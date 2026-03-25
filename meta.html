@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>環境分析 - GCG META</title>
+  <meta name="description" content="ガンダムカードゲームのデッキタイプ別カード使用率・環境メタを分析。TOP4データに基づく統計。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="section-header">
+      <h1 class="section-title">環境分析</h1>
+      <span class="section-badge" id="meta-info">TOP4 集計</span>
+    </div>
+
+    <!-- 統計サマリー -->
+    <div class="stats-grid" id="stats-summary">
+      <div class="stat-card">
+        <div class="stat-label">分析イベント数</div>
+        <div class="stat-value" id="s-events">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">TOP4 デッキ数</div>
+        <div class="stat-value" id="s-decks">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">デッキタイプ数</div>
+        <div class="stat-value" id="s-types">--</div>
+      </div>
+    </div>
+
+    <!-- デッキタイプ分布 -->
+    <section class="mb-32">
+      <div class="section-header">
+        <h2 class="section-title">デッキタイプ分布</h2>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div class="chart-container" style="flex:0 0 380px;min-width:300px">
+          <div class="chart-title">デッキタイプ シェア</div>
+          <div style="height:300px;position:relative">
+            <canvas id="decktype-pie"></canvas>
+          </div>
+        </div>
+        <div style="flex:1;min-width:340px;overflow-x:auto">
+          <table class="data-table" id="decktype-table">
+            <thead>
+              <tr>
+                <th style="position:static">デッキタイプ</th>
+                <th style="width:55px;position:static">数</th>
+                <th style="width:130px;position:static">シェア</th>
+                <th style="width:50px;position:static">優勝</th>
+                <th style="width:60px;position:static">優勝率</th>
+                <th style="width:55px;position:static">平均順位</th>
+              </tr>
+            </thead>
+            <tbody id="decktype-body">
+              <tr><td colspan="6" class="loading">データを読み込み中</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- デッキタイプ別カード採用率 -->
+    <section class="mb-32" id="deck-card-section">
+      <div class="section-header">
+        <h2 class="section-title">デッキタイプ別 カード採用率</h2>
+      </div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px">
+        各デッキタイプ内でのカード採用率を表示。タイプを選択してください。
+      </p>
+
+      <!-- タイプ選択タブ -->
+      <div class="filter-bar" id="type-tabs" style="gap:6px;flex-wrap:wrap;margin-bottom:20px">
+        <div class="loading">データを読み込み中</div>
+      </div>
+
+      <!-- カード採用率テーブル -->
+      <div id="deck-card-content">
+        <div style="text-align:center;padding:32px;color:var(--text-muted);font-size:13px">
+          上のタブからデッキタイプを選択してください
+        </div>
+      </div>
+    </section>
+
+    <!-- 地域別メタ -->
+    <section class="mb-32" id="region-section">
+      <div class="section-header">
+        <h2 class="section-title">地域別メタ</h2>
+      </div>
+      <div id="region-content">
+        <div class="loading">データを読み込み中</div>
+      </div>
+    </section>
+
+    <!-- イベント一覧 -->
+    <section class="mb-32" id="event-list-section">
+      <div class="section-header">
+        <h2 class="section-title">イベント一覧</h2>
+      </div>
+      <div id="event-list-content" style="overflow-x:auto">
+        <div class="loading">データを読み込み中</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js"></script>
+  <script>
+    GCG.init();
+
+    let deckTypes = [];
+    let selectedType = null;
+    let cardNames = {};
+
+    async function loadCardNames() {
+      try {
+        const resp = await fetch(GCG.getBasePath() + 'data/card_names.json');
+        if (resp.ok) cardNames = await resp.json();
+      } catch (e) { /* ignore */ }
+    }
+
+    function getCardName(cardId) {
+      return cardNames[cardId] || '';
+    }
+
+    async function init() {
+      await loadCardNames();
+      const summary = await GCG.loadSummary();
+      const eventsData = await GCG.loadEvents();
+      deckTypes = summary.deck_type_ranking || [];
+
+      // Stats
+      GCG.animateNumber(document.getElementById('s-events'), summary.total_events);
+      GCG.animateNumber(document.getElementById('s-decks'), summary.total_decks);
+      GCG.animateNumber(document.getElementById('s-types'), deckTypes.length);
+
+      document.getElementById('meta-info').textContent =
+        `${summary.total_events}イベント / ${summary.total_decks}デッキ (TOP4)`;
+
+      renderDeckTypeTable(deckTypes);
+      renderPieChart(deckTypes);
+      renderTypeTabs(deckTypes);
+      renderRegionSection(summary.region_ranking || []);
+      renderEventList(eventsData);
+
+      // URLパラメータからタイプ選択
+      const paramType = GCG.getParam('type');
+      if (paramType) {
+        const dt = deckTypes.find(d => d.type_key === paramType);
+        if (dt) selectType(dt.type_key);
+      } else if (deckTypes.length > 0) {
+        selectType(deckTypes[0].type_key);
+      }
+    }
+
+    function renderDeckTypeTable(types) {
+      const maxShare = types[0]?.share || 100;
+      const tbody = document.getElementById('decktype-body');
+      tbody.innerHTML = types.map(dt => {
+        const primaryColor = GCG.primaryColorHex(dt.colors);
+        return `<tr style="cursor:pointer" onclick="selectType('${dt.type_key}');document.getElementById('deck-card-section').scrollIntoView({behavior:'smooth',block:'start'})">
+          <td>${GCG.renderColorTags(dt.colors)}</td>
+          <td class="text-mono">${dt.count}</td>
+          <td>
+            <div class="flex items-center gap-8">
+              <div class="usage-bar-container">
+                <div class="usage-bar" style="width:${(dt.share / maxShare) * 100}%;background:${primaryColor}"></div>
+              </div>
+              <span class="usage-rate">${dt.share}%</span>
+            </div>
+          </td>
+          <td class="text-mono">${dt.wins}</td>
+          <td class="text-mono" style="color:var(--green)">${dt.win_rate}%</td>
+          <td class="text-mono" style="color:var(--accent)">${dt.avg_rank}</td>
+        </tr>`;
+      }).join('');
+    }
+
+    function renderPieChart(types) {
+      const top8 = types.slice(0, 8);
+      const others = types.slice(8);
+      const othersCount = others.reduce((s, d) => s + d.count, 0);
+
+      const labels = top8.map(d => d.label);
+      const data = top8.map(d => d.count);
+
+      if (othersCount > 0) {
+        labels.push('その他');
+        data.push(othersCount);
+      }
+
+      const canvas = document.getElementById('decktype-pie');
+      const ctx = canvas.getContext('2d');
+
+      // デッキタイプの2色からグラデーションを生成
+      function makeGradient(colorArr) {
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        if (colorArr.length >= 2) {
+          const c1 = (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888';
+          const c2 = (GCG.DECK_COLORS[colorArr[1]] || {}).hex || '#888';
+          grad.addColorStop(0, c1);
+          grad.addColorStop(1, c2);
+        } else if (colorArr.length === 1) {
+          const c1 = (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888';
+          grad.addColorStop(0, c1);
+          grad.addColorStop(1, c1);
+        }
+        return grad;
+      }
+
+      const bgColors = top8.map(d => makeGradient(d.colors));
+      if (othersCount > 0) {
+        const grayGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        grayGrad.addColorStop(0, '#3a3f47');
+        grayGrad.addColorStop(1, '#2a2f37');
+        bgColors.push(grayGrad);
+      }
+
+      // 凡例用にフラットカラーも保持
+      const legendColors = top8.map(d => GCG.primaryColorHex(d.colors));
+      if (othersCount > 0) legendColors.push('#3a3f47');
+
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '55%',
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                color: '#d0d6e0',
+                font: { size: 11, family: "'JetBrains Mono', monospace" },
+                padding: 10,
+                usePointStyle: true,
+                pointStyleWidth: 8,
+                generateLabels: function(chart) {
+                  return chart.data.labels.map((label, i) => ({
+                    text: label,
+                    fontColor: '#d0d6e0',
+                    fillStyle: legendColors[i],
+                    strokeStyle: '#0a0e14',
+                    lineWidth: 2,
+                    hidden: !chart.getDataVisibility(i),
+                    index: i,
+                    pointStyle: 'circle'
+                  }));
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: '#1e2736',
+              titleColor: '#e8ecf2',
+              bodyColor: '#8b95a5',
+              borderColor: '#2a3a50',
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 10,
+              callbacks: {
+                label: (ctx) => {
+                  const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                  const pct = Math.round(ctx.raw / total * 100);
+                  return ` ${ctx.label}: ${ctx.raw}デッキ (${pct}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderTypeTabs(types) {
+      const container = document.getElementById('type-tabs');
+      container.innerHTML = types.map(dt => {
+        const primaryColor = GCG.primaryColorHex(dt.colors);
+        return `<button class="type-tab" data-type="${dt.type_key}"
+          style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);
+            padding:8px 14px;border-radius:var(--radius);font-size:12px;font-family:var(--font-mono);
+            cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:6px"
+          onclick="selectType('${dt.type_key}')">
+          ${GCG.renderColorDots(dt.colors)}
+          <span>${dt.label}</span>
+          <span style="opacity:0.5;font-size:10px">(${dt.count})</span>
+        </button>`;
+      }).join('');
+    }
+
+    function selectType(typeKey) {
+      selectedType = typeKey;
+
+      // Update tab styling
+      document.querySelectorAll('.type-tab').forEach(tab => {
+        if (tab.dataset.type === typeKey) {
+          tab.style.borderColor = 'var(--accent)';
+          tab.style.color = 'var(--accent)';
+          tab.style.background = 'var(--accent-dim)';
+        } else {
+          tab.style.borderColor = 'var(--border)';
+          tab.style.color = 'var(--text-secondary)';
+          tab.style.background = 'var(--bg-card)';
+        }
+      });
+
+      // Find deck type data
+      const dt = deckTypes.find(d => d.type_key === typeKey);
+      if (!dt) return;
+
+      const cards = dt.card_ranking || [];
+      const container = document.getElementById('deck-card-content');
+
+      if (cards.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">カードデータがありません</div>';
+        return;
+      }
+
+      container.innerHTML = `
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">
+          ${GCG.escapeHtml(dt.label)} デッキ カード採用率 （${dt.count}デッキ中）
+        </div>
+        <div style="overflow-x:auto">
+        <table class="data-table" style="--th-position:static">
+          <thead>
+            <tr>
+              <th style="width:36px;position:static">#</th>
+              <th style="position:static">カード</th>
+              <th style="width:90px;position:static">採用デッキ数</th>
+              <th style="width:70px;position:static">採用率</th>
+              <th style="width:55px;position:static">優勝数</th>
+              <th style="width:60px;position:static">優勝率</th>
+              <th style="width:60px;position:static">最大枚数</th>
+              <th style="width:60px;position:static">最小枚数</th>
+              <th style="width:60px;position:static">中央枚数</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${cards.map((c, i) => {
+              const name = getCardName(c.card_id);
+              const winRate = c.win_rate !== undefined ? c.win_rate :
+                (c.decks > 0 ? Math.round((c.wins / c.decks) * 1000) / 10 : 0);
+              return `<tr>
+                <td class="rank-cell ${GCG.rankClass(i + 1)}">${i + 1}</td>
+                <td>
+                  <a href="${GCG.cardSearchUrl(c.card_id)}" target="_blank" rel="noopener"
+                     style="color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:8px">
+                    <img src="${GCG.cardImageUrl(c.card_id)}" alt="" style="width:28px;height:39px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
+                         onerror="this.style.display='none'">
+                    <div>
+                      <div style="font-family:var(--font-mono);font-size:12px">${GCG.escapeHtml(c.card_id)}</div>
+                      ${name ? `<div style="font-size:11px;color:var(--text-secondary);margin-top:1px">${GCG.escapeHtml(name)}</div>` : ''}
+                    </div>
+                  </a>
+                </td>
+                <td class="text-mono" style="white-space:nowrap">${c.decks} / ${dt.count}</td>
+                <td>
+                  <span class="usage-rate" style="font-weight:600">${c.usage_rate}%</span>
+                </td>
+                <td class="text-mono">${c.wins}</td>
+                <td class="text-mono" style="color:var(--green)">${winRate}%</td>
+                <td class="text-mono">${c.max_count || '-'}</td>
+                <td class="text-mono">${c.min_count || '-'}</td>
+                <td class="text-mono">${c.median_count !== undefined ? c.median_count : (c.avg_count || '-')}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+        </div>`;
+    }
+
+    // 地域別メタ
+    function renderRegionSection(regions) {
+      const container = document.getElementById('region-content');
+      if (!regions || regions.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">地域データがありません</div>';
+        return;
+      }
+      container.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+          ${regions.map(r => `
+            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+                <span style="font-weight:600;font-size:15px;color:var(--text-primary)">${GCG.escapeHtml(r.region)}</span>
+                <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">${r.events}イベント / ${r.decks}デッキ</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                ${r.top_deck_types.map(dt => `
+                  <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px">
+                    <span>${GCG.renderColorDots(dt.colors)} <span style="color:var(--text-secondary)">${GCG.escapeHtml(dt.label)}</span></span>
+                    <span class="text-mono" style="color:var(--text-muted)">${dt.count}デッキ</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>`;
+    }
+
+    // イベント一覧（日付→店舗名→TOP4デッキカラー）
+    function renderEventList(eventsData) {
+      const container = document.getElementById('event-list-content');
+      if (!eventsData || !eventsData.events) {
+        container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">イベントデータがありません</div>';
+        return;
+      }
+
+      const events = Object.values(eventsData.events)
+        .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+      container.innerHTML = `
+        <table class="data-table" style="border-collapse:collapse">
+          <thead>
+            <tr>
+              <th style="width:100px;position:static">日付</th>
+              <th style="position:static">店舗名</th>
+              <th style="position:static">TOP4 デッキカラー</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${events.map(ev => {
+              const top4 = ev.top4_colors || [];
+              const top4Html = top4.length > 0
+                ? top4.sort((a, b) => a.rank - b.rank).map((t, i) => {
+                    const rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
+                    const sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';
+                    return `${sep}<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">
+                      <span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">${rankLabel}</span>
+                      ${GCG.renderColorDots(t.colors)}
+                    </span>`;
+                  }).join('')
+                : '<span style="color:var(--text-muted);font-size:11px">データなし</span>';
+
+              return `<tr style="cursor:pointer" onclick="location.href='event.html?id=${ev.event_id}'">
+                <td class="text-mono" style="white-space:nowrap">${ev.date || '-'}</td>
+                <td>${GCG.escapeHtml(ev.store || '-')}</td>
+                <td>${top4Html}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>`;
+    }
+
+    document.getElementById('header').innerHTML = GCG.renderHeader('meta');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+
+    init();
+  </script>
+</body>
+</html>

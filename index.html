@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCG META - ガンダムカードゲーム 大会結果・環境分析</title>
+  <meta name="description" content="ガンダムカードゲーム（GCG）の公式大会結果を自動集計。デッキタイプ別カード採用率・環境メタをリアルタイムで分析。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <!-- Hero -->
+    <div class="hero">
+      <h1 class="hero-title">GCG META</h1>
+      <p class="hero-subtitle">ガンダムカードゲーム 大会結果・環境分析</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-value" id="stat-events">--</div>
+          <div class="hero-stat-label">イベント</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" id="stat-decks">--</div>
+          <div class="hero-stat-label">TOP4 デッキ</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-value" id="stat-types">--</div>
+          <div class="hero-stat-label">デッキタイプ</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- デッキタイプ概要 -->
+    <section class="mb-32">
+      <div class="section-header">
+        <h2 class="section-title">デッキタイプ分布</h2>
+        <a href="meta.html" class="section-badge">詳細分析 →</a>
+      </div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div class="chart-container" style="flex:0 0 400px;min-width:300px">
+          <div class="chart-title">TOP4 デッキタイプ シェア</div>
+          <div style="position:relative;height:280px">
+            <canvas id="decktype-pie"></canvas>
+          </div>
+        </div>
+        <div style="flex:2;min-width:340px">
+          <div id="decktype-cards" class="loading">データを読み込み中</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 最新イベント -->
+    <section class="mb-32">
+      <div class="section-header">
+        <h2 class="section-title">最新イベント</h2>
+        <a href="events.html" class="section-badge">全件表示 →</a>
+      </div>
+      <div class="event-list" id="recent-events">
+        <div class="loading">データを読み込み中</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js"></script>
+  <script>
+    GCG.init();
+
+    async function renderDashboard() {
+      const [summary, eventsData] = await Promise.all([
+        GCG.loadSummary(),
+        GCG.loadEvents()
+      ]);
+
+      // Hero stats (animated)
+      GCG.animateNumber(document.getElementById('stat-events'), summary.total_events);
+      GCG.animateNumber(document.getElementById('stat-decks'), summary.total_decks);
+      GCG.animateNumber(document.getElementById('stat-types'), (summary.deck_type_ranking || []).length);
+
+      // デッキタイプ分布
+      renderDeckTypes(summary.deck_type_ranking || []);
+
+      // 最新イベント（10件）
+      const events = GCG.sortedEvents(eventsData.events).slice(0, 10);
+      const eventsContainer = document.getElementById('recent-events');
+      eventsContainer.innerHTML = events.map(ev => {
+        const top4 = (ev.top4_colors || []).sort((a, b) => a.rank - b.rank);
+        const top4Html = top4.map((t, i) => {
+          const rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
+          const sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';
+          return `${sep}<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">
+            <span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">${rankLabel}</span>
+            ${GCG.renderColorDots(t.colors)}
+          </span>`;
+        }).join('');
+        return `
+          <a href="event.html?id=${ev.event_id}" class="event-card">
+            <span class="event-date">${GCG.formatDate(ev.date)}</span>
+            <span class="event-store">${GCG.escapeHtml(ev.store)}</span>
+            <span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              ${top4Html || '<span style="color:var(--text-muted);font-size:11px">データなし</span>'}
+            </span>
+          </a>`;
+      }).join('');
+    }
+
+    function renderDeckTypes(deckTypes) {
+      if (!deckTypes.length) return;
+
+      // Cards
+      const container = document.getElementById('decktype-cards');
+      const maxShare = deckTypes[0]?.share || 100;
+      container.innerHTML = deckTypes.slice(0, 6).map(dt => {
+        const primaryColor = GCG.primaryColorHex(dt.colors);
+        return `
+          <a href="meta.html?type=${dt.type_key}" class="decktype-card">
+            <div class="decktype-card-header">
+              <div class="decktype-card-colors">${GCG.renderColorTags(dt.colors)}</div>
+              <div class="decktype-card-count">${dt.count} デッキ</div>
+            </div>
+            <div class="decktype-card-stats">
+              <div class="decktype-mini-stat">
+                <div class="decktype-mini-stat-value">${dt.share}%</div>
+                <div class="decktype-mini-stat-label">シェア</div>
+              </div>
+              <div class="decktype-mini-stat">
+                <div class="decktype-mini-stat-value">${dt.win_rate}%</div>
+                <div class="decktype-mini-stat-label">優勝率</div>
+              </div>
+              <div class="decktype-mini-stat">
+                <div class="decktype-mini-stat-value">${dt.avg_rank}</div>
+                <div class="decktype-mini-stat-label">平均順位</div>
+              </div>
+            </div>
+            <div class="share-bar">
+              <div class="share-bar-fill" style="width:${(dt.share / maxShare) * 100}%;background:${primaryColor}"></div>
+            </div>
+          </a>`;
+      }).join('');
+
+      // Pie chart
+      const top6 = deckTypes.slice(0, 6);
+      const others = deckTypes.slice(6);
+      const othersCount = others.reduce((s, d) => s + d.count, 0);
+
+      const labels = top6.map(d => d.label);
+      const data = top6.map(d => d.count);
+
+      if (othersCount > 0) {
+        labels.push('その他');
+        data.push(othersCount);
+      }
+
+      const canvas = document.getElementById('decktype-pie');
+      const ctx = canvas.getContext('2d');
+
+      // 2色グラデーション生成
+      function makeGrad(colorArr) {
+        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        if (colorArr.length >= 2) {
+          grad.addColorStop(0, (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888');
+          grad.addColorStop(1, (GCG.DECK_COLORS[colorArr[1]] || {}).hex || '#888');
+        } else if (colorArr.length === 1) {
+          const c = (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888';
+          grad.addColorStop(0, c); grad.addColorStop(1, c);
+        }
+        return grad;
+      }
+      const bgColors = top6.map(d => makeGrad(d.colors));
+      if (othersCount > 0) {
+        const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        g.addColorStop(0, '#3a3f47'); g.addColorStop(1, '#2a2f37');
+        bgColors.push(g);
+      }
+      const legendColors = top6.map(d => GCG.primaryColorHex(d.colors));
+      if (othersCount > 0) legendColors.push('#3a3f47');
+
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '60%',
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: '#d0d6e0',
+                font: { size: 11, family: "'JetBrains Mono', monospace" },
+                padding: 12,
+                usePointStyle: true,
+                pointStyleWidth: 8,
+                generateLabels: function(chart) {
+                  return chart.data.labels.map((label, i) => ({
+                    text: label,
+                    fontColor: '#d0d6e0',
+                    fillStyle: legendColors[i],
+                    strokeStyle: '#0a0e14',
+                    lineWidth: 2,
+                    hidden: !chart.getDataVisibility(i),
+                    index: i,
+                    pointStyle: 'circle'
+                  }));
+                }
+              }
+            },
+            tooltip: {
+              backgroundColor: '#1e2736',
+              titleColor: '#e8ecf2',
+              bodyColor: '#8b95a5',
+              borderColor: '#2a3a50',
+              borderWidth: 1,
+              cornerRadius: 8,
+              padding: 10,
+              callbacks: {
+                label: (ctx) => {
+                  const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                  const pct = Math.round(ctx.raw / total * 100);
+                  return ` ${ctx.label}: ${ctx.raw}デッキ (${pct}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Header/Footer
+    document.getElementById('header').innerHTML = GCG.renderHeader('home');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+
+    renderDashboard();
+  </script>
+</body>
+</html>
