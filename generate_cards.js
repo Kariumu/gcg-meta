@@ -227,7 +227,7 @@ function generateCoUsedSection(cardId, coUsed) {
     return `
           <a href="../../cards/${co.card_id}/" class="co-card-item" title="${name}" data-rate="${rateLevel}">
             <div class="co-card-image-wrap">
-              <img src="https://www.gundam-gcg.com/jp/images/cards/card/${co.card_id}.webp" alt="${name}" class="co-card-image" loading="lazy"
+              <img src="../../images/cards/${co.card_id}.webp" alt="${name}" class="co-card-image" loading="lazy"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
               <div class="co-card-fallback" style="display:none"><span>${co.card_id}</span></div>
             </div>
