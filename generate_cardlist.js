@@ -56,12 +56,45 @@ for (const c of (summary.card_ranking || [])) {
   cardRankingMap[c.card_id] = c;
 }
 
+// === 収録弾ラベル ===
+const SET_LABELS = {
+  'GD01': '第1弾ブースターパック',
+  'GD02': '第2弾ブースターパック',
+  'GD03': '第3弾ブースターパック',
+  'ST01': 'スタートデッキ 地球連邦',
+  'ST02': 'スタートデッキ ジオン',
+  'ST03': 'スタートデッキ アナハイム',
+  'ST04': 'スタートデッキ OZ',
+  'ST05': 'スタートデッキ ザフト',
+  'ST06': 'スタートデッキ ソレスタルビーイング',
+  'ST07': 'スタートデッキ ネオ・ジオン',
+  'ST08': 'スタートデッキ ティターンズ',
+  'ST09': 'スタートデッキ インパルス',
+};
+
+function getSetPrefix(cardId) {
+  return cardId.replace(/-\d+$/, '');
+}
+
 // === 全カードのソート済みリスト ===
 const allCards = Object.values(cardsMaster).sort((a, b) => a.id.localeCompare(b.id));
 const totalCards = allCards.length;
 const tournamentCards = allCards.filter(c => cardRankingMap[c.id]).length;
 
+// 収録弾リスト（出現順）
+const setOrder = [];
+const setCardCounts = {};
+for (const card of allCards) {
+  const prefix = getSetPrefix(card.id);
+  if (!setCardCounts[prefix]) {
+    setOrder.push(prefix);
+    setCardCounts[prefix] = 0;
+  }
+  setCardCounts[prefix]++;
+}
+
 console.log(`  全カード: ${totalCards} 枚 (入賞実績あり: ${tournamentCards} 枚)`);
+console.log(`  収録弾: ${setOrder.length} セット`);
 
 // === HTMLテンプレート生成 ===
 
@@ -92,6 +125,7 @@ function generateCardsDataJS() {
       rarity: card.rarity,
       type: card.card_type,
       color: card.color,
+      set: getSetPrefix(card.id),
       level: card.level || 0,
       cost: card.cost || 0,
       ap: card.stats ? card.stats.ap : 0,
@@ -446,6 +480,45 @@ function generateHTML() {
       border-top: 1px solid var(--border);
     }
 
+    /* Set Sections */
+    .set-section {
+      margin-bottom: 40px;
+    }
+    .set-section:last-child {
+      margin-bottom: 16px;
+    }
+    .set-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .set-section-title {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .set-section-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .set-section-count {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+
     /* No results */
     .no-results {
       text-align: center;
@@ -559,6 +632,15 @@ function generateHTML() {
         </div>
       </div>
 
+      <!-- 収録弾フィルター -->
+      <div class="filter-group">
+        <span class="filter-group-label">収録弾 / Set</span>
+        <div class="filter-chips" id="filter-set">
+          <button class="filter-chip active" data-value="all">全て</button>
+${setOrder.map(prefix => `          <button class="filter-chip" data-value="${prefix}">${prefix}</button>`).join('\n')}
+        </div>
+      </div>
+
       <!-- タイプフィルター -->
       <div class="filter-group">
         <span class="filter-group-label">タイプ / Type</span>
@@ -616,7 +698,7 @@ function generateHTML() {
     </div>
 
     <!-- カードグリッド -->
-    <div class="card-grid" id="card-grid"></div>
+    <div id="card-grid"></div>
 
     <!-- 結果なし表示 -->
     <div class="no-results" id="no-results">
@@ -643,10 +725,13 @@ ${generateNoscriptContent()}
     var TYPE_JP = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース' };
     var RARITY_ORDER = { LR: 0, R: 1, U: 2, C: 3 };
     var TOTAL_CARDS = ${totalCards};
+    var SET_ORDER = ${JSON.stringify(setOrder)};
+    var SET_LABELS = ${JSON.stringify(SET_LABELS)};
 
     // === Filter State ===
     var filterState = {
       colors: [],      // empty = all
+      sets: [],        // empty = all
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
@@ -708,6 +793,8 @@ ${generateNoscriptContent()}
       var result = CARDS.filter(function(card) {
         // Color filter
         if (filterState.colors.length > 0 && filterState.colors.indexOf(card.color) < 0) return false;
+        // Set filter
+        if (filterState.sets.length > 0 && filterState.sets.indexOf(card.set) < 0) return false;
         // Type filter
         if (filterState.types.length > 0 && filterState.types.indexOf(card.type) < 0) return false;
         // Rarity filter
@@ -800,16 +887,50 @@ ${generateNoscriptContent()}
       }
       noResultsEl.style.display = 'none';
 
-      // Build HTML
-      var html = '';
+      // Group by set
+      var groups = {};
+      var groupOrder = [];
       for (var i = 0; i < count; i++) {
-        html += cardHTML(filtered[i]);
+        var card = filtered[i];
+        var setKey = card.set;
+        if (!groups[setKey]) {
+          groups[setKey] = [];
+          groupOrder.push(setKey);
+        }
+        groups[setKey].push(card);
+      }
+
+      // Maintain original set order when sorted by ID
+      if (filterState.sort === 'id-asc') {
+        groupOrder.sort(function(a, b) {
+          return SET_ORDER.indexOf(a) - SET_ORDER.indexOf(b);
+        });
+      }
+
+      // Build HTML with set sections
+      var html = '';
+      for (var g = 0; g < groupOrder.length; g++) {
+        var setKey = groupOrder[g];
+        var cards = groups[setKey];
+        var label = SET_LABELS[setKey] || setKey;
+        html += '<div class="set-section">';
+        html += '<div class="set-section-header">';
+        html += '<h2 class="set-section-title">' + setKey + '<span class="set-section-label">' + escapeAttr(label) + '</span></h2>';
+        html += '<span class="set-section-count">' + cards.length + ' 枚</span>';
+        html += '</div>';
+        html += '<div class="card-grid">';
+        for (var j = 0; j < cards.length; j++) {
+          html += cardHTML(cards[j]);
+        }
+        html += '</div>';
+        html += '</div>';
       }
       gridEl.innerHTML = html;
     }
 
     // === Event Listeners ===
     setupFilterGroup('filter-color', 'colors', true);
+    setupFilterGroup('filter-set', 'sets', true);
     setupFilterGroup('filter-type', 'types', true);
     setupFilterGroup('filter-rarity', 'rarities', true);
     setupFilterGroup('filter-tournament', 'tournament', false);
@@ -842,6 +963,13 @@ ${generateNoscriptContent()}
         var chips = document.querySelectorAll('#filter-color .filter-chip');
         chips[0].classList.remove('active');
         chips.forEach(function(c) { if (colors.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      }
+      if (params.get('set')) {
+        var sets = params.get('set').split(',');
+        filterState.sets = sets;
+        var chips = document.querySelectorAll('#filter-set .filter-chip');
+        chips[0].classList.remove('active');
+        chips.forEach(function(c) { if (sets.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
       }
       if (params.get('type')) {
         var types = params.get('type').split(',');
