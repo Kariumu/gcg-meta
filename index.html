@@ -229,21 +229,18 @@
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
 
-      // 2色分割パターン生成
-      function makeSplitPattern(colorArr) {
+      // 2色上下分割グラデーション生成
+      function makeSplitGradient(colorArr) {
         var hexArr = colorArr.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
         if (hexArr.length === 1) return hexArr[0];
-        var size = 40;
-        var pc = document.createElement('canvas');
-        pc.width = size; pc.height = size;
-        var pctx = pc.getContext('2d');
-        pctx.fillStyle = hexArr[0];
-        pctx.fillRect(0, 0, size, size / 2);
-        pctx.fillStyle = hexArr[1];
-        pctx.fillRect(0, size / 2, size, size / 2);
-        return ctx.createPattern(pc, 'repeat');
+        var grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        grad.addColorStop(0, hexArr[0]);
+        grad.addColorStop(0.5, hexArr[0]);
+        grad.addColorStop(0.5, hexArr[1]);
+        grad.addColorStop(1, hexArr[1]);
+        return grad;
       }
-      const bgColors = top8.map(d => makeSplitPattern(d.colors));
+      const bgColors = top8.map(d => makeSplitGradient(d.colors));
 
       // HTML凡例を生成
       var legendEl = document.getElementById('decktype-legend');
