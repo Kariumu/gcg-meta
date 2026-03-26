@@ -13,6 +13,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GCG STATS - ガンダムカードゲーム 大会結果・環境分析</title>
   <meta name="description" content="ガンダムカードゲームのニュータイプチャレンジ大会結果を自動集計。カード採用率・デッキタイプ分布・地域別メタを分析する非公式ファンサイトです。">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="GCG STATS - ガンダムカードゲーム 大会結果・環境分析">
+  <meta property="og:description" content="ガンダムカードゲームのニュータイプチャレンジ大会結果を自動集計。カード採用率・デッキタイプ分布・地域別メタを分析する非公式ファンサイトです。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GCG STATS - ガンダムカードゲーム 大会結果・環境分析">
+  <meta name="twitter:description" content="ガンダムカードゲームのニュータイプチャレンジ大会結果を自動集計。カード採用率・デッキタイプ分布・地域別メタを分析します。">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -40,6 +52,7 @@
           <div class="hero-stat-label">デッキタイプ数</div>
         </div>
       </div>
+      <div id="share-buttons" style="display:flex;justify-content:center;margin-top:12px"></div>
     </div>
 
     <!-- デッキタイプ概要 -->
@@ -305,6 +318,7 @@
     document.getElementById('footer').innerHTML = GCG.renderFooter();
 
     renderDashboard();
+    GCG.renderShareButtons('share-buttons', 'GCG STATS - ガンダムカードゲーム 大会結果・環境分析');
   </script>
 </body>
 </html>

@@ -13,10 +13,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>カードリスト | GCG STATS</title>
   <meta name="description" content="ガンダムカードゲームの全カード一覧。ユニット・パイロット・コマンド・ベースカード526枚を色・タイプ・レアリティでフィルタリングして検索できます。大会採用率データも確認可能。">
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="カードリスト | GCG STATS">
   <meta property="og:description" content="ガンダムカードゲーム全526枚のカードリスト。大会採用率・フィルタリング検索対応。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gcg-stats.com/cards.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="カードリスト | GCG STATS">
+  <meta name="twitter:description" content="ガンダムカードゲーム全526枚のカードリスト。大会採用率・フィルタリング検索対応。">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="canonical" href="https://gcg-stats.com/cards.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -452,6 +459,7 @@
       <h1 class="section-title">カードリスト</h1>
       <span class="section-badge" id="total-badge">526 CARDS</span>
     </div>
+    <div id="share-buttons"></div>
 
     <!-- 統計サマリー -->
     <div class="cardlist-stats">
@@ -1403,6 +1411,7 @@
 
     // Initial render
     renderCards();
+    GCG.renderShareButtons('share-buttons', 'カードリスト | GCG STATS');
   </script>
 </body>
 </html>

@@ -13,6 +13,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イベント一覧 | GCG STATS</title>
   <meta name="description" content="ガンダムカードゲーム ニュータイプチャレンジの大会結果一覧。全国168件のイベント・668デッキのデータを掲載。">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="イベント一覧 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲーム ニュータイプチャレンジの全国大会結果一覧。168件のイベント・668デッキのデータを掲載。各イベントの優勝・入賞デッキが確認できます。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/events.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="イベント一覧 | GCG STATS">
+  <meta name="twitter:description" content="ガンダムカードゲーム ニュータイプチャレンジの全国大会結果一覧。168件のイベントデータを掲載。">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -25,6 +37,7 @@
       <h1 class="section-title">イベント一覧</h1>
       <span class="section-badge" id="event-count">--</span>
     </div>
+    <div id="share-buttons"></div>
 
     <div class="filter-bar">
       <input type="text" class="filter-input" id="search-input" placeholder="店舗名・プレイヤー名で検索...">
@@ -154,6 +167,7 @@
     document.getElementById('footer').innerHTML = GCG.renderFooter();
 
     init();
+    GCG.renderShareButtons('share-buttons', 'イベント一覧 | GCG STATS');
   </script>
 </body>
 </html>

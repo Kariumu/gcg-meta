@@ -12,6 +12,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イベント結果 - GCG STATS</title>
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="イベント結果 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲーム ニュータイプチャレンジ大会結果の詳細ページ。">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -116,7 +125,9 @@
         html += renderPlayerCard(results[i], i * 0.06);
       }
 
+      html += '<div id="share-buttons" style="margin-top:16px"></div>';
       document.getElementById('event-content').innerHTML = html;
+      GCG.renderShareButtons('share-buttons', ev.store + ' ' + GCG.formatDate(ev.date) + ' 大会結果 | GCG STATS');
     }
 
     document.getElementById('header').innerHTML = GCG.renderHeader('events');

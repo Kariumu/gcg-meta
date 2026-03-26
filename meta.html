@@ -13,6 +13,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>環境分析 | GCG STATS</title>
   <meta name="description" content="ガンダムカードゲームの環境メタ分析。デッキタイプ別シェア・カード採用率ランキング・地域別メタを数値で確認できます。">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="環境分析 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲームの環境メタ分析。デッキタイプ別シェア・カード採用率ランキング・地域別メタをデータで可視化。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/meta.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="環境分析 | GCG STATS">
+  <meta name="twitter:description" content="ガンダムカードゲームの環境メタ分析。デッキタイプ別シェア・カード採用率ランキング・地域別メタをデータで可視化。">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
@@ -26,6 +38,7 @@
       <h1 class="section-title">環境分析</h1>
       <span class="section-badge" id="meta-info">TOP4 集計</span>
     </div>
+    <div id="share-buttons"></div>
 
     <!-- フィルターボタン -->
     <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" id="rank-filter">
@@ -786,6 +799,7 @@
     document.getElementById('footer').innerHTML = GCG.renderFooter();
 
     init();
+    GCG.renderShareButtons('share-buttons', '環境分析 | GCG STATS');
   </script>
 </body>
 </html>

@@ -211,5 +211,43 @@ const GCG = {
           <a href="${basePath}contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
         </div>
       </footer>`;
+  },
+
+  // シェアボタンを指定コンテナに描画
+  renderShareButtons: function(containerId, title) {
+    var el = document.getElementById(containerId);
+    if (!el) return;
+    var url = window.location.href.split('?')[0].split('#')[0];
+    var tweetText = encodeURIComponent(title + '\n' + url + '\n#GCG #ガンダムカードゲーム');
+    var tweetUrl = 'https://twitter.com/intent/tweet?text=' + tweetText;
+    el.innerHTML =
+      '<div class="share-section">' +
+        '<span class="share-label">SHARE</span>' +
+        '<a class="share-btn share-x" href="' + tweetUrl + '" target="_blank" rel="noopener">' +
+          '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.731-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>' +
+          'X\u3067\u30b7\u30a7\u30a2' +
+        '</a>' +
+        '<button class="share-btn share-copy" onclick="GCG.copyShareUrl(this)">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>' +
+          '<span class="copy-label">URL\u3092\u30b3\u30d4\u30fc</span>' +
+        '</button>' +
+      '</div>';
+  },
+
+  copyShareUrl: function(btn) {
+    var url = window.location.href.split('?')[0].split('#')[0];
+    var label = btn.querySelector('.copy-label');
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function() {
+        btn.classList.add('copied');
+        label.textContent = '\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f';
+        setTimeout(function() { btn.classList.remove('copied'); label.textContent = 'URL\u3092\u30b3\u30d4\u30fc'; }, 2000);
+      });
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      label.textContent = '\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f';
+      setTimeout(function() { label.textContent = 'URL\u3092\u30b3\u30d4\u30fc'; }, 2000);
+    }
   }
 };

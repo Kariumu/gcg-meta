@@ -285,11 +285,17 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(pageTitle)}</title>
   <meta name="description" content="${escapeHtml(description)}">
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="${escapeHtml(pageTitle)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${SITE_URL}/cards/${cardId}/">
   <meta property="og:image" content="https://gcg-stats.com/images/cards/${cardId}.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(pageTitle)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/cards/${cardId}.webp">
   <link rel="canonical" href="${SITE_URL}/cards/${cardId}/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -412,6 +418,8 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
 
     ${typeTableHtml}
     ${adoptionTableHtml}
+
+    <div id="share-buttons" style="margin-top:24px"></div>
   </main>
 
   <footer class="site-footer">
@@ -454,6 +462,9 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   </script>
 
   <script src="../../js/common.js?v=2"></script>
+  <script>
+    GCG.renderShareButtons('share-buttons', '${escapeHtml(cardName || cardId)}（${cardId}）採用率${usageRate}% | GCG STATS');
+  </script>
 </body>
 </html>`;
 }

@@ -947,3 +947,55 @@ a.section-badge:hover {
   .hero { padding: 32px 16px; }
   .hero-stats { gap: 16px; }
 }
+
+/* === Share Buttons === */
+.share-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.share-label {
+  font-size: 11px;
+  color: var(--text-muted, #5a6577);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 2px;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  line-height: 1;
+}
+.share-btn:hover {
+  border-color: var(--border-hover);
+  color: var(--text-primary);
+}
+.share-btn.share-x:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+.share-btn.share-copy.copied {
+  border-color: var(--green, #2ecc71);
+  color: var(--green, #2ecc71);
+}
+.share-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
