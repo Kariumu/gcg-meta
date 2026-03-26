@@ -627,10 +627,34 @@ async function main() {
   console.log(`  → ${path.join(DATA_DIR, 'events.json')}`);
   console.log(`  → ${path.join(DATA_DIR, 'summary.json')}`);
 
-  console.log(`\n=== 完了 ===`);
+  console.log(`\n=== スクレイピング完了 ===`);
   console.log(`  イベント数: ${Object.keys(existingData.events).length}`);
   console.log(`  総デッキ数: ${summary.total_decks}`);
   console.log(`  カード種数: ${summary.card_ranking.length}`);
+
+  // 静的HTML生成 & カードページ生成
+  console.log('\n[後処理] 静的HTML・カードページを生成中...');
+  try {
+    execSync('node generate.js', { cwd: __dirname, stdio: 'inherit' });
+    execSync('node generate_cards.js', { cwd: __dirname, stdio: 'inherit' });
+    console.log('[後処理] 生成完了');
+  } catch (e) {
+    console.error('[後処理] 生成でエラー:', e.message);
+  }
+
+  // Git操作（CI環境など自動実行時）
+  if (process.env.AUTO_DEPLOY === '1' || process.argv.includes('--deploy')) {
+    console.log('\n[デプロイ] Git commit & push...');
+    try {
+      const dateStr = new Date().toISOString().split('T')[0];
+      execSync('git add .', { cwd: __dirname, stdio: 'inherit' });
+      execSync(`git commit -m "データ更新: ${dateStr}" --allow-empty`, { cwd: __dirname, stdio: 'inherit' });
+      execSync('git push origin main', { cwd: __dirname, stdio: 'inherit' });
+      console.log('[デプロイ] 完了');
+    } catch (e) {
+      console.error('[デプロイ] エラー:', e.message);
+    }
+  }
 }
 
 main().catch(err => {
