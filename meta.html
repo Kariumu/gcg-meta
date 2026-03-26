@@ -300,7 +300,8 @@
         document.getElementById('meta-info').textContent =
           `${totalEvents}イベント / ${totalDecks}デッキ (TOP4)`;
 
-        renderRegionSection(summaryDataGlobal.region_ranking || []);
+        const regionRankingTop4 = computeRegionRanking(eventsDataGlobal, 'top4');
+        renderRegionSection(regionRankingTop4);
       } else {
         // Compute from raw events data
         const { ranking, totalDecks } = computeDeckTypeRanking(eventsDataGlobal, currentFilter);
@@ -316,9 +317,9 @@
         document.getElementById('meta-info').textContent =
           `${totalEvents}イベント / ${totalDecks}デッキ (${filterLabel})`;
 
-        // Region data not available for non-top4, hide or show message
-        document.getElementById('region-content').innerHTML =
-          '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px">地域別データはTOP4フィルターでのみ表示されます</div>';
+        // 地域別メタも動的に集計
+        const regionRanking = computeRegionRanking(eventsDataGlobal, currentFilter);
+        renderRegionSection(regionRanking);
       }
 
       renderDeckTypeTable(deckTypes);
@@ -577,6 +578,63 @@
           </tbody>
         </table>
         </div>`;
+    }
+
+    // 地域別メタをフィルターに基づいて動的に集計
+    function computeRegionRanking(eventsData, filter) {
+      const regionMap = {}; // region -> { events: Set, decks: [], typeMap: {} }
+
+      for (const ev of Object.values(eventsData.events)) {
+        const region = ev.region;
+        if (!region) continue;
+
+        if (!regionMap[region]) {
+          regionMap[region] = { region: region, eventIds: new Set(), typeMap: {} };
+        }
+
+        const results = ev.results || [];
+        let hasMatchingPlayer = false;
+
+        for (const r of results) {
+          if (filter === 'win' && r.rank !== 1) continue;
+          if (filter === 'top4' && r.rank > 4) continue;
+          if (!r.deck || r.deck.length === 0) continue;
+
+          hasMatchingPlayer = true;
+          const colors = detectDeckColors(r.deck);
+          const typeKey = colors.join('+');
+
+          if (!regionMap[region].typeMap[typeKey]) {
+            regionMap[region].typeMap[typeKey] = {
+              type_key: typeKey,
+              colors: colors,
+              label: colors.map(function(c) { return (GCG.DECK_COLORS[c] || GCG.DECK_COLORS.Unknown).jp; }).join('/'),
+              count: 0,
+              wins: 0
+            };
+          }
+          regionMap[region].typeMap[typeKey].count++;
+          if (r.rank === 1) regionMap[region].typeMap[typeKey].wins++;
+        }
+
+        if (hasMatchingPlayer) {
+          regionMap[region].eventIds.add(ev.event_id);
+        }
+      }
+
+      return Object.values(regionMap).map(function(r) {
+        const topTypes = Object.values(r.typeMap)
+          .sort(function(a, b) { return b.count - a.count; })
+          .slice(0, 5);
+        const totalDecks = Object.values(r.typeMap).reduce(function(s, t) { return s + t.count; }, 0);
+        return {
+          region: r.region,
+          events: r.eventIds.size,
+          decks: totalDecks,
+          top_deck_types: topTypes
+        };
+      }).filter(function(r) { return r.decks > 0; })
+        .sort(function(a, b) { return b.decks - a.decks; });
     }
 
     // 地域別メタ

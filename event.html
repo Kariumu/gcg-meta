@@ -100,45 +100,12 @@
 
       // 全プレイヤーを表示
       const results = (ev.results || []).sort(function(a, b) { return a.rank - b.rank; });
-      const top4 = results.filter(function(r) { return r.rank <= 4; });
-      const rest = results.filter(function(r) { return r.rank > 4; });
 
-      for (var i = 0; i < top4.length; i++) {
-        html += renderPlayerCard(top4[i], (top4[i].rank - 1) * 0.08);
-      }
-
-      // 5位以降を折りたたみで表示
-      if (rest.length > 0) {
-        html += '<div style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px">' +
-          '<button id="toggle-rest" onclick="toggleRest()" style="' +
-          'background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);' +
-          'padding:10px 20px;border-radius:var(--radius);font-size:13px;font-family:var(--font-mono);' +
-          'cursor:pointer;transition:all 0.15s;width:100%;text-align:center"' +
-          ' onmouseover="this.style.borderColor=\'var(--accent)\';this.style.color=\'var(--accent)\'"' +
-          ' onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text-secondary)\'">' +
-          '5位以降を表示（' + rest.length + '名） ▼</button>' +
-          '<div id="rest-players" style="display:none;margin-top:20px">';
-
-        for (var j = 0; j < rest.length; j++) {
-          html += renderPlayerCard(rest[j]);
-        }
-
-        html += '</div></div>';
+      for (var i = 0; i < results.length; i++) {
+        html += renderPlayerCard(results[i], i * 0.06);
       }
 
       document.getElementById('event-content').innerHTML = html;
-    }
-
-    function toggleRest() {
-      var el = document.getElementById('rest-players');
-      var btn = document.getElementById('toggle-rest');
-      if (el.style.display === 'none') {
-        el.style.display = 'block';
-        btn.innerHTML = btn.innerHTML.replace('表示', '非表示').replace('▼', '▲');
-      } else {
-        el.style.display = 'none';
-        btn.innerHTML = btn.innerHTML.replace('非表示', '表示').replace('▲', '▼');
-      }
     }
 
     document.getElementById('header').innerHTML = GCG.renderHeader('events');
