@@ -54,7 +54,7 @@
       if (hasDeck) {
         deckHtml = '<div class="deck-grid">' +
           player.deck.map(function(card) {
-            return '<a href="' + GCG.cardSearchUrl(card.card_id) + '" target="_blank" rel="noopener" class="deck-card" title="' + card.card_id + '">' +
+            return '<a href="' + GCG.getBasePath() + 'cards/' + card.card_id + '/" class="deck-card" title="' + card.card_id + '">' +
               '<img src="' + GCG.cardImageUrl(card.card_id) + '" alt="' + card.card_id + '"' +
               ' onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.insertAdjacentHTML(\'afterbegin\',\'<div style=&quot;aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center&quot;>' + card.card_id + '</div>\')">' +
               '<span class="card-count">×' + card.count + '</span>' +
