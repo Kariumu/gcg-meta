@@ -122,16 +122,18 @@ function main() {
 }
 
 function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
-  const usageRate = card.usage_rate;
   const decks = card.decks;
   const wins = card.wins;
   const avgCount = card.avg_count;
   const totalDecks = summary.total_decks;
 
-  // デッキタイプ別採用数の合計
+  // デッキタイプ別採用数の合計・総デッキ数の合計
   const totalAdoptions = typeUsage.reduce((sum, tu) => sum + tu.adoptionCount, 0);
+  const totalDeckCount = typeUsage.reduce((sum, tu) => sum + tu.deckCount, 0);
+  // 全体採用率 = 採用デッキ数合計 ÷ 総デッキ数合計 × 100
+  const usageRate = totalDeckCount > 0 ? (totalAdoptions / totalDeckCount * 100).toFixed(1) : '0.0';
 
-  const description = `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${decks}デッキで採用されています。GCG STATSで詳細な使用データを確認できます。`;
+  const description = `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。GCG STATSで詳細な使用データを確認できます。`;
 
   // デッキタイプ別テーブル
   let typeTableHtml = '';
