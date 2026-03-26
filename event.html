@@ -23,6 +23,51 @@
   <script>
     GCG.init();
 
+    function renderPlayerCard(player, animDelay) {
+      const hasDeck = player.deck && player.deck.length > 0;
+      const tagClass = player.rank === 1 ? 'tag-win' : 'tag-rate';
+      const delayStyle = animDelay !== undefined
+        ? 'animation:fadeIn 0.4s ease-out backwards;animation-delay:' + animDelay + 's'
+        : 'animation:fadeIn 0.4s ease-out backwards';
+
+      let linkHtml = '';
+      if (player.tcgplus_url) {
+        linkHtml = '<a href="' + GCG.escapeHtml(player.tcgplus_url) + '" target="_blank" rel="noopener" class="btn-link">' +
+          '🔗 BANDAI TCG+ で見る' +
+          '<span style="font-size:10px;color:var(--text-muted);margin-left:2px">※TCG+に遷移します</span>' +
+          '</a>';
+      } else if (hasDeck) {
+        linkHtml = '<button class="btn-copy" onclick="GCG.copyToClipboard(GCG.deckToText(' +
+          JSON.stringify(player.deck).replace(/"/g, '&quot;') + '), this)">' +
+          '📋 デッキリストをコピー</button>';
+      }
+
+      let deckHtml = '';
+      if (hasDeck) {
+        deckHtml = '<div class="deck-grid">' +
+          player.deck.map(function(card) {
+            return '<a href="' + GCG.cardSearchUrl(card.card_id) + '" target="_blank" rel="noopener" class="deck-card" title="' + card.card_id + '">' +
+              '<img src="' + GCG.cardImageUrl(card.card_id) + '" alt="' + card.card_id + '"' +
+              ' onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.insertAdjacentHTML(\'afterbegin\',\'<div style=&quot;aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center&quot;>' + card.card_id + '</div>\')">' +
+              '<span class="card-count">×' + card.count + '</span>' +
+              '</a>';
+          }).join('') +
+          '</div>';
+      } else {
+        deckHtml = '<div style="color:var(--text-muted);font-size:13px;padding:16px 0">デッキ情報なし</div>';
+      }
+
+      return '<div style="margin-bottom:36px;' + delayStyle + '">' +
+        '<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap">' +
+        '<span class="tag ' + tagClass + '" style="font-size:13px;min-width:52px;text-align:center">' +
+        GCG.rankText(player.rank) + '</span>' +
+        '<span style="font-size:16px;font-weight:600">' + GCG.escapeHtml(player.player) + '</span>' +
+        linkHtml +
+        '</div>' +
+        deckHtml +
+        '</div>';
+    }
+
     async function renderEvent() {
       const eventId = GCG.getParam('id');
       if (!eventId) {
@@ -37,134 +82,56 @@
         return;
       }
 
-      document.title = `${ev.store} ${GCG.formatDate(ev.date)} - GCG META`;
+      document.title = ev.store + ' ' + GCG.formatDate(ev.date) + ' - GCG META';
 
       const seriesName = data.series[ev.series_id] || '';
 
-      let html = `
-        <div style="margin-bottom:12px">
-          <a href="events.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.15s"
-             onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">
-            ← イベント一覧に戻る
-          </a>
-        </div>
-        <div class="section-header">
-          <div>
-            <h1 class="section-title" style="margin-bottom:6px;font-size:16px">${GCG.escapeHtml(ev.store)}</h1>
-            <div style="font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-              <span class="text-mono" style="color:var(--accent)">${GCG.formatDate(ev.date)}</span>
-              ${seriesName ? `<span style="opacity:0.3">|</span> <span>${GCG.escapeHtml(seriesName)}</span>` : ''}
-            </div>
-          </div>
-          <span class="section-badge">${(ev.results || []).length}名参加</span>
-        </div>
-      `;
+      let html = '<div style="margin-bottom:12px">' +
+        '<a href="events.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.15s"' +
+        ' onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--text-muted)\'">' +
+        '← イベント一覧に戻る</a></div>' +
+        '<div class="section-header"><div>' +
+        '<h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + GCG.escapeHtml(ev.store) + '</h1>' +
+        '<div style="font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
+        '<span class="text-mono" style="color:var(--accent)">' + GCG.formatDate(ev.date) + '</span>' +
+        (seriesName ? '<span style="opacity:0.3">|</span> <span>' + GCG.escapeHtml(seriesName) + '</span>' : '') +
+        '</div></div>' +
+        '<span class="section-badge">' + (ev.results || []).length + '名参加</span></div>';
 
       // 全プレイヤーを表示
-      const results = (ev.results || [])
-        .sort((a, b) => a.rank - b.rank);
+      const results = (ev.results || []).sort(function(a, b) { return a.rank - b.rank; });
+      const top4 = results.filter(function(r) { return r.rank <= 4; });
+      const rest = results.filter(function(r) { return r.rank > 4; });
 
-      const top4 = results.filter(r => r.rank <= 4);
-      const rest = results.filter(r => r.rank > 4);
-
-      for (const player of top4) {
-        const hasDeck = player.deck && player.deck.length > 0;
-
-        html += `
-          <div style="margin-bottom:36px;animation:fadeIn 0.4s ease-out backwards;animation-delay:${(player.rank - 1) * 0.08}s">
-            <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap">
-              <span class="tag ${player.rank === 1 ? 'tag-win' : 'tag-rate'}" style="font-size:13px;min-width:52px;text-align:center">
-                ${GCG.rankText(player.rank)}
-              </span>
-              <span style="font-size:16px;font-weight:600">${GCG.escapeHtml(player.player)}</span>
-              ${player.tcgplus_url ? `
-                <a href="${GCG.escapeHtml(player.tcgplus_url)}" target="_blank" rel="noopener" class="btn-link">
-                  🔗 BANDAI TCG+ で見る
-                  <span style="font-size:10px;color:var(--text-muted);margin-left:2px">※TCG+に遷移します</span>
-                </a>
-              ` : (hasDeck ? `
-                <button class="btn-copy" onclick="GCG.copyToClipboard(GCG.deckToText(${JSON.stringify(player.deck).replace(/"/g, '&quot;')}), this)">
-                  📋 デッキリストをコピー
-                </button>
-              ` : '')}
-            </div>
-            ${hasDeck ? `
-              <div class="deck-grid">
-                ${player.deck.map(card => `
-                  <a href="${GCG.cardSearchUrl(card.card_id)}" target="_blank" rel="noopener" class="deck-card" title="${card.card_id}">
-                    <img src="${GCG.cardImageUrl(card.card_id)}" alt="${card.card_id}"
-                         onerror="this.onerror=null;this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=&quot;aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center&quot;>${card.card_id}</div>')">
-                    <span class="card-count">×${card.count}</span>
-                  </a>
-                `).join('')}
-              </div>
-            ` : '<div style="color:var(--text-muted);font-size:13px;padding:16px 0">デッキ情報なし</div>'}
-          </div>
-        `;
+      for (var i = 0; i < top4.length; i++) {
+        html += renderPlayerCard(top4[i], (top4[i].rank - 1) * 0.08);
       }
 
       // 5位以降を折りたたみで表示
       if (rest.length > 0) {
-        html += `
-          <div style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px">
-            <button id="toggle-rest" onclick="toggleRest()" style="
-              background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);
-              padding:10px 20px;border-radius:var(--radius);font-size:13px;font-family:var(--font-mono);
-              cursor:pointer;transition:all 0.15s;width:100%;text-align:center;
-            " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
-               onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-secondary)'">
-              5位以降を表示（${rest.length}名） ▼
-            </button>
-            <div id="rest-players" style="display:none;margin-top:20px">
-        `;
+        html += '<div style="margin-top:24px;border-top:1px solid var(--border);padding-top:20px">' +
+          '<button id="toggle-rest" onclick="toggleRest()" style="' +
+          'background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);' +
+          'padding:10px 20px;border-radius:var(--radius);font-size:13px;font-family:var(--font-mono);' +
+          'cursor:pointer;transition:all 0.15s;width:100%;text-align:center"' +
+          ' onmouseover="this.style.borderColor=\'var(--accent)\';this.style.color=\'var(--accent)\'"' +
+          ' onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text-secondary)\'">' +
+          '5位以降を表示（' + rest.length + '名） ▼</button>' +
+          '<div id="rest-players" style="display:none;margin-top:20px">';
 
-        for (const player of rest) {
-          const hasDeck = player.deck && player.deck.length > 0;
-          html += `
-            <div style="margin-bottom:36px;animation:fadeIn 0.4s ease-out backwards">
-              <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap">
-                <span class="tag tag-rate" style="font-size:13px;min-width:52px;text-align:center">
-                  ${GCG.rankText(player.rank)}
-                </span>
-                <span style="font-size:16px;font-weight:600">${GCG.escapeHtml(player.player)}</span>
-                ${player.tcgplus_url ? \`
-                  <a href="\${GCG.escapeHtml(player.tcgplus_url)}" target="_blank" rel="noopener" class="btn-link">
-                    🔗 BANDAI TCG+ で見る
-                    <span style="font-size:10px;color:var(--text-muted);margin-left:2px">※TCG+に遷移します</span>
-                  </a>
-                \` : (hasDeck ? \`
-                  <button class="btn-copy" onclick="GCG.copyToClipboard(GCG.deckToText(\${JSON.stringify(player.deck).replace(/"/g, '&quot;')}), this)">
-                    📋 デッキリストをコピー
-                  </button>
-                \` : '')}
-              </div>
-              \${hasDeck ? \`
-                <div class="deck-grid">
-                  \${player.deck.map(card => \`
-                    <a href="\${GCG.cardSearchUrl(card.card_id)}" target="_blank" rel="noopener" class="deck-card" title="\${card.card_id}">
-                      <img src="\${GCG.cardImageUrl(card.card_id)}" alt="\${card.card_id}"
-                           onerror="this.onerror=null;this.style.display='none';this.parentElement.insertAdjacentHTML('afterbegin','<div style=&quot;aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center&quot;>\${card.card_id}</div>')">
-                      <span class="card-count">×\${card.count}</span>
-                    </a>
-                  \`).join('')}
-                </div>
-              \` : '<div style="color:var(--text-muted);font-size:13px;padding:16px 0">デッキ情報なし</div>'}
-            </div>
-          `;
+        for (var j = 0; j < rest.length; j++) {
+          html += renderPlayerCard(rest[j]);
         }
 
-        html += `
-            </div>
-          </div>
-        `;
+        html += '</div></div>';
       }
 
       document.getElementById('event-content').innerHTML = html;
     }
 
     function toggleRest() {
-      const el = document.getElementById('rest-players');
-      const btn = document.getElementById('toggle-rest');
+      var el = document.getElementById('rest-players');
+      var btn = document.getElementById('toggle-rest');
       if (el.style.display === 'none') {
         el.style.display = 'block';
         btn.innerHTML = btn.innerHTML.replace('表示', '非表示').replace('▼', '▲');
