@@ -217,7 +217,7 @@ const GCG = {
   renderShareButtons: function(containerId, title) {
     var el = document.getElementById(containerId);
     if (!el) return;
-    var url = window.location.href.split('?')[0].split('#')[0];
+    var url = window.location.href.split('#')[0];
     var tweetText = encodeURIComponent(title + '\n' + url + '\n#GCG #ガンダムカードゲーム');
     var tweetUrl = 'https://twitter.com/intent/tweet?text=' + tweetText;
     el.innerHTML =
@@ -235,7 +235,7 @@ const GCG = {
   },
 
   copyShareUrl: function(btn) {
-    var url = window.location.href.split('?')[0].split('#')[0];
+    var url = window.location.href.split('#')[0];
     var label = btn.querySelector('.copy-label');
     if (navigator.clipboard) {
       navigator.clipboard.writeText(url).then(function() {
@@ -246,8 +246,9 @@ const GCG = {
     } else {
       var ta = document.createElement('textarea');
       ta.value = url; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      btn.classList.add('copied');
       label.textContent = '\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f';
-      setTimeout(function() { label.textContent = 'URL\u3092\u30b3\u30d4\u30fc'; }, 2000);
+      setTimeout(function() { btn.classList.remove('copied'); label.textContent = 'URL\u3092\u30b3\u30d4\u30fc'; }, 2000);
     }
   }
 };
