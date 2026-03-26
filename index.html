@@ -91,15 +91,41 @@
     GCG.init();
 
     async function renderDashboard() {
-      const [summary, eventsData] = await Promise.all([
+      const [summary, eventsData, cardColors] = await Promise.all([
         GCG.loadSummary(),
-        GCG.loadEvents()
+        GCG.loadEvents(),
+        fetch(GCG.getBasePath() + 'data/card_colors.json').then(r => r.json()).catch(() => ({}))
       ]);
+
+      // 全 results から総デッキ数・デッキタイプ数を集計（ヒーロー表示用）
+      var SET_COLORS = {ST01:'Blue',ST02:'Red',ST03:'Green',ST04:'White',ST05:'Green',ST06:'Red',ST07:'Purple',ST08:'Blue',ST09:'White'};
+      function getColor(id) { return cardColors[id] || SET_COLORS[id.split('-')[0]] || 'Unknown'; }
+      var totalResults = 0;
+      var allTypeKeys = {};
+      var allEvents = Object.values(eventsData.events);
+      for (var i = 0; i < allEvents.length; i++) {
+        var results = allEvents[i].results || [];
+        totalResults += results.length;
+        for (var j = 0; j < results.length; j++) {
+          var deck = results[j].deck;
+          if (!deck || deck.length === 0) continue;
+          var cc = {};
+          for (var k = 0; k < deck.length; k++) {
+            var col = getColor(deck[k].card_id);
+            if (col !== 'Unknown' && col !== 'Colorless') cc[col] = 1;
+          }
+          var colors = Object.keys(cc).sort(function(a,b){
+            var order = ['Blue','Red','Green','White','Purple'];
+            return order.indexOf(a) - order.indexOf(b);
+          });
+          if (colors.length > 0) allTypeKeys[colors.join('+')] = 1;
+        }
+      }
 
       // Hero stats (animated)
       GCG.animateNumber(document.getElementById('stat-events'), summary.total_events);
-      GCG.animateNumber(document.getElementById('stat-decks'), summary.total_decks);
-      GCG.animateNumber(document.getElementById('stat-types'), (summary.deck_type_ranking || []).length);
+      GCG.animateNumber(document.getElementById('stat-decks'), totalResults);
+      GCG.animateNumber(document.getElementById('stat-types'), Object.keys(allTypeKeys).length);
 
       // デッキタイプ分布
       renderDeckTypes(summary.deck_type_ranking || []);
