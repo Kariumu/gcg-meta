@@ -50,7 +50,7 @@
       </div>
       <div style="display:flex;gap:20px;flex-wrap:wrap">
         <div class="chart-container" style="flex:0 0 400px;min-width:300px">
-          <div class="chart-title">TOP4 デッキタイプ シェア</div>
+          <div class="chart-title">TOP6 デッキタイプ シェア</div>
           <div style="position:relative;height:280px">
             <canvas id="decktype-pie"></canvas>
           </div>
@@ -193,16 +193,9 @@
 
       // Pie chart
       const top6 = deckTypes.slice(0, 6);
-      const others = deckTypes.slice(6);
-      const othersCount = others.reduce((s, d) => s + d.count, 0);
 
       const labels = top6.map(d => d.label);
       const data = top6.map(d => d.count);
-
-      if (othersCount > 0) {
-        labels.push('その他');
-        data.push(othersCount);
-      }
 
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
@@ -220,13 +213,7 @@
         return grad;
       }
       const bgColors = top6.map(d => makeGrad(d.colors));
-      if (othersCount > 0) {
-        const g = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        g.addColorStop(0, '#3a3f47'); g.addColorStop(1, '#2a2f37');
-        bgColors.push(g);
-      }
       const legendColors = top6.map(d => GCG.primaryColorHex(d.colors));
-      if (othersCount > 0) legendColors.push('#3a3f47');
 
       new Chart(ctx, {
         type: 'doughnut',

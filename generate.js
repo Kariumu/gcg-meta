@@ -162,7 +162,7 @@ function generateMeta(summary, eventsData) {
 
   let seoHtml = `<h2>環境分析データ</h2>`;
 
-  seoHtml += `<h3>デッキタイプ別シェア（TOP4集計）</h3><ul>`;
+  seoHtml += `<h3>デッキタイプ別シェア</h3><ul>`;
   for (const dt of deckTypes) {
     seoHtml += `<li>${dt.label}：${dt.count}デッキ（シェア${dt.share}%、優勝${dt.wins}回、優勝率${dt.win_rate}%、平均順位${dt.avg_rank}）</li>`;
   }
