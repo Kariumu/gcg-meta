@@ -19,6 +19,36 @@
       <span class="section-badge" id="meta-info">TOP4 集計</span>
     </div>
 
+    <!-- フィルターボタン -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap" id="rank-filter">
+      <button class="rank-filter-btn" data-filter="win" onclick="setFilter('win')">優勝のみ</button>
+      <button class="rank-filter-btn active" data-filter="top4" onclick="setFilter('top4')">TOP4</button>
+      <button class="rank-filter-btn" data-filter="all" onclick="setFilter('all')">全て</button>
+    </div>
+    <style>
+      .rank-filter-btn {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 8px 20px;
+        border-radius: var(--radius);
+        font-size: 13px;
+        font-family: var(--font-mono);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .rank-filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .rank-filter-btn.active {
+        background: var(--accent-dim, rgba(255, 170, 0, 0.1));
+        border-color: var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+      }
+    </style>
+
     <!-- 統計サマリー -->
     <div class="stats-grid" id="stats-summary">
       <div class="stat-card">
@@ -26,7 +56,7 @@
         <div class="stat-value" id="s-events">--</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">TOP4 デッキ数</div>
+        <div class="stat-label" id="s-decks-label">TOP4 デッキ数</div>
         <div class="stat-value" id="s-decks">--</div>
       </div>
       <div class="stat-card">
@@ -116,9 +146,14 @@
   <script>
     GCG.init();
 
+    let currentFilter = 'top4'; // 'win', 'top4', 'all'
     let deckTypes = [];
     let selectedType = null;
     let cardNames = {};
+    let cardColors = {};
+    let eventsDataGlobal = null;
+    let summaryDataGlobal = null;
+    let pieChart = null;
 
     async function loadCardNames() {
       try {
@@ -127,37 +162,195 @@
       } catch (e) { /* ignore */ }
     }
 
+    async function loadCardColors() {
+      try {
+        const resp = await fetch(GCG.getBasePath() + 'data/card_colors.json');
+        if (resp.ok) cardColors = await resp.json();
+      } catch (e) { /* ignore */ }
+    }
+
     function getCardName(cardId) {
       return cardNames[cardId] || '';
     }
 
-    async function init() {
-      await loadCardNames();
-      const summary = await GCG.loadSummary();
-      const eventsData = await GCG.loadEvents();
-      deckTypes = summary.deck_type_ranking || [];
+    // デッキのカラーを判定（カードの色の上位2色）
+    function detectDeckColors(deck) {
+      const colorCount = {};
+      for (const card of deck) {
+        const color = cardColors[card.card_id];
+        if (color && color !== 'Unknown') {
+          colorCount[color] = (colorCount[color] || 0) + card.count;
+        }
+      }
+      const sorted = Object.entries(colorCount).sort((a, b) => b[1] - a[1]);
+      if (sorted.length >= 2) return [sorted[0][0], sorted[1][0]].sort();
+      if (sorted.length === 1) return [sorted[0][0]];
+      return ['Unknown'];
+    }
 
-      // Stats
-      GCG.animateNumber(document.getElementById('s-events'), summary.total_events);
-      GCG.animateNumber(document.getElementById('s-decks'), summary.total_decks);
-      GCG.animateNumber(document.getElementById('s-types'), deckTypes.length);
+    // フィルターに基づいてeventsDataからデッキタイプランキングを動的に集計
+    function computeDeckTypeRanking(eventsData, filter) {
+      const typeMap = {}; // type_key -> { colors, decks: [...], wins: 0 }
 
-      document.getElementById('meta-info').textContent =
-        `${summary.total_events}イベント / ${summary.total_decks}デッキ (TOP4)`;
+      for (const ev of Object.values(eventsData.events)) {
+        const results = ev.results || [];
+        for (const r of results) {
+          // フィルター適用
+          if (filter === 'win' && r.rank !== 1) continue;
+          if (filter === 'top4' && r.rank > 4) continue;
+          // 'all' は全プレイヤー
+
+          if (!r.deck || r.deck.length === 0) continue;
+
+          const colors = detectDeckColors(r.deck);
+          const typeKey = colors.join('+');
+
+          if (!typeMap[typeKey]) {
+            typeMap[typeKey] = {
+              type_key: typeKey,
+              colors: colors,
+              label: colors.map(c => (GCG.DECK_COLORS[c] || GCG.DECK_COLORS.Unknown).jp).join('/'),
+              decks: [],
+              wins: 0,
+              totalRank: 0
+            };
+          }
+
+          typeMap[typeKey].decks.push({ deck: r.deck, rank: r.rank, isWin: r.rank === 1 });
+          if (r.rank === 1) typeMap[typeKey].wins++;
+          typeMap[typeKey].totalRank += r.rank;
+        }
+      }
+
+      // ランキング形式に整形
+      const totalDecks = Object.values(typeMap).reduce((s, t) => s + t.decks.length, 0);
+      const ranking = Object.values(typeMap).map(t => {
+        const count = t.decks.length;
+        const share = totalDecks > 0 ? Math.round(count / totalDecks * 1000) / 10 : 0;
+        const winRate = count > 0 ? Math.round(t.wins / count * 1000) / 10 : 0;
+        const avgRank = count > 0 ? Math.round(t.totalRank / count * 10) / 10 : 0;
+
+        // カード採用率の集計
+        const cardMap = {};
+        for (const d of t.decks) {
+          for (const card of d.deck) {
+            if (!cardMap[card.card_id]) {
+              cardMap[card.card_id] = { card_id: card.card_id, decks: 0, wins: 0, counts: [], totalCount: 0 };
+            }
+            cardMap[card.card_id].decks++;
+            if (d.isWin) cardMap[card.card_id].wins++;
+            cardMap[card.card_id].counts.push(card.count);
+            cardMap[card.card_id].totalCount += card.count;
+          }
+        }
+        const cardRanking = Object.values(cardMap).map(c => {
+          c.counts.sort((a, b) => a - b);
+          return {
+            card_id: c.card_id,
+            decks: c.decks,
+            usage_rate: Math.round(c.decks / count * 1000) / 10,
+            wins: c.wins,
+            win_rate: c.decks > 0 ? Math.round(c.wins / c.decks * 1000) / 10 : 0,
+            avg_count: Math.round(c.totalCount / c.decks * 10) / 10,
+            median_count: c.counts[Math.floor(c.counts.length / 2)],
+            max_count: c.counts[c.counts.length - 1],
+            min_count: c.counts[0]
+          };
+        }).sort((a, b) => b.usage_rate - a.usage_rate || b.decks - a.decks);
+
+        return {
+          type_key: t.type_key,
+          colors: t.colors,
+          label: t.label,
+          count: count,
+          share: share,
+          wins: t.wins,
+          win_rate: winRate,
+          avg_rank: avgRank,
+          card_ranking: cardRanking
+        };
+      }).sort((a, b) => b.count - a.count);
+
+      return { ranking, totalDecks };
+    }
+
+    function setFilter(filter) {
+      currentFilter = filter;
+      // Update button states
+      document.querySelectorAll('.rank-filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+      // Re-render with new filter
+      renderWithFilter();
+    }
+
+    function renderWithFilter() {
+      if (!eventsDataGlobal) return;
+
+      if (currentFilter === 'top4') {
+        // Use pre-computed summary data for TOP4 (original behavior)
+        deckTypes = summaryDataGlobal.deck_type_ranking || [];
+        const totalDecks = summaryDataGlobal.total_decks;
+        const totalEvents = summaryDataGlobal.total_events;
+
+        document.getElementById('s-events').textContent = totalEvents.toLocaleString();
+        document.getElementById('s-decks').textContent = totalDecks.toLocaleString();
+        document.getElementById('s-decks-label').textContent = 'TOP4 デッキ数';
+        document.getElementById('s-types').textContent = deckTypes.length.toLocaleString();
+        document.getElementById('meta-info').textContent =
+          `${totalEvents}イベント / ${totalDecks}デッキ (TOP4)`;
+
+        renderRegionSection(summaryDataGlobal.region_ranking || []);
+      } else {
+        // Compute from raw events data
+        const { ranking, totalDecks } = computeDeckTypeRanking(eventsDataGlobal, currentFilter);
+        deckTypes = ranking;
+        const totalEvents = Object.keys(eventsDataGlobal.events).length;
+        const filterLabel = currentFilter === 'win' ? '優勝のみ' : '全て';
+
+        document.getElementById('s-events').textContent = totalEvents.toLocaleString();
+        document.getElementById('s-decks').textContent = totalDecks.toLocaleString();
+        document.getElementById('s-decks-label').textContent =
+          currentFilter === 'win' ? '優勝デッキ数' : '全デッキ数';
+        document.getElementById('s-types').textContent = deckTypes.length.toLocaleString();
+        document.getElementById('meta-info').textContent =
+          `${totalEvents}イベント / ${totalDecks}デッキ (${filterLabel})`;
+
+        // Region data not available for non-top4, hide or show message
+        document.getElementById('region-content').innerHTML =
+          '<div style="text-align:center;padding:24px;color:var(--text-muted);font-size:13px">地域別データはTOP4フィルターでのみ表示されます</div>';
+      }
 
       renderDeckTypeTable(deckTypes);
       renderPieChart(deckTypes);
       renderTypeTabs(deckTypes);
-      renderRegionSection(summary.region_ranking || []);
-      renderEventList(eventsData);
+
+      // Re-select type if available
+      if (selectedType) {
+        const dt = deckTypes.find(d => d.type_key === selectedType);
+        if (dt) {
+          selectType(dt.type_key);
+        } else if (deckTypes.length > 0) {
+          selectType(deckTypes[0].type_key);
+        }
+      } else if (deckTypes.length > 0) {
+        selectType(deckTypes[0].type_key);
+      }
+    }
+
+    async function init() {
+      await Promise.all([loadCardNames(), loadCardColors()]);
+      summaryDataGlobal = await GCG.loadSummary();
+      eventsDataGlobal = await GCG.loadEvents();
+
+      renderWithFilter();
+      renderEventList(eventsDataGlobal);
 
       // URLパラメータからタイプ選択
       const paramType = GCG.getParam('type');
       if (paramType) {
         const dt = deckTypes.find(d => d.type_key === paramType);
         if (dt) selectType(dt.type_key);
-      } else if (deckTypes.length > 0) {
-        selectType(deckTypes[0].type_key);
       }
     }
 
@@ -185,6 +378,12 @@
     }
 
     function renderPieChart(types) {
+      // Destroy existing chart
+      if (pieChart) {
+        pieChart.destroy();
+        pieChart = null;
+      }
+
       const top8 = types.slice(0, 8);
       const others = types.slice(8);
       const othersCount = others.reduce((s, d) => s + d.count, 0);
@@ -200,7 +399,6 @@
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
 
-      // デッキタイプの2色からグラデーションを生成
       function makeGradient(colorArr) {
         const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
         if (colorArr.length >= 2) {
@@ -224,11 +422,10 @@
         bgColors.push(grayGrad);
       }
 
-      // 凡例用にフラットカラーも保持
       const legendColors = top8.map(d => GCG.primaryColorHex(d.colors));
       if (othersCount > 0) legendColors.push('#3a3f47');
 
-      new Chart(ctx, {
+      pieChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
           labels,
@@ -326,9 +523,12 @@
         return;
       }
 
+      const filterLabel = currentFilter === 'win' ? '優勝デッキ' :
+                          currentFilter === 'top4' ? 'TOP4デッキ' : '全デッキ';
+
       container.innerHTML = `
         <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">
-          ${GCG.escapeHtml(dt.label)} デッキ カード採用率 （${dt.count}デッキ中）
+          ${GCG.escapeHtml(dt.label)} デッキ カード採用率 （${dt.count}${filterLabel}中）
         </div>
         <div style="overflow-x:auto">
         <table class="data-table" style="--th-position:static">
@@ -407,7 +607,7 @@
         </div>`;
     }
 
-    // イベント一覧（日付→店舗名→TOP4デッキカラー）
+    // イベント一覧
     function renderEventList(eventsData) {
       const container = document.getElementById('event-list-content');
       if (!eventsData || !eventsData.events) {
