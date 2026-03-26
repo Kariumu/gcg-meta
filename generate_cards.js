@@ -12,6 +12,30 @@ const DATA_DIR = path.join(ROOT, 'data');
 const CARDS_DIR = path.join(ROOT, 'cards');
 const SITE_URL = 'https://gcg-stats.com';
 
+// カードマスターデータ
+let cardsMaster = {};
+try {
+  cardsMaster = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'cards_master.json'), 'utf-8'));
+  console.log(`  カードマスター: ${Object.keys(cardsMaster).length} 件読み込み`);
+} catch (e) {
+  console.warn('  ⚠ cards_master.json が見つかりません。カード名なしで生成します。');
+}
+
+// 色の日本語変換
+const COLOR_JP = {
+  'Blue': '青', 'Green': '緑', 'Red': '赤', 'White': '白', 'Purple': '紫', 'Colorless': '無色'
+};
+
+// カードタイプの日本語変換
+const TYPE_JP = {
+  'UNIT': 'ユニット', 'PILOT': 'パイロット', 'COMMAND': 'コマンド', 'BASE': 'ベース'
+};
+
+// レアリティ表示
+const RARITY_LABEL = {
+  'LR': 'LR', 'R': 'R', 'U': 'U', 'C': 'C'
+};
+
 // デッキカラー定義
 const DECK_COLORS = {
   Blue:    { hex: '#4488ff', jp: '青', cssClass: 'c-blue' },
@@ -107,7 +131,8 @@ function main() {
     }
     adoptions.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-    const html = generateCardPage(cardId, card, typeUsage, adoptions, summary);
+    const masterCard = cardsMaster[cardId] || null;
+    const html = generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard);
 
     const cardDir = path.join(CARDS_DIR, cardId);
     fs.mkdirSync(cardDir, { recursive: true });
@@ -121,7 +146,7 @@ function main() {
   console.log('  → sitemap.xml 更新完了');
 }
 
-function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
+function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard) {
   const decks = card.decks;
   const wins = card.wins;
   const avgCount = card.avg_count;
@@ -133,7 +158,19 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
   // 全体採用率 = 採用デッキ数合計 ÷ 総デッキ数合計 × 100
   const usageRate = totalDeckCount > 0 ? (totalAdoptions / totalDeckCount * 100).toFixed(1) : '0.0';
 
-  const description = `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。GCG STATSで詳細な使用データを確認できます。`;
+  // カード名（マスターデータがあれば使用、なければカードID）
+  const cardName = masterCard ? masterCard.name_jp : cardId;
+  const colorJp = masterCard ? (COLOR_JP[masterCard.color] || masterCard.color) : '';
+  const typeJp = masterCard ? (TYPE_JP[masterCard.card_type] || masterCard.card_type) : '';
+
+  // SEO用 description
+  const description = masterCard
+    ? `${cardName}（${cardId}）のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。色:${colorJp} タイプ:${typeJp}`
+    : `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。`;
+  // SEO用 title
+  const pageTitle = masterCard
+    ? `${cardName}（${cardId}）の大会採用率 | GCG STATS`
+    : `${cardId} の大会採用率・使用デッキ | GCG STATS`;
 
   // デッキタイプ別テーブル
   let typeTableHtml = '';
@@ -231,9 +268,9 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(cardId)} の大会採用率・使用デッキ | GCG STATS</title>
+  <title>${escapeHtml(pageTitle)}</title>
   <meta name="description" content="${escapeHtml(description)}">
-  <meta property="og:title" content="${escapeHtml(cardId)} の大会採用率・使用デッキ | GCG STATS">
+  <meta property="og:title" content="${escapeHtml(pageTitle)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${SITE_URL}/cards/${cardId}/">
@@ -312,12 +349,24 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
 
     <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap">
       <div style="flex-shrink:0">
-        <img src="../../images/cards/${cardId}.webp" alt="${escapeHtml(cardId)}"
+        <img src="../../images/cards/${cardId}.webp" alt="${escapeHtml(cardName)}"
              style="width:180px;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md)"
              onerror="this.src='https://www.gundam-gcg.com/jp/images/cards/card/${cardId}.webp';this.onerror=null;">
       </div>
       <div style="flex:1;min-width:300px">
-        <h1 style="font-family:var(--font-mono);font-size:22px;margin-bottom:8px">${escapeHtml(cardId)}</h1>
+        <h1 style="font-family:var(--font-mono);font-size:22px;margin-bottom:4px">${masterCard ? escapeHtml(cardName) : escapeHtml(cardId)}</h1>
+        ${masterCard ? `<p style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted);margin:0 0 8px">${escapeHtml(cardId)}</p>` : ''}
+        ${masterCard ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex}22;color:${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex};border:1px solid ${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex}44">${escapeHtml(colorJp)}</span>
+          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">${escapeHtml(typeJp)}</span>
+          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">${escapeHtml(RARITY_LABEL[masterCard.rarity] || masterCard.rarity)}</span>
+          ${masterCard.card_type === 'UNIT' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">Lv.${masterCard.level} / コスト${masterCard.cost}</span>
+          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">AP${masterCard.stats.ap || 0} / HP${masterCard.stats.hp || 0}</span>` : ''}
+          ${masterCard.card_type === 'PILOT' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">Lv.${masterCard.level} / コスト${masterCard.cost}</span>` : ''}
+          ${masterCard.card_type === 'COMMAND' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">コスト${masterCard.cost}</span>` : ''}
+        </div>
+        ${masterCard.traits && masterCard.traits.length > 0 ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ${escapeHtml(masterCard.traits.join(', '))}</p>` : ''}
+        ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}` : ''}
         <a href="https://www.gundam-gcg.com/jp/cards/${cardId}" target="_blank" rel="noopener"
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
