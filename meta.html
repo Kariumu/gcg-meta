@@ -406,18 +406,31 @@
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
 
-      function makeSplitGradient(colorArr) {
-        var hexArr = colorArr.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
-        if (hexArr.length === 1) return hexArr[0];
-        var grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        grad.addColorStop(0, hexArr[0]);
-        grad.addColorStop(0.5, hexArr[0]);
-        grad.addColorStop(0.5, hexArr[1]);
-        grad.addColorStop(1, hexArr[1]);
-        return grad;
-      }
+      // 初期色（プラグインで上書きされる）
+      const bgColors = top8.map(function(d) {
+        var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        return hexArr[0];
+      });
 
-      const bgColors = top8.map(d => makeSplitGradient(d.colors));
+      // Chart.jsプラグイン: レイアウト後に正確な座標で上下分割グラデーションを生成
+      const splitColorPlugin = {
+        id: 'splitColor',
+        beforeDraw: function(chart) {
+          var cctx = chart.ctx;
+          var area = chart.chartArea;
+          if (!area) return;
+          chart.data.datasets[0].backgroundColor = top8.map(function(d) {
+            var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+            if (hexArr.length === 1) return hexArr[0];
+            var grad = cctx.createLinearGradient(0, area.top, 0, area.bottom);
+            grad.addColorStop(0, hexArr[0]);
+            grad.addColorStop(0.5, hexArr[0]);
+            grad.addColorStop(0.5, hexArr[1]);
+            grad.addColorStop(1, hexArr[1]);
+            return grad;
+          });
+        }
+      };
 
       // HTML凡例を生成
       var legendEl = document.getElementById('decktype-legend');
@@ -436,6 +449,7 @@
           labels,
           datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }]
         },
+        plugins: [splitColorPlugin],
         options: {
           responsive: true,
           maintainAspectRatio: false,
