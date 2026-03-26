@@ -759,7 +759,7 @@ ${generateNoscriptContent()}
 
       return '<a class="card-item" href="/cards/' + card.id + '/">' +
         '<div class="card-item-img-wrap">' +
-          '<img class="card-item-img" src="' + imgSrc + '" alt="' + escapeAttr(card.name) + '" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+          '<img class="card-item-img" src="' + imgSrc + '" alt="' + escapeAttr(card.name) + '" loading="lazy" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;flex&quot;">' +
           '<div class="card-item-fallback"><div class="card-item-fallback-id">' + card.id + '</div><div class="card-item-fallback-name">' + escapeAttr(card.name) + '</div></div>' +
           '<span class="card-rarity-badge rarity-' + card.rarity + '">' + card.rarity + '</span>' +
         '</div>' +
