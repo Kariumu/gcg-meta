@@ -1,0 +1,583 @@
+#!/usr/bin/env node
+/**
+ * generate-report.js
+ * 週次環境レポート記事を Claude API で生成し、reports/ に保存する
+ *
+ * 使い方:
+ *   ANTHROPIC_API_KEY=sk-... node generate-report.js
+ *   ANTHROPIC_API_KEY=sk-... node generate-report.js --week 2026-03-09  # 特定週を指定
+ */
+
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+
+const ROOT = __dirname;
+const DATA_DIR = path.join(ROOT, 'data');
+const REPORTS_DIR = path.join(ROOT, 'reports');
+const SITE_URL = 'https://gcg-stats.com';
+
+// カードマスター
+let cardsMaster = {};
+try {
+  cardsMaster = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'cards_master.json'), 'utf-8'));
+} catch (e) {}
+
+// デッキカラー日本語
+const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
+
+function escapeHtml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function formatDate(d) {
+  return d.replace(/-/g, '.');
+}
+
+function cardName(id) {
+  const m = cardsMaster[id];
+  return m ? m.name_jp + '(' + id + ')' : id;
+}
+
+/**
+ * 月曜始まりの週を計算
+ */
+function getWeekMonday(dateStr) {
+  const dt = new Date(dateStr + 'T00:00:00');
+  const day = dt.getDay(); // 0=Sun
+  const diff = (day + 6) % 7; // Mon=0, Tue=1, ... Sun=6
+  const mon = new Date(dt);
+  mon.setDate(mon.getDate() - diff);
+  return mon.toISOString().split('T')[0];
+}
+
+function getSunday(mondayStr) {
+  const dt = new Date(mondayStr + 'T00:00:00');
+  dt.setDate(dt.getDate() + 6);
+  return dt.toISOString().split('T')[0];
+}
+
+/**
+ * 対象週のイベントを抽出
+ */
+function extractWeeklyEvents(eventsData, mondayStr) {
+  const sunday = getSunday(mondayStr);
+  const result = [];
+  for (const ev of Object.values(eventsData.events)) {
+    if (ev.date >= mondayStr && ev.date <= sunday) {
+      result.push(ev);
+    }
+  }
+  return result;
+}
+
+/**
+ * 週次データを集計
+ */
+function computeWeeklyStats(weekEvents) {
+  const deckTypeMap = {};
+  const cardCountMap = {};
+  const winnerDecks = [];
+  let totalDecks = 0;
+
+  for (const ev of weekEvents) {
+    for (const r of (ev.results || [])) {
+      if (r.rank > 4) continue;
+      totalDecks++;
+
+      // デッキタイプ集計
+      const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
+      const colors = colorEntry ? colorEntry.colors : null;
+      if (colors) {
+        const typeKey = colors.map(c => COLOR_JP[c] || c).join('/');
+        if (!deckTypeMap[typeKey]) deckTypeMap[typeKey] = { count: 0, wins: 0 };
+        deckTypeMap[typeKey].count++;
+        if (r.rank === 1) deckTypeMap[typeKey].wins++;
+      }
+
+      // カード採用率
+      for (const card of (r.deck || [])) {
+        if (!cardCountMap[card.card_id]) cardCountMap[card.card_id] = { decks: 0, totalCount: 0 };
+        cardCountMap[card.card_id].decks++;
+        cardCountMap[card.card_id].totalCount += card.count;
+      }
+
+      // 優勝デッキ
+      if (r.rank === 1 && r.deck && r.deck.length > 0) {
+        winnerDecks.push({
+          store: ev.store,
+          date: ev.date,
+          player: r.player,
+          deck: r.deck,
+          region: ev.region || ''
+        });
+      }
+    }
+  }
+
+  // デッキタイプランキング
+  const deckTypeRanking = Object.entries(deckTypeMap)
+    .map(([type, d]) => ({
+      type,
+      count: d.count,
+      wins: d.wins,
+      share: (d.count / totalDecks * 100).toFixed(1),
+      winRate: d.count > 0 ? (d.wins / d.count * 100).toFixed(1) : '0'
+    }))
+    .sort((a, b) => b.count - a.count);
+
+  // カード採用率ランキング
+  const cardRanking = Object.entries(cardCountMap)
+    .map(([id, d]) => ({
+      card_id: id,
+      name: cardName(id),
+      decks: d.decks,
+      rate: (d.decks / totalDecks * 100).toFixed(1),
+      avg: (d.totalCount / d.decks).toFixed(1)
+    }))
+    .sort((a, b) => b.decks - a.decks)
+    .slice(0, 20);
+
+  return { totalDecks, deckTypeRanking, cardRanking, winnerDecks };
+}
+
+/**
+ * Claude API プロンプトを構築
+ */
+function buildPrompt(mondayStr, sundayStr, weekEvents, stats) {
+  let deckTypeText = '';
+  for (const dt of stats.deckTypeRanking) {
+    deckTypeText += dt.type + ': ' + dt.count + 'デッキ（シェア' + dt.share + '%、優勝' + dt.wins + '回、優勝率' + dt.winRate + '%）\n';
+  }
+
+  let winnerText = '';
+  for (const w of stats.winnerDecks.slice(0, 10)) {
+    winnerText += w.date + ' ' + w.store + '（' + w.region + '）優勝: ' + w.player + '\n';
+    winnerText += '  デッキ: ' + w.deck.map(c => cardName(c.card_id) + ' x' + c.count).join(', ') + '\n';
+  }
+
+  let cardText = '';
+  for (const c of stats.cardRanking) {
+    cardText += c.name + ': 採用率' + c.rate + '%（' + c.decks + 'デッキ、平均' + c.avg + '枚）\n';
+  }
+
+  return 'あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。\n' +
+    '以下の大会データに基づいて、今週の環境レポート記事を日本語で書いてください。\n\n' +
+    '【記事の構成】\n' +
+    '1. 今週のサマリー（3〜4行）\n' +
+    '   - 開催イベント数、地域の傾向\n' +
+    '2. デッキタイプ分布\n' +
+    '   - 上位3〜5タイプの特徴と注目ポイント\n' +
+    '3. 注目カード\n' +
+    '   - 採用率が上昇しているカード、新しく使われ始めたカード\n' +
+    '4. 今週の優勝デッキ紹介（2〜3デッキ）\n' +
+    '   - 特徴的な構築やメタ読みがあれば解説\n' +
+    '5. 来週に向けて（1〜2行）\n' +
+    '   - メタの予想や注目ポイント\n\n' +
+    '【注意事項】\n' +
+    '- カードIDだけでなくカード名を併記すること\n' +
+    '- 数値データ（採用率・優勝率）は正確に引用すること\n' +
+    '- 堅すぎず、TCGプレイヤーが読んで面白い文体にすること\n' +
+    '- HTML形式で出力すること（<h2>、<p>、<ul>タグを使用）\n' +
+    '- 全体で800〜1200文字程度\n' +
+    '- <h2>から始めること（<h1>は不要）\n\n' +
+    '【今週のデータ】\n' +
+    '期間: ' + formatDate(mondayStr) + ' 〜 ' + formatDate(sundayStr) + '\n' +
+    'イベント数: ' + weekEvents.length + '件\n' +
+    'TOP4デッキ数: ' + stats.totalDecks + '件\n\n' +
+    '【デッキタイプ別集計（今週分）】\n' + deckTypeText + '\n' +
+    '【今週の優勝デッキ一覧】\n' + winnerText + '\n' +
+    '【カード採用率TOP20（今週分）】\n' + cardText;
+}
+
+/**
+ * Claude API を呼び出す
+ */
+function callClaudeAPI(prompt) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    throw new Error('環境変数 ANTHROPIC_API_KEY が設定されていません。');
+  }
+
+  return new Promise((resolve, reject) => {
+    const body = JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 2000,
+      messages: [{ role: 'user', content: prompt }]
+    });
+
+    const options = {
+      hostname: 'api.anthropic.com',
+      path: '/v1/messages',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'Content-Length': Buffer.byteLength(body)
+      }
+    };
+
+    const req = https.request(options, (res) => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        if (res.statusCode !== 200) {
+          reject(new Error('API error ' + res.statusCode + ': ' + data));
+          return;
+        }
+        try {
+          const json = JSON.parse(data);
+          const text = json.content && json.content[0] && json.content[0].text;
+          if (!text) reject(new Error('APIレスポンスにテキストがありません: ' + data));
+          else resolve(text);
+        } catch (e) {
+          reject(new Error('JSONパースエラー: ' + e.message));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+/**
+ * weekId を生成 (例: "2026-03-week2")
+ */
+function weekId(mondayStr) {
+  const dt = new Date(mondayStr + 'T00:00:00');
+  const month = dt.getMonth() + 1;
+  const year = dt.getFullYear();
+  // 月内の週番号を計算
+  const firstOfMonth = new Date(year, dt.getMonth(), 1);
+  const firstMonday = new Date(firstOfMonth);
+  const dayOfWeek = firstOfMonth.getDay();
+  const daysToMonday = (dayOfWeek === 0 ? 1 : (8 - dayOfWeek)) % 7;
+  firstMonday.setDate(firstOfMonth.getDate() + daysToMonday);
+  if (firstMonday > dt) {
+    // この月曜は前月にある
+    return year + '-' + String(month).padStart(2, '0') + '-week1';
+  }
+  const weekNum = Math.floor((dt.getDate() - firstMonday.getDate()) / 7) + 1 + (daysToMonday === 0 ? 0 : 1);
+  return year + '-' + String(month).padStart(2, '0') + '-week' + weekNum;
+}
+
+/**
+ * テキストからHTMLタグを除去
+ */
+function stripTags(html) {
+  return html.replace(/<[^>]+>/g, '').trim();
+}
+
+/**
+ * レポートHTMLページを生成
+ */
+function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, stats) {
+  const dateRange = formatDate(mondayStr) + '〜' + formatDate(sundayStr);
+  const titleText = 'GCG環境レポート ' + dateRange + ' | GCG STATS';
+  const descText = formatDate(mondayStr) + '〜' + formatDate(sundayStr) + 'のガンダムカードゲーム環境レポート。' + weekEvents.length + 'イベント・' + stats.totalDecks + 'デッキのデータを分析。';
+  const seoText = stripTags(articleHtml);
+
+  return '<!DOCTYPE html>\n' +
+'<html lang="ja">\n' +
+'<head>\n' +
+'  <!-- Google Analytics -->\n' +
+'  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>\n' +
+'  <script>\n' +
+'    window.dataLayer = window.dataLayer || [];\n' +
+'    function gtag(){dataLayer.push(arguments);}\n' +
+'    gtag(\'js\', new Date());\n' +
+'    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
+'  </script>\n' +
+'  <meta charset="UTF-8">\n' +
+'  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+'  <title>' + escapeHtml(titleText) + '</title>\n' +
+'  <meta name="description" content="' + escapeHtml(descText) + '">\n' +
+'  <!-- OGP -->\n' +
+'  <meta property="og:site_name" content="GCG STATS">\n' +
+'  <meta property="og:locale" content="ja_JP">\n' +
+'  <meta property="og:title" content="' + escapeHtml(titleText) + '">\n' +
+'  <meta property="og:description" content="' + escapeHtml(descText) + '">\n' +
+'  <meta property="og:type" content="article">\n' +
+'  <meta property="og:url" content="' + SITE_URL + '/reports/' + wId + '.html">\n' +
+'  <meta property="og:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
+'  <meta name="twitter:card" content="summary_large_image">\n' +
+'  <meta name="twitter:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
+'  <link rel="canonical" href="' + SITE_URL + '/reports/' + wId + '.html">\n' +
+'  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+'  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">\n' +
+'  <link rel="stylesheet" href="../css/style.css">\n' +
+'</head>\n' +
+'<body>\n' +
+'  <div id="header"></div>\n' +
+'\n' +
+'  <main class="container">\n' +
+'    <div style="margin-bottom:12px">\n' +
+'      <a href="index.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.15s"\n' +
+'       onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--text-muted)\'">\n' +
+'        \u2190 \u30EC\u30DD\u30FC\u30C8\u4E00\u89A7\u306B\u623B\u308B</a>\n' +
+'    </div>\n' +
+'    <div class="section-header">\n' +
+'      <div>\n' +
+'        <h1 class="section-title" style="margin-bottom:6px;font-size:16px">\u74B0\u5883\u30EC\u30DD\u30FC\u30C8 ' + dateRange + '</h1>\n' +
+'        <div style="font-size:13px;color:var(--text-secondary)">\n' +
+'          <span class="text-mono" style="color:var(--accent)">' + weekEvents.length + '\u30A4\u30D9\u30F3\u30C8 / ' + stats.totalDecks + '\u30C7\u30C3\u30AD</span>\n' +
+'        </div>\n' +
+'      </div>\n' +
+'    </div>\n' +
+'\n' +
+'    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">\n' +
+articleHtml + '\n' +
+'    </article>\n' +
+'\n' +
+'    <div id="share-buttons" style="margin-top:32px"></div>\n' +
+'  </main>\n' +
+'\n' +
+'  <noscript>' + escapeHtml(seoText) + '</noscript>\n' +
+'  <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">' + escapeHtml(seoText) + '</div>\n' +
+'\n' +
+'  <div id="footer"></div>\n' +
+'\n' +
+'  <script src="../js/common.js?v=5"></script>\n' +
+'  <script>\n' +
+'    GCG.init();\n' +
+'    document.getElementById(\'header\').innerHTML = GCG.renderHeader(\'reports\');\n' +
+'    document.getElementById(\'footer\').innerHTML = GCG.renderFooter();\n' +
+'    GCG.renderShareButtons(\'share-buttons\', \'' + escapeHtml(titleText).replace(/'/g, "\\'") + '\');\n' +
+'  </script>\n' +
+'</body>\n' +
+'</html>';
+}
+
+/**
+ * レポート一覧ページを更新
+ */
+function updateReportIndex() {
+  if (!fs.existsSync(REPORTS_DIR)) return;
+
+  const files = fs.readdirSync(REPORTS_DIR)
+    .filter(f => f.endsWith('.html') && f !== 'index.html')
+    .sort()
+    .reverse();
+
+  let listHtml = '';
+  for (const f of files) {
+    // ファイル名からweekIdを取得
+    const wId = f.replace('.html', '');
+    // ファイルからtitleを読み取る
+    const content = fs.readFileSync(path.join(REPORTS_DIR, f), 'utf-8');
+    const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/);
+    const title = titleMatch ? titleMatch[1] : wId;
+    listHtml += '      <a href="' + f + '" class="event-card" style="display:block;padding:16px 20px">\n' +
+      '        <span style="font-size:15px;font-weight:600">' + title + '</span>\n' +
+      '      </a>\n';
+  }
+
+  if (files.length === 0) {
+    listHtml = '      <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">\u30EC\u30DD\u30FC\u30C8\u306F\u307E\u3060\u3042\u308A\u307E\u305B\u3093</div>\n';
+  }
+
+  const noscriptLinks = files.map(f => {
+    const wId = f.replace('.html', '');
+    return '<li><a href="' + f + '">' + wId + '</a></li>';
+  }).join('');
+
+  const html = '<!DOCTYPE html>\n' +
+'<html lang="ja">\n' +
+'<head>\n' +
+'  <!-- Google Analytics -->\n' +
+'  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>\n' +
+'  <script>\n' +
+'    window.dataLayer = window.dataLayer || [];\n' +
+'    function gtag(){dataLayer.push(arguments);}\n' +
+'    gtag(\'js\', new Date());\n' +
+'    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
+'  </script>\n' +
+'  <meta charset="UTF-8">\n' +
+'  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
+'  <title>\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7 | GCG STATS</title>\n' +
+'  <meta name="description" content="\u30AC\u30F3\u30C0\u30E0\u30AB\u30FC\u30C9\u30B2\u30FC\u30E0\u306E\u9031\u6B21\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7\u3002\u30C7\u30C3\u30AD\u30BF\u30A4\u30D7\u5206\u5E03\u3084\u6CE8\u76EE\u30AB\u30FC\u30C9\u306E\u5206\u6790\u3092\u6BCE\u9031\u304A\u5C4A\u3051\u3002">\n' +
+'  <!-- OGP -->\n' +
+'  <meta property="og:site_name" content="GCG STATS">\n' +
+'  <meta property="og:locale" content="ja_JP">\n' +
+'  <meta property="og:title" content="\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7 | GCG STATS">\n' +
+'  <meta property="og:description" content="\u30AC\u30F3\u30C0\u30E0\u30AB\u30FC\u30C9\u30B2\u30FC\u30E0\u306E\u9031\u6B21\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7">\n' +
+'  <meta property="og:type" content="website">\n' +
+'  <meta property="og:url" content="' + SITE_URL + '/reports/">\n' +
+'  <meta property="og:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
+'  <meta name="twitter:card" content="summary_large_image">\n' +
+'  <meta name="twitter:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
+'  <link rel="canonical" href="' + SITE_URL + '/reports/">\n' +
+'  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
+'  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">\n' +
+'  <link rel="stylesheet" href="../css/style.css">\n' +
+'</head>\n' +
+'<body>\n' +
+'  <div id="header"></div>\n' +
+'\n' +
+'  <main class="container">\n' +
+'    <div class="section-header">\n' +
+'      <h1 class="section-title">\u74B0\u5883\u30EC\u30DD\u30FC\u30C8</h1>\n' +
+'      <span class="section-badge">' + files.length + '\u4EF6</span>\n' +
+'    </div>\n' +
+'\n' +
+'    <div class="event-list" style="margin-top:20px">\n' +
+listHtml +
+'    </div>\n' +
+'  </main>\n' +
+'\n' +
+'  <noscript><h2>\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7</h2><ul>' + noscriptLinks + '</ul></noscript>\n' +
+'\n' +
+'  <div id="footer"></div>\n' +
+'\n' +
+'  <script src="../js/common.js?v=5"></script>\n' +
+'  <script>\n' +
+'    GCG.init();\n' +
+'    document.getElementById(\'header\').innerHTML = GCG.renderHeader(\'reports\');\n' +
+'    document.getElementById(\'footer\').innerHTML = GCG.renderFooter();\n' +
+'  </script>\n' +
+'</body>\n' +
+'</html>';
+
+  fs.writeFileSync(path.join(REPORTS_DIR, 'index.html'), html, 'utf-8');
+}
+
+/**
+ * sitemap.xml にレポートURLを追加
+ */
+function updateSitemap() {
+  const sitemapPath = path.join(ROOT, 'sitemap.xml');
+  if (!fs.existsSync(sitemapPath)) return;
+
+  let xml = fs.readFileSync(sitemapPath, 'utf-8');
+  const now = new Date().toISOString().split('T')[0];
+
+  // 既存のレポートURLを削除
+  xml = xml.replace(/\s*<url>\s*<loc>https:\/\/gcg-stats\.com\/reports\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
+
+  // reports/ のファイル一覧
+  const files = fs.readdirSync(REPORTS_DIR)
+    .filter(f => f.endsWith('.html'))
+    .sort();
+
+  let reportUrls = '';
+  for (const f of files) {
+    const name = f === 'index.html' ? '' : f;
+    const loc = name ? SITE_URL + '/reports/' + name : SITE_URL + '/reports/';
+    const priority = name ? '0.5' : '0.7';
+    reportUrls += '\n  <url>\n' +
+      '    <loc>' + loc + '</loc>\n' +
+      '    <changefreq>' + (name ? 'monthly' : 'weekly') + '</changefreq>\n' +
+      '    <priority>' + priority + '</priority>\n' +
+      '    <lastmod>' + now + '</lastmod>\n' +
+      '  </url>';
+  }
+
+  // </urlset> の前に挿入
+  xml = xml.replace('</urlset>', reportUrls + '\n</urlset>');
+  fs.writeFileSync(sitemapPath, xml, 'utf-8');
+}
+
+async function main() {
+  console.log('=== 環境レポート生成 ===');
+
+  const eventsData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'events.json'), 'utf-8'));
+
+  // 対象週を決定
+  let targetMonday;
+  const weekArg = process.argv.find((a, i) => process.argv[i - 1] === '--week');
+  if (weekArg) {
+    targetMonday = getWeekMonday(weekArg);
+  } else {
+    // 直近の完了した週（前週の月曜日）
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const daysBack = ((dayOfWeek + 6) % 7) + 7; // 前週の月曜日まで
+    const lastMonday = new Date(today);
+    lastMonday.setDate(today.getDate() - daysBack);
+    targetMonday = lastMonday.toISOString().split('T')[0];
+  }
+
+  const targetSunday = getSunday(targetMonday);
+  const wId = weekId(targetMonday);
+
+  console.log('  対象期間: ' + targetMonday + ' 〜 ' + targetSunday);
+  console.log('  レポートID: ' + wId);
+
+  // 既存チェック
+  if (!fs.existsSync(REPORTS_DIR)) {
+    fs.mkdirSync(REPORTS_DIR, { recursive: true });
+  }
+
+  const outputPath = path.join(REPORTS_DIR, wId + '.html');
+  if (fs.existsSync(outputPath)) {
+    console.log('  ⚠ ' + wId + '.html は既に存在します。スキップします。');
+    console.log('  → 上書きする場合は先にファイルを削除してください。');
+    return;
+  }
+
+  // 週のイベントを抽出
+  const weekEvents = extractWeeklyEvents(eventsData, targetMonday);
+  if (weekEvents.length === 0) {
+    console.log('  ⚠ 対象週のイベントが0件です。レポートを生成しません。');
+    return;
+  }
+
+  console.log('  イベント数: ' + weekEvents.length + '件');
+
+  // 集計
+  const stats = computeWeeklyStats(weekEvents);
+  console.log('  TOP4デッキ数: ' + stats.totalDecks + '件');
+  console.log('  優勝デッキ数: ' + stats.winnerDecks.length + '件');
+
+  // Claude API でレポート生成
+  const prompt = buildPrompt(targetMonday, targetSunday, weekEvents, stats);
+  const isDryRun = process.argv.includes('--dry-run');
+  let articleHtml;
+
+  if (isDryRun) {
+    console.log('  [DRY-RUN] API呼び出しをスキップ。サンプル記事を使用します。');
+    articleHtml = '<h2>今週のサマリー</h2>\n' +
+      '<p>今週は' + weekEvents.length + '件のイベントが各地で開催されました。' +
+      'TOP4デッキ数は' + stats.totalDecks + '件で、' +
+      (stats.deckTypeRanking[0] ? stats.deckTypeRanking[0].type + 'が引き続きトップシェア' : '') +
+      'を維持しています。</p>\n' +
+      '<h2>デッキタイプ分布</h2>\n' +
+      '<ul>\n' +
+      stats.deckTypeRanking.slice(0, 5).map(dt =>
+        '<li>' + dt.type + ': ' + dt.count + 'デッキ（シェア' + dt.share + '%、優勝率' + dt.winRate + '%）</li>\n'
+      ).join('') +
+      '</ul>\n' +
+      '<h2>注目カード</h2>\n' +
+      '<ul>\n' +
+      stats.cardRanking.slice(0, 5).map(c =>
+        '<li>' + c.name + ': 採用率' + c.rate + '%（平均' + c.avg + '枚）</li>\n'
+      ).join('') +
+      '</ul>\n' +
+      '<h2>来週に向けて</h2>\n' +
+      '<p>※この記事はDRY-RUNモードで生成されたサンプルです。実際のレポートはClaude APIで生成されます。</p>';
+  } else {
+    console.log('  Claude API を呼び出し中...');
+    articleHtml = await callClaudeAPI(prompt);
+    console.log('  → 記事生成完了（' + articleHtml.length + '文字）');
+  }
+
+  // HTMLページを生成
+  const pageHtml = generateReportPage(wId, targetMonday, targetSunday, articleHtml, weekEvents, stats);
+  fs.writeFileSync(outputPath, pageHtml, 'utf-8');
+  console.log('  → ' + wId + '.html を保存しました');
+
+  // 一覧ページ更新
+  updateReportIndex();
+  console.log('  → reports/index.html を更新しました');
+
+  // サイトマップ更新
+  updateSitemap();
+  console.log('  → sitemap.xml を更新しました');
+}
+
+main().catch(err => {
+  console.error('エラー:', err.message);
+  process.exit(1);
+});

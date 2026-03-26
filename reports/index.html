@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>環境レポート一覧 | GCG STATS</title>
+  <meta name="description" content="ガンダムカードゲームの週次環境レポート一覧。デッキタイプ分布や注目カードの分析を毎週お届け。">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="環境レポート一覧 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲームの週次環境レポート一覧">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/reports/">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <link rel="canonical" href="https://gcg-stats.com/reports/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="section-header">
+      <h1 class="section-title">環境レポート</h1>
+      <span class="section-badge">2件</span>
+    </div>
+
+    <div class="event-list" style="margin-top:20px">
+      <a href="2026-03-week2.html" class="event-card" style="display:block;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">環境レポート 2026.03.08〜2026.03.13</span>
+      </a>
+      <a href="2026-03-week1.html" class="event-card" style="display:block;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">環境レポート 2026.03.01〜2026.03.06</span>
+      </a>
+    </div>
+  </main>
+
+  <noscript><h2>環境レポート一覧</h2><ul><li><a href="2026-03-week2.html">2026-03-week2</a></li><li><a href="2026-03-week1.html">2026-03-week1</a></li></ul></noscript>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=5"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>

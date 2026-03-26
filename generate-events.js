@@ -206,7 +206,7 @@ function generateEventPage(eventId, ev, seriesName) {
 '\n' +
 '  <div id="footer"></div>\n' +
 '\n' +
-'  <script src="../js/common.js?v=4"></script>\n' +
+'  <script src="../js/common.js?v=5"></script>\n' +
 '  <script>\n' +
 clientJs +
 '  </script>\n' +
