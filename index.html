@@ -235,22 +235,22 @@
         return hexArr[0];
       });
 
-      // Chart.jsプラグイン: レイアウト後に正確な座標で上下分割グラデーションを生成
-      const splitColorPlugin = {
-        id: 'splitColor',
-        beforeDraw: function(chart) {
+      // Chart.jsプラグイン: 2色デッキはグラデーションで描画
+      const gradientPlugin = {
+        id: 'gradientColor',
+        beforeDatasetsDraw: function(chart) {
           var cctx = chart.ctx;
           var area = chart.chartArea;
           if (!area) return;
-          chart.data.datasets[0].backgroundColor = top8.map(function(d) {
+          var meta = chart.getDatasetMeta(0);
+          top8.forEach(function(d, i) {
             var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
-            if (hexArr.length === 1) return hexArr[0];
-            var grad = cctx.createLinearGradient(0, area.top, 0, area.bottom);
-            grad.addColorStop(0, hexArr[0]);
-            grad.addColorStop(0.5, hexArr[0]);
-            grad.addColorStop(0.5, hexArr[1]);
-            grad.addColorStop(1, hexArr[1]);
-            return grad;
+            if (hexArr.length >= 2 && meta.data[i]) {
+              var grad = cctx.createLinearGradient(area.left, area.top, area.right, area.bottom);
+              grad.addColorStop(0, hexArr[0]);
+              grad.addColorStop(1, hexArr[1]);
+              meta.data[i].options.backgroundColor = grad;
+            }
           });
         }
       };
@@ -260,7 +260,7 @@
       legendEl.innerHTML = top8.map(function(d) {
         var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
         var bg = hexArr.length === 1 ? hexArr[0]
-          : 'linear-gradient(to bottom, ' + hexArr[0] + ' 50%, ' + hexArr[1] + ' 50%)';
+          : 'linear-gradient(135deg, ' + hexArr[0] + ' 0%, ' + hexArr[1] + ' 100%)';
         return '<div style="display:flex;align-items:center;gap:6px">' +
           '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>' +
           '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
@@ -272,7 +272,7 @@
           labels,
           datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }]
         },
-        plugins: [splitColorPlugin],
+        plugins: [gradientPlugin],
         options: {
           responsive: true,
           maintainAspectRatio: false,
