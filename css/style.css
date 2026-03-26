@@ -485,6 +485,22 @@ a.section-badge:hover {
 .color-dot.c-white { background: #cccccc; }
 .color-dot.c-purple { background: #b444ff; }
 
+/* === Color Badge (統一バッジ) === */
+.color-badge {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.color-badge-sm {
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+}
+
 /* === Usage Bars === */
 .usage-bar-container {
   width: 140px;

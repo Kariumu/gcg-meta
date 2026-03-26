@@ -90,18 +90,34 @@ const GCG = {
 
   // 色配列からカラータグHTMLを生成
   renderColorTags(colors) {
-    return colors.map(c => {
-      const info = this.DECK_COLORS[c] || this.DECK_COLORS.Unknown;
-      return `<span class="color-tag color-tag-${c.toLowerCase()}">${info.jp}</span>`;
-    }).join(' ');
+    return this.renderColorBadge(colors) + ' ' +
+      colors.map(c => (this.DECK_COLORS[c] || this.DECK_COLORS.Unknown).jp).join('/');
   },
 
   // 色配列からドットHTMLを生成
   renderColorDots(colors) {
-    return colors.map(c => {
-      const info = this.DECK_COLORS[c] || this.DECK_COLORS.Unknown;
-      return `<span class="color-dot ${info.cssClass}" title="${info.jp}"></span>`;
-    }).join('');
+    return this.renderColorBadge(colors, 'sm');
+  },
+
+  // 統一カラーバッジ（1色=単色円、2色=斜め分割円）
+  renderColorBadge(colors, size) {
+    if (!colors || colors.length === 0) return '';
+    const cls = 'color-badge' + (size === 'sm' ? ' color-badge-sm' : '');
+    const title = colors.map(c => (this.DECK_COLORS[c] || this.DECK_COLORS.Unknown).jp).join('/');
+    const hexArr = colors.map(c => (this.DECK_COLORS[c] || this.DECK_COLORS.Unknown).hex);
+    let bg;
+    if (hexArr.length === 1) {
+      bg = hexArr[0];
+    } else {
+      // 2色以上: 斜め分割（135度）
+      const stops = hexArr.map((h, i) => {
+        const start = (i / hexArr.length * 100).toFixed(0);
+        const end = ((i + 1) / hexArr.length * 100).toFixed(0);
+        return `${h} ${start}% ${end}%`;
+      }).join(', ');
+      bg = `conic-gradient(from 135deg, ${stops})`;
+    }
+    return `<span class="${cls}" title="${title}" style="background:${bg}"></span>`;
   },
 
   // 色配列からprimary colorのhexを返す
