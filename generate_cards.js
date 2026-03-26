@@ -87,27 +87,41 @@ function main() {
   const cardRanking = summary.card_ranking || [];
   const deckTypes = summary.deck_type_ranking || [];
 
-  console.log(`  カード数: ${cardRanking.length}`);
+  // card_ranking をマップ化
+  const cardRankingMap = {};
+  for (const card of cardRanking) {
+    cardRankingMap[card.card_id] = card;
+  }
+
+  // 全カードIDリスト: card_ranking + cards_master の和集合
+  const allCardIds = new Set([
+    ...cardRanking.map(c => c.card_id),
+    ...Object.keys(cardsMaster)
+  ]);
+
+  console.log(`  大会データあり: ${cardRanking.length} 枚 / マスター: ${Object.keys(cardsMaster).length} 枚 / 合計: ${allCardIds.size} 枚`);
 
   const generatedCardIds = [];
 
-  for (const card of cardRanking) {
-    const cardId = card.card_id;
+  for (const cardId of allCardIds) {
     generatedCardIds.push(cardId);
+    const card = cardRankingMap[cardId] || null;
 
     // デッキタイプ別採用状況
     const typeUsage = [];
-    for (const dt of deckTypes) {
-      const c = (dt.card_ranking || []).find(x => x.card_id === cardId);
-      if (c) {
-        typeUsage.push({
-          label: dt.label,
-          colors: dt.colors,
-          deckCount: dt.count,
-          adoptionCount: c.decks,
-          usageRate: c.usage_rate,
-          avgCount: c.avg_count
-        });
+    if (card) {
+      for (const dt of deckTypes) {
+        const c = (dt.card_ranking || []).find(x => x.card_id === cardId);
+        if (c) {
+          typeUsage.push({
+            label: dt.label,
+            colors: dt.colors,
+            deckCount: dt.count,
+            adoptionCount: c.decks,
+            usageRate: c.usage_rate,
+            avgCount: c.avg_count
+          });
+        }
       }
     }
 
@@ -147,9 +161,10 @@ function main() {
 }
 
 function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard) {
-  const decks = card.decks;
-  const wins = card.wins;
-  const avgCount = card.avg_count;
+  const hasData = !!card;
+  const decks = hasData ? card.decks : 0;
+  const wins = hasData ? card.wins : 0;
+  const avgCount = hasData ? card.avg_count : 0;
   const totalDecks = summary.total_decks;
 
   // デッキタイプ別採用数の合計・総デッキ数の合計
