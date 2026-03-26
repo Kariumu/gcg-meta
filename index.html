@@ -51,8 +51,11 @@
       <div style="display:flex;gap:20px;flex-wrap:wrap">
         <div class="chart-container" style="flex:0 0 400px;min-width:300px">
           <div class="chart-title">ベスト8 デッキタイプ シェア</div>
-          <div style="position:relative;height:280px">
-            <canvas id="decktype-pie"></canvas>
+          <div style="display:flex;align-items:center;gap:12px">
+            <div style="width:220px;height:220px;position:relative;flex-shrink:0">
+              <canvas id="decktype-pie"></canvas>
+            </div>
+            <div id="decktype-legend" style="display:flex;flex-direction:column;gap:4px"></div>
           </div>
         </div>
         <div style="flex:2;min-width:340px">
@@ -239,7 +242,19 @@
         return grad;
       }
       const bgColors = top8.map(d => makeGrad(d.colors));
-      const legendColors = top8.map(d => GCG.primaryColorHex(d.colors));
+
+      // HTML凡例を生成
+      var legendEl = document.getElementById('decktype-legend');
+      legendEl.innerHTML = top8.map(function(d) {
+        var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        var bg = hexArr.length === 1 ? hexArr[0]
+          : 'conic-gradient(from 135deg, ' + hexArr.map(function(h, i) {
+              return h + ' ' + (i / hexArr.length * 100).toFixed(0) + '% ' + ((i + 1) / hexArr.length * 100).toFixed(0) + '%';
+            }).join(', ') + ')';
+        return '<div style="display:flex;align-items:center;gap:6px">' +
+          '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>' +
+          '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
+      }).join('');
 
       new Chart(ctx, {
         type: 'doughnut',
@@ -252,28 +267,7 @@
           maintainAspectRatio: false,
           cutout: '60%',
           plugins: {
-            legend: {
-              position: 'bottom',
-              labels: {
-                color: '#d0d6e0',
-                font: { size: 11, family: "'JetBrains Mono', monospace" },
-                padding: 12,
-                usePointStyle: true,
-                pointStyleWidth: 8,
-                generateLabels: function(chart) {
-                  return chart.data.labels.map((label, i) => ({
-                    text: label,
-                    fontColor: '#d0d6e0',
-                    fillStyle: legendColors[i],
-                    strokeStyle: '#0a0e14',
-                    lineWidth: 2,
-                    hidden: !chart.getDataVisibility(i),
-                    index: i,
-                    pointStyle: 'circle'
-                  }));
-                }
-              }
-            },
+            legend: { display: false },
             tooltip: {
               backgroundColor: '#1e2736',
               titleColor: '#e8ecf2',
