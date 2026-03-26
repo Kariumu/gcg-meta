@@ -789,7 +789,7 @@
                   }).join('')
                 : '<span style="color:var(--text-muted);font-size:11px">データなし</span>';
 
-              return `<tr style="cursor:pointer" onclick="location.href='event.html?id=${ev.event_id}'">
+              return `<tr style="cursor:pointer" onclick="location.href='events/${ev.event_id}.html'">
                 <td class="text-mono" style="white-space:nowrap">${ev.date || '-'}</td>
                 <td>${GCG.escapeHtml(ev.store || '-')}</td>
                 <td>${top4Html}</td>

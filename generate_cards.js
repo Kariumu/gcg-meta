@@ -336,7 +336,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     const rows = displayAdoptions.map(a => `
               <tr>
                 <td class="text-mono" style="color:var(--accent)">${formatDate(a.date)}</td>
-                <td><a href="../../event.html?id=${a.eventId}" style="color:var(--text-primary);text-decoration:none">${escapeHtml(a.store)}</a></td>
+                <td><a href="../../events/${a.eventId}.html" style="color:var(--text-primary);text-decoration:none">${escapeHtml(a.store)}</a></td>
                 <td>${escapeHtml(a.player)}</td>
                 <td class="rank-cell ${rankClass(a.rank)}">${rankText(a.rank)}</td>
                 <td class="text-mono">×${a.count}</td>

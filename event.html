@@ -26,6 +26,14 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <script>
+    // 静的イベントページへリダイレクト
+    var params = new URLSearchParams(window.location.search);
+    var eventId = params.get('id');
+    if (eventId) {
+      window.location.replace('events/' + eventId + '.html');
+    }
+  </script>
   <div id="header"></div>
 
   <main class="container">
