@@ -461,7 +461,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     });
   </script>
 
-  <script src="../../js/common.js?v=2"></script>
+  <script src="../../js/common.js?v=3"></script>
   <script>
     GCG.renderShareButtons('share-buttons', '${escapeHtml(cardName || cardId)}（${cardId}）採用率${usageRate}% | GCG STATS');
   </script>
