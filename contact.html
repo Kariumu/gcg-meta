@@ -17,17 +17,12 @@
       font-size: 13px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 16px;
     }
     .contact-card p:last-child { margin-bottom: 0; }
-    .contact-link {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--bg-elevated); border: 1px solid var(--border);
-      color: var(--text-primary); padding: 12px 24px;
-      border-radius: var(--radius); font-size: 14px; font-weight: 600;
-      text-decoration: none; transition: all 0.15s; margin-top: 8px;
+    .contact-email {
+      display: inline-block; background: var(--bg-elevated); border: 1px solid var(--border);
+      padding: 12px 24px; border-radius: var(--radius); margin-top: 8px;
+      font-family: var(--font-mono); font-size: 14px; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.5px; user-select: all;
     }
-    .contact-link:hover {
-      border-color: var(--accent); color: var(--accent); background: var(--accent-dim);
-    }
-    .contact-link svg { width: 18px; height: 18px; }
   </style>
 </head>
 <body>
@@ -40,15 +35,12 @@
 
     <div class="contact-content">
       <div class="contact-card">
-        <p>GCG STATSに関するお問い合わせは、X（旧Twitter）のダイレクトメッセージにて受け付けております。</p>
-        <p>掲載内容に問題がある場合（誤った情報の掲載、削除依頼など）も、下記のXアカウントまでお気軽にご連絡ください。可能な限り迅速に対応いたします。</p>
+        <p>GCG STATSに関するお問い合わせは、下記メールアドレスにて受け付けております。</p>
+        <p>掲載内容に問題がある場合（誤った情報の掲載、削除依頼など）も、お気軽にご連絡ください。可能な限り迅速に対応いたします。</p>
 
-        <a href="https://x.com/YOUR_ACCOUNT" target="_blank" rel="noopener" class="contact-link">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          X でお問い合わせ
-        </a>
+        <div class="contact-email">gcgstats.info [at] gmail.com</div>
 
-        <p style="margin-top: 20px; font-size: 11px; color: var(--text-muted)">※ Xアカウントは準備中です。近日公開予定。</p>
+        <p style="margin-top: 20px; font-size: 11px; color: var(--text-muted)">※ [at] を @ に置き換えてお送りください。</p>
       </div>
     </div>
   </main>
