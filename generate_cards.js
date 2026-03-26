@@ -289,7 +289,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="${SITE_URL}/cards/${cardId}/">
-  <meta property="og:image" content="https://www.gundam-gcg.com/jp/images/cards/card/${cardId}.webp">
+  <meta property="og:image" content="https://gcg-stats.com/images/cards/${cardId}.webp">
   <link rel="canonical" href="${SITE_URL}/cards/${cardId}/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -382,7 +382,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
         </div>
         ${masterCard.traits && masterCard.traits.length > 0 ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ${escapeHtml(masterCard.traits.join(', '))}</p>` : ''}
         ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}` : ''}
-        <a href="https://www.gundam-gcg.com/jp/cards/${cardId}" target="_blank" rel="noopener"
+        <a href="https://www.gundam-gcg.com/jp/cards/" target="_blank" rel="noopener"
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
         </a>
