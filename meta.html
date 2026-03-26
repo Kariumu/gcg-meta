@@ -406,22 +406,34 @@
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
 
-      function makeGradient(colorArr) {
-        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        if (colorArr.length >= 2) {
-          const c1 = (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888';
-          const c2 = (GCG.DECK_COLORS[colorArr[1]] || {}).hex || '#888';
-          grad.addColorStop(0, c1);
-          grad.addColorStop(1, c2);
-        } else if (colorArr.length === 1) {
-          const c1 = (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888';
-          grad.addColorStop(0, c1);
-          grad.addColorStop(1, c1);
-        }
-        return grad;
+      function makeSplitPattern(colorArr) {
+        var hexArr = colorArr.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        if (hexArr.length === 1) return hexArr[0];
+        // 2色分割パターン: 小さなcanvasに斜め分割を描画
+        var size = 40;
+        var pc = document.createElement('canvas');
+        pc.width = size; pc.height = size;
+        var pctx = pc.getContext('2d');
+        // 左上三角 = 1色目
+        pctx.fillStyle = hexArr[0];
+        pctx.beginPath();
+        pctx.moveTo(0, 0);
+        pctx.lineTo(size, 0);
+        pctx.lineTo(0, size);
+        pctx.closePath();
+        pctx.fill();
+        // 右下三角 = 2色目
+        pctx.fillStyle = hexArr[1];
+        pctx.beginPath();
+        pctx.moveTo(size, 0);
+        pctx.lineTo(size, size);
+        pctx.lineTo(0, size);
+        pctx.closePath();
+        pctx.fill();
+        return ctx.createPattern(pc, 'repeat');
       }
 
-      const bgColors = top8.map(d => makeGradient(d.colors));
+      const bgColors = top8.map(d => makeSplitPattern(d.colors));
 
       // HTML凡例を生成
       var legendEl = document.getElementById('decktype-legend');

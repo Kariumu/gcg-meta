@@ -229,19 +229,25 @@
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
 
-      // 2色グラデーション生成
-      function makeGrad(colorArr) {
-        const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-        if (colorArr.length >= 2) {
-          grad.addColorStop(0, (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888');
-          grad.addColorStop(1, (GCG.DECK_COLORS[colorArr[1]] || {}).hex || '#888');
-        } else if (colorArr.length === 1) {
-          const c = (GCG.DECK_COLORS[colorArr[0]] || {}).hex || '#888';
-          grad.addColorStop(0, c); grad.addColorStop(1, c);
-        }
-        return grad;
+      // 2色分割パターン生成
+      function makeSplitPattern(colorArr) {
+        var hexArr = colorArr.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        if (hexArr.length === 1) return hexArr[0];
+        var size = 40;
+        var pc = document.createElement('canvas');
+        pc.width = size; pc.height = size;
+        var pctx = pc.getContext('2d');
+        pctx.fillStyle = hexArr[0];
+        pctx.beginPath();
+        pctx.moveTo(0, 0); pctx.lineTo(size, 0); pctx.lineTo(0, size);
+        pctx.closePath(); pctx.fill();
+        pctx.fillStyle = hexArr[1];
+        pctx.beginPath();
+        pctx.moveTo(size, 0); pctx.lineTo(size, size); pctx.lineTo(0, size);
+        pctx.closePath(); pctx.fill();
+        return ctx.createPattern(pc, 'repeat');
       }
-      const bgColors = top8.map(d => makeGrad(d.colors));
+      const bgColors = top8.map(d => makeSplitPattern(d.colors));
 
       // HTML凡例を生成
       var legendEl = document.getElementById('decktype-legend');
