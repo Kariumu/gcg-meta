@@ -490,17 +490,19 @@
       // Chart.jsプラグイン: 2色デッキはグラデーションで描画
       const gradientPlugin = {
         id: 'gradientColor',
-        beforeDraw: function(chart) {
+        beforeDatasetsDraw: function(chart) {
           var cctx = chart.ctx;
           var area = chart.chartArea;
           if (!area) return;
-          chart.data.datasets[0].backgroundColor = top8.map(function(d) {
+          var meta = chart.getDatasetMeta(0);
+          top8.forEach(function(d, i) {
             var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
-            if (hexArr.length === 1) return hexArr[0];
-            var grad = cctx.createLinearGradient(area.left, area.top, area.right, area.bottom);
-            grad.addColorStop(0, hexArr[0]);
-            grad.addColorStop(1, hexArr[1]);
-            return grad;
+            if (hexArr.length >= 2 && meta.data[i]) {
+              var grad = cctx.createLinearGradient(area.left, area.top, area.right, area.bottom);
+              grad.addColorStop(0, hexArr[0]);
+              grad.addColorStop(1, hexArr[1]);
+              meta.data[i].options.backgroundColor = grad;
+            }
           });
         }
       };
