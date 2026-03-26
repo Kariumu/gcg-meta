@@ -78,6 +78,56 @@ function formatDate(dateStr) {
   return dateStr.replace(/-/g, '.');
 }
 
+/**
+ * 全カードの共起データを一括計算する（O(N)のデッキ走査で全カード分を計算）
+ */
+function calcAllCoUsed(eventsData, topN = 8) {
+  // decksByCard[cardId] = [deckIndex, deckIndex, ...] — そのカードを含むデッキのインデックス
+  const allDecks = [];
+  for (const ev of Object.values(eventsData.events)) {
+    for (const result of (ev.results || [])) {
+      if (result.rank > 4) continue;
+      const cardIds = (result.deck || []).map(c => c.card_id);
+      if (cardIds.length > 0) allDecks.push(cardIds);
+    }
+  }
+
+  // cardId → { coCardId → count }
+  const coMap = {};
+  const deckCounts = {};
+
+  for (const cardIds of allDecks) {
+    for (const cid of cardIds) {
+      deckCounts[cid] = (deckCounts[cid] || 0) + 1;
+    }
+    // 共起カウント
+    for (let i = 0; i < cardIds.length; i++) {
+      const a = cardIds[i];
+      if (!coMap[a]) coMap[a] = {};
+      for (let j = 0; j < cardIds.length; j++) {
+        if (i === j) continue;
+        const b = cardIds[j];
+        coMap[a][b] = (coMap[a][b] || 0) + 1;
+      }
+    }
+  }
+
+  // 結果をまとめる
+  const result = {};
+  for (const [cardId, coCards] of Object.entries(coMap)) {
+    const total = deckCounts[cardId] || 1;
+    result[cardId] = Object.entries(coCards)
+      .map(([cid, count]) => ({
+        card_id: cid,
+        co_count: count,
+        co_rate: parseFloat((count / total * 100).toFixed(1))
+      }))
+      .sort((a, b) => b.co_count - a.co_count)
+      .slice(0, topN);
+  }
+  return result;
+}
+
 function main() {
   console.log('[generate_cards] カード個別ページ生成を開始...');
 
@@ -93,6 +143,11 @@ function main() {
     cardRankingMap[card.card_id] = card;
   }
 
+  // 共起データを一括計算
+  console.log('  共起データを計算中...');
+  const allCoUsed = calcAllCoUsed(eventsData);
+  console.log(`  → ${Object.keys(allCoUsed).length} 枚のカードの共起データを計算完了`);
+
   // 全カードIDリスト: card_ranking + cards_master の和集合
   const allCardIds = new Set([
     ...cardRanking.map(c => c.card_id),
@@ -106,6 +161,7 @@ function main() {
   for (const cardId of allCardIds) {
     generatedCardIds.push(cardId);
     const card = cardRankingMap[cardId] || null;
+    const coUsed = allCoUsed[cardId] || [];
 
     // デッキタイプ別採用状況
     const typeUsage = [];
@@ -146,7 +202,7 @@ function main() {
     adoptions.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
     const masterCard = cardsMaster[cardId] || null;
-    const html = generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard);
+    const html = generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard, coUsed);
 
     const cardDir = path.join(CARDS_DIR, cardId);
     fs.mkdirSync(cardDir, { recursive: true });
@@ -160,7 +216,54 @@ function main() {
   console.log('  → sitemap.xml 更新完了');
 }
 
-function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard) {
+function generateCoUsedSection(cardId, coUsed) {
+  if (!coUsed || coUsed.length === 0) return '';
+
+  const items = coUsed.map(co => {
+    const master = cardsMaster[co.card_id] || {};
+    const name = escapeHtml(master.name_jp || co.card_id);
+    const rateLevel = co.co_rate >= 80 ? 'high' : co.co_rate >= 50 ? 'mid' : 'low';
+
+    return `
+          <a href="../../cards/${co.card_id}/" class="co-card-item" title="${name}" data-rate="${rateLevel}">
+            <div class="co-card-image-wrap">
+              <img src="https://www.gundam-gcg.com/jp/images/cards/card/${co.card_id}.webp" alt="${name}" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>${co.card_id}</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">${name}</div>
+              <div class="co-card-rate"><span class="co-rate-value">${co.co_rate}</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>`;
+  }).join('');
+
+  // noscript用テキスト
+  const noscriptItems = coUsed.map(co => {
+    const master = cardsMaster[co.card_id] || {};
+    const name = escapeHtml(master.name_jp || co.card_id);
+    return `<li><a href="/cards/${co.card_id}/">${name}（${co.card_id}）- ${co.co_rate}%</a></li>`;
+  }).join('\n            ');
+
+  return `
+        <section class="mb-32">
+          <div class="section-header">
+            <h2 class="section-title">一緒によく使われるカード</h2>
+            <span class="section-badge">TOP${coUsed.length}</span>
+          </div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
+          <div class="co-cards-grid">${items}
+          </div>
+          <noscript>
+            <h3>一緒によく使われるカード</h3>
+            <ul>
+            ${noscriptItems}
+            </ul>
+          </noscript>
+        </section>`;
+}
+
+function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard, coUsed) {
   const hasData = !!card;
   const decks = hasData ? card.decks : 0;
   const wins = hasData ? card.wins : 0;
@@ -417,6 +520,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     </div>
 
     ${typeTableHtml}
+    ${generateCoUsedSection(cardId, coUsed)}
     ${adoptionTableHtml}
 
     <div id="share-buttons" style="margin-top:24px"></div>

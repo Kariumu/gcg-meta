@@ -999,3 +999,89 @@ a.section-badge:hover {
   height: 14px;
   flex-shrink: 0;
 }
+
+/* === Co-Used Cards Grid === */
+.co-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+@media (min-width: 640px) {
+  .co-cards-grid { grid-template-columns: repeat(8, 1fr); }
+}
+.co-card-item {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-card);
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+.co-card-item:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover, #1a2332);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(212, 160, 41, 0.15);
+}
+.co-card-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+.co-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--transition-fast);
+}
+.co-card-item:hover .co-card-image { transform: scale(1.03); }
+.co-card-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted, #5a6577);
+  font-size: 10px;
+  font-family: var(--font-mono);
+  padding: 4px;
+  text-align: center;
+}
+.co-card-info {
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.co-card-name {
+  font-size: 10px;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.co-card-rate {
+  display: flex;
+  align-items: baseline;
+  gap: 1px;
+}
+.co-rate-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: var(--font-mono);
+}
+.co-rate-unit {
+  font-size: 10px;
+  color: var(--text-muted, #5a6577);
+}
+.co-card-item[data-rate="high"] .co-rate-value { color: var(--green, #2ecc71); }
+.co-card-item[data-rate="mid"] .co-rate-value { color: var(--accent); }
+.co-card-item[data-rate="low"] .co-rate-value { color: var(--text-secondary); }
