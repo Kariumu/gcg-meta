@@ -238,13 +238,9 @@
         pc.width = size; pc.height = size;
         var pctx = pc.getContext('2d');
         pctx.fillStyle = hexArr[0];
-        pctx.beginPath();
-        pctx.moveTo(0, 0); pctx.lineTo(size, 0); pctx.lineTo(0, size);
-        pctx.closePath(); pctx.fill();
+        pctx.fillRect(0, 0, size, size / 2);
         pctx.fillStyle = hexArr[1];
-        pctx.beginPath();
-        pctx.moveTo(size, 0); pctx.lineTo(size, size); pctx.lineTo(0, size);
-        pctx.closePath(); pctx.fill();
+        pctx.fillRect(0, size / 2, size, size / 2);
         return ctx.createPattern(pc, 'repeat');
       }
       const bgColors = top8.map(d => makeSplitPattern(d.colors));
@@ -254,9 +250,7 @@
       legendEl.innerHTML = top8.map(function(d) {
         var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
         var bg = hexArr.length === 1 ? hexArr[0]
-          : 'conic-gradient(from 135deg, ' + hexArr.map(function(h, i) {
-              return h + ' ' + (i / hexArr.length * 100).toFixed(0) + '% ' + ((i + 1) / hexArr.length * 100).toFixed(0) + '%';
-            }).join(', ') + ')';
+          : 'linear-gradient(to bottom, ' + hexArr[0] + ' 50%, ' + hexArr[1] + ' 50%)';
         return '<div style="display:flex;align-items:center;gap:6px">' +
           '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>' +
           '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
