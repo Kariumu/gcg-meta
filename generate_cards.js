@@ -26,27 +26,11 @@ function escapeHtml(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function renderColorBadge(colors) {
-  if (!colors || colors.length === 0) return '';
-  const title = colors.map(c => (DECK_COLORS[c] || DECK_COLORS.Unknown).jp).join('/');
-  const hexArr = colors.map(c => (DECK_COLORS[c] || DECK_COLORS.Unknown).hex);
-  let bg;
-  if (hexArr.length === 1) {
-    bg = hexArr[0];
-  } else {
-    const stops = hexArr.map((h, i) => {
-      const start = (i / hexArr.length * 100).toFixed(0);
-      const end = ((i + 1) / hexArr.length * 100).toFixed(0);
-      return `${h} ${start}% ${end}%`;
-    }).join(', ');
-    bg = `conic-gradient(from 135deg, ${stops})`;
-  }
-  return `<span class="color-badge" title="${title}" style="background:${bg}"></span>`;
-}
-
 function renderColorTags(colors) {
-  return renderColorBadge(colors) + ' ' +
-    colors.map(c => (DECK_COLORS[c] || DECK_COLORS.Unknown).jp).join('/');
+  return colors.map(c => {
+    const info = DECK_COLORS[c] || DECK_COLORS.Unknown;
+    return `<span class="color-tag color-tag-${c.toLowerCase()}">${info.jp}</span>`;
+  }).join(' ');
 }
 
 function primaryColorHex(colors) {
