@@ -481,16 +481,38 @@
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
 
+      // 初期色（プラグインで上書きされる）
       const bgColors = top8.map(function(d) {
-        return GCG.primaryColorHex(d.colors) || '#888';
+        var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        return hexArr[0];
       });
 
-      // HTML凡例を生成
+      // Chart.jsプラグイン: 2色デッキはグラデーションで描画
+      const gradientPlugin = {
+        id: 'gradientColor',
+        beforeDraw: function(chart) {
+          var cctx = chart.ctx;
+          var area = chart.chartArea;
+          if (!area) return;
+          chart.data.datasets[0].backgroundColor = top8.map(function(d) {
+            var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+            if (hexArr.length === 1) return hexArr[0];
+            var grad = cctx.createLinearGradient(area.left, area.top, area.right, area.bottom);
+            grad.addColorStop(0, hexArr[0]);
+            grad.addColorStop(1, hexArr[1]);
+            return grad;
+          });
+        }
+      };
+
+      // HTML凡例を生成（2色はグラデーション丸）
       var legendEl = document.getElementById('decktype-legend');
       legendEl.innerHTML = top8.map(function(d) {
-        var hex = GCG.primaryColorHex(d.colors) || '#888';
+        var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        var bg = hexArr.length === 1 ? hexArr[0]
+          : 'linear-gradient(135deg, ' + hexArr[0] + ' 0%, ' + hexArr[1] + ' 100%)';
         return '<div style="display:flex;align-items:center;gap:6px">' +
-          '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + hex + ';flex-shrink:0"></span>' +
+          '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>' +
           '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
       }).join('');
 
@@ -500,6 +522,7 @@
           labels,
           datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }]
         },
+        plugins: [gradientPlugin],
         options: {
           responsive: true,
           maintainAspectRatio: false,
