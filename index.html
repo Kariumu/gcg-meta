@@ -140,7 +140,7 @@
       }
       const maxRate = top10[0]?.usage_rate || 100;
       container.innerHTML = `<div style="display:grid;gap:6px">${top10.map((c, i) => `
-        <a href="cards/${c.card_id}/" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text-primary);transition:all var(--transition-fast)" onmouseover="this.style.borderColor='var(--border-hover)';this.style.background='var(--bg-card-hover)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--bg-card)'">
+        <a href="cards/${c.card_id}/?from=top" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text-primary);transition:all var(--transition-fast)" onmouseover="this.style.borderColor='var(--border-hover)';this.style.background='var(--bg-card-hover)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--bg-card)'">
           <span class="rank-cell ${GCG.rankClass(i + 1)}" style="font-family:var(--font-mono);font-size:14px;font-weight:700;min-width:28px;text-align:center">${i + 1}</span>
           <img src="${GCG.cardImageUrl(c.card_id)}" alt="" style="width:32px;height:45px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display='none'">
           <div style="flex:1;min-width:0">

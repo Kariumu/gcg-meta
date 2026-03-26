@@ -128,6 +128,9 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
   const avgCount = card.avg_count;
   const totalDecks = summary.total_decks;
 
+  // デッキタイプ別採用数の合計
+  const totalAdoptions = typeUsage.reduce((sum, tu) => sum + tu.adoptionCount, 0);
+
   const description = `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${decks}デッキで採用されています。GCG STATSで詳細な使用データを確認できます。`;
 
   // デッキタイプ別テーブル
@@ -258,11 +261,52 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
 
   <main class="container">
     <div style="margin-bottom:12px">
-      <a href="../../meta.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.15s"
+      <a id="back-link" href="../../meta.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.15s;cursor:pointer"
          onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">
-        ← 環境分析に戻る
+        ← 戻る
       </a>
     </div>
+    <script>
+      (function() {
+        var params = new URLSearchParams(window.location.search);
+        var from = params.get('from');
+        var name = params.get('name');
+        var el = document.getElementById('back-link');
+        if (from === 'event' && name) {
+          el.textContent = '\\u2190 ' + decodeURIComponent(name) + 'の結果に戻る';
+          el.removeAttribute('href');
+          el.onclick = function() { history.back(); };
+        } else if (from === 'meta') {
+          el.textContent = '\\u2190 環境分析に戻る';
+          el.href = '../../meta.html';
+        } else if (from === 'top') {
+          el.textContent = '\\u2190 トップに戻る';
+          el.href = '../../index.html';
+        } else if (document.referrer) {
+          var ref = document.referrer;
+          if (ref.indexOf('/meta.html') !== -1) {
+            el.textContent = '\\u2190 環境分析に戻る';
+            el.removeAttribute('href');
+            el.onclick = function() { history.back(); };
+          } else if (ref.indexOf('/event.html') !== -1) {
+            el.textContent = '\\u2190 イベント結果に戻る';
+            el.removeAttribute('href');
+            el.onclick = function() { history.back(); };
+          } else if (ref.indexOf('gcg-stats.com') !== -1 && (ref.endsWith('/') || ref.indexOf('/index.html') !== -1)) {
+            el.textContent = '\\u2190 トップに戻る';
+            el.removeAttribute('href');
+            el.onclick = function() { history.back(); };
+          } else {
+            el.textContent = '\\u2190 戻る';
+            el.removeAttribute('href');
+            el.onclick = function() { history.back(); };
+          }
+        } else {
+          el.textContent = '\\u2190 戻る';
+          el.href = '../../index.html';
+        }
+      })();
+    </script>
 
     <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap">
       <div style="flex-shrink:0">
@@ -279,11 +323,11 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
 
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
-            <div class="stat-label">TOP4 採用数</div>
-            <div class="stat-value">${decks}<span class="unit"> / ${totalDecks}</span></div>
+            <div class="stat-label">採用デッキ数</div>
+            <div class="stat-value">${totalAdoptions}<span class="unit"> デッキ</span></div>
           </div>
           <div class="stat-card">
-            <div class="stat-label">TOP4 採用率</div>
+            <div class="stat-label">全体採用率</div>
             <div class="stat-value">${usageRate}<span class="unit">%</span></div>
           </div>
           <div class="stat-card">

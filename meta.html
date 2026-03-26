@@ -564,7 +564,7 @@
               return `<tr>
                 <td class="rank-cell ${GCG.rankClass(i + 1)}">${i + 1}</td>
                 <td>
-                  <a href="${GCG.getBasePath()}cards/${c.card_id}/"
+                  <a href="${GCG.getBasePath()}cards/${c.card_id}/?from=meta"
                      style="color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:8px">
                     <img src="${GCG.cardImageUrl(c.card_id)}" alt="" style="width:28px;height:39px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
                          onerror="this.style.display='none'">
