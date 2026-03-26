@@ -144,10 +144,11 @@
     </div>
 
     
-        <section class="mb-32">
-          <div class="section-header">
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
             <h2 class="section-title">デッキタイプ別採用状況</h2>
-          </div>
+            <span class="toggle-icon"></span>
+          </summary>
           <table class="data-table">
             <thead>
               <tr>
@@ -212,13 +213,13 @@
               </tr>
             </tbody>
           </table>
-        </section>
+        </details>
     
-        <section class="mb-32">
-          <div class="section-header">
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
             <h2 class="section-title">一緒によく使われるカード</h2>
-            <span class="section-badge">TOP8</span>
-          </div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">TOP8</span><span class="toggle-icon"></span></div>
+          </summary>
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
           <div class="co-cards-grid">
           <a href="../../cards/GD01-086/" class="co-card-item" title="ガンダム・ルブリス" data-rate="high">
@@ -323,13 +324,13 @@
             <li><a href="/cards/ST01-009/">ザウォート（ST01-009）- 47.1%</a></li>
             </ul>
           </noscript>
-        </section>
+        </details>
     
-        <section>
-          <div class="section-header">
+        <details class="collapsible-section">
+          <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <span class="section-badge">263件</span>
-          </div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">263件</span><span class="toggle-icon"></span></div>
+          </summary>
           <table class="data-table">
             <thead>
               <tr>
@@ -1044,7 +1045,7 @@
             </tbody>
           </table>
           <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:13px">最新100件を表示</p>
-        </section>
+        </details>
 
     <div id="share-buttons" style="margin-top:24px"></div>
   </main>

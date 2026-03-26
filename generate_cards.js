@@ -246,11 +246,11 @@ function generateCoUsedSection(cardId, coUsed) {
   }).join('\n            ');
 
   return `
-        <section class="mb-32">
-          <div class="section-header">
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
             <h2 class="section-title">一緒によく使われるカード</h2>
-            <span class="section-badge">TOP${coUsed.length}</span>
-          </div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">TOP${coUsed.length}</span><span class="toggle-icon"></span></div>
+          </summary>
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
           <div class="co-cards-grid">${items}
           </div>
@@ -260,7 +260,7 @@ function generateCoUsedSection(cardId, coUsed) {
             ${noscriptItems}
             </ul>
           </noscript>
-        </section>`;
+        </details>`;
 }
 
 function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard, coUsed) {
@@ -309,10 +309,11 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
               </tr>`).join('');
 
     typeTableHtml = `
-        <section class="mb-32">
-          <div class="section-header">
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
             <h2 class="section-title">デッキタイプ別採用状況</h2>
-          </div>
+            <span class="toggle-icon"></span>
+          </summary>
           <table class="data-table">
             <thead>
               <tr>
@@ -325,7 +326,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
             <tbody>${rows}
             </tbody>
           </table>
-        </section>`;
+        </details>`;
   }
 
   // TOP4採用実績テーブル
@@ -342,11 +343,11 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
               </tr>`).join('');
 
     adoptionTableHtml = `
-        <section>
-          <div class="section-header">
+        <details class="collapsible-section">
+          <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <span class="section-badge">${adoptions.length}件</span>
-          </div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">${adoptions.length}件</span><span class="toggle-icon"></span></div>
+          </summary>
           <table class="data-table">
             <thead>
               <tr>
@@ -361,16 +362,16 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
             </tbody>
           </table>
           ${adoptions.length > 100 ? '<p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:13px">最新100件を表示</p>' : ''}
-        </section>`;
+        </details>`;
   } else {
     adoptionTableHtml = `
-        <section>
-          <div class="section-header">
+        <details class="collapsible-section">
+          <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <span class="section-badge">0件</span>
-          </div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">0件</span><span class="toggle-icon"></span></div>
+          </summary>
           <div style="text-align:center;padding:32px;color:var(--text-muted)">TOP4での採用実績がありません</div>
-        </section>`;
+        </details>`;
   }
 
   return `<!DOCTYPE html>

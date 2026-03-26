@@ -1085,3 +1085,47 @@ a.section-badge:hover {
 .co-card-item[data-rate="high"] .co-rate-value { color: var(--green, #2ecc71); }
 .co-card-item[data-rate="mid"] .co-rate-value { color: var(--accent); }
 .co-card-item[data-rate="low"] .co-rate-value { color: var(--text-secondary); }
+
+/* === Collapsible Sections === */
+.collapsible-section {
+  border: none;
+}
+.collapsible-toggle {
+  cursor: pointer;
+  user-select: none;
+  list-style: none;
+}
+.collapsible-toggle::-webkit-details-marker { display: none; }
+.collapsible-toggle::marker { content: ''; }
+.toggle-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  position: relative;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+.toggle-icon::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-secondary);
+  border-bottom: 2px solid var(--text-secondary);
+  transform: translate(-50%, -60%) rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.collapsible-section[open] .toggle-icon::after {
+  transform: translate(-50%, -40%) rotate(-135deg);
+}
+.collapsible-toggle:hover .toggle-icon {
+  border-color: var(--accent);
+}
+.collapsible-toggle:hover .toggle-icon::after {
+  border-color: var(--accent);
+}
