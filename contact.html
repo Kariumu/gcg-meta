@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ - GCG STATS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .contact-content { max-width: 640px; margin: 0 auto; }
+    .contact-card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 32px; margin-top: 24px;
+    }
+    .contact-card p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 16px;
+    }
+    .contact-card p:last-child { margin-bottom: 0; }
+    .contact-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg-elevated); border: 1px solid var(--border);
+      color: var(--text-primary); padding: 12px 24px;
+      border-radius: var(--radius); font-size: 14px; font-weight: 600;
+      text-decoration: none; transition: all 0.15s; margin-top: 8px;
+    }
+    .contact-link:hover {
+      border-color: var(--accent); color: var(--accent); background: var(--accent-dim);
+    }
+    .contact-link svg { width: 18px; height: 18px; }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="section-header">
+      <h1 class="section-title">お問い合わせ</h1>
+    </div>
+
+    <div class="contact-content">
+      <div class="contact-card">
+        <p>GCG STATSに関するお問い合わせは、X（旧Twitter）のダイレクトメッセージにて受け付けております。</p>
+        <p>掲載内容に問題がある場合（誤った情報の掲載、削除依頼など）も、下記のXアカウントまでお気軽にご連絡ください。可能な限り迅速に対応いたします。</p>
+
+        <a href="https://x.com/YOUR_ACCOUNT" target="_blank" rel="noopener" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X でお問い合わせ
+        </a>
+
+        <p style="margin-top: 20px; font-size: 11px; color: var(--text-muted)">※ Xアカウントは準備中です。近日公開予定。</p>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>

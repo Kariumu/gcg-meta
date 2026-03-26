@@ -196,6 +196,7 @@ const GCG = {
 
   // 共通フッターHTML生成
   renderFooter() {
+    const basePath = this.getBasePath();
     return `
       <footer class="site-footer">
         <div class="footer-disclaimer">
@@ -203,6 +204,10 @@ const GCG = {
           バンダイ・サンライズの認可・許諾は得ていません。<br>
           掲載情報は公式大会結果を基に自動集計しています。<br>
           ©SOTSU・SUNRISE ©BANDAI
+        </div>
+        <div class="footer-links" style="margin-top:16px;display:flex;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
+          <a href="${basePath}privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">プライバシーポリシー</a>
+          <a href="${basePath}contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
         </div>
       </footer>`;
   }

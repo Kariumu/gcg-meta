@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プライバシーポリシー - GCG STATS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .policy-content { max-width: 780px; margin: 0 auto; }
+    .policy-content h2 {
+      font-size: 15px; font-weight: 600; color: var(--accent);
+      margin: 36px 0 12px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+    }
+    .policy-content p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 12px;
+    }
+    .policy-content a {
+      color: var(--accent); text-decoration: none; transition: color 0.15s;
+    }
+    .policy-content a:hover { color: var(--accent-hover); }
+    .policy-date {
+      font-size: 12px; color: var(--text-muted); font-family: var(--font-mono);
+      margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="section-header">
+      <h1 class="section-title">プライバシーポリシー</h1>
+    </div>
+
+    <div class="policy-content">
+      <h2>1. サイトについて</h2>
+      <p>GCG STATS（以下「当サイト」）は、ガンダムカードゲーム（GCG）の公式大会結果を集計・分析する非公式ファンサイトです。バンダイ・サンライズの認可・許諾は得ていません。</p>
+
+      <h2>2. 広告について</h2>
+      <p>当サイトでは、第三者配信の広告サービス「Google AdSense」を利用する予定です。</p>
+      <p>Google AdSenseでは、ユーザーのアクセス情報（Cookie）に基づいてパーソナライズされた広告を配信することがあります。Cookieを使用することにより、GoogleおよびGoogleのパートナーはユーザーの当サイトや他のサイトへのアクセス情報に基づいて適切な広告を表示します。</p>
+      <p>ユーザーはGoogleの広告設定ページからパーソナライズ広告を無効にすることができます。また、<a href="https://www.aboutads.info/" target="_blank" rel="noopener">www.aboutads.info</a> にアクセスすることで、パーソナライズ広告に使われる第三者配信事業者のCookieを無効にすることができます。</p>
+      <p>Googleのプライバシーポリシーについては、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google プライバシーポリシー</a>をご確認ください。</p>
+
+      <h2>3. アクセス解析について</h2>
+      <p>当サイトでは、Googleによるアクセス解析ツール「Google Analytics」を使用する場合があります。Google Analyticsはトラフィックデータの収集のためにCookieを使用しています。</p>
+      <p>このトラフィックデータは匿名で収集されており、個人を特定するものではありません。この機能はCookieを無効にすることで収集を拒否することができますので、お使いのブラウザの設定をご確認ください。</p>
+
+      <h2>4. 著作権・免責事項</h2>
+      <p>当サイトはガンダムカードゲームの非公式ファンサイトです。掲載しているカード画像・カード名称等の著作権は、それぞれの権利者に帰属します。</p>
+      <p>©SOTSU・SUNRISE ©BANDAI</p>
+      <p>当サイトに掲載される情報は、公式大会結果を基に自動集計したものであり、その正確性・完全性・最新性を保証するものではありません。掲載情報の利用により生じたいかなる損害についても、当サイトは一切の責任を負いません。</p>
+
+      <h2>5. プライバシーポリシーの変更</h2>
+      <p>当サイトは、必要に応じて本プライバシーポリシーの内容を予告なく変更する場合があります。変更後のプライバシーポリシーは、当ページに掲載した時点から効力を生じるものとします。</p>
+
+      <div class="policy-date">制定日: 2026年3月26日</div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>
