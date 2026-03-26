@@ -1,5 +1,5 @@
 /**
- * GCG META - 共通モジュール
+ * GCG STATS - 共通モジュール
  */
 
 const GCG = {
@@ -181,7 +181,7 @@ const GCG = {
           <a href="${basePath}index.html" class="site-logo">
             <span class="logo-icon">G</span>
             <div>
-              <span class="logo-text">GCG META</span>
+              <span class="logo-text">GCG STATS</span>
               <span class="logo-sub">Tournament Analytics</span>
             </div>
           </a>

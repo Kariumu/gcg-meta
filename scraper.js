@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * GCG META スクレイパー
+ * GCG STATS スクレイパー
  * 公式サイトから大会結果を取得し、events.json / summary.json を生成する
  *
  * Usage:
@@ -550,7 +550,7 @@ async function main() {
   const isFullMode = process.argv.includes('--full');
   const limitArg = process.argv.find(a => a.startsWith('--limit='));
   const limit = limitArg ? parseInt(limitArg.split('=')[1], 10) : 0;
-  console.log(`=== GCG META スクレイパー (${isFullMode ? '全件取得' : '差分取得'}${limit ? ` / 上限${limit}件` : ''}) ===\n`);
+  console.log(`=== GCG STATS スクレイパー (${isFullMode ? '全件取得' : '差分取得'}${limit ? ` / 上限${limit}件` : ''}) ===\n`);
 
   // dataディレクトリ作成
   if (!fs.existsSync(DATA_DIR)) {
