@@ -93,7 +93,8 @@
     <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap">
       <div style="flex-shrink:0">
         <img id="card-img" src="/images/cards/GD02-043.webp" alt="ドートレス・ウェポン"
-             style="width:180px;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md)"
+             style="width:180px;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
+             onclick="openLightbox(this.src)"
              onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='/images/cards/GD02-043.webp?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
       </div>
       <div style="flex:1;min-width:300px">
@@ -159,6 +160,32 @@
       <a href="../../contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
     </div>
   </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center"
+       onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt=""
+         style="max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.6);object-fit:contain;animation:lbFadeIn 0.2s ease">
+    <button onclick="closeLightbox()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;opacity:0.7;transition:opacity 0.15s;line-height:1" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">&times;</button>
+  </div>
+  <style>
+    @keyframes lbFadeIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
+  </style>
+  <script>
+    function openLightbox(src) {
+      var lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 
   <script src="../../js/common.js?v=2"></script>
 </body>
