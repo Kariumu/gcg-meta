@@ -257,7 +257,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
   <link rel="canonical" href="${SITE_URL}/cards/${cardId}/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../../css/style.css?v=3">
 </head>
 <body>
   <header class="site-header">
@@ -377,7 +377,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary) {
     </div>
   </footer>
 
-  <script src="../../js/common.js?v=2"></script>
+  <script src="../../js/common.js?v=3"></script>
 </body>
 </html>`;
 }
