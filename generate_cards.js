@@ -309,6 +309,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
         <a href="../../index.html">ダッシュボード</a>
         <a href="../../events.html">イベント</a>
         <a href="../../meta.html">環境分析</a>
+        <a href="../../cards.html">カードリスト</a>
       </nav>
     </div>
   </header>
@@ -478,6 +479,12 @@ function updateSitemap(cardIds) {
     <loc>${SITE_URL}/meta.html</loc>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <lastmod>${now}</lastmod>
+  </url>
+  <url>
+    <loc>${SITE_URL}/cards.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
     <lastmod>${now}</lastmod>
   </url>
   <url>

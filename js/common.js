@@ -189,6 +189,7 @@ const GCG = {
             <a href="${basePath}index.html" class="${activePage === 'home' ? 'active' : ''}">ダッシュボード</a>
             <a href="${basePath}events.html" class="${activePage === 'events' ? 'active' : ''}">イベント</a>
             <a href="${basePath}meta.html" class="${activePage === 'meta' ? 'active' : ''}">環境分析</a>
+            <a href="${basePath}cards.html" class="${activePage === 'cards' ? 'active' : ''}">カードリスト</a>
           </nav>
         </div>
       </header>`;
