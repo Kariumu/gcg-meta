@@ -92,9 +92,9 @@
 
     <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap">
       <div style="flex-shrink:0">
-        <img src="../../images/cards/GD01-035.webp" alt="ザクⅡ"
+        <img id="card-img" src="/images/cards/GD01-035.webp" alt="ザクⅡ"
              style="width:180px;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md)"
-             onerror="this.src='https://www.gundam-gcg.com/jp/images/cards/card/GD01-035.webp';this.onerror=null;">
+             onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='/images/cards/GD01-035.webp?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
       </div>
       <div style="flex:1;min-width:300px">
         <h1 style="font-family:var(--font-mono);font-size:22px;margin-bottom:4px">ザクⅡ</h1>
