@@ -383,7 +383,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
         </div>
         ${masterCard.traits && masterCard.traits.length > 0 ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ${escapeHtml(masterCard.traits.join(', '))}</p>` : ''}
         ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}` : ''}
-        <a href="https://www.gundam-gcg.com/jp/cards/" target="_blank" rel="noopener"
+        <a href="https://www.gundam-gcg.com/jp/cards/index.php?freeword=${cardId}" target="_blank" rel="noopener"
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
         </a>
