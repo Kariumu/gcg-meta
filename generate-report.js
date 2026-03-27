@@ -233,9 +233,10 @@ function callClaudeAPI(prompt) {
     };
 
     const req = https.request(options, (res) => {
-      let data = '';
-      res.on('data', chunk => data += chunk.toString('utf-8'));
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf-8');
         if (res.statusCode !== 200) {
           reject(new Error('API error ' + res.statusCode + ': ' + data));
           return;
