@@ -8,6 +8,7 @@
  *   ANTHROPIC_API_KEY=sk-... node generate-report.js --week 2026-03-09  # 特定週を指定
  */
 
+require('dotenv').config({ override: true });
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
