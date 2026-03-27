@@ -17,6 +17,19 @@ const DATA_DIR = path.join(ROOT, 'data');
 const REPORTS_DIR = path.join(ROOT, 'reports');
 const SITE_URL = 'https://gcg-stats.com';
 
+// 地域マッピング（日本語名 → URLサフィックス）
+const REGIONS = {
+  '関東': 'kanto',
+  '中部': 'chubu',
+  '関西': 'kansai',
+  '九州': 'kyushu',
+  '東北': 'tohoku',
+  '中国': 'chugoku',
+  '四国': 'shikoku',
+  '北海道': 'hokkaido'
+};
+const REGION_MIN_EVENTS = 3;
+
 // カードマスター
 let cardsMaster = {};
 try {
@@ -271,12 +284,80 @@ function stripTags(html) {
 }
 
 /**
+ * カードサムネイルHTML生成（注目カード用）
+ */
+function renderCardThumbnailHtml(cardId, extraText) {
+  const name = cardsMaster[cardId] ? cardsMaster[cardId].name_jp : cardId;
+  return '<div style="display:flex;align-items:center;gap:12px;margin:10px 0">' +
+    '<a href="../cards/' + cardId + '/" style="flex-shrink:0">' +
+    '<img src="../images/cards/' + cardId + '.webp" alt="' + escapeHtml(name) + '"' +
+    ' style="width:60px;border-radius:4px;border:1px solid var(--border)"' +
+    ' onerror="this.style.display=\'none\'">' +
+    '</a>' +
+    '<div>' +
+    '<a href="../cards/' + cardId + '/" style="font-weight:600;color:var(--text-primary);text-decoration:none">' +
+    escapeHtml(name) + '<span style="color:var(--text-muted);font-size:12px;margin-left:4px">' + cardId + '</span></a>' +
+    (extraText ? '<div style="font-size:13px;color:var(--text-secondary);margin-top:2px">' + extraText + '</div>' : '') +
+    '</div>' +
+    '</div>';
+}
+
+/**
+ * 記事HTML内の注目カードセクションをサムネイル付きに後処理
+ * Claude APIの出力やDRY-RUN出力の<li>タグからカードIDを抽出してサムネイル化
+ */
+function postProcessArticleCards(html, stats) {
+  // 注目カードセクション（<h2>注目カード</h2>の後の<ul>...</ul>）を検出
+  const regex = /(<h2>[^<]*注目カード[^<]*<\/h2>\s*)<ul>([\s\S]*?)<\/ul>/i;
+  const match = html.match(regex);
+  if (!match) return html;
+
+  const headerPart = match[1];
+  const listContent = match[2];
+
+  // <li>タグ内のカード情報を抽出
+  const liRegex = /<li>([\s\S]*?)<\/li>/gi;
+  let liMatch;
+  const items = [];
+  while ((liMatch = liRegex.exec(listContent)) !== null) {
+    items.push(liMatch[1]);
+  }
+
+  // 各アイテムからカードIDを探してサムネイルHTML化
+  let thumbnailHtml = '';
+  for (const item of items) {
+    // カードIDパターン: GD01-001, ST01-001 など
+    const idMatch = item.match(/((?:GD|ST)\d{2}-\d{3}[A-Z]?)/);
+    if (idMatch) {
+      const cardId = idMatch[1];
+      // 元テキストからカードID/名前部分を除いた説明テキストを抽出
+      const plainText = stripTags(item);
+      // カード名とIDを除去して残りを説明として使う
+      const descText = plainText
+        .replace(/[^(（]*[)）]?\s*\(?GD\d{2}-\d{3}[A-Z]?\)?/g, '')
+        .replace(/^\s*[:：\-]\s*/, '')
+        .trim();
+      thumbnailHtml += renderCardThumbnailHtml(cardId, descText);
+    } else {
+      // カードIDが見つからない場合はそのまま
+      thumbnailHtml += '<div style="margin:8px 0;font-size:14px">' + item + '</div>';
+    }
+  }
+
+  return html.replace(match[0], headerPart + '<div class="card-highlights">' + thumbnailHtml + '</div>');
+}
+
+/**
  * レポートHTMLページを生成
  */
-function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, stats) {
+function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, stats, options) {
+  options = options || {};
+  const regionLabel = options.regionLabel || '';  // 例: '関東'
+  const regionalLinksHtml = options.regionalLinksHtml || '';  // 全国版に追加する地域リンク
   const dateRange = formatDate(mondayStr) + '〜' + formatDate(sundayStr);
-  const titleText = 'GCG環境レポート ' + dateRange + ' | GCG STATS';
-  const descText = formatDate(mondayStr) + '〜' + formatDate(sundayStr) + 'のガンダムカードゲーム環境レポート。' + weekEvents.length + 'イベント・' + stats.totalDecks + 'デッキのデータを分析。';
+  const regionPrefix = regionLabel ? regionLabel + '地域 ' : '';
+  const titleText = 'GCG環境レポート ' + regionPrefix + dateRange + ' | GCG STATS';
+  const descText = formatDate(mondayStr) + '〜' + formatDate(sundayStr) + 'のガンダムカードゲーム' + regionPrefix + '環境レポート。' + weekEvents.length + 'イベント・' + stats.totalDecks + 'デッキのデータを分析。';
   const seoText = stripTags(articleHtml);
 
   return '<!DOCTYPE html>\n' +
@@ -320,7 +401,7 @@ function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, 
 '    </div>\n' +
 '    <div class="section-header">\n' +
 '      <div>\n' +
-'        <h1 class="section-title" style="margin-bottom:6px;font-size:16px">\u74B0\u5883\u30EC\u30DD\u30FC\u30C8 ' + dateRange + '</h1>\n' +
+'        <h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + (regionLabel ? escapeHtml(regionLabel) + '\u5730\u57DF ' : '') + '\u74B0\u5883\u30EC\u30DD\u30FC\u30C8 ' + dateRange + '</h1>\n' +
 '        <div style="font-size:13px;color:var(--text-secondary)">\n' +
 '          <span class="text-mono" style="color:var(--accent)">' + weekEvents.length + '\u30A4\u30D9\u30F3\u30C8 / ' + stats.totalDecks + '\u30C7\u30C3\u30AD</span>\n' +
 '        </div>\n' +
@@ -330,6 +411,7 @@ function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, 
 '    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">\n' +
 articleHtml + '\n' +
 '    </article>\n' +
+(regionalLinksHtml ? '\n' + regionalLinksHtml + '\n' : '') +
 '\n' +
 '    <div id="share-buttons" style="margin-top:32px"></div>\n' +
 '  </main>\n' +
@@ -356,8 +438,18 @@ articleHtml + '\n' +
 function updateReportIndex() {
   if (!fs.existsSync(REPORTS_DIR)) return;
 
+  // 地域別レポートのサフィックス一覧
+  const regionSuffixes = Object.values(REGIONS);
   const files = fs.readdirSync(REPORTS_DIR)
-    .filter(f => f.endsWith('.html') && f !== 'index.html')
+    .filter(f => {
+      if (!f.endsWith('.html') || f === 'index.html') return false;
+      // 地域別レポート（例: 2026-03-week2-kanto.html）は除外
+      const base = f.replace('.html', '');
+      for (const suffix of regionSuffixes) {
+        if (base.endsWith('-' + suffix)) return false;
+      }
+      return true;
+    })
     .sort()
     .reverse();
 
@@ -479,6 +571,101 @@ function updateSitemap() {
   fs.writeFileSync(sitemapPath, xml, 'utf-8');
 }
 
+/**
+ * DRY-RUN用サンプル記事を生成
+ * @param {Array} weekEvents
+ * @param {Object} stats
+ * @param {string} [regionName] - 地域名（省略時は全国版）
+ * @param {Object} [nationalStats] - 全国統計（地域版比較用）
+ */
+function generateDryRunArticle(weekEvents, stats, regionName, nationalStats) {
+  const regionLabel = regionName ? regionName + '地域 ' : '';
+  let html = '<h2>今週のサマリー</h2>\n' +
+    '<p>' + regionLabel + '今週は' + weekEvents.length + '件のイベントが開催されました。' +
+    'TOP4デッキ数は' + stats.totalDecks + '件で、' +
+    (stats.deckTypeRanking[0] ? stats.deckTypeRanking[0].type + 'が引き続きトップシェア' : '') +
+    'を維持しています。</p>\n';
+
+  if (regionName && nationalStats) {
+    html += '<p>全国平均と比較すると、' + regionName + '地域では' +
+      (stats.deckTypeRanking[0] ? stats.deckTypeRanking[0].type + 'のシェアが' + stats.deckTypeRanking[0].share + '%' : '') +
+      'となっています。</p>\n';
+  }
+
+  html += '<h2>デッキタイプ分布</h2>\n' +
+    '<ul>\n' +
+    stats.deckTypeRanking.slice(0, 5).map(dt =>
+      '<li>' + dt.type + ': ' + dt.count + 'デッキ（シェア' + dt.share + '%、優勝率' + dt.winRate + '%）</li>\n'
+    ).join('') +
+    '</ul>\n' +
+    '<h2>注目カード</h2>\n' +
+    '<ul>\n' +
+    stats.cardRanking.slice(0, 5).map(c =>
+      '<li>' + c.name + ': 採用率' + c.rate + '%（平均' + c.avg + '枚）</li>\n'
+    ).join('') +
+    '</ul>\n' +
+    '<h2>来週に向けて</h2>\n' +
+    '<p>※この記事はDRY-RUNモードで生成されたサンプルです。実際のレポートはClaude APIで生成されます。</p>';
+
+  return html;
+}
+
+/**
+ * 地域別レポート用のClaude APIプロンプトを構築
+ */
+function buildRegionalPrompt(mondayStr, sundayStr, regionEvents, regionStats, regionName, nationalStats) {
+  let deckTypeText = '';
+  for (const dt of regionStats.deckTypeRanking) {
+    deckTypeText += dt.type + ': ' + dt.count + 'デッキ（シェア' + dt.share + '%、優勝' + dt.wins + '回、優勝率' + dt.winRate + '%）\n';
+  }
+
+  let winnerText = '';
+  for (const w of regionStats.winnerDecks.slice(0, 10)) {
+    winnerText += w.date + ' ' + w.store + ' 優勝: ' + w.player + '\n';
+    winnerText += '  デッキ: ' + w.deck.map(c => cardName(c.card_id) + ' x' + c.count).join(', ') + '\n';
+  }
+
+  let cardText = '';
+  for (const c of regionStats.cardRanking) {
+    cardText += c.name + ': 採用率' + c.rate + '%（' + c.decks + 'デッキ、平均' + c.avg + '枚）\n';
+  }
+
+  // 全国統計との比較データ
+  let nationalCompare = '';
+  for (const dt of nationalStats.deckTypeRanking.slice(0, 5)) {
+    nationalCompare += dt.type + ': 全国シェア' + dt.share + '%、優勝率' + dt.winRate + '%\n';
+  }
+
+  return 'あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。\n' +
+    '以下の大会データに基づいて、' + regionName + '地域の今週の環境レポート記事を日本語で書いてください。\n\n' +
+    '【記事の構成】\n' +
+    '1. ' + regionName + '地域のサマリー（3〜4行）\n' +
+    '   - 開催イベント数、全国との違い\n' +
+    '2. デッキタイプ分布\n' +
+    '   - 上位3〜5タイプの特徴、全国平均との比較\n' +
+    '3. 注目カード\n' +
+    '   - ' + regionName + '地域で特に採用率が高いカード\n' +
+    '4. ' + regionName + 'の優勝デッキ紹介（2〜3デッキ）\n' +
+    '   - 特徴的な構築やメタ読みがあれば解説\n' +
+    '5. 来週に向けて（1〜2行）\n\n' +
+    '【注意事項】\n' +
+    '- カードIDだけでなくカード名を併記すること\n' +
+    '- 全国統計との比較を適宜入れること\n' +
+    '- 数値データ（採用率・優勝率）は正確に引用すること\n' +
+    '- 堅すぎず、TCGプレイヤーが読んで面白い文体にすること\n' +
+    '- HTML形式で出力すること（<h2>、<p>、<ul>タグを使用）\n' +
+    '- 全体で600〜900文字程度\n' +
+    '- <h2>から始めること（<h1>は不要）\n\n' +
+    '【' + regionName + '地域 今週のデータ】\n' +
+    '期間: ' + formatDate(mondayStr) + ' 〜 ' + formatDate(sundayStr) + '\n' +
+    'イベント数: ' + regionEvents.length + '件\n' +
+    'TOP4デッキ数: ' + regionStats.totalDecks + '件\n\n' +
+    '【' + regionName + '地域 デッキタイプ別集計】\n' + deckTypeText + '\n' +
+    '【全国 デッキタイプ上位（比較用）】\n' + nationalCompare + '\n' +
+    '【' + regionName + '地域 優勝デッキ一覧】\n' + winnerText + '\n' +
+    '【' + regionName + '地域 カード採用率TOP20】\n' + cardText;
+}
+
 async function main() {
   console.log('=== 環境レポート生成 ===');
 
@@ -538,33 +725,63 @@ async function main() {
 
   if (isDryRun) {
     console.log('  [DRY-RUN] API呼び出しをスキップ。サンプル記事を使用します。');
-    articleHtml = '<h2>今週のサマリー</h2>\n' +
-      '<p>今週は' + weekEvents.length + '件のイベントが各地で開催されました。' +
-      'TOP4デッキ数は' + stats.totalDecks + '件で、' +
-      (stats.deckTypeRanking[0] ? stats.deckTypeRanking[0].type + 'が引き続きトップシェア' : '') +
-      'を維持しています。</p>\n' +
-      '<h2>デッキタイプ分布</h2>\n' +
-      '<ul>\n' +
-      stats.deckTypeRanking.slice(0, 5).map(dt =>
-        '<li>' + dt.type + ': ' + dt.count + 'デッキ（シェア' + dt.share + '%、優勝率' + dt.winRate + '%）</li>\n'
-      ).join('') +
-      '</ul>\n' +
-      '<h2>注目カード</h2>\n' +
-      '<ul>\n' +
-      stats.cardRanking.slice(0, 5).map(c =>
-        '<li>' + c.name + ': 採用率' + c.rate + '%（平均' + c.avg + '枚）</li>\n'
-      ).join('') +
-      '</ul>\n' +
-      '<h2>来週に向けて</h2>\n' +
-      '<p>※この記事はDRY-RUNモードで生成されたサンプルです。実際のレポートはClaude APIで生成されます。</p>';
+    articleHtml = generateDryRunArticle(weekEvents, stats);
   } else {
     console.log('  Claude API を呼び出し中...');
     articleHtml = await callClaudeAPI(prompt);
     console.log('  → 記事生成完了（' + articleHtml.length + '文字）');
   }
 
-  // HTMLページを生成
-  const pageHtml = generateReportPage(wId, targetMonday, targetSunday, articleHtml, weekEvents, stats);
+  // 注目カードセクションをサムネイル付きに後処理
+  articleHtml = postProcessArticleCards(articleHtml, stats);
+
+  // --- 地域別レポート生成 ---
+  const regionalLinks = [];
+  for (const [regionName, regionSuffix] of Object.entries(REGIONS)) {
+    const regionEvents = weekEvents.filter(ev => ev.region === regionName);
+    if (regionEvents.length < REGION_MIN_EVENTS) continue;
+
+    const regionWId = wId + '-' + regionSuffix;
+    const regionOutputPath = path.join(REPORTS_DIR, regionWId + '.html');
+    if (fs.existsSync(regionOutputPath)) {
+      console.log('  ⚠ ' + regionWId + '.html は既に存在します。スキップ。');
+      regionalLinks.push({ name: regionName, suffix: regionSuffix, wId: regionWId });
+      continue;
+    }
+
+    console.log('  地域別レポート: ' + regionName + '（' + regionEvents.length + 'イベント）');
+    const regionStats = computeWeeklyStats(regionEvents);
+
+    let regionArticle;
+    if (isDryRun) {
+      regionArticle = generateDryRunArticle(regionEvents, regionStats, regionName, stats);
+    } else {
+      const regionPrompt = buildRegionalPrompt(targetMonday, targetSunday, regionEvents, regionStats, regionName, stats);
+      regionArticle = await callClaudeAPI(regionPrompt);
+    }
+    regionArticle = postProcessArticleCards(regionArticle, regionStats);
+
+    const regionPageHtml = generateReportPage(regionWId, targetMonday, targetSunday, regionArticle, regionEvents, regionStats, { regionLabel: regionName });
+    fs.writeFileSync(regionOutputPath, regionPageHtml, 'utf-8');
+    console.log('  → ' + regionWId + '.html を保存しました');
+    regionalLinks.push({ name: regionName, suffix: regionSuffix, wId: regionWId });
+  }
+
+  // 全国レポートに地域別リンクを追加
+  let regionalLinksHtml = '';
+  if (regionalLinks.length > 0) {
+    regionalLinksHtml = '    <div style="margin-top:32px;padding:20px;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--border)">\n' +
+      '      <h2 style="font-size:15px;margin:0 0 12px 0">\u5730\u57DF\u5225\u30EC\u30DD\u30FC\u30C8</h2>\n' +
+      '      <div style="display:flex;flex-wrap:wrap;gap:8px">\n' +
+      regionalLinks.map(r =>
+        '        <a href="' + r.wId + '.html" class="btn-link" style="font-size:13px;padding:6px 14px">' + escapeHtml(r.name) + '</a>'
+      ).join('\n') + '\n' +
+      '      </div>\n' +
+      '    </div>';
+  }
+
+  // HTMLページを生成（全国版）
+  const pageHtml = generateReportPage(wId, targetMonday, targetSunday, articleHtml, weekEvents, stats, { regionalLinksHtml: regionalLinksHtml });
   fs.writeFileSync(outputPath, pageHtml, 'utf-8');
   console.log('  → ' + wId + '.html を保存しました');
 
