@@ -332,10 +332,17 @@ function postProcessArticleCards(html, stats) {
       const cardId = idMatch[1];
       // 元テキストからカードID/名前部分を除いた説明テキストを抽出
       const plainText = stripTags(item);
-      // カード名とIDを除去して残りを説明として使う
-      const descText = plainText
-        .replace(/[^(（]*[)）]?\s*\(?GD\d{2}-\d{3}[A-Z]?\)?/g, '')
-        .replace(/^\s*[:：\-]\s*/, '')
+      // カード名（全角括弧含む）とIDを除去して残りを説明として使う
+      let descText = plainText;
+      // まずカードマスターから正式名を取得して除去
+      const masterName = cardsMaster[cardId] ? cardsMaster[cardId].name_jp : null;
+      if (masterName) {
+        descText = descText.replace(masterName, '');
+      }
+      // カードID部分を除去（半角/全角括弧で囲まれている場合も対応）
+      descText = descText
+        .replace(/[（(]?(?:GD|ST)\d{2}-\d{3}[A-Z]?[）)]?/g, '')
+        .replace(/^\s*[:：\-\s]+/, '')
         .trim();
       thumbnailHtml += renderCardThumbnailHtml(cardId, descText);
     } else {
