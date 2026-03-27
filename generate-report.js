@@ -234,7 +234,7 @@ function callClaudeAPI(prompt) {
 
     const req = https.request(options, (res) => {
       let data = '';
-      res.on('data', chunk => data += chunk);
+      res.on('data', chunk => data += chunk.toString('utf-8'));
       res.on('end', () => {
         if (res.statusCode !== 200) {
           reject(new Error('API error ' + res.statusCode + ': ' + data));
@@ -466,7 +466,7 @@ function updateReportIndex() {
     // ファイル名からweekIdを取得
     const wId = f.replace('.html', '');
     // ファイルからtitleを読み取る
-    const content = fs.readFileSync(path.join(REPORTS_DIR, f), 'utf-8');
+    const content = fs.readFileSync(path.join(REPORTS_DIR, f), { encoding: 'utf-8' });
     const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/);
     const title = titleMatch ? titleMatch[1] : wId;
     listHtml += '      <a href="' + f + '" class="event-card" style="display:block;padding:16px 20px">\n' +
@@ -540,7 +540,7 @@ listHtml +
 '</body>\n' +
 '</html>';
 
-  fs.writeFileSync(path.join(REPORTS_DIR, 'index.html'), html, 'utf-8');
+  fs.writeFileSync(path.join(REPORTS_DIR, 'index.html'), html, { encoding: 'utf-8' });
 }
 
 /**
@@ -550,7 +550,7 @@ function updateSitemap() {
   const sitemapPath = path.join(ROOT, 'sitemap.xml');
   if (!fs.existsSync(sitemapPath)) return;
 
-  let xml = fs.readFileSync(sitemapPath, 'utf-8');
+  let xml = fs.readFileSync(sitemapPath, { encoding: 'utf-8' });
   const now = new Date().toISOString().split('T')[0];
 
   // 既存のレポートURLを削除
@@ -576,7 +576,7 @@ function updateSitemap() {
 
   // </urlset> の前に挿入
   xml = xml.replace('</urlset>', reportUrls + '\n</urlset>');
-  fs.writeFileSync(sitemapPath, xml, 'utf-8');
+  fs.writeFileSync(sitemapPath, xml, { encoding: 'utf-8' });
 }
 
 /**
@@ -770,7 +770,7 @@ async function main() {
     regionArticle = postProcessArticleCards(regionArticle, regionStats);
 
     const regionPageHtml = generateReportPage(regionWId, targetMonday, targetSunday, regionArticle, regionEvents, regionStats, { regionLabel: regionName });
-    fs.writeFileSync(regionOutputPath, regionPageHtml, 'utf-8');
+    fs.writeFileSync(regionOutputPath, regionPageHtml, { encoding: 'utf-8' });
     console.log('  → ' + regionWId + '.html を保存しました');
     regionalLinks.push({ name: regionName, suffix: regionSuffix, wId: regionWId });
   }
@@ -790,7 +790,7 @@ async function main() {
 
   // HTMLページを生成（全国版）
   const pageHtml = generateReportPage(wId, targetMonday, targetSunday, articleHtml, weekEvents, stats, { regionalLinksHtml: regionalLinksHtml });
-  fs.writeFileSync(outputPath, pageHtml, 'utf-8');
+  fs.writeFileSync(outputPath, pageHtml, { encoding: 'utf-8' });
   console.log('  → ' + wId + '.html を保存しました');
 
   // 一覧ページ更新
