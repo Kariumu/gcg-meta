@@ -467,16 +467,41 @@ function buildCardTableHtml(cardInfoList) {
   return html;
 }
 
+// === カード画像URL判定 ===
+function getCardImageUrl(card) {
+  // X投稿画像がある場合はそちらを優先（未発売カード対策）
+  if (card._xImageUrl) return card._xImageUrl;
+  // 既存カード（ST/GD01-03）は公式カードリストから
+  return `${CARD_IMAGE_BASE}/${card.card_number}.webp`;
+}
+
+function isUnreleasedCard(cardNumber) {
+  // GD04以降は未発売の可能性あり（公式画像が404になる）
+  const m = cardNumber.match(/^(ST|GD)(\d+)/);
+  if (!m) return true;
+  const prefix = m[1];
+  const num = parseInt(m[2]);
+  if (prefix === 'GD' && num >= 4) return true;
+  if (prefix === 'ST' && num >= 9) return true;
+  return false;
+}
+
 // === カード個別紹介HTML（画像付き） ===
 function buildCardDetailHtml(card) {
   const num = escapeHtml(card.card_number);
   const name = escapeHtml(card.card_name);
-  const imgUrl = `${CARD_IMAGE_BASE}/${card.card_number}.webp`;
+  const imgUrl = getCardImageUrl(card);
+  const unreleased = isUnreleasedCard(card.card_number);
 
   let html = '<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:20px">\n';
-  html += `  <a href="../cards/${card.card_number}/" style="flex-shrink:0">\n`;
-  html += `    <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.parentElement.style.display='none'">\n`;
-  html += '  </a>\n';
+  html += '  <div style="flex-shrink:0">\n';
+  if (unreleased) {
+    // 未発売カード: onerrorでプレースホルダー表示
+    html += `    <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'color:var(--text-muted);font-size:11px;text-align:center;padding:8px;width:120px;height:168px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center\\'>${num}<br>画像準備中</span>'">\n`;
+  } else {
+    html += `    <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.parentElement.style.display='none'">\n`;
+  }
+  html += '  </div>\n';
   html += '  <div>\n';
   html += `    <h3 style="margin:0 0 6px;font-size:15px">${name} (${num})</h3>\n`;
   if (card.effect) {
@@ -497,12 +522,12 @@ function buildRelatedCardsHtml(relatedCards) {
   for (const r of relatedCards) {
     const imgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
     html += '<li style="display:flex;align-items:center;gap:10px;margin-bottom:8px">\n';
-    html += `  <a href="../cards/${r.card_id}/" style="flex-shrink:0">\n`;
+    html += `  <a href="../../cards/${r.card_id}/" style="flex-shrink:0">\n`;
     html += `    <img src="${imgUrl}" alt="${escapeHtml(r.name)}" style="width:40px;height:56px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display='none'">\n`;
     html += '  </a>\n';
     html += '  <div>\n';
-    html += `    <a href="../cards/${r.card_id}/" style="color:var(--accent);text-decoration:none;font-size:14px">${escapeHtml(r.name)} (${escapeHtml(r.card_id)})</a>\n`;
-    html += `    <div style="font-size:12px;color:var(--text-secondary)">${escapeHtml(r.color)}系デッキ内採用率${r.usage_rate}% (${r.decks}デッキ) — ${escapeHtml(r.reason)}</div>\n`;
+    html += `    <a href="../../cards/${r.card_id}/" style="color:var(--text-primary);text-decoration:none;font-weight:600">${escapeHtml(r.name)}<span style="color:var(--text-muted);font-weight:400;margin-left:4px">(${escapeHtml(r.card_id)})</span></a>\n`;
+    html += `    <div style="font-size:12px;color:var(--text-secondary)">${escapeHtml(r.color)}系デッキ内採用率${r.usage_rate}% (${r.decks}デッキ)</div>\n`;
     html += '  </div>\n';
     html += '</li>\n';
   }
@@ -834,6 +859,10 @@ async function main() {
 
       for (const ci of cardInfoList) {
         ci._tweetUrl = tweetUrl;
+        // X投稿画像URLを保持（未発売カードの画像表示用）
+        if (tweet.images.length > 0) {
+          ci._xImageUrl = tweet.images[0];
+        }
         allCardInfos.push(ci);
         const related = findRelatedCards(ci, cardsMaster, summary);
         allRelated.push(...related);
