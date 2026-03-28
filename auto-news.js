@@ -22,6 +22,7 @@ const DATA_DIR = path.join(ROOT, 'data');
 const NEWS_DIR = path.join(ROOT, 'reports', 'news');
 const LAST_CHECK_FILE = path.join(DATA_DIR, 'last-check.json');
 const LOG_FILE = path.join(DATA_DIR, 'auto-news-log.txt');
+const CARD_IMAGE_BASE = 'https://www.gundam-gcg.com/jp/images/cards/card';
 
 const OFFICIAL_USER_ID = '1837069552842330114'; // @GUNDAM_GCG_JP
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
@@ -34,6 +35,9 @@ const X_ACCESS_TOKEN_SECRET = process.env.X_API_ACCESS_TOKEN_SECRET;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const DRY_RUN = process.argv.includes('--dry-run');
+
+const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
+const VALID_CARD_TYPES = ['UNIT', 'PILOT', 'COMMAND', 'BASE'];
 
 // === ユーティリティ ===
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -50,13 +54,20 @@ function todayStr() {
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
 }
 
+function dateLabel(dateStr) {
+  // "2026-03-27" → "3/27"
+  const m = dateStr.match(/(\d+)-(\d+)-(\d+)/);
+  if (!m) return dateStr;
+  return `${parseInt(m[2])}/${parseInt(m[3])}`;
+}
+
 function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function stripTags(s) { return s.replace(/<[^>]*>/g, ''); }
 
 function log(msg) {
   const line = `[${now()}] ${msg}`;
   console.log(line);
-  fs.appendFileSync(LOG_FILE, line + '\n', 'utf-8');
+  fs.appendFileSync(LOG_FILE, line + '\n', { encoding: 'utf-8' });
 }
 
 function percentEncode(str) {
@@ -103,9 +114,10 @@ function xGet(endpoint, params) {
       method: 'GET',
       headers: { 'Authorization': authHeader }
     }, res => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf-8');
         if (res.statusCode === 200) resolve(JSON.parse(data));
         else reject(new Error(`X API GET ${res.statusCode}: ${data}`));
       });
@@ -127,9 +139,10 @@ function postTweet(text) {
       hostname: 'api.x.com', path: '/2/tweets', method: 'POST',
       headers: { 'Authorization': authHeader, 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
     }, res => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf-8');
         if (res.statusCode === 201) { log('X投稿成功'); resolve(JSON.parse(data)); }
         else { log(`X投稿失敗 (${res.statusCode}): ${data}`); reject(new Error(data)); }
       });
@@ -160,9 +173,10 @@ function callClaude(messages, maxTokens) {
         'Content-Length': Buffer.byteLength(body)
       }
     }, res => {
-      let data = '';
-      res.on('data', chunk => data += chunk);
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf-8');
         if (res.statusCode === 200) {
           const parsed = JSON.parse(data);
           const text = parsed.content.find(c => c.type === 'text');
@@ -203,7 +217,6 @@ function getLastCheck() {
     const data = JSON.parse(fs.readFileSync(LAST_CHECK_FILE, 'utf-8'));
     return data.last_check;
   } catch (e) {
-    // デフォルト: 12時間前
     return new Date(Date.now() - 12 * 60 * 60 * 1000).toISOString();
   }
 }
@@ -239,7 +252,6 @@ async function fetchOfficialTweets(sinceTime) {
 
   const data = await xGet(`/2/users/${OFFICIAL_USER_ID}/tweets`, params);
 
-  // メディアマップ作成
   const mediaMap = {};
   if (data.includes && data.includes.media) {
     data.includes.media.forEach(m => { mediaMap[m.media_key] = m; });
@@ -292,13 +304,20 @@ async function recognizeCard(imageUrls) {
   if (content.length === 0) return null;
 
   content.push({ type: 'text', text: `この画像はガンダムカードゲーム（GCG）のカード紹介画像です。
-画像からカード情報を読み取り、以下のJSON形式で出力してください。
+画像からカード情報を正確に読み取り、以下のJSON形式のみで出力してください。
 他の文章は一切不要です。JSONのみ出力してください。
-複数カードがある場合はJSON配列で出力してください。
+
+【重要ルール】
+- card_type は UNIT / PILOT / COMMAND / BASE の4種のみ。「キャラクター」「モビルスーツ」等は使わない
+- カード名は画像に表示されている通りに正確に転記すること
+- 効果テキストは画像に表示されている通りに一字一句正確に転記すること。要約・言い換え・解釈をしない
+- GCGのキーワード能力: 《リペア》《突破》《ブロッカー》《クイック》《バースト》のみ。これ以外のキーワードを捏造しない
+- 「EXリソース」を「Xソリューズ」等に誤変換しない
+- 色はBlue/Red/Green/White/Purpleのいずれか
 
 {
   "card_number": "GD04-009",
-  "card_name": "ガンキャノン（108）&ガンキャノン（109）",
+  "card_name": "ガンキャノン（108）＆ガンキャノン（109）",
   "rarity": "R",
   "color": "Blue",
   "level": 5,
@@ -309,19 +328,19 @@ async function recognizeCard(imageUrls) {
   "zone": "宇宙 地球",
   "traits": ["地球連邦", "WB隊"],
   "link": "「カイ・シデン」/「ハヤト・コバヤシ」",
-  "effect": "【リンク時】このユニット以外の、Lv.4以上の〔WB隊〕の自分のユニット1つを選ぶ。それをアクティブにする。",
-  "model_number": "RX-77"
+  "effect": "【リンク時】このユニット以外の、Lv.4以上の〔WB隊〕の自分のユニット1つを選ぶ。それをアクティブにする。"
 }` });
 
   log('  カード画像認識中...');
   const result = await callClaude([{ role: 'user', content }], 2000);
 
   try {
-    // JSON部分を抽出
-    const jsonMatch = result.match(/\[[\s\S]*\]/) || result.match(/\{[\s\S]*\}/);
+    const jsonMatch = result.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       const parsed = JSON.parse(jsonMatch[0]);
-      return Array.isArray(parsed) ? parsed : [parsed];
+      const cards = Array.isArray(parsed) ? parsed : [parsed];
+      // バリデーション
+      return cards.map(c => validateCardInfo(c));
     }
   } catch (e) {
     log(`  画像認識JSON解析失敗: ${e.message}`);
@@ -329,35 +348,68 @@ async function recognizeCard(imageUrls) {
   return null;
 }
 
-// === 関連カード抽出 ===
+// === カード情報バリデーション ===
+function validateCardInfo(card) {
+  // card_type を正規化
+  if (card.card_type && !VALID_CARD_TYPES.includes(card.card_type)) {
+    const typeMap = { 'キャラクター': 'PILOT', 'CHARACTER': 'PILOT', 'パイロット': 'PILOT',
+                      'モビルスーツ': 'UNIT', 'ユニット': 'UNIT', 'コマンド': 'COMMAND',
+                      'ACTION': 'COMMAND', 'アクション': 'COMMAND', 'OPERATION': 'COMMAND',
+                      'ベース': 'BASE' };
+    card.card_type = typeMap[card.card_type] || card.card_type;
+  }
+  // color を正規化
+  const colorMap = { '青': 'Blue', '赤': 'Red', '緑': 'Green', '白': 'White', '紫': 'Purple' };
+  if (colorMap[card.color]) card.color = colorMap[card.color];
+  return card;
+}
+
+// === 関連カード抽出（同色優先） ===
 function findRelatedCards(cardInfo, cardsMaster, summary) {
-  const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
-  const colorJp = COLOR_JP[cardInfo.color] || cardInfo.color;
   const traits = cardInfo.traits || [];
   const cardRanking = summary.card_ranking || [];
+  const cardColor = cardInfo.color;
 
   const related = [];
+  const seen = new Set();
 
-  // 同じ特徴を持つカード（採用率上位）
+  // 1. 同色 + 同特徴のカード（最優先）
   for (const cr of cardRanking) {
     if (related.length >= 5) break;
     const master = cardsMaster[cr.card_id];
-    if (!master) continue;
+    if (!master || seen.has(cr.card_id)) continue;
     const masterTraits = master.traits || [];
-    const hasCommonTrait = traits.some(t => masterTraits.includes(t));
-    if (hasCommonTrait) {
+    const commonTraits = traits.filter(t => masterTraits.includes(t));
+    if (commonTraits.length > 0 && master.color === cardColor) {
+      seen.add(cr.card_id);
       related.push({
-        card_id: cr.card_id,
-        name: master.name_jp,
+        card_id: cr.card_id, name: master.name_jp,
         color: COLOR_JP[master.color] || master.color,
-        usage_rate: cr.usage_rate,
-        decks: cr.decks,
-        reason: `共通特徴: ${traits.filter(t => masterTraits.includes(t)).join('、')}`
+        usage_rate: cr.usage_rate, decks: cr.decks,
+        reason: `同色・共通特徴: ${commonTraits.join('、')}`
       });
     }
   }
 
-  // リンク先カード
+  // 2. 同色カード（特徴不一致でもOK）
+  if (related.length < 3) {
+    for (const cr of cardRanking) {
+      if (related.length >= 5) break;
+      const master = cardsMaster[cr.card_id];
+      if (!master || seen.has(cr.card_id)) continue;
+      if (master.color === cardColor) {
+        seen.add(cr.card_id);
+        related.push({
+          card_id: cr.card_id, name: master.name_jp,
+          color: COLOR_JP[master.color] || master.color,
+          usage_rate: cr.usage_rate, decks: cr.decks,
+          reason: '同色デッキ内で採用率上位'
+        });
+      }
+    }
+  }
+
+  // 3. リンク先カード
   if (cardInfo.link) {
     const linkNames = cardInfo.link.match(/「([^」]+)」/g) || [];
     for (const name of linkNames) {
@@ -365,7 +417,8 @@ function findRelatedCards(cardInfo, cardsMaster, summary) {
       for (const [id, master] of Object.entries(cardsMaster)) {
         if (master.name_jp && master.name_jp.includes(cleanName)) {
           const cr = cardRanking.find(c => c.card_id === id);
-          if (cr && !related.find(r => r.card_id === id)) {
+          if (cr && !seen.has(id)) {
+            seen.add(id);
             related.push({
               card_id: id, name: master.name_jp,
               color: COLOR_JP[master.color] || master.color,
@@ -381,52 +434,141 @@ function findRelatedCards(cardInfo, cardsMaster, summary) {
   return related.slice(0, 5);
 }
 
+// === カード一覧テーブルHTML生成 ===
+function buildCardTableHtml(cardInfoList) {
+  let html = '<div style="overflow-x:auto;margin:16px 0">\n';
+  html += '<table style="width:100%;border-collapse:collapse;font-size:13px">\n';
+  html += '<thead><tr style="border-bottom:2px solid var(--border);text-align:left">';
+  html += '<th style="padding:6px 8px">カード名</th>';
+  html += '<th style="padding:6px 8px">番号</th>';
+  html += '<th style="padding:6px 8px">色</th>';
+  html += '<th style="padding:6px 8px">タイプ</th>';
+  html += '<th style="padding:6px 8px">Lv</th>';
+  html += '<th style="padding:6px 8px">COST</th>';
+  html += '<th style="padding:6px 8px">AP</th>';
+  html += '<th style="padding:6px 8px">HP</th>';
+  html += '</tr></thead>\n<tbody>\n';
+
+  for (const c of cardInfoList) {
+    const colorJp = COLOR_JP[c.color] || c.color;
+    html += '<tr style="border-bottom:1px solid var(--border)">';
+    html += `<td style="padding:6px 8px;font-weight:600">${escapeHtml(c.card_name)}</td>`;
+    html += `<td style="padding:6px 8px">${escapeHtml(c.card_number)}</td>`;
+    html += `<td style="padding:6px 8px">${escapeHtml(colorJp)}</td>`;
+    html += `<td style="padding:6px 8px">${escapeHtml(c.card_type)}</td>`;
+    html += `<td style="padding:6px 8px">${c.level != null ? c.level : '-'}</td>`;
+    html += `<td style="padding:6px 8px">${c.cost != null ? c.cost : '-'}</td>`;
+    html += `<td style="padding:6px 8px">${c.ap != null ? c.ap : '-'}</td>`;
+    html += `<td style="padding:6px 8px">${c.hp != null ? c.hp : '-'}</td>`;
+    html += '</tr>\n';
+  }
+
+  html += '</tbody></table>\n</div>\n';
+  return html;
+}
+
+// === カード個別紹介HTML（画像付き） ===
+function buildCardDetailHtml(card) {
+  const num = escapeHtml(card.card_number);
+  const name = escapeHtml(card.card_name);
+  const imgUrl = `${CARD_IMAGE_BASE}/${card.card_number}.webp`;
+
+  let html = '<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:20px">\n';
+  html += `  <a href="../cards/${card.card_number}/" style="flex-shrink:0">\n`;
+  html += `    <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.parentElement.style.display='none'">\n`;
+  html += '  </a>\n';
+  html += '  <div>\n';
+  html += `    <h3 style="margin:0 0 6px;font-size:15px">${name} (${num})</h3>\n`;
+  if (card.effect) {
+    html += `    <p style="margin:0;font-size:13px;color:var(--text-secondary);line-height:1.6">${escapeHtml(card.effect)}</p>\n`;
+  }
+  html += '  </div>\n';
+  html += '</div>\n';
+  return html;
+}
+
+// === 関連カードHTML（サムネイル+リンク付き） ===
+function buildRelatedCardsHtml(relatedCards) {
+  if (!relatedCards || relatedCards.length === 0) return '';
+
+  let html = '<h2 style="font-size:15px;margin-top:28px">関連カード</h2>\n';
+  html += '<ul style="list-style:none;padding:0;margin:12px 0">\n';
+
+  for (const r of relatedCards) {
+    const imgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
+    html += '<li style="display:flex;align-items:center;gap:10px;margin-bottom:8px">\n';
+    html += `  <a href="../cards/${r.card_id}/" style="flex-shrink:0">\n`;
+    html += `    <img src="${imgUrl}" alt="${escapeHtml(r.name)}" style="width:40px;height:56px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display='none'">\n`;
+    html += '  </a>\n';
+    html += '  <div>\n';
+    html += `    <a href="../cards/${r.card_id}/" style="color:var(--accent);text-decoration:none;font-size:14px">${escapeHtml(r.name)} (${escapeHtml(r.card_id)})</a>\n`;
+    html += `    <div style="font-size:12px;color:var(--text-secondary)">${escapeHtml(r.color)}系デッキ内採用率${r.usage_rate}% (${r.decks}デッキ) — ${escapeHtml(r.reason)}</div>\n`;
+    html += '  </div>\n';
+    html += '</li>\n';
+  }
+
+  html += '</ul>\n';
+  return html;
+}
+
 // === 記事生成: 新カード ===
-async function generateCardArticle(cardInfoList, relatedCards, tweetUrl) {
-  const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
+async function generateCardArticle(cardInfoList, relatedCards, tweetUrl, articleDate) {
   const cardsDesc = cardInfoList.map(c => {
     const colorJp = COLOR_JP[c.color] || c.color;
-    return `- ${c.card_name} (${c.card_number}): ${colorJp}/${c.card_type}, Lv.${c.level||'?'}, COST${c.cost||'?'}, AP${c.ap||'?'}/HP${c.hp||'?'}, 特徴: ${(c.traits||[]).join('、')}, 効果: ${c.effect||'不明'}`;
+    return `- ${c.card_name} (${c.card_number}): ${colorJp}/${c.card_type}, Lv.${c.level||'?'}, COST${c.cost||'?'}, AP${c.ap||'?'}/HP${c.hp||'?'}, 特徴: ${(c.traits||[]).join('、')}, 効果テキスト（原文）: ${c.effect||'不明'}`;
   }).join('\n');
 
   const relatedDesc = relatedCards.map(r =>
-    `- ${r.name} (${r.card_id}) [${r.color}] — 採用率${r.usage_rate}% (${r.decks}デッキ) — ${r.reason}`
+    `- ${r.name} (${r.card_id}) [${r.color}] — ${r.color}系デッキ内採用率${r.usage_rate}% (${r.decks}デッキ) — ${r.reason}`
   ).join('\n');
 
   const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
-以下の新カード情報と関連カードデータに基づいて、新カード紹介記事を日本語で書いてください。
+以下の新カード情報と関連カードデータに基づいて、ピックアップ記事（考察パート）を日本語で書いてください。
 
-【厳守ルール】
+注意: カード一覧テーブル・カード画像・関連カードリンクは別途HTMLで自動生成します。
+あなたが書くのは「導入文」と「ピックアップ考察（2〜3枚を深掘り）」の部分だけです。
+
+【GCG用語ルール — 厳守】
+- カードタイプは UNIT / PILOT / COMMAND / BASE の4種のみ。「キャラクター」「モビルスーツ」等のカードタイプは存在しない
+- 「機動」「合体」「アップグレード」「エース効果」「高機動」「エースパーツ」等のGCGに存在しない概念を使わないこと
+- 効果テキストは提供された原文をそのまま引用し、言い換え・要約・解釈をしないこと
+- カード名は提供されたデータを正確に使うこと。推測で変更しない
+- 「EXリソース」を「Xソリューズ」等に誤変換しないこと
+- GCGのキーワード能力: 《リペア》《突破》《ブロッカー》《クイック》《バースト》。上記以外のキーワードを捏造しないこと
+
+【禁止表現 — 以下は絶対に使わないこと】
+「注目すべき」「最も注目すべきは」「特筆すべき」「徹底解析」「一挙公開」「秘めています」「秘めた」
+「バラエティ豊かな」「洗練させつつ」「新しい風を吹き込む」「待ち遠しいですね」「爆発力を秘めています」
+「幅広い可能性」「徹底」「一挙」「必見」「〜になりそうです」の連続使用、「〜でしょう」の多用
+
+【文体ルール】
+- データに基づいた具体的な表現を使う
+- 感想ではなく分析を書く
+- 「〜が面白い」「〜が強そう」程度のカジュアルな表現はOK
+- プレイヤーが読んで「なるほど」と思える内容にする
 - デッキタイプ名はすべて日本語表記（青/紫、赤/白等）
-- カードの色情報を必ず確認し、そのカードの色に基づいた正確な表現をすること
-- 採用率は「○○系デッキ内採用率」を使用すること
-- 数値データは正確に引用し、推測で数値を作らないこと
-- 堅すぎず、TCGプレイヤーが読んで面白い文体にすること
-- AI臭い表現（「注目すべき」「特筆すべき」等）を避けること
-- HTML形式で出力（<h2>、<p>、<ul>タグを使用）
-- 全体で400〜800文字程度
+- 採用率は「○○系デッキ内採用率」を使用
+- 数値データは正確に引用し、推測で数値を作らない
 
-【記事の構成】
-1. カード紹介（名前・ステータス・効果の要約）
-2. 環境への影響考察（既存の同色・同特徴カードとの比較、採用率データを活用）
-3. 関連カード紹介（2〜3枚、採用率付き）
+【出力形式】
+- HTML形式で出力（<p>タグを使用。<h2>は使わない）
+- 構成:
+  1. 導入文（1段落、2〜3行。日付は不要、カード枚数と収録パック名に触れる程度）
+  2. ピックアップ考察（環境に影響しそうな2〜3枚を選んで深掘り。各カードは<h3>で区切る）
+- 全体で400〜700文字程度
 
 【新カード情報】
 ${cardsDesc}
 
-【関連カード】
-${relatedDesc || 'データなし'}
-
-【出典】
-公式XポストURL: ${tweetUrl}`;
+【関連カード（現環境の採用率データ）】
+${relatedDesc || 'データなし'}`;
 
   log('  記事生成中 (Claude API)...');
-  return await callClaude([{ role: 'user', content: prompt }], 3000);
+  return await callClaude([{ role: 'user', content: prompt }], 4000);
 }
 
 // === 記事生成: 速報 ===
 async function generateNoticeArticle(tweetText, tweetUrl, summary) {
-  // 関連する採用率データがあれば付与
   let dataContext = '';
   const cardRanking = summary.card_ranking || [];
   if (cardRanking.length > 0) {
@@ -440,10 +582,12 @@ async function generateNoticeArticle(tweetText, tweetUrl, summary) {
 【厳守ルール】
 - 公式の発表内容を正確に伝えること
 - GCG STATSのデータがある場合は、影響分析を加えること
-  例: 禁止制限カードの現在の採用率データを添える
 - AI臭い表現を避け、自然な文体にすること
 - HTML形式で出力（<h2>、<p>タグを使用）
 - 全体で300〜600文字程度
+
+【禁止表現】
+「注目すべき」「特筆すべき」「徹底」「一挙」「秘めて」「バラエティ豊かな」「待ち遠しい」
 
 【公式アナウンス内容】
 ${tweetText}
@@ -500,7 +644,6 @@ ${articleInfo.url}
   }
 
   const result = await callClaude([{ role: 'user', content: prompt }], 500);
-  // 余分な引用符や改行を除去
   return result.replace(/^["']|["']$/g, '').trim();
 }
 
@@ -508,7 +651,7 @@ ${articleInfo.url}
 function generateNewsPage(pageId, title, description, articleHtml, options) {
   options = options || {};
   const canonical = options.canonical || `${SITE_URL}/reports/news/${pageId}.html`;
-  const backLink = options.backLink || 'index.html';
+  const displayDate = options.displayDate || todayStr().replace(/-/g, '.');
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -551,7 +694,7 @@ function generateNewsPage(pageId, title, description, articleHtml, options) {
     </div>
     <div class="section-header">
       <h1 class="section-title" style="margin-bottom:6px;font-size:16px">${escapeHtml(title)}</h1>
-      <span class="section-badge">${todayStr().replace(/-/g, '.')}</span>
+      <span class="section-badge">${displayDate}</span>
     </div>
 
     <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">
@@ -577,6 +720,37 @@ ${articleHtml}
 </html>`;
 }
 
+// === 新カード記事の完全なHTML組み立て ===
+function assembleCardArticleHtml(introHtml, cardInfoList, relatedCards, tweetUrls) {
+  let html = '';
+
+  // 1. 導入 + ピックアップ考察（Claude生成パート）
+  html += introHtml + '\n';
+
+  // 2. カード一覧テーブル
+  html += '<h2 style="font-size:15px;margin-top:28px">公開カード一覧</h2>\n';
+  html += buildCardTableHtml(cardInfoList);
+
+  // 3. 各カード詳細（画像+効果テキスト）
+  html += '<h2 style="font-size:15px;margin-top:28px">カード詳細</h2>\n';
+  for (const card of cardInfoList) {
+    html += buildCardDetailHtml(card);
+  }
+
+  // 4. 関連カード（サムネイル+リンク付き）
+  html += buildRelatedCardsHtml(relatedCards);
+
+  // 5. 出典
+  html += '\n<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">\n';
+  html += '<p style="font-size:12px;color:var(--text-muted)">出典:</p>\n<ul style="font-size:12px">\n';
+  tweetUrls.forEach(url => {
+    html += `<li><a href="${escapeHtml(url)}" target="_blank" rel="noopener" style="color:var(--accent)">${escapeHtml(url)}</a></li>\n`;
+  });
+  html += '</ul>\n</div>';
+
+  return html;
+}
+
 // === Git操作 ===
 function gitPush(message) {
   if (DRY_RUN) { log(`[DRY-RUN] git push スキップ: ${message}`); return; }
@@ -599,10 +773,8 @@ async function main() {
     process.exit(1);
   }
 
-  // news ディレクトリ確保
   if (!fs.existsSync(NEWS_DIR)) fs.mkdirSync(NEWS_DIR, { recursive: true });
 
-  // チェック開始時刻
   const sinceTime = parseSince() || getLastCheck();
 
   // ① 公式ツイート取得
@@ -625,12 +797,10 @@ async function main() {
 
   log(`対象投稿: ${targets.length}件 (新カード: ${targets.filter(t=>t.type==='new_card').length}, 速報: ${targets.filter(t=>t.type==='notice').length})`);
 
-  // データ読み込み
   const cardsMaster = loadCardsMaster();
   const summary = loadSummary();
   const date = todayStr();
 
-  // ③ 各ターゲットを処理
   const newCards = targets.filter(t => t.type === 'new_card');
   const notices = targets.filter(t => t.type === 'notice');
 
@@ -639,10 +809,13 @@ async function main() {
   if (newCards.length > 0) {
     const allRelated = [];
 
+    // 最も古い投稿の日付を記事日付にする
+    const tweetDates = newCards.map(t => t.tweet.created_at).filter(Boolean).sort();
+    const articleDate = tweetDates.length > 0 ? tweetDates[0].split('T')[0] : date;
+
     for (const { tweet } of newCards) {
       const tweetUrl = `https://x.com/GUNDAM_GCG_JP/status/${tweet.id}`;
 
-      // 画像認識
       let cardInfoList = null;
       if (tweet.images.length > 0 && ANTHROPIC_API_KEY) {
         try {
@@ -653,9 +826,10 @@ async function main() {
       }
 
       if (!cardInfoList) {
-        // テキストから最低限の情報を抽出
         log('  画像認識なし。テキストのみで処理。');
-        cardInfoList = [{ card_name: tweet.text.split('\n')[1] || '新カード', card_number: '不明', color: '不明', card_type: '不明', traits: [], effect: tweet.text }];
+        const nameMatch = tweet.text.match(/「([^」]+)」/);
+        const cardName = nameMatch ? nameMatch[1] : (tweet.text.split('\n')[2] || '新カード');
+        cardInfoList = [{ card_name: cardName, card_number: '不明', color: '不明', card_type: '不明', traits: [], effect: '' }];
       }
 
       for (const ci of cardInfoList) {
@@ -668,35 +842,39 @@ async function main() {
       await sleep(1000);
     }
 
-    // 日別まとめ記事生成
-    const tweetUrls = [...new Set(allCardInfos.map(c => c._tweetUrl))];
-    let articleHtml;
-    try {
-      articleHtml = await generateCardArticle(allCardInfos, allRelated, tweetUrls.join('\n'));
-    } catch (e) {
-      log(`記事生成失敗: ${e.message}`);
-      articleHtml = `<h2>新カード公開</h2><p>${allCardInfos.map(c => escapeHtml(c.card_name)).join('、')}が公開されました。</p>`;
+    // 関連カードの重複排除
+    const uniqueRelated = [];
+    const seenIds = new Set();
+    for (const r of allRelated) {
+      if (!seenIds.has(r.card_id)) { seenIds.add(r.card_id); uniqueRelated.push(r); }
     }
 
-    // 出典リンク追加
-    articleHtml += '\n<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">\n';
-    articleHtml += '<p style="font-size:12px;color:var(--text-muted)">出典:</p>\n<ul style="font-size:12px">\n';
-    tweetUrls.forEach(url => {
-      articleHtml += `<li><a href="${escapeHtml(url)}" target="_blank" rel="noopener" style="color:var(--accent)">${escapeHtml(url)}</a></li>\n`;
-    });
-    articleHtml += '</ul>\n</div>';
+    const tweetUrls = [...new Set(allCardInfos.map(c => c._tweetUrl))];
+    const dateLbl = dateLabel(articleDate);
+    const cardCount = allCardInfos.length;
 
-    // HTML保存
-    const cardNames = allCardInfos.map(c => c.card_name).join('、');
-    const title = `新カード公開: ${cardNames}`;
-    const desc = `ガンダムカードゲーム新カード${cardNames}の紹介と環境への影響考察。`;
-    const pageHtml = generateNewsPage(date, title, desc, articleHtml);
+    // Claude APIで導入+考察パートを生成
+    let introHtml;
+    try {
+      introHtml = await generateCardArticle(allCardInfos, uniqueRelated.slice(0, 5), tweetUrls.join('\n'), articleDate);
+    } catch (e) {
+      log(`記事生成失敗: ${e.message}`);
+      introHtml = `<p>GD04 Phantom Ariaから新カード${cardCount}枚が公開されました。</p>`;
+    }
+
+    // 完全なHTML組み立て（テーブル+画像+関連カードリンクは自動生成）
+    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, uniqueRelated.slice(0, 5), tweetUrls);
+
+    const title = `【${dateLbl}公開】GD04 Phantom Aria 新カード${cardCount}枚まとめ`;
+    const desc = `ガンダムカードゲームGD04 Phantom Ariaから公開された新カード${cardCount}枚の紹介と環境考察。`;
+    const pageHtml = generateNewsPage(date, title, desc, articleHtml, { displayDate: articleDate.replace(/-/g, '.') });
     const filePath = path.join(NEWS_DIR, `${date}.html`);
     fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
     log(`記事保存: ${filePath}`);
 
     // X投稿
     const articleUrl = `${SITE_URL}/reports/news/${date}.html`;
+    const cardNames = allCardInfos.map(c => c.card_name).join('、');
     try {
       const tweetText = await generateTweetText('new_card', { cardNames, url: articleUrl });
       await postTweet(tweetText);
@@ -718,7 +896,6 @@ async function main() {
         articleHtml = `<h2>公式からのお知らせ</h2><p>${escapeHtml(tweet.text)}</p>`;
       }
 
-      // 出典リンク
       articleHtml += `\n<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">
 <p style="font-size:12px;color:var(--text-muted)">出典: <a href="${escapeHtml(tweetUrl)}" target="_blank" rel="noopener" style="color:var(--accent)">${escapeHtml(tweetUrl)}</a></p>
 </div>`;
@@ -731,7 +908,6 @@ async function main() {
       fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
       log(`速報記事保存: ${filePath}`);
 
-      // X投稿
       const articleUrl = `${SITE_URL}/reports/news/${pageId}.html`;
       try {
         const tweetText = await generateTweetText('notice', { summary: tweet.text.substring(0, 100), url: articleUrl });
@@ -748,7 +924,6 @@ async function main() {
   const commitMsg = `auto-news: ${[commitCards, commitNotices].filter(Boolean).join(' + ')} (${date})`;
   gitPush(commitMsg);
 
-  // チェック日時保存
   saveLastCheck();
   log('=== auto-news 完了 ===');
 }
