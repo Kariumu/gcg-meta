@@ -497,8 +497,8 @@ function buildCardBlockHtml(card, analysis, inlineRelated) {
   let html = '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px">\n';
   html += '  <div style="display:flex;gap:16px;align-items:flex-start">\n';
   // カード画像（180px, クリックで拡大）
-  html += '    <div style="flex-shrink:0;width:180px">\n';
-  html += `      <img src="${imgUrl}" alt="${name}" style="width:180px;border-radius:6px;border:1px solid var(--border);cursor:pointer" onclick="showCardModal(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
+  html += '    <div style="flex-shrink:0;width:200px">\n';
+  html += `      <img src="${imgUrl}" alt="${name}" style="width:200px;border-radius:6px;border:1px solid var(--border);cursor:pointer" onclick="showCardModal(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
   html += '    </div>\n';
   // カード情報
   html += '    <div style="flex:1">\n';
@@ -641,6 +641,13 @@ ${relatedDesc || 'データなし'}
 注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
 洗練させつつ、新しい風を吹き込む、待ち遠しいですね、爆発力を秘めています、幅広い可能性、
 徹底、必見、一挙、速報レビュー
+
+【考察文のルール】
+- 効果テキストから読み取れる事実のみに基づいて考察すること
+- カードの効果を勝手に解釈・推測して存在しない相互作用を書かないこと
+- 既存カードとの相性を書く場合は、そのカードの効果テキストを確認してから書くこと
+- 「中核を担う」「環境を変える」等の過大評価は避ける。新カードは実績がないため控えめに
+- データに基づかない推測は避け、ステータスと効果の事実を中心に書く
 
 【文体】
 - プレイヤーが読んで「なるほど」と思える分析を書く
