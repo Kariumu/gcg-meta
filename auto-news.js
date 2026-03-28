@@ -486,27 +486,39 @@ function isUnreleasedCard(cardNumber) {
   return false;
 }
 
-// === カード個別紹介HTML（画像付き） ===
-function buildCardDetailHtml(card) {
+// === カードブロックHTML（画像+ステータス+考察をセット表示） ===
+function buildCardBlockHtml(card, analysis) {
   const num = escapeHtml(card.card_number);
   const name = escapeHtml(card.card_name);
   const imgUrl = getCardImageUrl(card);
-  const unreleased = isUnreleasedCard(card.card_number);
+  const colorJp = COLOR_JP[card.color] || card.color;
+  const traitsStr = (card.traits || []).join('、');
 
-  let html = '<div style="display:flex;align-items:flex-start;gap:16px;margin-bottom:20px">\n';
-  html += '  <div style="flex-shrink:0">\n';
-  if (unreleased) {
-    // 未発売カード: onerrorでプレースホルダー表示
-    html += `    <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\\'color:var(--text-muted);font-size:11px;text-align:center;padding:8px;width:120px;height:168px;background:var(--bg-card);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center\\'>${num}<br>画像準備中</span>'">\n`;
-  } else {
-    html += `    <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.parentElement.style.display='none'">\n`;
-  }
-  html += '  </div>\n';
-  html += '  <div>\n';
-  html += `    <h3 style="margin:0 0 6px;font-size:15px">${name} (${num})</h3>\n`;
+  let html = '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px">\n';
+  html += '  <div style="display:flex;gap:16px;align-items:flex-start">\n';
+  // カード画像
+  html += '    <div style="flex-shrink:0;width:120px">\n';
+  html += `      <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.style.display=\'none\'">\n`;
+  html += '    </div>\n';
+  // カード情報
+  html += '    <div style="flex:1">\n';
+  html += `      <h3 style="margin:0 0 8px 0;font-size:16px">${name} (${num})</h3>\n`;
+  html += '      <table style="font-size:13px;margin-bottom:8px">\n';
+  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">色</td><td>${escapeHtml(colorJp)}</td>`;
+  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">タイプ</td><td>${escapeHtml(card.card_type)}</td></tr>\n`;
+  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">Lv</td><td>${card.level != null ? card.level : '-'}</td>`;
+  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">COST</td><td>${card.cost != null ? card.cost : '-'}</td></tr>\n`;
+  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">AP</td><td>${card.ap != null ? card.ap : '-'}</td>`;
+  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">HP</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
+  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
+  html += '      </table>\n';
   if (card.effect) {
-    html += `    <p style="margin:0;font-size:13px;color:var(--text-secondary);line-height:1.6">${escapeHtml(card.effect)}</p>\n`;
+    html += `      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0"><strong>効果:</strong> ${escapeHtml(card.effect)}</p>\n`;
   }
+  if (analysis) {
+    html += `      <p style="font-size:14px;margin:0">${analysis}</p>\n`;
+  }
+  html += '    </div>\n';
   html += '  </div>\n';
   html += '</div>\n';
   return html;
@@ -536,60 +548,105 @@ function buildRelatedCardsHtml(relatedCards) {
   return html;
 }
 
-// === 記事生成: 新カード ===
-async function generateCardArticle(cardInfoList, relatedCards, tweetUrl, articleDate) {
+// === 記事生成: 導入文 ===
+async function generateIntroText(cardInfoList, relatedCards, articleDate) {
   const cardsDesc = cardInfoList.map(c => {
     const colorJp = COLOR_JP[c.color] || c.color;
-    return `- ${c.card_name} (${c.card_number}): ${colorJp}/${c.card_type}, Lv.${c.level||'?'}, COST${c.cost||'?'}, AP${c.ap||'?'}/HP${c.hp||'?'}, 特徴: ${(c.traits||[]).join('、')}, 効果テキスト（原文）: ${c.effect||'不明'}`;
+    return `- ${c.card_name} (${c.card_number}): ${colorJp}/${c.card_type}`;
   }).join('\n');
 
-  const relatedDesc = relatedCards.map(r =>
-    `- ${r.name} (${r.card_id}) [${r.color}] — ${r.color}系デッキ内採用率${r.usage_rate}% (${r.decks}デッキ) — ${r.reason}`
-  ).join('\n');
-
   const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
-以下の新カード情報と関連カードデータに基づいて、ピックアップ記事（考察パート）を日本語で書いてください。
-
-注意: カード一覧テーブル・カード画像・関連カードリンクは別途HTMLで自動生成します。
-あなたが書くのは「導入文」と「ピックアップ考察（2〜3枚を深掘り）」の部分だけです。
-
-【GCG用語ルール — 厳守】
-- カードタイプは UNIT / PILOT / COMMAND / BASE の4種のみ。「キャラクター」「モビルスーツ」等のカードタイプは存在しない
-- 「機動」「合体」「アップグレード」「エース効果」「高機動」「エースパーツ」等のGCGに存在しない概念を使わないこと
-- 効果テキストは提供された原文をそのまま引用し、言い換え・要約・解釈をしないこと
-- カード名は提供されたデータを正確に使うこと。推測で変更しない
-- 「EXリソース」を「Xソリューズ」等に誤変換しないこと
-- GCGのキーワード能力: 《リペア》《突破》《ブロッカー》《クイック》《バースト》。上記以外のキーワードを捏造しないこと
-
-【禁止表現 — 以下は絶対に使わないこと】
-「注目すべき」「最も注目すべきは」「特筆すべき」「徹底解析」「一挙公開」「秘めています」「秘めた」
-「バラエティ豊かな」「洗練させつつ」「新しい風を吹き込む」「待ち遠しいですね」「爆発力を秘めています」
-「幅広い可能性」「徹底」「一挙」「必見」「〜になりそうです」の連続使用、「〜でしょう」の多用
-
-【文体ルール】
-- データに基づいた具体的な表現を使う
-- 感想ではなく分析を書く
-- 「〜が面白い」「〜が強そう」程度のカジュアルな表現はOK
-- プレイヤーが読んで「なるほど」と思える内容にする
-- デッキタイプ名はすべて日本語表記（青/紫、赤/白等）
-- 採用率は「○○系デッキ内採用率」を使用
-- 数値データは正確に引用し、推測で数値を作らない
+以下の新カード情報に基づいて、カード紹介記事の「導入文」だけを書いてください。
 
 【出力形式】
-- HTML形式で出力（<p>タグを使用。<h2>は使わない）
-- 構成:
-  1. 導入文（1段落、2〜3行。日付は不要、カード枚数と収録パック名に触れる程度）
-  2. ピックアップ考察（環境に影響しそうな2〜3枚を選んで深掘り。各カードは<h3>で区切る）
-- 全体で400〜700文字程度
+- HTML形式で <p> タグ1つだけ
+- 2〜3行程度。カード枚数と収録パック名に触れる
+- 日付は不要
+
+【GCG用語ルール - 厳守】
+- カードタイプは UNIT / PILOT / COMMAND / BASE の4種のみ
+  「キャラクター」「モビルスーツ」「機動ユニット」は存在しない
+- 以下の用語はGCGに存在しない。絶対に使わないこと:
+  合体、アップグレード、エース効果、エースパーツ、高機動、機動ユニット、Xソリューズ、重大損傷コマンド
+- EXリソースを「Xソリューズ」に変換しないこと
+- カードタイプ「PILOT」を「キャラクター」に変換しないこと
+
+【禁止表現 - 使用厳禁】
+注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
+洗練させつつ、新しい風を吹き込む、待ち遠しいですね、爆発力を秘めています、幅広い可能性、
+徹底、必見、一挙、速報レビュー
+
+【文体】
+- プレイヤーが読んで「なるほど」と思える分析を書く
+- データに基づいた具体的な表現を使う
+- 感想文ではなく分析記事を書く
 
 【新カード情報】
 ${cardsDesc}
 
-【関連カード（現環境の採用率データ）】
-${relatedDesc || 'データなし'}`;
+<p>タグのみ出力してください。`;
 
-  log('  記事生成中 (Claude API)...');
-  return await callClaude([{ role: 'user', content: prompt }], 4000);
+  log('  導入文生成中 (Claude API)...');
+  return await callClaude([{ role: 'user', content: prompt }], 1000);
+}
+
+// === 記事生成: カードごとの考察 ===
+async function generateCardAnalyses(cardInfoList, relatedCards) {
+  const analyses = {};
+
+  for (const card of cardInfoList) {
+    const colorJp = COLOR_JP[card.color] || card.color;
+    const relatedDesc = relatedCards.filter(r => r.color === colorJp || r.reason.includes('リンク先'))
+      .slice(0, 3)
+      .map(r => `${r.name}(${r.card_id}): ${r.color}系デッキ内採用率${r.usage_rate}%`)
+      .join('、');
+
+    const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
+以下のカード1枚について、2〜3行の簡潔な考察を書いてください。プレーンテキストのみで出力（HTMLタグ不要）。
+
+【カード情報】
+- カード名: ${card.card_name} (${card.card_number})
+- 色: ${colorJp} / タイプ: ${card.card_type}
+- Lv.${card.level||'?'}, COST${card.cost||'?'}, AP${card.ap||'?'}/HP${card.hp||'?'}
+- 特徴: ${(card.traits||[]).join('、')}
+- 効果テキスト（原文）: ${card.effect||'不明'}
+
+【関連カード（現環境データ）】
+${relatedDesc || 'データなし'}
+
+【GCG用語ルール - 厳守】
+- カードタイプは UNIT / PILOT / COMMAND / BASE の4種のみ
+  「キャラクター」「モビルスーツ」「機動ユニット」は存在しない
+- 効果テキストは提供された原文をそのまま引用すること。言い換え・要約・解釈をしない
+- 以下の用語はGCGに存在しない。絶対に使わないこと:
+  合体、アップグレード、エース効果、エースパーツ、高機動、機動ユニット、Xソリューズ、重大損傷コマンド
+- GCGの正しいキーワード能力: 《リペア》《突破》《ブロッカー》《クイック》《バースト》
+  上記以外のキーワードを作らないこと
+- EXリソースを「Xソリューズ」に変換しないこと
+
+【禁止表現 - 使用厳禁】
+注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
+洗練させつつ、新しい風を吹き込む、待ち遠しいですね、爆発力を秘めています、幅広い可能性、
+徹底、必見、一挙、速報レビュー
+
+【文体】
+- プレイヤーが読んで「なるほど」と思える分析を書く
+- 「このカード強そう」「使いたい」程度のカジュアルな感想はOK
+- データに基づいた具体的な表現を使う
+- 2〜3行で簡潔に。プレーンテキストのみ出力。`;
+
+    try {
+      log(`  考察生成中: ${card.card_name}...`);
+      const analysis = await callClaude([{ role: 'user', content: prompt }], 500);
+      analyses[card.card_number] = analysis.replace(/<[^>]*>/g, '').trim();
+    } catch (e) {
+      log(`  考察生成失敗: ${card.card_name} - ${e.message}`);
+      analyses[card.card_number] = '';
+    }
+    await sleep(500);
+  }
+
+  return analyses;
 }
 
 // === 記事生成: 速報 ===
@@ -746,26 +803,22 @@ ${articleHtml}
 }
 
 // === 新カード記事の完全なHTML組み立て ===
-function assembleCardArticleHtml(introHtml, cardInfoList, relatedCards, tweetUrls) {
+function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedCards, tweetUrls) {
   let html = '';
 
-  // 1. 導入 + ピックアップ考察（Claude生成パート）
+  // 1. 導入文（Claude生成パート）
   html += introHtml + '\n';
 
-  // 2. カード一覧テーブル
-  html += '<h2 style="font-size:15px;margin-top:28px">公開カード一覧</h2>\n';
-  html += buildCardTableHtml(cardInfoList);
-
-  // 3. 各カード詳細（画像+効果テキスト）
-  html += '<h2 style="font-size:15px;margin-top:28px">カード詳細</h2>\n';
+  // 2. カードブロック × N枚（画像+ステータス+考察をセットで表示）
   for (const card of cardInfoList) {
-    html += buildCardDetailHtml(card);
+    const analysis = cardAnalyses[card.card_number] || '';
+    html += buildCardBlockHtml(card, analysis);
   }
 
-  // 4. 関連カード（サムネイル+リンク付き）
+  // 3. 関連カード（サムネイル+リンク付き）
   html += buildRelatedCardsHtml(relatedCards);
 
-  // 5. 出典
+  // 4. 出典
   html += '\n<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">\n';
   html += '<p style="font-size:12px;color:var(--text-muted)">出典:</p>\n<ul style="font-size:12px">\n';
   tweetUrls.forEach(url => {
@@ -882,17 +935,25 @@ async function main() {
     const dateLbl = dateLabel(articleDate);
     const cardCount = allCardInfos.length;
 
-    // Claude APIで導入+考察パートを生成
+    // Claude APIで導入文を生成
     let introHtml;
     try {
-      introHtml = await generateCardArticle(allCardInfos, uniqueRelated.slice(0, 5), tweetUrls.join('\n'), articleDate);
+      introHtml = await generateIntroText(allCardInfos, uniqueRelated.slice(0, 5), articleDate);
     } catch (e) {
-      log(`記事生成失敗: ${e.message}`);
+      log(`導入文生成失敗: ${e.message}`);
       introHtml = `<p>GD04 Phantom Ariaから新カード${cardCount}枚が公開されました。</p>`;
     }
 
-    // 完全なHTML組み立て（テーブル+画像+関連カードリンクは自動生成）
-    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, uniqueRelated.slice(0, 5), tweetUrls);
+    // Claude APIでカードごとの考察を生成
+    let cardAnalyses = {};
+    try {
+      cardAnalyses = await generateCardAnalyses(allCardInfos, uniqueRelated.slice(0, 5));
+    } catch (e) {
+      log(`考察生成失敗: ${e.message}`);
+    }
+
+    // 完全なHTML組み立て（カードブロック+関連カードリンクは自動生成）
+    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, cardAnalyses, uniqueRelated.slice(0, 5), tweetUrls);
 
     const title = `【${dateLbl}公開】GD04 Phantom Aria 新カード${cardCount}枚まとめ`;
     const desc = `ガンダムカードゲームGD04 Phantom Ariaから公開された新カード${cardCount}枚の紹介と環境考察。`;
