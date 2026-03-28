@@ -26,7 +26,9 @@ const CARD_IMAGE_BASE = 'https://www.gundam-gcg.com/jp/images/cards/card';
 
 const OFFICIAL_USER_ID = '1837069552842330114'; // @GUNDAM_GCG_JP
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
-const ANTHROPIC_MODEL = 'claude-sonnet-4-20250514';
+const ANTHROPIC_MODEL_SONNET = 'claude-sonnet-4-20250514';
+const ANTHROPIC_MODEL_OPUS = 'claude-opus-4-20250514';
+const RECOGNITION_LOG_FILE = path.join(DATA_DIR, 'card-recognition-log.json');
 
 const X_API_KEY = process.env.X_API_KEY;
 const X_API_SECRET = process.env.X_API_SECRET;
@@ -154,11 +156,12 @@ function postTweet(text) {
 }
 
 // === Claude API ===
-function callClaude(messages, maxTokens) {
+function callClaude(messages, maxTokens, model) {
   if (!ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY が設定されていません');
   maxTokens = maxTokens || 2000;
+  model = model || ANTHROPIC_MODEL_SONNET;
   const body = JSON.stringify({
-    model: ANTHROPIC_MODEL,
+    model: model,
     max_tokens: maxTokens,
     messages: messages
   });
@@ -304,35 +307,67 @@ async function recognizeCard(imageUrls) {
   if (content.length === 0) return null;
 
   content.push({ type: 'text', text: `この画像はガンダムカードゲーム（GCG）のカード紹介画像です。
-画像からカード情報を正確に読み取り、以下のJSON形式のみで出力してください。
-他の文章は一切不要です。JSONのみ出力してください。
-
-【重要ルール】
-- card_type は UNIT / PILOT / COMMAND / BASE の4種のみ。「キャラクター」「モビルスーツ」等は使わない
-- カード名は画像に表示されている通りに正確に転記すること
-- 効果テキストは画像に表示されている通りに一字一句正確に転記すること。要約・言い換え・解釈をしない
-- GCGのキーワード能力: 《リペア》《突破》《ブロッカー》《クイック》《バースト》のみ。これ以外のキーワードを捏造しない
-- 「EXリソース」を「Xソリューズ」等に誤変換しない
-- 色はBlue/Red/Green/White/Purpleのいずれか
+画像からカード情報を一字一句正確に読み取り、以下のJSON形式で出力してください。
+JSON以外の文章は一切出力しないでください。
 
 {
-  "card_number": "GD04-009",
-  "card_name": "ガンキャノン（108）＆ガンキャノン（109）",
-  "rarity": "R",
-  "color": "Blue",
-  "level": 5,
-  "cost": 4,
-  "ap": 3,
-  "hp": 4,
-  "card_type": "UNIT",
-  "zone": "宇宙 地球",
-  "traits": ["地球連邦", "WB隊"],
-  "link": "「カイ・シデン」/「ハヤト・コバヤシ」",
-  "effect": "【リンク時】このユニット以外の、Lv.4以上の〔WB隊〕の自分のユニット1つを選ぶ。それをアクティブにする。"
-}` });
+  "card_number": "GD04-XXX",
+  "card_name": "カード名",
+  "rarity": "R/SR/LR等",
+  "color": "青/赤/緑/白/紫",
+  "card_type": "UNIT/PILOT/COMMAND/BASE",
+  "level": 数値,
+  "cost": 数値,
+  "ap": 数値またはnull,
+  "hp": 数値またはnull,
+  "zone": "宇宙/地球/両方/なし",
+  "traits": ["特徴1", "特徴2"],
+  "link": "リンク先のカード名（あれば）",
+  "effect": "効果テキスト全文（画像の文字をそのまま転記）",
+  "source_title": "作品名（あれば）"
+}
 
-  log('  カード画像認識中...');
-  const result = await callClaude([{ role: 'user', content }], 2000);
+【重要な注意事項】
+- 効果テキストは画像に書かれている文字をそのまま転記すること
+- 推測や解釈で用語を変換しないこと
+- 「EXリソース」を「Xリソース」に省略しないこと
+- カッコの種類を正確に区別すること: 〔〕 《》 「」 （）
+- 特徴欄は正確に読み取ること（「国連」「鉄華団」等を間違えない）
+
+【GCG用語辞書 — 画像に以下の用語が出た場合はこの表記で出力すること】
+
+■ カードタイプ（4種のみ）
+UNIT / PILOT / COMMAND / BASE
+※「キャラクター」「モビルスーツ」「機動ユニット」は存在しない
+
+■ キーワード能力
+《リペア》《突破》《ブロッカー》《クイック》《バースト》
+※ 上記以外のキーワード能力を作らないこと
+
+■ リソース関連
+「EXリソース」 ← 正しい表記。「Xリソース」「EXソリューズ」等に変換しないこと
+「EXベース」
+「リソース」
+
+■ 効果タイミング
+起動 / リンク時 / セット中 / アタック時 / ブロック時 / メイン / アクション
+
+■ ゾーン
+宇宙 / 地球
+
+■ 色
+青 / 赤 / 緑 / 白 / 紫
+
+■ 特徴の例（以下は正しい特徴名の一部）
+地球連邦 / ジオン / ザフト / ティターンズ / エゥーゴ / 鉄華団 / 国連 /
+学園 / ベネリットグループ / WB隊 / ミネルバ隊 / オーブ /
+クロスボーン・バンガード / ネオ・ジオン / ソレスタルビーイング
+
+■ 存在しない用語（絶対に使わないこと）
+合体 / アップグレード / エース効果 / エースパーツ / 機動ユニット / Xソリューズ / 重大損傷コマンド / モビルパック` });
+
+  log('  カード画像認識中 (Opus)...');
+  const result = await callClaude([{ role: 'user', content }], 2000, ANTHROPIC_MODEL_OPUS);
 
   try {
     const jsonMatch = result.match(/\{[\s\S]*\}/);
@@ -346,6 +381,54 @@ async function recognizeCard(imageUrls) {
     log(`  画像認識JSON解析失敗: ${e.message}`);
   }
   return null;
+}
+
+// === 認識結果ログ保存 ===
+function saveRecognitionLog(date, cardInfoList, sourceTweets) {
+  let logData = {};
+  if (fs.existsSync(RECOGNITION_LOG_FILE)) {
+    try {
+      logData = JSON.parse(fs.readFileSync(RECOGNITION_LOG_FILE, 'utf-8'));
+    } catch (e) {
+      log(`  認識ログ読み込み失敗（新規作成します）: ${e.message}`);
+    }
+  }
+
+  const existingCards = (logData[date] && logData[date].cards) || [];
+
+  const newCards = cardInfoList.map(c => ({
+    card_number: c.card_number || '不明',
+    card_name: c.card_name || '不明',
+    color: c.color || '不明',
+    card_type: c.card_type || '不明',
+    level: c.level || null,
+    cost: c.cost || null,
+    ap: c.ap || null,
+    hp: c.hp || null,
+    traits: c.traits || [],
+    effect: c.effect || '',
+    image_url: c._xImageUrl || null,
+    confidence: 'medium'
+  }));
+
+  // 既存カードとマージ（同一card_numberは上書き）
+  const mergedMap = {};
+  for (const card of existingCards) mergedMap[card.card_number] = card;
+  for (const card of newCards) mergedMap[card.card_number] = card;
+  const mergedCards = Object.values(mergedMap);
+
+  logData[date] = {
+    recognized_at: new Date().toISOString(),
+    source_tweets: [...new Set([
+      ...((logData[date] && logData[date].source_tweets) || []),
+      ...sourceTweets
+    ])],
+    cards: mergedCards,
+    status: 'pending_review'
+  };
+
+  fs.writeFileSync(RECOGNITION_LOG_FILE, JSON.stringify(logData, null, 2), 'utf-8');
+  log(`  認識ログ保存: ${RECOGNITION_LOG_FILE} (${mergedCards.length}枚)`);
 }
 
 // === カード情報バリデーション ===
@@ -987,6 +1070,10 @@ async function main() {
 
       await sleep(1000);
     }
+
+    // 認識結果をログに保存（松岡さんの確認用）
+    const tweetUrlsForLog = [...new Set(allCardInfos.map(c => c._tweetUrl))];
+    saveRecognitionLog(articleDate, allCardInfos, tweetUrlsForLog);
 
     // 関連カードの重複排除
     const uniqueRelated = [];
