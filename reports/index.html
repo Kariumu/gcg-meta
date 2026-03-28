@@ -1,62 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-3MY17P4E7F');
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-3MY17P4E7F");</script>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>環境レポート一覧 | GCG STATS</title>
-  <meta name="description" content="ガンダムカードゲームの週次環境レポート一覧。デッキタイプ分布や注目カードの分析を毎週お届け。">
-  <meta property="og:site_name" content="GCG STATS">
-  <meta property="og:locale" content="ja_JP">
-  <meta property="og:title" content="環境レポート一覧 | GCG STATS">
-  <meta property="og:description" content="ガンダムカードゲームの週次環境レポート一覧">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://gcg-stats.com/reports/">
-  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
-  <link rel="canonical" href="https://gcg-stats.com/reports/">
+  <meta name="description" content="GCG環境レポートの一覧ページ。週ごとのデッキ分布・カード採用率データを分析。">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
   <div id="header"></div>
-
   <main class="container">
-    <div class="section-header">
-      <h1 class="section-title">環境レポート</h1>
-      <span class="section-badge">2件</span>
-    </div>
-
-    <div class="event-list" style="margin-top:20px">
+    <div class="section-header"><div><h1 class="section-title">環境レポート</h1></div></div>
+    <div class="card-list" style="margin-top:20px">
+      <a href="2026-03-week4-report.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">環境レポート 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026/03/28</span>
+      </a>
       <a href="2026-03-report.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">環境レポート 2026.03.01〜2026.03.15</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026/03/28</span>
       </a>
       <a href="2026-03-restriction.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">コルシカ基地制限＜2＞の影響考察</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026/03/28</span>
       </a>
     </div>
   </main>
-
-  <noscript><h2>環境レポート一覧</h2><ul><li><a href="2026-03-report.html">2026-03-report</a></li><li><a href="2026-03-restriction.html">2026-03-restriction</a></li></ul></noscript>
-
   <div id="footer"></div>
-
   <script src="../js/common.js?v=5"></script>
-  <script>
-    GCG.init();
-    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
-    document.getElementById('footer').innerHTML = GCG.renderFooter();
-  </script>
+  <script>GCG.init();document.getElementById("header").innerHTML=GCG.renderHeader("reports");document.getElementById("footer").innerHTML=GCG.renderFooter();</script>
 </body>
 </html>
