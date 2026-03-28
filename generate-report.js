@@ -37,7 +37,28 @@ try {
 } catch (e) {}
 
 // デッキカラー日本語
-const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
+const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫', Black: '黒' };
+
+/**
+ * デッキタイプ英語 → 日本語変換  "Blue+Purple" → "青/紫"
+ */
+function deckTypeToJP(deckType) {
+  return deckType.split('+').map(c => COLOR_JP[c.trim()] || c).join('/');
+}
+
+/**
+ * カードの詳細情報文字列を生成（プロンプト用）
+ */
+function cardInfoString(cardId) {
+  const info = cardsMaster[cardId];
+  if (!info) return '';
+  const color = COLOR_JP[info.color] || info.color || '?';
+  const parts = [color, info.card_type || '?'];
+  if (info.level != null) parts.push('Lv' + info.level);
+  if (info.cost != null) parts.push('COST' + info.cost);
+  if (info.traits && info.traits.length > 0) parts.push('特徴:' + info.traits.join(','));
+  return '[' + parts.join('/') + ']';
+}
 
 function escapeHtml(str) {
   return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -139,19 +160,63 @@ function computeWeeklyStats(weekEvents) {
     }))
     .sort((a, b) => b.count - a.count);
 
-  // カード採用率ランキング
+  // 色別デッキ数を集計（カードの色を含むデッキの母数計算用）
+  const colorDeckCount = {};  // { 'Blue': 数, 'Red': 数, ... }
+  for (const ev of weekEvents) {
+    for (const r of (ev.results || [])) {
+      if (r.rank > 4) continue;
+      const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
+      if (colorEntry && colorEntry.colors) {
+        for (const col of colorEntry.colors) {
+          colorDeckCount[col] = (colorDeckCount[col] || 0) + 1;
+        }
+      }
+    }
+  }
+
+  // カードごとの色別採用数を集計
+  const cardColorUsage = {};  // { cardId: { colorDecks: 数 } }
+  for (const ev of weekEvents) {
+    for (const r of (ev.results || [])) {
+      if (r.rank > 4) continue;
+      const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
+      const deckColors = colorEntry ? colorEntry.colors : [];
+      for (const card of (r.deck || [])) {
+        if (!cardColorUsage[card.card_id]) cardColorUsage[card.card_id] = { colorDecks: 0 };
+        // このカードの色がデッキの色に含まれているか
+        const cardColor = cardsMaster[card.card_id] ? cardsMaster[card.card_id].color : null;
+        if (cardColor && deckColors.includes(cardColor)) {
+          cardColorUsage[card.card_id].colorDecks++;
+        }
+      }
+    }
+  }
+
+  // カード採用率ランキング（色別採用率付き）
   const cardRanking = Object.entries(cardCountMap)
-    .map(([id, d]) => ({
-      card_id: id,
-      name: cardName(id),
-      decks: d.decks,
-      rate: (d.decks / totalDecks * 100).toFixed(1),
-      avg: (d.totalCount / d.decks).toFixed(1)
-    }))
+    .map(([id, d]) => {
+      const cardColor = cardsMaster[id] ? cardsMaster[id].color : null;
+      const colorJP = cardColor ? (COLOR_JP[cardColor] || cardColor) : null;
+      const colorTotal = cardColor ? (colorDeckCount[cardColor] || 0) : 0;
+      const colorUsage = cardColorUsage[id] ? cardColorUsage[id].colorDecks : 0;
+      const colorRate = colorTotal > 0 ? (colorUsage / colorTotal * 100).toFixed(1) : null;
+      return {
+        card_id: id,
+        name: cardName(id),
+        decks: d.decks,
+        rate: (d.decks / totalDecks * 100).toFixed(1),
+        avg: (d.totalCount / d.decks).toFixed(1),
+        cardColor: colorJP,
+        colorRate: colorRate,
+        colorTotal: colorTotal,
+        colorUsage: colorUsage,
+        info: cardInfoString(id)
+      };
+    })
     .sort((a, b) => b.decks - a.decks)
     .slice(0, 20);
 
-  return { totalDecks, deckTypeRanking, cardRanking, winnerDecks };
+  return { totalDecks, deckTypeRanking, cardRanking, winnerDecks, colorDeckCount };
 }
 
 /**
@@ -171,7 +236,12 @@ function buildPrompt(mondayStr, sundayStr, weekEvents, stats) {
 
   let cardText = '';
   for (const c of stats.cardRanking) {
-    cardText += c.name + ': 採用率' + c.rate + '%（' + c.decks + 'デッキ、平均' + c.avg + '枚）\n';
+    cardText += c.name + ' ' + c.info + '\n';
+    cardText += '   全体採用率: ' + c.rate + '%（' + stats.totalDecks + 'デッキ中' + c.decks + 'デッキ）\n';
+    if (c.cardColor && c.colorRate) {
+      cardText += '   ' + c.cardColor + '系デッキ内採用率: ' + c.colorRate + '%（' + c.colorTotal + '件中' + c.colorUsage + '件）\n';
+    }
+    cardText += '   平均枚数: ' + c.avg + '枚\n';
   }
 
   return 'あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。\n' +
@@ -182,25 +252,49 @@ function buildPrompt(mondayStr, sundayStr, weekEvents, stats) {
     '2. デッキタイプ分布\n' +
     '   - 上位3〜5タイプの特徴と注目ポイント\n' +
     '3. 注目カード\n' +
-    '   - 採用率が上昇しているカード、新しく使われ始めたカード\n' +
+    '   - 採用率が高いカード、環境を定義するカード\n' +
+    '   - 各カードの色情報と色別採用率を正確に反映すること\n' +
     '4. 今週の優勝デッキ紹介（2〜3デッキ）\n' +
     '   - 特徴的な構築やメタ読みがあれば解説\n' +
     '5. 来週に向けて（1〜2行）\n' +
     '   - メタの予想や注目ポイント\n\n' +
-    '【注意事項】\n' +
+    '【厳守ルール】\n' +
+    '- デッキタイプ名はすべて日本語で表記すること（例: 青/紫、緑/白、赤/白）\n' +
+    '  英語表記（Blue+Purple等）は絶対に使わないこと\n' +
+    '- カードの色情報を必ず確認し、そのカードの色に基づいた正確な表現をすること\n' +
+    '  例: 青のカード → 「青系デッキの汎用カード」（○） 「色を問わない汎用カード」（×）\n' +
+    '  例: 緑のカード → 「緑系デッキのキーカード」（○） 「緑白・赤白系のキーカード」（×、赤白に緑は入らない）\n' +
+    '- カードの役割はそのカードの色とデッキタイプ別採用率から判断すること\n' +
+    '  「青系デッキ内採用率93%」→ 青系デッキの必須カード\n' +
+    '  「全体採用率30%だが赤系デッキ内採用率85%」→ 赤系デッキの核\n' +
+    '- 「汎用カード」と表現する場合は「○○系デッキの汎用カード」のように必ず色を付けること\n' +
+    '  本当に複数の色のデッキで高い採用率（各色デッキ内50%以上）がある場合のみ「幅広いデッキで採用される」と表現してよい\n' +
+    '- 採用率データは「そのカードの色を含むデッキ内での採用率」を優先的に使用すること\n' +
     '- カードIDだけでなくカード名を併記すること\n' +
-    '- 数値データ（採用率・優勝率）は正確に引用すること\n' +
+    '- 数値データ（採用率・優勝率）は正確に引用すること、推測で数値を作らないこと\n' +
     '- 堅すぎず、TCGプレイヤーが読んで面白い文体にすること\n' +
-    '- HTML形式で出力すること（<h2>、<p>、<ul>タグを使用）\n' +
     '- 全体で800〜1200文字程度\n' +
+    '- HTML形式で出力すること（<h2>、<p>、<ul>タグを使用）\n' +
     '- <h2>から始めること（<h1>は不要）\n\n' +
+    '【記事の文体のお手本】\n' +
+    '以下は良い記事の例です。この品質・文体に合わせて書いてください。\n\n' +
+    '---\n' +
+    '<h2>今週のサマリー</h2>\n' +
+    '<p>3/8〜3/15の期間、全国で52件のニュータイプチャレンジが開催されました。\n' +
+    '青/紫デッキが依然として最多の31.7%を占め、続いて緑/白（15.9%）、赤/白（12.4%）という順位は先週から変わりません。</p>\n\n' +
+    '<h2>注目カード</h2>\n' +
+    '<ul>\n' +
+    '<li>ガンダム(ST01-001) [青/UNIT] — 青系デッキ内採用率93.4%。青を使うならほぼ必須。先週比+1.2%とじわじわ上昇中。</li>\n' +
+    '<li>覚悟の表れ(GD01-100) [青/COMMAND] — 青系デッキの汎用コマンド。採用率は青系内で78.2%と安定。低コストで手札を整えられる堅実な1枚。</li>\n' +
+    '</ul>\n' +
+    '---\n\n' +
     '【今週のデータ】\n' +
     '期間: ' + formatDate(mondayStr) + ' 〜 ' + formatDate(sundayStr) + '\n' +
     'イベント数: ' + weekEvents.length + '件\n' +
     'TOP4デッキ数: ' + stats.totalDecks + '件\n\n' +
     '【デッキタイプ別集計（今週分）】\n' + deckTypeText + '\n' +
     '【今週の優勝デッキ一覧】\n' + winnerText + '\n' +
-    '【カード採用率TOP20（今週分）】\n' + cardText;
+    '【カード採用率TOP20（今週分） ※カード属性・色別採用率付き】\n' + cardText;
 }
 
 /**
@@ -616,9 +710,10 @@ function generateDryRunArticle(weekEvents, stats, regionName, nationalStats) {
     '</ul>\n' +
     '<h2>注目カード</h2>\n' +
     '<ul>\n' +
-    stats.cardRanking.slice(0, 5).map(c =>
-      '<li>' + c.name + ': 採用率' + c.rate + '%（平均' + c.avg + '枚）</li>\n'
-    ).join('') +
+    stats.cardRanking.slice(0, 5).map(c => {
+      const colorInfo = c.cardColor ? c.cardColor + '系デッキ内採用率' + (c.colorRate || '?') + '%、' : '';
+      return '<li>' + c.name + ' ' + c.info + ' — ' + colorInfo + '全体採用率' + c.rate + '%（平均' + c.avg + '枚）</li>\n';
+    }).join('') +
     '</ul>\n' +
     '<h2>来週に向けて</h2>\n' +
     '<p>※この記事はDRY-RUNモードで生成されたサンプルです。実際のレポートはClaude APIで生成されます。</p>';
@@ -643,7 +738,12 @@ function buildRegionalPrompt(mondayStr, sundayStr, regionEvents, regionStats, re
 
   let cardText = '';
   for (const c of regionStats.cardRanking) {
-    cardText += c.name + ': 採用率' + c.rate + '%（' + c.decks + 'デッキ、平均' + c.avg + '枚）\n';
+    cardText += c.name + ' ' + c.info + '\n';
+    cardText += '   全体採用率: ' + c.rate + '%（' + regionStats.totalDecks + 'デッキ中' + c.decks + 'デッキ）\n';
+    if (c.cardColor && c.colorRate) {
+      cardText += '   ' + c.cardColor + '系デッキ内採用率: ' + c.colorRate + '%（' + c.colorTotal + '件中' + c.colorUsage + '件）\n';
+    }
+    cardText += '   平均枚数: ' + c.avg + '枚\n';
   }
 
   // 全国統計との比較データ
@@ -661,17 +761,38 @@ function buildRegionalPrompt(mondayStr, sundayStr, regionEvents, regionStats, re
     '   - 上位3〜5タイプの特徴、全国平均との比較\n' +
     '3. 注目カード\n' +
     '   - ' + regionName + '地域で特に採用率が高いカード\n' +
+    '   - 各カードの色情報と色別採用率を正確に反映すること\n' +
     '4. ' + regionName + 'の優勝デッキ紹介（2〜3デッキ）\n' +
     '   - 特徴的な構築やメタ読みがあれば解説\n' +
     '5. 来週に向けて（1〜2行）\n\n' +
-    '【注意事項】\n' +
+    '【厳守ルール】\n' +
+    '- デッキタイプ名はすべて日本語で表記すること（例: 青/紫、緑/白、赤/白）\n' +
+    '  英語表記（Blue+Purple等）は絶対に使わないこと\n' +
+    '- カードの色情報を必ず確認し、そのカードの色に基づいた正確な表現をすること\n' +
+    '  例: 青のカード → 「青系デッキの汎用カード」（○） 「色を問わない汎用カード」（×）\n' +
+    '  例: 紫のカード → 「紫系デッキのキーカード」（○） 「緑白系のキーカード」（×、紫を含まないデッキに紫カードは属さない）\n' +
+    '- カードの役割はそのカードの色とデッキタイプ別採用率から判断すること\n' +
+    '- 「汎用カード」と表現する場合は「○○系デッキの汎用カード」のように必ず色を付けること\n' +
+    '- 採用率データは「そのカードの色を含むデッキ内での採用率」を優先的に使用すること\n' +
     '- カードIDだけでなくカード名を併記すること\n' +
     '- 全国統計との比較を適宜入れること\n' +
-    '- 数値データ（採用率・優勝率）は正確に引用すること\n' +
+    '- 数値データ（採用率・優勝率）は正確に引用すること、推測で数値を作らないこと\n' +
     '- 堅すぎず、TCGプレイヤーが読んで面白い文体にすること\n' +
     '- HTML形式で出力すること（<h2>、<p>、<ul>タグを使用）\n' +
     '- 全体で600〜900文字程度\n' +
     '- <h2>から始めること（<h1>は不要）\n\n' +
+    '【記事の文体のお手本】\n' +
+    '以下は良い記事の例です。この品質・文体に合わせて書いてください。\n\n' +
+    '---\n' +
+    '<h2>関東地域のサマリー</h2>\n' +
+    '<p>今週の関東は22件のイベントが開催され、全国71件の約3割を占めました。\n' +
+    '青/紫がシェア33.7%でトップですが、全国平均（36.3%）を下回っており、赤/白・緑/白が健闘する多様な環境です。</p>\n\n' +
+    '<h2>注目カード</h2>\n' +
+    '<ul>\n' +
+    '<li>アムロ・レイ(ST01-010) [青/PILOT] — 青系デッキ内採用率89.3%。青を使うならほぼ必須の1枚。</li>\n' +
+    '<li>溢れる慈愛(GD01-118) [青/COMMAND] — 青系デッキの汎用コマンド。関東では全国平均を上回る採用率45.8%。</li>\n' +
+    '</ul>\n' +
+    '---\n\n' +
     '【' + regionName + '地域 今週のデータ】\n' +
     '期間: ' + formatDate(mondayStr) + ' 〜 ' + formatDate(sundayStr) + '\n' +
     'イベント数: ' + regionEvents.length + '件\n' +
