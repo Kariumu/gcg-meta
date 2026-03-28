@@ -235,6 +235,82 @@ const GCG = {
       '</div>';
   },
 
+  // 日付フィルター: 半月単位のデフォルト範囲を計算
+  // ルール: 半月期間の最初の1週間以内 → 前の半月を表示
+  getDefaultDateRange() {
+    const today = new Date();
+    const y = today.getFullYear();
+    const m = today.getMonth(); // 0-indexed
+    const d = today.getDate();
+
+    let startDate, endDate;
+
+    if (d <= 7) {
+      // 月前半の最初の1週間 → 前月16日〜前月末
+      const prevMonth = m === 0 ? 11 : m - 1;
+      const prevYear = m === 0 ? y - 1 : y;
+      startDate = new Date(prevYear, prevMonth, 16);
+      endDate = new Date(prevYear, prevMonth + 1, 0); // 前月末日
+    } else if (d <= 15) {
+      // 月前半の後半(8〜15日) → 当月1日〜15日
+      startDate = new Date(y, m, 1);
+      endDate = new Date(y, m, 15);
+    } else if (d <= 22) {
+      // 月後半の最初の1週間(16〜22日) → 当月1日〜15日
+      startDate = new Date(y, m, 1);
+      endDate = new Date(y, m, 15);
+    } else {
+      // 月後半の後半(23日〜) → 当月16日〜当月末
+      startDate = new Date(y, m, 16);
+      endDate = new Date(y, m + 1, 0); // 当月末日
+    }
+
+    const fmt = (dt) => {
+      const yy = dt.getFullYear();
+      const mm = String(dt.getMonth() + 1).padStart(2, '0');
+      const dd = String(dt.getDate()).padStart(2, '0');
+      return `${yy}-${mm}-${dd}`;
+    };
+
+    return { start: fmt(startDate), end: fmt(endDate) };
+  },
+
+  // 日付フィルターUIを生成して返す
+  renderDateFilterHTML(startVal, endVal) {
+    return `
+      <div class="date-filter-container">
+        <span class="date-filter-label">期間:</span>
+        <input type="date" class="date-filter-input" id="date-start" value="${startVal}">
+        <span class="date-filter-sep">〜</span>
+        <input type="date" class="date-filter-input" id="date-end" value="${endVal}">
+        <button class="date-filter-reset" id="date-reset-btn" title="フィルター解除">全期間</button>
+      </div>`;
+  },
+
+  // イベント配列を日付範囲でフィルター
+  filterEventsByDate(events, startDate, endDate) {
+    if (!startDate && !endDate) return events;
+    return events.filter(ev => {
+      if (!ev.date) return false;
+      if (startDate && ev.date < startDate) return false;
+      if (endDate && ev.date > endDate) return false;
+      return true;
+    });
+  },
+
+  // イベントオブジェクト(events.json形式)を日付範囲でフィルター
+  filterEventsObjByDate(eventsObj, startDate, endDate) {
+    if (!startDate && !endDate) return eventsObj;
+    const filtered = {};
+    for (const [key, ev] of Object.entries(eventsObj)) {
+      if (!ev.date) continue;
+      if (startDate && ev.date < startDate) continue;
+      if (endDate && ev.date > endDate) continue;
+      filtered[key] = ev;
+    }
+    return filtered;
+  },
+
   copyShareUrl: function(btn) {
     var url = window.location.href.split('#')[0];
     var label = btn.querySelector('.copy-label');

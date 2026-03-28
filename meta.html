@@ -40,6 +40,9 @@
     </div>
     <div id="share-buttons"></div>
 
+    <!-- 日付フィルター -->
+    <div id="date-filter-area" style="margin-bottom:12px"></div>
+
     <!-- フィルターボタン -->
     <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" id="rank-filter">
       <button class="rank-filter-btn" data-filter="win" onclick="setFilter('win')">優勝のみ</button>
@@ -198,12 +201,14 @@
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=5"></script>
+  <script src="js/common.js?v=6"></script>
   <script>
     GCG.init();
 
     let currentFilter = 'top4'; // 'win', 'top4', 'all'
     let currentRegion = null;   // null = 全地域, or region name string
+    let currentDateStart = '';
+    let currentDateEnd = '';
     let deckTypes = [];
     let selectedType = null;
     let cardNames = {};
@@ -245,11 +250,16 @@
       return ['Unknown'];
     }
 
-    // イベントデータを地域でフィルターして返す
+    // イベントデータを日付+地域でフィルターして返す
     function getFilteredEvents(eventsData, region) {
-      if (!region) return eventsData;
+      let events = eventsData.events;
+      // 日付フィルター適用
+      if (currentDateStart || currentDateEnd) {
+        events = GCG.filterEventsObjByDate(events, currentDateStart, currentDateEnd);
+      }
+      if (!region) return { events: events };
       const filtered = { events: {} };
-      for (const [key, ev] of Object.entries(eventsData.events)) {
+      for (const [key, ev] of Object.entries(events)) {
         if (ev.region === region) {
           filtered.events[key] = ev;
         }
@@ -384,9 +394,9 @@
       const filteredEvents = getFilteredEvents(eventsDataGlobal, currentRegion);
       const totalEvents = Object.keys(filteredEvents.events).length;
 
-      // 地域選択時 or TOP4以外は常に動的計算
-      // TOP4 + 全地域のときだけpre-computed summaryを使える
-      if (currentFilter === 'top4' && !currentRegion) {
+      // 地域選択時 or TOP4以外 or 日付フィルター時は常に動的計算
+      // TOP4 + 全地域 + 日付フィルターなしのときだけpre-computed summaryを使える
+      if (currentFilter === 'top4' && !currentRegion && !currentDateStart && !currentDateEnd) {
         deckTypes = summaryDataGlobal.deck_type_ranking || [];
         const totalDecks = summaryDataGlobal.total_decks;
         const totalEventsAll = summaryDataGlobal.total_events;
@@ -445,10 +455,30 @@
       }
     }
 
+    function onDateFilterChange() {
+      currentDateStart = document.getElementById('date-start').value;
+      currentDateEnd = document.getElementById('date-end').value;
+      renderWithFilter();
+    }
+
     async function init() {
       await Promise.all([loadCardNames(), loadCardColors()]);
       summaryDataGlobal = await GCG.loadSummary();
       eventsDataGlobal = await GCG.loadEvents();
+
+      // 日付フィルター設置
+      const defaultRange = GCG.getDefaultDateRange();
+      const filterArea = document.getElementById('date-filter-area');
+      filterArea.innerHTML = GCG.renderDateFilterHTML(defaultRange.start, defaultRange.end);
+      currentDateStart = defaultRange.start;
+      currentDateEnd = defaultRange.end;
+      document.getElementById('date-start').addEventListener('change', onDateFilterChange);
+      document.getElementById('date-end').addEventListener('change', onDateFilterChange);
+      document.getElementById('date-reset-btn').addEventListener('click', function() {
+        document.getElementById('date-start').value = '';
+        document.getElementById('date-end').value = '';
+        onDateFilterChange();
+      });
 
       // 地域フィルターボタンを生成
       buildRegionFilterButtons(eventsDataGlobal);

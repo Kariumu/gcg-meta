@@ -53,6 +53,7 @@
         </div>
       </div>
       <div id="share-buttons" style="display:flex;justify-content:center;margin-top:12px"></div>
+      <div id="date-filter-area" style="display:flex;justify-content:center;margin-top:16px"></div>
     </div>
 
     <!-- デッキタイプ概要 -->
@@ -102,55 +103,114 @@
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=5"></script>
+  <script src="js/common.js?v=6"></script>
   <script>
     GCG.init();
 
+    let dashEventsData = null;
+    let dashCardColors = {};
+    let dashSummary = null;
+    let dashPieChart = null;
+
+    var SET_COLORS = {ST01:'Blue',ST02:'Red',ST03:'Green',ST04:'White',ST05:'Green',ST06:'Red',ST07:'Purple',ST08:'Blue',ST09:'White'};
+    function getColor(id) { return dashCardColors[id] || SET_COLORS[id.split('-')[0]] || 'Unknown'; }
+
     async function renderDashboard() {
-      const [summary, eventsData, cardColors] = await Promise.all([
+      [dashSummary, dashEventsData, dashCardColors] = await Promise.all([
         GCG.loadSummary(),
         GCG.loadEvents(),
         fetch(GCG.getBasePath() + 'data/card_colors.json').then(r => r.json()).catch(() => ({}))
       ]);
 
-      // 全 results から総デッキ数・デッキタイプ数を集計（ヒーロー表示用）
-      var SET_COLORS = {ST01:'Blue',ST02:'Red',ST03:'Green',ST04:'White',ST05:'Green',ST06:'Red',ST07:'Purple',ST08:'Blue',ST09:'White'};
-      function getColor(id) { return cardColors[id] || SET_COLORS[id.split('-')[0]] || 'Unknown'; }
+      // 日付フィルター設置
+      const defaultRange = GCG.getDefaultDateRange();
+      const filterArea = document.getElementById('date-filter-area');
+      filterArea.innerHTML = GCG.renderDateFilterHTML(defaultRange.start, defaultRange.end);
+      document.getElementById('date-start').addEventListener('change', refreshDashboard);
+      document.getElementById('date-end').addEventListener('change', refreshDashboard);
+      document.getElementById('date-reset-btn').addEventListener('click', function() {
+        document.getElementById('date-start').value = '';
+        document.getElementById('date-end').value = '';
+        refreshDashboard();
+      });
+
+      refreshDashboard();
+    }
+
+    function refreshDashboard() {
+      const startDate = document.getElementById('date-start').value;
+      const endDate = document.getElementById('date-end').value;
+
+      // 日付フィルター適用
+      const filteredEventsObj = GCG.filterEventsObjByDate(dashEventsData.events, startDate, endDate);
+      const allEvents = Object.values(filteredEventsObj);
+
+      // 集計
       var totalResults = 0;
       var allTypeKeys = {};
-      var allEvents = Object.values(eventsData.events);
+      var deckTypeMap = {};
+      var cardUsageMap = {};
+
       for (var i = 0; i < allEvents.length; i++) {
         var results = allEvents[i].results || [];
-        totalResults += results.length;
         for (var j = 0; j < results.length; j++) {
-          var deck = results[j].deck;
+          var r = results[j];
+          if (r.rank > 4) continue;
+          totalResults++;
+          var deck = r.deck;
           if (!deck || deck.length === 0) continue;
           var cc = {};
           for (var k = 0; k < deck.length; k++) {
             var col = getColor(deck[k].card_id);
-            if (col !== 'Unknown' && col !== 'Colorless') cc[col] = 1;
+            if (col !== 'Unknown' && col !== 'Colorless') cc[col] = (cc[col]||0) + deck[k].count;
+            // カード使用率集計
+            if (!cardUsageMap[deck[k].card_id]) cardUsageMap[deck[k].card_id] = { card_id: deck[k].card_id, decks: 0 };
+            cardUsageMap[deck[k].card_id].decks++;
           }
-          var colors = Object.keys(cc).sort(function(a,b){
+          var sorted = Object.entries(cc).sort((a,b) => b[1]-a[1]);
+          var colors = sorted.length >= 2 ? [sorted[0][0], sorted[1][0]].sort((a,b) => {
             var order = ['Blue','Red','Green','White','Purple'];
             return order.indexOf(a) - order.indexOf(b);
-          });
-          if (colors.length > 0) allTypeKeys[colors.join('+')] = 1;
+          }) : sorted.length === 1 ? [sorted[0][0]] : ['Unknown'];
+          var typeKey = colors.join('+');
+          allTypeKeys[typeKey] = 1;
+
+          if (!deckTypeMap[typeKey]) {
+            deckTypeMap[typeKey] = { type_key: typeKey, colors: colors,
+              label: colors.map(c => (GCG.DECK_COLORS[c]||GCG.DECK_COLORS.Unknown).jp).join('/'),
+              count: 0, wins: 0, totalRank: 0 };
+          }
+          deckTypeMap[typeKey].count++;
+          if (r.rank === 1) deckTypeMap[typeKey].wins++;
+          deckTypeMap[typeKey].totalRank += r.rank;
         }
       }
 
-      // Hero stats (animated)
-      GCG.animateNumber(document.getElementById('stat-events'), summary.total_events);
+      // Hero stats
+      GCG.animateNumber(document.getElementById('stat-events'), allEvents.length);
       GCG.animateNumber(document.getElementById('stat-decks'), totalResults);
       GCG.animateNumber(document.getElementById('stat-types'), Object.keys(allTypeKeys).length);
 
-      // デッキタイプ分布
-      renderDeckTypes(summary.deck_type_ranking || []);
+      // デッキタイプ分布 (動的集計)
+      var deckTypeRanking = Object.values(deckTypeMap).map(t => {
+        var share = totalResults > 0 ? Math.round(t.count / totalResults * 1000) / 10 : 0;
+        var winRate = t.count > 0 ? Math.round(t.wins / t.count * 1000) / 10 : 0;
+        var avgRank = t.count > 0 ? Math.round(t.totalRank / t.count * 10) / 10 : 0;
+        return { type_key: t.type_key, colors: t.colors, label: t.label,
+          count: t.count, share: share, win_rate: winRate, avg_rank: avgRank, wins: t.wins };
+      }).sort((a,b) => b.count - a.count);
 
-      // カード使用率TOP10
-      renderCardTop10(summary.card_ranking || [], summary.total_decks);
+      renderDeckTypes(deckTypeRanking);
+
+      // カードTOP10 (動的集計)
+      var cardRanking = Object.values(cardUsageMap).map(c => ({
+        card_id: c.card_id, decks: c.decks,
+        usage_rate: totalResults > 0 ? Math.round(c.decks / totalResults * 1000) / 10 : 0
+      })).sort((a,b) => b.usage_rate - a.usage_rate || b.decks - a.decks);
+      renderCardTop10(cardRanking, totalResults);
 
       // 最新イベント（10件）
-      const events = GCG.sortedEvents(eventsData.events).slice(0, 10);
+      const events = allEvents.sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 10);
       const eventsContainer = document.getElementById('recent-events');
       eventsContainer.innerHTML = events.map(ev => {
         const top4 = (ev.top4_colors || []).sort((a, b) => a.rank - b.rank);
@@ -171,6 +231,9 @@
             </span>
           </a>`;
       }).join('');
+      if (events.length === 0) {
+        eventsContainer.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">該当期間のイベントがありません</div>';
+      }
     }
 
     function renderCardTop10(cardRanking, totalDecks) {
@@ -200,7 +263,11 @@
     }
 
     function renderDeckTypes(deckTypes) {
-      if (!deckTypes.length) return;
+      if (!deckTypes.length) {
+        document.getElementById('decktype-cards').innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">該当期間のデータがありません</div>';
+        return;
+      }
+      if (dashPieChart) { dashPieChart.destroy(); dashPieChart = null; }
 
       // Cards
       const container = document.getElementById('decktype-cards');
@@ -279,7 +346,7 @@
           '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
       }).join('');
 
-      new Chart(ctx, {
+      dashPieChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
           labels,

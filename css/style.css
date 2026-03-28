@@ -633,6 +633,57 @@ a.section-badge:hover {
   color: var(--text-muted);
 }
 
+/* === Date Filter === */
+.date-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.date-filter-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  white-space: nowrap;
+}
+.date-filter-input {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 7px 10px;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  color-scheme: dark;
+}
+.date-filter-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+  outline: none;
+}
+.date-filter-sep {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+.date-filter-reset {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 7px 14px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.date-filter-reset:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .filter-select {
   background: var(--bg-input);
   border: 1px solid var(--border);

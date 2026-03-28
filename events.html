@@ -39,11 +39,9 @@
     </div>
     <div id="share-buttons"></div>
 
+    <div id="date-filter-area" style="margin-bottom:12px"></div>
     <div class="filter-bar">
       <input type="text" class="filter-input" id="search-input" placeholder="店舗名・プレイヤー名で検索...">
-      <select class="filter-select" id="date-filter">
-        <option value="">全日付</option>
-      </select>
     </div>
 
     <div class="event-list" id="events-list">
@@ -57,7 +55,7 @@
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=5"></script>
+  <script src="js/common.js?v=6"></script>
   <script>
     GCG.init();
 
@@ -70,14 +68,16 @@
       const data = await GCG.loadEvents();
       allEvents = GCG.sortedEvents(data.events);
 
-      // 日付フィルタの選択肢を生成
-      const dates = [...new Set(allEvents.map(e => e.date?.substring(0, 7)))].filter(Boolean).sort().reverse();
-      const dateFilter = document.getElementById('date-filter');
-      dates.forEach(d => {
-        const opt = document.createElement('option');
-        opt.value = d;
-        opt.textContent = d.replace('-', '年') + '月';
-        dateFilter.appendChild(opt);
+      // 日付フィルター設置
+      const defaultRange = GCG.getDefaultDateRange();
+      const filterArea = document.getElementById('date-filter-area');
+      filterArea.innerHTML = GCG.renderDateFilterHTML(defaultRange.start, defaultRange.end);
+      document.getElementById('date-start').addEventListener('change', applyFilters);
+      document.getElementById('date-end').addEventListener('change', applyFilters);
+      document.getElementById('date-reset-btn').addEventListener('click', function() {
+        document.getElementById('date-start').value = '';
+        document.getElementById('date-end').value = '';
+        applyFilters();
       });
 
       applyFilters();
@@ -85,10 +85,10 @@
 
     function applyFilters() {
       const searchText = document.getElementById('search-input').value.toLowerCase();
-      const dateVal = document.getElementById('date-filter').value;
+      const dateStart = document.getElementById('date-start').value;
+      const dateEnd = document.getElementById('date-end').value;
 
-      filteredEvents = allEvents.filter(ev => {
-        if (dateVal && !ev.date?.startsWith(dateVal)) return false;
+      filteredEvents = GCG.filterEventsByDate(allEvents, dateStart, dateEnd).filter(ev => {
         if (searchText) {
           const haystack = [
             ev.store,
@@ -161,7 +161,6 @@
     }
 
     document.getElementById('search-input').addEventListener('input', applyFilters);
-    document.getElementById('date-filter').addEventListener('change', applyFilters);
 
     document.getElementById('header').innerHTML = GCG.renderHeader('events');
     document.getElementById('footer').innerHTML = GCG.renderFooter();
