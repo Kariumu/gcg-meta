@@ -13,7 +13,7 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
-require('dotenv').config();
+require('dotenv').config({ override: true });
 
 // === 設定 ===
 const SITE_URL = 'https://gcg-stats.com';
