@@ -486,8 +486,8 @@ function isUnreleasedCard(cardNumber) {
   return false;
 }
 
-// === カードブロックHTML（画像+ステータス+考察をセット表示） ===
-function buildCardBlockHtml(card, analysis) {
+// === カードブロックHTML（画像+ステータス+考察+インライン関連カードをセット表示） ===
+function buildCardBlockHtml(card, analysis, inlineRelated) {
   const num = escapeHtml(card.card_number);
   const name = escapeHtml(card.card_name);
   const imgUrl = getCardImageUrl(card);
@@ -496,9 +496,9 @@ function buildCardBlockHtml(card, analysis) {
 
   let html = '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px">\n';
   html += '  <div style="display:flex;gap:16px;align-items:flex-start">\n';
-  // カード画像
-  html += '    <div style="flex-shrink:0;width:120px">\n';
-  html += `      <img src="${imgUrl}" alt="${name}" style="width:120px;border-radius:6px;border:1px solid var(--border)" onerror="this.style.display=\'none\'">\n`;
+  // カード画像（180px, クリックで拡大）
+  html += '    <div style="flex-shrink:0;width:180px">\n';
+  html += `      <img src="${imgUrl}" alt="${name}" style="width:180px;border-radius:6px;border:1px solid var(--border);cursor:pointer" onclick="showCardModal(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
   html += '    </div>\n';
   // カード情報
   html += '    <div style="flex:1">\n';
@@ -520,6 +520,19 @@ function buildCardBlockHtml(card, analysis) {
   }
   html += '    </div>\n';
   html += '  </div>\n';
+  // インライン関連カード（同色・同特徴 1〜2枚）
+  if (inlineRelated && inlineRelated.length > 0) {
+    html += '  <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">\n';
+    html += '    <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">関連カード</div>\n';
+    for (const r of inlineRelated) {
+      const rImgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
+      html += '    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">\n';
+      html += `      <a href="../../cards/${r.card_id}/"><img src="${rImgUrl}" alt="${escapeHtml(r.name)}" style="width:32px;border-radius:2px" onerror="this.style.display=\'none\'"></a>\n`;
+      html += `      <a href="../../cards/${r.card_id}/" style="font-size:12px;color:var(--text-primary);text-decoration:none">${escapeHtml(r.name)} (${r.card_id}) — ${escapeHtml(r.color)}系${r.usage_rate}%</a>\n`;
+      html += '    </div>\n';
+    }
+    html += '  </div>\n';
+  }
   html += '</div>\n';
   return html;
 }
@@ -802,17 +815,55 @@ ${articleHtml}
 </html>`;
 }
 
+// === カードごとのインライン関連カード抽出（同色・同特徴、1〜2枚） ===
+function findInlineRelated(cardInfo, cardsMaster, summary) {
+  const traits = cardInfo.traits || [];
+  const cardColor = cardInfo.color;
+  const cardRanking = summary.card_ranking || [];
+  const result = [];
+  const seen = new Set();
+
+  // 同色+同特徴 優先
+  for (const cr of cardRanking) {
+    if (result.length >= 2) break;
+    const master = cardsMaster[cr.card_id];
+    if (!master || seen.has(cr.card_id)) continue;
+    const masterTraits = master.traits || [];
+    const common = traits.filter(t => masterTraits.includes(t));
+    if (common.length > 0 && master.color === cardColor) {
+      seen.add(cr.card_id);
+      result.push({ card_id: cr.card_id, name: master.name_jp, color: COLOR_JP[master.color] || master.color, usage_rate: cr.usage_rate });
+    }
+  }
+  // 同特徴（色不問）で補完
+  if (result.length < 1) {
+    for (const cr of cardRanking) {
+      if (result.length >= 2) break;
+      const master = cardsMaster[cr.card_id];
+      if (!master || seen.has(cr.card_id)) continue;
+      const masterTraits = master.traits || [];
+      const common = traits.filter(t => masterTraits.includes(t));
+      if (common.length > 0) {
+        seen.add(cr.card_id);
+        result.push({ card_id: cr.card_id, name: master.name_jp, color: COLOR_JP[master.color] || master.color, usage_rate: cr.usage_rate });
+      }
+    }
+  }
+  return result;
+}
+
 // === 新カード記事の完全なHTML組み立て ===
-function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedCards, tweetUrls) {
+function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedCards, tweetUrls, cardsMaster, summary) {
   let html = '';
 
   // 1. 導入文（Claude生成パート）
   html += introHtml + '\n';
 
-  // 2. カードブロック × N枚（画像+ステータス+考察をセットで表示）
+  // 2. カードブロック × N枚（画像+ステータス+考察+インライン関連カードをセットで表示）
   for (const card of cardInfoList) {
     const analysis = cardAnalyses[card.card_number] || '';
-    html += buildCardBlockHtml(card, analysis);
+    const inlineRelated = findInlineRelated(card, cardsMaster, summary);
+    html += buildCardBlockHtml(card, analysis, inlineRelated);
   }
 
   // 3. 関連カード（サムネイル+リンク付き）
@@ -825,6 +876,12 @@ function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedC
     html += `<li><a href="${escapeHtml(url)}" target="_blank" rel="noopener" style="color:var(--accent)">${escapeHtml(url)}</a></li>\n`;
   });
   html += '</ul>\n</div>';
+
+  // 5. モーダル（カード画像拡大表示）
+  html += `\n<div id="card-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:1000;cursor:pointer;align-items:center;justify-content:center" onclick="this.style.display='none'">
+  <img id="card-modal-img" src="" style="max-width:90%;max-height:90%;border-radius:8px">
+</div>
+<script>function showCardModal(src){var m=document.getElementById('card-modal');document.getElementById('card-modal-img').src=src;m.style.display='flex';}</script>`;
 
   return html;
 }
@@ -953,7 +1010,7 @@ async function main() {
     }
 
     // 完全なHTML組み立て（カードブロック+関連カードリンクは自動生成）
-    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, cardAnalyses, uniqueRelated.slice(0, 5), tweetUrls);
+    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, cardAnalyses, uniqueRelated.slice(0, 5), tweetUrls, cardsMaster, summary);
 
     const title = `【${dateLbl}公開】GD04 Phantom Aria 新カード${cardCount}枚まとめ`;
     const desc = `ガンダムカードゲームGD04 Phantom Ariaから公開された新カード${cardCount}枚の紹介と環境考察。`;
