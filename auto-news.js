@@ -37,6 +37,7 @@ const X_ACCESS_TOKEN_SECRET = process.env.X_API_ACCESS_TOKEN_SECRET;
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const DRY_RUN = process.argv.includes('--dry-run');
+const TEST_MODE = true; // 松岡さんのOKが出たらfalseに変更
 
 const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
 const VALID_CARD_TYPES = ['UNIT', 'PILOT', 'COMMAND', 'BASE'];
@@ -362,6 +363,11 @@ UNIT / PILOT / COMMAND / BASE
 地球連邦 / ジオン / ザフト / ティターンズ / エゥーゴ / 鉄華団 / 国連 /
 学園 / ベネリットグループ / WB隊 / ミネルバ隊 / オーブ /
 クロスボーン・バンガード / ネオ・ジオン / ソレスタルビーイング
+
+■ よくある認識ミス（必ず修正すること）
+「EEXリソース」→「EXリソース」（Eが重複する誤読）
+「Xリソース」→「EXリソース」（EXが正しい）
+「Xソリュース」→「EXリソース」
 
 ■ 存在しない用語（絶対に使わないこと）
 合体 / アップグレード / エース効果 / エースパーツ / 機動ユニット / Xソリューズ / 重大損傷コマンド / モビルパック` });
@@ -719,6 +725,7 @@ ${relatedDesc || 'データなし'}
 - GCGの正しいキーワード能力: 《リペア》《突破》《ブロッカー》《クイック》《バースト》
   上記以外のキーワードを作らないこと
 - EXリソースを「Xソリューズ」に変換しないこと
+- COMMANDカードがPILOT的な役割を持つ場合がある。カードタイプは認識結果のまま使い、考察文でその特性に言及する
 
 【禁止表現 - 使用厳禁】
 注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
@@ -1113,14 +1120,18 @@ async function main() {
     fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
     log(`記事保存: ${filePath}`);
 
-    // X投稿
+    // X投稿（テストモードではスキップ）
     const articleUrl = `${SITE_URL}/reports/news/${date}.html`;
-    const cardNames = allCardInfos.map(c => c.card_name).join('、');
-    try {
-      const tweetText = await generateTweetText('new_card', { cardNames, url: articleUrl });
-      await postTweet(tweetText);
-    } catch (e) {
-      log(`X投稿生成/送信失敗: ${e.message}`);
+    if (TEST_MODE) {
+      log(`[TEST_MODE] X投稿スキップ。記事URL: ${articleUrl}`);
+    } else {
+      const cardNames = allCardInfos.map(c => c.card_name).join('、');
+      try {
+        const tweetText = await generateTweetText('new_card', { cardNames, url: articleUrl });
+        await postTweet(tweetText);
+      } catch (e) {
+        log(`X投稿生成/送信失敗: ${e.message}`);
+      }
     }
   }
 
@@ -1150,11 +1161,15 @@ async function main() {
       log(`速報記事保存: ${filePath}`);
 
       const articleUrl = `${SITE_URL}/reports/news/${pageId}.html`;
-      try {
-        const tweetText = await generateTweetText('notice', { summary: tweet.text.substring(0, 100), url: articleUrl });
-        await postTweet(tweetText);
-      } catch (e) {
-        log(`X投稿生成/送信失敗: ${e.message}`);
+      if (TEST_MODE) {
+        log(`[TEST_MODE] X投稿スキップ。記事URL: ${articleUrl}`);
+      } else {
+        try {
+          const tweetText = await generateTweetText('notice', { summary: tweet.text.substring(0, 100), url: articleUrl });
+          await postTweet(tweetText);
+        } catch (e) {
+          log(`X投稿生成/送信失敗: ${e.message}`);
+        }
       }
     }
   }
