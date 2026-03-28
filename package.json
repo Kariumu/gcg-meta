@@ -6,16 +6,10 @@
     "scrape": "node scraper.js",
     "scrape:full": "node scraper.js --full"
   },
-  "keywords": [
-    "gundam",
-    "card-game",
-    "gcg",
-    "tournament"
-  ],
+  "keywords": ["gundam", "card-game", "gcg", "tournament"],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cheerio": "^1.2.0",
-    "dotenv": "^17.3.1"
+    "cheerio": "^1.2.0"
   }
 }

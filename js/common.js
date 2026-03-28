@@ -58,7 +58,7 @@ const GCG = {
   // ページのベースパスを自動検出
   getBasePath() {
     const path = window.location.pathname;
-    if (path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/') || path.includes('/reports/')) {
+    if (path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/')) {
       return '../';
     }
     return './';
