@@ -8,7 +8,6 @@
  *   ANTHROPIC_API_KEY=sk-... node generate-report.js --week 2026-03-09  # 特定週を指定
  */
 
-require('dotenv').config({ override: true });
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
@@ -233,10 +232,9 @@ function callClaudeAPI(prompt) {
     };
 
     const req = https.request(options, (res) => {
-      const chunks = [];
-      res.on('data', chunk => chunks.push(chunk));
+      let data = '';
+      res.on('data', chunk => data += chunk);
       res.on('end', () => {
-        const data = Buffer.concat(chunks).toString('utf-8');
         if (res.statusCode !== 200) {
           reject(new Error('API error ' + res.statusCode + ': ' + data));
           return;
@@ -459,19 +457,28 @@ function updateReportIndex() {
       }
       return true;
     })
-    .sort()
-    .reverse();
+    .map(f => {
+      const filePath = path.join(REPORTS_DIR, f);
+      const stat = fs.statSync(filePath);
+      return { name: f, mtime: stat.mtime };
+    })
+    .sort((a, b) => b.mtime - a.mtime) // 更新日時の新しい順
+    .map(item => item.name);
 
   let listHtml = '';
   for (const f of files) {
-    // ファイル名からweekIdを取得
     const wId = f.replace('.html', '');
-    // ファイルからtitleを読み取る
-    const content = fs.readFileSync(path.join(REPORTS_DIR, f), { encoding: 'utf-8' });
+    const filePath = path.join(REPORTS_DIR, f);
+    const content = fs.readFileSync(filePath, 'utf-8');
     const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/);
     const title = titleMatch ? titleMatch[1] : wId;
-    listHtml += '      <a href="' + f + '" class="event-card" style="display:block;padding:16px 20px">\n' +
+    // ファイルの更新日時から投稿日時を取得
+    const stat = fs.statSync(filePath);
+    const d = stat.mtime;
+    const dateStr = d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0');
+    listHtml += '      <a href="' + f + '" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">\n' +
       '        <span style="font-size:15px;font-weight:600">' + title + '</span>\n' +
+      '        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">' + dateStr + '</span>\n' +
       '      </a>\n';
   }
 
@@ -541,7 +548,7 @@ listHtml +
 '</body>\n' +
 '</html>';
 
-  fs.writeFileSync(path.join(REPORTS_DIR, 'index.html'), html, { encoding: 'utf-8' });
+  fs.writeFileSync(path.join(REPORTS_DIR, 'index.html'), html, 'utf-8');
 }
 
 /**
@@ -551,7 +558,7 @@ function updateSitemap() {
   const sitemapPath = path.join(ROOT, 'sitemap.xml');
   if (!fs.existsSync(sitemapPath)) return;
 
-  let xml = fs.readFileSync(sitemapPath, { encoding: 'utf-8' });
+  let xml = fs.readFileSync(sitemapPath, 'utf-8');
   const now = new Date().toISOString().split('T')[0];
 
   // 既存のレポートURLを削除
@@ -577,7 +584,7 @@ function updateSitemap() {
 
   // </urlset> の前に挿入
   xml = xml.replace('</urlset>', reportUrls + '\n</urlset>');
-  fs.writeFileSync(sitemapPath, xml, { encoding: 'utf-8' });
+  fs.writeFileSync(sitemapPath, xml, 'utf-8');
 }
 
 /**
@@ -771,7 +778,7 @@ async function main() {
     regionArticle = postProcessArticleCards(regionArticle, regionStats);
 
     const regionPageHtml = generateReportPage(regionWId, targetMonday, targetSunday, regionArticle, regionEvents, regionStats, { regionLabel: regionName });
-    fs.writeFileSync(regionOutputPath, regionPageHtml, { encoding: 'utf-8' });
+    fs.writeFileSync(regionOutputPath, regionPageHtml, 'utf-8');
     console.log('  → ' + regionWId + '.html を保存しました');
     regionalLinks.push({ name: regionName, suffix: regionSuffix, wId: regionWId });
   }
@@ -791,7 +798,7 @@ async function main() {
 
   // HTMLページを生成（全国版）
   const pageHtml = generateReportPage(wId, targetMonday, targetSunday, articleHtml, weekEvents, stats, { regionalLinksHtml: regionalLinksHtml });
-  fs.writeFileSync(outputPath, pageHtml, { encoding: 'utf-8' });
+  fs.writeFileSync(outputPath, pageHtml, 'utf-8');
   console.log('  → ' + wId + '.html を保存しました');
 
   // 一覧ページ更新
