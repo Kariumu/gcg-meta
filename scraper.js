@@ -541,9 +541,46 @@ function saveData(existingData) {
   fs.writeFileSync(eventsFile, JSON.stringify(existingData, null, 2), 'utf-8');
   const summaryFile = path.join(DATA_DIR, 'summary.json');
   fs.writeFileSync(summaryFile, JSON.stringify(summary, null, 2), 'utf-8');
+  // 未取得データ一覧を生成
+  generateMissingData(existingData);
   // カード画像の自動ダウンロード
   downloadCardImages(existingData);
   return summary;
+}
+
+/**
+ * 未取得データ一覧 (missing_data.json) を生成
+ * - 結果データ未取得のイベント
+ * - TOP4のデッキデータ未取得
+ */
+function generateMissingData(eventsData) {
+  const missing = [];
+  for (const ev of Object.values(eventsData.events)) {
+    const results = ev.results || [];
+    if (results.length === 0) {
+      missing.push({
+        event_id: ev.event_id, date: ev.date, store: ev.store,
+        region: ev.region || '', type: 'no_results', detail: '結果データ未取得'
+      });
+      continue;
+    }
+    for (const r of results) {
+      if (r.rank > 4) continue;
+      if (!r.deck || r.deck.length === 0) {
+        missing.push({
+          event_id: ev.event_id, date: ev.date, store: ev.store,
+          region: ev.region || '', type: 'no_deck',
+          detail: `rank ${r.rank} (${r.player || '不明'}) のデッキデータ未取得`
+        });
+      }
+    }
+  }
+  missing.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  const missingFile = path.join(DATA_DIR, 'missing_data.json');
+  fs.writeFileSync(missingFile, JSON.stringify(missing, null, 2), 'utf-8');
+  if (missing.length > 0) {
+    console.log(`  未取得データ: ${missing.length}件 → ${missingFile}`);
+  }
 }
 
 async function main() {
