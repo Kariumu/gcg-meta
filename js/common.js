@@ -181,7 +181,7 @@ const GCG = {
     return `
       <header class="site-header">
         <div class="header-inner">
-          <a href="${basePath}index.html" class="site-logo">
+          <a href="${basePath}" class="site-logo">
             <span class="logo-icon">G</span>
             <div>
               <span class="logo-text">GCG STATS</span>
@@ -189,7 +189,7 @@ const GCG = {
             </div>
           </a>
           <nav>
-            <a href="${basePath}index.html" class="${activePage === 'home' ? 'active' : ''}">ダッシュボード</a>
+            <a href="${basePath}" class="${activePage === 'home' ? 'active' : ''}">ダッシュボード</a>
             <a href="${basePath}events.html" class="${activePage === 'events' ? 'active' : ''}">イベント</a>
             <a href="${basePath}meta.html" class="${activePage === 'meta' ? 'active' : ''}">環境分析</a>
             <a href="${basePath}cards.html" class="${activePage === 'cards' ? 'active' : ''}">カードリスト</a>
