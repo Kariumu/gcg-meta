@@ -58,7 +58,10 @@ const GCG = {
   // ページのベースパスを自動検出
   getBasePath() {
     const path = window.location.pathname;
-    if (path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/')) {
+    if (path.includes('/reports/news/')) {
+      return '../../';
+    }
+    if (path.includes('/reports/') || path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/')) {
       return '../';
     }
     return './';
@@ -329,3 +332,33 @@ const GCG = {
     }
   }
 };
+
+// Lightbox（画像拡大表示）- グローバル関数
+function openLightbox(src) {
+  var lb = document.getElementById('lightbox');
+  if (!lb) {
+    lb = document.createElement('div');
+    lb.id = 'lightbox';
+    lb.style.cssText = 'display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center';
+    lb.onclick = closeLightbox;
+    lb.innerHTML = '<img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.6);object-fit:contain">' +
+      '<button onclick="closeLightbox()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;opacity:0.7;line-height:1">&times;</button>';
+    document.body.appendChild(lb);
+  }
+  document.getElementById('lightbox-img').src = src;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  var lb = document.getElementById('lightbox');
+  if (lb) {
+    lb.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+}
+
+// Escapeキーで閉じる
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});

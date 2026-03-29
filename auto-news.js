@@ -320,6 +320,16 @@ function fixRecognitionErrors(result, cardsMaster) {
     }
   }
 
+  // === LINK条件テキストの正規化 ===
+  // Opusが「特徴（ティターンズ）」「特徴(ザフト)」等の生テキストを返す場合があるため
+  // findLinkTargets()で解析可能な標準形式「特徴にXXXを持つPILOT」に正規化する
+  if (result.link) {
+    const linkNorm = result.link.match(/^特徴[（(〔]([^）)〕]+)[）)〕]$/);
+    if (linkNorm) {
+      result.link = `特徴に${linkNorm[1]}を持つPILOT`;
+    }
+  }
+
   // === カードタイプの修正 ===
   const typeMap = {
     'キャラクター': 'PILOT',
@@ -1135,7 +1145,7 @@ ${articleHtml}
 
   <div id="footer"></div>
 
-  <script src="../../js/common.js?v=6"></script>
+  <script src="../../js/common.js?v=7"></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('reports');
@@ -1391,6 +1401,14 @@ async function main() {
         if (prev && prev.link) {
           ci.link = prev.link;
           log(`  前回認識ログからlink復元: ${ci.card_number} → ${prev.link}`);
+        }
+      }
+      // 復元/認識されたlinkテキストを正規化（findLinkTargetsで解析可能な形式に）
+      if (ci.link) {
+        const linkNorm = ci.link.match(/^特徴[（(〔]([^）)〕]+)[）)〕]$/);
+        if (linkNorm) {
+          ci.link = `特徴に${linkNorm[1]}を持つPILOT`;
+          log(`  link正規化: ${ci.card_number} → ${ci.link}`);
         }
       }
     }
