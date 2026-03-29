@@ -22,13 +22,15 @@ const DATA_DIR = path.join(ROOT, 'data');
 const NEWS_DIR = path.join(ROOT, 'reports', 'news');
 const LAST_CHECK_FILE = path.join(DATA_DIR, 'last-check.json');
 const LOG_FILE = path.join(DATA_DIR, 'auto-news-log.txt');
-const CARD_IMAGE_BASE = 'https://www.gundam-gcg.com/jp/images/cards/card';
+const CARD_IMAGE_BASE = '../../images/cards'; // ローカル画像パス（記事HTMLからの相対パス）
 
 const OFFICIAL_USER_ID = '1837069552842330114'; // @GUNDAM_GCG_JP
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
 const ANTHROPIC_MODEL_SONNET = 'claude-sonnet-4-20250514';
 const ANTHROPIC_MODEL_OPUS = 'claude-opus-4-20250514';
 const RECOGNITION_LOG_FILE = path.join(DATA_DIR, 'card-recognition-log.json');
+
+const NEWS_IMAGE_DIR = path.join(ROOT, 'images', 'news'); // 新カード画像保存先
 
 const X_API_KEY = process.env.X_API_KEY;
 const X_API_SECRET = process.env.X_API_SECRET;
@@ -712,11 +714,53 @@ function buildCardTableHtml(cardInfoList) {
   return html;
 }
 
+// === X投稿画像のローカルダウンロード ===
+async function downloadCardImage(imageUrl, cardNumber, date) {
+  const dir = path.join(NEWS_IMAGE_DIR, date);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+
+  const ext = imageUrl.includes('.png') ? '.png' : '.jpg';
+  const filename = `${cardNumber}${ext}`;
+  const filepath = path.join(dir, filename);
+
+  // 既にダウンロード済みならスキップ
+  if (fs.existsSync(filepath)) {
+    log(`    画像キャッシュ使用: ${filename}`);
+    return `../../images/news/${date}/${filename}`;
+  }
+
+  return new Promise((resolve, reject) => {
+    const urlObj = new URL(imageUrl);
+    const file = fs.createWriteStream(filepath);
+    https.get(urlObj, (response) => {
+      if (response.statusCode === 301 || response.statusCode === 302) {
+        // リダイレクト対応
+        file.close();
+        fs.unlink(filepath, () => {});
+        downloadCardImage(response.headers.location, cardNumber, date).then(resolve).catch(reject);
+        return;
+      }
+      response.pipe(file);
+      file.on('finish', () => {
+        file.close();
+        log(`    画像保存: ${filename} (${fs.statSync(filepath).size} bytes)`);
+        resolve(`../../images/news/${date}/${filename}`);
+      });
+    }).on('error', (err) => {
+      fs.unlink(filepath, () => {});
+      log(`    画像ダウンロード失敗: ${err.message}`);
+      reject(err);
+    });
+  });
+}
+
 // === カード画像URL判定 ===
 function getCardImageUrl(card) {
-  // X投稿画像がある場合はそちらを優先（未発売カード対策）
-  if (card._xImageUrl) return card._xImageUrl;
-  // 既存カード（ST/GD01-03）は公式カードリストから
+  // ダウンロード済みローカル画像がある場合はそちらを使用
+  if (card._localImagePath) return card._localImagePath;
+  // 既存カード画像
   return `${CARD_IMAGE_BASE}/${card.card_number}.webp`;
 }
 
@@ -743,7 +787,7 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   html += '  <div style="display:flex;gap:16px;align-items:flex-start">\n';
   // カード画像（250px, クリックで拡大）
   html += '    <div style="flex-shrink:0;width:250px">\n';
-  html += `      <img src="${imgUrl}" alt="${name}" style="width:250px;border-radius:6px;border:1px solid var(--border);cursor:pointer" onclick="showCardModal(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
+  html += `      <img src="${imgUrl}" alt="${name}" style="width:250px;border-radius:6px;border:1px solid var(--border);cursor:zoom-in" onclick="openLightbox(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
   html += '    </div>\n';
   // カード情報
   html += '    <div style="flex:1">\n';
@@ -1214,11 +1258,15 @@ function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedC
   });
   html += '</ul>\n</div>';
 
-  // 5. モーダル（カード画像拡大表示）
-  html += `\n<div id="card-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:1000;cursor:pointer;align-items:center;justify-content:center" onclick="this.style.display='none'">
-  <img id="card-modal-img" src="" style="max-width:90%;max-height:90%;border-radius:8px">
+  // 5. ライトボックス（カード詳細ページと同じ実装）
+  html += `\n<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.6);object-fit:contain">
 </div>
-<script>function showCardModal(src){var m=document.getElementById('card-modal');document.getElementById('card-modal-img').src=src;m.style.display='flex';}</script>`;
+<script>
+function openLightbox(src){var lb=document.getElementById('lightbox');document.getElementById('lightbox-img').src=src;lb.style.display='flex';document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').style.display='none';document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
+</script>`;
 
   return html;
 }
@@ -1306,9 +1354,14 @@ async function main() {
 
       for (const ci of cardInfoList) {
         ci._tweetUrl = tweetUrl;
-        // X投稿画像URLを保持（未発売カードの画像表示用）
+        // X投稿画像をダウンロードしてローカル保存
         if (tweet.images.length > 0) {
-          ci._xImageUrl = tweet.images[0];
+          try {
+            ci._localImagePath = await downloadCardImage(tweet.images[0], ci.card_number || 'unknown', articleDate);
+          } catch (e) {
+            log(`  画像ダウンロード失敗（記事は画像なしで生成）: ${e.message}`);
+          }
+          await sleep(1000); // ダウンロード間隔
         }
         allCardInfos.push(ci);
         const related = findRelatedCards(ci, cardsMaster, summary);
@@ -1355,13 +1408,13 @@ async function main() {
 
     const title = `【${dateLbl}公開】GD04 Phantom Aria 新カード${cardCount}枚まとめ`;
     const desc = `ガンダムカードゲームGD04 Phantom Ariaから公開された新カード${cardCount}枚の紹介と環境考察。`;
-    const pageHtml = generateNewsPage(date, title, desc, articleHtml, { displayDate: articleDate.replace(/-/g, '.') });
-    const filePath = path.join(NEWS_DIR, `${date}.html`);
+    const pageHtml = generateNewsPage(articleDate, title, desc, articleHtml, { displayDate: articleDate.replace(/-/g, '.') });
+    const filePath = path.join(NEWS_DIR, `${articleDate}.html`);
     fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
     log(`記事保存: ${filePath}`);
 
     // X投稿（テストモードではスキップ）
-    const articleUrl = `${SITE_URL}/reports/news/${date}.html`;
+    const articleUrl = `${SITE_URL}/reports/news/${articleDate}.html`;
     if (TEST_MODE) {
       log(`[TEST_MODE] X投稿スキップ。記事URL: ${articleUrl}`);
     } else {
