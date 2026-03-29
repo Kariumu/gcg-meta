@@ -278,6 +278,106 @@ function classifyTweet(tweet) {
   return null;
 }
 
+// === 画像認識結果の自動修正 ===
+// 526枚テスト＋191枚X投稿画像テストから発見された誤読パターンを後処理で修正する
+// cardsMaster: cards_master.jsonのデータ（card_idをキーとしたオブジェクト）。
+//              card_numberに一致するカードがあれば、色・タイプ等をデータベース値で補正する。
+function fixRecognitionErrors(result, cardsMaster) {
+  if (!result) return result;
+
+  // === 効果テキストの修正 ===
+  if (result.effect) {
+    // バースト括弧修正: 《バースト》→【バースト】
+    result.effect = result.effect.replace(/《バースト》/g, '【バースト】');
+
+    // EXリソースの誤読修正
+    result.effect = result.effect.replace(/EEXリソース/g, 'EXリソース');
+    result.effect = result.effect.replace(/(?<!E)Xリソース/g, 'EXリソース');
+    result.effect = result.effect.replace(/Xソリュース/g, 'EXリソース');
+    result.effect = result.effect.replace(/EXソリューズ/g, 'EXリソース');
+
+    // 全角カッコ→半角カッコ（トークン仕様部分）
+    // 「カード名」（〔trait〕... の形式を (〔trait〕... に変換
+    result.effect = result.effect.replace(/」（〔/g, '」(〔');
+    result.effect = result.effect.replace(/》）の/g, '》)の');
+    result.effect = result.effect.replace(/([0-9])）の/g, '$1)の');
+
+    // 存在しない効果タイミングの修正
+    result.effect = result.effect.replace(/【起動時】/g, '【配備時】');
+
+    // LINK条件の誤読修正: LINK欄の「特徴(XXX)」をeffectと誤認識するケースがある
+    // effectが「《高機動》（XXX）」「特徴(XXX)」等のLINK条件のみの場合はeffect空にしてlinkに移動
+    const linkMisread = result.effect.match(/^《?高機動》?[（(]([^）)]+)[）)]$/);
+    const linkMisread2 = result.effect.match(/^特徴[（(〔]([^）)〕]+)[）)〕]$/);
+    if (linkMisread) {
+      result.link = `特徴に${linkMisread[1]}を持つPILOT`;
+      result.effect = '';
+    } else if (linkMisread2) {
+      result.link = `特徴に${linkMisread2[1]}を持つPILOT`;
+      result.effect = '';
+    }
+  }
+
+  // === カードタイプの修正 ===
+  const typeMap = {
+    'キャラクター': 'PILOT',
+    'モビルスーツ': 'UNIT',
+    '機動ユニット': 'UNIT',
+    'コマンド': 'COMMAND',
+    'ベース': 'BASE'
+  };
+  if (typeMap[result.card_type]) {
+    result.card_type = typeMap[result.card_type];
+  }
+
+  // === AP/HP修正 ===
+  // PILOTとCOMMANDはAP/HPを持たない
+  if (result.card_type === 'PILOT' || result.card_type === 'COMMAND') {
+    result.ap = null;
+    result.hp = null;
+  }
+  // BASEはAPを持たない（HPのみ）
+  if (result.card_type === 'BASE') {
+    result.ap = null;
+  }
+
+  // === 色の正規化 ===
+  const colorMap = { '青': 'Blue', '赤': 'Red', '緑': 'Green', '白': 'White', '紫': 'Purple' };
+  if (colorMap[result.color]) result.color = colorMap[result.color];
+
+  // === X投稿画像対応: card_numberベースのデータベース補正 ===
+  // X投稿画像では背景色によりcolor誤認識が多発する（White正解率32%等）。
+  // card_numberが認識できており、cards_masterにデータがある場合は
+  // データベースの値で色・タイプ・特徴等を上書きする。
+  // ※effectは画像読み取り値を維持（新カードの効果テキスト取得が主目的のため）
+  if (cardsMaster && result.card_number) {
+    const masterCard = cardsMaster[result.card_number];
+    if (masterCard) {
+      // 色: X投稿画像での誤認識が最も深刻（全体74%、White32%）なのでDB値を優先
+      if (masterCard.color) result.color = masterCard.color;
+      // カードタイプ: PILOT/COMMAND混同対策
+      if (masterCard.card_type) result.card_type = masterCard.card_type;
+      // 特徴: 画像からの読み取りが困難な場合が多い
+      if (masterCard.traits) result.traits = masterCard.traits;
+      // 数値フィールド: DB値があれば補正
+      if (masterCard.level !== undefined) result.level = masterCard.level;
+      if (masterCard.cost !== undefined) result.cost = masterCard.cost;
+      if (masterCard.ap !== undefined) result.ap = masterCard.ap;
+      if (masterCard.hp !== undefined) result.hp = masterCard.hp;
+      // AP/HP再修正（card_typeをDB値で補正した後）
+      if (result.card_type === 'PILOT' || result.card_type === 'COMMAND') {
+        result.ap = null;
+        result.hp = null;
+      }
+      if (result.card_type === 'BASE') {
+        result.ap = null;
+      }
+    }
+  }
+
+  return result;
+}
+
 // === カードデータ読み込み ===
 function loadCardsMaster() {
   try {
@@ -292,7 +392,7 @@ function loadSummary() {
 }
 
 // === 新カード: 画像認識 ===
-async function recognizeCard(imageUrls) {
+async function recognizeCard(imageUrls, cardsMaster) {
   if (!imageUrls || imageUrls.length === 0) return null;
 
   const content = [];
@@ -307,8 +407,9 @@ async function recognizeCard(imageUrls) {
 
   if (content.length === 0) return null;
 
-  content.push({ type: 'text', text: `この画像はガンダムカードゲーム（GCG）のカード紹介画像です。
-画像からカード情報を一字一句正確に読み取り、以下のJSON形式で出力してください。
+  content.push({ type: 'text', text: `この画像はガンダムカードゲーム（GCG）の公式X投稿のカード紹介画像です。
+背景に商品パッケージ、ロゴ、セット名、発売日等が含まれていますが、それらは無視してください。
+カード枠内の情報のみを読み取り、以下のJSON形式で出力してください。
 JSON以外の文章は一切出力しないでください。
 
 {
@@ -323,51 +424,75 @@ JSON以外の文章は一切出力しないでください。
   "hp": 数値またはnull,
   "zone": "宇宙/地球/両方/なし",
   "traits": ["特徴1", "特徴2"],
-  "link": "リンク先のカード名（あれば）",
+  "link": "リンク条件テキスト（あれば。例: 「特徴にティターンズを持つPILOT」「シャア・アズナブル」等）",
   "effect": "効果テキスト全文（画像の文字をそのまま転記）",
   "source_title": "作品名（あれば）"
 }
 
-【重要な注意事項】
-- 効果テキストは画像に書かれている文字をそのまま転記すること
-- 推測や解釈で用語を変換しないこと
-- 「EXリソース」を「Xリソース」に省略しないこと
-- カッコの種類を正確に区別すること: 〔〕 《》 「」 （）
-- 特徴欄は正確に読み取ること（「国連」「鉄華団」等を間違えない）
+=== 重要な読み取りルール ===
 
-【GCG用語辞書 — 画像に以下の用語が出た場合はこの表記で出力すること】
+■ カッコの使い分け（最重要）
+GCGでは以下の4種類のカッコが使い分けられている。混同しないこと。
 
-■ カードタイプ（4種のみ）
+1. 【】（黒カッコ）= ゲームメカニクス・効果タイミング
+   【バースト】【配備時】【セット時】【セット中】【リンク時】【リンク中】
+   【アタック時】【起動・メイン】【起動・アクション】【ターン1回】
+   【メイン】【アクション】【パイロット】
+   ※特に「バースト」は必ず【バースト】と書く。《バースト》は誤り。
+
+2. 《》（二重山カッコ）= キーワード能力のみ
+   《リペア1》《リペア2》《突破1》《突破2》《突破3》《突破4》
+   《ブロッカー》《クイック》《高機動》《制圧》《先制攻撃》《援護1》《援護2》
+   ※バーストは【】で書く。《バースト》は存在しない。
+
+3. 〔〕（亀甲カッコ）= 所属・特徴の参照
+   〔ジオン〕〔地球連邦〕〔ティターンズ〕〔CB〕〔鉄華団〕等
+
+4. 「」（カギカッコ）= カード名・トークン名の参照
+
+■ 効果タイミングの正確な読み取り
+- 【セット時】= パイロットセット時に1回発動 ≠ 【セット中】= セット中ずっと有効
+- 【リンク時】= リンク時に1回発動 ≠ 【リンク中】= リンク中ずっと有効
+- 【配備時】= 配備時に1回発動
+- 【起動・メイン】/【起動・アクション】は存在するが「起動時」は存在しない
+- 条件付き: 【セット中・〔ネオ・ジオン〕のパイロット】のように「・」の後に条件
+
+■ AP/HPの扱い
+- UNIT: AP/HPの数値を読み取る
+- PILOT: ap=null, hp=null
+- COMMAND: ap=null, hp=null
+- BASE: ap=null, hp=数値（画像に0と表示されていてもAPはnullとする）
+
+■ 【パイロット】指定
+COMMANDカードの効果テキスト末尾に【パイロット】「カード名」がある場合、
+効果テキストの一部として必ず含めること。
+
+■ トークン仕様
+半角カッコ()で記述: (〔trait〕・AP数・HP数・能力)
+
+【GCG用語辞書】
+
+■ カードタイプ（4種のみ。カード右上の英語表記を確認すること）
 UNIT / PILOT / COMMAND / BASE
 ※「キャラクター」「モビルスーツ」「機動ユニット」は存在しない
-
-■ キーワード能力
-《リペア》《突破》《ブロッカー》《クイック》《バースト》
-※ 上記以外のキーワード能力を作らないこと
+※COMMANDカードに【パイロット】指定があるとイラストがキャラクターに見えるが、右上の表記がCOMMANDならCOMMAND
 
 ■ リソース関連
-「EXリソース」 ← 正しい表記。「Xリソース」「EXソリューズ」等に変換しないこと
-「EXベース」
-「リソース」
+「EXリソース」 ← 正しい表記。「Xリソース」「EEXリソース」「EXソリューズ」等は誤読
 
-■ 効果タイミング
-起動 / リンク時 / セット中 / アタック時 / ブロック時 / メイン / アクション
+■ 色（カード枠の色で判定。背景色は絶対に参照しない）
+青(Blue) / 赤(Red) / 緑(Green) / 白(White) / 紫(Purple)
+※White(白)カードは銀色/灰白色の枠で、背景色の影響を受けやすい。彩度が低いフレームはWhiteを疑う
 
-■ ゾーン
-宇宙 / 地球
-
-■ 色
-青 / 赤 / 緑 / 白 / 紫
-
-■ 特徴の例（以下は正しい特徴名の一部）
+■ 特徴の例
 地球連邦 / ジオン / ザフト / ティターンズ / エゥーゴ / 鉄華団 / 国連 /
 学園 / ベネリットグループ / WB隊 / ミネルバ隊 / オーブ /
-クロスボーン・バンガード / ネオ・ジオン / ソレスタルビーイング
+クロスボーン・バンガード / ネオ・ジオン / ソレスタルビーイング / CB / GNドライヴ
 
 ■ よくある認識ミス（必ず修正すること）
-「EEXリソース」→「EXリソース」（Eが重複する誤読）
-「Xリソース」→「EXリソース」（EXが正しい）
-「Xソリュース」→「EXリソース」
+「EEXリソース」→「EXリソース」
+「Xリソース」→「EXリソース」
+《バースト》→【バースト】
 
 ■ 存在しない用語（絶対に使わないこと）
 合体 / アップグレード / エース効果 / エースパーツ / 機動ユニット / Xソリューズ / 重大損傷コマンド / モビルパック` });
@@ -380,8 +505,8 @@ UNIT / PILOT / COMMAND / BASE
     if (jsonMatch) {
       const parsed = JSON.parse(jsonMatch[0]);
       const cards = Array.isArray(parsed) ? parsed : [parsed];
-      // バリデーション
-      return cards.map(c => validateCardInfo(c));
+      // 自動修正（card_numberベースのDB補正含む） → バリデーション
+      return cards.map(c => validateCardInfo(fixRecognitionErrors(c, cardsMaster)));
     }
   } catch (e) {
     log(`  画像認識JSON解析失敗: ${e.message}`);
@@ -498,20 +623,23 @@ function findRelatedCards(cardInfo, cardsMaster, summary) {
     }
   }
 
-  // 3. リンク先カード
+  // 3. リンク先カード（カード名指定）
   if (cardInfo.link) {
     const linkNames = cardInfo.link.match(/「([^」]+)」/g) || [];
     for (const name of linkNames) {
       const cleanName = name.replace(/[「」]/g, '');
+      // リンク条件のテキストの一部（例: 「特徴にティターンズを持つPILOT」）かカード名か判定
+      const isCondition = /特徴|を持つ|PILOT|COMMAND/.test(cleanName);
+      if (isCondition) continue; // 条件テキストはカード名検索しない（4で処理）
       for (const [id, master] of Object.entries(cardsMaster)) {
         if (master.name_jp && master.name_jp.includes(cleanName)) {
           const cr = cardRanking.find(c => c.card_id === id);
-          if (cr && !seen.has(id)) {
+          if (!seen.has(id)) {
             seen.add(id);
             related.push({
               card_id: id, name: master.name_jp,
               color: COLOR_JP[master.color] || master.color,
-              usage_rate: cr.usage_rate, decks: cr.decks,
+              usage_rate: cr ? cr.usage_rate : 0, decks: cr ? cr.decks : 0,
               reason: 'リンク先'
             });
           }
@@ -520,7 +648,35 @@ function findRelatedCards(cardInfo, cardsMaster, summary) {
     }
   }
 
-  return related.slice(0, 5);
+  // 4. リンク条件（特徴指定のPILOT/COMMAND検索）
+  if (cardInfo.link) {
+    const linkText = cardInfo.link;
+    // 「特徴に〇〇を持つPILOT」パターンの抽出
+    const traitMatch = linkText.match(/特徴[にが]?〔?([^〕を]+)〕?を持つ(PILOT|COMMAND)?/i)
+      || linkText.match(/〔([^〕]+)〕.*(PILOT|COMMAND)/i)
+      || linkText.match(/(ティターンズ|ジオン|地球連邦|エゥーゴ|CB|鉄華団|WB隊|ザフト|ミネルバ隊|フォルドの夜明け|学園|ネオ・ジオン|アナハイム).*(PILOT|パイロット)/i);
+    if (traitMatch) {
+      const targetTrait = traitMatch[1];
+      const targetType = (traitMatch[2] || 'PILOT').toUpperCase();
+      for (const [id, master] of Object.entries(cardsMaster)) {
+        if (seen.has(id)) continue;
+        const masterTraits = master.traits || [];
+        const masterType = (master.card_type || '').toUpperCase();
+        if (masterTraits.includes(targetTrait) && (masterType === targetType || masterType === 'PILOT' || masterType === 'COMMAND')) {
+          seen.add(id);
+          const cr = cardRanking.find(c => c.card_id === id);
+          related.push({
+            card_id: id, name: master.name_jp,
+            color: COLOR_JP[master.color] || master.color,
+            usage_rate: cr ? cr.usage_rate : 0, decks: cr ? cr.decks : 0,
+            reason: `リンク対象（${targetTrait} ${targetType}）`
+          });
+        }
+      }
+    }
+  }
+
+  return related.slice(0, 10);
 }
 
 // === カード一覧テーブルHTML生成 ===
@@ -576,7 +732,7 @@ function isUnreleasedCard(cardNumber) {
 }
 
 // === カードブロックHTML（画像+ステータス+考察+インライン関連カードをセット表示） ===
-function buildCardBlockHtml(card, analysis, inlineRelated) {
+function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   const num = escapeHtml(card.card_number);
   const name = escapeHtml(card.card_name);
   const imgUrl = getCardImageUrl(card);
@@ -585,9 +741,9 @@ function buildCardBlockHtml(card, analysis, inlineRelated) {
 
   let html = '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px">\n';
   html += '  <div style="display:flex;gap:16px;align-items:flex-start">\n';
-  // カード画像（240px, クリックで拡大）
-  html += '    <div style="flex-shrink:0;width:240px">\n';
-  html += `      <img src="${imgUrl}" alt="${name}" style="width:240px;border-radius:6px;border:1px solid var(--border);cursor:pointer" onclick="showCardModal(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
+  // カード画像（250px, クリックで拡大）
+  html += '    <div style="flex-shrink:0;width:250px">\n';
+  html += `      <img src="${imgUrl}" alt="${name}" style="width:250px;border-radius:6px;border:1px solid var(--border);cursor:pointer" onclick="showCardModal(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
   html += '    </div>\n';
   // カード情報
   html += '    <div style="flex:1">\n';
@@ -618,6 +774,22 @@ function buildCardBlockHtml(card, analysis, inlineRelated) {
       html += '    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">\n';
       html += `      <a href="../../cards/${r.card_id}/"><img src="${rImgUrl}" alt="${escapeHtml(r.name)}" style="width:36px;border-radius:2px" onerror="this.style.display=\'none\'"></a>\n`;
       html += `      <a href="../../cards/${r.card_id}/" style="font-size:12px;color:var(--text-primary);text-decoration:none">${escapeHtml(r.name)} (${r.card_id}) — ${escapeHtml(r.color)}系${r.usage_rate}%</a>\n`;
+      html += '    </div>\n';
+    }
+    html += '  </div>\n';
+  }
+  // リンク対象カード（特徴指定PILOTなど）
+  if (linkTargets && linkTargets.length > 0) {
+    const linkReason = linkTargets[0].reason || 'リンク対象';
+    const labelMatch = linkReason.match(/リンク対象（(.+)）/);
+    const linkLabel = labelMatch ? `リンク対象カード（${labelMatch[1]}）` : 'リンク対象カード';
+    html += '  <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">\n';
+    html += `    <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">${escapeHtml(linkLabel)}</div>\n`;
+    for (const r of linkTargets) {
+      const rImgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
+      html += '    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">\n';
+      html += `      <a href="../../cards/${r.card_id}/"><img src="${rImgUrl}" alt="${escapeHtml(r.name)}" style="width:36px;border-radius:2px" onerror="this.style.display=\'none\'"></a>\n`;
+      html += `      <a href="../../cards/${r.card_id}/" style="font-size:12px;color:var(--text-primary);text-decoration:none">${escapeHtml(r.name)} (${r.card_id})</a>\n`;
       html += '    </div>\n';
     }
     html += '  </div>\n';
@@ -678,6 +850,10 @@ async function generateIntroText(cardInfoList, relatedCards, articleDate) {
 洗練させつつ、新しい風を吹き込む、待ち遠しいですね、爆発力を秘めています、幅広い可能性、
 徹底、必見、一挙、速報レビュー
 
+【記事生成の追加ルール】
+- 「GUNDAM DYNASTY」という表現は使わない。セット名（例: GD04 Phantom Aria）を使うこと
+- 「属性」という表現は使わない。GCGでは「色」が正しい表現
+
 【文体】
 - プレイヤーが読んで「なるほど」と思える分析を書く
 - データに基づいた具体的な表現を使う
@@ -711,7 +887,7 @@ async function generateCardAnalyses(cardInfoList, relatedCards) {
 - 色: ${colorJp} / タイプ: ${card.card_type}
 - Lv.${card.level||'?'}, COST${card.cost||'?'}, AP${card.ap||'?'}/HP${card.hp||'?'}
 - 特徴: ${(card.traits||[]).join('、')}
-- 効果テキスト（原文）: ${card.effect||'不明'}
+- 効果テキスト（原文）: ${card.effect||'効果なし（バニラ）'}
 
 【関連カード（現環境データ）】
 ${relatedDesc || 'データなし'}
@@ -731,6 +907,12 @@ ${relatedDesc || 'データなし'}
 注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
 洗練させつつ、新しい風を吹き込む、待ち遠しいですね、爆発力を秘めています、幅広い可能性、
 徹底、必見、一挙、速報レビュー
+
+【記事生成の追加ルール】
+- 「GUNDAM DYNASTY」という表現は使わない。セット名（例: GD04 Phantom Aria）を使うこと
+- 「属性」という表現は使わない。GCGでは「色」が正しい表現
+- 効果テキストが空の場合は「効果なし（バニラ）」カードとして扱い、
+  ステータスとコスト効率で評価すること。「不明」「評価できない」とは書かない
 
 【考察文のルール】
 - 効果テキストから読み取れる事実のみに基づいて考察すること
@@ -912,6 +1094,62 @@ ${articleHtml}
 </html>`;
 }
 
+// === リンク対象カード抽出（特徴指定のPILOT/COMMAND） ===
+function findLinkTargets(cardInfo, cardsMaster, summary) {
+  if (!cardInfo.link) return [];
+  const linkText = cardInfo.link;
+  const cardRanking = (summary.card_ranking || []);
+  const result = [];
+  const seen = new Set();
+
+  // 「特徴に〇〇を持つPILOT」パターンの抽出
+  const traitMatch = linkText.match(/特徴[にが]?〔?([^〕を]+)〕?を持つ(PILOT|COMMAND)?/i)
+    || linkText.match(/〔([^〕]+)〕.*(PILOT|COMMAND)/i)
+    || linkText.match(/(ティターンズ|ジオン|地球連邦|エゥーゴ|CB|鉄華団|WB隊|ザフト|ミネルバ隊|フォルドの夜明け|学園|ネオ・ジオン|アナハイム).*(PILOT|パイロット)/i);
+
+  if (traitMatch) {
+    const targetTrait = traitMatch[1];
+    const targetType = (traitMatch[2] || 'PILOT').toUpperCase();
+    for (const [id, master] of Object.entries(cardsMaster)) {
+      if (seen.has(id)) continue;
+      const masterTraits = master.traits || [];
+      const masterType = (master.card_type || '').toUpperCase();
+      if (masterTraits.includes(targetTrait) && (masterType === targetType || masterType === 'PILOT' || masterType === 'COMMAND')) {
+        seen.add(id);
+        const cr = cardRanking.find(c => c.card_id === id);
+        result.push({
+          card_id: id, name: master.name_jp,
+          color: COLOR_JP[master.color] || master.color,
+          usage_rate: cr ? cr.usage_rate : 0, decks: cr ? cr.decks : 0,
+          reason: `リンク対象（${targetTrait} ${targetType}）`
+        });
+      }
+    }
+  }
+
+  // カード名指定のリンク先
+  const linkNames = linkText.match(/「([^」]+)」/g) || [];
+  for (const name of linkNames) {
+    const cleanName = name.replace(/[「」]/g, '');
+    if (/特徴|を持つ|PILOT|COMMAND/.test(cleanName)) continue;
+    for (const [id, master] of Object.entries(cardsMaster)) {
+      if (seen.has(id)) continue;
+      if (master.name_jp && master.name_jp.includes(cleanName)) {
+        seen.add(id);
+        const cr = cardRanking.find(c => c.card_id === id);
+        result.push({
+          card_id: id, name: master.name_jp,
+          color: COLOR_JP[master.color] || master.color,
+          usage_rate: cr ? cr.usage_rate : 0, decks: cr ? cr.decks : 0,
+          reason: 'リンク先'
+        });
+      }
+    }
+  }
+
+  return result;
+}
+
 // === カードごとのインライン関連カード抽出（同色・同特徴、1〜2枚） ===
 function findInlineRelated(cardInfo, cardsMaster, summary) {
   const traits = cardInfo.traits || [];
@@ -956,11 +1194,13 @@ function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedC
   // 1. 導入文（Claude生成パート）
   html += introHtml + '\n';
 
-  // 2. カードブロック × N枚（画像+ステータス+考察+インライン関連カードをセットで表示）
+  // 2. カードブロック × N枚（画像+ステータス+考察+インライン関連カード+リンク対象をセットで表示）
   for (const card of cardInfoList) {
     const analysis = cardAnalyses[card.card_number] || '';
     const inlineRelated = findInlineRelated(card, cardsMaster, summary);
-    html += buildCardBlockHtml(card, analysis, inlineRelated);
+    // リンク対象カード抽出
+    const linkTargets = findLinkTargets(card, cardsMaster, summary);
+    html += buildCardBlockHtml(card, analysis, inlineRelated, linkTargets);
   }
 
   // 3. 関連カード（サムネイル+リンク付き）
@@ -1051,7 +1291,7 @@ async function main() {
       let cardInfoList = null;
       if (tweet.images.length > 0 && ANTHROPIC_API_KEY) {
         try {
-          cardInfoList = await recognizeCard(tweet.images);
+          cardInfoList = await recognizeCard(tweet.images, cardsMaster);
         } catch (e) {
           log(`  画像認識失敗: ${e.message}`);
         }
