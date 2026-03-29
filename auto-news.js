@@ -539,15 +539,23 @@ function saveRecognitionLog(date, cardInfoList, sourceTweets) {
     ap: c.ap || null,
     hp: c.hp || null,
     traits: c.traits || [],
+    link: c.link || '',
     effect: c.effect || '',
     image_url: c._xImageUrl || null,
     confidence: 'medium'
   }));
 
-  // 既存カードとマージ（同一card_numberは上書き）
+  // 既存カードとマージ（同一card_numberは上書き、ただしlinkは前回値を保持）
   const mergedMap = {};
   for (const card of existingCards) mergedMap[card.card_number] = card;
-  for (const card of newCards) mergedMap[card.card_number] = card;
+  for (const card of newCards) {
+    const prev = mergedMap[card.card_number];
+    // 新認識でlinkが空だが前回認識にlinkがあれば復元
+    if (!card.link && prev && prev.link) {
+      card.link = prev.link;
+    }
+    mergedMap[card.card_number] = card;
+  }
   const mergedCards = Object.values(mergedMap);
 
   logData[date] = {
@@ -1369,6 +1377,22 @@ async function main() {
       }
 
       await sleep(1000);
+    }
+
+    // 認識ログから前回のlink情報を復元（Opusが再認識時にLINKを読み飛ばす場合の対策）
+    let prevLogData = {};
+    if (fs.existsSync(RECOGNITION_LOG_FILE)) {
+      try { prevLogData = JSON.parse(fs.readFileSync(RECOGNITION_LOG_FILE, 'utf-8')); } catch (e) {}
+    }
+    const prevCards = (prevLogData[articleDate] && prevLogData[articleDate].cards) || [];
+    for (const ci of allCardInfos) {
+      if (!ci.link && ci.card_number) {
+        const prev = prevCards.find(p => p.card_number === ci.card_number);
+        if (prev && prev.link) {
+          ci.link = prev.link;
+          log(`  前回認識ログからlink復元: ${ci.card_number} → ${prev.link}`);
+        }
+      }
     }
 
     // 認識結果をログに保存（松岡さんの確認用）
