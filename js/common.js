@@ -193,6 +193,7 @@ const GCG = {
             <a href="${basePath}events.html" class="${activePage === 'events' ? 'active' : ''}">イベント</a>
             <a href="${basePath}meta.html" class="${activePage === 'meta' ? 'active' : ''}">環境分析</a>
             <a href="${basePath}cards.html" class="${activePage === 'cards' ? 'active' : ''}">カードリスト</a>
+            <a href="${basePath}deck.html" class="${activePage === 'deck' ? 'active' : ''}">デッキ評価</a>
             <a href="${basePath}reports/" class="${activePage === 'reports' ? 'active' : ''}">レポート</a>
           </nav>
         </div>
