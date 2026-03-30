@@ -564,6 +564,8 @@
     let charts = {};
     let currentDeck = [];
     let imageRecognizedDeck = null;
+    let imageReadyToRecognize = false;
+    let imageRecognized = false;
 
     const COLOR_ORDER = ['Blue', 'Red', 'Green', 'White', 'Purple'];
     const COLOR_HEX = {
@@ -592,6 +594,7 @@
         document.getElementById('tab-btn-' + t).classList.toggle('active', t === tab);
       });
       updateDeckCountDisplay();
+      updateEvaluateButton();
     }
 
     // ===== Filter =====
@@ -890,18 +893,55 @@
     // ===== Image Recognition =====
     const WORKER_URL = 'https://gcg-deck-reader.kariumu19.workers.dev';
 
+    function updateEvaluateButton() {
+      const btn = document.getElementById('evaluate-btn');
+      const imageTabVisible = document.getElementById('tab-image').style.display !== 'none';
+      if (imageTabVisible && imageReadyToRecognize && !imageRecognized) {
+        btn.textContent = '画像を読み込む';
+        btn.onclick = recognizeImage;
+      } else {
+        btn.textContent = 'デッキを評価する';
+        btn.onclick = evaluateDeck;
+      }
+    }
+
     async function handleImageUpload(input) {
       const file = input.files[0];
       if (!file) return;
       const preview = document.getElementById('image-preview');
       const status = document.getElementById('image-status');
 
+      // プレビュー表示のみ
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = function(e) {
         preview.innerHTML = '<img src="' + e.target.result + '" style="max-width:100%;max-height:300px;border-radius:6px;border:1px solid var(--border)">';
       };
       reader.readAsDataURL(file);
 
+      // 状態を更新（APIはまだ呼ばない）
+      imageReadyToRecognize = true;
+      imageRecognized = false;
+      imageRecognizedDeck = null;
+      status.textContent = '画像が選択されました。「画像を読み込む」ボタンを押してください。';
+      status.style.color = 'var(--text-muted)';
+
+      updateEvaluateButton();
+      updateDeckCountDisplay();
+    }
+
+    async function recognizeImage() {
+      const input = document.getElementById('deck-image-input');
+      const file = input.files[0];
+      if (!file) {
+        alert('画像が選択されていません。');
+        return;
+      }
+
+      const status = document.getElementById('image-status');
+      const btn = document.getElementById('evaluate-btn');
+
+      btn.disabled = true;
+      btn.textContent = '読み取り中...';
       status.textContent = '画像を読み取り中...（10〜20秒かかります）';
       status.style.color = 'var(--text-muted)';
 
@@ -916,29 +956,42 @@
 
         if (data.error) {
           status.textContent = '読み取りエラー: ' + data.error;
+          status.style.color = '#ff5050';
+          btn.disabled = false;
+          updateEvaluateButton();
           return;
         }
 
         if (data.cards && data.cards.length > 0) {
           const sorted = sortDeckCards(data.cards);
           imageRecognizedDeck = sorted;
+          imageRecognized = true;
+          imageReadyToRecognize = false;
+
+          // テキスト入力欄にも反映
           document.getElementById('deck-text-input').value = sorted.map(c => c.card_id + ':' + c.count).join('\n');
           updateDeckCountDisplay();
 
           const totalCards = sorted.reduce((s, c) => s + c.count, 0);
           if (totalCards !== 50) {
-            status.innerHTML = '読み取り完了: ' + sorted.length + '種 ' + totalCards + '枚<br><span style="color:#ff5050;font-weight:600">⚠ 合計が50枚ではありません。枚数を確認・修正してから評価してください。</span>';
-            status.style.color = '';
+            status.innerHTML = '読み取り完了: ' + sorted.length + '種 ' + totalCards + '枚<br>' +
+              '<span style="color:#ff8800;font-weight:600">⚠ 合計が50枚ではありません。「B. テキスト入力」タブで枚数を修正できます。</span>';
+            status.style.color = 'var(--accent)';
           } else {
-            status.textContent = '読み取り完了: ' + sorted.length + '種 ' + totalCards + '枚';
+            status.textContent = '読み取り完了: ' + sorted.length + '種 ' + totalCards + '枚。「デッキを評価する」を押してください。';
             status.style.color = 'var(--accent)';
           }
         } else {
           status.textContent = 'カードを検出できませんでした。画像を確認してください。';
+          status.style.color = '#ff5050';
         }
       } catch (error) {
         status.textContent = 'エラー: ' + error.message;
+        status.style.color = '#ff5050';
       }
+
+      btn.disabled = false;
+      updateEvaluateButton();
     }
 
     function fileToBase64(file) {
