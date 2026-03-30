@@ -928,7 +928,8 @@
         { key: 'ap', title: 'AP別 (UNITのみ)' },
         { key: 'hp', title: 'HP別 (UNIT/BASE)' },
         { key: 'rarity', title: 'レアリティ別' },
-        { key: 'keyword', title: '効果キーワード別' }
+        { key: 'keyword', title: '効果キーワード別' },
+        { key: 'timing', title: '発動タイミング別' }
       ];
 
       chartDefs.forEach(def => {
@@ -959,8 +960,10 @@
       buildHpChart(deck);
       // 9. Rarity pie
       buildRarityChart(deck);
-      // 10. Keyword bar
+      // 10. Effect keyword bar
       buildKeywordChart(deck);
+      // 11. Timing bar
+      buildTimingChart(deck);
     }
 
     function buildTypeChart(deck) {
@@ -1240,28 +1243,56 @@
       });
     }
 
-    function buildKeywordChart(deck) {
-      const KEYWORDS = [
-        { label: 'ダメージ付与', patterns: ['ダメージを与える'] },
-        { label: 'ブロッカー', patterns: ['《ブロッカー》'] },
-        { label: '除去', patterns: ['破壊する', 'トラッシュに置く'] },
-        { label: 'ドロー', patterns: ['ドローする', '1枚引く'] },
-        { label: 'バウンス', patterns: ['手札に戻す'] },
-        { label: 'コスト軽減', patterns: ['コストダウン', 'コストを支払わず'] },
-        { label: '回復', patterns: ['《リペア》', 'アクティブにする'] },
-        { label: '突破', patterns: ['《突破》'] },
-        { label: 'ダメージ軽減', patterns: ['軽減する', 'ダメージを0にする'] }
-      ];
-      const counts = KEYWORDS.map(() => 0);
+    function countEffectTags(deck) {
+      const tagLabels = {
+        damage: 'ダメージ付与', destroy: '除去（破壊）', rest: 'レスト',
+        active: 'アクティブ', draw: 'ドロー', bounce: 'バウンス',
+        cost_down: 'コスト軽減', damage_reduce: 'ダメージ軽減',
+        search: 'サーチ', trash_use: 'トラッシュ利用', token: 'トークン',
+        stat_buff: 'ステータス上昇', stat_debuff: 'ステータス低下',
+        repair: '《リペア》', breakthrough: '《突破》', support: '《援護》',
+        blocker: '《ブロッカー》', first_strike: '《先制攻撃》',
+        high_mobility: '《高機動》', suppression: '《制圧》'
+      };
+      const counts = {};
+      for (const tag in tagLabels) counts[tag] = 0;
       deck.forEach(({ card_id, count }) => {
         const card = cardsData[card_id];
-        if (!card) return;
-        const effect = card.effect || card.text || card.description || '';
-        KEYWORDS.forEach((kw, i) => {
-          if (kw.patterns.some(p => effect.includes(p))) counts[i] += count;
-        });
+        if (!card || !card.effect_tags) return;
+        card.effect_tags.forEach(tag => { if (tag in counts) counts[tag] += count; });
       });
-      const labels = KEYWORDS.map(k => k.label);
+      return Object.entries(counts)
+        .filter(([_, v]) => v > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(([tag, count]) => ({ tag, label: tagLabels[tag], count }));
+    }
+
+    function countTimingTags(deck) {
+      const timingLabels = {
+        on_deploy: '【配備時】', on_attack: '【アタック時】', on_destroy: '【破壊時】',
+        burst: '【バースト】', activate_main: '【起動・メイン】',
+        activate_action: '【起動・アクション】', main: '【メイン】', action: '【アクション】',
+        on_set: '【セット時】', while_set: '【セット中】',
+        on_link: '【リンク時】', while_link: '【リンク中】',
+        once_per_turn: '【ターン1回】', has_pilot: '【パイロット】'
+      };
+      const counts = {};
+      for (const tag in timingLabels) counts[tag] = 0;
+      deck.forEach(({ card_id, count }) => {
+        const card = cardsData[card_id];
+        if (!card || !card.effect_tags) return;
+        card.effect_tags.forEach(tag => { if (tag in counts) counts[tag] += count; });
+      });
+      return Object.entries(counts)
+        .filter(([_, v]) => v > 0)
+        .sort((a, b) => b[1] - a[1])
+        .map(([tag, count]) => ({ tag, label: timingLabels[tag], count }));
+    }
+
+    function buildKeywordChart(deck) {
+      const data = countEffectTags(deck);
+      const labels = data.map(d => d.label);
+      const counts = data.map(d => d.count);
       const ctx = document.getElementById('chart-keyword').getContext('2d');
       charts['keyword'] = new Chart(ctx, {
         type: 'bar',
@@ -1272,6 +1303,33 @@
             data: counts,
             backgroundColor: '#b444ff66',
             borderColor: '#b444ff',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          ...chartDefaults(),
+          indexAxis: 'y',
+          responsive: true, maintainAspectRatio: false,
+          scales: darkBarScales(),
+          plugins: { legend: { display: false } }
+        }
+      });
+    }
+
+    function buildTimingChart(deck) {
+      const data = countTimingTags(deck);
+      const labels = data.map(d => d.label);
+      const counts = data.map(d => d.count);
+      const ctx = document.getElementById('chart-timing').getContext('2d');
+      charts['timing'] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: '枚数',
+            data: counts,
+            backgroundColor: '#44aaff66',
+            borderColor: '#44aaff',
             borderWidth: 1
           }]
         },
