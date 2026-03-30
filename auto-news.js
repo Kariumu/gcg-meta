@@ -361,7 +361,8 @@ function fixRecognitionErrors(result, cardsMaster) {
   // X投稿画像では背景色によりcolor誤認識が多発する（White正解率32%等）。
   // card_numberが認識できており、cards_masterにデータがある場合は
   // データベースの値で色・タイプ・特徴等を上書きする。
-  // ※effectは画像読み取り値を維持（新カードの効果テキスト取得が主目的のため）
+  // 既存カード（DB登録済み）のeffectもDB値で上書きする（長文誤読防止）。
+  // 新カード（DB未登録）のeffectのみ画像認識値を使用する。
   if (cardsMaster && result.card_number) {
     const masterCard = cardsMaster[result.card_number];
     if (masterCard) {
@@ -376,6 +377,8 @@ function fixRecognitionErrors(result, cardsMaster) {
       if (masterCard.cost !== undefined) result.cost = masterCard.cost;
       if (masterCard.ap !== undefined) result.ap = masterCard.ap;
       if (masterCard.hp !== undefined) result.hp = masterCard.hp;
+      // 効果テキスト: 既存カードはDB値で上書き（長文の誤読防止）
+      if (masterCard.effect) result.effect = masterCard.effect;
       // AP/HP再修正（card_typeをDB値で補正した後）
       if (result.card_type === 'PILOT' || result.card_type === 'COMMAND') {
         result.ap = null;
@@ -506,8 +509,25 @@ UNIT / PILOT / COMMAND / BASE
 「Xリソース」→「EXリソース」
 《バースト》→【バースト】
 
+■ 【破壊時】と《突破》の区別（重要）
+- 《突破》はキーワード効果（数値付き）。「《突破3》」のように記載される
+- 【破壊時】はキーワード（効果タイミング）。「【破壊時】〜する」のように記載される
+- この2つは全く別物。「突破時」という表記はGCGに存在しない
+- 画像内に「【破壊時】」と書かれているものを「突破時」と読み替えないこと
+
+■ 長文効果テキストの注意
+- 効果テキストが長い場合でも、推測で補完しないこと
+- 読めない文字がある場合は「[判読不能]」と明示すること
+- 特に以下の部分を正確に読むこと:
+  - 対象の条件（「Lv.5以下の〔CB〕の」等）
+  - 処理の結果（「手札に加える」「デッキの下に戻す」「トラッシュに置く」等）
+  - 選択の有無（「〜してもよい」「〜する」の違い）
+
 ■ 存在しない用語（絶対に使わないこと）
-合体 / アップグレード / エース効果 / エースパーツ / 機動ユニット / Xソリューズ / 重大損傷コマンド / モビルパック` });
+合体 / アップグレード / エース効果 / エースパーツ / 機動ユニット / Xソリューズ / 重大損傷コマンド / モビルパック
+「捨て札にする」→ GCGでは「トラッシュに置く」が正しい
+「突破時」→ GCGに存在しない。「【破壊時】」の誤読
+「シールドゾーン」→ 正しくは「シールドエリア」` });
 
   log('  カード画像認識中 (Opus)...');
   const result = await callClaude([{ role: 'user', content }], 2000, ANTHROPIC_MODEL_OPUS);
@@ -524,6 +544,14 @@ UNIT / PILOT / COMMAND / BASE
     log(`  画像認識JSON解析失敗: ${e.message}`);
   }
   return null;
+}
+
+// === 効果テキスト信頼度判定 ===
+function getEffectConfidence(effectText) {
+  if (!effectText) return 'high'; // バニラ
+  if (effectText.length <= 50) return 'high';
+  if (effectText.length <= 100) return 'medium';
+  return 'low'; // 長文は誤読リスクが高い
 }
 
 // === 認識結果ログ保存 ===
@@ -551,6 +579,8 @@ function saveRecognitionLog(date, cardInfoList, sourceTweets) {
     traits: c.traits || [],
     link: c.link || '',
     effect: c.effect || '',
+    effect_confidence: getEffectConfidence(c.effect),
+    effect_length: (c.effect || '').length,
     image_url: c._xImageUrl || null,
     confidence: 'medium'
   }));
@@ -906,6 +936,9 @@ async function generateIntroText(cardInfoList, relatedCards, articleDate) {
   合体、アップグレード、エース効果、エースパーツ、高機動、機動ユニット、Xソリューズ、重大損傷コマンド
 - EXリソースを「Xソリューズ」に変換しないこと
 - カードタイプ「PILOT」を「キャラクター」に変換しないこと
+- 「捨て札にする」→ GCGでは「トラッシュに置く」が正しい
+- 「突破時」→ GCGに存在しない。《突破》と【破壊時】は全く別の効果
+- 「シールドゾーン」→ 正しくは「シールドエリア」
 
 【禁止表現 - 使用厳禁】
 注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
@@ -964,6 +997,9 @@ ${relatedDesc || 'データなし'}
   上記以外のキーワードを作らないこと
 - EXリソースを「Xソリューズ」に変換しないこと
 - COMMANDカードがPILOT的な役割を持つ場合がある。カードタイプは認識結果のまま使い、考察文でその特性に言及する
+- 「捨て札にする」→ GCGでは「トラッシュに置く」が正しい
+- 「突破時」→ GCGに存在しない。《突破》と【破壊時】は全く別の効果
+- 「シールドゾーン」→ 正しくは「シールドエリア」
 
 【禁止表現 - 使用厳禁】
 注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、

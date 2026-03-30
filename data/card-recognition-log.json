@@ -375,5 +375,32 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-03-30": {
+    "recognized_at": "2026-03-30T08:50:44.389Z",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2038526642424103077"
+    ],
+    "cards": [
+      {
+        "card_number": "GD04-019",
+        "card_name": "GNアーマー TYPE-D(トランザム)",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 4,
+        "hp": 5,
+        "traits": [
+          "CB",
+          "GNドライヴ"
+        ],
+        "link": "特徴にロックオン・ストラトスを持つPILOT",
+        "effect": "《突破3》\n（このユニットのアタックで相手のユニットを破壊したとき、相手のシールドエリアのカードに3ダメージを与える）\n【破壊時】自分のデッキを上から3枚見て、その中のLv.5以下の〔CB〕のユニットカード1枚を公開して手札に加えても良い。残ったカードは無作為に下に戻す。",
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
