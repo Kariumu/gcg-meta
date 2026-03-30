@@ -532,6 +532,7 @@
     let activeColorFilter = 'all';
     let activeTypeFilter = 'all';
     let charts = {};
+    let currentDeck = [];
 
     const COLOR_ORDER = ['Blue', 'Red', 'Green', 'White', 'Purple'];
     const COLOR_HEX = {
@@ -865,6 +866,7 @@
     }
 
     async function renderResults(deck, warnings) {
+      currentDeck = deck;
       const deckType = determineDeckType(deck);
       const halfMonth = getCurrentHalfMonth();
       const filteredEvents = filterEventsByHalfMonth(halfMonth);
@@ -927,7 +929,6 @@
         { key: 'link', title: 'UNIT/PILOT 特徴重複' },
         { key: 'ap', title: 'AP別 (UNITのみ)' },
         { key: 'hp', title: 'HP別 (UNIT/BASE)' },
-        { key: 'rarity', title: 'レアリティ別' },
         { key: 'keyword', title: '効果キーワード別' },
         { key: 'timing', title: '発動タイミング別' }
       ];
@@ -958,9 +959,7 @@
       buildApChart(deck);
       // 8. HP bar
       buildHpChart(deck);
-      // 9. Rarity pie
-      buildRarityChart(deck);
-      // 10. Effect keyword bar
+      // 9. Effect keyword bar
       buildKeywordChart(deck);
       // 11. Timing bar
       buildTimingChart(deck);
@@ -1218,31 +1217,6 @@
       });
     }
 
-    function buildRarityChart(deck) {
-      const rarities = ['LR', 'SR', 'R', 'U', 'C'];
-      const counts = {};
-      deck.forEach(({ card_id }) => {
-        const card = cardsData[card_id];
-        if (!card || !card.rarity) return;
-        counts[card.rarity] = (counts[card.rarity] || 0) + 1;
-      });
-      const labels = rarities.filter(r => counts[r]);
-      const ctx = document.getElementById('chart-rarity').getContext('2d');
-      charts['rarity'] = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels,
-          datasets: [{
-            data: labels.map(r => counts[r]),
-            backgroundColor: ['#ffd70066', '#c0c0c066', '#cd7f3266', '#88aaff66', '#66666666'],
-            borderColor: ['#ffd700', '#c0c0c0', '#cd7f32', '#88aaff', '#666666'],
-            borderWidth: 1
-          }]
-        },
-        options: { ...chartDefaults(), responsive: true, maintainAspectRatio: false }
-      });
-    }
-
     function countEffectTags(deck) {
       const tagLabels = {
         damage: 'ダメージ付与', destroy: '除去（破壊）', rest: 'レスト',
@@ -1289,10 +1263,49 @@
         .map(([tag, count]) => ({ tag, label: timingLabels[tag], count }));
     }
 
+    function hBarScales() {
+      return {
+        x: {
+          ticks: { color: '#888', font: { family: "'JetBrains Mono', monospace", size: 11 } },
+          grid: { color: '#333' }
+        },
+        y: {
+          ticks: { color: '#888', font: { family: "'JetBrains Mono', monospace", size: 11 }, autoSkip: false, padding: 4 },
+          grid: { color: '#333' },
+          afterFit: function(scale) { scale.width = 140; }
+        }
+      };
+    }
+
+    function showTagCards(label, matchingCards, parentElement) {
+      const existing = parentElement.querySelector('.tag-card-list');
+      if (existing) existing.remove();
+      if (matchingCards.length === 0) return;
+      const div = document.createElement('div');
+      div.className = 'tag-card-list';
+      div.style.cssText = 'margin-top:12px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:12px;';
+      div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12px;font-family:var(--font-mono);color:var(--text-muted);">
+        <span>${label} のカード (${matchingCards.length}種)</span>
+        <button onclick="this.closest('.tag-card-list').remove()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;">✕ 閉じる</button>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        ${matchingCards.map(({ card_id, count }) => `
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;">
+            <img src="images/cards/${card_id}.webp" alt="${card_id}"
+              style="width:64px;height:auto;border-radius:4px;border:1px solid var(--border);"
+              onerror="this.style.display='none'">
+            <span style="font-size:10px;font-family:var(--font-mono);color:var(--text-muted);text-align:center;">${card_id}</span>
+            <span style="font-size:11px;font-family:var(--font-mono);color:var(--text-primary);">×${count}</span>
+          </div>`).join('')}
+      </div>`;
+      parentElement.appendChild(div);
+    }
+
     function buildKeywordChart(deck) {
       const data = countEffectTags(deck);
       const labels = data.map(d => d.label);
       const counts = data.map(d => d.count);
+      const tagData = data;
       const ctx = document.getElementById('chart-keyword').getContext('2d');
       charts['keyword'] = new Chart(ctx, {
         type: 'bar',
@@ -1310,8 +1323,21 @@
           ...chartDefaults(),
           indexAxis: 'y',
           responsive: true, maintainAspectRatio: false,
-          scales: darkBarScales(),
-          plugins: { legend: { display: false } }
+          layout: { padding: { left: 20 } },
+          scales: hBarScales(),
+          plugins: { legend: { display: false } },
+          onClick(event, elements) {
+            if (!elements.length) return;
+            const idx = elements[0].index;
+            const tag = tagData[idx]?.tag;
+            const label = tagData[idx]?.label;
+            if (!tag) return;
+            const matching = currentDeck.filter(({ card_id }) => {
+              const card = cardsData[card_id];
+              return card?.effect_tags?.includes(tag);
+            });
+            showTagCards(label, matching, ctx.canvas.parentElement);
+          }
         }
       });
     }
@@ -1320,6 +1346,7 @@
       const data = countTimingTags(deck);
       const labels = data.map(d => d.label);
       const counts = data.map(d => d.count);
+      const tagData = data;
       const ctx = document.getElementById('chart-timing').getContext('2d');
       charts['timing'] = new Chart(ctx, {
         type: 'bar',
@@ -1337,8 +1364,21 @@
           ...chartDefaults(),
           indexAxis: 'y',
           responsive: true, maintainAspectRatio: false,
-          scales: darkBarScales(),
-          plugins: { legend: { display: false } }
+          layout: { padding: { left: 20 } },
+          scales: hBarScales(),
+          plugins: { legend: { display: false } },
+          onClick(event, elements) {
+            if (!elements.length) return;
+            const idx = elements[0].index;
+            const tag = tagData[idx]?.tag;
+            const label = tagData[idx]?.label;
+            if (!tag) return;
+            const matching = currentDeck.filter(({ card_id }) => {
+              const card = cardsData[card_id];
+              return card?.effect_tags?.includes(tag);
+            });
+            showTagCards(label, matching, ctx.canvas.parentElement);
+          }
         }
       });
     }
