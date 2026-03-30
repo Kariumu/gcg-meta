@@ -1600,8 +1600,13 @@
             row.appendChild(info);
 
             const badge = document.createElement('span');
-            badge.style.cssText = 'background:rgba(255,80,80,0.15);color:#ff5050;font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-mono);flex-shrink:0';
-            badge.textContent = '低採用';
+            if (!cr || cr.usage_rate === 0) {
+              badge.style.cssText = 'background:rgba(120,120,120,0.2);color:#888;font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-mono);flex-shrink:0';
+              badge.textContent = '実績なし';
+            } else {
+              badge.style.cssText = 'background:rgba(255,80,80,0.15);color:#ff5050;font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-mono);flex-shrink:0';
+              badge.textContent = '低採用';
+            }
             row.appendChild(badge);
 
             list.appendChild(row);
@@ -1695,10 +1700,9 @@
 
       const rowsHtml = rows.map(r => {
         const barWidth = Math.min(100, r.usageRate).toFixed(1);
-        const warn = r.usageRate < 10 ? '<span class="warn-tag">低採用</span>' : '';
         return `<tr>
           <td>${GCG.escapeHtml(r.card_id)}</td>
-          <td>${GCG.escapeHtml(r.name)}${warn}</td>
+          <td>${GCG.escapeHtml(r.name)}</td>
           <td style="text-align:right">${r.count}</td>
           <td style="text-align:right">${r.avgCount}</td>
           <td>
