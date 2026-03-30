@@ -522,7 +522,7 @@
   </main>
   <div id="footer"></div>
 
-  <script src="js/common.js"></script>
+  <script src="js/common.js?v=7"></script>
   <script>
     // ===== State =====
     let cardsData = {};
@@ -546,8 +546,8 @@
     async function loadCardsData() {
       try {
         const res = await fetch(GCG.DATA_PATH + 'cards_master.json');
-        const arr = await res.json();
-        arr.forEach(c => { cardsData[c.id] = c; });
+        const data = await res.json();
+        Object.values(data).forEach(c => { cardsData[c.id] = c; });
       } catch (e) {
         console.error('cards_master.json の読み込みに失敗:', e);
       }
@@ -927,7 +927,8 @@
         { key: 'link', title: 'UNIT/PILOT 特徴重複' },
         { key: 'ap', title: 'AP別 (UNITのみ)' },
         { key: 'hp', title: 'HP別 (UNIT/BASE)' },
-        { key: 'rarity', title: 'レアリティ別' }
+        { key: 'rarity', title: 'レアリティ別' },
+        { key: 'keyword', title: '効果キーワード別' }
       ];
 
       chartDefs.forEach(def => {
@@ -958,6 +959,8 @@
       buildHpChart(deck);
       // 9. Rarity pie
       buildRarityChart(deck);
+      // 10. Keyword bar
+      buildKeywordChart(deck);
     }
 
     function buildTypeChart(deck) {
@@ -1234,6 +1237,51 @@
           }]
         },
         options: { ...chartDefaults(), responsive: true, maintainAspectRatio: false }
+      });
+    }
+
+    function buildKeywordChart(deck) {
+      const KEYWORDS = [
+        { label: 'ダメージ付与', patterns: ['ダメージを与える'] },
+        { label: 'ブロッカー', patterns: ['《ブロッカー》'] },
+        { label: '除去', patterns: ['破壊する', 'トラッシュに置く'] },
+        { label: 'ドロー', patterns: ['ドローする', '1枚引く'] },
+        { label: 'バウンス', patterns: ['手札に戻す'] },
+        { label: 'コスト軽減', patterns: ['コストダウン', 'コストを支払わず'] },
+        { label: '回復', patterns: ['《リペア》', 'アクティブにする'] },
+        { label: '突破', patterns: ['《突破》'] },
+        { label: 'ダメージ軽減', patterns: ['軽減する', 'ダメージを0にする'] }
+      ];
+      const counts = KEYWORDS.map(() => 0);
+      deck.forEach(({ card_id, count }) => {
+        const card = cardsData[card_id];
+        if (!card) return;
+        const effect = card.effect || card.text || card.description || '';
+        KEYWORDS.forEach((kw, i) => {
+          if (kw.patterns.some(p => effect.includes(p))) counts[i] += count;
+        });
+      });
+      const labels = KEYWORDS.map(k => k.label);
+      const ctx = document.getElementById('chart-keyword').getContext('2d');
+      charts['keyword'] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: '枚数',
+            data: counts,
+            backgroundColor: '#b444ff66',
+            borderColor: '#b444ff',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          ...chartDefaults(),
+          indexAxis: 'y',
+          responsive: true, maintainAspectRatio: false,
+          scales: darkBarScales(),
+          plugins: { legend: { display: false } }
+        }
       });
     }
 
