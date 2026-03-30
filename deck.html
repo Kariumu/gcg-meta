@@ -518,6 +518,7 @@
 
     <!-- Evaluate button -->
     <button class="evaluate-btn" id="evaluate-btn" onclick="evaluateDeck()">デッキを評価する</button>
+    <div id="deck-card-grid-container" style="margin-top:16px"></div>
 
     <!-- Results section (hidden until evaluated) -->
     <div class="results-section" id="results-section" style="display:none">
@@ -886,11 +887,16 @@
       const envStats = calcEnvShare(deckType.type_key, filteredEvents);
       const matchResult = calcMatchRate(deck, deckType.type_key, filteredEvents);
 
+      // Show deck card grid above results
+      const gridContainer = document.getElementById('deck-card-grid-container');
+      gridContainer.innerHTML = '';
+      gridContainer.appendChild(renderDeckCardList(deck));
+
       // Show results section
       document.getElementById('results-section').style.display = '';
 
       // Scroll to results
-      document.getElementById('results-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('deck-card-grid-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       // --- Summary grid ---
       const totalCards = deck.reduce((s, c) => s + c.count, 0);
@@ -1291,46 +1297,70 @@
     }
 
     function showTagCards(label, matchingCards, parentElement) {
-      const existing = parentElement.querySelector('.tag-card-list');
-      if (existing) existing.remove();
+      document.querySelectorAll('.tag-card-list').forEach(el => el.remove());
       if (matchingCards.length === 0) return;
-      const div = document.createElement('div');
-      div.className = 'tag-card-list';
-      div.style.cssText = 'margin-top:12px;padding:14px;' +
-        'background:var(--bg-card);' +
-        'border:2px solid var(--accent);' +
-        'border-radius:8px;' +
-        'box-shadow:0 4px 16px rgba(0,0,0,0.3)';
-      const titleEl = document.createElement('div');
-      titleEl.style.cssText = 'font-size:13px;color:var(--accent);font-weight:600;' +
-        'margin-bottom:10px;font-family:var(--font-mono);' +
-        'padding-bottom:8px;border-bottom:1px solid var(--border)';
-      titleEl.innerHTML = `<span>${label} のカード (${matchingCards.length}種)</span>` +
-        `<button onclick="this.closest('.tag-card-list').remove()" style="float:right;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;">✕ 閉じる</button>`;
-      div.appendChild(titleEl);
+
+      const container = document.createElement('div');
+      container.className = 'tag-card-list';
+      container.style.cssText =
+        'margin-top:12px;padding:14px;background:#1a1f2e;' +
+        'border:2px solid var(--accent);border-radius:8px;' +
+        'box-shadow:0 4px 20px rgba(0,0,0,0.5);position:relative;z-index:10;clear:both';
+
+      const title = document.createElement('div');
+      title.style.cssText =
+        'font-size:14px;color:var(--accent);font-weight:700;' +
+        'margin-bottom:12px;font-family:var(--font-mono);' +
+        'padding-bottom:8px;border-bottom:1px solid var(--accent)';
+      title.textContent = label + ' のカード（' + matchingCards.length + '種）';
+      container.appendChild(title);
+
       const grid = document.createElement('div');
-      grid.style.cssText = 'display:flex;flex-wrap:wrap;gap:10px;';
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(4,1fr);gap:8px';
+
       matchingCards.forEach(({ card_id, count }) => {
-        const item = document.createElement('div');
-        item.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;';
+        const card = cardsData[card_id];
+        if (!card) return;
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = 'position:relative';
+
         const img = document.createElement('img');
         img.src = 'images/cards/' + card_id + '.webp';
-        img.alt = card_id;
-        img.style.cssText = 'width:64px;height:auto;border-radius:4px;border:1px solid var(--border);';
-        img.onerror = function() { this.style.display = 'none'; };
-        const idSpan = document.createElement('span');
-        idSpan.style.cssText = 'font-size:10px;font-family:var(--font-mono);color:var(--text-muted);text-align:center;';
-        idSpan.textContent = card_id;
-        const cntSpan = document.createElement('span');
-        cntSpan.style.cssText = 'font-size:11px;font-family:var(--font-mono);color:var(--text-primary);';
-        cntSpan.textContent = '×' + count;
-        item.appendChild(img);
-        item.appendChild(idSpan);
-        item.appendChild(cntSpan);
-        grid.appendChild(item);
+        img.alt = card.name_jp;
+        img.style.cssText = 'width:100%;border-radius:4px;border:1px solid var(--border)';
+        img.loading = 'lazy';
+        img.onerror = function() {
+          this.style.display = 'none';
+          const fb = document.createElement('div');
+          fb.style.cssText = 'width:100%;aspect-ratio:5/7;background:var(--bg-elevated);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--text-muted);text-align:center;padding:2px';
+          fb.textContent = card.name_jp;
+          this.parentElement.appendChild(fb);
+        };
+        wrapper.appendChild(img);
+
+        const badge = document.createElement('div');
+        badge.style.cssText =
+          'position:absolute;top:2px;right:2px;background:var(--accent);color:#fff;' +
+          'width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;' +
+          'font-size:11px;font-weight:700;font-family:var(--font-mono);box-shadow:0 1px 3px rgba(0,0,0,0.4)';
+        badge.textContent = count;
+        wrapper.appendChild(badge);
+        grid.appendChild(wrapper);
       });
-      div.appendChild(grid);
-      parentElement.appendChild(div);
+
+      container.appendChild(grid);
+
+      const closeBtn = document.createElement('div');
+      closeBtn.style.cssText = 'text-align:right;margin-top:10px';
+      closeBtn.innerHTML = '<button onclick="document.querySelectorAll(\'.tag-card-list\').forEach(el=>el.remove())" style="background:none;border:1px solid var(--text-muted);color:var(--text-muted);cursor:pointer;font-size:12px;padding:4px 12px;border-radius:4px;font-family:var(--font-mono)">✕ 閉じる</button>';
+      container.appendChild(closeBtn);
+
+      const chartCard = parentElement.closest('.chart-card');
+      if (chartCard) {
+        chartCard.after(container);
+      } else {
+        parentElement.appendChild(container);
+      }
     }
 
     function buildKeywordChart(deck) {
@@ -1462,8 +1492,6 @@
     function renderEvalText(deck, deckType, halfMonth, envStats, matchResult, warnings) {
       const container = document.getElementById('eval-text-section');
       container.innerHTML = '';
-      const deckGrid = renderDeckCardList(deck);
-      container.appendChild(deckGrid);
 
       // Warnings for unknown cards
       if (warnings && warnings.length > 0) {
