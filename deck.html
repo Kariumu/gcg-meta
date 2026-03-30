@@ -563,6 +563,7 @@
     let activeTypeFilter = 'all';
     let charts = {};
     let currentDeck = [];
+    let imageRecognizedDeck = null;
 
     const COLOR_ORDER = ['Blue', 'Red', 'Green', 'White', 'Purple'];
     const COLOR_HEX = {
@@ -717,20 +718,31 @@
 
     // ===== Deck helpers =====
     function getCurrentDeck() {
+      // カードリストタブ
       if (document.getElementById('tab-checklist').style.display !== 'none') {
         return {
           deck: Object.entries(deckCounts).map(([card_id, count]) => ({ card_id, count: parseInt(count) || 1 })),
           warnings: []
         };
-      } else {
-        return parseDeckText(document.getElementById('deck-text-input').value);
       }
+      // 画像認識タブ（認識結果がある場合）
+      if (document.getElementById('tab-image').style.display !== 'none' && imageRecognizedDeck) {
+        const warnings = [];
+        imageRecognizedDeck.forEach(({ card_id }) => {
+          if (!cardsData[card_id]) warnings.push(card_id);
+        });
+        return { deck: imageRecognizedDeck, warnings };
+      }
+      // テキスト入力タブ（デフォルト）
+      return parseDeckText(document.getElementById('deck-text-input').value);
     }
 
     function updateDeckCountDisplay() {
       let total = 0;
       if (document.getElementById('tab-checklist') && document.getElementById('tab-checklist').style.display !== 'none') {
         total = Object.values(deckCounts).reduce((s, v) => s + (parseInt(v) || 0), 0);
+      } else if (document.getElementById('tab-image') && document.getElementById('tab-image').style.display !== 'none' && imageRecognizedDeck) {
+        total = imageRecognizedDeck.reduce((s, c) => s + (c.count || 0), 0);
       } else {
         const { deck } = parseDeckText(document.getElementById('deck-text-input') ? document.getElementById('deck-text-input').value : '');
         total = deck.reduce((s, c) => s + (c.count || 0), 0);
@@ -876,7 +888,7 @@
     }
 
     // ===== Image Recognition =====
-    const WORKER_URL = 'https://gcg-deck-reader.kariumu.workers.dev';
+    const WORKER_URL = 'https://gcg-deck-reader.kariumu19.workers.dev';
 
     async function handleImageUpload(input) {
       const file = input.files[0];
@@ -909,9 +921,9 @@
 
         if (data.cards && data.cards.length > 0) {
           const sorted = sortDeckCards(data.cards);
+          imageRecognizedDeck = sorted;
           document.getElementById('deck-text-input').value = sorted.map(c => c.card_id + ':' + c.count).join('\n');
-          switchTab('text');
-          if (typeof updateDeckCountDisplay === 'function') updateDeckCountDisplay();
+          updateDeckCountDisplay();
 
           const totalCards = sorted.reduce((s, c) => s + c.count, 0);
           if (totalCards !== 50) {
