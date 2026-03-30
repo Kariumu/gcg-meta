@@ -1564,18 +1564,50 @@
         deckTypeData.card_ranking.forEach(cr => { rankMap[cr.card_id] = cr; });
         const offMeta = deck.filter(({ card_id }) => {
           const cr = rankMap[card_id];
-          return !cr || (cr.usage_rate * 100) < 10;
+          return !cr || cr.usage_rate < 10;
         });
         if (offMeta.length === 0) {
           addEvalItem(sec4, '', '全カードが標準構成の採用率10%以上に含まれています');
         } else {
-          const items = offMeta.map(({ card_id, count }) => {
+          const subtitle = document.createElement('div');
+          subtitle.style.cssText = 'font-size:12px;color:var(--text-muted);margin-bottom:8px';
+          subtitle.textContent = '採用率10%未満のカード';
+          sec4.appendChild(subtitle);
+
+          const list = document.createElement('div');
+          list.style.cssText = 'display:flex;flex-direction:column;gap:8px';
+
+          offMeta.forEach(({ card_id, count }) => {
             const card = cardsData[card_id];
             const cr = rankMap[card_id];
-            const rate = cr ? (cr.usage_rate * 100).toFixed(1) : '0.0';
-            return `${card_id}（${card?.name_jp || '不明'}）: ${count}枚 [採用率 ${rate}%]`;
+            const rate = cr ? cr.usage_rate.toFixed(1) : '0.0';
+
+            const row = document.createElement('div');
+            row.style.cssText = 'display:flex;align-items:center;gap:10px;padding:8px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px';
+
+            const img = document.createElement('img');
+            img.src = 'images/cards/' + card_id + '.webp';
+            img.alt = card ? card.name_jp : card_id;
+            img.style.cssText = 'width:36px;border-radius:3px;flex-shrink:0';
+            img.onerror = function() { this.style.display = 'none'; };
+            row.appendChild(img);
+
+            const info = document.createElement('div');
+            info.style.cssText = 'flex:1;font-size:12px;font-family:var(--font-mono)';
+            info.innerHTML =
+              '<div style="color:var(--text-primary);font-weight:600">' + (card ? card.name_jp : '不明') + ' <span style="color:var(--text-muted)">(' + card_id + ')</span></div>' +
+              '<div style="color:var(--text-muted);margin-top:2px">' + count + '枚投入 / 同タイプ内採用率 ' + rate + '%</div>';
+            row.appendChild(info);
+
+            const badge = document.createElement('span');
+            badge.style.cssText = 'background:rgba(255,80,80,0.15);color:#ff5050;font-size:10px;padding:2px 6px;border-radius:3px;font-family:var(--font-mono);flex-shrink:0';
+            badge.textContent = '低採用';
+            row.appendChild(badge);
+
+            list.appendChild(row);
           });
-          addEvalItem(sec4, '採用率10%未満のカード', items.join('\n'));
+
+          sec4.appendChild(list);
         }
       } else {
         addEvalItem(sec4, '', 'データなし');
@@ -1656,8 +1688,8 @@
       const rows = deck.map(({ card_id, count }) => {
         const card = cardsData[card_id];
         const cr = rankMap[card_id];
-        const usageRate = cr ? (cr.usage_rate * 100) : 0;
-        const avgCount = cr ? cr.avg_count.toFixed(1) : '---';
+        const usageRate = cr ? cr.usage_rate : 0;
+        const avgCount = cr ? cr.avg_count.toFixed(1) : '0';
         return { card_id, name: card?.name_jp || '不明', count, usageRate, avgCount };
       }).sort((a, b) => b.usageRate - a.usageRate);
 
