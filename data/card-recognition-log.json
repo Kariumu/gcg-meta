@@ -402,5 +402,34 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-03-31": {
+    "recognized_at": "2026-03-31T21:46:19.782Z",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2038889031514067195"
+    ],
+    "cards": [
+      {
+        "card_number": "GD04-038",
+        "card_name": "ガンダムエクシア",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "CB",
+          "GNドライヴ"
+        ],
+        "link": "「刹那・F・セイエイ」",
+        "effect": "【配備時】相手のユニットが2つ以上いるなら、Lv.2以下の相手のユニット1つを選ぶ、それにこのターン、ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 60,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }

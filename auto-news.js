@@ -444,6 +444,15 @@ JSON以外の文章は一切出力しないでください。
   "source_title": "作品名（あれば）"
 }
 
+【リンク条件の読み取り（必須）】
+UNITカードにはリンク条件が設定されている場合がある。
+カード下部の「LINK」と縦書きされた黒枠内にリンク条件が記載されている。
+リンク条件は必ず読み取ること。読み取れない場合は「[リンク条件判読不能]」と明記すること。
+
+リンク条件がある場合:
+1. リンク条件のテキストを出力に含めること
+2. cards_master.jsonからリンク条件に該当するPILOTを抽出して関連カードに含めること
+
 === 重要な読み取りルール ===
 
 ■ カッコの使い分け（最重要）
@@ -498,6 +507,19 @@ UNIT / PILOT / COMMAND / BASE
 ■ 色（カード枠の色で判定。背景色は絶対に参照しない）
 青(Blue) / 赤(Red) / 緑(Green) / 白(White) / 紫(Purple)
 ※White(白)カードは銀色/灰白色の枠で、背景色の影響を受けやすい。彩度が低いフレームはWhiteを疑う
+
+【新カードの色判定（重要）】
+X投稿画像では背景色がカードの色と異なる場合がある。
+色の判定は必ずカードフレーム（枠）の色で行うこと。背景は無視すること。
+
+各色のフレーム特徴:
+- 青: 青色のフレーム、左上のLv/COST表記エリアが青系
+- 赤: 赤色のフレーム、左上のLv/COST表記エリアが赤系
+- 緑: 緑色のフレーム、左上のLv/COST表記エリアが緑系
+- 白: 白〜銀色のフレーム、他色より明るい
+- 紫: 紫色のフレーム、左上のLv/COST表記エリアが紫系
+
+色の判定に自信がない場合は「[色判定不確実]」と明記すること。
 
 ■ 特徴の例
 地球連邦 / ジオン / ザフト / ティターンズ / エゥーゴ / 鉄華団 / 国連 /
@@ -1023,7 +1045,16 @@ ${relatedDesc || 'データなし'}
 - プレイヤーが読んで「なるほど」と思える分析を書く
 - 「このカード強そう」「使いたい」程度のカジュアルな感想はOK
 - データに基づいた具体的な表現を使う
-- 2〜3行で簡潔に。プレーンテキストのみ出力。`;
+- 2〜3行で簡潔に。プレーンテキストのみ出力。
+
+【表記ルール】
+記事内で以下の表記を統一すること:
+- UNIT → ユニット
+- PILOT → パイロット
+- COMMAND → コマンド
+- BASE → ベース
+- COST → コスト
+- ただし、カードのステータス表（テーブル内）では英語表記のまま`;
 
     try {
       log(`  考察生成中: ${card.card_name}...`);
@@ -1312,15 +1343,7 @@ function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedC
   });
   html += '</ul>\n</div>';
 
-  // 5. ライトボックス（カード詳細ページと同じ実装）
-  html += `\n<div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="" style="max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.6);object-fit:contain">
-</div>
-<script>
-function openLightbox(src){var lb=document.getElementById('lightbox');document.getElementById('lightbox-img').src=src;lb.style.display='flex';document.body.style.overflow='hidden';}
-function closeLightbox(){document.getElementById('lightbox').style.display='none';document.body.style.overflow='';}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLightbox();});
-</script>`;
+  // 5. ライトボックスはcommon.jsで提供されるため、インライン定義は不要
 
   return html;
 }

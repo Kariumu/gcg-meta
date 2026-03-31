@@ -15,13 +15,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "〔WB隊〕の自分のユニットすべては《リペア1》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)【セット時】このユニット以外の、自分のユニットが2つ以上いるなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "repair",
-      "on_set",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-002": {
     "id": "GD01-002",
@@ -38,13 +32,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "手札のこのカードをプレイするとき、Lv.5のカード名に「ユニコーンモード」を含む自分のリンクユニット1つを破壊してもよい。そうしたなら、これをLv.とコストを0としてプレイする。【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_attack",
-      "destroy",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-003": {
     "id": "GD01-003",
@@ -61,15 +49,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【リンク中】【アタック時】自分のトラッシュのカード12枚を選ぶ。それらを持ち主のデッキに戻し、シャッフルする。そうしたなら、このユニットをアクティブにし、このターン中、これは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "on_attack",
-      "while_link",
-      "damage",
-      "active"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-004": {
     "id": "GD01-004",
@@ -87,13 +67,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)【セット時】HP2以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "repair",
-      "on_set",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-005": {
     "id": "GD01-005",
@@ -110,13 +84,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【リンク中】【破壊時】このユニットにセットされていたパイロットを持ち主の手札に戻す。その後、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "on_destroy",
-      "while_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-006": {
     "id": "GD01-006",
@@ -133,13 +101,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)【リンク中】このユニットをHP+1する。",
-    "effect_tags": [
-      "repair",
-      "while_link",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-007": {
     "id": "GD01-007",
@@ -156,12 +118,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【破壊時】このユニット以外の、〔OZ〕の自分のユニットがいるなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "on_destroy",
-      "draw"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-008": {
     "id": "GD01-008",
@@ -179,12 +136,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【配備時】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-009": {
     "id": "GD01-009",
@@ -202,12 +154,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【配備時】〔WB隊〕の自分のユニット1つを選ぶ。このターン中、それは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility",
-      "on_deploy"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-010": {
     "id": "GD01-010",
@@ -224,12 +171,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【セット時】HP3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_set",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-011": {
     "id": "GD01-011",
@@ -246,9 +188,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-012": {
     "id": "GD01-012",
@@ -265,12 +205,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【セット時】HP3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_set",
-      "rest"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-013": {
     "id": "GD01-013",
@@ -288,9 +223,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-014": {
     "id": "GD01-014",
@@ -308,13 +241,7 @@
       "ap": 1,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【リンク中】【起動・アクション】【ターン1回】ユニット1つを選ぶ。それを1回復する。",
-    "effect_tags": [
-      "activate_action",
-      "while_link",
-      "once_per_turn"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-015": {
     "id": "GD01-015",
@@ -331,11 +258,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【アタック時】自分のユニット1つを選ぶ。それを1回復する。",
-    "effect_tags": [
-      "on_attack"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-016": {
     "id": "GD01-016",
@@ -352,11 +275,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "〔地球連邦〕の自分のユニットが2つ以上いる間、手札のこのカードをコスト-1する。",
-    "effect_tags": [
-      "cost_down"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-017": {
     "id": "GD01-017",
@@ -373,11 +292,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-018": {
     "id": "GD01-018",
@@ -394,9 +309,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-019": {
     "id": "GD01-019",
@@ -413,12 +326,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "相手のユニットが4つ以上いる間、このユニットは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-020": {
     "id": "GD01-020",
@@ -435,12 +343,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【配備時】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-021": {
     "id": "GD01-021",
@@ -457,9 +360,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-022": {
     "id": "GD01-022",
@@ -476,9 +377,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-023": {
     "id": "GD01-023",
@@ -495,11 +394,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【起動・メイン】自分の手札の〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を捨てる：このユニットにパイロットがセットされていないなら、自分のトラッシュのLv.3以下の〔ニュータイプ〕のパイロットカード1枚を選ぶ。それをこれにセットする。",
-    "effect_tags": [
-      "activate_main"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-024": {
     "id": "GD01-024",
@@ -516,13 +411,7 @@
       "ap": 5,
       "hp": 7
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《高機動》(このユニットはブロックされない)【配備時】Lv.5以下のユニットすべてに3ダメージを与える。",
-    "effect_tags": [
-      "high_mobility",
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-025": {
     "id": "GD01-025",
@@ -539,13 +428,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【セット時・〔オペレーション・メテオ〕のパイロット】自分はリソース1つをレストで置く。その後、このターン中、このユニットは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "on_set",
-      "damage"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-026": {
     "id": "GD01-026",
@@ -562,13 +445,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【セット中】【破壊時】「ザクⅡ（シャア・アズナブル機）」(〔ジオン〕・AP3・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "on_destroy",
-      "while_set",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-027": {
     "id": "GD01-027",
@@ -585,15 +462,7 @@
       "ap": 5,
       "hp": 6
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "《突破4》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【配備時】自分のトラッシュに〔ジオン〕/〔ネオ・ジオン〕のユニットカードが10枚以上あるなら、《ブロッカー》を持つユニットすべてに4ダメージを与える。",
-    "effect_tags": [
-      "breakthrough",
-      "blocker",
-      "on_deploy",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-028": {
     "id": "GD01-028",
@@ -610,11 +479,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【配備時】自分の手札の、〔マグアナック隊〕のユニットカード1枚を配備してもよい。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-029": {
     "id": "GD01-029",
@@ -631,15 +496,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《突破4》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【アタック時】《ブロッカー》を持つLv.3以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "breakthrough",
-      "blocker",
-      "on_attack",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-030": {
     "id": "GD01-030",
@@ -656,13 +513,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "《突破2》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-031": {
     "id": "GD01-031",
@@ -679,9 +530,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-032": {
     "id": "GD01-032",
@@ -698,13 +547,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【セット時・〔ジオン〕のパイロット】《ブロッカー》を持つLv.2以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "blocker",
-      "on_set",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-033": {
     "id": "GD01-033",
@@ -721,11 +564,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-034": {
     "id": "GD01-034",
@@ -742,14 +581,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【セット中】このユニットは《突破3》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "while_set",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-035": {
     "id": "GD01-035",
@@ -766,9 +598,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-036": {
     "id": "GD01-036",
@@ -785,9 +615,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-037": {
     "id": "GD01-037",
@@ -804,9 +632,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-038": {
     "id": "GD01-038",
@@ -823,12 +649,7 @@
       "ap": 2,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【配備時】相手のユニットが5つ以上いるなら、相手のユニットすべてに1ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-039": {
     "id": "GD01-039",
@@ -845,11 +666,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【配備時】自分のデッキを上から1枚見て、上か下に戻す。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-040": {
     "id": "GD01-040",
@@ -866,9 +683,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-041": {
     "id": "GD01-041",
@@ -885,13 +700,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-042": {
     "id": "GD01-042",
@@ -908,9 +717,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "このユニットは、アクティブのLv.2以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-043": {
     "id": "GD01-043",
@@ -927,11 +734,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【配備時】緑の自分のユニット1つを選ぶ。このターン中、それはアクティブのAP4以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-044": {
     "id": "GD01-044",
@@ -948,12 +751,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【セット時・〔強化人間〕/〔ニュータイプ〕のパイロット】相手のユニット1～2つを選ぶ。それらに1ダメージを与える。",
-    "effect_tags": [
-      "on_set",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-045": {
     "id": "GD01-045",
@@ -970,11 +768,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【セット時】自分のデッキを上から3枚見て、その中の、Lv.4以下の〔ザフト〕のユニットカード1枚を配備してもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "on_set"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-046": {
     "id": "GD01-046",
@@ -991,17 +785,7 @@
       "ap": 1,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【起動・メイン】《援護3》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)【セット中・〔コーディネイター〕のパイロット】【ターン1回】このユニットの《援護》で〔ザフト〕のユニットをAP+したとき、これをアクティブにする。",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "while_set",
-      "once_per_turn",
-      "rest",
-      "active",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-047": {
     "id": "GD01-047",
@@ -1018,12 +802,7 @@
       "ap": 6,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【アタック時】このユニット以外のレストの味方のユニットが2つ以上いるなら、相手のユニット1つを選ぶ。それに3ダメージを与える。",
-    "effect_tags": [
-      "on_attack",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-048": {
     "id": "GD01-048",
@@ -1040,15 +819,7 @@
       "ap": null,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)【配備時】自分のデッキを上から1枚見る。それが、〔ジオン〕/〔ネオ・ジオン〕のユニットカードなら公開して手札に加えてもよい。残ったカードは下に戻す。",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "on_deploy",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-049": {
     "id": "GD01-049",
@@ -1065,13 +836,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【配備時】AP5以上の〔ザフト〕の自分のユニット1つを選ぶ。このターン中、それは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-050": {
     "id": "GD01-050",
@@ -1088,12 +853,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【アタック時】このユニットがAP5以上で、相手のユニットにアタックしているなら、相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "on_attack",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-051": {
     "id": "GD01-051",
@@ -1110,9 +870,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-052": {
     "id": "GD01-052",
@@ -1129,12 +887,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【配備時】相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-053": {
     "id": "GD01-053",
@@ -1151,13 +904,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【起動・メイン】【ターン1回】①：AP2以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "activate_main",
-      "once_per_turn",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-054": {
     "id": "GD01-054",
@@ -1174,13 +921,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "このユニットがAP5以上の間、これは《突破3》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-055": {
     "id": "GD01-055",
@@ -1197,14 +938,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【起動・メイン】《援護2》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-056": {
     "id": "GD01-056",
@@ -1221,12 +955,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【破壊時】AP5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_destroy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-057": {
     "id": "GD01-057",
@@ -1243,9 +972,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-058": {
     "id": "GD01-058",
@@ -1262,13 +989,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【起動・アクション】【ターン1回】①：Lv.4以上のユニット1つを選ぶ。このバトル中、それをAP+1する。",
-    "effect_tags": [
-      "activate_action",
-      "once_per_turn",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-059": {
     "id": "GD01-059",
@@ -1285,12 +1006,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【アタック時】相手プレイヤーにアタックしているなら、このバトル中、このユニットをAP+2する。",
-    "effect_tags": [
-      "on_attack",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-060": {
     "id": "GD01-060",
@@ -1307,9 +1023,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-061": {
     "id": "GD01-061",
@@ -1326,14 +1040,7 @@
       "ap": null,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-062": {
     "id": "GD01-062",
@@ -1350,9 +1057,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-063": {
     "id": "GD01-063",
@@ -1369,12 +1074,7 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "自分のターン中、このユニットがLv.2以下の相手のユニットとバトルしている間、これは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-064": {
     "id": "GD01-064",
@@ -1391,9 +1091,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-065": {
     "id": "GD01-065",
@@ -1410,15 +1108,7 @@
       "ap": 4,
       "hp": 6
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【セット中】【ターン1回】このユニットか、白の自分のユニットにパイロットをセットしたとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect_tags": [
-      "blocker",
-      "while_set",
-      "once_per_turn",
-      "rest",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-066": {
     "id": "GD01-066",
@@ -1435,15 +1125,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【配備時】「ファトゥム-00」(〔三隻同盟〕・AP2・HP2・《ブロッカー》)のユニットトークン1つを配備する。【セット中】【アタック時】自分の〔三隻同盟〕のユニットトークン1つを選ぶ。それは配備したターンにアタックしてもよい。",
-    "effect_tags": [
-      "blocker",
-      "on_deploy",
-      "on_attack",
-      "while_set",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-067": {
     "id": "GD01-067",
@@ -1460,12 +1142,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【セット時】自分のトラッシュのLv.5以下のコマンドカード1枚を選ぶ。それを手札に加える。",
-    "effect_tags": [
-      "on_set",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-068": {
     "id": "GD01-068",
@@ -1482,14 +1159,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【配備時】HP1の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "blocker",
-      "on_deploy",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-069": {
     "id": "GD01-069",
@@ -1506,14 +1176,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【起動・メイン】【ターン1回】①：《ブロッカー》を持つレストの白の自分のユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
-    "effect_tags": [
-      "blocker",
-      "activate_main",
-      "once_per_turn",
-      "active"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-070": {
     "id": "GD01-070",
@@ -1530,11 +1193,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "自分のトラッシュにコマンドカードが4枚以上ある間、手札のこのカードをコスト-2する。",
-    "effect_tags": [
-      "cost_down"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-071": {
     "id": "GD01-071",
@@ -1551,13 +1210,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【リンク中】【アタック時】相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
-    "effect_tags": [
-      "on_attack",
-      "while_link",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-072": {
     "id": "GD01-072",
@@ -1574,12 +1227,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-073": {
     "id": "GD01-073",
@@ -1596,13 +1244,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【リンク中】【アタック時】HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "on_attack",
-      "while_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-074": {
     "id": "GD01-074",
@@ -1619,12 +1261,7 @@
       "ap": 3,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【アタック時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "on_attack",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-075": {
     "id": "GD01-075",
@@ -1641,12 +1278,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【配備時】HP1の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-076": {
     "id": "GD01-076",
@@ -1663,11 +1295,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "自分のトラッシュにコマンドカードが4枚以上ある間、このユニットをAP+1、HP+1する。",
-    "effect_tags": [
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-077": {
     "id": "GD01-077",
@@ -1684,9 +1312,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-078": {
     "id": "GD01-078",
@@ -1703,12 +1329,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【配備時】相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
-    "effect_tags": [
-      "on_deploy",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-079": {
     "id": "GD01-079",
@@ -1725,9 +1346,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-080": {
     "id": "GD01-080",
@@ -1744,12 +1363,7 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【破壊時】Lv.2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "on_destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-081": {
     "id": "GD01-081",
@@ -1766,13 +1380,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "このユニット以外の、〔三隻同盟〕の自分のユニットがいる間、これはAP+1され、《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-082": {
     "id": "GD01-082",
@@ -1789,14 +1397,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【セット中】【起動・アクション】【ターン1回】②：相手のユニット1つを選ぶ。このバトル中、それをAP-1する。",
-    "effect_tags": [
-      "activate_action",
-      "while_set",
-      "once_per_turn",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-083": {
     "id": "GD01-083",
@@ -1813,9 +1414,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-084": {
     "id": "GD01-084",
@@ -1832,9 +1431,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-085": {
     "id": "GD01-085",
@@ -1851,9 +1448,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-086": {
     "id": "GD01-086",
@@ -1870,12 +1465,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-087": {
     "id": "GD01-087",
@@ -1894,13 +1484,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを手札に加える。このユニットが青の間、これは《リペア1》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair",
-      "burst",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-088": {
     "id": "GD01-088",
@@ -1918,14 +1502,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-089": {
     "id": "GD01-089",
@@ -1942,14 +1519,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを手札に加える。このユニットが《リペア》を持つ間、これをAP+1する。",
-    "effect_tags": [
-      "repair",
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-090": {
     "id": "GD01-090",
@@ -1966,13 +1536,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットのAPは相手の効果で減少しない。",
-    "effect_tags": [
-      "burst",
-      "while_link",
-      "bounce"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-091": {
     "id": "GD01-091",
@@ -1989,14 +1553,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを手札に加える。自分のターン中、このユニットが《突破》を持つ間、これはAP3以下の相手のユニットからバトルダメージを受けない。",
-    "effect_tags": [
-      "breakthrough",
-      "burst",
-      "bounce",
-      "damage_reduce"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-092": {
     "id": "GD01-092",
@@ -2013,15 +1570,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを手札に加える。このユニットが〔ジオン〕の間、これは《突破1》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "burst",
-      "damage",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-093": {
     "id": "GD01-093",
@@ -2039,15 +1588,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】【アタック時】このユニットのLv.以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "while_link",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-094": {
     "id": "GD01-094",
@@ -2065,14 +1606,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【ターン1回】このユニットがアタックしている間、相手のリンクユニットがダメージで破壊されたとき、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "once_per_turn",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-095": {
     "id": "GD01-095",
@@ -2090,14 +1624,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分の手札1枚を捨てる。そうしたなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-096": {
     "id": "GD01-096",
@@ -2114,14 +1641,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。このユニットが白の間、これは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "burst",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-097": {
     "id": "GD01-097",
@@ -2138,15 +1658,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【バースト】このカードを手札に加える。【起動・メイン】【ターン1回】相手の手札が8枚以上あるなら、このユニットをアクティブにし、このターン中、これはアタックできない。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "once_per_turn",
-      "active",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-098": {
     "id": "GD01-098",
@@ -2163,14 +1675,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【バースト】このカードを手札に加える。【起動・アクション】【ターン1回】AP1以下の相手のユニットがいるなら、このユニットを1回復する。",
-    "effect_tags": [
-      "activate_action",
-      "burst",
-      "once_per_turn",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-099": {
     "id": "GD01-099",
@@ -2182,14 +1687,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】HP5以下の相手のユニット1つを選ぶ。それをレストにする。【メイン】/【アクション】HP3以下の相手のユニット1～2つを選ぶ。それらをレストにする。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-100": {
     "id": "GD01-100",
@@ -2201,12 +1699,7 @@
     "cost": 3,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【メイン】自分は2枚ドローする。",
-    "effect_tags": [
-      "main",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-101": {
     "id": "GD01-101",
@@ -2222,13 +1715,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【メイン】/【アクション】味方のリンクユニット1つを選ぶ。それを3回復する。【パイロット】「ルクレツィア・ノイン」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-102": {
     "id": "GD01-102",
@@ -2240,11 +1727,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム",
-    "effect": "【メイン】Lv.4以下の味方のユニットすべてを2回復する。",
-    "effect_tags": [
-      "main"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-103": {
     "id": "GD01-103",
@@ -2260,13 +1743,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【メイン】アクティブの〔地球連邦〕の味方のユニット1つと、相手のユニット1つを選ぶ。それらをレストにする。【パイロット】「ダグザ・マックール」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-104": {
     "id": "GD01-104",
@@ -2278,14 +1755,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】自分は1枚ドローする。【メイン】レストの相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "damage",
-      "draw"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-105": {
     "id": "GD01-105",
@@ -2297,14 +1767,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを手札に加える。【メイン】このターン中、自分のユニットすべてをAP+2する。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-106": {
     "id": "GD01-106",
@@ -2320,13 +1783,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【メイン】「ザクⅡ」(〔ジオン〕・AP1・HP1)のユニットトークン2つを配備する。【パイロット】「ドズル・ザビ」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-107": {
     "id": "GD01-107",
@@ -2338,12 +1795,7 @@
     "cost": 3,
     "traits": [],
     "stats": {},
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】自分はEXリソース1つを置く。【メイン】自分はリソース1つをレストで置く。",
-    "effect_tags": [
-      "main",
-      "burst"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-108": {
     "id": "GD01-108",
@@ -2355,13 +1807,7 @@
     "cost": 6,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム",
-    "effect": "【メイン】《ブロッカー》を持つユニットすべてに2ダメージを与える。",
-    "effect_tags": [
-      "blocker",
-      "main",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-109": {
     "id": "GD01-109",
@@ -2373,11 +1819,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【メイン】自分のデッキを上から5枚見て、その中の、〔オペレーション・メテオ〕/〔Gチーム〕の、ユニットカード1枚/パイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "main"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-110": {
     "id": "GD01-110",
@@ -2393,13 +1835,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【メイン】/【アクション】Lv.4以上のユニット1つを選ぶ。このターン中、それはアクティブのAP6以下の相手のユニットをアタック先に選んでもよい。【パイロット】「ラシード・クラマ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-111": {
     "id": "GD01-111",
@@ -2411,14 +1847,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】相手のユニット1つを選ぶ。それに2ダメージを与える。【メイン】/【アクション】ダメージを受けている相手のユニット1つを選ぶ。それに3ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-112": {
     "id": "GD01-112",
@@ -2435,14 +1864,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【メイン】アクティブの自分のユニット2つを選ぶ。それらをレストにする。そうしたなら、相手のユニット1つを選ぶ。それに3ダメージを与える。【パイロット】「ロニ・ガーベイ」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "damage",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-113": {
     "id": "GD01-113",
@@ -2459,14 +1881,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【メイン】/【アクション】〔ザフト〕の味方のユニット1つを選ぶ。このターン中、それをAP+3する。【パイロット】「アンドリュー・バルトフェルド」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-114": {
     "id": "GD01-114",
@@ -2482,13 +1897,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【アクション】味方のユニット2つを選ぶ。このターン中、それらをAP+1する。【パイロット】「ヨンム・カークス」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-115": {
     "id": "GD01-115",
@@ -2500,13 +1909,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【メイン】/【アクション】相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "action",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-116": {
     "id": "GD01-116",
@@ -2523,14 +1926,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【メイン】/【アクション】AP2以下の相手のユニット1つを選ぶ。それに2ダメージを与える。【パイロット】「ニコル・アマルフィ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-117": {
     "id": "GD01-117",
@@ -2542,14 +1938,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-118": {
     "id": "GD01-118",
@@ -2561,12 +1950,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【メイン】自分は2枚ドローする。その後、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "main",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-119": {
     "id": "GD01-119",
@@ -2582,14 +1966,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【メイン】/【アクション】Lv.4以下の相手のユニット1つを選ぶ。このターン中、それをAP-2する。【パイロット】「チュアチュリー・パンランチ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-120": {
     "id": "GD01-120",
@@ -2601,15 +1978,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】相手のユニット1つを選ぶ。このターン中、それをAP-3する。【アクション】《ブロッカー》を持つ味方のユニット1つを選ぶ。このターン中、それをAP+3する。",
-    "effect_tags": [
-      "blocker",
-      "action",
-      "burst",
-      "stat_buff",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-121": {
     "id": "GD01-121",
@@ -2621,14 +1990,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】《ブロッカー》を持つレストのユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
-    "effect_tags": [
-      "blocker",
-      "main",
-      "burst",
-      "active"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-122": {
     "id": "GD01-122",
@@ -2644,13 +2006,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【メイン】HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。自分のリンクユニットがいるなら、かわりにHP4以下の相手のユニット1つを選ぶ。【パイロット】「シャディク・ゼネリ」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD01-123": {
     "id": "GD01-123",
@@ -2667,14 +2023,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、HP3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-124": {
     "id": "GD01-124",
@@ -2691,15 +2040,7 @@
     "stats": {
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：味方のユニット1つを選ぶ。それを1回復する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-125": {
     "id": "GD01-125",
@@ -2716,13 +2057,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、自分の手札のLv.4以下の〔ジオン〕のユニットカード1枚を配備してもよい。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD01-126": {
     "id": "GD01-126",
@@ -2739,13 +2074,7 @@
     "stats": {
       "hp": 6
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD01-127": {
     "id": "GD01-127",
@@ -2762,18 +2091,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・アクション】このベースをレストにする：AP5以上の〔ザフト〕の味方のユニット1つを選ぶ。このバトル中、それは《突破3》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "activate_action",
-      "burst",
-      "on_deploy",
-      "damage",
-      "destroy",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-128": {
     "id": "GD01-128",
@@ -2790,13 +2108,7 @@
     "stats": {
       "hp": 6
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD01-129": {
     "id": "GD01-129",
@@ -2813,13 +2125,7 @@
     "stats": {
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD01-130": {
     "id": "GD01-130",
@@ -2836,16 +2142,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：〔学園〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD02-001": {
     "id": "GD02-001",
@@ -2862,14 +2159,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット中・〔強化人間〕のパイロット】〔ティターンズ〕の自分のユニットがダメージで相手のシールドエリアのカードを破壊したとき、このユニットを2回復する。",
-    "effect_tags": [
-      "breakthrough",
-      "while_set",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-002": {
     "id": "GD02-002",
@@ -2886,14 +2176,7 @@
       "ap": 6,
       "hp": 6
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【リンク中】【ターン1回】自分のターン中、自分のユニットがバトルダメージで相手のユニットを破壊したとき、このユニットをアクティブにする。",
-    "effect_tags": [
-      "while_link",
-      "once_per_turn",
-      "destroy",
-      "active"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD02-003": {
     "id": "GD02-003",
@@ -2910,13 +2193,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【セット中・Lv.3以下のパイロット】【破壊時】自分の手札のユニットカード1枚を捨ててもよい。そうしたなら、このユニットにセットされていたカードを手札に戻す。",
-    "effect_tags": [
-      "on_destroy",
-      "while_set",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-004": {
     "id": "GD02-004",
@@ -2933,11 +2210,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【セット時】レストのHP3以下の相手のユニット1つを選ぶ。それは次の相手のターンのスタートフェイズでアクティブにならない。",
-    "effect_tags": [
-      "on_set"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-005": {
     "id": "GD02-005",
@@ -2954,13 +2227,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【リンク中】【アタック時】HP2以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_attack",
-      "while_link",
-      "rest"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD02-006": {
     "id": "GD02-006",
@@ -2977,13 +2244,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)自分のターン中、このユニットはLv.2以下の相手のユニットからバトルダメージを受けない。",
-    "effect_tags": [
-      "blocker",
-      "rest",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-007": {
     "id": "GD02-007",
@@ -3000,11 +2261,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-008": {
     "id": "GD02-008",
@@ -3021,12 +2278,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【リンク時】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_link",
-      "damage"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-009": {
     "id": "GD02-009",
@@ -3043,12 +2295,7 @@
       "ap": 3,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【ターン1回】このユニットのAPが相手の効果で減少したとき、レストの相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "once_per_turn",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-010": {
     "id": "GD02-010",
@@ -3065,12 +2312,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【ターン1回】このユニットが相手の効果ダメージを受けたとき、自分は1枚ドローする。",
-    "effect_tags": [
-      "once_per_turn",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-011": {
     "id": "GD02-011",
@@ -3087,13 +2329,7 @@
       "ap": null,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【起動・アクション】このユニットを破壊する：このユニットとバトルしている、相手のベース1つ/相手のシールド1つに6ダメージを与える。",
-    "effect_tags": [
-      "activate_action",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-012": {
     "id": "GD02-012",
@@ -3111,9 +2347,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "GD02-013": {
     "id": "GD02-013",
@@ -3130,9 +2364,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-014": {
     "id": "GD02-014",
@@ -3149,12 +2381,7 @@
       "ap": 3,
       "hp": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【配備時】〔ティターンズ〕の自分のユニット1つを選ぶ。このターン中、それをAP+1する。",
-    "effect_tags": [
-      "on_deploy",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-015": {
     "id": "GD02-015",
@@ -3171,9 +2398,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-016": {
     "id": "GD02-016",
@@ -3190,12 +2415,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【配備時】〔ティターンズ〕の自分のユニット1つを選ぶ。このターン中、それをAP+1する。",
-    "effect_tags": [
-      "on_deploy",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-017": {
     "id": "GD02-017",
@@ -3212,11 +2432,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD02-018": {
     "id": "GD02-018",
@@ -3233,9 +2449,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "このユニットは、相手プレイヤーをアタック先に選べない。",
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD02-019": {
     "id": "GD02-019",
@@ -3252,9 +2466,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-020": {
     "id": "GD02-020",
@@ -3271,13 +2483,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【配備時】自分のデッキを上から5枚見て、その中の緑の〔ジオン〕のパイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【リンク中】このユニットをAP+2する。",
-    "effect_tags": [
-      "on_deploy",
-      "while_link",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD02-021": {
     "id": "GD02-021",
@@ -3295,12 +2501,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【配備時】自分の手札の緑の〔地球連邦〕のユニットカード1枚を捨ててもよい。そうしたなら、自分はEXリソース1つを置く。その後、自分がLv.7以上なら、自分は1枚ドローする。",
-    "effect_tags": [
-      "on_deploy",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-022": {
     "id": "GD02-022",
@@ -3317,14 +2518,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【ターン1回】自分のEXリソースが置かれたとき、〔AGEシステム〕の自分のユニット1つを選ぶ。このターン中、それは《突破2》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "once_per_turn",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-023": {
     "id": "GD02-023",
@@ -3342,13 +2536,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【リンク中】自分がLv.7以上の間、このユニットは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "while_link",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-024": {
     "id": "GD02-024",
@@ -3365,12 +2553,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【リンク中】このユニットは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility",
-      "while_link"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-025": {
     "id": "GD02-025",
@@ -3387,11 +2570,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【配備時】自分のデッキを上から1枚見て、上か下に戻す。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD02-026": {
     "id": "GD02-026",
@@ -3408,12 +2587,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【配備時】自分がLv.7以上なら、〔AGEシステム〕の自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
-    "effect_tags": [
-      "on_deploy",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-027": {
     "id": "GD02-027",
@@ -3431,13 +2605,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-028": {
     "id": "GD02-028",
@@ -3454,9 +2622,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD02-029": {
     "id": "GD02-029",
@@ -3474,9 +2640,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-030": {
     "id": "GD02-030",
@@ -3493,9 +2657,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-031": {
     "id": "GD02-031",
@@ -3513,11 +2675,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "自分がLv.7以上の間、このユニットをAP+2する。",
-    "effect_tags": [
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-032": {
     "id": "GD02-032",
@@ -3534,9 +2692,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-033": {
     "id": "GD02-033",
@@ -3553,13 +2709,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "このユニット以外の、〔ジオン〕の味方のリンクユニットがいる間、これは《突破5》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-034": {
     "id": "GD02-034",
@@ -3576,12 +2726,7 @@
       "ap": null,
       "hp": 3
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【セット中・赤のパイロット】このユニットをAP+2する。",
-    "effect_tags": [
-      "while_set",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-035": {
     "id": "GD02-035",
@@ -3598,9 +2743,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "このユニットは、相手プレイヤーをアタック先に選べない。",
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-036": {
     "id": "GD02-036",
@@ -3617,15 +2760,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【リンク時】このターン中、このユニットは《制圧》を得る。\n(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【セット中・〔ネオ・ジオン〕のパイロット】【アタック時】ダメージを受けている相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "suppression",
-      "on_attack",
-      "while_set",
-      "on_link",
-      "damage"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-037": {
     "id": "GD02-037",
@@ -3642,14 +2777,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "《突破1》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【配備時】相手のシールドが3つ以下なら、AP5以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "breakthrough",
-      "on_deploy",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-038": {
     "id": "GD02-038",
@@ -3666,11 +2794,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【配備時】自分のデッキを上から3枚見て、その中のLv.4以下の〔クラン〕のユニットカード1枚を配備してもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-039": {
     "id": "GD02-039",
@@ -3687,12 +2811,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【セット時】Lv.3以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_set",
-      "damage"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-040": {
     "id": "GD02-040",
@@ -3709,16 +2828,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【起動・メイン】《援護2》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)【配備時】このユニット以外の、〔新連邦〕の自分のユニット1つを選ぶ。このターン中、それはHP2以下の相手のユニットからバトルダメージを受けない。",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "on_deploy",
-      "rest",
-      "damage_reduce",
-      "stat_buff"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-041": {
     "id": "GD02-041",
@@ -3735,12 +2845,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【配備時】Lv.5以上の相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-042": {
     "id": "GD02-042",
@@ -3757,12 +2862,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【配備時】〔新連邦〕の自分のユニット1つを選ぶ。このターン中、それは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility",
-      "on_deploy"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-043": {
     "id": "GD02-043",
@@ -3779,12 +2879,7 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【配備時】このユニット以外の、〔新連邦〕の自分のユニットがいるなら、「ドートレス」(〔新連邦〕・AP0・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "on_deploy",
-      "token"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-044": {
     "id": "GD02-044",
@@ -3801,12 +2896,7 @@
       "ap": 3,
       "hp": 1
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【破壊時】このユニット以外の、〔新連邦〕の自分のユニットがいるなら、「ドートレス」(〔新連邦〕・AP0・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "on_destroy",
-      "token"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-045": {
     "id": "GD02-045",
@@ -3823,12 +2913,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【アタック時】このユニットがAP5以上で、相手のユニットにアタックしているなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "on_attack",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-046": {
     "id": "GD02-046",
@@ -3845,13 +2930,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【配備時】相手のユニットトークン1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage",
-      "token"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-047": {
     "id": "GD02-047",
@@ -3868,14 +2947,7 @@
       "ap": null,
       "hp": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【起動・メイン】このユニットをレストにする：これを破壊し、Lv.5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "activate_main",
-      "damage",
-      "destroy",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-048": {
     "id": "GD02-048",
@@ -3892,9 +2964,7 @@
       "ap": 4,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD02-049": {
     "id": "GD02-049",
@@ -3911,14 +2981,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-050": {
     "id": "GD02-050",
@@ -3935,9 +2998,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD02-051": {
     "id": "GD02-051",
@@ -3954,9 +3015,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-052": {
     "id": "GD02-052",
@@ -3973,9 +3032,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-053": {
     "id": "GD02-053",
@@ -3992,13 +3049,7 @@
       "ap": 6,
       "hp": 5
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【リンク中】自分のターン中、自分のトラッシュにカードが7枚以上ある間、このユニット以外の、〔バルチャー〕の自分のユニットすべてをAP+2する。",
-    "effect_tags": [
-      "suppression",
-      "while_link",
-      "stat_buff"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-054": {
     "id": "GD02-054",
@@ -4016,12 +3067,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【アタック時】このユニットがダメージを受けているなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "on_attack",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-055": {
     "id": "GD02-055",
@@ -4039,14 +3085,7 @@
       "ap": 3,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【配備時】自分のユニット1つと、相手のユニット1つを選ぶ。それらに1ダメージを与える。",
-    "effect_tags": [
-      "blocker",
-      "on_deploy",
-      "damage",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-056": {
     "id": "GD02-056",
@@ -4063,13 +3102,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【セット中・〔バルチャー〕のパイロット】【破壊時】自分のトラッシュのLv.5以上の〔バルチャー〕のユニットカード1枚を選ぶ。それを手札に加える。",
-    "effect_tags": [
-      "on_destroy",
-      "while_set",
-      "bounce"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-057": {
     "id": "GD02-057",
@@ -4087,14 +3120,7 @@
       "ap": 5,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【セット中】【アタック時】このユニット以外の、自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、Lv.4以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "on_attack",
-      "while_set",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-058": {
     "id": "GD02-058",
@@ -4111,13 +3137,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【配備時】自分のユニット1つを選ぶ。それに1ダメージを与える。そうしたなら、自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "on_deploy",
-      "damage",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-059": {
     "id": "GD02-059",
@@ -4134,12 +3154,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-060": {
     "id": "GD02-060",
@@ -4156,12 +3171,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【配備時】自分のトラッシュにカードが7枚以上あるなら、Lv.4以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_deploy",
-      "rest"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-061": {
     "id": "GD02-061",
@@ -4178,12 +3188,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【セット時・紫のパイロット】自分のトラッシュに〔テイワズ〕/〔鉄華団〕のカードが3枚以上あるなら、AP3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_set",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-062": {
     "id": "GD02-062",
@@ -4200,9 +3205,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-063": {
     "id": "GD02-063",
@@ -4219,9 +3222,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-064": {
     "id": "GD02-064",
@@ -4238,11 +3239,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "自分のターン中、自分のトラッシュにカードが7枚以上ある間、このユニットは相手のコマンドから効果ダメージを受けない。",
-    "effect_tags": [
-      "damage_reduce"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-065": {
     "id": "GD02-065",
@@ -4259,9 +3256,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-066": {
     "id": "GD02-066",
@@ -4279,9 +3274,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "このユニットは相手プレイヤーをアタック先に選べない。",
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-067": {
     "id": "GD02-067",
@@ -4299,9 +3292,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-068": {
     "id": "GD02-068",
@@ -4319,12 +3310,7 @@
       "ap": 3,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【配備時】このユニットに2ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-069": {
     "id": "GD02-069",
@@ -4341,15 +3327,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【リンク中】【起動・メイン】【ターン1回】アクティブの味方のベース1つを選ぶ。それをレストにする。そうしたなら、このユニットをアクティブにし、このターン中、これは相手プレイヤーをアタック先に選べない。",
-    "effect_tags": [
-      "activate_main",
-      "while_link",
-      "once_per_turn",
-      "rest",
-      "active"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-070": {
     "id": "GD02-070",
@@ -4367,12 +3345,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【配備時】自分のトラッシュに〔ギャラルホルン〕のカードが4枚以上あるなら、自分は2枚ドローする。そうしたなら、自分の手札2枚を捨てる。",
-    "effect_tags": [
-      "on_deploy",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-071": {
     "id": "GD02-071",
@@ -4389,11 +3362,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【配備時】白の味方のベースがあるなら、自分の手札の〔エゥーゴ〕のパイロットカード1枚をこのユニットにセットしてもよい。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-072": {
     "id": "GD02-072",
@@ -4410,13 +3379,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)白の味方のベースがある間、このユニットは《リペア1》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair",
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-073": {
     "id": "GD02-073",
@@ -4433,12 +3396,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "相手のターン中、このユニットとバトルしている相手のユニットは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-074": {
     "id": "GD02-074",
@@ -4455,14 +3413,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "《高機動》(このユニットはブロックされない)【セット中】自分のトラッシュにコマンドカードが4枚以上ある間、このユニットは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "high_mobility",
-      "while_set",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD02-075": {
     "id": "GD02-075",
@@ -4479,13 +3430,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【アタック時】アクティブの味方のベース1つを選ぶ。それをレストにする。そうしたなら、Lv.4以下の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
-    "effect_tags": [
-      "on_attack",
-      "rest",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-076": {
     "id": "GD02-076",
@@ -4502,12 +3447,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "このユニットがAP5以上の間、これは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-077": {
     "id": "GD02-077",
@@ -4524,9 +3464,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-078": {
     "id": "GD02-078",
@@ -4543,9 +3481,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD02-079": {
     "id": "GD02-079",
@@ -4562,12 +3498,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-080": {
     "id": "GD02-080",
@@ -4584,9 +3515,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-081": {
     "id": "GD02-081",
@@ -4603,12 +3532,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【配備時】白の味方のベースがあるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect_tags": [
-      "on_deploy",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-082": {
     "id": "GD02-082",
@@ -4625,12 +3549,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "このユニット以外の、〔ギャラルホルン〕の自分のユニットがいる間、これは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-083": {
     "id": "GD02-083",
@@ -4647,12 +3566,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【破壊時】相手のターンなら、〔ギャラルホルン〕の自分のユニット1つを選ぶ。それをアクティブにする。",
-    "effect_tags": [
-      "on_destroy",
-      "active"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-084": {
     "id": "GD02-084",
@@ -4669,9 +3583,7 @@
       "ap": 1,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "GD02-085": {
     "id": "GD02-085",
@@ -4689,15 +3601,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】【ターン1回】自分のターン中、このユニットが回復したとき、自分の手札が4枚以下なら、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "while_link",
-      "once_per_turn",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-086": {
     "id": "GD02-086",
@@ -4714,13 +3618,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。このユニット以外の、〔ティターンズ〕の自分のユニットがいる間、これをAP+1する。",
-    "effect_tags": [
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-087": {
     "id": "GD02-087",
@@ -4738,15 +3636,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】このユニットが青なら、《ブロッカー》を持つ相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "blocker",
-      "burst",
-      "on_link",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-088": {
     "id": "GD02-088",
@@ -4765,13 +3655,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分のデッキを上から3枚見て、その中の、緑の〔地球連邦〕のユニットカード1枚/カード名に「AGEデバイス」を含むカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-089": {
     "id": "GD02-089",
@@ -4789,16 +3673,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを手札に加える。【セット時】このユニット以外の、〔ジオン〕の自分のリンクユニット1つを選ぶ。このターン中、それは《突破1》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "burst",
-      "on_set",
-      "damage",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD02-090": {
     "id": "GD02-090",
@@ -4816,14 +3691,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードを手札に加える。このユニット以外の、《高機動》を持つ自分のユニットがいる間、これをAP+1する。",
-    "effect_tags": [
-      "high_mobility",
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-091": {
     "id": "GD02-091",
@@ -4841,14 +3709,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。【セット時】このユニットが赤なら、これのLv.以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-092": {
     "id": "GD02-092",
@@ -4865,15 +3726,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】【アタック時】〔新連邦〕の自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "while_link",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-093": {
     "id": "GD02-093",
@@ -4890,14 +3743,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで〔ニュータイプ〕のパイロットがセットされている相手のユニットを破壊したとき、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "destroy",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-094": {
     "id": "GD02-094",
@@ -4915,13 +3761,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【バースト】このカードを手札に加える。【セット時】自分の手札1枚を捨ててもよい。そうしたなら、自分のデッキを上から3枚見て、その中の〔バルチャー〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "bounce"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-095": {
     "id": "GD02-095",
@@ -4937,14 +3777,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】このユニットがダメージを受けていてLv.5以下なら、このバトル中、これは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility",
-      "burst",
-      "on_attack",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-096": {
     "id": "GD02-096",
@@ -4962,13 +3795,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分のトラッシュのLv.2以下の〔ヴェイガン〕のユニットカード1枚を選んでもよい。それをコストを支払って配備する。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-097": {
     "id": "GD02-097",
@@ -4986,13 +3813,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。白の味方のベースがある間、このユニットをAP+2する。",
-    "effect_tags": [
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-098": {
     "id": "GD02-098",
@@ -5010,14 +3831,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "このカードのカード名は「シャア・アズナブル」としても扱う。\n【バースト】このカードを手札に加える。【リンク時】このユニットが〔エゥーゴ〕なら、自分は1枚ドローする。そうしたなら、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-099": {
     "id": "GD02-099",
@@ -5034,14 +3848,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを手札に加える。【セット時】自分のトラッシュに〔ギャラルホルン〕のカードが4枚以上あるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "bounce",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-100": {
     "id": "GD02-100",
@@ -5053,13 +3860,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】自分は1枚ドローする。【メイン】ダメージを受けている味方のユニット1つを選ぶ。それを2回復する。その後、自分は1枚ドローする。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-101": {
     "id": "GD02-101",
@@ -5071,13 +3872,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【メイン】/【アクション】Lv.2以下の相手のユニット1～2つを選ぶ。それらをレストにする。",
-    "effect_tags": [
-      "main",
-      "action",
-      "rest"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD02-102": {
     "id": "GD02-102",
@@ -5093,14 +3888,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【メイン】/【アクション】〔ティターンズ〕の味方のユニット1つを選ぶ。このターン中、それをAP+2する。【パイロット】「マウアー・ファラオ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-103": {
     "id": "GD02-103",
@@ -5112,13 +3900,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【バースト】自分のトラッシュの〔アスノ家〕のパイロットカード1枚を選ぶ。それを手札に加える。【メイン】〔AGEシステム〕の自分のユニットがいるなら、自分はEXリソース1つを置く。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-104": {
     "id": "GD02-104",
@@ -5130,12 +3912,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【メイン】自分のデッキを上から3枚見て、その中のカード1枚を上に戻す。残ったカードは無作為に下に戻す。その後、〔ニュータイプ〕の自分のパイロットがいるなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "main",
-      "draw"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-105": {
     "id": "GD02-105",
@@ -5152,14 +3929,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【アクション】自分のユニットトークン1つを選ぶ。このバトル中、それは相手のユニットからバトルダメージを受けない。【パイロット】「エグザベ・オリベ」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "damage_reduce",
-      "token"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-106": {
     "id": "GD02-106",
@@ -5175,13 +3945,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【アクション】このバトル中、自分のシールドエリアのカードは、Lv.3以下の相手のユニットからダメージを受けない。【パイロット】「ウルフ・エニアクル」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-107": {
     "id": "GD02-107",
@@ -5193,13 +3957,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】相手のユニット1つを選ぶ。それに1ダメージを与える。【メイン】リンクユニット以外の、相手のユニットすべてに1ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "damage"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-108": {
     "id": "GD02-108",
@@ -5211,11 +3969,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【メイン】〔クラン〕の味方のユニット1つを選ぶ。このターン中、それはアクティブのLv.4以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "main"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-109": {
     "id": "GD02-109",
@@ -5233,14 +3987,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【メイン】/【アクション】相手のユニット1つを選ぶ。それに1ダメージを与える。\n【パイロット】「シイコ・スガイ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "damage"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-110": {
     "id": "GD02-110",
@@ -5252,11 +3999,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【メイン】自分のトラッシュのLv.5以下のユニットカード1枚を選ぶ。それをコストを支払って配備する。",
-    "effect_tags": [
-      "main"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-111": {
     "id": "GD02-111",
@@ -5268,14 +4011,7 @@
     "cost": 4,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】Lv.3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。\n【メイン】自分のトラッシュの紫のユニットカード6枚を選ぶ。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-112": {
     "id": "GD02-112",
@@ -5287,14 +4023,7 @@
     "cost": 3,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】自分は1枚ドローする。\n【メイン】自分のトラッシュの紫のパイロットカード1枚を選ぶ。それを手札に加える。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-113": {
     "id": "GD02-113",
@@ -5311,14 +4040,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【メイン】/【アクション】〔テイワズ〕の味方のリンクユニットがいるなら、AP2以下の相手のユニット1つを選ぶ。それを破壊する。\n【パイロット】「アミダ・アルカ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-114": {
     "id": "GD02-114",
@@ -5336,14 +4058,7 @@
       "ap": 1,
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【メイン】/【アクション】ダメージを受けている味方のユニット1つを選ぶ。このターン中、それをAP+2する。\n【パイロット】「ノルバ・シノ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-115": {
     "id": "GD02-115",
@@ -5360,14 +4075,7 @@
       "ap": 0,
       "hp": 1
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【メイン】/【アクション】〔バルチャー〕の味方のユニット1つを選ぶ。このターン中、それをAP+2する。\n【パイロット】「ウィッツ・スー」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-116": {
     "id": "GD02-116",
@@ -5384,12 +4092,7 @@
       "ap": 1,
       "hp": 0
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【メイン】自分のトラッシュにカードが7枚以上あるなら、〔バルチャー〕の味方のユニット1つを選ぶ。このターン中、それはアクティブのLv.4以下の相手のユニットをアタック先に選んでもよい。\n【パイロット】「ロアビィ・ロイ」",
-    "effect_tags": [
-      "main",
-      "has_pilot"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-117": {
     "id": "GD02-117",
@@ -5401,14 +4104,7 @@
     "cost": 3,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】自分のトラッシュの〔エゥーゴ〕のベースカード1枚を選ぶ。それを手札に加える。\n【メイン】自分は3枚ドローする。その後、自分の手札2枚を捨てる。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-118": {
     "id": "GD02-118",
@@ -5425,14 +4121,7 @@
       "ap": 1,
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【アクション】《ブロッカー》を持つ味方のユニットとバトルしている、HP4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。\n【パイロット】「アイン・ダルトン」",
-    "effect_tags": [
-      "blocker",
-      "action",
-      "has_pilot",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-119": {
     "id": "GD02-119",
@@ -5449,13 +4138,7 @@
       "ap": 1,
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【アクション】〔ギャラルホルン〕の自分のリンクユニットがいるなら、相手のユニット1つを選ぶ。このバトル中、それをAP-3する。\n【パイロット】「カルタ・イシュー」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-120": {
     "id": "GD02-120",
@@ -5472,12 +4155,7 @@
       "ap": 0,
       "hp": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【アクション】〔エゥーゴ〕の自分の、ユニット1つ/ベース1つを選ぶ。それを2回復する。\n【パイロット】「ファ・ユイリィ」",
-    "effect_tags": [
-      "action",
-      "has_pilot"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-121": {
     "id": "GD02-121",
@@ -5495,13 +4173,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、青の味方のユニット1つを選ぶ。それを2回復する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD02-122": {
     "id": "GD02-122",
@@ -5519,14 +4191,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、レストのLv.4以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-123": {
     "id": "GD02-123",
@@ -5544,14 +4209,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、味方のユニットトークン1つを選ぶ。このターン中、それはアクティブのAP5以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "GD02-124": {
     "id": "GD02-124",
@@ -5569,14 +4227,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n自分のターン中、自分がLv.7以上の間、緑の〔地球連邦〕の味方のユニットすべてをAP+1する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD02-125": {
     "id": "GD02-125",
@@ -5594,14 +4245,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、自分の手札の赤のカード1枚を捨ててもよい。そうしたなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD02-126": {
     "id": "GD02-126",
@@ -5619,15 +4263,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n【破壊時】Lv.4以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "on_destroy",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD02-127": {
     "id": "GD02-127",
@@ -5645,14 +4281,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n【破壊時】自分のデッキを上から2枚、自分のトラッシュに置く。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "on_destroy",
-      "bounce"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD02-128": {
     "id": "GD02-128",
@@ -5670,14 +4299,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、自分のターンで、〔テイワズ〕の味方のリンクユニットがいるなら、AP2以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD02-129": {
     "id": "GD02-129",
@@ -5695,14 +4317,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\nこのベースは相手から効果ダメージを受けない。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD02-130": {
     "id": "GD02-130",
@@ -5720,14 +4335,7 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、〔ギャラルホルン〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-001": {
     "id": "GD03-001",
@@ -5744,15 +4352,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)【セット時】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。この効果で相手のユニットを破壊したとき、自分は1枚ドローする。",
-    "effect_tags": [
-      "repair",
-      "on_set",
-      "damage",
-      "destroy",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-002": {
     "id": "GD03-002",
@@ -5770,13 +4370,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "《リペア3》(自分のターン終了時、このユニットを指定の数回復する)【セット中】このユニット以外の、《リペア》を持つ自分のユニットがアタックしたとき、そのユニットのLv.以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "repair",
-      "while_set",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-003": {
     "id": "GD03-003",
@@ -5794,13 +4388,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)《リペア1》(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair",
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-004": {
     "id": "GD03-004",
@@ -5817,12 +4405,7 @@
       "ap": 5,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【アタック時】このユニット以外の、〔ティターンズ〕の自分のユニットが2つ以上いるなら、HP5以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_attack",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-005": {
     "id": "GD03-005",
@@ -5839,13 +4422,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)【配備時】自分は1枚ドローする。",
-    "effect_tags": [
-      "repair",
-      "on_deploy",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD03-006": {
     "id": "GD03-006",
@@ -5862,12 +4439,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【配備時】HP3以下の相手のユニット1～2つを選ぶ。それらをレストにする。",
-    "effect_tags": [
-      "on_deploy",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "GD03-007": {
     "id": "GD03-007",
@@ -5884,12 +4456,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【破壊時】HP3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_destroy",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-008": {
     "id": "GD03-008",
@@ -5907,12 +4474,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【セット中】このユニットは《リペア2》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair",
-      "while_set"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-009": {
     "id": "GD03-009",
@@ -5930,12 +4492,7 @@
       "ap": 5,
       "hp": 3
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【配備時】自分のトラッシュの〔ティターンズ〕のカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、Lv.4以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_deploy",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-010": {
     "id": "GD03-010",
@@ -5952,11 +4509,7 @@
       "ap": 6,
       "hp": 6
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "《リペア3》(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD03-011": {
     "id": "GD03-011",
@@ -5973,9 +4526,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-012": {
     "id": "GD03-012",
@@ -5993,11 +4544,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-013": {
     "id": "GD03-013",
@@ -6015,12 +4562,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "このユニット以外の、〔ジュピトリス〕の自分のユニットがいる間、これはAP+1され、《リペア1》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-014": {
     "id": "GD03-014",
@@ -6037,11 +4579,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "〔ティターンズ〕の自分のユニットが2つ以上いる間、手札のこのカードをコスト-1する。",
-    "effect_tags": [
-      "cost_down"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-015": {
     "id": "GD03-015",
@@ -6058,15 +4596,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【起動・メイン】【ターン1回】自分のトラッシュの〔ティターンズ〕のカード3枚をゲームから除外する：このターン中、このユニットは《突破4》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "activate_main",
-      "once_per_turn",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-016": {
     "id": "GD03-016",
@@ -6083,9 +4613,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "GD03-017": {
     "id": "GD03-017",
@@ -6103,13 +4631,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【バースト】自分のトラッシュの〔サイクロプス隊〕のパイロットカード1枚を選ぶ。それを手札に加える。【セット時・〔サイクロプス隊〕のパイロット】〔サイクロプス隊〕の自分のユニットすべては、このターン中、アクティブのAP5以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-018": {
     "id": "GD03-018",
@@ -6126,15 +4648,7 @@
       "ap": 5,
       "hp": 6
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《突破5》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【アタック時】《ブロッカー》を持つ相手のユニット1つを選ぶ。それに5ダメージを与える。",
-    "effect_tags": [
-      "breakthrough",
-      "blocker",
-      "on_attack",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD03-019": {
     "id": "GD03-019",
@@ -6152,12 +4666,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【セット中】相手のユニットはアタックするとき、可能ならレストのこのユニットをアタック先に選ぶ。【リンク時】自分はEXリソース1つを置く。",
-    "effect_tags": [
-      "while_set",
-      "on_link"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-020": {
     "id": "GD03-020",
@@ -6175,13 +4684,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【セット時】自分のトラッシュに〔サイクロプス隊〕のカードが4枚以上あるなら、「アドバルーン」(〔民間〕・AP0・HP1・このユニットは、アクティブにできず、パイロットをセットできない)のユニットトークン2つをレストで配備する。カード名に「アドバルーン」を含む自分のユニットがいる間、このユニットは相手からバトルダメージを受けない。",
-    "effect_tags": [
-      "on_set",
-      "damage_reduce",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-021": {
     "id": "GD03-021",
@@ -6198,11 +4701,7 @@
       "ap": 6,
       "hp": 5
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【配備時】〔オペレーション・メテオ〕/〔Gチーム〕の自分のユニット1つを選ぶ。このターン中、それはアクティブの相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD03-022": {
     "id": "GD03-022",
@@ -6220,13 +4719,7 @@
       "ap": 5,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【リンク中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、Lv.3以下の相手のユニットすべてに1ダメージを与える。",
-    "effect_tags": [
-      "while_link",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-023": {
     "id": "GD03-023",
@@ -6243,11 +4736,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "自分のEXリソースが置かれたとき、〔AGEシステム〕の自分のユニット1つを選ぶ。このターン中、それは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-024": {
     "id": "GD03-024",
@@ -6265,12 +4754,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【リンク時】このユニット以外の、〔サイクロプス隊〕の自分のユニットがいるなら、「ハイゴッグ」(〔サイクロプス隊〕・AP2・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "on_link",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-025": {
     "id": "GD03-025",
@@ -6287,9 +4771,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "相手のユニットはアタックするとき、可能ならレストの自分の〔マグアナック隊〕のユニットをアタック先に選ぶ。",
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD03-026": {
     "id": "GD03-026",
@@ -6307,13 +4789,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-027": {
     "id": "GD03-027",
@@ -6331,9 +4807,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-028": {
     "id": "GD03-028",
@@ -6350,12 +4824,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【アタック時】相手のユニットにアタックしているなら、このバトル中、このユニットをAP+2する。",
-    "effect_tags": [
-      "on_attack",
-      "stat_buff"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD03-029": {
     "id": "GD03-029",
@@ -6372,13 +4841,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、《ブロッカー》を持つ相手のユニットすべてに2ダメージを与える。",
-    "effect_tags": [
-      "blocker",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD03-030": {
     "id": "GD03-030",
@@ -6396,11 +4859,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "〔CB〕の自分のリンクユニットがいる間、手札のこのカードをコスト-1する。",
-    "effect_tags": [
-      "cost_down"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-031": {
     "id": "GD03-031",
@@ -6418,9 +4877,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-032": {
     "id": "GD03-032",
@@ -6437,9 +4894,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-033": {
     "id": "GD03-033",
@@ -6456,14 +4911,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【セット中・〔ザフト〕のパイロット】自分のターン中、〔ザフト〕の自分のユニットすべてをAP+2する。【アタック時】相手のユニット1つを選ぶ。それに、このユニットのAP4につき1ダメージを与える。",
-    "effect_tags": [
-      "on_attack",
-      "while_set",
-      "damage",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-034": {
     "id": "GD03-034",
@@ -6480,13 +4928,7 @@
       "ap": 6,
       "hp": 5
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【配備時】相手のユニット1つを選ぶ。それに3ダメージを与える。",
-    "effect_tags": [
-      "suppression",
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-035": {
     "id": "GD03-035",
@@ -6503,14 +4945,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【起動・メイン】【ターン1回】①,自分のトラッシュのパイロットカード1枚をゲームから除外する：相手のユニットすべてに1ダメージを与える。【リンク時】このターン中、このユニットはアクティブの、これのAP以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "activate_main",
-      "on_link",
-      "once_per_turn",
-      "damage"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-036": {
     "id": "GD03-036",
@@ -6527,12 +4962,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【リンク時】相手のユニットすべてに1ダメージを与える。",
-    "effect_tags": [
-      "on_link",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "GD03-037": {
     "id": "GD03-037",
@@ -6549,14 +4979,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【リンク中】自分のターン中、このユニットが【破壊時】を持つ相手のユニットとバトルしている間、これは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "on_destroy",
-      "while_link",
-      "damage"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-038": {
     "id": "GD03-038",
@@ -6573,14 +4996,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)自分のターン中、このユニットが効果でレストになったとき、〔ザフト〕の自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-039": {
     "id": "GD03-039",
@@ -6597,13 +5013,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【配備時】このユニット以外の、アクティブの〔クラン〕の味方のユニット1つを選ぶ。それをレストにする。そうしたなら、AP2以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage",
-      "rest"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-040": {
     "id": "GD03-040",
@@ -6620,12 +5030,7 @@
       "ap": 3,
       "hp": 5
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【リンク中】このユニットは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility",
-      "while_link"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-041": {
     "id": "GD03-041",
@@ -6642,12 +5047,7 @@
       "ap": 5,
       "hp": 6
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【配備時】ベースすべてに3ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-042": {
     "id": "GD03-042",
@@ -6664,9 +5064,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "このユニットがAP5以上の間、これはアクティブのLv.5以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-043": {
     "id": "GD03-043",
@@ -6683,12 +5081,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【セット時】相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_set",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "GD03-044": {
     "id": "GD03-044",
@@ -6705,12 +5098,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【配備時】「ドートレス」(〔新連邦〕・AP0・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "on_deploy",
-      "token"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-045": {
     "id": "GD03-045",
@@ -6727,12 +5115,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "自分のユニットトークンがいる間、このユニットをAP+1する。",
-    "effect_tags": [
-      "token",
-      "stat_buff"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-046": {
     "id": "GD03-046",
@@ -6749,9 +5132,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-047": {
     "id": "GD03-047",
@@ -6768,9 +5149,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-048": {
     "id": "GD03-048",
@@ -6787,12 +5166,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】相手のシールドが3つ以下なら、「GFreD」(〔ジオン〕・AP4・HP3)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "burst",
-      "token"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-049": {
     "id": "GD03-049",
@@ -6810,12 +5184,7 @@
       "ap": 6,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、自分のトラッシュに〔CB〕のカードが10枚以上あるなら、最もHPが低い相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "suppression",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-050": {
     "id": "GD03-050",
@@ -6833,12 +5202,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【起動・メイン】自分のトラッシュの、〔鉄華団〕/〔テイワズ〕のユニットカード3枚を選ぶ。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "activate_main",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-051": {
     "id": "GD03-051",
@@ -6855,11 +5219,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【リンク時】自分のトラッシュのLv.4以下のユニットカード1枚を選んでもよい。それをコストを支払って配備する。",
-    "effect_tags": [
-      "on_link"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-052": {
     "id": "GD03-052",
@@ -6877,16 +5237,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【起動・メイン】《援護2》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)このユニットがLv.5以下の相手のユニットにバトルダメージを与えたとき、〔CB〕の自分のパイロットがいるなら、その相手のユニットを破壊する。",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "damage",
-      "destroy",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-053": {
     "id": "GD03-053",
@@ -6904,14 +5255,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【セット中】【ターン1回】自分のターン中、〔鉄華団〕/〔テイワズ〕の自分のユニットが効果ダメージを受けたとき、Lv.4以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "blocker",
-      "while_set",
-      "once_per_turn",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-054": {
     "id": "GD03-054",
@@ -6928,13 +5272,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "《高機動》(このユニットはブロックされない)【セット時・〔Xラウンダー〕のパイロット】自分のトラッシュの〔ヴェイガン〕のカード4枚を選んでもよい。それらをゲームから除外する。そうしたなら、Lv.4以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "high_mobility",
-      "on_set",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-055": {
     "id": "GD03-055",
@@ -6952,12 +5290,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【セット時・紫のパイロット】Lv.2以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "on_set",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-056": {
     "id": "GD03-056",
@@ -6975,12 +5308,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【配備時】自分のユニット1つと、相手のユニット1つを選ぶ。それらに1ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-057": {
     "id": "GD03-057",
@@ -6998,12 +5326,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-058": {
     "id": "GD03-058",
@@ -7021,11 +5344,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "トラッシュのこのカードをコスト-1する。",
-    "effect_tags": [
-      "cost_down"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-059": {
     "id": "GD03-059",
@@ -7042,12 +5361,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【アタック時】自分のトラッシュの〔ヴェイガン〕のカード1枚を選んでもよい。それをゲームから除外する。そうしたなら、〔ヴェイガン〕の自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
-    "effect_tags": [
-      "on_attack",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-060": {
     "id": "GD03-060",
@@ -7064,12 +5378,7 @@
       "ap": null,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【ターン1回】自分のターン中、このユニットが効果ダメージを受けたとき、「CGSモビルワーカー」(〔鉄華団〕・AP1・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "once_per_turn",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-061": {
     "id": "GD03-061",
@@ -7087,11 +5396,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "このユニットがHP1の間、これは《リペア3》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-062": {
     "id": "GD03-062",
@@ -7109,13 +5414,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【配備時】このユニットをトラッシュから配備したなら、AP4以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage",
-      "trash_use"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-063": {
     "id": "GD03-063",
@@ -7133,9 +5432,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-064": {
     "id": "GD03-064",
@@ -7153,12 +5450,7 @@
       "ap": 2,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【配備時】自分のトラッシュの〔Xラウンダー〕のカード1枚を選んでもよい。それを手札に加える。そうしたなら、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-065": {
     "id": "GD03-065",
@@ -7175,9 +5467,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-066": {
     "id": "GD03-066",
@@ -7195,9 +5485,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-067": {
     "id": "GD03-067",
@@ -7215,13 +5503,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【配備時】自分のユニット1つを選んでもよい。それに1ダメージを与え、このターン中、それをAP+1する。",
-    "effect_tags": [
-      "on_deploy",
-      "damage",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-068": {
     "id": "GD03-068",
@@ -7239,12 +5521,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "味方のベースがある間、このユニットは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-069": {
     "id": "GD03-069",
@@ -7261,13 +5538,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "《高機動》(このユニットはブロックされない)【リンク中】このユニットにパイロットがセットされたターンの終了時に、これをアクティブにする。",
-    "effect_tags": [
-      "high_mobility",
-      "while_link",
-      "active"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-070": {
     "id": "GD03-070",
@@ -7284,11 +5555,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "このユニットがレストの間、味方のシールドは相手のユニットからバトルダメージを受けない。",
-    "effect_tags": [
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-071": {
     "id": "GD03-071",
@@ -7305,12 +5572,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【配備時】相手のユニット1つを選ぶ。自分のトラッシュの〔エゥーゴ〕のユニットカード1枚につき、このターン中、それをAP-1する。",
-    "effect_tags": [
-      "on_deploy",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-072": {
     "id": "GD03-072",
@@ -7327,14 +5589,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【配備時】このユニット以外の、〔三隻同盟〕の自分のユニットがいるなら、自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "blocker",
-      "on_deploy",
-      "rest",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-073": {
     "id": "GD03-073",
@@ -7351,16 +5606,7 @@
       "ap": 6,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【リンク中】【起動・アクション】【ターン1回】自分のトラッシュに〔ギャラルホルン〕のカードが6枚以上あるなら、このユニットとバトルしている相手のユニット1つを選ぶ。このバトル中、それをAP-3する。",
-    "effect_tags": [
-      "blocker",
-      "activate_action",
-      "while_link",
-      "once_per_turn",
-      "rest",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-074": {
     "id": "GD03-074",
@@ -7377,11 +5623,7 @@
       "ap": 3,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【セット中】このユニット以外の、〔超大国群〕の自分のユニットがいる間、相手のユニットはアタックするとき、可能ならレストのこのユニットをアタック先に選ぶ。",
-    "effect_tags": [
-      "while_set"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-075": {
     "id": "GD03-075",
@@ -7398,13 +5640,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【リンク中】【アタック時】パイロットがセットされていない相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect_tags": [
-      "on_attack",
-      "while_link",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-076": {
     "id": "GD03-076",
@@ -7421,12 +5657,7 @@
       "ap": 6,
       "hp": 6
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【ターン1回】自分のターン中、〔三隻同盟〕の自分のユニットが相手のユニットにバトルダメージを与えたとき、その相手のユニットを持ち主の手札に戻してもよい。",
-    "effect_tags": [
-      "once_per_turn",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-077": {
     "id": "GD03-077",
@@ -7443,12 +5674,7 @@
       "ap": 6,
       "hp": 6
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【リンク時】HP3以下の相手のユニット1～3つを選ぶ。それらを持ち主の手札に戻す。",
-    "effect_tags": [
-      "on_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-078": {
     "id": "GD03-078",
@@ -7465,13 +5691,7 @@
       "ap": 3,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【リンク中】【破壊時】このユニットにセットされていたカードを手札に戻す。",
-    "effect_tags": [
-      "on_destroy",
-      "while_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-079": {
     "id": "GD03-079",
@@ -7488,11 +5708,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "自分のユニットの効果で自分のベースをレストにするとき、かわりにこのユニットをレストにしてもよい。",
-    "effect_tags": [
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-080": {
     "id": "GD03-080",
@@ -7510,12 +5726,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【リンク時】自分のトラッシュの〔ギャラルホルン〕のコマンドカード1枚を選ぶ。それを手札に加える。",
-    "effect_tags": [
-      "on_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-081": {
     "id": "GD03-081",
@@ -7532,9 +5743,7 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "このユニットは、〔超大国群〕/〔国連〕の自分のユニットが配備されたターン中しかアタックできない。",
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-082": {
     "id": "GD03-082",
@@ -7551,11 +5760,7 @@
       "ap": 4,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "〔超大国群〕/〔国連〕の自分のユニットが2つ以上いる間、手札のこのカードをコスト-1する。",
-    "effect_tags": [
-      "cost_down"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-083": {
     "id": "GD03-083",
@@ -7572,12 +5777,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-084": {
     "id": "GD03-084",
@@ -7596,15 +5796,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】このユニット以外の、自分のユニット1つを選ぶ。このターン中、それは《リペア2》を得る。その後、それが〔ジュピトリス〕なら、自分は1枚ドローする。\n(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect_tags": [
-      "repair",
-      "burst",
-      "on_link",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-085": {
     "id": "GD03-085",
@@ -7621,12 +5813,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【バースト】このカードを手札に加える。手札のこのカードを、カード名に「ガンダムNT-1」を含むユニットにセットするようにプレイするとき、これをコストを0としてプレイする。",
-    "effect_tags": [
-      "burst",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-086": {
     "id": "GD03-086",
@@ -7643,14 +5830,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】このユニットのLv.以下の〔ティターンズ〕の自分のユニット1つを選ぶ。このターン中、それをAP+1する。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-087": {
     "id": "GD03-087",
@@ -7669,14 +5849,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-088": {
     "id": "GD03-088",
@@ -7694,17 +5867,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットが〔AGEシステム〕なら、これはAP+1され、《突破1》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "burst",
-      "while_link",
-      "damage",
-      "destroy",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-089": {
     "id": "GD03-089",
@@ -7722,13 +5885,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【バースト】このカードを手札に加える。このユニットを、自分のトラッシュのカード名の異なる〔サイクロプス隊〕の、パイロットカード/コマンドカードと同じ数だけAP+する。",
-    "effect_tags": [
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-090": {
     "id": "GD03-090",
@@ -7746,16 +5903,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】〔サイクロプス隊〕の自分のユニット1つを選ぶ。このターン中、それは《突破1》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "burst",
-      "on_attack",
-      "damage",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-091": {
     "id": "GD03-091",
@@ -7772,13 +5920,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分のトラッシュの〔ザフト〕のベースカード1枚を選ぶ。それを手札に加える。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-092": {
     "id": "GD03-092",
@@ -7796,14 +5938,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分のデッキを上から1枚、自分のトラッシュに置く。この効果で、〔ジオン〕/〔クラン〕のカードを置いたなら、相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-093": {
     "id": "GD03-093",
@@ -7821,13 +5956,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【バースト】このカードを手札に加える。相手のベースが無い間、このユニットをAP+1する。",
-    "effect_tags": [
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-094": {
     "id": "GD03-094",
@@ -7845,14 +5974,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【バースト】このカードを手札に加える。【セット時】自分のデッキを上から2枚、自分のトラッシュに置く。この効果で〔ヴェイガン〕のカードを置いたなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "bounce",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-095": {
     "id": "GD03-095",
@@ -7869,14 +5991,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを手札に加える。【ターン1回】このユニットが効果ダメージを受けたとき、相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
-    "effect_tags": [
-      "burst",
-      "once_per_turn",
-      "bounce",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-096": {
     "id": "GD03-096",
@@ -7894,15 +6009,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】【アタック時】自分の手札1枚を捨ててもよい。そうしたなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "while_link",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-097": {
     "id": "GD03-097",
@@ -7919,15 +6026,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】【ターン1回】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のデッキを上から2枚見て、その中のカード1枚を上に戻す。残ったカードは自分のトラッシュに置く。",
-    "effect_tags": [
-      "burst",
-      "while_link",
-      "once_per_turn",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-098": {
     "id": "GD03-098",
@@ -7945,13 +6044,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】レストのこのユニットが効果でアクティブになったとき、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "burst",
-      "while_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-099": {
     "id": "GD03-099",
@@ -7968,14 +6061,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】【破壊時】白の味方のベースがあるなら、このユニットのLv.以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_destroy",
-      "while_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-100": {
     "id": "GD03-100",
@@ -7994,14 +6080,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを手札に加える。【破壊時】相手のユニット1つを選ぶ。このターン中、それをAP-3する。",
-    "effect_tags": [
-      "burst",
-      "on_destroy",
-      "bounce",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-101": {
     "id": "GD03-101",
@@ -8013,13 +6092,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【メイン】自分は1枚ドローする。その後、自分のトラッシュに、カード名に「旺盛な好奇心」を含むカードが2枚以上あるなら、HP4以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "main",
-      "rest",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-102": {
     "id": "GD03-102",
@@ -8031,14 +6104,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】自分は1枚ドローする。【アクション】相手のユニットとバトルしている〔ティターンズ〕の自分のリンクユニット1つを選ぶ。それをアクティブにする。",
-    "effect_tags": [
-      "action",
-      "burst",
-      "active",
-      "draw"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-103": {
     "id": "GD03-103",
@@ -8050,14 +6116,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【バースト】HP2以下の相手のユニット1つを選ぶ。それをレストにする。【メイン】相手のユニットが3つ以上いるなら、レストの相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "damage",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "GD03-104": {
     "id": "GD03-104",
@@ -8074,14 +6133,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【メイン】/【アクション】HP3以下の相手のユニット1つを選ぶ。それをレストにする。〔ジュピトリス〕の味方のリンクユニットがいるなら、かわりにHP3以下の相手のユニット1～2つを選ぶ。【パイロット】「レコア・ロンド」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-105": {
     "id": "GD03-105",
@@ -8093,13 +6145,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを手札に加える。【メイン】味方のユニット1つを選ぶ。このターン中、それは、パイロットがセットされていないアクティブの相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-106": {
     "id": "GD03-106",
@@ -8111,12 +6157,7 @@
     "cost": 4,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【メイン】「GQuuuuuuX（オメガ・サイコミュ起動時）」(〔クラン〕・AP3・HP2)のユニットトークン1つと、「赤いガンダム」(〔クラン〕・AP2・HP3)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "main",
-      "token"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-107": {
     "id": "GD03-107",
@@ -8133,14 +6174,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【メイン】Lv.5以下の相手のユニット1つを選ぶ。それに味方のユニットトークンと同じ数のダメージを与える。【パイロット】「ハーディ・シュタイナー」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "damage",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-108": {
     "id": "GD03-108",
@@ -8157,13 +6191,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【メイン】「ハイゴッグ」(〔サイクロプス隊〕・AP2・HP1)のユニットトークン1つを配備する。【パイロット】「ガブリエル・ラミレス・ガルシア」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-109": {
     "id": "GD03-109",
@@ -8175,14 +6203,7 @@
     "cost": 3,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】Lv.4以下の相手のユニット1つを選ぶ。それに3ダメージを与える。自分のトラッシュに、カード名に「戦技の向上」を含むカードが2枚以上あるなら、かわりに相手のユニット1つを選ぶ。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "damage"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "GD03-110": {
     "id": "GD03-110",
@@ -8194,13 +6215,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【メイン】/【アクション】Lv.5以下の相手のユニットにセットされているパイロット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "main",
-      "action",
-      "destroy"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-111": {
     "id": "GD03-111",
@@ -8216,14 +6231,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【メイン】/【アクション】〔マフティー〕の味方のユニット1つを選ぶ。このターン中、それをAP+3する。【パイロット】「エメラルダ・ズービン」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "GD03-112": {
     "id": "GD03-112",
@@ -8235,15 +6243,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【メイン】/【アクション】このターン中、パイロットがセットされているユニットすべてをAP+2する。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-113": {
     "id": "GD03-113",
@@ -8255,14 +6255,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【メイン】/【アクション】アクティブの味方のユニット1つを選ぶ。それをレストにする。そうしたなら、この効果でレストにしたユニットのLv.以下の相手のユニット1つを選ぶ。それに3ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "action",
-      "damage",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-114": {
     "id": "GD03-114",
@@ -8274,13 +6267,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードの【アクション】を発動する。【アクション】アクティブのLv.2以下の相手のユニット1つを選ぶ。それを破壊する。自分のトラッシュにカードが10枚以上あるなら、かわりにアクティブのLv.4以下の相手のユニット1つを選ぶ。",
-    "effect_tags": [
-      "action",
-      "burst",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-115": {
     "id": "GD03-115",
@@ -8298,13 +6285,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【アクション】〔Xラウンダー〕のパイロットがセットされている味方のユニット1つを選ぶ。このバトル中、それはAP2以下の相手のユニットからバトルダメージを受けない。自分がLv.7以上なら、かわりにAP5以下の相手のユニットからバトルダメージを受けない。【パイロット】「ユリン・ルシェル」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-116": {
     "id": "GD03-116",
@@ -8316,13 +6297,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【メイン】/【アクション】〔ヴェイガン〕の味方のユニット1つと、相手のユニット1つを選ぶ。それらに2ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "action",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-117": {
     "id": "GD03-117",
@@ -8334,12 +6309,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【メイン】相手のユニットが1～4ついるなら、「グレイズ改」(〔鉄華団〕・AP2・HP2)、5つ以上いるなら、「ガンダム・バルバトス（第4形態）」(〔鉄華団〕・AP4・HP4)のユニットトークン1つを配備する。",
-    "effect_tags": [
-      "main",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-118": {
     "id": "GD03-118",
@@ -8351,15 +6321,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【アクション】レストのLv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。その後、自分のトラッシュに、カード名に「能力の覚醒」を含むカードが2枚以上あるなら、味方のユニット1つを選んでもよい。このターン中、それは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "action",
-      "burst",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-119": {
     "id": "GD03-119",
@@ -8371,13 +6333,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【メイン】レストの味方のベース1つを選ぶ。それをアクティブにする。そうしたなら、このターン中、相手のユニットすべてをAP-1する。",
-    "effect_tags": [
-      "main",
-      "active",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-120": {
     "id": "GD03-120",
@@ -8394,14 +6350,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【メイン】このターン中、〔超大国群〕/〔国連〕の味方のユニットがバトルダメージで相手のユニットを破壊しているなら、〔超大国群〕/〔国連〕のレストの味方のユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。【パイロット】「パトリック・コーラサワー」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "destroy",
-      "active"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-121": {
     "id": "GD03-121",
@@ -8418,13 +6367,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【アクション】味方のベース1つと、HP3以下の相手のユニット1つを選ぶ。それらをレストにする。【パイロット】「カツ・コバヤシ」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "rest"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-122": {
     "id": "GD03-122",
@@ -8441,13 +6384,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【アクション】Lv.3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。【パイロット】「セルゲイ・スミルノフ」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "GD03-123": {
     "id": "GD03-123",
@@ -8465,14 +6402,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、〔ジュピトリス〕の味方のユニットがいるなら、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "GD03-124": {
     "id": "GD03-124",
@@ -8489,15 +6419,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【ターン1回】自分のユニットにLv.3以下のパイロットをセットしたとき、HP3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "once_per_turn",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-125": {
     "id": "GD03-125",
@@ -8514,15 +6436,7 @@
     "stats": {
       "hp": 6
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【ターン1回】自分のターン中、Lv.6以上の〔オペレーション・メテオ〕/〔Gチーム〕の味方のユニットがバトルダメージで相手のユニットを破壊したとき、その味方のユニットを2回復してもよい。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "once_per_turn",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "GD03-126": {
     "id": "GD03-126",
@@ -8539,15 +6453,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n相手のターン中、味方のユニットトークンすべてをAP+1する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "token",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争"
   },
   "GD03-127": {
     "id": "GD03-127",
@@ -8564,14 +6470,7 @@
     "stats": {
       "hp": 6
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、〔ザフト〕の味方のユニット1つを選ぶ。このターン中、それをAP+3する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-128": {
     "id": "GD03-128",
@@ -8588,15 +6487,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動新世紀ガンダムX",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【ターン1回】相手のターン中、自分のユニットが相手の効果でレストになったとき、相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "once_per_turn",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動新世紀ガンダムX"
   },
   "GD03-129": {
     "id": "GD03-129",
@@ -8613,15 +6504,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n自分のターン中、〔鉄華団〕/〔テイワズ〕の味方のユニットが効果ダメージを受けたとき、このベースをレストにしてもよい。そうしたなら、そのダメージを1軽減する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "GD03-130": {
     "id": "GD03-130",
@@ -8638,13 +6521,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムAGE",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、自分のトラッシュのLv.4以下の〔ヴェイガン〕のユニットカード1枚を選んでもよい。それをコストを支払って配備する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムAGE"
   },
   "GD03-131": {
     "id": "GD03-131",
@@ -8661,13 +6538,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、〔三隻同盟〕の自分のユニットが2つ以上いるなら、Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "GD03-132": {
     "id": "GD03-132",
@@ -8684,15 +6555,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士Zガンダム",
-    "effect": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n【破壊時】〔エゥーゴ〕の自分のリンクユニットがいるなら、HP4以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "on_destroy",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士Zガンダム"
   },
   "ST01-001": {
     "id": "ST01-001",
@@ -8710,13 +6573,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)【セット中】自分のターン中、自分のユニットすべてをAP+1する。",
-    "effect_tags": [
-      "repair",
-      "while_set",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-002": {
     "id": "ST01-002",
@@ -8734,12 +6591,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【セット時・〔WB隊〕のパイロット】自分は1枚ドローする。",
-    "effect_tags": [
-      "on_set",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-003": {
     "id": "ST01-003",
@@ -8757,9 +6609,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-004": {
     "id": "ST01-004",
@@ -8777,12 +6627,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【配備時】HP2以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_deploy",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-005": {
     "id": "ST01-005",
@@ -8799,9 +6644,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-006": {
     "id": "ST01-006",
@@ -8818,12 +6661,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【セット時】Lv.5以下の相手のユニット1つを選ぶ。このターン中、それをAP-3する。",
-    "effect_tags": [
-      "on_set",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "ST01-007": {
     "id": "ST01-007",
@@ -8840,9 +6678,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "ST01-008": {
     "id": "ST01-008",
@@ -8859,12 +6695,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "ST01-009": {
     "id": "ST01-009",
@@ -8881,12 +6712,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)このユニットは、相手プレイヤーをアタック先に選べない。",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "ST01-010": {
     "id": "ST01-010",
@@ -8904,14 +6730,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを手札に加える。【セット時】HP5以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-011": {
     "id": "ST01-011",
@@ -8928,15 +6747,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】【ターン1回】自分のリソース1つを選ぶ。それをアクティブにする。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "once_per_turn",
-      "active",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "ST01-012": {
     "id": "ST01-012",
@@ -8953,13 +6764,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【メイン】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。【パイロット】「ハヤト・コバヤシ」",
-    "effect_tags": [
-      "main",
-      "has_pilot",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-013": {
     "id": "ST01-013",
@@ -8976,12 +6781,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【メイン】味方のユニット1つを選ぶ。それを3回復する。【パイロット】「カイ・シデン」",
-    "effect_tags": [
-      "main",
-      "has_pilot"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-014": {
     "id": "ST01-014",
@@ -8993,14 +6793,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】相手のユニット1つを選ぶ。このターン中、それをAP-3する。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "ST01-015": {
     "id": "ST01-015",
@@ -9018,16 +6811,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】【ターン1回】②：自分のユニットがいないなら、「ガンダム」(〔WB隊〕・AP3・HP3)、1つだけいるなら、「ガンキャノン」(〔WB隊〕・AP2・HP2)、2つ以上いるなら、「ガンタンク」(〔WB隊〕・AP1・HP1)のユニットトークン1つを配備する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "once_per_turn",
-      "bounce",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST01-016": {
     "id": "ST01-016",
@@ -9044,16 +6828,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：このターン中、味方のリンクユニットすべてをAP+1する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 水星の魔女"
   },
   "ST02-001": {
     "id": "ST02-001",
@@ -9070,13 +6845,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《突破5》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)このユニットは、アクティブのLv.4以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-002": {
     "id": "ST02-002",
@@ -9093,11 +6862,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【配備時】自分はEXリソース1つを置く。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-003": {
     "id": "ST02-003",
@@ -9114,13 +6879,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【セット中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、Lv.3以下の相手のユニットすべてに1ダメージを与える。",
-    "effect_tags": [
-      "while_set",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-004": {
     "id": "ST02-004",
@@ -9137,9 +6896,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-005": {
     "id": "ST02-005",
@@ -9156,9 +6913,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-006": {
     "id": "ST02-006",
@@ -9175,13 +6930,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【起動・メイン】【ターン1回】④：このユニットをアクティブにする。",
-    "effect_tags": [
-      "activate_main",
-      "once_per_turn",
-      "active"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-007": {
     "id": "ST02-007",
@@ -9198,9 +6947,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-008": {
     "id": "ST02-008",
@@ -9217,12 +6964,7 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-009": {
     "id": "ST02-009",
@@ -9239,12 +6981,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-010": {
     "id": "ST02-010",
@@ -9261,14 +6998,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットをAP+1、HP+1する。",
-    "effect_tags": [
-      "burst",
-      "while_link",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-011": {
     "id": "ST02-011",
@@ -9285,15 +7015,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "while_link",
-      "destroy",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-012": {
     "id": "ST02-012",
@@ -9309,15 +7031,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【メイン】自分のユニット1つを選ぶ。このターン中、それは《突破3》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【パイロット】「トロワ・バートン」",
-    "effect_tags": [
-      "breakthrough",
-      "main",
-      "has_pilot",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-013": {
     "id": "ST02-013",
@@ -9333,13 +7047,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【アクション】このバトル中、自分のシールドエリアのカードは、Lv.4以下の相手のユニットからダメージを受けない。【パイロット】「カトル・ラバーバ・ウィナー」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "damage_reduce"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-014": {
     "id": "ST02-014",
@@ -9351,14 +7059,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】HP5以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "rest"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-015": {
     "id": "ST02-015",
@@ -9375,13 +7076,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のデッキを上から2枚見て、その中のカード1枚を上に戻す。残ったカードは下に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST02-016": {
     "id": "ST02-016",
@@ -9398,14 +7093,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "新機動戦記ガンダムW",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、「トールギス」(〔OZ〕・AP4・HP2)のユニットトークン1つを配備する。自分のターンで、自分のトラッシュにカード名に「コルシカ基地」を含むカードがあるなら、かわりに「リーオー」(〔OZ〕・AP1・HP1)のユニットトークン2つを配備する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "token"
-    ]
+    "source_title": "新機動戦記ガンダムW"
   },
   "ST03-001": {
     "id": "ST03-001",
@@ -9422,14 +7110,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【セット中】このユニットは《高機動》を得る。\n(このユニットはブロックされない)自分のターン中、このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "high_mobility",
-      "while_set",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-002": {
     "id": "ST03-002",
@@ -9446,14 +7127,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【起動・メイン】《援護2》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-003": {
     "id": "ST03-003",
@@ -9470,9 +7144,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-004": {
     "id": "ST03-004",
@@ -9489,14 +7161,7 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【起動・メイン】《援護2》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-005": {
     "id": "ST03-005",
@@ -9513,9 +7178,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-006": {
     "id": "ST03-006",
@@ -9532,11 +7195,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【破壊時】自分のデッキを上から3枚見て、その中の、〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "on_destroy"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST03-007": {
     "id": "ST03-007",
@@ -9553,9 +7212,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム"
   },
   "ST03-008": {
     "id": "ST03-008",
@@ -9572,12 +7229,7 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【アタック時】このターン中、このユニットをAP+2する。",
-    "effect_tags": [
-      "on_attack",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST03-009": {
     "id": "ST03-009",
@@ -9594,12 +7246,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【配備時】「ザクⅡ」(〔ジオン〕・AP1・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "on_deploy",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST03-010": {
     "id": "ST03-010",
@@ -9617,13 +7264,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを手札に加える。【セット時】自分の手札の、Lv.4以下の、〔ネオ・ジオン〕/〔ジオン〕のユニットカード1枚を配備してもよい。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-011": {
     "id": "ST03-011",
@@ -9641,15 +7282,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility",
-      "burst",
-      "on_attack",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST03-012": {
     "id": "ST03-012",
@@ -9665,14 +7298,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【メイン】/【アクション】味方のユニット1つを選ぶ。このターン中、それをAP+2する。【パイロット】「アンジェロ・ザウパー」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-013": {
     "id": "ST03-013",
@@ -9684,14 +7310,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "action",
-      "burst",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-014": {
     "id": "ST03-014",
@@ -9707,13 +7326,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【アクション】味方のユニット1つを選ぶ。このバトル中、それはAP2以下の相手のユニットからバトルダメージを受けない。【パイロット】「ランバ・ラル」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST03-015": {
     "id": "ST03-015",
@@ -9730,14 +7343,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムUC",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、AP5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムUC"
   },
   "ST03-016": {
     "id": "ST03-016",
@@ -9754,14 +7360,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、「ザクⅡ（シャア・アズナブル機）」(〔ジオン〕・AP3・HP1)のユニットトークン1つをレストで配備する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム"
   },
   "ST04-001": {
     "id": "ST04-001",
@@ -9778,14 +7377,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【セット時・Lv.4以上のパイロット】HP4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect_tags": [
-      "blocker",
-      "on_set",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-002": {
     "id": "ST04-002",
@@ -9802,12 +7394,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【配備時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
-    "effect_tags": [
-      "on_deploy",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-003": {
     "id": "ST04-003",
@@ -9824,9 +7411,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-004": {
     "id": "ST04-004",
@@ -9843,12 +7428,7 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-005": {
     "id": "ST04-005",
@@ -9865,9 +7445,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-006": {
     "id": "ST04-006",
@@ -9884,12 +7462,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【アタック時】このユニットがAP5以上なら、Lv.5以上の相手のユニット1つを選ぶ。それに3ダメージを与える。",
-    "effect_tags": [
-      "on_attack",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-007": {
     "id": "ST04-007",
@@ -9906,13 +7479,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-008": {
     "id": "ST04-008",
@@ -9929,9 +7496,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-009": {
     "id": "ST04-009",
@@ -9948,13 +7513,7 @@
       "ap": 3,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【セット中】【破壊時】このユニット以外の、自分のリンクユニットがいるなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "on_destroy",
-      "while_set",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-010": {
     "id": "ST04-010",
@@ -9972,14 +7531,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "bounce",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-011": {
     "id": "ST04-011",
@@ -9997,13 +7549,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】このターン中、このユニットはアクティブのLv.5以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-012": {
     "id": "ST04-012",
@@ -10015,14 +7561,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】〔地球連合〕の自分のユニットトークンがいないなら、「エールストライクガンダム」(〔地球連合〕・AP3・HP3・《ブロッカー》)のユニットトークン1つを配備する。【メイン】〔地球連合〕の自分のユニットトークンがいないなら、「ソードストライクガンダム」(〔地球連合〕・AP4・HP2・《ブロッカー》)か、「ランチャーストライクガンダム」(〔地球連合〕・AP2・HP4・《ブロッカー》)のユニットトークン1つを配備する。",
-    "effect_tags": [
-      "blocker",
-      "main",
-      "burst",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-013": {
     "id": "ST04-013",
@@ -10038,14 +7577,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【メイン】/【アクション】HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。【パイロット】「ムウ・ラ・フラガ」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-014": {
     "id": "ST04-014",
@@ -10062,15 +7594,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【メイン】/【アクション】Lv.2以下の味方のユニット1つを選ぶ。このターン中、それは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)【パイロット】「ミゲル・アイマン」",
-    "effect_tags": [
-      "first_strike",
-      "main",
-      "action",
-      "has_pilot",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-015": {
     "id": "ST04-015",
@@ -10087,17 +7611,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】【ターン1回】②：《ブロッカー》を持つ味方のユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
-    "effect_tags": [
-      "blocker",
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "once_per_turn",
-      "active",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST04-016": {
     "id": "ST04-016",
@@ -10114,16 +7628,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：味方のユニット1つを選ぶ。このターン中、それをAP+1する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダムSEED"
   },
   "ST05-001": {
     "id": "ST05-001",
@@ -10141,14 +7646,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【配備時】このユニット以外の、自分のユニット1つを選ぶ。それに1ダメージを与え、このターン中、それをAP+1する。このユニットがダメージを受けている間、これは《制圧》を得る。\n(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)",
-    "effect_tags": [
-      "suppression",
-      "on_deploy",
-      "damage",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-002": {
     "id": "ST05-002",
@@ -10166,11 +7664,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "このユニットがダメージを受けている間、これをAP+2する。",
-    "effect_tags": [
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-003": {
     "id": "ST05-003",
@@ -10187,14 +7681,7 @@
       "ap": null,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【起動・メイン】このユニットをレストにする：自分のユニット1つを選ぶ。それに1ダメージを与え、このターン中、それをAP+1する。",
-    "effect_tags": [
-      "activate_main",
-      "damage",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-004": {
     "id": "ST05-004",
@@ -10211,9 +7698,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-005": {
     "id": "ST05-005",
@@ -10231,12 +7716,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【破壊時】AP4以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "on_destroy",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-006": {
     "id": "ST05-006",
@@ -10253,9 +7733,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-007": {
     "id": "ST05-007",
@@ -10272,14 +7750,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【セット時】Lv.3以下の相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect_tags": [
-      "blocker",
-      "on_set",
-      "rest",
-      "stat_debuff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-008": {
     "id": "ST05-008",
@@ -10296,12 +7767,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-009": {
     "id": "ST05-009",
@@ -10318,9 +7784,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-010": {
     "id": "ST05-010",
@@ -10337,14 +7801,7 @@
     "stats": {
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを手札に加える。【セット時】自分のユニット1つと、相手のユニット1つを選ぶ。それらに1ダメージを与える。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "damage",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-011": {
     "id": "ST05-011",
@@ -10362,14 +7819,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のトラッシュのLv.2以下の〔鉄華団〕のユニットカード1枚を選ぶ。それを手札に加える。",
-    "effect_tags": [
-      "burst",
-      "while_link",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-012": {
     "id": "ST05-012",
@@ -10386,14 +7836,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを手札に加える。【セット時】このユニット以外の、〔ギャラルホルン〕/〔鉄華団〕の自分のユニットが2つ以上いるなら、HP3以下の相手のユニット1つを選ぶ。それをレストにする。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "rest",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-013": {
     "id": "ST05-013",
@@ -10405,14 +7848,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【メイン】/【アクション】自分のユニット1つを選ぶ。それに1ダメージを与え、このターン中、それをAP+3する。",
-    "effect_tags": [
-      "main",
-      "action",
-      "damage",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-014": {
     "id": "ST05-014",
@@ -10424,14 +7860,7 @@
     "cost": 2,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】相手のユニット1つを選ぶ。それに1ダメージを与える。【メイン】Lv.3以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "main",
-      "burst",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST05-015": {
     "id": "ST05-015",
@@ -10448,16 +7877,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：ダメージを受けている自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ"
   },
   "ST06-001": {
     "id": "ST06-001",
@@ -10474,13 +7894,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【リンク時】このユニット以外の、〔クラン〕の味方のユニットがいるなら、このターン中、これは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "effect_tags": [
-      "first_strike",
-      "on_link",
-      "damage"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-002": {
     "id": "ST06-002",
@@ -10497,12 +7911,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【配備時】このユニット以外の、〔クラン〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-003": {
     "id": "ST06-003",
@@ -10519,14 +7928,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
-    "effect_tags": [
-      "support",
-      "activate_main",
-      "rest",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-004": {
     "id": "ST06-004",
@@ -10543,9 +7945,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-005": {
     "id": "ST06-005",
@@ -10562,15 +7962,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "《突破1》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【アタック時】〔クラン〕の味方のユニット1～2つを選ぶ。このターン中、それらをAP+2する。",
-    "effect_tags": [
-      "breakthrough",
-      "on_attack",
-      "damage",
-      "destroy",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-006": {
     "id": "ST06-006",
@@ -10587,9 +7979,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-007": {
     "id": "ST06-007",
@@ -10606,11 +7996,7 @@
       "ap": 3,
       "hp": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【配備時】このユニット以外の、〔クラン〕の自分のユニット1つを選ぶ。このターン中、それはアクティブのAP3以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-008": {
     "id": "ST06-008",
@@ -10627,9 +8013,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-009": {
     "id": "ST06-009",
@@ -10647,13 +8031,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分のデッキを上から1枚見る。それが〔クラン〕のカードなら公開して手札に加えてもよい。残ったカードは下に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-010": {
     "id": "ST06-010",
@@ -10671,14 +8049,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードを手札に加える。【リンク中】【アタック時】〔クラン〕の自分のユニットがいるなら、自分のデッキを上から1枚見て、上か下に戻す。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "while_link",
-      "bounce"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-011": {
     "id": "ST06-011",
@@ -10694,14 +8065,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【メイン】/【アクション】〔クラン〕の味方のユニット1～2つを選ぶ。このターン中、それらをAP+2する。【パイロット】「ガイア（GQ）」",
-    "effect_tags": [
-      "main",
-      "action",
-      "has_pilot",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-012": {
     "id": "ST06-012",
@@ -10713,11 +8077,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【メイン】自分のデッキを上から3枚見て、その中の〔クラン〕の、ユニットカード1枚/パイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "main"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-013": {
     "id": "ST06-013",
@@ -10733,13 +8093,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【アクション】〔クラン〕の味方のユニット1～2つを選ぶ。このターン中、それらはLv.2以下の相手のユニットからバトルダメージを受けない。【パイロット】「オルテガ（GQ）」",
-    "effect_tags": [
-      "action",
-      "has_pilot",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-014": {
     "id": "ST06-014",
@@ -10756,16 +8110,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：〔クラン〕の味方のリンクユニットがいるなら、味方のユニット1つを選ぶ。このターン中、それをAP+2する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "rest",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST06-015": {
     "id": "ST06-015",
@@ -10782,17 +8127,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【ターン1回】〔クラン〕の味方のユニットがリンクしたとき、このターン中、それは《突破3》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
-    "effect_tags": [
-      "breakthrough",
-      "burst",
-      "on_deploy",
-      "once_per_turn",
-      "damage",
-      "destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)"
   },
   "ST07-001": {
     "id": "ST07-001",
@@ -10810,13 +8145,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "自分のターン終了時、自分のトラッシュに〔CB〕のカードが7枚以上あるなら、自分のリソース1つを選ぶ。それをアクティブにする。【セット時】自分のデッキを上から2枚、自分のトラッシュに置く。この効果で〔CB〕のカードを置いたなら、自分は1枚ドローする。",
-    "effect_tags": [
-      "on_set",
-      "active",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-002": {
     "id": "ST07-002",
@@ -10834,9 +8163,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-003": {
     "id": "ST07-003",
@@ -10854,9 +8181,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-004": {
     "id": "ST07-004",
@@ -10874,12 +8199,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "〔CB〕の自分のパイロットがいる間、このユニットは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-005": {
     "id": "ST07-005",
@@ -10897,13 +8217,7 @@
       "ap": 2,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、これを2回復する。【リンク中】このユニットをAP+2する。",
-    "effect_tags": [
-      "while_link",
-      "destroy",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-006": {
     "id": "ST07-006",
@@ -10921,9 +8235,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-007": {
     "id": "ST07-007",
@@ -10941,11 +8253,7 @@
       "ap": 2,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "自分のターン中、〔CB〕の自分のパイロットがいる間、このユニットをAP+2する。",
-    "effect_tags": [
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-008": {
     "id": "ST07-008",
@@ -10963,9 +8271,7 @@
       "ap": 3,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-009": {
     "id": "ST07-009",
@@ -10982,14 +8288,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】このターン中、このユニットをAP+1する。自分のトラッシュに〔CB〕のカードが7枚以上あるなら、かわりに〔CB〕の自分のユニットすべてをAP+1する。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-010": {
     "id": "ST07-010",
@@ -11007,14 +8306,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを手札に加える。【破壊時】相手のターンで、このユニットが〔CB〕なら、自分は1枚ドローする。",
-    "effect_tags": [
-      "burst",
-      "on_destroy",
-      "draw",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-011": {
     "id": "ST07-011",
@@ -11031,13 +8323,7 @@
       "ap_mod": 2,
       "hp_mod": 2
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを手札に加える。【セット時】このユニットが〔CB〕なら、このターン中、これはアクティブの、これのLv.以下の相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-012": {
     "id": "ST07-012",
@@ -11055,13 +8341,7 @@
       "ap_mod": 1,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを手札に加える。自分のターン中、〔CB〕の自分のリンクユニットがいる間、このユニットはAP3以下の相手のユニットからバトルダメージを受けない。",
-    "effect_tags": [
-      "burst",
-      "bounce",
-      "damage_reduce"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-013": {
     "id": "ST07-013",
@@ -11073,13 +8353,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】自分は1枚ドローする。【アクション】レストの〔CB〕の味方のユニット1つを選ぶ。バトルしている相手のユニットのアタック先をそれにする。",
-    "effect_tags": [
-      "action",
-      "burst",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-014": {
     "id": "ST07-014",
@@ -11091,11 +8365,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【メイン】自分のデッキを上から3枚見て、その中の〔CB〕の、ユニットカード1枚/パイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "main"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST07-015": {
     "id": "ST07-015",
@@ -11112,15 +8382,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム00",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\nレストの〔CB〕の味方のユニットがいる間、このベースは、ユニットトークン以外の、Lv.3以下の相手のユニットからダメージを受けない。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "damage_reduce",
-      "token"
-    ]
+    "source_title": "機動戦士ガンダム00"
   },
   "ST08-001": {
     "id": "ST08-001",
@@ -11137,13 +8399,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "Lv.6以上の自分のユニットがいない間、相手のユニット1つにつき、手札のこのカードをLv.-1、コスト-1する。【セット時】最もLv.が高い相手のユニット1つを選ぶ。それに3ダメージを与える。",
-    "effect_tags": [
-      "on_set",
-      "damage",
-      "cost_down"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-002": {
     "id": "ST08-002",
@@ -11160,12 +8416,7 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【配備時】相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_deploy",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-003": {
     "id": "ST08-003",
@@ -11182,9 +8433,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-004": {
     "id": "ST08-004",
@@ -11201,12 +8450,7 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【アタック時】相手のユニットにアタックしているなら、相手のユニット1つを選ぶ。それに1ダメージを与える。",
-    "effect_tags": [
-      "on_attack",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-005": {
     "id": "ST08-005",
@@ -11223,9 +8467,7 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-006": {
     "id": "ST08-006",
@@ -11242,14 +8484,7 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【セット中】【アタック時】【ターン1回】相手プレイヤーにアタックしているなら、自分の手札の〔地球連邦〕のユニットカード1枚を公開し、デッキの下に戻す。そうしたなら、自分は2枚ドローする。",
-    "effect_tags": [
-      "on_attack",
-      "while_set",
-      "once_per_turn",
-      "draw"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-007": {
     "id": "ST08-007",
@@ -11266,9 +8501,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-008": {
     "id": "ST08-008",
@@ -11285,12 +8518,7 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "相手のユニットが3つ以上いる間、このユニットは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
-    "effect_tags": [
-      "blocker",
-      "rest"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-009": {
     "id": "ST08-009",
@@ -11307,11 +8535,7 @@
       "ap": null,
       "hp": 1
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【配備時】レストのLv.2以下の相手のユニット1つを選ぶ。それは次の相手のターンのスタートフェイズでアクティブにならない。",
-    "effect_tags": [
-      "on_deploy"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-010": {
     "id": "ST08-010",
@@ -11329,13 +8553,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【バースト】このカードを手札に加える。【セット時】このユニットが〔マフティー〕なら、〔マフティー〕の自分のユニット1つを選ぶ。このターン中、それはダメージを受けているアクティブの相手のユニットをアタック先に選んでもよい。",
-    "effect_tags": [
-      "burst",
-      "on_set",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-011": {
     "id": "ST08-011",
@@ -11352,13 +8570,7 @@
       "ap_mod": 2,
       "hp_mod": 1
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【バースト】このカードを手札に加える。自分が効果でドローしたとき、このユニットが青なら、このターン中、これは《高機動》を得る。\n(このユニットはブロックされない)",
-    "effect_tags": [
-      "high_mobility",
-      "burst",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-012": {
     "id": "ST08-012",
@@ -11374,15 +8586,7 @@
     "stats": {
       "hp": 0
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【メイン】味方のリンクユニット1つを選ぶ。このターン中、それは《突破1》を得る。\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【パイロット】「ガウマン・ノビル」",
-    "effect_tags": [
-      "breakthrough",
-      "main",
-      "has_pilot",
-      "damage",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-013": {
     "id": "ST08-013",
@@ -11394,13 +8598,7 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【メイン】/【アクション】相手のユニット1つを選ぶ。それに1ダメージを与える。〔マフティー〕の味方のリンクユニットがいるなら、かわりに2ダメージを与える。",
-    "effect_tags": [
-      "main",
-      "action",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-014": {
     "id": "ST08-014",
@@ -11417,14 +8615,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce",
-      "stat_buff"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST08-015": {
     "id": "ST08-015",
@@ -11441,15 +8632,7 @@
     "stats": {
       "hp": 5
     },
-    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】【ターン1回】②：自分のユニット1つを選ぶ。それを2回復する。",
-    "effect_tags": [
-      "activate_main",
-      "burst",
-      "on_deploy",
-      "once_per_turn",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ"
   },
   "ST09-001": {
     "id": "ST09-001",
@@ -11467,11 +8650,7 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "【起動・メイン】②：このユニットを持ち主のデッキの下に戻す：自分のトラッシュのLv.4以上のカード名に「インパルスガンダム」を含むユニットカード1つを選ぶ。それを配備する。",
-    "effect_tags": [
-      "activate_main"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-002": {
     "id": "ST09-002",
@@ -11489,12 +8668,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "【破壊時】自分のトラッシュのカード名に「フォースインパルスガンダム」を含まない、〔ミネルバ隊〕のユニットカード1枚を選ぶ。それを手札に加える。",
-    "effect_tags": [
-      "on_destroy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-003": {
     "id": "ST09-003",
@@ -11512,13 +8686,7 @@
       "ap": 5,
       "hp": 4
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "《突破3》【リンク時】自分のトラッシュに紫のカードが5枚以上あるなら、AP5以下のユニットすべてに2ダメージを与える。",
-    "effect_tags": [
-      "breakthrough",
-      "on_link",
-      "damage"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-004": {
     "id": "ST09-004",
@@ -11535,12 +8703,7 @@
       "ap": 4,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "《ブロッカー》味方のベースがある間、このユニットは《制圧》を得る。",
-    "effect_tags": [
-      "blocker",
-      "suppression"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-005": {
     "id": "ST09-005",
@@ -11558,9 +8721,7 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": null,
-    "effect_tags": []
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-006": {
     "id": "ST09-006",
@@ -11578,13 +8739,7 @@
       "ap": 4,
       "hp": 2
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "【配備時】このユニットをトラッシュから配備したなら、Lv.3以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "on_deploy",
-      "destroy",
-      "trash_use"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-007": {
     "id": "ST09-007",
@@ -11602,11 +8757,7 @@
       "ap": 5,
       "hp": 3
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "《ブロッカー》",
-    "effect_tags": [
-      "blocker"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-008": {
     "id": "ST09-008",
@@ -11625,14 +8776,7 @@
       "ap_mod": 3,
       "hp_mod": 0
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "【バースト】このカードを手札に加える。【アタック時】このユニットが〔ミネルバ隊〕なら、自分のリソース1つを選ぶ。それをアクティブにする。",
-    "effect_tags": [
-      "burst",
-      "on_attack",
-      "active",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-009": {
     "id": "ST09-009",
@@ -11644,13 +8788,7 @@
     "cost": 3,
     "traits": [],
     "stats": {},
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "【メイン】/【アクション】アクティブのAP4以下の相手のユニット1つを選ぶ。それを破壊する。",
-    "effect_tags": [
-      "main",
-      "action",
-      "destroy"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
   },
   "ST09-010": {
     "id": "ST09-010",
@@ -11669,12 +8807,26 @@
       "ap": 0,
       "hp": 5
     },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、自分のデッキを上から2枚見て、その中のカード1枚を上に戻す。残ったカードは自分のトラッシュに置く。",
-    "effect_tags": [
-      "burst",
-      "on_deploy",
-      "bounce"
-    ]
+    "source_title": "機動戦士ガンダムSEED DESTINY"
+  },
+  "GD04-038": {
+    "id": "GD04-038",
+    "name_jp": "ガンダム エクシア",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "link": "刹那・F・セイエイ",
+    "effect": "【配備時】相手のユニットが2つ以上いるなら、Lv.2以下の相手のユニット1つを選ぶ、それにこのターン、ダメージを与える。",
+    "source_title": "機動戦士ガンダム00"
   }
 }
