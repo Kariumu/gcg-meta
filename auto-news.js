@@ -921,9 +921,13 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">AP</td><td>${card.ap != null ? card.ap : '-'}</td>`;
   html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">HP</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
   html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
+  if (card.link) {
+    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">リンク条件</td><td colspan="3">${escapeHtml(card.link)}</td></tr>\n`;
+  }
   html += '      </table>\n';
-  if (card.effect) {
-    html += `      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0"><strong>効果:</strong> ${escapeHtml(card.effect)}</p>\n`;
+  {
+    const effectText = card.effect || '効果なし（バニラ）';
+    html += `      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0"><strong>効果:</strong> ${escapeHtml(effectText)}</p>\n`;
   }
   if (analysis) {
     html += `      <p style="font-size:14px;margin:0">${analysis}</p>\n`;
@@ -1048,7 +1052,7 @@ async function generateCardAnalyses(cardInfoList, relatedCards) {
       .join('、');
 
     const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
-以下のカード1枚について、2〜3行の簡潔な考察を書いてください。プレーンテキストのみで出力（HTMLタグ不要）。
+以下のカード1枚について、最低3文以上の考察を書いてください。プレーンテキストのみで出力（HTMLタグ不要）。
 
 【カード情報】
 - カード名: ${card.card_name} (${card.card_number})
@@ -1086,6 +1090,10 @@ ${relatedDesc || 'データなし'}
   ステータスとコスト効率で評価すること。「不明」「評価できない」とは書かない
 
 【考察文のルール】
+- 最低3文以上の考察を書くこと
+- ステータス（Lv/コスト/AP/HP）と効果の両面から評価すること
+- 同色デッキでの採用可能性に言及すること
+- 「高機動ユニット」「注目される」等の抽象的な表現だけで終わらせないこと
 - 効果テキストから読み取れる事実のみに基づいて考察すること
 - カードの効果を勝手に解釈・推測して存在しない相互作用を書かないこと
 - 既存カードとの相性を書く場合は、そのカードの効果テキストを確認してから書くこと
@@ -1096,7 +1104,7 @@ ${relatedDesc || 'データなし'}
 - プレイヤーが読んで「なるほど」と思える分析を書く
 - 「このカード強そう」「使いたい」程度のカジュアルな感想はOK
 - データに基づいた具体的な表現を使う
-- 2〜3行で簡潔に。プレーンテキストのみ出力。
+- プレーンテキストのみ出力。
 
 【表記ルール】
 記事内で以下の表記を統一すること:
