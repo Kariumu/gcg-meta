@@ -40,6 +40,7 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const TEST_MODE = true; // 松岡さんのOKが出たらfalseに変更
+const REGENERATE_DATE = (() => { const i = process.argv.indexOf('--regenerate'); return i >= 0 ? process.argv[i + 1] : null; })();
 
 const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
 const VALID_CARD_TYPES = ['UNIT', 'PILOT', 'COMMAND', 'BASE'];
@@ -1423,6 +1424,45 @@ function gitPush(message) {
 // === メイン処理 ===
 async function main() {
   log('=== auto-news 開始 ===');
+
+  // --regenerate DATE: 認識ログからHTMLのみ再生成（X API不要）
+  if (REGENERATE_DATE) {
+    log(`=== 再生成モード: ${REGENERATE_DATE} ===`);
+    if (!ANTHROPIC_API_KEY) { log('エラー: ANTHROPIC_API_KEY が設定されていません'); process.exit(1); }
+    if (!fs.existsSync(NEWS_DIR)) fs.mkdirSync(NEWS_DIR, { recursive: true });
+    let logData = {};
+    try { logData = JSON.parse(fs.readFileSync(RECOGNITION_LOG_FILE, 'utf-8')); } catch (e) { log('認識ログ読み込み失敗'); process.exit(1); }
+    const logEntry = logData[REGENERATE_DATE];
+    if (!logEntry || !logEntry.cards || logEntry.cards.length === 0) { log(`認識ログに ${REGENERATE_DATE} のデータなし`); process.exit(1); }
+    const cardsMaster = loadCardsMaster();
+    const summary = loadSummary();
+    const allCardInfos = logEntry.cards.map(c => {
+      // ローカル画像があれば設定
+      const dir = path.join(NEWS_IMAGE_DIR, REGENERATE_DATE);
+      const ext = ['.jpg', '.png'].find(e => fs.existsSync(path.join(dir, `${c.card_number}${e}`)));
+      if (ext) c._localImagePath = `../../images/news/${REGENERATE_DATE}/${c.card_number}${ext}`;
+      return c;
+    });
+    const tweetUrls = logEntry.source_tweets || [];
+    const allRelated = [];
+    for (const ci of allCardInfos) allRelated.push(...findRelatedCards(ci, cardsMaster, summary));
+    const uniqueRelated = [...new Map(allRelated.map(r => [r.card_id, r])).values()];
+    const dateLbl = dateLabel(REGENERATE_DATE);
+    const cardCount = allCardInfos.length;
+    let introHtml;
+    try { introHtml = await generateIntroText(allCardInfos, uniqueRelated.slice(0, 10), REGENERATE_DATE); }
+    catch (e) { introHtml = `<p>GD04 Phantom Ariaから新カード${cardCount}枚が公開されました。</p>`; }
+    let cardAnalyses = {};
+    try { cardAnalyses = await generateCardAnalyses(allCardInfos, uniqueRelated.slice(0, 10)); } catch (e) {}
+    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, cardAnalyses, uniqueRelated.slice(0, 10), tweetUrls, cardsMaster, summary);
+    const title = `【${dateLbl}公開】GD04 Phantom Aria 新カード${cardCount}枚まとめ`;
+    const desc = `ガンダムカードゲームGD04 Phantom Ariaから公開された新カード${cardCount}枚の紹介と環境考察。`;
+    const pageHtml = generateNewsPage(REGENERATE_DATE, title, desc, articleHtml, { displayDate: REGENERATE_DATE.replace(/-/g, '.') });
+    const filePath = path.join(NEWS_DIR, `${REGENERATE_DATE}.html`);
+    fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
+    log(`再生成完了: ${filePath}`);
+    return;
+  }
 
   if (!X_API_KEY || !X_ACCESS_TOKEN) {
     log('エラー: X API キーが設定されていません');
