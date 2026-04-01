@@ -490,6 +490,24 @@ function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, 
 '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
 '  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">\n' +
 '  <link rel="stylesheet" href="../css/style.css">\n' +
+'  <script type="application/ld+json">\n' +
+'{\n' +
+'  "@context": "https://schema.org",\n' +
+'  "@type": "Article",\n' +
+'  "headline": "' + escapeHtml(titleText) + '",\n' +
+'  "datePublished": "' + mondayStr + '",\n' +
+'  "description": "' + escapeHtml(descText) + '",\n' +
+'  "url": "' + SITE_URL + '/reports/' + wId + '.html",\n' +
+'  "publisher": {\n' +
+'    "@type": "Organization",\n' +
+'    "name": "GCG STATS",\n' +
+'    "logo": {\n' +
+'      "@type": "ImageObject",\n' +
+'      "url": "' + SITE_URL + '/images/ogp-default.png"\n' +
+'    }\n' +
+'  }\n' +
+'}\n' +
+'</script>\n' +
 '</head>\n' +
 '<body>\n' +
 '  <div id="header"></div>\n' +

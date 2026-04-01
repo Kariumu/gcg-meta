@@ -1245,6 +1245,24 @@ function generateNewsPage(pageId, title, description, articleHtml, options) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "${escapeHtml(title)}",
+  "datePublished": "${canonical.match(/\\/([\\d-]+)\\.html/)?.[1] || todayStr()}",
+  "description": "${escapeHtml(description)}",
+  "url": "${canonical}",
+  "publisher": {
+    "@type": "Organization",
+    "name": "GCG STATS",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "${SITE_URL}/images/ogp-default.png"
+    }
+  }
+}
+</script>
 </head>
 <body>
   <div id="header"></div>
