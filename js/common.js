@@ -193,6 +193,7 @@ const GCG = {
             <a href="${basePath}events.html" class="${activePage === 'events' ? 'active' : ''}">イベント</a>
             <a href="${basePath}meta.html" class="${activePage === 'meta' ? 'active' : ''}">環境分析</a>
             <a href="${basePath}cards.html" class="${activePage === 'cards' ? 'active' : ''}">カードリスト</a>
+            <a href="${basePath}schedule.html" class="${activePage === 'schedule' ? 'active' : ''}">スケジュール</a>
             <a href="${basePath}reports/" class="${activePage === 'reports' ? 'active' : ''}">レポート</a>
           </nav>
         </div>
@@ -213,7 +214,6 @@ const GCG = {
         <div class="footer-links" style="margin-top:16px;display:flex;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
           <a href="${basePath}privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">プライバシーポリシー</a>
           <a href="${basePath}contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
-          <a href="${basePath}about.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">サイトについて</a>
         </div>
       </footer>`;
   },

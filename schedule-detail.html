@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>イベント開催一覧 | GCG STATS</title>
+  <meta name="description" content="ガンダムカードゲームのイベント開催一覧。地域でフィルタして近くのイベントを検索できます。">
+  <meta property="og:title" content="イベント開催一覧 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲームのイベント開催一覧。地域でフィルタして近くのイベントを検索できます。">
+  <meta property="og:image" content="https://gcg-stats.com/og-image.png">
+  <meta property="og:url" content="https://gcg-stats.com/schedule-detail.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="イベント開催一覧 | GCG STATS">
+  <meta name="twitter:description" content="ガンダムカードゲームのイベント開催一覧。地域でフィルタして近くのイベントを検索できます。">
+  <meta name="twitter:image" content="https://gcg-stats.com/og-image.png">
+  <link rel="canonical" href="https://gcg-stats.com/schedule-detail.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <style>
+    .pref-filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pref-filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .pref-filter-btn.active {
+      background: rgba(255, 170, 0, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main style="max-width:1000px;margin:0 auto;padding:20px">
+    <div style="margin-bottom:20px">
+      <a href="schedule.html" style="color:var(--accent);text-decoration:none;font-size:14px">← スケジュールに戻る</a>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+      <h1 id="page-title" style="margin:0;font-size:28px;font-weight:700">イベント開催一覧</h1>
+      <span id="event-count-badge" style="display:inline-block;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;color:#fff;background:#ef4444;font-family:var(--font-mono)">0件</span>
+    </div>
+
+    <div id="region-filter" style="margin-bottom:24px"></div>
+
+    <div id="filtered-count" style="margin-bottom:16px;font-size:14px;color:var(--text-muted)"></div>
+
+    <div id="loading" style="text-align:center;padding:40px;color:var(--text-muted)">イベント情報を取得中...</div>
+    <div id="event-list"></div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js?v=7"></script>
+  <script>
+    // Regions data with JP codes
+    var REGIONS = [
+      {
+        name: '北海道',
+        prefs: [
+          { code: 'JP-01', name: '北海道' }
+        ]
+      },
+      {
+        name: '東北',
+        prefs: [
+          { code: 'JP-02', name: '青森県' },
+          { code: 'JP-03', name: '岩手県' },
+          { code: 'JP-04', name: '宮城県' },
+          { code: 'JP-05', name: '秋田県' },
+          { code: 'JP-06', name: '山形県' },
+          { code: 'JP-07', name: '福島県' }
+        ]
+      },
+      {
+        name: '関東',
+        prefs: [
+          { code: 'JP-08', name: '茨城県' },
+          { code: 'JP-09', name: '栃木県' },
+          { code: 'JP-10', name: '群馬県' },
+          { code: 'JP-11', name: '埼玉県' },
+          { code: 'JP-12', name: '千葉県' },
+          { code: 'JP-13', name: '東京都' },
+          { code: 'JP-14', name: '神奈川県' }
+        ]
+      },
+      {
+        name: '中部',
+        prefs: [
+          { code: 'JP-15', name: '新潟県' },
+          { code: 'JP-16', name: '富山県' },
+          { code: 'JP-17', name: '石川県' },
+          { code: 'JP-18', name: '福井県' },
+          { code: 'JP-19', name: '山梨県' },
+          { code: 'JP-20', name: '長野県' },
+          { code: 'JP-21', name: '岐阜県' },
+          { code: 'JP-22', name: '愛知県' },
+          { code: 'JP-23', name: '三重県' }
+        ]
+      },
+      {
+        name: '近畿',
+        prefs: [
+          { code: 'JP-24', name: '滋賀県' },
+          { code: 'JP-25', name: '京都府' },
+          { code: 'JP-26', name: '大阪府' },
+          { code: 'JP-27', name: '兵庫県' },
+          { code: 'JP-28', name: '奈良県' },
+          { code: 'JP-29', name: '和歌山県' }
+        ]
+      },
+      {
+        name: '中国',
+        prefs: [
+          { code: 'JP-30', name: '鳥取県' },
+          { code: 'JP-31', name: '島根県' },
+          { code: 'JP-32', name: '岡山県' },
+          { code: 'JP-33', name: '広島県' },
+          { code: 'JP-34', name: '山口県' }
+        ]
+      },
+      {
+        name: '四国',
+        prefs: [
+          { code: 'JP-36', name: '徳島県' },
+          { code: 'JP-37', name: '香川県' },
+          { code: 'JP-38', name: '愛媛県' },
+          { code: 'JP-39', name: '高知県' }
+        ]
+      },
+      {
+        name: '九州・沖縄',
+        prefs: [
+          { code: 'JP-40', name: '福岡県' },
+          { code: 'JP-41', name: '佐賀県' },
+          { code: 'JP-42', name: '長崎県' },
+          { code: 'JP-43', name: '熊本県' },
+          { code: 'JP-44', name: '大分県' },
+          { code: 'JP-45', name: '宮崎県' },
+          { code: 'JP-46', name: '鹿児島県' },
+          { code: 'JP-47', name: '沖縄県' }
+        ]
+      }
+    ];
+
+    var HOLIDAYS_2026 = [
+      '2026-01-01', '2026-01-12', '2026-02-11', '2026-02-23', '2026-03-20',
+      '2026-04-29', '2026-05-03', '2026-05-04', '2026-05-05', '2026-05-06',
+      '2026-07-20', '2026-08-11', '2026-09-21', '2026-09-22', '2026-09-23',
+      '2026-10-12', '2026-11-03', '2026-11-23', '2026-12-23'
+    ];
+
+    var selectedPrefs = new Set();
+    var allEvents = [];
+
+    function getDateColor(dateStr) {
+      var d = new Date(dateStr);
+      var year = d.getFullYear();
+      var month = String(d.getMonth() + 1).padStart(2, '0');
+      var day = String(d.getDate()).padStart(2, '0');
+      var dateKey = year + '-' + month + '-' + day;
+
+      if (HOLIDAYS_2026.indexOf(dateKey) !== -1) return '#ef4444';
+      var dow = d.getDay();
+      if (dow === 0) return '#ef4444';
+      if (dow === 6) return '#3b82f6';
+      return '#6b7280';
+    }
+
+    function getDayOfWeekStr(dateStr) {
+      var d = new Date(dateStr);
+      var days = ['日', '月', '火', '水', '木', '金', '土'];
+      return days[d.getDay()];
+    }
+
+    function renderEventRow(event) {
+      var div = document.createElement('div');
+      div.style.cssText = 'background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px';
+
+      var d = new Date(event.start_datetime);
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var dow = getDayOfWeekStr(event.start_datetime);
+      var dateColor = getDateColor(event.start_datetime);
+      var timeStr = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+
+      var dateDiv = document.createElement('div');
+      dateDiv.style.cssText = 'font-size:14px;font-weight:600;color:' + dateColor + ';font-family:var(--font-mono)';
+      dateDiv.textContent = month + '/' + day + ' (' + dow + ')';
+
+      var timeDiv = document.createElement('div');
+      timeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
+      timeDiv.textContent = '時刻: ' + timeStr;
+
+      var storeDiv = document.createElement('div');
+      storeDiv.style.cssText = 'font-size:14px;font-weight:600;color:var(--text-primary)';
+      storeDiv.textContent = event.organizer_name || '未定';
+
+      var addressDiv = document.createElement('div');
+      addressDiv.style.cssText = 'font-size:13px;color:var(--text-secondary)';
+      addressDiv.textContent = event.city_code + ' ' + (event.street_address || '');
+
+      var capacityDiv = document.createElement('div');
+      capacityDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
+      capacityDiv.textContent = '定員: ' + (event.max_join_count || '0') + '名';
+
+      var feeDiv = document.createElement('div');
+      feeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
+      var feeStr = event.entry_fee ? event.entry_fee : '0';
+      feeDiv.textContent = '参加料: ' + feeStr + (event.entry_fee_currency_code || 'JPY');
+
+      var btnDiv = document.createElement('div');
+      btnDiv.style.cssText = 'margin-top:8px';
+      var btn = document.createElement('a');
+      btn.href = 'https://www.bandai-tcg-plus.com/event/' + event.id;
+      btn.textContent = '詳細・応募';
+      btn.style.cssText = 'display:inline-block;background:var(--accent);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity 0.15s';
+      btn.onmouseover = function() { btn.style.opacity = '0.8'; };
+      btn.onmouseout = function() { btn.style.opacity = '1'; };
+      btnDiv.appendChild(btn);
+
+      div.appendChild(dateDiv);
+      div.appendChild(timeDiv);
+      div.appendChild(storeDiv);
+      div.appendChild(addressDiv);
+      div.appendChild(capacityDiv);
+      div.appendChild(feeDiv);
+      div.appendChild(btnDiv);
+
+      return div;
+    }
+
+    function getEventCountByPref(pref) {
+      return allEvents.filter(function(e) { return e.city_code.indexOf(pref) === 0; }).length;
+    }
+
+    function renderRegionFilter() {
+      var container = document.getElementById('region-filter');
+      container.innerHTML = '';
+
+      for (var i = 0; i < REGIONS.length; i++) {
+        var region = REGIONS[i];
+        var regionDiv = document.createElement('div');
+        regionDiv.style.cssText = 'margin-bottom:16px';
+
+        var regionTitle = document.createElement('div');
+        regionTitle.style.cssText = 'font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px';
+        regionTitle.textContent = region.name;
+        regionDiv.appendChild(regionTitle);
+
+        var prefContainer = document.createElement('div');
+        prefContainer.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px';
+
+        for (var j = 0; j < region.prefs.length; j++) {
+          var pref = region.prefs[j];
+          var btn = document.createElement('button');
+          btn.className = 'pref-filter-btn';
+          var count = getEventCountByPref(pref.code);
+          btn.textContent = pref.name + ' (' + count + ')';
+          btn.dataset.code = pref.code;
+          btn.type = 'button';
+
+          btn.onclick = (function(code) {
+            return function() {
+              if (selectedPrefs.has(code)) {
+                selectedPrefs.delete(code);
+                this.classList.remove('active');
+              } else {
+                selectedPrefs.add(code);
+                this.classList.add('active');
+              }
+              renderFilteredEvents();
+            };
+          })(pref.code);
+
+          prefContainer.appendChild(btn);
+        }
+
+        regionDiv.appendChild(prefContainer);
+        container.appendChild(regionDiv);
+      }
+    }
+
+    function renderFilteredEvents() {
+      var eventList = document.getElementById('event-list');
+      var filteredCount = document.getElementById('filtered-count');
+
+      var filtered;
+      if (selectedPrefs.size === 0) {
+        filtered = allEvents;
+      } else {
+        filtered = allEvents.filter(function(e) {
+          for (var pref of selectedPrefs) {
+            if (e.city_code.indexOf(pref) === 0) return true;
+          }
+          return false;
+        });
+      }
+
+      if (selectedPrefs.size > 0) {
+        filteredCount.textContent = 'フィルタ結果: ' + filtered.length + '件';
+        filteredCount.style.display = 'block';
+      } else {
+        filteredCount.style.display = 'none';
+      }
+
+      eventList.innerHTML = '';
+      if (filtered.length === 0) {
+        var emptyDiv = document.createElement('div');
+        emptyDiv.style.cssText = 'text-align:center;padding:40px;color:var(--text-muted)';
+        emptyDiv.textContent = 'イベントが見つかりません';
+        eventList.appendChild(emptyDiv);
+      } else {
+        for (var i = 0; i < filtered.length; i++) {
+          eventList.appendChild(renderEventRow(filtered[i]));
+        }
+      }
+    }
+
+    function loadEventDetail(seriesId) {
+      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list?game_title_id=15&event_series_id=' + seriesId + '&limit=999&offset=0')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var events = data.success.event_list || [];
+          return events
+            .filter(function(e) { return e.event_status !== 'canceled'; })
+            .sort(function(a, b) {
+              return new Date(a.start_datetime) - new Date(b.start_datetime);
+            });
+        });
+    }
+
+    function getSeriesTitle(seriesId) {
+      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list/params')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var series = data.success.event_series_with_game_title_id;
+          for (var i = 0; i < series.length; i++) {
+            if (series[i].event_series_id === seriesId) {
+              return series[i].event_series_title;
+            }
+          }
+          return 'イベント開催一覧';
+        });
+    }
+
+    function getUrlParam(name) {
+      var url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    async function init() {
+      GCG.init();
+      document.getElementById('header').innerHTML = GCG.renderHeader('schedule');
+      document.getElementById('footer').innerHTML = GCG.renderFooter();
+
+      var seriesId = getUrlParam('series_id');
+      if (!seriesId) {
+        document.getElementById('loading').textContent = 'シリーズIDが指定されていません';
+        document.getElementById('loading').style.color = '#ff5050';
+        var errorLink = document.createElement('div');
+        errorLink.style.cssText = 'margin-top:16px';
+        var link = document.createElement('a');
+        link.href = 'schedule.html';
+        link.textContent = 'スケジュールに戻る';
+        link.style.cssText = 'color:var(--accent);text-decoration:none';
+        errorLink.appendChild(link);
+        document.getElementById('loading').parentNode.insertBefore(errorLink, document.getElementById('loading').nextSibling);
+        return;
+      }
+
+      try {
+        var titlePromise = getSeriesTitle(parseInt(seriesId));
+        var eventsPromise = loadEventDetail(parseInt(seriesId));
+
+        var title = await titlePromise;
+        allEvents = await eventsPromise;
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('page-title').textContent = title;
+        document.getElementById('event-count-badge').textContent = allEvents.length + '件';
+
+        renderRegionFilter();
+        renderFilteredEvents();
+      } catch(e) {
+        document.getElementById('loading').textContent = 'イベント情報の取得に失敗しました: ' + e.message;
+        document.getElementById('loading').style.color = '#ff5050';
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
