@@ -34,12 +34,12 @@
   <div id="header"></div>
 
   <main style="max-width:1000px;margin:0 auto;padding:20px">
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
       <h1 style="margin:0;font-size:28px;font-weight:700">イベントスケジュール</h1>
-      <span style="display:inline-block;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;color:#fff;background:#ef4444;font-family:var(--font-mono)">LIVE</span>
     </div>
+    <div id="last-updated" style="font-size:12px;color:var(--text-muted);margin-bottom:24px;font-family:var(--font-mono)"></div>
 
-    <div id="loading" style="text-align:center;padding:40px;color:var(--text-muted)">イベント情報を取得中...</div>
+    <div id="loading" style="text-align:center;padding:40px;color:var(--text-muted)">イベント情報を読み込み中...</div>
     <div id="series-list"></div>
   </main>
 
@@ -47,18 +47,16 @@
 
   <script src="js/common.js?v=7"></script>
   <script>
-    // Status determination
-    function getEventSeriesStatus(events) {
+    // Status determination (from pre-fetched JSON data)
+    function getEventSeriesStatus(series) {
       var now = new Date();
-      var applyEndDates = events.map(function(e) { return new Date(e.apply_end_datetime); });
-      var startDates = events.map(function(e) { return new Date(e.start_datetime); });
-      var latestApplyEnd = new Date(Math.max.apply(null, applyEndDates));
-      var earliestStart = new Date(Math.min.apply(null, startDates));
-      var latestStart = new Date(Math.max.apply(null, startDates));
+      var applyEnd = new Date(series.apply_end_datetime);
+      var firstStart = new Date(series.first_start_datetime);
+      var lastStart = new Date(series.last_start_datetime);
 
-      if (now < latestApplyEnd) return { status: 'accepting', label: '応募受付中', color: '#22c55e' };
-      if (now >= earliestStart && now <= latestStart) return { status: 'ongoing', label: '開催中', color: '#f97316' };
-      if (now < earliestStart) return { status: 'upcoming', label: '開催予定', color: '#3b82f6' };
+      if (now < applyEnd) return { status: 'accepting', label: '応募受付中', color: '#22c55e' };
+      if (now >= firstStart && now <= lastStart) return { status: 'ongoing', label: '開催中', color: '#f97316' };
+      if (now < firstStart) return { status: 'upcoming', label: '開催予定', color: '#3b82f6' };
       return { status: 'ended', label: '終了', color: '#6b7280' };
     }
 
@@ -88,40 +86,6 @@
       return card;
     }
 
-    // Data loading
-    async function loadEventSeries() {
-      var res = await fetch('https://api.bandai-tcg-plus.com/api/user/event/list/params');
-      var data = await res.json();
-      var allSeries = data.success.event_series_with_game_title_id;
-
-      var jpSeries = allSeries.filter(function(s) {
-        return s.game_title_id === 15 &&
-          s.event_series_title.indexOf('[') === -1 &&
-          s.event_series_title.indexOf('Championships26-27 Store') === -1;
-      });
-
-      for (var i = 0; i < jpSeries.length; i++) {
-        var series = jpSeries[i];
-        try {
-          var evRes = await fetch('https://api.bandai-tcg-plus.com/api/user/event/list?game_title_id=15&event_series_id=' + series.event_series_id + '&limit=1&offset=0');
-          var evData = await evRes.json();
-          var events = evData.success.event_list;
-          var total = evData.success.total;
-          if (events.length === 0) continue;
-          series.total = total;
-          series.apply_end_datetime = events[0].apply_end_datetime;
-          series.status = getEventSeriesStatus(events);
-        } catch(e) { /* skip */ }
-      }
-
-      return jpSeries
-        .filter(function(s) { return s.status && s.status.status !== 'ended'; })
-        .sort(function(a, b) {
-          var order = { accepting: 0, ongoing: 1, upcoming: 2 };
-          return (order[a.status.status] || 9) - (order[b.status.status] || 9);
-        });
-    }
-
     // Init
     async function init() {
       GCG.init();
@@ -129,7 +93,23 @@
       document.getElementById('footer').innerHTML = GCG.renderFooter();
 
       try {
-        var series = await loadEventSeries();
+        var res = await fetch('data/schedule.json');
+        var scheduleData = await res.json();
+
+        // 最終更新日時を表示
+        if (scheduleData.last_updated) {
+          var upd = new Date(scheduleData.last_updated);
+          document.getElementById('last-updated').textContent = '最終更新: ' + upd.getFullYear() + '/' + (upd.getMonth()+1) + '/' + upd.getDate() + ' ' + String(upd.getHours()).padStart(2,'0') + ':' + String(upd.getMinutes()).padStart(2,'0');
+        }
+
+        var series = scheduleData.series
+          .map(function(s) { s.status = getEventSeriesStatus(s); return s; })
+          .filter(function(s) { return s.status.status !== 'ended'; })
+          .sort(function(a, b) {
+            var order = { accepting: 0, ongoing: 1, upcoming: 2 };
+            return (order[a.status.status] || 9) - (order[b.status.status] || 9);
+          });
+
         document.getElementById('loading').style.display = 'none';
         var list = document.getElementById('series-list');
         if (series.length === 0) {
@@ -138,7 +118,7 @@
           series.forEach(function(s) { list.appendChild(renderSeriesCard(s)); });
         }
       } catch(e) {
-        document.getElementById('loading').textContent = 'イベント情報の取得に失敗しました: ' + e.message;
+        document.getElementById('loading').textContent = 'イベント情報の読み込みに失敗しました: ' + e.message;
         document.getElementById('loading').style.color = '#ff5050';
       }
     }

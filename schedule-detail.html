@@ -177,6 +177,7 @@
 
     var selectedPrefs = new Set();
     var allEvents = [];
+    var allStores = {};
 
     function getDateColor(dateStr) {
       var d = new Date(dateStr);
@@ -192,71 +193,49 @@
       return '#6b7280';
     }
 
-    function getDayOfWeekStr(dateStr) {
-      var d = new Date(dateStr);
-      var days = ['日', '月', '火', '水', '木', '金', '土'];
-      return days[d.getDay()];
-    }
-
     function renderEventRow(event) {
-      var div = document.createElement('div');
-      div.style.cssText = 'background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px';
-
       var d = new Date(event.start_datetime);
       var month = d.getMonth() + 1;
-      var day = d.getDate();
-      var dow = getDayOfWeekStr(event.start_datetime);
+      var date = d.getDate();
+      var days = ['日', '月', '火', '水', '木', '金', '土'];
+      var dayName = days[d.getDay()];
       var dateColor = getDateColor(event.start_datetime);
-      var timeStr = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+      var hours = String(d.getHours()).padStart(2, '0');
+      var minutes = String(d.getMinutes()).padStart(2, '0');
 
-      var dateDiv = document.createElement('div');
-      dateDiv.style.cssText = 'font-size:14px;font-weight:600;color:' + dateColor + ';font-family:var(--font-mono)';
-      dateDiv.textContent = month + '/' + day + ' (' + dow + ')';
+      var store = event.store || {};
+      var address = ((store.city || '') + ' ' + (store.address || '')).trim();
+      var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + event.id;
 
-      var timeDiv = document.createElement('div');
-      timeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      timeDiv.textContent = '時刻: ' + timeStr;
+      var row = document.createElement('div');
+      row.style.cssText = 'padding:8px 12px;border-bottom:1px solid var(--border);font-family:var(--font-mono)';
 
-      var storeDiv = document.createElement('div');
-      storeDiv.style.cssText = 'font-size:14px;font-weight:600;color:var(--text-primary)';
-      storeDiv.textContent = event.organizer_name || '未定';
+      row.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+          '<div style="flex:1;min-width:0">' +
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">' +
+              '<span style="font-size:13px;font-weight:700;color:' + dateColor + '">' + month + '/' + date + '(' + dayName + ')</span>' +
+              '<span style="font-size:12px;color:var(--text-muted)">開催時間 ' + hours + ':' + minutes + '</span>' +
+            '</div>' +
+            '<div style="font-size:12px;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (store.name || '不明') + '</div>' +
+            '<div style="font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + address + '</div>' +
+            '<div style="font-size:11px;color:var(--text-muted);margin-top:1px">定員' + (event.max_join_count || 0) + '名　参加費' + (event.entry_fee || 0) + '円</div>' +
+          '</div>' +
+          '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener"' +
+             ' style="flex-shrink:0;padding:6px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap">' +
+            '詳細・応募' +
+          '</a>' +
+        '</div>';
 
-      var addressDiv = document.createElement('div');
-      addressDiv.style.cssText = 'font-size:13px;color:var(--text-secondary)';
-      addressDiv.textContent = event.city_code + ' ' + (event.street_address || '');
-
-      var capacityDiv = document.createElement('div');
-      capacityDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      capacityDiv.textContent = '定員: ' + (event.max_join_count || '0') + '名';
-
-      var feeDiv = document.createElement('div');
-      feeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      var feeStr = event.entry_fee ? event.entry_fee : '0';
-      feeDiv.textContent = '参加料: ' + feeStr + (event.entry_fee_currency_code || 'JPY');
-
-      var btnDiv = document.createElement('div');
-      btnDiv.style.cssText = 'margin-top:8px';
-      var btn = document.createElement('a');
-      btn.href = 'https://www.bandai-tcg-plus.com/event/' + event.id;
-      btn.textContent = '詳細・応募';
-      btn.style.cssText = 'display:inline-block;background:var(--accent);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity 0.15s';
-      btn.onmouseover = function() { btn.style.opacity = '0.8'; };
-      btn.onmouseout = function() { btn.style.opacity = '1'; };
-      btnDiv.appendChild(btn);
-
-      div.appendChild(dateDiv);
-      div.appendChild(timeDiv);
-      div.appendChild(storeDiv);
-      div.appendChild(addressDiv);
-      div.appendChild(capacityDiv);
-      div.appendChild(feeDiv);
-      div.appendChild(btnDiv);
-
-      return div;
+      return row;
     }
 
     function getEventCountByPref(pref) {
-      return allEvents.filter(function(e) { return e.city_code.indexOf(pref) === 0; }).length;
+      return allEvents.filter(function(e) {
+        var store = allStores[e.organizer_id];
+        var prefCode = store ? store.pref_code : e.pref_code;
+        return prefCode === pref;
+      }).length;
     }
 
     function renderRegionFilter() {
@@ -315,8 +294,10 @@
         filtered = allEvents;
       } else {
         filtered = allEvents.filter(function(e) {
+          var store = allStores[e.organizer_id];
+          var prefCode = store ? store.pref_code : e.pref_code;
           for (var pref of selectedPrefs) {
-            if (e.city_code.indexOf(pref) === 0) return true;
+            if (prefCode === pref) return true;
           }
           return false;
         });
@@ -340,33 +321,6 @@
           eventList.appendChild(renderEventRow(filtered[i]));
         }
       }
-    }
-
-    function loadEventDetail(seriesId) {
-      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list?game_title_id=15&event_series_id=' + seriesId + '&limit=999&offset=0')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          var events = data.success.event_list || [];
-          return events
-            .filter(function(e) { return e.event_status !== 'canceled'; })
-            .sort(function(a, b) {
-              return new Date(a.start_datetime) - new Date(b.start_datetime);
-            });
-        });
-    }
-
-    function getSeriesTitle(seriesId) {
-      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list/params')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          var series = data.success.event_series_with_game_title_id;
-          for (var i = 0; i < series.length; i++) {
-            if (series[i].event_series_id === seriesId) {
-              return series[i].event_series_title;
-            }
-          }
-          return 'イベント開催一覧';
-        });
     }
 
     function getUrlParam(name) {
@@ -395,11 +349,25 @@
       }
 
       try {
-        var titlePromise = getSeriesTitle(parseInt(seriesId));
-        var eventsPromise = loadEventDetail(parseInt(seriesId));
+        var res = await fetch('data/schedule.json');
+        var data = await res.json();
 
-        var title = await titlePromise;
-        allEvents = await eventsPromise;
+        allStores = data.stores || {};
+        var events = data.events[seriesId] || [];
+        var seriesInfo = null;
+        for (var i = 0; i < data.series.length; i++) {
+          if (data.series[i].event_series_id == seriesId) {
+            seriesInfo = data.series[i];
+            break;
+          }
+        }
+
+        // 店舗情報を結合してソート
+        allEvents = events
+          .map(function(e) { return Object.assign({}, e, { store: allStores[e.organizer_id] || {} }); })
+          .sort(function(a, b) { return new Date(a.start_datetime) - new Date(b.start_datetime); });
+
+        var title = seriesInfo ? seriesInfo.event_series_title : 'イベント開催一覧';
 
         document.getElementById('loading').style.display = 'none';
         document.getElementById('page-title').textContent = title;
@@ -408,7 +376,7 @@
         renderRegionFilter();
         renderFilteredEvents();
       } catch(e) {
-        document.getElementById('loading').textContent = 'イベント情報の取得に失敗しました: ' + e.message;
+        document.getElementById('loading').textContent = 'イベント情報の読み込みに失敗しました: ' + e.message;
         document.getElementById('loading').style.color = '#ff5050';
       }
     }
