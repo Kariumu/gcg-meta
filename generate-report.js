@@ -472,6 +472,9 @@ function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, 
 '    gtag(\'js\', new Date());\n' +
 '    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
 '  </script>\n' +
+'  <!-- Google AdSense -->\n' +
+'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"\n' +
+'       crossorigin="anonymous"></script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
 '  <title>' + escapeHtml(titleText) + '</title>\n' +
@@ -614,6 +617,9 @@ function updateReportIndex() {
 '    gtag(\'js\', new Date());\n' +
 '    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
 '  </script>\n' +
+'  <!-- Google AdSense -->\n' +
+'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"\n' +
+'       crossorigin="anonymous"></script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
 '  <title>\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7 | GCG STATS</title>\n' +
