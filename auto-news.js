@@ -17,7 +17,7 @@ require('dotenv').config({ override: true });
 
 // === 設定 ===
 const SITE_URL = 'https://gcg-stats.com';
-const ROOT = __dirname;
+const ROOT = path.resolve(__dirname, '..'); // git repo root
 const DATA_DIR = path.join(ROOT, 'data');
 const NEWS_DIR = path.join(ROOT, 'reports', 'news');
 const LAST_CHECK_FILE = path.join(DATA_DIR, 'last-check.json');
