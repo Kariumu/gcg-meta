@@ -329,15 +329,17 @@
 
       var timeDiv = document.createElement('div');
       timeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      timeDiv.textContent = '時刻: ' + timeStr;
+      timeDiv.textContent = '開催時間 ' + timeStr;
+
+      var store = allStores[event.organizer_id] || {};
 
       var storeDiv = document.createElement('div');
       storeDiv.style.cssText = 'font-size:14px;font-weight:600;color:var(--text-primary)';
-      storeDiv.textContent = event.organizer_name || '未定';
+      storeDiv.textContent = store.name || '未定';
 
       var addressDiv = document.createElement('div');
       addressDiv.style.cssText = 'font-size:13px;color:var(--text-secondary)';
-      addressDiv.textContent = event.city_code + ' ' + (event.street_address || '');
+      addressDiv.textContent = (store.city || '') + ' ' + (store.address || '');
 
       var capacityDiv = document.createElement('div');
       capacityDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
@@ -345,8 +347,7 @@
 
       var feeDiv = document.createElement('div');
       feeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      var feeStr = event.entry_fee ? event.entry_fee : '0';
-      feeDiv.textContent = '参加料: ' + feeStr + (event.entry_fee_currency_code || 'JPY');
+      feeDiv.textContent = '参加費: ' + (event.entry_fee || 0) + '円';
 
       var btnDiv = document.createElement('div');
       btnDiv.style.cssText = 'margin-top:8px';
