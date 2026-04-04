@@ -256,7 +256,9 @@
     }
 
     function toggleCity(prefCode, cityName) {
-      if (!selectedPrefs[prefCode]) return;
+      if (!selectedPrefs[prefCode]) {
+        selectedPrefs[prefCode] = new Set();
+      }
       if (selectedPrefs[prefCode].has(cityName)) {
         selectedPrefs[prefCode].delete(cityName);
         if (selectedPrefs[prefCode].size === 0) {
