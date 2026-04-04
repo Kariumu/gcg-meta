@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
-       crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イベント開催一覧 | GCG STATS</title>
@@ -35,17 +32,59 @@
       border: 1px solid var(--border);
       color: var(--text-secondary);
       padding: 6px 14px;
-      border-radius: var(--radius);
       font-size: 12px;
       font-family: var(--font-mono);
       cursor: pointer;
       transition: all 0.15s;
+      border-radius: 4px 0 0 4px;
+      border-right: none;
+    }
+    .pref-filter-btn.no-expand {
+      border-radius: var(--radius);
+      border-right: 1px solid var(--border);
     }
     .pref-filter-btn:hover {
       border-color: var(--accent);
       color: var(--accent);
     }
     .pref-filter-btn.active {
+      background: rgba(255, 170, 0, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .pref-expand-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.15s;
+      border-radius: 0 4px 4px 0;
+      min-width: 28px;
+      padding: 6px 4px;
+    }
+    .pref-expand-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .city-filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      padding: 4px 10px;
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .city-filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .city-filter-btn.active {
       background: rgba(255, 170, 0, 0.1);
       border-color: var(--accent);
       color: var(--accent);
@@ -119,30 +158,29 @@
           { code: 'JP-19', name: '山梨県' },
           { code: 'JP-20', name: '長野県' },
           { code: 'JP-21', name: '岐阜県' },
-          { code: 'JP-22', name: '静岡県' },
-          { code: 'JP-23', name: '愛知県' }
+          { code: 'JP-22', name: '愛知県' },
+          { code: 'JP-23', name: '三重県' }
         ]
       },
       {
         name: '近畿',
         prefs: [
-          { code: 'JP-24', name: '三重県' },
-          { code: 'JP-25', name: '滋賀県' },
-          { code: 'JP-26', name: '京都府' },
-          { code: 'JP-27', name: '大阪府' },
-          { code: 'JP-28', name: '兵庫県' },
-          { code: 'JP-29', name: '奈良県' },
-          { code: 'JP-30', name: '和歌山県' }
+          { code: 'JP-24', name: '滋賀県' },
+          { code: 'JP-25', name: '京都府' },
+          { code: 'JP-26', name: '大阪府' },
+          { code: 'JP-27', name: '兵庫県' },
+          { code: 'JP-28', name: '奈良県' },
+          { code: 'JP-29', name: '和歌山県' }
         ]
       },
       {
         name: '中国',
         prefs: [
-          { code: 'JP-31', name: '鳥取県' },
-          { code: 'JP-32', name: '島根県' },
-          { code: 'JP-33', name: '岡山県' },
-          { code: 'JP-34', name: '広島県' },
-          { code: 'JP-35', name: '山口県' }
+          { code: 'JP-30', name: '鳥取県' },
+          { code: 'JP-31', name: '島根県' },
+          { code: 'JP-32', name: '岡山県' },
+          { code: 'JP-33', name: '広島県' },
+          { code: 'JP-34', name: '山口県' }
         ]
       },
       {
@@ -176,9 +214,81 @@
       '2026-10-12', '2026-11-03', '2026-11-23', '2026-12-23'
     ];
 
-    var selectedPrefs = new Set();
+    // === フィルタ状態 ===
+    // selectedPrefs: { 'JP-13': Set(['千代田区', '豊島区', ...]), ... }
+    var selectedPrefs = {};
+    var expandedPrefs = new Set();
     var allEvents = [];
-    var allStores = {};
+    var cityMap = {}; // { 'JP-13': { '千代田区': [event1, ...], ... }, ... }
+
+    function normalizeCity(city) {
+      if (!city) return '不明';
+      city = city.replace(/^(北海道|東京都|.{2,3}[府県])/, '');
+      var m = city.match(/^(.+?市.+?区)/);
+      if (m) return m[1];
+      m = city.match(/^(.+?[市区町村])/);
+      if (m) return m[1];
+      return city;
+    }
+
+    function buildCityMap() {
+      cityMap = {};
+      allEvents.forEach(function(e) {
+        var pref = e.pref_code || '';
+        var city = normalizeCity(e.city_code || '');
+        if (!cityMap[pref]) cityMap[pref] = {};
+        if (!cityMap[pref][city]) cityMap[pref][city] = [];
+        cityMap[pref][city].push(e);
+      });
+    }
+
+    function togglePref(prefCode) {
+      if (selectedPrefs[prefCode]) {
+        delete selectedPrefs[prefCode];
+      } else {
+        var cities = Object.keys(cityMap[prefCode] || {});
+        selectedPrefs[prefCode] = new Set(cities);
+      }
+      renderFilteredEvents();
+      updateButtonStates();
+    }
+
+    function toggleCity(prefCode, cityName) {
+      if (!selectedPrefs[prefCode]) return;
+      if (selectedPrefs[prefCode].has(cityName)) {
+        selectedPrefs[prefCode].delete(cityName);
+        if (selectedPrefs[prefCode].size === 0) {
+          delete selectedPrefs[prefCode];
+        }
+      } else {
+        selectedPrefs[prefCode].add(cityName);
+      }
+      renderFilteredEvents();
+      updateButtonStates();
+    }
+
+    function toggleExpand(prefCode) {
+      if (expandedPrefs.has(prefCode)) {
+        expandedPrefs.delete(prefCode);
+      } else {
+        expandedPrefs.add(prefCode);
+      }
+      updateCityDisplay(prefCode);
+    }
+
+    function clearAll() {
+      selectedPrefs = {};
+      expandedPrefs.clear();
+      renderFilteredEvents();
+      updateButtonStates();
+      // collapse all city containers
+      document.querySelectorAll('[id^="city-container-"]').forEach(function(el) {
+        el.style.display = 'none';
+      });
+      document.querySelectorAll('.pref-expand-btn').forEach(function(btn) {
+        btn.textContent = '+';
+      });
+    }
 
     function getDateColor(dateStr) {
       var d = new Date(dateStr);
@@ -194,49 +304,76 @@
       return '#6b7280';
     }
 
-    function renderEventRow(event) {
-      var d = new Date(event.start_datetime);
-      var month = d.getMonth() + 1;
-      var date = d.getDate();
+    function getDayOfWeekStr(dateStr) {
+      var d = new Date(dateStr);
       var days = ['日', '月', '火', '水', '木', '金', '土'];
-      var dayName = days[d.getDay()];
-      var dateColor = getDateColor(event.start_datetime);
-      var hours = String(d.getHours()).padStart(2, '0');
-      var minutes = String(d.getMinutes()).padStart(2, '0');
-
-      var store = event.store || {};
-      var address = ((store.city || '') + ' ' + (store.address || '')).trim();
-      var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + event.id;
-
-      var row = document.createElement('div');
-      row.style.cssText = 'padding:8px 12px;border-bottom:1px solid var(--border);font-family:var(--font-mono)';
-
-      row.innerHTML =
-        '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
-          '<div style="flex:1;min-width:0">' +
-            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">' +
-              '<span style="font-size:13px;font-weight:700;color:' + dateColor + '">' + month + '/' + date + '(' + dayName + ')</span>' +
-              '<span style="font-size:12px;color:var(--text-muted)">開催時間 ' + hours + ':' + minutes + '</span>' +
-            '</div>' +
-            '<div style="font-size:12px;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (store.name || '不明') + '</div>' +
-            '<div style="font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + address + '</div>' +
-            '<div style="font-size:11px;color:var(--text-muted);margin-top:1px">定員' + (event.max_join_count || 0) + '名　参加費' + (event.entry_fee || 0) + '円</div>' +
-          '</div>' +
-          '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener"' +
-             ' style="flex-shrink:0;padding:6px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;white-space:nowrap">' +
-            '詳細・応募' +
-          '</a>' +
-        '</div>';
-
-      return row;
+      return days[d.getDay()];
     }
 
-    function getEventCountByPref(pref) {
-      return allEvents.filter(function(e) {
-        var store = allStores[e.organizer_id];
-        var prefCode = store ? store.pref_code : e.pref_code;
-        return prefCode === pref;
-      }).length;
+    function renderEventRow(event) {
+      var div = document.createElement('div');
+      div.style.cssText = 'background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px';
+
+      var d = new Date(event.start_datetime);
+      var month = d.getMonth() + 1;
+      var day = d.getDate();
+      var dow = getDayOfWeekStr(event.start_datetime);
+      var dateColor = getDateColor(event.start_datetime);
+      var timeStr = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+
+      var dateDiv = document.createElement('div');
+      dateDiv.style.cssText = 'font-size:14px;font-weight:600;color:' + dateColor + ';font-family:var(--font-mono)';
+      dateDiv.textContent = month + '/' + day + ' (' + dow + ')';
+
+      var timeDiv = document.createElement('div');
+      timeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
+      timeDiv.textContent = '時刻: ' + timeStr;
+
+      var storeDiv = document.createElement('div');
+      storeDiv.style.cssText = 'font-size:14px;font-weight:600;color:var(--text-primary)';
+      storeDiv.textContent = event.organizer_name || '未定';
+
+      var addressDiv = document.createElement('div');
+      addressDiv.style.cssText = 'font-size:13px;color:var(--text-secondary)';
+      addressDiv.textContent = event.city_code + ' ' + (event.street_address || '');
+
+      var capacityDiv = document.createElement('div');
+      capacityDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
+      capacityDiv.textContent = '定員: ' + (event.max_join_count || '0') + '名';
+
+      var feeDiv = document.createElement('div');
+      feeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
+      var feeStr = event.entry_fee ? event.entry_fee : '0';
+      feeDiv.textContent = '参加料: ' + feeStr + (event.entry_fee_currency_code || 'JPY');
+
+      var btnDiv = document.createElement('div');
+      btnDiv.style.cssText = 'margin-top:8px';
+      var btn = document.createElement('a');
+      btn.href = 'https://www.bandai-tcg-plus.com/event/' + event.id;
+      btn.textContent = '詳細・応募';
+      btn.style.cssText = 'display:inline-block;background:var(--accent);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity 0.15s';
+      btn.onmouseover = function() { btn.style.opacity = '0.8'; };
+      btn.onmouseout = function() { btn.style.opacity = '1'; };
+      btnDiv.appendChild(btn);
+
+      div.appendChild(dateDiv);
+      div.appendChild(timeDiv);
+      div.appendChild(storeDiv);
+      div.appendChild(addressDiv);
+      div.appendChild(capacityDiv);
+      div.appendChild(feeDiv);
+      div.appendChild(btnDiv);
+
+      return div;
+    }
+
+    function getEventCountByPref(prefCode) {
+      var prefCities = cityMap[prefCode] || {};
+      var count = 0;
+      Object.keys(prefCities).forEach(function(city) {
+        count += prefCities[city].length;
+      });
+      return count;
     }
 
     function renderRegionFilter() {
@@ -246,65 +383,146 @@
       for (var i = 0; i < REGIONS.length; i++) {
         var region = REGIONS[i];
         var regionDiv = document.createElement('div');
+        regionDiv.className = 'region-group';
         regionDiv.style.cssText = 'margin-bottom:16px';
 
         var regionTitle = document.createElement('div');
+        regionTitle.className = 'region-title';
         regionTitle.style.cssText = 'font-size:13px;font-weight:600;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px';
         regionTitle.textContent = region.name;
         regionDiv.appendChild(regionTitle);
 
         var prefContainer = document.createElement('div');
+        prefContainer.className = 'pref-buttons';
         prefContainer.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px';
 
         for (var j = 0; j < region.prefs.length; j++) {
           var pref = region.prefs[j];
-          var btn = document.createElement('button');
-          btn.className = 'pref-filter-btn';
           var count = getEventCountByPref(pref.code);
+          var hasCities = Object.keys(cityMap[pref.code] || {}).length > 1;
+
+          var wrapper = document.createElement('span');
+          wrapper.style.cssText = 'display:inline-flex;align-items:center;gap:0;margin:0 0 0 0';
+
+          var btn = document.createElement('button');
+          btn.className = 'pref-filter-btn' + (hasCities ? '' : ' no-expand');
           btn.textContent = pref.name + ' (' + count + ')';
           btn.dataset.code = pref.code;
           btn.type = 'button';
-
           btn.onclick = (function(code) {
-            return function() {
-              if (selectedPrefs.has(code)) {
-                selectedPrefs.delete(code);
-                this.classList.remove('active');
-              } else {
-                selectedPrefs.add(code);
-                this.classList.add('active');
-              }
-              renderFilteredEvents();
-            };
+            return function() { togglePref(code); };
           })(pref.code);
+          wrapper.appendChild(btn);
 
-          prefContainer.appendChild(btn);
+          if (hasCities) {
+            var expandBtn = document.createElement('button');
+            expandBtn.className = 'pref-expand-btn';
+            expandBtn.textContent = '+';
+            expandBtn.dataset.code = pref.code;
+            expandBtn.type = 'button';
+            expandBtn.onclick = (function(code) {
+              return function(e) {
+                e.stopPropagation();
+                toggleExpand(code);
+              };
+            })(pref.code);
+            wrapper.appendChild(expandBtn);
+          }
+
+          prefContainer.appendChild(wrapper);
         }
 
         regionDiv.appendChild(prefContainer);
+
+        // 各都道府県の市区コンテナ（非表示）
+        for (var j = 0; j < region.prefs.length; j++) {
+          var pref = region.prefs[j];
+          var cityContainer = document.createElement('div');
+          cityContainer.id = 'city-container-' + pref.code.replace('-', '');
+          cityContainer.style.cssText = 'display:none;flex-wrap:wrap;gap:4px;padding:6px 0 6px 12px';
+          regionDiv.appendChild(cityContainer);
+        }
+
         container.appendChild(regionDiv);
       }
+
+      // クリアボタン
+      var clearDiv = document.createElement('div');
+      clearDiv.style.cssText = 'margin-top:8px';
+      var clearBtn = document.createElement('button');
+      clearBtn.textContent = 'クリア';
+      clearBtn.type = 'button';
+      clearBtn.style.cssText = 'background:none;border:1px solid var(--border);color:var(--text-muted);padding:4px 12px;border-radius:var(--radius);font-size:11px;font-family:var(--font-mono);cursor:pointer;transition:all 0.15s';
+      clearBtn.onmouseover = function() { clearBtn.style.borderColor = 'var(--accent)'; clearBtn.style.color = 'var(--accent)'; };
+      clearBtn.onmouseout = function() { clearBtn.style.borderColor = 'var(--border)'; clearBtn.style.color = 'var(--text-muted)'; };
+      clearBtn.onclick = clearAll;
+      clearDiv.appendChild(clearBtn);
+      container.appendChild(clearDiv);
+    }
+
+    function updateCityDisplay(prefCode) {
+      var container = document.getElementById('city-container-' + prefCode.replace('-', ''));
+      if (!container) return;
+
+      if (expandedPrefs.has(prefCode)) {
+        container.style.display = 'flex';
+        container.innerHTML = '';
+        var cities = Object.keys(cityMap[prefCode] || {}).sort();
+        cities.forEach(function(cityName) {
+          var count = cityMap[prefCode][cityName].length;
+          var btn = document.createElement('button');
+          btn.className = 'city-filter-btn';
+          btn.textContent = cityName + ' (' + count + ')';
+          btn.type = 'button';
+          if (selectedPrefs[prefCode] && selectedPrefs[prefCode].has(cityName)) {
+            btn.classList.add('active');
+          }
+          btn.onclick = (function(code, name) {
+            return function() { toggleCity(code, name); };
+          })(prefCode, cityName);
+          container.appendChild(btn);
+        });
+        var expandBtn = document.querySelector('.pref-expand-btn[data-code="' + prefCode + '"]');
+        if (expandBtn) expandBtn.textContent = '−';
+      } else {
+        container.style.display = 'none';
+        var expandBtn = document.querySelector('.pref-expand-btn[data-code="' + prefCode + '"]');
+        if (expandBtn) expandBtn.textContent = '+';
+      }
+    }
+
+    function updateButtonStates() {
+      document.querySelectorAll('.pref-filter-btn').forEach(function(btn) {
+        var code = btn.dataset.code;
+        if (selectedPrefs[code]) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      expandedPrefs.forEach(function(prefCode) {
+        updateCityDisplay(prefCode);
+      });
     }
 
     function renderFilteredEvents() {
       var eventList = document.getElementById('event-list');
       var filteredCount = document.getElementById('filtered-count');
 
+      var prefCodes = Object.keys(selectedPrefs);
       var filtered;
-      if (selectedPrefs.size === 0) {
+      if (prefCodes.length === 0) {
         filtered = allEvents;
       } else {
         filtered = allEvents.filter(function(e) {
-          var store = allStores[e.organizer_id];
-          var prefCode = store ? store.pref_code : e.pref_code;
-          for (var pref of selectedPrefs) {
-            if (prefCode === pref) return true;
-          }
-          return false;
+          var pref = e.pref_code || '';
+          var city = normalizeCity(e.city_code || '');
+          if (!selectedPrefs[pref]) return false;
+          return selectedPrefs[pref].has(city);
         });
       }
 
-      if (selectedPrefs.size > 0) {
+      if (prefCodes.length > 0) {
         filteredCount.textContent = 'フィルタ結果: ' + filtered.length + '件';
         filteredCount.style.display = 'block';
       } else {
@@ -322,6 +540,33 @@
           eventList.appendChild(renderEventRow(filtered[i]));
         }
       }
+    }
+
+    function loadEventDetail(seriesId) {
+      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list?game_title_id=15&event_series_id=' + seriesId + '&limit=999&offset=0')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var events = data.success.event_list || [];
+          return events
+            .filter(function(e) { return e.event_status !== 'canceled'; })
+            .sort(function(a, b) {
+              return new Date(a.start_datetime) - new Date(b.start_datetime);
+            });
+        });
+    }
+
+    function getSeriesTitle(seriesId) {
+      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list/params')
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          var series = data.success.event_series_with_game_title_id;
+          for (var i = 0; i < series.length; i++) {
+            if (series[i].event_series_id === seriesId) {
+              return series[i].event_series_title;
+            }
+          }
+          return 'イベント開催一覧';
+        });
     }
 
     function getUrlParam(name) {
@@ -350,34 +595,21 @@
       }
 
       try {
-        var res = await fetch('data/schedule.json');
-        var data = await res.json();
+        var titlePromise = getSeriesTitle(parseInt(seriesId));
+        var eventsPromise = loadEventDetail(parseInt(seriesId));
 
-        allStores = data.stores || {};
-        var events = data.events[seriesId] || [];
-        var seriesInfo = null;
-        for (var i = 0; i < data.series.length; i++) {
-          if (data.series[i].event_series_id == seriesId) {
-            seriesInfo = data.series[i];
-            break;
-          }
-        }
-
-        // 店舗情報を結合してソート
-        allEvents = events
-          .map(function(e) { return Object.assign({}, e, { store: allStores[e.organizer_id] || {} }); })
-          .sort(function(a, b) { return new Date(a.start_datetime) - new Date(b.start_datetime); });
-
-        var title = seriesInfo ? seriesInfo.event_series_title : 'イベント開催一覧';
+        var title = await titlePromise;
+        allEvents = await eventsPromise;
 
         document.getElementById('loading').style.display = 'none';
         document.getElementById('page-title').textContent = title;
         document.getElementById('event-count-badge').textContent = allEvents.length + '件';
 
+        buildCityMap();
         renderRegionFilter();
         renderFilteredEvents();
       } catch(e) {
-        document.getElementById('loading').textContent = 'イベント情報の読み込みに失敗しました: ' + e.message;
+        document.getElementById('loading').textContent = 'イベント情報の取得に失敗しました: ' + e.message;
         document.getElementById('loading').style.color = '#ff5050';
       }
     }
