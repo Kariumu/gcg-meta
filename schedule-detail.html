@@ -69,6 +69,11 @@
       border-color: var(--accent);
       color: var(--accent);
     }
+    .pref-expand-btn.active {
+      background: rgba(255, 170, 0, 0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
     .city-filter-btn {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -507,6 +512,14 @@
       });
       expandedPrefs.forEach(function(prefCode) {
         updateCityDisplay(prefCode);
+      });
+      document.querySelectorAll('.pref-expand-btn').forEach(function(btn) {
+        var code = btn.dataset.code;
+        if (selectedPrefs[code]) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
       });
     }
 
