@@ -943,10 +943,17 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">色</td><td>${escapeHtml(colorJp)}</td>`;
   html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">タイプ</td><td>${escapeHtml(card.card_type)}</td></tr>\n`;
   html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">Lv</td><td>${card.level != null ? card.level : '-'}</td>`;
-  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">COST</td><td>${card.cost != null ? card.cost : '-'}</td></tr>\n`;
-  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">AP</td><td>${card.ap != null ? card.ap : '-'}</td>`;
-  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">HP</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
-  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
+  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">コスト</td><td>${card.cost != null ? card.cost : '-'}</td></tr>\n`;
+  if (card.card_type === 'UNIT') {
+    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">AP</td><td>${card.ap != null ? card.ap : '-'}</td>`;
+    html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">HP</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
+  }
+  if (traitsStr) {
+    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
+  }
+  if (card.link) {
+    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">リンク条件</td><td colspan="3">${escapeHtml(card.link)}</td></tr>\n`;
+  }
   html += '      </table>\n';
   if (card.effect) {
     html += `      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0"><strong>効果:</strong> ${escapeHtml(card.effect)}</p>\n`;
