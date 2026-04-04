@@ -339,12 +339,10 @@
           var events = data.events[seriesId];
           events.forEach(function(e) {
             if (String(e.organizer_id) === String(storeId)) {
-              if (new Date(e.start_datetime) >= new Date()) {
-                storeEvents.push(Object.assign({}, e, {
-                  series_title: allSeries[seriesId] ? allSeries[seriesId].event_series_title : '不明',
-                  series_id: seriesId
-                }));
-              }
+              storeEvents.push(Object.assign({}, e, {
+                series_title: allSeries[seriesId] ? allSeries[seriesId].event_series_title : '不明',
+                series_id: seriesId
+              }));
             }
           });
         });
