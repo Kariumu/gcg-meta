@@ -219,6 +219,7 @@
     var selectedPrefs = {};
     var expandedPrefs = new Set();
     var allEvents = [];
+    var allStores = {};
     var cityMap = {}; // { 'JP-13': { '千代田区': [event1, ...], ... }, ... }
 
     function normalizeCity(city) {
@@ -234,8 +235,9 @@
     function buildCityMap() {
       cityMap = {};
       allEvents.forEach(function(e) {
+        var store = allStores[e.organizer_id] || {};
         var pref = e.pref_code || '';
-        var city = normalizeCity(e.city_code || '');
+        var city = normalizeCity(store.city || e.city_code || '');
         if (!cityMap[pref]) cityMap[pref] = {};
         if (!cityMap[pref][city]) cityMap[pref][city] = [];
         cityMap[pref][city].push(e);
@@ -515,8 +517,9 @@
         filtered = allEvents;
       } else {
         filtered = allEvents.filter(function(e) {
+          var store = allStores[e.organizer_id] || {};
           var pref = e.pref_code || '';
-          var city = normalizeCity(e.city_code || '');
+          var city = normalizeCity(store.city || e.city_code || '');
           if (!selectedPrefs[pref]) return false;
           return selectedPrefs[pref].has(city);
         });
