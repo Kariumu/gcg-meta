@@ -9,9 +9,6 @@
     gtag('js', new Date());
     gtag('config', 'G-3MY17P4E7F');
   </script>
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
-       crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>レプトンカード館五日市店 2026.03.15 GCG大会結果 | GCG STATS</title>
@@ -30,6 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <style>.section-title a:hover { text-decoration: underline; }</style>
 </head>
 <body>
   <div id="header"></div>
@@ -45,7 +43,7 @@
 
   <div id="footer"></div>
 
-  <script src="../js/common.js?v=7"></script>
+  <script src="../js/common.js?v=5"></script>
   <script>
 
     GCG.init();
@@ -109,6 +107,24 @@
       document.title = ev.store + ' ' + GCG.formatDate(ev.date) + ' - GCG STATS';
       currentEventStore = ev.store;
 
+      // schedule.jsonからorganizer_idを検索
+      var organizerId = null;
+      try {
+        var schedRes = await fetch(GCG.getBasePath() + 'data/schedule.json');
+        var schedData = await schedRes.json();
+        var allSchedEvents = schedData.events || {};
+        Object.keys(allSchedEvents).some(function(sid) {
+          var found = allSchedEvents[sid].find(function(se) { return String(se.id) === String(eventId); });
+          if (found) { organizerId = found.organizer_id; return true; }
+          return false;
+        });
+      } catch(e) {}
+
+      var storeDisplay = GCG.escapeHtml(ev.store);
+      if (organizerId) {
+        storeDisplay = '<a href="' + GCG.getBasePath() + 'store.html?id=' + organizerId + '" style="color:var(--text-primary);text-decoration:none">' + GCG.escapeHtml(ev.store) + '</a>';
+      }
+
       const seriesName = data.series[ev.series_id] || '';
 
       let html = '<div style="margin-bottom:12px">' +
@@ -116,7 +132,7 @@
         ' onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--text-muted)\'">' +
         '\u2190 \u30A4\u30D9\u30F3\u30C8\u4E00\u89A7\u306B\u623B\u308B</a></div>' +
         '<div class="section-header"><div>' +
-        '<h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + GCG.escapeHtml(ev.store) + '</h1>' +
+        '<h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + storeDisplay + '</h1>' +
         '<div style="font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
         '<span class="text-mono" style="color:var(--accent)">' + GCG.formatDate(ev.date) + '</span>' +
         (seriesName ? '<span style="opacity:0.3">|</span> <span>' + GCG.escapeHtml(seriesName) + '</span>' : '') +

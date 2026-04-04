@@ -122,6 +122,24 @@ const CLIENT_JS_TEMPLATE = `
       document.title = ev.store + ' ' + GCG.formatDate(ev.date) + ' - GCG STATS';
       currentEventStore = ev.store;
 
+      // schedule.json\u304B\u3089organizer_id\u3092\u691C\u7D22
+      var organizerId = null;
+      try {
+        var schedRes = await fetch(GCG.getBasePath() + 'data/schedule.json');
+        var schedData = await schedRes.json();
+        var allSchedEvents = schedData.events || {};
+        Object.keys(allSchedEvents).some(function(sid) {
+          var found = allSchedEvents[sid].find(function(se) { return String(se.id) === String(eventId); });
+          if (found) { organizerId = found.organizer_id; return true; }
+          return false;
+        });
+      } catch(e) {}
+
+      var storeDisplay = GCG.escapeHtml(ev.store);
+      if (organizerId) {
+        storeDisplay = '<a href="' + GCG.getBasePath() + 'store.html?id=' + organizerId + '" style="color:var(--text-primary);text-decoration:none">' + GCG.escapeHtml(ev.store) + '</a>';
+      }
+
       const seriesName = data.series[ev.series_id] || '';
 
       let html = '<div style="margin-bottom:12px">' +
@@ -129,7 +147,7 @@ const CLIENT_JS_TEMPLATE = `
         ' onmouseover="this.style.color=\\'var(--accent)\\'" onmouseout="this.style.color=\\'var(--text-muted)\\'">' +
         '\\u2190 \\u30A4\\u30D9\\u30F3\\u30C8\\u4E00\\u89A7\\u306B\\u623B\\u308B</a></div>' +
         '<div class="section-header"><div>' +
-        '<h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + GCG.escapeHtml(ev.store) + '</h1>' +
+        '<h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + storeDisplay + '</h1>' +
         '<div style="font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
         '<span class="text-mono" style="color:var(--accent)">' + GCG.formatDate(ev.date) + '</span>' +
         (seriesName ? '<span style="opacity:0.3">|</span> <span>' + GCG.escapeHtml(seriesName) + '</span>' : '') +
@@ -192,6 +210,7 @@ function generateEventPage(eventId, ev, seriesName) {
 '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
 '  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">\n' +
 '  <link rel="stylesheet" href="../css/style.css">\n' +
+'  <style>.section-title a:hover { text-decoration: underline; }</style>\n' +
 '</head>\n' +
 '<body>\n' +
 '  <div id="header"></div>\n' +
