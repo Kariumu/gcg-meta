@@ -127,10 +127,12 @@ const CLIENT_JS_TEMPLATE = `
       try {
         var schedRes = await fetch(GCG.getBasePath() + 'data/schedule.json');
         var schedData = await schedRes.json();
-        var allSchedEvents = schedData.events || {};
-        Object.keys(allSchedEvents).some(function(sid) {
-          var found = allSchedEvents[sid].find(function(se) { return String(se.id) === String(eventId); });
-          if (found) { organizerId = found.organizer_id; return true; }
+        var stores = schedData.stores || {};
+        Object.keys(stores).some(function(storeId) {
+          if (stores[storeId].name === ev.store) {
+            organizerId = storeId;
+            return true;
+          }
           return false;
         });
       } catch(e) {}
