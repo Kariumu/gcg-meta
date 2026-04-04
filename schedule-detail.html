@@ -573,4 +573,18 @@
 
         document.getElementById('loading').style.display = 'none';
         document.getElementById('page-title').textContent = title;
-        document.getElementById('event
+        document.getElementById('event-count-badge').textContent = allEvents.length + '件';
+
+        buildCityMap();
+        renderRegionFilter();
+        renderFilteredEvents();
+      } catch(e) {
+        document.getElementById('loading').textContent = 'イベント情報の取得に失敗しました: ' + e.message;
+        document.getElementById('loading').style.color = '#ff5050';
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
