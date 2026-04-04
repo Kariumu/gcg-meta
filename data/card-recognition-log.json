@@ -1,530 +1,94 @@
 {
-  "2026-03-27": {
-    "recognized_at": "2026-03-28T09:17:41.483Z",
-    "source_tweets": [
-      "https://x.com/GUNDAM_GCG_JP/status/2037801872996868441",
-      "https://x.com/GUNDAM_GCG_JP/status/2037496102141014114",
-      "https://x.com/GUNDAM_GCG_JP/status/2037494843664953648",
-      "https://x.com/GUNDAM_GCG_JP/status/2037493585638011160",
-      "https://x.com/GUNDAM_GCG_JP/status/2037492328575959276",
-      "https://x.com/GUNDAM_GCG_JP/status/2037491068824858957",
-      "https://x.com/GUNDAM_GCG_JP/status/2037489810546315416"
-    ],
-    "cards": [
-      {
-        "card_number": "GD04-055",
-        "card_name": "ソードインパルスガンダム",
-        "color": "Purple",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 2,
-        "ap": 3,
-        "hp": 3,
-        "traits": [
-          "ザフト",
-          "ミネルバ隊"
-        ],
-        "effect": "配備時：このユニットに1ダメージを与える。そうした場合、AP3以下の相手のユニット1つを選び、それをレストにする。",
-        "image_url": "https://pbs.twimg.com/media/HEO6VsObQAAtwI8.jpg",
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-075",
-        "card_name": "シンクス",
-        "color": "Purple",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 6,
-        "ap": 5,
-        "hp": 3,
-        "traits": [
-          "宇宙",
-          "地球"
-        ],
-        "effect": "手札のこのカードを、自分のトラッシュの〔国連〕/〔総太国群〕のコマンドカードと同じ名前/コストにする。",
-        "image_url": "https://pbs.twimg.com/media/HEO2wUDbcAELC9i.jpg",
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-050",
-        "card_name": "デスティニーガンダム",
-        "color": "Purple",
-        "card_type": "UNIT",
-        "level": 7,
-        "cost": 5,
-        "ap": 5,
-        "hp": 5,
-        "traits": [
-          "ザフト",
-          "ミネルバ隊"
-        ],
-        "effect": "高速機動〔このユニットはブロックされない〕\nリンク時：アタック準備目分のトラッシュのミネルバ隊のユニットカード1枚を選んでもよい。それをコストを支払って配備する。",
-        "image_url": "https://pbs.twimg.com/media/HEO2lrCboAA831i.jpg",
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-110",
-        "card_name": "出資者",
-        "color": "Purple",
-        "card_type": "COMMAND",
-        "level": 6,
-        "cost": 3,
-        "ap": null,
-        "hp": null,
-        "traits": [],
-        "effect": "メイン：ラクション 自分はEXベース1つを配備する。",
-        "image_url": "https://pbs.twimg.com/media/HEO2WmKbwAAQK8R.jpg",
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-109",
-        "card_name": "ソフィ・プロネ",
-        "color": "Green",
-        "card_type": "PILOT",
-        "level": 4,
-        "cost": 1,
-        "ap": null,
-        "hp": null,
-        "traits": [
-          "学園",
-          "フォルドの夜明け"
-        ],
-        "effect": "メイン／アクション（学園）の味方のユニット1つを選ぶ。このターン中、それが次に受けるダメージを2軽減する。EXリソースを使用してこのカードをプレイしたなら、かわりに4軽減する。",
-        "image_url": "https://pbs.twimg.com/media/HEO2KT0boAAShon.jpg",
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-020",
-        "card_name": "ガンダム・ルブリス・ウル",
-        "color": "Green",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 3,
-        "ap": 4,
-        "hp": 3,
-        "traits": [
-          "フォルドの夜明け",
-          "学園"
-        ],
-        "effect": "ターン1回　自分のターン中、自分がUNITリソースを使用して「フォルドの夜明け」のコマンドカードをプレイした後に発動したときる。自分は1枚ドローする。",
-        "image_url": "https://pbs.twimg.com/media/HEO18t0bAAAxRSY.jpg",
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-009",
-        "card_name": "ガンキャノン(108)&ガンキャノン(109)",
-        "color": "Blue",
-        "card_type": "UNIT",
-        "level": 5,
-        "cost": 4,
-        "ap": 3,
-        "hp": 4,
-        "traits": [
-          "地球連邦",
-          "WB隊"
-        ],
-        "effect": "リンク時 このユニット以外のLv.4以上の《WB隊》の自分のユニット1つを選ぶ。それをアクティブにする。",
-        "image_url": "https://pbs.twimg.com/media/HEO0dgVbAAAVH1V.jpg",
-        "confidence": "medium"
-      }
-    ],
-    "status": "pending_review"
-  },
-  "2026-03-29": {
-    "recognized_at": "2026-03-29T21:57:27.365Z",
-    "source_tweets": [
-      "https://x.com/GUNDAM_GCG_JP/status/2038164256554991636"
-    ],
-    "cards": [
-      {
-        "card_number": "GD04-010",
-        "card_name": "ギャプラン",
-        "color": "Blue",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 2,
-        "ap": 3,
-        "hp": 4,
-        "traits": [
-          "ティターンズ"
-        ],
-        "link": "特徴にティターンズを持つPILOT",
-        "effect": "",
-        "image_url": null,
-        "confidence": "medium"
-      }
-    ],
-    "status": "pending_review"
-  },
-  "2026-03-28": {
-    "recognized_at": "2026-03-29T21:58:58.829Z",
-    "source_tweets": [
-      "https://x.com/GUNDAM_GCG_JP/status/2038164256554991636",
-      "https://x.com/GUNDAM_GCG_JP/status/2037801872996868441",
-      "https://x.com/GUNDAM_GCG_JP/status/2037496102141014114",
-      "https://x.com/GUNDAM_GCG_JP/status/2037494843664953648",
-      "https://x.com/GUNDAM_GCG_JP/status/2037493585638011160",
-      "https://x.com/GUNDAM_GCG_JP/status/2037492328575959276",
-      "https://x.com/GUNDAM_GCG_JP/status/2037491068824858957",
-      "https://x.com/GUNDAM_GCG_JP/status/2037489810546315416"
-    ],
-    "cards": [
-      {
-        "card_number": "GD04-010",
-        "card_name": "ギャプラン",
-        "color": "Blue",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 2,
-        "ap": 3,
-        "hp": 4,
-        "traits": [
-          "ティターンズ"
-        ],
-        "link": "特徴にティターンズを持つPILOT",
-        "effect": "",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-055",
-        "card_name": "ソードインパルスガンダム",
-        "color": "Purple",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 2,
-        "ap": 3,
-        "hp": 3,
-        "traits": [
-          "ザフト",
-          "ミネルバ隊"
-        ],
-        "link": "「シン・アスカ」「ルナマリア・ホーク」",
-        "effect": "【配備時】このユニットに1ダメージを与える。そうした場合、AP3以下の相手のユニット1つを選ぶ。それをレスト状態にする。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-075",
-        "card_name": "ジンクス",
-        "color": "White",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 6,
-        "ap": 5,
-        "hp": 3,
-        "traits": [
-          "地球"
-        ],
-        "link": "",
-        "effect": "手札のこのカードを、自分のトラッシュの〔国連〕/〔超大国群〕のコマンドカードと同じ枚数だけコストを減らす。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-050",
-        "card_name": "デスティニーガンダム",
-        "color": "Purple",
-        "card_type": "UNIT",
-        "level": 7,
-        "cost": 5,
-        "ap": 5,
-        "hp": 5,
-        "traits": [
-          "ザフト",
-          "ミネルバ隊"
-        ],
-        "link": "",
-        "effect": "《高機動1》（このユニットはブロックされない）\n【セット時】【アタック時】自分のトラッシュ（ミネルバ隊）のユニットカード1枚を選んでもよい。それをコストを支払って配置する。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-110",
-        "card_name": "出資者",
-        "color": "Red",
-        "card_type": "COMMAND",
-        "level": 6,
-        "cost": 3,
-        "ap": null,
-        "hp": null,
-        "traits": [],
-        "link": "",
-        "effect": "【メイン】/【アクション】自分はEXベース1つを配備する。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-103",
-        "card_name": "ソフィ・プロネ",
-        "color": "Green",
-        "card_type": "PILOT",
-        "level": 4,
-        "cost": 1,
-        "ap": null,
-        "hp": null,
-        "traits": [
-          "学園",
-          "フォルドの夜明け"
-        ],
-        "effect": "【メイン】「アクション」(学園)の味方のユニット1つを選ぶ、この学園は、それが次に受けるダメージを2軽減する。EXリソースを破棄してこのカードをプレイしたなら、かわりに4軽減する。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-020",
-        "card_name": "ガンダム・ルブリス・ウル",
-        "color": "Green",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 3,
-        "ap": 4,
-        "hp": 8,
-        "traits": [
-          "ソフィ・プロネ"
-        ],
-        "link": "「ソフィ・プロネ」",
-        "effect": "【ターン1回】敵がゲージ中、自分がEXリソースを使用して「フォルドの夜明け」のコマンドカードをプレイし、敵動したとき、敵の持ち枚1を捨てる。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-009",
-        "card_name": "ガンキャノン(108)&ガンキャノン(109)",
-        "color": "Blue",
-        "card_type": "UNIT",
-        "level": 5,
-        "cost": 4,
-        "ap": 3,
-        "hp": 4,
-        "traits": [
-          "地球連邦",
-          "WB隊"
-        ],
-        "link": "「ウィンデン」「ハヤト・コバヤシ」",
-        "effect": "このユニット以外のLv.4以上の〔WB隊〕の自分のユニット1つを選択されるたびにディナイする。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-108",
-        "card_name": "ソフィ・プロネ",
-        "color": "Green",
-        "card_type": "PILOT",
-        "level": 4,
-        "cost": 1,
-        "ap": null,
-        "hp": null,
-        "traits": [
-          "学園",
-          "フォルドの夜明け"
-        ],
-        "link": "",
-        "effect": "【リンク時】「アクション」〔学園〕の味方のユニット1つを選ぶ。このターン中、それが次に受けるダメージを2軽減する。EXリソースを使用してこのカードをプレイしたなら、かわりに4軽減する。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-029",
-        "card_name": "不明",
-        "color": "Green",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 3,
-        "ap": 4,
-        "hp": 3,
-        "traits": [
-          "ソッティ・プロネ"
-        ],
-        "effect": "ターン1回　自分のターン中、自分がEXリソースを使用して「フォルドの反則分け」のコマンドをプレイした時、自分の山札を上から3枚引きに捨てる。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-109",
-        "card_name": "ソフィ・プロネ",
-        "color": "Green",
-        "card_type": "PILOT",
-        "level": 4,
-        "cost": 1,
-        "ap": null,
-        "hp": null,
-        "traits": [
-          "地球の魔女"
-        ],
-        "effect": "【メイン】「ガンダム」（学園）の味方のユニット1つを選ぶ。このターン中、それが次に受けるダメージを2軽減する。EXリソースを破棄してこのカードをプレイしたなら、かわりに4軽減する。",
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-015",
-        "card_name": "ジンクス",
-        "color": "White",
-        "card_type": "UNIT",
-        "level": 4,
-        "cost": 6,
-        "ap": 5,
-        "hp": 3,
-        "traits": [
-          "国連"
-        ],
-        "link": "",
-        "effect": "手札のこのカードを、自分のトラッシュの〔国連〕/〔超大国群〕のコマンドカードと同じ枚数/2以下のコストにする。",
-        "image_url": null,
-        "confidence": "medium"
-      }
-    ],
-    "status": "pending_review"
-  },
-  "2026-03-30": {
-    "recognized_at": "2026-03-30T08:50:44.389Z",
-    "source_tweets": [
-      "https://x.com/GUNDAM_GCG_JP/status/2038526642424103077"
-    ],
-    "cards": [
-      {
-        "card_number": "GD04-019",
-        "card_name": "GNアーマー TYPE-D(トランザム)",
-        "color": "Green",
-        "card_type": "UNIT",
-        "level": 6,
-        "cost": 5,
-        "ap": 4,
-        "hp": 5,
-        "traits": [
-          "CB",
-          "GNドライヴ"
-        ],
-        "link": "特徴にロックオン・ストラトスを持つPILOT",
-        "effect": "《突破3》\n（このユニットのアタックで相手のユニットを破壊したとき、相手のシールドエリアのカードに3ダメージを与える）\n【破壊時】自分のデッキを上から3枚見て、その中のLv.5以下の〔CB〕のユニットカード1枚を公開して手札に加えても良い。残ったカードは無作為に下に戻す。",
-        "image_url": null,
-        "confidence": "medium"
-      }
-    ],
-    "status": "pending_review"
-  },
-  "2026-03-31": {
-    "recognized_at": "2026-04-01T03:06:59.099Z",
-    "source_tweets": [
-      "https://x.com/GUNDAM_GCG_JP/status/2038889031514067195"
-    ],
-    "cards": [
-      {
-        "card_number": "GD04-038",
-        "card_name": "ガンダムエクシア",
-        "color": "Red",
-        "card_type": "UNIT",
-        "level": 3,
-        "cost": 2,
-        "ap": 2,
-        "hp": 1,
-        "traits": [
-          "CB",
-          "GNドライヴ"
-        ],
-        "link": "「刹那・F・セイエイ」",
-        "effect": "【配備時】相手のユニットが2つ以上いるなら、Lv.2以下の相手のユニット1つを選ぶ、それにこのターン、ダメージを与える。",
-        "effect_confidence": "medium",
-        "effect_length": 60,
-        "image_url": null,
-        "confidence": "medium"
-      }
-    ],
-    "status": "pending_review"
-  },
-  "2026-04-01": {
-    "recognized_at": "2026-04-02T10:10:35.995Z",
-    "source_tweets": [
-      "https://x.com/GUNDAM_GCG_JP/status/2039613806280917395",
-      "https://x.com/GUNDAM_GCG_JP/status/2039251422437605552"
-    ],
-    "cards": [
-      {
-        "card_number": "GD04-072",
-        "card_name": "ユニコーンガンダム2号機 バンシィ・ルパス（ユニコーンモード）",
-        "color": "Purple",
-        "card_type": "UNIT",
-        "level": 5,
-        "cost": 3,
-        "ap": 5,
-        "hp": 3,
-        "traits": [
-          "地球連邦"
-        ],
-        "link": "「リディ・マーセナス」",
-        "effect": "【リンク】HP3以下の相手のユニット1つを選び、それを持ち主の手札に戻す。",
-        "effect_confidence": "high",
-        "effect_length": 37,
-        "image_url": null,
-        "confidence": "medium"
-      },
-      {
-        "card_number": "GD04-128",
-        "card_name": "アーモリーワン",
-        "color": "Purple",
-        "card_type": "BASE",
-        "level": 4,
-        "cost": 1,
-        "ap": null,
-        "hp": 6,
-        "traits": [
-          "ザフト",
-          "地点"
-        ],
-        "link": "",
-        "effect": "【バースト】このカードを配備する。配備時、自分のシールド1つを手札に加える。破壊時、プレイヤー1人は1枚ドローする。",
-        "effect_confidence": "medium",
-        "effect_length": 58,
-        "image_url": null,
-        "confidence": "medium"
-      }
-    ],
-    "status": "pending_review"
-  },
   "2026-04-03": {
-    "date": "2026-04-03",
+    "recognized_at": "2026-04-03T23:05:36.838Z",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2040031558753788228",
+      "https://x.com/GUNDAM_GCG_JP/status/2040030300781351226",
+      "https://x.com/GUNDAM_GCG_JP/status/2040029043425443880"
+    ],
     "cards": [
       {
         "card_number": "GD04-065",
         "card_name": "ユニコーンガンダム（覚醒）",
-        "color": "白",
+        "color": "Blue",
         "card_type": "UNIT",
-        "cost": "5",
-        "traits": "地球連邦",
-        "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる) 自分がコマンドのメイン/アクションを発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-        "link": "バナージ・リンクス",
-        "effect_confidence": "high",
-        "effect_length": 96,
-        "source": "manual_correction"
+        "level": 7,
+        "cost": 15,
+        "ap": 4,
+        "hp": 6,
+        "traits": [
+          "地球連邦"
+        ],
+        "link": "「バナージ・リンクス」",
+        "effect": "【配備時】〔アタックでマールドによるダメージは、先頭から5クラに同時に与えられてる〕\n自分がコストが0のメイン/アクションを発動したとき、相手のユニット1つを選ぶ、このターン中、それをAP-2する。",
+        "effect_confidence": "medium",
+        "effect_length": 99,
+        "image_url": null,
+        "confidence": "medium"
       },
       {
         "card_number": "GD04-109",
         "card_name": "強大な圧力",
-        "color": "赤",
+        "color": "Red",
         "card_type": "COMMAND",
-        "cost": "?",
-        "traits": "",
-        "effect": "【メイン】/【アクション】 Lv.6以下の相手ユニット1つを選ぶ。それに4ダメージを与える。",
+        "level": 5,
+        "cost": 3,
+        "ap": null,
+        "hp": null,
+        "traits": [],
         "link": "",
-        "effect_confidence": "high",
-        "effect_length": 46,
-        "source": "manual_correction"
+        "effect": "【アクション】【ターン1回】Lv.6以下の相手のユニット1つ破壊する。そうしたら、自分はカードを1枚ドローする。",
+        "effect_confidence": "medium",
+        "effect_length": 56,
+        "image_url": null,
+        "confidence": "medium"
       },
       {
         "card_number": "GD04-033",
         "card_name": "ネオ・ジオング",
-        "color": "赤",
+        "color": "Red",
         "card_type": "UNIT",
-        "cost": "?",
-        "traits": "ネオ・ジオン",
-        "effect": "このユニットか、〔ネオ・ジオン〕の自分ユニットが配備されたとき、相手のユニット1つを選ぶ。それに3ダメージを与える。【リンク中】自分ユニットすべては〔ネオ・ジオン〕を得る。",
-        "link": "フル・フロンタル",
-        "effect_confidence": "high",
-        "effect_length": 86,
-        "source": "manual_correction"
+        "level": 9,
+        "cost": 8,
+        "ap": 6,
+        "hp": 7,
+        "traits": [
+          "ネオ・ジオン"
+        ],
+        "link": "「フル・フロンタル」",
+        "effect": "このユニットが〔ネオ・ジオン〕の自分のユニットが配備されたとき、相手のユニット1つを選ぶ。それは3ダメージを受ける。【リンク中】自分のユニットすべては《高機動》を得る。",
+        "effect_confidence": "medium",
+        "effect_length": 84,
+        "image_url": null,
+        "confidence": "medium"
       }
     ],
-    "tweet_urls": [],
-    "note": "松岡さんの確定情報で手動修正（auto-news誤読を全面修正）"
+    "status": "pending_review"
+  },
+  "2026-04-04": {
+    "recognized_at": "2026-04-04T23:12:17.789Z",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2040338590358528162"
+    ],
+    "cards": [
+      {
+        "card_number": "不明",
+        "card_name": "ガンイージ",
+        "color": "不明",
+        "card_type": "不明",
+        "level": null,
+        "cost": null,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
