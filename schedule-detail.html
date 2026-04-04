@@ -320,61 +320,32 @@
     }
 
     function renderEventRow(event) {
-      var div = document.createElement('div');
-      div.style.cssText = 'background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;display:flex;flex-direction:column;gap:8px';
-
+      var store = allStores[event.organizer_id] || {};
       var d = new Date(event.start_datetime);
       var month = d.getMonth() + 1;
       var day = d.getDate();
       var dow = getDayOfWeekStr(event.start_datetime);
       var dateColor = getDateColor(event.start_datetime);
-      var timeStr = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
-
-      var dateDiv = document.createElement('div');
-      dateDiv.style.cssText = 'font-size:14px;font-weight:600;color:' + dateColor + ';font-family:var(--font-mono)';
-      dateDiv.textContent = month + '/' + day + ' (' + dow + ')';
-
-      var timeDiv = document.createElement('div');
-      timeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      timeDiv.textContent = '開催時間 ' + timeStr;
-
-      var store = allStores[event.organizer_id] || {};
-
-      var storeDiv = document.createElement('div');
-      storeDiv.style.cssText = 'font-size:14px;font-weight:600;color:var(--text-primary)';
-      storeDiv.textContent = store.name || '未定';
-
-      var addressDiv = document.createElement('div');
-      addressDiv.style.cssText = 'font-size:13px;color:var(--text-secondary)';
-      addressDiv.textContent = (store.city || '') + ' ' + (store.address || '');
-
-      var capacityDiv = document.createElement('div');
-      capacityDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      capacityDiv.textContent = '定員: ' + (event.max_join_count || '0') + '名';
-
-      var feeDiv = document.createElement('div');
-      feeDiv.style.cssText = 'font-size:13px;color:var(--text-secondary);font-family:var(--font-mono)';
-      feeDiv.textContent = '参加費: ' + (event.entry_fee || 0) + '円';
-
-      var btnDiv = document.createElement('div');
-      btnDiv.style.cssText = 'margin-top:8px';
-      var btn = document.createElement('a');
-      btn.href = 'https://www.bandai-tcg-plus.com/event/' + event.id;
-      btn.textContent = '詳細・応募';
-      btn.style.cssText = 'display:inline-block;background:var(--accent);color:#fff;padding:8px 14px;border-radius:4px;font-size:13px;font-weight:600;text-decoration:none;transition:opacity 0.15s';
-      btn.onmouseover = function() { btn.style.opacity = '0.8'; };
-      btn.onmouseout = function() { btn.style.opacity = '1'; };
-      btnDiv.appendChild(btn);
-
-      div.appendChild(dateDiv);
-      div.appendChild(timeDiv);
-      div.appendChild(storeDiv);
-      div.appendChild(addressDiv);
-      div.appendChild(capacityDiv);
-      div.appendChild(feeDiv);
-      div.appendChild(btnDiv);
-
-      return div;
+      var hours = String(d.getHours()).padStart(2, '0');
+      var minutes = String(d.getMinutes()).padStart(2, '0');
+      var address = ((store.city || '') + ' ' + (store.address || '')).trim();
+      var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + event.id;
+      var row = document.createElement('div');
+      row.style.cssText = 'padding:8px 12px;border-bottom:1px solid var(--border)';
+      row.innerHTML =
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+          '<div style="flex:1;min-width:0">' +
+            '<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">' +
+              '<span style="font-size:13px;font-weight:700;color:' + dateColor + ';font-family:var(--font-mono)">' + month + '/' + day + '(' + dow + ')</span>' +
+              '<span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">開催時間 ' + hours + ':' + minutes + '</span>' +
+            '</div>' +
+            '<div style="font-size:12px;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (store.name || '未定') + '</div>' +
+            '<div style="font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + address + '</div>' +
+            '<div style="font-size:11px;color:var(--text-muted);margin-top:1px;font-family:var(--font-mono)">定員' + (event.max_join_count || 0) + '名　参加費' + (event.entry_fee || 0) + '円</div>' +
+          '</div>' +
+          '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener" style="flex-shrink:0;padding:6px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;font-family:var(--font-mono);white-space:nowrap">詳細・応募</a>' +
+        '</div>';
+      return row;
     }
 
     function getEventCountByPref(prefCode) {
@@ -602,18 +573,4 @@
 
         document.getElementById('loading').style.display = 'none';
         document.getElementById('page-title').textContent = title;
-        document.getElementById('event-count-badge').textContent = allEvents.length + '件';
-
-        buildCityMap();
-        renderRegionFilter();
-        renderFilteredEvents();
-      } catch(e) {
-        document.getElementById('loading').textContent = 'イベント情報の取得に失敗しました: ' + e.message;
-        document.getElementById('loading').style.color = '#ff5050';
-      }
-    }
-
-    init();
-  </script>
-</body>
-</html>
+        document.getElementById('event
