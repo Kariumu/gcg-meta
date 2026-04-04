@@ -101,7 +101,8 @@
     document.getElementById('header').innerHTML = GCG.renderHeader('reports');
     document.getElementById('footer').innerHTML = GCG.renderFooter();
     if (typeof GCG.renderShareButtons === 'function') {
-      document.getElementById('share-buttons').innerHTML = GCG.renderShareButtons();
+      var shareHtml = GCG.renderShareButtons();
+      if (shareHtml) document.getElementById('share-buttons').innerHTML = shareHtml;
     }
   </script>
 </body>
