@@ -4,10 +4,12 @@
 
 const fs = require('fs');
 const https = require('https');
+const path = require('path');
+const { pushFiles } = require('./git-push');
 
 const API_BASE = 'https://api.bandai-tcg-plus.com';
 const GCG_GAME_TITLE_ID = 15;
-const OUTPUT_PATH = 'data/schedule.json';
+const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'schedule.json');
 
 function fetchJSON(url) {
   return new Promise((resolve, reject) => {
@@ -123,11 +125,17 @@ async function main() {
     last_updated: new Date().toISOString()
   };
 
-  fs.writeFileSync(OUTPUT_PATH, JSON.stringify(output), 'utf-8');
+  const jsonContent = JSON.stringify(output);
+  fs.writeFileSync(OUTPUT_PATH, jsonContent, 'utf-8');
   console.log(`\nSaved to ${OUTPUT_PATH}`);
   console.log(`  Series: ${seriesList.length}`);
   console.log(`  Stores: ${Object.keys(allStores).length}`);
   console.log(`  Last updated: ${output.last_updated}`);
+
+  // 6. GitHub API経由でpush
+  await pushFiles([
+    { path: 'data/schedule.json', content: jsonContent }
+  ], `Update schedule data ${new Date().toISOString().split('T')[0]}`);
 }
 
 main().catch(err => {

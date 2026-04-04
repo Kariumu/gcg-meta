@@ -6,6 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { pushFiles } = require('./git-push');
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
@@ -173,9 +174,6 @@ function generateEventPage(eventId, ev, seriesName) {
 '    gtag(\'js\', new Date());\n' +
 '    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
 '  </script>\n' +
-'  <!-- Google AdSense -->\n' +
-'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"\n' +
-'       crossorigin="anonymous"></script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
 '  <title>' + storeName + ' ' + dateFormatted + ' GCG大会結果 | GCG STATS</title>\n' +
@@ -318,6 +316,22 @@ function main() {
 
   updateSitemap(eventIds);
   console.log('  → sitemap.xml 更新完了');
+
+  // --push オプション付きで実行した場合、GitHub API経由でpush
+  if (process.argv.includes('--push')) {
+    const filesToPush = [];
+    for (const eid of eventIds) {
+      filesToPush.push({
+        path: 'events/' + eid + '.html',
+        content: fs.readFileSync(path.join(EVENTS_DIR, eid + '.html'), 'utf-8')
+      });
+    }
+    filesToPush.push({
+      path: 'sitemap.xml',
+      content: fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf-8')
+    });
+    return pushFiles(filesToPush, `Update event pages (${generated} pages)`);
+  }
 }
 
 main();

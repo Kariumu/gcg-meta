@@ -12,6 +12,7 @@ const { execSync } = require('child_process');
 const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
+const { pushFiles } = require('./git-push');
 
 // === 設定 ===
 const BASE_URL = 'https://www.gundam-gcg.com/jp';
@@ -679,14 +680,32 @@ async function main() {
     console.error('[後処理] 生成でエラー:', e.message);
   }
 
-  // Git操作（CI環境など自動実行時）
+  // GitHub API経由でpush（CI環境など自動実行時）
   if (process.env.AUTO_DEPLOY === '1' || process.argv.includes('--deploy')) {
-    console.log('\n[デプロイ] Git commit & push...');
+    console.log('\n[デプロイ] GitHub API push...');
     try {
       const dateStr = new Date().toISOString().split('T')[0];
-      execSync('git add .', { cwd: __dirname, stdio: 'inherit' });
-      execSync(`git commit -m "データ更新: ${dateStr}" --allow-empty`, { cwd: __dirname, stdio: 'inherit' });
-      execSync('git push origin main', { cwd: __dirname, stdio: 'inherit' });
+      const filesToPush = [
+        { path: 'data/events.json', content: fs.readFileSync(path.join(__dirname, 'data', 'events.json'), 'utf-8') },
+        { path: 'data/summary.json', content: fs.readFileSync(path.join(__dirname, 'data', 'summary.json'), 'utf-8') }
+      ];
+      // 生成されたイベントページも追加
+      const eventsDir = path.join(__dirname, 'events');
+      if (fs.existsSync(eventsDir)) {
+        const eventFiles = fs.readdirSync(eventsDir).filter(f => f.endsWith('.html'));
+        for (const ef of eventFiles) {
+          filesToPush.push({
+            path: 'events/' + ef,
+            content: fs.readFileSync(path.join(eventsDir, ef), 'utf-8')
+          });
+        }
+      }
+      // sitemap
+      const sitemapPath = path.join(__dirname, 'sitemap.xml');
+      if (fs.existsSync(sitemapPath)) {
+        filesToPush.push({ path: 'sitemap.xml', content: fs.readFileSync(sitemapPath, 'utf-8') });
+      }
+      await pushFiles(filesToPush, `データ更新: ${dateStr}`);
       console.log('[デプロイ] 完了');
     } catch (e) {
       console.error('[デプロイ] エラー:', e.message);

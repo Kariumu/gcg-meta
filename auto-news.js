@@ -13,11 +13,12 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { pushFiles, pushBinaryFile } = require('./git-push');
 require('dotenv').config({ override: true });
 
 // === 設定 ===
 const SITE_URL = 'https://gcg-stats.com';
-const ROOT = path.resolve(__dirname, '..'); // git repo root
+const ROOT = path.resolve(__dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
 const NEWS_DIR = path.join(ROOT, 'reports', 'news');
 const LAST_CHECK_FILE = path.join(DATA_DIR, 'last-check.json');
@@ -40,7 +41,6 @@ const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
 
 const DRY_RUN = process.argv.includes('--dry-run');
 const TEST_MODE = true; // 松岡さんのOKが出たらfalseに変更
-const REGENERATE_DATE = (() => { const i = process.argv.indexOf('--regenerate'); return i >= 0 ? process.argv[i + 1] : null; })();
 
 const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
 const VALID_CARD_TYPES = ['UNIT', 'PILOT', 'COMMAND', 'BASE'];
@@ -922,13 +922,9 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">AP</td><td>${card.ap != null ? card.ap : '-'}</td>`;
   html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">HP</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
   html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
-  if (card.link) {
-    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">リンク条件</td><td colspan="3">${escapeHtml(card.link)}</td></tr>\n`;
-  }
   html += '      </table>\n';
-  {
-    const effectText = card.effect || '効果なし（バニラ）';
-    html += `      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0"><strong>効果:</strong> ${escapeHtml(effectText)}</p>\n`;
+  if (card.effect) {
+    html += `      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0"><strong>効果:</strong> ${escapeHtml(card.effect)}</p>\n`;
   }
   if (analysis) {
     html += `      <p style="font-size:14px;margin:0">${analysis}</p>\n`;
@@ -1053,7 +1049,7 @@ async function generateCardAnalyses(cardInfoList, relatedCards) {
       .join('、');
 
     const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
-以下のカード1枚について、最低3文以上の考察を書いてください。プレーンテキストのみで出力（HTMLタグ不要）。
+以下のカード1枚について、2〜3行の簡潔な考察を書いてください。プレーンテキストのみで出力（HTMLタグ不要）。
 
 【カード情報】
 - カード名: ${card.card_name} (${card.card_number})
@@ -1091,10 +1087,6 @@ ${relatedDesc || 'データなし'}
   ステータスとコスト効率で評価すること。「不明」「評価できない」とは書かない
 
 【考察文のルール】
-- 最低3文以上の考察を書くこと
-- ステータス（Lv/コスト/AP/HP）と効果の両面から評価すること
-- 同色デッキでの採用可能性に言及すること
-- 「高機動ユニット」「注目される」等の抽象的な表現だけで終わらせないこと
 - 効果テキストから読み取れる事実のみに基づいて考察すること
 - カードの効果を勝手に解釈・推測して存在しない相互作用を書かないこと
 - 既存カードとの相性を書く場合は、そのカードの効果テキストを確認してから書くこと
@@ -1105,7 +1097,7 @@ ${relatedDesc || 'データなし'}
 - プレイヤーが読んで「なるほど」と思える分析を書く
 - 「このカード強そう」「使いたい」程度のカジュアルな感想はOK
 - データに基づいた具体的な表現を使う
-- プレーンテキストのみ出力。
+- 2〜3行で簡潔に。プレーンテキストのみ出力。
 
 【表記ルール】
 記事内で以下の表記を統一すること:
@@ -1227,9 +1219,6 @@ function generateNewsPage(pageId, title, description, articleHtml, options) {
     gtag('js', new Date());
     gtag('config', 'G-3MY17P4E7F');
   </script>
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
-       crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(title)} | GCG STATS</title>
@@ -1248,24 +1237,6 @@ function generateNewsPage(pageId, title, description, articleHtml, options) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Article",
-  "headline": "${escapeHtml(title)}",
-  "datePublished": "${canonical.match(/\\/([\\d-]+)\\.html/)?.[1] || todayStr()}",
-  "description": "${escapeHtml(description)}",
-  "url": "${canonical}",
-  "publisher": {
-    "@type": "Organization",
-    "name": "GCG STATS",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "${SITE_URL}/images/ogp-default.png"
-    }
-  }
-}
-</script>
 </head>
 <body>
   <div id="header"></div>
@@ -1429,61 +1400,36 @@ function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedC
   return html;
 }
 
-// === Git操作 ===
-function gitPush(message) {
+// === Git操作（GitHub API経由） ===
+async function gitPush(message, generatedFiles) {
   if (DRY_RUN) { log(`[DRY-RUN] git push スキップ: ${message}`); return; }
   try {
-    execSync('git add -A', { cwd: ROOT, encoding: 'utf-8' });
-    execSync(`git commit -m "${message.replace(/"/g, '\\"')}"`, { cwd: ROOT, encoding: 'utf-8' });
-    execSync('git push', { cwd: ROOT, encoding: 'utf-8' });
-    log('git push 完了');
+    // テキストファイルをまとめてpush
+    const textFiles = (generatedFiles || []).filter(f => !f.binary);
+    const binaryFiles = (generatedFiles || []).filter(f => f.binary);
+
+    if (textFiles.length > 0) {
+      const filesToPush = textFiles.map(f => ({
+        path: f.repoPath,
+        content: fs.readFileSync(path.join(ROOT, f.repoPath), 'utf-8')
+      }));
+      await pushFiles(filesToPush, message);
+    }
+
+    // バイナリファイル（画像）を個別にpush
+    for (const f of binaryFiles) {
+      await pushBinaryFile(f.repoPath, path.join(ROOT, f.repoPath), `Add ${path.basename(f.repoPath)}`);
+    }
+
+    log('GitHub API push 完了');
   } catch (e) {
-    log(`git push 失敗: ${e.message}`);
+    log(`GitHub API push 失敗: ${e.message}`);
   }
 }
 
 // === メイン処理 ===
 async function main() {
   log('=== auto-news 開始 ===');
-
-  // --regenerate DATE: 認識ログからHTMLのみ再生成（X API不要）
-  if (REGENERATE_DATE) {
-    log(`=== 再生成モード: ${REGENERATE_DATE} ===`);
-    if (!ANTHROPIC_API_KEY) { log('エラー: ANTHROPIC_API_KEY が設定されていません'); process.exit(1); }
-    if (!fs.existsSync(NEWS_DIR)) fs.mkdirSync(NEWS_DIR, { recursive: true });
-    let logData = {};
-    try { logData = JSON.parse(fs.readFileSync(RECOGNITION_LOG_FILE, 'utf-8')); } catch (e) { log('認識ログ読み込み失敗'); process.exit(1); }
-    const logEntry = logData[REGENERATE_DATE];
-    if (!logEntry || !logEntry.cards || logEntry.cards.length === 0) { log(`認識ログに ${REGENERATE_DATE} のデータなし`); process.exit(1); }
-    const cardsMaster = loadCardsMaster();
-    const summary = loadSummary();
-    const allCardInfos = logEntry.cards.map(c => {
-      // ローカル画像があれば設定
-      const dir = path.join(NEWS_IMAGE_DIR, REGENERATE_DATE);
-      const ext = ['.jpg', '.png'].find(e => fs.existsSync(path.join(dir, `${c.card_number}${e}`)));
-      if (ext) c._localImagePath = `../../images/news/${REGENERATE_DATE}/${c.card_number}${ext}`;
-      return c;
-    });
-    const tweetUrls = logEntry.source_tweets || [];
-    const allRelated = [];
-    for (const ci of allCardInfos) allRelated.push(...findRelatedCards(ci, cardsMaster, summary));
-    const uniqueRelated = [...new Map(allRelated.map(r => [r.card_id, r])).values()];
-    const dateLbl = dateLabel(REGENERATE_DATE);
-    const cardCount = allCardInfos.length;
-    let introHtml;
-    try { introHtml = await generateIntroText(allCardInfos, uniqueRelated.slice(0, 10), REGENERATE_DATE); }
-    catch (e) { introHtml = `<p>GD04 Phantom Ariaから新カード${cardCount}枚が公開されました。</p>`; }
-    let cardAnalyses = {};
-    try { cardAnalyses = await generateCardAnalyses(allCardInfos, uniqueRelated.slice(0, 10)); } catch (e) {}
-    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, cardAnalyses, uniqueRelated.slice(0, 10), tweetUrls, cardsMaster, summary);
-    const title = `【${dateLbl}公開】GD04 Phantom Aria 新カード${cardCount}枚まとめ`;
-    const desc = `ガンダムカードゲームGD04 Phantom Ariaから公開された新カード${cardCount}枚の紹介と環境考察。`;
-    const pageHtml = generateNewsPage(REGENERATE_DATE, title, desc, articleHtml, { displayDate: REGENERATE_DATE.replace(/-/g, '.') });
-    const filePath = path.join(NEWS_DIR, `${REGENERATE_DATE}.html`);
-    fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
-    log(`再生成完了: ${filePath}`);
-    return;
-  }
 
   if (!X_API_KEY || !X_ACCESS_TOKEN) {
     log('エラー: X API キーが設定されていません');
@@ -1517,6 +1463,7 @@ async function main() {
   const cardsMaster = loadCardsMaster();
   const summary = loadSummary();
   const date = todayStr();
+  const generatedFiles = []; // GitHub API push用ファイルリスト
 
   const newCards = targets.filter(t => t.type === 'new_card');
   const notices = targets.filter(t => t.type === 'notice');
@@ -1595,6 +1542,7 @@ async function main() {
     // 認識結果をログに保存（松岡さんの確認用）
     const tweetUrlsForLog = [...new Set(allCardInfos.map(c => c._tweetUrl))];
     saveRecognitionLog(articleDate, allCardInfos, tweetUrlsForLog);
+    generatedFiles.push({ repoPath: 'data/card-recognition-log.json', binary: false });
 
     // 関連カードの重複排除
     const uniqueRelated = [];
@@ -1632,6 +1580,14 @@ async function main() {
     const pageHtml = generateNewsPage(articleDate, title, desc, articleHtml, { displayDate: articleDate.replace(/-/g, '.') });
     const filePath = path.join(NEWS_DIR, `${articleDate}.html`);
     fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
+    generatedFiles.push({ repoPath: `reports/news/${articleDate}.html`, binary: false });
+    // 画像ファイルも追跡
+    for (const ci of allCardInfos) {
+      if (ci._localImagePath) {
+        const imgRepoPath = path.relative(ROOT, path.join(ROOT, ci._localImagePath));
+        generatedFiles.push({ repoPath: imgRepoPath, binary: true });
+      }
+    }
     log(`記事保存: ${filePath}`);
 
     // X投稿（テストモードではスキップ）
@@ -1672,6 +1628,7 @@ async function main() {
       const pageHtml = generateNewsPage(pageId, title, desc, articleHtml);
       const filePath = path.join(NEWS_DIR, `${pageId}.html`);
       fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
+      generatedFiles.push({ repoPath: `reports/news/${pageId}.html`, binary: false });
       log(`速報記事保存: ${filePath}`);
 
       const articleUrl = `${SITE_URL}/reports/news/${pageId}.html`;
@@ -1688,11 +1645,11 @@ async function main() {
     }
   }
 
-  // ⑤ Git push
+  // ⑤ GitHub API経由でpush
   const commitCards = newCards.length > 0 ? `新カード記事(${allCardInfos.length}枚)` : '';
   const commitNotices = notices.length > 0 ? `速報${notices.length}件` : '';
   const commitMsg = `auto-news: ${[commitCards, commitNotices].filter(Boolean).join(' + ')} (${date})`;
-  gitPush(commitMsg);
+  await gitPush(commitMsg, generatedFiles);
 
   saveLastCheck();
   log('=== auto-news 完了 ===');

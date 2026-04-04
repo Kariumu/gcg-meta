@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const https = require('https');
+const { pushFiles } = require('./git-push');
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
@@ -472,9 +473,6 @@ function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, 
 '    gtag(\'js\', new Date());\n' +
 '    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
 '  </script>\n' +
-'  <!-- Google AdSense -->\n' +
-'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"\n' +
-'       crossorigin="anonymous"></script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
 '  <title>' + escapeHtml(titleText) + '</title>\n' +
@@ -493,24 +491,6 @@ function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, 
 '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
 '  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">\n' +
 '  <link rel="stylesheet" href="../css/style.css">\n' +
-'  <script type="application/ld+json">\n' +
-'{\n' +
-'  "@context": "https://schema.org",\n' +
-'  "@type": "Article",\n' +
-'  "headline": "' + escapeHtml(titleText) + '",\n' +
-'  "datePublished": "' + mondayStr + '",\n' +
-'  "description": "' + escapeHtml(descText) + '",\n' +
-'  "url": "' + SITE_URL + '/reports/' + wId + '.html",\n' +
-'  "publisher": {\n' +
-'    "@type": "Organization",\n' +
-'    "name": "GCG STATS",\n' +
-'    "logo": {\n' +
-'      "@type": "ImageObject",\n' +
-'      "url": "' + SITE_URL + '/images/ogp-default.png"\n' +
-'    }\n' +
-'  }\n' +
-'}\n' +
-'</script>\n' +
 '</head>\n' +
 '<body>\n' +
 '  <div id="header"></div>\n' +
@@ -617,9 +597,6 @@ function updateReportIndex() {
 '    gtag(\'js\', new Date());\n' +
 '    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
 '  </script>\n' +
-'  <!-- Google AdSense -->\n' +
-'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"\n' +
-'       crossorigin="anonymous"></script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
 '  <title>\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7 | GCG STATS</title>\n' +
@@ -953,6 +930,14 @@ async function main() {
   // サイトマップ更新
   updateSitemap();
   console.log('  → sitemap.xml を更新しました');
+
+  // GitHub API経由でpush
+  const filesToPush = [
+    { path: `reports/${wId}.html`, content: fs.readFileSync(outputPath, 'utf-8') },
+    { path: 'reports/index.html', content: fs.readFileSync(path.join(ROOT, 'reports', 'index.html'), 'utf-8') },
+    { path: 'sitemap.xml', content: fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf-8') }
+  ];
+  await pushFiles(filesToPush, `Add weekly report ${wId}`);
 }
 
 main().catch(err => {
