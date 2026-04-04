@@ -545,33 +545,6 @@
       }
     }
 
-    function loadEventDetail(seriesId) {
-      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list?game_title_id=15&event_series_id=' + seriesId + '&limit=999&offset=0')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          var events = data.success.event_list || [];
-          return events
-            .filter(function(e) { return e.event_status !== 'canceled'; })
-            .sort(function(a, b) {
-              return new Date(a.start_datetime) - new Date(b.start_datetime);
-            });
-        });
-    }
-
-    function getSeriesTitle(seriesId) {
-      return fetch('https://api.bandai-tcg-plus.com/api/user/event/list/params')
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          var series = data.success.event_series_with_game_title_id;
-          for (var i = 0; i < series.length; i++) {
-            if (series[i].event_series_id === seriesId) {
-              return series[i].event_series_title;
-            }
-          }
-          return 'イベント開催一覧';
-        });
-    }
-
     function getUrlParam(name) {
       var url = new URL(window.location.href);
       return url.searchParams.get(name);
@@ -598,11 +571,18 @@
       }
 
       try {
-        var titlePromise = getSeriesTitle(parseInt(seriesId));
-        var eventsPromise = loadEventDetail(parseInt(seriesId));
+        var res = await fetch('data/schedule.json');
+        var data = await res.json();
 
-        var title = await titlePromise;
-        allEvents = await eventsPromise;
+        allStores = data.stores || {};
+
+        var events = data.events[seriesId] || [];
+        var seriesInfo = (data.series || []).find(function(s) { return s.event_series_id == seriesId; });
+        var title = seriesInfo ? seriesInfo.event_series_title : 'イベント開催一覧';
+
+        allEvents = events.sort(function(a, b) {
+          return new Date(a.start_datetime) - new Date(b.start_datetime);
+        });
 
         document.getElementById('loading').style.display = 'none';
         document.getElementById('page-title').textContent = title;
