@@ -27,6 +27,9 @@
     gtag('config', 'G-3MY17P4E7F');
   </script>
   <style>
+    #event-list a:hover {
+      text-decoration: underline;
+    }
     .pref-filter-btn {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -339,7 +342,7 @@
               '<span style="font-size:15px;font-weight:700;color:' + dateColor + ';font-family:var(--font-mono)">' + month + '/' + day + '(' + dow + ')</span>' +
               '<span style="font-size:14px;color:var(--text-muted);font-family:var(--font-mono)">開催時間 ' + hours + ':' + minutes + '</span>' +
             '</div>' +
-            '<div style="font-size:15px;font-weight:600;color:var(--text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (store.name || '未定') + '</div>' +
+            '<a href="store.html?id=' + event.organizer_id + '" style="display:block;font-size:15px;font-weight:600;color:var(--text-primary);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + (store.name || '未定') + '</a>' +
             '<div style="font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + address + '</div>' +
             '<div style="font-size:13px;color:var(--text-muted);margin-top:1px;font-family:var(--font-mono)">定員' + (event.max_join_count || 0) + '名　参加費' + (event.entry_fee || 0) + '円</div>' +
           '</div>' +

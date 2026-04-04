@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
+       crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>店舗詳細 | GCG STATS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    #event-list a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main style="max-width:900px;margin:0 auto;padding:20px">
+    <div style="margin-bottom:20px">
+      <a href="schedule.html" style="color:var(--accent);text-decoration:none;font-size:14px">← スケジュールに戻る</a>
+    </div>
+
+    <div id="store-info" style="margin-bottom:24px"></div>
+    <div id="loading" style="text-align:center;padding:40px;color:var(--text-muted)">読み込み中...</div>
+    <div id="calendar"></div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js?v=7"></script>
+  <script>
+    var currentYear = new Date().getFullYear();
+    var currentMonth = new Date().getMonth();
+    var allStoreEvents = [];
+    var popup = null;
+
+    var EVENT_COLORS = {
+      'ニュータイプチャレンジ': '#f59e0b',
+      'WORLD CHAMPIONSHIPS': '#ef4444',
+      'ショップバトル': '#3b82f6',
+      'ビギナーズバトル': '#22c55e'
+    };
+
+    function getEventColor(seriesTitle) {
+      for (var key in EVENT_COLORS) {
+        if (seriesTitle.indexOf(key) !== -1) {
+          return EVENT_COLORS[key];
+        }
+      }
+      return '#6b7280';
+    }
+
+    function shortenTitle(seriesTitle) {
+      if (seriesTitle.indexOf('ニュータイプチャレンジ') !== -1) return 'ニュータイプ…';
+      if (seriesTitle.indexOf('WORLD CHAMPIONSHIPS') !== -1) return 'WC予選';
+      if (seriesTitle.indexOf('ショップバトル') !== -1) return 'ショップ…';
+      if (seriesTitle.indexOf('ビギナーズバトル') !== -1) return 'ビギナーズ…';
+      if (seriesTitle.indexOf('新弾構築戦') !== -1) return '新弾構築戦';
+      if (seriesTitle.indexOf('限定戦') !== -1) return '限定戦';
+      if (seriesTitle.indexOf('ティーチング') !== -1) return 'ティーチング…';
+      if (seriesTitle.indexOf('バトルロワイヤル') !== -1) return 'バトロワ…';
+      if (seriesTitle.length > 12) return seriesTitle.substring(0, 10) + '…';
+      return seriesTitle;
+    }
+
+    function formatPhone(phone) {
+      if (phone.length === 10) {
+        return phone.slice(0, 4) + '-' + phone.slice(4, 6) + '-' + phone.slice(6);
+      }
+      if (phone.length === 11) {
+        return phone.slice(0, 3) + '-' + phone.slice(3, 7) + '-' + phone.slice(7);
+      }
+      return phone;
+    }
+
+    var HOLIDAYS_2026 = [
+      '2026-01-01', '2026-01-12', '2026-02-11', '2026-02-23',
+      '2026-03-20', '2026-04-29', '2026-05-03', '2026-05-04',
+      '2026-05-05', '2026-05-06', '2026-07-20', '2026-08-11',
+      '2026-09-21', '2026-09-22', '2026-09-23', '2026-10-12',
+      '2026-11-03', '2026-11-23', '2026-12-23'
+    ];
+    function isHoliday(dateStr) { return HOLIDAYS_2026.indexOf(dateStr) !== -1; }
+
+    function getUrlParam(name) {
+      var url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+
+    function renderStoreInfo(store) {
+      var container = document.getElementById('store-info');
+
+      var mapLink = '';
+      if (store.geo && store.geo.x && store.geo.y) {
+        var mapsUrl = 'https://www.google.com/maps?q=' + store.geo.x + ',' + store.geo.y;
+        mapLink = ' <a href="' + mapsUrl + '" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;font-size:15px" title="地図を開く">📍</a>';
+      }
+
+      var address = ((store.city || '') + ' ' + (store.address || '')).trim();
+      var phone = store.phone ? formatPhone(store.phone) : '';
+
+      container.innerHTML =
+        '<h1 style="font-size:20px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0">' + store.name + '</h1>' +
+        '<div style="font-size:14px;color:var(--text-secondary);margin-bottom:4px">' + address + mapLink + '</div>' +
+        (phone ? '<div style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">TEL: ' + phone + '</div>' : '');
+    }
+
+    function renderCalendar(events) {
+      allStoreEvents = events;
+      drawCalendar();
+    }
+
+    function drawCalendar() {
+      var container = document.getElementById('calendar');
+      container.innerHTML = '';
+
+      var header = document.createElement('div');
+      header.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px';
+      header.innerHTML =
+        '<button onclick="prevMonth()" style="background:none;border:1px solid var(--border);color:var(--text-primary);padding:6px 12px;border-radius:4px;cursor:pointer;font-size:16px">◀</button>' +
+        '<span style="font-size:18px;font-weight:700;color:var(--text-primary);font-family:var(--font-mono);min-width:150px;text-align:center">' + currentYear + '年' + (currentMonth + 1) + '月</span>' +
+        '<button onclick="nextMonth()" style="background:none;border:1px solid var(--border);color:var(--text-primary);padding:6px 12px;border-radius:4px;cursor:pointer;font-size:16px">▶</button>';
+      container.appendChild(header);
+
+      var dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+      var dayColors = ['#ef4444', 'inherit', 'inherit', 'inherit', 'inherit', 'inherit', '#3b82f6'];
+      var dowHeader = document.createElement('div');
+      dowHeader.style.cssText = 'display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px';
+      dayNames.forEach(function(name, i) {
+        var cell = document.createElement('div');
+        cell.style.cssText = 'text-align:center;font-size:12px;font-weight:600;color:' + dayColors[i] + ';padding:4px 0;font-family:var(--font-mono)';
+        cell.textContent = name;
+        dowHeader.appendChild(cell);
+      });
+      container.appendChild(dowHeader);
+
+      var eventsByDate = {};
+      allStoreEvents.forEach(function(e) {
+        var d = new Date(e.start_datetime);
+        if (d.getFullYear() === currentYear && d.getMonth() === currentMonth) {
+          var dateKey = d.getDate();
+          if (!eventsByDate[dateKey]) eventsByDate[dateKey] = [];
+          eventsByDate[dateKey].push(e);
+        }
+      });
+
+      var grid = document.createElement('div');
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(7,1fr);gap:2px';
+
+      var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      for (var i = 0; i < firstDay; i++) {
+        var empty = document.createElement('div');
+        empty.style.cssText = 'min-height:80px';
+        grid.appendChild(empty);
+      }
+
+      for (var day = 1; day <= daysInMonth; day++) {
+        var cell = document.createElement('div');
+        var dateObj = new Date(currentYear, currentMonth, day);
+        var dow = dateObj.getDay();
+        var dateStr = currentYear + '-' + String(currentMonth + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+
+        var dateColor = 'var(--text-primary)';
+        if (dow === 0 || isHoliday(dateStr)) dateColor = '#ef4444';
+        else if (dow === 6) dateColor = '#3b82f6';
+
+        cell.style.cssText = 'min-height:80px;border:1px solid var(--border);border-radius:4px;padding:4px;position:relative;overflow:hidden';
+
+        var dateLabel = '<div style="font-size:13px;font-weight:600;color:' + dateColor + ';font-family:var(--font-mono);margin-bottom:2px">' + day + '</div>';
+
+        var bars = '';
+        var dayEvents = eventsByDate[day] || [];
+        dayEvents.sort(function(a, b) { return new Date(a.start_datetime) - new Date(b.start_datetime); });
+
+        dayEvents.forEach(function(e) {
+          var time = new Date(e.start_datetime);
+          var timeStr = String(time.getHours()).padStart(2, '0') + ':' + String(time.getMinutes()).padStart(2, '0');
+          var color = getEventColor(e.series_title);
+          var shortTitle = shortenTitle(e.series_title);
+          bars += '<div style="font-size:9px;line-height:1.3;padding:1px 3px;margin-bottom:1px;border-left:3px solid ' + color + ';background:' + color + '20;border-radius:0 2px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-secondary);cursor:pointer" data-date="' + day + '">' + timeStr + ' ' + shortTitle + '</div>';
+        });
+
+        cell.innerHTML = dateLabel + bars;
+
+        if (dayEvents.length > 0) {
+          cell.style.cursor = 'pointer';
+          cell.onclick = (function(d) {
+            return function(e) { showPopup(d, e); };
+          })(day);
+        }
+
+        grid.appendChild(cell);
+      }
+
+      container.appendChild(grid);
+    }
+
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      closePopup();
+      drawCalendar();
+    }
+
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      closePopup();
+      drawCalendar();
+    }
+
+    function showPopup(day, clickEvent) {
+      closePopup();
+
+      var dayEvents = allStoreEvents.filter(function(e) {
+        var d = new Date(e.start_datetime);
+        return d.getFullYear() === currentYear && d.getMonth() === currentMonth && d.getDate() === day;
+      }).sort(function(a, b) {
+        return new Date(a.start_datetime) - new Date(b.start_datetime);
+      });
+
+      if (dayEvents.length === 0) return;
+
+      var dateObj = new Date(currentYear, currentMonth, day);
+      var dayNamesList = ['日', '月', '火', '水', '木', '金', '土'];
+      var dow = dayNamesList[dateObj.getDay()];
+      var dateStr = currentYear + '-' + String(currentMonth + 1).padStart(2, '0') + '-' + String(day).padStart(2, '0');
+      var dateColor = 'var(--text-primary)';
+      if (dateObj.getDay() === 0 || isHoliday(dateStr)) dateColor = '#ef4444';
+      else if (dateObj.getDay() === 6) dateColor = '#3b82f6';
+
+      popup = document.createElement('div');
+      popup.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:20px;z-index:1000;max-width:400px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,0.4)';
+
+      var headerHtml = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)">' +
+        '<span style="font-size:16px;font-weight:700;color:' + dateColor + ';font-family:var(--font-mono)">' + (currentMonth + 1) + '/' + day + '(' + dow + ')</span>' +
+        '<button onclick="closePopup()" style="background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;padding:0 4px">✕</button>' +
+        '</div>';
+
+      var eventsHtml = '';
+      dayEvents.forEach(function(e, index) {
+        var time = new Date(e.start_datetime);
+        var timeStr = String(time.getHours()).padStart(2, '0') + ':' + String(time.getMinutes()).padStart(2, '0');
+        var color = getEventColor(e.series_title);
+        var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + e.id;
+        var separator = index > 0 ? 'border-top:1px solid var(--border);padding-top:10px;margin-top:10px;' : '';
+
+        eventsHtml +=
+          '<div style="' + separator + '">' +
+            '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">' +
+              '<div style="width:4px;height:16px;border-radius:2px;background:' + color + '"></div>' +
+              '<span style="font-size:14px;font-weight:600;color:var(--text-primary)">' + e.series_title + '</span>' +
+            '</div>' +
+            '<div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-mono);margin-bottom:4px">開催時間 ' + timeStr + '</div>' +
+            '<div style="display:flex;justify-content:space-between;align-items:center">' +
+              '<span style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">定員' + (e.max_join_count || 0) + '名　参加費' + (e.entry_fee || 0) + '円</span>' +
+              '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener" style="padding:5px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;font-family:var(--font-mono);white-space:nowrap">詳細・応募</a>' +
+            '</div>' +
+          '</div>';
+      });
+
+      popup.innerHTML = headerHtml + eventsHtml;
+
+      var overlay = document.createElement('div');
+      overlay.id = 'popup-overlay';
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999';
+      overlay.onclick = closePopup;
+
+      document.body.appendChild(overlay);
+      document.body.appendChild(popup);
+    }
+
+    function closePopup() {
+      if (popup) {
+        popup.remove();
+        popup = null;
+      }
+      var overlay = document.getElementById('popup-overlay');
+      if (overlay) overlay.remove();
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePopup();
+    });
+
+    async function init() {
+      GCG.init();
+      document.getElementById('header').innerHTML = GCG.renderHeader('schedule');
+      document.getElementById('footer').innerHTML = GCG.renderFooter();
+
+      var storeId = getUrlParam('id');
+      if (!storeId) {
+        document.getElementById('loading').textContent = '店舗IDが指定されていません';
+        document.getElementById('loading').style.color = '#ff5050';
+        var errorLink = document.createElement('div');
+        errorLink.style.cssText = 'margin-top:16px';
+        var link = document.createElement('a');
+        link.href = 'schedule.html';
+        link.textContent = 'スケジュールに戻る';
+        link.style.cssText = 'color:var(--accent);text-decoration:none';
+        errorLink.appendChild(link);
+        document.getElementById('loading').parentNode.insertBefore(errorLink, document.getElementById('loading').nextSibling);
+        return;
+      }
+
+      try {
+        var res = await fetch('data/schedule.json');
+        var data = await res.json();
+
+        var stores = data.stores || {};
+        var store = stores[storeId] || null;
+        if (!store) {
+          document.getElementById('loading').textContent = '店舗が見つかりませんでした';
+          document.getElementById('loading').style.color = '#ff5050';
+          return;
+        }
+
+        var allSeries = {};
+        (data.series || []).forEach(function(s) {
+          allSeries[s.event_series_id] = s;
+        });
+
+        var storeEvents = [];
+        Object.keys(data.events || {}).forEach(function(seriesId) {
+          var events = data.events[seriesId];
+          events.forEach(function(e) {
+            if (String(e.organizer_id) === String(storeId)) {
+              if (new Date(e.start_datetime) >= new Date()) {
+                storeEvents.push(Object.assign({}, e, {
+                  series_title: allSeries[seriesId] ? allSeries[seriesId].event_series_title : '不明',
+                  series_id: seriesId
+                }));
+              }
+            }
+          });
+        });
+
+        storeEvents.sort(function(a, b) {
+          return new Date(a.start_datetime) - new Date(b.start_datetime);
+        });
+
+        document.getElementById('loading').style.display = 'none';
+        document.title = store.name + ' | GCG STATS';
+
+        renderStoreInfo(store);
+        renderCalendar(storeEvents);
+      } catch(e) {
+        document.getElementById('loading').textContent = '情報の取得に失敗しました: ' + e.message;
+        document.getElementById('loading').style.color = '#ff5050';
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
