@@ -144,5 +144,34 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-04-07": {
+    "recognized_at": "2026-04-07T08:50:39.157Z",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2041425753825575210"
+    ],
+    "cards": [
+      {
+        "card_number": "GD04-045",
+        "card_name": "ガンダムスローネツヴァイ",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔CB〕",
+          "「トリニティ」"
+        ],
+        "link": "〔CB〕の自分のユニットを選ぶ。このターン中、それはダメージを受けないタイプの相手のユニットをアタック先に選んでもよい。",
+        "effect": "【リンク時】〔CB〕の自分のユニットを選ぶ。このターン中、それはダメージを受けないタイプの相手のユニットをアタック先に選んでもよい。",
+        "effect_confidence": "medium",
+        "effect_length": 66,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
