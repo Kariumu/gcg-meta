@@ -1631,7 +1631,7 @@ async function main() {
     // 画像ファイルも追跡
     for (const ci of allCardInfos) {
       if (ci._localImagePath) {
-        const imgRepoPath = path.relative(ROOT, path.join(ROOT, ci._localImagePath));
+        const imgRepoPath = path.relative(ROOT, path.resolve(NEWS_DIR, ci._localImagePath));
         generatedFiles.push({ repoPath: imgRepoPath, binary: true });
       }
     }
