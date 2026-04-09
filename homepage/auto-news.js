@@ -17,6 +17,15 @@ const { pushFiles, pushBinaryFile } = require('./git-push');
 const sharp = require('sharp');
 require('dotenv').config({ override: true });
 
+// === セルフチェック: ファイル末尾の // EOF マーカーを確認 ===
+{
+  const selfSrc = fs.readFileSync(__filename, 'utf-8');
+  if (!selfSrc.trimEnd().endsWith('// EOF')) {
+    console.error('[FATAL] auto-news.js のファイル末尾が切断されています（// EOF が見つかりません）。実行を中止します。');
+    process.exit(2);
+  }
+}
+
 // === 設定 ===
 const SITE_URL = 'https://gcg-stats.com';
 const ROOT = path.resolve(__dirname, '..');
@@ -561,8 +570,10 @@ function parseVisionBlocks(visionResponse) {
   // UNIT: nameUnit ゾーン（y420-475）
   // PILOT: namePilot ゾーン（y495-535）
   // COMMAND: 拡張ゾーン（y420-490, COMMANDカード名はy=478付近）
+  // BASE: nameUnit ゾーンと同じ（y420-475）
   const nameZone = result.card_type === 'PILOT' ? CARD_ZONES.namePilot
     : result.card_type === 'COMMAND' ? { x1: 555, y1: 420, x2: 860, y2: 490 }
+    : result.card_type === 'BASE' ? CARD_ZONES.nameUnit
     : CARD_ZONES.nameUnit;
   let nameText = zoneText(cardWords, nameZone);
   // 「」で囲まれたカード名から「」を除去（COMMANDカードの「地球の魔女」等）
@@ -583,9 +594,11 @@ function parseVisionBlocks(visionResponse) {
   // UNIT: effectUnit（y470-570）
   // PILOT: effectPilot（y445-595）
   // COMMAND: effectCommand（y490-570, カード名の下から）
+  // BASE: effectUnit（y470-570, UNITと同ゾーン）
   let effectZone;
   if (result.card_type === 'PILOT') effectZone = CARD_ZONES.effectPilot;
   else if (result.card_type === 'COMMAND') effectZone = { x1: 550, y1: 490, x2: 895, y2: 570 };
+  else if (result.card_type === 'BASE') effectZone = CARD_ZONES.effectUnit;
   else effectZone = CARD_ZONES.effectUnit;
   const effectLines = zoneTextSpaced(cardWords, effectZone);
   if (effectLines) {
@@ -612,9 +625,11 @@ function parseVisionBlocks(visionResponse) {
   // UNIT: traits ゾーン（y590-620）
   // PILOT: traitsPilot ゾーン（y530-555）
   // COMMAND: link ゾーン付近（y615-640, パイロット欄の下に特徴がある）
+  // BASE: traits ゾーン（y590-620, UNITと同ゾーン）
   let traitZone;
   if (result.card_type === 'PILOT') traitZone = CARD_ZONES.traitsPilot;
   else if (result.card_type === 'COMMAND') traitZone = CARD_ZONES.link; // COMMANDの特徴はlinkゾーン位置
+  else if (result.card_type === 'BASE') traitZone = CARD_ZONES.traits;
   else traitZone = CARD_ZONES.traits;
   const traitZoneWords = wordsInZone(cardWords, traitZone);
   // フォールバック: 通常のtraitsゾーンも検索
@@ -645,6 +660,13 @@ function parseVisionBlocks(visionResponse) {
     if (plusMatch) {
       result.ap = parseInt(plusMatch[1]);
       result.hp = parseInt(plusMatch[2]);
+    }
+  } else if (result.card_type === 'BASE') {
+    // BASE: HPのみ（APなし）。右下の数値ゾーンからHP読み取り
+    const baseHpText = zoneText(cardWords, CARD_ZONES.apHp);
+    const hpDigits = baseHpText.replace(/[^0-9]/g, '');
+    if (hpDigits.length >= 1) {
+      result.hp = parseInt(hpDigits.slice(-1));
     }
   }
 
@@ -793,7 +815,8 @@ function fixBrackets(text) {
     'ザフト', 'オーブ', 'ロンド・ベル', 'アーガマ隊', 'WB隊',
     'リガ・ミリティア', 'シャッフル同盟', 'Gの鉄血', 'Gのレコンギスタ',
     'SEED', '超大国群', '国連', 'シャングリラの少年',
-    'ミネルバ隊', '学園', 'フォルドの夜明け'
+    'ミネルバ隊', '学園', 'フォルドの夜明け',
+    'ミリシャ', '艦船'
   ];
   for (const tr of traits) {
     text = text.replace(new RegExp(`[「【《]\\s*(${tr})\\s*[」】》]`, 'g'), '〔$1〕');
@@ -805,6 +828,19 @@ function fixBrackets(text) {
   text = text.replace(/《バースト》/g, '【バースト】');
 
   return text;
+}
+
+// 【】を持たないタイミングキーワードに自動付与
+function autoAddBrackets(text) {
+  if (!text) return text;
+  const keywords = ['バースト', '配備時', 'ターン1回', '起動', 'メイン', 'アタック時', 'リンク時'];
+  let result = text;
+  for (const kw of keywords) {
+    // 既に【】があれば無視、なければ付与
+    const re = new RegExp(`(?<!【[^】]{0,20})${kw}(?![^【]*】)`, 'g');
+    result = result.replace(re, `【${kw}】`);
+  }
+  return result;
 }
 
 // リンク条件の抽出: effectから分離
@@ -824,6 +860,7 @@ function step1C_merge(visionResult, color) {
 
   // カッコ修正
   visionResult.effect = fixBrackets(visionResult.effect);
+  visionResult.effect = autoAddBrackets(visionResult.effect);
 
   // 特徴のカッコ修正
   if (visionResult.traits) {
@@ -2766,3 +2803,4 @@ main().catch(e => {
   console.error(e);
   process.exit(1);
 });
+// EOF
