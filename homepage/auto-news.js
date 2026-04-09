@@ -53,15 +53,32 @@ const VALID_CARD_TYPES = ['UNIT', 'PILOT', 'COMMAND', 'BASE'];
 const VISION_USAGE_FILE = path.join(DATA_DIR, 'vision-api-usage.json');
 const VISION_MONTHLY_LIMIT = 1000; // 無料枠上限
 
+// === JST ユーティリティ ===
+function toJST(date) {
+  const d = date instanceof Date ? date : new Date(date);
+  return new Date(d.getTime() + 9 * 60 * 60 * 1000);
+}
+function nowJST() {
+  return toJST(new Date());
+}
+function formatJST(date) {
+  const d = toJST(date);
+  return d.toISOString().replace('T', ' ').slice(0, 19) + ' JST';
+}
+function dateStrJST(date) {
+  const d = toJST(date);
+  return d.toISOString().slice(0, 10); // YYYY-MM-DD
+}
+
 function getVisionUsage() {
   try {
     const data = JSON.parse(fs.readFileSync(VISION_USAGE_FILE, 'utf-8'));
-    const currentMonth = new Date().toISOString().slice(0, 7); // "2026-04"
+    const currentMonth = dateStrJST(new Date()).slice(0, 7); // "2026-04" (JST)
     if (data.month === currentMonth) return data;
     // 月が変わったらリセット
     return { month: currentMonth, count: 0 };
   } catch (e) {
-    return { month: new Date().toISOString().slice(0, 7), count: 0 };
+    return { month: dateStrJST(new Date()).slice(0, 7), count: 0 };
   }
 }
 
@@ -85,15 +102,13 @@ function isVisionQuotaAvailable(needed = 1) {
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 function now() {
-  const d = new Date();
+  const d = nowJST();
   const pad = n => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth()+1)}-${pad(d.getUTCDate())} ${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())} JST`;
 }
 
 function todayStr() {
-  const d = new Date();
-  const pad = n => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  return dateStrJST(new Date());
 }
 
 function dateLabel(dateStr) {
@@ -190,6 +205,50 @@ function postTweet(text) {
       });
     });
     req.on('error', reject);
+    req.write(body);
+    req.end();
+  });
+}
+
+/**
+ * 収録カード紹介検知時のアンケート投稿
+ * poll + 公式ポストURL をテキストに含めて投稿
+ */
+function postSurvey(cardName, officialPostUrl) {
+  if (DRY_RUN || TEST_MODE) {
+    log(`[SKIP] アンケート投稿スキップ: ${cardName} / ${officialPostUrl}`);
+    return Promise.resolve(null);
+  }
+  const url = 'https://api.x.com/2/tweets';
+  const authHeader = buildOAuthHeader('POST', url, {});
+  const body = JSON.stringify({
+    text: `【アンケート】${cardName}の収録が発表されました！\nあなたはGCG STATSをどの程度利用していますか？\n${officialPostUrl}\n#ガンダムカードゲーム #GCG`,
+    poll: {
+      options: ['3日に1回程度', '週に1回程度', '1度だけ', '使ったことが無い・知らない'],
+      duration_minutes: 1440
+    }
+  });
+
+  return new Promise((resolve, reject) => {
+    const req = https.request({
+      hostname: 'api.x.com', path: '/2/tweets', method: 'POST',
+      headers: { 'Authorization': authHeader, 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
+    }, res => {
+      const chunks = [];
+      res.on('data', chunk => chunks.push(chunk));
+      res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf-8');
+        if (res.statusCode === 201) {
+          const parsed = JSON.parse(data);
+          log(`アンケート投稿成功: https://x.com/gcg_stats/status/${parsed.data.id}`);
+          resolve(parsed.data.id);
+        } else {
+          log(`アンケート投稿失敗 (${res.statusCode}): ${data}`);
+          resolve(null); // エラーでも後続処理を止めない
+        }
+      });
+    });
+    req.on('error', err => { log(`アンケート投稿エラー: ${err.message}`); resolve(null); });
     req.write(body);
     req.end();
   });
@@ -1083,7 +1142,7 @@ function saveCardPreview(cardInfo, sourceUrl) {
     rarity: cardInfo.rarity,
     effect: cardInfo.effect || '',
     source_url: sourceUrl || '',
-    created_at: new Date().toISOString(),
+    created_at: formatJST(new Date()),
     preview: true
   };
 
@@ -1602,7 +1661,7 @@ function saveRecognitionLog(date, cardInfoList, sourceTweets) {
   const mergedCards = Object.values(mergedMap);
 
   logData[date] = {
-    recognized_at: new Date().toISOString(),
+    recognized_at: formatJST(new Date()),
     source_tweets: [...new Set([
       ...((logData[date] && logData[date].source_tweets) || []),
       ...sourceTweets
@@ -2482,6 +2541,11 @@ async function main() {
     for (const { tweet } of newCards) {
       const tweetUrl = `https://x.com/GUNDAM_GCG_JP/status/${tweet.id}`;
 
+      // アンケート投稿（OCRパイプライン前）
+      const nameMatchSurvey = tweet.text.match(/「([^」]+)」/);
+      const surveyCardName = nameMatchSurvey ? nameMatchSurvey[1] : (tweet.text.split('\n')[2] || '新カード');
+      await postSurvey(surveyCardName, tweetUrl);
+
       let cardInfoList = null;
       if (tweet.images.length > 0 && ANTHROPIC_API_KEY) {
         try {
@@ -2667,7 +2731,7 @@ async function main() {
       const title = '公式お知らせ速報';
       const desc = tweet.text.substring(0, 120);
       const pageId = `${date}-notice`;
-      const pageHtml = generateNewsPage(pageId, title, desc, articleHtml);
+      const pageHtml = generateNewsPage(pageId, title, desc, articleHtml, { displayDate: date.replace(/-/g, '.') });
       const filePath = path.join(NEWS_DIR, `${pageId}.html`);
       fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
       generatedFiles.push({ repoPath: `reports/news/${pageId}.html`, binary: false });
@@ -2687,7 +2751,7 @@ async function main() {
     }
   }
 
-  // ⑤ GitHub API経由でpush
+  // ⑤ Git push
   const commitCards = newCards.length > 0 ? `新カード記事(${allCardInfos.length}枚)` : '';
   const commitNotices = notices.length > 0 ? `速報${notices.length}件` : '';
   const commitMsg = `auto-news: ${[commitCards, commitNotices].filter(Boolean).join(' + ')} (${date})`;
