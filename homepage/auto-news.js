@@ -224,7 +224,7 @@ function postTweet(text) {
  * poll + 公式ポストURL をテキストに含めて投稿
  */
 function postSurvey(cardName, officialPostUrl) {
-  if (DRY_RUN || TEST_MODE) {
+  if (DRY_RUN) {
     log(`[SKIP] アンケート投稿スキップ: ${cardName} / ${officialPostUrl}`);
     return Promise.resolve(null);
   }
