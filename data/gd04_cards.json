@@ -1,0 +1,1711 @@
+[
+  {
+    "id": "GD04-001",
+    "name_jp": "ガンダム",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "LR",
+    "level": 6,
+    "cost": 4,
+    "ap": 6,
+    "hp": 3,
+    "traits": [
+      "地球連邦",
+      "WB隊"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【リンク中】【アタック時】相手のユニットにアタックしているなら、このユニットにセットされている青のパイロットを持ち主の手札に戻してもよい。",
+    "link_condition": "「アムロ・レイ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-002",
+    "name_jp": "ペーネロペー（フライト・フォーム）",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "LR",
+    "level": 6,
+    "cost": 5,
+    "ap": 3,
+    "hp": 5,
+    "traits": [
+      "地球連邦"
+    ],
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
+    "effect": "自分のターン中、〔地球連邦〕の自分のユニットすべてをAP+1する。\n【配備時】このターン中、〔地球連邦〕の自分のユニットがバトルダメージで相手のユニットを破壊したとき、HP5以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "link_condition": "「レーン・エイム」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-003",
+    "name_jp": "Vガンダム",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "LR",
+    "level": 4,
+    "cost": 3,
+    "ap": 3,
+    "hp": 4,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "【アタック時】〔リガ・ミリティア〕の自分のユニットが3つ以上いるなら、自分は1枚ドローする。",
+    "link_condition": "特徴〔リガ・ミリティア〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-004",
+    "name_jp": "サイコ・ガンダムMk-Ⅱ",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "R",
+    "level": 8,
+    "cost": 7,
+    "ap": 4,
+    "hp": 7,
+    "traits": [
+      "ティターンズ"
+    ],
+    "source_title": "機動戦士Zガンダム",
+    "effect": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)\n【ターン1回】青の自分のユニットに〔強化人間〕のパイロットをセットしたとき、自分は1枚ドローする。",
+    "link_condition": "「ロザミア・バダム」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-005",
+    "name_jp": "ジムⅢ",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "C",
+    "level": 2,
+    "cost": 2,
+    "ap": 3,
+    "hp": 2,
+    "traits": [
+      "地球連邦"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-006",
+    "name_jp": "Vダッシュガンダム",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "R",
+    "level": 6,
+    "cost": 4,
+    "ap": 4,
+    "hp": 5,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)\n【起動・メイン】【ターン1回】このユニット以外の、〔リガ・ミリティア〕の自分のユニット1つをレストにする：HP4以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "link_condition": "「ウッソ・エヴィン」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-007",
+    "name_jp": "Vガンダムヘキサ",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "R",
+    "level": 5,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "【セット中】【アタック時】「パーツ」(〔リガ・ミリティア〕・AP1・HP1・このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
+    "link_condition": "特徴〔リガ・ミリティア〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-008",
+    "name_jp": "ガンダム",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "U",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "地球連邦",
+      "WB隊"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【リンク中】このユニットは《高機動》を得る。\n\n(このユニットはブロックされない)",
+    "link_condition": "「アムロ・レイ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-009",
+    "name_jp": "ガンキャノン（108）&ガンキャノン（109）",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "R",
+    "level": 5,
+    "cost": 4,
+    "ap": 3,
+    "hp": 4,
+    "traits": [
+      "地球連邦",
+      "WB隊"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【リンク時】このユニット以外の、Lv.4以上の〔WB隊〕の自分のユニット1つを選ぶ。それをアクティブにする。",
+    "link_condition": "「カイ・シデン」 「ハヤト・コバヤシ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-010",
+    "name_jp": "ギャプラン",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "U",
+    "level": 4,
+    "cost": 2,
+    "ap": 3,
+    "hp": 4,
+    "traits": [
+      "ティターンズ"
+    ],
+    "source_title": "機動戦士Zガンダム",
+    "effect": "",
+    "link_condition": "特徴〔ティターンズ〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-011",
+    "name_jp": "Vガンダム",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "U",
+    "level": 3,
+    "cost": 2,
+    "ap": 3,
+    "hp": 2,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "【破壊時】このユニット以外の、〔リガ・ミリティア〕の味方のユニットがいるなら、「パーツ」(〔リガ・ミリティア〕・AP1・HP1・このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-012",
+    "name_jp": "コア・ブースター（005）&コア・ブースター（006）",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "traits": [
+      "地球連邦",
+      "WB隊"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "",
+    "link_condition": "「スレッガー・ロウ」 「セイラ・マス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-013",
+    "name_jp": "コア・ファイター",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "U",
+    "level": 4,
+    "cost": 2,
+    "ap": 2,
+    "hp": 3,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "このユニットがレストの間、〔リガ・ミリティア〕の自分のユニットトークンすべては《ブロッカー》を得る。\n\n(レストにすることでアタック先をこのユニットにする)",
+    "link_condition": "特徴〔リガ・ミリティア〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-014",
+    "name_jp": "シャッコー",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "C",
+    "level": 2,
+    "cost": 2,
+    "ap": 2,
+    "hp": 3,
+    "traits": [
+      "リガ・ミリティア",
+      "ザンスカール"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "地球"
+  },
+  {
+    "id": "GD04-015",
+    "name_jp": "ガンイージ",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 2,
+    "hp": 3,
+    "traits": [
+      "リガ・ミリティア",
+      "シュラク隊"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "【配備時】アクティブの〔リガ・ミリティア〕の自分のユニット1つと、Lv.3以下の相手のユニット1つを選ぶ。それらをレストにする。",
+    "link_condition": "特徴〔シュラク隊〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-016",
+    "name_jp": "ゾロアット（リガ・ミリティア仕様）",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "rarity": "C",
+    "level": 2,
+    "cost": 2,
+    "ap": 3,
+    "hp": 2,
+    "traits": [
+      "リガ・ミリティア"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\nこのユニットは相手プレイヤーをアタック先に選べない。",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "宇宙"
+  },
+  {
+    "id": "GD04-017",
+    "name_jp": "ジオング",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "LR",
+    "level": 6,
+    "cost": 5,
+    "ap": 4,
+    "hp": 3,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【セット時・〔ニュータイプ〕のパイロット】「有線式アーム」(〔ジオン〕・AP2・HP1・このユニットはパイロットをセットできない)のユニットトークン2つを配備する。\n【破壊時】「ジオング(ヘッド)」(〔ジオン〕・AP3・HP1)のユニットトークン1つをレストで配備する。",
+    "link_condition": "「シャア・アズナブル」",
+    "burst": "",
+    "terrain": "宇宙"
+  },
+  {
+    "id": "GD04-018",
+    "name_jp": "ガンダム・ファラクト",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "LR",
+    "level": 6,
+    "cost": 4,
+    "ap": 5,
+    "hp": 4,
+    "traits": [
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "《突破5》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)\n【ターン1回】自分のターン中、このユニット以外の、〔学園〕の自分のユニットが相手からダメージを受けたとき、自分はEXリソース1つを置く。",
+    "link_condition": "「エラン・ケレス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-019",
+    "name_jp": "GNアーマー TYPE-D（トランザム）",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "R",
+    "level": 6,
+    "cost": 5,
+    "ap": 4,
+    "hp": 5,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)\n【破壊時】自分のデッキを上から3枚見て、その中のLv.5以下の〔CB〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "link_condition": "「ロックオン・ストラトス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-020",
+    "name_jp": "ガンダム・ルブリス・ウル",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "R",
+    "level": 4,
+    "cost": 3,
+    "ap": 4,
+    "hp": 3,
+    "traits": [
+      "フォルドの夜明け",
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "【ターン1回】自分のターン中、自分がEXリソースを使用して〔フォルドの夜明け〕のコマンドカードをプレイし発動したとき、自分は1枚ドローする。",
+    "link_condition": "「ソフィ・プロネ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-021",
+    "name_jp": "ガンダム・ルブリス・ソーン",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "R",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "フォルドの夜明け",
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)\n自分のターン中、自分がEXリソースを使用して〔フォルドの夜明け〕のコマンドカードをプレイし発動したとき、トラッシュのそのカードを、カード名に「ガンダム・ルブリス」を含む自分のユニットにセットしてもよい。",
+    "link_condition": "「ノレア・デュノク」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-022",
+    "name_jp": "キケロガ（MS形態）（GQ)",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "R",
+    "level": 7,
+    "cost": 4,
+    "ap": 3,
+    "hp": 6,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "effect": "自分のユニットトークンすべては《突破1》を得る。\n\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)\n【リンク中】ユニットトークン以外の、Lv.3以下のユニットすべては、レストで配備される。",
+    "link_condition": "「シャリア・ブル」",
+    "burst": "",
+    "terrain": "宇宙"
+  },
+  {
+    "id": "GD04-023",
+    "name_jp": "ガンダムキュリオス（テールブースター装備）",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "U",
+    "level": 5,
+    "cost": 4,
+    "ap": 5,
+    "hp": 3,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【配備時】〔超兵〕のパイロットがセットされている自分のユニット1つを選ぶ。このターン中、それはアクティブのLv.4以下の相手のユニットをアタック先に選んでもよい。",
+    "link_condition": "「アレルヤ・ハプティズム」 「ハレルヤ・ハプティズム」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-024",
+    "name_jp": "ガンダム・エアリアル（改修型）",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "U",
+    "level": 7,
+    "cost": 5,
+    "ap": 5,
+    "hp": 5,
+    "traits": [
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "【配備時】自分のデッキを上から3枚見て、その中の〔学園〕の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "link_condition": "「スレッタ・マーキュリー」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-025",
+    "name_jp": "ガンヴォルヴァ",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "U",
+    "level": 3,
+    "cost": 2,
+    "ap": 3,
+    "hp": 2,
+    "traits": [
+      "フォルドの夜明け",
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "【破壊時】自分のターン中、このユニット以外の、〔フォルドの夜明け〕の自分のユニットがいるなら、自分はEXリソース1つを置く。",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-026",
+    "name_jp": "ドップ（ガルマ・ザビ専用）",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 3,
+    "cost": 1,
+    "ap": 1,
+    "hp": 1,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【配備時】自分のデッキを上から1枚見て、上に戻すか、自分のトラッシュに置く。",
+    "link_condition": "「ガルマ・ザビ」",
+    "burst": "",
+    "terrain": "地球"
+  },
+  {
+    "id": "GD04-027",
+    "name_jp": "ビグロ",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 5,
+    "cost": 3,
+    "ap": 5,
+    "hp": 4,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "",
+    "link_condition": "「トクワン」",
+    "burst": "",
+    "terrain": "宇宙"
+  },
+  {
+    "id": "GD04-028",
+    "name_jp": "ザクレロ",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 3,
+    "cost": 1,
+    "ap": 4,
+    "hp": null,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【アタック時】アクティブの相手のユニット1つを選ぶ。このターン中、それは《ブロッカー》を得る。\n\n(レストにすることでアタック先をこのユニットにする)",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "宇宙"
+  },
+  {
+    "id": "GD04-029",
+    "name_jp": "ガンダムデュナメス（GNフルシールド）",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 2,
+    "hp": 3,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【ターン1回】〔CB〕の自分のパイロットがいるなら、このユニットが相手からダメージを受けるとき、そのダメージを1軽減する。",
+    "link_condition": "「ロックオン・ストラトス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-030",
+    "name_jp": "デミトレーナー チュチュ専用機",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 3,
+    "hp": 2,
+    "traits": [
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "【アタック時】このユニット以外の、〔学園〕の自分のユニット1つを選ぶ。このターン中、それはアクティブのLv.3以下の相手のユニットをアタック先に選んでもよい。",
+    "link_condition": "特徴〔学園〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-031",
+    "name_jp": "ハインドリー",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 2,
+    "cost": 2,
+    "ap": 3,
+    "hp": 2,
+    "traits": [
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-032",
+    "name_jp": "エグザベ専用ギャン（ハクジ装備）（GQ）",
+    "card_type": "UNIT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 5,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "effect": "",
+    "link_condition": "「エグザベ・オリべ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-033",
+    "name_jp": "ネオ・ジオング",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "LR",
+    "level": 9,
+    "cost": 8,
+    "ap": 6,
+    "hp": 7,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "このユニットか、〔ネオ・ジオン〕の自分のユニットが配備されたとき、相手のユニット1つを選ぶ。それに3ダメージを与える。\n【リンク中】自分のユニットすべては〔ネオ・ジオン〕を得る。",
+    "link_condition": "「フル・フロンタル」",
+    "burst": "",
+    "terrain": "宇宙"
+  },
+  {
+    "id": "GD04-034",
+    "name_jp": "ガンダムキュリオス",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "LR",
+    "level": 4,
+    "cost": 3,
+    "ap": 1,
+    "hp": 4,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "《先制攻撃》(アタック中のこのユニットは、相手より先にダメージを与える)\n【リンク中】このユニットを、レストの〔CB〕の自分のユニット1つにつきAP+2する。",
+    "link_condition": "「アレルヤ・ハプティズム」 「ハレルヤ・ハプティズム」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-035",
+    "name_jp": "Ξガンダム",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "R",
+    "level": 5,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "マフティー"
+    ],
+    "source_title": "機動戦士ガンダム 閃光のハサウェイ",
+    "effect": "【配備時】〔マフティー〕の自分のユニット1つを選ぶ。このターン中、それがバトルダメージで相手のユニットを破壊したとき、自分の手札が3枚以下なら、自分は1枚ドローする。",
+    "link_condition": "「ハサウェイ・ノア」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-036",
+    "name_jp": "ガンダムスローネアイン",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "R",
+    "level": 6,
+    "cost": 4,
+    "ap": 5,
+    "hp": 2,
+    "traits": [
+      "CB",
+      "トリニティ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【配備時】このユニット以外の、アクティブの〔CB〕の自分のユニット1～2つを選んでもよい。それらをレストにする。そうしたなら、Lv.6以下の相手のユニットすべてに、この効果でレストにしたユニットと同じ数だけダメージを与える。",
+    "link_condition": "特徴〔トリニティ〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-037",
+    "name_jp": "ガンダムキュリオス（トランザム）",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "R",
+    "level": 6,
+    "cost": 5,
+    "ap": 5,
+    "hp": 4,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "赤の〔超兵〕の自分のパイロットがいる間、このユニットは《先制攻撃》を得る。\n\n(アタック中のこのユニットは、相手より先にダメージを与える)\n緑の〔超兵〕の自分のパイロットがいる間、このユニットは《突破3》を得る。\n\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "link_condition": "「アレルヤ・ハプティズム」 「ハレルヤ・ハプティズム」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-038",
+    "name_jp": "ガンダムエクシア",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "R",
+    "level": 3,
+    "cost": 2,
+    "ap": 2,
+    "hp": 1,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【配備時】相手のユニットが2つ以上いるなら、Lv.2以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "link_condition": "「刹那・F・セイエイ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-039",
+    "name_jp": "ローゼン・ズール",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "U",
+    "level": 4,
+    "cost": 6,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "自分のトラッシュに〔ネオ・ジオン〕のカードが8枚以上あるなら、手札のこのカードをコスト-4する。\n【配備時】相手のユニット1つを選ぶ。それに1ダメージを与える。それが《リペア》を持つなら、かわりに3ダメージを与える。",
+    "link_condition": "「アンジェロ・ザウパー」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-040",
+    "name_jp": "シュツルム・ガルス",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "U",
+    "level": 4,
+    "cost": 2,
+    "ap": 4,
+    "hp": 3,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "",
+    "link_condition": "特徴〔ネオ・ジオン〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-041",
+    "name_jp": "ガンダムスローネドライ",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "U",
+    "level": 5,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "traits": [
+      "CB",
+      "トリニティ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【ターン1回】このユニットが効果でレストになったとき、これをアクティブにする。",
+    "link_condition": "特徴〔トリニティ〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-042",
+    "name_jp": "サイコ・ガンダム（GQ）",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "U",
+    "level": 7,
+    "cost": 5,
+    "ap": 4,
+    "hp": 5,
+    "traits": [
+      "地球連邦"
+    ],
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "effect": "【リンク中】【ターン1回】〔強化人間〕のパイロットがセットされている自分のユニットのダメージで相手のシールドエリアのカードを破壊したとき、AP5以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "link_condition": "「ドゥー・ムラサメ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-043",
+    "name_jp": "ズサ（袖付き仕様）",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 2,
+    "hp": 3,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "【配備時】相手のベース1つを選ぶ。それに1ダメージを与える。",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-044",
+    "name_jp": "ガディール",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "traits": [
+      "新連邦"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "【アタック時】ダメージを受けている相手のユニットにアタックしているなら、このバトル中、このユニットは《突破3》を得る。\n\n(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "地球"
+  },
+  {
+    "id": "GD04-045",
+    "name_jp": "ガンダムスローネツヴァイ",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "C",
+    "level": 4,
+    "cost": 3,
+    "ap": 3,
+    "hp": 4,
+    "traits": [
+      "CB",
+      "トリニティ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【リンク時】〔CB〕の自分のユニット1つを選ぶ。このターン中、それはダメージを受けているアクティブの相手のユニットをアタック先に選んでもよい。",
+    "link_condition": "特徴〔トリニティ〕 「アリー・アル・サーシェス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-046",
+    "name_jp": "ガンダムデュナメス",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "C",
+    "level": 5,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【配備時】このユニットをレストにしてもよい。そうしたなら、Lv.3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "link_condition": "「ロックオン・ストラトス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-047",
+    "name_jp": "ガンダムヴァーチェ",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "C",
+    "level": 3,
+    "cost": 1,
+    "ap": 3,
+    "hp": 1,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "",
+    "link_condition": "「ティエリア・アーデ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-048",
+    "name_jp": "ハンブラビ（GQ）",
+    "card_type": "UNIT",
+    "color": "Red",
+    "rarity": "C",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "地球連邦"
+    ],
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "effect": "",
+    "link_condition": "特徴〔地球連邦〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-049",
+    "name_jp": "ガンダムDX",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "LR",
+    "level": 8,
+    "cost": 7,
+    "ap": 6,
+    "hp": 6,
+    "traits": [
+      "バルチャー"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)\n【セット中】【アタック時】相手プレイヤーにアタックしているなら、自分のトラッシュの〔バルチャー〕のカード7枚を選んでもよい。それらをゲームから除外する。そうしたなら、Lv.8以下の相手の、ユニット1つ/ベース1つを選ぶ。それを破壊する。",
+    "link_condition": "「ガロード・ラン」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-050",
+    "name_jp": "デスティニーガンダム",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "LR",
+    "level": 7,
+    "cost": 5,
+    "ap": 5,
+    "hp": 5,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "effect": "《高機動》(このユニットはブロックされない)\n【セット中】【アタック時】自分のトラッシュの〔ミネルバ隊〕のユニットカード1枚を選んでもよい。それをコストを支払って配備する。",
+    "link_condition": "「シン・アスカ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-051",
+    "name_jp": "ガンダムエアマスターバースト",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "R",
+    "level": 5,
+    "cost": 4,
+    "ap": 5,
+    "hp": 3,
+    "traits": [
+      "バルチャー"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "【セット中・〔バルチャー〕のパイロット】自分のトラッシュにカードが7枚以上あるなら、このユニットは、キーワード効果を持つアクティブの相手のユニットをアタック先に選んでもよい。",
+    "link_condition": "「ウィッツ・スー」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-052",
+    "name_jp": "ガンダムレオパルドデストロイ",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "R",
+    "level": 6,
+    "cost": 4,
+    "ap": 4,
+    "hp": 5,
+    "traits": [
+      "バルチャー"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "【セット中】【アタック時】相手のユニット1つを選んでもよい。それと、このユニットに2ダメージを与える。",
+    "link_condition": "特徴〔バルチャー〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-053",
+    "name_jp": "ブレイズザクファントム（レイ専用機）",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "R",
+    "level": 4,
+    "cost": 3,
+    "ap": 4,
+    "hp": 3,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "effect": "【リンク中】【ターン1回】このユニットが相手からダメージを受けるとき、そのダメージを1軽減する。",
+    "link_condition": "特徴〔ミネルバ隊〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-054",
+    "name_jp": "ガンダムヴァーチェ（トランザム）",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "R",
+    "level": 7,
+    "cost": 5,
+    "ap": 2,
+    "hp": 6,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "このユニットが相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。",
+    "link_condition": "「ティエリア・アーデ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-055",
+    "name_jp": "グフイグナイテッド（ハイネ・ヴェステンフルス専用機）",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "U",
+    "level": 5,
+    "cost": 3,
+    "ap": 5,
+    "hp": 4,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "effect": "",
+    "link_condition": "「ハイネ・ヴェステンフルス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-056",
+    "name_jp": "ソードインパルスガンダム",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "U",
+    "level": 4,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "effect": "【配備時】このユニットに1ダメージを与える。そうしたなら、AP3以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "link_condition": "「シン・アスカ」 「ルナマリア・ホーク」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-057",
+    "name_jp": "ガンダムナドレ",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "U",
+    "level": 4,
+    "cost": 3,
+    "ap": 4,
+    "hp": 3,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【配備時】Lv.6以下の相手のユニット1つを選ぶ。このターン中、それを、自分のトラッシュのカード名に「ガンダムヴァーチェ」を含むユニットカードと同じ数だけAP-する。",
+    "link_condition": "「ティエリア・アーデ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-058",
+    "name_jp": "ガンダムX（ジャミル機）",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 2,
+    "hp": 1,
+    "traits": [
+      "旧連邦"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "【セット中・〔バルチャー〕のパイロット】【破壊時】自分のターンなら、このユニットにセットされていたパイロットを持ち主の手札に戻す。",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-059",
+    "name_jp": "ドートレスHMCワイズワラビー",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "C",
+    "level": 2,
+    "cost": 2,
+    "ap": 2,
+    "hp": 2,
+    "traits": [
+      "バルチャー"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "",
+    "link_condition": "特徴〔バルチャー〕",
+    "burst": "",
+    "terrain": "地球"
+  },
+  {
+    "id": "GD04-060",
+    "name_jp": "エスペランサ",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 1,
+    "hp": 4,
+    "traits": [
+      "バルチャー"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "【配備時】このユニットをトラッシュから配備したなら、自分は1枚ドローする。",
+    "link_condition": "「エニル・エル」",
+    "burst": "",
+    "terrain": "地球"
+  },
+  {
+    "id": "GD04-061",
+    "name_jp": "Gファルコン",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "C",
+    "level": 2,
+    "cost": 2,
+    "ap": 3,
+    "hp": 1,
+    "traits": [
+      "バルチャー"
+    ],
+    "source_title": "機動新世紀ガンダムX",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\nこのユニットは、自分のトラッシュにカードが6枚以下の間、アタックできない。",
+    "link_condition": "「パーラ・シス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-062",
+    "name_jp": "ガナーザクウォーリア（ルナマリア・ホーク専用機）",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 2,
+    "hp": 4,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "effect": "",
+    "link_condition": "特徴〔ミネルバ隊〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-063",
+    "name_jp": "GNアーマー TYPE-E",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "C",
+    "level": 4,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【配備時】Lv.1以下/AP1以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "link_condition": "「刹那・F・セイエイ」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-064",
+    "name_jp": "ガンダムエクシア",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "rarity": "C",
+    "level": 2,
+    "cost": 2,
+    "ap": 2,
+    "hp": 3,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-065",
+    "name_jp": "ユニコーンガンダム2号機 バンシィ・ノルン（デストロイモード）",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "LR",
+    "level": 7,
+    "cost": 5,
+    "ap": 5,
+    "hp": 5,
+    "traits": [
+      "地球連邦"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "【リンク中】【起動・メイン】自分のトラッシュの青のカード3枚をゲームから除外する：このユニットをアクティブにし、このターン中、これは相手プレイヤーをアタック先に選べない。\n【アタック時】このターン中、相手のユニットすべてをAP-1する。",
+    "link_condition": "「リディ・マーセナス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-066",
+    "name_jp": "ユニコーンガンダム（覚醒）",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "LR",
+    "level": 7,
+    "cost": 5,
+    "ap": 4,
+    "hp": 6,
+    "traits": [
+      "民間"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)\n自分がコマンドの【メイン】/【アクション】を発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "link_condition": "「バナージ・リンクス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-067",
+    "name_jp": "∀ガンダム",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "LR",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "ミリシャ"
+    ],
+    "source_title": "∀ガンダム",
+    "effect": "【起動・メイン】【ターン1回】①：トラッシュの、《リペア》/《突破》/《先制攻撃》/《援護》/《高機動》/《制圧》/《ブロッカー》を持つユニットカード1枚を選ぶ。このターン中、このユニットはAP+1され、それが持つ《リペア》/《突破》/《先制攻撃》/《援護》/《高機動》/《制圧》/《ブロッカー》すべてを得る。",
+    "link_condition": "「ロラン・セアック」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-068",
+    "name_jp": "シルヴァ・バレト",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "R",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "民間"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\nこのユニットが相手から効果ダメージを受けるとき、そのダメージを3軽減する。",
+    "link_condition": "「ガエル・チャン」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-069",
+    "name_jp": "∀ガンダム",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "R",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 3,
+    "traits": [
+      "ミリシャ"
+    ],
+    "source_title": "∀ガンダム",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\n【リンク中】このユニット以外の、〔ミリシャ〕/〔ディアナ・カウンター〕の自分のユニットの効果で①以上を支払ったターン終了時、〔ミリシャ〕の自分のユニット1つを選ぶ。それをアクティブにする。",
+    "link_condition": "「ロラン・セアック」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-070",
+    "name_jp": "サーシェス専用AEUイナクトカスタム（モラリア開発実験型）",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "R",
+    "level": 2,
+    "cost": 2,
+    "ap": 3,
+    "hp": 1,
+    "traits": [
+      "超大国群"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【配備時】自分の手札のカード名に「アリー・アル・サーシェス」を含むパイロットカード1枚を、このユニットにセットしてもよい。",
+    "link_condition": "「アリー・アル・サーシェス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-071",
+    "name_jp": "グラハム専用ユニオンフラッグカスタムⅡ（GNフラッグ）",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "R",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 3,
+    "traits": [
+      "国連"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【起動・メイン】自分のトラッシュの、〔超大国群〕のカード1枚と、〔国連〕のカード1枚を選ぶ。それらをゲームから除外する。そうしたなら、このユニットをアクティブにし、このターン中、これはアタックできない。",
+    "link_condition": "「グラハム・エーカー」",
+    "burst": "【バースト】〔CB〕の相手のユニットがいるなら、このカードを手札に加える。",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-072",
+    "name_jp": "ユニコーンガンダム2号機 バンシィ・ノルン（ユニコーンモード）",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "U",
+    "level": 5,
+    "cost": 3,
+    "ap": 5,
+    "hp": 3,
+    "traits": [
+      "地球連邦"
+    ],
+    "source_title": "機動戦士ガンダムUC",
+    "effect": "【リンク時】HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "link_condition": "「リディ・マーセナス」",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-073",
+    "name_jp": "∀ガンダム",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "U",
+    "level": 4,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "traits": [
+      "ミリシャ"
+    ],
+    "source_title": "∀ガンダム",
+    "effect": "【起動・メイン】【ターン1回】①：このターン中、このユニットをAP+2する。",
+    "link_condition": "特徴〔ミリシャ〕 特徴〔ムーンレィス〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-074",
+    "name_jp": "カプル",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "U",
+    "level": 3,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "traits": [
+      "ミリシャ"
+    ],
+    "source_title": "∀ガンダム",
+    "effect": "【アタック時】①支払ってもよい。そうしたなら、自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
+    "link_condition": "特徴〔ミリシャ〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-075",
+    "name_jp": "ジンクス",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "U",
+    "level": 4,
+    "cost": 6,
+    "ap": 5,
+    "hp": 3,
+    "traits": [
+      "国連"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "手札のこのカードを、自分のトラッシュの、〔国連〕/〔超大国群〕のコマンドカードと同じ数だけコスト-する。",
+    "link_condition": "特徴〔国連〕",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-076",
+    "name_jp": "ヒップヘビー",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "C",
+    "level": 1,
+    "cost": 1,
+    "ap": 1,
+    "hp": 2,
+    "traits": [
+      "ミリシャ"
+    ],
+    "source_title": "∀ガンダム",
+    "effect": "",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "地球"
+  },
+  {
+    "id": "GD04-077",
+    "name_jp": "フラット（ミリシャ仕様）",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "C",
+    "level": 3,
+    "cost": 2,
+    "ap": 2,
+    "hp": 4,
+    "traits": [
+      "ミリシャ"
+    ],
+    "source_title": "∀ガンダム",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-078",
+    "name_jp": "ボルジャーノン",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "C",
+    "level": 2,
+    "cost": 1,
+    "ap": 2,
+    "hp": 2,
+    "traits": [
+      "ミリシャ"
+    ],
+    "source_title": "∀ガンダム",
+    "effect": "",
+    "link_condition": "-",
+    "burst": "",
+    "terrain": "両方"
+  },
+  {
+    "id": "GD04-079",
+    "name_jp": "アグリッサ",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "C",
+    "level": 5,
+    "cost": 3,
+    "ap": 5,
+    "hp": 4,
+    "traits": [
+      "超大国群"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "",
+    "link_condition": "「アリー・アル・サーシェス」",
+    "burst": "",
+    "terrain": "地球"
+  },
+  {
+    "id": "GD04-080",
+    "name_jp": "アルヴァトーレ",
+    "card_type": "UNIT",
+    "color": "White",
+    "rarity": "C",
+    "level": 4,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "traits": [
+      "国連"
+    ],
+    "source_title": "機動戦士ガンダム00",
+    "effect": "【破壊時】このユニット以外の、〔国連〕/〔超大国群〕の自分のユニットがいるなら、「アルヴァアロン」(〔国連〕・AP4・HP1)のユニットトークン1つをレストで配備する。",
+    "link_condition": "「アレハンドロ・コーナー」",
+    "burst": "",
+    "terrain": "宇宙"
+  },
+  {
+    "id": "GD04-081",
+    "name_jp": "ウッソ・エヴィン",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "rarity": "R",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 1,
+    "traits": [
+      "リガ・ミリティア",
+      "ニュータイプ"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "【セット時】このユニットが〔リガ・ミリティア〕なら、「パーツ」(〔リガ・ミリティア〕・AP1・HP1・このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  },
+  {
+    "id": "GD04-082",
+    "name_jp": "ロザミア・バダム",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "rarity": "U",
+    "level": 3,
+    "cost": 1,
+    "ap": 2,
+    "hp": 0,
+    "traits": [
+      "ティターンズ",
+      "強化人間"
+    ],
+    "source_title": "機動戦士Zガンダム",
+    "effect": "【リンク時】レストのユニット1つを選ぶ。それに1ダメージを与える。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  },
+  {
+    "id": "GD04-083",
+    "name_jp": "マーベット・フィンガーハット",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "rarity": "U",
+    "level": 3,
+    "cost": 1,
+    "ap": 1,
+    "hp": 1,
+    "traits": [
+      "リガ・ミリティア"
+    ],
+    "source_title": "機動戦士Vガンダム",
+    "effect": "〔リガ・ミリティア〕の自分のユニットトークンすべてをAP+1する。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  },
+  {
+    "id": "GD04-084",
+    "name_jp": "スレッガー・ロウ",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "rarity": "C",
+    "level": 3,
+    "cost": 1,
+    "ap": 1,
+    "hp": 1,
+    "traits": [
+      "地球連邦",
+      "WB隊"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【アタック時】〔WB隊〕の自分のユニット1つを選ぶ。このターン中、それをAP+1する。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  },
+  {
+    "id": "GD04-085",
+    "name_jp": "スレッタ・マーキュリー",
+    "card_type": "PILOT",
+    "color": "Green",
+    "rarity": "R",
+    "level": 5,
+    "cost": 1,
+    "ap": 2,
+    "hp": 2,
+    "traits": [
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "【リンク中】【ターン1回】自分がEXリソースを使用して〔学園〕のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  },
+  {
+    "id": "GD04-086",
+    "name_jp": "ガルマ・ザビ",
+    "card_type": "PILOT",
+    "color": "Green",
+    "rarity": "U",
+    "level": 3,
+    "cost": 1,
+    "ap": 1,
+    "hp": 0,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "【リンク中】【破壊時】自分のEXリソースがないなら、自分はEXリソース1つを置く。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  },
+  {
+    "id": "GD04-087",
+    "name_jp": "エラン・ケレス（強化人士5号）",
+    "card_type": "PILOT",
+    "color": "Green",
+    "rarity": "U",
+    "level": 4,
+    "cost": 1,
+    "ap": 1,
+    "hp": 2,
+    "traits": [
+      "学園"
+    ],
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "effect": "【リンク中】【アタック時】〔学園〕の自分のユニット1つを選んでもよい。このバトル中、このユニットが受けるバトルダメージは、かわりにそれが受ける。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  },
+  {
+    "id": "GD04-088",
+    "name_jp": "トクワン",
+    "card_type": "PILOT",
+    "color": "Green",
+    "rarity": "C",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 0,
+    "traits": [
+      "ジオン"
+    ],
+    "source_title": "機動戦士ガンダム",
+    "effect": "このユニットがLv.4以下の相手のユニットにブロックされたとき、このバトル中、これはバトルダメージを受けない。",
+    "link_condition": "-",
+    "burst": "【バースト】このカードを手札に加える。",
+    "terrain": "なし"
+  }
+]
