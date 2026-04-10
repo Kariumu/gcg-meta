@@ -79,6 +79,103 @@ function formatDate(dateStr) {
 }
 
 /**
+ * linkフィールドを正規化して配列にする
+ * linkフィールドは文字列/配列/空のいずれか
+ */
+function normalizeLink(link) {
+  if (!link) return [];
+  if (typeof link === 'string') {
+    return [link.replace(/^「/, '').replace(/」$/, '')];
+  }
+  if (Array.isArray(link)) {
+    return link.map(l => l.replace(/^「/, '').replace(/」$/, ''));
+  }
+  return [];
+}
+
+/**
+ * カードがリンク条件にマッチするか判定
+ */
+function matchesLinkCondition(card, conditions) {
+  for (const condition of conditions) {
+    if (!condition.startsWith('特徴') && card.name_jp === condition) {
+      return true;
+    }
+    if (condition.startsWith('特徴〔')) {
+      const traitName = condition.replace('特徴〔', '').replace('〕', '');
+      if ((card.traits || []).includes(traitName)) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+/**
+ * カードのリンク関連カードを検索する
+ */
+function findLinkedCards(cardId, allCards) {
+  const card = allCards[cardId];
+  if (!card) return [];
+
+  const results = [];
+
+  if (card.card_type === 'UNIT') {
+    const linkConditions = normalizeLink(card.link);
+    if (linkConditions.length === 0) return [];
+
+    for (const [id, c] of Object.entries(allCards)) {
+      if (id === cardId) continue;
+
+      if (c.card_type === 'PILOT') {
+        if (matchesLinkCondition(c, linkConditions)) {
+          results.push(c);
+        }
+      }
+
+      if (c.card_type === 'COMMAND') {
+        const effect = c.effect || '';
+        if (effect.includes('【パイロット】')) {
+          if (matchesLinkCondition(c, linkConditions)) {
+            results.push(c);
+          }
+        }
+      }
+    }
+
+  } else if (card.card_type === 'PILOT' ||
+             (card.card_type === 'COMMAND' && (card.effect || '').includes('【パイロット】'))) {
+    const pilotName = card.name_jp;
+    const pilotTraits = card.traits || [];
+
+    for (const [id, c] of Object.entries(allCards)) {
+      if (id === cardId) continue;
+      if (c.card_type !== 'UNIT') continue;
+
+      const unitLinks = normalizeLink(c.link);
+      if (unitLinks.length === 0) continue;
+
+      for (const condition of unitLinks) {
+        if (!condition.startsWith('特徴') && condition === pilotName) {
+          results.push(c);
+          break;
+        }
+        if (condition.startsWith('特徴〔')) {
+          const traitName = condition.replace('特徴〔', '').replace('〕', '');
+          if (pilotTraits.includes(traitName)) {
+            results.push(c);
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  results.sort((a, b) => a.id.localeCompare(b.id));
+  return results;
+}
+
+/**
  * 全カードの共起データを一括計算する（O(N)のデッキ走査で全カード分を計算）
  */
 function calcAllCoUsed(eventsData, topN = 8) {
@@ -281,6 +378,41 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   const colorJp = masterCard ? (COLOR_JP[masterCard.color] || masterCard.color) : '';
   const typeJp = masterCard ? (TYPE_JP[masterCard.card_type] || masterCard.card_type) : '';
 
+  // リンク関連カード
+  let linkedHtml = '';
+  if (masterCard) {
+    const linkedCards = findLinkedCards(cardId, cardsMaster);
+    if (linkedCards.length > 0) {
+      const sectionTitle = masterCard.card_type === 'UNIT'
+        ? 'リンク対象パイロット'
+        : 'リンク対象ユニット';
+      const colorMap = { Blue: '#4488ff', Green: '#44cc64', Red: '#ff4444', White: '#cccccc', Purple: '#b444ff' };
+      const typeMap = { UNIT: 'ユニット', PILOT: 'パイロット', COMMAND: 'コマンド', BASE: 'ベース' };
+      linkedHtml = `
+        <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+          <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:1px">${sectionTitle}</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            ${linkedCards.map(lc => {
+              const colorHex = colorMap[lc.color] || '#888';
+              const lcTypeJp = typeMap[lc.card_type] || '';
+              return `<a href="../${lc.id}/" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 10px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px;transition:border-color 0.15s"
+                   onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <img src="/images/cards/${lc.id}.webp" alt="${escapeHtml(lc.name_jp)}"
+                       style="width:36px;height:50px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
+                       onerror="this.style.display='none'">
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--text-primary)">${escapeHtml(lc.name_jp)}</div>
+                    <div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono)">${lc.id}
+                      <span style="color:${colorHex};margin-left:4px">${lcTypeJp}</span>
+                    </div>
+                  </div>
+                </a>`;
+            }).join('\n')}
+          </div>
+        </div>`;
+    }
+  }
+
   // SEO用 description
   const description = masterCard
     ? `${cardName}（${cardId}）のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。色:${colorJp} タイプ:${typeJp}`
@@ -385,9 +517,6 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     gtag('js', new Date());
     gtag('config', 'G-3MY17P4E7F');
   </script>
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
-       crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(pageTitle)}</title>
@@ -501,6 +630,8 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
         </a>
+
+        ${linkedHtml}
 
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
