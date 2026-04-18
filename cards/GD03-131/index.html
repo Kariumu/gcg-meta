@@ -159,18 +159,7 @@
     <div id="share-buttons" style="margin-top:24px"></div>
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-disclaimer">
-      本サイトはガンダムカードゲームの非公式ファンサイトです。<br>
-      バンダイ・サンライズの認可・許諾は得ていません。<br>
-      掲載情報は公式大会結果を基に自動集計しています。<br>
-      ©SOTSU・SUNRISE ©BANDAI
-    </div>
-    <div class="footer-links" style="margin-top:16px;display:flex;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
-      <a href="../../privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">プライバシーポリシー</a>
-      <a href="../../contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
-    </div>
-  </footer>
+  <div id="footer"></div>
 
   <!-- Lightbox Modal -->
   <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center"
@@ -198,8 +187,10 @@
     });
   </script>
 
-  <script src="../../js/common.js?v=5"></script>
+  <script src="../../js/common.js?v=8"></script>
   <script>
+    GCG.init();
+    document.getElementById("footer").innerHTML = GCG.renderFooter();
     GCG.renderShareButtons('share-buttons', 'エターナル（GD03-131）採用率0.0% | GCG STATS');
   </script>
 </body>
