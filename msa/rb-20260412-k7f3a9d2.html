@@ -1,0 +1,4498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MSA Royal Battle Data Analysis | GCG STATS</title>
+  <meta name="description" content="Anonymized tournament data analysis for MSA Steel Requiem .2 Royal Battle.">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    main.rb-page { max-width: 960px; margin: 0 auto; padding: 24px 16px 80px; }
+    main.rb-page h1 { font-size: 1.8rem; margin-bottom: 8px; }
+    main.rb-page h2 { margin-top: 32px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    main.rb-page h4 { margin: 16px 0 8px; font-size: 1rem; }
+    main.rb-page p { line-height: 1.6; }
+    main.rb-page .meta-info { margin: 12px 0 16px; padding: 12px 14px; border-left: 3px solid #4aa3ff; background: rgba(74,163,255,0.08); line-height: 1.7; font-size: 0.95rem; }
+    main.rb-page .privacy-notice { margin: 12px 0 24px; padding: 12px 14px; border-left: 3px solid #ffb347; background: rgba(255,179,71,0.08); font-size: 0.95rem; }
+    main.rb-page table { border-collapse: collapse; width: 100%; margin: 8px 0 16px; font-size: 0.93rem; }
+    main.rb-page table th, main.rb-page table td { border: 1px solid rgba(255,255,255,0.15); padding: 6px 10px; text-align: left; }
+    main.rb-page table th { background: rgba(255,255,255,0.06); font-weight: 600; }
+    main.rb-page table td.num, main.rb-page table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    main.rb-page table td.mono { font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 0.88rem; }
+    main.rb-page details { margin: 10px 0; border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; background: rgba(255,255,255,0.02); }
+    main.rb-page details > summary { cursor: pointer; padding: 10px 14px; font-weight: 600; list-style: none; user-select: none; }
+    main.rb-page details > summary::-webkit-details-marker { display: none; }
+    main.rb-page details > summary::before { content: "▶"; display: inline-block; margin-right: 8px; font-size: 0.8em; transition: transform 0.15s; }
+    main.rb-page details[open] > summary::before { transform: rotate(90deg); }
+    main.rb-page details > *:not(summary) { padding: 0 14px 12px; }
+    main.rb-page details details { margin: 6px 0; }
+    main.rb-page .top8-list { padding-left: 28px; }
+    main.rb-page .top8-list li { margin: 4px 0; }
+    main.rb-page .note-p { font-size: 0.9rem; color: rgba(255,255,255,0.7); margin: 6px 0 10px; }
+    main.rb-page .footer-note { margin-top: 48px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.15); font-size: 0.88rem; color: rgba(255,255,255,0.6); }
+    main.rb-page .footer-note hr { display: none; }
+</style>
+</head>
+<body>
+<main class="rb-page">
+
+  <h1>MSA Steel Requiem .2 Royal Battle - Data Analysis</h1>
+  <p>Unofficial data aggregation from Limitless TCG public tournament data.</p>
+
+  <div class="meta-info">
+    Tournament Date: April 12, 2026<br>
+    Format: 6 Swiss Rounds + TOP 8 (Best of 1)<br>
+    Participants: 72<br>
+    Data Source: <a href="https://mobilesuitarena.com/" target="_blank" rel="noopener">Mobile Suit Arena</a> &times; <a href="https://play.limitlesstcg.com/tournament/69ce86dbd478313a15a39b9b/standings" target="_blank" rel="noopener">Limitless TCG</a>
+  </div>
+
+  <div class="privacy-notice">
+    <strong>Privacy Notice:</strong> All data on this page is anonymized.
+    Player names, countries, individual records, and final placements are not displayed.
+  </div>
+
+  <h2>Deck Type Distribution</h2>
+  
+  <table class="dist-table">
+    <thead>
+      <tr><th>Deck Type</th><th class="num">Players</th><th class="num">Share</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Blue/Purple</td>
+        <td class="num">16</td>
+        <td class="num">22.2%</td>
+      </tr>
+      <tr>
+        <td>Blue/Red</td>
+        <td class="num">14</td>
+        <td class="num">19.4%</td>
+      </tr>
+      <tr>
+        <td>Blue/White</td>
+        <td class="num">14</td>
+        <td class="num">19.4%</td>
+      </tr>
+      <tr>
+        <td>Green/White</td>
+        <td class="num">7</td>
+        <td class="num">9.7%</td>
+      </tr>
+      <tr>
+        <td>White/Purple</td>
+        <td class="num">6</td>
+        <td class="num">8.3%</td>
+      </tr>
+      <tr>
+        <td>Red/White</td>
+        <td class="num">5</td>
+        <td class="num">6.9%</td>
+      </tr>
+      <tr>
+        <td>Blue/Green</td>
+        <td class="num">4</td>
+        <td class="num">5.6%</td>
+      </tr>
+      <tr>
+        <td>Green/Purple</td>
+        <td class="num">2</td>
+        <td class="num">2.8%</td>
+      </tr>
+      <tr>
+        <td>Red/Purple</td>
+        <td class="num">2</td>
+        <td class="num">2.8%</td>
+      </tr>
+      <tr>
+        <td>Blue (Mono)</td>
+        <td class="num">1</td>
+        <td class="num">1.4%</td>
+      </tr>
+      <tr>
+        <td>Red/Green</td>
+        <td class="num">1</td>
+        <td class="num">1.4%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h4>Top 8 by Deck Type</h4>
+  <ol class="top8-list">
+    <li><strong>1st</strong>: Blue/Purple</li>
+    <li><strong>2nd</strong>: Blue/Red</li>
+    <li><strong>3rd</strong>: Blue/White</li>
+    <li><strong>4th</strong>: Blue/Purple</li>
+    <li><strong>5th</strong>: Green/White</li>
+    <li><strong>6th</strong>: Blue/Red</li>
+    <li><strong>7th</strong>: Blue/White</li>
+    <li><strong>8th</strong>: White/Purple</li>
+  </ol>
+
+  <h2>Deck Type Details</h2>
+  <p class="note-p">All 11 deck types. Click to expand. Card names remain in Japanese as-is from the card master. Adoption rate uses the deck type's sample (N) as denominator; Avg / Median copies are computed over adopting decks only.</p>
+
+  <details class="deck-type-block">
+    <summary>Blue/Purple &mdash; 16 players (22.2%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.44</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td class="num">93.8%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td class="num">93.8%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td class="num">87.5%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td class="num">87.5%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>グレイズ改</td>
+            <td class="mono">ST05-004</td>
+            <td class="num">87.5%</td>
+            <td class="num">3.86</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ジム</td>
+            <td class="mono">ST01-005</td>
+            <td class="num">75.0%</td>
+            <td class="num">3.75</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td class="num">68.8%</td>
+            <td class="num">1.91</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td class="num">62.5%</td>
+            <td class="num">3.90</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td class="num">62.5%</td>
+            <td class="num">1.40</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <td>リゼル</td>
+            <td class="mono">GD01-018</td>
+            <td class="num">56.3%</td>
+            <td class="num">2.89</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダム・グシオンリベイク</td>
+            <td class="mono">GD02-055</td>
+            <td class="num">56.3%</td>
+            <td class="num">2.11</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ハイザック</td>
+            <td class="mono">GD02-013</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.75</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>0ガンダム</td>
+            <td class="mono">GD03-063</td>
+            <td class="num">37.5%</td>
+            <td class="num">2.50</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>致命の一撃</td>
+            <td class="mono">ST05-014</td>
+            <td class="num">31.3%</td>
+            <td class="num">2.40</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトス（第4形態）</td>
+            <td class="mono">ST05-001</td>
+            <td class="num">18.8%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ジャイアントキリング</td>
+            <td class="mono">ST09-009</td>
+            <td class="num">18.8%</td>
+            <td class="num">1.67</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>バナージ・リンクス</td>
+            <td class="mono">GD01-088</td>
+            <td class="num">12.5%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム</td>
+            <td class="mono">GD01-001</td>
+            <td class="num">12.5%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトスルプス</td>
+            <td class="mono">GD03-050</td>
+            <td class="num">12.5%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ユニコーンガンダム（ユニコーンモード）</td>
+            <td class="mono">GD01-005</td>
+            <td class="num">6.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>フルアーマー・ユニコーンガンダム（ユニコーンモード）</td>
+            <td class="mono">GD03-016</td>
+            <td class="num">6.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>旺盛な好奇心</td>
+            <td class="mono">GD03-101</td>
+            <td class="num">6.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトス（第2形態）</td>
+            <td class="mono">ST05-002</td>
+            <td class="num">6.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ユニコーンガンダム（デストロイモード）</td>
+            <td class="mono">GD01-002</td>
+            <td class="num">6.3%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>Gファイター</td>
+            <td class="mono">GD01-009</td>
+            <td class="num">6.3%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Blue/Red &mdash; 14 players (19.4%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>格闘戦</td>
+            <td class="mono">ST03-013</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.79</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-044</td>
+            <td class="num">92.9%</td>
+            <td class="num">3.92</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>マリーダ・クルス</td>
+            <td class="mono">GD01-093</td>
+            <td class="num">92.9%</td>
+            <td class="num">3.92</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td class="num">92.9%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td class="num">92.9%</td>
+            <td class="num">2.46</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ユニコーンガンダム2号機 バンシィ（デストロイモード）</td>
+            <td class="mono">GD01-003</td>
+            <td class="num">92.9%</td>
+            <td class="num">2.31</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>戦技の向上</td>
+            <td class="mono">GD03-109</td>
+            <td class="num">85.7%</td>
+            <td class="num">3.92</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>エースの戦い</td>
+            <td class="mono">GD01-111</td>
+            <td class="num">85.7%</td>
+            <td class="num">3.25</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td class="num">64.3%</td>
+            <td class="num">3.89</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td class="num">64.3%</td>
+            <td class="num">3.67</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>旺盛な好奇心</td>
+            <td class="mono">GD03-101</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.86</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>レウルーラ</td>
+            <td class="mono">ST03-015</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.57</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>メッサーF02型 マインレイヤー</td>
+            <td class="mono">ST08-005</td>
+            <td class="num">42.9%</td>
+            <td class="num">3.83</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td class="num">42.9%</td>
+            <td class="num">2.67</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td class="num">35.7%</td>
+            <td class="num">2.80</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>リゼル</td>
+            <td class="mono">GD01-018</td>
+            <td class="num">28.6%</td>
+            <td class="num">3.25</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td class="num">28.6%</td>
+            <td class="num">2.75</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td class="num">28.6%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td class="num">28.6%</td>
+            <td class="num">1.75</td>
+            <td class="num">1.5</td>
+          </tr>
+          <tr>
+            <td>Ξガンダム</td>
+            <td class="mono">ST08-002</td>
+            <td class="num">21.4%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ハサウェイ・ノア</td>
+            <td class="mono">ST08-010</td>
+            <td class="num">21.4%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>Ξガンダム</td>
+            <td class="mono">ST08-001</td>
+            <td class="num">21.4%</td>
+            <td class="num">2.67</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>セイラ専用軽キャノン</td>
+            <td class="mono">GD02-046</td>
+            <td class="num">21.4%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>バナージ・リンクス</td>
+            <td class="mono">GD01-088</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ユニコーンガンダム（ユニコーンモード）</td>
+            <td class="mono">GD01-005</td>
+            <td class="num">14.3%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>資源衛星パラオ</td>
+            <td class="mono">GD01-128</td>
+            <td class="num">14.3%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>フルアーマー・ユニコーンガンダム（ユニコーンモード）</td>
+            <td class="mono">GD03-016</td>
+            <td class="num">14.3%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-051</td>
+            <td class="num">14.3%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ザク・マリナー</td>
+            <td class="mono">GD01-060</td>
+            <td class="num">14.3%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ユニコーンガンダム（デストロイモード）</td>
+            <td class="mono">GD01-002</td>
+            <td class="num">14.3%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Blue/White &mdash; 14 players (19.4%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.71</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.36</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.21</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.14</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.71</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td class="num">92.9%</td>
+            <td class="num">3.62</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td class="num">92.9%</td>
+            <td class="num">3.23</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ジ・O</td>
+            <td class="mono">GD03-002</td>
+            <td class="num">71.4%</td>
+            <td class="num">3.80</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>パプテマス・シロッコ</td>
+            <td class="mono">GD03-084</td>
+            <td class="num">71.4%</td>
+            <td class="num">3.80</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>メッサーラ</td>
+            <td class="mono">GD03-003</td>
+            <td class="num">71.4%</td>
+            <td class="num">3.10</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td class="num">71.4%</td>
+            <td class="num">2.90</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>クサナギ</td>
+            <td class="mono">GD01-129</td>
+            <td class="num">64.3%</td>
+            <td class="num">3.22</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>予期せぬ出来事</td>
+            <td class="mono">ST01-014</td>
+            <td class="num">64.3%</td>
+            <td class="num">1.00</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <td>パーフェクトストライクガンダム</td>
+            <td class="mono">GD01-068</td>
+            <td class="num">57.1%</td>
+            <td class="num">2.25</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ボリノーク・サマーン</td>
+            <td class="mono">GD03-008</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.86</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>バナージ・リンクス</td>
+            <td class="mono">GD01-088</td>
+            <td class="num">21.4%</td>
+            <td class="num">3.67</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>フルアーマー・ユニコーンガンダム（ユニコーンモード）</td>
+            <td class="mono">GD03-016</td>
+            <td class="num">21.4%</td>
+            <td class="num">3.33</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザウォート</td>
+            <td class="mono">ST01-009</td>
+            <td class="num">21.4%</td>
+            <td class="num">3.33</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>フルアーマー・ユニコーンガンダム（デストロイモード）</td>
+            <td class="mono">GD03-010</td>
+            <td class="num">21.4%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td class="num">21.4%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>アークエンジェル</td>
+            <td class="mono">ST04-015</td>
+            <td class="num">21.4%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>フリーダムガンダム</td>
+            <td class="mono">GD01-065</td>
+            <td class="num">14.3%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ネェル・アーガマ</td>
+            <td class="mono">GD01-123</td>
+            <td class="num">14.3%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td class="num">14.3%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td class="num">14.3%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>フリーダムガンダム</td>
+            <td class="mono">ST09-004</td>
+            <td class="num">14.3%</td>
+            <td class="num">1.50</td>
+            <td class="num">1.5</td>
+          </tr>
+          <tr>
+            <td>ユニコーンガンダム（デストロイモード）</td>
+            <td class="mono">GD01-002</td>
+            <td class="num">7.1%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ジャスティスガンダム</td>
+            <td class="mono">GD01-066</td>
+            <td class="num">7.1%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>デミギャリソン</td>
+            <td class="mono">GD01-085</td>
+            <td class="num">7.1%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Green/White &mdash; 7 players (9.7%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.86</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td class="num">85.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ウイングガンダム</td>
+            <td class="mono">ST02-001</td>
+            <td class="num">85.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ヒイロ・ユイ</td>
+            <td class="mono">ST02-010</td>
+            <td class="num">85.7%</td>
+            <td class="num">3.83</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ウイングガンダムゼロ</td>
+            <td class="mono">GD01-024</td>
+            <td class="num">85.7%</td>
+            <td class="num">3.67</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td class="num">85.7%</td>
+            <td class="num">3.67</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ピースミリオン</td>
+            <td class="mono">GD03-125</td>
+            <td class="num">85.7%</td>
+            <td class="num">3.17</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td class="num">85.7%</td>
+            <td class="num">3.17</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td class="num">71.4%</td>
+            <td class="num">3.80</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td class="num">71.4%</td>
+            <td class="num">3.80</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ソードストライクガンダム</td>
+            <td class="mono">GD01-073</td>
+            <td class="num">71.4%</td>
+            <td class="num">2.60</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>アルトロンガンダム</td>
+            <td class="mono">GD03-018</td>
+            <td class="num">57.1%</td>
+            <td class="num">2.25</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ザウォート</td>
+            <td class="mono">ST01-009</td>
+            <td class="num">42.9%</td>
+            <td class="num">3.33</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>砂漠地下基地</td>
+            <td class="mono">GD01-126</td>
+            <td class="num">42.9%</td>
+            <td class="num">2.67</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>シェンロンガンダム</td>
+            <td class="mono">GD01-029</td>
+            <td class="num">42.9%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>予期せぬ出来事</td>
+            <td class="mono">ST01-014</td>
+            <td class="num">42.9%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>フリーダムガンダム</td>
+            <td class="mono">ST09-004</td>
+            <td class="num">42.9%</td>
+            <td class="num">1.67</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>張五飛</td>
+            <td class="mono">GD01-091</td>
+            <td class="num">28.6%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ランチャーストライクガンダム</td>
+            <td class="mono">GD01-072</td>
+            <td class="num">28.6%</td>
+            <td class="num">2.50</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>ジャスティスガンダム</td>
+            <td class="mono">GD01-066</td>
+            <td class="num">28.6%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>シャア専用ゲルググ</td>
+            <td class="mono">GD01-023</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ（シャア・アズナブル機）</td>
+            <td class="mono">GD01-026</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ゲルググ</td>
+            <td class="mono">GD01-031</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ</td>
+            <td class="mono">GD01-035</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザンジバル</td>
+            <td class="mono">GD01-125</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>百式</td>
+            <td class="mono">GD02-072</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>クワトロ・バジーナ</td>
+            <td class="mono">GD02-098</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ（シャア・アズナブル機）</td>
+            <td class="mono">ST03-006</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ</td>
+            <td class="mono">ST03-008</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>シャア・アズナブル</td>
+            <td class="mono">ST03-011</td>
+            <td class="num">14.3%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>White/Purple &mdash; 6 players (8.3%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td class="num">83.3%</td>
+            <td class="num">3.80</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>インパルスガンダム</td>
+            <td class="mono">ST09-001</td>
+            <td class="num">66.7%</td>
+            <td class="num">3.75</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ミネルバ</td>
+            <td class="mono">ST09-010</td>
+            <td class="num">66.7%</td>
+            <td class="num">3.50</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>フォースインパルスガンダム</td>
+            <td class="mono">ST09-002</td>
+            <td class="num">66.7%</td>
+            <td class="num">3.25</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ブラストインパルスガンダム</td>
+            <td class="mono">ST09-007</td>
+            <td class="num">66.7%</td>
+            <td class="num">3.25</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>シン・アスカ</td>
+            <td class="mono">ST09-008</td>
+            <td class="num">66.7%</td>
+            <td class="num">3.25</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ソードインパルスガンダム</td>
+            <td class="mono">ST09-006</td>
+            <td class="num">66.7%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.67</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.67</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.67</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.33</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダム・グシオンリベイク</td>
+            <td class="mono">GD02-055</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.67</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ゼハート・ガレット</td>
+            <td class="mono">GD03-094</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.33</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>予期せぬ出来事</td>
+            <td class="mono">ST01-014</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.33</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td class="num">33.3%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td class="num">33.3%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>イサリビ</td>
+            <td class="mono">ST05-015</td>
+            <td class="num">33.3%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ソードストライクガンダム</td>
+            <td class="mono">GD01-073</td>
+            <td class="num">33.3%</td>
+            <td class="num">2.50</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>新たな鼓動</td>
+            <td class="mono">GD02-117</td>
+            <td class="num">33.3%</td>
+            <td class="num">2.50</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトス（第4形態）</td>
+            <td class="mono">ST05-001</td>
+            <td class="num">33.3%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>フリーダムガンダム</td>
+            <td class="mono">ST09-004</td>
+            <td class="num">33.3%</td>
+            <td class="num">1.00</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <td>ダリルバルデ</td>
+            <td class="mono">GD01-075</td>
+            <td class="num">16.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ディランザ グエル専用機</td>
+            <td class="mono">GD01-083</td>
+            <td class="num">16.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>魔女と花嫁</td>
+            <td class="mono">GD01-117</td>
+            <td class="num">16.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダムエクシア（トランザム）</td>
+            <td class="mono">GD03-049</td>
+            <td class="num">16.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトスルプス</td>
+            <td class="mono">GD03-050</td>
+            <td class="num">16.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・端白星（第2形態）</td>
+            <td class="mono">GD03-055</td>
+            <td class="num">16.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>GNアーマー TYPE-E</td>
+            <td class="mono">GD03-057</td>
+            <td class="num">16.7%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Red/White &mdash; 5 players (6.9%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.60</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td class="num">80.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td class="num">80.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>格闘戦</td>
+            <td class="mono">ST03-013</td>
+            <td class="num">80.0%</td>
+            <td class="num">3.75</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td class="num">80.0%</td>
+            <td class="num">3.75</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>エースの戦い</td>
+            <td class="mono">GD01-111</td>
+            <td class="num">80.0%</td>
+            <td class="num">3.25</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td class="num">80.0%</td>
+            <td class="num">3.25</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td class="num">80.0%</td>
+            <td class="num">2.50</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td class="num">80.0%</td>
+            <td class="num">1.75</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>プロヴィデンスガンダム</td>
+            <td class="mono">GD03-033</td>
+            <td class="num">60.0%</td>
+            <td class="num">3.33</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>GFreD</td>
+            <td class="mono">GD03-035</td>
+            <td class="num">60.0%</td>
+            <td class="num">3.33</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ラウ・ル・クルーゼ</td>
+            <td class="mono">GD03-091</td>
+            <td class="num">60.0%</td>
+            <td class="num">3.33</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ヤキン・ドゥーエ</td>
+            <td class="mono">GD03-127</td>
+            <td class="num">60.0%</td>
+            <td class="num">3.33</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ニャアン</td>
+            <td class="mono">GD03-092</td>
+            <td class="num">60.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>戦技の向上</td>
+            <td class="mono">GD03-109</td>
+            <td class="num">40.0%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-044</td>
+            <td class="num">40.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ジャスティスガンダム</td>
+            <td class="mono">GD01-066</td>
+            <td class="num">40.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ランチャーストライクガンダム</td>
+            <td class="mono">GD01-072</td>
+            <td class="num">40.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>マリーダ・クルス</td>
+            <td class="mono">GD01-093</td>
+            <td class="num">40.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>アスラン・ザラ</td>
+            <td class="mono">ST04-011</td>
+            <td class="num">40.0%</td>
+            <td class="num">2.50</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>パーフェクトストライクガンダム</td>
+            <td class="mono">GD01-068</td>
+            <td class="num">40.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>イージスガンダム</td>
+            <td class="mono">ST04-006</td>
+            <td class="num">40.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ヴェサリウス</td>
+            <td class="mono">ST04-016</td>
+            <td class="num">40.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>フリーダムガンダム</td>
+            <td class="mono">ST09-004</td>
+            <td class="num">40.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>オールレンジ攻撃</td>
+            <td class="mono">GD02-107</td>
+            <td class="num">20.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>シュウジの隠れ家</td>
+            <td class="mono">GD02-126</td>
+            <td class="num">20.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>Ξガンダム（フライト・フォーム）</td>
+            <td class="mono">GD03-036</td>
+            <td class="num">20.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>レウルーラ</td>
+            <td class="mono">ST03-015</td>
+            <td class="num">20.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ハサウェイ・ノア</td>
+            <td class="mono">ST08-010</td>
+            <td class="num">20.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ソードストライクガンダム</td>
+            <td class="mono">GD01-073</td>
+            <td class="num">20.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Blue/Green &mdash; 4 players (5.6%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ</td>
+            <td class="mono">ST03-008</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.75</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.50</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>リック・ドム</td>
+            <td class="mono">GD01-030</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.50</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.50</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ</td>
+            <td class="mono">GD01-035</td>
+            <td class="num">75.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ジム</td>
+            <td class="mono">ST01-005</td>
+            <td class="num">75.0%</td>
+            <td class="num">3.33</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>バナージ・リンクス</td>
+            <td class="mono">GD01-088</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>フルアーマー・ユニコーンガンダム（ユニコーンモード）</td>
+            <td class="mono">GD03-016</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダムデュナメス</td>
+            <td class="mono">ST07-005</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ロックオン・ストラトス（ニール）</td>
+            <td class="mono">ST07-011</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>リゼル</td>
+            <td class="mono">GD01-018</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ガンダムデュナメス</td>
+            <td class="mono">GD03-026</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.50</td>
+            <td class="num">2.5</td>
+          </tr>
+          <tr>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>旺盛な好奇心</td>
+            <td class="mono">GD03-101</td>
+            <td class="num">25.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ（シャア・アズナブル機）</td>
+            <td class="mono">ST03-006</td>
+            <td class="num">25.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ハイザック</td>
+            <td class="mono">GD02-013</td>
+            <td class="num">25.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ユニコーンガンダム（デストロイモード）</td>
+            <td class="mono">GD01-002</td>
+            <td class="num">25.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンキャノン</td>
+            <td class="mono">GD01-004</td>
+            <td class="num">25.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>Gファイター</td>
+            <td class="mono">GD01-009</td>
+            <td class="num">25.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>包囲戦術</td>
+            <td class="mono">ST02-014</td>
+            <td class="num">25.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ファルメル</td>
+            <td class="mono">ST03-016</td>
+            <td class="num">25.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Green/Purple &mdash; 2 players (2.8%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>グレイズ改</td>
+            <td class="mono">ST05-004</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ウイングガンダムゼロ</td>
+            <td class="mono">GD01-024</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.50</td>
+            <td class="num">3.5</td>
+          </tr>
+          <tr>
+            <td>ガンダム・グシオンリベイク</td>
+            <td class="mono">GD02-055</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td class="num">100.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトスルプス</td>
+            <td class="mono">GD03-050</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>0ガンダム</td>
+            <td class="mono">GD03-063</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ゼハート・ガレット</td>
+            <td class="mono">GD03-094</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ウイングガンダム</td>
+            <td class="mono">ST02-001</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ヒイロ・ユイ</td>
+            <td class="mono">ST02-010</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>砂漠地下基地</td>
+            <td class="mono">GD01-126</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダムヘビーアームズ</td>
+            <td class="mono">GD02-025</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ</td>
+            <td class="mono">ST03-008</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ガンダムデュナメス</td>
+            <td class="mono">ST07-005</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>流星号（グレイズ改弐）</td>
+            <td class="mono">GD02-058</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダム・グシオンリベイクフルシティ</td>
+            <td class="mono">GD03-053</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>漏影</td>
+            <td class="mono">GD03-067</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>決意の眼差し</td>
+            <td class="mono">GD03-114</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトス（第4形態）</td>
+            <td class="mono">ST05-001</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>イサリビ</td>
+            <td class="mono">ST05-015</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ロックオン・ストラトス（ニール）</td>
+            <td class="mono">ST07-011</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ミネルバ</td>
+            <td class="mono">ST09-010</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>決戦の切り札</td>
+            <td class="mono">GD02-111</td>
+            <td class="num">50.0%</td>
+            <td class="num">1.00</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <td>ピースミリオン</td>
+            <td class="mono">GD03-125</td>
+            <td class="num">50.0%</td>
+            <td class="num">1.00</td>
+            <td class="num">1</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Red/Purple &mdash; 2 players (2.8%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>ヴェサリウス</td>
+            <td class="mono">ST04-016</td>
+            <td class="num">100.0%</td>
+            <td class="num">1.00</td>
+            <td class="num">1</td>
+          </tr>
+          <tr>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-044</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザク・マリナー</td>
+            <td class="mono">GD01-060</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>戦技の向上</td>
+            <td class="mono">GD03-109</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>格闘戦</td>
+            <td class="mono">ST03-013</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>アスラン・ザラ</td>
+            <td class="mono">ST04-011</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ゲルググ（GQ）</td>
+            <td class="mono">ST06-004</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>フォースインパルスガンダム</td>
+            <td class="mono">ST09-002</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ソードインパルスガンダム</td>
+            <td class="mono">ST09-006</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>シン・アスカ</td>
+            <td class="mono">ST09-008</td>
+            <td class="num">50.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>デュエルガンダム</td>
+            <td class="mono">GD01-054</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>マリーダ・クルス</td>
+            <td class="mono">GD01-093</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>インパルスガンダム</td>
+            <td class="mono">ST09-001</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>セイバーガンダム</td>
+            <td class="mono">ST09-003</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>ブラストインパルスガンダム</td>
+            <td class="mono">ST09-007</td>
+            <td class="num">50.0%</td>
+            <td class="num">3.00</td>
+            <td class="num">3</td>
+          </tr>
+          <tr>
+            <td>バクゥ</td>
+            <td class="mono">GD01-055</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>エースの戦い</td>
+            <td class="mono">GD01-111</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>資源衛星パラオ</td>
+            <td class="mono">GD01-128</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダム・グシオンリベイク</td>
+            <td class="mono">GD02-055</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>憩いのひととき</td>
+            <td class="mono">GD02-112</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>プロヴィデンスガンダム</td>
+            <td class="mono">GD03-033</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ゲイツ（指揮官用）</td>
+            <td class="mono">GD03-038</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ラウ・ル・クルーゼ</td>
+            <td class="mono">GD03-091</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>シナンジュ</td>
+            <td class="mono">ST03-001</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>フル・フロンタル</td>
+            <td class="mono">ST03-010</td>
+            <td class="num">50.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Blue (Mono) &mdash; 1 players (1.4%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>マラサイ</td>
+            <td class="mono">GD02-015</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ジ・O</td>
+            <td class="mono">GD03-002</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>メッサーラ</td>
+            <td class="mono">GD03-003</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ハンブラビ</td>
+            <td class="mono">GD03-004</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ボリノーク・サマーン</td>
+            <td class="mono">GD03-008</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>メッサーラ（MA形態）</td>
+            <td class="mono">GD03-012</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>パプテマス・シロッコ</td>
+            <td class="mono">GD03-084</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ヤザン・ゲーブル</td>
+            <td class="mono">GD03-086</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>サラ・ザビアロフ</td>
+            <td class="mono">GD03-087</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ジュピトリス</td>
+            <td class="mono">GD03-123</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>パラス・アテネ</td>
+            <td class="mono">GD03-009</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details class="deck-type-block">
+    <summary>Red/Green &mdash; 1 players (1.4%)</summary>
+    <h4>Top Adopted Cards (up to 30)</h4>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+          <th class="num">Median Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>ザクⅡ（シャア・アズナブル機）</td>
+            <td class="mono">GD01-026</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>リック・ドム</td>
+            <td class="mono">GD01-030</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ</td>
+            <td class="mono">GD01-035</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザク・マリナー</td>
+            <td class="mono">GD01-060</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>GFreD</td>
+            <td class="mono">GD03-035</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ニャアン</td>
+            <td class="mono">GD03-092</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ（シャア・アズナブル機）</td>
+            <td class="mono">ST03-006</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ザクⅡ</td>
+            <td class="mono">ST03-008</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>シャア・アズナブル</td>
+            <td class="mono">ST03-011</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>ゲルググ（GQ）</td>
+            <td class="mono">ST06-004</td>
+            <td class="num">100.0%</td>
+            <td class="num">4.00</td>
+            <td class="num">4</td>
+          </tr>
+          <tr>
+            <td>シャア専用ゲルググ</td>
+            <td class="mono">GD01-023</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ビグ・ザム</td>
+            <td class="mono">GD01-027</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ザンジバル</td>
+            <td class="mono">GD01-125</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+          <tr>
+            <td>ファルメル</td>
+            <td class="mono">ST03-016</td>
+            <td class="num">100.0%</td>
+            <td class="num">2.00</td>
+            <td class="num">2</td>
+          </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <h2>Overall Card Adoption Ranking</h2>
+
+  <details class="overall-block">
+    <summary>Overall Card Adoption Rankings (all 72 decks)</summary>
+    <p class="note-p">Top 50 most adopted cards across all decks, regardless of deck type.</p>
+    <table class="card-table">
+      <thead>
+        <tr>
+          <th class="num">Rank</th>
+          <th>Card</th>
+          <th>Card ID</th>
+          <th>Color</th>
+          <th class="num">Adoption</th>
+          <th class="num">Avg Copies</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td class="num">1</td>
+        <td>覚悟の表れ</td>
+        <td class="mono">GD01-100</td>
+        <td>Blue</td>
+        <td class="num">65.3%</td>
+        <td class="num">2.68</td>
+      </tr>
+      <tr>
+        <td class="num">2</td>
+        <td>アムロ・レイ</td>
+        <td class="mono">ST01-010</td>
+        <td>Blue</td>
+        <td class="num">58.3%</td>
+        <td class="num">3.98</td>
+      </tr>
+      <tr>
+        <td class="num">3</td>
+        <td>ガンダム</td>
+        <td class="mono">ST01-001</td>
+        <td>Blue</td>
+        <td class="num">58.3%</td>
+        <td class="num">3.62</td>
+      </tr>
+      <tr>
+        <td class="num">4</td>
+        <td>溢れる慈愛</td>
+        <td class="mono">GD01-118</td>
+        <td>White</td>
+        <td class="num">41.7%</td>
+        <td class="num">3.70</td>
+      </tr>
+      <tr>
+        <td class="num">5</td>
+        <td>ガンダム・ルブリス</td>
+        <td class="mono">GD01-086</td>
+        <td>White</td>
+        <td class="num">36.1%</td>
+        <td class="num">3.77</td>
+      </tr>
+      <tr>
+        <td class="num">6</td>
+        <td>エールストライクガンダム</td>
+        <td class="mono">ST04-001</td>
+        <td>White</td>
+        <td class="num">36.1%</td>
+        <td class="num">3.35</td>
+      </tr>
+      <tr>
+        <td class="num">7</td>
+        <td>コルシカ基地</td>
+        <td class="mono">ST02-016</td>
+        <td>Blue</td>
+        <td class="num">36.1%</td>
+        <td class="num">2.00</td>
+      </tr>
+      <tr>
+        <td class="num">8</td>
+        <td>キラ・ヤマト</td>
+        <td class="mono">ST04-010</td>
+        <td>White</td>
+        <td class="num">34.7%</td>
+        <td class="num">3.48</td>
+      </tr>
+      <tr>
+        <td class="num">9</td>
+        <td>リック・ディアス</td>
+        <td class="mono">GD02-079</td>
+        <td>White</td>
+        <td class="num">34.7%</td>
+        <td class="num">3.40</td>
+      </tr>
+      <tr>
+        <td class="num">10</td>
+        <td>ガンタンク</td>
+        <td class="mono">GD01-008</td>
+        <td>Blue</td>
+        <td class="num">33.3%</td>
+        <td class="num">3.67</td>
+      </tr>
+      <tr>
+        <td class="num">11</td>
+        <td>アンクシャ</td>
+        <td class="mono">GD01-020</td>
+        <td>Blue</td>
+        <td class="num">31.9%</td>
+        <td class="num">3.09</td>
+      </tr>
+      <tr>
+        <td class="num">12</td>
+        <td>ストライカーパック</td>
+        <td class="mono">ST04-012</td>
+        <td>White</td>
+        <td class="num">31.9%</td>
+        <td class="num">2.74</td>
+      </tr>
+      <tr>
+        <td class="num">13</td>
+        <td>ガンダム・バルバトスアダプト</td>
+        <td class="mono">GD03-056</td>
+        <td>Purple</td>
+        <td class="num">30.6%</td>
+        <td class="num">3.95</td>
+      </tr>
+      <tr>
+        <td class="num">14</td>
+        <td>三日月・オーガス</td>
+        <td class="mono">ST05-010</td>
+        <td>Purple</td>
+        <td class="num">30.6%</td>
+        <td class="num">3.95</td>
+      </tr>
+      <tr>
+        <td class="num">15</td>
+        <td>ガンダム・バルバトス（第1形態）</td>
+        <td class="mono">GD02-054</td>
+        <td>Purple</td>
+        <td class="num">30.6%</td>
+        <td class="num">3.91</td>
+      </tr>
+      <tr>
+        <td class="num">16</td>
+        <td>ホワイトベース</td>
+        <td class="mono">ST01-015</td>
+        <td>Blue</td>
+        <td class="num">29.2%</td>
+        <td class="num">2.14</td>
+      </tr>
+      <tr>
+        <td class="num">17</td>
+        <td>格闘戦</td>
+        <td class="mono">ST03-013</td>
+        <td>Red</td>
+        <td class="num">26.4%</td>
+        <td class="num">3.79</td>
+      </tr>
+      <tr>
+        <td class="num">18</td>
+        <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+        <td class="mono">GD03-034</td>
+        <td>Red</td>
+        <td class="num">26.4%</td>
+        <td class="num">2.42</td>
+      </tr>
+      <tr>
+        <td class="num">19</td>
+        <td>ガンダムNT-1</td>
+        <td class="mono">GD03-001</td>
+        <td>Blue</td>
+        <td class="num">25.0%</td>
+        <td class="num">1.61</td>
+      </tr>
+      <tr>
+        <td class="num">20</td>
+        <td>グレイズ改</td>
+        <td class="mono">ST05-004</td>
+        <td>Purple</td>
+        <td class="num">23.6%</td>
+        <td class="num">3.88</td>
+      </tr>
+      <tr>
+        <td class="num">21</td>
+        <td>エースの戦い</td>
+        <td class="mono">GD01-111</td>
+        <td>Red</td>
+        <td class="num">23.6%</td>
+        <td class="num">3.18</td>
+      </tr>
+      <tr>
+        <td class="num">22</td>
+        <td>クシャトリヤ</td>
+        <td class="mono">GD01-044</td>
+        <td>Red</td>
+        <td class="num">22.2%</td>
+        <td class="num">3.81</td>
+      </tr>
+      <tr>
+        <td class="num">23</td>
+        <td>マリーダ・クルス</td>
+        <td class="mono">GD01-093</td>
+        <td>Red</td>
+        <td class="num">22.2%</td>
+        <td class="num">3.75</td>
+      </tr>
+      <tr>
+        <td class="num">24</td>
+        <td>リゼル</td>
+        <td class="mono">GD01-018</td>
+        <td>Blue</td>
+        <td class="num">22.2%</td>
+        <td class="num">3.00</td>
+      </tr>
+      <tr>
+        <td class="num">25</td>
+        <td>戦技の向上</td>
+        <td class="mono">GD03-109</td>
+        <td>Red</td>
+        <td class="num">20.8%</td>
+        <td class="num">3.87</td>
+      </tr>
+      <tr>
+        <td class="num">26</td>
+        <td>ジム</td>
+        <td class="mono">ST01-005</td>
+        <td>Blue</td>
+        <td class="num">20.8%</td>
+        <td class="num">3.67</td>
+      </tr>
+      <tr>
+        <td class="num">27</td>
+        <td>百錬</td>
+        <td class="mono">ST05-006</td>
+        <td>Purple</td>
+        <td class="num">20.8%</td>
+        <td class="num">3.67</td>
+      </tr>
+      <tr>
+        <td class="num">28</td>
+        <td>ガンダム・グシオンリベイク</td>
+        <td class="mono">GD02-055</td>
+        <td>Purple</td>
+        <td class="num">20.8%</td>
+        <td class="num">2.40</td>
+      </tr>
+      <tr>
+        <td class="num">29</td>
+        <td>予期せぬ出来事</td>
+        <td class="mono">ST01-014</td>
+        <td>White</td>
+        <td class="num">20.8%</td>
+        <td class="num">1.47</td>
+      </tr>
+      <tr>
+        <td class="num">30</td>
+        <td>ユニコーンガンダム2号機 バンシィ（デストロイモード）</td>
+        <td class="mono">GD01-003</td>
+        <td>Blue</td>
+        <td class="num">18.1%</td>
+        <td class="num">2.31</td>
+      </tr>
+      <tr>
+        <td class="num">31</td>
+        <td>メッサーラ</td>
+        <td class="mono">GD03-003</td>
+        <td>Blue</td>
+        <td class="num">16.7%</td>
+        <td class="num">3.08</td>
+      </tr>
+      <tr>
+        <td class="num">32</td>
+        <td>ジ・O</td>
+        <td class="mono">GD03-002</td>
+        <td>Blue</td>
+        <td class="num">15.3%</td>
+        <td class="num">3.82</td>
+      </tr>
+      <tr>
+        <td class="num">33</td>
+        <td>パプテマス・シロッコ</td>
+        <td class="mono">GD03-084</td>
+        <td>Blue</td>
+        <td class="num">15.3%</td>
+        <td class="num">3.82</td>
+      </tr>
+      <tr>
+        <td class="num">34</td>
+        <td>ハイザック</td>
+        <td class="mono">GD02-013</td>
+        <td>Blue</td>
+        <td class="num">13.9%</td>
+        <td class="num">2.90</td>
+      </tr>
+      <tr>
+        <td class="num">35</td>
+        <td>パーフェクトストライクガンダム</td>
+        <td class="mono">GD01-068</td>
+        <td>White</td>
+        <td class="num">13.9%</td>
+        <td class="num">2.20</td>
+      </tr>
+      <tr>
+        <td class="num">36</td>
+        <td>バナージ・リンクス</td>
+        <td class="mono">GD01-088</td>
+        <td>Blue</td>
+        <td class="num">12.5%</td>
+        <td class="num">3.89</td>
+      </tr>
+      <tr>
+        <td class="num">37</td>
+        <td>旺盛な好奇心</td>
+        <td class="mono">GD03-101</td>
+        <td>Blue</td>
+        <td class="num">12.5%</td>
+        <td class="num">3.89</td>
+      </tr>
+      <tr>
+        <td class="num">38</td>
+        <td>レウルーラ</td>
+        <td class="mono">ST03-015</td>
+        <td>Red</td>
+        <td class="num">12.5%</td>
+        <td class="num">3.33</td>
+      </tr>
+      <tr>
+        <td class="num">39</td>
+        <td>クサナギ</td>
+        <td class="mono">GD01-129</td>
+        <td>White</td>
+        <td class="num">12.5%</td>
+        <td class="num">3.22</td>
+      </tr>
+      <tr>
+        <td class="num">40</td>
+        <td>ソードストライクガンダム</td>
+        <td class="mono">GD01-073</td>
+        <td>White</td>
+        <td class="num">12.5%</td>
+        <td class="num">2.56</td>
+      </tr>
+      <tr>
+        <td class="num">41</td>
+        <td>フリーダムガンダム</td>
+        <td class="mono">ST09-004</td>
+        <td>White</td>
+        <td class="num">12.5%</td>
+        <td class="num">1.56</td>
+      </tr>
+      <tr>
+        <td class="num">42</td>
+        <td>ウイングガンダムゼロ</td>
+        <td class="mono">GD01-024</td>
+        <td>Green</td>
+        <td class="num">11.1%</td>
+        <td class="num">3.63</td>
+      </tr>
+      <tr>
+        <td class="num">43</td>
+        <td>フルアーマー・ユニコーンガンダム（ユニコーンモード）</td>
+        <td class="mono">GD03-016</td>
+        <td>Blue</td>
+        <td class="num">11.1%</td>
+        <td class="num">3.63</td>
+      </tr>
+      <tr>
+        <td class="num">44</td>
+        <td>ボリノーク・サマーン</td>
+        <td class="mono">GD03-008</td>
+        <td>Blue</td>
+        <td class="num">11.1%</td>
+        <td class="num">3.00</td>
+      </tr>
+      <tr>
+        <td class="num">45</td>
+        <td>ウイングガンダム</td>
+        <td class="mono">ST02-001</td>
+        <td>Green</td>
+        <td class="num">9.7%</td>
+        <td class="num">4.00</td>
+      </tr>
+      <tr>
+        <td class="num">46</td>
+        <td>ヒイロ・ユイ</td>
+        <td class="mono">ST02-010</td>
+        <td>Green</td>
+        <td class="num">9.7%</td>
+        <td class="num">3.86</td>
+      </tr>
+      <tr>
+        <td class="num">47</td>
+        <td>ザクⅡ</td>
+        <td class="mono">ST03-008</td>
+        <td>Green</td>
+        <td class="num">9.7%</td>
+        <td class="num">3.86</td>
+      </tr>
+      <tr>
+        <td class="num">48</td>
+        <td>ピースミリオン</td>
+        <td class="mono">GD03-125</td>
+        <td>Green</td>
+        <td class="num">9.7%</td>
+        <td class="num">2.86</td>
+      </tr>
+      <tr>
+        <td class="num">49</td>
+        <td>ミネルバ</td>
+        <td class="mono">ST09-010</td>
+        <td>Purple</td>
+        <td class="num">9.7%</td>
+        <td class="num">2.86</td>
+      </tr>
+      <tr>
+        <td class="num">50</td>
+        <td>0ガンダム</td>
+        <td class="mono">GD03-063</td>
+        <td>Purple</td>
+        <td class="num">9.7%</td>
+        <td class="num">2.71</td>
+      </tr>
+      </tbody>
+    </table>
+  </details>
+
+  <h2>Top 16 Deck Lists</h2>
+
+  <details class="top16-block">
+    <summary>Top 16 Deck Lists (anonymized, randomized order)</summary>
+    <p class="note-p">The following 16 deck lists are from the top placings, but presented in randomized order without ranking numbers or player identifiers. Deck labels (A&ndash;P) do not correspond to placement.</p>
+
+    <details class="deck-list-block">
+      <summary>Deck A &mdash; Blue/Purple</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>リゼル</td>
+            <td class="mono">GD01-018</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ハイザック</td>
+            <td class="mono">GD02-013</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダム・グシオンリベイク</td>
+            <td class="mono">GD02-055</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ジム</td>
+            <td class="mono">ST01-005</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>グレイズ改</td>
+            <td class="mono">ST05-004</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck B &mdash; Blue/White</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">2</td>
+            <td>パーフェクトストライクガンダム</td>
+            <td class="mono">GD01-068</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ジ・O</td>
+            <td class="mono">GD03-002</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>メッサーラ</td>
+            <td class="mono">GD03-003</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ボリノーク・サマーン</td>
+            <td class="mono">GD03-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>パプテマス・シロッコ</td>
+            <td class="mono">GD03-084</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>予期せぬ出来事</td>
+            <td class="mono">ST01-014</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>クサナギ</td>
+            <td class="mono">GD01-129</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck C &mdash; Blue/Purple</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>0ガンダム</td>
+            <td class="mono">GD03-063</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ジム</td>
+            <td class="mono">ST01-005</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>グレイズ改</td>
+            <td class="mono">ST05-004</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>致命の一撃</td>
+            <td class="mono">ST05-014</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ジャイアントキリング</td>
+            <td class="mono">ST09-009</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck D &mdash; Green/Purple</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">4</td>
+            <td>ウイングガンダムゼロ</td>
+            <td class="mono">GD01-024</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・グシオンリベイク</td>
+            <td class="mono">GD02-055</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>流星号（グレイズ改弐）</td>
+            <td class="mono">GD02-058</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトスルプス</td>
+            <td class="mono">GD03-050</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダム・グシオンリベイクフルシティ</td>
+            <td class="mono">GD03-053</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>漏影</td>
+            <td class="mono">GD03-067</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダム・バルバトス（第4形態）</td>
+            <td class="mono">ST05-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>グレイズ改</td>
+            <td class="mono">ST05-004</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ゼハート・ガレット</td>
+            <td class="mono">GD03-094</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>決意の眼差し</td>
+            <td class="mono">GD03-114</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>イサリビ</td>
+            <td class="mono">ST05-015</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ミネルバ</td>
+            <td class="mono">ST09-010</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck E &mdash; Green/White</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">4</td>
+            <td>ウイングガンダムゼロ</td>
+            <td class="mono">GD01-024</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ソードストライクガンダム</td>
+            <td class="mono">GD01-073</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>アルトロンガンダム</td>
+            <td class="mono">GD03-018</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ウイングガンダム</td>
+            <td class="mono">ST02-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>張五飛</td>
+            <td class="mono">GD01-091</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ヒイロ・ユイ</td>
+            <td class="mono">ST02-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>予期せぬ出来事</td>
+            <td class="mono">ST01-014</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ピースミリオン</td>
+            <td class="mono">GD03-125</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck F &mdash; Blue/Red</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">3</td>
+            <td>ユニコーンガンダム2号機 バンシィ（デストロイモード）</td>
+            <td class="mono">GD01-003</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>リゼル</td>
+            <td class="mono">GD01-018</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-044</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ザク・マリナー</td>
+            <td class="mono">GD01-060</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>セイラ専用軽キャノン</td>
+            <td class="mono">GD02-046</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>メッサーF02型 マインレイヤー</td>
+            <td class="mono">ST08-005</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>マリーダ・クルス</td>
+            <td class="mono">GD01-093</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>エースの戦い</td>
+            <td class="mono">GD01-111</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>旺盛な好奇心</td>
+            <td class="mono">GD03-101</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>格闘戦</td>
+            <td class="mono">ST03-013</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck G &mdash; Blue/Purple</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダム</td>
+            <td class="mono">GD01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>リゼル</td>
+            <td class="mono">GD01-018</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ジム</td>
+            <td class="mono">ST01-005</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>グレイズ改</td>
+            <td class="mono">ST05-004</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ミネルバ</td>
+            <td class="mono">ST09-010</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck H &mdash; Blue/White</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">3</td>
+            <td>パーフェクトストライクガンダム</td>
+            <td class="mono">GD01-068</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ジ・O</td>
+            <td class="mono">GD03-002</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>メッサーラ</td>
+            <td class="mono">GD03-003</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>パプテマス・シロッコ</td>
+            <td class="mono">GD03-084</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>包囲戦術</td>
+            <td class="mono">ST02-014</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>クサナギ</td>
+            <td class="mono">GD01-129</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck I &mdash; White/Purple</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">3</td>
+            <td>ソードストライクガンダム</td>
+            <td class="mono">GD01-073</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>インパルスガンダム</td>
+            <td class="mono">ST09-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>フォースインパルスガンダム</td>
+            <td class="mono">ST09-002</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>フリーダムガンダム</td>
+            <td class="mono">ST09-004</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ソードインパルスガンダム</td>
+            <td class="mono">ST09-006</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ブラストインパルスガンダム</td>
+            <td class="mono">ST09-007</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>シン・アスカ</td>
+            <td class="mono">ST09-008</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>目覚める力</td>
+            <td class="mono">GD02-110</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>エンデュミオンの鷹</td>
+            <td class="mono">ST04-013</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ミネルバ</td>
+            <td class="mono">ST09-010</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck J &mdash; Blue/Red</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">2</td>
+            <td>ユニコーンガンダム2号機 バンシィ（デストロイモード）</td>
+            <td class="mono">GD01-003</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-044</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>マリーダ・クルス</td>
+            <td class="mono">GD01-093</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>エースの戦い</td>
+            <td class="mono">GD01-111</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>旺盛な好奇心</td>
+            <td class="mono">GD03-101</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>戦技の向上</td>
+            <td class="mono">GD03-109</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>格闘戦</td>
+            <td class="mono">ST03-013</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>レウルーラ</td>
+            <td class="mono">ST03-015</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck K &mdash; Blue/Red</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">2</td>
+            <td>ユニコーンガンダム2号機 バンシィ（デストロイモード）</td>
+            <td class="mono">GD01-003</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-044</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>セイラ専用軽キャノン</td>
+            <td class="mono">GD02-046</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>Ξガンダム</td>
+            <td class="mono">ST08-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>Ξガンダム</td>
+            <td class="mono">ST08-002</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>メッサーF02型 マインレイヤー</td>
+            <td class="mono">ST08-005</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>マリーダ・クルス</td>
+            <td class="mono">GD01-093</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ハサウェイ・ノア</td>
+            <td class="mono">ST08-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>エースの戦い</td>
+            <td class="mono">GD01-111</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>戦技の向上</td>
+            <td class="mono">GD03-109</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>格闘戦</td>
+            <td class="mono">ST03-013</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>レウルーラ</td>
+            <td class="mono">ST03-015</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck L &mdash; White/Purple</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">2</td>
+            <td>ソードストライクガンダム</td>
+            <td class="mono">GD01-073</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダム・グシオンリベイク</td>
+            <td class="mono">GD02-055</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンダム・バルバトス（第4形態）</td>
+            <td class="mono">ST05-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>百錬</td>
+            <td class="mono">ST05-006</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>インパルスガンダム</td>
+            <td class="mono">ST09-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>フォースインパルスガンダム</td>
+            <td class="mono">ST09-002</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ソードインパルスガンダム</td>
+            <td class="mono">ST09-006</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ブラストインパルスガンダム</td>
+            <td class="mono">ST09-007</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ゼハート・ガレット</td>
+            <td class="mono">GD03-094</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>シン・アスカ</td>
+            <td class="mono">ST09-008</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>予期せぬ出来事</td>
+            <td class="mono">ST01-014</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>アークエンジェル</td>
+            <td class="mono">ST04-015</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>イサリビ</td>
+            <td class="mono">ST05-015</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ミネルバ</td>
+            <td class="mono">ST09-010</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck M &mdash; Blue/White</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">2</td>
+            <td>パーフェクトストライクガンダム</td>
+            <td class="mono">GD01-068</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・ルブリス</td>
+            <td class="mono">GD01-086</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>リック・ディアス</td>
+            <td class="mono">GD02-079</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ジ・O</td>
+            <td class="mono">GD03-002</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>メッサーラ</td>
+            <td class="mono">GD03-003</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ボリノーク・サマーン</td>
+            <td class="mono">GD03-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>エールストライクガンダム</td>
+            <td class="mono">ST04-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>パプテマス・シロッコ</td>
+            <td class="mono">GD03-084</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>キラ・ヤマト</td>
+            <td class="mono">ST04-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>予期せぬ出来事</td>
+            <td class="mono">ST01-014</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ストライカーパック</td>
+            <td class="mono">ST04-012</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>クサナギ</td>
+            <td class="mono">GD01-129</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck N &mdash; Blue/Purple</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>リゼル</td>
+            <td class="mono">GD01-018</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>アンクシャ</td>
+            <td class="mono">GD01-020</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ハイザック</td>
+            <td class="mono">GD02-013</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトス（第1形態）</td>
+            <td class="mono">GD02-054</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム・バルバトスアダプト</td>
+            <td class="mono">GD03-056</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ジム</td>
+            <td class="mono">ST01-005</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>グレイズ改</td>
+            <td class="mono">ST05-004</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>三日月・オーガス</td>
+            <td class="mono">ST05-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>ジャイアントキリング</td>
+            <td class="mono">ST09-009</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td>BASE</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>コルシカ基地</td>
+            <td class="mono">ST02-016</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck O &mdash; Blue/Red</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">2</td>
+            <td>ユニコーンガンダム2号機 バンシィ（デストロイモード）</td>
+            <td class="mono">GD01-003</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>ガンタンク</td>
+            <td class="mono">GD01-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>クシャトリヤ</td>
+            <td class="mono">GD01-044</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ガンダムNT-1</td>
+            <td class="mono">GD03-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>GQuuuuuuX（オメガ・サイコミュ起動時）</td>
+            <td class="mono">GD03-034</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ガンダム</td>
+            <td class="mono">ST01-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>シナンジュ</td>
+            <td class="mono">ST03-001</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>マリーダ・クルス</td>
+            <td class="mono">GD01-093</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>アムロ・レイ</td>
+            <td class="mono">ST01-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>フル・フロンタル</td>
+            <td class="mono">ST03-010</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>覚悟の表れ</td>
+            <td class="mono">GD01-100</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>エースの戦い</td>
+            <td class="mono">GD01-111</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>オールレンジ攻撃</td>
+            <td class="mono">GD02-107</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>旺盛な好奇心</td>
+            <td class="mono">GD03-101</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>戦技の向上</td>
+            <td class="mono">GD03-109</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>格闘戦</td>
+            <td class="mono">ST03-013</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ホワイトベース</td>
+            <td class="mono">ST01-015</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+
+    <details class="deck-list-block">
+      <summary>Deck P &mdash; Green/White</summary>
+      <table class="decklist-table">
+        <thead>
+          <tr><th class="num">Count</th><th>Card</th><th>Card ID</th><th>Type</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="num">4</td>
+            <td>シャア専用ゲルググ</td>
+            <td class="mono">GD01-023</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ザクⅡ（シャア・アズナブル機）</td>
+            <td class="mono">GD01-026</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">3</td>
+            <td>ビグ・ザム</td>
+            <td class="mono">GD01-027</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ゲルググ</td>
+            <td class="mono">GD01-031</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ザクⅡ</td>
+            <td class="mono">GD01-035</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>百式</td>
+            <td class="mono">GD02-072</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ザクⅡ（シャア・アズナブル機）</td>
+            <td class="mono">ST03-006</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ザクⅡ</td>
+            <td class="mono">ST03-008</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">1</td>
+            <td>グフ</td>
+            <td class="mono">ST03-009</td>
+            <td>UNIT</td>
+          </tr>
+          <tr>
+            <td class="num">2</td>
+            <td>マ・クベ</td>
+            <td class="mono">GD01-092</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>クワトロ・バジーナ</td>
+            <td class="mono">GD02-098</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>シャア・アズナブル</td>
+            <td class="mono">ST03-011</td>
+            <td>PILOT</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>溢れる慈愛</td>
+            <td class="mono">GD01-118</td>
+            <td>COMMAND</td>
+          </tr>
+          <tr>
+            <td class="num">4</td>
+            <td>ザンジバル</td>
+            <td class="mono">GD01-125</td>
+            <td>BASE</td>
+          </tr>
+        </tbody>
+      </table>
+    </details>
+  </details>
+
+  <div class="footer-note">
+    <hr>
+    <p>
+      <strong>Note:</strong> This page is displayed in English for international readers.<br>
+      Our main site content is normally in Japanese.
+    </p>
+    <p>
+      本ページは海外読者向けに英語で表記しています。通常のサイトコンテンツは日本語で表記を行う想定です。
+    </p>
+  </div>
+
+</main>
+</body>
+</html>
