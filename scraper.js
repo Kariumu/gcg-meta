@@ -713,7 +713,18 @@ async function main() {
   }
 }
 
-main().catch(err => {
-  console.error('致命的エラー:', err.message);
-  process.exit(1);
-});
+// モジュールとして読み込まれた場合は関数のみ公開（差分マージ時の集計再生成で利用）
+if (require.main === module) {
+  main().catch(err => {
+    console.error('致命的エラー:', err.message);
+    process.exit(1);
+  });
+}
+
+module.exports = {
+  generateSummary,
+  generateMissingData,
+  getDeckColors,
+  getRegion,
+  saveData,
+};
