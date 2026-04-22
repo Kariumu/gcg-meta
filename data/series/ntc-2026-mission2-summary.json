@@ -1,0 +1,277 @@
+{
+  "id": "6226",
+  "slug": "ntc-2026-mission2",
+  "official_name": "ニュータイプチャレンジ 2026 MISSION2（3月開催）",
+  "display_name": "ニュータイプチャレンジ 2026 MISSION2",
+  "short_name": "NTC MISSION2",
+  "subtitle": "3月開催",
+  "type": "ntc",
+  "year": 2026,
+  "month": 3,
+  "start_date": "2026-03-01",
+  "end_date": "2026-03-31",
+  "status": "completed",
+  "description": "2026年3月に全国各地で開催された公式トーナメント「ニュータイプチャレンジ」の3月分（MISSION2）。298店舗で2,368選手が参加し、1,190デッキが記録されました。",
+  "stats": {
+    "event_count": 298,
+    "total_result_entries": 2835,
+    "total_decks": 1190,
+    "by_region": {
+      "東北": {
+        "events": 16,
+        "decks": 64
+      },
+      "中国": {
+        "events": 24,
+        "decks": 95
+      },
+      "中部": {
+        "events": 62,
+        "decks": 248
+      },
+      "関東": {
+        "events": 91,
+        "decks": 363
+      },
+      "北海道": {
+        "events": 4,
+        "decks": 16
+      },
+      "関西": {
+        "events": 50,
+        "decks": 200
+      },
+      "九州": {
+        "events": 40,
+        "decks": 160
+      },
+      "四国": {
+        "events": 11,
+        "decks": 44
+      }
+    },
+    "deck_type_ranking": [
+      {
+        "type_key": "Blue+Purple",
+        "colors": [
+          "Blue",
+          "Purple"
+        ],
+        "label": "青/紫",
+        "count": 401,
+        "share": 33.7
+      },
+      {
+        "type_key": "Green+White",
+        "colors": [
+          "Green",
+          "White"
+        ],
+        "label": "緑/白",
+        "count": 193,
+        "share": 16.2
+      },
+      {
+        "type_key": "Red+White",
+        "colors": [
+          "Red",
+          "White"
+        ],
+        "label": "赤/白",
+        "count": 165,
+        "share": 13.9
+      },
+      {
+        "type_key": "Blue+Green",
+        "colors": [
+          "Blue",
+          "Green"
+        ],
+        "label": "青/緑",
+        "count": 127,
+        "share": 10.7
+      },
+      {
+        "type_key": "Blue+White",
+        "colors": [
+          "Blue",
+          "White"
+        ],
+        "label": "青/白",
+        "count": 107,
+        "share": 9
+      },
+      {
+        "type_key": "Blue+Red",
+        "colors": [
+          "Blue",
+          "Red"
+        ],
+        "label": "青/赤",
+        "count": 97,
+        "share": 8.2
+      },
+      {
+        "type_key": "Red+Purple",
+        "colors": [
+          "Red",
+          "Purple"
+        ],
+        "label": "赤/紫",
+        "count": 40,
+        "share": 3.4
+      },
+      {
+        "type_key": "Red+Green",
+        "colors": [
+          "Red",
+          "Green"
+        ],
+        "label": "赤/緑",
+        "count": 26,
+        "share": 2.2
+      },
+      {
+        "type_key": "White+Purple",
+        "colors": [
+          "White",
+          "Purple"
+        ],
+        "label": "白/紫",
+        "count": 19,
+        "share": 1.6
+      },
+      {
+        "type_key": "Green+Purple",
+        "colors": [
+          "Green",
+          "Purple"
+        ],
+        "label": "緑/紫",
+        "count": 14,
+        "share": 1.2
+      },
+      {
+        "type_key": "Purple",
+        "colors": [
+          "Purple"
+        ],
+        "label": "紫",
+        "count": 1,
+        "share": 0.1
+      }
+    ],
+    "winning_decks": [
+      {
+        "type_key": "Blue+Purple",
+        "colors": [
+          "Blue",
+          "Purple"
+        ],
+        "label": "青/紫",
+        "wins": 103,
+        "count": 401,
+        "win_rate": 25.7
+      },
+      {
+        "type_key": "Green+White",
+        "colors": [
+          "Green",
+          "White"
+        ],
+        "label": "緑/白",
+        "wins": 48,
+        "count": 193,
+        "win_rate": 24.9
+      },
+      {
+        "type_key": "Red+White",
+        "colors": [
+          "Red",
+          "White"
+        ],
+        "label": "赤/白",
+        "wins": 45,
+        "count": 165,
+        "win_rate": 27.3
+      },
+      {
+        "type_key": "Blue+Green",
+        "colors": [
+          "Blue",
+          "Green"
+        ],
+        "label": "青/緑",
+        "wins": 38,
+        "count": 127,
+        "win_rate": 29.9
+      },
+      {
+        "type_key": "Blue+White",
+        "colors": [
+          "Blue",
+          "White"
+        ],
+        "label": "青/白",
+        "wins": 22,
+        "count": 107,
+        "win_rate": 20.6
+      },
+      {
+        "type_key": "Blue+Red",
+        "colors": [
+          "Blue",
+          "Red"
+        ],
+        "label": "青/赤",
+        "wins": 19,
+        "count": 97,
+        "win_rate": 19.6
+      },
+      {
+        "type_key": "Red+Purple",
+        "colors": [
+          "Red",
+          "Purple"
+        ],
+        "label": "赤/紫",
+        "wins": 12,
+        "count": 40,
+        "win_rate": 30
+      },
+      {
+        "type_key": "Green+Purple",
+        "colors": [
+          "Green",
+          "Purple"
+        ],
+        "label": "緑/紫",
+        "wins": 4,
+        "count": 14,
+        "win_rate": 28.6
+      },
+      {
+        "type_key": "Red+Green",
+        "colors": [
+          "Red",
+          "Green"
+        ],
+        "label": "赤/緑",
+        "wins": 3,
+        "count": 26,
+        "win_rate": 11.5
+      },
+      {
+        "type_key": "White+Purple",
+        "colors": [
+          "White",
+          "Purple"
+        ],
+        "label": "白/紫",
+        "wins": 2,
+        "count": 19,
+        "win_rate": 10.5
+      }
+    ]
+  }
+}
