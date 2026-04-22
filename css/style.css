@@ -1509,3 +1509,410 @@ a.section-badge:hover {
   .series-rank-table th,
   .series-rank-table td { padding: 6px 8px; font-size: 12px; }
 }
+
+/* ===================================================================
+ * Phase 4 — Task H: トップページ（/）専用スタイル
+ * （ヒーロー / 店舗検索 / サイトコンテンツ導線 など）
+ * =================================================================== */
+
+/* ---- シリーズ ヒーロー ---- */
+.series-hero-section {
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  margin-bottom: 32px;
+}
+.series-hero-loading,
+.series-hero-empty {
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 24px 0;
+  text-align: center;
+}
+.series-hero-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.series-hero-headline {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.series-hero-badges {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.series-hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 4px 0 6px;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+.series-hero-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 6px;
+}
+.series-hero-period {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+.series-hero-desc {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.series-hero-stats {
+  display: flex;
+  gap: 24px;
+  margin: 16px 0 20px;
+  flex-wrap: wrap;
+}
+.series-hero-stat {
+  min-width: 96px;
+}
+.series-hero-stat-value {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.series-hero-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+.series-hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.series-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 18px;
+  background: var(--accent);
+  color: #0a0e14;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: filter var(--transition-fast, 0.15s);
+}
+.series-hero-cta:hover {
+  filter: brightness(1.08);
+}
+.series-hero-cta-sub {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 12px;
+  transition: border-color var(--transition-fast, 0.15s), background var(--transition-fast, 0.15s);
+}
+.series-hero-cta-sub:hover {
+  border-color: var(--accent);
+  background: var(--bg-card);
+}
+
+/* ---- ホーム：hero-stats（ダッシュボード統計を流用） ---- */
+.home-hero-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+}
+.home-hero-stat {
+  min-width: 100px;
+  text-align: center;
+}
+.home-hero-stat-value {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.home-hero-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+/* ---- 店舗検索セクション（トップ用） ---- */
+.home-store-search {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+.home-store-search-inner {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.home-store-search-inner > div:first-child { flex: 1 1 240px; }
+.home-store-search-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--text-primary);
+}
+.home-store-search-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+.home-store-search-sub a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.home-store-search-sub a:hover { text-decoration: underline; }
+.home-store-search-box {
+  position: relative;
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+.home-store-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color var(--transition-fast, 0.15s);
+}
+.home-store-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.home-store-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  z-index: 50;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.home-store-suggestion {
+  display: block;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background var(--transition-fast, 0.15s);
+}
+.home-store-suggestion:last-child { border-bottom: 0; }
+.home-store-suggestion:hover,
+.home-store-suggestion.is-active {
+  background: var(--bg-card);
+}
+.home-store-suggest-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+.home-store-suggest-sub {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.home-store-empty {
+  padding: 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ---- サイトコンテンツ導線（カードグリッド） ---- */
+.site-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.site-nav-card {
+  display: block;
+  padding: 16px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: border-color var(--transition-fast, 0.15s), background var(--transition-fast, 0.15s);
+}
+.site-nav-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+.site-nav-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.site-nav-card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ---- モバイル調整 ---- */
+@media (max-width: 640px) {
+  .series-hero-section { padding: 20px 18px; }
+  .series-hero-title { font-size: 22px; }
+  .series-hero-stats { gap: 16px; }
+  .home-store-search-inner { gap: 12px; }
+  .site-nav-grid { grid-template-columns: 1fr; }
+}
+
+/* ===================================================================
+ * Phase 4 — Task I: /events.html 用（シリーズセレクタ / イベントカード上のシリーズバッジ）
+ * =================================================================== */
+.series-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px;
+}
+.series-tab {
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--transition-fast, 0.15s), color var(--transition-fast, 0.15s), background var(--transition-fast, 0.15s);
+  font-family: inherit;
+}
+.series-tab:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.series-tab.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0e14;
+  font-weight: 600;
+}
+.event-card-series {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+/* ===================================================================
+ * Phase 4 — Task K: /meta.html 専用（リードテキスト / events誘導ノート）
+ * =================================================================== */
+.page-lead {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.page-lead a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.page-lead a:hover { text-decoration: underline; }
+
+.event-list-redirect {
+  padding: 18px 20px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+.event-list-redirect-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.event-list-redirect-title a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.event-list-redirect-title a:hover { text-decoration: underline; }
+.event-list-redirect-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ===================================================================
+ * Phase 4 — Task U: /store.html 結果データ統合
+ * =================================================================== */
+.store-results-section {
+  margin-top: 24px;
+}
+.store-winner-trends {
+  margin: 8px 0 16px;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.store-winner-trends-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+.store-winner-trends-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.store-winner-trend-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+.store-winner-trend-colors { display: inline-flex; gap: 2px; }
+.store-winner-trend-label {
+  flex: 1;
+  color: var(--text-primary);
+}
+.store-winner-trend-count {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.store-events-history {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}

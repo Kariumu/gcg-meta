@@ -35,11 +35,16 @@
   <div id="header"></div>
 
   <main class="container">
+    <nav id="breadcrumb-container" aria-label="パンくずリスト"></nav>
     <div class="section-header">
       <h1 class="section-title">環境分析</h1>
       <span class="section-badge" id="meta-info">TOP4 集計</span>
     </div>
+    <p class="page-lead">カード採用率・デッキタイプ分布・地域別メタを分析します。大会結果の全件一覧は <a href="events.html">イベント一覧</a> をご覧ください。</p>
     <div id="share-buttons"></div>
+
+    <!-- シリーズ絞り込み（最上位） -->
+    <div id="series-selector-area" class="series-selector" aria-label="シリーズ絞り込み"></div>
 
     <!-- 日付フィルター -->
     <div id="date-filter-area" style="margin-bottom:12px"></div>
@@ -186,23 +191,18 @@
       </div>
     </details>
 
-    <!-- イベント一覧 -->
-    <details class="collapsible-section mb-32" id="event-list-section" open>
-      <summary class="section-header collapsible-toggle">
-        <h2 class="section-title">イベント一覧</h2>
-        <span class="toggle-icon"></span>
-      </summary>
-      <div id="event-list-content" style="overflow-x:auto">
-        <div class="loading">データを読み込み中</div>
-      </div>
-    </details>
+    <!-- イベント一覧は /events.html に集約（役割明確化） -->
+    <div class="event-list-redirect mb-32" role="note">
+      <div class="event-list-redirect-title">イベント一覧は <a href="events.html">/events.html</a> に移動しました</div>
+      <div class="event-list-redirect-desc">全大会の日付・店舗・シリーズ絞り込み付き一覧は「イベント一覧」ページでご覧いただけます。</div>
+    </div>
     <noscript><h2>環境分析データ</h2><h3>デッキタイプ別シェア</h3><ul><li>青/紫：401デッキ（シェア33.7%、優勝103回、優勝率25.7%、平均順位2.5）</li><li>緑/白：193デッキ（シェア16.2%、優勝48回、優勝率24.9%、平均順位2.5）</li><li>赤/白：165デッキ（シェア13.9%、優勝45回、優勝率27.3%、平均順位2.5）</li><li>青/緑：127デッキ（シェア10.7%、優勝38回、優勝率29.9%、平均順位2.4）</li><li>青/白：107デッキ（シェア9%、優勝22回、優勝率20.6%、平均順位2.6）</li><li>青/赤：97デッキ（シェア8.2%、優勝19回、優勝率19.6%、平均順位2.5）</li><li>赤/紫：40デッキ（シェア3.4%、優勝12回、優勝率30%、平均順位2.3）</li><li>赤/緑：26デッキ（シェア2.2%、優勝3回、優勝率11.5%、平均順位2.8）</li><li>白/紫：19デッキ（シェア1.6%、優勝2回、優勝率10.5%、平均順位2.4）</li><li>緑/紫：14デッキ（シェア1.2%、優勝4回、優勝率28.6%、平均順位2.4）</li><li>紫：1デッキ（シェア0.1%、優勝0回、優勝率0%、平均順位3）</li></ul><h3>カード採用率ランキング（TOP30）</h3><ol><li><a href="cards/ST01-010/">ST01-010</a>：採用率59.3%（706デッキ、優勝175回、平均4枚）</li><li><a href="cards/ST01-001/">ST01-001</a>：採用率58.3%（694デッキ、優勝168回、平均3.9枚）</li><li><a href="cards/GD01-100/">GD01-100</a>：採用率49%（583デッキ、優勝144回、平均2.2枚）</li><li><a href="cards/ST02-016/">ST02-016</a>：採用率47.5%（565デッキ、優勝149回、平均4枚）</li><li><a href="cards/ST05-010/">ST05-010</a>：採用率39.8%（474デッキ、優勝121回、平均4枚）</li><li><a href="cards/GD03-056/">GD03-056</a>：採用率39.7%（473デッキ、優勝121回、平均4枚）</li><li><a href="cards/GD02-054/">GD02-054</a>：採用率39.5%（470デッキ、優勝120回、平均4枚）</li><li><a href="cards/GD01-118/">GD01-118</a>：採用率38%（452デッキ、優勝112回、平均3.7枚）</li><li><a href="cards/GD01-086/">GD01-086</a>：採用率37.6%（448デッキ、優勝110回、平均4枚）</li><li><a href="cards/GD01-008/">GD01-008</a>：採用率36.9%（439デッキ、優勝118回、平均3.7枚）</li><li><a href="cards/GD01-020/">GD01-020</a>：採用率36.8%（438デッキ、優勝109回、平均3.4枚）</li><li><a href="cards/ST04-001/">ST04-001</a>：採用率36.7%（437デッキ、優勝111回、平均3.9枚）</li><li><a href="cards/ST05-004/">ST05-004</a>：採用率36.1%（430デッキ、優勝107回、平均3.9枚）</li><li><a href="cards/ST05-006/">ST05-006</a>：採用率36%（428デッキ、優勝105回、平均3.8枚）</li><li><a href="cards/ST04-010/">ST04-010</a>：採用率35.8%（426デッキ、優勝108回、平均3.9枚）</li><li><a href="cards/ST01-005/">ST01-005</a>：採用率35.8%（426デッキ、優勝106回、平均3.6枚）</li><li><a href="cards/GD02-079/">GD02-079</a>：採用率31.8%（379デッキ、優勝93回、平均3.2枚）</li><li><a href="cards/ST04-012/">ST04-012</a>：採用率29.2%（348デッキ、優勝81回、平均3.2枚）</li><li><a href="cards/GD02-055/">GD02-055</a>：採用率28.1%（334デッキ、優勝92回、平均3.1枚）</li><li><a href="cards/ST03-013/">ST03-013</a>：採用率25.8%（307デッキ、優勝76回、平均4枚）</li><li><a href="cards/ST05-014/">ST05-014</a>：採用率25.1%（299デッキ、優勝74回、平均2.4枚）</li><li><a href="cards/GD01-073/">GD01-073</a>：採用率25%（297デッキ、優勝80回、平均3枚）</li><li><a href="cards/GD02-013/">GD02-013</a>：採用率25%（297デッキ、優勝70回、平均3.1枚）</li><li><a href="cards/GD01-066/">GD01-066</a>：採用率24.7%（294デッキ、優勝79回、平均2.8枚）</li><li><a href="cards/GD03-034/">GD03-034</a>：採用率23.7%（282デッキ、優勝72回、平均2.8枚）</li><li><a href="cards/GD01-018/">GD01-018</a>：採用率21.7%（258デッキ、優勝56回、平均2.7枚）</li><li><a href="cards/GD03-109/">GD03-109</a>：採用率21%（250デッキ、優勝54回、平均3.9枚）</li><li><a href="cards/GD03-001/">GD03-001</a>：採用率21%（250デッキ、優勝65回、平均1.5枚）</li><li><a href="cards/GD01-024/">GD01-024</a>：採用率18.6%（221デッキ、優勝55回、平均3.8枚）</li><li><a href="cards/ST02-001/">ST02-001</a>：採用率17.8%（212デッキ、優勝53回、平均4枚）</li></ol><h3>地域別メタ</h3><ul><li>関東：91イベント・363デッキ（上位: 青/紫、緑/白、赤/白）</li><li>中部：62イベント・248デッキ（上位: 青/紫、緑/白、赤/白）</li><li>関西：50イベント・200デッキ（上位: 青/紫、緑/白、赤/白）</li><li>九州：40イベント・160デッキ（上位: 青/紫、赤/白、青/赤）</li><li>中国：24イベント・95デッキ（上位: 青/紫、緑/白、青/緑）</li><li>東北：16イベント・64デッキ（上位: 青/紫、赤/白、緑/白）</li><li>四国：11イベント・44デッキ（上位: 青/紫、青/赤、青/白）</li><li>北海道：4イベント・16デッキ（上位: 青/紫、緑/白、青/白）</li></ul></noscript>
     <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"><h2>環境分析データ</h2><h3>デッキタイプ別シェア</h3><ul><li>青/紫：401デッキ（シェア33.7%、優勝103回、優勝率25.7%、平均順位2.5）</li><li>緑/白：193デッキ（シェア16.2%、優勝48回、優勝率24.9%、平均順位2.5）</li><li>赤/白：165デッキ（シェア13.9%、優勝45回、優勝率27.3%、平均順位2.5）</li><li>青/緑：127デッキ（シェア10.7%、優勝38回、優勝率29.9%、平均順位2.4）</li><li>青/白：107デッキ（シェア9%、優勝22回、優勝率20.6%、平均順位2.6）</li><li>青/赤：97デッキ（シェア8.2%、優勝19回、優勝率19.6%、平均順位2.5）</li><li>赤/紫：40デッキ（シェア3.4%、優勝12回、優勝率30%、平均順位2.3）</li><li>赤/緑：26デッキ（シェア2.2%、優勝3回、優勝率11.5%、平均順位2.8）</li><li>白/紫：19デッキ（シェア1.6%、優勝2回、優勝率10.5%、平均順位2.4）</li><li>緑/紫：14デッキ（シェア1.2%、優勝4回、優勝率28.6%、平均順位2.4）</li><li>紫：1デッキ（シェア0.1%、優勝0回、優勝率0%、平均順位3）</li></ul><h3>カード採用率ランキング（TOP30）</h3><ol><li><a href="cards/ST01-010/">ST01-010</a>：採用率59.3%（706デッキ、優勝175回、平均4枚）</li><li><a href="cards/ST01-001/">ST01-001</a>：採用率58.3%（694デッキ、優勝168回、平均3.9枚）</li><li><a href="cards/GD01-100/">GD01-100</a>：採用率49%（583デッキ、優勝144回、平均2.2枚）</li><li><a href="cards/ST02-016/">ST02-016</a>：採用率47.5%（565デッキ、優勝149回、平均4枚）</li><li><a href="cards/ST05-010/">ST05-010</a>：採用率39.8%（474デッキ、優勝121回、平均4枚）</li><li><a href="cards/GD03-056/">GD03-056</a>：採用率39.7%（473デッキ、優勝121回、平均4枚）</li><li><a href="cards/GD02-054/">GD02-054</a>：採用率39.5%（470デッキ、優勝120回、平均4枚）</li><li><a href="cards/GD01-118/">GD01-118</a>：採用率38%（452デッキ、優勝112回、平均3.7枚）</li><li><a href="cards/GD01-086/">GD01-086</a>：採用率37.6%（448デッキ、優勝110回、平均4枚）</li><li><a href="cards/GD01-008/">GD01-008</a>：採用率36.9%（439デッキ、優勝118回、平均3.7枚）</li><li><a href="cards/GD01-020/">GD01-020</a>：採用率36.8%（438デッキ、優勝109回、平均3.4枚）</li><li><a href="cards/ST04-001/">ST04-001</a>：採用率36.7%（437デッキ、優勝111回、平均3.9枚）</li><li><a href="cards/ST05-004/">ST05-004</a>：採用率36.1%（430デッキ、優勝107回、平均3.9枚）</li><li><a href="cards/ST05-006/">ST05-006</a>：採用率36%（428デッキ、優勝105回、平均3.8枚）</li><li><a href="cards/ST04-010/">ST04-010</a>：採用率35.8%（426デッキ、優勝108回、平均3.9枚）</li><li><a href="cards/ST01-005/">ST01-005</a>：採用率35.8%（426デッキ、優勝106回、平均3.6枚）</li><li><a href="cards/GD02-079/">GD02-079</a>：採用率31.8%（379デッキ、優勝93回、平均3.2枚）</li><li><a href="cards/ST04-012/">ST04-012</a>：採用率29.2%（348デッキ、優勝81回、平均3.2枚）</li><li><a href="cards/GD02-055/">GD02-055</a>：採用率28.1%（334デッキ、優勝92回、平均3.1枚）</li><li><a href="cards/ST03-013/">ST03-013</a>：採用率25.8%（307デッキ、優勝76回、平均4枚）</li><li><a href="cards/ST05-014/">ST05-014</a>：採用率25.1%（299デッキ、優勝74回、平均2.4枚）</li><li><a href="cards/GD01-073/">GD01-073</a>：採用率25%（297デッキ、優勝80回、平均3枚）</li><li><a href="cards/GD02-013/">GD02-013</a>：採用率25%（297デッキ、優勝70回、平均3.1枚）</li><li><a href="cards/GD01-066/">GD01-066</a>：採用率24.7%（294デッキ、優勝79回、平均2.8枚）</li><li><a href="cards/GD03-034/">GD03-034</a>：採用率23.7%（282デッキ、優勝72回、平均2.8枚）</li><li><a href="cards/GD01-018/">GD01-018</a>：採用率21.7%（258デッキ、優勝56回、平均2.7枚）</li><li><a href="cards/GD03-109/">GD03-109</a>：採用率21%（250デッキ、優勝54回、平均3.9枚）</li><li><a href="cards/GD03-001/">GD03-001</a>：採用率21%（250デッキ、優勝65回、平均1.5枚）</li><li><a href="cards/GD01-024/">GD01-024</a>：採用率18.6%（221デッキ、優勝55回、平均3.8枚）</li><li><a href="cards/ST02-001/">ST02-001</a>：採用率17.8%（212デッキ、優勝53回、平均4枚）</li></ol><h3>地域別メタ</h3><ul><li>関東：91イベント・363デッキ（上位: 青/紫、緑/白、赤/白）</li><li>中部：62イベント・248デッキ（上位: 青/紫、緑/白、赤/白）</li><li>関西：50イベント・200デッキ（上位: 青/紫、緑/白、赤/白）</li><li>九州：40イベント・160デッキ（上位: 青/紫、赤/白、青/赤）</li><li>中国：24イベント・95デッキ（上位: 青/紫、緑/白、青/緑）</li><li>東北：16イベント・64デッキ（上位: 青/紫、赤/白、緑/白）</li><li>四国：11イベント・44デッキ（上位: 青/紫、青/赤、青/白）</li><li>北海道：4イベント・16デッキ（上位: 青/紫、緑/白、青/白）</li></ul></div>
   </main>
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=8"></script>
+  <script src="js/common.js?v=9"></script>
   <script>
     GCG.init();
 
@@ -217,6 +217,49 @@
     let eventsDataGlobal = null;
     let summaryDataGlobal = null;
     let pieChart = null;
+    let allSeriesMap = {};
+    let currentSeriesId = '';
+
+    function pickDefaultSeries() {
+      var list = Object.values(allSeriesMap || {});
+      if (!list.length) return '';
+      var active = list.filter(function(s){return s.status === 'active';});
+      if (active.length) return active.sort(function(a,b){return (a.start_date||'').localeCompare(b.start_date||'');})[0].id;
+      var upcoming = list.filter(function(s){return s.status === 'upcoming';})
+        .sort(function(a,b){return (a.start_date||'').localeCompare(b.start_date||'');});
+      if (upcoming.length) return upcoming[0].id;
+      var completed = list.filter(function(s){return s.status === 'completed';})
+        .sort(function(a,b){return (b.start_date||'').localeCompare(a.start_date||'');});
+      if (completed.length) return completed[0].id;
+      return '';
+    }
+    function renderSeriesSelector() {
+      var el = document.getElementById('series-selector-area');
+      if (!el) return;
+      var list = Object.values(allSeriesMap || {})
+        .sort(function(a,b){return (b.start_date||'').localeCompare(a.start_date||'');});
+      if (!list.length) { el.innerHTML = ''; return; }
+      var tabs = [];
+      tabs.push('<button type="button" class="series-tab' + (currentSeriesId === '' ? ' is-active' : '') + '" data-sid="">全シリーズ</button>');
+      list.forEach(function(s){
+        var isActive = currentSeriesId === s.id;
+        var label = GCG.escapeHtml(s.short_name || s.display_name || s.id);
+        tabs.push('<button type="button" class="series-tab' + (isActive ? ' is-active' : '') + '" data-sid="' + GCG.escapeHtml(s.id) + '">' + label + '</button>');
+      });
+      el.innerHTML = tabs.join('');
+      el.querySelectorAll('.series-tab').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          currentSeriesId = btn.getAttribute('data-sid') || '';
+          el.querySelectorAll('.series-tab').forEach(function(b){ b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          renderWithFilter();
+          var u = new URL(window.location.href);
+          if (currentSeriesId) u.searchParams.set('series_id', currentSeriesId);
+          else u.searchParams.delete('series_id');
+          window.history.replaceState({}, '', u.toString());
+        });
+      });
+    }
 
     async function loadCardNames() {
       try {
@@ -251,12 +294,20 @@
       return ['Unknown'];
     }
 
-    // イベントデータを日付+地域でフィルターして返す
+    // イベントデータを日付+地域+シリーズでフィルターして返す
     function getFilteredEvents(eventsData, region) {
       let events = eventsData.events;
       // 日付フィルター適用
       if (currentDateStart || currentDateEnd) {
         events = GCG.filterEventsObjByDate(events, currentDateStart, currentDateEnd);
+      }
+      // シリーズフィルター適用
+      if (currentSeriesId) {
+        const sFiltered = {};
+        for (const [key, ev] of Object.entries(events)) {
+          if (String(ev.series_id || '') === currentSeriesId) sFiltered[key] = ev;
+        }
+        events = sFiltered;
       }
       if (!region) return { events: events };
       const filtered = { events: {} };
@@ -440,8 +491,7 @@
         renderRegionSection(regionRanking);
       }
 
-      // イベント一覧も地域フィルター適用
-      renderEventList(filteredEvents);
+      // イベント一覧は /events.html に移動済（Task K で削除）
 
       // Re-select type if available
       if (selectedType) {
@@ -463,9 +513,26 @@
     }
 
     async function init() {
+      // breadcrumb
+      var bcItems = [
+        { name: 'トップ', href: GCG.getBasePath() },
+        { name: '環境分析' }
+      ];
+      document.getElementById('breadcrumb-container').innerHTML = GCG.renderBreadcrumb(bcItems)
+        + GCG.renderBreadcrumbJsonLd(bcItems, 'https://gcg-stats.com/');
+
       await Promise.all([loadCardNames(), loadCardColors()]);
       summaryDataGlobal = await GCG.loadSummary();
       eventsDataGlobal = await GCG.loadEvents();
+      try {
+        const sRes = await fetch(GCG.getBasePath() + 'data/series.json');
+        if (sRes.ok) allSeriesMap = await sRes.json();
+      } catch (_) { allSeriesMap = {}; }
+      var urlParams = new URLSearchParams(window.location.search);
+      var paramSeries = urlParams.get('series_id') || urlParams.get('series');
+      if (paramSeries && allSeriesMap[paramSeries]) currentSeriesId = paramSeries;
+      else currentSeriesId = pickDefaultSeries();
+      renderSeriesSelector();
 
       // 日付フィルター設置
       const defaultRange = GCG.getDefaultDateRange();
@@ -784,50 +851,6 @@
             </div>
           `).join('')}
         </div>`;
-    }
-
-    // イベント一覧
-    function renderEventList(eventsData) {
-      const container = document.getElementById('event-list-content');
-      if (!eventsData || !eventsData.events) {
-        container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">イベントデータがありません</div>';
-        return;
-      }
-
-      const events = Object.values(eventsData.events)
-        .sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-
-      container.innerHTML = `
-        <table class="data-table" style="border-collapse:collapse">
-          <thead>
-            <tr>
-              <th style="width:100px;position:static">日付</th>
-              <th style="position:static">店舗名</th>
-              <th style="position:static">TOP4 デッキカラー</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${events.map(ev => {
-              const top4 = ev.top4_colors || [];
-              const top4Html = top4.length > 0
-                ? top4.sort((a, b) => a.rank - b.rank).map((t, i) => {
-                    const rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
-                    const sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';
-                    return `${sep}<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">
-                      <span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">${rankLabel}</span>
-                      ${GCG.renderColorDots(t.colors)}
-                    </span>`;
-                  }).join('')
-                : '<span style="color:var(--text-muted);font-size:11px">データなし</span>';
-
-              return `<tr style="cursor:pointer" onclick="location.href='events/${ev.event_id}.html'">
-                <td class="text-mono" style="white-space:nowrap">${ev.date || '-'}</td>
-                <td>${GCG.escapeHtml(ev.store || '-')}</td>
-                <td>${top4Html}</td>
-              </tr>`;
-            }).join('')}
-          </tbody>
-        </table>`;
     }
 
     document.getElementById('header').innerHTML = GCG.renderHeader('meta');

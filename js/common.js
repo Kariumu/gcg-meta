@@ -190,9 +190,11 @@ const GCG = {
           </a>
           <nav>
             <a href="${basePath}" class="${activePage === 'home' ? 'active' : ''}">ダッシュボード</a>
+            <a href="${basePath}series/" class="${activePage === 'series' ? 'active' : ''}">シリーズ</a>
             <a href="${basePath}events.html" class="${activePage === 'events' ? 'active' : ''}">イベント</a>
             <a href="${basePath}meta.html" class="${activePage === 'meta' ? 'active' : ''}">環境分析</a>
             <a href="${basePath}cards.html" class="${activePage === 'cards' ? 'active' : ''}">カードリスト</a>
+            <a href="${basePath}stores.html" class="${activePage === 'stores' ? 'active' : ''}">店舗</a>
             <a href="${basePath}schedule.html" class="${activePage === 'schedule' ? 'active' : ''}">スケジュール</a>
             <a href="${basePath}reports/" class="${activePage === 'reports' ? 'active' : ''}">レポート</a>
           </nav>

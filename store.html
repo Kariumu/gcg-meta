@@ -28,18 +28,36 @@
   <div id="header"></div>
 
   <main style="max-width:900px;margin:0 auto;padding:20px">
-    <div style="margin-bottom:20px">
-      <a href="schedule.html" style="color:var(--accent);text-decoration:none;font-size:14px">← スケジュールに戻る</a>
-    </div>
+    <nav id="breadcrumb-container" aria-label="パンくずリスト"></nav>
 
     <div id="store-info" style="margin-bottom:24px"></div>
     <div id="loading" style="text-align:center;padding:40px;color:var(--text-muted)">読み込み中...</div>
-    <div id="calendar"></div>
+
+    <!-- 地図 -->
+    <div id="store-map-area"></div>
+
+    <!-- 過去の大会結果（本店舗で開催されたNTC等） -->
+    <section id="store-results-section" class="store-results-section" style="display:none">
+      <div class="section-header" style="margin-top:28px">
+        <h2 class="section-title">過去の大会結果</h2>
+        <span class="section-badge" id="store-results-count">--</span>
+      </div>
+      <div id="store-winner-deck-trends" class="store-winner-trends"></div>
+      <div id="store-events-history" class="store-events-history"></div>
+    </section>
+
+    <!-- スケジュール（カレンダー） -->
+    <section id="store-schedule-section" style="margin-top:28px">
+      <div class="section-header">
+        <h2 class="section-title">開催スケジュール</h2>
+      </div>
+      <div id="calendar"></div>
+    </section>
   </main>
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=8"></script>
+  <script src="js/common.js?v=9"></script>
   <script>
     var currentYear = new Date().getFullYear();
     var currentMonth = new Date().getMonth();
@@ -93,6 +111,91 @@
       '2026-11-03', '2026-11-23', '2026-12-23'
     ];
     function isHoliday(dateStr) { return HOLIDAYS_2026.indexOf(dateStr) !== -1; }
+
+    function renderStoreMap(store) {
+      var el = document.getElementById('store-map-area');
+      if (!el) return;
+      if (!store.geo || !store.geo.x || !store.geo.y) { el.innerHTML = ''; return; }
+      var mapUrl = 'https://maps.google.com/maps?q=' + encodeURIComponent(store.geo.x + ',' + store.geo.y) + '&z=16&output=embed';
+      el.innerHTML = '<div class="store-map"><iframe src="' + mapUrl + '" width="100%" height="300" frameborder="0" loading="lazy" title="店舗地図"></iframe></div>';
+    }
+
+    async function renderStoreResults(storeId, storeName) {
+      try {
+        var basePath = GCG.getBasePath();
+        var [eventsData, seriesMap, colorsMap] = await Promise.all([
+          GCG.loadEvents(),
+          fetch(basePath + 'data/series.json').then(function(r){return r.ok ? r.json() : {};}).catch(function(){return {};}),
+          fetch(basePath + 'data/card_colors.json').then(function(r){return r.ok ? r.json() : {};}).catch(function(){return {};})
+        ]);
+        var events = Object.values(eventsData.events || {})
+          .filter(function(ev){ return String(ev.store_id || '') === String(storeId); })
+          .sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+
+        var section = document.getElementById('store-results-section');
+        var countEl = document.getElementById('store-results-count');
+        if (!events.length) {
+          section.style.display = 'none';
+          return;
+        }
+        section.style.display = '';
+        countEl.textContent = events.length + '件';
+
+        // 優勝デッキ集計（colors ベース）
+        var winTypes = {};
+        events.forEach(function(ev){
+          var winners = (ev.top4_colors || []).filter(function(t){return t.rank === 1;});
+          winners.forEach(function(w){
+            var key = (w.colors || []).join('/') || '不明';
+            if (!winTypes[key]) winTypes[key] = { label: key, count: 0, colors: w.colors || [] };
+            winTypes[key].count++;
+          });
+        });
+        var trendList = Object.values(winTypes).sort(function(a,b){return b.count - a.count;});
+        var trendEl = document.getElementById('store-winner-deck-trends');
+        if (trendList.length) {
+          trendEl.innerHTML = '<div class="store-winner-trends-title">この店舗の優勝デッキタイプ</div>'
+            + '<div class="store-winner-trends-list">'
+            + trendList.slice(0, 5).map(function(t){
+                var dots = GCG.renderColorDots ? GCG.renderColorDots(t.colors) : '';
+                return '<div class="store-winner-trend-row">'
+                  + '<span class="store-winner-trend-colors">' + dots + '</span>'
+                  + '<span class="store-winner-trend-label">' + GCG.escapeHtml(t.label) + '</span>'
+                  + '<span class="store-winner-trend-count">' + t.count + '回</span>'
+                  + '</div>';
+              }).join('')
+            + '</div>';
+        } else {
+          trendEl.innerHTML = '';
+        }
+
+        // イベント履歴
+        var historyEl = document.getElementById('store-events-history');
+        historyEl.innerHTML = events.map(function(ev){
+          var top4 = (ev.top4_colors || []).slice().sort(function(a,b){return a.rank - b.rank;});
+          var top4Html = top4.map(function(t, i){
+            var rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
+            var sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';
+            return sep + '<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">'
+              + '<span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">' + rankLabel + '</span>'
+              + (GCG.renderColorDots ? GCG.renderColorDots(t.colors) : '')
+              + '</span>';
+          }).join('');
+          var seriesMeta = ev.series_id && seriesMap[ev.series_id] ? seriesMap[ev.series_id] : null;
+          var seriesBadgeHtml = seriesMeta && GCG.renderSeriesBadge ? GCG.renderSeriesBadge(seriesMeta.short_name || seriesMeta.display_name, seriesMeta.slug) : '';
+          return '<a href="events/' + ev.event_id + '.html" class="event-card">'
+            + '<span class="event-date">' + GCG.formatDate(ev.date) + '</span>'
+            + '<span class="event-store">' + GCG.escapeHtml(ev.store || storeName || '') + '</span>'
+            + (seriesBadgeHtml ? '<span class="event-card-series">' + seriesBadgeHtml + '</span>' : '')
+            + '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+            +   (top4Html || '<span style="color:var(--text-muted);font-size:11px">データなし</span>')
+            + '</span>'
+            + '</a>';
+        }).join('');
+      } catch (e) {
+        console.warn('store results failed:', e && e.message);
+      }
+    }
 
     function getUrlParam(name) {
       var url = new URL(window.location.href);
@@ -354,7 +457,18 @@
         document.getElementById('loading').style.display = 'none';
         document.title = store.name + ' | GCG STATS';
 
+        // breadcrumb
+        var bcItems = [
+          { name: 'トップ', href: GCG.getBasePath() },
+          { name: '店舗一覧', href: GCG.getBasePath() + 'stores.html' },
+          { name: store.name || '店舗詳細' }
+        ];
+        document.getElementById('breadcrumb-container').innerHTML = GCG.renderBreadcrumb(bcItems)
+          + GCG.renderBreadcrumbJsonLd(bcItems, 'https://gcg-stats.com/');
+
         renderStoreInfo(store);
+        renderStoreMap(store);
+        renderStoreResults(storeId, store.name);
         renderCalendar(storeEvents);
       } catch(e) {
         document.getElementById('loading').textContent = '情報の取得に失敗しました: ' + e.message;
