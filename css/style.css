@@ -1359,3 +1359,153 @@ a.section-badge:hover {
     margin: 0 6px;
   }
 }
+
+/* ============================================================
+ * Phase 3: シリーズ・店舗ページ用スタイル
+ * ============================================================ */
+
+/* ---- シリーズ一覧・カード ---- */
+.series-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.series-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+.series-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.series-card-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.series-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.series-card-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.series-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.series-card-action {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---- シリーズ詳細ページの順位テーブル ---- */
+.series-rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.series-rank-table th,
+.series-rank-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.series-rank-table thead th {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.series-rank-table tbody tr:last-child th,
+.series-rank-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.series-rank-table tbody tr:hover {
+  background: var(--bg-elevated);
+}
+
+/* ---- 店舗一覧 ---- */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.store-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+.store-row:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent);
+}
+.store-row-name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.store-row-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.store-row-stats {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- 店舗詳細ページ：地図 ---- */
+.store-map {
+  margin: 16px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+.store-map iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+/* ---- モバイル ---- */
+@media (max-width: 640px) {
+  .series-list { grid-template-columns: 1fr; }
+  .store-grid  { grid-template-columns: 1fr; }
+  .series-rank-table th,
+  .series-rank-table td { padding: 6px 8px; font-size: 12px; }
+}
