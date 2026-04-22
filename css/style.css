@@ -1180,3 +1180,182 @@ a.section-badge:hover {
 .collapsible-toggle:hover .toggle-icon::after {
   border-color: var(--accent);
 }
+
+/* ============================================================
+ * Phase 2: 共通コンポーネント Style
+ * (breadcrumb / series-badge / status-badge / header-search)
+ * ============================================================ */
+
+/* ---- Task C: パンくずリスト ---- */
+.breadcrumb {
+  margin: 16px 0 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+}
+.breadcrumb li + li::before {
+  content: '›';
+  margin: 0 8px;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.breadcrumb a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.breadcrumb [aria-current="page"] {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ---- Task D: シリーズバッジ ---- */
+.series-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(212, 160, 41, 0.12);
+  border: 1px solid rgba(212, 160, 41, 0.35);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.5;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+.series-badge:hover {
+  background: rgba(212, 160, 41, 0.22);
+  border-color: rgba(212, 160, 41, 0.6);
+}
+
+/* ---- Task E: ステータスバッジ ---- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  border: 1px solid transparent;
+}
+.status-badge.status-active {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #22c55e;
+}
+.status-badge.status-upcoming {
+  background: rgba(234, 179, 8, 0.14);
+  border-color: rgba(234, 179, 8, 0.35);
+  color: #eab308;
+}
+.status-badge.status-completed {
+  background: rgba(120, 130, 145, 0.14);
+  border-color: rgba(120, 130, 145, 0.35);
+  color: var(--text-muted);
+}
+
+/* ---- Task S: ヘッダー検索バー ---- */
+.header-search {
+  position: relative;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+.header-search input[type="search"] {
+  width: 200px;
+  padding: 6px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 13px;
+  transition: border-color var(--transition-fast), width var(--transition-fast);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.header-search input[type="search"]:focus {
+  border-color: var(--accent);
+  width: 260px;
+}
+.header-search input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 260px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  z-index: 200;
+}
+.search-suggestions[hidden] {
+  display: none !important;
+}
+.search-suggestion {
+  display: block;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+.search-suggestion:last-child {
+  border-bottom: none;
+}
+.search-suggestion:hover,
+.search-suggestion.is-active {
+  background: var(--bg-elevated);
+}
+.search-suggestion .suggest-name {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.search-suggestion .suggest-sub {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.search-suggestions-empty {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ---- モバイル（幅 768px 以下） ---- */
+@media (max-width: 768px) {
+  .header-search {
+    display: none;
+  }
+  .breadcrumb {
+    font-size: 12px;
+  }
+  .breadcrumb li + li::before {
+    margin: 0 6px;
+  }
+}
