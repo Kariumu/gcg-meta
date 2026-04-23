@@ -1916,3 +1916,29 @@ a.section-badge:hover {
   gap: 6px;
   margin-bottom: 24px;
 }
+
+/* ============================================================
+ * Phase 7 — 問題2: モバイル時ヘッダー検索バーの折りたたみ対応
+ * 既存の @media (max-width: 768px) で .header-search は display:none
+ * となっているため、<=640px で再表示し、通常40pxのコンパクト幅、
+ * フォーカス時に180pxへ展開する挙動に置き換える。
+ * プレースホルダー文字列は非フォーカス時に透明化してアイコンのみ
+ * 見えるように寄せる。デスクトップ（>640px）には影響なし。
+ * ============================================================ */
+@media (max-width: 640px) {
+  .header-search {
+    display: block;
+    margin-left: 8px;
+  }
+  .header-search input[type="search"] {
+    width: 40px;
+    padding: 6px 10px;
+    transition: width 0.2s ease-out;
+  }
+  .header-search input[type="search"]:focus {
+    width: 180px;
+  }
+  .header-search input[type="search"]:not(:focus)::placeholder {
+    color: transparent;
+  }
+}
