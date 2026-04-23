@@ -30,23 +30,7 @@
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="../../index.html" class="site-logo">
-        <span class="logo-icon">G</span>
-        <div>
-          <span class="logo-text">GCG STATS</span>
-          <span class="logo-sub">Tournament Analytics</span>
-        </div>
-      </a>
-      <nav>
-        <a href="../../index.html">ダッシュボード</a>
-        <a href="../../events.html">イベント</a>
-        <a href="../../meta.html">環境分析</a>
-        <a href="../../cards.html">カードリスト</a>
-      </nav>
-    </div>
-  </header>
+  <div id="header"></div>
 
   <main class="container">
     <div style="margin-bottom:12px">
@@ -448,6 +432,7 @@
   <script src="../../js/common.js?v=8"></script>
   <script>
     GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
     GCG.renderShareButtons('share-buttons', 'エールストライクガンダム（GD03-072）採用率2.4% | GCG STATS');
   </script>
