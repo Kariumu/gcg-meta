@@ -329,13 +329,22 @@
     }
 
     async function renderDashboard() {
-      [dashSummary, dashEventsData, dashCardColors] = await Promise.all([
+      var basePath = GCG.getBasePath();
+      var [summary, events, colors, seriesMap] = await Promise.all([
         GCG.loadSummary(),
         GCG.loadEvents(),
-        fetch(GCG.getBasePath() + 'data/card_colors.json').then(r => r.json()).catch(() => ({}))
+        fetch(basePath + 'data/card_colors.json').then(r => r.json()).catch(() => ({})),
+        fetch(basePath + 'data/series.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
       ]);
+      dashSummary = summary;
+      dashEventsData = events;
+      dashCardColors = colors;
 
-      const defaultRange = GCG.getDefaultDateRange();
+      // シリーズ連動のデフォルト期間: デフォルトシリーズ（active > upcoming > 最新completed）の start_date/end_date を採用。
+      // シリーズが取得できない場合のみ半月単位フォールバック。
+      var defaultSeries = GCG.pickDefaultSeries ? GCG.pickDefaultSeries(seriesMap) : null;
+      var defaultRange = defaultSeries ? GCG.getSeriesDateRange(defaultSeries) : GCG.getDefaultDateRange();
+      if (!defaultRange.start && !defaultRange.end) defaultRange = GCG.getDefaultDateRange();
       const filterArea = document.getElementById('date-filter-area');
       filterArea.innerHTML = GCG.renderDateFilterHTML(defaultRange.start, defaultRange.end);
       document.getElementById('date-start').addEventListener('change', refreshDashboard);

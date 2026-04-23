@@ -97,10 +97,10 @@
 
       renderSeriesSelector();
 
-      // 日付フィルター設置
-      const defaultRange = GCG.getDefaultDateRange();
+      // 日付フィルター設置（シリーズ連動: 選択シリーズの start_date/end_date を初期値に）
+      var initialRange = getSeriesRangeById(currentSeriesId);
       const filterArea = document.getElementById('date-filter-area');
-      filterArea.innerHTML = GCG.renderDateFilterHTML(defaultRange.start, defaultRange.end);
+      filterArea.innerHTML = GCG.renderDateFilterHTML(initialRange.start, initialRange.end);
       document.getElementById('date-start').addEventListener('change', applyFilters);
       document.getElementById('date-end').addEventListener('change', applyFilters);
       document.getElementById('date-reset-btn').addEventListener('click', function() {
@@ -110,6 +110,13 @@
       });
 
       applyFilters();
+    }
+
+    // シリーズIDから {start, end} を返す。'' (全シリーズ) の場合は全期間を意味する空文字。
+    function getSeriesRangeById(sid) {
+      if (!sid) return { start: '', end: '' };
+      var s = allSeries[sid];
+      return GCG.getSeriesDateRange ? GCG.getSeriesDateRange(s) : { start: s ? s.start_date || '' : '', end: s ? s.end_date || '' : '' };
     }
 
     function pickDefaultSeries() {
@@ -150,6 +157,12 @@
           currentSeriesId = btn.getAttribute('data-sid') || '';
           el.querySelectorAll('.series-tab').forEach(function(b){ b.classList.remove('is-active'); });
           btn.classList.add('is-active');
+          // シリーズ切替時: 期間を新シリーズの start_date/end_date に自動更新
+          var r = getSeriesRangeById(currentSeriesId);
+          var dsEl = document.getElementById('date-start');
+          var deEl = document.getElementById('date-end');
+          if (dsEl) dsEl.value = r.start || '';
+          if (deEl) deEl.value = r.end || '';
           applyFilters();
           // URL を更新（履歴汚さない replaceState）
           var u = new URL(window.location.href);

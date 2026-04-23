@@ -322,6 +322,36 @@ const GCG = {
     return filtered;
   },
 
+  // data/series.json の配列/マップから「デフォルトで選ぶべきシリーズ」を返す
+  // 優先順位: active（start昇順の最初）> upcoming（start昇順の最初）> completed（start降順の最初/最新）
+  pickDefaultSeries: function(seriesInput) {
+    var list;
+    if (Array.isArray(seriesInput)) list = seriesInput.slice();
+    else if (seriesInput && typeof seriesInput === 'object') list = Object.values(seriesInput);
+    else return null;
+    list = list.filter(function(s) { return s && s.id; });
+    if (list.length === 0) return null;
+    var actives = list.filter(function(s) { return s.status === 'active'; })
+      .sort(function(a,b) { return (a.start_date||'').localeCompare(b.start_date||''); });
+    if (actives.length > 0) return actives[0];
+    var upcoming = list.filter(function(s) { return s.status === 'upcoming'; })
+      .sort(function(a,b) { return (a.start_date||'').localeCompare(b.start_date||''); });
+    if (upcoming.length > 0) return upcoming[0];
+    var completed = list.filter(function(s) { return s.status === 'completed'; })
+      .sort(function(a,b) { return (b.start_date||'').localeCompare(a.start_date||''); });
+    if (completed.length > 0) return completed[0];
+    return list[0];
+  },
+
+  // シリーズから {start, end} を返す。指定がなければ空文字
+  getSeriesDateRange: function(series) {
+    if (!series) return { start: '', end: '' };
+    return {
+      start: series.start_date || '',
+      end: series.end_date || ''
+    };
+  },
+
   copyShareUrl: function(btn) {
     var url = window.location.href.split('#')[0];
     var label = btn.querySelector('.copy-label');
