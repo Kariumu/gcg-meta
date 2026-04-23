@@ -58,9 +58,15 @@ const GCG = {
   // ページのベースパスを自動検出
   getBasePath() {
     const path = window.location.pathname;
+    // 2 階層深いページ（サイトルートまで戻るには ../../）
     if (path.includes('/reports/news/')) {
       return '../../';
     }
+    // /cards/{id}/ はディレクトリ構造として 2 階層深い（/cards/{id}/index.html）
+    if (/\/cards\/[^/]+\//.test(path)) {
+      return '../../';
+    }
+    // 1 階層深いページ
     if (path.includes('/reports/') || path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/')) {
       return '../';
     }
