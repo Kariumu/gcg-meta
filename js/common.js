@@ -58,9 +58,15 @@ const GCG = {
   // ページのベースパスを自動検出
   getBasePath() {
     const path = window.location.pathname;
+    // 2 階層深いページ（サイトルートまで戻るには ../../）
     if (path.includes('/reports/news/')) {
       return '../../';
     }
+    // /cards/{id}/ はディレクトリ構造として 2 階層深い（/cards/{id}/index.html）
+    if (/\/cards\/[^/]+\//.test(path)) {
+      return '../../';
+    }
+    // 1 階層深いページ
     if (path.includes('/reports/') || path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/')) {
       return '../';
     }
@@ -190,12 +196,15 @@ const GCG = {
           </a>
           <nav>
             <a href="${basePath}" class="${activePage === 'home' ? 'active' : ''}">ダッシュボード</a>
+            <a href="${basePath}series/" class="${activePage === 'series' ? 'active' : ''}">シリーズ</a>
             <a href="${basePath}events.html" class="${activePage === 'events' ? 'active' : ''}">イベント</a>
             <a href="${basePath}meta.html" class="${activePage === 'meta' ? 'active' : ''}">環境分析</a>
             <a href="${basePath}cards.html" class="${activePage === 'cards' ? 'active' : ''}">カードリスト</a>
+            <a href="${basePath}stores.html" class="${activePage === 'stores' ? 'active' : ''}">店舗</a>
             <a href="${basePath}schedule.html" class="${activePage === 'schedule' ? 'active' : ''}">スケジュール</a>
             <a href="${basePath}reports/" class="${activePage === 'reports' ? 'active' : ''}">レポート</a>
           </nav>
+          ${this.renderHeaderSearch()}
         </div>
       </header>`;
   },
@@ -319,6 +328,36 @@ const GCG = {
     return filtered;
   },
 
+  // data/series.json の配列/マップから「デフォルトで選ぶべきシリーズ」を返す
+  // 優先順位: active（start昇順の最初）> upcoming（start昇順の最初）> completed（start降順の最初/最新）
+  pickDefaultSeries: function(seriesInput) {
+    var list;
+    if (Array.isArray(seriesInput)) list = seriesInput.slice();
+    else if (seriesInput && typeof seriesInput === 'object') list = Object.values(seriesInput);
+    else return null;
+    list = list.filter(function(s) { return s && s.id; });
+    if (list.length === 0) return null;
+    var actives = list.filter(function(s) { return s.status === 'active'; })
+      .sort(function(a,b) { return (a.start_date||'').localeCompare(b.start_date||''); });
+    if (actives.length > 0) return actives[0];
+    var upcoming = list.filter(function(s) { return s.status === 'upcoming'; })
+      .sort(function(a,b) { return (a.start_date||'').localeCompare(b.start_date||''); });
+    if (upcoming.length > 0) return upcoming[0];
+    var completed = list.filter(function(s) { return s.status === 'completed'; })
+      .sort(function(a,b) { return (b.start_date||'').localeCompare(a.start_date||''); });
+    if (completed.length > 0) return completed[0];
+    return list[0];
+  },
+
+  // シリーズから {start, end} を返す。指定がなければ空文字
+  getSeriesDateRange: function(series) {
+    if (!series) return { start: '', end: '' };
+    return {
+      start: series.start_date || '',
+      end: series.end_date || ''
+    };
+  },
+
   copyShareUrl: function(btn) {
     var url = window.location.href.split('#')[0];
     var label = btn.querySelector('.copy-label');
@@ -337,6 +376,225 @@ const GCG = {
     }
   }
 };
+
+/* ============================================================
+ * Phase 2: 共通コンポーネント（パンくず / シリーズバッジ /
+ *           ステータスバッジ / ヘッダー検索バー）
+ * ============================================================ */
+
+// ---- Task C: パンくずリスト ----
+// items: [{ name, href }]（最後の要素の href は無くても良い）
+GCG.renderBreadcrumb = function(items) {
+  if (!Array.isArray(items) || items.length === 0) return '';
+  const escape = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const ol = items.map((item, idx) => {
+    const isLast = idx === items.length - 1;
+    const name = escape(item.name);
+    const href = item.href ? escape(item.href) : '';
+    const inner = isLast || !href ? `<span>${name}</span>` : `<a href="${href}">${name}</a>`;
+    const attr = isLast ? ' aria-current="page"' : '';
+    return `<li${attr}>${inner}</li>`;
+  }).join('');
+  return `<nav class="breadcrumb" aria-label="パンくずリスト"><ol>${ol}</ol></nav>`;
+};
+
+// JSON-LD 構造化データ（SEO 用）。最後の要素も item を付けたい場合は href を付ける。
+GCG.renderBreadcrumbJsonLd = function(items) {
+  if (!Array.isArray(items) || items.length === 0) return '';
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, idx) => {
+      const el = {
+        '@type': 'ListItem',
+        position: idx + 1,
+        name: item.name
+      };
+      if (item.href) {
+        const abs = /^https?:\/\//.test(item.href) ? item.href : ('https://gcg-stats.com' + item.href);
+        el.item = abs;
+      }
+      return el;
+    })
+  };
+  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+};
+
+// ---- Task D: シリーズバッジ ----
+// shortName: 表示文字列 / slug: /series/{slug}.html へのリンク
+GCG.renderSeriesBadge = function(shortName, slug) {
+  const escape = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  const name = escape(shortName);
+  const href = slug ? `/series/${encodeURIComponent(slug)}.html` : '#';
+  return `<a href="${href}" class="series-badge">${name}</a>`;
+};
+
+// ---- Task E: ステータスバッジ ----
+// status: 'active' | 'upcoming' | 'completed'
+GCG.renderStatusBadge = function(status) {
+  const labels = {
+    active:    { emoji: '\u{1F7E2}', text: '開催中' },
+    upcoming:  { emoji: '\u{1F7E1}', text: '予告' },
+    completed: { emoji: '\u26AB',    text: '終了' }
+  };
+  const key = labels[status] ? status : 'completed';
+  const l = labels[key];
+  return `<span class="status-badge status-${key}">${l.emoji} ${l.text}</span>`;
+};
+
+// ---- Task S: ヘッダー検索バー ----
+GCG.renderHeaderSearch = function() {
+  return `
+      <div class="header-search">
+        <input
+          type="search"
+          id="header-search-input"
+          placeholder="店舗を検索..."
+          aria-label="店舗検索"
+          autocomplete="off"
+        >
+        <div class="search-suggestions" id="header-search-suggestions" hidden></div>
+      </div>`;
+};
+
+// 店舗データは共通キャッシュ
+GCG._stores = null;
+GCG._storesLoading = null;
+
+GCG.loadStoresForSearch = function() {
+  if (this._stores) return Promise.resolve(this._stores);
+  if (this._storesLoading) return this._storesLoading;
+  const basePath = this.getBasePath();
+  this._storesLoading = fetch(basePath + 'data/schedule.json')
+    .then(r => {
+      if (!r.ok) throw new Error('schedule.json HTTP ' + r.status);
+      return r.json();
+    })
+    .then(data => {
+      const stores = [];
+      const src = data && data.stores ? data.stores : {};
+      for (const [id, s] of Object.entries(src)) {
+        if (!s || !s.name) continue;
+        stores.push({
+          id: s.id != null ? s.id : id,
+          name: String(s.name).replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim(),
+          rawName: s.name,
+          pref_code: s.pref_code || '',
+          city: s.city || ''
+        });
+      }
+      this._stores = stores;
+      this._storesLoading = null;
+      return stores;
+    })
+    .catch(e => {
+      this._storesLoading = null;
+      console.warn('loadStoresForSearch failed:', e && e.message);
+      return [];
+    });
+  return this._storesLoading;
+};
+
+GCG.initHeaderSearch = function() {
+  const input = document.getElementById('header-search-input');
+  const suggestions = document.getElementById('header-search-suggestions');
+  if (!input || !suggestions) return;
+  if (input.dataset.gcgSearchInit === '1') return; // 二重初期化防止
+  input.dataset.gcgSearchInit = '1';
+
+  const self = this;
+  const basePath = this.getBasePath();
+  let storesPromise = null;
+  let activeIdx = -1;
+
+  const escape = (s) => String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+  function render(matched) {
+    if (!matched || matched.length === 0) {
+      suggestions.innerHTML = '<div class="search-suggestions-empty">一致する店舗なし</div>';
+      suggestions.hidden = false;
+      activeIdx = -1;
+      return;
+    }
+    suggestions.innerHTML = matched.map(s =>
+      `<a href="${basePath}store.html?id=${encodeURIComponent(s.id)}" class="search-suggestion" data-id="${escape(s.id)}">` +
+        `<div class="suggest-name">${escape(s.name)}</div>` +
+        `<div class="suggest-sub">${escape(s.pref_code || '')}${s.city ? ' ' + escape(s.city) : ''}</div>` +
+      `</a>`
+    ).join('');
+    suggestions.hidden = false;
+    activeIdx = -1;
+  }
+
+  function doSearch() {
+    const raw = input.value || '';
+    const query = raw.replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim();
+    if (query.length < 1) { suggestions.hidden = true; return; }
+    if (!storesPromise) storesPromise = self.loadStoresForSearch();
+    storesPromise.then(stores => {
+      const q = query;
+      const matched = stores.filter(s => s.name.indexOf(q) !== -1).slice(0, 10);
+      render(matched);
+    });
+  }
+
+  input.addEventListener('input', doSearch);
+  input.addEventListener('focus', () => {
+    if ((input.value || '').trim().length > 0) doSearch();
+  });
+
+  // 外側クリックで閉じる
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest || !e.target.closest('.header-search')) {
+      suggestions.hidden = true;
+    }
+  });
+
+  // キーボード操作（↑↓Enter Esc）
+  input.addEventListener('keydown', (e) => {
+    if (suggestions.hidden) return;
+    const items = suggestions.querySelectorAll('.search-suggestion');
+    if (items.length === 0) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIdx = (activeIdx + 1) % items.length;
+      items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
+      items[activeIdx].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIdx = (activeIdx - 1 + items.length) % items.length;
+      items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
+      items[activeIdx].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') {
+      if (activeIdx >= 0 && items[activeIdx]) {
+        e.preventDefault();
+        window.location.href = items[activeIdx].href;
+      }
+    } else if (e.key === 'Escape') {
+      suggestions.hidden = true;
+      input.blur();
+    }
+  });
+};
+
+// DOM 準備完了時に自動初期化（renderHeader が先に挿入済みの想定）
+if (typeof document !== 'undefined') {
+  const _gcgAutoInitSearch = function() {
+    try { GCG.initHeaderSearch(); } catch (e) { /* ignore */ }
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _gcgAutoInitSearch);
+  } else {
+    // すでに読み込み済みなら次マイクロタスクで実行
+    setTimeout(_gcgAutoInitSearch, 0);
+  }
+}
 
 // Lightbox（画像拡大表示）- グローバル関数
 function openLightbox(src) {

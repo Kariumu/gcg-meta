@@ -1180,3 +1180,765 @@ a.section-badge:hover {
 .collapsible-toggle:hover .toggle-icon::after {
   border-color: var(--accent);
 }
+
+/* ============================================================
+ * Phase 2: 共通コンポーネント Style
+ * (breadcrumb / series-badge / status-badge / header-search)
+ * ============================================================ */
+
+/* ---- Task C: パンくずリスト ---- */
+.breadcrumb {
+  margin: 16px 0 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.breadcrumb ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+}
+.breadcrumb li + li::before {
+  content: '›';
+  margin: 0 8px;
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+.breadcrumb a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.breadcrumb [aria-current="page"] {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ---- Task D: シリーズバッジ ---- */
+.series-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(212, 160, 41, 0.12);
+  border: 1px solid rgba(212, 160, 41, 0.35);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.5;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+.series-badge:hover {
+  background: rgba(212, 160, 41, 0.22);
+  border-color: rgba(212, 160, 41, 0.6);
+}
+
+/* ---- Task E: ステータスバッジ ---- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  border: 1px solid transparent;
+}
+.status-badge.status-active {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.35);
+  color: #22c55e;
+}
+.status-badge.status-upcoming {
+  background: rgba(234, 179, 8, 0.14);
+  border-color: rgba(234, 179, 8, 0.35);
+  color: #eab308;
+}
+.status-badge.status-completed {
+  background: rgba(120, 130, 145, 0.14);
+  border-color: rgba(120, 130, 145, 0.35);
+  color: var(--text-muted);
+}
+
+/* ---- Task S: ヘッダー検索バー ---- */
+.header-search {
+  position: relative;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+.header-search input[type="search"] {
+  width: 200px;
+  padding: 6px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 13px;
+  transition: border-color var(--transition-fast), width var(--transition-fast);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.header-search input[type="search"]:focus {
+  border-color: var(--accent);
+  width: 260px;
+}
+.header-search input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 260px;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  z-index: 200;
+}
+.search-suggestions[hidden] {
+  display: none !important;
+}
+.search-suggestion {
+  display: block;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+.search-suggestion:last-child {
+  border-bottom: none;
+}
+.search-suggestion:hover,
+.search-suggestion.is-active {
+  background: var(--bg-elevated);
+}
+.search-suggestion .suggest-name {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.search-suggestion .suggest-sub {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.search-suggestions-empty {
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ---- モバイル（幅 768px 以下） ---- */
+@media (max-width: 768px) {
+  .header-search {
+    display: none;
+  }
+  .breadcrumb {
+    font-size: 12px;
+  }
+  .breadcrumb li + li::before {
+    margin: 0 6px;
+  }
+}
+
+/* ============================================================
+ * Phase 3: シリーズ・店舗ページ用スタイル
+ * ============================================================ */
+
+/* ---- シリーズ一覧・カード ---- */
+.series-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+.series-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+.series-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+.series-card-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.series-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.series-card-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.series-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+.series-card-action {
+  margin-top: 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ---- シリーズ詳細ページの順位テーブル ---- */
+.series-rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.series-rank-table th,
+.series-rank-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+}
+.series-rank-table thead th {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.series-rank-table tbody tr:last-child th,
+.series-rank-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.series-rank-table tbody tr:hover {
+  background: var(--bg-elevated);
+}
+
+/* ---- 店舗一覧 ---- */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+}
+.store-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+.store-row:hover {
+  background: var(--bg-elevated);
+  border-color: var(--accent);
+}
+.store-row-name {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.store-row-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.store-row-stats {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- 店舗詳細ページ：地図 ---- */
+.store-map {
+  margin: 16px 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg-card);
+}
+.store-map iframe {
+  display: block;
+  width: 100%;
+  border: 0;
+}
+
+/* ---- モバイル ---- */
+@media (max-width: 640px) {
+  .series-list { grid-template-columns: 1fr; }
+  .store-grid  { grid-template-columns: 1fr; }
+  .series-rank-table th,
+  .series-rank-table td { padding: 6px 8px; font-size: 12px; }
+}
+
+/* ===================================================================
+ * Phase 4 — Task H: トップページ（/）専用スタイル
+ * （ヒーロー / 店舗検索 / サイトコンテンツ導線 など）
+ * =================================================================== */
+
+/* ---- シリーズ ヒーロー ---- */
+.series-hero-section {
+  background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-card) 100%);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  margin-bottom: 32px;
+}
+.series-hero-loading,
+.series-hero-empty {
+  color: var(--text-muted);
+  font-size: 13px;
+  padding: 24px 0;
+  text-align: center;
+}
+.series-hero-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.series-hero-headline {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.series-hero-badges {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.series-hero-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 4px 0 6px;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+.series-hero-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 6px;
+}
+.series-hero-period {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 12px;
+}
+.series-hero-desc {
+  font-size: 13px;
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.series-hero-stats {
+  display: flex;
+  gap: 24px;
+  margin: 16px 0 20px;
+  flex-wrap: wrap;
+}
+.series-hero-stat {
+  min-width: 96px;
+}
+.series-hero-stat-value {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.series-hero-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+.series-hero-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.series-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 18px;
+  background: var(--accent);
+  color: #0a0e14;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: filter var(--transition-fast, 0.15s);
+}
+.series-hero-cta:hover {
+  filter: brightness(1.08);
+}
+.series-hero-cta-sub {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 12px;
+  transition: border-color var(--transition-fast, 0.15s), background var(--transition-fast, 0.15s);
+}
+.series-hero-cta-sub:hover {
+  border-color: var(--accent);
+  background: var(--bg-card);
+}
+
+/* ---- ホーム：hero-stats（ダッシュボード統計を流用） ---- */
+.home-hero-stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 16px;
+}
+.home-hero-stat {
+  min-width: 100px;
+  text-align: center;
+}
+.home-hero-stat-value {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.home-hero-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+/* ---- 店舗検索セクション（トップ用） ---- */
+.home-store-search {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 24px;
+}
+.home-store-search-inner {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.home-store-search-inner > div:first-child { flex: 1 1 240px; }
+.home-store-search-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--text-primary);
+}
+.home-store-search-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+.home-store-search-sub a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.home-store-search-sub a:hover { text-decoration: underline; }
+.home-store-search-box {
+  position: relative;
+  flex: 1 1 280px;
+  min-width: 220px;
+}
+.home-store-input {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: border-color var(--transition-fast, 0.15s);
+}
+.home-store-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.home-store-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 320px;
+  overflow-y: auto;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  z-index: 50;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.home-store-suggestion {
+  display: block;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: background var(--transition-fast, 0.15s);
+}
+.home-store-suggestion:last-child { border-bottom: 0; }
+.home-store-suggestion:hover,
+.home-store-suggestion.is-active {
+  background: var(--bg-card);
+}
+.home-store-suggest-name {
+  font-size: 13px;
+  font-weight: 500;
+}
+.home-store-suggest-sub {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.home-store-empty {
+  padding: 14px;
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ---- サイトコンテンツ導線（カードグリッド） ---- */
+.site-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.site-nav-card {
+  display: block;
+  padding: 16px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: border-color var(--transition-fast, 0.15s), background var(--transition-fast, 0.15s);
+}
+.site-nav-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+.site-nav-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.site-nav-card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ---- モバイル調整 ---- */
+@media (max-width: 640px) {
+  .series-hero-section { padding: 20px 18px; }
+  .series-hero-title { font-size: 22px; }
+  .series-hero-stats { gap: 16px; }
+  .home-store-search-inner { gap: 12px; }
+  .site-nav-grid { grid-template-columns: 1fr; }
+}
+
+/* ===================================================================
+ * Phase 4 — Task I: /events.html 用（シリーズセレクタ / イベントカード上のシリーズバッジ）
+ * =================================================================== */
+.series-selector {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 12px 0 16px;
+}
+.series-tab {
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--transition-fast, 0.15s), color var(--transition-fast, 0.15s), background var(--transition-fast, 0.15s);
+  font-family: inherit;
+}
+.series-tab:hover {
+  border-color: var(--accent);
+  color: var(--text-primary);
+}
+.series-tab.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0a0e14;
+  font-weight: 600;
+}
+.event-card-series {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+/* ===================================================================
+ * Phase 4 — Task K: /meta.html 専用（リードテキスト / events誘導ノート）
+ * =================================================================== */
+.page-lead {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 16px;
+}
+.page-lead a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.page-lead a:hover { text-decoration: underline; }
+
+.event-list-redirect {
+  padding: 18px 20px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+.event-list-redirect-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.event-list-redirect-title a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.event-list-redirect-title a:hover { text-decoration: underline; }
+.event-list-redirect-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ===================================================================
+ * Phase 4 — Task U: /store.html 結果データ統合
+ * =================================================================== */
+.store-results-section {
+  margin-top: 24px;
+}
+.store-winner-trends {
+  margin: 8px 0 16px;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.store-winner-trends-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+.store-winner-trends-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.store-winner-trend-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+.store-winner-trend-colors { display: inline-flex; gap: 2px; }
+.store-winner-trend-label {
+  flex: 1;
+  color: var(--text-primary);
+}
+.store-winner-trend-count {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+.store-events-history {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+/* ============================================================
+ * Phase 7 — 問題2: モバイル時ヘッダー検索バーの折りたたみ対応
+ * 既存の @media (max-width: 768px) で .header-search は display:none
+ * となっているため、<=640px で再表示し、通常40pxのコンパクト幅、
+ * フォーカス時に180pxへ展開する挙動に置き換える。
+ * プレースホルダー文字列は非フォーカス時に透明化してアイコンのみ
+ * 見えるように寄せる。デスクトップ（>640px）には影響なし。
+ * ============================================================ */
+@media (max-width: 640px) {
+  .header-search {
+    display: block;
+    margin-left: 8px;
+  }
+  .header-search input[type="search"] {
+    width: 40px;
+    padding: 6px 10px;
+    transition: width 0.2s ease-out;
+  }
+  .header-search input[type="search"]:focus {
+    width: 180px;
+  }
+  .header-search input[type="search"]:not(:focus)::placeholder {
+    color: transparent;
+  }
+}

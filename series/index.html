@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>シリーズ一覧 | GCG STATS</title>
+  <meta name="description" content="ガンダムカードゲーム公式トーナメント（ニュータイプチャレンジ等）のシリーズ一覧。開催中・予告・終了済みをステータス別に表示します。">
+  <link rel="canonical" href="https://gcg-stats.com/series/">
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="シリーズ一覧 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲーム公式トーナメントのシリーズ一覧。開催中・予告・終了済みをステータス別に表示します。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/series/">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://gcg-stats.com/" },
+      { "@type": "ListItem", "position": 2, "name": "シリーズ一覧" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div id="breadcrumb"></div>
+
+    <div class="section-header">
+      <h1 class="section-title">シリーズ一覧</h1>
+    </div>
+    <p style="color:var(--text-muted);font-size:13px;margin:0 0 24px">
+      ガンダムカードゲームの公式トーナメントシリーズ一覧。ステータス（開催中 / 予告 / 終了済み）別に表示しています。
+    </p>
+
+    <!-- noscript 用の静的内容 -->
+    <noscript>
+      <section style="margin:24px 0">
+        <h2 style="font-size:16px;color:var(--accent);margin:16px 0 8px">終了済みシリーズ</h2>
+        <ul style="list-style:none;padding:0;margin:0">
+          <li style="padding:12px;border:1px solid var(--border);border-radius:6px;margin-bottom:8px">
+            <strong><a href="/series/ntc-2026-mission2.html">ニュータイプチャレンジ 2026 MISSION2</a></strong><br>
+            <span style="color:var(--text-muted);font-size:12px">2026-03-01 〜 2026-03-31 / 298店舗 / 1,190デッキ</span>
+          </li>
+        </ul>
+      </section>
+    </noscript>
+
+    <div id="series-root" data-state="loading">
+      <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">読み込み中...</div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/common.js"></script>
+  <script>
+    (async () => {
+      // パンくず
+      document.getElementById('breadcrumb').innerHTML = GCG.renderBreadcrumb([
+        { name: 'トップ', href: '/' },
+        { name: 'シリーズ一覧' }
+      ]);
+
+      // ヘッダー・フッター
+      document.getElementById('header').innerHTML = GCG.renderHeader('series');
+      document.getElementById('footer').innerHTML = GCG.renderFooter();
+      try { GCG.initHeaderSearch(); } catch (e) {}
+
+      const root = document.getElementById('series-root');
+      let seriesMap = {};
+      try {
+        const res = await fetch('/data/series.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        seriesMap = await res.json();
+      } catch (e) {
+        root.setAttribute('data-state', 'error');
+        root.innerHTML = '<div style="padding:24px;color:var(--text-muted);font-size:13px">シリーズデータの読み込みに失敗しました。</div>';
+        return;
+      }
+
+      const all = Object.values(seriesMap);
+      const today = new Date().toISOString().split('T')[0];
+      for (const s of all) {
+        if (today < s.start_date) s.status = 'upcoming';
+        else if (today > s.end_date) s.status = 'completed';
+        else s.status = 'active';
+      }
+      const active    = all.filter(s => s.status === 'active');
+      const upcoming  = all.filter(s => s.status === 'upcoming');
+      const completed = all.filter(s => s.status === 'completed')
+        .sort((a, b) => b.start_date.localeCompare(a.start_date));
+
+      // シリーズ毎の stats（summary.json）を並列取得（あれば数字を表示）
+      async function enrichStats(list) {
+        await Promise.all(list.map(async s => {
+          try {
+            const r = await fetch('/data/series/' + s.slug + '-summary.json');
+            if (!r.ok) return;
+            const j = await r.json();
+            s._stats = j.stats || null;
+          } catch (e) { /* ignore */ }
+        }));
+      }
+      await enrichStats([...active, ...upcoming, ...completed]);
+
+      function fmtDate(s) { return s.replace(/-/g, '/'); }
+
+      function renderCard(s) {
+        const statusBadge = GCG.renderStatusBadge(s.status);
+        const statsLine = s._stats
+          ? s._stats.event_count + '店舗 / ' + s._stats.total_decks + 'デッキ記録'
+          : '';
+        return '<a href="/series/' + encodeURIComponent(s.slug) + '.html" class="series-card">'
+          + '<div class="series-card-status">' + statusBadge + '</div>'
+          + '<div class="series-card-title">' + GCG.escapeHtml(s.display_name) + '</div>'
+          + '<div class="series-card-sub">' + GCG.escapeHtml(s.subtitle || '') + '</div>'
+          + '<div class="series-card-meta">'
+          +   '<span>期間: ' + fmtDate(s.start_date) + ' 〜 ' + fmtDate(s.end_date) + '</span>'
+          +   (statsLine ? '<span>' + statsLine + '</span>' : '')
+          + '</div>'
+          + '<div class="series-card-action">詳細を見る →</div>'
+          + '</a>';
+      }
+
+      function renderSection(title, list, opts) {
+        opts = opts || {};
+        if (list.length === 0 && opts.hideIfEmpty) return '';
+        const body = list.length === 0
+          ? '<div style="padding:16px;color:var(--text-muted);font-size:13px">該当シリーズなし</div>'
+          : '<div class="series-list">' + list.map(renderCard).join('') + '</div>';
+        return '<section style="margin:24px 0">'
+          + '<h2 style="font-size:16px;color:var(--text-primary);margin:16px 0 12px">' + GCG.escapeHtml(title) + '</h2>'
+          + body + '</section>';
+      }
+
+      let html = '';
+      html += renderSection('開催中（active）',   active,   { hideIfEmpty: true });
+      html += renderSection('予告（upcoming）',   upcoming, { hideIfEmpty: true });
+      html += renderSection('終了済み（completed）', completed);
+
+      if (!html) {
+        html = '<div style="padding:48px;text-align:center;color:var(--text-muted);font-size:13px">シリーズが登録されていません。</div>';
+      }
+
+      root.innerHTML = html;
+      root.setAttribute('data-state', 'ready');
+    })();
+  </script>
+</body>
+</html>

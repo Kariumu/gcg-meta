@@ -35,37 +35,34 @@
   <div id="header"></div>
 
   <main class="container">
-    <!-- Hero -->
-    <div class="hero">
-      <h1 class="hero-title">GCG STATS</h1>
-      <p class="hero-subtitle">ガンダムカードゲーム 大会結果・環境分析</p>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-value" id="stat-events">--</div>
-          <div class="hero-stat-label">イベント</div>
+    <!-- Hero: 開催中シリーズ（active/upcoming/completed-fallback） -->
+    <section id="series-hero" class="series-hero-section" aria-label="現在のシリーズ">
+      <div class="series-hero-loading">データを読み込み中</div>
+    </section>
+
+    <!-- 店舗検索セクション -->
+    <section class="home-store-search mb-32" aria-label="店舗検索">
+      <div class="home-store-search-inner">
+        <div>
+          <h2 class="home-store-search-title">店舗検索</h2>
+          <p class="home-store-search-sub">全国<span id="store-count">--</span>店舗から、店舗名で検索できます。都道府県別一覧は<a href="stores.html">店舗一覧</a>をご覧ください。</p>
         </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value" id="stat-decks">--</div>
-          <div class="hero-stat-label">総デッキ数</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-value" id="stat-types">--</div>
-          <div class="hero-stat-label">デッキタイプ数</div>
+        <div class="home-store-search-box">
+          <input type="search" id="home-store-input" class="home-store-input" placeholder="店舗名を入力（例：カードラボ）" autocomplete="off">
+          <div id="home-store-suggestions" class="home-store-suggestions" hidden></div>
         </div>
       </div>
-      <div id="share-buttons" style="display:flex;justify-content:center;margin-top:12px"></div>
-      <div id="date-filter-area" style="display:flex;justify-content:center;margin-top:16px"></div>
-    </div>
+    </section>
 
-    <!-- デッキタイプ概要 -->
+    <!-- 環境トレンド（Top3） -->
     <section class="mb-32">
       <div class="section-header">
-        <h2 class="section-title">デッキタイプ分布</h2>
+        <h2 class="section-title">環境トレンド Top3</h2>
         <a href="meta.html" class="section-badge">詳細分析 →</a>
       </div>
       <div style="display:flex;gap:20px;flex-wrap:wrap">
         <div class="chart-container" style="flex:0 0 400px;min-width:300px">
-          <div class="chart-title">ベスト8 デッキタイプ シェア</div>
+          <div class="chart-title">デッキタイプ シェア</div>
           <div style="display:flex;align-items:center;gap:12px">
             <div style="width:220px;height:220px;position:relative;flex-shrink:0">
               <canvas id="decktype-pie"></canvas>
@@ -77,6 +74,21 @@
           <div id="decktype-cards" class="loading">データを読み込み中</div>
         </div>
       </div>
+      <div class="home-hero-stats" id="dash-stats">
+        <div class="home-hero-stat">
+          <div class="home-hero-stat-value" id="stat-events">--</div>
+          <div class="home-hero-stat-label">イベント</div>
+        </div>
+        <div class="home-hero-stat">
+          <div class="home-hero-stat-value" id="stat-decks">--</div>
+          <div class="home-hero-stat-label">総デッキ数</div>
+        </div>
+        <div class="home-hero-stat">
+          <div class="home-hero-stat-value" id="stat-types">--</div>
+          <div class="home-hero-stat-label">デッキタイプ数</div>
+        </div>
+      </div>
+      <div id="date-filter-area" style="display:flex;justify-content:center;margin-top:16px"></div>
     </section>
 
     <!-- カード使用率TOP10 -->
@@ -88,23 +100,61 @@
       <div id="card-top10" class="loading">データを読み込み中</div>
     </section>
 
-    <!-- 最新イベント -->
+    <!-- 最新の大会結果（10件） -->
     <section class="mb-32">
       <div class="section-header">
-        <h2 class="section-title">最新イベント</h2>
+        <h2 class="section-title">最新の大会結果</h2>
         <a href="events.html" class="section-badge">全件表示 →</a>
       </div>
       <div class="event-list" id="recent-events">
         <div class="loading">データを読み込み中</div>
       </div>
     </section>
-    <noscript><h2>大会データ概要</h2><p>全298イベント、TOP4合計1190デッキのデータを掲載しています。</p><h3>デッキタイプ分布</h3><ul><li>青/紫：401デッキ（シェア33.7%、優勝率25.7%）</li><li>緑/白：193デッキ（シェア16.2%、優勝率24.9%）</li><li>赤/白：165デッキ（シェア13.9%、優勝率27.3%）</li><li>青/緑：127デッキ（シェア10.7%、優勝率29.9%）</li><li>青/白：107デッキ（シェア9%、優勝率20.6%）</li><li>青/赤：97デッキ（シェア8.2%、優勝率19.6%）</li><li>赤/紫：40デッキ（シェア3.4%、優勝率30%）</li><li>赤/緑：26デッキ（シェア2.2%、優勝率11.5%）</li><li>白/紫：19デッキ（シェア1.6%、優勝率10.5%）</li><li>緑/紫：14デッキ（シェア1.2%、優勝率28.6%）</li><li>紫：1デッキ（シェア0.1%、優勝率0%）</li></ul><h3>最新イベント</h3><ul><li><a href="event.html?id=5881927">2026.03.31 Japan TCG Center吉祥寺駅北口店</a></li><li><a href="event.html?id=5829131">2026.03.30 カードラボ名古屋駅前店</a></li><li><a href="event.html?id=5724917">2026.03.29 レプトンカード館五日市店</a></li><li><a href="event.html?id=5731002">2026.03.29 アメニティードリーム大須店</a></li><li><a href="event.html?id=5742767">2026.03.29 レプトン サンモール店</a></li><li><a href="event.html?id=5749037">2026.03.29 トーナメントセンターバトロコ水戸駅前</a></li><li><a href="event.html?id=5765867">2026.03.29 トレーディングカードショップシエル</a></li><li><a href="event.html?id=5773754">2026.03.29 カードラボ水戸店</a></li><li><a href="event.html?id=5802287">2026.03.29 BOOKSながしま</a></li><li><a href="event.html?id=5814841">2026.03.29 カードラボ岐阜店</a></li><li><a href="event.html?id=5827832">2026.03.29 カードラボ姫路店</a></li><li><a href="event.html?id=5829324">2026.03.29 SuperKaBoS二の宮本店</a></li><li><a href="event.html?id=5835219">2026.03.29 カードラボ鹿児島店</a></li><li><a href="event.html?id=5872958">2026.03.29 カードショップアヴァロン</a></li><li><a href="event.html?id=5875212">2026.03.29 カードラボ長野店</a></li><li><a href="event.html?id=5888183">2026.03.29 カード＆ホビーショップ ドラグーン住吉</a></li><li><a href="event.html?id=5889781">2026.03.29 トーナメントセンターバトロコ盛岡大通</a></li><li><a href="event.html?id=5890944">2026.03.29 ビデオインアメリカ福知山店</a></li><li><a href="event.html?id=5907400">2026.03.29 カードゲームショップ オレタン岡山本店</a></li><li><a href="event.html?id=5908513">2026.03.29 トーナメントセンターバトロコ富山駅前</a></li></ul></noscript>
-    <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"><h2>大会データ概要</h2><p>全298イベント、TOP4合計1190デッキのデータを掲載しています。</p><h3>デッキタイプ分布</h3><ul><li>青/紫：401デッキ（シェア33.7%、優勝率25.7%）</li><li>緑/白：193デッキ（シェア16.2%、優勝率24.9%）</li><li>赤/白：165デッキ（シェア13.9%、優勝率27.3%）</li><li>青/緑：127デッキ（シェア10.7%、優勝率29.9%）</li><li>青/白：107デッキ（シェア9%、優勝率20.6%）</li><li>青/赤：97デッキ（シェア8.2%、優勝率19.6%）</li><li>赤/紫：40デッキ（シェア3.4%、優勝率30%）</li><li>赤/緑：26デッキ（シェア2.2%、優勝率11.5%）</li><li>白/紫：19デッキ（シェア1.6%、優勝率10.5%）</li><li>緑/紫：14デッキ（シェア1.2%、優勝率28.6%）</li><li>紫：1デッキ（シェア0.1%、優勝率0%）</li></ul><h3>最新イベント</h3><ul><li><a href="event.html?id=5881927">2026.03.31 Japan TCG Center吉祥寺駅北口店</a></li><li><a href="event.html?id=5829131">2026.03.30 カードラボ名古屋駅前店</a></li><li><a href="event.html?id=5724917">2026.03.29 レプトンカード館五日市店</a></li><li><a href="event.html?id=5731002">2026.03.29 アメニティードリーム大須店</a></li><li><a href="event.html?id=5742767">2026.03.29 レプトン サンモール店</a></li><li><a href="event.html?id=5749037">2026.03.29 トーナメントセンターバトロコ水戸駅前</a></li><li><a href="event.html?id=5765867">2026.03.29 トレーディングカードショップシエル</a></li><li><a href="event.html?id=5773754">2026.03.29 カードラボ水戸店</a></li><li><a href="event.html?id=5802287">2026.03.29 BOOKSながしま</a></li><li><a href="event.html?id=5814841">2026.03.29 カードラボ岐阜店</a></li><li><a href="event.html?id=5827832">2026.03.29 カードラボ姫路店</a></li><li><a href="event.html?id=5829324">2026.03.29 SuperKaBoS二の宮本店</a></li><li><a href="event.html?id=5835219">2026.03.29 カードラボ鹿児島店</a></li><li><a href="event.html?id=5872958">2026.03.29 カードショップアヴァロン</a></li><li><a href="event.html?id=5875212">2026.03.29 カードラボ長野店</a></li><li><a href="event.html?id=5888183">2026.03.29 カード＆ホビーショップ ドラグーン住吉</a></li><li><a href="event.html?id=5889781">2026.03.29 トーナメントセンターバトロコ盛岡大通</a></li><li><a href="event.html?id=5890944">2026.03.29 ビデオインアメリカ福知山店</a></li><li><a href="event.html?id=5907400">2026.03.29 カードゲームショップ オレタン岡山本店</a></li><li><a href="event.html?id=5908513">2026.03.29 トーナメントセンターバトロコ富山駅前</a></li></ul></div>
+
+    <!-- サイトコンテンツ導線 -->
+    <section class="mb-32">
+      <div class="section-header">
+        <h2 class="section-title">サイトコンテンツ</h2>
+      </div>
+      <div class="site-nav-grid">
+        <a href="series/" class="site-nav-card">
+          <div class="site-nav-card-title">シリーズ一覧</div>
+          <div class="site-nav-card-desc">開催中・過去のシリーズ別集計ページ。</div>
+        </a>
+        <a href="stores.html" class="site-nav-card">
+          <div class="site-nav-card-title">店舗一覧</div>
+          <div class="site-nav-card-desc">都道府県別・開催回数別に全店舗を一覧表示。</div>
+        </a>
+        <a href="events.html" class="site-nav-card">
+          <div class="site-nav-card-title">イベント一覧</div>
+          <div class="site-nav-card-desc">全大会結果の検索・シリーズ絞り込み。</div>
+        </a>
+        <a href="meta.html" class="site-nav-card">
+          <div class="site-nav-card-title">環境分析</div>
+          <div class="site-nav-card-desc">カード採用率・デッキタイプ分布・地域別メタ。</div>
+        </a>
+        <a href="cards.html" class="site-nav-card">
+          <div class="site-nav-card-title">カードリスト</div>
+          <div class="site-nav-card-desc">収録カードの全件一覧と個別カード詳細。</div>
+        </a>
+        <a href="schedule.html" class="site-nav-card">
+          <div class="site-nav-card-title">スケジュール</div>
+          <div class="site-nav-card-desc">今後のニュータイプチャレンジ開催予定。</div>
+        </a>
+        <a href="reports/" class="site-nav-card">
+          <div class="site-nav-card-title">レポート</div>
+          <div class="site-nav-card-desc">環境まとめ・週次サマリーなど分析記事。</div>
+        </a>
+      </div>
+    </section>
+
+    <noscript><h2>大会データ概要</h2><p>全298イベント、TOP4合計1190デッキのデータを掲載しています。</p><h3>デッキタイプ分布</h3><ul><li>青/紫：401デッキ（シェア33.7%、優勝率25.7%）</li><li>緑/白：193デッキ（シェア16.2%、優勝率24.9%）</li><li>赤/白：165デッキ（シェア13.9%、優勝率27.3%）</li><li>青/緑：127デッキ（シェア10.7%、優勝率29.9%）</li><li>青/白：107デッキ（シェア9%、優勝率20.6%）</li><li>青/赤：97デッキ（シェア8.2%、優勝率19.6%）</li><li>赤/紫：40デッキ（シェア3.4%、優勝率30%）</li><li>赤/緑：26デッキ（シェア2.2%、優勝率11.5%）</li><li>白/紫：19デッキ（シェア1.6%、優勝率10.5%）</li><li>緑/紫：14デッキ（シェア1.2%、優勝率28.6%）</li><li>紫：1デッキ（シェア0.1%、優勝率0%）</li></ul><h3>最新イベント</h3><ul><li><a href="event.html?id=5881927">2026.03.31 Japan TCG Center吉祥寺駅北口店</a></li><li><a href="event.html?id=5829131">2026.03.30 カードラボ名古屋駅前店</a></li><li><a href="event.html?id=5724917">2026.03.29 レプトンカード館五日市店</a></li><li><a href="event.html?id=5731002">2026.03.29 アメニティードリーム大須店</a></li><li><a href="event.html?id=5742767">2026.03.29 レプトン サンモール店</a></li><li><a href="event.html?id=5749037">2026.03.29 トーナメントセンターバトロコ水戸駅前</a></li><li><a href="event.html?id=5765867">2026.03.29 トレーディングカードショップシエル</a></li><li><a href="event.html?id=5773754">2026.03.29 カードラボ水戸店</a></li><li><a href="event.html?id=5802287">2026.03.29 BOOKSながしま</a></li><li><a href="event.html?id=5814841">2026.03.29 カードラボ岐阜店</a></li></ul></noscript>
+    <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"><h2>大会データ概要</h2><p>全298イベント、TOP4合計1190デッキのデータを掲載しています。</p></div>
   </main>
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=8"></script>
+  <script src="js/common.js?v=9"></script>
   <script>
     GCG.init();
 
@@ -116,15 +166,185 @@
     var SET_COLORS = {ST01:'Blue',ST02:'Red',ST03:'Green',ST04:'White',ST05:'Green',ST06:'Red',ST07:'Purple',ST08:'Blue',ST09:'White'};
     function getColor(id) { return dashCardColors[id] || SET_COLORS[id.split('-')[0]] || 'Unknown'; }
 
+    // ---- Hero Series selection logic ----
+    function pickHeroSeries(allSeries) {
+      const active = allSeries.filter(s => s.status === 'active');
+      if (active.length > 0) {
+        return { series: active.sort((a,b)=> (a.start_date||'').localeCompare(b.start_date||''))[0], mode: 'active' };
+      }
+      const upcoming = allSeries.filter(s => s.status === 'upcoming')
+        .sort((a,b) => (a.start_date||'').localeCompare(b.start_date||''));
+      if (upcoming.length > 0) return { series: upcoming[0], mode: 'upcoming' };
+      const completed = allSeries.filter(s => s.status === 'completed')
+        .sort((a, b) => (b.start_date||'').localeCompare(a.start_date||''));
+      if (completed.length > 0) return { series: completed[0], mode: 'completed-fallback' };
+      return null;
+    }
+
+    function renderHeroSeries(pick, summary) {
+      const el = document.getElementById('series-hero');
+      if (!pick) {
+        el.innerHTML = '<div class="series-hero-empty">現在登録されているシリーズはありません。</div>';
+        return;
+      }
+      const s = pick.series;
+      const mode = pick.mode;
+      const headline = mode === 'active' ? '開催中'
+        : mode === 'upcoming' ? '次回開催'
+        : '直近開催（最新シリーズ）';
+      const statusBadge = GCG.renderStatusBadge ? GCG.renderStatusBadge(s.status) : '';
+      const seriesBadge = GCG.renderSeriesBadge ? GCG.renderSeriesBadge(s.short_name || s.display_name, s.slug) : '';
+      const period = (s.start_date || '') + ' 〜 ' + (s.end_date || '');
+      const detailHref = 'series/' + (s.slug || '') + '.html';
+      let statsHtml = '';
+      if (summary && summary.stats) {
+        const st = summary.stats;
+        statsHtml = ''
+          + '<div class="series-hero-stats">'
+          +   '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.event_count != null ? st.event_count : '--') + '</div><div class="series-hero-stat-label">開催イベント</div></div>'
+          +   '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.total_decks != null ? st.total_decks : '--') + '</div><div class="series-hero-stat-label">集計デッキ</div></div>'
+          +   '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.total_result_entries != null ? st.total_result_entries : '--') + '</div><div class="series-hero-stat-label">記録結果</div></div>'
+          + '</div>';
+      }
+      el.innerHTML = ''
+        + '<div class="series-hero-head">'
+        +   '<div class="series-hero-headline">' + GCG.escapeHtml(headline) + '</div>'
+        +   '<div class="series-hero-badges">' + statusBadge + seriesBadge + '</div>'
+        + '</div>'
+        + '<h1 class="series-hero-title">' + GCG.escapeHtml(s.display_name || s.official_name || '') + '</h1>'
+        + (s.subtitle ? '<p class="series-hero-subtitle">' + GCG.escapeHtml(s.subtitle) + '</p>' : '')
+        + '<p class="series-hero-period">開催期間: ' + GCG.escapeHtml(period) + '</p>'
+        + (s.description ? '<p class="series-hero-desc">' + GCG.escapeHtml(s.description) + '</p>' : '')
+        + statsHtml
+        + '<div class="series-hero-actions">'
+        +   '<a href="' + detailHref + '" class="series-hero-cta">シリーズ詳細へ →</a>'
+        +   '<a href="series/" class="series-hero-cta-sub">シリーズ一覧</a>'
+        + '</div>';
+    }
+
+    async function loadHero() {
+      try {
+        const basePath = GCG.getBasePath();
+        const seriesRes = await fetch(basePath + 'data/series.json');
+        if (!seriesRes.ok) throw new Error('series.json HTTP ' + seriesRes.status);
+        const seriesMap = await seriesRes.json();
+        const allSeries = Object.values(seriesMap || {});
+        const pick = pickHeroSeries(allSeries);
+        let summary = null;
+        if (pick && pick.series && pick.series.slug) {
+          try {
+            const summaryRes = await fetch(basePath + 'data/series/' + pick.series.slug + '-summary.json');
+            if (summaryRes.ok) summary = await summaryRes.json();
+          } catch (_) { /* summary optional */ }
+        }
+        renderHeroSeries(pick, summary);
+      } catch (e) {
+        console.warn('hero load failed:', e && e.message);
+        document.getElementById('series-hero').innerHTML = '<div class="series-hero-empty">シリーズ情報を取得できませんでした。</div>';
+      }
+    }
+
+    // ---- 店舗検索（ホーム版：ヘッダー検索と独立） ----
+    function initHomeStoreSearch() {
+      const input = document.getElementById('home-store-input');
+      const suggestions = document.getElementById('home-store-suggestions');
+      const countEl = document.getElementById('store-count');
+      if (!input || !suggestions) return;
+      const basePath = GCG.getBasePath();
+      let storesPromise = null;
+      let activeIdx = -1;
+
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+      }
+
+      function render(matched) {
+        if (!matched || matched.length === 0) {
+          suggestions.innerHTML = '<div class="home-store-empty">一致する店舗なし</div>';
+          suggestions.hidden = false;
+          activeIdx = -1;
+          return;
+        }
+        suggestions.innerHTML = matched.map(s =>
+          '<a href="' + basePath + 'store.html?id=' + encodeURIComponent(s.id) + '" class="home-store-suggestion" data-id="' + esc(s.id) + '">'
+            + '<div class="home-store-suggest-name">' + esc(s.name) + '</div>'
+            + '<div class="home-store-suggest-sub">' + esc(s.pref_code || '') + (s.city ? ' ' + esc(s.city) : '') + '</div>'
+          + '</a>'
+        ).join('');
+        suggestions.hidden = false;
+        activeIdx = -1;
+      }
+
+      function doSearch() {
+        const raw = input.value || '';
+        const q = raw.replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim();
+        if (q.length < 1) { suggestions.hidden = true; return; }
+        if (!storesPromise) storesPromise = GCG.loadStoresForSearch();
+        storesPromise.then(stores => {
+          const matched = stores.filter(s => s.name.indexOf(q) !== -1).slice(0, 10);
+          render(matched);
+        });
+      }
+
+      input.addEventListener('input', doSearch);
+      input.addEventListener('focus', () => {
+        if ((input.value || '').trim().length > 0) doSearch();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest || !e.target.closest('.home-store-search')) {
+          suggestions.hidden = true;
+        }
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (suggestions.hidden) return;
+        const items = suggestions.querySelectorAll('.home-store-suggestion');
+        if (items.length === 0) return;
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          activeIdx = (activeIdx + 1) % items.length;
+          items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
+          items[activeIdx].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          activeIdx = (activeIdx - 1 + items.length) % items.length;
+          items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
+          items[activeIdx].scrollIntoView({ block: 'nearest' });
+        } else if (e.key === 'Enter') {
+          if (activeIdx >= 0 && items[activeIdx]) {
+            e.preventDefault();
+            window.location.href = items[activeIdx].href;
+          }
+        } else if (e.key === 'Escape') {
+          suggestions.hidden = true;
+          input.blur();
+        }
+      });
+
+      // 店舗数表示
+      GCG.loadStoresForSearch().then(stores => {
+        if (countEl && stores && stores.length) countEl.textContent = stores.length;
+      }).catch(() => {});
+    }
+
     async function renderDashboard() {
-      [dashSummary, dashEventsData, dashCardColors] = await Promise.all([
+      var basePath = GCG.getBasePath();
+      var [summary, events, colors, seriesMap] = await Promise.all([
         GCG.loadSummary(),
         GCG.loadEvents(),
-        fetch(GCG.getBasePath() + 'data/card_colors.json').then(r => r.json()).catch(() => ({}))
+        fetch(basePath + 'data/card_colors.json').then(r => r.json()).catch(() => ({})),
+        fetch(basePath + 'data/series.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
       ]);
+      dashSummary = summary;
+      dashEventsData = events;
+      dashCardColors = colors;
 
-      // 日付フィルター設置
-      const defaultRange = GCG.getDefaultDateRange();
+      // シリーズ連動のデフォルト期間: デフォルトシリーズ（active > upcoming > 最新completed）の start_date/end_date を採用。
+      // シリーズが取得できない場合のみ半月単位フォールバック。
+      var defaultSeries = GCG.pickDefaultSeries ? GCG.pickDefaultSeries(seriesMap) : null;
+      var defaultRange = defaultSeries ? GCG.getSeriesDateRange(defaultSeries) : GCG.getDefaultDateRange();
+      if (!defaultRange.start && !defaultRange.end) defaultRange = GCG.getDefaultDateRange();
       const filterArea = document.getElementById('date-filter-area');
       filterArea.innerHTML = GCG.renderDateFilterHTML(defaultRange.start, defaultRange.end);
       document.getElementById('date-start').addEventListener('change', refreshDashboard);
@@ -142,11 +362,9 @@
       const startDate = document.getElementById('date-start').value;
       const endDate = document.getElementById('date-end').value;
 
-      // 日付フィルター適用
       const filteredEventsObj = GCG.filterEventsObjByDate(dashEventsData.events, startDate, endDate);
       const allEvents = Object.values(filteredEventsObj);
 
-      // 集計
       var totalResults = 0;
       var allTypeKeys = {};
       var deckTypeMap = {};
@@ -164,7 +382,6 @@
           for (var k = 0; k < deck.length; k++) {
             var col = getColor(deck[k].card_id);
             if (col !== 'Unknown' && col !== 'Colorless') cc[col] = (cc[col]||0) + deck[k].count;
-            // カード使用率集計
             if (!cardUsageMap[deck[k].card_id]) cardUsageMap[deck[k].card_id] = { card_id: deck[k].card_id, decks: 0 };
             cardUsageMap[deck[k].card_id].decks++;
           }
@@ -187,12 +404,10 @@
         }
       }
 
-      // Hero stats
       GCG.animateNumber(document.getElementById('stat-events'), allEvents.length);
       GCG.animateNumber(document.getElementById('stat-decks'), totalResults);
       GCG.animateNumber(document.getElementById('stat-types'), Object.keys(allTypeKeys).length);
 
-      // デッキタイプ分布 (動的集計)
       var deckTypeRanking = Object.values(deckTypeMap).map(t => {
         var share = totalResults > 0 ? Math.round(t.count / totalResults * 1000) / 10 : 0;
         var winRate = t.count > 0 ? Math.round(t.wins / t.count * 1000) / 10 : 0;
@@ -203,14 +418,12 @@
 
       renderDeckTypes(deckTypeRanking);
 
-      // カードTOP10 (動的集計)
       var cardRanking = Object.values(cardUsageMap).map(c => ({
         card_id: c.card_id, decks: c.decks,
         usage_rate: totalResults > 0 ? Math.round(c.decks / totalResults * 1000) / 10 : 0
       })).sort((a,b) => b.usage_rate - a.usage_rate || b.decks - a.decks);
       renderCardTop10(cardRanking, totalResults);
 
-      // 最新イベント（10件）
       const events = allEvents.sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 10);
       const eventsContainer = document.getElementById('recent-events');
       eventsContainer.innerHTML = events.map(ev => {
@@ -218,19 +431,19 @@
         const top4Html = top4.map((t, i) => {
           const rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
           const sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';
-          return `${sep}<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">
-            <span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">${rankLabel}</span>
-            ${GCG.renderColorDots(t.colors)}
-          </span>`;
+          return '<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">'
+            + '<span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">' + rankLabel + '</span>'
+            + GCG.renderColorDots(t.colors)
+            + '</span>';
         }).join('');
-        return `
-          <a href="events/${ev.event_id}.html" class="event-card">
-            <span class="event-date">${GCG.formatDate(ev.date)}</span>
-            <span class="event-store">${GCG.escapeHtml(ev.store)}</span>
-            <span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              ${top4Html || '<span style="color:var(--text-muted);font-size:11px">データなし</span>'}
-            </span>
-          </a>`;
+        return ''
+          + '<a href="events/' + ev.event_id + '.html" class="event-card">'
+          +   '<span class="event-date">' + GCG.formatDate(ev.date) + '</span>'
+          +   '<span class="event-store">' + GCG.escapeHtml(ev.store) + '</span>'
+          +   '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+          +     (top4Html || '<span style="color:var(--text-muted);font-size:11px">データなし</span>')
+          +   '</span>'
+          + '</a>';
       }).join('');
       if (events.length === 0) {
         eventsContainer.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">該当期間のイベントがありません</div>';
@@ -244,23 +457,23 @@
         container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">データなし</div>';
         return;
       }
-      const maxRate = top10[0]?.usage_rate || 100;
-      container.innerHTML = `<div style="display:grid;gap:6px">${top10.map((c, i) => `
-        <a href="cards/${c.card_id}/?from=top" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text-primary);transition:all var(--transition-fast)" onmouseover="this.style.borderColor='var(--border-hover)';this.style.background='var(--bg-card-hover)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--bg-card)'">
-          <span class="rank-cell ${GCG.rankClass(i + 1)}" style="font-family:var(--font-mono);font-size:14px;font-weight:700;min-width:28px;text-align:center">${i + 1}</span>
-          <img src="${GCG.cardImageUrl(c.card_id)}" alt="" style="width:32px;height:45px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display='none'">
-          <div style="flex:1;min-width:0">
-            <div style="font-family:var(--font-mono);font-size:13px;font-weight:600">${GCG.escapeHtml(c.card_id)}</div>
-            <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
-              <div style="flex:1;height:4px;background:var(--bg-elevated);border-radius:2px;overflow:hidden">
-                <div style="height:100%;width:${(c.usage_rate / maxRate) * 100}%;background:var(--accent);border-radius:2px"></div>
-              </div>
-              <span style="font-family:var(--font-mono);font-size:12px;color:var(--accent);min-width:48px;text-align:right">${c.usage_rate}%</span>
-            </div>
-          </div>
-          <span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);min-width:60px;text-align:right">${c.decks}/${totalDecks}</span>
-        </a>
-      `).join('')}</div>`;
+      const maxRate = top10[0] ? top10[0].usage_rate : 100;
+      container.innerHTML = '<div style="display:grid;gap:6px">' + top10.map((c, i) => ''
+        + '<a href="cards/' + c.card_id + '/?from=top" style="display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text-primary);transition:all var(--transition-fast)" onmouseover="this.style.borderColor=\'var(--border-hover)\';this.style.background=\'var(--bg-card-hover)\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.background=\'var(--bg-card)\'">'
+          + '<span class="rank-cell ' + GCG.rankClass(i + 1) + '" style="font-family:var(--font-mono);font-size:14px;font-weight:700;min-width:28px;text-align:center">' + (i + 1) + '</span>'
+          + '<img src="' + GCG.cardImageUrl(c.card_id) + '" alt="" style="width:32px;height:45px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display=\'none\'">'
+          + '<div style="flex:1;min-width:0">'
+            + '<div style="font-family:var(--font-mono);font-size:13px;font-weight:600">' + GCG.escapeHtml(c.card_id) + '</div>'
+            + '<div style="display:flex;align-items:center;gap:8px;margin-top:4px">'
+              + '<div style="flex:1;height:4px;background:var(--bg-elevated);border-radius:2px;overflow:hidden">'
+                + '<div style="height:100%;width:' + ((c.usage_rate / maxRate) * 100) + '%;background:var(--accent);border-radius:2px"></div>'
+              + '</div>'
+              + '<span style="font-family:var(--font-mono);font-size:12px;color:var(--accent);min-width:48px;text-align:right">' + c.usage_rate + '%</span>'
+            + '</div>'
+          + '</div>'
+          + '<span style="font-family:var(--font-mono);font-size:11px;color:var(--text-muted);min-width:60px;text-align:right">' + c.decks + '/' + totalDecks + '</span>'
+        + '</a>'
+      ).join('') + '</div>';
     }
 
     function renderDeckTypes(deckTypes) {
@@ -270,53 +483,36 @@
       }
       if (dashPieChart) { dashPieChart.destroy(); dashPieChart = null; }
 
-      // Cards
+      // Top3 表示（スペックに基づく。ドーナツは上位8タイプを継続表示）
       const container = document.getElementById('decktype-cards');
-      const maxShare = deckTypes[0]?.share || 100;
-      container.innerHTML = deckTypes.slice(0, 6).map(dt => {
+      const maxShare = deckTypes[0] ? deckTypes[0].share : 100;
+      container.innerHTML = deckTypes.slice(0, 3).map(dt => {
         const primaryColor = GCG.primaryColorHex(dt.colors);
-        return `
-          <a href="meta.html?type=${dt.type_key}" class="decktype-card">
-            <div class="decktype-card-header">
-              <div class="decktype-card-colors">${GCG.renderColorTags(dt.colors)}</div>
-              <div class="decktype-card-count">${dt.count} デッキ</div>
-            </div>
-            <div class="decktype-card-stats">
-              <div class="decktype-mini-stat">
-                <div class="decktype-mini-stat-value">${dt.share}%</div>
-                <div class="decktype-mini-stat-label">シェア</div>
-              </div>
-              <div class="decktype-mini-stat">
-                <div class="decktype-mini-stat-value">${dt.win_rate}%</div>
-                <div class="decktype-mini-stat-label">優勝率</div>
-              </div>
-              <div class="decktype-mini-stat">
-                <div class="decktype-mini-stat-value">${dt.avg_rank}</div>
-                <div class="decktype-mini-stat-label">平均順位</div>
-              </div>
-            </div>
-            <div class="share-bar">
-              <div class="share-bar-fill" style="width:${(dt.share / maxShare) * 100}%;background:${primaryColor}"></div>
-            </div>
-          </a>`;
+        return ''
+          + '<a href="meta.html?type=' + dt.type_key + '" class="decktype-card">'
+          +   '<div class="decktype-card-header">'
+          +     '<div class="decktype-card-colors">' + GCG.renderColorTags(dt.colors) + '</div>'
+          +     '<div class="decktype-card-count">' + dt.count + ' デッキ</div>'
+          +   '</div>'
+          +   '<div class="decktype-card-stats">'
+          +     '<div class="decktype-mini-stat"><div class="decktype-mini-stat-value">' + dt.share + '%</div><div class="decktype-mini-stat-label">シェア</div></div>'
+          +     '<div class="decktype-mini-stat"><div class="decktype-mini-stat-value">' + dt.win_rate + '%</div><div class="decktype-mini-stat-label">優勝率</div></div>'
+          +     '<div class="decktype-mini-stat"><div class="decktype-mini-stat-value">' + dt.avg_rank + '</div><div class="decktype-mini-stat-label">平均順位</div></div>'
+          +   '</div>'
+          +   '<div class="share-bar"><div class="share-bar-fill" style="width:' + ((dt.share / maxShare) * 100) + '%;background:' + primaryColor + '"></div></div>'
+          + '</a>';
       }).join('');
 
-      // Pie chart
       const top8 = deckTypes.slice(0, 8);
-
       const labels = top8.map(d => d.label);
       const data = top8.map(d => d.count);
-
       const canvas = document.getElementById('decktype-pie');
       const ctx = canvas.getContext('2d');
-
-      // 初期色（プラグインで上書きされる）
       const bgColors = top8.map(function(d) {
         var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
         return hexArr[0];
       });
 
-      // Chart.jsプラグイン: 2色デッキはグラデーションで描画
       const gradientPlugin = {
         id: 'gradientColor',
         beforeDatasetsDraw: function(chart) {
@@ -336,23 +532,19 @@
         }
       };
 
-      // HTML凡例を生成
       var legendEl = document.getElementById('decktype-legend');
       legendEl.innerHTML = top8.map(function(d) {
         var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
         var bg = hexArr.length === 1 ? hexArr[0]
           : 'linear-gradient(135deg, ' + hexArr[0] + ' 0%, ' + hexArr[1] + ' 100%)';
-        return '<div style="display:flex;align-items:center;gap:6px">' +
-          '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>' +
-          '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
+        return '<div style="display:flex;align-items:center;gap:6px">'
+          + '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>'
+          + '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
       }).join('');
 
       dashPieChart = new Chart(ctx, {
         type: 'doughnut',
-        data: {
-          labels,
-          datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }]
-        },
+        data: { labels, datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }] },
         plugins: [gradientPlugin],
         options: {
           responsive: true,
@@ -372,7 +564,7 @@
                 label: (ctx) => {
                   const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
                   const pct = Math.round(ctx.raw / total * 100);
-                  return ` ${ctx.label}: ${ctx.raw}デッキ (${pct}%)`;
+                  return ' ' + ctx.label + ': ' + ctx.raw + 'デッキ (' + pct + '%)';
                 }
               }
             }
@@ -385,6 +577,8 @@
     document.getElementById('header').innerHTML = GCG.renderHeader('home');
     document.getElementById('footer').innerHTML = GCG.renderFooter();
 
+    loadHero();
+    initHomeStoreSearch();
     renderDashboard();
     GCG.renderShareButtons('share-buttons', 'GCG STATS - ガンダムカードゲーム 大会結果・環境分析');
   </script>
