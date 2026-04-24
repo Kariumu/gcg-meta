@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-3MY17P4E7F");</script>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ニュータイプチャレンジ 2026 MISSION2（3月）総括 — 全国298店舗1,190デッキの分析 | GCG STATS</title>
+  <meta name="description" content="ニュータイプチャレンジ 2026 MISSION2（3月開催）の総括。全国298店舗で記録された1,190デッキを集計し、全体分布・優勝分布・地域差・月内推移を分析。コルシカ基地制限とGD04リリースを控えた3月環境の最終スナップショット。">
+  <meta property="og:site_name" content="GCG STATS"><meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="NTC 2026 MISSION2（3月）総括 — 全国298店舗1,190デッキの分析 | GCG STATS">
+  <meta property="og:description" content="ニュータイプチャレンジ3月開催分の総括。全国298店舗1,190デッキから見える環境構造と、コルシカ基地制限・GD04リリースを控えた展望。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://gcg-stats.com/reports/ntc-2026-mission2-recap.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp/ntc-2026-mission2-recap.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp/ntc-2026-mission2-recap.png">
+  <link rel="canonical" href="https://gcg-stats.com/reports/ntc-2026-mission2-recap.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .recap-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:13px; }
+    .recap-table th, .recap-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
+    .recap-table th { background:var(--bg-elevated); color:var(--text-muted); font-weight:600; font-size:12px; }
+    .recap-table td.num { font-family:var(--font-mono); text-align:right; }
+    .recap-table tr.highlight td { background:rgba(255,200,0,0.05); }
+    .chart-wrap { margin:20px 0; padding:16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); }
+    .chart-wrap svg { display:block; margin:0 auto; max-width:100%; height:auto; }
+    .chart-title { font-size:13px; color:var(--text-muted); margin-bottom:10px; text-align:center; }
+    .winner-list { columns:3; column-gap:20px; font-size:13px; line-height:1.9; padding:12px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
+    .winner-list span { display:block; }
+    @media (max-width: 640px) {
+      .winner-list { columns:2; }
+      .recap-table { font-size:12px; }
+      .recap-table th, .recap-table td { padding:6px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div style="margin-bottom:12px"><a href="index.html" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a></div>
+    <div class="section-header"><div>
+        <h1 class="section-title" style="margin-bottom:6px;font-size:16px">ニュータイプチャレンジ 2026 MISSION2（3月）総括 — 全国298店舗1,190デッキの分析</h1>
+        <div style="font-size:13px;color:var(--text-secondary)"><span class="text-mono">2026年3月1日 〜 3月31日 / 全国8地方 298店舗</span></div>
+    </div></div>
+
+    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">
+
+<p>ニュータイプチャレンジ 2026 MISSION2 が3月31日に終了しました。GCG STATSでは全国298店舗で開催された大会から、TOP4入賞1,190デッキ・優勝296名のデータを集計。本記事ではその総括として、全体のデッキ分布、地域別の特徴、月内の推移、そして4月に控える<strong>コルシカ基地の4→2枚制限</strong>と<strong>GD04「Phantom Aria」リリース</strong>という2つの変化点が環境にどう作用するかを分析します。3月環境の最終スナップショットとして残しておきたい内容です。</p>
+
+<h2>大会規模</h2>
+
+<table class="recap-table">
+  <tr><th>項目</th><th>数字</th></tr>
+  <tr><td>開催店舗数</td><td class="num">298 店舗</td></tr>
+  <tr><td>対象地方</td><td class="num">全 8 地方</td></tr>
+  <tr><td>記録された TOP4 デッキ</td><td class="num">1,190 デッキ</td></tr>
+  <tr><td>記録された優勝者（延べ）</td><td class="num">296 名</td></tr>
+  <tr><td>ユニーク優勝プレイヤー</td><td class="num">278 名</td></tr>
+  <tr><td>複数回優勝プレイヤー</td><td class="num">18 名（全員 2 回）</td></tr>
+  <tr><td>開催期間</td><td class="num">2026/03/01 〜 2026/03/31</td></tr>
+</table>
+
+<p>詳細な大会リストは<a href="../series/ntc-2026-mission2.html">シリーズ詳細ページ</a>から各大会にアクセスできます。</p>
+
+<h2>全体分布（TOP4入賞 1,190デッキ）</h2>
+
+<p>まず TOP4入賞デッキの色分布を確認します。</p>
+
+<table class="recap-table">
+  <tr><th>順位</th><th>デッキ色</th><th>件数</th><th>シェア</th></tr>
+  <tr class="highlight"><td class="num">1</td><td><strong>青/紫</strong></td><td class="num">401</td><td class="num"><strong>33.7%</strong></td></tr>
+  <tr><td class="num">2</td><td>緑/白</td><td class="num">193</td><td class="num">16.2%</td></tr>
+  <tr><td class="num">3</td><td>赤/白</td><td class="num">165</td><td class="num">13.9%</td></tr>
+  <tr><td class="num">4</td><td>青/緑</td><td class="num">127</td><td class="num">10.7%</td></tr>
+  <tr><td class="num">5</td><td>青/白</td><td class="num">107</td><td class="num">9.0%</td></tr>
+  <tr><td class="num">6</td><td>青/赤</td><td class="num">97</td><td class="num">8.2%</td></tr>
+  <tr><td class="num">7</td><td>赤/紫</td><td class="num">40</td><td class="num">3.4%</td></tr>
+  <tr><td class="num">8</td><td>赤/緑</td><td class="num">26</td><td class="num">2.2%</td></tr>
+  <tr><td class="num">9</td><td>白/紫</td><td class="num">19</td><td class="num">1.6%</td></tr>
+  <tr><td class="num">10</td><td>緑/紫</td><td class="num">14</td><td class="num">1.2%</td></tr>
+</table>
+
+<div class="chart-wrap">
+  <div class="chart-title">TOP4入賞デッキ色シェア（上位10色）</div>
+  <svg viewBox="0 0 600 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="TOP4入賞デッキ色分布の棒グラフ">
+    <!-- 軸 -->
+    <line x1="110" y1="20" x2="110" y2="230" stroke="#444" stroke-width="1"/>
+    <line x1="110" y1="230" x2="590" y2="230" stroke="#444" stroke-width="1"/>
+    <!-- 目盛（シェア%） -->
+    <g font-family="monospace" font-size="10" fill="#888">
+      <text x="108" y="234" text-anchor="end">0</text>
+      <text x="108" y="169" text-anchor="end">10</text>
+      <text x="108" y="104" text-anchor="end">20</text>
+      <text x="108" y="39" text-anchor="end">30</text>
+      <text x="108" y="25" text-anchor="end">35%</text>
+    </g>
+    <g stroke="#333" stroke-dasharray="2,3">
+      <line x1="110" y1="169" x2="590" y2="169"/>
+      <line x1="110" y1="104" x2="590" y2="104"/>
+      <line x1="110" y1="39" x2="590" y2="39"/>
+    </g>
+    <!-- バー（33.7%=218, 10%=65で計算) -->
+    <!-- BP Blue+Purple 33.7% -->
+    <rect x="125" y="30" width="36" height="200" fill="#8a7dff"/>
+    <!-- GW Green+White 16.2% -->
+    <rect x="170" y="124" width="36" height="106" fill="#7cd99c"/>
+    <!-- RW Red+White 13.9% -->
+    <rect x="215" y="139" width="36" height="91" fill="#ff7b7b"/>
+    <!-- BG Blue+Green 10.7% -->
+    <rect x="260" y="160" width="36" height="70" fill="#5bb0ff"/>
+    <!-- BW Blue+White 9.0% -->
+    <rect x="305" y="172" width="36" height="58" fill="#6ca0ff"/>
+    <!-- BR Blue+Red 8.2% -->
+    <rect x="350" y="177" width="36" height="53" fill="#b78aff"/>
+    <!-- RP Red+Purple 3.4% -->
+    <rect x="395" y="208" width="36" height="22" fill="#ff8a8a"/>
+    <!-- RG Red+Green 2.2% -->
+    <rect x="440" y="216" width="36" height="14" fill="#ff9a7a"/>
+    <!-- WP White+Purple 1.6% -->
+    <rect x="485" y="220" width="36" height="10" fill="#c7b8ff"/>
+    <!-- GP Green+Purple 1.2% -->
+    <rect x="530" y="222" width="36" height="8" fill="#a7c99f"/>
+    <!-- 数値ラベル -->
+    <g font-family="monospace" font-size="10" fill="#fff" text-anchor="middle">
+      <text x="143" y="25">33.7%</text>
+      <text x="188" y="119">16.2%</text>
+      <text x="233" y="134">13.9%</text>
+      <text x="278" y="155">10.7%</text>
+      <text x="323" y="167">9.0%</text>
+      <text x="368" y="172">8.2%</text>
+      <text x="413" y="203">3.4%</text>
+      <text x="458" y="211">2.2%</text>
+      <text x="503" y="215">1.6%</text>
+      <text x="548" y="217">1.2%</text>
+    </g>
+    <!-- 色ラベル -->
+    <g font-family="Inter,sans-serif" font-size="10" fill="#aaa" text-anchor="middle">
+      <text x="143" y="246">青紫</text>
+      <text x="188" y="246">緑白</text>
+      <text x="233" y="246">赤白</text>
+      <text x="278" y="246">青緑</text>
+      <text x="323" y="246">青白</text>
+      <text x="368" y="246">青赤</text>
+      <text x="413" y="246">赤紫</text>
+      <text x="458" y="246">赤緑</text>
+      <text x="503" y="246">白紫</text>
+      <text x="548" y="246">緑紫</text>
+    </g>
+  </svg>
+</div>
+
+<p>青/紫が約3分の1を占める圧倒的な首位となりました。青を含むデッキ（青/紫・青/緑・青/白・青/赤）の合計は全TOP4の<strong>62%</strong>に達し、3月環境が「青を中心とした環境」であったことを数字が裏付けています。一方で、緑/白・赤/白といった青を含まないデッキも10%台後半のシェアを保っており、完全な一強ではない多様性も残していました。</p>
+
+<h2>優勝分布と変換率</h2>
+
+<p>次に優勝296件の分布を見ます。</p>
+
+<table class="recap-table">
+  <tr><th>順位</th><th>デッキ色</th><th>優勝数</th><th>優勝率</th></tr>
+  <tr class="highlight"><td class="num">1</td><td><strong>青/紫</strong></td><td class="num">104</td><td class="num"><strong>35.1%</strong></td></tr>
+  <tr><td class="num">2</td><td>緑/白</td><td class="num">48</td><td class="num">16.2%</td></tr>
+  <tr><td class="num">3</td><td>赤/白</td><td class="num">45</td><td class="num">15.2%</td></tr>
+  <tr><td class="num">4</td><td>青/緑</td><td class="num">38</td><td class="num">12.8%</td></tr>
+  <tr><td class="num">5</td><td>青/白</td><td class="num">22</td><td class="num">7.4%</td></tr>
+  <tr><td class="num">6</td><td>青/赤</td><td class="num">19</td><td class="num">6.4%</td></tr>
+  <tr><td class="num">7</td><td>赤/紫</td><td class="num">12</td><td class="num">4.1%</td></tr>
+</table>
+
+<p>TOP4入賞に対して優勝までどれだけ勝ち切れたかを示すのが「変換率」です。標準ラインは25%前後（TOP4の4人に1人が優勝）で、それを大きく超える・下回るデッキは性能の偏りを持っています。</p>
+
+<table class="recap-table">
+  <tr><th>デッキ色</th><th>TOP4</th><th>優勝</th><th>変換率</th></tr>
+  <tr class="highlight"><td><strong>青/緑</strong></td><td class="num">127</td><td class="num">38</td><td class="num"><strong>29.9%</strong></td></tr>
+  <tr><td>赤/紫</td><td class="num">40</td><td class="num">12</td><td class="num">30.0%</td></tr>
+  <tr><td>赤/白</td><td class="num">165</td><td class="num">45</td><td class="num">27.3%</td></tr>
+  <tr><td>青/紫</td><td class="num">401</td><td class="num">104</td><td class="num">25.9%</td></tr>
+  <tr><td>緑/白</td><td class="num">193</td><td class="num">48</td><td class="num">24.9%</td></tr>
+  <tr><td>青/白</td><td class="num">107</td><td class="num">22</td><td class="num">20.6%</td></tr>
+  <tr><td>青/赤</td><td class="num">97</td><td class="num">19</td><td class="num">19.6%</td></tr>
+</table>
+
+<p>注目したいのは<strong>青/緑の変換率29.9%</strong>です。TOP4シェアでは4位ながら、いったん入賞したら勝ち切る率が青/紫（25.9%）を上回っています。青/緑は母数が少ないため目立ちにくい存在ですが、3月環境で最も勝ち切り力の高いアーキタイプの一つでした。赤/紫の30.0%も母数は少ないものの変換率は高く、いずれも「使えば確実に強いが、選ばれる頻度が低かった」タイプと言えます。</p>
+
+<p>逆に青/白・青/赤は入賞率こそ一定ながら、優勝まで届く率が20%前後と低め。TOP4止まりの大会が多かった傾向が読み取れます。</p>
+
+<p>詳細な数値は<a href="../meta.html">環境分析ページ</a>で期間・地域・順位を自由に絞り込んで確認できます。</p>
+
+<h2>地域別の特徴</h2>
+
+<p>同じ3月環境でも、地域によって顔ぶれは少しずつ異なります。</p>
+
+<table class="recap-table">
+  <tr><th>地域</th><th>大会数</th><th>1位</th><th>2位</th><th>3位</th></tr>
+  <tr><td>関東</td><td class="num">90</td><td>青/紫(39%)</td><td>緑/白(21%)</td><td>赤/白(12%)</td></tr>
+  <tr><td>中部</td><td class="num">62</td><td>青/紫(29%)</td><td>赤/白(23%)</td><td>緑/白(16%)</td></tr>
+  <tr><td>関西</td><td class="num">50</td><td>青/紫(24%)</td><td>赤/白(22%)</td><td>青/緑(20%)</td></tr>
+  <tr><td>九州</td><td class="num">40</td><td>青/紫(42%)</td><td>赤/白(18%)</td><td>青/赤(12%)</td></tr>
+  <tr class="highlight"><td>中国</td><td class="num">23</td><td><strong>青/紫(52%)</strong></td><td>青/緑(17%)</td><td>赤/紫(13%)</td></tr>
+  <tr><td>東北</td><td class="num">16</td><td>青/紫(25%)</td><td>緑/白(19%)</td><td>赤/白(12%)</td></tr>
+  <tr class="highlight"><td>四国</td><td class="num">11</td><td><strong>青/白(27%)</strong>＆青/紫(27%)</td><td>—</td><td>青/赤(18%)</td></tr>
+  <tr><td>北海道</td><td class="num">4</td><td colspan="3">サンプル数が少ないため傾向は割愛</td></tr>
+</table>
+
+<p><strong>中国地方</strong>は青/紫が52%と全国平均（35.1%）を大きく上回り、青/紫偏重が最も強い地域となりました。逆に<strong>関西</strong>は青/紫・赤/白・青/緑がいずれも20%台で拮抗しており、環境のバランスが最も良い地域と言えます。<strong>四国</strong>は青/白が青/紫と並んで1位タイに入る全国唯一の地域で、地域コミュニティの個性が出ています。関東・九州は全国平均より青/紫が強く、緑/白または赤/白が明確な2番手につくオーソドックスな構図でした。</p>
+
+<h2>月内の環境推移</h2>
+
+<p>次に、月を通じた優勝デッキの週別推移を見ます。</p>
+
+<table class="recap-table">
+  <tr><th>週</th><th>大会数</th><th>青/紫</th><th>緑/白</th><th>赤/白</th><th>青/緑</th><th>青/白</th></tr>
+  <tr><td>第1週 (3/1-7)</td><td class="num">62</td><td class="num">24 (39%)</td><td class="num">12 (19%)</td><td class="num">1 (2%)</td><td class="num">9 (15%)</td><td class="num">10 (16%)</td></tr>
+  <tr><td>第2週 (3/8-14)</td><td class="num">81</td><td class="num">27 (33%)</td><td class="num">13 (16%)</td><td class="num">13 (16%)</td><td class="num">8 (10%)</td><td class="num">5 (6%)</td></tr>
+  <tr><td>第3週 (3/15-21)</td><td class="num">75</td><td class="num">22 (29%)</td><td class="num">12 (16%)</td><td class="num"><strong>16 (21%)</strong></td><td class="num">13 (17%)</td><td class="num">2 (3%)</td></tr>
+  <tr><td>第4週 (3/22-28)</td><td class="num">57</td><td class="num"><strong>25 (44%)</strong></td><td class="num">8 (14%)</td><td class="num">11 (19%)</td><td class="num">3 (5%)</td><td class="num">3 (5%)</td></tr>
+  <tr><td>第5週 (3/29-31)</td><td class="num">21</td><td class="num">5 (24%)</td><td class="num">3 (14%)</td><td class="num">4 (19%)</td><td class="num">5 (24%)</td><td class="num">2 (10%)</td></tr>
+</table>
+
+<p>月を通じて青/紫は常にトップを維持しましたが、シェアは一定ではありませんでした。<strong>第1週</strong>は青/紫39%・赤/白2%とスタートダッシュは青/紫が独走。ところが<strong>第2週〜第3週</strong>にかけて赤/白が16%→21%と急上昇し、青/紫のシェアは33%→29%まで下がります。対応するように<strong>第4週</strong>で青/紫が44%まで再強化され、メタを押さえ込み直した構図です。<strong>第5週</strong>は大会数が少ない中、青/緑が24%で青/紫と並ぶ結果になりました。</p>
+
+<p>青/紫という絶対王者に対して赤/白が月中盤で対抗馬として台頭し、月末に青/紫が再び抑え込む——という、メタゲームの振り子を感じられる1ヶ月でした。</p>
+
+<h2>複数回優勝プレイヤー</h2>
+
+<p>3月中に2回優勝したプレイヤーは18名でした。3回以上はなしです。以下、順不同・敬称略で紹介します。</p>
+
+<div class="winner-list">
+  <span>つぐと</span>
+  <span>わか</span>
+  <span>タケ</span>
+  <span>ぷー</span>
+  <span>なっつ</span>
+  <span>カズマ</span>
+  <span>フルフル</span>
+  <span>ノレア</span>
+  <span>あまとう</span>
+  <span>ぶひこ</span>
+  <span>一休さん</span>
+  <span>宇宙海賊</span>
+  <span>トート</span>
+  <span>ならにか</span>
+  <span>カナアド</span>
+  <span>シロネコ</span>
+  <span>John</span>
+  <span>ユウ</span>
+</div>
+
+<p>278名のユニーク優勝者のうち、複数回勝ち上がれたのは6.5%と少数。それぞれの大会結果は<a href="../events.html">イベント一覧</a>からプレイヤー名で検索して確認できます。</p>
+
+<h2>青/紫デッキの構成傾向</h2>
+
+<p>3月環境のトップメタである青/紫の優勝デッキ104件から、採用率の高いコアカードを抽出しました。具体的なレシピは大会ごとに微妙に異なりますが、採用率99%のカードはほぼ全員が4枚フル投入しており、「固定枠」として機能していたことが分かります。</p>
+
+<table class="recap-table">
+  <tr><th>採用率</th><th>カード</th><th>種別</th><th>平均枚数</th></tr>
+  <tr><td class="num">99%</td><td><a href="../cards/ST01-001/">ガンダム (ST01-001)</a></td><td>UNIT・青</td><td class="num">4.0</td></tr>
+  <tr><td class="num">99%</td><td><a href="../cards/ST01-010/">アムロ・レイ (ST01-010)</a></td><td>PILOT・青</td><td class="num">4.0</td></tr>
+  <tr><td class="num">99%</td><td><a href="../cards/ST05-010/">三日月・オーガス (ST05-010)</a></td><td>PILOT・紫</td><td class="num">4.0</td></tr>
+  <tr><td class="num">99%</td><td><a href="../cards/ST02-016/">コルシカ基地 (ST02-016)</a></td><td>BASE・青</td><td class="num">4.0</td></tr>
+  <tr><td class="num">99%</td><td><a href="../cards/GD03-056/">ガンダム・バルバトスアダプト (GD03-056)</a></td><td>UNIT・紫</td><td class="num">4.0</td></tr>
+  <tr><td class="num">98%</td><td><a href="../cards/GD02-054/">ガンダム・バルバトス〔第1形態〕(GD02-054)</a></td><td>UNIT・紫</td><td class="num">4.0</td></tr>
+  <tr><td class="num">97%</td><td><a href="../cards/ST05-004/">グレイズ改 (ST05-004)</a></td><td>UNIT・紫</td><td class="num">3.9</td></tr>
+  <tr><td class="num">88%</td><td><a href="../cards/ST05-006/">百錬 (ST05-006)</a></td><td>UNIT・紫</td><td class="num">3.7</td></tr>
+  <tr><td class="num">77%</td><td><a href="../cards/GD01-100/">覚悟の表れ (GD01-100)</a></td><td>COMMAND・青</td><td class="num">1.9</td></tr>
+  <tr><td class="num">73%</td><td><a href="../cards/GD01-008/">ガンタンク (GD01-008)</a></td><td>UNIT・青</td><td class="num">3.7</td></tr>
+  <tr><td class="num">71%</td><td><a href="../cards/GD02-055/">ガンダム・グシオンリベイク (GD02-055)</a></td><td>UNIT・紫</td><td class="num">3.1</td></tr>
+  <tr><td class="num">66%</td><td><a href="../cards/ST05-014/">致命の一撃 (ST05-014)</a></td><td>COMMAND・紫</td><td class="num">2.6</td></tr>
+</table>
+
+<p>青/紫は「ガンダム＋アムロの青エンジン」と「バルバトスアダプト＋第1形態＋三日月の紫アタッカー」を骨格に組まれており、構築の自由度は低い代わりに完成度が非常に高いアーキタイプでした。採用率99%のコアカード7枚だけで28枚分を占め、残り22枚にどれだけ個性を出せるかが勝敗を分けた格好です。</p>
+
+<h2>コルシカ基地 4→2枚制限の影響</h2>
+
+<p>ここからは4月以降に影響を与える要素の分析に移ります。<strong>コルシカ基地（ST02-016）の4枚制限から2枚制限への変更</strong>は、3月環境のデータと照らし合わせると影響範囲が非常に明確です。</p>
+
+<p>3月中に TOP4 入賞した全 2,835 デッキにおけるコルシカ基地の採用状況は以下の通りでした。</p>
+
+<table class="recap-table">
+  <tr><th>デッキ色</th><th>TOP4件数</th><th>コルシカ採用</th><th>採用率</th></tr>
+  <tr class="highlight"><td><strong>青/紫</strong></td><td class="num">401</td><td class="num">399</td><td class="num"><strong>99.5%</strong></td></tr>
+  <tr class="highlight"><td><strong>青/緑</strong></td><td class="num">127</td><td class="num">125</td><td class="num"><strong>98.4%</strong></td></tr>
+  <tr><td>青/赤</td><td class="num">97</td><td class="num">21</td><td class="num">21.6%</td></tr>
+  <tr><td>青/白</td><td class="num">107</td><td class="num">19</td><td class="num">17.8%</td></tr>
+  <tr><td>赤/紫</td><td class="num">40</td><td class="num">1</td><td class="num">2.5%</td></tr>
+  <tr><td>赤/白</td><td class="num">165</td><td class="num">0</td><td class="num">0.0%</td></tr>
+  <tr><td>緑/白</td><td class="num">193</td><td class="num">0</td><td class="num">0.0%</td></tr>
+</table>
+
+<p>採用デッキは全体の45.8%（1,299デッキ）に上り、そのうち<strong>97.0%（1,260デッキ）が4枚フル投入</strong>でした。平均採用枚数は3.96枚と、採用されたデッキではほぼ全員が4枚積みだったことになります。</p>
+
+<p>特に青/紫・青/緑の2アーキタイプは採用率99%・98%と事実上の必須パーツで、これらは4→2枚制限によってデッキの中核を削減せざるを得ません。3月に優勝した青/紫104件・青/緑38件、合計<strong>全優勝の47.7%にあたる142件</strong>が、そのままの構成では4月以降戦えないということです。</p>
+
+<p>一方で赤/白と緑/白は採用率0%で制限の影響を完全に受けず、青/赤・青/白も採用率20%前後と軽微な影響にとどまります。</p>
+
+<p>構造的には<strong>3月環境で上位に君臨した青/紫・青/緑の2アーキタイプをピンポイントで弱体化させ、対抗馬だった緑/白・赤/白に影響を与えない</strong>形の制限となっており、4月以降のメタゲームは大きく再編される見通しです。青/紫ユーザーはコルシカ基地を2枚に抑えた構成への再設計、または別の拠点カードへの置き換えを検討することになります。</p>
+
+<h2>GD04 リリース後の環境展望</h2>
+
+<p>コルシカ基地制限と同時期に、2026年4月25日にはGD04「Phantom Aria」がリリースされます。全130枚・LR 5枚を含むこのブースターパックが、制限で空いた枠にどう作用するかが4月環境の焦点です。GCG STATS では各色のLRを1枚ずつ考察する記事を公開しています。</p>
+
+<ul style="line-height:2">
+  <li><a href="gd04-lr-blue.html">GD04 青LR考察</a> — 既存の青系デッキへの影響と、〔リガ・ミリティア〕新軸</li>
+  <li><a href="gd04-lr-green.html">GD04 緑LR考察</a> — 緑/白・青/緑の強化要素</li>
+  <li><a href="gd04-lr-red.html">GD04 赤LR考察</a> — 制限の影響を受けず、3月月中で台頭した赤/白の更なる飛躍があるか</li>
+  <li><a href="gd04-lr-purple.html">GD04 紫LR考察</a> — 青/紫の紫側の立て直し、または新紫デッキの可能性</li>
+  <li><a href="gd04-lr-white.html">GD04 白LR考察</a> — 緑/白・白系の新軸</li>
+</ul>
+
+<p>注目点を整理すると以下になります。</p>
+
+<p><strong>① 青系の再編</strong>：コルシカ基地制限で青/紫・青/緑の中核が削られたところに、GD04 青LRがどう作用するか。青LR記事でも触れているように、〔リガ・ミリティア〕という新アーキタイプの起点が含まれており、青系デッキの選択肢は既存の2色構築から広がる可能性があります。</p>
+
+<p><strong>② 赤/白の立ち位置</strong>：制限の影響を受けず、3月中盤で21%まで上昇していた赤/白はGD04でさらに強化されれば、4月のトップメタ候補になり得ます。</p>
+
+<p><strong>③ マイナーアーキタイプの浮上</strong>：3月中にTOP4で1〜3%程度だった白/紫・緑/紫・赤/緑などが、GD04の新規カードと制限後の環境変化を受けて再評価される余地があります。</p>
+
+<p><strong>④ NC MISSION3 の予測困難性</strong>：制限とGD04リリースが同時期に発生するため、4月に開催される次回 NTC MISSION3 は近年で最もメタゲームが流動的な1ヶ月になりそうです。3月のような「青/紫一強」が継続するか、新環境が生まれるかは、店舗予選が始まる4月上旬の数週間で方向性が見えてくると予想されます。</p>
+
+<h2>まとめ</h2>
+
+<p>3月のニュータイプチャレンジ MISSION2 は、青/紫が使用率・優勝率ともに首位で環境を牽引した一方、青/緑の高い変換率や赤/白の月中盤の台頭、地域ごとの個性（中国地方の青/紫偏重、関西のバランス、四国の青/白独自性）など、多層的な構造を持った1ヶ月でした。</p>
+
+<p>4月からはコルシカ基地の4→2枚制限が青/紫・青/緑の中核を削り、同時期のGD04リリースが各色に新カードを供給します。3月に相対的に弱かったアーキタイプや、まだ市民権を得ていない色の組み合わせが浮上する可能性も十分にあり、NC MISSION3 の結果は近年で最も予測しにくい環境になりそうです。</p>
+
+<p>GCG STATS では4月も全国のNCデータを自動集計してお届けします。シリーズが進行中のイベント結果は<a href="../series/">シリーズ一覧</a>からご確認ください。</p>
+
+<p style="margin-top:32px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.7">
+  ※本記事はAIによって記述されている文章を含みます。記事内容に誤りがある場合には<a href="https://x.com/gcg_stats" target="_blank" rel="noopener" style="color:var(--accent)">Xアカウント（@gcg_stats）</a>のDMへご報告ください。
+</p>
+
+<div id="share-buttons" style="margin-top:20px"></div>
+
+    </article>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=8"></script>
+  <script>GCG.init();document.getElementById("header").innerHTML=GCG.renderHeader("reports");document.getElementById("footer").innerHTML=GCG.renderFooter();GCG.renderShareButtons("share-buttons","ニュータイプチャレンジ 2026 MISSION2（3月）総括 | GCG STATS");</script>
+</body>
+</html>
