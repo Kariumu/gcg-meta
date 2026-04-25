@@ -35,6 +35,86 @@
     ]
   }
   </script>
+  <style>
+    /* 地域・都道府県の折りたたみ表示 */
+    .stores-collapsible details {
+      margin: 0;
+    }
+    .stores-collapsible details > summary {
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.12s;
+      padding: 4px 8px;
+      margin: 0 -8px;
+      border-radius: 4px;
+    }
+    .stores-collapsible details > summary::-webkit-details-marker { display: none; }
+    .stores-collapsible details > summary::before {
+      content: '▼';
+      display: inline-block;
+      color: var(--text-muted);
+      font-size: 11px;
+      transition: transform 0.15s ease;
+      width: 12px;
+      flex-shrink: 0;
+    }
+    .stores-collapsible details:not([open]) > summary::before {
+      transform: rotate(-90deg);
+    }
+    .stores-collapsible details > summary:hover {
+      background: var(--bg-elevated);
+    }
+    .stores-collapsible details > summary > * {
+      margin: 0;
+      flex: 1;
+    }
+    .stores-collapsible .region-block {
+      margin: 24px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+    .stores-collapsible .region-block:last-child { border-bottom: none; }
+    .stores-collapsible .region-block > summary > h2 {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .stores-collapsible .pref-block {
+      margin: 12px 0 12px 24px;
+    }
+    .stores-collapsible .pref-block > summary > h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .stores-collapsible .pref-block > .store-grid {
+      margin-top: 8px;
+      margin-left: 4px;
+    }
+    .stores-collapsible .toggle-bar {
+      display: flex;
+      gap: 8px;
+      margin: 0 0 12px;
+    }
+    .stores-collapsible .toggle-bar button {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s, border-color 0.12s;
+    }
+    .stores-collapsible .toggle-bar button:hover {
+      background: var(--bg-card);
+      border-color: var(--accent);
+    }
+  </style>
 </head>
 <body>
   <div id="header"></div>
@@ -67,7 +147,7 @@
       </select>
     </div>
 
-    <div id="stores-root" data-state="loading">
+    <div id="stores-root" class="stores-collapsible" data-state="loading">
       <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">読み込み中...</div>
     </div>
   </main>
@@ -266,40 +346,52 @@
         }
 
         if (sortBy === 'prefecture') {
-          // 地域 → 都道府県 の 2 段で見出しを出す
-          let html = '';
-          let lastRegion = null;
-          let lastPref = null;
-          let prefBuf = [];
-
-          function flushPrefBuf() {
-            if (lastPref === null || prefBuf.length === 0) return;
-            html += '<section style="margin:8px 0 24px">'
-              + '<h3 style="font-size:14px;color:var(--accent);margin:8px 0">' + GCG.escapeHtml(PREF_MAP[lastPref] || lastPref) + '（' + prefBuf.length + '店舗）</h3>'
-              + '<div class="store-grid">' + prefBuf.map(renderStoreRow).join('') + '</div>'
-              + '</section>';
-            prefBuf = [];
-          }
-          function flushRegion() {
-            flushPrefBuf();
-            lastPref = null;
-          }
-
+          // 地域 → 都道府県 の 2 段。各見出しは <details><summary> で折りたたみ可能
+          // まず list を 地域 → 都道府県 にグループ化
+          const regionGroups = {};
           for (const s of list) {
-            if (s.region !== lastRegion) {
-              flushRegion();
-              lastRegion = s.region;
-              const regionCount = list.filter(x => x.region === s.region).length;
-              html += '<h2 style="font-size:18px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)">' + GCG.escapeHtml(s.region) + ' <span style="font-size:13px;color:var(--text-muted);font-weight:400">（' + regionCount + '店舗）</span></h2>';
-            }
-            if (s.pref_code !== lastPref) {
-              flushPrefBuf();
-              lastPref = s.pref_code;
-            }
-            prefBuf.push(s);
+            if (!regionGroups[s.region]) regionGroups[s.region] = { stores: [], prefMap: {} };
+            regionGroups[s.region].stores.push(s);
+            if (!regionGroups[s.region].prefMap[s.pref_code]) regionGroups[s.region].prefMap[s.pref_code] = [];
+            regionGroups[s.region].prefMap[s.pref_code].push(s);
           }
-          flushRegion();
+
+          // 表示順序を REGION_ORDER に従う（list は事前にソート済みだが、グループ単位で順序保証）
+          const regionsInOrder = REGION_ORDER.filter(r => regionGroups[r]);
+
+          let html = '<div class="toggle-bar">'
+            + '<button type="button" id="expand-all">全て展開</button>'
+            + '<button type="button" id="collapse-all">全て折りたたみ</button>'
+            + '</div>';
+
+          for (const region of regionsInOrder) {
+            const grp = regionGroups[region];
+            const prefCodes = Object.keys(grp.prefMap).sort();
+            let prefHtml = '';
+            for (const code of prefCodes) {
+              const ps = grp.prefMap[code];
+              const prefName = PREF_MAP[code] || code;
+              prefHtml += '<details class="pref-block" open>'
+                + '<summary><h3>' + GCG.escapeHtml(prefName) + ' <span style="color:var(--text-muted);font-weight:400">（' + ps.length + '店舗）</span></h3></summary>'
+                + '<div class="store-grid">' + ps.map(renderStoreRow).join('') + '</div>'
+                + '</details>';
+            }
+            html += '<details class="region-block" open>'
+              + '<summary><h2>' + GCG.escapeHtml(region) + ' <span style="font-size:13px;color:var(--text-muted);font-weight:400">（' + grp.stores.length + '店舗）</span></h2></summary>'
+              + '<div class="region-content">' + prefHtml + '</div>'
+              + '</details>';
+          }
           root.innerHTML = html;
+
+          // Toggle handlers
+          const expandBtn = document.getElementById('expand-all');
+          const collapseBtn = document.getElementById('collapse-all');
+          if (expandBtn) expandBtn.addEventListener('click', () => {
+            root.querySelectorAll('details').forEach(d => d.open = true);
+          });
+          if (collapseBtn) collapseBtn.addEventListener('click', () => {
+            root.querySelectorAll('details').forEach(d => d.open = false);
+          });
         } else {
           root.innerHTML = '<div class="store-grid">' + list.map(renderStoreRow).join('') + '</div>';
         }
