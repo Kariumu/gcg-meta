@@ -12,12 +12,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>店舗一覧 | GCG STATS</title>
-  <meta name="description" content="ガンダムカードゲーム公式トーナメントの開催実績がある店舗の一覧。都道府県別に表示し、検索・並び替えが可能です。">
+  <meta name="description" content="ガンダムカードゲーム公式トーナメントの開催実績がある店舗の一覧。地域・都道府県・エリアで絞り込みできます。">
   <link rel="canonical" href="https://gcg-stats.com/stores.html">
   <meta property="og:site_name" content="GCG STATS">
   <meta property="og:locale" content="ja_JP">
   <meta property="og:title" content="店舗一覧 | GCG STATS">
-  <meta property="og:description" content="ガンダムカードゲーム公式トーナメントの開催実績がある店舗の一覧。都道府県別に表示し、検索・並び替えが可能です。">
+  <meta property="og:description" content="ガンダムカードゲーム公式トーナメントの開催実績がある店舗の一覧。地域・都道府県・エリアで絞り込みできます。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gcg-stats.com/stores.html">
   <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
@@ -50,15 +50,19 @@
       ガンダムカードゲーム公式トーナメントの開催実績がある店舗の一覧。店舗名・住所で検索できます。
     </p>
 
-    <div class="filter-bar" style="margin-bottom:16px">
+    <div class="filter-bar" style="margin-bottom:16px;flex-wrap:wrap">
       <input type="search" class="filter-input" id="store-search" placeholder="店舗名・住所で検索..." style="flex:1;min-width:200px">
+      <select id="region-filter" class="filter-input" style="min-width:140px">
+        <option value="">すべての地域</option>
+      </select>
       <select id="pref-filter" class="filter-input" style="min-width:140px">
         <option value="">すべての都道府県</option>
       </select>
+      <select id="city-filter" class="filter-input" style="min-width:140px" disabled>
+        <option value="">すべてのエリア</option>
+      </select>
       <select id="sort-by" class="filter-input" style="min-width:140px">
         <option value="prefecture">都道府県順</option>
-        <option value="count_desc">開催実績が多い順</option>
-        <option value="latest_desc">直近開催が新しい順</option>
         <option value="name">店舗名（あいうえお順）</option>
       </select>
     </div>
@@ -84,6 +88,29 @@
       'CN-HK':'香港'
     };
 
+    // 地域マップ（pref_code → 地域名）。三重県は近畿地方として扱う。香港は「海外」枠。
+    const REGION_MAP = {
+      'JP-01':'北海道',
+      'JP-02':'東北','JP-03':'東北','JP-04':'東北','JP-05':'東北','JP-06':'東北','JP-07':'東北',
+      'JP-08':'関東','JP-09':'関東','JP-10':'関東','JP-11':'関東','JP-12':'関東','JP-13':'関東','JP-14':'関東',
+      'JP-15':'中部・甲信越','JP-16':'中部・甲信越','JP-17':'中部・甲信越','JP-18':'中部・甲信越','JP-19':'中部・甲信越','JP-20':'中部・甲信越','JP-21':'中部・甲信越','JP-22':'中部・甲信越','JP-23':'中部・甲信越',
+      'JP-24':'関西','JP-25':'関西','JP-26':'関西','JP-27':'関西','JP-28':'関西','JP-29':'関西','JP-30':'関西',
+      'JP-31':'中国','JP-32':'中国','JP-33':'中国','JP-34':'中国','JP-35':'中国',
+      'JP-36':'四国','JP-37':'四国','JP-38':'四国','JP-39':'四国',
+      'JP-40':'九州・沖縄','JP-41':'九州・沖縄','JP-42':'九州・沖縄','JP-43':'九州・沖縄','JP-44':'九州・沖縄','JP-45':'九州・沖縄','JP-46':'九州・沖縄','JP-47':'九州・沖縄',
+      'CN-HK':'海外'
+    };
+    // 表示順序（海外＝香港 を最下部に）
+    const REGION_ORDER = ['北海道','東北','関東','中部・甲信越','関西','中国','四国','九州・沖縄','海外'];
+
+    // city フィールドから「区／市／町／村」までの先頭部分を抽出（例: "渋谷区宇田川町" → "渋谷区"）
+    function extractArea(cityField) {
+      if (!cityField) return '';
+      const s = String(cityField).replace(/\u3000/g, ' ').trim();
+      const m = s.match(/^(.+?[区市町村])/);
+      return m ? m[1] : s;
+    }
+
     (async () => {
       document.getElementById('breadcrumb').innerHTML = GCG.renderBreadcrumb([
         { name: 'トップ', href: '/' },
@@ -95,66 +122,116 @@
 
       const root = document.getElementById('stores-root');
 
-      let schedule, events;
+      let schedule;
       try {
-        const [s, e] = await Promise.all([
-          fetch('/data/schedule.json').then(r => { if (!r.ok) throw new Error('schedule.json HTTP ' + r.status); return r.json(); }),
-          fetch('/data/events.json').then(r => { if (!r.ok) throw new Error('events.json HTTP ' + r.status); return r.json(); })
-        ]);
-        schedule = s; events = e;
+        schedule = await fetch('/data/schedule.json').then(r => { if (!r.ok) throw new Error('schedule.json HTTP ' + r.status); return r.json(); });
       } catch (err) {
         root.setAttribute('data-state', 'error');
         root.innerHTML = '<div style="padding:24px;color:var(--text-muted);font-size:13px">データの読み込みに失敗しました（' + GCG.escapeHtml(err.message) + '）。</div>';
         return;
       }
 
-      // 店舗毎の開催実績を集計
-      const storeStats = {};
-      for (const ev of Object.values(events.events || {})) {
-        if (!ev.store_id) continue;
-        const id = String(ev.store_id);
-        if (!storeStats[id]) storeStats[id] = { count: 0, latest: null };
-        storeStats[id].count++;
-        if (!storeStats[id].latest || ev.date > storeStats[id].latest) {
-          storeStats[id].latest = ev.date;
-        }
-      }
-
       const stores = [];
       for (const [id, s] of Object.entries(schedule.stores || {})) {
         if (!s || !s.name) continue;
         const normId = String(id);
+        const pref_code = s.pref_code || '';
         stores.push({
           id: s.id != null ? s.id : normId,
           name: String(s.name).replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim(),
-          rawName: s.name,
-          pref_code: s.pref_code || '',
-          pref: PREF_MAP[s.pref_code] || '(不明)',
+          pref_code,
+          pref: PREF_MAP[pref_code] || '(不明)',
+          region: REGION_MAP[pref_code] || '(その他)',
           city: s.city || '',
-          address: s.address || '',
-          stats: storeStats[normId] || { count: 0, latest: null }
+          area: extractArea(s.city || ''),
+          address: s.address || ''
         });
       }
 
       document.getElementById('store-count').textContent = stores.length + ' 店舗';
 
-      // 都道府県セレクト（実在する pref だけ）
-      const prefSelect = document.getElementById('pref-filter');
-      const prefCodes = Array.from(new Set(stores.map(s => s.pref_code).filter(Boolean))).sort();
-      for (const code of prefCodes) {
+      // 地域セレクト
+      const regionSelect = document.getElementById('region-filter');
+      const presentRegions = REGION_ORDER.filter(r => stores.some(s => s.region === r));
+      for (const r of presentRegions) {
         const opt = document.createElement('option');
-        opt.value = code;
-        opt.textContent = (PREF_MAP[code] || code) + ' (' + stores.filter(s => s.pref_code === code).length + ')';
-        prefSelect.appendChild(opt);
+        opt.value = r;
+        opt.textContent = r + ' (' + stores.filter(s => s.region === r).length + ')';
+        regionSelect.appendChild(opt);
       }
+
+      const prefSelect = document.getElementById('pref-filter');
+      const citySelect = document.getElementById('city-filter');
+
+      function rebuildPrefSelect() {
+        const region = regionSelect.value;
+        const targets = region ? stores.filter(s => s.region === region) : stores;
+        const codes = Array.from(new Set(targets.map(s => s.pref_code).filter(Boolean)));
+        // ソート: 海外（CN-）は末尾、それ以外は ISO コード順
+        codes.sort((a, b) => {
+          const aFor = a.startsWith('JP-') ? 0 : 1;
+          const bFor = b.startsWith('JP-') ? 0 : 1;
+          if (aFor !== bFor) return aFor - bFor;
+          return a.localeCompare(b);
+        });
+        // current value preserve if still valid
+        const cur = prefSelect.value;
+        prefSelect.innerHTML = '<option value="">すべての都道府県</option>';
+        for (const code of codes) {
+          const opt = document.createElement('option');
+          opt.value = code;
+          opt.textContent = (PREF_MAP[code] || code) + ' (' + targets.filter(s => s.pref_code === code).length + ')';
+          prefSelect.appendChild(opt);
+        }
+        prefSelect.value = codes.includes(cur) ? cur : '';
+      }
+
+      function rebuildCitySelect() {
+        const pref = prefSelect.value;
+        if (!pref) {
+          citySelect.innerHTML = '<option value="">すべてのエリア</option>';
+          citySelect.disabled = true;
+          citySelect.value = '';
+          return;
+        }
+        const targets = stores.filter(s => s.pref_code === pref);
+        const areas = Array.from(new Set(targets.map(s => s.area).filter(Boolean)));
+        areas.sort((a, b) => a.localeCompare(b, 'ja'));
+        const cur = citySelect.value;
+        citySelect.innerHTML = '<option value="">すべてのエリア</option>';
+        for (const a of areas) {
+          const opt = document.createElement('option');
+          opt.value = a;
+          opt.textContent = a + ' (' + targets.filter(s => s.area === a).length + ')';
+          citySelect.appendChild(opt);
+        }
+        // 「(エリア未登録)」の選択肢
+        const unknownCount = targets.filter(s => !s.area).length;
+        if (unknownCount > 0) {
+          const opt = document.createElement('option');
+          opt.value = '__unknown__';
+          opt.textContent = '(エリア未登録) (' + unknownCount + ')';
+          citySelect.appendChild(opt);
+        }
+        citySelect.disabled = false;
+        citySelect.value = (areas.includes(cur) || cur === '__unknown__') ? cur : '';
+      }
+
+      rebuildPrefSelect();
+      rebuildCitySelect();
 
       function applyFilters() {
         const q = (document.getElementById('store-search').value || '').replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim();
-        const pref = document.getElementById('pref-filter').value;
+        const region = regionSelect.value;
+        const pref = prefSelect.value;
+        const city = citySelect.value;
         const sortBy = document.getElementById('sort-by').value;
 
         let list = stores.slice();
+        if (region) list = list.filter(s => s.region === region);
         if (pref) list = list.filter(s => s.pref_code === pref);
+        if (city === '__unknown__') list = list.filter(s => !s.area);
+        else if (city) list = list.filter(s => s.area === city);
         if (q) {
           list = list.filter(s =>
             (s.name && s.name.indexOf(q) !== -1) ||
@@ -164,14 +241,17 @@
         }
 
         if (sortBy === 'prefecture') {
+          // region → pref → name の順序で並べるが、表示はグルーピング側で行う
           list.sort((a, b) => {
+            const ra = REGION_ORDER.indexOf(a.region);
+            const rb = REGION_ORDER.indexOf(b.region);
+            const raFor = ra === -1 ? 999 : ra;
+            const rbFor = rb === -1 ? 999 : rb;
+            if (raFor !== rbFor) return raFor - rbFor;
+            // 同地域内: 都道府県コード順（海外は同地域なので無視）
             if (a.pref_code !== b.pref_code) return a.pref_code.localeCompare(b.pref_code);
             return a.name.localeCompare(b.name, 'ja');
           });
-        } else if (sortBy === 'count_desc') {
-          list.sort((a, b) => (b.stats.count || 0) - (a.stats.count || 0) || a.name.localeCompare(b.name, 'ja'));
-        } else if (sortBy === 'latest_desc') {
-          list.sort((a, b) => (b.stats.latest || '').localeCompare(a.stats.latest || '') || a.name.localeCompare(b.name, 'ja'));
         } else if (sortBy === 'name') {
           list.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
         }
@@ -186,21 +266,39 @@
         }
 
         if (sortBy === 'prefecture') {
-          // 都道府県でグルーピング
-          const groups = {};
-          for (const s of list) {
-            if (!groups[s.pref_code]) groups[s.pref_code] = [];
-            groups[s.pref_code].push(s);
-          }
+          // 地域 → 都道府県 の 2 段で見出しを出す
           let html = '';
-          for (const code of Object.keys(groups).sort()) {
-            const g = groups[code];
-            html += '<section style="margin:24px 0">'
-              + '<h2 style="font-size:14px;color:var(--accent);margin:16px 0 8px">' + GCG.escapeHtml(PREF_MAP[code] || code) + '（' + g.length + '店舗）</h2>'
-              + '<div class="store-grid">'
-              + g.map(renderStoreRow).join('')
-              + '</div></section>';
+          let lastRegion = null;
+          let lastPref = null;
+          let prefBuf = [];
+
+          function flushPrefBuf() {
+            if (lastPref === null || prefBuf.length === 0) return;
+            html += '<section style="margin:8px 0 24px">'
+              + '<h3 style="font-size:14px;color:var(--accent);margin:8px 0">' + GCG.escapeHtml(PREF_MAP[lastPref] || lastPref) + '（' + prefBuf.length + '店舗）</h3>'
+              + '<div class="store-grid">' + prefBuf.map(renderStoreRow).join('') + '</div>'
+              + '</section>';
+            prefBuf = [];
           }
+          function flushRegion() {
+            flushPrefBuf();
+            lastPref = null;
+          }
+
+          for (const s of list) {
+            if (s.region !== lastRegion) {
+              flushRegion();
+              lastRegion = s.region;
+              const regionCount = list.filter(x => x.region === s.region).length;
+              html += '<h2 style="font-size:18px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--border)">' + GCG.escapeHtml(s.region) + ' <span style="font-size:13px;color:var(--text-muted);font-weight:400">（' + regionCount + '店舗）</span></h2>';
+            }
+            if (s.pref_code !== lastPref) {
+              flushPrefBuf();
+              lastPref = s.pref_code;
+            }
+            prefBuf.push(s);
+          }
+          flushRegion();
           root.innerHTML = html;
         } else {
           root.innerHTML = '<div class="store-grid">' + list.map(renderStoreRow).join('') + '</div>';
@@ -209,20 +307,39 @@
 
       function renderStoreRow(s) {
         const href = '/store.html?id=' + encodeURIComponent(s.id);
-        const count = s.stats.count > 0 ? (s.stats.count + '件') : '–';
-        const latest = s.stats.latest ? s.stats.latest.replace(/-/g, '/') : '–';
         return '<a href="' + href + '" class="store-row">'
           + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
-          + '<div class="store-row-stats">'
-          +   '<span>開催: ' + count + '</span>'
-          +   '<span>直近: ' + latest + '</span>'
-          + '</div>'
           + '</a>';
       }
 
+      // イベントリスナ
       document.getElementById('store-search').addEventListener('input', applyFilters);
-      document.getElementById('pref-filter').addEventListener('change', applyFilters);
+      regionSelect.addEventListener('change', () => {
+        // 地域変更時、都道府県・エリアをリセット → 再構築 → 適用
+        prefSelect.value = '';
+        citySelect.value = '';
+        rebuildPrefSelect();
+        rebuildCitySelect();
+        applyFilters();
+      });
+      prefSelect.addEventListener('change', () => {
+        // 都道府県変更時、エリアをリセット → 再構築 → 適用
+        // 都道府県を選んだ場合、地域は自動連動（推測）
+        if (prefSelect.value && !regionSelect.value) {
+          const region = REGION_MAP[prefSelect.value];
+          if (region && Array.from(regionSelect.options).some(o => o.value === region)) {
+            regionSelect.value = region;
+            rebuildPrefSelect();
+            // 再選択
+            prefSelect.value = prefSelect.value;
+          }
+        }
+        citySelect.value = '';
+        rebuildCitySelect();
+        applyFilters();
+      });
+      citySelect.addEventListener('change', applyFilters);
       document.getElementById('sort-by').addEventListener('change', applyFilters);
 
       applyFilters();
