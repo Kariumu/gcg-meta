@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSA環境レポート Week 11（2026/4/12〜4/18）| GCG STATS</title>
+  <meta name="description" content="Mobile Suit Arenaのランクマッチ43,638試合から見る2026年4月12日〜4月18日のオンラインメタ分析。青紫アグロが2週連続首位、使用率15.6%でさらに支配力を強化。">
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="MSA環境レポート Week 11（2026/4/12〜4/18）| GCG STATS">
+  <meta property="og:description" content="Mobile Suit Arenaのランクマッチ43,638試合から見るオンラインメタ週次レポート。Top5の順位は2週連続不変、青紫アグロが独走。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://gcg-stats.com/reports/msa-week11.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp/msa-week11.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp/msa-week11.png">
+  <link rel="canonical" href="https://gcg-stats.com/reports/msa-week11.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <a href="../reports/" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a>
+
+    <div class="section-header" style="margin-top:16px">
+      <h1 class="section-title">MSA環境レポート Week 11</h1>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:4px">
+        青紫アグロが2週連続首位、使用率15.6%でさらに支配力を強化
+      </p>
+      <p style="color:var(--text-muted);font-size:12px;margin-top:4px">
+        対象期間: 2026年4月12日 〜 2026年4月18日
+      </p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius)">
+      <p style="margin:0;font-size:13px;line-height:1.8;color:var(--text-secondary)">
+        本記事は、<strong>Doug Godinho氏</strong>が<a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">Patreon</a>で公開している週次メタ分析レポート「Meta Monday」のTop5デッキ部分をもとに、日本語で紹介するものです。<a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">Doug氏のPatreon</a>では、全14デッキの使用率、Top35の勝率ランキング、先攻後攻勝率、マッチアップ情報など、本記事より遥かに詳細な分析が公開されています。
+      </p>
+      <p style="margin:8px 0 0;font-size:12px;line-height:1.8;color:var(--text-muted)">
+        なお、<a href="https://mobilesuitarena.com/" target="_blank" rel="noopener" style="color:var(--accent)">Mobile Suit Arena</a>は公式の<a href="https://www.gundam-gcg.com/ja/" target="_blank" rel="noopener" style="color:var(--accent)">ガンダムカードゲーム</a>をブラウザ上で練習できる非公式のファン制作プラットフォームです。競技シーンの主戦場はあくまで公式大会（店舗予選・チャンピオンシップ等）であり、本レポートのオンライン環境データは、実戦に向けたデッキ研究やメタ把握の参考としてご活用ください。
+      </p>
+    </div>
+
+
+    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">
+
+      <h2>今週のオンライン環境サマリ</h2>
+      <p>
+        Mobile Suit Arena（以下MSA）は、Gundam Card Gameをブラウザ上でプレイできる非公式のオンライン対戦プラットフォームです。本記事では、2026年4月12日〜4月18日の期間にMSAランクマッチでプレイされた<strong>43,638試合（87,276デッキリスト）</strong>の集計データを元に、オンライン環境の使用率上位5デッキを紹介します。
+      </p>
+      <p>
+        Week 11は、GD04（4月25日リリース）の直前にあたるGD03環境の最終週です。Top5の順位はWeek 10から完全に維持され（1位 青紫アグロ → 5位 バルバトスの並びが2週連続）、青紫アグロが使用率・勝率ともにさらに上昇して支配力を強化しました。一方、Week 10で大幅後退したフォースインパルスガンダムは使用率の下落が継続。総試合数は前週比で大きく減少（54,157 → 43,638、-19.4%）しました。
+      </p>
+
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <table style="width:100%;font-size:13px">
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">対象期間</td>
+            <td style="padding:4px 8px">2026年4月12日 〜 4月18日</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">対象モード</td>
+            <td style="padding:4px 8px">ランクマッチ</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">分析試合数</td>
+            <td style="padding:4px 8px">43,638試合</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">デッキリスト数</td>
+            <td style="padding:4px 8px">87,276</td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>使用率Top5デッキ</h2>
+
+      <!-- デッキ1: 青紫 アグロ -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">1位</span>
+          青紫 アグロ
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>15.6%</strong> <span style="color:var(--green)">(先週比 +1.0%)</span>
+          　/
+          勝率 <strong>59.5%</strong> <span style="color:var(--green)">(先週比 +0.5%)</span>
+          　/
+          試合数 13,584
+        </div>
+        <p>
+          先週から首位を維持。今週もさらに使用率が1.0ポイント上昇し、勝率も59.5%とTop5中で最高水準を維持しました。Top5の中で唯一、使用率・勝率ともに上昇したデッキで、現環境の中核としての地盤がさらに強まっています。
+        </p>
+      </div>
+
+      <!-- デッキ2: フォースインパルスガンダム -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">2位</span>
+          フォースインパルスガンダム
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>9.5%</strong> <span style="color:var(--red)">(先週比 -1.6%)</span>
+          　/
+          勝率 <strong>44.3%</strong> <span style="color:var(--green)">(先週比 +1.1%)</span>
+          　/
+          試合数 8,320
+        </div>
+        <p>
+          先週の-6.1ポイント（17.2% → 11.1%）に続き、今週も使用率が1.6ポイント下落。勝率は1.1ポイント微増したものの44.3%にとどまり、Top5の中では最低水準が続いています。Week 9に首位だったデッキが2週連続で大幅な使用率減を示しており、青紫アグロとの差は前週の3.5ポイントから6.1ポイントへと拡大しました。
+        </p>
+      </div>
+
+      <!-- デッキ3: バンシィ コントロール -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">3位</span>
+          バンシィ コントロール
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>8.0%</strong> <span style="color:var(--red)">(先週比 -1.2%)</span>
+          　/
+          勝率 <strong>48.5%</strong> <span style="color:var(--red)">(先週比 -0.4%)</span>
+          　/
+          試合数 6,944
+        </div>
+        <p>
+          順位は3位を維持しているものの、使用率は1.2ポイント減と縮小傾向。勝率は約48.5%とほぼ五分の水準を維持しています。
+        </p>
+      </div>
+
+      <!-- デッキ4: ジ・O ブロッカー -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">4位</span>
+          ジ・O ブロッカー
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>7.6%</strong> <span style="color:var(--red)">(先週比 -0.4%)</span>
+          　/
+          勝率 <strong>55.3%</strong> <span style="color:var(--red)">(先週比 -1.7%)</span>
+          　/
+          試合数 6,653
+        </div>
+        <p>
+          順位は4位を維持。勝率は55.3%と依然として高水準ですが、Top5の中で最も大きい1.7ポイントの勝率下落を記録しました。使用率も微減（-0.4ポイント）しています。
+        </p>
+      </div>
+
+      <!-- デッキ5: バルバトス -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">5位</span>
+          バルバトス
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>6.1%</strong> <span style="color:var(--red)">(先週比 -0.9%)</span>
+          　/
+          勝率 <strong>46.2%</strong> <span style="color:var(--red)">(先週比 -0.7%)</span>
+          　/
+          試合数 5,298
+        </div>
+        <p>
+          順位5位を維持。使用率・勝率ともに微減（それぞれ -0.9ポイント、-0.7ポイント）。勝率は46%台で推移しており、Top5の中では使用率・勝率ともに低い水準が続いています。
+        </p>
+      </div>
+
+      <h2>今週の主な変動</h2>
+      <p>
+        Top5の顔ぶれ・順位ともにWeek 10から完全に変化なく、メタが固まりつつある様子が読み取れます。注目すべき動きは以下の通りです。
+      </p>
+      <ul style="line-height:1.8">
+        <li><strong>Top5の順位が2週連続で完全不変</strong>: 1位 青紫アグロ、2位 フォースインパルスガンダム、3位 バンシィ コントロール、4位 ジ・O ブロッカー、5位 バルバトスの並びがWeek 10と同じ。GD04リリース直前で、各プレイヤーが既知のアーキタイプに収束している可能性があります。</li>
+        <li><strong>青紫アグロが独走を強化</strong>: 使用率・勝率ともに上昇したのはTop5の中で青紫アグロのみ。フォースインパルスガンダムとの使用率差は、前週の3.5ポイント（14.6% - 11.1%）から6.1ポイント（15.6% - 9.5%）へと大きく拡大しました。</li>
+        <li><strong>フォースインパルスガンダムの連続後退</strong>: Week 9 → Week 10で-6.1ポイント、Week 10 → Week 11で-1.6ポイントと、2週連続で使用率が下落。Week 9時点では首位だったデッキが、現在は青紫アグロから6ポイント以上引き離されています。</li>
+        <li><strong>Top5以外への分散が進行</strong>: Top5の使用率合計はWeek 10の49.9%から、Week 11は46.8%へ -3.1ポイント減少。使用率はTop5以外のデッキへ分散している可能性があります（実際にDoug氏のレポート上、Week 11では使用率2%以上のデッキが14種類存在しています）。</li>
+        <li><strong>総試合数が前週比 -19.4%</strong>: 54,157試合 → 43,638試合と大きく減少しました。原因はDoug氏の原文では言及されていないため、本データからは断定できませんが、GD04リリース直前の様子見・連休影響などの可能性が考えられます。</li>
+      </ul>
+
+      <h2>GD04環境への展望</h2>
+      <p>
+        Week 11はGD03環境の最終週にあたり、4月25日のGD04（Phantom Aria）リリース後は環境が大きく変動する見込みです。Doug氏のWeek 11レポート本文中にGD04に関する具体的な言及はありませんでしたが、次回 Week 12 の Meta Monday が GD04 リリース後初の週次データを反映するレポートになる可能性が高く、Top5の構成にも変化が生じる可能性があります。GCG STATS では Week 12 以降も継続して日本語要約を予定しています。
+      </p>
+
+      <h2>データソースとクレジット</h2>
+      <p>
+        本記事の数値データは、<strong>Doug Godinho氏</strong>が運営する <strong>Mobile Suit Arena</strong> の <strong>Meta Monday</strong>（週次メタ分析レポート）を参考に、Top5デッキ部分を日本語で紹介しています。全14デッキの使用率、Top35の勝率ランキング、先攻後攻勝率、マッチアップ情報など、より詳細な分析は Doug Godinho氏の Patreon で公開されています。本記事は Doug氏の許可を得て公開しています。
+      </p>
+      <ul style="line-height:1.8">
+        <li>Mobile Suit Arena: <a href="https://mobilesuitarena.com/" target="_blank" rel="noopener" style="color:var(--accent)">mobilesuitarena.com</a></li>
+        <li>Meta Monday Week 11 全文（Doug Godinho氏 Patreon）: <a href="https://www.patreon.com/posts/meta-monday-gd03-156217651" target="_blank" rel="noopener" style="color:var(--accent)">patreon.com/posts/meta-monday-gd03-156217651</a></li>
+        <li>Meta Monday シリーズ全体: <a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">patreon.com/DougGodinho</a></li>
+        <li>ガンダムカードゲーム公式サイト: <a href="https://www.gundam-gcg.com/ja/" target="_blank" rel="noopener" style="color:var(--accent)">gundam-gcg.com</a></li>
+      </ul>
+
+      <div style="margin:20px 0 0;padding:14px 18px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:13px;color:var(--text-secondary);line-height:1.8">
+        <strong>🎴 公式ガンダムカードゲームを楽しもう</strong><br>
+        競技シーンの本番は<a href="https://www.gundam-gcg.com/ja/" target="_blank" rel="noopener" style="color:var(--accent)">公式ガンダムカードゲーム</a>の店舗予選・チャンピオンシップです。Mobile Suit Arena はあくまでオンラインで練習やデッキ研究を行う場として活用し、実戦では公式ゲームを中心に楽しんでください。余裕があれば、データ集計・分析を続けてくれている<a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">Doug氏のPatreon</a>支援もぜひご検討を。
+      </div>
+
+      <p style="margin-top:24px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.7">
+        ※本記事で扱う数値は、オンライン対戦プラットフォーム上での集計データであり、実戦（紙の公式大会）とは環境が異なります。<br>
+        ※Mobile Suit Arena は非公式のファン制作プラットフォームです。<br>
+        ※デッキ名は海外コミュニティでの呼称を日本語化したものです。国内での呼称とは異なる場合があります。<br>
+        ※記事内容に誤りがある場合には<a href="https://x.com/gcg_stats" target="_blank" rel="noopener" style="color:var(--accent)">Xアカウント（@gcg_stats）</a>のDMへご報告ください。
+      </p>
+
+    </article>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=8"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>
