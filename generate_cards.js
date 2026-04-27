@@ -33,7 +33,11 @@ const TYPE_JP = {
 
 // レアリティ表示
 const RARITY_LABEL = {
-  'LR': 'LR', 'R': 'R', 'U': 'U', 'C': 'C'
+  'LR': 'LR', 'R': 'R', 'U': 'U', 'C': 'C',
+  'LR+': 'LR+', 'LR++': 'LR++', 'LR+++': 'LR+++',
+  'R+': 'R+', 'R++': 'R++',
+  'U+': 'U+', 'U++': 'U++',
+  'C+': 'C+', 'C++': 'C++'
 };
 
 // デッキカラー定義
@@ -172,7 +176,71 @@ function findLinkedCards(cardId, allCards) {
   }
 
   results.sort((a, b) => a.id.localeCompare(b.id));
-  return results;
+  // パラレル版を除外（リンク一覧は通常版のみ表示）
+  return results.filter(c => !c.id.includes('_p'));
+}
+
+/**
+ * 同じ base_card_id を持つ他のバージョンを検索
+ */
+function findOtherVersions(cardId, allCards) {
+  const card = allCards[cardId];
+  if (!card) return [];
+
+  const baseId = card.base_card_id || cardId;
+
+  const versions = [];
+  for (const [id, c] of Object.entries(allCards)) {
+    if (id === cardId) continue;
+    const otherBaseId = c.base_card_id || id;
+    if (otherBaseId === baseId) {
+      versions.push({
+        id: id,
+        name_jp: c.name_jp || id,
+        rarity: c.rarity,
+        is_parallel: c.is_parallel || false,
+        parallel_number: c.parallel_number || null
+      });
+    }
+  }
+
+  // 並び順: 通常版 → _p1 → _p2 ...
+  versions.sort((a, b) => {
+    if (!a.is_parallel && b.is_parallel) return -1;
+    if (a.is_parallel && !b.is_parallel) return 1;
+    return (a.parallel_number || 0) - (b.parallel_number || 0);
+  });
+
+  return versions;
+}
+
+/**
+ * 別バージョンセクションのHTML生成
+ */
+function generateOtherVersionsHtml(cardId, allCards) {
+  const versions = findOtherVersions(cardId, allCards);
+  if (versions.length === 0) return '';
+
+  const versionsHtml = versions.map(v => {
+    const altText = v.is_parallel
+      ? `${escapeHtml(v.name_jp)}（パラレル版${v.parallel_number || ''}）`
+      : `${escapeHtml(v.name_jp)}（通常版）`;
+    return `<a href="../${v.id}/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;padding:6px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px;transition:border-color 0.15s"
+                   onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <img src="/images/cards/${v.id}.webp" alt="${altText}"
+                       style="width:60px;height:84px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
+                       onerror="this.style.display='none'">
+                  <div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);text-align:center">${escapeHtml(v.rarity)}</div>
+                </a>`;
+  }).join('\n');
+
+  return `
+        <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+          <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:1px">別バージョン</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            ${versionsHtml}
+          </div>
+        </div>`;
 }
 
 /**
@@ -255,16 +323,25 @@ function main() {
 
   const generatedCardIds = [];
 
-  for (const cardId of allCardIds) {
+  // DEBUG mode: 4枚のみ生成（テスト用）
+  const DEBUG_IDS = ['GD04-001', 'GD04-001_p1', 'GD04-017_p2', 'GD01-002_p2'];
+  const targetCardIds = process.env.DEBUG ? DEBUG_IDS : [...allCardIds];
+
+  for (const cardId of targetCardIds) {
     generatedCardIds.push(cardId);
-    const card = cardRankingMap[cardId] || null;
-    const coUsed = allCoUsed[cardId] || [];
+    const masterCard = cardsMaster[cardId] || null;
+
+    // パラレル版なら base_card_id のデータを参照
+    const dataKey = masterCard?.base_card_id || cardId;
+
+    const card = cardRankingMap[dataKey] || null;
+    const coUsed = allCoUsed[dataKey] || [];
 
     // デッキタイプ別採用状況
     const typeUsage = [];
     if (card) {
       for (const dt of deckTypes) {
-        const c = (dt.card_ranking || []).find(x => x.card_id === cardId);
+        const c = (dt.card_ranking || []).find(x => x.card_id === dataKey);
         if (c) {
           typeUsage.push({
             label: dt.label,
@@ -283,7 +360,7 @@ function main() {
     for (const ev of Object.values(eventsData.events)) {
       for (const result of (ev.results || [])) {
         if (result.rank > 4) continue;
-        const c = (result.deck || []).find(x => x.card_id === cardId);
+        const c = (result.deck || []).find(x => x.card_id === dataKey);
         if (c) {
           adoptions.push({
             eventId: ev.event_id,
@@ -298,7 +375,6 @@ function main() {
     }
     adoptions.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
-    const masterCard = cardsMaster[cardId] || null;
     const html = generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard, coUsed);
 
     const cardDir = path.join(CARDS_DIR, cardId);
@@ -367,6 +443,10 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   const avgCount = hasData ? card.avg_count : 0;
   const totalDecks = summary.total_decks;
 
+  // パラレル版判定
+  const isParallel = masterCard?.is_parallel || false;
+  const baseCardId = masterCard?.base_card_id || cardId;
+
   // デッキタイプ別採用数の合計・総デッキ数の合計
   const totalAdoptions = typeUsage.reduce((sum, tu) => sum + tu.adoptionCount, 0);
   const totalDeckCount = typeUsage.reduce((sum, tu) => sum + tu.deckCount, 0);
@@ -378,10 +458,11 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   const colorJp = masterCard ? (COLOR_JP[masterCard.color] || masterCard.color) : '';
   const typeJp = masterCard ? (TYPE_JP[masterCard.card_type] || masterCard.card_type) : '';
 
-  // リンク関連カード
+  // リンク関連カード（パラレル版はbase_card_idのリンク先を使う）
   let linkedHtml = '';
   if (masterCard) {
-    const linkedCards = findLinkedCards(cardId, cardsMaster);
+    const linkLookupId = isParallel ? baseCardId : cardId;
+    const linkedCards = findLinkedCards(linkLookupId, cardsMaster);
     if (linkedCards.length > 0) {
       const sectionTitle = masterCard.card_type === 'UNIT'
         ? 'リンク対象パイロット'
@@ -414,12 +495,24 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   }
 
   // SEO用 description
-  const description = masterCard
-    ? `${cardName}（${cardId}）のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。色:${colorJp} タイプ:${typeJp}`
-    : `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。`;
+  let description;
+  if (masterCard && isParallel) {
+    // 他弾再録パラレルの場合
+    if (!cardId.startsWith('GD04-') && masterCard.acquisition_info) {
+      description = `${cardName}（${cardId}）は${baseCardId}のパラレル版で、${masterCard.acquisition_info}に再録されました。色:${colorJp} タイプ:${typeJp} レアリティ:${masterCard.rarity} 採用率データは通常版と共通です。`;
+    } else {
+      description = `${cardName}（${cardId}）は${baseCardId}のパラレル版です。色:${colorJp} タイプ:${typeJp} レアリティ:${masterCard.rarity} 採用率データは通常版と共通です。`;
+    }
+  } else if (masterCard) {
+    description = `${cardName}（${cardId}）のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。色:${colorJp} タイプ:${typeJp}`;
+  } else {
+    description = `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。`;
+  }
   // SEO用 title
   const pageTitle = masterCard
-    ? `${cardName}（${cardId}）の大会採用率 | GCG STATS`
+    ? (isParallel
+        ? `${cardName}（${cardId}）パラレル版の大会採用率 | GCG STATS`
+        : `${cardName}（${cardId}）の大会採用率 | GCG STATS`)
     : `${cardId} の大会採用率・使用デッキ | GCG STATS`;
 
   // デッキタイプ別テーブル
@@ -538,23 +631,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   <link rel="stylesheet" href="../../css/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="../../index.html" class="site-logo">
-        <span class="logo-icon">G</span>
-        <div>
-          <span class="logo-text">GCG STATS</span>
-          <span class="logo-sub">Tournament Analytics</span>
-        </div>
-      </a>
-      <nav>
-        <a href="../../index.html">ダッシュボード</a>
-        <a href="../../events.html">イベント</a>
-        <a href="../../meta.html">環境分析</a>
-        <a href="../../cards.html">カードリスト</a>
-      </nav>
-    </div>
-  </header>
+  <div id="header"></div>
 
   <main class="container">
     <div style="margin-bottom:12px">
@@ -607,7 +684,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
 
     <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap">
       <div style="flex-shrink:0">
-        <img id="card-img" src="/images/cards/${cardId}.webp" alt="${escapeHtml(cardName)}"
+        <img id="card-img" src="/images/cards/${cardId}.webp" alt="${escapeHtml(cardName)}${isParallel ? '（パラレル版）' : ''}"
              style="width:180px;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
              onclick="openLightbox(this.src)"
              onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='/images/cards/${cardId}.webp?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
@@ -625,13 +702,15 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
           ${masterCard.card_type === 'COMMAND' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">コスト${masterCard.cost}</span>` : ''}
         </div>
         ${masterCard.traits && masterCard.traits.length > 0 ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ${escapeHtml(masterCard.traits.join(', '))}</p>` : ''}
-        ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}` : ''}
-        <a href="https://www.gundam-gcg.com/jp/cards/index.php?freeword=${cardId}" target="_blank" rel="noopener"
+        ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}
+        ${masterCard.acquisition_info ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">入手情報: ${escapeHtml(masterCard.acquisition_info)}</p>` : ''}` : ''}
+        <a href="https://www.gundam-gcg.com/jp/cards/${isParallel ? 'detail.php?detailSearch=' : 'index.php?freeword='}${cardId}" target="_blank" rel="noopener"
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
         </a>
 
         ${linkedHtml}
+        ${generateOtherVersionsHtml(cardId, cardsMaster)}
 
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
@@ -651,6 +730,9 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
             <div class="stat-value">${avgCount}<span class="unit">枚</span></div>
           </div>
         </div>
+        ${isParallel ? `<p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
+          ※採用率データは通常版（<a href="../${baseCardId}/" style="color:var(--accent)">${baseCardId}</a>）と共通です
+        </p>` : ''}
       </div>
     </div>
 
@@ -692,8 +774,9 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   <script src="../../js/common.js?v=8"></script>
   <script>
     GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', '${escapeHtml(cardName || cardId)}（${cardId}）採用率${usageRate}% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', '${escapeHtml(cardName || cardId)}（${cardId}）${isParallel ? 'パラレル版' : ''}採用率${usageRate}% | GCG STATS');
   </script>
 </body>
 </html>`;

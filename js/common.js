@@ -218,10 +218,13 @@ const GCG = {
           本サイトはガンダムカードゲームの非公式ファンサイトです。<br>
           バンダイ・サンライズの認可・許諾は得ていません。<br>
           掲載情報は公式大会結果を基に自動集計しています。<br>
+          カード画像・テキスト等は<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">公式サイト</a>より引用しています。<br>
           ガンダムおよびガンダムカードゲームに関連するすべての名称・デザイン・商標は、©SOTSU・SUNRISE・BANDAIに帰属します。<br>
           <br>
           本サイトは公式ゲームの代替を意図したものではありません。<br>
-          ガンダムカードゲーム公式サイト(<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">gundam-gcg.com</a>)をご利用・ご支援ください。
+          ガンダムカードゲーム公式サイト(<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">gundam-gcg.com</a>)をご利用・ご支援ください。<br>
+          <br>
+          <span style="font-size:10px;color:var(--text-muted);">権利者からの削除・修正のご要請には<a href="${basePath}contact.html" style="color:var(--accent);text-decoration:none;">お問い合わせ</a>より速やかに対応いたします。</span>
         </div>
         <div class="footer-links" style="margin-top:16px;display:flex;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
           <a href="${basePath}privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">プライバシーポリシー</a>
