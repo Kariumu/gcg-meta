@@ -102,6 +102,7 @@
         </div>
         <p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ミリシャ</p>
         
+        <p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">入手情報: Phantom Aria [GD04]</p>
         <a href="https://www.gundam-gcg.com/jp/cards/index.php?freeword=GD04-067" target="_blank" rel="noopener"
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
@@ -125,6 +126,19 @@
                 </a>
           </div>
         </div>
+        
+        <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+          <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:1px">別バージョン</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <a href="../GD04-067_p1/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;padding:6px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px;transition:border-color 0.15s"
+                   onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <img src="/images/cards/GD04-067_p1.webp" alt="∀ガンダム（パラレル版1）"
+                       style="width:60px;height:84px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
+                       onerror="this.style.display='none'">
+                  <div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);text-align:center">LR+</div>
+                </a>
+          </div>
+        </div>
 
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
@@ -144,6 +158,7 @@
             <div class="stat-value">0<span class="unit">枚</span></div>
           </div>
         </div>
+        
       </div>
     </div>
 
@@ -189,7 +204,7 @@
     });
   </script>
 
-  <script src="../../js/common.js?v=8"></script>
+  <script src="../../js/common.js?v=9"></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
