@@ -110,6 +110,18 @@
 
         
         
+        <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+          <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:1px">別バージョン</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            <a href="../GD02-053_p1/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;padding:6px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px;transition:border-color 0.15s"
+                   onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <img src="/images/cards/GD02-053_p1.webp" alt="ガンダムX（パラレル版1）"
+                       style="width:60px;height:84px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
+                       onerror="this.style.display='none'">
+                  <div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);text-align:center">LR+</div>
+                </a>
+          </div>
+        </div>
 
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
@@ -175,7 +187,7 @@
     });
   </script>
 
-  <script src="../../js/common.js?v=9"></script>
+  <script src="../../js/common.js?v=8"></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
