@@ -94,6 +94,30 @@
       margin-top: 8px;
       margin-left: 4px;
     }
+    /* ショップバトル関連 */
+    .sb-highlight {
+      margin-bottom: 24px; padding: 20px; background: var(--bg-card);
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+    }
+    .sb-top3-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;
+    }
+    .sb-top3-card {
+      padding: 12px; background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 6px; transition: border-color 0.15s;
+    }
+    .sb-top3-card:hover { border-color: var(--accent); }
+    .sb-badge {
+      display: inline-flex; align-items: baseline; gap: 6px;
+      margin-top: 8px; padding: 4px 10px;
+      background: linear-gradient(135deg, rgba(68, 187, 255, 0.12), rgba(68, 187, 255, 0.05));
+      border: 1px solid rgba(68, 187, 255, 0.3);
+      border-radius: 4px; font-family: var(--font-mono); font-size: 11px;
+    }
+    .sb-badge-label { color: var(--text-muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sb-badge-value { color: #44bbff; font-weight: 700; font-size: 13px; }
+    .sb-badge-count { color: var(--text-muted); font-size: 10px; }
+
     .stores-collapsible .toggle-bar {
       display: flex;
       gap: 8px;
@@ -130,6 +154,18 @@
       ガンダムカードゲーム公式トーナメントの開催実績がある店舗の一覧。店舗名・住所で検索できます。
     </p>
 
+    <section class="sb-highlight" id="sb-highlight-section" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+        <h2 id="sb-highlight-title" style="font-size:14px;font-family:var(--font-mono);color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin:0">
+          読み込み中...
+        </h2>
+        <a href="/regions.html" style="color:var(--accent);text-decoration:none;font-size:12px">
+          地域別ランキング &rarr;
+        </a>
+      </div>
+      <div id="sb-top3-cards" class="sb-top3-grid"></div>
+    </section>
+
     <div class="filter-bar" style="margin-bottom:16px;flex-wrap:wrap">
       <input type="search" class="filter-input" id="store-search" placeholder="店舗名・住所で検索..." style="flex:1;min-width:200px">
       <select id="region-filter" class="filter-input" style="min-width:140px">
@@ -144,6 +180,9 @@
       <select id="sort-by" class="filter-input" style="min-width:140px">
         <option value="prefecture">都道府県順</option>
         <option value="name">店舗名（あいうえお順）</option>
+        <option value="sb-avg">SB平均参加者数順</option>
+        <option value="sb-count">SB開催回数順</option>
+        <option value="sb-total">SB総参加者数順</option>
       </select>
     </div>
 
@@ -154,7 +193,7 @@
 
   <div id="footer"></div>
 
-  <script src="/js/common.js"></script>
+  <script src="/js/common.js?v=10"></script>
   <script>
     // 都道府県コードの辞書（ISO 3166-2 形式。data/schedule.json の pref_code に一致）
     const PREF_MAP = {
@@ -211,12 +250,47 @@
         return;
       }
 
+      // ショップバトルデータ読み込み
+      let shopbattleData = null;
+      let shopbattleLatestMonth = null;
+      const shopbattleStoreMap = new Map();
+      const shopbattleNameMap = new Map();
+
+      function normalizeStoreName(name) {
+        return name.replace(/　/g, '').replace(/\s+/g, '').trim().toLowerCase();
+      }
+
+      try {
+        const manifest = await fetch('/data/shopbattle/manifest.json').then(r => r.json());
+        shopbattleLatestMonth = manifest.latestMonth;
+        shopbattleData = await fetch(`/data/shopbattle/${shopbattleLatestMonth}-aggregated.json`)
+          .then(r => r.json());
+
+        for (const store of shopbattleData.stores) {
+          shopbattleStoreMap.set(String(store.organizerId), store);
+          const norm = normalizeStoreName(store.storeName);
+          if (norm) shopbattleNameMap.set(norm, store);
+        }
+      } catch (err) {
+        console.warn('ショップバトルデータの読み込み失敗:', err);
+      }
+
+      function getShopbattleInfo(storeObj) {
+        if (!shopbattleData) return null;
+        let info = shopbattleStoreMap.get(String(storeObj.id));
+        if (!info) {
+          const norm = normalizeStoreName(storeObj.name);
+          info = shopbattleNameMap.get(norm);
+        }
+        return info;
+      }
+
       const stores = [];
       for (const [id, s] of Object.entries(schedule.stores || {})) {
         if (!s || !s.name) continue;
         const normId = String(id);
         const pref_code = s.pref_code || '';
-        stores.push({
+        const storeObj = {
           id: s.id != null ? s.id : normId,
           name: String(s.name).replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim(),
           pref_code,
@@ -225,10 +299,27 @@
           city: s.city || '',
           area: extractArea(s.city || ''),
           address: s.address || ''
-        });
+        };
+        storeObj.sbInfo = getShopbattleInfo(storeObj);
+        stores.push(storeObj);
+      }
+
+      // SB紐付けログ
+      if (shopbattleData) {
+        const sbLinked = stores.filter(s => s.sbInfo).length;
+        const sbTotal = shopbattleData.stores.length;
+        console.log('SB紐付け: ' + sbLinked + '/' + sbTotal + ' (' + (sbLinked/sbTotal*100).toFixed(1) + '%)');
+        const linkedIds = new Set(stores.filter(s => s.sbInfo).map(s => String(s.sbInfo.organizerId)));
+        const unlinked = shopbattleData.stores.filter(s => !linkedIds.has(String(s.organizerId)));
+        if (unlinked.length > 0) {
+          console.warn('SB紐付け失敗 (' + unlinked.length + '件):', unlinked.slice(0, 5).map(s => s.storeName));
+        }
       }
 
       document.getElementById('store-count').textContent = stores.length + ' 店舗';
+
+      // TOP3セクション描画
+      renderTop3Section();
 
       // 地域セレクト
       const regionSelect = document.getElementById('region-filter');
@@ -321,19 +412,23 @@
         }
 
         if (sortBy === 'prefecture') {
-          // region → pref → name の順序で並べるが、表示はグルーピング側で行う
           list.sort((a, b) => {
             const ra = REGION_ORDER.indexOf(a.region);
             const rb = REGION_ORDER.indexOf(b.region);
             const raFor = ra === -1 ? 999 : ra;
             const rbFor = rb === -1 ? 999 : rb;
             if (raFor !== rbFor) return raFor - rbFor;
-            // 同地域内: 都道府県コード順（海外は同地域なので無視）
             if (a.pref_code !== b.pref_code) return a.pref_code.localeCompare(b.pref_code);
             return a.name.localeCompare(b.name, 'ja');
           });
         } else if (sortBy === 'name') {
           list.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+        } else if (sortBy === 'sb-avg') {
+          list.sort((a, b) => (b.sbInfo?.avgParticipants || 0) - (a.sbInfo?.avgParticipants || 0) || (b.sbInfo?.eventCount || 0) - (a.sbInfo?.eventCount || 0));
+        } else if (sortBy === 'sb-count') {
+          list.sort((a, b) => (b.sbInfo?.eventCount || 0) - (a.sbInfo?.eventCount || 0) || (b.sbInfo?.avgParticipants || 0) - (a.sbInfo?.avgParticipants || 0));
+        } else if (sortBy === 'sb-total') {
+          list.sort((a, b) => (b.sbInfo?.totalParticipants || 0) - (a.sbInfo?.totalParticipants || 0) || (b.sbInfo?.eventCount || 0) - (a.sbInfo?.eventCount || 0));
         }
 
         render(list, sortBy);
@@ -392,6 +487,9 @@
           if (collapseBtn) collapseBtn.addEventListener('click', () => {
             root.querySelectorAll('details').forEach(d => d.open = false);
           });
+        } else if (sortBy.startsWith('sb-')) {
+          // SB系ソート: SBデータありの店舗を先に、なしの店舗を後に
+          root.innerHTML = '<div class="store-grid">' + list.map(renderStoreRow).join('') + '</div>';
         } else {
           root.innerHTML = '<div class="store-grid">' + list.map(renderStoreRow).join('') + '</div>';
         }
@@ -399,10 +497,58 @@
 
       function renderStoreRow(s) {
         const href = '/store.html?id=' + encodeURIComponent(s.id);
+        const sbBadge = s.sbInfo
+          ? '<div class="sb-badge" title="' + shopbattleLatestMonth + ' ショップバトル">'
+            + '<span class="sb-badge-label">' + shopbattleLatestMonth.split('-')[1] + '月SB</span>'
+            + '<span class="sb-badge-value">平均' + s.sbInfo.avgParticipants + '名</span>'
+            + '<span class="sb-badge-count">' + s.sbInfo.eventCount + '回</span>'
+            + '</div>'
+          : '';
         return '<a href="' + href + '" class="store-row">'
           + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
+          + sbBadge
           + '</a>';
+      }
+
+      function renderTop3Section() {
+        const section = document.getElementById('sb-highlight-section');
+        if (!shopbattleData) return;
+        section.style.display = '';
+
+        const monthDisplay = shopbattleLatestMonth.replace('-', '年') + '月';
+        document.getElementById('sb-highlight-title').textContent =
+          monthDisplay + ' 複数回開催 盛り上がり店舗 TOP 3';
+
+        const top3 = shopbattleData.stores
+          .filter(s => s.eventCount >= 2)
+          .sort((a, b) => b.avgParticipants - a.avgParticipants || b.eventCount - a.eventCount)
+          .slice(0, 3);
+
+        if (top3.length === 0) {
+          document.getElementById('sb-top3-cards').innerHTML =
+            '<div style="color:var(--text-muted);font-size:13px">複数回開催のデータが集まり次第表示されます</div>';
+          return;
+        }
+
+        const colors = ['#ffd700', '#c0c0c0', '#cd7f32'];
+        const html = top3.map((s, i) =>
+          '<div class="sb-top3-card">'
+          + '<div style="display:flex;align-items:baseline;gap:8px;margin-bottom:6px">'
+          + '<span style="font-size:18px;font-weight:700;color:' + colors[i] + '">' + (i + 1) + '位</span>'
+          + '<span style="font-size:13px;font-weight:600">' + GCG.escapeHtml(s.storeName) + '</span>'
+          + '</div>'
+          + '<div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono)">'
+          + GCG.escapeHtml(s.prefName)
+          + '</div>'
+          + '<div style="margin-top:6px;font-size:13px">'
+          + '<span style="font-weight:700;color:#44bbff">平均 ' + s.avgParticipants + '名</span>'
+          + '<span style="color:var(--text-muted);font-size:11px;margin-left:6px">/ ' + s.eventCount + '回開催</span>'
+          + '</div>'
+          + '</div>'
+        ).join('');
+
+        document.getElementById('sb-top3-cards').innerHTML = html;
       }
 
       // イベントリスナ

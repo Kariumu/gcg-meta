@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ショップバトル地域別ランキング | GCG STATS</title>
+  <meta name="description" content="ガンダムカードゲーム公式ショップバトルの参加者数データ。全国・地域別の盛り上がり店舗ランキングを月次で更新中。">
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="ショップバトル地域別ランキング | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲーム公式ショップバトルの参加者数データ。全国・地域別の盛り上がり店舗ランキング。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/regions.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://gcg-stats.com/regions.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "トップ", "item": "https://gcg-stats.com/" },
+      { "@type": "ListItem", "position": 2, "name": "地域別ランキング" }
+    ]
+  }
+  </script>
+
+  <style>
+    .region-tab-bar { display: flex; gap: 8px; margin: 16px 0 24px; flex-wrap: wrap; }
+    .region-tab {
+      padding: 6px 14px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 4px; font-family: var(--font-mono); font-size: 12px;
+      color: var(--text-muted); cursor: pointer; transition: all 0.15s;
+    }
+    .region-tab:hover { border-color: var(--accent); color: var(--text-primary); }
+    .region-tab.active { background: var(--accent); color: var(--bg-base); border-color: var(--accent); font-weight: 600; }
+
+    .ranking-list {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px; margin-top: 16px;
+    }
+
+    .ranking-card {
+      padding: 16px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); transition: border-color 0.15s;
+    }
+    .ranking-card:hover { border-color: var(--accent); }
+
+    .ranking-card-header { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+
+    .rank-number { font-family: var(--font-mono); font-size: 18px; font-weight: 700; }
+    .rank-number-1 { color: #ffd700; }
+    .rank-number-2 { color: #c0c0c0; }
+    .rank-number-3 { color: #cd7f32; }
+
+    .ranking-store-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .ranking-pref { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; }
+
+    .ranking-stats { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+    .ranking-stat-value { color: #44bbff; font-weight: 700; font-size: 16px; font-family: var(--font-mono); }
+    .ranking-stat-label { color: var(--text-muted); font-size: 11px; }
+
+    .region-section { margin-top: 32px; }
+    .region-section h3 {
+      font-size: 16px; font-family: var(--font-mono); color: var(--text-primary);
+      margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
+    }
+
+    .summary-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px; margin: 24px 0;
+    }
+    .summary-card {
+      padding: 14px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); text-align: center;
+    }
+    .summary-value { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--accent); }
+    .summary-label { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    .single-event-list {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 8px; margin-top: 12px;
+    }
+    .single-event-item {
+      padding: 8px 12px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 4px; font-size: 12px;
+    }
+    .single-event-name { color: var(--text-primary); font-weight: 500; }
+    .single-event-meta { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+
+    details summary {
+      cursor: pointer; color: var(--accent); font-size: 13px; padding: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div id="breadcrumb" style="margin-bottom:12px"></div>
+
+    <header style="margin-bottom:24px">
+      <h1 style="margin-bottom:6px">地域別ランキング</h1>
+      <p id="page-subtitle" style="color:var(--text-muted);font-size:13px">読み込み中...</p>
+    </header>
+
+    <div id="content-root">
+      <div style="padding:48px;text-align:center;color:var(--text-muted)">読み込み中...</div>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/common.js?v=10"></script>
+  <script>
+    const REGION_ORDER = ['全国', '北海道', '東北', '関東', '中部・甲信越', '関西', '中国', '四国', '九州・沖縄'];
+    const MULTI_EVENT_THRESHOLD = 2;
+
+    let aggregatedData = null;
+    let currentRegion = '全国';
+
+    (async () => {
+      document.getElementById('breadcrumb').innerHTML = GCG.renderBreadcrumb([
+        { name: 'トップ', href: '/' },
+        { name: '地域別ランキング' }
+      ]);
+      document.getElementById('header').innerHTML = GCG.renderHeader('regions');
+      document.getElementById('footer').innerHTML = GCG.renderFooter();
+      try { GCG.initHeaderSearch(); } catch (e) {}
+
+      try {
+        const manifest = await fetch('/data/shopbattle/manifest.json').then(r => r.json());
+        aggregatedData = await fetch(`/data/shopbattle/${manifest.latestMonth}-aggregated.json`)
+          .then(r => r.json());
+
+        const monthDisplay = manifest.latestMonth.replace('-', '年') + '月';
+        document.getElementById('page-subtitle').textContent =
+          `${monthDisplay} ショップバトル平均参加者数（${aggregatedData.summary.totalEvents.toLocaleString()}イベント、${aggregatedData.summary.totalStores.toLocaleString()}店舗、${aggregatedData.summary.totalParticipants.toLocaleString()}名）`;
+
+        renderPage();
+      } catch (err) {
+        document.getElementById('content-root').innerHTML =
+          `<div style="padding:24px;color:var(--text-muted)">データの読み込みに失敗しました: ${GCG.escapeHtml(err.message)}</div>`;
+      }
+    })();
+
+    function renderPage() {
+      const root = document.getElementById('content-root');
+      const summaryHtml = renderSummary();
+      const tabsHtml = renderTabs();
+      const mainHtml = currentRegion === '全国'
+        ? renderNationalView()
+        : renderRegionView(currentRegion);
+
+      root.innerHTML = summaryHtml + tabsHtml + mainHtml;
+
+      document.querySelectorAll('.region-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          currentRegion = tab.dataset.region;
+          renderPage();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    }
+
+    function renderSummary() {
+      const s = aggregatedData.summary;
+      return `
+        <div class="summary-grid">
+          <div class="summary-card">
+            <div class="summary-value">${s.totalEvents.toLocaleString()}</div>
+            <div class="summary-label">総イベント数</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">${s.totalStores.toLocaleString()}</div>
+            <div class="summary-label">参加店舗数</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">${s.totalParticipants.toLocaleString()}</div>
+            <div class="summary-label">総参加者数</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value">${s.avgParticipantsPerEvent}</div>
+            <div class="summary-label">平均参加者数/回</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTabs() {
+      const tabs = REGION_ORDER.map(r =>
+        `<button class="region-tab ${r === currentRegion ? 'active' : ''}" data-region="${r}">${r}</button>`
+      ).join('');
+      return `<div class="region-tab-bar">${tabs}</div>`;
+    }
+
+    function renderNationalView() {
+      const allStores = aggregatedData.stores;
+
+      // 複数回開催ランキング
+      const multiEventStores = allStores
+        .filter(s => s.eventCount >= MULTI_EVENT_THRESHOLD)
+        .sort((a, b) => b.avgParticipants - a.avgParticipants || b.eventCount - a.eventCount)
+        .slice(0, 10);
+
+      // 総参加者数ランキング
+      const totalRanking = [...allStores]
+        .sort((a, b) => b.totalParticipants - a.totalParticipants || b.eventCount - a.eventCount)
+        .slice(0, 10);
+
+      // 単発満員（eventCount=1 かつ参加者15名以上）
+      const singleFullStores = allStores
+        .filter(s => s.eventCount === 1 && s.totalParticipants >= 15)
+        .sort((a, b) => b.totalParticipants - a.totalParticipants);
+
+      // 地域別ハイライト
+      const regionSections = aggregatedData.regions
+        .sort((a, b) => REGION_ORDER.indexOf(a.region) - REGION_ORDER.indexOf(b.region))
+        .filter(r => r.region !== '海外')
+        .map(r => {
+          const topMulti = (r.stores || [])
+            .filter(s => s.eventCount >= MULTI_EVENT_THRESHOLD)
+            .sort((a, b) => b.avgParticipants - a.avgParticipants || b.eventCount - a.eventCount)
+            .slice(0, 5);
+
+          if (topMulti.length === 0) {
+            return `
+              <div class="region-section">
+                <h3>${esc(r.region)} <span style="font-size:11px;color:var(--text-muted);margin-left:8px">${r.storeCount}店舗、${r.totalEvents}イベント、平均${r.avgParticipantsPerEvent}名/回</span></h3>
+                <p style="color:var(--text-muted);font-size:13px;margin-top:8px">複数回開催の店舗データがありません</p>
+              </div>
+            `;
+          }
+
+          return `
+            <div class="region-section">
+              <h3>${esc(r.region)} TOP 5（複数回開催） <span style="font-size:11px;color:var(--text-muted);margin-left:8px">${r.storeCount}店舗、${r.totalEvents}イベント、平均${r.avgParticipantsPerEvent}名/回</span></h3>
+              <div class="ranking-list">
+                ${topMulti.map((s, i) => renderRankingCard(s, i + 1)).join('')}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+      return `
+        <h2 style="font-size:16px;margin-top:24px">複数回開催ランキング TOP 10</h2>
+        <p style="color:var(--text-muted);font-size:12px;margin:4px 0 0">2回以上開催された店舗を平均参加者数で並べたランキング</p>
+        <div class="ranking-list">${multiEventStores.map((s, i) => renderRankingCard(s, i + 1)).join('')}</div>
+
+        <h2 style="font-size:16px;margin-top:32px">総参加者数ランキング TOP 10</h2>
+        <p style="color:var(--text-muted);font-size:12px;margin:4px 0 0">月間累計の参加者数（開催回数も加味した指標）</p>
+        <div class="ranking-list">${totalRanking.map((s, i) => renderRankingCardTotal(s, i + 1)).join('')}</div>
+
+        ${singleFullStores.length > 0 ? `
+          <details style="margin-top:32px">
+            <summary>単発開催で15名以上集めた店舗（${singleFullStores.length}件）</summary>
+            <div class="single-event-list">
+              ${singleFullStores.map(s => `
+                <div class="single-event-item">
+                  <div class="single-event-name">${esc(s.storeName)}</div>
+                  <div class="single-event-meta">${esc(s.prefName)} - ${s.totalParticipants}名</div>
+                </div>
+              `).join('')}
+            </div>
+          </details>
+        ` : ''}
+
+        <h2 style="font-size:16px;margin-top:32px">地域別ハイライト</h2>
+        ${regionSections}
+      `;
+    }
+
+    function renderRegionView(regionName) {
+      const region = aggregatedData.regions.find(r => r.region === regionName);
+      if (!region) {
+        return `<div style="padding:24px;color:var(--text-muted)">${esc(regionName)} のデータがありません</div>`;
+      }
+
+      const allRegionStores = region.stores || [];
+
+      // 複数回開催
+      const multiEvent = allRegionStores
+        .filter(s => s.eventCount >= MULTI_EVENT_THRESHOLD)
+        .sort((a, b) => b.avgParticipants - a.avgParticipants || b.eventCount - a.eventCount);
+
+      // 単発満員
+      const singleFull = allRegionStores
+        .filter(s => s.eventCount === 1 && s.totalParticipants >= 15)
+        .sort((a, b) => b.totalParticipants - a.totalParticipants);
+
+      const summary = `
+        <div style="padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);margin-top:16px">
+          <div style="font-family:var(--font-mono);font-size:13px;color:var(--text-secondary)">
+            ${region.storeCount}店舗 / ${region.totalEvents}イベント / ${region.totalParticipants.toLocaleString()}名 / 平均 ${region.avgParticipantsPerEvent}名/回
+          </div>
+        </div>
+      `;
+
+      const multiSection = multiEvent.length > 0 ? `
+        <h2 style="font-size:16px;margin-top:24px">複数回開催ランキング（${multiEvent.length}店舗）</h2>
+        <div class="ranking-list">${multiEvent.map((s, i) => renderRankingCard(s, i + 1)).join('')}</div>
+      ` : `
+        <p style="color:var(--text-muted);font-size:13px;margin-top:24px">この地域では複数回開催の店舗データがありません</p>
+      `;
+
+      const singleSection = singleFull.length > 0 ? `
+        <details style="margin-top:32px">
+          <summary>単発開催で15名以上集めた店舗（${singleFull.length}件）</summary>
+          <div class="single-event-list">
+            ${singleFull.map(s => `
+              <div class="single-event-item">
+                <div class="single-event-name">${esc(s.storeName)}</div>
+                <div class="single-event-meta">${esc(s.prefName)} - ${s.totalParticipants}名</div>
+              </div>
+            `).join('')}
+          </div>
+        </details>
+      ` : '';
+
+      return `
+        <h1 style="font-size:18px;margin-top:24px">${esc(regionName)}</h1>
+        ${summary}
+        ${multiSection}
+        ${singleSection}
+      `;
+    }
+
+    function renderRankingCard(store, rank) {
+      const rankClass = rank <= 3 ? `rank-number-${rank}` : '';
+      return `
+        <div class="ranking-card">
+          <div class="ranking-card-header">
+            <span class="rank-number ${rankClass}">${rank}位</span>
+            <span class="ranking-store-name">${esc(store.storeName)}</span>
+          </div>
+          <div class="ranking-pref">${esc(store.prefName)}</div>
+          <div class="ranking-stats">
+            <div>
+              <span class="ranking-stat-value">${store.avgParticipants}</span>
+              <span class="ranking-stat-label">名/回（平均）</span>
+            </div>
+            <div>
+              <span class="ranking-stat-value">${store.eventCount}</span>
+              <span class="ranking-stat-label">回開催</span>
+            </div>
+            <div>
+              <span class="ranking-stat-value">${store.totalParticipants}</span>
+              <span class="ranking-stat-label">名累計</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderRankingCardTotal(store, rank) {
+      const rankClass = rank <= 3 ? `rank-number-${rank}` : '';
+      return `
+        <div class="ranking-card">
+          <div class="ranking-card-header">
+            <span class="rank-number ${rankClass}">${rank}位</span>
+            <span class="ranking-store-name">${esc(store.storeName)}</span>
+          </div>
+          <div class="ranking-pref">${esc(store.prefName)}</div>
+          <div class="ranking-stats">
+            <div>
+              <span class="ranking-stat-value">${store.totalParticipants}</span>
+              <span class="ranking-stat-label">名累計</span>
+            </div>
+            <div>
+              <span class="ranking-stat-value">${store.eventCount}</span>
+              <span class="ranking-stat-label">回開催</span>
+            </div>
+            <div>
+              <span class="ranking-stat-value">${store.avgParticipants}</span>
+              <span class="ranking-stat-label">名/回（平均）</span>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function esc(str) { return GCG.escapeHtml(str); }
+  </script>
+</body>
+</html>
