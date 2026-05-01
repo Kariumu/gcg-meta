@@ -117,6 +117,11 @@
       <p id="page-subtitle" style="color:var(--text-muted);font-size:13px">読み込み中...</p>
     </header>
 
+    <div id="data-disclaimer" style="display:none;margin:16px 0;padding:12px 16px;background:rgba(255,170,0,0.08);border:1px solid rgba(255,170,0,0.2);border-radius:6px;font-size:13px;line-height:1.6">
+      <strong style="color:#ffcc66">&#x1F4CC; データに関する注意</strong><br>
+      <span id="disclaimer-text"></span>
+    </div>
+
     <div id="content-root">
       <div style="padding:48px;text-align:center;color:var(--text-muted)">読み込み中...</div>
     </div>
@@ -149,6 +154,14 @@
         const monthDisplay = manifest.latestMonth.replace('-', '年') + '月';
         document.getElementById('page-subtitle').textContent =
           `${monthDisplay} ショップバトル平均参加者数（${aggregatedData.summary.totalEvents.toLocaleString()}イベント、${aggregatedData.summary.totalStores.toLocaleString()}店舗、${aggregatedData.summary.totalParticipants.toLocaleString()}名）`;
+
+        // 注意書き表示
+        const disclaimerEl = document.getElementById('data-disclaimer');
+        const disclaimerText = document.getElementById('disclaimer-text');
+        if (disclaimerEl && disclaimerText) {
+          disclaimerText.textContent = `${monthDisplay}分は予定登録ベースで取得されたデータのため、月途中で追加登録された開催が一部欠損している可能性があります。「毎週開催」の店舗でも実際の開催回数より少なく表示されることがあります。5月以降は完全な開催履歴の取得を予定しています。`;
+          disclaimerEl.style.display = '';
+        }
 
         renderPage();
       } catch (err) {
@@ -338,8 +351,35 @@
       `;
     }
 
+    function formatDateWithDayOfWeek(dateStr) {
+      if (!dateStr || dateStr.length < 10) return dateStr || '';
+      const parts = dateStr.substring(0, 10).split('-');
+      const y = parseInt(parts[0]), m = parseInt(parts[1]), d = parseInt(parts[2]);
+      const dt = new Date(y, m - 1, d);
+      const days = ['日', '月', '火', '水', '木', '金', '土'];
+      return `${m}/${d} (${days[dt.getDay()]})`;
+    }
+
+    function renderEventHistory(events) {
+      if (!events || events.length < 2) return '';
+      const sorted = [...events].sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+      const rows = sorted.map(ev => {
+        const day = formatDateWithDayOfWeek(ev.date);
+        return `<span style="color:var(--text-secondary)">${esc(day)}</span><span style="color:#44bbff;font-weight:700;text-align:right">${ev.participants || 0}名</span>`;
+      }).join('');
+      return `
+        <details style="margin-top:10px;font-size:11px">
+          <summary style="cursor:pointer;color:var(--accent);font-family:var(--font-mono);list-style:none;user-select:none">&#x25B6; 開催履歴を見る</summary>
+          <div style="margin-top:6px;padding:8px;background:var(--bg-elevated);border-radius:4px;display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:11px;font-family:var(--font-mono)">
+            ${rows}
+          </div>
+        </details>
+      `;
+    }
+
     function renderRankingCard(store, rank) {
       const rankClass = rank <= 3 ? `rank-number-${rank}` : '';
+      const historyHtml = renderEventHistory(store.events);
       return `
         <div class="ranking-card">
           <div class="ranking-card-header">
@@ -361,12 +401,14 @@
               <span class="ranking-stat-label">名累計</span>
             </div>
           </div>
+          ${historyHtml}
         </div>
       `;
     }
 
     function renderRankingCardTotal(store, rank) {
       const rankClass = rank <= 3 ? `rank-number-${rank}` : '';
+      const historyHtml = renderEventHistory(store.events);
       return `
         <div class="ranking-card">
           <div class="ranking-card-header">
@@ -388,6 +430,7 @@
               <span class="ranking-stat-label">名/回（平均）</span>
             </div>
           </div>
+          ${historyHtml}
         </div>
       `;
     }
