@@ -136,6 +136,22 @@ async function main() {
   }
 
   let ids = JSON.parse(fs.readFileSync(idsFile, 'utf8'));
+  const retryPendingOnly = args.includes('--retry-pending-only');
+
+  // --retry-pending-only: 既存ファイルのpendingのみ再試行
+  if (retryPendingOnly) {
+    const existingPath = path.join(__dirname, '..', 'data', 'shopbattle', `${monthLabel}.json`);
+    if (fs.existsSync(existingPath)) {
+      const existing = JSON.parse(fs.readFileSync(existingPath, 'utf8'));
+      const pendingIds = (existing.events || [])
+        .filter(e => e.status === 'pending')
+        .map(e => e.eventId);
+      console.log(`🔄 pending ${pendingIds.length}件のみ再試行します`);
+      ids = pendingIds;
+    } else {
+      console.log('既存ファイルが見つかりません。全件取得します。');
+    }
+  }
 
   // バッチ制御
   if (testLimit > 0) {
@@ -159,6 +175,12 @@ async function main() {
   if (fs.existsSync(outputPath)) {
     const existing = JSON.parse(fs.readFileSync(outputPath, 'utf8'));
     existingResults = existing.events || [];
+    if (retryPendingOnly) {
+      // pending再試行: pendingエントリを除外（再取得するため）
+      const pendingSet = new Set(ids);
+      existingResults = existingResults.filter(e => !pendingSet.has(e.eventId));
+      console.log(`  pending除外後: ${existingResults.length}件を保持`);
+    }
     existingResults.forEach(e => existingIds.add(e.eventId));
     console.log(`  既存データ: ${existingResults.length}件（スキップ対象）`);
   }

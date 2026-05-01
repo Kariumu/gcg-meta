@@ -1,44 +1,12 @@
 {
   "seriesId": "6490",
   "monthLabel": "2026-04",
-  "fetchedAt": "2026-05-01T04:53:32.805Z",
+  "fetchedAt": "2026-05-01T09:41:52.399Z",
   "totalEvents": 1175,
-  "successCount": 1040,
-  "pendingCount": 135,
+  "successCount": 1041,
+  "pendingCount": 134,
   "errorCount": 0,
   "events": [
-    {
-      "eventId": 6299104,
-      "organizerId": 3979,
-      "organizerName": "ふぁんたじ屋",
-      "prefCode": "JP-38",
-      "prefName": "愛媛県",
-      "region": "四国",
-      "city": "松山市湊町",
-      "startDatetime": "2026-04-29T14:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "status": "pending",
-      "participants": 0,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6243082,
-      "organizerId": 13797,
-      "organizerName": "スタートレカ池袋店",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "city": "豊島区東池袋",
-      "startDatetime": "2026-04-29T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "status": "pending",
-      "participants": 0,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
     {
       "eventId": 6274016,
       "organizerId": 6590,
@@ -166,38 +134,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 5922708,
-      "organizerId": 2794,
-      "organizerName": "シーガル大河原店",
-      "prefCode": "JP-04",
-      "prefName": "宮城県",
-      "region": "東北",
-      "city": "柴田郡大河原町字新東",
-      "startDatetime": "2026-04-29T19:00:00",
-      "maxJoinCount": 8,
-      "statusId": 31,
-      "isCanceled": false,
-      "status": "pending",
-      "participants": 0,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6246614,
-      "organizerId": 2975,
-      "organizerName": "バトロコミニ帯広WOW店",
-      "prefCode": "JP-01",
-      "prefName": "北海道",
-      "region": "北海道",
-      "city": "帯広市西四条南",
-      "startDatetime": "2026-04-29T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 31,
-      "isCanceled": false,
-      "status": "pending",
-      "participants": 0,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6121672,
@@ -340,22 +276,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6297431,
-      "organizerId": 10848,
-      "organizerName": "トレカひろば",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "city": "鹿屋市白崎町",
-      "startDatetime": "2026-04-29T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 51,
-      "isCanceled": false,
-      "status": "pending",
-      "participants": 0,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6276088,
@@ -512,51 +432,6 @@
       ]
     },
     {
-      "eventId": 6297610,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4393,
-      "organizerName": "カードショップ パワーレイズ",
-      "prefCode": "JP-34",
-      "prefName": "広島県",
-      "region": "中国",
-      "startDatetime": "2026-04-20T18:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6293556,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 16763,
-      "organizerName": "トレカSunrise長野駅前店",
-      "prefCode": "JP-20",
-      "prefName": "長野県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-21T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6008648,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 9811,
-      "organizerName": "カードショップラフテリア",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-21T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 5925270,
       "status": "success",
       "participants": 2,
@@ -605,21 +480,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6260640,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 7352,
-      "organizerName": "トレカキリン練馬店",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "startDatetime": "2026-04-22T15:30:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 5952624,
@@ -887,21 +747,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6247065,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3379,
-      "organizerName": "イエローサブマリン宇都宮店",
-      "prefCode": "JP-09",
-      "prefName": "栃木県",
-      "region": "関東",
-      "startDatetime": "2026-04-22T17:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6185216,
@@ -1562,21 +1407,6 @@
       ]
     },
     {
-      "eventId": 6272742,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 8877,
-      "organizerName": "トレカチャンピオン神戸三宮店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-22T18:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6259474,
       "status": "success",
       "participants": 4,
@@ -1992,21 +1822,6 @@
       ]
     },
     {
-      "eventId": 5922707,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 2794,
-      "organizerName": "シーガル大河原店",
-      "prefCode": "JP-04",
-      "prefName": "宮城県",
-      "region": "東北",
-      "startDatetime": "2026-04-22T19:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6268498,
       "status": "success",
       "participants": 8,
@@ -2173,21 +1988,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6155746,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3242,
-      "organizerName": "ふるいちトップブックス港北ミナモ店",
-      "prefCode": "JP-14",
-      "prefName": "神奈川県",
-      "region": "関東",
-      "startDatetime": "2026-04-22T19:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6121671,
@@ -3012,21 +2812,6 @@
       ]
     },
     {
-      "eventId": 6297430,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 10848,
-      "organizerName": "トレカひろば",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-22T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6229060,
       "status": "success",
       "participants": 7,
@@ -3103,21 +2888,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6067960,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 15441,
-      "organizerName": "コーギーアール名古屋",
-      "prefCode": "JP-23",
-      "prefName": "愛知県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-22T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6009006,
@@ -3975,36 +3745,6 @@
       ]
     },
     {
-      "eventId": 5927073,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 14231,
-      "organizerName": "トレキャットFC御影店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-23T14:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6026958,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3284,
-      "organizerName": "古本市場 千里丘店",
-      "prefCode": "JP-27",
-      "prefName": "大阪府",
-      "region": "関西",
-      "startDatetime": "2026-04-23T15:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6257133,
       "status": "success",
       "participants": 7,
@@ -4050,21 +3790,6 @@
       ]
     },
     {
-      "eventId": 6034105,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3734,
-      "organizerName": "カードショップすけきよ",
-      "prefCode": "JP-29",
-      "prefName": "奈良県",
-      "region": "関西",
-      "startDatetime": "2026-04-23T15:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6261554,
       "status": "success",
       "participants": 3,
@@ -4092,36 +3817,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6285011,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3545,
-      "organizerName": "カードショップキャット町屋店",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "startDatetime": "2026-04-23T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6243199,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3663,
-      "organizerName": "サムライパンチ津西店",
-      "prefCode": "JP-24",
-      "prefName": "三重県",
-      "region": "関西",
-      "startDatetime": "2026-04-23T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6282043,
@@ -4215,21 +3910,6 @@
       ]
     },
     {
-      "eventId": 6207522,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 19684,
-      "organizerName": "アナログゲーム・トレカCharon",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-23T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6293653,
       "status": "success",
       "participants": 5,
@@ -4298,21 +3978,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6182956,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3170,
-      "organizerName": "カードラボ名古屋駅前店",
-      "prefCode": "JP-23",
-      "prefName": "愛知県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-23T17:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6258980,
@@ -4497,51 +4162,6 @@
       ]
     },
     {
-      "eventId": 6218787,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3189,
-      "organizerName": "株式会社ホビーベースイエローサブマリン姫路店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-23T17:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6255682,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3946,
-      "organizerName": "ブックオフイオン本牧店",
-      "prefCode": "JP-14",
-      "prefName": "神奈川県",
-      "region": "関東",
-      "startDatetime": "2026-04-23T17:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6318872,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 2778,
-      "organizerName": "HaSh",
-      "prefCode": "JP-18",
-      "prefName": "福井県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 5980436,
       "status": "success",
       "participants": 2,
@@ -4590,21 +4210,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6173724,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 2816,
-      "organizerName": "カードラボ札幌店",
-      "prefCode": "JP-01",
-      "prefName": "北海道",
-      "region": "北海道",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6256218,
@@ -4679,21 +4284,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 5949989,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3000,
-      "organizerName": "古本市場 新小岩店",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6295802,
@@ -4906,21 +4496,6 @@
       ]
     },
     {
-      "eventId": 6277168,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3535,
-      "organizerName": "アメニティードリームなんば2号店",
-      "prefCode": "JP-27",
-      "prefName": "大阪府",
-      "region": "関西",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6270438,
       "status": "success",
       "participants": 3,
@@ -4975,21 +4550,6 @@
       ]
     },
     {
-      "eventId": 6219162,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3681,
-      "organizerName": "フルコンプ吉祥寺店",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6052803,
       "status": "success",
       "participants": 7,
@@ -5035,36 +4595,6 @@
       ]
     },
     {
-      "eventId": 6292693,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3822,
-      "organizerName": "トレカ専門店 スーパートレ☆スタ宮崎駅前店",
-      "prefCode": "JP-45",
-      "prefName": "宮崎県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6296080,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3857,
-      "organizerName": "アドバンテージ大須2号店",
-      "prefCode": "JP-23",
-      "prefName": "愛知県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6227522,
       "status": "success",
       "participants": 4,
@@ -5096,21 +4626,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 5948734,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4527,
-      "organizerName": "スポーツカード&カードゲームショップ MINT仙台店",
-      "prefCode": "JP-04",
-      "prefName": "宮城県",
-      "region": "東北",
-      "startDatetime": "2026-04-23T18:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6237510,
@@ -5747,21 +5262,6 @@
       ]
     },
     {
-      "eventId": 6220504,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3551,
-      "organizerName": "BOOKOFF埼玉毛呂山店",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-23T18:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 5983070,
       "status": "success",
       "participants": 3,
@@ -6114,21 +5614,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 5923791,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3377,
-      "organizerName": "カードショップもののふ",
-      "prefCode": "JP-23",
-      "prefName": "愛知県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-23T19:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6294332,
@@ -7413,21 +6898,6 @@
       ]
     },
     {
-      "eventId": 6087293,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3723,
-      "organizerName": "ゲームショップブリックス",
-      "prefCode": "JP-26",
-      "prefName": "京都府",
-      "region": "関西",
-      "startDatetime": "2026-04-23T20:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6164738,
       "status": "success",
       "participants": 3,
@@ -7455,21 +6925,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 5984273,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3737,
-      "organizerName": "TCGBAR Rishadan",
-      "prefCode": "JP-04",
-      "prefName": "宮城県",
-      "region": "東北",
-      "startDatetime": "2026-04-23T20:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6156381,
@@ -7677,21 +7132,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6121145,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3315,
-      "organizerName": "カードラボ水戸店",
-      "prefCode": "JP-08",
-      "prefName": "茨城県",
-      "region": "関東",
-      "startDatetime": "2026-04-24T12:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6220328,
@@ -8225,21 +7665,6 @@
       ]
     },
     {
-      "eventId": 6292095,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 11383,
-      "organizerName": "ホビーステーション小倉店",
-      "prefCode": "JP-40",
-      "prefName": "福岡県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-24T17:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6065241,
       "status": "success",
       "participants": 15,
@@ -8737,21 +8162,6 @@
       ]
     },
     {
-      "eventId": 6113000,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3706,
-      "organizerName": "カードワン",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-24T18:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6219067,
       "status": "success",
       "participants": 4,
@@ -8783,21 +8193,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6005197,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5017,
-      "organizerName": "GEKIRIN金町店",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "startDatetime": "2026-04-24T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6217365,
@@ -8837,21 +8232,6 @@
       ]
     },
     {
-      "eventId": 6203769,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5562,
-      "organizerName": "カードラボ熊本店",
-      "prefCode": "JP-43",
-      "prefName": "熊本県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-24T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6236826,
       "status": "success",
       "participants": 2,
@@ -8875,21 +8255,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6276817,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 7857,
-      "organizerName": "CARD SHOPえうれか昭和町店",
-      "prefCode": "JP-31",
-      "prefName": "鳥取県",
-      "region": "中国",
-      "startDatetime": "2026-04-24T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6244046,
@@ -10131,36 +9496,6 @@
       ]
     },
     {
-      "eventId": 6207164,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4929,
-      "organizerName": "ふるいちトップブックス高田西店",
-      "prefCode": "JP-15",
-      "prefName": "新潟県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-24T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6295862,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5852,
-      "organizerName": "トイギャラリー サイハティ",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-24T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6087764,
       "status": "success",
       "participants": 6,
@@ -10321,36 +9656,6 @@
       ]
     },
     {
-      "eventId": 6294976,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 8287,
-      "organizerName": "HIROKO MARKET",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-24T19:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6257876,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 8695,
-      "organizerName": "カードショップ彩々アミュプラザ鹿児島店",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-24T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6206964,
       "status": "success",
       "participants": 9,
@@ -10490,21 +9795,6 @@
       ]
     },
     {
-      "eventId": 5984710,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 13888,
-      "organizerName": "トレーディングカード専門店グッドスタッフ",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-24T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6274396,
       "status": "success",
       "participants": 6,
@@ -10589,21 +9879,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6296068,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 17690,
-      "organizerName": "トレカSunrise西宮北口駅前店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-24T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6218607,
@@ -10990,21 +10265,6 @@
       ]
     },
     {
-      "eventId": 6215766,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3445,
-      "organizerName": "ボードゲームスペースdotto",
-      "prefCode": "JP-29",
-      "prefName": "奈良県",
-      "region": "関西",
-      "startDatetime": "2026-04-25T10:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6216571,
       "status": "success",
       "participants": 7,
@@ -11073,21 +10333,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6087368,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4508,
-      "organizerName": "おもちゃのはた水原店",
-      "prefCode": "JP-15",
-      "prefName": "新潟県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-25T10:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6173409,
@@ -11319,21 +10564,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6296674,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3652,
-      "organizerName": "カードショップWiZ",
-      "prefCode": "JP-25",
-      "prefName": "滋賀県",
-      "region": "関西",
-      "startDatetime": "2026-04-25T12:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6243200,
@@ -11806,21 +11036,6 @@
       ]
     },
     {
-      "eventId": 6207782,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3563,
-      "organizerName": "ジョイランド柏原店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-25T13:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6182907,
       "status": "success",
       "participants": 5,
@@ -11937,21 +11152,6 @@
       ]
     },
     {
-      "eventId": 6293607,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5028,
-      "organizerName": "ふるいちトップブックス東松山店",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-25T13:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6205127,
       "status": "success",
       "participants": 2,
@@ -12004,21 +11204,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6064858,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 7885,
-      "organizerName": "ゼスト相模原店トレカ館",
-      "prefCode": "JP-14",
-      "prefName": "神奈川県",
-      "region": "関東",
-      "startDatetime": "2026-04-25T13:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6258068,
@@ -12197,21 +11382,6 @@
       ]
     },
     {
-      "eventId": 6026467,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 14179,
-      "organizerName": "トレカSHOPあんりみてっど",
-      "prefCode": "JP-07",
-      "prefName": "福島県",
-      "region": "東北",
-      "startDatetime": "2026-04-25T13:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6275842,
       "status": "success",
       "participants": 5,
@@ -12313,21 +11483,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6006396,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3577,
-      "organizerName": "SoftStationチャンプ",
-      "prefCode": "JP-23",
-      "prefName": "愛知県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-25T13:30:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6286118,
@@ -12435,21 +11590,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6259149,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4801,
-      "organizerName": "イベント&TCGカフェTINY FRONTIER",
-      "prefCode": "JP-09",
-      "prefName": "栃木県",
-      "region": "関東",
-      "startDatetime": "2026-04-25T13:30:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6218135,
@@ -12672,21 +11812,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6274660,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3073,
-      "organizerName": "TSUTAYA室蘭店",
-      "prefCode": "JP-01",
-      "prefName": "北海道",
-      "region": "北海道",
-      "startDatetime": "2026-04-25T14:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6259025,
@@ -13043,21 +12168,6 @@
       ]
     },
     {
-      "eventId": 6226895,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4013,
-      "organizerName": "さつき書店",
-      "prefCode": "JP-47",
-      "prefName": "沖縄県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-25T14:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6299160,
       "status": "success",
       "participants": 2,
@@ -13227,21 +12337,6 @@
       ]
     },
     {
-      "eventId": 6234565,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5585,
-      "organizerName": "トーナメントセンターバトロコ新潟万代",
-      "prefCode": "JP-15",
-      "prefName": "新潟県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-25T14:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6274015,
       "status": "success",
       "participants": 5,
@@ -13337,21 +12432,6 @@
       ]
     },
     {
-      "eventId": 6162766,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3907,
-      "organizerName": "フミヤ",
-      "prefCode": "JP-34",
-      "prefName": "広島県",
-      "region": "中国",
-      "startDatetime": "2026-04-25T14:30:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6296530,
       "status": "success",
       "participants": 16,
@@ -13431,21 +12511,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6100997,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 8664,
-      "organizerName": "WonderGOO鎌ヶ谷店",
-      "prefCode": "JP-12",
-      "prefName": "千葉県",
-      "region": "関東",
-      "startDatetime": "2026-04-25T14:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6225876,
@@ -13620,21 +12685,6 @@
       ]
     },
     {
-      "eventId": 6089792,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3270,
-      "organizerName": "古本市場 幸手店",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-25T15:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6068505,
       "status": "success",
       "participants": 5,
@@ -13670,21 +12720,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6077174,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3504,
-      "organizerName": "ビデオインアメリカ大徳寺店",
-      "prefCode": "JP-26",
-      "prefName": "京都府",
-      "region": "関西",
-      "startDatetime": "2026-04-25T15:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6286905,
@@ -14349,21 +13384,6 @@
       ]
     },
     {
-      "eventId": 6283953,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 8273,
-      "organizerName": "ゲオ亘理店",
-      "prefCode": "JP-04",
-      "prefName": "宮城県",
-      "region": "東北",
-      "startDatetime": "2026-04-25T15:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 5926381,
       "status": "success",
       "participants": 10,
@@ -14560,21 +13580,6 @@
       ]
     },
     {
-      "eventId": 6134256,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3752,
-      "organizerName": "カンテラ",
-      "prefCode": "JP-08",
-      "prefName": "茨城県",
-      "region": "関東",
-      "startDatetime": "2026-04-25T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6299554,
       "status": "success",
       "participants": 4,
@@ -14606,21 +13611,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6292994,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3915,
-      "organizerName": "ブックエース上荒川店",
-      "prefCode": "JP-07",
-      "prefName": "福島県",
-      "region": "東北",
-      "startDatetime": "2026-04-25T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6204020,
@@ -15531,21 +14521,6 @@
       ]
     },
     {
-      "eventId": 6227015,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4476,
-      "organizerName": "ツタ尼トレカ　阪急伊丹駅前店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-25T17:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6294578,
       "status": "success",
       "participants": 4,
@@ -15577,21 +14552,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6298203,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4602,
-      "organizerName": "カードキャット",
-      "prefCode": "JP-20",
-      "prefName": "長野県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-25T17:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6110272,
@@ -15791,21 +14751,6 @@
       ]
     },
     {
-      "eventId": 6053910,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 6535,
-      "organizerName": "ブックオフスーパーバザー25号八尾永畑店",
-      "prefCode": "JP-27",
-      "prefName": "大阪府",
-      "region": "関西",
-      "startDatetime": "2026-04-25T17:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6260921,
       "status": "success",
       "participants": 2,
@@ -15952,21 +14897,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6279546,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 20070,
-      "organizerName": "カードショップボルカ",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-25T17:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6207942,
@@ -16232,21 +15162,6 @@
       ]
     },
     {
-      "eventId": 6184400,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 2818,
-      "organizerName": "レプトン出汐店",
-      "prefCode": "JP-34",
-      "prefName": "広島県",
-      "region": "中国",
-      "startDatetime": "2026-04-25T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6163124,
       "status": "success",
       "participants": 2,
@@ -16375,36 +15290,6 @@
       ]
     },
     {
-      "eventId": 6156561,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3641,
-      "organizerName": "お宝バンク",
-      "prefCode": "JP-34",
-      "prefName": "広島県",
-      "region": "中国",
-      "startDatetime": "2026-04-25T18:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6254859,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3667,
-      "organizerName": "カードショップ龍皇亭",
-      "prefCode": "JP-38",
-      "prefName": "愛媛県",
-      "region": "四国",
-      "startDatetime": "2026-04-25T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6219446,
       "status": "success",
       "participants": 5,
@@ -16440,21 +15325,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6274944,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3861,
-      "organizerName": "TSUTAYA嵐山店",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-25T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6292641,
@@ -16509,21 +15379,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6226628,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4401,
-      "organizerName": "カードボックス イオンモール徳島店",
-      "prefCode": "JP-36",
-      "prefName": "徳島県",
-      "region": "四国",
-      "startDatetime": "2026-04-25T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6234695,
@@ -16792,21 +15647,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6113786,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4443,
-      "organizerName": "トレカショップファンクス",
-      "prefCode": "JP-38",
-      "prefName": "愛媛県",
-      "region": "四国",
-      "startDatetime": "2026-04-25T18:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6156304,
@@ -17287,21 +16127,6 @@
       ]
     },
     {
-      "eventId": 6099824,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4335,
-      "organizerName": "カードショップNEST",
-      "prefCode": "JP-05",
-      "prefName": "秋田県",
-      "region": "東北",
-      "startDatetime": "2026-04-25T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6277088,
       "status": "success",
       "participants": 6,
@@ -17343,21 +16168,6 @@
       ]
     },
     {
-      "eventId": 6282308,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5857,
-      "organizerName": "カードショップ Lotus",
-      "prefCode": "JP-40",
-      "prefName": "福岡県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-25T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6282309,
       "status": "success",
       "participants": 4,
@@ -17389,21 +16199,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6248924,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5941,
-      "organizerName": "トレカショップフロント",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-25T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6295235,
@@ -17835,36 +16630,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6229748,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3892,
-      "organizerName": "Reseau",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-25T21:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6296408,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4574,
-      "organizerName": "ホビーショップキムラ",
-      "prefCode": "JP-44",
-      "prefName": "大分県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-25T21:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6298857,
@@ -19126,21 +17891,6 @@
       ]
     },
     {
-      "eventId": 6295093,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3282,
-      "organizerName": "トレカのフジヤ気仙沼店",
-      "prefCode": "JP-04",
-      "prefName": "宮城県",
-      "region": "東北",
-      "startDatetime": "2026-04-26T13:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6284994,
       "status": "success",
       "participants": 13,
@@ -19606,21 +18356,6 @@
       ]
     },
     {
-      "eventId": 6154575,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5239,
-      "organizerName": "ふるいちトップブックス滑川店",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-26T13:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6270851,
       "status": "success",
       "participants": 14,
@@ -20030,21 +18765,6 @@
       ]
     },
     {
-      "eventId": 6154883,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3898,
-      "organizerName": "デュエルラック",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-26T13:30:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6258468,
       "status": "success",
       "participants": 3,
@@ -20072,21 +18792,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6233798,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4510,
-      "organizerName": "カベの店春日部店",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-26T13:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6208265,
@@ -20519,21 +19224,6 @@
       ]
     },
     {
-      "eventId": 6297335,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3795,
-      "organizerName": "TSUTAYA竹原店",
-      "prefCode": "JP-34",
-      "prefName": "広島県",
-      "region": "中国",
-      "startDatetime": "2026-04-26T14:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6295548,
       "status": "success",
       "participants": 6,
@@ -20872,21 +19562,6 @@
       ]
     },
     {
-      "eventId": 6259181,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3174,
-      "organizerName": "ファミーズ ブックワン",
-      "prefCode": "JP-22",
-      "prefName": "静岡県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-26T14:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6183585,
       "status": "success",
       "participants": 3,
@@ -21088,21 +19763,6 @@
       ]
     },
     {
-      "eventId": 6237362,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 2922,
-      "organizerName": "フェイズ四日市店",
-      "prefCode": "JP-24",
-      "prefName": "三重県",
-      "region": "関西",
-      "startDatetime": "2026-04-26T15:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6182746,
       "status": "success",
       "participants": 4,
@@ -21233,21 +19893,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6274918,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3743,
-      "organizerName": "CARD SHOPえうれか",
-      "prefCode": "JP-31",
-      "prefName": "鳥取県",
-      "region": "中国",
-      "startDatetime": "2026-04-26T15:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6297360,
@@ -22593,21 +21238,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6297889,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5079,
-      "organizerName": "つくも屋",
-      "prefCode": "JP-15",
-      "prefName": "新潟県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-26T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6134476,
@@ -23989,21 +22619,6 @@
       ]
     },
     {
-      "eventId": 6007066,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3640,
-      "organizerName": "シーガル西多賀店",
-      "prefCode": "JP-04",
-      "prefName": "宮城県",
-      "region": "東北",
-      "startDatetime": "2026-04-26T17:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6293746,
       "status": "success",
       "participants": 2,
@@ -24485,21 +23100,6 @@
       ]
     },
     {
-      "eventId": 6254860,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3667,
-      "organizerName": "カードショップ龍皇亭",
-      "prefCode": "JP-38",
-      "prefName": "愛媛県",
-      "region": "四国",
-      "startDatetime": "2026-04-26T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6283160,
       "status": "success",
       "participants": 4,
@@ -24634,21 +23234,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6297365,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4380,
-      "organizerName": "こども楽園",
-      "prefCode": "JP-21",
-      "prefName": "岐阜県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-26T18:00:00",
-      "maxJoinCount": 12,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6172414,
@@ -25306,21 +23891,6 @@
       ]
     },
     {
-      "eventId": 5949743,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 9206,
-      "organizerName": "ふるいちモレラ岐阜店",
-      "prefCode": "JP-21",
-      "prefName": "岐阜県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-26T18:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6293390,
       "status": "success",
       "participants": 3,
@@ -25417,21 +23987,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6195313,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3866,
-      "organizerName": "トレカショップ ストレージ",
-      "prefCode": "JP-10",
-      "prefName": "群馬県",
-      "region": "関東",
-      "startDatetime": "2026-04-26T19:00:00",
-      "maxJoinCount": 12,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6208703,
@@ -26036,21 +24591,6 @@
       ]
     },
     {
-      "eventId": 6298828,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 6514,
-      "organizerName": "TOP ONE",
-      "prefCode": "JP-43",
-      "prefName": "熊本県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-27T12:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6217022,
       "status": "success",
       "participants": 2,
@@ -26144,36 +24684,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6258269,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 17651,
-      "organizerName": "ホビーショップShelly",
-      "prefCode": "JP-35",
-      "prefName": "山口県",
-      "region": "中国",
-      "startDatetime": "2026-04-27T14:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6052321,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3748,
-      "organizerName": "カードショップにけ",
-      "prefCode": "JP-12",
-      "prefName": "千葉県",
-      "region": "関東",
-      "startDatetime": "2026-04-27T14:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6220016,
@@ -26362,21 +24872,6 @@
       ]
     },
     {
-      "eventId": 6272484,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5939,
-      "organizerName": "TSUTAYA Trading Card錦糸町",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "startDatetime": "2026-04-27T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6245428,
       "status": "success",
       "participants": 3,
@@ -26554,21 +25049,6 @@
       ]
     },
     {
-      "eventId": 6134136,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3814,
-      "organizerName": "木乃美書房",
-      "prefCode": "JP-33",
-      "prefName": "岡山県",
-      "region": "中国",
-      "startDatetime": "2026-04-27T17:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6293761,
       "status": "success",
       "participants": 3,
@@ -26625,36 +25105,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6247257,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5981,
-      "organizerName": "ふるいちイオンモール幕張新都心店",
-      "prefCode": "JP-12",
-      "prefName": "千葉県",
-      "region": "関東",
-      "startDatetime": "2026-04-27T17:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 5950984,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 8952,
-      "organizerName": "ふるいちイオンモール土岐店",
-      "prefCode": "JP-21",
-      "prefName": "岐阜県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-27T17:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6184591,
@@ -26997,36 +25447,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6163123,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3498,
-      "organizerName": "JABUROⅡ",
-      "prefCode": "JP-15",
-      "prefName": "新潟県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-27T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 5982179,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3534,
-      "organizerName": "買取くん",
-      "prefCode": "JP-13",
-      "prefName": "東京都",
-      "region": "関東",
-      "startDatetime": "2026-04-27T18:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6218878,
@@ -29068,21 +27488,6 @@
       ]
     },
     {
-      "eventId": 6294977,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 8287,
-      "organizerName": "HIROKO MARKET",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-27T19:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6281270,
       "status": "success",
       "participants": 5,
@@ -29118,21 +27523,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6206292,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 15629,
-      "organizerName": "カードラボ鹿児島店",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-27T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 5952673,
@@ -29568,21 +27958,6 @@
       ]
     },
     {
-      "eventId": 6249847,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4475,
-      "organizerName": "てぶくろの部屋",
-      "prefCode": "JP-01",
-      "prefName": "北海道",
-      "region": "北海道",
-      "startDatetime": "2026-04-27T21:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6235112,
       "status": "success",
       "participants": 13,
@@ -29749,21 +28124,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6220017,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3812,
-      "organizerName": "Rebook徳島",
-      "prefCode": "JP-36",
-      "prefName": "徳島県",
-      "region": "四国",
-      "startDatetime": "2026-04-28T14:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6258323,
@@ -29946,21 +28306,6 @@
       ]
     },
     {
-      "eventId": 6227359,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3796,
-      "organizerName": "カードショップBungBung",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-28T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6245429,
       "status": "success",
       "participants": 2,
@@ -30064,21 +28409,6 @@
       ]
     },
     {
-      "eventId": 6123997,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3712,
-      "organizerName": "ディスカウントBANBAN",
-      "prefCode": "JP-27",
-      "prefName": "大阪府",
-      "region": "関西",
-      "startDatetime": "2026-04-28T17:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6172415,
       "status": "success",
       "participants": 5,
@@ -30176,21 +28506,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6294402,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 6378,
-      "organizerName": "トレカの郷",
-      "prefCode": "JP-07",
-      "prefName": "福島県",
-      "region": "東北",
-      "startDatetime": "2026-04-28T17:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6155326,
@@ -30707,21 +29022,6 @@
       ]
     },
     {
-      "eventId": 6101790,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3951,
-      "organizerName": "トーナメントセンターバトロコ水戸駅前",
-      "prefCode": "JP-08",
-      "prefName": "茨城県",
-      "region": "関東",
-      "startDatetime": "2026-04-28T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6284976,
       "status": "success",
       "participants": 9,
@@ -30875,21 +29175,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6270948,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4798,
-      "organizerName": "1/144マニア模型店",
-      "prefCode": "JP-29",
-      "prefName": "奈良県",
-      "region": "関西",
-      "startDatetime": "2026-04-28T18:00:00",
-      "maxJoinCount": 12,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6236680,
@@ -32223,21 +30508,6 @@
       ]
     },
     {
-      "eventId": 5952285,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4774,
-      "organizerName": "コーギーアール本店",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-28T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6077421,
       "status": "success",
       "participants": 5,
@@ -32964,21 +31234,6 @@
       ]
     },
     {
-      "eventId": 6220203,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 2787,
-      "organizerName": "ビートダウン センター北駅前店",
-      "prefCode": "JP-14",
-      "prefName": "神奈川県",
-      "region": "関東",
-      "startDatetime": "2026-04-28T20:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6262957,
       "status": "success",
       "participants": 3,
@@ -33629,21 +31884,6 @@
       ]
     },
     {
-      "eventId": 6281916,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3809,
-      "organizerName": "カードショップアビス",
-      "prefCode": "JP-05",
-      "prefName": "秋田県",
-      "region": "東北",
-      "startDatetime": "2026-04-29T13:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6181699,
       "status": "success",
       "participants": 5,
@@ -33893,36 +32133,6 @@
       ]
     },
     {
-      "eventId": 6291311,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3324,
-      "organizerName": "Shop Rainbox",
-      "prefCode": "JP-07",
-      "prefName": "福島県",
-      "region": "東北",
-      "startDatetime": "2026-04-29T13:30:00",
-      "maxJoinCount": 10,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6154884,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3898,
-      "organizerName": "デュエルラック",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-29T13:30:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6220080,
       "status": "success",
       "participants": 7,
@@ -34142,21 +32352,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6234561,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 5585,
-      "organizerName": "トーナメントセンターバトロコ新潟万代",
-      "prefCode": "JP-15",
-      "prefName": "新潟県",
-      "region": "中部・甲信越",
-      "startDatetime": "2026-04-29T14:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6281332,
@@ -34644,21 +32839,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6113153,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 4376,
-      "organizerName": "石とカードの森",
-      "prefCode": "JP-11",
-      "prefName": "埼玉県",
-      "region": "関東",
-      "startDatetime": "2026-04-29T15:30:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6260641,
@@ -36542,21 +34722,6 @@
       ]
     },
     {
-      "eventId": 6294543,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3420,
-      "organizerName": "TCG専門店カードショップわいずまん",
-      "prefCode": "JP-40",
-      "prefName": "福岡県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-29T19:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6100926,
       "status": "success",
       "participants": 9,
@@ -37983,21 +36148,6 @@
       ]
     },
     {
-      "eventId": 6008270,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3747,
-      "organizerName": "POCKET HOBBY",
-      "prefCode": "JP-46",
-      "prefName": "鹿児島県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-29T20:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6281079,
       "status": "success",
       "participants": 8,
@@ -38119,21 +36269,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6273033,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 9023,
-      "organizerName": "CLEVER（クレバー）東大阪店",
-      "prefCode": "JP-27",
-      "prefName": "大阪府",
-      "region": "関西",
-      "startDatetime": "2026-04-30T11:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6100184,
@@ -38320,21 +36455,6 @@
       ]
     },
     {
-      "eventId": 5927074,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 14231,
-      "organizerName": "トレキャットFC御影店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-30T14:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6257134,
       "status": "success",
       "participants": 9,
@@ -38386,21 +36506,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6034106,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3734,
-      "organizerName": "カードショップすけきよ",
-      "prefCode": "JP-29",
-      "prefName": "奈良県",
-      "region": "関西",
-      "startDatetime": "2026-04-30T15:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6261555,
@@ -38566,21 +36671,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6297667,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3982,
-      "organizerName": "カードラボ福岡天神店",
-      "prefCode": "JP-40",
-      "prefName": "福岡県",
-      "region": "九州・沖縄",
-      "startDatetime": "2026-04-30T16:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6204978,
@@ -38973,36 +37063,6 @@
       ]
     },
     {
-      "eventId": 6218788,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3189,
-      "organizerName": "株式会社ホビーベースイエローサブマリン姫路店",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-30T17:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
-      "eventId": 6255683,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3946,
-      "organizerName": "ブックオフイオン本牧店",
-      "prefCode": "JP-14",
-      "prefName": "神奈川県",
-      "region": "関東",
-      "startDatetime": "2026-04-30T17:30:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 5980437,
       "status": "success",
       "participants": 16,
@@ -39115,21 +37175,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6173725,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 2816,
-      "organizerName": "カードラボ札幌店",
-      "prefCode": "JP-01",
-      "prefName": "北海道",
-      "region": "北海道",
-      "startDatetime": "2026-04-30T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6256219,
@@ -39590,21 +37635,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6220516,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 3645,
-      "organizerName": "トリックスター",
-      "prefCode": "JP-12",
-      "prefName": "千葉県",
-      "region": "関東",
-      "startDatetime": "2026-04-30T18:00:00",
-      "maxJoinCount": 16,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6219163,
@@ -40091,21 +38121,6 @@
           "playerCount": 1
         }
       ]
-    },
-    {
-      "eventId": 6217699,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 13600,
-      "organizerName": "CARD Pl@ce",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-30T18:00:00",
-      "maxJoinCount": 8,
-      "statusId": 11,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6285847,
@@ -42425,21 +40440,6 @@
       ]
     },
     {
-      "eventId": 6285474,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 11073,
-      "organizerName": "トレカショップ スペース",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-21T12:00:00",
-      "maxJoinCount": 16,
-      "statusId": 31,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6206980,
       "status": "success",
       "participants": 7,
@@ -42677,21 +40677,6 @@
       ]
     },
     {
-      "eventId": 6281928,
-      "status": "pending",
-      "participants": 0,
-      "organizerId": 14967,
-      "organizerName": "カードショップトレカスタジオ",
-      "prefCode": "JP-28",
-      "prefName": "兵庫県",
-      "region": "関西",
-      "startDatetime": "2026-04-22T12:00:00",
-      "maxJoinCount": 16,
-      "statusId": 31,
-      "isCanceled": false,
-      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
-    },
-    {
       "eventId": 6147962,
       "status": "success",
       "participants": 8,
@@ -42813,6 +40798,2026 @@
           "playerCount": 1
         }
       ]
+    },
+    {
+      "eventId": 6297431,
+      "status": "success",
+      "participants": 2,
+      "winner": "クゥ",
+      "organizerId": 10848,
+      "organizerName": "トレカひろば",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-29T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 51,
+      "isCanceled": false,
+      "rankings": [
+        {
+          "rank": 1,
+          "playerCount": 1
+        },
+        {
+          "rank": 2,
+          "playerCount": 1
+        }
+      ]
+    },
+    {
+      "eventId": 6299104,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3979,
+      "organizerName": "ふぁんたじ屋",
+      "prefCode": "JP-38",
+      "prefName": "愛媛県",
+      "region": "四国",
+      "startDatetime": "2026-04-29T14:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6243082,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 13797,
+      "organizerName": "スタートレカ池袋店",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-29T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5922708,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2794,
+      "organizerName": "シーガル大河原店",
+      "prefCode": "JP-04",
+      "prefName": "宮城県",
+      "region": "東北",
+      "startDatetime": "2026-04-29T19:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6246614,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2975,
+      "organizerName": "バトロコミニ帯広WOW店",
+      "prefCode": "JP-01",
+      "prefName": "北海道",
+      "region": "北海道",
+      "startDatetime": "2026-04-29T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6297610,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4393,
+      "organizerName": "カードショップ パワーレイズ",
+      "prefCode": "JP-34",
+      "prefName": "広島県",
+      "region": "中国",
+      "startDatetime": "2026-04-20T18:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6293556,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 16763,
+      "organizerName": "トレカSunrise長野駅前店",
+      "prefCode": "JP-20",
+      "prefName": "長野県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-21T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6008648,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 9811,
+      "organizerName": "カードショップラフテリア",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-21T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6260640,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 7352,
+      "organizerName": "トレカキリン練馬店",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-22T15:30:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6247065,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3379,
+      "organizerName": "イエローサブマリン宇都宮店",
+      "prefCode": "JP-09",
+      "prefName": "栃木県",
+      "region": "関東",
+      "startDatetime": "2026-04-22T17:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6272742,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 8877,
+      "organizerName": "トレカチャンピオン神戸三宮店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-22T18:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5922707,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2794,
+      "organizerName": "シーガル大河原店",
+      "prefCode": "JP-04",
+      "prefName": "宮城県",
+      "region": "東北",
+      "startDatetime": "2026-04-22T19:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6155746,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3242,
+      "organizerName": "ふるいちトップブックス港北ミナモ店",
+      "prefCode": "JP-14",
+      "prefName": "神奈川県",
+      "region": "関東",
+      "startDatetime": "2026-04-22T19:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6297430,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 10848,
+      "organizerName": "トレカひろば",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-22T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6067960,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 15441,
+      "organizerName": "コーギーアール名古屋",
+      "prefCode": "JP-23",
+      "prefName": "愛知県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-22T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5927073,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 14231,
+      "organizerName": "トレキャットFC御影店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-23T14:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6026958,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3284,
+      "organizerName": "古本市場 千里丘店",
+      "prefCode": "JP-27",
+      "prefName": "大阪府",
+      "region": "関西",
+      "startDatetime": "2026-04-23T15:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6034105,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3734,
+      "organizerName": "カードショップすけきよ",
+      "prefCode": "JP-29",
+      "prefName": "奈良県",
+      "region": "関西",
+      "startDatetime": "2026-04-23T15:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6285011,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3545,
+      "organizerName": "カードショップキャット町屋店",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-23T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6243199,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3663,
+      "organizerName": "サムライパンチ津西店",
+      "prefCode": "JP-24",
+      "prefName": "三重県",
+      "region": "関西",
+      "startDatetime": "2026-04-23T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6207522,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 19684,
+      "organizerName": "アナログゲーム・トレカCharon",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-23T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6182956,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3170,
+      "organizerName": "カードラボ名古屋駅前店",
+      "prefCode": "JP-23",
+      "prefName": "愛知県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-23T17:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6218787,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3189,
+      "organizerName": "株式会社ホビーベースイエローサブマリン姫路店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-23T17:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6255682,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3946,
+      "organizerName": "ブックオフイオン本牧店",
+      "prefCode": "JP-14",
+      "prefName": "神奈川県",
+      "region": "関東",
+      "startDatetime": "2026-04-23T17:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6318872,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2778,
+      "organizerName": "HaSh",
+      "prefCode": "JP-18",
+      "prefName": "福井県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6173724,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2816,
+      "organizerName": "カードラボ札幌店",
+      "prefCode": "JP-01",
+      "prefName": "北海道",
+      "region": "北海道",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5949989,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3000,
+      "organizerName": "古本市場 新小岩店",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6277168,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3535,
+      "organizerName": "アメニティードリームなんば2号店",
+      "prefCode": "JP-27",
+      "prefName": "大阪府",
+      "region": "関西",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6219162,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3681,
+      "organizerName": "フルコンプ吉祥寺店",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6292693,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3822,
+      "organizerName": "トレカ専門店 スーパートレ☆スタ宮崎駅前店",
+      "prefCode": "JP-45",
+      "prefName": "宮崎県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6296080,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3857,
+      "organizerName": "アドバンテージ大須2号店",
+      "prefCode": "JP-23",
+      "prefName": "愛知県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5948734,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4527,
+      "organizerName": "スポーツカード&カードゲームショップ MINT仙台店",
+      "prefCode": "JP-04",
+      "prefName": "宮城県",
+      "region": "東北",
+      "startDatetime": "2026-04-23T18:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6220504,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3551,
+      "organizerName": "BOOKOFF埼玉毛呂山店",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-23T18:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5923791,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3377,
+      "organizerName": "カードショップもののふ",
+      "prefCode": "JP-23",
+      "prefName": "愛知県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-23T19:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6087293,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3723,
+      "organizerName": "ゲームショップブリックス",
+      "prefCode": "JP-26",
+      "prefName": "京都府",
+      "region": "関西",
+      "startDatetime": "2026-04-23T20:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5984273,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3737,
+      "organizerName": "TCGBAR Rishadan",
+      "prefCode": "JP-04",
+      "prefName": "宮城県",
+      "region": "東北",
+      "startDatetime": "2026-04-23T20:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6121145,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3315,
+      "organizerName": "カードラボ水戸店",
+      "prefCode": "JP-08",
+      "prefName": "茨城県",
+      "region": "関東",
+      "startDatetime": "2026-04-24T12:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6292095,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 11383,
+      "organizerName": "ホビーステーション小倉店",
+      "prefCode": "JP-40",
+      "prefName": "福岡県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-24T17:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6113000,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3706,
+      "organizerName": "カードワン",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-24T18:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6005197,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5017,
+      "organizerName": "GEKIRIN金町店",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-24T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6203769,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5562,
+      "organizerName": "カードラボ熊本店",
+      "prefCode": "JP-43",
+      "prefName": "熊本県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-24T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6276817,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 7857,
+      "organizerName": "CARD SHOPえうれか昭和町店",
+      "prefCode": "JP-31",
+      "prefName": "鳥取県",
+      "region": "中国",
+      "startDatetime": "2026-04-24T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6207164,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4929,
+      "organizerName": "ふるいちトップブックス高田西店",
+      "prefCode": "JP-15",
+      "prefName": "新潟県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-24T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6295862,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5852,
+      "organizerName": "トイギャラリー サイハティ",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-24T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6294976,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 8287,
+      "organizerName": "HIROKO MARKET",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-24T19:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6257876,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 8695,
+      "organizerName": "カードショップ彩々アミュプラザ鹿児島店",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-24T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5984710,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 13888,
+      "organizerName": "トレーディングカード専門店グッドスタッフ",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-24T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6296068,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 17690,
+      "organizerName": "トレカSunrise西宮北口駅前店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-24T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6215766,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3445,
+      "organizerName": "ボードゲームスペースdotto",
+      "prefCode": "JP-29",
+      "prefName": "奈良県",
+      "region": "関西",
+      "startDatetime": "2026-04-25T10:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6087368,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4508,
+      "organizerName": "おもちゃのはた水原店",
+      "prefCode": "JP-15",
+      "prefName": "新潟県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-25T10:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6296674,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3652,
+      "organizerName": "カードショップWiZ",
+      "prefCode": "JP-25",
+      "prefName": "滋賀県",
+      "region": "関西",
+      "startDatetime": "2026-04-25T12:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6207782,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3563,
+      "organizerName": "ジョイランド柏原店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-25T13:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6293607,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5028,
+      "organizerName": "ふるいちトップブックス東松山店",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-25T13:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6064858,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 7885,
+      "organizerName": "ゼスト相模原店トレカ館",
+      "prefCode": "JP-14",
+      "prefName": "神奈川県",
+      "region": "関東",
+      "startDatetime": "2026-04-25T13:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6026467,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 14179,
+      "organizerName": "トレカSHOPあんりみてっど",
+      "prefCode": "JP-07",
+      "prefName": "福島県",
+      "region": "東北",
+      "startDatetime": "2026-04-25T13:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6006396,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3577,
+      "organizerName": "SoftStationチャンプ",
+      "prefCode": "JP-23",
+      "prefName": "愛知県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-25T13:30:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6259149,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4801,
+      "organizerName": "イベント&TCGカフェTINY FRONTIER",
+      "prefCode": "JP-09",
+      "prefName": "栃木県",
+      "region": "関東",
+      "startDatetime": "2026-04-25T13:30:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6274660,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3073,
+      "organizerName": "TSUTAYA室蘭店",
+      "prefCode": "JP-01",
+      "prefName": "北海道",
+      "region": "北海道",
+      "startDatetime": "2026-04-25T14:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6226895,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4013,
+      "organizerName": "さつき書店",
+      "prefCode": "JP-47",
+      "prefName": "沖縄県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-25T14:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6234565,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5585,
+      "organizerName": "トーナメントセンターバトロコ新潟万代",
+      "prefCode": "JP-15",
+      "prefName": "新潟県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-25T14:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6162766,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3907,
+      "organizerName": "フミヤ",
+      "prefCode": "JP-34",
+      "prefName": "広島県",
+      "region": "中国",
+      "startDatetime": "2026-04-25T14:30:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6100997,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 8664,
+      "organizerName": "WonderGOO鎌ヶ谷店",
+      "prefCode": "JP-12",
+      "prefName": "千葉県",
+      "region": "関東",
+      "startDatetime": "2026-04-25T14:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6089792,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3270,
+      "organizerName": "古本市場 幸手店",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-25T15:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6077174,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3504,
+      "organizerName": "ビデオインアメリカ大徳寺店",
+      "prefCode": "JP-26",
+      "prefName": "京都府",
+      "region": "関西",
+      "startDatetime": "2026-04-25T15:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6283953,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 8273,
+      "organizerName": "ゲオ亘理店",
+      "prefCode": "JP-04",
+      "prefName": "宮城県",
+      "region": "東北",
+      "startDatetime": "2026-04-25T15:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6134256,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3752,
+      "organizerName": "カンテラ",
+      "prefCode": "JP-08",
+      "prefName": "茨城県",
+      "region": "関東",
+      "startDatetime": "2026-04-25T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6292994,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3915,
+      "organizerName": "ブックエース上荒川店",
+      "prefCode": "JP-07",
+      "prefName": "福島県",
+      "region": "東北",
+      "startDatetime": "2026-04-25T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6227015,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4476,
+      "organizerName": "ツタ尼トレカ　阪急伊丹駅前店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-25T17:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6298203,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4602,
+      "organizerName": "カードキャット",
+      "prefCode": "JP-20",
+      "prefName": "長野県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-25T17:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6053910,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 6535,
+      "organizerName": "ブックオフスーパーバザー25号八尾永畑店",
+      "prefCode": "JP-27",
+      "prefName": "大阪府",
+      "region": "関西",
+      "startDatetime": "2026-04-25T17:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6279546,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 20070,
+      "organizerName": "カードショップボルカ",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-25T17:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6184400,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2818,
+      "organizerName": "レプトン出汐店",
+      "prefCode": "JP-34",
+      "prefName": "広島県",
+      "region": "中国",
+      "startDatetime": "2026-04-25T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6156561,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3641,
+      "organizerName": "お宝バンク",
+      "prefCode": "JP-34",
+      "prefName": "広島県",
+      "region": "中国",
+      "startDatetime": "2026-04-25T18:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6254859,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3667,
+      "organizerName": "カードショップ龍皇亭",
+      "prefCode": "JP-38",
+      "prefName": "愛媛県",
+      "region": "四国",
+      "startDatetime": "2026-04-25T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6274944,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3861,
+      "organizerName": "TSUTAYA嵐山店",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-25T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6226628,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4401,
+      "organizerName": "カードボックス イオンモール徳島店",
+      "prefCode": "JP-36",
+      "prefName": "徳島県",
+      "region": "四国",
+      "startDatetime": "2026-04-25T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6113786,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4443,
+      "organizerName": "トレカショップファンクス",
+      "prefCode": "JP-38",
+      "prefName": "愛媛県",
+      "region": "四国",
+      "startDatetime": "2026-04-25T18:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6099824,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4335,
+      "organizerName": "カードショップNEST",
+      "prefCode": "JP-05",
+      "prefName": "秋田県",
+      "region": "東北",
+      "startDatetime": "2026-04-25T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6282308,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5857,
+      "organizerName": "カードショップ Lotus",
+      "prefCode": "JP-40",
+      "prefName": "福岡県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-25T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6248924,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5941,
+      "organizerName": "トレカショップフロント",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-25T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6229748,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3892,
+      "organizerName": "Reseau",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-25T21:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6296408,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4574,
+      "organizerName": "ホビーショップキムラ",
+      "prefCode": "JP-44",
+      "prefName": "大分県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-25T21:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6295093,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3282,
+      "organizerName": "トレカのフジヤ気仙沼店",
+      "prefCode": "JP-04",
+      "prefName": "宮城県",
+      "region": "東北",
+      "startDatetime": "2026-04-26T13:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6154575,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5239,
+      "organizerName": "ふるいちトップブックス滑川店",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-26T13:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6154883,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3898,
+      "organizerName": "デュエルラック",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-26T13:30:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6233798,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4510,
+      "organizerName": "カベの店春日部店",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-26T13:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6297335,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3795,
+      "organizerName": "TSUTAYA竹原店",
+      "prefCode": "JP-34",
+      "prefName": "広島県",
+      "region": "中国",
+      "startDatetime": "2026-04-26T14:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6259181,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3174,
+      "organizerName": "ファミーズ ブックワン",
+      "prefCode": "JP-22",
+      "prefName": "静岡県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-26T14:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6237362,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2922,
+      "organizerName": "フェイズ四日市店",
+      "prefCode": "JP-24",
+      "prefName": "三重県",
+      "region": "関西",
+      "startDatetime": "2026-04-26T15:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6274918,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3743,
+      "organizerName": "CARD SHOPえうれか",
+      "prefCode": "JP-31",
+      "prefName": "鳥取県",
+      "region": "中国",
+      "startDatetime": "2026-04-26T15:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6297889,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5079,
+      "organizerName": "つくも屋",
+      "prefCode": "JP-15",
+      "prefName": "新潟県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-26T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6007066,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3640,
+      "organizerName": "シーガル西多賀店",
+      "prefCode": "JP-04",
+      "prefName": "宮城県",
+      "region": "東北",
+      "startDatetime": "2026-04-26T17:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6254860,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3667,
+      "organizerName": "カードショップ龍皇亭",
+      "prefCode": "JP-38",
+      "prefName": "愛媛県",
+      "region": "四国",
+      "startDatetime": "2026-04-26T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6297365,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4380,
+      "organizerName": "こども楽園",
+      "prefCode": "JP-21",
+      "prefName": "岐阜県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-26T18:00:00",
+      "maxJoinCount": 12,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5949743,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 9206,
+      "organizerName": "ふるいちモレラ岐阜店",
+      "prefCode": "JP-21",
+      "prefName": "岐阜県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-26T18:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6195313,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3866,
+      "organizerName": "トレカショップ ストレージ",
+      "prefCode": "JP-10",
+      "prefName": "群馬県",
+      "region": "関東",
+      "startDatetime": "2026-04-26T19:00:00",
+      "maxJoinCount": 12,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6298828,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 6514,
+      "organizerName": "TOP ONE",
+      "prefCode": "JP-43",
+      "prefName": "熊本県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-27T12:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6258269,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 17651,
+      "organizerName": "ホビーショップShelly",
+      "prefCode": "JP-35",
+      "prefName": "山口県",
+      "region": "中国",
+      "startDatetime": "2026-04-27T14:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6052321,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3748,
+      "organizerName": "カードショップにけ",
+      "prefCode": "JP-12",
+      "prefName": "千葉県",
+      "region": "関東",
+      "startDatetime": "2026-04-27T14:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6272484,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5939,
+      "organizerName": "TSUTAYA Trading Card錦糸町",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-27T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6134136,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3814,
+      "organizerName": "木乃美書房",
+      "prefCode": "JP-33",
+      "prefName": "岡山県",
+      "region": "中国",
+      "startDatetime": "2026-04-27T17:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6247257,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5981,
+      "organizerName": "ふるいちイオンモール幕張新都心店",
+      "prefCode": "JP-12",
+      "prefName": "千葉県",
+      "region": "関東",
+      "startDatetime": "2026-04-27T17:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5950984,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 8952,
+      "organizerName": "ふるいちイオンモール土岐店",
+      "prefCode": "JP-21",
+      "prefName": "岐阜県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-27T17:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6163123,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3498,
+      "organizerName": "JABUROⅡ",
+      "prefCode": "JP-15",
+      "prefName": "新潟県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-27T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5982179,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3534,
+      "organizerName": "買取くん",
+      "prefCode": "JP-13",
+      "prefName": "東京都",
+      "region": "関東",
+      "startDatetime": "2026-04-27T18:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6294977,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 8287,
+      "organizerName": "HIROKO MARKET",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-27T19:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6206292,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 15629,
+      "organizerName": "カードラボ鹿児島店",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-27T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6249847,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4475,
+      "organizerName": "てぶくろの部屋",
+      "prefCode": "JP-01",
+      "prefName": "北海道",
+      "region": "北海道",
+      "startDatetime": "2026-04-27T21:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6220017,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3812,
+      "organizerName": "Rebook徳島",
+      "prefCode": "JP-36",
+      "prefName": "徳島県",
+      "region": "四国",
+      "startDatetime": "2026-04-28T14:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6227359,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3796,
+      "organizerName": "カードショップBungBung",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-28T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6123997,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3712,
+      "organizerName": "ディスカウントBANBAN",
+      "prefCode": "JP-27",
+      "prefName": "大阪府",
+      "region": "関西",
+      "startDatetime": "2026-04-28T17:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6294402,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 6378,
+      "organizerName": "トレカの郷",
+      "prefCode": "JP-07",
+      "prefName": "福島県",
+      "region": "東北",
+      "startDatetime": "2026-04-28T17:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6101790,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3951,
+      "organizerName": "トーナメントセンターバトロコ水戸駅前",
+      "prefCode": "JP-08",
+      "prefName": "茨城県",
+      "region": "関東",
+      "startDatetime": "2026-04-28T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6270948,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4798,
+      "organizerName": "1/144マニア模型店",
+      "prefCode": "JP-29",
+      "prefName": "奈良県",
+      "region": "関西",
+      "startDatetime": "2026-04-28T18:00:00",
+      "maxJoinCount": 12,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5952285,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4774,
+      "organizerName": "コーギーアール本店",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-28T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6220203,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2787,
+      "organizerName": "ビートダウン センター北駅前店",
+      "prefCode": "JP-14",
+      "prefName": "神奈川県",
+      "region": "関東",
+      "startDatetime": "2026-04-28T20:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6281916,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3809,
+      "organizerName": "カードショップアビス",
+      "prefCode": "JP-05",
+      "prefName": "秋田県",
+      "region": "東北",
+      "startDatetime": "2026-04-29T13:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6291311,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3324,
+      "organizerName": "Shop Rainbox",
+      "prefCode": "JP-07",
+      "prefName": "福島県",
+      "region": "東北",
+      "startDatetime": "2026-04-29T13:30:00",
+      "maxJoinCount": 10,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6154884,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3898,
+      "organizerName": "デュエルラック",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-29T13:30:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6234561,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 5585,
+      "organizerName": "トーナメントセンターバトロコ新潟万代",
+      "prefCode": "JP-15",
+      "prefName": "新潟県",
+      "region": "中部・甲信越",
+      "startDatetime": "2026-04-29T14:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6113153,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 4376,
+      "organizerName": "石とカードの森",
+      "prefCode": "JP-11",
+      "prefName": "埼玉県",
+      "region": "関東",
+      "startDatetime": "2026-04-29T15:30:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6294543,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3420,
+      "organizerName": "TCG専門店カードショップわいずまん",
+      "prefCode": "JP-40",
+      "prefName": "福岡県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-29T19:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6008270,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3747,
+      "organizerName": "POCKET HOBBY",
+      "prefCode": "JP-46",
+      "prefName": "鹿児島県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-29T20:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6273033,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 9023,
+      "organizerName": "CLEVER（クレバー）東大阪店",
+      "prefCode": "JP-27",
+      "prefName": "大阪府",
+      "region": "関西",
+      "startDatetime": "2026-04-30T11:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 5927074,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 14231,
+      "organizerName": "トレキャットFC御影店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-30T14:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6034106,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3734,
+      "organizerName": "カードショップすけきよ",
+      "prefCode": "JP-29",
+      "prefName": "奈良県",
+      "region": "関西",
+      "startDatetime": "2026-04-30T15:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6297667,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3982,
+      "organizerName": "カードラボ福岡天神店",
+      "prefCode": "JP-40",
+      "prefName": "福岡県",
+      "region": "九州・沖縄",
+      "startDatetime": "2026-04-30T16:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6218788,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3189,
+      "organizerName": "株式会社ホビーベースイエローサブマリン姫路店",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-30T17:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6255683,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3946,
+      "organizerName": "ブックオフイオン本牧店",
+      "prefCode": "JP-14",
+      "prefName": "神奈川県",
+      "region": "関東",
+      "startDatetime": "2026-04-30T17:30:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6173725,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 2816,
+      "organizerName": "カードラボ札幌店",
+      "prefCode": "JP-01",
+      "prefName": "北海道",
+      "region": "北海道",
+      "startDatetime": "2026-04-30T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6220516,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 3645,
+      "organizerName": "トリックスター",
+      "prefCode": "JP-12",
+      "prefName": "千葉県",
+      "region": "関東",
+      "startDatetime": "2026-04-30T18:00:00",
+      "maxJoinCount": 16,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6217699,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 13600,
+      "organizerName": "CARD Pl@ce",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-30T18:00:00",
+      "maxJoinCount": 8,
+      "statusId": 11,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6285474,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 11073,
+      "organizerName": "トレカショップ スペース",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-21T12:00:00",
+      "maxJoinCount": 16,
+      "statusId": 31,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
+    },
+    {
+      "eventId": 6281928,
+      "status": "pending",
+      "participants": 0,
+      "organizerId": 14967,
+      "organizerName": "カードショップトレカスタジオ",
+      "prefCode": "JP-28",
+      "prefName": "兵庫県",
+      "region": "関西",
+      "startDatetime": "2026-04-22T12:00:00",
+      "maxJoinCount": 16,
+      "statusId": 31,
+      "isCanceled": false,
+      "error": "{\"match_not_found\":\"ECEventStanding001\"}"
     },
     {
       "eventId": 6191419,
