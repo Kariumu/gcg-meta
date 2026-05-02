@@ -81,24 +81,22 @@
       })();
     </script>
 
-    <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap">
+    <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex-shrink:0">
         <img id="card-img" src="/images/cards/GD02-111.webp" alt="決戦の切り札"
-             style="width:180px;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
+             style="width:280px;max-width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
              onclick="openLightbox(this.src)"
              onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='/images/cards/GD02-111.webp?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
       </div>
-      <div style="flex:1;min-width:300px">
+      <div style="flex:1;min-width:280px">
         <h1 style="font-family:var(--font-mono);font-size:22px;margin-bottom:4px">決戦の切り札</h1>
-        <p style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted);margin:0 0 8px">GD02-111</p>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+        <p style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted);margin:0 0 12px">GD02-111</p>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:#b444ff22;color:#b444ff;border:1px solid #b444ff44">紫</span>
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">コマンド</span>
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">R</span>
-          
-          
-          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">コスト4</span>
         </div>
+        <div style="margin:14px 0;padding:16px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)"><div style="display:flex;justify-content:center;gap:24px;align-items:baseline;font-family:var(--font-mono)"><div><span style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-right:4px">コスト</span><span style="font-size:18px;font-weight:600;color:var(--text-primary)">4</span></div></div></div>
         
         <p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: 機動戦士ガンダム 鉄血のオルフェンズ</p>
         
