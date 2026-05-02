@@ -719,26 +719,13 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
           const showHP = ct === 'UNIT' || ct === 'BASE';
           const showLv = ct === 'UNIT' || ct === 'PILOT';
           const showCost = ct !== 'PILOT';
-          const hasMainStats = showAP || showHP;
-          const hasSubStats = showLv || showCost;
-          if (!hasMainStats && !hasSubStats) return '';
-          let html = '<div style="margin:14px 0;padding:16px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">';
-          if (hasMainStats) {
-            html += '<div style="display:flex;justify-content:center;gap:32px;align-items:baseline;margin-bottom:' + (hasSubStats ? '12px' : '0') + '">';
-            if (showAP) html += '<div style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px">AP</div><div style="font-size:32px;font-weight:700;font-family:var(--font-mono);color:#ff6b6b;line-height:1">' + ((masterCard.stats && masterCard.stats.ap) || 0) + '</div></div>';
-            if (showAP && showHP) html += '<div style="font-size:24px;color:var(--text-muted);font-family:var(--font-mono)">／</div>';
-            if (showHP) html += '<div style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px">HP</div><div style="font-size:32px;font-weight:700;font-family:var(--font-mono);color:#66cc88;line-height:1">' + ((masterCard.stats && masterCard.stats.hp) || 0) + '</div></div>';
-            html += '</div>';
-          }
-          if (hasMainStats && hasSubStats) html += '<div style="height:1px;background:var(--border);margin:8px 0"></div>';
-          if (hasSubStats) {
-            html += '<div style="display:flex;justify-content:center;gap:24px;align-items:baseline;font-family:var(--font-mono)">';
-            if (showLv) html += '<div><span style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-right:4px">Lv.</span><span style="font-size:18px;font-weight:600;color:var(--text-primary)">' + (masterCard.level || 0) + '</span></div>';
-            if (showCost) html += '<div><span style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-right:4px">コスト</span><span style="font-size:18px;font-weight:600;color:var(--text-primary)">' + (masterCard.cost || 0) + '</span></div>';
-            html += '</div>';
-          }
-          html += '</div>';
-          return html;
+          const cards = [];
+          if (showLv) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">Lv.</div><div class="stat-value">' + (masterCard.level || 0) + '</div></div>');
+          if (showCost) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">コスト</div><div class="stat-value">' + (masterCard.cost || 0) + '</div></div>');
+          if (showAP) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">AP</div><div class="stat-value" style="color:#ff6b6b">' + ((masterCard.stats && masterCard.stats.ap) || 0) + '</div></div>');
+          if (showHP) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">HP</div><div class="stat-value" style="color:#66cc88">' + ((masterCard.stats && masterCard.stats.hp) || 0) + '</div></div>');
+          if (cards.length === 0) return '';
+          return '<div class="card-stats-grid">' + cards.join('') + '</div>';
         })()}
         ${masterCard.traits && masterCard.traits.length > 0 ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ${escapeHtml(masterCard.traits.join(', '))}</p>` : ''}
         ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}

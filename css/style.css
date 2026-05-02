@@ -2022,3 +2022,39 @@ a.section-badge:hover {
     line-height: 1.65;
   }
 }
+
+/* ========== カード詳細ページのステータスグリッド ========== */
+.card-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 8px;
+  margin: 14px 0;
+}
+
+.card-stat-card {
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.card-stat-card .stat-label {
+  font-size: 10px;
+  margin-bottom: 4px;
+}
+
+.card-stat-card .stat-value {
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+@media (max-width: 600px) {
+  .card-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .card-stat-card {
+    padding: 8px 10px;
+  }
+  .card-stat-card .stat-value {
+    font-size: 22px;
+  }
+}
