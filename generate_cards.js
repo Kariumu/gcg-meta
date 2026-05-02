@@ -698,25 +698,48 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       })();
     </script>
 
-    <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap">
+    <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex-shrink:0">
         <img id="card-img" src="/images/cards/${cardId}.webp" alt="${escapeHtml(cardName)}${isParallel ? '（パラレル版）' : ''}"
-             style="width:180px;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
+             style="width:280px;max-width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
              onclick="openLightbox(this.src)"
              onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='/images/cards/${cardId}.webp?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
       </div>
-      <div style="flex:1;min-width:300px">
+      <div style="flex:1;min-width:280px">
         <h1 style="font-family:var(--font-mono);font-size:22px;margin-bottom:4px">${masterCard ? escapeHtml(cardName) : escapeHtml(cardId)}</h1>
-        ${masterCard ? `<p style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted);margin:0 0 8px">${escapeHtml(cardId)}</p>` : ''}
-        ${masterCard ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">
+        ${masterCard ? `<p style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted);margin:0 0 12px">${escapeHtml(cardId)}</p>` : ''}
+        ${masterCard ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex}22;color:${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex};border:1px solid ${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex}44">${escapeHtml(colorJp)}</span>
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">${escapeHtml(typeJp)}</span>
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">${escapeHtml(RARITY_LABEL[masterCard.rarity] || masterCard.rarity)}</span>
-          ${masterCard.card_type === 'UNIT' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">Lv.${masterCard.level} / コスト${masterCard.cost}</span>
-          <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">AP${masterCard.stats.ap || 0} / HP${masterCard.stats.hp || 0}</span>` : ''}
-          ${masterCard.card_type === 'PILOT' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">Lv.${masterCard.level} / コスト${masterCard.cost}</span>` : ''}
-          ${masterCard.card_type === 'COMMAND' ? `<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">コスト${masterCard.cost}</span>` : ''}
         </div>
+        ${(() => {
+          const ct = masterCard.card_type;
+          const showAP = ct === 'UNIT' || ct === 'PILOT';
+          const showHP = ct === 'UNIT' || ct === 'BASE';
+          const showLv = ct === 'UNIT' || ct === 'PILOT';
+          const showCost = ct !== 'PILOT';
+          const hasMainStats = showAP || showHP;
+          const hasSubStats = showLv || showCost;
+          if (!hasMainStats && !hasSubStats) return '';
+          let html = '<div style="margin:14px 0;padding:16px 14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">';
+          if (hasMainStats) {
+            html += '<div style="display:flex;justify-content:center;gap:32px;align-items:baseline;margin-bottom:' + (hasSubStats ? '12px' : '0') + '">';
+            if (showAP) html += '<div style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px">AP</div><div style="font-size:32px;font-weight:700;font-family:var(--font-mono);color:#ff6b6b;line-height:1">' + ((masterCard.stats && masterCard.stats.ap) || 0) + '</div></div>';
+            if (showAP && showHP) html += '<div style="font-size:24px;color:var(--text-muted);font-family:var(--font-mono)">／</div>';
+            if (showHP) html += '<div style="text-align:center"><div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono);text-transform:uppercase;letter-spacing:1px">HP</div><div style="font-size:32px;font-weight:700;font-family:var(--font-mono);color:#66cc88;line-height:1">' + ((masterCard.stats && masterCard.stats.hp) || 0) + '</div></div>';
+            html += '</div>';
+          }
+          if (hasMainStats && hasSubStats) html += '<div style="height:1px;background:var(--border);margin:8px 0"></div>';
+          if (hasSubStats) {
+            html += '<div style="display:flex;justify-content:center;gap:24px;align-items:baseline;font-family:var(--font-mono)">';
+            if (showLv) html += '<div><span style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-right:4px">Lv.</span><span style="font-size:18px;font-weight:600;color:var(--text-primary)">' + (masterCard.level || 0) + '</span></div>';
+            if (showCost) html += '<div><span style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-right:4px">コスト</span><span style="font-size:18px;font-weight:600;color:var(--text-primary)">' + (masterCard.cost || 0) + '</span></div>';
+            html += '</div>';
+          }
+          html += '</div>';
+          return html;
+        })()}
         ${masterCard.traits && masterCard.traits.length > 0 ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ${escapeHtml(masterCard.traits.join(', '))}</p>` : ''}
         ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}
         ${masterCard.acquisition_info ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">入手情報: ${escapeHtml(masterCard.acquisition_info)}</p>` : ''}
