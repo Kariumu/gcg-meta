@@ -54,6 +54,22 @@ function escapeHtml(str) {
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+/**
+ * カードテキストを装飾付きHTMLに変換
+ * XSS対策: escapeHtml 後に span タグ置換
+ */
+function formatEffectText(text) {
+  if (!text) return '';
+  let html = escapeHtml(text);
+  // 【...】 タイミング → 青
+  html = html.replace(/【([^】]+)】/g, '<span class="effect-timing">【$1】</span>');
+  // 《...》 キーワード能力 → 緑
+  html = html.replace(/《([^》]+)》/g, '<span class="effect-keyword">《$1》</span>');
+  // 〔...〕 特徴/種別 → オレンジ
+  html = html.replace(/〔([^〕]+)〕/g, '<span class="effect-trait">〔$1〕</span>');
+  return html;
+}
+
 function renderColorTags(colors) {
   return colors.map(c => {
     const info = DECK_COLORS[c] || DECK_COLORS.Unknown;
@@ -703,7 +719,11 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
         </div>
         ${masterCard.traits && masterCard.traits.length > 0 ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 4px">特徴: ${escapeHtml(masterCard.traits.join(', '))}</p>` : ''}
         ${masterCard.source_title ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">作品: ${escapeHtml(masterCard.source_title)}</p>` : ''}
-        ${masterCard.acquisition_info ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">入手情報: ${escapeHtml(masterCard.acquisition_info)}</p>` : ''}` : ''}
+        ${masterCard.acquisition_info ? `<p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">入手情報: ${escapeHtml(masterCard.acquisition_info)}</p>` : ''}
+        ${masterCard.effect_text ? `<div class="card-effect-section">
+          <div class="card-effect-label">カードテキスト</div>
+          <div class="card-effect-text">${formatEffectText(masterCard.effect_text)}</div>
+        </div>` : ''}` : ''}
         <a href="https://www.gundam-gcg.com/jp/cards/${isParallel ? 'detail.php?detailSearch=' : 'index.php?freeword='}${cardId}" target="_blank" rel="noopener"
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →

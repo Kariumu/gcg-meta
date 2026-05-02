@@ -1942,3 +1942,83 @@ a.section-badge:hover {
     color: transparent;
   }
 }
+
+/* ============================================================
+ * Phase 7 — 問題2: モバイル時ヘッダー検索バーの折りたたみ対応
+ * 既存の @media (max-width: 768px) で .header-search は display:none
+ * となっているため、<=640px で再表示し、通常40pxのコンパクト幅、
+ * フォーカス時に180pxへ展開する挙動に置き換える。
+ * プレースホルダー文字列は非フォーカス時に透明化してアイコンのみ
+ * 見えるように寄せる。デスクトップ（>640px）には影響なし。
+ * ============================================================ */
+@media (max-width: 640px) {
+  .header-search {
+    display: block;
+    margin-left: 8px;
+  }
+  .header-search input[type="search"] {
+    width: 40px;
+    padding: 6px 10px;
+    transition: width 0.2s ease-out;
+  }
+  .header-search input[type="search"]:focus {
+    width: 180px;
+  }
+  .header-search input[type="search"]:not(:focus)::placeholder {
+    color: transparent;
+  }
+}
+
+/* ========== Phase Y-7: カードテキスト表示 ========== */
+.card-effect-section {
+  margin: 16px 0 12px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+.card-effect-label {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.card-effect-text {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* タイミング: 【セット時】【アタック時】等 → 青系 */
+.effect-timing {
+  color: #44bbff;
+  font-weight: 600;
+}
+
+/* キーワード能力: 《リペア》《スピードムーブ》等 → 緑系 */
+.effect-keyword {
+  color: #66cc88;
+  font-weight: 600;
+}
+
+/* 特徴/種別: 〔WB隊〕〔地球連邦〕等 → オレンジ系 */
+.effect-trait {
+  color: #ffaa66;
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .card-effect-section {
+    padding: 12px 14px;
+  }
+  .card-effect-text {
+    font-size: 12px;
+    line-height: 1.65;
+  }
+}
