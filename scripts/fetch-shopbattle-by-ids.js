@@ -210,14 +210,12 @@ async function main() {
       if (data.success?.rankings) {
         const rankings = data.success.rankings;
         const participants = rankings.reduce((sum, r) => sum + (r.users?.length || 0), 0);
-        const winner = rankings.find(r => r.rank === 1)?.users?.[0]?.player_name || null;
 
         const prefCode = schedEvent?.pref_code || null;
         results.push({
           eventId,
           status: 'success',
           participants,
-          winner,
           organizerId: schedEvent?.organizer_id || null,
           organizerName: storeMap.get(schedEvent?.organizer_id) || null,
           prefCode,
