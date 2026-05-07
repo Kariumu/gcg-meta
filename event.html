@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- SEO: /event.html?id=XXX → /events/XXX.html リダイレクト (Phase A2) -->
+  <meta name="robots" content="noindex,follow">
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('id');
+      if (id && /^[0-9]+$/.test(id)) {
+        window.location.replace('/events/' + id + '.html');
+      }
+    })();
+  </script>
+  <link rel="canonical" href="https://gcg-stats.com/events/" id="dynamic-canonical">
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var id = params.get('id');
+      if (id && /^[0-9]+$/.test(id)) {
+        var canonical = document.getElementById('dynamic-canonical');
+        if (canonical) canonical.href = 'https://gcg-stats.com/events/' + id + '.html';
+      }
+    })();
+  </script>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
   <script>
@@ -13,7 +35,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イベント結果 - GCG STATS</title>
   <meta name="description" content="ガンダムカードゲーム ニュータイプチャレンジ大会結果の詳細ページ。トップ4デッキと使用カードを掲載。GCG STATSより。">
-  <link rel="canonical" href="https://gcg-stats.com/event.html">
   <!-- OGP -->
   <meta property="og:site_name" content="GCG STATS">
   <meta property="og:locale" content="ja_JP">

@@ -90,7 +90,7 @@ function generateIndex(summary, eventsData) {
 
   seoHtml += `<h3>最新イベント</h3><ul>`;
   for (const ev of events) {
-    seoHtml += `<li><a href="event.html?id=${ev.event_id}">${formatDate(ev.date)} ${escapeHtml(ev.store)}</a></li>`;
+    seoHtml += `<li><a href="events/${ev.event_id}.html">${formatDate(ev.date)} ${escapeHtml(ev.store)}</a></li>`;
   }
   seoHtml += `</ul>`;
 
@@ -128,7 +128,7 @@ function generateEvents(summary, eventsData) {
   let seoHtml = `<h2>イベント一覧（全${totalEvents}件）</h2><ul>`;
   for (const ev of events) {
     const winner = (ev.results || []).find(r => r.rank === 1);
-    seoHtml += `<li><a href="event.html?id=${ev.event_id}">${formatDate(ev.date)} ${escapeHtml(ev.store)}</a>`;
+    seoHtml += `<li><a href="events/${ev.event_id}.html">${formatDate(ev.date)} ${escapeHtml(ev.store)}</a>`;
     if (winner) seoHtml += ` 優勝: ${escapeHtml(winner.player)}`;
     seoHtml += `</li>`;
   }
