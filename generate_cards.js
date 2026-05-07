@@ -474,6 +474,25 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   const colorJp = masterCard ? (COLOR_JP[masterCard.color] || masterCard.color) : '';
   const typeJp = masterCard ? (TYPE_JP[masterCard.card_type] || masterCard.card_type) : '';
 
+  // セット名（パンくず・JSON-LD用）
+  const setPrefix = cardId.replace(/_p\d+$/, '').replace(/-\d+$/, '');
+  const SET_NAMES = {
+    'GD01': 'GD01 機動戦士ガンダム',
+    'GD02': 'GD02 交錯する戦場',
+    'GD03': 'GD03 覚醒する力',
+    'GD04': 'GD04 Phantom Aria',
+    'ST01': 'ST01 地球連邦デッキ',
+    'ST02': 'ST02 ジオンデッキ',
+    'ST03': 'ST03 ラクス・クラインデッキ',
+    'ST04': 'ST04 アスラン・ザラデッキ',
+    'ST05': 'ST05 ソレスタルビーイングデッキ',
+    'ST06': 'ST06 鉄華団デッキ',
+    'ST07': 'ST07 アムロ・レイデッキ',
+    'ST08': 'ST08 シャア・アズナブルデッキ',
+    'ST09': 'ST09 キラ・ヤマトデッキ',
+  };
+  const setName = SET_NAMES[setPrefix] || setPrefix;
+
   // リンク関連カード（パラレル版はbase_card_idのリンク先を使う）
   let linkedHtml = '';
   if (masterCard) {
@@ -642,6 +661,18 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="https://gcg-stats.com/images/cards/${cardId}.webp">
   <link rel="canonical" href="${SITE_URL}/cards/${cardId}/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "${SITE_URL}/"},
+      {"@type": "ListItem", "position": 2, "name": "カード一覧", "item": "${SITE_URL}/cards.html"},
+      {"@type": "ListItem", "position": 3, "name": "${escapeHtml(setPrefix)}", "item": "${SITE_URL}/cards.html#${setPrefix}"},
+      {"@type": "ListItem", "position": 4, "name": "${escapeHtml(cardName)}"}
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
@@ -650,53 +681,15 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   <div id="header"></div>
 
   <main class="container">
-    <div style="margin-bottom:12px">
-      <a id="back-link" href="../../meta.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.15s;cursor:pointer"
-         onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">
-        ← 戻る
-      </a>
-    </div>
-    <script>
-      (function() {
-        var params = new URLSearchParams(window.location.search);
-        var from = params.get('from');
-        var name = params.get('name');
-        var el = document.getElementById('back-link');
-        if (from === 'event' && name) {
-          el.textContent = '\\u2190 ' + decodeURIComponent(name) + 'の結果に戻る';
-          el.removeAttribute('href');
-          el.onclick = function() { history.back(); };
-        } else if (from === 'meta') {
-          el.textContent = '\\u2190 環境分析に戻る';
-          el.href = '../../meta.html';
-        } else if (from === 'top') {
-          el.textContent = '\\u2190 トップに戻る';
-          el.href = '../../index.html';
-        } else if (document.referrer) {
-          var ref = document.referrer;
-          if (ref.indexOf('/meta.html') !== -1) {
-            el.textContent = '\\u2190 環境分析に戻る';
-            el.removeAttribute('href');
-            el.onclick = function() { history.back(); };
-          } else if (ref.indexOf('/event.html') !== -1) {
-            el.textContent = '\\u2190 イベント結果に戻る';
-            el.removeAttribute('href');
-            el.onclick = function() { history.back(); };
-          } else if (ref.indexOf('gcg-stats.com') !== -1 && (ref.endsWith('/') || ref.indexOf('/index.html') !== -1)) {
-            el.textContent = '\\u2190 トップに戻る';
-            el.removeAttribute('href');
-            el.onclick = function() { history.back(); };
-          } else {
-            el.textContent = '\\u2190 戻る';
-            el.removeAttribute('href');
-            el.onclick = function() { history.back(); };
-          }
-        } else {
-          el.textContent = '\\u2190 戻る';
-          el.href = '../../index.html';
-        }
-      })();
-    </script>
+    <nav class="breadcrumb" style="margin-bottom:12px;font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">
+      <a href="../../index.html" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">ホーム</a>
+      <span style="margin:0 6px">›</span>
+      <a href="../../cards.html" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">カード一覧</a>
+      <span style="margin:0 6px">›</span>
+      <a href="../../cards.html#${setPrefix}" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">${escapeHtml(setPrefix)}</a>
+      <span style="margin:0 6px">›</span>
+      <span style="color:var(--text-secondary)">${escapeHtml(cardName)}</span>
+    </nav>
 
     <div style="display:flex;gap:24px;margin-bottom:32px;flex-wrap:wrap;align-items:flex-start">
       <div style="flex-shrink:0">
