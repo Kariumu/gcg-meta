@@ -3,3 +3,8 @@ scraper.log
 *.log
 .DS_Store
 .env
+_screenshots_*/
+
+# 一時デプロイスクリプト
+deploy-s*.js
+add-breadcrumb-*.js

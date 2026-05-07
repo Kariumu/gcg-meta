@@ -53,7 +53,7 @@ function deckToLinkedHtml(deck) {
   }).join(', ');
 }
 
-function generateSeoContent(ev, seriesName) {
+function generateSeoContent(ev, seriesName, { linkCards = false } = {}) {
   const results = (ev.results || []).sort((a, b) => a.rank - b.rank);
   let h = '<h2>' + escapeHtml(ev.store) + ' 大会結果</h2>';
   h += '<p>開催日: ' + formatDate(ev.date) + '</p>';
@@ -61,7 +61,9 @@ function generateSeoContent(ev, seriesName) {
   if (seriesName) h += '<p>シリーズ: ' + escapeHtml(seriesName) + '</p>';
   h += '<h3>順位一覧</h3><ol>';
   for (const r of results) {
-    h += '<li>' + rankText(r.rank) + ': ' + escapeHtml(r.player) + ' - デッキ: ' + deckToLinkedHtml(r.deck) + '</li>';
+    // Top 3 finishers get linked cards (noscript only), rest plain text
+    const deckHtml = (linkCards && r.rank <= 3) ? deckToLinkedHtml(r.deck) : escapeHtml(deckToText(r.deck));
+    h += '<li>' + rankText(r.rank) + ': ' + escapeHtml(r.player) + ' - デッキ: ' + deckHtml + '</li>';
   }
   h += '</ol>';
   // Internal links section
@@ -154,9 +156,6 @@ const CLIENT_JS_TEMPLATE = `
       } catch(e) {}
 
       var storeDisplay = GCG.escapeHtml(ev.store);
-      if (organizerId) {
-        storeDisplay = '<a href="' + GCG.getBasePath() + 'store.html?id=' + organizerId + '" style="color:var(--text-primary);text-decoration:none">' + GCG.escapeHtml(ev.store) + '</a>';
-      }
 
       const seriesName = data.series[ev.series_id] || '';
 
@@ -262,7 +261,8 @@ function generateEventPage(eventId, ev, seriesName) {
   const dateFormatted = formatDate(ev.date);
   const winnerResult = (ev.results || []).find(r => r.rank === 1);
   const winnerName = winnerResult ? escapeHtml(winnerResult.player) : '';
-  const seoContent = generateSeoContent(ev, seriesName);
+  const noscriptContent = generateSeoContent(ev, seriesName, { linkCards: true });
+  const seoContent = generateSeoContent(ev, seriesName, { linkCards: false });
 
   // クライアントJSのイベントIDを置換
   const clientJs = CLIENT_JS_TEMPLATE.replace('{{EVENT_ID}}', eventId);
@@ -330,7 +330,7 @@ breadcrumbNav +
 '    </div>\n' +
 '  </main>\n' +
 '\n' +
-'  <noscript>' + seoContent + '</noscript>\n' +
+'  <noscript>' + noscriptContent + '</noscript>\n' +
 '  <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">' + seoContent + '</div>\n' +
 '\n' +
 '  <div id="footer"></div>\n' +
