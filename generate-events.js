@@ -44,6 +44,15 @@ function deckToText(deck) {
   }).join(', ');
 }
 
+function deckToLinkedHtml(deck) {
+  if (!deck || deck.length === 0) return 'デッキ情報なし';
+  return deck.map(c => {
+    const name = cardsMaster[c.card_id] ? escapeHtml(cardsMaster[c.card_id].name_jp) : '';
+    const label = name ? (escapeHtml(c.card_id) + '(' + name + ') x' + c.count) : (escapeHtml(c.card_id) + ' x' + c.count);
+    return '<a href="../cards/' + c.card_id + '/" style="color:var(--text-muted)">' + label + '</a>';
+  }).join(', ');
+}
+
 function generateSeoContent(ev, seriesName) {
   const results = (ev.results || []).sort((a, b) => a.rank - b.rank);
   let h = '<h2>' + escapeHtml(ev.store) + ' 大会結果</h2>';
@@ -52,9 +61,16 @@ function generateSeoContent(ev, seriesName) {
   if (seriesName) h += '<p>シリーズ: ' + escapeHtml(seriesName) + '</p>';
   h += '<h3>順位一覧</h3><ol>';
   for (const r of results) {
-    h += '<li>' + rankText(r.rank) + ': ' + escapeHtml(r.player) + ' - デッキ: ' + escapeHtml(deckToText(r.deck)) + '</li>';
+    h += '<li>' + rankText(r.rank) + ': ' + escapeHtml(r.player) + ' - デッキ: ' + deckToLinkedHtml(r.deck) + '</li>';
   }
   h += '</ol>';
+  // Internal links section
+  h += '<h3>関連リンク</h3><ul>';
+  h += '<li><a href="index.html">大会結果一覧</a></li>';
+  h += '<li><a href="../index.html">GCG STATS トップ</a></li>';
+  h += '<li><a href="../cards.html">カード一覧</a></li>';
+  h += '<li><a href="../reports/">レポート・分析</a></li>';
+  h += '</ul>';
   return h;
 }
 
@@ -251,6 +267,27 @@ function generateEventPage(eventId, ev, seriesName) {
   // クライアントJSのイベントIDを置換
   const clientJs = CLIENT_JS_TEMPLATE.replace('{{EVENT_ID}}', eventId);
 
+  // JSON-LD BreadcrumbList
+  const jsonLd = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": SITE_URL + "/"},
+      {"@type": "ListItem", "position": 2, "name": "大会結果", "item": SITE_URL + "/events/"},
+      {"@type": "ListItem", "position": 3, "name": storeName + ' ' + dateFormatted}
+    ]
+  });
+
+  // Breadcrumb nav (static, for crawlers)
+  const breadcrumbNav =
+'    <nav class="breadcrumb" style="margin-bottom:12px;font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">\n' +
+'      <a href="../index.html" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--text-muted)\'">ホーム</a>\n' +
+'      <span style="margin:0 6px">›</span>\n' +
+'      <a href="index.html" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--text-muted)\'">大会結果</a>\n' +
+'      <span style="margin:0 6px">›</span>\n' +
+'      <span style="color:var(--text-secondary)">' + storeName + ' ' + dateFormatted + '</span>\n' +
+'    </nav>\n';
+
   return '<!DOCTYPE html>\n' +
 '<html lang="ja">\n' +
 '<head>\n' +
@@ -277,6 +314,7 @@ function generateEventPage(eventId, ev, seriesName) {
 '  <meta name="twitter:card" content="summary_large_image">\n' +
 '  <meta name="twitter:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
 '  <link rel="canonical" href="' + SITE_URL + '/events/' + eventId + '.html">\n' +
+'  <script type="application/ld+json">' + jsonLd + '</script>\n' +
 '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
 '  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">\n' +
 '  <link rel="stylesheet" href="../css/style.css">\n' +
@@ -286,6 +324,7 @@ function generateEventPage(eventId, ev, seriesName) {
 '  <div id="header"></div>\n' +
 '\n' +
 '  <main class="container">\n' +
+breadcrumbNav +
 '    <div id="event-content">\n' +
 '      <div class="loading">データを読み込み中</div>\n' +
 '    </div>\n' +
