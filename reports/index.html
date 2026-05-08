@@ -18,12 +18,31 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://gcg-stats.com/"},
+      {"@type": "ListItem", "position": 2, "name": "レポート"}
+    ]
+  }
+  </script>
 </head>
 <body>
   <div id="header"></div>
+
   <main class="container">
+    <nav class="breadcrumb" style="margin-bottom:12px;font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">
+      <a href="../index.html" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">ホーム</a>
+      <span style="margin:0 6px">›</span>
+      <span style="color:var(--text-secondary)">レポート</span>
+    </nav>
+
     <div class="section-header"><div><h1 class="section-title">環境レポート</h1></div></div>
     <div class="card-list" style="margin-top:20px">
+
+      <!-- MSA環境レポート -->
       <a href="msa-gd04-week1.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 1 — 一年戦争が使用率1位&amp;勝率62.4%で2冠</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.07</span>
@@ -36,10 +55,18 @@
         <span style="font-size:15px;font-weight:600">MSA環境レポート Week 11 — 青紫アグロが2週連続首位</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.26</span>
       </a>
+      <a href="msa-week10.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 10 — 環境分析</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.12</span>
+      </a>
+
+      <!-- NTC総括 -->
       <a href="ntc-2026-mission2-recap.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">ニュータイプチャレンジ 2026 MISSION2（3月）総括 — 全国298店舗1,190デッキの分析</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.24</span>
       </a>
+
+      <!-- GD04 LR考察 -->
       <a href="gd04-lr-blue.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">GD04 青LR考察 — 地球連邦の新たな切り札たち</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
@@ -60,6 +87,8 @@
         <span style="font-size:15px;font-weight:600">GD04 白LR考察 — UC決戦と∀の可能性</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
       </a>
+
+      <!-- 環境レポート -->
       <a href="2026-03-week4-report.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">環境レポート 2026.03.16〜2026.03.22</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
@@ -69,4 +98,71 @@
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
       </a>
       <a href="2026-03-restriction.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">コルシカ基地制限＜2�
+        <span style="font-size:15px;font-weight:600">コルシカ基地制限＜2＞の影響考察</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+
+      <!-- 地域別レポート -->
+      <a href="2026-03-week4-kanto.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 関東地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-kansai.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 関西地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-chubu.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 中部地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-kyushu.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 九州地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-chugoku.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 中国地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-tohoku.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 東北地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+
+      <!-- ニュース -->
+      <a href="news/2026-04-03.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/3公開】GD04 Phantom Aria 新カード3枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.03</span>
+      </a>
+      <a href="news/2026-04-01.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/1公開】GD04 Phantom Aria 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.01</span>
+      </a>
+      <a href="news/2026-03-31.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/31公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.31</span>
+      </a>
+      <a href="news/2026-03-30.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/30公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.30</span>
+      </a>
+      <a href="news/2026-03-29.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/29公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.29</span>
+      </a>
+      <a href="news/2026-03-28.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/28公開】GD04 Phantom Aria 新カード7枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=10"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>
