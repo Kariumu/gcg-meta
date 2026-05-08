@@ -452,6 +452,119 @@ function generateCoUsedSection(cardId, coUsed) {
         </details>`;
 }
 
+// SEOテキストセクション生成（A1: カードページ300文字以上確保）
+function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, usageRate, totalAdoptions, wins, avgCount, typeUsage, coUsed, isParallel) {
+  if (!masterCard) return '';
+
+  const ct = masterCard.card_type;
+  const rarity = masterCard.rarity || '';
+  const level = masterCard.level || 0;
+  const cost = masterCard.cost || 0;
+  const ap = (masterCard.stats && masterCard.stats.ap) || 0;
+  const hp = (masterCard.stats && masterCard.stats.hp) || 0;
+  const traits = masterCard.traits || [];
+  const source = masterCard.source_title || '';
+  const setPrefix = cardId.replace(/_p\d+$/, '').replace(/-\d+$/, '');
+
+  // --- 1. このカードの概要 ---
+  let overviewParts = [];
+  overviewParts.push(`${escapeHtml(cardName)}は${escapeHtml(source ? '「' + source + '」に登場する' : '')}${escapeHtml(colorJp)}の${escapeHtml(typeJp)}カードです。`);
+
+  if (ct === 'UNIT') {
+    overviewParts.push(`Lv.${level}・コスト${cost}で、AP${ap}/HP${hp}のステータスを持ちます。`);
+    if (traits.length > 0) {
+      overviewParts.push(`特徴は「${escapeHtml(traits.join('」「'))}」です。`);
+    }
+  } else if (ct === 'PILOT') {
+    overviewParts.push(`Lv.${level}のパイロットで、AP${ap}を持ちます。`);
+    if (traits.length > 0) {
+      overviewParts.push(`特徴は「${escapeHtml(traits.join('」「'))}」です。`);
+    }
+  } else if (ct === 'COMMAND') {
+    overviewParts.push(`コスト${cost}のコマンドカードです。`);
+  } else if (ct === 'BASE') {
+    overviewParts.push(`HP${hp}を持つベースカードです。`);
+  }
+
+  if (rarity) {
+    overviewParts.push(`レアリティは${escapeHtml(rarity)}で、${escapeHtml(setPrefix)}に収録されています。`);
+  }
+
+  const overviewText = overviewParts.join('');
+
+  // --- 2. 採用データからの分析 ---
+  let analysisParts = [];
+  const rate = parseFloat(usageRate);
+
+  if (isParallel) {
+    analysisParts.push(`パラレル版のため、採用率データは通常版と共通で集計されています。`);
+  }
+
+  if (rate >= 30) {
+    analysisParts.push(`ニュータイプチャレンジ大会での採用率は${usageRate}%と非常に高く、環境を代表するカードの一つです。`);
+  } else if (rate >= 10) {
+    analysisParts.push(`ニュータイプチャレンジ大会での採用率は${usageRate}%で、多くのプレイヤーに支持されているカードです。`);
+  } else if (rate > 0) {
+    analysisParts.push(`ニュータイプチャレンジ大会での採用率は${usageRate}%で、特定のデッキタイプで活躍しています。`);
+  } else {
+    analysisParts.push(`現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。`);
+  }
+
+  if (totalAdoptions > 0) {
+    analysisParts.push(`合計${totalAdoptions}デッキで採用されており、平均${avgCount}枚で投入されています。`);
+  }
+
+  if (wins > 0) {
+    analysisParts.push(`優勝デッキでの採用実績が${wins}件あり、トーナメントシーンでの実力が証明されています。`);
+  }
+
+  // デッキタイプ別の情報を追加
+  if (typeUsage.length > 0) {
+    const topType = typeUsage[0];
+    const topColors = topType.colors || [];
+    const topColorNames = topColors.map(c => (DECK_COLORS[c] || DECK_COLORS.Unknown).jp).join('');
+    if (topColorNames) {
+      analysisParts.push(`最も採用率が高いデッキタイプは${escapeHtml(topColorNames)}系（${topType.usageRate}%）です。`);
+    }
+  }
+
+  const analysisText = analysisParts.join('');
+
+  // --- 3. 相性の良いカード ---
+  let synergyText = '';
+  if (coUsed && coUsed.length > 0) {
+    const topCards = coUsed.slice(0, 3);
+    const cardNames = topCards.map(co => {
+      const m = cardsMaster[co.card_id] || {};
+      return escapeHtml(m.name_jp || co.card_id) + '（同時採用率' + co.co_rate + '%）';
+    });
+    synergyText = `このカードと相性が良く、よく一緒に採用されるカードとして${cardNames.join('、')}などがあります。デッキ構築の参考にしてください。`;
+  }
+
+  // --- 4. 公式情報リンクテキスト ---
+  const officialText = `${escapeHtml(cardName)}の公式カード情報やルール詳細はBANDAI公式サイトをご確認ください。`;
+
+  // HTMLセクション組み立て
+  let html = `
+    <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+      <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">${escapeHtml(cardName)}について</h2>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${overviewText}</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${analysisText}</p>`;
+
+  if (synergyText) {
+    html += `
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${synergyText}</p>`;
+  }
+
+  html += `
+      <p style="font-size:13px;line-height:1.6;color:var(--text-muted);margin:0">${officialText}</p>
+    </section>`;
+
+  return html;
+}
+
 function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard, coUsed) {
   const hasData = !!card;
   const decks = hasData ? card.decks : 0;
@@ -762,6 +875,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     ${typeTableHtml}
     ${generateCoUsedSection(cardId, coUsed)}
     ${adoptionTableHtml}
+    ${generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, usageRate, totalAdoptions, wins, avgCount, typeUsage, coUsed, isParallel)}
 
     <div id="share-buttons" style="margin-top:24px"></div>
   </main>
