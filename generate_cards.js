@@ -544,13 +544,13 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   // --- 4. 公式情報リンクテキスト ---
   const officialText = `${escapeHtml(cardName)}の公式カード情報やルール詳細はBANDAI公式サイトをご確認ください。`;
 
-  // --- 5. A2拡張: 採用0カード向け独自分析セクション ---
+  // --- 5. A2拡張: 独自分析セクショ��� ---
   let effectAnalysis = '';
   let usageHints = '';
   let similarCards = '';
 
-  // パラレル版で採用なしの場合も拡張テキスト追加
-  if (isParallel && totalAdoptions === 0) {
+  // パラレル版向け拡張テキスト
+  if (isParallel) {
     const baseCard = cardsMaster[masterCard.base_card_id];
     effectAnalysis = `${escapeHtml(cardName)}はイラスト違いのパラレル版カードです。通常版と同じ効果・ステータスを持ちながら、コレクション性の高い特別なイラストが魅力です。パラレル版はパック開封やキャンペーンなどで入手でき、同じ性能でありながらプレミアム感のある一枚です。`;
     usageHints = `デッキ構築においては通常版と同一のカードとして扱われるため、性能面での違いはありません。お気に入りのイラストで対戦を楽しめるのがパラレル版の醍醐味です。大会でもパラレル版は通常版と同様に使用可能で、コレクションとしての価値も高いカードです。`;
@@ -561,7 +561,7 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
     }
   }
 
-  if (totalAdoptions === 0 && !isParallel && masterCard.effect_text) {
+  if (!isParallel && masterCard.effect_text) {
     // 効果テキスト解説
     const effectText = masterCard.effect_text;
     const effectParts = [];
@@ -594,8 +594,20 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
 
     if (effectParts.length > 0) {
       effectAnalysis = `${escapeHtml(cardName)}は${effectParts.slice(0, 3).join('。また、')}。`;
+      if (effectParts.length === 1) {
+        effectAnalysis += `このカード固有の能力を活かした戦術を組み立てることで、デッキの勝率向上に貢献します。`;
+      }
     } else {
-      effectAnalysis = `${escapeHtml(cardName)}は独自の効果を持つカードで、特定の戦略において活躍が期待されます。`;
+      // 効果テキストが短い/キーワードなしカード向けの充実テキスト
+      if (ct === 'UNIT') {
+        effectAnalysis = `${escapeHtml(cardName)}はバニラ（効果なし）に近いシンプルなユニットですが、コストに対して安定したステータスを持つことが強みです。効果持ちユニットに比べてカウンターされにくく、純粋な戦闘力で盤面に貢献します。特にリミテッド環境やシールド戦では、こうした堅実なステータスを持つカードが活躍する場面が多くあります。`;
+      } else if (ct === 'PILOT') {
+        effectAnalysis = `${escapeHtml(cardName)}はシンプルな能力を持つパイロットカードです。対応するユニットに搭乗させることで戦闘力を底上げし、バトルでの優位を確保します。派手な効果はありませんが、安定した補正値は構築の土台として頼りになります。`;
+      } else if (ct === 'COMMAND') {
+        effectAnalysis = `${escapeHtml(cardName)}はシンプルながら確実な効果を持つコマンドカードです。使い所を見極めて発動することで、戦況を有利に運ぶ一手となります。コマンドカードはタイミングが重要なため、相手の動きを読んで使うことが勝利への鍵です。`;
+      } else {
+        effectAnalysis = `${escapeHtml(cardName)}は独自の効果を持つカードで、特定の戦略において活躍が期待されます。使いこなすことで対戦相手の意表を突く戦術が可能になります。`;
+      }
     }
 
     // タイプ別の運用ヒント
@@ -707,6 +719,31 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
     if (deckAdviceParts.length > 0) {
       usageHints += ' ' + deckAdviceParts.join('。') + '。';
     }
+
+    // 収録パック情報テキスト（全カード共通でテキスト量を確保）
+    const setNames = {
+      'GD01': 'ガンダムカードゲーム ブースターパック01「機動戦士ガンダム ～戦場の絆～」',
+      'GD02': 'ガンダムカードゲーム ブースターパック02「宇宙世紀の鼓動」',
+      'GD03': 'ガンダムカードゲーム ブースターパック03「英雄の共鳴」',
+      'GD04': 'ガンダムカードゲーム ブースターパック04「運命の加速」',
+      'ST01': 'スターターデッキ01「地球連邦軍」',
+      'ST02': 'スターターデッキ02「ジオン公国軍」',
+      'ST03': 'スターターデッキ03「ティターンズ」',
+      'ST04': 'スターターデッキ04「エゥーゴ」',
+      'ST05': 'スターターデッキ05「ザフト」',
+      'ST06': 'スターターデッキ06「地球連合」',
+      'ST07': 'スターターデッキ07「ソレスタルビーイング」',
+      'ST08': 'スターターデッキ08「ガンダムマイスターズ」',
+      'ST09': 'スターターデッキ09「ネオ・ジオン」',
+    };
+    const setFullName = setNames[setPrefix] || `${escapeHtml(setPrefix)}パック`;
+    let packInfo = `${escapeHtml(cardName)}は「${escapeHtml(setFullName)}」に収録されています。`;
+    if (setPrefix.startsWith('ST')) {
+      packInfo += `スターターデッキは構築済みのカードセットとして手軽にゲームを始められる商品で、初心者にもおすすめです。スターターのカードを基盤にブースターパックのカードを加えることで、より強力なデッキへと進化させることができます。`;
+    } else {
+      packInfo += `ブースターパックはランダム封入のため、目当てのカードを手に入れるにはトレーディングやシングル購入も有効です。同パックの他カードとの相性も考慮してコレクションを進めましょう。`;
+    }
+    usageHints += ' ' + packInfo;
   }
 
   // HTMLセクション組み立て
@@ -742,7 +779,21 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${similarCards}</p>`;
   }
 
+  // 全カード共通: GCGゲーム情報セクション
+  const colorTip = {
+    '赤': '赤は攻撃的なカードが多く、速攻や高APを活かした積極的な攻めが得意なカラーです。',
+    '青': '青はドローやサーチなどの手札補充に優れ、安定したゲーム展開が可能なカラーです。',
+    '緑': '緑は耐久力やリペアに優れ、長期戦で真価を発揮す��防御的なカラーです。',
+    '黄': '黄は多彩な効果を持つカードが揃い、柔軟な戦術を取れるバランス型のカラーです。',
+    '紫': '紫はトリッキーな効果や強力なコマンドを持ち、相手の戦略を崩す妨害に長けたカラーです。',
+    '黒': '黒は高コストながら強力な効果を持つカードが多く、終盤の逆転力が魅力のカラーです。',
+  };
+  const colorInfo = colorTip[colorJp] || `${escapeHtml(colorJp)}カラーは独自の戦略性を持ちます。`;
+  const gameInfo = `${colorInfo}ガンダ��カードゲームでは最大4枚まで同名カードをデッキに入れることができ、デッキ枚数は50枚で構成します。大会ではニュータイプチャレンジ形式が主流で、全国の店舗で定期的に開催されています。`;
+
   html += `
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">ガンダムカードゲームについて</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${gameInfo}</p>
       <p style="font-size:13px;line-height:1.6;color:var(--text-muted);margin:0">${officialText}</p>
     </section>`;
 
