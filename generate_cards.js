@@ -544,7 +544,7 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   // --- 4. 公式情報リンクテキスト ---
   const officialText = `${escapeHtml(cardName)}の公式カード情報やルール詳細はBANDAI公式サイトをご確認ください。`;
 
-  // --- 5. A2拡張: 独自分析セクショ��� ---
+  // --- 5. A2拡張: 独自分析セクション ---
   let effectAnalysis = '';
   let usageHints = '';
   let similarCards = '';
@@ -783,13 +783,13 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   const colorTip = {
     '赤': '赤は攻撃的なカードが多く、速攻や高APを活かした積極的な攻めが得意なカラーです。',
     '青': '青はドローやサーチなどの手札補充に優れ、安定したゲーム展開が可能なカラーです。',
-    '緑': '緑は耐久力やリペアに優れ、長期戦で真価を発揮す��防御的なカラーです。',
+    '緑': '緑は耐久力やリペアに優れ、長期戦で真価を発揮する防御的なカラーです。',
     '黄': '黄は多彩な効果を持つカードが揃い、柔軟な戦術を取れるバランス型のカラーです。',
     '紫': '紫はトリッキーな効果や強力なコマンドを持ち、相手の戦略を崩す妨害に長けたカラーです。',
     '黒': '黒は高コストながら強力な効果を持つカードが多く、終盤の逆転力が魅力のカラーです。',
   };
   const colorInfo = colorTip[colorJp] || `${escapeHtml(colorJp)}カラーは独自の戦略性を持ちます。`;
-  const gameInfo = `${colorInfo}ガンダ��カードゲームでは最大4枚まで同名カードをデッキに入れることができ、デッキ枚数は50枚で構成します。大会ではニュータイプチャレンジ形式が主流で、全国の店舗で定期的に開催されています。`;
+  const gameInfo = `${colorInfo}ガンダムカードゲームでは最大4枚まで同名カードをデッキに入れることができ、デッキ枚数は50枚で構成します。大会ではニュータイプチャレンジ形式が主流で、全国の店舗で定期的に開催されています。`;
 
   html += `
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">ガンダムカードゲームについて</h3>
