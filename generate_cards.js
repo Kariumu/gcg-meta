@@ -544,6 +544,171 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   // --- 4. 公式情報リンクテキスト ---
   const officialText = `${escapeHtml(cardName)}の公式カード情報やルール詳細はBANDAI公式サイトをご確認ください。`;
 
+  // --- 5. A2拡張: 採用0カード向け独自分析セクション ---
+  let effectAnalysis = '';
+  let usageHints = '';
+  let similarCards = '';
+
+  // パラレル版で採用なしの場合も拡張テキスト追加
+  if (isParallel && totalAdoptions === 0) {
+    const baseCard = cardsMaster[masterCard.base_card_id];
+    effectAnalysis = `${escapeHtml(cardName)}はイラスト違いのパラレル版カードです。通常版と同じ効果・ステータスを持ちながら、コレクション性の高い特別なイラストが魅力です。パラレル版はパック開封やキャンペーンなどで入手でき、同じ性能でありながらプレミアム感のある一枚です。`;
+    usageHints = `デッキ構築においては通常版と同一のカードとして扱われるため、性能面での違いはありません。お気に入りのイラストで対戦を楽しめるのがパラレル版の醍醐味です。大会でもパラレル版は通常版と同様に使用可能で、コレクションとしての価値も高いカードです。`;
+    if (baseCard) {
+      const baseColorJp = COLOR_JP[baseCard.color] || baseCard.color || '';
+      const baseTypeJp = TYPE_JP[baseCard.card_type] || baseCard.card_type || '';
+      similarCards = `通常版の${escapeHtml(baseCard.name_jp || masterCard.base_card_id)}（${escapeHtml(masterCard.base_card_id)}）と完全に同一の効果・ステータスを持ちます。${escapeHtml(baseColorJp)}${escapeHtml(baseTypeJp)}カードとしてデッキに最大4枚まで投入でき、通常版とパラレル版を混在させることも可能です。`;
+    }
+  }
+
+  if (totalAdoptions === 0 && !isParallel && masterCard.effect_text) {
+    // 効果テキスト解説
+    const effectText = masterCard.effect_text;
+    const effectParts = [];
+
+    // キーワード検出による効果分析
+    const keywords = {
+      'ドロー': 'ドロー効果によりハンドアドバンテージを得ることができます',
+      'ダメージ': '相手にダメージを与える攻撃的な効果を持ちます',
+      'リペア': '回復能力により長期戦での粘り強さが光ります',
+      '破壊': '除去効果を持ち、相手の盤面に干渉できます',
+      '配備': '配備時に効果が発動し、テンポよく展開できます',
+      'セット時': 'セット時に効果が発動するため、タイミングを計った運用が重要です',
+      '覚醒': '覚醒条件を満たすことで真価を発揮するカードです',
+      '指定攻撃': '指定攻撃により、狙った相手ユニットを処理できます',
+      '貫通': '貫通能力により、ユニットを超えてダメージを通すことができます',
+      '速攻': '速攻を持つため配備直後から攻撃に参加でき、奇襲性が高いです',
+      '強襲': '強襲による追加攻撃で、1ターンでの大ダメージが狙えます',
+      '高機動': '高機動により攻防両面で柔軟な立ち回りが可能です',
+      'コスト軽減': 'コスト軽減効果により、効率的なカード展開を支援します',
+      'サーチ': 'デッキからカードを探す効果で、安定したゲームプランを実現します',
+      'バウンス': '相手カードを手札に戻す効果で、テンポアドバンテージを得られます',
+      'ガード': '防御的な効果により、重要なユニットやベースを守ることができます',
+    };
+
+    for (const [kw, desc] of Object.entries(keywords)) {
+      if (effectText.includes(kw)) {
+        effectParts.push(desc);
+      }
+    }
+
+    if (effectParts.length > 0) {
+      effectAnalysis = `${escapeHtml(cardName)}は${effectParts.slice(0, 3).join('。また、')}。`;
+    } else {
+      effectAnalysis = `${escapeHtml(cardName)}は独自の効果を持つカードで、特定の戦略において活躍が期待されます。`;
+    }
+
+    // タイプ別の運用ヒント
+    const hintParts = [];
+    if (ct === 'UNIT') {
+      if (ap >= 4 && hp >= 4) {
+        hintParts.push(`AP${ap}/HP${hp}という高いステータスを誇り、攻守のバランスに優れています`);
+      } else if (ap >= 4) {
+        hintParts.push(`AP${ap}の高い攻撃力を持ち、アタッカーとして優秀です`);
+      } else if (hp >= 4) {
+        hintParts.push(`HP${hp}の高い耐久力を持ち、壁役として機能します`);
+      } else if (cost <= 2) {
+        hintParts.push(`コスト${cost}と軽量なため、序盤の展開を支えるカードです`);
+      } else {
+        hintParts.push(`Lv.${level}・コスト${cost}のユニットとして、デッキのカーブを構成する中堅カードです`);
+      }
+
+      if (traits.length > 0) {
+        hintParts.push(`「${escapeHtml(traits[0])}」特徴を持つため、同特徴のカードとシナジーが期待できます`);
+      }
+    } else if (ct === 'PILOT') {
+      hintParts.push(`Lv.${level}のパイロットとして、対応するユニットの戦闘力を引き上げます`);
+      if (ap >= 3) {
+        hintParts.push(`AP${ap}の高い補正値により、搭乗ユニットの火力が大幅に向上します`);
+      }
+      if (traits.length > 0) {
+        hintParts.push(`「${escapeHtml(traits[0])}」特徴を持つため、同作品のユニットとの組み合わせが自然です`);
+      }
+    } else if (ct === 'COMMAND') {
+      if (cost <= 2) {
+        hintParts.push(`コスト${cost}と軽量なコマンドのため、余ったリソースで柔軟に発動できます`);
+      } else {
+        hintParts.push(`コスト${cost}のコマンドカードとして、ゲーム中盤以降に真価を発揮します`);
+      }
+      hintParts.push(`${escapeHtml(colorJp)}デッキであればどのアーキタイプにも採用を検討できる汎用性があります`);
+    } else if (ct === 'BASE') {
+      hintParts.push(`ベースカードとして、ゲームを通じて継続的なアドバンテージを提供します`);
+      hintParts.push(`HP${hp}を持つため、ベース攻撃に対する耐久ラインを考慮してデッキを構築しましょう`);
+    }
+
+    if (hintParts.length > 0) {
+      usageHints = hintParts.join('。') + '。';
+    }
+
+    // 類似カード比較: 同色・同タイプ・同コスト帯のカードを検索
+    const similarList = [];
+    for (const [sid, sc] of Object.entries(cardsMaster)) {
+      if (sid === cardId || sid.includes('_p')) continue;
+      if (sc.color !== masterCard.color || sc.card_type !== ct) continue;
+      if (ct === 'UNIT' || ct === 'PILOT') {
+        if (Math.abs((sc.level || 0) - level) > 1) continue;
+      } else {
+        if (Math.abs((sc.cost || 0) - cost) > 1) continue;
+      }
+      similarList.push(sc);
+      if (similarList.length >= 5) break;
+    }
+
+    if (similarList.length >= 2) {
+      const names = similarList.slice(0, 3).map(s => escapeHtml(s.name_jp));
+      if (ct === 'UNIT' || ct === 'PILOT') {
+        similarCards = `${escapeHtml(colorJp)}のLv.${level}帯${escapeHtml(typeJp)}カードとしては${names.join('、')}などが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。環境やプレイスタイルに応じて使い分けることで、デッキの対応力を高められます。`;
+      } else {
+        similarCards = `${escapeHtml(colorJp)}のコスト${cost}帯${escapeHtml(typeJp)}カードとしては${names.join('、')}などが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。環境やプレイスタイルに応じて使い分けることで、デッキの対応力を高められます。`;
+      }
+    } else if (similarList.length === 1) {
+      similarCards = `${escapeHtml(colorJp)}の同レベル帯で近い役割を持つカードとして${escapeHtml(similarList[0].name_jp)}があります。効果やステータスの違いを比較し、デッキに合った方を選択しましょう。`;
+    }
+
+    // デッキ構築アドバイス（追加テキスト確保）
+    const deckAdviceParts = [];
+    if (source) {
+      deckAdviceParts.push(`「${escapeHtml(source)}」シリーズのカードと組み合わせることで、テーマデッキとしての一体感が生まれます`);
+    }
+    if (traits.length > 0) {
+      deckAdviceParts.push(`「${escapeHtml(traits[0])}」特徴を持つ他のカードとの組み合わせにより、特徴シナジーを活かした戦術が可能です`);
+      if (traits.length >= 2) {
+        deckAdviceParts.push(`また「${escapeHtml(traits[1])}」特徴も持つため、複数の特徴軸でのデッキ構築に柔軟性があります`);
+      }
+    }
+    if (ct === 'UNIT' && level >= 5) {
+      deckAdviceParts.push(`高レベルユニットとして、序盤を支える低コストカードとの配分バランスに注意が必要です`);
+    } else if (ct === 'UNIT' && level <= 2) {
+      deckAdviceParts.push(`序盤から展開できる低レベルユニットとして、ゲームの主導権を握る役割を担います`);
+    }
+    if (masterCard.link && masterCard.link.length > 0) {
+      deckAdviceParts.push(`リンク対象として「${escapeHtml(masterCard.link[0])}」が設定されており、リンク成功時のボーナスを狙えます`);
+    }
+    // コマンドカード特徴なし向け補完
+    if (ct === 'COMMAND' && traits.length === 0 && !masterCard.link) {
+      deckAdviceParts.push(`${escapeHtml(colorJp)}カードを使うデッキであれば色条件を満たせるため、メインデッキやサイドボードへの投入を検討できます`);
+      if (cost <= 3) {
+        deckAdviceParts.push(`低コストコマンドはゲーム序盤から中盤にかけてテンポよく使用でき、盤面の優位を築く手助けとなります`);
+      } else {
+        deckAdviceParts.push(`高コストコマンドは発動タイミングが限られるものの、効果が強力で試合の流れを変える一枚になり得ます`);
+      }
+      deckAdviceParts.push(`対戦相手のデッキタイプに応じて採用枚数を調整することで、環境への対応力が上がります`);
+    }
+    // ベースカード向け補完
+    if (ct === 'BASE' && traits.length === 0) {
+      deckAdviceParts.push(`ベースカードはゲーム開始時に配置するカードで、試合全体を通じて効果が持続します`);
+      deckAdviceParts.push(`デッキの戦略に合ったベースを選ぶことで、ゲームプランの安定性が大きく向上します`);
+    }
+    // 汎用の追加テキスト（データが少ないカードの底上げ）
+    if (deckAdviceParts.length === 0) {
+      deckAdviceParts.push(`${escapeHtml(setPrefix)}収録のカードとして、同弾のカードとの組み合わせを意識したデッキ構築がおすすめです`);
+      deckAdviceParts.push(`今後のカードプールの拡張により、新たなシナジーが生まれる可能性もあります`);
+    }
+    if (deckAdviceParts.length > 0) {
+      usageHints += ' ' + deckAdviceParts.join('。') + '。';
+    }
+  }
+
   // HTMLセクション組み立て
   let html = `
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
@@ -556,6 +721,25 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
     html += `
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${synergyText}</p>`;
+  }
+
+  // A2拡張セクション（採用0カード向け）
+  if (effectAnalysis) {
+    html += `
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">カードの強み</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${effectAnalysis}</p>`;
+  }
+
+  if (usageHints) {
+    html += `
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">運用のヒント</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${usageHints}</p>`;
+  }
+
+  if (similarCards) {
+    html += `
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">類似カード</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${similarCards}</p>`;
   }
 
   html += `
