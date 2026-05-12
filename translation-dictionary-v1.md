@@ -11,6 +11,7 @@
 |---|---|---|
 | 2026-05-07 | 初版作成。GD04 Week 1 の訳語を登録 | reports/msa-gd04-week1.html |
 | 2026-05-07 | One Year War の採用形を「ワンイヤー・ウォー」→「一年戦争」に変更（松岡さん指示） | reports/msa-gd04-week1.html |
+| 2026-05-12 | GD04 Week 2 新規訳語追加: The-O Blockers / Destiny Blockers & Barbatos / Celestial Being Lockon | reports/msa-gd04-week2.html |
 
 ## デッキ名・アーキタイプ訳語
 
@@ -31,21 +32,7 @@
 | League Militaire | **リーグ・ミリタリー** | | |
 | Barbatos Rush | **バルバトス アグロ** | バルバトスラッシュ | 既存サイトの「アグロ」表記に統一 |
 | Blue Green Rush | **青緑アグロ** | 青緑ラッシュ | 同上 |
-
-## カラータイプ表記
-
-| 英語 | 日本語 |
-|---|---|
-| Blue | 青 |
-| Red | 赤 |
-| Green | 緑 |
-| White | 白 |
-| Purple | 紫 |
-
-2色デッキは固定順「青 > 赤 > 緑 > 白 > 紫」で結合する。例: `Red Blue` → `青赤` ではなく `青/赤` または「青赤」を採用（記事種別ごとに分離）。
-
-## URL 標準
-
-| 項目 | URL |
-|---|---|
-| 公式ガンダムカードゲーム | `https://www
+| The-O Blockers | **ジ・O ブロッカー** | The-O ブロッカー | Week 11 で採用済み |
+| Destiny Blockers & Barbatos | **デスティニーブロッカー&バルバトス** | デスティニーブロッカー＆バルバトス | GD04 Week 2 新規 |
+| Celestial Being Lockon | **ソレスタルビーイング ロックオン** | CB ロックオン | GD04 Week 2 新規 |
+| Unicorn Blockers | **ユニコーン ブロッカー** | ユニコーンブロッカー | GD0
