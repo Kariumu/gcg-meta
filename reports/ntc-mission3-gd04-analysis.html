@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- 非公開レビュー用ページ: インデックス禁止 -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GD04 Phantom Aria リリース直後の大会環境 — 5月NTC入賞データ分析 | GCG STATS</title>
+  <meta name="description" content="ニュータイプチャレンジ 2026 MISSION3（5月）の入賞1,274デッキを集計し、GD04「Phantom Aria」のカード採用率・優勝デッキ構成・タッチと全振りの二極化を分析。GD04環境の最初のスナップショット。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .recap-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:13px; }
+    .recap-table th, .recap-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
+    .recap-table th { background:var(--bg-elevated); color:var(--text-muted); font-weight:600; font-size:12px; }
+    .recap-table td.num { font-family:var(--font-mono); text-align:right; }
+    .recap-table tr.highlight td { background:rgba(255,200,0,0.05); }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px; margin:16px 0; }
+    .stat-card { padding:14px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
+    .stat-card .stat-label { font-size:12px; color:var(--text-muted); margin-bottom:4px; }
+    .stat-card .stat-value { font-family:var(--font-mono); font-size:22px; font-weight:700; color:var(--text-primary); }
+    .stat-card .stat-sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
+    @media (max-width: 640px) {
+      .recap-table { font-size:12px; }
+      .recap-table th, .recap-table td { padding:6px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <a href="../reports/" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a>
+
+    <div class="section-header" style="margin-top:16px">
+      <h1 class="section-title">GD04 Phantom Aria リリース直後の大会環境</h1>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:4px">
+        5月NTC入賞1,274デッキから読むGD04環境の最初のスナップショット
+      </p>
+      <p style="color:var(--text-muted);font-size:12px;margin-top:4px">
+        対象大会: ニュータイプチャレンジ 2026 MISSION3（2026年5月開催、5/10時点）
+      </p>
+    </div>
+
+    <div style="margin:16px 0;padding:14px 18px;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius)">
+      <p style="margin:0;font-size:13px;line-height:1.8;color:var(--text-secondary)">
+        本記事は、ニュータイプチャレンジ 2026 MISSION3（5月開催）の入賞デッキ集計データをもとに、<strong>GD04「Phantom Aria」</strong>リリースから2週間時点のカード環境を分析したものです。GD04は2026年4月25日に発売され、MISSION3は5月初週から始まっています。本レポートは、GD04環境において公式大会で採取できた最初期のスナップショットに相当します。
+      </p>
+    </div>
+
+    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">
+
+      <h2>はじめに</h2>
+      <p>
+        GD04「Phantom Aria」のリリースから、わずか2週間。5月のニュータイプチャレンジ（MISSION3）は、新弾投入後にしてはあまりに早いタイミングで開幕しました。プレイヤーが GD04 を「研究して投入する」までの時間がほとんどなかったにもかかわらず、入賞1,274デッキのうち966デッキが GD04 のカードを採用しています。本記事では、このデータが GD04 環境の「最初の輪郭」をどう描いているかを、採用率・順位別の差・採用枚数の分布という3つの角度から読み解きます。
+      </p>
+
+      <h2>GD04採用率：75.8% という数字の意味</h2>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">GD04を1枚以上採用</div>
+          <div class="stat-value">75.8%</div>
+          <div class="stat-sub">966 / 1,274 デッキ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">優勝デッキでの採用</div>
+          <div class="stat-value">72.3%</div>
+          <div class="stat-sub">99 / 137 優勝デッキ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">TOP4入賞での採用</div>
+          <div class="stat-value">73.6%</div>
+          <div class="stat-sub">404 / 549 TOP4</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">平均採用枚数</div>
+          <div class="stat-value">8.8 枚</div>
+          <div class="stat-sub">中央値: 6 枚</div>
+        </div>
+      </div>
+
+      <p>
+        まず注目すべきは、入賞デッキ全体のおよそ <strong>4分の3</strong>（75.8%）が GD04 のカードを1枚以上採用している、という事実です。リリース2週間という流通の浅さを考えると、これは異例の浸透速度といえます。
+      </p>
+      <p>
+        さらに興味深いのは、入賞デッキ全体（75.8%）と優勝デッキ（72.3%）・TOP4入賞デッキ（73.6%）で採用率にほとんど差がないことです。順位ごとの採用率を見ても、すべての枠で 72〜87% のあいだに収まっています。もし GD04 が「入れた方が勝てる強カード群」であれば、上位ほど採用率が跳ね上がるはずですが、現実にはほぼ横ばい。これは GD04 がすでに <strong>「入れると勝てる」フェーズを通り越し、「入っていて当たり前」の標準装備</strong>として扱われ始めていることを示唆します。
+      </p>
+      <p>
+        採用枚数の分布を見ると、もう一段細かい構造が見えてきます（採用966デッキ内訳）。
+      </p>
+
+      <table class="recap-table">
+        <tr><th>採用枚数</th><th class="num">デッキ数</th><th class="num">採用デッキ内シェア</th><th>位置づけ</th></tr>
+        <tr class="highlight"><td class="num">1〜4枚（タッチ）</td><td class="num">424</td><td class="num"><strong>43.9%</strong></td><td>既存デッキの部分強化</td></tr>
+        <tr><td class="num">5〜8枚</td><td class="num">213</td><td class="num">22.0%</td><td>部分換装</td></tr>
+        <tr><td class="num">9〜12枚</td><td class="num">148</td><td class="num">15.3%</td><td>中核入れ替え</td></tr>
+        <tr><td class="num">13〜16枚</td><td class="num">46</td><td class="num">4.8%</td><td>主軸入れ替え</td></tr>
+        <tr><td class="num">17〜20枚</td><td class="num">34</td><td class="num">3.5%</td><td>準・全振り構築</td></tr>
+        <tr class="highlight"><td class="num">21枚以上</td><td class="num">101</td><td class="num"><strong>10.5%</strong></td><td>GD04メイン構築</td></tr>
+      </table>
+
+      <p>
+        過半数のプレイヤー（採用デッキの43.9%、入賞全体の33.3%）は、既存の強デッキに1〜4枚の GD04 カードを足す「タッチ採用」を選択しました。GD04 のリリースから研究時間がまだ十分でないなか、これは最も合理的な選択といえます。
+      </p>
+      <p>
+        一方で、17枚以上の GD04 カードを積んだ「ほぼ GD04 メイン」のデッキも採用966デッキ中135デッキ（14.0%）存在しています。とくに21枚以上を投入したデッキが101デッキあり、ここに GD04 を中心に据えた新規アーキタイプが含まれていると見るのが自然です。
+      </p>
+
+      <h2>最もよく使われた GD04 カード TOP10</h2>
+
+      <p>
+        個別カードの採用状況を見ると、GD04 の中でも「すぐに環境に組み込まれたカード」と「これから評価される候補」が分かれています。以下は入賞1,274デッキ中での採用率トップ10です。
+      </p>
+
+      <table class="recap-table">
+        <tr>
+          <th style="width:36px">#</th>
+          <th>カード名</th>
+          <th class="num">採用デッキ数</th>
+          <th class="num">採用率</th>
+          <th class="num">優勝数</th>
+          <th class="num">平均枚数</th>
+        </tr>
+        <tr class="highlight"><td class="num">1</td><td><strong>優雅な物腰</strong><span style="color:var(--text-muted);font-size:11px"> (GD04-117)</span></td><td class="num">304</td><td class="num"><strong>23.9%</strong></td><td class="num">30</td><td class="num">2.49</td></tr>
+        <tr><td class="num">2</td><td>フラット（ミリシャ仕様）<span style="color:var(--text-muted);font-size:11px"> (GD04-077)</span></td><td class="num">266</td><td class="num">20.9%</td><td class="num">33</td><td class="num">3.09</td></tr>
+        <tr><td class="num">3</td><td>ジオング<span style="color:var(--text-muted);font-size:11px"> (GD04-017)</span></td><td class="num">213</td><td class="num">16.7%</td><td class="num">12</td><td class="num">2.86</td></tr>
+        <tr><td class="num">4</td><td>シルヴァ・バレト<span style="color:var(--text-muted);font-size:11px"> (GD04-068)</span></td><td class="num">206</td><td class="num">16.2%</td><td class="num">26</td><td class="num">2.73</td></tr>
+        <tr><td class="num">5</td><td>ネオ・ジオング<span style="color:var(--text-muted);font-size:11px"> (GD04-033)</span></td><td class="num">123</td><td class="num">9.7%</td><td class="num">9</td><td class="num">3.17</td></tr>
+        <tr><td class="num">6</td><td>ソードインパルスガンダム<span style="color:var(--text-muted);font-size:11px"> (GD04-056)</span></td><td class="num">112</td><td class="num">8.8%</td><td class="num">14</td><td class="num">2.61</td></tr>
+        <tr><td class="num">7</td><td>ジャブロー<span style="color:var(--text-muted);font-size:11px"> (GD04-122)</span></td><td class="num">99</td><td class="num">7.8%</td><td class="num">8</td><td class="num">1.77</td></tr>
+        <tr><td class="num">8</td><td>ユニコーンガンダム（覚醒）<span style="color:var(--text-muted);font-size:11px"> (GD04-066)</span></td><td class="num">93</td><td class="num">7.3%</td><td class="num">11</td><td class="num">2.54</td></tr>
+        <tr><td class="num">9</td><td>ゾロアット（リガ・ミリティア仕様）<span style="color:var(--text-muted);font-size:11px"> (GD04-016)</span></td><td class="num">91</td><td class="num">7.1%</td><td class="num">11</td><td class="num">3.91</td></tr>
+        <tr><td class="num">10</td><td>ガンダムエクシア<span style="color:var(--text-muted);font-size:11px"> (GD04-038)</span></td><td class="num">76</td><td class="num">6.0%</td><td class="num">4</td><td class="num">3.51</td></tr>
+      </table>
+
+      <p>
+        1位の <strong>「優雅な物腰」</strong>（23.9%）は、入賞のおよそ4枚に1枚に入る浸透ぶりで、平均採用枚数2.49枚から「ピン挿し含めて広く採用される万能枠」として機能していると見られます。2位の <strong>「フラット（ミリシャ仕様）」</strong>（20.9%）は採用率が2位ですが、優勝デッキでの採用数は33とTOP10中最多。平均枚数3.09枚と「複数枚積んで使う前提」のカードで、優勝デッキへの貢献度ではこちらが頭ひとつ抜けています。
+      </p>
+      <p>
+        4位 <strong>「シルヴァ・バレト」</strong> も注目で、採用率16.2%に対して優勝デッキ採用26と、採用1〜3位の水準に匹敵する優勝貢献を示しています。一方、3位の「ジオング」は採用率では3位ながら優勝デッキ採用は12と、上位カードのなかでは比較的少なめ。同じ高採用率でも、「優勝デッキにどれだけ入っているか」で見ると順位が大きく変わる点はおもしろいデータです。
+      </p>
+      <p>
+        プレイヤー視点で言うと、「とにかく1枚採用」の万能カードは <strong>優雅な物腰</strong>、「優勝に直結するパワーカード」は <strong>フラット（ミリシャ仕様）</strong> と <strong>シルヴァ・バレト</strong>、というのが現時点の構図です。
+      </p>
+
+      <h2>「タッチ採用」と「全振り構築」の二極化</h2>
+
+      <p>
+        改めて GD04 採用デッキ内の分布を眺めると、明確な二極化が見えてきます。
+      </p>
+      <ul style="line-height:1.8">
+        <li><strong>43.9%（424デッキ）はタッチ採用</strong>: 既存の青/紫アグロや緑/白などの完成形に GD04 のパーツを1〜4枚差すパターン。研究時間の短さを補う合理的な選択。</li>
+        <li><strong>14.0%（135デッキ）は17枚以上の全振り構築</strong>: GD04 を主役に据えた構築。とくに21枚以上の101デッキは、GD04 をベースにした新規アーキタイプを試している層と推測されます。</li>
+        <li><strong>残り42.1%（407デッキ）は中間層</strong>: 5〜16枚採用と、既存デッキとGD04 のハイブリッドを模索する層。MISSION4以降にはこの層の構築が方向性を絞ってくる可能性があります。</li>
+      </ul>
+
+      <p>
+        デッキタイプ別の優勝率を見ると、GD04 のカード追加が特に効果を発揮したと見られるアーキタイプも見えてきます。
+      </p>
+
+      <table class="recap-table">
+        <tr><th>デッキタイプ</th><th class="num">入賞数</th><th class="num">優勝数</th><th class="num">優勝率</th></tr>
+        <tr class="highlight"><td><strong>白/紫</strong></td><td class="num">17</td><td class="num">6</td><td class="num"><strong>35.3%</strong></td></tr>
+        <tr><td>緑/白</td><td class="num">71</td><td class="num">23</td><td class="num">32.4%</td></tr>
+        <tr><td>赤/緑</td><td class="num">17</td><td class="num">5</td><td class="num">29.4%</td></tr>
+        <tr><td>青/紫（環境1位）</td><td class="num">170</td><td class="num">48</td><td class="num">28.2%</td></tr>
+        <tr><td>青/赤</td><td class="num">20</td><td class="num">5</td><td class="num">25.0%</td></tr>
+        <tr><td>赤/白</td><td class="num">79</td><td class="num">18</td><td class="num">22.8%</td></tr>
+        <tr><td>青/白</td><td class="num">73</td><td class="num">14</td><td class="num">19.2%</td></tr>
+        <tr><td>青/緑</td><td class="num">84</td><td class="num">12</td><td class="num">14.3%</td></tr>
+      </table>
+
+      <p>
+        白/紫は入賞17デッキと母数は小さいものの、優勝率35.3%は2色以上のアーキタイプの中で最高水準。緑/白も32.4%と、これに次ぐ高効率を記録しています。プレイヤー視点では「数は少ないけれど、勝ちきっている人がいる」枠が複数存在しており、GD04 環境の早期研究で先行している層が、ここで成果を出していると見ることもできます。
+      </p>
+
+      <h2>まとめ</h2>
+      <p>
+        GD04「Phantom Aria」は、リリース直後の5月NTC時点で <strong>環境に「壊れた1枚」を投入したわけではない</strong> という評価が、データから読み取れます。むしろ、既存のアーキタイプに自然に組み込めるカード群として機能しており、デッキ単位の選択肢を広げる方向に作用しています。
+      </p>
+      <ul style="line-height:1.8">
+        <li>採用率75.8%という浸透速度の早さ。ただし上位ほど採用率が上がる傾向はなく、「入っていれば勝つ」ではなく「入っているのが当たり前」の標準装備化。</li>
+        <li>採用率TOP10は「優雅な物腰」「フラット（ミリシャ仕様）」「ジオング」など、特定の色／戦略に強く結びついたパーツが上位を占める。優勝デッキ採用数で見ると「フラット（ミリシャ仕様）」「シルヴァ・バレト」が頭ひとつ抜ける。</li>
+        <li>採用デッキの過半数はタッチ採用。一方で14%は17枚以上の全振り構築で、GD04メインの新規構築の萌芽も見える。</li>
+      </ul>
+      <p>
+        MISSION3はGD04環境の「最初の2週間」のスナップショットにすぎず、研究が進む後半・MISSION4以降に向けて、ここから採用率やアーキタイプの構図はさらに動く可能性が高いと考えられます。MISSION4の集計ではこの記事との差分を再度追いかける予定です。
+      </p>
+
+      <p style="margin-top:24px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.7">
+        ※本記事の数値は、ニュータイプチャレンジ 2026 MISSION3（5月10日時点 137イベント・1,274デッキ）の入賞デッキ集計結果です。<br>
+        ※MISSION3は開催途中のデータであり、最終確定数値とは異なる場合があります。<br>
+        ※採用率はデッキ単位、平均枚数は採用しているデッキの中での平均値です。<br>
+        ※カード名は公式表記に準拠していますが、収集ソースの揺れにより一部表記が異なる場合があります。
+      </p>
+
+    </article>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=8"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>
