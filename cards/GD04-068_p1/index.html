@@ -101,19 +101,19 @@
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
             <div class="stat-label">採用デッキ数</div>
-            <div class="stat-value">0<span class="unit"> デッキ</span></div>
+            <div class="stat-value">101<span class="unit"> デッキ</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">全体採用率</div>
-            <div class="stat-value">0.0<span class="unit">%</span></div>
+            <div class="stat-value">13.8<span class="unit">%</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">優勝デッキ数</div>
-            <div class="stat-value">0</div>
+            <div class="stat-value">26</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">平均採用枚数</div>
-            <div class="stat-value">0<span class="unit">枚</span></div>
+            <div class="stat-value">2.7<span class="unit">枚</span></div>
           </div>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
@@ -123,21 +123,929 @@
     </div>
 
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">デッキタイプ別採用状況</h2>
+            <span class="toggle-icon"></span>
+          </summary>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>デッキタイプ</th>
+                <th style="width:90px">採用数</th>
+                <th style="width:180px">採用率</th>
+                <th style="width:60px">平均枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="color-tag color-tag-green">緑</span> <span class="color-tag color-tag-white">白</span></td>
+                <td class="text-mono">48 / 264</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:18.2%;background:#44cc64"></div>
+                    </div>
+                    <span class="usage-rate">18.2%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2.6</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-red">赤</span> <span class="color-tag color-tag-white">白</span></td>
+                <td class="text-mono">32 / 244</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:13.1%;background:#ff4444"></div>
+                    </div>
+                    <span class="usage-rate">13.1%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2.9</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-white">白</span></td>
+                <td class="text-mono">16 / 180</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:8.9%;background:#4488ff"></div>
+                    </div>
+                    <span class="usage-rate">8.9%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2.8</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-white">白</span> <span class="color-tag color-tag-purple">紫</span></td>
+                <td class="text-mono">3 / 36</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:8.3%;background:#cccccc"></div>
+                    </div>
+                    <span class="usage-rate">8.3%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-blue">青</span></td>
+                <td class="text-mono">2 / 8</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:25%;background:#4488ff"></div>
+                    </div>
+                    <span class="usage-rate">25%</span>
+                  </div>
+                </td>
+                <td class="text-mono">4</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">一緒によく使われるカード</h2>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">TOP8</span><span class="toggle-icon"></span></div>
+          </summary>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
+          <div class="co-cards-grid">
+          <a href="../../cards/GD01-118/" class="co-card-item" title="溢れる慈愛" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-118.webp" alt="溢れる慈愛" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-118</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">溢れる慈愛</div>
+              <div class="co-card-rate"><span class="co-rate-value">94.1</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-086/" class="co-card-item" title="ガンダム・ルブリス" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-086.webp" alt="ガンダム・ルブリス" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-086</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダム・ルブリス</div>
+              <div class="co-card-rate"><span class="co-rate-value">89.1</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/ST04-001/" class="co-card-item" title="エールストライクガンダム" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/ST04-001.webp" alt="エールストライクガンダム" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>ST04-001</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">エールストライクガンダム</div>
+              <div class="co-card-rate"><span class="co-rate-value">82.2</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/ST04-010/" class="co-card-item" title="キラ・ヤマト" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/ST04-010.webp" alt="キラ・ヤマト" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>ST04-010</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">キラ・ヤマト</div>
+              <div class="co-card-rate"><span class="co-rate-value">82.2</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-117/" class="co-card-item" title="優雅な物腰" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-117.webp" alt="優雅な物腰" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-117</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">優雅な物腰</div>
+              <div class="co-card-rate"><span class="co-rate-value">66.3</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-077/" class="co-card-item" title="フラット(ミリシャ仕様)」" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-077.webp" alt="フラット(ミリシャ仕様)」" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-077</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">フラット(ミリシャ仕様)」</div>
+              <div class="co-card-rate"><span class="co-rate-value">65.3</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD02-079/" class="co-card-item" title="リック・ディアス" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD02-079.webp" alt="リック・ディアス" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD02-079</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">リック・ディアス</div>
+              <div class="co-card-rate"><span class="co-rate-value">57.4</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD03-125/" class="co-card-item" title="ピースミリオン" data-rate="low">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD03-125.webp" alt="ピースミリオン" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD03-125</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ピースミリオン</div>
+              <div class="co-card-rate"><span class="co-rate-value">47.5</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          </div>
+          <noscript>
+            <h3>一緒によく使われるカード</h3>
+            <ul>
+            <li><a href="/cards/GD01-118/">溢れる慈愛（GD01-118）- 94.1%</a></li>
+            <li><a href="/cards/GD01-086/">ガンダム・ルブリス（GD01-086）- 89.1%</a></li>
+            <li><a href="/cards/ST04-001/">エールストライクガンダム（ST04-001）- 82.2%</a></li>
+            <li><a href="/cards/ST04-010/">キラ・ヤマト（ST04-010）- 82.2%</a></li>
+            <li><a href="/cards/GD04-117/">優雅な物腰（GD04-117）- 66.3%</a></li>
+            <li><a href="/cards/GD04-077/">フラット(ミリシャ仕様)」（GD04-077）- 65.3%</a></li>
+            <li><a href="/cards/GD02-079/">リック・ディアス（GD02-079）- 57.4%</a></li>
+            <li><a href="/cards/GD03-125/">ピースミリオン（GD03-125）- 47.5%</a></li>
+            </ul>
+          </noscript>
+        </details>
     
         <details class="collapsible-section">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">0件</span><span class="toggle-icon"></span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">101件</span><span class="toggle-icon"></span></div>
           </summary>
-          <div style="text-align:center;padding:32px;color:var(--text-muted)">TOP4での採用実績がありません</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>店舗</th>
+                <th>プレイヤー</th>
+                <th style="width:60px">順位</th>
+                <th style="width:60px">枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6305943.html" style="color:var(--text-primary);text-decoration:none">TSUTAYA瀬戸店</a></td>
+                <td>くまー</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6360765.html" style="color:var(--text-primary);text-decoration:none">GameSpace&amp;cafeドラグーン博多</a></td>
+                <td>いねまる</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6361007.html" style="color:var(--text-primary);text-decoration:none">トーナメントセンターバトロコ水戸駅前</a></td>
+                <td>yoyoyo</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6392762.html" style="color:var(--text-primary);text-decoration:none">レプトン出汐店</a></td>
+                <td>タケ</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6392826.html" style="color:var(--text-primary);text-decoration:none">ブックエース小名浜住吉店</a></td>
+                <td>フジカスタム</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6392826.html" style="color:var(--text-primary);text-decoration:none">ブックエース小名浜住吉店</a></td>
+                <td>しばた</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6400181.html" style="color:var(--text-primary);text-decoration:none">JABUROⅡ</a></td>
+                <td>きゅーる</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6400718.html" style="color:var(--text-primary);text-decoration:none">元野木書店</a></td>
+                <td>オちんガール⭐︎マジシャン</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6411012.html" style="color:var(--text-primary);text-decoration:none">レプトン サンモール店</a></td>
+                <td>くまさんジェイムソン</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6411012.html" style="color:var(--text-primary);text-decoration:none">レプトン サンモール店</a></td>
+                <td>ふわとろ</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6463853.html" style="color:var(--text-primary);text-decoration:none">古本市場 福山曙店</a></td>
+                <td>オガディン</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6486100.html" style="color:var(--text-primary);text-decoration:none">オレタン福岡天神店</a></td>
+                <td>ねずみ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6492534.html" style="color:var(--text-primary);text-decoration:none">BOOKOFF西尾下町店</a></td>
+                <td>タナベ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6506705.html" style="color:var(--text-primary);text-decoration:none">プレイズ西尾シャオ店</a></td>
+                <td>うめ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6514760.html" style="color:var(--text-primary);text-decoration:none">ゲームスペース鶴岡</a></td>
+                <td>かっけ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6514760.html" style="color:var(--text-primary);text-decoration:none">ゲームスペース鶴岡</a></td>
+                <td>ピース</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6514760.html" style="color:var(--text-primary);text-decoration:none">ゲームスペース鶴岡</a></td>
+                <td>ペンテ</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6514962.html" style="color:var(--text-primary);text-decoration:none">カードボックスイオンモール高知店</a></td>
+                <td>K</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6515275.html" style="color:var(--text-primary);text-decoration:none">G-PROJECT中津店</a></td>
+                <td>cokemomo</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6530764.html" style="color:var(--text-primary);text-decoration:none">シーガル泉中央店</a></td>
+                <td>Vallen</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6530764.html" style="color:var(--text-primary);text-decoration:none">シーガル泉中央店</a></td>
+                <td>てる</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6530764.html" style="color:var(--text-primary);text-decoration:none">シーガル泉中央店</a></td>
+                <td>星宮</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6535961.html" style="color:var(--text-primary);text-decoration:none">カードボックス イオンモール徳島店</a></td>
+                <td>ふなっく</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6535961.html" style="color:var(--text-primary);text-decoration:none">カードボックス イオンモール徳島店</a></td>
+                <td>なり</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6535961.html" style="color:var(--text-primary);text-decoration:none">カードボックス イオンモール徳島店</a></td>
+                <td>A-XIN</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6538098.html" style="color:var(--text-primary);text-decoration:none">バトロコ新津田沼駅前</a></td>
+                <td>SunSun</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6303928.html" style="color:var(--text-primary);text-decoration:none">GIRAFULL京都店</a></td>
+                <td>せたこは</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6332642.html" style="color:var(--text-primary);text-decoration:none">Duel Stade Ganryu 入間店</a></td>
+                <td>しる</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6332836.html" style="color:var(--text-primary);text-decoration:none">BIG MAGICなんば店</a></td>
+                <td>宙(そら)</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6368669.html" style="color:var(--text-primary);text-decoration:none">カードゲームのシーガル郡山店</a></td>
+                <td>内山</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6368669.html" style="color:var(--text-primary);text-decoration:none">カードゲームのシーガル郡山店</a></td>
+                <td>光</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6390710.html" style="color:var(--text-primary);text-decoration:none">SuperKaBoS二の宮本店</a></td>
+                <td>住処</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6392289.html" style="color:var(--text-primary);text-decoration:none">お宝弁財天 feat. パンドラ</a></td>
+                <td>kanade</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6466472.html" style="color:var(--text-primary);text-decoration:none">ブックマーケット 野々市新庄店</a></td>
+                <td>よるめし</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6510792.html" style="color:var(--text-primary);text-decoration:none">V100徳島藍住店</a></td>
+                <td>とこ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6529227.html" style="color:var(--text-primary);text-decoration:none">ブックオフチャチャタウン小倉店</a></td>
+                <td>いねまる</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.08</td>
+                <td><a href="../../events/6398727.html" style="color:var(--text-primary);text-decoration:none">トレカダンジョン</a></td>
+                <td>ジュン</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.08</td>
+                <td><a href="../../events/6485953.html" style="color:var(--text-primary);text-decoration:none">カードラボ天王寺店</a></td>
+                <td>むげん</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.08</td>
+                <td><a href="../../events/6485953.html" style="color:var(--text-primary);text-decoration:none">カードラボ天王寺店</a></td>
+                <td>ぷー</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.08</td>
+                <td><a href="../../events/6485953.html" style="color:var(--text-primary);text-decoration:none">カードラボ天王寺店</a></td>
+                <td>エボルヴ惨敗侍</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.08</td>
+                <td><a href="../../events/6511644.html" style="color:var(--text-primary);text-decoration:none">ビデオインアメリカ京都西七条店</a></td>
+                <td>まつこし</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.07</td>
+                <td><a href="../../events/6359625.html" style="color:var(--text-primary);text-decoration:none">カードボックス川口店</a></td>
+                <td>まずつす</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.07</td>
+                <td><a href="../../events/6380580.html" style="color:var(--text-primary);text-decoration:none">フルコンプ PLAYERS CENTER 八王子本店</a></td>
+                <td>G2</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.07</td>
+                <td><a href="../../events/6504324.html" style="color:var(--text-primary);text-decoration:none">アメニティードリーム立川店</a></td>
+                <td>テオ</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.07</td>
+                <td><a href="../../events/6551362.html" style="color:var(--text-primary);text-decoration:none">カードラボ大阪日本橋店</a></td>
+                <td>ゆうや</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.07</td>
+                <td><a href="../../events/6551362.html" style="color:var(--text-primary);text-decoration:none">カードラボ大阪日本橋店</a></td>
+                <td>むげん</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.07</td>
+                <td><a href="../../events/6551362.html" style="color:var(--text-primary);text-decoration:none">カードラボ大阪日本橋店</a></td>
+                <td>ポムランタン</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6307254.html" style="color:var(--text-primary);text-decoration:none">BANDAI CARD GAMES 公式ショップ デクスタ ー DECKS STADIUM―(デックス スタジアム）</a></td>
+                <td>シブヤマ</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6473006.html" style="color:var(--text-primary);text-decoration:none">カードゲームのシーガル仙台駅前店</a></td>
+                <td>あがつ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6502941.html" style="color:var(--text-primary);text-decoration:none">トーナメントセンターバトロコ新潟万代</a></td>
+                <td>りんごデニッシュリベイク</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6510535.html" style="color:var(--text-primary);text-decoration:none">イエローサブマリンマジッカーズ福岡店</a></td>
+                <td>ムラタ・アズラエル</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6510535.html" style="color:var(--text-primary);text-decoration:none">イエローサブマリンマジッカーズ福岡店</a></td>
+                <td>ナギ</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6517079.html" style="color:var(--text-primary);text-decoration:none">エディオン横浜西口本店</a></td>
+                <td>トキ</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6535510.html" style="color:var(--text-primary);text-decoration:none">カードラボ博多マルイ店</a></td>
+                <td>あふてらる</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6537240.html" style="color:var(--text-primary);text-decoration:none">カードラボ千葉中央店</a></td>
+                <td>エジル</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
+                <td><a href="../../events/6537240.html" style="color:var(--text-primary);text-decoration:none">カードラボ千葉中央店</a></td>
+                <td>SunSun</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6336246.html" style="color:var(--text-primary);text-decoration:none">ハリケーン川西店</a></td>
+                <td>ゆうう</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6336246.html" style="color:var(--text-primary);text-decoration:none">ハリケーン川西店</a></td>
+                <td>もーせ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6336246.html" style="color:var(--text-primary);text-decoration:none">ハリケーン川西店</a></td>
+                <td>あらぞう</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6398929.html" style="color:var(--text-primary);text-decoration:none">TSUTAYA BOOK STORE ビバモール寝屋川店</a></td>
+                <td>テラスネスク</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6400470.html" style="color:var(--text-primary);text-decoration:none">GIRAFULLなんば店</a></td>
+                <td>むげん</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6400470.html" style="color:var(--text-primary);text-decoration:none">GIRAFULLなんば店</a></td>
+                <td>なえp</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6456908.html" style="color:var(--text-primary);text-decoration:none">カードショップ＠ほ～む。宮崎店</a></td>
+                <td>オちんガール⭐︎マジシャン</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6457946.html" style="color:var(--text-primary);text-decoration:none">TSUTAYA田上店</a></td>
+                <td>ルシア</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6485172.html" style="color:var(--text-primary);text-decoration:none">カードキングダム徳島店</a></td>
+                <td>けんちゃん。</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6486910.html" style="color:var(--text-primary);text-decoration:none">ホビーショップ パワーナイン</a></td>
+                <td>ハナヤマ</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6488018.html" style="color:var(--text-primary);text-decoration:none">NextPro名古屋大須店</a></td>
+                <td>むひ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.05</td>
+                <td><a href="../../events/6529217.html" style="color:var(--text-primary);text-decoration:none">ホビーステーション名駅2号店</a></td>
+                <td>ごぅれむ</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6304669.html" style="color:var(--text-primary);text-decoration:none">ゲームプラザ元気302</a></td>
+                <td>うほうほ</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6317281.html" style="color:var(--text-primary);text-decoration:none">カードラボ岡山西口店</a></td>
+                <td>香辛料</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6362094.html" style="color:var(--text-primary);text-decoration:none">TSUTAYA 田崎店</a></td>
+                <td>カテキン</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6400969.html" style="color:var(--text-primary);text-decoration:none">カードラボ新潟店</a></td>
+                <td>ゴン</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×1</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6400969.html" style="color:var(--text-primary);text-decoration:none">カードラボ新潟店</a></td>
+                <td>なお</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6465673.html" style="color:var(--text-primary);text-decoration:none">遊INGコマーシャルモール博多店</a></td>
+                <td>あふてらる</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6465673.html" style="color:var(--text-primary);text-decoration:none">遊INGコマーシャルモール博多店</a></td>
+                <td>ドン！クリーク</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6465673.html" style="color:var(--text-primary);text-decoration:none">遊INGコマーシャルモール博多店</a></td>
+                <td>はにゃ〜♪</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6486513.html" style="color:var(--text-primary);text-decoration:none">TOP CARD</a></td>
+                <td>あーちんふぁんとむ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6512160.html" style="color:var(--text-primary);text-decoration:none">ドラゴンスター日本橋3号店</a></td>
+                <td>stern000(シュテル)</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6512160.html" style="color:var(--text-primary);text-decoration:none">ドラゴンスター日本橋3号店</a></td>
+                <td>ポムランタン</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.04</td>
+                <td><a href="../../events/6550709.html" style="color:var(--text-primary);text-decoration:none">トーナメントセンターバトロコ札幌狸小路</a></td>
+                <td>$$$</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6318883.html" style="color:var(--text-primary);text-decoration:none">トレカ専門店 スーパートレ☆スタ宮崎恒久店</a></td>
+                <td>ゾノ</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6441296.html" style="color:var(--text-primary);text-decoration:none">カードラボ札幌店</a></td>
+                <td>ふるかわ555</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6450060.html" style="color:var(--text-primary);text-decoration:none">コミかる伊勢崎店</a></td>
+                <td>山賊</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6456203.html" style="color:var(--text-primary);text-decoration:none">竜星のPAO中野店</a></td>
+                <td>ZEIKIN</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6456203.html" style="color:var(--text-primary);text-decoration:none">竜星のPAO中野店</a></td>
+                <td>ヨウ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6494235.html" style="color:var(--text-primary);text-decoration:none">TSUTAYAブックセンター名豊刈谷店</a></td>
+                <td>アスラン・ヅラ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6494235.html" style="color:var(--text-primary);text-decoration:none">TSUTAYAブックセンター名豊刈谷店</a></td>
+                <td>よーちゃん</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6495311.html" style="color:var(--text-primary);text-decoration:none">BOOKSながしま</a></td>
+                <td>にゅーりん</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6503445.html" style="color:var(--text-primary);text-decoration:none">MINT GAMES 池袋店</a></td>
+                <td>りゅーちゃ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.03</td>
+                <td><a href="../../events/6565581.html" style="color:var(--text-primary);text-decoration:none">TSUTAYA福井高柳店</a></td>
+                <td>犬くぎ</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6316148.html" style="color:var(--text-primary);text-decoration:none">蔦屋書店小川町</a></td>
+                <td>オちんガール⭐︎マジシャン</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6318726.html" style="color:var(--text-primary);text-decoration:none">トーナメントセンターバトロコ横浜伊勢佐木町</a></td>
+                <td>夏髪が頬を切る</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6318954.html" style="color:var(--text-primary);text-decoration:none">コーギーアール本店</a></td>
+                <td>ちょめじ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6331769.html" style="color:var(--text-primary);text-decoration:none">トレーディングカードゲームショップ193名駅太閤店</a></td>
+                <td>らる</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6390709.html" style="color:var(--text-primary);text-decoration:none">トイコンプ高槻店</a></td>
+                <td>どんぐり大好き</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6474231.html" style="color:var(--text-primary);text-decoration:none">カードラボ所沢店</a></td>
+                <td>あらびき</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×1</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6502259.html" style="color:var(--text-primary);text-decoration:none">カードラボ熊本店</a></td>
+                <td>ユウダイ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6509413.html" style="color:var(--text-primary);text-decoration:none">TSUTAYA BOOKSTORE そよら成田ニュータウン</a></td>
+                <td>ホロウ</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×4</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6515530.html" style="color:var(--text-primary);text-decoration:none">ブックオフイオン橋本店</a></td>
+                <td>ハッサン</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.02</td>
+                <td><a href="../../events/6536146.html" style="color:var(--text-primary);text-decoration:none">ビデオインアメリカ尼崎店</a></td>
+                <td>まやまつ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="text-align:center;margin-top:16px;color:var(--text-muted);font-size:13px">最新100件を表示</p>
         </details>
     
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
       <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">シルヴァ・バレトについて</h2>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">シルヴァ・バレトは「機動戦士ガンダムUC」に登場する白のユニットカードです。Lv.5・コスト3で、AP4/HP4のステータスを持ちます。特徴は「民間」です。レアリティはR+で、GD04に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は13.8%で、多くのプレイヤーに支持されているカードです。合計101デッキで採用されており、平均2.7枚で投入されています。優勝デッキでの採用実績が26件あり、トーナメントシーンでの実力が証明されています。最も採用率が高いデッキタイプは緑白系（18.2%）です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとして溢れる慈愛（同時採用率94.1%）、ガンダム・ルブリス（同時採用率89.1%）、エールストライクガンダム（同時採用率82.2%）などがあります。デッキ構築の参考にしてください。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">カードの強み</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">シルヴァ・バレトはイラスト違いのパラレル版カードです。通常版と同じ効果・ステータスを持ちながら、コレクション性の高い特別なイラストが魅力です。パラレル版はパック開封やキャンペーンなどで入手でき、同じ性能でありながらプレミアム感のある一枚です。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">運用のヒント</h3>
@@ -185,7 +1093,7 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', 'シルヴァ・バレト（GD04-068_p1）パラレル版採用率0.0% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', 'シルヴァ・バレト（GD04-068_p1）パラレル版採用率13.8% | GCG STATS');
   </script>
 </body>
 </html>

@@ -79,7 +79,8 @@ async function fetchEventList() {
 
   // シリーズ情報（ドロップダウンはJS動的生成のためハードコード＋イベントリンクから自動検出）
   const series = {
-    '6226': 'ニュータイプチャレンジ 2026 MISSION2（3月開催）'
+    '6226': 'ニュータイプチャレンジ 2026 MISSION2（3月開催）',
+    '6776': 'ニュータイプチャレンジ 2026 MISSION3（5月開催）'
   };
   let currentSeriesId = null;
 

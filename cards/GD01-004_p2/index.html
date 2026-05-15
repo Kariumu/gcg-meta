@@ -153,7 +153,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-label">全体採用率</div>
-            <div class="stat-value">0.8<span class="unit">%</span></div>
+            <div class="stat-value">0.6<span class="unit">%</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">優勝デッキ数</div>
@@ -188,7 +188,20 @@
             <tbody>
               <tr>
                 <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-purple">紫</span></td>
-                <td class="text-mono">2 / 401</td>
+                <td class="text-mono">2 / 571</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:0.4%;background:#4488ff"></div>
+                    </div>
+                    <span class="usage-rate">0.4%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2.5</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-green">緑</span></td>
+                <td class="text-mono">1 / 211</td>
                 <td>
                   <div class="flex items-center gap-8">
                     <div class="usage-bar-container">
@@ -197,30 +210,17 @@
                     <span class="usage-rate">0.5%</span>
                   </div>
                 </td>
-                <td class="text-mono">2.5</td>
-              </tr>
-              <tr>
-                <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-green">緑</span></td>
-                <td class="text-mono">1 / 127</td>
-                <td>
-                  <div class="flex items-center gap-8">
-                    <div class="usage-bar-container">
-                      <div class="usage-bar" style="width:0.8%;background:#4488ff"></div>
-                    </div>
-                    <span class="usage-rate">0.8%</span>
-                  </div>
-                </td>
                 <td class="text-mono">2</td>
               </tr>
               <tr>
                 <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-red">赤</span></td>
-                <td class="text-mono">2 / 97</td>
+                <td class="text-mono">2 / 117</td>
                 <td>
                   <div class="flex items-center gap-8">
                     <div class="usage-bar-container">
-                      <div class="usage-bar" style="width:2.1%;background:#4488ff"></div>
+                      <div class="usage-bar" style="width:1.7%;background:#4488ff"></div>
                     </div>
-                    <span class="usage-rate">2.1%</span>
+                    <span class="usage-rate">1.7%</span>
                   </div>
                 </td>
                 <td class="text-mono">2</td>
@@ -400,7 +400,7 @@
       <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">ガンキャノンについて</h2>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">ガンキャノンは「機動戦士ガンダム」に登場する青のユニットカードです。Lv.3・コスト2で、AP2/HP3のステータスを持ちます。特徴は「地球連邦」「WB隊」です。レアリティはR+で、GD01に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は0.8%で、特定のデッキタイプで活躍しています。合計5デッキで採用されており、平均2.2枚で投入されています。優勝デッキでの採用実績が1件あり、トーナメントシーンでの実力が証明されています。最も採用率が高いデッキタイプは青紫系（0.5%）です。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は0.6%で、特定のデッキタイプで活躍しています。合計5デッキで採用されており、平均2.2枚で投入されています。優勝デッキでの採用実績が1件あり、トーナメントシーンでの実力が証明されています。最も採用率が高いデッキタイプは青紫系（0.4%）です。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてアムロ・レイ（同時採用率100%）、ガンダム（同時採用率80%）、ガンタンク（同時採用率60%）などがあります。デッキ構築の参考にしてください。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">カードの強み</h3>
@@ -450,7 +450,7 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', 'ガンキャノン（GD01-004_p2）パラレル版採用率0.8% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', 'ガンキャノン（GD01-004_p2）パラレル版採用率0.6% | GCG STATS');
   </script>
 </body>
 </html>

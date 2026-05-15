@@ -154,11 +154,11 @@
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
             <div class="stat-label">採用デッキ数</div>
-            <div class="stat-value">0<span class="unit"> デッキ</span></div>
+            <div class="stat-value">2<span class="unit"> デッキ</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">全体採用率</div>
-            <div class="stat-value">0.0<span class="unit">%</span></div>
+            <div class="stat-value">66.7<span class="unit">%</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">優勝デッキ数</div>
@@ -166,7 +166,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-label">平均採用枚数</div>
-            <div class="stat-value">0<span class="unit">枚</span></div>
+            <div class="stat-value">1.5<span class="unit">枚</span></div>
           </div>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
@@ -176,21 +176,191 @@
     </div>
 
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">デッキタイプ別採用状況</h2>
+            <span class="toggle-icon"></span>
+          </summary>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>デッキタイプ</th>
+                <th style="width:90px">採用数</th>
+                <th style="width:180px">採用率</th>
+                <th style="width:60px">平均枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="color-tag color-tag-purple">紫</span></td>
+                <td class="text-mono">2 / 3</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:66.7%;background:#b444ff"></div>
+                    </div>
+                    <span class="usage-rate">66.7%</span>
+                  </div>
+                </td>
+                <td class="text-mono">1.5</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">一緒によく使われるカード</h2>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">TOP8</span><span class="toggle-icon"></span></div>
+          </summary>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
+          <div class="co-cards-grid">
+          <a href="../../cards/ST07-004/" class="co-card-item" title="ガンダムヴァーチェ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/ST07-004.webp" alt="ガンダムヴァーチェ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>ST07-004</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダムヴァーチェ</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-038/" class="co-card-item" title="ガンダムエクシア" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-038.webp" alt="ガンダムエクシア" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-038</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダムエクシア</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-063/" class="co-card-item" title="GNアーマー TYPE-E" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-063.webp" alt="GNアーマー TYPE-E" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-063</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">GNアーマー TYPE-E</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-046/" class="co-card-item" title="ガンダムデュナメス" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-046.webp" alt="ガンダムデュナメス" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-046</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダムデュナメス</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-034/" class="co-card-item" title="ガンダム・キュリオス" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-034.webp" alt="ガンダム・キュリオス" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-034</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダム・キュリオス</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-036/" class="co-card-item" title="ガンダムスローネアイン" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-036.webp" alt="ガンダムスローネアイン" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-036</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダムスローネアイン</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-037/" class="co-card-item" title="ガンダムキュリオス(トランザム)" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-037.webp" alt="ガンダムキュリオス(トランザム)" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-037</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダムキュリオス(トランザム)</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-090/" class="co-card-item" title="ハレルヤ・ハプティズム" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-090.webp" alt="ハレルヤ・ハプティズム" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-090</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ハレルヤ・ハプティズム</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          </div>
+          <noscript>
+            <h3>一緒によく使われるカード</h3>
+            <ul>
+            <li><a href="/cards/ST07-004/">ガンダムヴァーチェ（ST07-004）- 100%</a></li>
+            <li><a href="/cards/GD04-038/">ガンダムエクシア（GD04-038）- 100%</a></li>
+            <li><a href="/cards/GD04-063/">GNアーマー TYPE-E（GD04-063）- 100%</a></li>
+            <li><a href="/cards/GD04-046/">ガンダムデュナメス（GD04-046）- 100%</a></li>
+            <li><a href="/cards/GD04-034/">ガンダム・キュリオス（GD04-034）- 100%</a></li>
+            <li><a href="/cards/GD04-036/">ガンダムスローネアイン（GD04-036）- 100%</a></li>
+            <li><a href="/cards/GD04-037/">ガンダムキュリオス(トランザム)（GD04-037）- 100%</a></li>
+            <li><a href="/cards/GD04-090/">ハレルヤ・ハプティズム（GD04-090）- 100%</a></li>
+            </ul>
+          </noscript>
+        </details>
     
         <details class="collapsible-section">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">0件</span><span class="toggle-icon"></span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">2件</span><span class="toggle-icon"></span></div>
           </summary>
-          <div style="text-align:center;padding:32px;color:var(--text-muted)">TOP4での採用実績がありません</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>店舗</th>
+                <th>プレイヤー</th>
+                <th style="width:60px">順位</th>
+                <th style="width:60px">枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
+                <td><a href="../../events/6492534.html" style="color:var(--text-primary);text-decoration:none">BOOKOFF西尾下町店</a></td>
+                <td>T2</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.09</td>
+                <td><a href="../../events/6510792.html" style="color:var(--text-primary);text-decoration:none">V100徳島藍住店</a></td>
+                <td>えすぺ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×1</td>
+              </tr>
+            </tbody>
+          </table>
+          
         </details>
     
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
       <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">ネーナ・トリニティについて</h2>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">ネーナ・トリニティは「機動戦士ガンダム00」に登場する赤のパイロットカードです。Lv.4のパイロットで、AP0を持ちます。特徴は「CB」「トリニティ」です。レアリティはR+で、GD04に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は66.7%と非常に高く、環境を代表するカードの一つです。合計2デッキで採用されており、平均1.5枚で投入されています。最も採用率が高いデッキタイプは紫系（66.7%）です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてガンダムヴァーチェ（同時採用率100%）、ガンダムエクシア（同時採用率100%）、GNアーマー TYPE-E（同時採用率100%）などがあります。デッキ構築の参考にしてください。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">カードの強み</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">ネーナ・トリニティはイラスト違いのパラレル版カードです。通常版と同じ効果・ステータスを持ちながら、コレクション性の高い特別なイラストが魅力です。パラレル版はパック開封やキャンペーンなどで入手でき、同じ性能でありながらプレミアム感のある一枚です。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">運用のヒント</h3>
@@ -238,7 +408,7 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', 'ネーナ・トリニティ（GD04-089_p1）パラレル版採用率0.0% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', 'ネーナ・トリニティ（GD04-089_p1）パラレル版採用率66.7% | GCG STATS');
   </script>
 </body>
 </html>
