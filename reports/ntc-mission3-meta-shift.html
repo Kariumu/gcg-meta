@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTC MISSION2（3月）→ MISSION3（5月）環境変化レポート | GCG STATS</title>
+  <meta name="description" content="GD03環境のまとめからGD04環境の幕開けへ。ニュータイプチャレンジ 2026 MISSION2とMISSION3のデッキシェア・優勝率・採用カードの差分を集計し、世代交代の構図を分析。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .recap-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:13px; }
+    .recap-table th, .recap-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
+    .recap-table th { background:var(--bg-elevated); color:var(--text-muted); font-weight:600; font-size:12px; }
+    .recap-table td.num { font-family:var(--font-mono); text-align:right; }
+    .recap-table tr.highlight td { background:rgba(255,200,0,0.05); }
+    .delta-up { color:#7cd99c; font-weight:600; }
+    .delta-down { color:#ff7b7b; font-weight:600; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px; margin:16px 0; }
+    .stat-card { padding:14px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
+    .stat-card .stat-label { font-size:12px; color:var(--text-muted); margin-bottom:4px; }
+    .stat-card .stat-value { font-family:var(--font-mono); font-size:22px; font-weight:700; color:var(--text-primary); }
+    .stat-card .stat-sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
+    @media (max-width: 640px) {
+      .recap-table { font-size:12px; }
+      .recap-table th, .recap-table td { padding:6px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <a href="../reports/" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a>
+
+    <div class="section-header" style="margin-top:16px">
+      <h1 class="section-title">NTC MISSION2（3月）→ MISSION3（5月）環境変化レポート</h1>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:4px">
+        GD03環境のまとめとGD04移行の節目を、デッキシェアとカード採用の差分で読む
+      </p>
+      <p style="color:var(--text-muted);font-size:12px;margin-top:4px">
+        対象大会: NTC 2026 MISSION2（series=6226、3月）／ MISSION3（series=6776、5月10日時点）
+      </p>
+    </div>
+
+    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">
+
+      <h2>はじめに</h2>
+      <p>
+        ニュータイプチャレンジ 2026 MISSION2（3月開催）は、GD03環境の総決算となる大規模な公式大会でした。続くMISSION3（5月開催）は、4月25日のGD04「Phantom Aria」リリースを挟み、新弾投入後最初の公式大会という性格を持っています。<strong>GD03の完成形 →（GD04リリース）→ GD04環境の幕開け</strong>、というカードプール全体の節目を、この2大会の差分はちょうど挟んでいる形です。
+      </p>
+      <p>
+        本レポートでは、MISSION2の入賞1,190デッキとMISSION3の入賞1,274デッキ（5月10日時点）を比較し、(1) デッキシェアの変化、(2) 優勝率の視点で見える隠れた強者、(3) 採用カードの世代交代、(4) 今後の展望、という4つの切り口から環境変化を整理します。
+      </p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-label">MISSION2 規模</div>
+          <div class="stat-value">298 店</div>
+          <div class="stat-sub">入賞 1,190デッキ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">MISSION3 規模（5/10時点）</div>
+          <div class="stat-value">137 店</div>
+          <div class="stat-sub">入賞 1,274デッキ</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">M3 GD04 採用率</div>
+          <div class="stat-value">75.8%</div>
+          <div class="stat-sub">966 / 1,274</div>
+        </div>
+      </div>
+
+      <h2>デッキシェアの変化</h2>
+
+      <p>まずは色別のデッキシェアと優勝数を、MISSION2とMISSION3で並べて見比べます。</p>
+
+      <table class="recap-table">
+        <tr>
+          <th>デッキタイプ</th>
+          <th class="num">M2 シェア</th>
+          <th class="num">M3 シェア</th>
+          <th class="num">差分</th>
+          <th class="num">M2 優勝</th>
+          <th class="num">M3 優勝</th>
+        </tr>
+        <tr class="highlight"><td><strong>青/紫</strong></td><td class="num">33.7%</td><td class="num">31.0%</td><td class="num delta-down">−2.7</td><td class="num">103</td><td class="num">48</td></tr>
+        <tr><td>青/緑</td><td class="num">10.7%</td><td class="num">15.3%</td><td class="num delta-up">+4.6</td><td class="num">38</td><td class="num">12</td></tr>
+        <tr><td>赤/白</td><td class="num">13.9%</td><td class="num">14.4%</td><td class="num">+0.5</td><td class="num">45</td><td class="num">18</td></tr>
+        <tr><td>青/白</td><td class="num">9.0%</td><td class="num">13.3%</td><td class="num delta-up">+4.3</td><td class="num">22</td><td class="num">14</td></tr>
+        <tr><td>緑/白</td><td class="num">16.2%</td><td class="num">12.9%</td><td class="num delta-down">−3.3</td><td class="num">48</td><td class="num">23</td></tr>
+        <tr><td>青/赤</td><td class="num">8.2%</td><td class="num">3.6%</td><td class="num delta-down">−4.6</td><td class="num">19</td><td class="num">5</td></tr>
+        <tr><td>赤/緑</td><td class="num">2.2%</td><td class="num">3.1%</td><td class="num">+0.9</td><td class="num">3</td><td class="num">5</td></tr>
+        <tr class="highlight"><td><strong>白/紫</strong></td><td class="num">1.6%</td><td class="num">3.1%</td><td class="num delta-up">+1.5</td><td class="num">2</td><td class="num">6</td></tr>
+        <tr><td>青（単色）</td><td class="num">0.0%</td><td class="num">1.5%</td><td class="num delta-up">+1.5</td><td class="num">0</td><td class="num">3</td></tr>
+        <tr><td>赤/紫</td><td class="num">3.4%</td><td class="num">0.7%</td><td class="num delta-down">−2.7</td><td class="num">12</td><td class="num">2</td></tr>
+        <tr><td>緑/紫</td><td class="num">1.2%</td><td class="num">0.2%</td><td class="num">−1.0</td><td class="num">4</td><td class="num">0</td></tr>
+      </table>
+
+      <p style="font-size:11px;color:var(--text-muted);margin-top:-4px;margin-bottom:16px">
+        ※上記表に記載のない単色デッキ等を約0.9%含むため、M3 シェア合計は約99.1%となっています。
+      </p>
+
+      <p>
+        最も伸びたのは <strong>青/緑（+4.6ポイント）</strong> と <strong>青/白（+4.3ポイント）</strong> の青系2タイプです。GD04 の青系カードを取り込み、シェアを一気に伸ばしました。続いて <strong>白/紫</strong>（+1.5ポイント）と <strong>青（単色）</strong>（+1.5ポイント、M2では0%）も、シェア自体は小さいながら新たに台頭してきています。
+      </p>
+      <p>
+        逆に大きく落としたのは <strong>青/赤（−4.6ポイント）</strong>、<strong>緑/白（−3.3ポイント）</strong>、そして首位を維持した <strong>青/紫（−2.7ポイント）</strong>。とくに青/紫はMISSION2でシェア33.7%・優勝103回を誇っていましたが、MISSION3（5月10日時点）ではシェア31.0%・優勝48回へと縮小しています。順位はまだ1位ですが、追われる立場へと位置を変えました。
+      </p>
+      <p>
+        全体として、<strong>「青/紫一強」から「青系の分散」へ</strong>という構図が読み取れます。青を含むデッキ（青/紫・青/緑・青/白・青/赤＋青単色）の合計シェアはM2の61.6%からM3の64.7%とむしろ微増しており、その内訳が「青/紫1点集中」から「青/紫＋青/緑＋青/白＋青単」という分散へと変わっている点が今回最大の変化です。
+      </p>
+
+      <h2>優勝率の視点で見る隠れた強者</h2>
+
+      <p>
+        絶対値の優勝「数」では、青/紫がM2・M3いずれもダントツです。しかし、「入賞デッキあたりの優勝率」で見ると、まったく違う風景が見えてきます。
+      </p>
+
+      <table class="recap-table">
+        <tr>
+          <th>デッキタイプ</th>
+          <th class="num">M3 入賞</th>
+          <th class="num">M3 優勝</th>
+          <th class="num">M3 優勝率</th>
+          <th>コメント</th>
+        </tr>
+        <tr class="highlight"><td><strong>白/紫</strong></td><td class="num">17</td><td class="num">6</td><td class="num"><strong>35.3%</strong></td><td>2色アーキタイプ中で最高効率</td></tr>
+        <tr class="highlight"><td><strong>緑/白</strong></td><td class="num">71</td><td class="num">23</td><td class="num"><strong>32.4%</strong></td><td>シェアは減も勝ちきる</td></tr>
+        <tr><td>赤/緑</td><td class="num">17</td><td class="num">5</td><td class="num">29.4%</td><td>少数派の隠れ強者</td></tr>
+        <tr><td>青/紫</td><td class="num">170</td><td class="num">48</td><td class="num">28.2%</td><td>絶対値は依然首位</td></tr>
+        <tr><td>青/赤</td><td class="num">20</td><td class="num">5</td><td class="num">25.0%</td><td>標準ライン水準</td></tr>
+        <tr><td>赤/白</td><td class="num">79</td><td class="num">18</td><td class="num">22.8%</td><td>標準ライン下回り</td></tr>
+        <tr><td>青/白</td><td class="num">73</td><td class="num">14</td><td class="num">19.2%</td><td>シェア急増に対し変換弱め</td></tr>
+        <tr><td>青/緑</td><td class="num">84</td><td class="num">12</td><td class="num">14.3%</td><td>シェア増・優勝率低調</td></tr>
+      </table>
+
+      <p>
+        最も目立つのは <strong>白/紫の優勝率35.3%</strong>。母数は17デッキと少ないため数値はぶれやすいものの、3月のM2では優勝率10.5%（19デッキ中2勝）と完全に下位枠だったところから、M3では2色アーキタイプ中で最高効率にまで一気に伸びています。GD04 のカードプール拡張がこのデッキの完成度を一段引き上げた、と推測できます。
+      </p>
+      <p>
+        対照的に、シェアが急増した <strong>青/緑（優勝率14.3%）</strong> と <strong>青/白（19.2%）</strong> は、優勝率では標準ラインを下回ります。「使う人は増えたが、まだ研究が追いついていない／構築の最適解が定まっていない」段階で、ここから優勝率が伸びてくるとさらに環境を動かす可能性があります。プレイヤー視点で言えば、青/緑・青/白を握るなら、いま現在は「環境のフロンティア」で動いている自覚を持って取り組む価値があります。
+      </p>
+
+      <h2>採用カードの世代交代</h2>
+
+      <p>
+        個別カードレベルでも、世代交代がはっきりと見えています。MISSION2→MISSION3で採用率が大きく動いた既存カード（GD04新カードを除く既存カード）を並べます。
+      </p>
+
+      <table class="recap-table">
+        <tr><th>カード</th><th class="num">M2 採用率</th><th class="num">M3 採用率</th><th class="num">差分</th></tr>
+        <tr class="highlight"><td><strong>ホワイトベース</strong> (ST01-015)</td><td class="num">4.6%</td><td class="num">24.1%</td><td class="num delta-up">+19.5</td></tr>
+        <tr><td>シャア・アズナブル (ST03-011)</td><td class="num">6.3%</td><td class="num">17.7%</td><td class="num delta-up">+11.4</td></tr>
+        <tr><td>ガンタンク (GD01-008)</td><td class="num">35.7%</td><td class="num">46.9%</td><td class="num delta-up">+11.2</td></tr>
+        <tr><td>ザクⅡ（シャア・アズナブル機）(ST03-006)</td><td class="num">8.8%</td><td class="num">19.8%</td><td class="num delta-up">+11.0</td></tr>
+        <tr class="highlight"><td><strong>ストライカーパック</strong> (ST04-012)</td><td class="num">29.7%</td><td class="num">12.4%</td><td class="num delta-down">−17.3</td></tr>
+        <tr><td>致命の一撃 (ST05-014)</td><td class="num">23.6%</td><td class="num">9.5%</td><td class="num delta-down">−14.1</td></tr>
+        <tr><td>ガンダムNT-1 (GD03-001)</td><td class="num">21.5%</td><td class="num">8.6%</td><td class="num delta-down">−12.9</td></tr>
+        <tr><td>ザウォート (ST01-009)</td><td class="num">16.4%</td><td class="num">3.7%</td><td class="num delta-down">−12.7</td></tr>
+        <tr><td>GQuuuuuuX（オメガ・サイコミュ起動時）(GD03-034)</td><td class="num">24.6%</td><td class="num">13.0%</td><td class="num delta-down">−11.6</td></tr>
+      </table>
+
+      <p>
+        上昇トップは <strong>ホワイトベース（+19.5）</strong>。M2ではわずか4.6%だった採用率が、M3では24.1%まで跳ね上がりました。GD04 でシナジーを持つカードが増えたか、メタ環境の変化で価値が再評価されたのか — 理由はさらなる分析が必要ですが、いずれにせよ「既存カードの再評価」が起きた最大の事例です。続く <strong>シャア・アズナブル</strong>（+11.4）、<strong>ガンタンク</strong>（+11.2）、<strong>ザクⅡ（シャア機）</strong>（+11.0）は、いわゆる宇宙世紀のクラシック機体／キャラクター枠が軒並み伸びている格好です。
+      </p>
+      <p>
+        一方、急減した側を見ると、GD03 環境を象徴する <strong>ストライカーパック（−17.3）</strong> と <strong>GQuuuuuuX（−11.6）</strong> が並んでいます。これらは GD03 時代の青/紫や緑/白の中核を担っていたカードで、GD04 リリース後はその役割の一部が GD04 の新カードに置き換えられた、もしくは構築枠を奪われた、という構図になっています。<strong>致命の一撃</strong>（−14.1）や <strong>ザウォート</strong>（−12.7）、<strong>ガンダムNT-1</strong>（−12.9）も同様に、汎用枠や攻め筋を担っていたカードがそろってシェアを落としており、デッキ構築の「土台」レベルでカードプールの入れ替わりが進んでいます。
+      </p>
+      <p>
+        加えて、GD04 の新カードでは <strong>「優雅な物腰」</strong>（+23.9）、<strong>「フラット（ミリシャ仕様）」</strong>（+20.9）、<strong>「ジオング」</strong>（+16.7）、<strong>「シルヴァ・バレト」</strong>（+16.2）など、リリース直後にもかかわらず採用率20%級まで到達したカードが複数存在します。GD04 の詳細は <a href="ntc-mission3-gd04-analysis.html" style="color:var(--accent)">GD04 採用分析記事</a> で扱っています。
+      </p>
+      <p>
+        まとめると、「GD03 環境の主役カードが退場し、GD04 ＋クラシックカードがそのスペースを埋める」という非常にわかりやすい世代交代の構図が、データに表れています。
+      </p>
+
+      <h2>今後の展望</h2>
+
+      <p>
+        最後に、ここまでのデータから導かれる「MISSION3後半・以降に注目すべきポイント」を3つ挙げておきます。
+      </p>
+      <ul style="line-height:1.8">
+        <li><strong>青系のシェア分散がどこで止まるか</strong>: M2では青/紫1点集中だった青系のシェアが、M3では青/紫・青/緑・青/白・青単に分散しました。各タイプの優勝率は青/緑14.3%・青/白19.2%とまだ標準を下回っており、構築最適解が定まる過程で「どの青タイプに収束するか」がMISSION3後半・MISSION4の見どころです。</li>
+        <li><strong>白/紫の優勝率35.3%が「本物」か「ぶれ」か</strong>: 母数17デッキはサンプルサイズが小さく、数値の信頼区間は広めです。MISSION3の追加データやMISSION4で同水準を維持できれば、白/紫は明確に新環境の有力アーキタイプとして定着するでしょう。逆に20%台に戻るようなら、「初手研究で得をした層がうまく勝ち切った」一過性の数字と見るべきです。</li>
+        <li><strong>「ホワイトベース」「シャア・アズナブル」など既存カード再評価の射程</strong>: 既存カードでも採用率を10ポイント以上伸ばしたカードが複数あり、GD04 リリースをきっかけにデッキ構築の前提が変わっていることが見て取れます。MISSION4までに、他にも再評価される既存カードが出てくる可能性は十分にあります。</li>
+      </ul>
+
+      <p>
+        MISSION3はあくまで「GD04環境の最初の2週間（5月10日時点）」のスナップショットであり、研究が進む後半に向けて、ここから先のデータがいよいよ本丸です。GCG STATSではMISSION3終了後、ならびにMISSION4以降も、同様の差分比較を継続していきます。
+      </p>
+
+      <p style="margin-top:24px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.7">
+        ※本記事の数値は、GCG STATS が収集したニュータイプチャレンジ 2026 MISSION2（298店舗・1,190デッキ）および MISSION3（5月10日時点 137店舗・1,274デッキ）の入賞デッキ集計結果に基づきます。<br>
+        ※MISSION3は5月開催の途中時点のデータであり、最終確定数値とは異なる場合があります。<br>
+        ※カード名は公式表記に準拠していますが、収集ソースの揺れにより一部表記が異なる場合があります。
+      </p>
+
+      <p style="margin-top:32px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.7">
+        ※本記事はAIによって記述されている文章を含みます。記事内容に誤りがある場合には<a href="https://x.com/gcg_stats" target="_blank" rel="noopener" style="color:var(--accent)">Xアカウント（@gcg_stats）</a>のDMへご報告ください。
+      </p>
+
+    </article>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=8"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>
