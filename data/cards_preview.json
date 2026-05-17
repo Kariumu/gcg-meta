@@ -42,7 +42,8 @@
     "effect": "【バースト】このカードを手札に加える。【セット時】《ブロッカー》を持つアクティブの味方のユニット1つと、Lv.4以下の相手のユニット1つを選ぶ。それらをレストにする。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054841648643969384",
     "created_at": "2026-05-16 21:44:41 JST",
-    "preview": true
+    "preview": true,
+    "_articleDate": "2026-05-14"
   },
   "EB01-043": {
     "card_number": "EB01-043",
@@ -62,7 +63,8 @@
     "effect": "【アタック時】ブロッカーを持つ味方のユニットがいるなら、Lv.5以下の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054834103896125568",
     "created_at": "2026-05-16 21:44:47 JST",
-    "preview": true
+    "preview": true,
+    "_articleDate": "2026-05-14"
   },
   "ST10-012": {
     "card_number": "ST10-012",
@@ -144,7 +146,8 @@
     "effect": "《突破3》 (アタックで相手のユニットを破壊したとき、 その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【アタック時】 ブロッカーを持つLv.5以下の相手のユニット1つを選ぶ。 それに2ダメージを与える。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2053392094660571625",
     "created_at": "2026-05-17 07:52:36 JST",
-    "preview": true
+    "preview": true,
+    "_articleDate": "2026-05-10"
   },
   "EB01-017": {
     "card_number": "EB01-017",
@@ -164,7 +167,8 @@
     "effect": "【破壊時】このユニットがバトルダメージで破壊されたなら、自分とこのユニットを破壊したプレイヤーは1枚ドローする。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2053384550391091234",
     "created_at": "2026-05-17 07:52:44 JST",
-    "preview": true
+    "preview": true,
+    "_articleDate": "2026-05-10"
   },
   "EB01-066": {
     "card_number": "EB01-066",
@@ -390,12 +394,130 @@
     ],
     "link": "特徴に攻撃型を持つPILOT",
     "rarity": "LR",
-    "effect": "《突破(5)》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット中】〔ジージェネ〕のパイロット 自分のターン終了時、このユニットを破壊してもよい。そうしたなら、「ガンダムエクシア」(〔ジージェネ〕・AP2HP2)のユニットトークン3つを配備する。",
+    "effect": "《突破(5)》 【セット中】〔ジージェネ〕のパイロット 自分のターン終了時、このユニットを破壊してもよい。そうしたなら、『ガンダムエクシア』(〔ジージェネ〕・AP2HP2)のユニットトークン3つを配備する。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055921261466042778",
-    "created_at": "2026-05-17 17:11:53 JST",
+    "created_at": "2026-05-17 18:00:17 JST",
     "preview": true,
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-05-17"
+  },
+  "T-025": {
+    "card_number": "T-025",
+    "card_name": "ガンダムエクシア",
+    "color": "Unknown",
+    "card_type": "UNIT",
+    "level": 1,
+    "cost": null,
+    "ap": 2,
+    "hp": 2,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055928810936340571",
+    "created_at": "2026-05-17 18:00:08 JST",
+    "preview": true,
+    "_pendingReview": true,
+    "_pendingReviewIssues": [
+      "color が Unknown (色判定不能)",
+      "UNIT の cost が空"
+    ],
+    "_articleDate": "2026-05-17"
+  },
+  "EB01-075": {
+    "card_number": "EB01-075",
+    "card_name": "強敵襲来",
+    "color": "Blue",
+    "card_type": "COMMAND",
+    "level": 3,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [],
+    "link": "",
+    "rarity": "C",
+    "effect": "メインアクション HP2以下の相手のユニット1~2つを選ぶ。それらをレストにする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055566422445785537",
+    "created_at": "2026-05-17 21:45:51 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-16"
+  },
+  "ST10-004": {
+    "card_number": "ST10-004",
+    "card_name": "スーパーガンダム",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": 4,
+    "cost": 3,
+    "ap": 4,
+    "hp": 3,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "《リペア(2)》(自分のターン終了時、このユニットを指定の数回復する)",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055558875919892768",
+    "created_at": "2026-05-17 21:46:00 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-16"
+  },
+  "EB01-070": {
+    "card_number": "EB01-070",
+    "card_name": "ダリル・ローレンツ",
+    "color": "White",
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔支援型〕"
+    ],
+    "link": "",
+    "rarity": "SR",
+    "effect": "【バースト】このカードを手札に加える。【リンク中】【起動・アクション】ターン1回 1:相手のターンなら、ユニット1つを選ぶ。このバトル中、それをAP+1する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055250590943388004",
+    "created_at": "2026-05-17 21:46:08 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-15"
+  },
+  "EB01-045R": {
+    "card_number": "EB01-045R",
+    "card_name": "サイコ・ザク (EX)",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 7,
+    "cost": 5,
+    "ap": 4,
+    "hp": 6,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "「ダリル・ローレンツ」",
+    "rarity": "R",
+    "effect": "《制圧》（アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる） セット《リペア》を持つ相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055249332526285051",
+    "created_at": "2026-05-17 21:46:17 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [
+    ],
+    "_articleDate": "2026-05-15"
   }
 }
