@@ -1,57 +1,401 @@
 {
-  "GD04-092": {
-    "card_number": "GD04-092",
-    "card_name": "ミハエル・トリニティ",
+  "GD04-045": {
+    "card_number": "GD04-045",
+    "card_name": "ガンダムスローネツヴァイ",
     "color": "Red",
-    "card_type": "PILOT",
+    "card_type": "UNIT",
     "level": 4,
-    "cost": 1,
-    "ap": null,
-    "hp": null,
-    "terrain": [],
+    "cost": 3,
+    "ap": 3,
+    "hp": 4,
+    "terrain": [
+      "宇宙",
+      "地球"
+    ],
     "traits": [
       "〔CB〕",
       "〔トリニティ〕"
     ],
-    "link": "",
+    "link": "(トリニティ)/「アリー・アル・サーシェス」",
     "rarity": "C",
-    "effect": "|バーストこのカードを手札に加える。\n〔CB〕〔トリニティ〕\nリンクダメージを受けている相手のユニット1つを選\nぶ。それに1ダメージを与える。",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2041788133864616403",
-    "created_at": "2026-04-08T22:25:51.386Z",
+    "effect": "リンク時〔CB〕の自分のユニット1つを選ぶ。このターン中、それはダ\nメージを受けているアクティブの相手のユニットをアタック先に選んで\nもよい。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/test-e2e-dummy",
+    "created_at": "2026-04-08T21:59:54.992Z",
     "preview": true
   },
-  "GD04-129": {
-    "card_number": "GD04-129",
-    "card_name": "ウィルゲム",
+  "EB01-072": {
+    "card_number": "EB01-072",
+    "card_name": "ユウ・カジマ",
     "color": "White",
-    "card_type": null,
-    "level": 3,
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 1,
+    "hp": 2,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔攻撃型〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを手札に加える。【セット時】《ブロッカー》を持つアクティブの味方のユニット1つと、Lv.4以下の相手のユニット1つを選ぶ。それらをレストにする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054841648643969384",
+    "created_at": "2026-05-16 21:44:41 JST",
+    "preview": true
+  },
+  "EB01-043": {
+    "card_number": "EB01-043",
+    "card_name": "ブルーディスティニー1号機(EX)",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 5,
+    "cost": 3,
+    "ap": 5,
+    "hp": 3,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "「ユウ・カジマ」",
+    "rarity": "R",
+    "effect": "【アタック時】ブロッカーを持つ味方のユニットがいるなら、Lv.5以下の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054834103896125568",
+    "created_at": "2026-05-16 21:44:47 JST",
+    "preview": true
+  },
+  "ST10-012": {
+    "card_number": "ST10-012",
+    "card_name": "マーク・ギルダー",
+    "color": "White",
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔支援型〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを手札に加える。【セット時】Lv.5以下の相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2052983382666350634",
+    "created_at": "2026-05-17 07:23:01 JST",
+    "preview": true,
+    "_articleDate": "2026-05-09"
+  },
+  "ST10-006": {
+    "card_number": "ST10-006",
+    "card_name": "フェニックスガンダム (能力解放) (EX)",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 5,
+    "cost": 3,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "「マーク・ギルダー」",
+    "rarity": "LR",
+    "effect": "【セット中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2052982960295743753",
+    "created_at": "2026-05-17 07:23:09 JST",
+    "preview": true,
+    "_articleDate": "2026-05-09"
+  },
+  "EB01-078": {
+    "card_number": "EB01-078",
+    "card_name": "プレミアムガシャ",
+    "color": "Green",
+    "card_type": "COMMAND",
+    "level": 1,
     "cost": 1,
     "ap": null,
     "hp": null,
     "terrain": [],
-    "traits": [
-      "〔ミリシャ〕",
-      "〔艦船〕"
-    ],
-    "link": "(ミリシャ)(艦船)",
-    "rarity": "R",
-    "effect": "バーストこのカードを配備する。\n配備時自分のシールド1つを手札に加える。その後、このベースに3\nダメージを与える。\nターン1回自分のターン中、味方のユニットの効果で1以上を支払っ\nたとき、このベースを2回復する。",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2042150527161471218",
-    "created_at": "2026-04-09T08:13:33.339Z",
-    "preview": true
-  },
-  "不明": {
-    "card_number": "不明",
-    "card_name": "リソースカードはランダムに封入しています。",
-    "color": "不明",
-    "card_type": "不明",
-    "terrain": [],
     "traits": [],
     "link": "",
-    "effect": "",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2045419562426863933",
-    "created_at": "2026-04-19 17:13:27 JST",
+    "rarity": "U",
+    "effect": "メインプレイヤーすべてはそれぞれ自身のデッキを上から1枚見る。それがユニットカードなら公開して自身の手札に加えてもよい。残ったカードは上か下に戻す。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2052982716619247843",
+    "created_at": "2026-05-17 07:23:17 JST",
+    "preview": true,
+    "_articleDate": "2026-05-09"
+  },
+  "EB01-024": {
+    "card_number": "EB01-024",
+    "card_name": "クィン・マンサ (オメガ・サイコミュ起動時)",
+    "color": "Green",
+    "card_type": "UNIT",
+    "level": 5,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "特徴に攻撃型を持つPILOT",
+    "rarity": "R",
+    "effect": "《突破3》 (アタックで相手のユニットを破壊したとき、 その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【アタック時】 ブロッカーを持つLv.5以下の相手のユニット1つを選ぶ。 それに2ダメージを与える。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2053392094660571625",
+    "created_at": "2026-05-17 07:52:36 JST",
     "preview": true
+  },
+  "EB01-017": {
+    "card_number": "EB01-017",
+    "card_name": "ハロ",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": 3,
+    "cost": 3,
+    "ap": 3,
+    "hp": 3,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【破壊時】このユニットがバトルダメージで破壊されたなら、自分とこのユニットを破壊したプレイヤーは1枚ドローする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2053384550391091234",
+    "created_at": "2026-05-17 07:52:44 JST",
+    "preview": true
+  },
+  "EB01-066": {
+    "card_number": "EB01-066",
+    "card_name": "レイジ",
+    "color": "Green",
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔支援型〕"
+    ],
+    "link": "〔ジージェネ〕",
+    "rarity": null,
+    "effect": "【バースト】このカードを手札に加える。【セット時】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それは《ブロッカー》を持つアクティブの相手のユニットをアタック先に選んでもよい。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2053754482891047212",
+    "created_at": "2026-05-17 08:27:06 JST",
+    "preview": true,
+    "_articleDate": "2026-05-11"
+  },
+  "EB01-021": {
+    "card_number": "EB01-021",
+    "card_name": "ビルドストライクガンダム(フルパッケージ)(EX)",
+    "color": "Green",
+    "card_type": "UNIT",
+    "level": 2,
+    "cost": 5,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "「レイジ」",
+    "rarity": "R",
+    "effect": "《突破(4)》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット時】〔ジージェネ〕のパイロット 自分のトラッシュに〔ジージェネ〕のユニットカードが2枚以上あるなら、自分はリソース1つをレストで置く",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2053746934188560670",
+    "created_at": "2026-05-17 08:27:15 JST",
+    "preview": true,
+    "_articleDate": "2026-05-11"
+  },
+  "ST10-014": {
+    "card_number": "ST10-014",
+    "card_name": "開発経路図の解放",
+    "color": "Blue",
+    "card_type": "COMMAND",
+    "level": 1,
+    "cost": 2,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "手札のこのカードをプレイするとき、手札の〔ジージェネ〕のユニットカード1枚を捨ててもよい。そうしたなら、これをLv.1とコストを2としてプレイする。 メイン 自分は2枚ドローする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054116870849228986",
+    "created_at": "2026-05-17 09:13:23 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-12"
+  },
+  "EB01-090": {
+    "card_number": "EB01-090",
+    "card_name": "ティファ・アディール&フリーデン",
+    "color": "White",
+    "card_type": "BASE",
+    "level": 2,
+    "cost": 2,
+    "ap": 0,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔艦船〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、各相手プレイヤーのHP2以下のユニット1つずつを選ぶ。それらを持ち主の手札に戻す。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054109326680482300",
+    "created_at": "2026-05-17 09:13:31 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [
+      ""
+    ],
+    "_articleDate": "2026-05-12"
+  },
+  "ST10-016": {
+    "card_number": "ST10-016",
+    "card_name": "ルーナ・マナ&キャリー・ベース",
+    "color": "Blue",
+    "card_type": "BASE",
+    "level": 4,
+    "cost": 1,
+    "ap": 0,
+    "hp": 5,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔艦船〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】 このカードを配備する。【配備時】 自分のシールド1つを手札に加える。その後、〔ジージェネ〕の味方のユニットすべてを1回復する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054479258203181233",
+    "created_at": "2026-05-17 11:36:11 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-13"
+  },
+  "ST10-010": {
+    "card_number": "ST10-010",
+    "card_name": "鉄華団モビルワーカー",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 2,
+    "cost": 2,
+    "ap": 2,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2054471713715273874",
+    "created_at": "2026-05-17 11:36:20 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-13"
+  },
+  "EB01-009": {
+    "card_number": "EB01-009",
+    "card_name": "フルアーマー・ガンダム(サンダーボルト版)(EX)",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": 5,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [
+      "宇宙",
+      "地球"
+    ],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "「イオ・フレミング」",
+    "rarity": "U",
+    "effect": "【配備時】相手プレイヤーすべては、それぞれアクティブの自身のユニット1つを選ぶ。それらをレストにする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2052982161708577229",
+    "created_at": "2026-05-17 16:50:00 JST",
+    "preview": true,
+    "_articleDate": "2026-05-09"
+  },
+  "EB01-063": {
+    "card_number": "EB01-063",
+    "card_name": "イオ・フレミング",
+    "color": "White",
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔耐久型〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを手札に加える。このユニット以外の、レストのユニットが2つ以上いるなら、これは《リペア2》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2052982418953716007",
+    "created_at": "2026-05-17 16:50:00 JST",
+    "preview": true,
+    "_articleDate": "2026-05-09"
+  },
+  "EB01-044": {
+    "card_number": "EB01-044",
+    "card_name": "ジャスティスガンダム(EX)",
+    "color": "Red",
+    "card_type": "UNIT",
+    "level": 6,
+    "cost": 5,
+    "ap": 5,
+    "hp": 4,
+    "terrain": [
+      "宇宙",
+      "地球"
+    ],
+    "traits": [
+      "〔耐久型〕"
+    ],
+    "link": "(PILOT)",
+    "rarity": "R",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【配備時】相手プレイヤーが2人以上いるなら、最もユニットが多い相手プレイヤーのユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2052982544199811113",
+    "created_at": "2026-05-17 16:50:00 JST",
+    "preview": true,
+    "_articleDate": "2026-05-09"
+  },
+  "EB01-022": {
+    "card_number": "EB01-022",
+    "card_name": "ガンダムエクシア(EX)",
+    "color": "Green",
+    "card_type": "UNIT",
+    "level": 8,
+    "cost": 7,
+    "ap": 6,
+    "hp": 5,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "特徴に攻撃型を持つPILOT",
+    "rarity": "LR",
+    "effect": "《突破(5)》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット中】〔ジージェネ〕のパイロット 自分のターン終了時、このユニットを破壊してもよい。そうしたなら、「ガンダムエクシア」(〔ジージェネ〕・AP2HP2)のユニットトークン3つを配備する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055921261466042778",
+    "created_at": "2026-05-17 17:11:53 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-17"
   }
 }
