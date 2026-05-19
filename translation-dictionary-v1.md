@@ -12,6 +12,7 @@
 | 2026-05-07 | 初版作成。GD04 Week 1 の訳語を登録 | reports/msa-gd04-week1.html |
 | 2026-05-07 | One Year War の採用形を「ワンイヤー・ウォー」→「一年戦争」に変更（松岡さん指示） | reports/msa-gd04-week1.html |
 | 2026-05-12 | GD04 Week 2 新規訳語追加: The-O Blockers / Destiny Blockers & Barbatos / Celestial Being Lockon | reports/msa-gd04-week2.html |
+| 2026-05-19 | GD04 Week 3 新規訳語追加: Dynames Rush / Barbatos Lupus / Barbatos Rush (Purple Red) / Blue Red Agro / Militia Rush / Neo Zeong & League Militaire | reports/msa-gd04-week3.html |
 
 ## デッキ名・アーキタイプ訳語
 
@@ -35,4 +36,32 @@
 | The-O Blockers | **ジ・O ブロッカー** | The-O ブロッカー | Week 11 で採用済み |
 | Destiny Blockers & Barbatos | **デスティニーブロッカー&バルバトス** | デスティニーブロッカー＆バルバトス | GD04 Week 2 新規 |
 | Celestial Being Lockon | **ソレスタルビーイング ロックオン** | CB ロックオン | GD04 Week 2 新規 |
-| Unicorn Blockers | **ユニコーン ブロッカー** | ユニコーンブロッカー | GD0
+| Unicorn Blockers | **ユニコーン ブロッカー** | ユニコーンブロッカー | GD04 Week 2 新規 |
+| Justice Blockers | **ジャスティス ブロッカー** | ジャスティスブロッカー | GD04 Week 2 新規 |
+| Grampa Other | **グランパ その他** | グランパオザー | GD04 Week 2 新規（Doug氏記載のまま） |
+| Dynames Rush | **デュナメス アグロ** | デュナメスラッシュ | GD04 Week 3 新規 |
+| Barbatos Lupus | **バルバトス ルプス** | — | GD04 Week 3 新規 |
+| Barbatos Rush (Purple Red) | **バルバトス アグロ（紫赤）** | — | GD04 Week 3 新規。色違い派生 |
+| Blue Red Agro | **青赤アグロ** | 青赤ラッシュ | GD04 Week 3 新規 |
+| Militia Rush | **ミリシア アグロ** | ミリシアラッシュ | GD04 Week 3 新規 |
+| Neo Zeong & League Militaire | **ネオ・ジオング & リーグ・ミリタリー** | — | GD04 Week 3 新規 |
+
+## カラータイプ表記
+
+| 英語 | 日本語 |
+|---|---|
+| Blue | 青 |
+| Red | 赤 |
+| Green | 緑 |
+| White | 白 |
+| Purple | 紫 |
+
+2色デッキは固定順「青 > 赤 > 緑 > 白 > 紫」で結合する。例: `Red Blue` → `青赤` ではなく `青/赤` または「青赤」を採用（記事種別ごとに分離）。
+
+## URL 標準
+
+| 項目 | URL |
+|---|---|
+| 公式ガンダムカードゲーム | `https://www.gundam-gcg.com/ja/`（既存サイト全レポート統一表記） |
+| Mobile Suit Arena | `https://mobilesuitarena.com/` |
+| Doug Godinho 氏 Patreon | `https://www.patreon.com/DougGodinho` |
