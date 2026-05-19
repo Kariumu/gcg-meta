@@ -191,7 +191,8 @@
         <div class="site-nav-card" style="cursor:default">
           <div class="site-nav-card-title">ニュース・速報</div>
           <ul style="list-style:none;padding:0;margin:8px 0 0">
-              <li style="margin-bottom:6px"><a href="reports/news/2026-05-18.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/18】ST10 新カード2枚まとめ</a></li>
+                          <li style="margin-bottom:6px"><a href="reports/news/2026-05-19.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/19】EB01 新カード2枚まとめ</a></li>
+<li style="margin-bottom:6px"><a href="reports/news/2026-05-18.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/18】ST10 新カード2枚まとめ</a></li>
               <li style="margin-bottom:6px"><a href="reports/news/2026-05-17.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/17】EB01 新カード「ガンダムエクシア(EX)」</a></li>
               <li style="margin-bottom:6px"><a href="reports/news/2026-05-16.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/16】EB01+ST10 新カード2枚まとめ</a></li>
               <li style="margin-bottom:6px"><a href="reports/news/2026-05-15.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/15】EB01 新カード2枚まとめ</a></li>
@@ -214,7 +215,8 @@
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=10"></script>
+  <script src="shared/ntc-rank-consolidator.js?v=1"></script>
+  <script src="js/common.js?v=11"></script>
   <script>
     GCG.init();
 
@@ -431,10 +433,17 @@
       var cardUsageMap = {};
 
       for (var i = 0; i < allEvents.length; i++) {
-        var results = allEvents[i].results || [];
+        // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換し、
+        // 集計対象を TOP4 → TOP8 に拡張(松岡さん回答 追加確認1: B案)
+        var evRaw_i = allEvents[i];
+        var ev_i = GCG.consolidateNtcRank(evRaw_i);
+        var isNtc64 = (typeof window !== 'undefined' && window.NtcRankConsolidator
+          && window.NtcRankConsolidator.isTargetEvent(evRaw_i));
+        var rankThreshold = isNtc64 ? 8 : 4;
+        var results = ev_i.results || [];
         for (var j = 0; j < results.length; j++) {
           var r = results[j];
-          if (r.rank > 4) continue;
+          if (r.rank > rankThreshold) continue;
           var deck = r.deck;
           if (!deck || deck.length === 0) continue;
           totalResults++;
@@ -486,7 +495,9 @@
 
       const events = allEvents.sort((a,b) => (b.date||'').localeCompare(a.date||'')).slice(0, 10);
       const eventsContainer = document.getElementById('recent-events');
-      eventsContainer.innerHTML = events.map(ev => {
+      eventsContainer.innerHTML = events.map(evRaw => {
+        // 64名NTC大会のみ「ベスト8(各順位2名)」表記に変換(指示書 NTC順位集計統合, 軽量モード)
+        const ev = GCG.consolidateNtcRank(evRaw);
         const top4 = (ev.top4_colors || []).sort((a, b) => a.rank - b.rank);
         const top4Html = top4.map((t, i) => {
           const rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
