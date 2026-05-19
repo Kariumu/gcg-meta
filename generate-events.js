@@ -8,6 +8,12 @@ const fs = require('fs');
 const path = require('path');
 const { pushFiles } = require('./git-push');
 
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// 64名定員NTC大会(results.length>=16)を「ベスト8(各順位2名)」表記に変換。
+// 32名定員大会・他大会には一切影響を与えない(R2/R5 厳守)。
+// SEO HTML/個別ページは表記のみ参照のため軽量モード(getDeckColors 注入なし)で十分。
+const { consolidateNtcRank } = require('./shared/ntc-rank-consolidator');
+
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
 const EVENTS_DIR = path.join(ROOT, 'events');
@@ -131,7 +137,11 @@ const CLIENT_JS_TEMPLATE = `
     async function renderEvent() {
       const data = await GCG.loadEvents();
       var eventId = '{{EVENT_ID}}';
-      const ev = data.events[eventId];
+      // 64名NTC大会のみ「ベスト8(各順位2名)」表記に変換(クライアント側軽量モード)
+      // 32名・他大会は no-op(R2/R5 厳守)
+      const ev = GCG.consolidateNtcRank
+        ? GCG.consolidateNtcRank(data.events[eventId])
+        : data.events[eventId];
       if (!ev) {
         document.getElementById('event-content').innerHTML = '<p>\\u30A4\\u30D9\\u30F3\\u30C8\\u304C\\u898B\\u3064\\u304B\\u308A\\u307E\\u305B\\u3093\\u3002</p>';
         return;
@@ -256,9 +266,13 @@ const CLIENT_JS_TEMPLATE = `
     renderEvent();
 `;
 
-function generateEventPage(eventId, ev, seriesName) {
+function generateEventPage(eventId, evRaw, seriesName) {
+  // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換、
+  // それ以外は no-op で素通し。以後の処理は変換後の ev で行う。
+  const ev = consolidateNtcRank(evRaw);
   const storeName = escapeHtml(ev.store);
   const dateFormatted = formatDate(ev.date);
+  // 64名NTC大会では新rank=1 が2名いるが、find は先頭1件のみ取得(OG/twitter card 用途のため許容)
   const winnerResult = (ev.results || []).find(r => r.rank === 1);
   const winnerName = winnerResult ? escapeHtml(winnerResult.player) : '';
   const noscriptContent = generateSeoContent(ev, seriesName, { linkCards: true });
@@ -335,7 +349,8 @@ breadcrumbNav +
 '\n' +
 '  <div id="footer"></div>\n' +
 '\n' +
-'  <script src="../js/common.js?v=5"></script>\n' +
+'  <script src="../shared/ntc-rank-consolidator.js?v=1"></script>\n' +
+'  <script src="../js/common.js?v=11"></script>\n' +
 '  <script>\n' +
 clientJs +
 '  </script>\n' +

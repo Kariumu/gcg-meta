@@ -7,6 +7,12 @@
 const fs = require('fs');
 const path = require('path');
 
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// 64名定員NTC大会(results.length>=16)の共起カード集計を TOP4 → TOP8 拡張(松岡さん回答 質問A: 1)。
+// 32名定員・他大会は no-op で素通し(R2/R5 厳守)。共起カウントは deck だけ参照するため軽量モード。
+const { consolidateNtcRank, isTargetEvent: isNtcConsolidationTarget } =
+  require('./shared/ntc-rank-consolidator');
+
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
 const CARDS_DIR = path.join(ROOT, 'cards');
@@ -265,9 +271,13 @@ function generateOtherVersionsHtml(cardId, allCards) {
 function calcAllCoUsed(eventsData, topN = 8) {
   // decksByCard[cardId] = [deckIndex, deckIndex, ...] — そのカードを含むデッキのインデックス
   const allDecks = [];
-  for (const ev of Object.values(eventsData.events)) {
+  for (const evRaw of Object.values(eventsData.events)) {
+    // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換、
+    // 集計対象を TOP4→TOP8 に拡張(松岡さん回答 質問A: 1)
+    const ev = consolidateNtcRank(evRaw);
+    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
     for (const result of (ev.results || [])) {
-      if (result.rank > 4) continue;
+      if (result.rank > rankThreshold) continue;
       const cardIds = (result.deck || []).map(c => c.card_id);
       if (cardIds.length > 0) allDecks.push(cardIds);
     }
@@ -371,11 +381,13 @@ function main() {
       }
     }
 
-    // TOP4採用実績
+    // TOP4採用実績(64名NTC大会のみ TOP8 拡張、松岡さん回答 質問A: 1)
     const adoptions = [];
-    for (const ev of Object.values(eventsData.events)) {
+    for (const evRaw of Object.values(eventsData.events)) {
+      const ev = consolidateNtcRank(evRaw);
+      const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
       for (const result of (ev.results || [])) {
-        if (result.rank > 4) continue;
+        if (result.rank > rankThreshold) continue;
         const c = (result.deck || []).find(x => x.card_id === dataKey);
         if (c) {
           adoptions.push({

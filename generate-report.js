@@ -13,6 +13,13 @@ const path = require('path');
 const https = require('https');
 const { pushFiles } = require('./git-push');
 
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// 64名定員NTC大会(results.length >= 16)を「ベスト8(各順位2名)」表記に変換する。
+// 32名定員大会・他大会には一切影響を与えない(R2/R5 厳守)。
+const { consolidateNtcRank, isTargetEvent: isNtcConsolidationTarget } =
+  require('./shared/ntc-rank-consolidator');
+const { getDeckColors } = require('./scraper');
+
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
 const REPORTS_DIR = path.join(ROOT, 'reports');
@@ -115,9 +122,15 @@ function computeWeeklyStats(weekEvents) {
   const winnerDecks = [];
   let totalDecks = 0;
 
-  for (const ev of weekEvents) {
+  for (const evRaw of weekEvents) {
+    // NTC 64名定員大会(results.length>=16)のみ順位を「ベスト8(各順位2名)」表記に変換し、
+    // top4_colors も新rank=1〜8 用に完全再生成する(getDeckColors を注入)。
+    // 32名大会・他大会・他 series_id は no-op で素通し(R2/R5 充足)。
+    const ev = consolidateNtcRank(evRaw, { getDeckColors });
+    // 64名NTC大会のみ集計対象を TOP4 → TOP8 に拡張(松岡さん回答 追加確認1: B案)
+    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
     for (const r of (ev.results || [])) {
-      if (r.rank > 4) continue;
+      if (r.rank > rankThreshold) continue;
       totalDecks++;
 
       // デッキタイプ集計
@@ -162,10 +175,13 @@ function computeWeeklyStats(weekEvents) {
     .sort((a, b) => b.count - a.count);
 
   // 色別デッキ数を集計（カードの色を含むデッキの母数計算用）
+  // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換 + TOP8 拡張
   const colorDeckCount = {};  // { 'Blue': 数, 'Red': 数, ... }
-  for (const ev of weekEvents) {
+  for (const evRaw of weekEvents) {
+    const ev = consolidateNtcRank(evRaw, { getDeckColors });
+    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
     for (const r of (ev.results || [])) {
-      if (r.rank > 4) continue;
+      if (r.rank > rankThreshold) continue;
       const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
       if (colorEntry && colorEntry.colors) {
         for (const col of colorEntry.colors) {
@@ -176,10 +192,13 @@ function computeWeeklyStats(weekEvents) {
   }
 
   // カードごとの色別採用数を集計
+  // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換 + TOP8 拡張
   const cardColorUsage = {};  // { cardId: { colorDecks: 数 } }
-  for (const ev of weekEvents) {
+  for (const evRaw of weekEvents) {
+    const ev = consolidateNtcRank(evRaw, { getDeckColors });
+    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
     for (const r of (ev.results || [])) {
-      if (r.rank > 4) continue;
+      if (r.rank > rankThreshold) continue;
       const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
       const deckColors = colorEntry ? colorEntry.colors : [];
       for (const card of (r.deck || [])) {

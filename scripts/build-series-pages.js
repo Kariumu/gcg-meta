@@ -13,6 +13,10 @@
 const fs = require('fs');
 const path = require('path');
 
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// 64名定員NTC大会を「ベスト8(各順位2名)」表記に変換。本スクリプトは colors のみ参照するため軽量モード。
+const { consolidateNtcRank } = require('../shared/ntc-rank-consolidator');
+
 const ROOT = path.resolve(__dirname, '..');
 const SERIES_PATH = path.join(ROOT, 'data', 'series.json');
 const SUMMARY_DIR = path.join(ROOT, 'data', 'series');
@@ -115,7 +119,9 @@ function renderEventsList(seriesEvents) {
   // 日付新しい順
   seriesEvents.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
   const show = seriesEvents.slice(0, 30);
-  const rows = show.map(ev => {
+  const rows = show.map(evRaw => {
+    // 64名NTC大会のみ rank を新表記(1-8)に変換(本表示は colors のみ参照のため軽量モード)
+    const ev = consolidateNtcRank(evRaw);
     const top4 = (ev.top4_colors || []).slice(0, 4).map(t => esc(t.colors ? t.colors.join('/') : '')).join(' / ');
     return '<a href="/events/' + encodeURIComponent(ev.event_id) + '.html" class="event-card">'
       + '<span class="event-date">' + fmtDate(ev.date) + '</span>'

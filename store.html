@@ -59,7 +59,8 @@
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=10"></script>
+  <script src="shared/ntc-rank-consolidator.js?v=1"></script>
+  <script src="js/common.js?v=11"></script>
   <script>
     var currentYear = new Date().getFullYear();
     var currentMonth = new Date().getMonth();
@@ -144,8 +145,10 @@
         countEl.textContent = events.length + '件';
 
         // 優勝デッキ集計（colors ベース）
+        // 64名NTC大会では新rank=1 が2件(各順位2名)発生する(松岡さん R1)
         var winTypes = {};
-        events.forEach(function(ev){
+        events.forEach(function(evRaw){
+          var ev = GCG.consolidateNtcRank(evRaw);
           var winners = (ev.top4_colors || []).filter(function(t){return t.rank === 1;});
           winners.forEach(function(w){
             var key = (w.colors || []).join('/') || '不明';
@@ -173,7 +176,9 @@
 
         // イベント履歴
         var historyEl = document.getElementById('store-events-history');
-        historyEl.innerHTML = events.map(function(ev){
+        historyEl.innerHTML = events.map(function(evRaw){
+          // 64名NTC大会のみ「ベスト8(各順位2名)」表記に変換(指示書 NTC順位集計統合, 軽量モード)
+          var ev = GCG.consolidateNtcRank(evRaw);
           var top4 = (ev.top4_colors || []).slice().sort(function(a,b){return a.rank - b.rank;});
           var top4Html = top4.map(function(t, i){
             var rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';

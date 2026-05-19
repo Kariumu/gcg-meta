@@ -14,6 +14,13 @@ const fs = require('fs');
 const path = require('path');
 const { pushFiles } = require('./git-push');
 
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// 64名定員NTC大会の summary.json 集計を TOP4 → TOP8 拡張(松岡さん回答 質問B: 1)。
+// ただし events.json に書き戻す top4_colors は **既存4件のまま** 維持する
+// (read-time consolidation の light mode が正しく動作する基準形式を保つため)。
+const { consolidateNtcRank, isTargetEvent: isNtcConsolidationTarget } =
+  require('./shared/ntc-rank-consolidator');
+
 // === 設定 ===
 const BASE_URL = 'https://www.gundam-gcg.com/jp';
 const TOURNAMENT_URL = `${BASE_URL}/tournament-results/`;
@@ -79,8 +86,7 @@ async function fetchEventList() {
 
   // シリーズ情報（ドロップダウンはJS動的生成のためハードコード＋イベントリンクから自動検出）
   const series = {
-    '6226': 'ニュータイプチャレンジ 2026 MISSION2（3月開催）',
-    '6776': 'ニュータイプチャレンジ 2026 MISSION3（5月開催）'
+    '6226': 'ニュータイプチャレンジ 2026 MISSION2（3月開催）'
   };
   let currentSeriesId = null;
 
@@ -305,7 +311,10 @@ function generateSummary(eventsData) {
   const deckTypeStats = {};
   const regionStats = {};
 
-  // Pass 1: TOP4のみ、デッキデータありのみ集計
+  // Pass 1: デッキデータありのみ集計。
+  // 段階1: top4_colors は **既存4件のまま** events.json に書き戻す(read-time consolidation 互換)。
+  // 段階2: 集計(deckTypeStats / regionStats / totalDecks)は 64名NTC のみ TOP8 拡張
+  //        (松岡さん回答 質問B: 1、summary.json に TOP8 集計結果が反映される)。
   for (const event of allEvents) {
     const region = getRegion(event.store || '');
 
@@ -315,21 +324,35 @@ function generateSummary(eventsData) {
     }
     regionStats[region].events++;
 
-    // TOP4のデッキカラーをイベントに付与
+    // === 段階1: top4_colors 構築(events.json 互換、旧4件のみ) ===
+    // 注意: ここで TOP8 まで書くと events.json の top4_colors が16件になり、
+    //       read-time consolidator の light mode が Math.ceil で二重変換してしまう。
+    //       そのため top4_colors は意図的に旧4件のままにする(events.json 不変原則)。
     const top4Colors = [];
-
     for (const result of (event.results || [])) {
-      // TOP4のみ
       if (result.rank > 4) continue;
-      // デッキデータなしを除外
+      if (!result.deck || result.deck.length === 0) continue;
+      const colors = getDeckColors(result.deck);
+      top4Colors.push({ rank: result.rank, colors, type_key: colors.join('+') });
+    }
+    event.top4_colors = top4Colors;
+    event.region = region;
+
+    // === 段階2: summary.json 用の集計(64名NTC のみ TOP8 拡張) ===
+    // consolidateNtcRank で 64名NTC を「ベスト8(各順位2名)」表記に変換し、
+    // rankThreshold で集計上限を切替(NTC64=8, それ以外=4)。
+    // 32名・他大会は no-op で素通し(R2/R5 厳守)。
+    const evForAgg = consolidateNtcRank(event, { getDeckColors });
+    const rankThreshold = isNtcConsolidationTarget(event) ? 8 : 4;
+
+    for (const result of (evForAgg.results || [])) {
+      if (result.rank > rankThreshold) continue;
       if (!result.deck || result.deck.length === 0) continue;
 
       totalDecks++;
       const isWinner = result.rank === 1;
       const colors = getDeckColors(result.deck);
       const typeKey = colors.join('+');
-
-      top4Colors.push({ rank: result.rank, colors, type_key: typeKey });
 
       // 地域別デッキタイプ集計
       regionStats[region].decks++;
@@ -372,11 +395,6 @@ function generateSummary(eventsData) {
         cs.counts.push(count);
       }
     }
-
-    // イベントにTOP4デッキカラー情報を付与
-    event.top4_colors = top4Colors;
-    // イベントに地域情報を付与
-    event.region = region;
   }
 
   // デッキタイプランキング生成（デッキ数降順）

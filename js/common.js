@@ -85,6 +85,22 @@ const GCG = {
     return `${rank}位`;
   },
 
+  // === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+  // 64名定員NTC大会(results.length>=16)を「ベスト8(各順位2名)」表記に変換する。
+  // 32名定員大会・他大会は no-op で素通し(R2/R5 厳守)。
+  // 詳細仕様: /shared/ntc-rank-consolidator.js
+  //
+  // 前提: HTML 側で <script src="shared/ntc-rank-consolidator.js"> を common.js より先にロードする。
+  // 未ロード時は元 event をそのまま返す(フェイルセーフ)。
+  consolidateNtcRank(event) {
+    if (typeof window !== 'undefined' && window.NtcRankConsolidator
+        && typeof window.NtcRankConsolidator.consolidateNtcRank === 'function') {
+      // クライアント側は表示のみのため軽量モード(getDeckColors 注入なし)で十分。
+      return window.NtcRankConsolidator.consolidateNtcRank(event);
+    }
+    return event;
+  },
+
   // 順位CSSクラス
   rankClass(rank) {
     if (rank <= 3) return `rank-${rank}`;
