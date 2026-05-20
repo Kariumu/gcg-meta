@@ -144,6 +144,9 @@
         section.style.display = '';
         countEl.textContent = events.length + '件';
 
+        // series データを事前ロード(NTC順位集計の type ベース判定に使用)
+        await GCG.loadSeries();
+
         // 優勝デッキ集計（colors ベース）
         // 64名NTC大会では新rank=1 が2件(各順位2名)発生する(松岡さん R1)
         var winTypes = {};

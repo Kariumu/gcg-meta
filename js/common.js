@@ -55,6 +55,22 @@ const GCG = {
     }
   },
 
+  // === series データ(series.json)を読み込み、NTC順位集計の type 判定に使用 ===
+  // 指示書 NTC順位集計統合(2026-05-19 type ベース対応)
+  _seriesData: null,
+  async loadSeries() {
+    if (this._seriesData) return this._seriesData;
+    try {
+      const res = await fetch(this.DATA_PATH + 'series.json');
+      this._seriesData = await res.json();
+      return this._seriesData;
+    } catch (e) {
+      console.error('series.json の読み込みに失敗:', e);
+      this._seriesData = {};
+      return this._seriesData;
+    }
+  },
+
   // ページのベースパスを自動検出
   getBasePath() {
     const path = window.location.pathname;
@@ -96,7 +112,13 @@ const GCG = {
     if (typeof window !== 'undefined' && window.NtcRankConsolidator
         && typeof window.NtcRankConsolidator.consolidateNtcRank === 'function') {
       // クライアント側は表示のみのため軽量モード(getDeckColors 注入なし)で十分。
-      return window.NtcRankConsolidator.consolidateNtcRank(event);
+      // GCG.loadSeries() で series.json が事前にキャッシュされていれば type ベース判定を有効化。
+      // 未ロード時は consolidator 内のハードコードフォールバック (NTC_SERIES_IDS) で判定。
+      const opts = {};
+      if (this._seriesData && typeof window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap === 'function') {
+        opts.isNtcType = window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap(this._seriesData);
+      }
+      return window.NtcRankConsolidator.consolidateNtcRank(event, opts);
     }
     return event;
   },

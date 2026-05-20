@@ -7,11 +7,23 @@
 const fs = require('fs');
 const path = require('path');
 
-// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
 // 64名定員NTC大会(results.length>=16)の共起カード集計を TOP4 → TOP8 拡張(松岡さん回答 質問A: 1)。
 // 32名定員・他大会は no-op で素通し(R2/R5 厳守)。共起カウントは deck だけ参照するため軽量モード。
-const { consolidateNtcRank, isTargetEvent: isNtcConsolidationTarget } =
-  require('./shared/ntc-rank-consolidator');
+// NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
+const {
+  consolidateNtcRank,
+  isTargetEvent: isNtcConsolidationTarget,
+  makeIsNtcTypeFromSeriesMap
+} = require('./shared/ntc-rank-consolidator');
+
+let SERIES_MAP_FOR_NTC = {};
+try {
+  SERIES_MAP_FOR_NTC = JSON.parse(
+    require('fs').readFileSync(require('path').join(__dirname, 'data', 'series.json'), 'utf-8')
+  );
+} catch (_) {}
+const isNtcType = makeIsNtcTypeFromSeriesMap(SERIES_MAP_FOR_NTC);
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
@@ -274,8 +286,8 @@ function calcAllCoUsed(eventsData, topN = 8) {
   for (const evRaw of Object.values(eventsData.events)) {
     // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換、
     // 集計対象を TOP4→TOP8 に拡張(松岡さん回答 質問A: 1)
-    const ev = consolidateNtcRank(evRaw);
-    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
+    const ev = consolidateNtcRank(evRaw, { isNtcType });
+    const rankThreshold = isNtcConsolidationTarget(evRaw, { isNtcType }) ? 8 : 4;
     for (const result of (ev.results || [])) {
       if (result.rank > rankThreshold) continue;
       const cardIds = (result.deck || []).map(c => c.card_id);

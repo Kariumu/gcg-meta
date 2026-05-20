@@ -13,9 +13,21 @@
 const fs = require('fs');
 const path = require('path');
 
-// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
 // 64名定員NTC大会を「ベスト8(各順位2名)」表記に変換。本スクリプトは colors のみ参照するため軽量モード。
-const { consolidateNtcRank } = require('../shared/ntc-rank-consolidator');
+// NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
+const {
+  consolidateNtcRank,
+  makeIsNtcTypeFromSeriesMap
+} = require('../shared/ntc-rank-consolidator');
+
+let SERIES_MAP_FOR_NTC = {};
+try {
+  SERIES_MAP_FOR_NTC = JSON.parse(
+    require('fs').readFileSync(require('path').join(__dirname, '..', 'data', 'series.json'), 'utf-8')
+  );
+} catch (_) {}
+const isNtcType = makeIsNtcTypeFromSeriesMap(SERIES_MAP_FOR_NTC);
 
 const ROOT = path.resolve(__dirname, '..');
 const SERIES_PATH = path.join(ROOT, 'data', 'series.json');
@@ -39,7 +51,7 @@ function statusLabel(status) {
   const m = {
     active:    { emoji: '\u{1F7E2}', text: '開催中', cls: 'status-active' },
     upcoming:  { emoji: '\u{1F7E1}', text: '予告',   cls: 'status-upcoming' },
-    completed: { emoji: '\u26AB',    text: '終了',   cls: 'status-completed' }
+    completed: { emoji: '⚫',    text: '終了',   cls: 'status-completed' }
   };
   return m[status] || m.completed;
 }
@@ -121,7 +133,7 @@ function renderEventsList(seriesEvents) {
   const show = seriesEvents.slice(0, 30);
   const rows = show.map(evRaw => {
     // 64名NTC大会のみ rank を新表記(1-8)に変換(本表示は colors のみ参照のため軽量モード)
-    const ev = consolidateNtcRank(evRaw);
+    const ev = consolidateNtcRank(evRaw, { isNtcType });
     const top4 = (ev.top4_colors || []).slice(0, 4).map(t => esc(t.colors ? t.colors.join('/') : '')).join(' / ');
     return '<a href="/events/' + encodeURIComponent(ev.event_id) + '.html" class="event-card">'
       + '<span class="event-date">' + fmtDate(ev.date) + '</span>'

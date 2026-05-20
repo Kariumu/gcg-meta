@@ -14,12 +14,25 @@ const fs = require('fs');
 const path = require('path');
 const { pushFiles } = require('./git-push');
 
-// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
 // 64名定員NTC大会の summary.json 集計を TOP4 → TOP8 拡張(松岡さん回答 質問B: 1)。
 // ただし events.json に書き戻す top4_colors は **既存4件のまま** 維持する
 // (read-time consolidation の light mode が正しく動作する基準形式を保つため)。
-const { consolidateNtcRank, isTargetEvent: isNtcConsolidationTarget } =
-  require('./shared/ntc-rank-consolidator');
+// NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
+const {
+  consolidateNtcRank,
+  isTargetEvent: isNtcConsolidationTarget,
+  makeIsNtcTypeFromSeriesMap
+} = require('./shared/ntc-rank-consolidator');
+
+// series.json から isNtcType 関数を構築(本ファイルロード時に1回だけ実行、以降使い回し)
+let SERIES_MAP_FOR_NTC = {};
+try {
+  SERIES_MAP_FOR_NTC = JSON.parse(
+    require('fs').readFileSync(require('path').join(__dirname, 'data', 'series.json'), 'utf-8')
+  );
+} catch (_) { /* series.json 未配置の状況でもフォールバック(NTC_SERIES_IDS)で動作 */ }
+const isNtcType = makeIsNtcTypeFromSeriesMap(SERIES_MAP_FOR_NTC);
 
 // === 設定 ===
 const BASE_URL = 'https://www.gundam-gcg.com/jp';
@@ -280,7 +293,7 @@ const REGION_KEYWORDS = {
 
 // 正規化: スペース・記号のゆれを吸収
 function normalizeStoreName(name) {
-  return name.replace(/[\s\u3000ー―\-–—・]/g, '').replace(/[（(]/g, '(').replace(/[）)]/g, ')');
+  return name.replace(/[\s　ー―\-–—・]/g, '').replace(/[（(]/g, '(').replace(/[）)]/g, ')');
 }
 
 function getRegion(storeName) {
@@ -342,8 +355,8 @@ function generateSummary(eventsData) {
     // consolidateNtcRank で 64名NTC を「ベスト8(各順位2名)」表記に変換し、
     // rankThreshold で集計上限を切替(NTC64=8, それ以外=4)。
     // 32名・他大会は no-op で素通し(R2/R5 厳守)。
-    const evForAgg = consolidateNtcRank(event, { getDeckColors });
-    const rankThreshold = isNtcConsolidationTarget(event) ? 8 : 4;
+    const evForAgg = consolidateNtcRank(event, { getDeckColors, isNtcType });
+    const rankThreshold = isNtcConsolidationTarget(event, { isNtcType }) ? 8 : 4;
 
     for (const result of (evForAgg.results || [])) {
       if (result.rank > rankThreshold) continue;

@@ -339,7 +339,7 @@
 
       function doSearch() {
         const raw = input.value || '';
-        const q = raw.replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim();
+        const q = raw.replace(/　/g, ' ').replace(/\s+/g, ' ').trim();
         if (q.length < 1) { suggestions.hidden = true; return; }
         if (!storesPromise) storesPromise = GCG.loadStoresForSearch();
         storesPromise.then(stores => {
@@ -432,13 +432,19 @@
       var deckTypeMap = {};
       var cardUsageMap = {};
 
+      // series データを事前ロード(NTC順位集計の type ベース判定に使用)
+      await GCG.loadSeries();
+
       for (var i = 0; i < allEvents.length; i++) {
         // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換し、
         // 集計対象を TOP4 → TOP8 に拡張(松岡さん回答 追加確認1: B案)
         var evRaw_i = allEvents[i];
         var ev_i = GCG.consolidateNtcRank(evRaw_i);
+        var _ntcOpts = GCG._seriesData && window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap
+          ? { isNtcType: window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap(GCG._seriesData) }
+          : {};
         var isNtc64 = (typeof window !== 'undefined' && window.NtcRankConsolidator
-          && window.NtcRankConsolidator.isTargetEvent(evRaw_i));
+          && window.NtcRankConsolidator.isTargetEvent(evRaw_i, _ntcOpts));
         var rankThreshold = isNtc64 ? 8 : 4;
         var results = ev_i.results || [];
         for (var j = 0; j < results.length; j++) {

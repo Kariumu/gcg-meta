@@ -8,11 +8,23 @@ const fs = require('fs');
 const path = require('path');
 const { pushFiles } = require('./git-push');
 
-// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
 // 64名定員NTC大会(results.length>=16)を「ベスト8(各順位2名)」表記に変換。
 // 32名定員大会・他大会には一切影響を与えない(R2/R5 厳守)。
 // SEO HTML/個別ページは表記のみ参照のため軽量モード(getDeckColors 注入なし)で十分。
-const { consolidateNtcRank } = require('./shared/ntc-rank-consolidator');
+// NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
+const {
+  consolidateNtcRank,
+  makeIsNtcTypeFromSeriesMap
+} = require('./shared/ntc-rank-consolidator');
+
+let SERIES_MAP_FOR_NTC = {};
+try {
+  SERIES_MAP_FOR_NTC = JSON.parse(
+    require('fs').readFileSync(require('path').join(__dirname, 'data', 'series.json'), 'utf-8')
+  );
+} catch (_) {}
+const isNtcType = makeIsNtcTypeFromSeriesMap(SERIES_MAP_FOR_NTC);
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
@@ -136,6 +148,8 @@ const CLIENT_JS_TEMPLATE = `
 
     async function renderEvent() {
       const data = await GCG.loadEvents();
+      // series データを事前ロード(NTC順位集計の type ベース判定に使用)
+      if (GCG.loadSeries) await GCG.loadSeries();
       var eventId = '{{EVENT_ID}}';
       // 64名NTC大会のみ「ベスト8(各順位2名)」表記に変換(クライアント側軽量モード)
       // 32名・他大会は no-op(R2/R5 厳守)
@@ -269,7 +283,7 @@ const CLIENT_JS_TEMPLATE = `
 function generateEventPage(eventId, evRaw, seriesName) {
   // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換、
   // それ以外は no-op で素通し。以後の処理は変換後の ev で行う。
-  const ev = consolidateNtcRank(evRaw);
+  const ev = consolidateNtcRank(evRaw, { isNtcType });
   const storeName = escapeHtml(ev.store);
   const dateFormatted = formatDate(ev.date);
   // 64名NTC大会では新rank=1 が2名いるが、find は先頭1件のみ取得(OG/twitter card 用途のため許容)

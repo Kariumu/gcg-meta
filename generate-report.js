@@ -13,12 +13,24 @@ const path = require('path');
 const https = require('https');
 const { pushFiles } = require('./git-push');
 
-// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装) ===
+// === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
 // 64名定員NTC大会(results.length >= 16)を「ベスト8(各順位2名)」表記に変換する。
 // 32名定員大会・他大会には一切影響を与えない(R2/R5 厳守)。
-const { consolidateNtcRank, isTargetEvent: isNtcConsolidationTarget } =
-  require('./shared/ntc-rank-consolidator');
+// NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
+const {
+  consolidateNtcRank,
+  isTargetEvent: isNtcConsolidationTarget,
+  makeIsNtcTypeFromSeriesMap
+} = require('./shared/ntc-rank-consolidator');
 const { getDeckColors } = require('./scraper');
+
+let SERIES_MAP_FOR_NTC = {};
+try {
+  SERIES_MAP_FOR_NTC = JSON.parse(
+    require('fs').readFileSync(require('path').join(__dirname, 'data', 'series.json'), 'utf-8')
+  );
+} catch (_) {}
+const isNtcType = makeIsNtcTypeFromSeriesMap(SERIES_MAP_FOR_NTC);
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
@@ -178,8 +190,8 @@ function computeWeeklyStats(weekEvents) {
   // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換 + TOP8 拡張
   const colorDeckCount = {};  // { 'Blue': 数, 'Red': 数, ... }
   for (const evRaw of weekEvents) {
-    const ev = consolidateNtcRank(evRaw, { getDeckColors });
-    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
+    const ev = consolidateNtcRank(evRaw, { getDeckColors, isNtcType });
+    const rankThreshold = isNtcConsolidationTarget(evRaw, { isNtcType }) ? 8 : 4;
     for (const r of (ev.results || [])) {
       if (r.rank > rankThreshold) continue;
       const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
@@ -195,8 +207,8 @@ function computeWeeklyStats(weekEvents) {
   // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換 + TOP8 拡張
   const cardColorUsage = {};  // { cardId: { colorDecks: 数 } }
   for (const evRaw of weekEvents) {
-    const ev = consolidateNtcRank(evRaw, { getDeckColors });
-    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
+    const ev = consolidateNtcRank(evRaw, { getDeckColors, isNtcType });
+    const rankThreshold = isNtcConsolidationTarget(evRaw, { isNtcType }) ? 8 : 4;
     for (const r of (ev.results || [])) {
       if (r.rank > rankThreshold) continue;
       const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
@@ -301,7 +313,7 @@ function buildPrompt(mondayStr, sundayStr, weekEvents, stats) {
     '---\n' +
     '<h2>今週のサマリー</h2>\n' +
     '<p>3/8〜3/15の期間、全国で52件のニュータイプチャレンジが開催されました。\n' +
-    '青/紫デッキが依然として最多の31.7%を占め、続いて緑/白（15.9%）、赤/白（12.4%）という順位は先週から変わりません。</p>\n\n' +
+    '青/紫デッキが依然として最多の31.7%を占め、続いて緑/白(15.9%)、赤/白(12.4%)という順位は先週から変わりません。</p>\n\n' +
     '<h2>注目カード</h2>\n' +
     '<ul>\n' +
     '<li>ガンダム(ST01-001) [青/UNIT] — 青系デッキ内採用率93.4%。青を使うならほぼ必須。先週比+1.2%とじわじわ上昇中。</li>\n' +
@@ -518,13 +530,13 @@ function generateReportPage(wId, mondayStr, sundayStr, articleHtml, weekEvents, 
 '    <div style="margin-bottom:12px">\n' +
 '      <a href="index.html" style="color:var(--text-muted);text-decoration:none;font-size:13px;transition:color 0.15s"\n' +
 '       onmouseover="this.style.color=\'var(--accent)\'" onmouseout="this.style.color=\'var(--text-muted)\'">\n' +
-'        \u2190 \u30EC\u30DD\u30FC\u30C8\u4E00\u89A7\u306B\u623B\u308B</a>\n' +
+'        ← レポート一覧に戻る</a>\n' +
 '    </div>\n' +
 '    <div class="section-header">\n' +
 '      <div>\n' +
-'        <h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + (regionLabel ? escapeHtml(regionLabel) + '\u5730\u57DF ' : '') + '\u74B0\u5883\u30EC\u30DD\u30FC\u30C8 ' + dateRange + '</h1>\n' +
+'        <h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + (regionLabel ? escapeHtml(regionLabel) + '地域 ' : '') + '環境レポート ' + dateRange + '</h1>\n' +
 '        <div style="font-size:13px;color:var(--text-secondary)">\n' +
-'          <span class="text-mono" style="color:var(--accent)">' + weekEvents.length + '\u30A4\u30D9\u30F3\u30C8 / ' + stats.totalDecks + '\u30C7\u30C3\u30AD</span>\n' +
+'          <span class="text-mono" style="color:var(--accent)">' + weekEvents.length + 'イベント / ' + stats.totalDecks + 'デッキ</span>\n' +
 '        </div>\n' +
 '      </div>\n' +
 '    </div>\n' +
@@ -597,7 +609,7 @@ function updateReportIndex() {
   }
 
   if (files.length === 0) {
-    listHtml = '      <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">\u30EC\u30DD\u30FC\u30C8\u306F\u307E\u3060\u3042\u308A\u307E\u305B\u3093</div>\n';
+    listHtml = '      <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">レポートはまだありません</div>\n';
   }
 
   const noscriptLinks = files.map(f => {
@@ -618,13 +630,13 @@ function updateReportIndex() {
 '  </script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
-'  <title>\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7 | GCG STATS</title>\n' +
-'  <meta name="description" content="\u30AC\u30F3\u30C0\u30E0\u30AB\u30FC\u30C9\u30B2\u30FC\u30E0\u306E\u9031\u6B21\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7\u3002\u30C7\u30C3\u30AD\u30BF\u30A4\u30D7\u5206\u5E03\u3084\u6CE8\u76EE\u30AB\u30FC\u30C9\u306E\u5206\u6790\u3092\u6BCE\u9031\u304A\u5C4A\u3051\u3002">\n' +
+'  <title>環境レポート一覧 | GCG STATS</title>\n' +
+'  <meta name="description" content="ガンダムカードゲームの週次環境レポート一覧。デッキタイプ分布や注目カードの分析を毎週お届け。">\n' +
 '  <!-- OGP -->\n' +
 '  <meta property="og:site_name" content="GCG STATS">\n' +
 '  <meta property="og:locale" content="ja_JP">\n' +
-'  <meta property="og:title" content="\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7 | GCG STATS">\n' +
-'  <meta property="og:description" content="\u30AC\u30F3\u30C0\u30E0\u30AB\u30FC\u30C9\u30B2\u30FC\u30E0\u306E\u9031\u6B21\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7">\n' +
+'  <meta property="og:title" content="環境レポート一覧 | GCG STATS">\n' +
+'  <meta property="og:description" content="ガンダムカードゲームの週次環境レポート一覧">\n' +
 '  <meta property="og:type" content="website">\n' +
 '  <meta property="og:url" content="' + SITE_URL + '/reports/">\n' +
 '  <meta property="og:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
@@ -640,8 +652,8 @@ function updateReportIndex() {
 '\n' +
 '  <main class="container">\n' +
 '    <div class="section-header">\n' +
-'      <h1 class="section-title">\u74B0\u5883\u30EC\u30DD\u30FC\u30C8</h1>\n' +
-'      <span class="section-badge">' + files.length + '\u4EF6</span>\n' +
+'      <h1 class="section-title">環境レポート</h1>\n' +
+'      <span class="section-badge">' + files.length + '件</span>\n' +
 '    </div>\n' +
 '\n' +
 '    <div class="event-list" style="margin-top:20px">\n' +
@@ -649,7 +661,7 @@ listHtml +
 '    </div>\n' +
 '  </main>\n' +
 '\n' +
-'  <noscript><h2>\u74B0\u5883\u30EC\u30DD\u30FC\u30C8\u4E00\u89A7</h2><ul>' + noscriptLinks + '</ul></noscript>\n' +
+'  <noscript><h2>環境レポート一覧</h2><ul>' + noscriptLinks + '</ul></noscript>\n' +
 '\n' +
 '  <div id="footer"></div>\n' +
 '\n' +
@@ -806,7 +818,7 @@ function buildRegionalPrompt(mondayStr, sundayStr, regionEvents, regionStats, re
     '---\n' +
     '<h2>関東地域のサマリー</h2>\n' +
     '<p>今週の関東は22件のイベントが開催され、全国71件の約3割を占めました。\n' +
-    '青/紫がシェア33.7%でトップですが、全国平均（36.3%）を下回っており、赤/白・緑/白が健闘する多様な環境です。</p>\n\n' +
+    '青/紫がシェア33.7%でトップですが、全国平均(36.3%)を下回っており、赤/白・緑/白が健闘する多様な環境です。</p>\n\n' +
     '<h2>注目カード</h2>\n' +
     '<ul>\n' +
     '<li>アムロ・レイ(ST01-010) [青/PILOT] — 青系デッキ内採用率89.3%。青を使うならほぼ必須の1枚。</li>\n' +
@@ -928,7 +940,7 @@ async function main() {
   let regionalLinksHtml = '';
   if (regionalLinks.length > 0) {
     regionalLinksHtml = '    <div style="margin-top:32px;padding:20px;background:var(--bg-elevated);border-radius:8px;border:1px solid var(--border)">\n' +
-      '      <h2 style="font-size:15px;margin:0 0 12px 0">\u5730\u57DF\u5225\u30EC\u30DD\u30FC\u30C8</h2>\n' +
+      '      <h2 style="font-size:15px;margin:0 0 12px 0">地域別レポート</h2>\n' +
       '      <div style="display:flex;flex-wrap:wrap;gap:8px">\n' +
       regionalLinks.map(r =>
         '        <a href="' + r.wId + '.html" class="btn-link" style="font-size:13px;padding:6px 14px">' + escapeHtml(r.name) + '</a>'
