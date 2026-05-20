@@ -51,7 +51,8 @@
 
   <div id="footer"></div>
 
-  <script src="../js/common.js?v=5"></script>
+  <script src="../shared/ntc-rank-consolidator.js?v=1"></script>
+  <script src="../js/common.js?v=11"></script>
   <script>
 
     GCG.init();
@@ -105,8 +106,14 @@
 
     async function renderEvent() {
       const data = await GCG.loadEvents();
+      // series データを事前ロード(NTC順位集計の type ベース判定に使用)
+      if (GCG.loadSeries) await GCG.loadSeries();
       var eventId = '6504719';
-      const ev = data.events[eventId];
+      // 64名NTC大会のみ「ベスト8(各順位2名)」表記に変換(クライアント側軽量モード)
+      // 32名・他大会は no-op(R2/R5 厳守)
+      const ev = GCG.consolidateNtcRank
+        ? GCG.consolidateNtcRank(data.events[eventId])
+        : data.events[eventId];
       if (!ev) {
         document.getElementById('event-content').innerHTML = '<p>\u30A4\u30D9\u30F3\u30C8\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093\u3002</p>';
         return;
