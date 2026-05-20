@@ -191,7 +191,8 @@
         <div class="site-nav-card" style="cursor:default">
           <div class="site-nav-card-title">ニュース・速報</div>
           <ul style="list-style:none;padding:0;margin:8px 0 0">
-                          <li style="margin-bottom:6px"><a href="reports/news/2026-05-19.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/19】EB01 新カード2枚まとめ</a></li>
+                                      <li style="margin-bottom:6px"><a href="reports/news/2026-05-20.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/20】EB01 新カード2枚まとめ</a></li>
+<li style="margin-bottom:6px"><a href="reports/news/2026-05-19.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/19】EB01 新カード2枚まとめ</a></li>
 <li style="margin-bottom:6px"><a href="reports/news/2026-05-18.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/18】ST10 新カード2枚まとめ</a></li>
               <li style="margin-bottom:6px"><a href="reports/news/2026-05-17.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/17】EB01 新カード「ガンダムエクシア(EX)」</a></li>
               <li style="margin-bottom:6px"><a href="reports/news/2026-05-16.html" style="color:var(--accent);text-decoration:none;font-size:14px">【5/16】EB01+ST10 新カード2枚まとめ</a></li>
@@ -339,7 +340,7 @@
 
       function doSearch() {
         const raw = input.value || '';
-        const q = raw.replace(/　/g, ' ').replace(/\s+/g, ' ').trim();
+        const q = raw.replace(/\u3000/g, ' ').replace(/\s+/g, ' ').trim();
         if (q.length < 1) { suggestions.hidden = true; return; }
         if (!storesPromise) storesPromise = GCG.loadStoresForSearch();
         storesPromise.then(stores => {
