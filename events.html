@@ -195,7 +195,7 @@
       render();
     }
 
-    function render() {
+    async function render() {
       document.getElementById('event-count').textContent = filteredEvents.length + '件';
 
       const start = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -266,4 +266,4 @@
     GCG.renderShareButtons('share-buttons', 'イベント一覧 | GCG STATS');
   </script>
 </body>
-</html>
+</
