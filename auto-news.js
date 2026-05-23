@@ -684,14 +684,12 @@ function fixRecognitionErrors(result, cardsMaster) {
   // === AP/HP修正 ===
   // 2026-05-24 PILOT認識改修: 指示書37e(2026-05-17) で PILOT も補正 AP/HP 必須化されたため
   // PILOT を強制 null 化する旧コードを除去。PILOT は補正値(+X+Y)を保持する。
-  // COMMANDはAP/HPを持たない
+  // 2026-05-24 BASE認識改修: 指示書37c(2026-05-17、松岡さん視認 EB01-090: AP=0,HP=4)で
+  // BASE も AP 必須化されたため BASE 強制 null 化を除去。BASE は AP/HP 両方持つ。
+  // COMMANDはAP/HPを持たない(従来通り)
   if (result.card_type === 'COMMAND') {
     result.ap = null;
     result.hp = null;
-  }
-  // BASEはAPを持たない（HPのみ）
-  if (result.card_type === 'BASE') {
-    result.ap = null;
   }
 
   // === 色の正規化 ===
@@ -722,12 +720,10 @@ function fixRecognitionErrors(result, cardsMaster) {
       if (masterCard.effect) result.effect = masterCard.effect;
       // AP/HP再修正（card_typeをDB値で補正した後）
       // 2026-05-24 PILOT認識改修: PILOT は補正 AP/HP 必須化(指示書37e)のため強制 null から除外
+      // 2026-05-24 BASE認識改修: BASE は AP/HP 両方持つ(指示書37c)ため強制 null 化を除去
       if (result.card_type === 'COMMAND') {
         result.ap = null;
         result.hp = null;
-      }
-      if (result.card_type === 'BASE') {
-        result.ap = null;
       }
     }
   }
@@ -790,8 +786,8 @@ function saveCardPreview(cardInfo, sourceUrl) {
  * 4. カードタイプ別の必須フィールド未取得:
  *    - UNIT: level, cost, ap, hp のいずれかが - or null
  *    - PILOT: level, cost, ap(補正), hp(補正) のいずれかが - or null（指示書37e 2026-05-17 で補正AP/HP必須化）
- *    - COMMAND: cost が - or null(level/ap/hp は許容)
- *    - BASE: cost, hp のいずれかが - or null(level/ap は許容)
+ *    - COMMAND: level, cost のいずれかが - or null(ap/hp は許容)（指示書37b 2026-05-17）
+ *    - BASE: level, cost, ap, hp のいずれかが - or null（指示書37b/37c 2026-05-17、BASE も AP 必須化）
  *
  * @param {Object} cardData - 構造化済みのカードデータ
  * @returns {{hasIssue: boolean, issues: string[]}}
@@ -933,7 +929,7 @@ COMMANDカードの効果は「【メイン】」または「【アクション�
 例: 「自分のユニットすべては〔ネオ・ジオン〕を得る」→ 状態付与なので【リンク中】
 
 === AP/HPの扱い ===
-UNIT: AP/HPの数値を読み取る / PILOT: 補正AP/HPの数値を読み取る（カード名右横の "+X+Y" 形式、0 含む整数 0-9） / COMMAND: ap=null, hp=null / BASE: ap=null, hp=数値
+UNIT: AP/HPの数値を読み取る / PILOT: 補正AP/HPの数値を読み取る（カード名右横の "+X+Y" 形式、0 含む整数 0-9） / COMMAND: ap=null, hp=null / BASE: AP/HPの数値を読み取る（指示書37cにより BASE も AP 必須化、0 含む整数 0-9。例: EB01-090 は AP=0, HP=4）
 
 === 読み取りルール ===
 - 画像から読み取れる情報のみを出力。推測や補完をしない
@@ -1101,7 +1097,7 @@ GCGでは以下の4種類のカッコが使い分けられている。混同し�
 - UNIT: AP/HPの数値を読み取る
 - PILOT: 補正AP/HPの数値を読み取る（カード名右横の "+X+Y" 形式、0 含む整数 0-9）
 - COMMAND: ap=null, hp=null
-- BASE: ap=null, hp=数値（画像に0と表示されていてもAPはnullとする）
+- BASE: AP/HPの数値を読み取る（指示書37cにより BASE も AP 必須化、0 含む整数 0-9。例: EB01-090 は AP=0, HP=4。AP=0 でも null ではなく 0 として保持）
 
 ■ 【パイロット】指定
 COMMANDカードの効果テキスト末尾に【パイロット】「カード名」がある場合、

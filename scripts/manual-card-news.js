@@ -256,6 +256,42 @@ function postProcessVisionResultV2(rawText, visionResult) {
   }
 
   // ─────────────────────────────────
+  // 6c. ap, hp 抽出 (BASE のみ) [2026-05-24 BASE認識改修で追加]
+  //    背景:
+  //      指示書37c(2026-05-17、松岡さん視認 EB01-090: AP=0, HP=4)で BASE も AP 必須化
+  //      しかし Step 2 抽出ロジックが UNIT/PILOT のみで BASE 未対応のまま残っていた
+  //      → 過去事例で BASE の ap 100% null、hp 66.7% null となる原因。
+  //    戦略:
+  //      BASE には機体型番が無いため、「最後の trait () の後ろにある独立2桁数字」を抽出。
+  //      著作権マーク (©SOTSU / OSOTSU) 直前が AP/HP の位置(2桁、AP+HP 連結)。
+  //      実証(2026-05-24): EB01-090 rawText の "(艦船) 04" → 04 → AP=0,HP=4 で正解一致。
+  //                       ST10-016 rawText の "(艦船)\n05" → 05 → AP=0,HP=5 で正解一致。
+  // ─────────────────────────────────
+  if (result.card_type === 'BASE') {
+    // 最後の "(〇〇)" trait を探す
+    const traitPattern = /\(([^()]+)\)/g;
+    const traitMatches = [...rawText.matchAll(traitPattern)];
+    if (traitMatches.length > 0) {
+      const lastTrait = traitMatches[traitMatches.length - 1];
+      const afterLastTrait = rawText.slice(lastTrait.index + lastTrait[0].length);
+      // 著作権マーク (©SOTSU / OSOTSU / ©ST / OST) 直前までを対象範囲とする
+      const copyrightMatch = afterLastTrait.match(/[©O](?:SOTSU|ST)/);
+      const searchArea = copyrightMatch ? afterLastTrait.slice(0, copyrightMatch.index) : afterLastTrait;
+      // searchArea 内の2桁数字 (AP+HP 連結) を抽出
+      const numMatch = searchArea.match(/(\d{2})/);
+      if (numMatch) {
+        const num = numMatch[1];
+        const ap = parseInt(num[0]);
+        const hp = parseInt(num[1]);
+        if (!isNaN(ap) && !isNaN(hp) && ap >= 0 && ap <= 9 && hp >= 0 && hp <= 9) {
+          result.ap = ap;
+          result.hp = hp;
+        }
+      }
+    }
+  }
+
+  // ─────────────────────────────────
   // 7+8. link / traits 抽出 [改善D 適用 — 順序: link 先行で動的除外リスト構築]
   //    link パターン1: 「特徴 (XX)」 / 「特徴(XX)」(特徴指定リンク、EB01-044 等)
   //    link パターン2: 「カード名」(かぎ括弧、EB01-009 等)
@@ -466,7 +502,7 @@ ${hasImage
 - card_type: UNIT / PILOT / COMMAND / BASE
 - level: 1-12 の整数
 - cost: 0-12 の整数
-- ap: UNIT は通常 AP(0-9)、PILOT は補正AP(セット時の増分、0 含む 0-9)、COMMAND/BASE は null
+- ap: UNIT は通常 AP(0-9)、PILOT は補正AP(セット時の増分、0 含む 0-9)、BASE は通常 AP(0 含む 0-9、指示書37c により BASE も AP 必須化)、COMMAND は null
 - hp: UNIT は通常 HP(0-9)、PILOT は補正HP(セット時の増分、0 含む 0-9)、BASE は通常 HP(0-9)、COMMAND は null
 - traits: 〔ジージェネ〕等。card_name 内の括弧(能力解放、サンダーボルト版等)は traits ではない
 - link: 「カード名」または 特徴(XX) 形式
