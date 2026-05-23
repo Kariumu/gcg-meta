@@ -82,8 +82,8 @@
           "White"
         ],
         "label": "青/白",
-        "count": 117,
-        "share": 14.4
+        "count": 122,
+        "share": 15
       },
       {
         "type_key": "Red+White",
@@ -116,6 +116,16 @@
         "share": 4.3
       },
       {
+        "type_key": "Red+Green",
+        "colors": [
+          "Red",
+          "Green"
+        ],
+        "label": "赤/緑",
+        "count": 27,
+        "share": 3.3
+      },
+      {
         "type_key": "White+Purple",
         "colors": [
           "White",
@@ -126,14 +136,14 @@
         "share": 3.2
       },
       {
-        "type_key": "Red+Green",
+        "type_key": "Red+Purple",
         "colors": [
           "Red",
-          "Green"
+          "Purple"
         ],
-        "label": "赤/緑",
-        "count": 24,
-        "share": 3
+        "label": "赤/紫",
+        "count": 8,
+        "share": 1
       },
       {
         "type_key": "Blue",
@@ -141,36 +151,8 @@
           "Blue"
         ],
         "label": "青",
-        "count": 11,
-        "share": 1.4
-      },
-      {
-        "type_key": "Red+Purple",
-        "colors": [
-          "Red",
-          "Purple"
-        ],
-        "label": "赤/紫",
         "count": 7,
         "share": 0.9
-      },
-      {
-        "type_key": "Green",
-        "colors": [
-          "Green"
-        ],
-        "label": "緑",
-        "count": 4,
-        "share": 0.5
-      },
-      {
-        "type_key": "Purple",
-        "colors": [
-          "Purple"
-        ],
-        "label": "紫",
-        "count": 3,
-        "share": 0.4
       },
       {
         "type_key": "Green+Purple",
@@ -183,11 +165,20 @@
         "share": 0.2
       },
       {
-        "type_key": "White",
+        "type_key": "Purple",
         "colors": [
-          "White"
+          "Purple"
         ],
-        "label": "白",
+        "label": "紫",
+        "count": 2,
+        "share": 0.2
+      },
+      {
+        "type_key": "Green",
+        "colors": [
+          "Green"
+        ],
+        "label": "緑",
         "count": 1,
         "share": 0.1
       }
@@ -234,8 +225,8 @@
         ],
         "label": "青/白",
         "wins": 18,
-        "count": 117,
-        "win_rate": 15.4
+        "count": 122,
+        "win_rate": 14.8
       },
       {
         "type_key": "Blue+Green",
@@ -255,9 +246,9 @@
           "Green"
         ],
         "label": "赤/緑",
-        "wins": 6,
-        "count": 24,
-        "win_rate": 25
+        "wins": 7,
+        "count": 27,
+        "win_rate": 25.9
       },
       {
         "type_key": "White+Purple",
@@ -288,8 +279,8 @@
         ],
         "label": "青",
         "wins": 3,
-        "count": 11,
-        "win_rate": 27.3
+        "count": 7,
+        "win_rate": 42.9
       },
       {
         "type_key": "Red+Purple",
@@ -299,8 +290,8 @@
         ],
         "label": "赤/紫",
         "wins": 2,
-        "count": 7,
-        "win_rate": 28.6
+        "count": 8,
+        "win_rate": 25
       },
       {
         "type_key": "Green",
@@ -308,9 +299,9 @@
           "Green"
         ],
         "label": "緑",
-        "wins": 2,
-        "count": 4,
-        "win_rate": 50
+        "wins": 1,
+        "count": 1,
+        "win_rate": 100
       }
     ]
   }
