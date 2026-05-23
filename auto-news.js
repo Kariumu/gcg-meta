@@ -451,7 +451,8 @@ async function extractCardDataVisionPipeline(imageBase64List) {
       const postProcessed = postProcessVisionResultV2(fullText, merged);
 
       // Step 3: Claude API による構造化(System Prompt 強化版)
-      const final = await structureCardWithClaude(fullText, postProcessed);
+      // 2026-05-24 マルチモーダル化(認識精度改修 案件1): 画像も渡して Lv 等の OCR 読取漏れを補完
+      const final = await structureCardWithClaude(fullText, postProcessed, item.base64);
 
       cards.push(final);
     } catch (e) {
@@ -2445,5 +2446,4 @@ if (require.main === module) {
     process.exit(1);
   });
 }
-// EOF
 // EOF

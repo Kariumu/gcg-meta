@@ -417,20 +417,38 @@ function postProcessVisionResultV2(rawText, visionResult) {
 // OCR 誤認識・数字連結問題・null フィールドを Claude の文脈理解で補正する。
 //
 // 重要な前提:
-// - Claude API には画像を渡さない (Vision AI の役割を尊重)
+// - 2026-05-24 マルチモーダル化(認識精度改修 案件1): 画像も Claude に渡し
+//   OCR で読めない Lv 等を画像から直接抽出可能にした(imageBase64 オプション)
 // - color は Claude が触らない (改善F の領域、Step 1-B のみが管轄)
 // - エラー時は step2Result をそのまま返す (品質保証)
-async function structureCardWithClaude(rawText, step2Result) {
+function detectImageMediaType(base64) {
+  // base64 先頭から magic bytes を検出して media_type を決定
+  // 失敗時は image/jpeg をフォールバック
+  try {
+    const buf = Buffer.from(base64.slice(0, 24), 'base64');
+    if (buf[0] === 0xFF && buf[1] === 0xD8 && buf[2] === 0xFF) return 'image/jpeg';
+    if (buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4E && buf[3] === 0x47) return 'image/png';
+    if (buf.slice(0, 4).toString('ascii') === 'RIFF' && buf.slice(8, 12).toString('ascii') === 'WEBP') return 'image/webp';
+    if (buf[0] === 0x47 && buf[1] === 0x49 && buf[2] === 0x46) return 'image/gif';
+  } catch (_) { /* fallthrough */ }
+  return 'image/jpeg';
+}
+
+async function structureCardWithClaude(rawText, step2Result, imageBase64 = null) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     console.warn('[Step 3] ANTHROPIC_API_KEY 未設定、スキップ');
     return step2Result;
   }
 
+  const hasImage = !!imageBase64 && typeof imageBase64 === 'string' && imageBase64.length > 0;
+
   const systemPrompt = `あなたはガンダムカードゲーム(GCG)のカード画像から OCR で抽出したテキストを、構造化された JSON データに変換する専門家です。
 
 **重要な前提**:
-- 画像は見えません。OCR テキスト(_rawText)のみが渡されます
+${hasImage
+  ? '- カード画像と OCR テキスト(_rawText)の両方が渡されます\n- OCR テキストで読み取れない値(特に PILOT カードの Lv、薄い数字、小さい文字)は **画像から直接抽出** してください\n- ただし画像認識の捏造は厳禁。画像で明確に読み取れない場合は null とし、_corrections に「画像でも読取不能」と記載'
+  : '- 画像は見えません。OCR テキスト(_rawText)のみが渡されます'}
 - Step 2 で正規表現抽出した結果(step2Result)が渡されます
 - あなたの役割は OCR 誤認識・数字連結問題・抽出漏れを補正することです
 
@@ -539,7 +557,7 @@ effect テキスト内に以下の記号が出現します。これらは特定�
 6. 推測で値を捏造しない(根拠が _rawText にない場合は null)
 7. **terrain フィールドは出力に含めない**(対象外、step2Result の terrain[] は維持される)`;
 
-  const userPrompt = `OCR 認識テキストと Step 2 結果から、構造化された JSON を出力してください。
+  const userPrompt = `${hasImage ? 'カード画像と ' : ''}OCR 認識テキストと Step 2 結果から、構造化された JSON を出力してください。
 
 ## _rawText (Vision AI 認識テキスト)
 \`\`\`
@@ -551,13 +569,28 @@ ${rawText}
 ${JSON.stringify(step2Result, null, 2)}
 \`\`\`
 
-JSON のみで回答してください(マークダウンコードブロック等は不要)。`;
+${hasImage ? '画像で明確に確認できる値(特に level, cost, ap, hp 等の数値)は画像を優先してください。\n' : ''}JSON のみで回答してください(マークダウンコードブロック等は不要)。`;
+
+  // マルチモーダル: imageBase64 があれば画像 block + テキスト block の配列で渡す
+  const userContent = hasImage
+    ? [
+        {
+          type: 'image',
+          source: {
+            type: 'base64',
+            media_type: detectImageMediaType(imageBase64),
+            data: imageBase64,
+          },
+        },
+        { type: 'text', text: userPrompt },
+      ]
+    : userPrompt;
 
   const data = JSON.stringify({
     model: 'claude-sonnet-4-20250514',
     max_tokens: 2000,
     system: systemPrompt,
-    messages: [{ role: 'user', content: userPrompt }],
+    messages: [{ role: 'user', content: userContent }],
   });
 
   return new Promise((resolve) => {
@@ -801,8 +834,9 @@ async function main() {
       continue;
     }
     const rawText = visionResults[i]?._rawText || '';
-    console.log(`画像 ${i + 1} Step 3 構造化中 (Claude API)...`);
-    const step3Result = await structureCardWithClaude(rawText, step2Result);
+    console.log(`画像 ${i + 1} Step 3 構造化中 (Claude API, マルチモーダル)...`);
+    // 2026-05-24 マルチモーダル化: 画像も Claude に渡し、OCR で読めない Lv 等を補完
+    const step3Result = await structureCardWithClaude(rawText, step2Result, imageBase64List[i]?.base64);
     console.log(`画像 ${i + 1} Step 3 結果:`, safeStringify(step3Result, 2500));
     finalList.push(step3Result);
   }
@@ -923,7 +957,9 @@ module.exports = {
   callVisionAIv2,
   postProcessVisionResultV2,
   structureCardWithClaude,
+  detectImageMediaType,
 };
+
 
 // === CLI 直接実行時のみ バリデーション + main 起動 ===
 if (require.main === module) {
