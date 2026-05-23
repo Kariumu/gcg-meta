@@ -15,23 +15,103 @@ const path = require('path');
 const { execSync } = require('child_process');
 const { pushFiles, pushBinaryFile } = require('./git-push');
 const sharp = require('sharp');
-require('dotenv').config({ override: true });
+// 指示書37c 後の緊急修正(2026-05-17): schtasks 経由起動時の cwd 問題対策
+// __dirname を path に明示することで、cwd 関係なく homepage/.env を読込
+require('dotenv').config({ path: require('path').join(__dirname, '.env'), override: true });
+
+// === manual-card-news.js から試作改善関数を import(指示書32 で追加)===
+// 指示書22-25 + 28-Rev1 の試作改善を本番運用に統合
+// 注: manual-card-news.js は指示書30 で module.exports + require.main === module ガード追加済
+const {
+  callVisionAIv2,
+  postProcessVisionResultV2,
+  structureCardWithClaude,
+} = require('./scripts/manual-card-news.js');
+
+// === 共通モジュールから関数・定数を import(指示書34 で追加、循環依存解消、2026-05-16)===
+// 利用者: auto-news.js / scripts/manual-card-news.js / scripts/batch-recognize.js
+const {
+  // 環境変数・定数
+  ANTHROPIC_API_KEY,
+  GOOGLE_CLOUD_API_KEY,
+  ROOT,
+  DATA_DIR,
+  LOG_FILE,
+  CARDS_PREVIEW_FILE,
+  VISION_USAGE_FILE,
+  VISION_MONTHLY_LIMIT,
+  ANTHROPIC_API_URL,
+  ANTHROPIC_MODEL_SONNET,
+  ANTHROPIC_MODEL_OPUS,
+  COLOR_JP,
+  VALID_CARD_TYPES,
+  COLOR_CROP,
+  CARD_ZONES,
+  // JST ユーティリティ
+  toJST,
+  nowJST,
+  formatJST,
+  dateStrJST,
+  now,
+  // ユーティリティ
+  log,
+  escapeHtml,
+  stripTags,
+  // Vision API 使用量
+  getVisionUsage,
+  incrementVisionUsage,
+  isVisionQuotaAvailable,
+  // API
+  callClaude,
+  callVisionAI,
+  // パース補助
+  fixCardId,
+  cleanRarity,
+  getBounds,
+  flattenWords,
+  wordsInZone,
+  zoneText,
+  zoneTextSpaced,
+  // 画像処理
+  classifyColor,
+  detectCardColor,
+  parseVisionBlocks,
+  // Step 1-A/B/C
+  step1A_visionOCR,
+  step1B_pixelColorDetection,
+  step1C_merge,
+  fixBrackets,
+  autoAddBrackets,
+  // データ管理
+  loadCardsMaster,
+  loadSummary,
+  loadCardsPreview,
+  buildUnifiedCardDB,
+  // 記事生成
+  generateIntroText,
+  generateCardAnalyses,
+} = require('./scripts/shared/recognition-core.js');
+
+// === セルフチェック: ファイル末尾の // EOF マーカーを確認 ===
+{
+  const selfSrc = fs.readFileSync(__filename, 'utf-8');
+  if (!selfSrc.trimEnd().endsWith('// EOF')) {
+    console.error('[FATAL] auto-news.js のファイル末尾が切断されています（// EOF が見つかりません）。実行を中止します。');
+    process.exit(2);
+  }
+}
 
 // === 設定 ===
+// 注: ROOT, DATA_DIR, LOG_FILE, ANTHROPIC_API_URL, ANTHROPIC_MODEL_SONNET, ANTHROPIC_MODEL_OPUS,
+//     CARDS_PREVIEW_FILE, ANTHROPIC_API_KEY, GOOGLE_CLOUD_API_KEY は指示書34 で
+//     scripts/shared/recognition-core.js に移動 → 冒頭 require で取得済
 const SITE_URL = 'https://gcg-stats.com';
-const ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = path.join(ROOT, 'data');
 const NEWS_DIR = path.join(ROOT, 'reports', 'news');
 const LAST_CHECK_FILE = path.join(DATA_DIR, 'last-check.json');
-const LOG_FILE = path.join(DATA_DIR, 'auto-news-log.txt');
 const CARD_IMAGE_BASE = '../../images/cards'; // ローカル画像パス（記事HTMLからの相対パス）
 
 const OFFICIAL_USER_ID = '1837069552842330114'; // @GUNDAM_GCG_JP
-const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
-const ANTHROPIC_MODEL_SONNET = 'claude-sonnet-4-20250514';
-const ANTHROPIC_MODEL_OPUS = 'claude-opus-4-20250514';
 const RECOGNITION_LOG_FILE = path.join(DATA_DIR, 'card-recognition-log.json');
-const CARDS_PREVIEW_FILE = path.join(DATA_DIR, 'cards_preview.json');
 
 const NEWS_IMAGE_DIR = path.join(ROOT, 'images', 'news'); // 新カード画像保存先
 
@@ -39,61 +119,104 @@ const X_API_KEY = process.env.X_API_KEY;
 const X_API_SECRET = process.env.X_API_SECRET;
 const X_ACCESS_TOKEN = process.env.X_API_ACCESS_TOKEN;
 const X_ACCESS_TOKEN_SECRET = process.env.X_API_ACCESS_TOKEN_SECRET;
-const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-const GOOGLE_CLOUD_API_KEY = process.env.GOOGLE_CLOUD_API_KEY; // Vision AI 用
 
 const DRY_RUN = process.argv.includes('--dry-run');
-const TEST_MODE = true; // 4/9公開の新カード画像で手動テスト後に本番切り替え
+// === TEST_MODE 制御(指示書32 で環境変数化、2026-05-17)===
+// 優先順位: --no-test-mode > --test-mode > 環境変数 > デフォルト(true、安全側 = X 投稿スキップ)
+const TEST_MODE = (
+  process.argv.includes('--no-test-mode') ? false :
+  process.argv.includes('--test-mode') ? true :
+  process.env.AUTO_NEWS_TEST_MODE === 'false' ? false :
+  process.env.AUTO_NEWS_TEST_MODE === 'true' ? true :
+  true  // デフォルト = X 投稿スキップ(安全側)
+);
+// === postSurvey 制御(指示書32 で追加、デフォルト無効)===
+// --enable-survey 指定時のみアンケート投稿を実行
+const ENABLE_SURVEY = process.argv.includes('--enable-survey');
+
+// === 時刻範囲指定(指示書33 で追加、2026-05-17)===
+// --start-time YYYY-MM-DDTHH:MM (JST想定): X 投稿取得の開始時刻
+// --end-time YYYY-MM-DDTHH:MM (JST想定): X 投稿取得の終了時刻
+// --auto-window: 起動時刻から「前日18:00 JST → 当日18:00 JST」を自動計算(指示書35、schtasks 翌日 18:00 起動想定)
+// 優先順位: --start-time/--end-time(明示指定) > --auto-window > last-check.json(従来)
+function parseCliTimeArg(flagName) {
+  const idx = process.argv.indexOf(flagName);
+  if (idx === -1 || idx + 1 >= process.argv.length) return null;
+  const raw = process.argv[idx + 1];
+  // YYYY-MM-DDTHH:MM 形式 (JST想定)
+  const m = raw.match(/^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2})$/);
+  if (!m) {
+    console.error(`[FATAL] ${flagName} の形式が不正です: ${raw}`);
+    console.error('  期待形式: YYYY-MM-DDTHH:MM (JST想定、例: 2026-05-14T17:50)');
+    process.exit(2);
+  }
+  const [, ymd, hh, mm] = m;
+  // JST → UTC 変換(JST は UTC+9、+09:00 タイムゾーン付き ISO を Date でパース)
+  const jstDate = new Date(`${ymd}T${hh}:${mm}:00+09:00`);
+  if (isNaN(jstDate.getTime())) {
+    console.error(`[FATAL] ${flagName} の値が無効です: ${raw}`);
+    process.exit(2);
+  }
+  return jstDate.toISOString();
+}
+
+const CLI_START_TIME = parseCliTimeArg('--start-time');
+const CLI_END_TIME = parseCliTimeArg('--end-time');
+const AUTO_WINDOW = process.argv.includes('--auto-window');
+
+// 引数の論理的整合性チェック
+if (CLI_END_TIME && !CLI_START_TIME) {
+  console.error('[FATAL] --end-time は --start-time と同時に指定してください(単独指定不可)');
+  process.exit(2);
+}
+if (CLI_START_TIME && CLI_END_TIME) {
+  if (new Date(CLI_START_TIME) >= new Date(CLI_END_TIME)) {
+    console.error('[FATAL] --start-time は --end-time より前である必要があります');
+    process.exit(2);
+  }
+}
+if (AUTO_WINDOW && (CLI_START_TIME || CLI_END_TIME)) {
+  console.error('[FATAL] --auto-window と --start-time/--end-time は同時指定できません');
+  process.exit(2);
+}
+
 const USE_VISION_PIPELINE = process.env.USE_VISION_PIPELINE !== 'false'; // 新パイプライン有効化（デフォルトON）
 
-const COLOR_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫' };
-const VALID_CARD_TYPES = ['UNIT', 'PILOT', 'COMMAND', 'BASE'];
+// 注: COLOR_JP, VALID_CARD_TYPES は指示書34 で shared/recognition-core.js に移動
 
-// === Vision API 使用量管理 ===
-const VISION_USAGE_FILE = path.join(DATA_DIR, 'vision-api-usage.json');
-const VISION_MONTHLY_LIMIT = 1000; // 無料枠上限
+// === 拡張パック名マップ(指示書32 で追加、2026-05-17)===
+// 拡張コードから「コード + コードネーム」表記を生成
+// 確認済の2つのみ初期登録、未確認の拡張(GD01-03, ST01-09 等)はコードのみ表示
+const EXPANSION_NAMES = {
+  'GD04': 'GD04 Phantom Aria',
+  'EB01': 'EB01 Eternal Nexus',
+  // 将来追加対象: GD01/02/03(コードネーム未確認)、ST10(Generation Pulse の可能性)、ST01-09(未確認)
+};
 
-function getVisionUsage() {
-  try {
-    const data = JSON.parse(fs.readFileSync(VISION_USAGE_FILE, 'utf-8'));
-    const currentMonth = new Date().toISOString().slice(0, 7); // "2026-04"
-    if (data.month === currentMonth) return data;
-    // 月が変わったらリセット
-    return { month: currentMonth, count: 0 };
-  } catch (e) {
-    return { month: new Date().toISOString().slice(0, 7), count: 0 };
-  }
+/**
+ * 拡張コードから「拡張コード + コードネーム」表記を取得
+ * @param {string} expansionCode 例: 'EB01', 'GD04'
+ * @returns {string} 例: 'EB01 Eternal Nexus' / 未登録なら 'EB01' のみ / null/未定義なら空文字
+ */
+function formatExpansionName(expansionCode) {
+  if (!expansionCode) return '';
+  return EXPANSION_NAMES[expansionCode] || expansionCode;
 }
 
-function incrementVisionUsage(n = 1) {
-  const usage = getVisionUsage();
-  usage.count += n;
-  fs.writeFileSync(VISION_USAGE_FILE, JSON.stringify(usage, null, 2), 'utf-8');
-  return usage;
-}
+// 注: VISION_USAGE_FILE, VISION_MONTHLY_LIMIT は指示書34 で shared/recognition-core.js に移動
 
-function isVisionQuotaAvailable(needed = 1) {
-  const usage = getVisionUsage();
-  if (usage.count + needed > VISION_MONTHLY_LIMIT) {
-    log(`  [Vision API] 月間上限に達しています (${usage.count}/${VISION_MONTHLY_LIMIT})。従来パイプラインにフォールバックします。`);
-    return false;
-  }
-  return true;
-}
+// 注: toJST, nowJST, formatJST, dateStrJST, getVisionUsage,
+//     incrementVisionUsage, isVisionQuotaAvailable は指示書34 で
+//     shared/recognition-core.js に移動 → 冒頭 require で取得済
 
 // === ユーティリティ ===
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-function now() {
-  const d = new Date();
-  const pad = n => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-}
+// 注: now, escapeHtml, stripTags, log は指示書34 で
+//     shared/recognition-core.js に移動 → 冒頭 require で取得済
 
 function todayStr() {
-  const d = new Date();
-  const pad = n => String(n).padStart(2, '0');
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+  return dateStrJST(new Date());
 }
 
 function dateLabel(dateStr) {
@@ -101,15 +224,6 @@ function dateLabel(dateStr) {
   const m = dateStr.match(/(\d+)-(\d+)-(\d+)/);
   if (!m) return dateStr;
   return `${parseInt(m[2])}/${parseInt(m[3])}`;
-}
-
-function escapeHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function stripTags(s) { return s.replace(/<[^>]*>/g, ''); }
-
-function log(msg) {
-  const line = `[${now()}] ${msg}`;
-  console.log(line);
-  fs.appendFileSync(LOG_FILE, line + '\n', { encoding: 'utf-8' });
 }
 
 function percentEncode(str) {
@@ -200,7 +314,7 @@ function postTweet(text) {
  * poll + 公式ポストURL をテキストに含めて投稿
  */
 function postSurvey(cardName, officialPostUrl) {
-  if (DRY_RUN || TEST_MODE) {
+  if (DRY_RUN) {
     log(`[SKIP] アンケート投稿スキップ: ${cardName} / ${officialPostUrl}`);
     return Promise.resolve(null);
   }
@@ -239,47 +353,7 @@ function postSurvey(cardName, officialPostUrl) {
   });
 }
 
-// === Claude API ===
-function callClaude(messages, maxTokens, model, systemPrompt) {
-  if (!ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY が設定されていません');
-  maxTokens = maxTokens || 2000;
-  model = model || ANTHROPIC_MODEL_SONNET;
-  const payload = {
-    model: model,
-    max_tokens: maxTokens,
-    messages: messages
-  };
-  if (systemPrompt) payload.system = systemPrompt;
-  const body = JSON.stringify(payload);
-
-  return new Promise((resolve, reject) => {
-    const req = https.request({
-      hostname: 'api.anthropic.com', path: '/v1/messages', method: 'POST',
-      headers: {
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(body)
-      }
-    }, res => {
-      const chunks = [];
-      res.on('data', chunk => chunks.push(chunk));
-      res.on('end', () => {
-        const data = Buffer.concat(chunks).toString('utf-8');
-        if (res.statusCode === 200) {
-          const parsed = JSON.parse(data);
-          const text = parsed.content.find(c => c.type === 'text');
-          resolve(text ? text.text : '');
-        } else {
-          reject(new Error(`Claude API ${res.statusCode}: ${data}`));
-        }
-      });
-    });
-    req.on('error', reject);
-    req.write(body);
-    req.end();
-  });
-}
+// 注: callClaude は指示書34 で shared/recognition-core.js に移動 → 冒頭 require で取得済
 
 // === 画像取得 → base64 ===
 function fetchImageBase64(url) {
@@ -304,562 +378,105 @@ function fetchImageBase64(url) {
 // === Step1 新パイプライン: Vision AI + Claude 分離 ===
 // =============================================
 
-// --- Step1-A: Google Cloud Vision AI (TEXT_DETECTION) ---
-function callVisionAI(base64Image) {
-  if (!GOOGLE_CLOUD_API_KEY) throw new Error('GOOGLE_CLOUD_API_KEY が設定されていません');
-  const url = `https://vision.googleapis.com/v1/images:annotate?key=${GOOGLE_CLOUD_API_KEY}`;
-  const payload = {
-    requests: [{
-      image: { content: base64Image },
-      features: [{ type: 'TEXT_DETECTION', maxResults: 1 }]
-    }]
-  };
-  const body = JSON.stringify(payload);
+// 注: callVisionAI は指示書34 で shared/recognition-core.js に移動 → 冒頭 require で取得済
 
-  return new Promise((resolve, reject) => {
-    const urlObj = new URL(url);
-    const req = https.request({
-      hostname: urlObj.hostname,
-      path: urlObj.pathname + urlObj.search,
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
-    }, res => {
-      const chunks = [];
-      res.on('data', c => chunks.push(c));
-      res.on('end', () => {
-        const data = JSON.parse(Buffer.concat(chunks).toString('utf-8'));
-        if (res.statusCode === 200) resolve(data);
-        else reject(new Error(`Vision API ${res.statusCode}: ${JSON.stringify(data)}`));
-      });
-    });
-    req.on('error', reject);
-    req.write(body);
-    req.end();
-  });
-}
+// 注: fixCardId, cleanRarity, getBounds, flattenWords, wordsInZone, zoneText, zoneTextSpaced,
+//     CARD_ZONES は指示書34 で shared/recognition-core.js に移動 → 冒頭 require で取得済
 
-// カードID後処理: Vision AIが GD04 を G004 と誤読するケースを修正
-function fixCardId(rawId) {
-  if (!rawId) return rawId;
-  return rawId.replace(/^G0(\d{2})-/, 'GD$1-');
-}
+// 注: parseVisionBlocks は指示書34 で shared/recognition-core.js に移動 → 冒頭 require で取得済
 
-// レアリティ後処理: アイコン誤認識の「O」や末尾数字を除去
-function cleanRarity(raw) {
-  if (!raw) return null;
-  let cleaned = raw.replace(/O$/i, '');
-  cleaned = cleaned.replace(/\d+$/, '');
-  const valid = ['LR', 'SR', 'R', 'U', 'C'];
-  return valid.includes(cleaned) ? cleaned : (valid.includes(raw) ? raw : null);
-}
+// 注: step1A_visionOCR, COLOR_CROP, classifyColor, detectCardColor, step1B_pixelColorDetection,
+//     fixBrackets, autoAddBrackets, step1C_merge は指示書34 で
+//     shared/recognition-core.js に移動 → 冒頭 require で取得済
+// 注: extractLinkFromEffect は使用箇所なし(未使用関数)のため移動せず削除
 
-// === 座標ベース Vision AI パーサー ===
-// 公式X画像（1040x720）のカード領域レイアウトに基づく
-
-// boundingBox → {left, top, right, bottom, centerX, centerY}
-function getBounds(boundingBox) {
-  const vs = boundingBox.vertices;
-  const xs = vs.map(v => v.x || 0);
-  const ys = vs.map(v => v.y || 0);
-  const left = Math.min(...xs), top = Math.min(...ys);
-  const right = Math.max(...xs), bottom = Math.max(...ys);
-  return { left, top, right, bottom, centerX: (left + right) / 2, centerY: (top + bottom) / 2 };
-}
-
-// fullTextAnnotation の全ワードをフラット化（座標付き）
-function flattenWords(fullTextAnnotation) {
-  const words = [];
-  const page = fullTextAnnotation?.pages?.[0];
-  if (!page) return words;
-  for (const block of (page.blocks || [])) {
-    for (const para of (block.paragraphs || [])) {
-      for (const word of (para.words || [])) {
-        const text = word.symbols.map(s => s.text).join('');
-        const b = getBounds(word.boundingBox);
-        words.push({ text, ...b });
-      }
-    }
-  }
-  return words;
-}
-
-// ゾーン内のワードを収集してテキスト結合
-function wordsInZone(words, zone) {
-  return words.filter(w =>
-    w.centerX >= zone.x1 && w.centerX <= zone.x2 &&
-    w.centerY >= zone.y1 && w.centerY <= zone.y2
-  );
-}
-
-function zoneText(words, zone) {
-  const zw = wordsInZone(words, zone);
-  // y座標→x座標でソート（行優先）
-  zw.sort((a, b) => {
-    const dy = a.top - b.top;
-    return Math.abs(dy) < 8 ? a.left - b.left : dy;
-  });
-  return zw.map(w => w.text).join('');
-}
-
-function zoneTextSpaced(words, zone) {
-  const zw = wordsInZone(words, zone);
-  zw.sort((a, b) => {
-    const dy = a.top - b.top;
-    return Math.abs(dy) < 8 ? a.left - b.left : dy;
-  });
-  // 行ごとにグループ化
-  const lines = [];
-  let currentLine = [];
-  let lastY = -100;
-  for (const w of zw) {
-    if (Math.abs(w.top - lastY) > 8) {
-      if (currentLine.length > 0) lines.push(currentLine.map(w => w.text).join(''));
-      currentLine = [];
-    }
-    currentLine.push(w);
-    lastY = w.top;
-  }
-  if (currentLine.length > 0) lines.push(currentLine.map(w => w.text).join(''));
-  return lines.join('\n');
-}
-
-// カード領域のゾーン定義（公式X画像 1040x720 基準）
-const CARD_ZONES = {
-  // カードID + レアリティ: 右上
-  cardId:   { x1: 800, y1: 85, x2: 930, y2: 130 },
-  // Lv: 左上のLv表示（"Lv" ワードを検索して数値を取得）
-  lv:       { x1: 535, y1: 85, x2: 600, y2: 135 },
-  // Cost: Lvの下〜COSTラベルの間
-  cost:     { x1: 535, y1: 130, x2: 600, y2: 190 },
-  // カードタイプ: 縦書き（UNIT/PILOT/COMMAND）
-  cardType: { x1: 530, y1: 270, x2: 560, y2: 345 },
-  // カード名: UNIT系（y430-465）
-  nameUnit: { x1: 555, y1: 420, x2: 860, y2: 475 },
-  // カード名: PILOT/COMMAND系（y505-535, x835未満で+1+1を除外）
-  namePilot:{ x1: 555, y1: 495, x2: 835, y2: 535 },
-  // 効果テキスト: カード名の下の広い範囲
-  effectUnit:  { x1: 550, y1: 470, x2: 895, y2: 570 },
-  effectPilot: { x1: 550, y1: 445, x2: 895, y2: 595 },
-  // 地形: 宇宙/地球アイコン
-  terrain:  { x1: 560, y1: 565, x2: 680, y2: 600 },
-  // 特徴: (CB)(トリニティ) 等
-  traits:   { x1: 550, y1: 590, x2: 835, y2: 620 },
-  // AP/HP（UNIT用）: 右下の大きな数字
-  apHp:     { x1: 835, y1: 590, x2: 920, y2: 645 },
-  // AP/HP（PILOT用）: カード名の右横（+1+1 等）
-  apHpPilot:{ x1: 835, y1: 505, x2: 920, y2: 545 },
-  // リンク条件: 最下部
-  link:     { x1: 555, y1: 615, x2: 835, y2: 645 },
-  // PILOT特徴: カード名の下（UNIT系とは位置が異なる）
-  traitsPilot: { x1: 550, y1: 530, x2: 835, y2: 555 },
-};
-
-// fullTextAnnotation から座標ベースでカード情報を抽出
-function parseVisionBlocks(visionResponse) {
-  const fta = visionResponse.responses?.[0]?.fullTextAnnotation;
-  if (!fta) return null;
-
-  const words = flattenWords(fta);
-  // カード領域外（x < 480）のワードを除外（左半分はバナー情報）
-  const cardWords = words.filter(w => w.left >= 480 || w.right >= 520);
-
-  const result = {
-    card_number: null, card_name: null, rarity: null, card_type: null,
-    level: null, cost: null, ap: null, hp: null,
-    terrain: [], traits: [], link: '', effect: ''
-  };
-
-  // --- カードID + レアリティ ---
-  const idZoneWords = wordsInZone(words, CARD_ZONES.cardId);
-  idZoneWords.sort((a, b) => a.left - b.left);
-  for (const w of idZoneWords) {
-    // "GD04-108C" のようにID+レアリティが1ワードに結合されるケースに対応
-    const mergedM = w.text.match(/(G[D0]?\d{2}-\d{3})([A-Z]{1,3}\d?)$/);
-    if (mergedM) {
-      result.card_number = fixCardId(mergedM[1]);
-      result.rarity = cleanRarity(mergedM[2]);
-    } else {
-      const idM = w.text.match(/G[D0]?\d{2}-\d{3}/);
-      if (idM) result.card_number = fixCardId(idM[0]);
-      else if (result.card_number && /^[A-Z]{1,3}\d?$/.test(w.text)) {
-        result.rarity = cleanRarity(w.text);
-      }
-    }
-  }
-
-  // --- カードタイプ ---
-  const typeText = zoneText(cardWords, CARD_ZONES.cardType);
-  const typeMatch = typeText.match(/(UNIT|PILOT|COMMAND|BASE)/i);
-  if (typeMatch) result.card_type = typeMatch[1].toUpperCase();
-
-  // --- Lv ---
-  const lvZoneWords = wordsInZone(cardWords, CARD_ZONES.lv);
-  for (const w of lvZoneWords) {
-    // "Lv.9" のように結合されているケース
-    const lvMatch = w.text.match(/Lv\.?(\d+)/i);
-    if (lvMatch) { result.level = parseInt(lvMatch[1]); break; }
-  }
-  if (result.level === null) {
-    // "Lv" と数字が別ワードのケース: "Lv" "." "4"
-    const hasLv = lvZoneWords.some(w => /^Lv/i.test(w.text));
-    if (hasLv) {
-      const numWords = lvZoneWords.filter(w => /^\d+$/.test(w.text) && w.text.length === 1);
-      if (numWords.length > 0) result.level = parseInt(numWords[0].text);
-    }
-  }
-
-  // --- Cost ---
-  // COSTラベルの近傍（y130-190）で数字ワードを探す
-  // Vision AIがLv+Costを結合した2桁数字を出力するケースに対応
-  const costZoneWords = wordsInZone(cardWords, CARD_ZONES.cost);
-  const costDigitWords = costZoneWords.filter(w => /^\d+$/.test(w.text));
-  if (costDigitWords.length > 0) {
-    // 単独の数字ワードがあればそれがCost
-    const singleDigit = costDigitWords.find(w => w.text.length === 1);
-    if (singleDigit) {
-      result.cost = parseInt(singleDigit.text);
-    } else {
-      // 2桁以上の場合: Lvが既知なら先頭を除去
-      const merged = costDigitWords[0].text;
-      if (result.level !== null && merged.startsWith(String(result.level))) {
-        const costStr = merged.slice(String(result.level).length);
-        if (costStr.length > 0) result.cost = parseInt(costStr);
-      } else {
-        // Lv不明 or 先頭不一致 → 最後の文字をCostとして試行
-        result.cost = parseInt(merged.slice(-1));
-      }
-    }
-  }
-  // Lv+Costが1つのワードとして lv ゾーンに入っている場合のフォールバック
-  if (result.cost === null && result.level !== null) {
-    const lvAllDigits = wordsInZone(cardWords, { x1: 535, y1: 85, x2: 600, y2: 190 })
-      .filter(w => /^\d{2,}$/.test(w.text));
-    for (const w of lvAllDigits) {
-      if (w.text.startsWith(String(result.level))) {
-        const costStr = w.text.slice(String(result.level).length);
-        if (costStr.length > 0) { result.cost = parseInt(costStr); break; }
-      }
-    }
-  }
-
-  // --- カード名 ---
-  // UNIT: nameUnit ゾーン（y420-475）
-  // PILOT: namePilot ゾーン（y495-535）
-  // COMMAND: 拡張ゾーン（y420-490, COMMANDカード名はy=478付近）
-  const nameZone = result.card_type === 'PILOT' ? CARD_ZONES.namePilot
-    : result.card_type === 'COMMAND' ? { x1: 555, y1: 420, x2: 860, y2: 490 }
-    : CARD_ZONES.nameUnit;
-  let nameText = zoneText(cardWords, nameZone);
-  // 「」で囲まれたカード名から「」を除去（COMMANDカードの「地球の魔女」等）
-  if (nameText) nameText = nameText.replace(/^「/, '').replace(/」$/, '');
-  // 型番（NW-002等）やノイズを除外
-  if (nameText && !/^[A-Z]{2,3}-\d+$/.test(nameText)) {
-    result.card_name = nameText.replace(/[A-Z]{2,3}-\d{3}$/, '').trim();
-  }
-  // PILOTでユニット名ゾーンにもフォールバック
-  if (!result.card_name && result.card_type === 'PILOT') {
-    const fallback = zoneText(cardWords, CARD_ZONES.nameUnit);
-    if (fallback && !/^[A-Z]{2,3}-\d+$/.test(fallback)) {
-      result.card_name = fallback.replace(/[A-Z]{2,3}-\d{3}$/, '').trim();
-    }
-  }
-
-  // --- 効果テキスト ---
-  // UNIT: effectUnit（y470-570）
-  // PILOT: effectPilot（y445-595）
-  // COMMAND: effectCommand（y490-570, カード名の下から）
-  let effectZone;
-  if (result.card_type === 'PILOT') effectZone = CARD_ZONES.effectPilot;
-  else if (result.card_type === 'COMMAND') effectZone = { x1: 550, y1: 490, x2: 895, y2: 570 };
-  else effectZone = CARD_ZONES.effectUnit;
-  const effectLines = zoneTextSpaced(cardWords, effectZone);
-  if (effectLines) {
-    // カード名と同じテキストが含まれていたら除去
-    let cleaned = effectLines;
-    if (result.card_name) {
-      cleaned = cleaned.split('\n')
-        .filter(line => !line.includes(result.card_name.replace(/\s/g, '')))
-        .join('\n');
-    }
-    // 型番行を除去
-    cleaned = cleaned.split('\n')
-      .filter(line => !/^[A-Z]{2,3}-\d{3}$/.test(line.trim()))
-      .join('\n');
-    result.effect = cleaned.trim();
-  }
-
-  // --- 地形 ---
-  const terrainText = zoneText(cardWords, CARD_ZONES.terrain);
-  if (/宇宙/.test(terrainText)) result.terrain.push('宇宙');
-  if (/地球/.test(terrainText)) result.terrain.push('地球');
-
-  // --- 特徴 ---
-  // UNIT: traits ゾーン（y590-620）
-  // PILOT: traitsPilot ゾーン（y530-555）
-  // COMMAND: link ゾーン付近（y615-640, パイロット欄の下に特徴がある）
-  let traitZone;
-  if (result.card_type === 'PILOT') traitZone = CARD_ZONES.traitsPilot;
-  else if (result.card_type === 'COMMAND') traitZone = CARD_ZONES.link; // COMMANDの特徴はlinkゾーン位置
-  else traitZone = CARD_ZONES.traits;
-  const traitZoneWords = wordsInZone(cardWords, traitZone);
-  // フォールバック: 通常のtraitsゾーンも検索
-  if (traitZoneWords.length === 0) {
-    traitZoneWords.push(...wordsInZone(cardWords, CARD_ZONES.traits));
-  }
-  traitZoneWords.sort((a, b) => a.left - b.left);
-  const traitText = traitZoneWords.map(w => w.text).join('');
-  // ()や〔〕で囲まれた特徴名を抽出
-  const traitMatches = traitText.match(/[〔(]([^〕)]+)[〕)]/g);
-  if (traitMatches) {
-    result.traits = [...new Set(traitMatches.map(m => m.replace(/^\((.+)\)$/, '〔$1〕')))];
-  }
-
-  // --- AP/HP ---
-  if (result.card_type === 'UNIT') {
-    // UNIT: 右下の大きな数字 "34" → AP=3, HP=4
-    const apHpText = zoneText(cardWords, CARD_ZONES.apHp);
-    const digits = apHpText.replace(/[^0-9]/g, '');
-    if (digits.length >= 2) {
-      result.ap = parseInt(digits.slice(0, -1)) || parseInt(digits[0]);
-      result.hp = parseInt(digits.slice(-1));
-    }
-  } else if (result.card_type === 'PILOT') {
-    // PILOT: カード名の右横 "+1+1" 等（専用ゾーン）
-    const pilotStatText = zoneText(cardWords, CARD_ZONES.apHpPilot);
-    const plusMatch = pilotStatText.match(/\+(\d+).*\+(\d+)/);
-    if (plusMatch) {
-      result.ap = parseInt(plusMatch[1]);
-      result.hp = parseInt(plusMatch[2]);
-    }
-  }
-
-  // --- リンク条件 ---
-  if (result.card_type !== 'COMMAND') {
-    // UNIT/PILOT: linkゾーンからリンク条件を取得
-    const linkText = zoneTextSpaced(cardWords, CARD_ZONES.link);
-    if (linkText) {
-      const linkContent = linkText.replace(/^特徴/, '').trim();
-      result.link = linkContent;
-    }
-  }
-  // COMMANDカード: パイロット欄（y575-615）から【パイロット】情報を取得
-  if (result.card_type === 'COMMAND') {
-    const pilotZoneText = zoneTextSpaced(cardWords, { x1: 550, y1: 575, x2: 835, y2: 615 });
-    if (pilotZoneText) {
-      result.link = '【パイロット】「' + pilotZoneText + '」';
-    }
-  }
-
-  return result;
-}
-
-async function step1A_visionOCR(imageBase64List) {
-  const results = [];
-  for (const { base64 } of imageBase64List) {
-    try {
-      const visionResponse = await callVisionAI(base64);
-      const fta = visionResponse.responses?.[0]?.fullTextAnnotation;
-      if (fta) {
-        const textLen = fta.text?.length || 0;
-        log(`  [Step1-A] Vision AI OCR完了 (${textLen}文字, 座標ベースパース)`);
-        results.push(parseVisionBlocks(visionResponse));
-      } else {
-        log('  [Step1-A] Vision AI: テキスト検出なし');
-        results.push(null);
-      }
-    } catch (e) {
-      log(`  [Step1-A] Vision AI エラー: ${e.message}`);
-      results.push(null);
-    }
-  }
-  return results;
-}
-
-// --- Step1-B: ピクセルベース色判定（sharpのみ、コスト0円） ---
-
-// 公式X画像（1040x720）のコスト丸アイコン位置（固定座標）
-const COLOR_CROP = { left: 550, top: 130, width: 40, height: 50 };
-
-// RGB値から属性色を判定
-// 判定順序が重要: 白→緑→青→赤→紫→Unknown
-function classifyColor(r, g, b) {
-  // 白: R,G,B全て180以上かつ差が30以内
-  if (r > 180 && g > 180 && b > 180 && Math.max(r, g, b) - Math.min(r, g, b) < 30) {
-    return 'White';
-  }
-  // 緑: Gが最大 & G > 130 & Rより30以上大きい
-  if (g > r && g > b && g > 130 && (g - r) > 30) {
-    return 'Green';
-  }
-  // 青: Bが最大 & B > 130 & R < 120
-  if (b > r && b > g && b > 130 && r < 120) {
-    return 'Blue';
-  }
-  // 赤: Rが最大 & R > 150（紫より先に判定。赤はRが圧倒的に大きい）
-  if (r > g && r > b && r > 150) {
-    return 'Red';
-  }
-  // 紫: Bが最大 & R > 100 & G < R（赤の後に判定）
-  if (b > g && b > 100 && r > 100 && g < r) {
-    return 'Purple';
-  }
-  // フォールバック: 判定不能
-  return 'Unknown';
-}
-
-// 画像バッファからコスト丸アイコンの平均RGB値を取得して色判定
-async function detectCardColor(imageBuffer) {
-  const { data, info } = await sharp(imageBuffer)
-    .extract(COLOR_CROP)
-    .raw()
-    .toBuffer({ resolveWithObject: true });
-
-  let r = 0, g = 0, b = 0;
-  const pixels = info.width * info.height;
-  for (let i = 0; i < data.length; i += info.channels) {
-    r += data[i];
-    g += data[i + 1];
-    b += data[i + 2];
-  }
-  r = Math.round(r / pixels);
-  g = Math.round(g / pixels);
-  b = Math.round(b / pixels);
-
-  const color = classifyColor(r, g, b);
-  log(`  [Step1-B] ピクセル色判定: RGB(${r},${g},${b}) → ${color}`);
-  if (color === 'Unknown') {
-    log(`  [Step1-B] ⚠ 色判定不能: RGB(${r},${g},${b}) — 要手動確認`);
-  }
-  return { color, rgb: { r, g, b } };
-}
-
-// 複数画像の色判定（base64リストから）
-async function step1B_pixelColorDetection(imageBase64List) {
-  const results = [];
-  for (const { base64 } of imageBase64List) {
-    try {
-      const imageBuffer = Buffer.from(base64, 'base64');
-      const { color } = await detectCardColor(imageBuffer);
-      results.push(color);
-    } catch (e) {
-      log(`  [Step1-B] ピクセル色判定エラー: ${e.message}`);
-      results.push('Unknown');
-    }
-  }
-  return results;
-}
-
-// --- Step1-C: マージ＋後処理 ---
-
-// カッコ修正: ルールベースで自動修正
-function fixBrackets(text) {
-  if (!text) return text;
-
-  // キーワード能力 → 《》
-  const keywords = ['制圧', '突破\\d?', '援護\\d?', 'ブロッカー', '先制攻撃', '高機動', 'リペア\\d?', 'クイック'];
-  for (const kw of keywords) {
-    text = text.replace(new RegExp(`[【〔「]\\s*(${kw})\\s*[】〕」]`, 'g'), '《$1》');
-  }
-
-  // 効果タイミング → 【】
-  const timings = [
-    '配備時', 'アタック時', '破壊時', 'セット時', 'セット中',
-    'リンク時', 'リンク中', '起動', 'メイン', 'アクション',
-    'バースト', 'ターン1回', 'パイロット'
-  ];
-  for (const tm of timings) {
-    text = text.replace(new RegExp(`[《〔「]\\s*(${tm})\\s*[》〕」]`, 'g'), '【$1】');
-  }
-
-  // 所属・特徴名 → 〔〕（「」【】《》()からの変換）
-  const traits = [
-    'CB', 'トリニティ', '鉄華団', 'ソレスタルビーイング', 'ネオ・ジオン',
-    '地球連邦', 'ティターンズ', 'エゥーゴ', 'ジオン', 'デラーズ・フリート',
-    'ザフト', 'オーブ', 'ロンド・ベル', 'アーガマ隊', 'WB隊',
-    'リガ・ミリティア', 'シャッフル同盟', 'Gの鉄血', 'Gのレコンギスタ',
-    'SEED', '超大国群', '国連', 'シャングリラの少年',
-    'ミネルバ隊', '学園', 'フォルドの夜明け'
-  ];
-  for (const tr of traits) {
-    text = text.replace(new RegExp(`[「【《]\\s*(${tr})\\s*[」】》]`, 'g'), '〔$1〕');
-    // ()で囲まれている場合もある（Vision AIがカッコを丸カッコで読むケース）
-    text = text.replace(new RegExp(`\\(${tr}\\)`, 'g'), `〔${tr}〕`);
-  }
-
-  // 「バースト」は必ず【バースト】（《バースト》は誤り）
-  text = text.replace(/《バースト》/g, '【バースト】');
-
-  return text;
-}
-
-// リンク条件の抽出: effectから分離
-function extractLinkFromEffect(effectText) {
-  // effectText内に【リンク時】がある場合、それはリンク条件ではなくリンク時効果
-  // リンク条件はカード下部のLINK欄から取得すべき
-  // ここではeffectテキストがlinkに誤って入っている場合のクリーンアップのみ
-  return '';
-}
-
-// Step1-C: Vision AIの文字 + ピクセルの色 → 完成JSON
-function step1C_merge(visionResult, color) {
-  if (!visionResult) return null;
-
-  // 色を設定
-  visionResult.color = color || visionResult.color || null;
-
-  // カッコ修正
-  visionResult.effect = fixBrackets(visionResult.effect);
-
-  // 特徴のカッコ修正
-  if (visionResult.traits) {
-    visionResult.traits = visionResult.traits.map(t => {
-      // 「トリニティ」→ 〔トリニティ〕
-      return t.replace(/^「(.+)」$/, '〔$1〕');
-    });
-  }
-
-  // レアリティ修正
-  if (visionResult.rarity) {
-    visionResult.rarity = cleanRarity(visionResult.rarity);
-  }
-
-  return visionResult;
-}
-
-// 新パイプラインのメインエントリ
+// 新パイプラインのメインエントリ(指示書32 で試作改善を統合)
+//   Step 1-A v2: callVisionAIv2 (DOCUMENT_TEXT_DETECTION + 日本語ヒント)
+//   Step 1-B:    step1B_pixelColorDetection (既存)
+//   Step 1-C:    step1C_merge (既存)
+//   Step 2:      postProcessVisionResultV2 (effectKeywords 17要素 + 改善A-E)
+//   Step 3:      structureCardWithClaude (System Prompt 強化、GCG 公式ルール準拠)
+// 引数: imageBase64List = [{ base64: string }, ...]、戻り値: カード配列(現状維持)
 async function extractCardDataVisionPipeline(imageBase64List) {
   // Vision API クォータチェック
   if (!isVisionQuotaAvailable(imageBase64List.length)) {
     return null; // 呼び出し元で従来パイプラインにフォールバック
   }
 
-  // Step1-A: Vision AI OCR と Step1-B: ピクセル色判定 を並列実行
-  const [visionResults, colors] = await Promise.all([
-    step1A_visionOCR(imageBase64List),
-    step1B_pixelColorDetection(imageBase64List)
-  ]);
+  // Step 1-B: ピクセル色判定(全画像まとめて並列)
+  const colors = await step1B_pixelColorDetection(imageBase64List);
 
-  // Vision API 使用量を記録（Step1-Aで実際にAPIを呼んだ分）
-  const successCount = visionResults.filter(r => r !== null).length;
-  if (successCount > 0) {
-    const usage = incrementVisionUsage(successCount);
+  // 各画像を順次処理(callVisionAIv2 → 初期 visionResult → step1C_merge → 後処理 → Claude 構造化)
+  const cards = [];
+  let visionSuccessCount = 0;
+  for (let i = 0; i < imageBase64List.length; i++) {
+    const item = imageBase64List[i];
+    const color = colors[i] || null;
+    try {
+      // Step 1-A v2: Vision API (DOCUMENT_TEXT_DETECTION + 日本語ヒント)
+      const visionResponse = await callVisionAIv2(item.base64, true);
+      const fta = visionResponse.responses?.[0]?.fullTextAnnotation;
+      if (!fta) {
+        log(`  [Pipeline] 画像 ${i + 1}: fullTextAnnotation が空、スキップ`);
+        continue;
+      }
+      visionSuccessCount++;
+      const fullText = fta.text || '';
+      const blockCount = fta.pages?.[0]?.blocks?.length || 0;
+      log(`  [Step1-A v2] 画像 ${i + 1}: 認識テキスト ${fullText.length}文字 / ブロック ${blockCount}`);
+
+      // 初期 visionResult(batch-recognize.js / manual-card-news.js と同形)
+      const visionResult = {
+        _rawText: fullText,
+        _blocks: blockCount,
+        card_number: null,
+        card_name: null,
+        rarity: null,
+        card_type: null,
+        level: null,
+        cost: null,
+        ap: null,
+        hp: null,
+        terrain: [],
+        traits: [],
+        link: null,
+        effect: null,
+      };
+
+      // Step 1-C: マージ(color を統合 + 既存の effect/traits/rarity 修正)
+      const merged = step1C_merge(visionResult, color);
+      if (!merged) continue;
+
+      // Step 2: 正規表現後処理(effectKeywords 17要素 + 改善A-E)
+      const postProcessed = postProcessVisionResultV2(fullText, merged);
+
+      // Step 3: Claude API による構造化(System Prompt 強化版)
+      const final = await structureCardWithClaude(fullText, postProcessed);
+
+      cards.push(final);
+    } catch (e) {
+      log(`  [Pipeline] 画像 ${i + 1} 処理エラー: ${e.message}`);
+    }
+  }
+
+  // Vision API 使用量を記録(Step1-A v2 で実際に成功した分)
+  if (visionSuccessCount > 0) {
+    const usage = incrementVisionUsage(visionSuccessCount);
     log(`  [Vision API] 使用量: ${usage.count}/${VISION_MONTHLY_LIMIT}`);
   }
 
-  // Step1-C: マージ
-  const cards = [];
-  for (let i = 0; i < visionResults.length; i++) {
-    const vision = visionResults[i];
-    const color = colors[i] || null;
-    const merged = step1C_merge(vision, color);
-    if (merged) cards.push(merged);
-  }
-
-  log(`  [Step1-C] マージ完了: ${cards.map(c => c.card_number).join(', ')}`);
+  log(`  [Pipeline] 統合完了: ${cards.map((c) => c.card_number).filter(Boolean).join(', ') || '(card_number なし)'}`);
   return cards;
 }
 
 // === 前回チェック日時 ===
+// last-check.json の手動補正について(指示書32 メモ、2026-05-17)
+//   月次運用本格化開始時、以下の手順で last-check.json を補正:
+//     1. homepage/data/last-check.json を直接編集
+//     2. last_check の値を運用開始希望日時に補正
+//        例: "last_check": "2026-05-09T00:00:00.000Z"
+//     3. auto-news.js を起動すれば、その時刻以降のツイートを処理
+//   自動補正は実装しない(意図しない再処理を回避するため)
 function getLastCheck() {
   try {
     const data = JSON.parse(fs.readFileSync(LAST_CHECK_FILE, 'utf-8'));
@@ -869,8 +486,35 @@ function getLastCheck() {
   }
 }
 
-function saveLastCheck() {
-  fs.writeFileSync(LAST_CHECK_FILE, JSON.stringify({ last_check: new Date().toISOString() }, null, 2), { encoding: 'utf-8' });
+// 指示書33: timestamp 引数(ISO 8601 文字列)対応、未指定なら現在時刻(従来通り)
+function saveLastCheck(timestamp) {
+  const value = timestamp || new Date().toISOString();
+  fs.writeFileSync(LAST_CHECK_FILE, JSON.stringify({ last_check: value }, null, 2), { encoding: 'utf-8' });
+}
+
+/**
+ * --auto-window 用の時刻範囲を自動計算(指示書33 で追加、指示書35 で時刻改修、2026-05-16)
+ * 仕様: 「前日18:00 JST → 当日18:00 JST」(24時間きっかり)
+ * 起動時刻が当日 18:00 JST 以降の想定(schtasks で 18:00 起動)
+ * 公式X 運用: 17:00 + 17:30 JST 完全固定(5日連続実証、2026-05-10〜14)
+ * 配信日特例(20:30 延期): 翌日記事で許容
+ * @returns {{ startTime: string, endTime: string }} UTC ISO 8601 形式
+ */
+function calculateAutoWindow() {
+  const now = new Date();
+  // 現在時刻の JST 日付を取得(UTC + 9 hours)
+  const jstNow = new Date(now.getTime() + 9 * 60 * 60 * 1000);
+  const jstYear = jstNow.getUTCFullYear();
+  const jstMonth = jstNow.getUTCMonth();
+  const jstDay = jstNow.getUTCDate();
+  // 当日 18:00 JST = UTC 09:00(指示書35 で改修)
+  const endTime = new Date(Date.UTC(jstYear, jstMonth, jstDay, 9, 0, 0));
+  // 前日 18:00 JST = UTC 09:00(前日、JS Date は jstDay - 1 で月またぎ自動処理)
+  const startTime = new Date(Date.UTC(jstYear, jstMonth, jstDay - 1, 9, 0, 0));
+  return {
+    startTime: startTime.toISOString(),
+    endTime: endTime.toISOString(),
+  };
 }
 
 // --since パース
@@ -888,8 +532,9 @@ function parseSince() {
 }
 
 // === 公式ツイート取得 ===
-async function fetchOfficialTweets(sinceTime) {
-  log(`公式X投稿を取得中... (since: ${sinceTime})`);
+// 指示書33: endTime オプション引数追加(未指定なら従来通り start_time のみ)
+async function fetchOfficialTweets(sinceTime, endTime = null) {
+  log(`公式X投稿を取得中... (since: ${sinceTime}${endTime ? `, until: ${endTime}` : ''})`);
   const params = {
     'start_time': sinceTime,
     'tweet.fields': 'created_at,text,attachments',
@@ -897,6 +542,11 @@ async function fetchOfficialTweets(sinceTime) {
     'media.fields': 'url,type,preview_image_url',
     'max_results': '10'
   };
+  // 指示書33: end_time 指定(--end-time / --auto-window 経由)
+  // X API v2 制約: start_time/end_time は 10 秒以上前であること
+  if (endTime) {
+    params['end_time'] = endTime;
+  }
 
   const data = await xGet(`/2/users/${OFFICIAL_USER_ID}/tweets`, params);
 
@@ -1031,8 +681,10 @@ function fixRecognitionErrors(result, cardsMaster) {
   }
 
   // === AP/HP修正 ===
-  // PILOTとCOMMANDはAP/HPを持たない
-  if (result.card_type === 'PILOT' || result.card_type === 'COMMAND') {
+  // 2026-05-24 PILOT認識改修: 指示書37e(2026-05-17) で PILOT も補正 AP/HP 必須化されたため
+  // PILOT を強制 null 化する旧コードを除去。PILOT は補正値(+X+Y)を保持する。
+  // COMMANDはAP/HPを持たない
+  if (result.card_type === 'COMMAND') {
     result.ap = null;
     result.hp = null;
   }
@@ -1068,7 +720,8 @@ function fixRecognitionErrors(result, cardsMaster) {
       // 効果テキスト: 既存カードはDB値で上書き（長文の誤読防止）
       if (masterCard.effect) result.effect = masterCard.effect;
       // AP/HP再修正（card_typeをDB値で補正した後）
-      if (result.card_type === 'PILOT' || result.card_type === 'COMMAND') {
+      // 2026-05-24 PILOT認識改修: PILOT は補正 AP/HP 必須化(指示書37e)のため強制 null から除外
+      if (result.card_type === 'COMMAND') {
         result.ap = null;
         result.hp = null;
       }
@@ -1081,26 +734,10 @@ function fixRecognitionErrors(result, cardsMaster) {
   return result;
 }
 
-// === カードデータ読み込み ===
-function loadCardsMaster() {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'cards_master.json'), 'utf-8'));
-  } catch (e) { return {}; }
-}
+// 注: loadCardsMaster, loadSummary, loadCardsPreview は指示書34 で
+//     shared/recognition-core.js に移動 → 冒頭 require で取得済
 
-function loadSummary() {
-  try {
-    return JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'summary.json'), 'utf-8'));
-  } catch (e) { return { card_ranking: [], deck_type_ranking: [] }; }
-}
-
-// === cards_preview.json: 仮データ管理 ===
-
-function loadCardsPreview() {
-  try {
-    return JSON.parse(fs.readFileSync(CARDS_PREVIEW_FILE, 'utf-8'));
-  } catch (e) { return {}; }
-}
+// === cards_preview.json: 仮データ管理(auto-news.js 専用 saveCardPreview のみ残置)===
 
 /**
  * Step1-C マージ後のカードデータを cards_preview.json に追記保存
@@ -1127,59 +764,88 @@ function saveCardPreview(cardInfo, sourceUrl) {
     rarity: cardInfo.rarity,
     effect: cardInfo.effect || '',
     source_url: sourceUrl || '',
-    created_at: new Date().toISOString(),
-    preview: true
+    created_at: formatJST(new Date()),
+    preview: true,
+    // 指示書37: 認識精度問題フラグ(手動補完用)
+    _pendingReview: cardInfo._pendingReview === true,
+    _pendingReviewIssues: cardInfo._pendingReviewIssues || [],
+    // 指示書37: 再生成用の記事日付保持(regenerate-article.js から参照)
+    _articleDate: cardInfo._articleDate || null
   };
 
   fs.writeFileSync(CARDS_PREVIEW_FILE, JSON.stringify(preview, null, 2), 'utf-8');
-  log(`  [Preview] ${cardInfo.card_number} を cards_preview.json に保存`);
+  const flag = cardInfo._pendingReview === true ? ' [PENDING_REVIEW]' : '';
+  log(`  [Preview] ${cardInfo.card_number} を cards_preview.json に保存${flag}`);
 }
 
 /**
- * cards_master.json と cards_preview.json を統合した検索用DBを構築
- * cards_master のエントリを正規化して cards_preview と同じフィールド構造にする
- * 同じIDがある場合は cards_master を優先（正式データ優先）
- * @returns {Object} card_number → { card_number, card_name, color, card_type, level, cost, ap, hp, traits, link, preview }
+ * 認識精度問題の判定(指示書37、2026-05-17)
+ * 松岡さん戦略: 認識精度問題発生時には記事生成を停止 → 手動補完 → 再生成
+ *
+ * 判定条件:
+ * 1. color が "Unknown" / null / 空 ← 色判定不能
+ * 2. card_number が null / 空 ← 必須
+ * 3. card_name が null / 空 ← 必須
+ * 4. カードタイプ別の必須フィールド未取得:
+ *    - UNIT: level, cost, ap, hp のいずれかが - or null
+ *    - PILOT: level, cost, ap(補正), hp(補正) のいずれかが - or null（指示書37e 2026-05-17 で補正AP/HP必須化）
+ *    - COMMAND: cost が - or null(level/ap/hp は許容)
+ *    - BASE: cost, hp のいずれかが - or null(level/ap は許容)
+ *
+ * @param {Object} cardData - 構造化済みのカードデータ
+ * @returns {{hasIssue: boolean, issues: string[]}}
  */
-function buildUnifiedCardDB(cardsMaster) {
-  const db = {};
+function checkRecognitionIssues(cardData) {
+  const issues = [];
 
-  // 1. cards_preview.json（仮データ）を先に読み込み
-  const preview = loadCardsPreview();
-  for (const [id, p] of Object.entries(preview)) {
-    db[id] = {
-      card_number: p.card_number,
-      name_jp: p.card_name,
-      color: p.color,
-      card_type: p.card_type,
-      level: p.level,
-      cost: p.cost,
-      traits: p.traits || [],
-      stats: { ap: p.ap, hp: p.hp },
-      link: p.link,
-      preview: true
-    };
+  // 共通必須フィールド
+  if (!cardData.color || cardData.color === 'Unknown' || cardData.color === '') {
+    issues.push(`color が ${cardData.color || 'null'} (色判定不能)`);
+  }
+  if (!cardData.card_number || cardData.card_number === '不明') {
+    issues.push('card_number が空');
+  }
+  if (!cardData.card_name) {
+    issues.push('card_name が空');
   }
 
-  // 2. cards_master.json（正式データ）で上書き → 正式データ優先
-  for (const [id, m] of Object.entries(cardsMaster || {})) {
-    db[id] = {
-      card_number: id,
-      name_jp: m.name_jp,
-      color: m.color,
-      card_type: m.card_type,
-      level: m.level,
-      cost: m.cost,
-      traits: m.traits || [],
-      stats: m.stats || {},
-      link: m.link,
-      source_title: m.source_title,
-      preview: false
-    };
+  // カードタイプ別必須フィールド
+  const isEmpty = v => v === null || v === undefined || v === '-' || v === '';
+  const cardType = cardData.card_type;
+  if (cardType === 'UNIT') {
+    if (isEmpty(cardData.level)) issues.push('UNIT の level が空');
+    if (isEmpty(cardData.cost)) issues.push('UNIT の cost が空');
+    if (isEmpty(cardData.ap)) issues.push('UNIT の ap が空');
+    if (isEmpty(cardData.hp)) issues.push('UNIT の hp が空');
+  } else if (cardType === 'PILOT') {
+    // 指示書37e(2026-05-17): PILOT も補正 AP/HP 必須(松岡さんドメイン専門知識による訂正)
+    // PILOT カードに記載された補正値(UNIT にセット時の AP/HP 増分、0 含む)
+    if (isEmpty(cardData.level)) issues.push('PILOT の level が空');
+    if (isEmpty(cardData.cost)) issues.push('PILOT の cost が空');
+    if (isEmpty(cardData.ap)) issues.push('PILOT の ap(補正) が空');
+    if (isEmpty(cardData.hp)) issues.push('PILOT の hp(補正) が空');
+  } else if (cardType === 'COMMAND') {
+    // 指示書37b(2026-05-17): COMMAND もレベル・コスト必須(松岡さんドメイン専門知識による訂正)
+    if (isEmpty(cardData.level)) issues.push('COMMAND の level が空');
+    if (isEmpty(cardData.cost)) issues.push('COMMAND の cost が空');
+  } else if (cardType === 'BASE') {
+    // 指示書37b 更新版(2026-05-17): BASE もレベル必須(松岡さんドメイン専門知識による訂正)
+    // 指示書37c(2026-05-17): BASE も AP 必須化(松岡さん視認結果 EB01-090: AP=0 でも値として存在)
+    if (isEmpty(cardData.level)) issues.push('BASE の level が空');
+    if (isEmpty(cardData.cost)) issues.push('BASE の cost が空');
+    if (isEmpty(cardData.ap)) issues.push('BASE の ap が空');
+    if (isEmpty(cardData.hp)) issues.push('BASE の hp が空');
+  } else {
+    issues.push(`card_type が ${cardType || 'null'} (UNIT/PILOT/COMMAND/BASE のいずれでもない)`);
   }
 
-  return db;
+  return {
+    hasIssue: issues.length > 0,
+    issues: issues,
+  };
 }
+
+// 注: buildUnifiedCardDB は指示書34 で shared/recognition-core.js に移動 → 冒頭 require で取得済
 
 // === Step 1: カードデータ抽出（画像→JSON） ===
 const STEP1_SYSTEM_PROMPT = `あなたはガンダムカードゲーム（GCG）のカード画像からデータを抽出する専門ツールです。
@@ -1240,7 +906,7 @@ COMMANDカードの効果は「【メイン】」または「【アクション�
 カード中央下: カード名
 カード名の下: 効果テキスト
 カード下部: 地形アイコン（宇宙/地球）、特徴、LINK欄
-カード右下: AP（左）とHP（右）※UNITのみ
+カード右下: AP（左）とHP（右）※UNIT/BASEは通常値、PILOTはカード名右横の "+X+Y" 形式（補正値）
 
 === 色の判定 ===
 
@@ -1266,7 +932,7 @@ COMMANDカードの効果は「【メイン】」または「【アクション�
 例: 「自分のユニットすべては〔ネオ・ジオン〕を得る」→ 状態付与なので【リンク中】
 
 === AP/HPの扱い ===
-UNIT: AP/HPの数値を読み取る / PILOT・COMMAND: ap=null, hp=null / BASE: ap=null, hp=数値
+UNIT: AP/HPの数値を読み取る / PILOT: 補正AP/HPの数値を読み取る（カード名右横の "+X+Y" 形式、0 含む整数 0-9） / COMMAND: ap=null, hp=null / BASE: ap=null, hp=数値
 
 === 読み取りルール ===
 - 画像から読み取れる情報のみを出力。推測や補完をしない
@@ -1432,7 +1098,7 @@ GCGでは以下の4種類のカッコが使い分けられている。混同し�
 
 ■ AP/HPの扱い
 - UNIT: AP/HPの数値を読み取る
-- PILOT: ap=null, hp=null
+- PILOT: 補正AP/HPの数値を読み取る（カード名右横の "+X+Y" 形式、0 含む整数 0-9）
 - COMMAND: ap=null, hp=null
 - BASE: ap=null, hp=数値（画像に0と表示されていてもAPはnullとする）
 
@@ -1646,7 +1312,7 @@ function saveRecognitionLog(date, cardInfoList, sourceTweets) {
   const mergedCards = Object.values(mergedMap);
 
   logData[date] = {
-    recognized_at: new Date().toISOString(),
+    recognized_at: formatJST(new Date()),
     source_tweets: [...new Set([
       ...((logData[date] && logData[date].source_tweets) || []),
       ...sourceTweets
@@ -1913,9 +1579,13 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">タイプ</td><td>${escapeHtml(card.card_type)}</td></tr>\n`;
   html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">Lv</td><td>${card.level != null ? card.level : '-'}</td>`;
   html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">コスト</td><td>${card.cost != null ? card.cost : '-'}</td></tr>\n`;
-  if (card.card_type === 'UNIT') {
-    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">AP</td><td>${card.ap != null ? card.ap : '-'}</td>`;
-    html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">HP</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
+  // 指示書37d/37e(2026-05-17): UNIT/BASE は戦闘 AP/HP、PILOT は補正 AP/HP を表示。COMMAND のみ非表示。
+  // GCG ルール上、PILOT カードの AP/HP は UNIT にセット時の補正値 → ラベルで明示
+  if (card.card_type === 'UNIT' || card.card_type === 'BASE' || card.card_type === 'PILOT') {
+    const apLabel = card.card_type === 'PILOT' ? '補正 AP' : 'AP';
+    const hpLabel = card.card_type === 'PILOT' ? '補正 HP' : 'HP';
+    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">${apLabel}</td><td>${card.ap != null ? card.ap : '-'}</td>`;
+    html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">${hpLabel}</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
   }
   if (traitsStr) {
     html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
@@ -1966,7 +1636,8 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
 }
 
 // === 関連カードHTML（サムネイル+リンク付き） ===
-function buildRelatedCardsHtml(relatedCards) {
+// 指示書36: articleDate 引数を追加し、preview カードの _imageDate 未設定時のフォールバックに使用
+function buildRelatedCardsHtml(relatedCards, articleDate) {
   if (!relatedCards || relatedCards.length === 0) return '';
 
   let html = '<h2 style="font-size:15px;margin-top:28px">関連カード</h2>\n';
@@ -1974,8 +1645,9 @@ function buildRelatedCardsHtml(relatedCards) {
 
   for (const r of relatedCards) {
     // preview カード（GD04未発売）はニュース画像を使用、既存カードは公式画像
+    // 指示書36: _imageDate 未設定時は引数 articleDate にフォールバック(スラッシュ2連続防止)
     const imgUrl = r.preview
-      ? `../../images/news/${r._imageDate || ''}/${r.card_id}.jpg`
+      ? `../../images/news/${r._imageDate || articleDate || ''}/${r.card_id}.jpg`
       : `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
     const previewBadge = r.preview
       ? '<span style="display:inline-block;background:var(--accent);color:#fff;font-size:10px;padding:1px 5px;border-radius:3px;margin-left:6px;vertical-align:middle">NEW</span>'
@@ -1999,158 +1671,8 @@ function buildRelatedCardsHtml(relatedCards) {
   return html;
 }
 
-// === 記事生成: 導入文 ===
-async function generateIntroText(cardInfoList, relatedCards, articleDate) {
-  const cardsDesc = cardInfoList.map(c => {
-    const colorJp = COLOR_JP[c.color] || c.color;
-    return `- ${c.card_name} (${c.card_number}): ${colorJp}/${c.card_type}`;
-  }).join('\n');
-
-  const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
-以下の新カード情報に基づいて、カード紹介記事の「導入文」だけを書いてください。
-
-【出力形式】
-- HTML形式で <p> タグ1つだけ
-- 2〜3行程度。カード枚数と収録パック名に触れる
-- 日付は不要
-
-【GCG用語ルール - 厳守】
-- カードタイプは UNIT / PILOT / COMMAND / BASE の4種のみ
-  「キャラクター」「モビルスーツ」「機動ユニット」は存在しない
-- 以下の用語はGCGに存在しない。絶対に使わないこと:
-  合体、アップグレード、エース効果、エースパーツ、高機動、機動ユニット、Xソリューズ、重大損傷コマンド
-- EXリソースを「Xソリューズ」に変換しないこと
-- カードタイプ「PILOT」を「キャラクター」に変換しないこと
-- 「捨て札にする」→ GCGでは「トラッシュに置く」が正しい
-- 「突破時」→ GCGに存在しない。《突破》と【破壊時】は全く別の効果
-- 「シールドゾーン」→ 正しくは「シールドエリア」
-
-【禁止表現 - 使用厳禁】
-注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
-洗練させつつ、新しい風を吹き込む、待ち遠しいですね、爆発力を秘めています、幅広い可能性、
-徹底、必見、一挙、速報レビュー
-
-【記事生成の追加ルール】
-- 「GUNDAM DYNASTY」という表現は使わない。セット名（例: GD04 Phantom Aria）を使うこと
-- 「属性」という表現は使わない。GCGでは「色」が正しい表現
-
-【文体】
-- プレイヤーが読んで「なるほど」と思える分析を書く
-- データに基づいた具体的な表現を使う
-- 感想文ではなく分析記事を書く
-
-【新カード情報】
-${cardsDesc}
-
-<p>タグのみ出力してください。`;
-
-  log('  導入文生成中 (Claude API)...');
-  return await callClaude([{ role: 'user', content: prompt }], 1000);
-}
-
-// === 記事生成: カードごとの考察 ===
-async function generateCardAnalyses(cardInfoList, relatedCards) {
-  const analyses = {};
-
-  for (const card of cardInfoList) {
-    const colorJp = COLOR_JP[card.color] || card.color;
-    const relatedDesc = relatedCards
-      .filter(r => r.color === colorJp || r.reason.includes('リンク先') || r.reason.includes('リンク対象') || r.reason.includes('同色'))
-      .slice(0, 5)
-      .map(r => {
-        const previewTag = r.preview ? '【新カード】' : '';
-        return `${previewTag}${r.name}(${r.card_id}): ${r.color}系${r.usage_rate > 0 ? 'デッキ内採用率' + r.usage_rate + '%' : '（新カード・採用率未集計）'} — ${r.reason}`;
-      })
-      .join('\n');
-
-    const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
-以下のカード1枚について、2〜3行の簡潔な考察を書いてください。プレーンテキストのみで出力（HTMLタグ不要）。
-
-【カード情報】
-- カード名: ${card.card_name} (${card.card_number})
-- 色: ${colorJp} / タイプ: ${card.card_type}
-- Lv.${card.level||'?'}, COST${card.cost||'?'}, AP${card.ap||'?'}/HP${card.hp||'?'}
-- 特徴: ${(card.traits||[]).join('、')}
-- 効果テキスト（原文）: ${card.effect||'効果なし（バニラ）'}
-
-【関連カード（現環境データ）】
-${relatedDesc || 'データなし'}
-
-【GCG用語ルール - 厳守】
-- カードタイプは UNIT / PILOT / COMMAND / BASE の4種のみ
-  「キャラクター」「モビルスーツ」「機動ユニット」は存在しない
-- 効果テキストは提供された原文をそのまま引用すること。言い換え・要約・解釈をしない
-- 以下の用語はGCGに存在しない。絶対に使わないこと:
-  合体、アップグレード、エース効果、エースパーツ、高機動、機動ユニット、Xソリューズ、重大損傷コマンド
-- GCGの正しいキーワード能力: 《リペア》《突破》《ブロッカー》《クイック》《バースト》
-  上記以外のキーワードを作らないこと
-- EXリソースを「Xソリューズ」に変換しないこと
-- COMMANDカードがPILOT的な役割を持つ場合がある。カードタイプは認識結果のまま使い、考察文でその特性に言及する
-- 「捨て札にする」→ GCGでは「トラッシュに置く」が正しい
-- 「突破時」→ GCGに存在しない。《突破》と【破壊時】は全く別の効果
-- 「シールドゾーン」→ 正しくは「シールドエリア」
-
-【禁止表現 - 使用厳禁】
-注目すべき、最も注目すべきは、徹底解析、一挙公開、秘めています、秘めた、バラエティ豊かな、
-洗練させつつ、新しい風を吹き込む、待ち遠しいですね、爆発力を秘めています、幅広い可能性、
-徹底、必見、一挙、速報レビュー
-
-【記事生成の追加ルール】
-- 「GUNDAM DYNASTY」という表現は使わない。セット名（例: GD04 Phantom Aria）を使うこと
-- 「属性」という表現は使わない。GCGでは「色」が正しい表現
-- 効果テキストが空の場合は「効果なし（バニラ）」カードとして扱い、
-  ステータスとコスト効率で評価すること。「不明」「評価できない」とは書かない
-
-【考察文の整合性ルール（最重要）】
-考察文は効果テキストの内容のみに基づいて書くこと。
-効果テキストに記載されていない能力を考察文に含めることは禁止。
-
-禁止パターンの例:
-- 効果テキストに「ドロー」がないのに「ドローによるアドバンテージ」と書く
-- 効果テキストに「+2000」がないのに「+2000パンプ」と書く
-- 効果テキストに「サーチ」がないのに「デッキからサーチ」と書く
-- 効果テキストに「破壊」がないのに「破壊する」と書く
-
-考察文を書いた後、必ず以下の検証を行うこと:
-1. 考察文に含まれるすべての能力・効果が、効果テキストに記載されているか確認
-2. 効果テキストにない能力が考察文に含まれていたら削除して書き直す
-3. 「?」や「不明」がステータス表に含まれていないか確認
-
-【考察文のルール】
-- 効果テキストから読み取れる事実のみに基づいて考察すること
-- カードの効果を勝手に解釈・推測して存在しない相互作用を書かないこと
-- 既存カードとの相性を書く場合は、そのカードの効果テキストを確認してから書くこと
-- 「中核を担う」「環境を変える」等の過大評価は避ける。新カードは実績がないため控えめに
-- データに基づかない推測は避け、ステータスと効果の事実を中心に書く
-
-【文体】
-- プレイヤーが読んで「なるほど」と思える分析を書く
-- 「このカード強そう」「使いたい」程度のカジュアルな感想はOK
-- データに基づいた具体的な表現を使う
-- 2〜3行で簡潔に。プレーンテキストのみ出力。
-
-【表記ルール】
-記事内で以下の表記を統一すること:
-- UNIT → ユニット
-- PILOT → パイロット
-- COMMAND → コマンド
-- BASE → ベース
-- COST → コスト
-- ただし、カードのステータス表（テーブル内）では英語表記のまま`;
-
-    try {
-      log(`  考察生成中: ${card.card_name}...`);
-      const analysis = await callClaude([{ role: 'user', content: prompt }], 500);
-      analyses[card.card_number] = analysis.replace(/<[^>]*>/g, '').trim();
-    } catch (e) {
-      log(`  考察生成失敗: ${card.card_name} - ${e.message}`);
-      analyses[card.card_number] = '';
-    }
-    await sleep(500);
-  }
-
-  return analyses;
-}
+// 注: generateIntroText, generateCardAnalyses は指示書34 で
+//     shared/recognition-core.js に移動 → 冒頭 require で取得済
 
 // === 記事生成: 速報 ===
 async function generateNoticeArticle(tweetText, tweetUrl, summary) {
@@ -2186,29 +1708,16 @@ ${dataContext}`;
 }
 
 // === X投稿文生成 ===
+// 新カード投稿: ステータス情報はOCR精度の問題があるため含めず、
+// カード名+記事リンク+ハッシュタグのシンプルな固定フォーマットを使用する。
 async function generateTweetText(type, articleInfo) {
-  let prompt;
   if (type === 'new_card') {
-    prompt = `以下の新カード情報に基づいて、Xの投稿文を書いてください。
+    // 固定フォーマット: カード名と出典リンクのみ
+    return `【新カード】${articleInfo.cardNames}\n\n記事はこちら👇\n${articleInfo.url}\n\n#GCG #ガンダムカードゲーム`;
+  }
 
-【ルール】
-- 280文字以内
-- 絵文字の箇条書き（📊📈📝のような羅列）は使わない
-- 個人が書いたような自然な文体
-- 記事URLとハッシュタグを含める
-
-【カード情報】
-${articleInfo.cardNames}
-
-【記事URL】
-${articleInfo.url}
-
-【ハッシュタグ】
-#ガンダムカードゲーム #GCG
-
-投稿文のみを出力してください。`;
-  } else {
-    prompt = `以下の速報情報に基づいて、Xの投稿文を書いてください。
+  // 速報はClaude APIで生成（従来通り）
+  const prompt = `以下の速報情報に基づいて、Xの投稿文を書いてください。
 
 【ルール】
 - 280文字以内
@@ -2226,7 +1735,6 @@ ${articleInfo.url}
 #ガンダムカードゲーム #GCG
 
 投稿文のみを出力してください。`;
-  }
 
   const result = await callClaude([{ role: 'user', content: prompt }], 500);
   return result.replace(/^["']|["']$/g, '').trim();
@@ -2414,7 +1922,7 @@ function findInlineRelated(cardInfo, unifiedDB, summary) {
 }
 
 // === 新カード記事の完全なHTML組み立て ===
-function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedCards, tweetUrls, unifiedDB, summary) {
+function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedCards, tweetUrls, unifiedDB, summary, articleDate) {
   let html = '';
 
   // 1. 導入文（Claude生成パート）
@@ -2430,7 +1938,8 @@ function assembleCardArticleHtml(introHtml, cardInfoList, cardAnalyses, relatedC
   }
 
   // 3. 関連カード（サムネイル+リンク付き）
-  html += buildRelatedCardsHtml(relatedCards);
+  // 指示書36: articleDate を渡してスラッシュ2連続を防止
+  html += buildRelatedCardsHtml(relatedCards, articleDate);
 
   // 4. 出典
   html += '\n<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">\n';
@@ -2476,6 +1985,12 @@ async function gitPush(message, generatedFiles) {
 async function main() {
   log('=== auto-news 開始 ===');
 
+  // 指示書33: 起動時ログ強化(各モード明示)
+  log(`DRY_RUN: ${DRY_RUN}`);
+  log(`TEST_MODE: ${TEST_MODE} (X 投稿は ${TEST_MODE ? 'スキップ' : '実行'})`);
+  log(`ENABLE_SURVEY: ${ENABLE_SURVEY}`);
+  log(`USE_VISION_PIPELINE: ${USE_VISION_PIPELINE}`);
+
   if (!X_API_KEY || !X_ACCESS_TOKEN) {
     log('エラー: X API キーが設定されていません');
     process.exit(1);
@@ -2483,12 +1998,31 @@ async function main() {
 
   if (!fs.existsSync(NEWS_DIR)) fs.mkdirSync(NEWS_DIR, { recursive: true });
 
-  const sinceTime = parseSince() || getLastCheck();
+  // === 時刻範囲モード決定(指示書33 で追加、2026-05-17)===
+  // 優先順位: --start-time/--end-time(明示) > --auto-window > parseSince(--since) > last-check.json(従来)
+  let effectiveStartTime;
+  let effectiveEndTime = null;
+  if (CLI_START_TIME) {
+    effectiveStartTime = CLI_START_TIME;
+    effectiveEndTime = CLI_END_TIME; // null なら現在時刻まで
+    log(`時刻範囲モード: 明示指定 (--start-time / --end-time)`);
+    log(`  範囲: ${effectiveStartTime} 〜 ${effectiveEndTime || '現在'}`);
+  } else if (AUTO_WINDOW) {
+    const window = calculateAutoWindow();
+    effectiveStartTime = window.startTime;
+    effectiveEndTime = window.endTime;
+    log(`時刻範囲モード: --auto-window(前日18:00 JST → 当日18:00 JST)`);
+    log(`  範囲: ${effectiveStartTime} 〜 ${effectiveEndTime}`);
+  } else {
+    effectiveStartTime = parseSince() || getLastCheck();
+    log(`時刻範囲モード: last-check.json ベース(従来)`);
+    log(`  範囲: ${effectiveStartTime} 〜 現在`);
+  }
 
   // ① 公式ツイート取得
   let tweets;
   try {
-    tweets = await fetchOfficialTweets(sinceTime);
+    tweets = await fetchOfficialTweets(effectiveStartTime, effectiveEndTime);
   } catch (e) {
     log(`公式ツイート取得失敗: ${e.message}`);
     process.exit(1);
@@ -2499,7 +2033,15 @@ async function main() {
 
   if (targets.length === 0) {
     log('対象投稿なし。終了します。');
-    saveLastCheck();
+    // 指示書33: 対象なしでも last-check.json の更新制御は同じ規則
+    if (CLI_START_TIME) {
+      log('--start-time 明示指定のため last-check.json を更新しません');
+    } else if (AUTO_WINDOW) {
+      saveLastCheck(effectiveEndTime);
+      log(`auto-window 完了: last-check.json を ${effectiveEndTime} に更新`);
+    } else {
+      saveLastCheck();
+    }
     return;
   }
 
@@ -2526,10 +2068,14 @@ async function main() {
     for (const { tweet } of newCards) {
       const tweetUrl = `https://x.com/GUNDAM_GCG_JP/status/${tweet.id}`;
 
-      // アンケート投稿（OCRパイプライン前）
-      const nameMatchSurvey = tweet.text.match(/「([^」]+)」/);
-      const surveyCardName = nameMatchSurvey ? nameMatchSurvey[1] : (tweet.text.split('\n')[2] || '新カード');
-      await postSurvey(surveyCardName, tweetUrl);
+      // アンケート投稿（OCRパイプライン前、指示書32 で ENABLE_SURVEY ガード追加)
+      if (ENABLE_SURVEY) {
+        const nameMatchSurvey = tweet.text.match(/「([^」]+)」/);
+        const surveyCardName = nameMatchSurvey ? nameMatchSurvey[1] : (tweet.text.split('\n')[2] || '新カード');
+        await postSurvey(surveyCardName, tweetUrl);
+      } else {
+        log('  postSurvey スキップ(--enable-survey 指定なし)');
+      }
 
       let cardInfoList = null;
       if (tweet.images.length > 0 && ANTHROPIC_API_KEY) {
@@ -2584,6 +2130,14 @@ async function main() {
 
       for (const ci of cardInfoList) {
         ci._tweetUrl = tweetUrl;
+        ci._articleDate = articleDate; // 指示書37: 再生成用の記事日付
+        // 指示書37: 認識精度問題判定(手動補完戦略)
+        const recognitionCheck = checkRecognitionIssues(ci);
+        ci._pendingReview = recognitionCheck.hasIssue;
+        ci._pendingReviewIssues = recognitionCheck.hasIssue ? recognitionCheck.issues : [];
+        if (recognitionCheck.hasIssue) {
+          log(`  ⚠ 認識精度問題: ${ci.card_number || 'NO_NUMBER'} — ${recognitionCheck.issues.join(', ')}`);
+        }
         // X投稿画像をダウンロードしてローカル保存
         if (tweet.images.length > 0) {
           try {
@@ -2593,7 +2147,7 @@ async function main() {
           }
           await sleep(1000); // ダウンロード間隔
         }
-        // cards_preview.json に仮データ保存
+        // cards_preview.json に仮データ保存(_pendingReview フラグ含む)
         saveCardPreview(ci, tweetUrl);
         // 統合DBを再構築（新カード追加分を後続の検索に反映）
         unifiedDB = buildUnifiedCardDB(cardsMaster);
@@ -2629,10 +2183,46 @@ async function main() {
       }
     }
 
-    // 認識結果をログに保存（松岡さんの確認用）
+    // 認識結果をログに保存（松岡さんの確認用、_pendingReview を含む全カード)
     const tweetUrlsForLog = [...new Set(allCardInfos.map(c => c._tweetUrl))];
     saveRecognitionLog(articleDate, allCardInfos, tweetUrlsForLog);
     generatedFiles.push({ repoPath: 'data/card-recognition-log.json', binary: false });
+
+    // === 指示書37: 認識精度問題による停止メカニズム ===
+    // _pendingReview = true のカードを記事生成から除外。
+    // 全カードが pending なら process.exit(1) で停止し、手動補完 → regenerate-article.js で再生成。
+    const pendingCards = allCardInfos.filter(c => c._pendingReview === true);
+    const validCards = allCardInfos.filter(c => c._pendingReview !== true);
+
+    // 指示書37c(2026-05-17): 松岡さん戦略「すべて含めて記事作成」
+    // 一部でも保留があれば全体停止(部分生成廃止)→ 手動補完 → regenerate-article.js
+    if (pendingCards.length > 0) {
+      log('');
+      log('========================================');
+      log('⚠ 認識精度問題のため記事生成を全体停止します:');
+      log('以下のカードを手動補完してください:');
+      pendingCards.forEach(c => {
+        const issues = (c._pendingReviewIssues || []).join(', ');
+        log(`  - ${c.card_number || 'NO_NUMBER'} (${c.card_name || 'NO_NAME'}): ${issues}`);
+      });
+      log('手動補完手順:');
+      log('  1. data/cards_preview.json を編集し、対象カードを修正');
+      log('     (color/cost/ap/hp 等を補完、_pendingReview を false に変更)');
+      log(`  2. node scripts/regenerate-article.js --date ${articleDate} で再生成`);
+      log('  ※ 全カード認識成功 + 補完済の状態で記事生成されます');
+      log('========================================');
+      log('');
+      log(`記事生成スキップ: 認識精度問題により全体停止`);
+      log(`  - 認識成功: ${validCards.length} 件`);
+      log(`  - 保留: ${pendingCards.length} 件`);
+      log('=== auto-news 終了(認識精度問題、全体停止) ===');
+      // git push なし、X 投稿なし、last-check.json 更新なしで終了
+      process.exit(1);
+    }
+
+    // 全カード認識成功時のみ通常の記事生成へ
+    log(`記事生成: 認識成功 ${validCards.length} 件(全カード認識成功)`);
+    allCardInfos = validCards; // 念のため明示
 
     // 関連カードの重複排除
     const uniqueRelated = [];
@@ -2645,13 +2235,26 @@ async function main() {
     const dateLbl = dateLabel(articleDate);
     const cardCount = allCardInfos.length;
 
+    // === 拡張コードの動的決定(指示書32 で追加、2026-05-17)===
+    // allCardInfos から最も多い expansion を選択(混在時の dominant)、空なら空文字フォールバック
+    const expansionCounts = {};
+    allCardInfos.forEach((c) => {
+      if (c && c.expansion) {
+        expansionCounts[c.expansion] = (expansionCounts[c.expansion] || 0) + 1;
+      }
+    });
+    const dominantExpansion = Object.keys(expansionCounts).length > 0
+      ? Object.keys(expansionCounts).sort((a, b) => expansionCounts[b] - expansionCounts[a])[0]
+      : null;
+    const expansionName = formatExpansionName(dominantExpansion);
+
     // Claude APIで導入文を生成
     let introHtml;
     try {
       introHtml = await generateIntroText(allCardInfos, uniqueRelated.slice(0, 10), articleDate);
     } catch (e) {
       log(`導入文生成失敗: ${e.message}`);
-      introHtml = `<p>GD04 Phantom Ariaから新カード${cardCount}枚が公開されました。</p>`;
+      introHtml = `<p>${expansionName}から新カード${cardCount}枚が公開されました。</p>`;
     }
 
     // Claude APIでカードごとの考察を生成
@@ -2663,11 +2266,12 @@ async function main() {
     }
 
     // 完全なHTML組み立て（カードブロック+関連カードリンクは自動生成）
-    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, cardAnalyses, uniqueRelated.slice(0, 10), tweetUrls, unifiedDB, summary);
+    const articleHtml = assembleCardArticleHtml(introHtml, allCardInfos, cardAnalyses, uniqueRelated.slice(0, 10), tweetUrls, unifiedDB, summary, articleDate);
     generatedFiles.push({ repoPath: 'data/cards_preview.json', binary: false });
 
-    const title = `【${dateLbl}公開】GD04 Phantom Aria 新カード${cardCount}枚まとめ`;
-    const desc = `ガンダムカードゲームGD04 Phantom Ariaから公開された新カード${cardCount}枚の紹介と環境考察。`;
+    // 指示書32: 拡張コードを動的に取得(EXPANSION_NAMES マップ経由)
+    const title = `【${dateLbl}公開】${expansionName} 新カード${cardCount}枚まとめ`;
+    const desc = `ガンダムカードゲーム${expansionName}から公開された新カード${cardCount}枚の紹介と環境考察。`;
     const pageHtml = generateNewsPage(articleDate, title, desc, articleHtml, { displayDate: articleDate.replace(/-/g, '.') });
     const filePath = path.join(NEWS_DIR, `${articleDate}.html`);
     fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
@@ -2706,48 +2310,140 @@ async function main() {
         articleHtml = await generateNoticeArticle(tweet.text, tweetUrl, summary);
       } catch (e) {
         log(`速報記事生成失敗: ${e.message}`);
-        articleHtml = `<h2>公式からのお知らせ</h2><p>${escapeHtml(tweet.text)}</p>`;
+        const safeText = escapeHtml(tweet.text).replace(/\n/g, '<br>');
+        articleHtml = `<h2>公式アナウンス</h2>\n<p>${safeText}</p>\n<p><a href="${tweetUrl}" target="_blank" rel="noopener">元の投稿を見る</a></p>`;
       }
 
-      articleHtml += `\n<div style="margin-top:24px;padding-top:16px;border-top:1px solid var(--border)">
-<p style="font-size:12px;color:var(--text-muted)">出典: <a href="${escapeHtml(tweetUrl)}" target="_blank" rel="noopener" style="color:var(--accent)">${escapeHtml(tweetUrl)}</a></p>
-</div>`;
-
-      const title = '公式お知らせ速報';
-      const desc = tweet.text.substring(0, 120);
-      const pageId = `${date}-notice`;
-      const pageHtml = generateNewsPage(pageId, title, desc, articleHtml);
+      const tweetDate = (tweet.created_at || '').split('T')[0] || date;
+      const pageId = `notice-${tweet.id}`;
+      const firstLine = (tweet.text.split('\n').find(l => l.trim()) || '速報').trim().slice(0, 40);
+      const title = `【速報】${firstLine}`;
+      const desc = firstLine;
+      const pageHtml = generateNewsPage(pageId, title, desc, articleHtml, { displayDate: tweetDate.replace(/-/g, '.') });
       const filePath = path.join(NEWS_DIR, `${pageId}.html`);
       fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
       generatedFiles.push({ repoPath: `reports/news/${pageId}.html`, binary: false });
       log(`速報記事保存: ${filePath}`);
 
+      // X投稿（テストモードではスキップ）
       const articleUrl = `${SITE_URL}/reports/news/${pageId}.html`;
       if (TEST_MODE) {
         log(`[TEST_MODE] X投稿スキップ。記事URL: ${articleUrl}`);
       } else {
         try {
-          const tweetText = await generateTweetText('notice', { summary: tweet.text.substring(0, 100), url: articleUrl });
+          const tweetText = await generateTweetText('notice', { summary: firstLine, url: articleUrl });
           await postTweet(tweetText);
         } catch (e) {
           log(`X投稿生成/送信失敗: ${e.message}`);
         }
       }
+
+      await sleep(1000);
     }
   }
 
-  // ⑤ GitHub API経由でpush
-  const commitCards = newCards.length > 0 ? `新カード記事(${allCardInfos.length}枚)` : '';
-  const commitNotices = notices.length > 0 ? `速報${notices.length}件` : '';
-  const commitMsg = `auto-news: ${[commitCards, commitNotices].filter(Boolean).join(' + ')} (${date})`;
-  await gitPush(commitMsg, generatedFiles);
+  // === Git push ===
+  if (generatedFiles.length > 0) {
+    try {
+      await gitPush(`auto-news: ${date}`, generatedFiles);
+    } catch (e) {
+      log(`git push 失敗: ${e.message}`);
+    }
+  }
 
-  saveLastCheck();
+  // === Phase 3: post-processing 呼び出し(指示書41、2026-05-19)===
+  // 認識成功かつ _articleDate が一致するカードのみ後処理
+  // Option A: articleDate は新カードブロック内のブロックスコープ const のため、
+  //           ここからは直接参照不可。allCardInfos[0]._articleDate から取得する。
+  try {
+    const phase3ArticleDate = (allCardInfos.length > 0)
+      ? (allCardInfos[0]._articleDate || null)
+      : null;
+
+    if (!phase3ArticleDate) {
+      log(`[Phase 3] post-processing スキップ: articleDate 取得不可(allCardInfos 空 or _articleDate 未設定)`);
+    } else {
+      const successCardNumbers = allCardInfos
+        .filter(c => c && c._pendingReview !== true)
+        .filter(c => c && c._articleDate === phase3ArticleDate)
+        .map(c => c.card_number)
+        .filter(cn => typeof cn === 'string' && cn.length > 0);
+
+      if (successCardNumbers.length > 0) {
+        log(`[Phase 3] post-processing 開始: ${successCardNumbers.length} 件 (${successCardNumbers.join(', ')})`);
+        try {
+          const { postProcess } = require('./scripts/post-processing');
+          const result = await postProcess({
+            date: phase3ArticleDate,
+            cardNumbers: successCardNumbers,
+            dryRun: DRY_RUN,
+          });
+          log(`[Phase 3] post-processing 完了: ${JSON.stringify(result)}`);
+        } catch (err) {
+          // ★ post-processing エラーはメイン処理を中断しない(翌朝の松岡さん確認で対処)★
+          log(`[Phase 3] post-processing エラー: ${err.message}`);
+          if (err.stack) console.error(err.stack);
+        }
+      } else {
+        log(`[Phase 3] post-processing スキップ: 認識成功カード 0 件`);
+      }
+    }
+  } catch (outerErr) {
+    log(`[Phase 3] post-processing 前処理エラー: ${outerErr.message}`);
+  }
+
+  // 最終チェック時刻を保存
+  if (CLI_START_TIME) {
+    log('--start-time 明示指定のため last-check.json を更新しません');
+  } else if (AUTO_WINDOW) {
+    saveLastCheck(effectiveEndTime);
+    log(`auto-window 完了: last-check.json を ${effectiveEndTime} に更新`);
+  } else {
+    saveLastCheck();
+  }
   log('=== auto-news 完了 ===');
 }
 
-main().catch(e => {
-  log(`致命的エラー: ${e.message}`);
-  console.error(e);
-  process.exit(1);
-});
+// === Module exports for manual scripts ===
+// 指示書34: 共通モジュールから再エクスポート(他スクリプトからの後方互換性)
+// 指示書37(2026-05-17): regenerate-article.js から再利用するため auto-news.js 独自関数も追加
+module.exports = {
+  // 共通モジュール(指示書34: 認識・記事生成の基盤関数)
+  ...require('./scripts/shared/recognition-core.js'),
+  // auto-news.js 独自関数(指示書37 で公開)
+  formatExpansionName,
+  classifyTweet,
+  fetchOfficialTweets,
+  fetchImageBase64,
+  downloadCardImage,
+  verifyWithMaster,
+  fixRecognitionErrors,
+  validateCardInfo,
+  saveRecognitionLog,
+  saveCardPreview,
+  checkRecognitionIssues,
+  findRelatedCards,
+  findInlineRelated,
+  findLinkTargets,
+  buildCardBlockHtml,
+  buildRelatedCardsHtml,
+  assembleCardArticleHtml,
+  generateNewsPage,
+  generateTweetText,
+  gitPush,
+  postTweet,
+  postSurvey,
+  extractCardData,
+  extractCardDataVisionPipeline,
+};
+
+// 直接実行時のみ main を起動(require 時は実行しない)
+if (require.main === module) {
+  main().catch(e => {
+    log(`致命的エラー: ${e.message}`);
+    console.error(e);
+    process.exit(1);
+  });
+}
+// EOF
+// EOF
