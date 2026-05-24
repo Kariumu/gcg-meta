@@ -283,12 +283,86 @@ function xGet(endpoint, params) {
   });
 }
 
+// === X API: media upload (v1.1) ===
+// 2026-05-24 追加: 新カード記事投稿時にカード画像を添付するため
+// OAuth 1.0a multipart の場合、署名対象に body を含めない(X API 仕様)
+async function uploadMediaToX(imagePath) {
+  if (DRY_RUN) {
+    log(`[DRY-RUN] media upload スキップ: ${imagePath}`);
+    return null;
+  }
+  if (!fs.existsSync(imagePath)) {
+    log(`[media upload] 画像ファイル不在、スキップ: ${imagePath}`);
+    return null;
+  }
+
+  return new Promise((resolve) => {
+    const url = 'https://upload.twitter.com/1.1/media/upload.json';
+    const authHeader = buildOAuthHeader('POST', url, {});
+
+    const boundary = '----GcgStatsBoundary' + crypto.randomBytes(8).toString('hex');
+    const imageBuffer = fs.readFileSync(imagePath);
+    const head = Buffer.from(
+      `--${boundary}\r\n` +
+      `Content-Disposition: form-data; name="media"\r\n` +
+      `Content-Type: application/octet-stream\r\n\r\n`
+    );
+    const tail = Buffer.from(`\r\n--${boundary}--\r\n`);
+    const body = Buffer.concat([head, imageBuffer, tail]);
+
+    const req = https.request({
+      hostname: 'upload.twitter.com',
+      path: '/1.1/media/upload.json',
+      method: 'POST',
+      headers: {
+        'Authorization': authHeader,
+        'Content-Type': `multipart/form-data; boundary=${boundary}`,
+        'Content-Length': body.length
+      }
+    }, res => {
+      const chunks = [];
+      res.on('data', c => chunks.push(c));
+      res.on('end', () => {
+        const data = Buffer.concat(chunks).toString('utf-8');
+        if (res.statusCode === 200 || res.statusCode === 201) {
+          try {
+            const parsed = JSON.parse(data);
+            log(`[media upload] 成功: media_id=${parsed.media_id_string} (${path.basename(imagePath)})`);
+            resolve(parsed.media_id_string);
+          } catch (e) {
+            log(`[media upload] レスポンスパース失敗: ${e.message}`);
+            resolve(null);
+          }
+        } else {
+          log(`[media upload] 失敗 (${res.statusCode}): ${data.slice(0, 200)}`);
+          resolve(null);
+        }
+      });
+    });
+    req.on('error', e => {
+      log(`[media upload] 通信エラー: ${e.message}`);
+      resolve(null);
+    });
+    req.write(body);
+    req.end();
+  });
+}
+
 // === X API: POST tweet ===
-function postTweet(text) {
-  if (DRY_RUN) { log(`[DRY-RUN] X投稿スキップ: ${text.substring(0, 60)}...`); return Promise.resolve(null); }
+// 2026-05-24 拡張: mediaIds 配列を受け取り画像添付対応(最大 4 枚、X 仕様)
+function postTweet(text, mediaIds = []) {
+  if (DRY_RUN) {
+    const mediaInfo = mediaIds && mediaIds.length > 0 ? ` (画像 ${mediaIds.length} 枚予定)` : '';
+    log(`[DRY-RUN] X投稿スキップ${mediaInfo}: ${text.substring(0, 60)}...`);
+    return Promise.resolve(null);
+  }
   const url = 'https://api.x.com/2/tweets';
   const authHeader = buildOAuthHeader('POST', url, {});
-  const body = JSON.stringify({ text });
+  const tweetBody = { text };
+  if (mediaIds && mediaIds.length > 0) {
+    tweetBody.media = { media_ids: mediaIds };
+  }
+  const body = JSON.stringify(tweetBody);
 
   return new Promise((resolve, reject) => {
     const req = https.request({
@@ -299,7 +373,10 @@ function postTweet(text) {
       res.on('data', chunk => chunks.push(chunk));
       res.on('end', () => {
         const data = Buffer.concat(chunks).toString('utf-8');
-        if (res.statusCode === 201) { log('X投稿成功'); resolve(JSON.parse(data)); }
+        if (res.statusCode === 201) {
+          log(`X投稿成功${mediaIds && mediaIds.length > 0 ? ` (画像 ${mediaIds.length} 枚添付)` : ''}`);
+          resolve(JSON.parse(data));
+        }
         else { log(`X投稿失敗 (${res.statusCode}): ${data}`); reject(new Error(data)); }
       });
     });
@@ -2301,7 +2378,24 @@ async function main() {
       const cardNames = allCardInfos.map(c => c.card_name).join('、');
       try {
         const tweetText = await generateTweetText('new_card', { cardNames, url: articleUrl });
-        await postTweet(tweetText);
+
+        // 2026-05-24 追加: カード画像を X 投稿に添付 (X 仕様: 最大 4 枚)
+        const mediaIds = [];
+        const cardsForImage = allCardInfos.slice(0, 4);
+        for (const ci of cardsForImage) {
+          if (ci._localImagePath) {
+            const imageFullPath = path.resolve(NEWS_DIR, ci._localImagePath);
+            const mediaId = await uploadMediaToX(imageFullPath);
+            if (mediaId) mediaIds.push(mediaId);
+            await sleep(500);
+          }
+        }
+        if (allCardInfos.length > 4) {
+          log(`[X投稿] カード ${allCardInfos.length} 枚中、最大 4 枚を画像添付 (X 仕様上限)`);
+        }
+        log(`[X投稿] 画像 ${mediaIds.length} 枚添付`);
+
+        await postTweet(tweetText, mediaIds);
       } catch (e) {
         log(`X投稿生成/送信失敗: ${e.message}`);
       }
@@ -2440,6 +2534,7 @@ module.exports = {
   generateTweetText,
   gitPush,
   postTweet,
+  uploadMediaToX,
   postSurvey,
   extractCardData,
   extractCardDataVisionPipeline,
