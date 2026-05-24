@@ -219,11 +219,86 @@ const GCG = {
     requestAnimationFrame(step);
   },
 
+  // === 共通ヘッダー(2段ナビ構成、2026-05-24 案B 採用) ===
+  // activePage は既存呼び出し互換のため文字列キーを維持
+  // ('home','series','events','meta','cards','stores','regions','schedule','reports','')
+  // 内部で主タブ4つにマッピングしサブナビを切替表示する
+  _PAGE_MAP: {
+    home:     { main: 'home',        sub: null       },
+    events:   { main: 'tournaments', sub: 'events'   },
+    series:   { main: 'tournaments', sub: 'series'   },
+    schedule: { main: 'tournaments', sub: 'schedule' },
+    meta:     { main: 'analysis',    sub: 'meta'     },
+    cards:    { main: 'analysis',    sub: 'cards'    },
+    reports:  { main: 'analysis',    sub: 'reports'  },
+    stores:   { main: 'venues',      sub: 'stores'   },
+    regions:  { main: 'venues',      sub: 'regions'  }
+    // '' (contact/privacy/about 等) は主タブもサブもアクティブ無し
+  },
+
+  _MAIN_TABS: [
+    { key: 'home',        href: '',             label: 'ホーム'    },
+    { key: 'tournaments', href: 'events.html',  label: '大会データ' },
+    { key: 'analysis',    href: 'meta.html',    label: '環境分析'  },
+    { key: 'venues',      href: 'stores.html',  label: '店舗・地域' }
+  ],
+
+  _SUB_NAV: {
+    tournaments: [
+      { key: 'events',   href: 'events.html',   label: 'イベント'    },
+      { key: 'series',   href: 'series/',       label: 'シリーズ'    },
+      { key: 'schedule', href: 'schedule.html', label: 'スケジュール' }
+    ],
+    analysis: [
+      { key: 'meta',    href: 'meta.html',  label: 'メタ分析'    },
+      { key: 'cards',   href: 'cards.html', label: 'カードリスト' },
+      { key: 'reports', href: 'reports/',   label: 'レポート'    }
+    ],
+    venues: [
+      { key: 'stores',  href: 'stores.html',  label: '店舗一覧' },
+      { key: 'regions', href: 'regions.html', label: '地域別'  }
+    ]
+  },
+
+  _MAIN_LABEL: {
+    home:        'ホーム',
+    tournaments: '大会データ',
+    analysis:    '環境分析',
+    venues:      '店舗・地域'
+  },
+
   // 共通ヘッダーHTML生成
   renderHeader(activePage) {
     const basePath = this.getBasePath();
+    const map = this._PAGE_MAP[activePage] || { main: null, sub: null };
+    const activeMain = map.main;
+    const activeSub  = map.sub;
+
+    // 主タブ
+    const mainTabsHtml = this._MAIN_TABS.map(t => {
+      const cls = (t.key === activeMain) ? 'active' : '';
+      return `<a href="${basePath}${t.href}" class="${cls}">${t.label}</a>`;
+    }).join('');
+
+    // サブナビ（home / contact 等は表示しない）
+    let subNavHtml = '';
+    if (activeMain && activeMain !== 'home' && this._SUB_NAV[activeMain]) {
+      const items = this._SUB_NAV[activeMain].map(s => {
+        const cls = (s.key === activeSub) ? 'active' : '';
+        return `<a href="${basePath}${s.href}" class="${cls}">${s.label}</a>`;
+      }).join('');
+      const label = this._MAIN_LABEL[activeMain] || '';
+      subNavHtml = `
+        <div class="sub-nav">
+          <div class="sub-nav-inner">
+            <span class="sub-nav-label">${label} ›</span>
+            ${items}
+          </div>
+        </div>`;
+    }
+
     return `
-      <header class="site-header">
+      <header class="site-header site-header-v2">
         <div class="header-inner">
           <a href="${basePath}" class="site-logo">
             <span class="logo-icon">G</span>
@@ -232,19 +307,10 @@ const GCG = {
               <span class="logo-sub">Tournament Analytics</span>
             </div>
           </a>
-          <nav>
-            <a href="${basePath}" class="${activePage === 'home' ? 'active' : ''}">ダッシュボード</a>
-            <a href="${basePath}series/" class="${activePage === 'series' ? 'active' : ''}">シリーズ</a>
-            <a href="${basePath}events.html" class="${activePage === 'events' ? 'active' : ''}">イベント</a>
-            <a href="${basePath}meta.html" class="${activePage === 'meta' ? 'active' : ''}">環境分析</a>
-            <a href="${basePath}cards.html" class="${activePage === 'cards' ? 'active' : ''}">カードリスト</a>
-            <a href="${basePath}stores.html" class="${activePage === 'stores' ? 'active' : ''}">店舗</a>
-            <a href="${basePath}regions.html" class="${activePage === 'regions' ? 'active' : ''}">地域別</a>
-            <a href="${basePath}schedule.html" class="${activePage === 'schedule' ? 'active' : ''}">スケジュール</a>
-            <a href="${basePath}reports/" class="${activePage === 'reports' ? 'active' : ''}">レポート</a>
-          </nav>
+          <nav class="main-tabs">${mainTabsHtml}</nav>
           ${this.renderHeaderSearch()}
         </div>
+        ${subNavHtml}
       </header>`;
   },
 
@@ -611,7 +677,6 @@ GCG.initHeaderSearch = function() {
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       activeIdx = (activeIdx - 1 + items.length) % items.length;
-      items.forEach((el, i) => el.classList.toggle('is-active', i === activeIdx));
       items[activeIdx].scrollIntoView({ block: 'nearest' });
     } else if (e.key === 'Enter') {
       if (activeIdx >= 0 && items[activeIdx]) {
