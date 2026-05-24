@@ -219,28 +219,32 @@ const GCG = {
     requestAnimationFrame(step);
   },
 
-  // === 共通ヘッダー(2段ナビ構成、2026-05-24 案B 採用) ===
+  // === 共通ヘッダー(2段ナビ構成、2026-05-24 修正版) ===
+  // 変更履歴:
+  //   2026-05-24 案B採用(主タブ4つ + サブナビ)
+  //   2026-05-24 主タブ再編 → カードリスト/レポートを独立タブに昇格、検索欄削除
   // activePage は既存呼び出し互換のため文字列キーを維持
   // ('home','series','events','meta','cards','stores','regions','schedule','reports','')
-  // 内部で主タブ4つにマッピングしサブナビを切替表示する
   _PAGE_MAP: {
     home:     { main: 'home',        sub: null       },
     events:   { main: 'tournaments', sub: 'events'   },
     series:   { main: 'tournaments', sub: 'series'   },
     schedule: { main: 'tournaments', sub: 'schedule' },
-    meta:     { main: 'analysis',    sub: 'meta'     },
-    cards:    { main: 'analysis',    sub: 'cards'    },
-    reports:  { main: 'analysis',    sub: 'reports'  },
+    meta:     { main: 'analysis',    sub: null       },
+    cards:    { main: 'cards',       sub: null       },
+    reports:  { main: 'reports',     sub: null       },
     stores:   { main: 'venues',      sub: 'stores'   },
     regions:  { main: 'venues',      sub: 'regions'  }
     // '' (contact/privacy/about 等) は主タブもサブもアクティブ無し
   },
 
   _MAIN_TABS: [
-    { key: 'home',        href: '',             label: 'ホーム'    },
-    { key: 'tournaments', href: 'events.html',  label: '大会データ' },
-    { key: 'analysis',    href: 'meta.html',    label: '環境分析'  },
-    { key: 'venues',      href: 'stores.html',  label: '店舗・地域' }
+    { key: 'home',        href: '',             label: 'ホーム'     },
+    { key: 'tournaments', href: 'events.html',  label: '大会データ'  },
+    { key: 'analysis',    href: 'meta.html',    label: '環境分析'   },
+    { key: 'cards',       href: 'cards.html',   label: 'カードリスト' },
+    { key: 'reports',     href: 'reports/',     label: 'レポート'   },
+    { key: 'venues',      href: 'stores.html',  label: '店舗・地域'  }
   ],
 
   _SUB_NAV: {
@@ -249,21 +253,19 @@ const GCG = {
       { key: 'series',   href: 'series/',       label: 'シリーズ'    },
       { key: 'schedule', href: 'schedule.html', label: 'スケジュール' }
     ],
-    analysis: [
-      { key: 'meta',    href: 'meta.html',  label: 'メタ分析'    },
-      { key: 'cards',   href: 'cards.html', label: 'カードリスト' },
-      { key: 'reports', href: 'reports/',   label: 'レポート'    }
-    ],
     venues: [
       { key: 'stores',  href: 'stores.html',  label: '店舗一覧' },
       { key: 'regions', href: 'regions.html', label: '地域別'  }
     ]
+    // analysis / cards / reports / home はサブナビ無し
   },
 
   _MAIN_LABEL: {
     home:        'ホーム',
     tournaments: '大会データ',
     analysis:    '環境分析',
+    cards:       'カードリスト',
+    reports:     'レポート',
     venues:      '店舗・地域'
   },
 
@@ -280,9 +282,9 @@ const GCG = {
       return `<a href="${basePath}${t.href}" class="${cls}">${t.label}</a>`;
     }).join('');
 
-    // サブナビ（home / contact 等は表示しない）
+    // サブナビ（_SUB_NAV に定義のあるカテゴリのみ表示。home/cards/reports/analysis等は非表示）
     let subNavHtml = '';
-    if (activeMain && activeMain !== 'home' && this._SUB_NAV[activeMain]) {
+    if (activeMain && this._SUB_NAV[activeMain]) {
       const items = this._SUB_NAV[activeMain].map(s => {
         const cls = (s.key === activeSub) ? 'active' : '';
         return `<a href="${basePath}${s.href}" class="${cls}">${s.label}</a>`;
@@ -297,6 +299,7 @@ const GCG = {
         </div>`;
     }
 
+    // 検索欄は 2026-05-24 のヘッダー再修正で撤去
     return `
       <header class="site-header site-header-v2">
         <div class="header-inner">
@@ -308,7 +311,6 @@ const GCG = {
             </div>
           </a>
           <nav class="main-tabs">${mainTabsHtml}</nav>
-          ${this.renderHeaderSearch()}
         </div>
         ${subNavHtml}
       </header>`;
