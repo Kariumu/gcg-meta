@@ -8,3 +8,6 @@ _screenshots_*/
 # 一時デプロイスクリプト
 deploy-s*.js
 add-breadcrumb-*.js
+
+# RGB ログ収集ファイル(2026-05-24 追加、classifyColor 閾値調整用、肥大化するためリポ管理外)
+data/color-classification-log.jsonl

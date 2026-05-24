@@ -564,7 +564,10 @@ function classifyColor(r, g, b) {
 }
 
 // 画像バッファからコスト丸アイコンの平均RGB値を取得して色判定
-async function detectCardColor(imageBuffer) {
+// 2026-05-24 追加: context (card_number, source 等) を受け取り、
+// data/color-classification-log.jsonl に永続化する(将来の classifyColor 閾値調整用)。
+// context は省略可能。書込み失敗は警告のみで認識処理は続行(品質保証)。
+async function detectCardColor(imageBuffer, context = {}) {
   const { data, info } = await sharp(imageBuffer)
     .extract(COLOR_CROP)
     .raw()
@@ -586,6 +589,25 @@ async function detectCardColor(imageBuffer) {
   if (color === 'Unknown') {
     log(`  [Step1-B] ⚠ 色判定不能: RGB(${r},${g},${b}) — 要手動確認`);
   }
+
+  // RGB ログ JSONL 永続化 (2026-05-24 追加)
+  // 目的: 将来の classifyColor 閾値調整のため、全色判定結果を data/ に蓄積。
+  // Unknown だけでなく成功例も保存して、誤判定検出時の前後比較を可能にする。
+  try {
+    // spread 順序: context を先に置き、timestamp/rgb/color を後で書く。
+    // これにより context 側のキーが timestamp/rgb/color を誤上書きできない(防衛的)。
+    const logEntry = {
+      ...context, // card_number, source 等(呼び出し側が渡せば付与)
+      timestamp: new Date().toISOString(),
+      rgb: { r, g, b },
+      color,
+    };
+    const logPath = path.join(DATA_DIR, 'color-classification-log.jsonl');
+    fs.appendFileSync(logPath, JSON.stringify(logEntry) + '\n', 'utf-8');
+  } catch (e) {
+    log(`  [Step1-B] ⚠ color-classification-log.jsonl 書込み失敗: ${e.message}`);
+  }
+
   return { color, rgb: { r, g, b } };
 }
 
