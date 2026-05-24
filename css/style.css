@@ -2058,3 +2058,111 @@ a.section-badge:hover {
     font-size: 22px;
   }
 }
+
+/* =========================================================
+   Header v2 — 2段ナビゲーション (2026-05-24, 案B 採用)
+   - 1段目: ロゴ + 主タブ(4) + 検索
+   - 2段目: 選択中カテゴリのサブナビ(常時可視)
+   既存の nav / .site-header / .header-inner 共通ルールは
+   そのまま活用し、上書きはクラス指定で specificity を確保
+   ========================================================= */
+
+/* 主タブ(1段目) */
+.site-header-v2 nav.main-tabs {
+  display: flex;
+  gap: 2px;
+  align-items: stretch;
+  height: 60px;
+}
+.site-header-v2 nav.main-tabs a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition-fast),
+              background var(--transition-fast),
+              border-color var(--transition-fast);
+  position: relative;
+}
+.site-header-v2 nav.main-tabs a:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.04);
+}
+.site-header-v2 nav.main-tabs a.active {
+  color: var(--accent);
+  background: transparent;
+  border-bottom-color: var(--accent);
+}
+/* 旧 nav a.active::after の下線バーは main-tabs では border-bottom と重複するため抑止 */
+.site-header-v2 nav.main-tabs a.active::after { display: none; }
+
+/* サブナビ(2段目) */
+.site-header-v2 .sub-nav {
+  background: rgba(0,0,0,0.28);
+  border-top: 1px solid var(--border);
+}
+.site-header-v2 .sub-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 28px;
+  flex-wrap: wrap;
+}
+.site-header-v2 .sub-nav-label {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.site-header-v2 .sub-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+.site-header-v2 .sub-nav a:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+.site-header-v2 .sub-nav a.active {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.site-header-v2 .sub-nav a.active::after { display: none; }
+
+/* レスポンシブ(モバイル) */
+@media (max-width: 768px) {
+  .site-header-v2 nav.main-tabs {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .site-header-v2 nav.main-tabs a {
+    padding: 8px 12px;
+    font-size: 13px;
+    border-bottom: none;
+    border-radius: var(--radius);
+  }
+  .site-header-v2 nav.main-tabs a.active {
+    background: var(--accent-dim);
+  }
+  .site-header-v2 .sub-nav-inner {
+    padding: 6px 12px;
+    justify-content: center;
+    gap: 2px;
