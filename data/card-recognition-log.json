@@ -1018,5 +1018,241 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-05-19": {
+    "recognized_at": "2026-05-19 20:23:51 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2056653585899790603",
+      "https://x.com/GUNDAM_GCG_JP/status/2056646041399873754"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-065",
+        "card_name": "メイア・シヴァ",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": null,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔攻撃型〕"
+        ],
+        "link": "特徴(〔ジージェネ〕)",
+        "effect": "【バースト】このカードを手札に加える。【リンク中】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それは《突破(1)》を得る。",
+        "effect_confidence": "medium",
+        "effect_length": 67,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-025",
+        "card_name": "トールギスII",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 6,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴にジージェネを持つPILOT",
+        "effect": "【配備時】・開発2 自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■プレイヤーすべてはEXリソース1つを置く。【セット中】 相手のEXリソースがある間、このユニットはLv.5以下の相手のユニットからバトルダメージを受けない。",
+        "effect_confidence": "low",
+        "effect_length": 145,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-05-20": {
+    "recognized_at": "2026-05-20 21:19:56 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2057015973195202879",
+      "https://x.com/GUNDAM_GCG_JP/status/2057008423401902537"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-071",
+        "card_name": "イットウ・ツルギ",
+        "color": "White",
+        "card_type": "PILOT",
+        "level": null,
+        "cost": null,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔攻撃型〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットをAP+1する。",
+        "effect_confidence": "high",
+        "effect_length": 39,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-046",
+        "card_name": "ストライカー・カスタム(EX)",
+        "color": "Unknown",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "【セット中】【アタック時】Lv.4以上の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+        "effect_confidence": "high",
+        "effect_length": 50,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-05-22": {
+    "recognized_at": "2026-05-24 07:18:51 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2058103138683441230",
+      "https://x.com/GUNDAM_GCG_JP/status/2058095592392266197",
+      "https://x.com/GUNDAM_GCG_JP/status/2057787306203832447",
+      "https://x.com/GUNDAM_GCG_JP/status/2057786048676262125"
+    ],
+    "cards": [
+      {
+        "card_number": "ST10-007",
+        "card_name": "ガンダム・バルバトス (第4形態)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 5,
+        "ap": 6,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴にジージェネを持つPILOT",
+        "effect": "【リンク時】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分のトラッシュのLv.4以下のコマンドカード1枚を選ぶ。それを手札に加える。",
+        "effect_confidence": "low",
+        "effect_length": 102,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST10-015",
+        "card_name": "拡散ビーム砲",
+        "color": "Red",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "〔ジージェネ〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。このバトル中、それをAP-3する。",
+        "effect_confidence": "medium",
+        "effect_length": 51,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-068",
+        "card_name": "シャル・アクスティカ",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": null,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔攻撃型〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【リンク中】【破壊時】このユニットにセットされていたパイロットカードを持ち主のデッキの上に戻してもよい。",
+        "effect_confidence": "medium",
+        "effect_length": 71,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-028",
+        "card_name": "ガンダムプルトーネ",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 1,
+        "cost": 3,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "「シャル・アクスティカ」",
+        "effect": "ターン1回 このユニット以外のユニットが、相手のユニットにアタックしたとき、これがレストしているなら、このバトル中、アタックしているユニットは《突破(2)》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+        "effect_confidence": "low",
+        "effect_length": 138,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-05-24": {
+    "recognized_at": "2026-05-24 20:26:00 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2058465524774773043",
+      "https://x.com/GUNDAM_GCG_JP/status/2058457977619718273"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-061",
+        "card_name": "エリス・クロード",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 3,
+        "cost": 1,
+        "ap": 1,
+        "hp": 1,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔支援型〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】〔ジージェネ〕の味方のユニットがいるなら、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。",
+        "effect_confidence": "medium",
+        "effect_length": 76,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-005",
+        "card_name": "Zガンダム3号機P2型",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 6,
+        "ap": 6,
+        "hp": 4,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴に支援型を持つPILOT",
+        "effect": "【配備時】レストの他のプレイヤーのユニット1つを選ぶ。それをアクティブにし、自分は1枚ドローする。",
+        "effect_confidence": "high",
+        "effect_length": 49,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }

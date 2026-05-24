@@ -630,5 +630,149 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-05-20"
+  },
+  "ST10-007": {
+    "card_number": "ST10-007",
+    "card_name": "ガンダム・バルバトス (第4形態)",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 4,
+    "cost": 5,
+    "ap": 6,
+    "hp": 5,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "特徴にジージェネを持つPILOT",
+    "rarity": "C",
+    "effect": "【リンク時】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分のトラッシュのLv.4以下のコマンドカード1枚を選ぶ。それを手札に加える。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2058103138683441230",
+    "created_at": "2026-05-24 07:18:24 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-22"
+  },
+  "ST10-015": {
+    "card_number": "ST10-015",
+    "card_name": "拡散ビーム砲",
+    "color": "Red",
+    "card_type": "COMMAND",
+    "level": 3,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "〔ジージェネ〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。このバトル中、それをAP-3する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2058095592392266197",
+    "created_at": "2026-05-24 07:18:32 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-22"
+  },
+  "EB01-068": {
+    "card_number": "EB01-068",
+    "card_name": "シャル・アクスティカ",
+    "color": "Green",
+    "card_type": "PILOT",
+    "level": null,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔攻撃型〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを手札に加える。【リンク中】【破壊時】このユニットにセットされていたパイロットカードを持ち主のデッキの上に戻してもよい。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2057787306203832447",
+    "created_at": "2026-05-24 07:18:40 JST",
+    "preview": true,
+    "_pendingReview": true,
+    "_pendingReviewIssues": [
+      "PILOT の level が空",
+      "PILOT の ap(補正) が空",
+      "PILOT の hp(補正) が空"
+    ],
+    "_articleDate": "2026-05-22"
+  },
+  "EB01-028": {
+    "card_number": "EB01-028",
+    "card_name": "ガンダムプルトーネ",
+    "color": "Green",
+    "card_type": "UNIT",
+    "level": 1,
+    "cost": 3,
+    "ap": 3,
+    "hp": 3,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "「シャル・アクスティカ」",
+    "rarity": "U",
+    "effect": "ターン1回 このユニット以外のユニットが、相手のユニットにアタックしたとき、これがレストしているなら、このバトル中、アタックしているユニットは《突破(2)》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2057786048676262125",
+    "created_at": "2026-05-24 07:18:50 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-22"
+  },
+  "EB01-061": {
+    "card_number": "EB01-061",
+    "card_name": "エリス・クロード",
+    "color": "Blue",
+    "card_type": "PILOT",
+    "level": 3,
+    "cost": 1,
+    "ap": 1,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔支援型〕"
+    ],
+    "link": "",
+    "rarity": "R",
+    "effect": "【バースト】このカードを手札に加える。【セット時】〔ジージェネ〕の味方のユニットがいるなら、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2058465524774773043",
+    "created_at": "2026-05-24 20:25:50 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-24"
+  },
+  "EB01-005": {
+    "card_number": "EB01-005",
+    "card_name": "Zガンダム3号機P2型",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": 7,
+    "cost": 6,
+    "ap": 6,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "特徴に支援型を持つPILOT",
+    "rarity": "R",
+    "effect": "【配備時】レストの他のプレイヤーのユニット1つを選ぶ。それをアクティブにし、自分は1枚ドローする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2058457977619718273",
+    "created_at": "2026-05-24 20:25:59 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-24"
   }
 }
