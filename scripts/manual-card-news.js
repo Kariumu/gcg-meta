@@ -500,7 +500,7 @@ ${hasImage
 - card_name: ガンダム名 + (バリアント) + (EX/LR等のサフィックス)
 - rarity: LR / SR / R / U / C のいずれか
 - card_type: UNIT / PILOT / COMMAND / BASE
-- level: 1-12 の整数
+- level: 1-12 の整数。**重要(2026-05-24 案件3 改修)**: 画像が渡されている場合、カード左上の "Lv.X" 表示を画像から直接読み取ること。OCR テキストに "Lv" の文字列が見つからなくても、画像から数字を確認できる。card_type に関わらず(UNIT/PILOT/COMMAND/BASE 全て)level は必須項目。読み取れない場合のみ null
 - cost: 0-12 の整数
 - ap: UNIT は通常 AP(0-9)、PILOT は補正AP(セット時の増分、0 含む 0-9)、BASE は通常 AP(0 含む 0-9、指示書37c により BASE も AP 必須化)、COMMAND は null
 - hp: UNIT は通常 HP(0-9)、PILOT は補正HP(セット時の増分、0 含む 0-9)、BASE は通常 HP(0-9)、COMMAND は null
@@ -576,6 +576,7 @@ effect テキスト内に以下の記号が出現します。これらは特定�
   "cost": 3,
   "ap": 4,
   "hp": 4,
+  "color": "Blue",
   "traits": ["〔ジージェネ〕"],
   "link": "「マーク・ギルダー」",
   "effect": "...",
@@ -583,6 +584,13 @@ effect テキスト内に以下の記号が出現します。これらは特定�
   "release_date": "2026-06-27",
   "_corrections": ["LR を RO 誤認識から補正", "level=5(OCR連結 23 から分離)"]
 }
+
+**color フィールドの規則(2026-05-24 案件4 改修)**:
+- 値は必ず英語のみ: "Blue" / "Red" / "Green" / "White" / "Purple" / "Unknown"
+- 日本語表記("赤"/"青"/"緑"/"白"/"紫")は禁止
+- 画像が渡されている場合、カード左上のコスト丸アイコンの色を確認して判定
+- step2Result.color が "Unknown" や null の場合は、画像から色を判定して補完を試みる
+- 画像でも明確に判定できない場合は "Unknown" を返す(捏造禁止)
 
 **ルール**:
 1. step2Result で取得済の値は基本的にそのまま使用
@@ -664,13 +672,24 @@ ${hasImage ? '画像で明確に確認できる値(特に level, cost, ap, hp �
               resolve(step2Result);
               return;
             }
-            // step2Result の _rawText / _blocks / color / _warning_ap_hp は維持
+            // step2Result の _rawText / _blocks / _warning_ap_hp は維持
+            // color (2026-05-24 案件4 改修): Step 1-B (sharp pixel detection) が "Unknown" や
+            // null、または日本語表記の場合のみ、Step 3 Claude の color (画像認識) で補完。
+            // 通常の有効色 (Blue/Red/Green/White/Purple) は Step 1-B 優先(従来の設計を維持)。
+            const validColors = ['Blue', 'Red', 'Green', 'White', 'Purple'];
+            const step1bColor = step2Result.color;
+            const claudeColor = structured.color;
+            let finalColor = step1bColor;
+            if (!validColors.includes(step1bColor) && validColors.includes(claudeColor)) {
+              finalColor = claudeColor;
+              console.log(`[Step 3] color 補完: Step1-B="${step1bColor}" → Claude="${claudeColor}"`);
+            }
             const merged = {
               ...step2Result,
               ...structured,
               _rawText: step2Result._rawText,
               _blocks: step2Result._blocks,
-              color: step2Result.color, // 色は Step 1-B のみが管轄
+              color: finalColor,
             };
             if (step2Result._warning_ap_hp) merged._warning_ap_hp = step2Result._warning_ap_hp;
             // Step 3 の補正内容ログ
