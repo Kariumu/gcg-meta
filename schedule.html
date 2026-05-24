@@ -45,12 +45,14 @@
 
   <div id="footer"></div>
 
-  <script src="js/common.js?v=10"></script>
+  <script src="js/common.js?v=13"></script>
   <script>
-    // Status determination — 全イベントの最遅申込期限・最早/最遅開始時刻から判定
+    // Status determination — 全イベントの最遅申込期限・最早/最遅開始時刻から判定。
+    // 状態は同時に複数成立しうるため、該当する全ステータスを配列で返す
+    // (例: 5月のショップバトル → 開催中 + 応募受付中)。
     // data/schedule.json では apply_end_datetime / start_datetime が null のイベントが含まれるため、
-    // 有効な日時のみを対象にする
-    function getEventSeriesStatus(events) {
+    // 有効な日時のみを対象にする。
+    function getEventSeriesStatuses(events) {
       var now = new Date();
       function toValidDate(s) {
         if (!s) return null;
@@ -62,16 +64,30 @@
 
       // 日時が一件も取れない series は 'ended' 扱い（後続でフィルタ除外）
       if (applyEndDates.length === 0 && startDates.length === 0) {
-        return { status: 'ended', label: '終了', color: '#6b7280' };
+        return [{ status: 'ended', label: '終了', color: '#6b7280' }];
       }
       var latestApplyEnd = applyEndDates.length ? new Date(Math.max.apply(null, applyEndDates)) : null;
       var earliestStart  = startDates.length ? new Date(Math.min.apply(null, startDates)) : null;
       var latestStart    = startDates.length ? new Date(Math.max.apply(null, startDates)) : null;
 
-      if (latestApplyEnd && now < latestApplyEnd) return { status: 'accepting', label: '応募受付中', color: '#22c55e' };
-      if (earliestStart && latestStart && now >= earliestStart && now <= latestStart) return { status: 'ongoing', label: '開催中', color: '#f97316' };
-      if (earliestStart && now < earliestStart) return { status: 'upcoming', label: '開催予定', color: '#3b82f6' };
-      return { status: 'ended', label: '終了', color: '#6b7280' };
+      var statuses = [];
+      // 開催中: 既に始まっているイベントがあり、まだ全部終わっていない
+      if (earliestStart && latestStart && now >= earliestStart && now <= latestStart) {
+        statuses.push({ status: 'ongoing', label: '開催中', color: '#f97316' });
+      }
+      // 応募受付中: 申込締切がまだ来ていない
+      if (latestApplyEnd && now < latestApplyEnd) {
+        statuses.push({ status: 'accepting', label: '応募受付中', color: '#22c55e' });
+      }
+      // 開催予定: まだ何も始まっておらず ongoing/accepting にも該当しない
+      if (statuses.length === 0 && earliestStart && now < earliestStart) {
+        statuses.push({ status: 'upcoming', label: '開催予定', color: '#3b82f6' });
+      }
+      // どれにも該当しなければ ended
+      if (statuses.length === 0) {
+        statuses.push({ status: 'ended', label: '終了', color: '#6b7280' });
+      }
+      return statuses;
     }
 
     function formatDeadline(dateStr) {
@@ -98,13 +114,19 @@
       card.onmouseover = function() { card.style.borderColor = 'var(--accent)'; };
       card.onmouseout = function() { card.style.borderColor = 'var(--border)'; };
 
-      var badge = '<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;background:' + series.status.color + ';font-family:var(--font-mono)">' + series.status.label + '</span>';
-      var deadline = (series.status.status === 'accepting')
+      // 複数ステータスをすべてバッジ表示（例: 開催中 + 応募受付中）
+      var badges = (series.statuses || []).map(function(st) {
+        return '<span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;background:' + st.color + ';font-family:var(--font-mono)">' + st.label + '</span>';
+      }).join('');
+
+      // 応募受付中の場合に締切を表示
+      var hasAccepting = (series.statuses || []).some(function(st) { return st.status === 'accepting'; });
+      var deadline = hasAccepting
         ? '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-family:var(--font-mono)">応募締切: ' + formatDeadline(series.apply_end_datetime) + '</div>'
         : '';
 
       card.innerHTML =
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">' + badge + '</div>' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">' + badges + '</div>' +
         '<div style="font-size:15px;font-weight:600;color:var(--text-primary)">' + series.event_series_title + '</div>' +
         deadline +
         '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-family:var(--font-mono)">開催数: ' + series.total + '件</div>';
@@ -126,8 +148,9 @@
         var sid = String(series[i].event_series_id);
         var events = eventsByseries[sid] || [];
         if (events.length === 0) { series[i]._skip = true; continue; }
-        series[i].status = getEventSeriesStatus(events);
-        // 表示用の応募締切は「最遅」を採用（series.apply_end_datetime は先頭イベントの値のため上書き）
+        series[i].statuses = getEventSeriesStatuses(events);
+        // フォールバック: fetch-schedule.js 側で apply_end_datetime が「最遅」になっていない
+        // 古い schedule.json を読み込んだ場合に備え、ここでも最遅で上書きする。
         // 無効な日時 / null はスキップ、すべて無効なら元の値を維持
         var applyEnds = events.map(function(e) {
           if (!e.apply_end_datetime) return null;
@@ -140,13 +163,24 @@
         }
       }
 
+      // 並び順用の primary status (statuses[0])
+      function primaryStatus(s) {
+        return (s.statuses && s.statuses[0]) ? s.statuses[0].status : 'ended';
+      }
+
       return {
         lastUpdated: lastUpdated,
         series: series
-          .filter(function(s) { return !s._skip && s.status && s.status.status !== 'ended'; })
+          .filter(function(s) {
+            if (s._skip) return false;
+            if (!s.statuses || s.statuses.length === 0) return false;
+            // 全ステータスが ended の場合のみ非表示
+            return s.statuses.some(function(st) { return st.status !== 'ended'; });
+          })
           .sort(function(a, b) {
-            var order = { accepting: 0, ongoing: 1, upcoming: 2 };
-            return (order[a.status.status] || 9) - (order[b.status.status] || 9);
+            // 並び順: 開催中 → 応募受付中 → 開催予定 (現在動いているものを上に)
+            var order = { ongoing: 0, accepting: 1, upcoming: 2, ended: 9 };
+            return (order[primaryStatus(a)] || 9) - (order[primaryStatus(b)] || 9);
           })
       };
     }
