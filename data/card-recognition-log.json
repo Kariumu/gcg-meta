@@ -1254,5 +1254,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-05-25": {
+    "recognized_at": "2026-05-25 18:00:21 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2058827912523272552",
+      "https://x.com/GUNDAM_GCG_JP/status/2058820363778433249"
+    ],
+    "cards": [
+      {
+        "card_number": "ST10-011",
+        "card_name": "カミーユ・ビダン",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔攻撃型〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【リンク時】レストのユニットが2つ以上いるなら、このユニットのLv.以下の相手のユニット1つを選ぶ。それをレストにする。",
+        "effect_confidence": "medium",
+        "effect_length": 79,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST10-001",
+        "card_name": "Zガンダム (EX)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 6,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "「カミーユ・ビダン」",
+        "effect": "このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、これをアクティブにし、このターン中、これは同じ相手プレイヤー/相手チームをアタック先に選べない。",
+        "effect_confidence": "medium",
+        "effect_length": 85,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }

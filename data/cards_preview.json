@@ -682,10 +682,10 @@
     "card_name": "シャル・アクスティカ",
     "color": "Green",
     "card_type": "PILOT",
-    "level": null,
+    "level": 4,
     "cost": 1,
-    "ap": null,
-    "hp": null,
+    "ap": 1,
+    "hp": 2,
     "terrain": [],
     "traits": [
       "〔ジージェネ〕",
@@ -697,12 +697,8 @@
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2057787306203832447",
     "created_at": "2026-05-24 07:18:40 JST",
     "preview": true,
-    "_pendingReview": true,
-    "_pendingReviewIssues": [
-      "PILOT の level が空",
-      "PILOT の ap(補正) が空",
-      "PILOT の hp(補正) が空"
-    ],
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
     "_articleDate": "2026-05-22"
   },
   "EB01-028": {
@@ -774,5 +770,52 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-05-24"
+  },
+  "ST10-011": {
+    "card_number": "ST10-011",
+    "card_name": "カミーユ・ビダン",
+    "color": "Blue",
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔攻撃型〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを手札に加える。【リンク時】レストのユニットが2つ以上いるなら、このユニットのLv.以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2058827912523272552",
+    "created_at": "2026-05-25 18:00:13 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-25"
+  },
+  "ST10-001": {
+    "card_number": "ST10-001",
+    "card_name": "Zガンダム (EX)",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": 7,
+    "cost": 6,
+    "ap": 5,
+    "hp": 5,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "「カミーユ・ビダン」",
+    "rarity": "LR",
+    "effect": "このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、これをアクティブにし、このターン中、これは同じ相手プレイヤー/相手チームをアタック先に選べない。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2058820363778433249",
+    "created_at": "2026-05-25 18:00:20 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-05-25"
   }
 }
