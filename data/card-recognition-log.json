@@ -1303,5 +1303,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-05-26": {
+    "recognized_at": "2026-05-26 18:00:33 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2059190300484997290",
+      "https://x.com/GUNDAM_GCG_JP/status/2059182754072314277"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-035",
+        "card_name": "ガンダム・ルブリス・ソーン",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴に支援型を持つPILOT",
+        "effect": "このユニット以外の、Lv.3の〔ジージェネ〕の味方のユニットが配備されたとき、このターン中、これは《突破(1)》を得る。",
+        "effect_confidence": "medium",
+        "effect_length": 60,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-034",
+        "card_name": "ガンダム・ルブリス・ウル",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 2,
+        "hp": 2,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴にジージェネを持つPILOT",
+        "effect": "【リンク時】自分のデッキを上から3枚見て、その中の、Lv.3の〔ジージェネ〕のユニットカード1枚を公開して、手札に加えてもよい。残ったカードは無作為に下に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 80,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
