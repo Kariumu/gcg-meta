@@ -13,6 +13,7 @@
 | 2026-05-07 | One Year War の採用形を「ワンイヤー・ウォー」→「一年戦争」に変更（松岡さん指示） | reports/msa-gd04-week1.html |
 | 2026-05-12 | GD04 Week 2 新規訳語追加: The-O Blockers / Destiny Blockers & Barbatos / Celestial Being Lockon | reports/msa-gd04-week2.html |
 | 2026-05-19 | GD04 Week 3 新規訳語追加: Dynames Rush / Barbatos Lupus / Barbatos Rush (Purple Red) / Blue Red Agro / Militia Rush / Neo Zeong & League Militaire | reports/msa-gd04-week3.html |
+| 2026-05-27 | GD04 Week 4 新規訳語追加: Freedom Blockers / Justice & Providence Blockers / Clan | reports/msa-gd04-week4.html |
 
 ## デッキ名・アーキタイプ訳語
 
@@ -45,6 +46,9 @@
 | Blue Red Agro | **青赤アグロ** | 青赤ラッシュ | GD04 Week 3 新規 |
 | Militia Rush | **ミリシア アグロ** | ミリシアラッシュ | GD04 Week 3 新規 |
 | Neo Zeong & League Militaire | **ネオ・ジオング & リーグ・ミリタリー** | — | GD04 Week 3 新規 |
+| Freedom Blockers | **フリーダム ブロッカー** | フリーダムブロッカー | GD04 Week 4 新規 |
+| Justice & Providence Blockers | **ジャスティス&プロヴィデンス ブロッカー** | — | GD04 Week 4 新規 |
+| Clan | **クラン** | — | GD04 Week 4 新規 |
 
 ## カラータイプ表記
 
