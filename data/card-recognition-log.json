@@ -1400,5 +1400,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-05-28": {
+    "recognized_at": "2026-05-28 18:00:31 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2059915078095515853",
+      "https://x.com/GUNDAM_GCG_JP/status/2059907530034422268"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-050",
+        "card_name": "サイコロガンダム",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 6,
+        "ap": 5,
+        "hp": 6,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "【アタック時】自分のデッキを上から1枚、自分のトラッシュに置く。この効果でLv.3以上のカードを置いたなら、相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+        "effect_confidence": "medium",
+        "effect_length": 84,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-047",
+        "card_name": "キャスバル専用ガンダム",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴にジージェネを持つPILOT",
+        "effect": "【セット時】・【開発】 自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+        "effect_confidence": "low",
+        "effect_length": 109,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
