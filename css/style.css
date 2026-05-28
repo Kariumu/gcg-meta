@@ -2166,3 +2166,177 @@ a.section-badge:hover {
     padding: 6px 12px;
     justify-content: center;
     gap: 2px;
+  }
+  .site-header-v2 .sub-nav-label {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 4px;
+  }
+}
+
+/* =========================================================
+   Header v2 — 2段ナビゲーション (2026-05-24, 案B 採用)
+   - 1段目: ロゴ + 主タブ(4) + 検索
+   - 2段目: 選択中カテゴリのサブナビ(常時可視)
+   既存の nav / .site-header / .header-inner 共通ルールは
+   そのまま活用し、上書きはクラス指定で specificity を確保
+   ========================================================= */
+
+/* 主タブ(1段目) */
+.site-header-v2 nav.main-tabs {
+  display: flex;
+  gap: 2px;
+  align-items: stretch;
+  height: 60px;
+}
+.site-header-v2 nav.main-tabs a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 0;
+  background: transparent;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition-fast),
+              background var(--transition-fast),
+              border-color var(--transition-fast);
+  position: relative;
+}
+.site-header-v2 nav.main-tabs a:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.04);
+}
+.site-header-v2 nav.main-tabs a.active {
+  color: var(--accent);
+  background: transparent;
+  border-bottom-color: var(--accent);
+}
+.site-header-v2 nav.main-tabs a.active::after { display: none; }
+
+/* サブナビ(2段目) */
+.site-header-v2 .sub-nav {
+  background: rgba(0,0,0,0.28);
+  border-top: 1px solid var(--border);
+}
+.site-header-v2 .sub-nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 28px;
+  flex-wrap: wrap;
+}
+.site-header-v2 .sub-nav-label {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.site-header-v2 .sub-nav a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+.site-header-v2 .sub-nav a:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+.site-header-v2 .sub-nav a.active {
+  color: var(--accent);
+  background: var(--accent-dim);
+}
+.site-header-v2 .sub-nav a.active::after { display: none; }
+
+/* レスポンシブ(モバイル) */
+@media (max-width: 768px) {
+  .site-header-v2 nav.main-tabs {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+  .site-header-v2 nav.main-tabs a {
+    padding: 8px 12px;
+    font-size: 13px;
+    border-bottom: none;
+    border-radius: var(--radius);
+  }
+  .site-header-v2 nav.main-tabs a.active {
+    background: var(--accent-dim);
+  }
+  .site-header-v2 .sub-nav-inner {
+    padding: 6px 12px;
+    justify-content: center;
+    gap: 2px;
+  }
+  .site-header-v2 .sub-nav-label {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 4px;
+  }
+}
+
+/* ============================================================
+ * 新カード紹介記事のスマホ表示調整(2026-05-28 追加)
+ *
+ * 課題: buildCardBlockHtml(auto-news.js)が生成する HTML が
+ *       インラインスタイルで `display:flex; gap:16px; align-items:flex-start` を使い、
+ *       画像 250px + テキスト flex:1 の横並びになっている。
+ *       スマホ画面(375px 幅)では画像 250px + gap 16px = 266px が固定で、
+ *       テキスト領域が約 100px に圧迫され、文字が右側により過ぎて読みづらい。
+ *
+ * 対応: 768px 以下では縦並び(column)に変更し、画像を中央上配置、
+ *       テキストを横幅 100% に展開する。属性セレクタ + !important で
+ *       過去記事(既に push 済の HTML)にも遡及適用。
+ * ============================================================ */
+@media (max-width: 768px) {
+  /* カードブロック全体(display:flex + gap:16px + align-items:flex-start)を縦並びに */
+  .report-article div[style*="display:flex"][style*="gap:16px"][style*="align-items:flex-start"] {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  /* 画像ラッパー(flex-shrink:0 + width:250px)を画面幅に合わせて伸縮 */
+  .report-article div[style*="flex-shrink:0"][style*="width:250px"] {
+    width: 100% !important;
+    max-width: 250px !important;
+    margin: 0 auto !important;
+  }
+
+  /* カード画像自身も横幅 100% に(縦横比は維持) */
+  .report-article div[style*="flex-shrink:0"] img[style*="width:250px"] {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 250px !important;
+  }
+
+  /* テキストエリア(flex:1)を横幅 100% で展開 */
+  .report-article div[style*="display:flex"][style*="gap:16px"] > div[style*="flex:1"] {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+
+  /* ステータステーブルが画面幅を超えないように */
+  .report-article div[style*="display:flex"][style*="gap:16px"] table {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 関連カードリンク内の画像 + テキストの折り返し対策 */
+  .report-article div[style*="margin-top:8px"][style*="padding-top:8px"] div[style*="display:flex"][style*="align-items:center"] {
+    flex-wrap: wrap;
+  }
+}
