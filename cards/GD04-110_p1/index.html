@@ -101,11 +101,11 @@
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
             <div class="stat-label">採用デッキ数</div>
-            <div class="stat-value">0<span class="unit"> デッキ</span></div>
+            <div class="stat-value">2<span class="unit"> デッキ</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">全体採用率</div>
-            <div class="stat-value">0.0<span class="unit">%</span></div>
+            <div class="stat-value">0.9<span class="unit">%</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">優勝デッキ数</div>
@@ -113,7 +113,7 @@
           </div>
           <div class="stat-card">
             <div class="stat-label">平均採用枚数</div>
-            <div class="stat-value">0<span class="unit">枚</span></div>
+            <div class="stat-value">1.5<span class="unit">枚</span></div>
           </div>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
@@ -123,6 +123,37 @@
     </div>
 
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">デッキタイプ別採用状況</h2>
+            <span class="toggle-icon"></span>
+          </summary>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>デッキタイプ</th>
+                <th style="width:90px">採用数</th>
+                <th style="width:180px">採用率</th>
+                <th style="width:60px">平均枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-red">赤</span></td>
+                <td class="text-mono">2 / 219</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:0.9%;background:#4488ff"></div>
+                    </div>
+                    <span class="usage-rate">0.9%</span>
+                  </div>
+                </td>
+                <td class="text-mono">1.5</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
     
         <details class="collapsible-section mb-32" open>
           <summary class="section-header collapsible-toggle">
@@ -131,39 +162,6 @@
           </summary>
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
           <div class="co-cards-grid">
-          <a href="../../cards/GD01-051/" class="co-card-item" title="クシャトリヤ" data-rate="high">
-            <div class="co-card-image-wrap">
-              <img src="../../images/cards/GD01-051.webp" alt="クシャトリヤ" class="co-card-image" loading="lazy"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>GD01-051</span></div>
-            </div>
-            <div class="co-card-info">
-              <div class="co-card-name">クシャトリヤ</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
-            </div>
-          </a>
-          <a href="../../cards/ST01-001/" class="co-card-item" title="ガンダム" data-rate="high">
-            <div class="co-card-image-wrap">
-              <img src="../../images/cards/ST01-001.webp" alt="ガンダム" class="co-card-image" loading="lazy"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>ST01-001</span></div>
-            </div>
-            <div class="co-card-info">
-              <div class="co-card-name">ガンダム</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
-            </div>
-          </a>
-          <a href="../../cards/GD01-010/" class="co-card-item" title="ユニコーンガンダム2号機 バンシィ（ユニコーンモード）" data-rate="high">
-            <div class="co-card-image-wrap">
-              <img src="../../images/cards/GD01-010.webp" alt="ユニコーンガンダム2号機 バンシィ（ユニコーンモード）" class="co-card-image" loading="lazy"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>GD01-010</span></div>
-            </div>
-            <div class="co-card-info">
-              <div class="co-card-name">ユニコーンガンダム2号機 バンシィ（ユニコーンモード）</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
-            </div>
-          </a>
           <a href="../../cards/GD01-044/" class="co-card-item" title="クシャトリヤ" data-rate="high">
             <div class="co-card-image-wrap">
               <img src="../../images/cards/GD01-044.webp" alt="クシャトリヤ" class="co-card-image" loading="lazy"
@@ -172,28 +170,6 @@
             </div>
             <div class="co-card-info">
               <div class="co-card-name">クシャトリヤ</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
-            </div>
-          </a>
-          <a href="../../cards/ST03-001/" class="co-card-item" title="シナンジュ" data-rate="high">
-            <div class="co-card-image-wrap">
-              <img src="../../images/cards/ST03-001.webp" alt="シナンジュ" class="co-card-image" loading="lazy"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>ST03-001</span></div>
-            </div>
-            <div class="co-card-info">
-              <div class="co-card-name">シナンジュ</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
-            </div>
-          </a>
-          <a href="../../cards/GD03-005/" class="co-card-item" title="クシャトリヤ・ベッセルング" data-rate="high">
-            <div class="co-card-image-wrap">
-              <img src="../../images/cards/GD03-005.webp" alt="クシャトリヤ・ベッセルング" class="co-card-image" loading="lazy"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>GD03-005</span></div>
-            </div>
-            <div class="co-card-info">
-              <div class="co-card-name">クシャトリヤ・ベッセルング</div>
               <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
@@ -208,14 +184,69 @@
               <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
-          <a href="../../cards/GD04-033/" class="co-card-item" title="ネオ・ジオング" data-rate="high">
+          <a href="../../cards/GD01-093/" class="co-card-item" title="マリーダ・クルス" data-rate="high">
             <div class="co-card-image-wrap">
-              <img src="../../images/cards/GD04-033.webp" alt="ネオ・ジオング" class="co-card-image" loading="lazy"
+              <img src="../../images/cards/GD01-093.webp" alt="マリーダ・クルス" class="co-card-image" loading="lazy"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>GD04-033</span></div>
+              <div class="co-card-fallback" style="display:none"><span>GD01-093</span></div>
             </div>
             <div class="co-card-info">
-              <div class="co-card-name">ネオ・ジオング</div>
+              <div class="co-card-name">マリーダ・クルス</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/ST01-010/" class="co-card-item" title="アムロ・レイ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/ST01-010.webp" alt="アムロ・レイ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>ST01-010</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">アムロ・レイ</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/ST03-013/" class="co-card-item" title="格闘戦" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/ST03-013.webp" alt="格闘戦" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>ST03-013</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">格闘戦</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD03-109/" class="co-card-item" title="戦技の向上" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD03-109.webp" alt="戦技の向上" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD03-109</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">戦技の向上</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-111/" class="co-card-item" title="エースの戦い" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-111.webp" alt="エースの戦い" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-111</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">エースの戦い</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-100/" class="co-card-item" title="覚悟の表れ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-100.webp" alt="覚悟の表れ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-100</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">覚悟の表れ</div>
               <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
@@ -223,14 +254,14 @@
           <noscript>
             <h3>一緒によく使われるカード</h3>
             <ul>
-            <li><a href="/cards/GD01-051/">クシャトリヤ（GD01-051）- 100%</a></li>
-            <li><a href="/cards/ST01-001/">ガンダム（ST01-001）- 100%</a></li>
-            <li><a href="/cards/GD01-010/">ユニコーンガンダム2号機 バンシィ（ユニコーンモード）（GD01-010）- 100%</a></li>
             <li><a href="/cards/GD01-044/">クシャトリヤ（GD01-044）- 100%</a></li>
-            <li><a href="/cards/ST03-001/">シナンジュ（ST03-001）- 100%</a></li>
-            <li><a href="/cards/GD03-005/">クシャトリヤ・ベッセルング（GD03-005）- 100%</a></li>
             <li><a href="/cards/GD03-034/">GQuuuuuuX（オメガ・サイコミュ起動時）（GD03-034）- 100%</a></li>
-            <li><a href="/cards/GD04-033/">ネオ・ジオング（GD04-033）- 100%</a></li>
+            <li><a href="/cards/GD01-093/">マリーダ・クルス（GD01-093）- 100%</a></li>
+            <li><a href="/cards/ST01-010/">アムロ・レイ（ST01-010）- 100%</a></li>
+            <li><a href="/cards/ST03-013/">格闘戦（ST03-013）- 100%</a></li>
+            <li><a href="/cards/GD03-109/">戦技の向上（GD03-109）- 100%</a></li>
+            <li><a href="/cards/GD01-111/">エースの戦い（GD01-111）- 100%</a></li>
+            <li><a href="/cards/GD01-100/">覚悟の表れ（GD01-100）- 100%</a></li>
             </ul>
           </noscript>
         </details>
@@ -238,7 +269,7 @@
         <details class="collapsible-section">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">1件</span><span class="toggle-icon"></span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">2件</span><span class="toggle-icon"></span></div>
           </summary>
           <table class="data-table">
             <thead>
@@ -251,6 +282,13 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.11</td>
+                <td><a href="../../events/6569527.html" style="color:var(--text-primary);text-decoration:none">カードショップさくら</a></td>
+                <td>シラユキ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
               <tr>
                 <td class="text-mono" style="color:var(--accent)">2026.05.06</td>
                 <td><a href="../../events/6422054.html" style="color:var(--text-primary);text-decoration:none">ティアワン浜松店</a></td>
@@ -265,17 +303,19 @@
     
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
       <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">出資者について</h2>
-      <div style="display:flex;align-items:center;gap:10px;margin:0 0 16px;padding:10px 14px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:8px">
-        <span style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent);background:var(--bg-card);padding:2px 8px;border-radius:4px;letter-spacing:0.5px">PARALLEL</span>
-        <p style="margin:0;font-size:13px;color:var(--text-secondary);line-height:1.6">本カードは <a href="../GD04-110/" style="color:var(--blue);text-decoration:none">出資者（GD04-110）</a> のパラレル(イラスト違い)版です。効果・ステータス・特徴は完全に同一で、デッキでは合算 4 枚まで投入できます。</p>
-      </div>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">出資者は「機動戦士ガンダム00」に登場する赤のコマンドカードです。コスト3のコマンドカードです。レアリティはU+で、GD04に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は0.9%で、特定のデッキタイプで活躍しています。合計2デッキで採用されており、平均1.5枚で投入されています。最も採用率が高いデッキタイプは青赤系（0.9%）です。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてクシャトリヤ（同時採用率100%）、ガンダム（同時採用率100%）、ユニコーンガンダム2号機 バンシィ（ユニコーンモード）（同時採用率100%）などがあります。デッキ構築の参考にしてください。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてクシャトリヤ（同時採用率100%）、GQuuuuuuX（オメガ・サイコミュ起動時）（同時採用率100%）、マリーダ・クルス（同時採用率100%）などがあります。デッキ構築の参考にしてください。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">カードの強み</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">出資者はイラスト違いのパラレル版カードです。通常版と同じ効果・ステータスを持ちながら、コレクション性の高い特別なイラストが魅力です。パラレル版はパック開封やキャンペーンなどで入手でき、同じ性能でありながらプレミアム感のある一枚です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">運用のヒント</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">デッキ構築においては通常版と同一のカードとして扱われるため、性能面での違いはありません。お気に入りのイラストで対戦を楽しめるのがパラレル版の醍醐味です。大会でもパラレル版は通常版と同様に使用可能で、コレクションとしての価値も高いカードです。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">類似カード</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">赤のコスト3帯コマンドカードとしてはエースの戦い、オールレンジ攻撃、戦技の向上などが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">通常版の出資者（GD04-110）と完全に同一の効果・ステータスを持ちます。赤コマンドカードとしてデッキに最大4枚まで投入でき、通常版とパラレル版を混在させることも可能です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">ガンダムカードゲームについて</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">赤は攻撃的なカードが多く、速攻や高APを活かした積極的な攻めが得意なカラーです。ガンダムカードゲームでは最大4枚まで同名カードをデッキに入れることができ、デッキ枚数は50枚で構成します。大会ではニュータイプチャレンジ形式が主流で、全国の店舗で定期的に開催されています。</p>
       <p style="font-size:13px;line-height:1.6;color:var(--text-muted);margin:0">出資者の公式カード情報やルール詳細はBANDAI公式サイトをご確認ください。</p>
     </section>
 
@@ -315,7 +355,7 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', '出資者（GD04-110_p1）パラレル版採用率0.0% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', '出資者（GD04-110_p1）パラレル版採用率0.9% | GCG STATS');
   </script>
 </body>
 </html>

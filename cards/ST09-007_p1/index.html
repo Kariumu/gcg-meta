@@ -118,19 +118,19 @@
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
             <div class="stat-label">採用デッキ数</div>
-            <div class="stat-value">0<span class="unit"> デッキ</span></div>
+            <div class="stat-value">37<span class="unit"> デッキ</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">全体採用率</div>
-            <div class="stat-value">0.0<span class="unit">%</span></div>
+            <div class="stat-value">3.1<span class="unit">%</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">優勝デッキ数</div>
-            <div class="stat-value">0</div>
+            <div class="stat-value">8</div>
           </div>
           <div class="stat-card">
             <div class="stat-label">平均採用枚数</div>
-            <div class="stat-value">0<span class="unit">枚</span></div>
+            <div class="stat-value">2.4<span class="unit">枚</span></div>
           </div>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
@@ -140,6 +140,63 @@
     </div>
 
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">デッキタイプ別採用状況</h2>
+            <span class="toggle-icon"></span>
+          </summary>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>デッキタイプ</th>
+                <th style="width:90px">採用数</th>
+                <th style="width:180px">採用率</th>
+                <th style="width:60px">平均枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-purple">紫</span></td>
+                <td class="text-mono">1 / 1030</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:0.1%;background:#4488ff"></div>
+                    </div>
+                    <span class="usage-rate">0.1%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-red">赤</span> <span class="color-tag color-tag-purple">紫</span></td>
+                <td class="text-mono">2 / 87</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:2.3%;background:#ff4444"></div>
+                    </div>
+                    <span class="usage-rate">2.3%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2.5</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-white">白</span> <span class="color-tag color-tag-purple">紫</span></td>
+                <td class="text-mono">34 / 76</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:44.7%;background:#cccccc"></div>
+                    </div>
+                    <span class="usage-rate">44.7%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2.4</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
     
         <details class="collapsible-section mb-32" open>
           <summary class="section-header collapsible-toggle">
@@ -148,6 +205,17 @@
           </summary>
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
           <div class="co-cards-grid">
+          <a href="../../cards/GD04-050/" class="co-card-item" title="デスティニーガンダム" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-050.webp" alt="デスティニーガンダム" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-050</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">デスティニーガンダム</div>
+              <div class="co-card-rate"><span class="co-rate-value">97.3</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
           <a href="../../cards/ST09-002/" class="co-card-item" title="フォースインパルスガンダム" data-rate="high">
             <div class="co-card-image-wrap">
               <img src="../../images/cards/ST09-002.webp" alt="フォースインパルスガンダム" class="co-card-image" loading="lazy"
@@ -156,7 +224,7 @@
             </div>
             <div class="co-card-info">
               <div class="co-card-name">フォースインパルスガンダム</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+              <div class="co-card-rate"><span class="co-rate-value">97.3</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
           <a href="../../cards/ST09-006/" class="co-card-item" title="ソードインパルスガンダム" data-rate="high">
@@ -167,7 +235,7 @@
             </div>
             <div class="co-card-info">
               <div class="co-card-name">ソードインパルスガンダム</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+              <div class="co-card-rate"><span class="co-rate-value">97.3</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
           <a href="../../cards/ST09-001/" class="co-card-item" title="インパルスガンダム" data-rate="high">
@@ -178,18 +246,7 @@
             </div>
             <div class="co-card-info">
               <div class="co-card-name">インパルスガンダム</div>
-              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
-            </div>
-          </a>
-          <a href="../../cards/GD04-050/" class="co-card-item" title="デスティニーガンダム" data-rate="high">
-            <div class="co-card-image-wrap">
-              <img src="../../images/cards/GD04-050.webp" alt="デスティニーガンダム" class="co-card-image" loading="lazy"
-                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>GD04-050</span></div>
-            </div>
-            <div class="co-card-info">
-              <div class="co-card-name">デスティニーガンダム</div>
-              <div class="co-card-rate"><span class="co-rate-value">95.2</span><span class="co-rate-unit">%</span></div>
+              <div class="co-card-rate"><span class="co-rate-value">97.3</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
           <a href="../../cards/ST09-008/" class="co-card-item" title="シン・アスカ" data-rate="high">
@@ -200,18 +257,18 @@
             </div>
             <div class="co-card-info">
               <div class="co-card-name">シン・アスカ</div>
-              <div class="co-card-rate"><span class="co-rate-value">95.2</span><span class="co-rate-unit">%</span></div>
+              <div class="co-card-rate"><span class="co-rate-value">94.6</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
-          <a href="../../cards/ST09-010/" class="co-card-item" title="ミネルバ" data-rate="high">
+          <a href="../../cards/GD01-118/" class="co-card-item" title="溢れる慈愛" data-rate="high">
             <div class="co-card-image-wrap">
-              <img src="../../images/cards/ST09-010.webp" alt="ミネルバ" class="co-card-image" loading="lazy"
+              <img src="../../images/cards/GD01-118.webp" alt="溢れる慈愛" class="co-card-image" loading="lazy"
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-              <div class="co-card-fallback" style="display:none"><span>ST09-010</span></div>
+              <div class="co-card-fallback" style="display:none"><span>GD01-118</span></div>
             </div>
             <div class="co-card-info">
-              <div class="co-card-name">ミネルバ</div>
-              <div class="co-card-rate"><span class="co-rate-value">95.2</span><span class="co-rate-unit">%</span></div>
+              <div class="co-card-name">溢れる慈愛</div>
+              <div class="co-card-rate"><span class="co-rate-value">91.9</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
           <a href="../../cards/ST04-001/" class="co-card-item" title="エールストライクガンダム" data-rate="high">
@@ -222,7 +279,7 @@
             </div>
             <div class="co-card-info">
               <div class="co-card-name">エールストライクガンダム</div>
-              <div class="co-card-rate"><span class="co-rate-value">90.5</span><span class="co-rate-unit">%</span></div>
+              <div class="co-card-rate"><span class="co-rate-value">89.2</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
           <a href="../../cards/ST04-010/" class="co-card-item" title="キラ・ヤマト" data-rate="high">
@@ -233,21 +290,21 @@
             </div>
             <div class="co-card-info">
               <div class="co-card-name">キラ・ヤマト</div>
-              <div class="co-card-rate"><span class="co-rate-value">90.5</span><span class="co-rate-unit">%</span></div>
+              <div class="co-card-rate"><span class="co-rate-value">89.2</span><span class="co-rate-unit">%</span></div>
             </div>
           </a>
           </div>
           <noscript>
             <h3>一緒によく使われるカード</h3>
             <ul>
-            <li><a href="/cards/ST09-002/">フォースインパルスガンダム（ST09-002）- 100%</a></li>
-            <li><a href="/cards/ST09-006/">ソードインパルスガンダム（ST09-006）- 100%</a></li>
-            <li><a href="/cards/ST09-001/">インパルスガンダム（ST09-001）- 100%</a></li>
-            <li><a href="/cards/GD04-050/">デスティニーガンダム（GD04-050）- 95.2%</a></li>
-            <li><a href="/cards/ST09-008/">シン・アスカ（ST09-008）- 95.2%</a></li>
-            <li><a href="/cards/ST09-010/">ミネルバ（ST09-010）- 95.2%</a></li>
-            <li><a href="/cards/ST04-001/">エールストライクガンダム（ST04-001）- 90.5%</a></li>
-            <li><a href="/cards/ST04-010/">キラ・ヤマト（ST04-010）- 90.5%</a></li>
+            <li><a href="/cards/GD04-050/">デスティニーガンダム（GD04-050）- 97.3%</a></li>
+            <li><a href="/cards/ST09-002/">フォースインパルスガンダム（ST09-002）- 97.3%</a></li>
+            <li><a href="/cards/ST09-006/">ソードインパルスガンダム（ST09-006）- 97.3%</a></li>
+            <li><a href="/cards/ST09-001/">インパルスガンダム（ST09-001）- 97.3%</a></li>
+            <li><a href="/cards/ST09-008/">シン・アスカ（ST09-008）- 94.6%</a></li>
+            <li><a href="/cards/GD01-118/">溢れる慈愛（GD01-118）- 91.9%</a></li>
+            <li><a href="/cards/ST04-001/">エールストライクガンダム（ST04-001）- 89.2%</a></li>
+            <li><a href="/cards/ST04-010/">キラ・ヤマト（ST04-010）- 89.2%</a></li>
             </ul>
           </noscript>
         </details>
@@ -255,7 +312,7 @@
         <details class="collapsible-section">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">21件</span><span class="toggle-icon"></span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">37件</span><span class="toggle-icon"></span></div>
           </summary>
           <table class="data-table">
             <thead>
@@ -268,6 +325,118 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.24</td>
+                <td><a href="../../events/6494997.html" style="color:var(--text-primary);text-decoration:none">カードボックス高槻店</a></td>
+                <td>蒼藍-Aoi-</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×1</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.21</td>
+                <td><a href="../../events/6485055.html" style="color:var(--text-primary);text-decoration:none">ホビーステーション名古屋大須本店</a></td>
+                <td>よっしー</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.18</td>
+                <td><a href="../../events/6334784.html" style="color:var(--text-primary);text-decoration:none">ドラゴンスター町田店</a></td>
+                <td>おきの</td>
+                <td class="rank-cell ">7位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.17</td>
+                <td><a href="../../events/6318792.html" style="color:var(--text-primary);text-decoration:none">レプトンカード館五日市店</a></td>
+                <td>アオ</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.17</td>
+                <td><a href="../../events/6400561.html" style="color:var(--text-primary);text-decoration:none">トレカショップ　トレカ99</a></td>
+                <td>夏油</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.17</td>
+                <td><a href="../../events/6410253.html" style="color:var(--text-primary);text-decoration:none">カードラボアバンティ京都店</a></td>
+                <td>T田</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.17</td>
+                <td><a href="../../events/6502039.html" style="color:var(--text-primary);text-decoration:none">カードラボ長野店</a></td>
+                <td>にゃんすけ</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.17</td>
+                <td><a href="../../events/6512329.html" style="color:var(--text-primary);text-decoration:none">ブックオフプラス福岡糸島トレカ館</a></td>
+                <td>おのでぃー</td>
+                <td class="rank-cell rank-2">準優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.17</td>
+                <td><a href="../../events/6529467.html" style="color:var(--text-primary);text-decoration:none">TSUTAYAデイズタウンつくば</a></td>
+                <td>ちゃら松</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.17</td>
+                <td><a href="../../events/6529774.html" style="color:var(--text-primary);text-decoration:none">TSUTAYAあべの橋店</a></td>
+                <td>AJI</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×1</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.16</td>
+                <td><a href="../../events/6409819.html" style="color:var(--text-primary);text-decoration:none">エディオンなんば本店　トレカキャピタルなんば</a></td>
+                <td>といし</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.14</td>
+                <td><a href="../../events/6421999.html" style="color:var(--text-primary);text-decoration:none">青馬堂本店</a></td>
+                <td>sekayan</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×1</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.13</td>
+                <td><a href="../../events/6333818.html" style="color:var(--text-primary);text-decoration:none">ホビーステーション秋葉原本店</a></td>
+                <td>まかだみあ</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×1</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.13</td>
+                <td><a href="../../events/6539686.html" style="color:var(--text-primary);text-decoration:none">カードボックスオーサカ店</a></td>
+                <td>コンパク</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.12</td>
+                <td><a href="../../events/6307389.html" style="color:var(--text-primary);text-decoration:none">コーギーアール大宮駅前店</a></td>
+                <td>のあ</td>
+                <td class="rank-cell ">7位</td>
+                <td class="text-mono">×1</td>
+              </tr>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.05.11</td>
+                <td><a href="../../events/6391369.html" style="color:var(--text-primary);text-decoration:none">ホビーステーション仙台駅前店</a></td>
+                <td>とらと</td>
+                <td class="rank-cell rank-1">優勝</td>
+                <td class="text-mono">×3</td>
+              </tr>
               <tr>
                 <td class="text-mono" style="color:var(--accent)">2026.05.10</td>
                 <td><a href="../../events/6361007.html" style="color:var(--text-primary);text-decoration:none">トーナメントセンターバトロコ水戸駅前</a></td>
@@ -422,44 +591,19 @@
     
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
       <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">ブラストインパルスガンダムについて</h2>
-      <div style="display:flex;align-items:center;gap:10px;margin:0 0 16px;padding:10px 14px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:8px">
-        <span style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent);background:var(--bg-card);padding:2px 8px;border-radius:4px;letter-spacing:0.5px">PARALLEL</span>
-        <p style="margin:0;font-size:13px;color:var(--text-secondary);line-height:1.6">本カードは <a href="../ST09-007/" style="color:var(--blue);text-decoration:none">ブラストインパルスガンダム（ST09-007）</a> のパラレル(イラスト違い)版です。効果・ステータス・特徴は完全に同一で、デッキでは合算 4 枚まで投入できます。</p>
-      </div>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">ブラストインパルスガンダムは「機動戦士ガンダムSEED DESTINY」に登場する紫のユニットカードです。Lv.5・コスト3で、AP5/HP3のステータスを持ちます。特徴は「ザフト」「ミネルバ隊」です。レアリティはC+で、ST09に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は3.1%で、特定のデッキタイプで活躍しています。合計37デッキで採用されており、平均2.4枚で投入されています。優勝デッキでの採用実績が8件あり、トーナメントシーンでの実力が証明されています。最も採用率が高いデッキタイプは青紫系（0.1%）です。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてフォースインパルスガンダム（同時採用率100%）、ソードインパルスガンダム（同時採用率100%）、インパルスガンダム（同時採用率100%）などがあります。デッキ構築の参考にしてください。</p>
-      <h3 style="font-size:14px;font-weight:600;margin:0 0 12px;color:var(--text-primary)">このカードの特徴</h3>
-      <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px;padding:14px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg)">
-
-        <div style="display:flex;align-items:flex-start;gap:12px">
-          <span style="flex-shrink:0;color:#b87aff;margin-top:2px;line-height:0"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
-          <div style="flex:1;min-width:0">
-            <p style="margin:0;font-size:14px;font-weight:600;color:var(--text-primary)">リンク条件あり</p>
-            <p style="margin:2px 0 0;font-size:13px;line-height:1.6;color:var(--text-secondary)">「シン・アスカ」とリンクして追加効果を得られる</p>
-          </div>
-        </div>
-
-        <div style="display:flex;align-items:flex-start;gap:12px">
-          <span style="flex-shrink:0;color:#f44747;margin-top:2px;line-height:0"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/></svg></span>
-          <div style="flex:1;min-width:0">
-            <p style="margin:0;font-size:14px;font-weight:600;color:var(--text-primary)">高AP</p>
-            <p style="margin:2px 0 0;font-size:13px;line-height:1.6;color:var(--text-secondary)">AP5 の攻撃力でアタッカー適性が高い</p>
-          </div>
-        </div>
-
-        <div style="display:flex;align-items:flex-start;gap:12px">
-          <span style="flex-shrink:0;color:#8b95a5;margin-top:2px;line-height:0"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span>
-          <div style="flex:1;min-width:0">
-            <p style="margin:0;font-size:14px;font-weight:600;color:var(--text-primary)">特徴シナジー</p>
-            <p style="margin:2px 0 0;font-size:13px;line-height:1.6;color:var(--text-secondary)">〔ザフト〕〔ミネルバ隊〕 を持つカードと組み合わせて特徴シナジーを構築可能</p>
-          </div>
-        </div>
-      </div>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてデスティニーガンダム（同時採用率97.3%）、フォースインパルスガンダム（同時採用率97.3%）、ソードインパルスガンダム（同時採用率97.3%）などがあります。デッキ構築の参考にしてください。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">カードの強み</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">ブラストインパルスガンダムはイラスト違いのパラレル版カードです。通常版と同じ効果・ステータスを持ちながら、コレクション性の高い特別なイラストが魅力です。パラレル版はパック開封やキャンペーンなどで入手でき、同じ性能でありながらプレミアム感のある一枚です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">運用のヒント</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">デッキ構築においては通常版と同一のカードとして扱われるため、性能面での違いはありません。お気に入りのイラストで対戦を楽しめるのがパラレル版の醍醐味です。大会でもパラレル版は通常版と同様に使用可能で、コレクションとしての価値も高いカードです。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">類似カード</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">紫のLv.5帯ユニットカードとしてはガンダム・グシオンリベイク、ガンダムX、ゼダスなどが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">通常版のブラストインパルスガンダム（ST09-007）と完全に同一の効果・ステータスを持ちます。紫ユニットカードとしてデッキに最大4枚まで投入でき、通常版とパラレル版を混在させることも可能です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">ガンダムカードゲームについて</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">紫はトリッキーな効果や強力なコマンドを持ち、相手の戦略を崩す妨害に長けたカラーです。ガンダムカードゲームでは最大4枚まで同名カードをデッキに入れることができ、デッキ枚数は50枚で構成します。大会ではニュータイプチャレンジ形式が主流で、全国の店舗で定期的に開催されています。</p>
       <p style="font-size:13px;line-height:1.6;color:var(--text-muted);margin:0">ブラストインパルスガンダムの公式カード情報やルール詳細はBANDAI公式サイトをご確認ください。</p>
     </section>
 
@@ -499,7 +643,7 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', 'ブラストインパルスガンダム（ST09-007_p1）パラレル版採用率0.0% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', 'ブラストインパルスガンダム（ST09-007_p1）パラレル版採用率3.1% | GCG STATS');
   </script>
 </body>
 </html>
