@@ -76,6 +76,37 @@ function getSetPrefix(cardId) {
   return cardId.replace(/-\d+$/, '');
 }
 
+// === 収録弾の正となる値の決定（package_set 基準）===
+// 収録弾の正 ＝ 各カードの package_set（取り得る値: GD01-04 / ST01-09 / β / PROMO の15種）。
+// 公開中 cards.html の挙動（set=package_set、β/PROMO を独立した箱として保持）に揃える。
+// フォールバック: package_set が未設定/空のカードが将来現れた場合に限り、ID由来の
+//   prefix へ退避する。_pN（パラレル接尾辞）と末尾連番を除去して基本弾へ寄せるため、
+//   例 "GD05-001_p1" → "GD05"。これにより set が undefined/空になって箱が壊れるのを防ぐ。
+function getCardSet(card) {
+  const ps = card && card.package_set;
+  if (ps !== undefined && ps !== null && String(ps).trim() !== '') {
+    return String(ps).trim();
+  }
+  // フォールバック（package_set 欠落/空のときのみ発動）
+  return getSetPrefix(String((card && card.id) || '').replace(/_p\d+$/, ''));
+}
+
+// === 収録弾の表示順（正準順）===
+// chip と並びは package_set 基準。この順で整列し、正準順に無い未知の収録弾
+// （将来の新弾やフォールバック値）は末尾へ出現順で回す。
+const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','β','PROMO'];
+
+// === 収録弾 表示名対応表（生値 → 画面表示名）===
+// 既存の SET_LABELS（収録弾の長い説明文。例 "第1弾ブースターパック"。GD01-03/ST01-09 のみ定義）
+// とは役割が異なるため統合せず別表として新設する。
+//   SET_LABELS        … セクション小見出し用の説明文
+//   SET_DISPLAY_NAMES … chip 等で使う短い表示名（生値=表示でよいものは記載を省略）
+// 現状 "PROMO" のみ日本語表示「プロモ」。GD01-04 / ST01-09 / β は生値=表示で齟齬なし。
+const SET_DISPLAY_NAMES = { 'PROMO': 'プロモ' };
+function getSetDisplayName(set) {
+  return SET_DISPLAY_NAMES[set] || set;
+}
+
 // === 全カードのソート済みリスト ===
 const allCards = Object.values(cardsMaster).sort((a, b) => a.id.localeCompare(b.id));
 const totalCards = allCards.length;
@@ -85,13 +116,19 @@ const tournamentCards = allCards.filter(c => cardRankingMap[c.id]).length;
 const setOrder = [];
 const setCardCounts = {};
 for (const card of allCards) {
-  const prefix = getSetPrefix(card.id);
+  const prefix = getCardSet(card);          // 収録弾の正 = package_set（フォールバック付き）
   if (!setCardCounts[prefix]) {
     setOrder.push(prefix);
     setCardCounts[prefix] = 0;
   }
   setCardCounts[prefix]++;
 }
+// 表示順を正準順（SET_DISPLAY_ORDER）に整列。正準順に無い未知の収録弾は末尾へ。
+setOrder.sort((a, b) => {
+  const ia = SET_DISPLAY_ORDER.indexOf(a);
+  const ib = SET_DISPLAY_ORDER.indexOf(b);
+  return (ia < 0 ? 9999 : ia) - (ib < 0 ? 9999 : ib);
+});
 
 console.log(`  全カード: ${totalCards} 枚 (入賞実績あり: ${tournamentCards} 枚)`);
 console.log(`  収録弾: ${setOrder.length} セット`);
@@ -125,7 +162,7 @@ function generateCardsDataJS() {
       rarity: card.rarity,
       type: card.card_type,
       color: card.color,
-      set: getSetPrefix(card.id),
+      set: getCardSet(card),  // 収録弾の正 = package_set（フォールバック付き）
       level: card.level || 0,
       cost: card.cost || 0,
       ap: card.stats ? card.stats.ap : 0,
@@ -640,7 +677,7 @@ function generateHTML() {
         <span class="filter-group-label">収録弾 / Set</span>
         <div class="filter-chips" id="filter-set">
           <button class="filter-chip active" data-value="all">全て</button>
-${setOrder.map(prefix => `          <button class="filter-chip" data-value="${prefix}">${prefix}</button>`).join('\n')}
+${setOrder.map(prefix => `          <button class="filter-chip" data-value="${prefix}">${getSetDisplayName(prefix)}</button>`).join('\n')}
         </div>
       </div>
 

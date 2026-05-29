@@ -865,6 +865,20 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
   };
   const setName = SET_NAMES[setPrefix] || setPrefix;
 
+  // 収録弾リンク（パンくず・JSON-LD用）— 第1段階 generate_cardlist.js の getCardSet と同一規則。
+  // 正 = masterCard.package_set（取り得る値: GD01-04 / ST01-09 / β / PROMO の15種）。
+  // package_set が欠落/空のときのみ ID 由来 setPrefix へフォールバック（_pN・末尾連番除去済み）。
+  // cards.html は ?set=<値> を読み、フィルタ箱の data-value（=package_set）と突き合わせる。
+  const _packageSet = masterCard && masterCard.package_set;
+  const setLinkValue = (_packageSet !== undefined && _packageSet !== null && String(_packageSet).trim() !== '')
+    ? String(_packageSet).trim()
+    : setPrefix;
+  // 表示名対応表（第1段階 SET_DISPLAY_NAMES と同一。現状 PROMO のみ日本語表示「プロモ」）
+  const SET_DISPLAY_NAMES = { 'PROMO': 'プロモ' };
+  const setLinkLabel = SET_DISPLAY_NAMES[setLinkValue] || setLinkValue;
+  // URL は旧 #<set> ではなく ?set=<set>（cards.html の URL パラメータ仕様に一致）。βは encodeURIComponent で安全化。
+  const setLinkHref = `cards.html?set=${encodeURIComponent(setLinkValue)}`;
+
   // リンク関連カード（パラレル版はbase_card_idのリンク先を使う）
   let linkedHtml = '';
   if (masterCard) {
@@ -1040,7 +1054,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     "itemListElement": [
       {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "${SITE_URL}/"},
       {"@type": "ListItem", "position": 2, "name": "カード一覧", "item": "${SITE_URL}/cards.html"},
-      {"@type": "ListItem", "position": 3, "name": "${escapeHtml(setPrefix)}", "item": "${SITE_URL}/cards.html#${setPrefix}"},
+      {"@type": "ListItem", "position": 3, "name": "${escapeHtml(setLinkLabel)}", "item": "${SITE_URL}/${setLinkHref}"},
       {"@type": "ListItem", "position": 4, "name": "${escapeHtml(cardName)}"}
     ]
   }
@@ -1058,7 +1072,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       <span style="margin:0 6px">›</span>
       <a href="../../cards.html" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">カード一覧</a>
       <span style="margin:0 6px">›</span>
-      <a href="../../cards.html#${setPrefix}" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">${escapeHtml(setPrefix)}</a>
+      <a href="../../${setLinkHref}" style="color:var(--text-muted);text-decoration:none" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">${escapeHtml(setLinkLabel)}</a>
       <span style="margin:0 6px">›</span>
       <span style="color:var(--text-secondary)">${escapeHtml(cardName)}</span>
     </nav>
