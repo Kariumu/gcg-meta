@@ -1448,5 +1448,94 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-05-29": {
+    "recognized_at": "2026-05-30 18:00:43 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2060639853541466139",
+      "https://x.com/GUNDAM_GCG_JP/status/2060632302216958306",
+      "https://x.com/GUNDAM_GCG_JP/status/2060324021074595974",
+      "https://x.com/GUNDAM_GCG_JP/status/2060322767778545982"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-067",
+        "card_name": "アズナ・エルマリート",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 1,
+        "hp": 2,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔支援型〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】自分のデッキを上から3枚見て、その中の〔ジージェネ〕のユニットカード1枚を公開してデッキの上に戻してもよい。残ったカードは無作為に下に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 95,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-023",
+        "card_name": "ル・シーニュ (EX)",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "「アスナ・エルマリート」",
+        "effect": "【アタック時】プレイヤーすべては、それぞれ自身のデッキを上から1枚見る。それがLv.5以上のカードなら、公開して自身の手札に加えてもよい。残ったカードは上か下に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 83,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-076",
+        "card_name": "ガーベラ・ストレート",
+        "color": "Blue",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "「ロウ・ギュール」",
+        "effect": "【メイン/アクション】〔ジージェネ〕の味方のユニット1つを選ぶ。それを3回復する。",
+        "effect_confidence": "high",
+        "effect_length": 41,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-001",
+        "card_name": "ガンダムアストレイレッドフレーム改(EX)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 5,
+        "hp": 4,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "「ロウ・ギュール」",
+        "effect": "起動・メインターン1回 自分のトラッシュのコマンドカード2枚をゲームから除外する:ダメージを受けているLv.7以下の相手のユニット1つを選ぶ。それをレストにし、それは次の相手のターンのスタートフェイズでアクティブにならない。",
+        "effect_confidence": "low",
+        "effect_length": 112,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
