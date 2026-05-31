@@ -1537,5 +1537,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-05-31": {
+    "recognized_at": "2026-05-31 18:00:22 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2061002241163600043",
+      "https://x.com/GUNDAM_GCG_JP/status/2060994693073138049"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-084",
+        "card_name": "30cm砲(APFSDS弾)",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "「デメジエール・ソンネン」",
+        "effect": "【メイン/アクション】《ブロッカー》を持つユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
+        "effect_confidence": "medium",
+        "effect_length": 61,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-052",
+        "card_name": "ヒルドルブ",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 2,
+        "cost": 2,
+        "ap": null,
+        "hp": 2,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴にジージェネを持つPILOT",
+        "effect": "【配備】相手のユニットが3つ以上いるなら、HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 53,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
