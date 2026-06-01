@@ -957,99 +957,6 @@
     "_pendingReviewIssues": [],
     "_articleDate": "2026-05-28"
   },
-  "EB01-067": {
-    "card_number": "EB01-067",
-    "card_name": "アズナ・エルマリート",
-    "color": "Green",
-    "card_type": "PILOT",
-    "level": 4,
-    "cost": 1,
-    "ap": 1,
-    "hp": 2,
-    "terrain": [],
-    "traits": [
-      "〔ジージェネ〕",
-      "〔支援型〕"
-    ],
-    "link": "",
-    "rarity": "C",
-    "effect": "【バースト】このカードを手札に加える。【セット時】自分のデッキを上から3枚見て、その中の〔ジージェネ〕のユニットカード1枚を公開してデッキの上に戻してもよい。残ったカードは無作為に下に戻す。",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2060639853541466139",
-    "created_at": "2026-05-30 18:00:12 JST",
-    "preview": true,
-    "_pendingReview": false,
-    "_pendingReviewIssues": [],
-    "_articleDate": "2026-05-29"
-  },
-  "EB01-023": {
-    "card_number": "EB01-023",
-    "card_name": "ル・シーニュ (EX)",
-    "color": "Green",
-    "card_type": "UNIT",
-    "level": 4,
-    "cost": 3,
-    "ap": 3,
-    "hp": 3,
-    "terrain": [],
-    "traits": [
-      "〔ジージェネ〕"
-    ],
-    "link": "「アスナ・エルマリート」",
-    "rarity": "R",
-    "effect": "【アタック時】プレイヤーすべては、それぞれ自身のデッキを上から1枚見る。それがLv.5以上のカードなら、公開して自身の手札に加えてもよい。残ったカードは上か下に戻す。",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2060632302216958306",
-    "created_at": "2026-05-30 18:00:21 JST",
-    "preview": true,
-    "_pendingReview": false,
-    "_pendingReviewIssues": [],
-    "_articleDate": "2026-05-29"
-  },
-  "EB01-076": {
-    "card_number": "EB01-076",
-    "card_name": "ガーベラ・ストレート",
-    "color": "Blue",
-    "card_type": "COMMAND",
-    "level": 4,
-    "cost": 1,
-    "ap": null,
-    "hp": null,
-    "terrain": [],
-    "traits": [
-      "〔ジージェネ〕"
-    ],
-    "link": "「ロウ・ギュール」",
-    "rarity": "C",
-    "effect": "【メイン/アクション】〔ジージェネ〕の味方のユニット1つを選ぶ。それを3回復する。",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2060324021074595974",
-    "created_at": "2026-05-30 18:00:34 JST",
-    "preview": true,
-    "_pendingReview": false,
-    "_pendingReviewIssues": [],
-    "_articleDate": "2026-05-29"
-  },
-  "EB01-001": {
-    "card_number": "EB01-001",
-    "card_name": "ガンダムアストレイレッドフレーム改(EX)",
-    "color": "Blue",
-    "card_type": "UNIT",
-    "level": 6,
-    "cost": 5,
-    "ap": 5,
-    "hp": 4,
-    "terrain": [],
-    "traits": [
-      "〔ジージェネ〕"
-    ],
-    "link": "「ロウ・ギュール」",
-    "rarity": "R",
-    "effect": "起動・メインターン1回 自分のトラッシュのコマンドカード2枚をゲームから除外する:ダメージを受けているLv.7以下の相手のユニット1つを選ぶ。それをレストにし、それは次の相手のターンのスタートフェイズでアクティブにならない。",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2060322767778545982",
-    "created_at": "2026-05-30 18:00:42 JST",
-    "preview": true,
-    "_pendingReview": false,
-    "_pendingReviewIssues": [],
-    "_articleDate": "2026-05-29"
-  },
   "EB01-084": {
     "card_number": "EB01-084",
     "card_name": "30cm砲(APFSDS弾)",
@@ -1061,13 +968,14 @@
     "hp": null,
     "terrain": [],
     "traits": [
-      "〔ジージェネ〕"
+      "〔ジージェネ〕",
+      "〔攻撃型〕"
     ],
-    "link": "「デメジエール・ソンネン」",
+    "link": "",
     "rarity": "C",
-    "effect": "【メイン/アクション】《ブロッカー》を持つユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
+    "effect": "【メイン】/【アクション】《ブロッカー》を持つユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2061002241163600043",
-    "created_at": "2026-05-31 18:00:11 JST",
+    "created_at": "2026-05-31 21:05:16 JST",
     "preview": true,
     "_pendingReview": false,
     "_pendingReviewIssues": [],
@@ -1076,7 +984,7 @@
   "EB01-052": {
     "card_number": "EB01-052",
     "card_name": "ヒルドルブ",
-    "color": "Green",
+    "color": "White",
     "card_type": "UNIT",
     "level": 2,
     "cost": 2,
@@ -1090,10 +998,57 @@
     "rarity": "C",
     "effect": "【配備】相手のユニットが3つ以上いるなら、HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2060994693073138049",
-    "created_at": "2026-05-31 18:00:21 JST",
+    "created_at": "2026-05-31 21:05:27 JST",
     "preview": true,
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-05-31"
+  },
+  "EB01-086": {
+    "card_number": "EB01-086",
+    "card_name": "キシリア・ザビ & グワジン",
+    "color": "Blue",
+    "card_type": "BASE",
+    "level": 4,
+    "cost": 2,
+    "ap": 0,
+    "hp": 5,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔艦船〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。ターン1回 〔ジージェネ〕の味方のユニットがリンクしたとき、このターン中、それは《リペア(2)》を得る。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2061364629385740322",
+    "created_at": "2026-06-01 18:00:16 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-01"
+  },
+  "EB01-008": {
+    "card_number": "EB01-008",
+    "card_name": "ガンダムデルタカイ",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": 5,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "特徴にジージェネを持つPILOT",
+    "rarity": "U",
+    "effect": "【配備時】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■味方のユニット1つを選ぶ。それを2回復する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2061357084558651726",
+    "created_at": "2026-06-01 18:00:32 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-01"
   }
 }
