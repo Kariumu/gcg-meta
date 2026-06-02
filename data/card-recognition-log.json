@@ -1450,10 +1450,12 @@
     "status": "pending_review"
   },
   "2026-05-31": {
-    "recognized_at": "2026-05-31 21:05:28 JST",
+    "recognized_at": "2026-06-01 20:07:53 JST",
     "source_tweets": [
       "https://x.com/GUNDAM_GCG_JP/status/2061002241163600043",
-      "https://x.com/GUNDAM_GCG_JP/status/2060994693073138049"
+      "https://x.com/GUNDAM_GCG_JP/status/2060994693073138049",
+      "https://x.com/GUNDAM_GCG_JP/status/2061364629385740322",
+      "https://x.com/GUNDAM_GCG_JP/status/2061357084558651726"
     ],
     "cards": [
       {
@@ -1492,6 +1494,45 @@
         "effect": "【配備】相手のユニットが3つ以上いるなら、HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
         "effect_confidence": "medium",
         "effect_length": 53,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-086",
+        "card_name": "キシリア・ザビ & グワジン",
+        "color": "Blue",
+        "card_type": "BASE",
+        "level": 4,
+        "cost": 2,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】 このカードを配備する。【配備時】 自分のシールド1つを手札に加える。ターン1回 〔ジージェネ〕の味方のユニットがリンクしたとき、このターン中、それは《リペア2》を得る。",
+        "effect_confidence": "medium",
+        "effect_length": 91,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-008",
+        "card_name": "ガンダムデルタカイ",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 4,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴にジージェネを持つPILOT",
+        "effect": "【配備・開発】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■味方のユニット1つを選ぶ。それを2回復する。",
+        "effect_confidence": "medium",
+        "effect_length": 86,
         "image_url": null,
         "confidence": "medium"
       }
@@ -1541,6 +1582,34 @@
         "effect": "【配備時】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■味方のユニット1つを選ぶ。それを2回復する。",
         "effect_confidence": "medium",
         "effect_length": 84,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-06-02": {
+    "recognized_at": "2026-06-02 18:00:40 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2061727015888437353"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-079",
+        "card_name": "オプションパーツ",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "【メイン】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それはLv.3以下の相手のユニットからバトルダメージを受けない。",
+        "effect_confidence": "medium",
+        "effect_length": 65,
         "image_url": null,
         "confidence": "medium"
       }
