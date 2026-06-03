@@ -1615,5 +1615,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-03": {
+    "recognized_at": "2026-06-03 18:00:21 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2062089403523104964",
+      "https://x.com/GUNDAM_GCG_JP/status/2062081859924738488"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-054",
+        "card_name": "ギャプランTR-5〔フライルー〕1号機",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "high",
+        "effect_length": 33,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-055",
+        "card_name": "ドム・グロウスバイル",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 2,
+        "hp": 3,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "相手プレイヤーが2人以上いて、このユニットがレストしているなら、味方のシールドは相手のユニットからバトルダメージを受けない。",
+        "effect_confidence": "medium",
+        "effect_length": 62,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
