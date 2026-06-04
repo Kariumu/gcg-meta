@@ -1663,5 +1663,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-04": {
+    "recognized_at": "2026-06-04 18:00:40 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2062451793213395366",
+      "https://x.com/GUNDAM_GCG_JP/status/2062444246175486102"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-085",
+        "card_name": "クーデリア・藍那・バーンスタイン&イサリビ",
+        "color": "Blue",
+        "card_type": "BASE",
+        "level": 5,
+        "cost": 1,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、アクティブの青の〔ジージェネ〕の味方のユニット1つと相手のユニット1つを選んでもよい。それらをレストにする。",
+        "effect_confidence": "medium",
+        "effect_length": 97,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-010",
+        "card_name": "ガンダム・バルバトス (第6形態)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 4,
+        "ap": 5,
+        "hp": 2,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "【配備時・開発3】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■レストの相手のユニット1つを選ぶ。それに2ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 96,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
