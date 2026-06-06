@@ -1712,5 +1712,151 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-05": {
+    "recognized_at": "2026-06-06 18:01:08 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2063176567786709135",
+      "https://x.com/GUNDAM_GCG_JP/status/2063169024209330622",
+      "https://x.com/GUNDAM_GCG_JP/status/2062864511020011713",
+      "https://x.com/GUNDAM_GCG_JP/status/2062863252699119680",
+      "https://x.com/GUNDAM_GCG_JP/status/2062861994315616705",
+      "https://x.com/GUNDAM_GCG_JP/status/2062836839963410713",
+      "https://x.com/GUNDAM_GCG_JP/status/2062829280565055569"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-080",
+        "card_name": "シュツルム・ファウスト",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【メイン】/【アクション】〔ジージェネ〕のユニット1つを選ぶ。このターン中、それはアクティブの相手のユニットをアタック先に選んでもよい。",
+        "effect_confidence": "medium",
+        "effect_length": 68,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-037",
+        "card_name": "ヅダ（1番機）",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 1,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "「ジャン・リュック・デュバル」",
+        "effect": "自分のターン中、このユニットがブロッカーを持つ相手のユニットとバトルしている間、これはバトルダメージを受けない。",
+        "effect_confidence": "medium",
+        "effect_length": 56,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "G005-130",
+        "card_name": "大統領府",
+        "color": "White",
+        "card_type": "BASE",
+        "level": 2,
+        "cost": 1,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔地球圏統一国家〕",
+          "〔拠点〕"
+        ],
+        "link": "「大統領府」",
+        "effect": "【バースト】 このカードを配備する。【配備時】自分のシールド1つを手札に加える。【破壊時】 トラッシュのこのカードをゲームから除外してもよい。そうしたなら、自分の手札のカード名に「大統領府」を含むベースカード1枚を配備してもよい。",
+        "effect_confidence": "low",
+        "effect_length": 115,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "G005-098",
+        "card_name": "ヒイロ・ユイ",
+        "color": "White",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔Gチーム〕",
+          "〔オペレーションメテオ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。このユニットがダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+        "effect_confidence": "medium",
+        "effect_length": 83,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "G005-067",
+        "card_name": "ウイングガンダムゼロ(EW版)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 5,
+        "hp": 4,
+        "traits": [
+          "〔Gチーム〕"
+        ],
+        "link": "「ヒイロ・ユイ」",
+        "effect": "レストの相手のユニットがいる間、これは《制圧》を得る。(《制圧》: アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる) 【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
+        "effect_confidence": "medium",
+        "effect_length": 100,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-073",
+        "card_name": "キャラリクエスト",
+        "color": "Blue",
+        "card_type": "COMMAND",
+        "level": 6,
+        "cost": 2,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】自分は1枚ドローする。メイン　レストのユニットが6つ以上いるなら、自分は2枚ドローする。",
+        "effect_confidence": "high",
+        "effect_length": 50,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-002",
+        "card_name": "Hi-Vガンダム (EX)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 8,
+        "cost": 7,
+        "ap": 6,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴にジージェネを持つPILOT",
+        "effect": "【配備時】このユニット以外の、〔ジージェネ〕の味方のユニットがいるなら、各相手プレイヤーのユニット1つずつを選ぶ。それらをレストにする。【リンク中】【アタック時】ターン1回このユニット以外の、レストのユニットが3つ以上いるなら、これをアクティブにする。",
+        "effect_confidence": "low",
+        "effect_length": 126,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
