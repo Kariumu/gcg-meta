@@ -1858,5 +1858,92 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-06": {
+    "recognized_at": "2026-06-07 18:00:42 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2063538954721444193",
+      "https://x.com/GUNDAM_GCG_JP/status/2063531405385388403",
+      "https://x.com/GUNDAM_GCG_JP/status/2063191668623294718",
+      "https://x.com/GUNDAM_GCG_JP/status/2063184116842164527"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-081",
+        "card_name": "MAP兵器",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 2,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【メイン/アクション】HP2以下の相手のユニット1～2つを選ぶ。それらを持ち主の手札に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 65,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-042",
+        "card_name": "サイコ・ハロ(EX)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 8,
+        "cost": 7,
+        "ap": 6,
+        "hp": 6,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "このユニットがレストの間、ユニットすべて《ブロッカー》を得る。【アタック時】このバトル中、Lv.7以下のユニットすべては《ブロッカー》を発動できない。",
+        "effect_confidence": "medium",
+        "effect_length": 75,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "G005-123",
+        "card_name": "アークエンジェル",
+        "color": "Blue",
+        "card_type": "BASE",
+        "level": 2,
+        "cost": 1,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔オーブ〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。相手のターン中、〔オーブ〕の味方のユニットすべては、相手から2以下の効果ダメージを受けない。",
+        "effect_confidence": "medium",
+        "effect_length": 85,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "6005-004",
+        "card_name": "アカツキ(オオワシ)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 6,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "特徴にオーブを持つPILOT",
+        "effect": "Lv.6以上の自分のユニットがいない間、手札のこのカードを〔オーブ〕の自分のユニット1つにつき、Lv.-1、コスト-1する。【リンク時】Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+        "effect_confidence": "low",
+        "effect_length": 101,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
