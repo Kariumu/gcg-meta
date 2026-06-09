@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MSA環境レポート GD04環境 Week 6（2026/5/31〜6/6）| GCG STATS</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="theme-color" content="#d4a029">
+  <meta name="description" content="Mobile Suit Arena GD04 Phantom Aria環境 Week 6のメタ分析。61,718試合のデータから青紫アグロが使用率1位を6週連続維持（11.1%）、勝率Top Performingでも首位を奪還。リーグ・ミリタリーが使用率5位へ新登場。期間: 2026年5月31日〜6月6日。">
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="MSA環境レポート GD04環境 Week 6">
+  <meta property="og:description" content="GD04 Phantom Aria環境 6週目のメタ分析。青紫アグロが使用率1位を6週連続維持（11.1%）かつ勝率首位を奪還、リーグ・ミリタリーが使用率5位へ新登場。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://gcg-stats.com/reports/msa-gd04-week6.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp/msa-gd04-week6.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp/msa-gd04-week6.png">
+  <link rel="canonical" href="https://gcg-stats.com/reports/msa-gd04-week6.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <a href="../reports/" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a>
+
+    <div class="section-header" style="margin-top:16px">
+      <h1 class="section-title">MSA環境レポート GD04環境 Week 6</h1>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:4px">
+        青紫アグロが使用率1位を6週連続維持（11.1%）、勝率Top Performingでも首位を奪還
+      </p>
+      <p style="color:var(--text-muted);font-size:12px;margin-top:4px">
+        対象期間: 2026年5月31日 〜 2026年6月6日 / 分析試合数: 61,718試合（123,436リスト） / モード: ランクのみ
+      </p>
+    </div>
+
+    <!-- 出典・前提（Doug氏3条件①+③） -->
+    <section class="source-notice" style="margin:16px 0;padding:14px 18px;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius)">
+      <h2 style="margin:0 0 10px;font-size:16px">出典・前提</h2>
+      <p style="margin:0;font-size:13px;line-height:1.8;color:var(--text-secondary)">
+        本記事は <a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">Doug Godinho氏のPatreon</a> にて公開された <a href="https://www.patreon.com/posts/meta-monday-gd04-160571005" target="_blank" rel="noopener" style="color:var(--accent)">Meta Monday - GD04 - Week 6</a> のデータを部分要約したものです。完全な分析・全デッキの詳細データは Doug氏のPatreon Supporter特典としてご確認ください。
+      </p>
+      <p style="margin:8px 0 0;font-size:12px;line-height:1.8;color:var(--text-muted)">
+        分析対象は <a href="https://mobilesuitarena.com/" target="_blank" rel="noopener" style="color:var(--accent)">Mobile Suit Arena (MSA)</a> 上のランクマッチデータであり、Mobile Suit Arenaは <a href="https://www.gundam-gcg.com/ja/" target="_blank" rel="noopener" style="color:var(--accent)">公式ガンダムカードゲーム</a> の練習環境としてご活用ください。
+      </p>
+      <p style="margin:8px 0 0;font-size:12px;line-height:1.8;color:var(--text-muted)">
+        Mobile Suit Arenaについて詳しくは<a href="msa-introduction.html" style="color:var(--accent)">こちらの紹介記事</a>もご覧ください。
+      </p>
+    </section>
+
+
+    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">
+
+      <!-- 概要 -->
+      <h2>今週のオンライン環境サマリ</h2>
+      <p>
+        Mobile Suit Arena（以下MSA）は、Gundam Card Gameをブラウザ上でプレイできる非公式のオンライン対戦プラットフォームです。本記事では、2026年5月31日〜6月6日の期間にMSAランクマッチでプレイされた<strong>61,718試合（123,436デッキリスト）</strong>の集計データを元に、GD04（Phantom Aria）環境 Week 6 のオンライン環境を紹介します。
+      </p>
+      <p>
+        Week 6 の使用率Top 5 は、上位4枠（青紫アグロ・ネオ・ジオング ブロッカー・ウイングゼロ ブロッカー・一年戦争）が Week 5 から順位を完全維持しました。5枠目には Week 5 で8位だったリーグ・ミリタリーが浮上しています。また Top Performing では、Week 5 で勝率1位だったフリーダム ブロッカーに代わり、青紫アグロが勝率1位を奪還しました。なお Week 5 で勝率1位（60.5%）だったフリーダム ブロッカーは Week 6 で4位（55.2%・-5.3ポイント）へ後退しており、使用率1%未満の小サンプルデッキで勝率が大きく変動する傾向が表れています。
+      </p>
+
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <table style="width:100%;font-size:13px">
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">対象期間</td>
+            <td style="padding:4px 8px">2026年5月31日 〜 6月6日</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">対象モード</td>
+            <td style="padding:4px 8px">ランクマッチ</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">分析試合数</td>
+            <td style="padding:4px 8px">61,718試合</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">デッキリスト数</td>
+            <td style="padding:4px 8px">123,436</td>
+          </tr>
+          <tr>
+            <td style="padding:4px 8px;color:var(--text-muted)">対象拡張</td>
+            <td style="padding:4px 8px">GD04 Phantom Aria</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- セクション3: 今週の主な変動 -->
+      <h2>Week 5からの主な変動</h2>
+      <ul style="line-height:1.8">
+        <li><strong>青紫アグロが使用率1位を継続（6週連続）し、勝率首位も奪還</strong>: 使用率は Week 5 の 10.1% から +1.0ポイント増の 11.1%、勝率は 58.9% → 59.3% で +0.4ポイント。Week 5 では Top Performing 2位でしたが、Week 6 で1位へ復帰しました。</li>
+        <li><strong>使用率Top 5 の上位4枠は順位を完全維持</strong>: 1位 青紫アグロ、2位 ネオ・ジオング ブロッカー、3位 ウイングゼロ ブロッカー、4位 一年戦争 が Week 5 と同じ並びです。</li>
+        <li><strong>リーグ・ミリタリーが使用率8位 → 5位へ浮上</strong>: 使用率は Week 5 の 4.1% から +0.9ポイント増の 5.0% で、Week 6 の Top 5 に新たに入りました。これに伴いバンシィ・ノルン &amp; リーグ・ミリタリーは5位 → 6位へ後退しています。</li>
+        <li><strong>フリーダム ブロッカーが勝率1位 → 4位へ後退</strong>: Week 5 の勝率1位（60.5%）から -5.3ポイント減の 55.2% で4位に。使用率0.4%・試合数446の小サンプルであり、勝率の数値は参考値の扱いとなります。</li>
+        <li><strong>総試合数は前週比 -10.4%</strong>: 68,849試合 → 61,718試合 と減少。原因は元データから断定できません。</li>
+      </ul>
+
+      <!-- セクション4: 使用率Top 5デッキ -->
+      <h2>使用率Top 5デッキ</h2>
+      <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">
+        Most Popular Decks（メタシェア順）。各デッキ名は海外コミュニティでの呼称を日本語化したものです。先週比は Week 5 (5/24〜5/30) との差分です。
+      </p>
+
+      <!-- 使用率1位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">1位</span>
+          青紫アグロ
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(Blue Purple Rush)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>11.1%</strong> <span style="color:var(--green)">(先週比 +1.0%)</span>
+          　/
+          勝率 <strong>59.3%</strong> <span style="color:var(--green)">(先週比 +0.4%)</span>
+          　/
+          試合数 13,641
+        </div>
+        <p>
+          Week 5（10.1% / 58.9%）から使用率は +1.0ポイント増の 11.1% で、6週連続の使用率1位です。勝率も +0.4ポイントの 59.3% となり、Top Performing でも1位を奪還しました（後述）。GD04環境の中心的存在であり続けています。
+        </p>
+      </div>
+
+      <!-- 使用率2位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">2位</span>
+          ネオ・ジオング ブロッカー
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(Neo Zeong Blockers)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>6.1%</strong> <span style="color:var(--red)">(先週比 -0.5%)</span>
+          　/
+          勝率 <strong>52.7%</strong> <span style="color:var(--green)">(先週比 +0.6%)</span>
+          　/
+          試合数 7,541
+        </div>
+        <p>
+          Week 5 の2位（6.6% / 52.1%）から使用率は -0.5ポイント減となりつつ2位を維持。勝率は +0.6ポイント改善の 52.7% です。
+        </p>
+      </div>
+
+      <!-- 使用率3位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">3位</span>
+          ウイングゼロ ブロッカー
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(Wing Zero Blockers)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>5.9%</strong> <span style="color:var(--red)">(先週比 -0.6%)</span>
+          　/
+          勝率 <strong>50.7%</strong> <span style="color:var(--red)">(先週比 -2.0%)</span>
+          　/
+          試合数 7,291
+        </div>
+        <p>
+          Week 5 の3位（6.5% / 52.7%）から使用率・勝率ともに低下しつつ3位を維持。勝率は -2.0ポイント減の 50.7% となっています。
+        </p>
+      </div>
+
+      <!-- 使用率4位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">4位</span>
+          一年戦争
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(One Year War)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>5.6%</strong> <span style="color:var(--red)">(先週比 -0.9%)</span>
+          　/
+          勝率 <strong>56.7%</strong> <span style="color:var(--red)">(先週比 -2.0%)</span>
+          　/
+          試合数 6,865
+        </div>
+        <p>
+          Week 5 の4位（6.5% / 58.7%）から使用率・勝率ともに低下しつつ4位を維持。勝率は -2.0ポイント減の 56.7% ですが、Top Performing では2位に位置しています。
+        </p>
+      </div>
+
+      <!-- 使用率5位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">5位</span>
+          リーグ・ミリタリー
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(League Militaire)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          使用率 <strong>5.0%</strong> <span style="color:var(--green)">(先週比 +0.9%)</span>
+          　/
+          勝率 <strong>50.0%</strong> <span style="color:var(--red)">(先週比 -1.9%)</span>
+          　/
+          試合数 6,170
+        </div>
+        <p>
+          Week 5 では8位（4.1% / 51.9%）でしたが、使用率 +0.9ポイント増で Week 6 の Top 5 に新たに入りました。勝率は 50.0% です。これに伴い、Week 5 の5位だったバンシィ・ノルン &amp; リーグ・ミリタリー（今週は使用率4.8%）は6位へ後退しています。
+        </p>
+      </div>
+
+      <!-- セクション5: 勝率Top 5デッキ -->
+      <h2>勝率Top 5デッキ</h2>
+      <div style="margin:12px 0;padding:12px 14px;background:var(--bg-elevated);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);font-size:13px;color:var(--text-secondary);line-height:1.8">
+        ※ サンプル数の少ないデッキ（使用率1%未満）は試合結果のばらつきが大きいため、勝率の数値は参考値としてご覧ください。今週は Top Performing 3位と4位が該当します。
+      </div>
+
+      <!-- 勝率1位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">1位</span>
+          青紫アグロ
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(Blue Purple Rush)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          勝率 <strong>59.3%</strong> <span style="color:var(--green)">(先週比 +0.4%)</span>
+          　/
+          使用率 <strong>11.1%</strong> <span style="color:var(--green)">(先週比 +1.0%)</span>
+          　/
+          試合数 13,641
+        </div>
+        <p>
+          Week 5 で Top Performing 2位に下がっていましたが、Week 6 で勝率1位を奪還。試合数 13,641 と Top Performing 内で最大規模であり、勝率の信頼性も最も高い水準です。
+        </p>
+      </div>
+
+      <!-- 勝率2位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">2位</span>
+          一年戦争
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(One Year War)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          勝率 <strong>56.7%</strong> <span style="color:var(--red)">(先週比 -2.0%)</span>
+          　/
+          使用率 <strong>5.6%</strong> <span style="color:var(--red)">(先週比 -0.9%)</span>
+          　/
+          試合数 6,865
+        </div>
+        <p>
+          Week 5 の勝率3位（58.7%）から2位へ。勝率は -2.0ポイント低下しましたが、試合数 6,865 と十分なサンプル数を確保しています。
+        </p>
+      </div>
+
+      <!-- 勝率3位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">3位</span>
+          ジャスティス&amp;プロヴィデンス ブロッカー
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(Justice &amp; Providence Blockers)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          勝率 <strong>56.4%</strong> <span style="color:var(--green)">(先週比 +1.4%)</span>
+          　/
+          使用率 <strong>0.6%</strong> <span style="color:var(--green)">(先週比 +0.1%)</span>
+          　/
+          試合数 736
+        </div>
+        <p>
+          Week 5 の勝率5位（55.0%）から3位へ浮上。<strong>使用率0.6%・試合数736とサンプル数が小さく、勝率は参考値としてご覧ください。</strong>少数のプレイヤーによる試合結果が勝率に大きく影響している可能性があります。
+        </p>
+      </div>
+
+      <!-- 勝率4位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">4位</span>
+          フリーダム ブロッカー
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(Freedom Blockers)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          勝率 <strong>55.2%</strong> <span style="color:var(--red)">(先週比 -5.3%)</span>
+          　/
+          使用率 <strong>0.4%</strong> <span style="color:var(--green)">(先週比 +0.1%)</span>
+          　/
+          試合数 446
+        </div>
+        <p>
+          Week 5 の勝率1位（60.5%）から -5.3ポイント減の 55.2% で4位へ後退。<strong>使用率0.4%・試合数446とサンプル数が小さく、勝率は参考値としてご覧ください。</strong>小サンプルデッキの勝率が週ごとに大きく変動する一例です。
+        </p>
+      </div>
+
+      <!-- 勝率5位 -->
+      <div style="margin:20px 0;padding:16px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius)">
+        <h3 style="margin:0 0 8px">
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-right:8px">5位</span>
+          ジャスティス ブロッカー
+          <span style="font-size:12px;color:var(--text-muted);font-weight:400;margin-left:8px">(Justice Blockers)</span>
+        </h3>
+        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:8px;font-family:var(--font-mono)">
+          勝率 <strong>54.6%</strong> <span style="color:var(--red)">(先週比 -1.6%)</span>
+          　/
+          使用率 <strong>2.8%</strong> <span style="color:var(--green)">(先週比 +0.3%)</span>
+          　/
+          試合数 3,405
+        </div>
+        <p>
+          Week 5 の勝率4位（56.2%）から5位へ。使用率 2.8%・試合数 3,405 と一定のサンプル数を持っており、ブロッカー系の中では安定した勝率を維持しています。
+        </p>
+      </div>
+
+      <!-- セクション6: 締めくくり（Doug氏3条件②+③） -->
+      <section class="closing-notice" style="margin:24px 0 0;padding:16px 18px;background:var(--bg-card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius)">
+        <h2 style="margin:0 0 10px;font-size:16px">このレポートについて</h2>
+        <p style="margin:0;font-size:13px;line-height:1.8;color:var(--text-secondary)">
+          本記事は <a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">Doug Godinho氏</a>の許諾のもと、Mobile Suit Arena (MSA) のメタデータを日本語のGCGコミュニティ向けに紹介する目的で公開されています。
+        </p>
+        <p style="margin:8px 0 0;font-size:13px;line-height:1.8;color:var(--text-secondary)">
+          より詳細な分析（全デッキの完全データ、各デッキのリスト）は <a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">Doug Godinho氏のPatreon</a> でSupporterになることでご覧いただけます。元記事は <a href="https://www.patreon.com/posts/meta-monday-gd04-160571005" target="_blank" rel="noopener" style="color:var(--accent)">Meta Monday - GD04 - Week 6</a>。
+        </p>
+        <p style="margin:8px 0 0;font-size:13px;line-height:1.8;color:var(--text-secondary)">
+          <strong>MSAはあくまで <a href="https://www.gundam-gcg.com/ja/" target="_blank" rel="noopener" style="color:var(--accent)">公式ガンダムカードゲーム</a> の練習環境です。</strong>正式な競技体験は公式ガンダムカードゲームの店舗予選・チャンピオンシップ等でお楽しみください。
+        </p>
+        <ul style="margin:10px 0 0;padding-left:20px;font-size:12px;line-height:1.8;color:var(--text-muted)">
+          <li>Mobile Suit Arena: <a href="https://mobilesuitarena.com/" target="_blank" rel="noopener" style="color:var(--accent)">mobilesuitarena.com</a></li>
+          <li>Doug Godinho氏 Patreon: <a href="https://www.patreon.com/DougGodinho" target="_blank" rel="noopener" style="color:var(--accent)">patreon.com/DougGodinho</a></li>
+          <li>ガンダムカードゲーム公式サイト: <a href="https://www.gundam-gcg.com/ja/" target="_blank" rel="noopener" style="color:var(--accent)">gundam-gcg.com</a></li>
+        </ul>
+      </section>
+
+      <p style="margin-top:24px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.7">
+        ※本記事で扱う数値は、オンライン対戦プラットフォーム上での集計データであり、公式の店舗予選・大会とは環境が異なります。<br>
+        ※Mobile Suit Arena は非公式のファン制作プラットフォームです。<br>
+        ※デッキ名は海外コミュニティでの呼称を日本語化したものです。国内での呼称とは異なる場合があります。<br>
+        ※記事内容に誤りがある場合には<a href="https://x.com/gcg_stats" target="_blank" rel="noopener" style="color:var(--accent)">Xアカウント（@gcg_stats）</a>のDMへご報告ください。
+      </p>
+
+    </article>
+
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=10"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>
