@@ -1945,5 +1945,165 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-07": {
+    "recognized_at": "2026-06-08 18:00:24 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2063901343018881507",
+      "https://x.com/GUNDAM_GCG_JP/status/2063893799680827695",
+      "https://x.com/GUNDAM_GCG_JP/status/2063554056963183022",
+      "https://x.com/GUNDAM_GCG_JP/status/2063546516866785593"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-062",
+        "card_name": "不明",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": null,
+        "cost": 1,
+        "ap": 1,
+        "hp": 2,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔耐久型〕"
+        ],
+        "link": "",
+        "effect": "バースト このカードを手札に加える。ヨナ・バシュタ",
+        "effect_confidence": "high",
+        "effect_length": 25,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "不明",
+        "card_name": "不明",
+        "color": "Red",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ガンダムファイター〕",
+          "〔シャッフル同盟〕",
+          "〔必殺技〕"
+        ],
+        "link": "「ヨナ・バシュタ」",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-044",
+        "card_name": "ガンダムローズ",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔MF〕",
+          "〔シャッフル同盟〕"
+        ],
+        "link": "「ジョルジュ・ド・サンド」",
+        "effect": "【リンク中】【アタック時】このユニットにセットしているカードのメインを発動する。",
+        "effect_confidence": "high",
+        "effect_length": 40,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-06-08": {
+    "recognized_at": "2026-06-09 18:00:44 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2064263731702579505",
+      "https://x.com/GUNDAM_GCG_JP/status/2064256186900168791",
+      "https://x.com/GUNDAM_GCG_JP/status/2063916442228273256",
+      "https://x.com/GUNDAM_GCG_JP/status/2063908895148630120"
+    ],
+    "cards": [
+      {
+        "card_number": "EB01-087",
+        "card_name": "マリナ・イスマイール&プトレマイオス2",
+        "color": "Green",
+        "card_type": "BASE",
+        "level": 3,
+        "cost": 2,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。ターン1回 自分のターン中、緑の〔ジージェネ〕の味方のユニットがバトルダメージで相手のユニットを破壊したとき、味方のユニット1つを選ぶ。それを2回復する。",
+        "effect_confidence": "low",
+        "effect_length": 116,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-039",
+        "card_name": "ライジングフリーダムガンダム",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴に支援型を持つPILOT",
+        "effect": "手札のこのカードをプレイするとき、相手のユニットが3つ以上いるなら、これをLvとコストを3としてプレイする。",
+        "effect_confidence": "medium",
+        "effect_length": 54,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "G005-108",
+        "card_name": "苦難を越えて",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【アクション】レストの〔学園〕の味方のユニット1つを選ぶ。バトルしている相手のユニットのアタック先をそれにする。",
+        "effect_confidence": "medium",
+        "effect_length": 56,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-025",
+        "card_name": "デミバーディング",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "「チュアチュリー・パンランチ」",
+        "effect": "【配備時】自分のデッキを上から3枚見て、その中のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 64,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }

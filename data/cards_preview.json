@@ -1425,5 +1425,155 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-06-06"
+  },
+  "EB01-062": {
+    "card_number": "EB01-062",
+    "card_name": null,
+    "color": "Blue",
+    "card_type": "PILOT",
+    "level": null,
+    "cost": 1,
+    "ap": 1,
+    "hp": 2,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔耐久型〕"
+    ],
+    "link": "",
+    "rarity": "U",
+    "effect": "バースト このカードを手札に加える。ヨナ・バシュタ",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2063901343018881507",
+    "created_at": "2026-06-08 18:00:07 JST",
+    "preview": true,
+    "_pendingReview": true,
+    "_pendingReviewIssues": [
+      "card_name が空",
+      "PILOT の level が空"
+    ],
+    "_articleDate": "2026-06-07"
+  },
+  "GD05-044": {
+    "card_number": "GD05-044",
+    "card_name": "ガンダムローズ",
+    "color": "Red",
+    "card_type": "UNIT",
+    "level": 3,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "terrain": [],
+    "traits": [
+      "〔MF〕",
+      "〔シャッフル同盟〕"
+    ],
+    "link": "「ジョルジュ・ド・サンド」",
+    "rarity": "C",
+    "effect": "【リンク中】【アタック時】このユニットにセットしているカードのメインを発動する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2063546516866785593",
+    "created_at": "2026-06-08 18:00:23 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-07"
+  },
+  "EB01-087": {
+    "card_number": "EB01-087",
+    "card_name": "マリナ・イスマイール&プトレマイオス2",
+    "color": "Green",
+    "card_type": "BASE",
+    "level": 3,
+    "cost": 2,
+    "ap": 0,
+    "hp": 5,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕",
+      "〔艦船〕"
+    ],
+    "link": "",
+    "rarity": "U",
+    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。ターン1回 自分のターン中、緑の〔ジージェネ〕の味方のユニットがバトルダメージで相手のユニットを破壊したとき、味方のユニット1つを選ぶ。それを2回復する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2064263731702579505",
+    "created_at": "2026-06-09 18:00:13 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-08"
+  },
+  "EB01-039": {
+    "card_number": "EB01-039",
+    "card_name": "ライジングフリーダムガンダム",
+    "color": "Green",
+    "card_type": "UNIT",
+    "level": 6,
+    "cost": 5,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ジージェネ〕"
+    ],
+    "link": "特徴に支援型を持つPILOT",
+    "rarity": "C",
+    "effect": "手札のこのカードをプレイするとき、相手のユニットが3つ以上いるなら、これをLvとコストを3としてプレイする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2064256186900168791",
+    "created_at": "2026-06-09 18:00:22 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-08"
+  },
+  "G005-108": {
+    "card_number": "G005-108",
+    "card_name": "苦難を越えて",
+    "color": "Green",
+    "card_type": "COMMAND",
+    "level": 3,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [],
+    "link": "",
+    "rarity": "C",
+    "effect": "【アクション】レストの〔学園〕の味方のユニット1つを選ぶ。バトルしている相手のユニットのアタック先をそれにする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2063916442228273256",
+    "created_at": "2026-06-09 18:00:32 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-08",
+    "pilot": {
+      "name": "グエル・ジェターク",
+      "traits": [
+        "〔学園〕"
+      ],
+      "ap": 1,
+      "hp": 1
+    }
+  },
+  "GD05-025": {
+    "card_number": "GD05-025",
+    "card_name": "デミバーディング",
+    "color": "Green",
+    "card_type": "UNIT",
+    "level": 4,
+    "cost": 2,
+    "ap": 3,
+    "hp": 2,
+    "terrain": [],
+    "traits": [
+      "〔学園〕"
+    ],
+    "link": "「チュアチュリー・パンランチ」",
+    "rarity": "U",
+    "effect": "【配備時】自分のデッキを上から3枚見て、その中のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2063908895148630120",
+    "created_at": "2026-06-09 18:00:43 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-08"
   }
 }
