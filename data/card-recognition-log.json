@@ -2105,5 +2105,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-09": {
+    "recognized_at": "2026-06-10 07:37:22 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2064278831624786030",
+      "https://x.com/GUNDAM_GCG_JP/status/2064271288328196588"
+    ],
+    "cards": [
+      {
+        "card_number": "G005-094",
+        "card_name": "クェス・パラヤ",
+        "color": "Purple",
+        "card_type": "PILOT",
+        "level": 3,
+        "cost": 1,
+        "ap": 1,
+        "hp": 1,
+        "traits": [
+          "〔ネオ・ジオン〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【破壊時】〔ネオ・ジオン〕の自分のユニット1つを選ぶ。このターン中、それが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
+        "effect_confidence": "medium",
+        "effect_length": 87,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-053",
+        "card_name": "ヤクト・ドーガ(クェス専用機)",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "「クェス・バラヤ」",
+        "effect": "【破壊時】〔ネオ・ジオン〕の自分のカードの効果で破壊されているなら、トラッシュのこのカードを手札に加える。",
+        "effect_confidence": "medium",
+        "effect_length": 53,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
