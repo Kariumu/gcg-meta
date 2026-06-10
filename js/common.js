@@ -83,7 +83,7 @@ const GCG = {
       return '../../';
     }
     // 1 階層深いページ
-    if (path.includes('/reports/') || path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/') || path.includes('/series/')) {
+    if (path.includes('/reports/') || path.includes('/events/') || path.includes('/meta/') || path.includes('/cards/') || path.includes('/series/') || path.includes('/sets/')) {
       return '../';
     }
     return './';

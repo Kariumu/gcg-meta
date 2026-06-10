@@ -498,16 +498,26 @@ ${hasImage
 **カードの構造**:
 - card_number: EB01-044, ST10-006 等
 - card_name: ガンダム名 + (バリアント) + (EX/LR等のサフィックス)
-- rarity: LR / SR / R / U / C のいずれか
+- rarity: LR / R / U / C のいずれか(SR は存在しない。詳細は後述の有効値制約を参照)
 - card_type: UNIT / PILOT / COMMAND / BASE
 - level: 1-12 の整数。**重要(2026-05-24 案件3 改修)**: 画像が渡されている場合、カード左上の "Lv.X" 表示を画像から直接読み取ること。OCR テキストに "Lv" の文字列が見つからなくても、画像から数字を確認できる。card_type に関わらず(UNIT/PILOT/COMMAND/BASE 全て)level は必須項目。読み取れない場合のみ null
 - cost: 0-12 の整数
 - ap: UNIT は通常 AP(0-9)、PILOT は補正AP(セット時の増分、0 含む 0-9)、BASE は通常 AP(0 含む 0-9、指示書37c により BASE も AP 必須化)、COMMAND は null
 - hp: UNIT は通常 HP(0-9)、PILOT は補正HP(セット時の増分、0 含む 0-9)、BASE は通常 HP(0-9)、COMMAND は null
-- traits: 〔ジージェネ〕等。card_name 内の括弧(能力解放、サンダーボルト版等)は traits ではない
+- pilot: コマンドパイロットのパイロット面を表すサブオブジェクト { name, traits, ap, hp }。ap/hp は券面の補正値 "+N/+N" の数値(0 を含む。例 "+1/+0" は ap:1, hp:0)。level は持たせない。パイロット面が無い純コマンド・他タイプでは pilot を出力しない
+- traits: 〔ジージェネ〕等。card_name 内の括弧(能力解放、サンダーボルト版等)は traits ではない。**コマンドパイロット(後述)の場合は下帯の特徴を pilot.traits に入れ、この traits は空配列 [] にする**
 - link: 「カード名」または 特徴(XX) 形式
 - effect: 効果テキスト全文(改行除去、整形済)
 - **terrain: 出力対象外**(松岡さんの判断により、記事生成で使用しないため Step 3 では補完しない)
+
+**card_number のセットプレフィックス制約(2026-06-10 再発防止、松岡さん指示)**:
+- 有効なセットプレフィックスは GD01〜GD05 / ST01〜ST10 / EB01 **のみ**。これ以外のプレフィックスは GCG に存在しない
+- "G005" や "6005" は "GD05" の OCR 誤認識(G と D、D と 0、G と 6 を混同しない)。検出したら GD05 に補正し、_corrections に記載する
+- card_number の形式は「プレフィックス-数字3桁」(例: GD05-067)。**末尾にレアリティ記号(LR/SR/R/U/C)を付けない**(例: "EB01-045R" は誤り → "EB01-045"。レアリティは rarity フィールドにのみ入れる)
+
+**rarity の有効値制約(2026-06-10 再発防止、松岡さん指示)**:
+- rarity の有効値は **LR / R / U / C のみ**。"SR" というレアリティはこのゲームに存在しない(LR や R の誤読の可能性が高い)
+- 判別できない場合は捏造せず null とする
 
 **GCG カードタイプ(5種類、公式定義)**:
 - UNIT(ユニット): バトルエリアに配備、AP/HP を持つ
@@ -515,6 +525,13 @@ ${hasImage
 - COMMAND(コマンド): 一時的効果を発動、使い切り
 - BASE(ベース): シールド前に配置、守りの要
 - リソース: リソースデッキで使用、配備コスト
+
+**コマンドパイロット(COMMAND の二面カード、2026-06-01 追加)**:
+一部の COMMAND カードはカード下部に「パイロット面」を持ちます(下部に名前帯・特徴帯・補正値 "+AP/+HP" が並び、カード右端に縦書きの "PILOT" ラベルがある)。これを「コマンドパイロット」と呼びます。判定の主手がかりは右端の縦書き "PILOT" ラベルと、下帯の "+数値 … +数値" 表記です。
+- コマンドパイロットの場合: カード上部はコマンドとして扱い ap=null / hp=null を維持。下部のパイロット面は pilot サブオブジェクト({ name, traits, ap, hp })に格納する。
+- 下帯の特徴(〔ジージェネ〕等)は pilot.traits に入れ、コマンド本体の traits は空配列 [] にする。
+- パイロット面を持たない純粋な COMMAND カードには pilot を付けない(出力に含めない)。
+- 画像から下帯が明確に読み取れない場合は捏造せず、読めた範囲のみ設定し残りは null とする。
 
 **GCG キーワード効果(7種類、正式定義、これ以外は GCG に存在しない)**:
 カードの effect テキスト内に以下のキーワード効果が出現する場合があります。これらは GCG 公式で定義された効果であり、効果の意味を正確に保持してください。
@@ -583,6 +600,34 @@ effect テキスト内に以下の記号が出現します。これらは特定�
   "expansion": "...",
   "release_date": "2026-06-27",
   "_corrections": ["LR を RO 誤認識から補正", "level=5(OCR連結 23 から分離)"]
+}
+
+コマンドパイロットの場合のみ、上記に加えて pilot を付与します(例):
+{
+  "card_number": "EB01-084",
+  "card_type": "COMMAND",
+  "level": 4,
+  "cost": 1,
+  "ap": null,
+  "hp": null,
+  "color": "White",
+  "traits": [],
+  "effect": "...",
+  "pilot": { "name": "デメジエール・ソンネン", "traits": ["〔ジージェネ〕", "〔攻撃型〕"], "ap": 1, "hp": 1 }
+}
+
+補正に 0 を含む場合(例: 拡散ビーム砲、補正 +1/+0)は hp を 0 のまま保持する(null にしない):
+{
+  "card_number": "ST10-015",
+  "card_type": "COMMAND",
+  "level": 3,
+  "cost": 1,
+  "ap": null,
+  "hp": null,
+  "color": "Red",
+  "traits": [],
+  "effect": "...",
+  "pilot": { "name": "クレア・ヒースロー", "traits": ["〔ジージェネ〕", "〔耐久型〕"], "ap": 1, "hp": 0 }
 }
 
 **color フィールドの規則(2026-05-24 案件4 改修)**:
@@ -690,6 +735,7 @@ ${hasImage ? '画像で明確に確認できる値(特に level, cost, ap, hp �
               _rawText: step2Result._rawText,
               _blocks: step2Result._blocks,
               color: finalColor,
+              ...(structured.pilot ? { pilot: structured.pilot } : {}),
             };
             if (step2Result._warning_ap_hp) merged._warning_ap_hp = step2Result._warning_ap_hp;
             // Step 3 の補正内容ログ

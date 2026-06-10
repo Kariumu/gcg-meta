@@ -70,6 +70,10 @@ const SET_LABELS = {
   'ST07': 'スタートデッキ ネオ・ジオン',
   'ST08': 'スタートデッキ ティターンズ',
   'ST09': 'スタートデッキ インパルス',
+  // 2026-06-10 新弾追加（発売後の備え）。※「G005」は GD05 の OCR 誤読でありセットとして存在しない
+  'GD05': '第5弾ブースターパック',
+  'ST10': 'スタートデッキ Generation Pulse',
+  'EB01': 'Eternal Nexus',
 };
 
 function getSetPrefix(cardId) {
@@ -94,7 +98,14 @@ function getCardSet(card) {
 // === 収録弾の表示順（正準順）===
 // chip と並びは package_set 基準。この順で整列し、正準順に無い未知の収録弾
 // （将来の新弾やフォールバック値）は末尾へ出現順で回す。
-const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','β','PROMO'];
+// 2026-06-10 新弾追加（指示書 cowork-instr-preview-sets-and-series-2026-06-10.md Task 3）:
+//   既存の並び思想は「ブースター(GD) → スタートデッキ(ST) → 特殊(β/PROMO)」のため、
+//   GD05 は GD04 の直後、ST10 は ST09 の直後に挿入。
+//   EB01（Eternal Nexus）は既存カテゴリに属さない新シリーズのため、
+//   通常販売パック群の末尾（ST の後）かつ特殊枠（β/PROMO）の前に配置。
+//   ※「G005」は GD05 の OCR 誤読でありセットとして存在しないため除去
+//     （2026-06-10 指示書 cowork-instr-g005-merge-images Task E）
+const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','β','PROMO'];
 
 // === 収録弾 表示名対応表（生値 → 画面表示名）===
 // 既存の SET_LABELS（収録弾の長い説明文。例 "第1弾ブースターパック"。GD01-03/ST01-09 のみ定義）
