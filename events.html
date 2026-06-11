@@ -66,7 +66,7 @@
   <div id="footer"></div>
 
   <script src="shared/ntc-rank-consolidator.js?v=1"></script>
-  <script src="js/common.js?v=13"></script>
+  <script src="js/common.js?v=14"></script>
   <script>
     GCG.init();
 
@@ -100,7 +100,11 @@
       if (paramSeries && allSeries[paramSeries]) {
         currentSeriesId = paramSeries;
       } else {
-        currentSeriesId = pickDefaultSeries();
+        // 2026-06-11 指示書v6: 初期選択のみ「イベントデータのあるシリーズ」を優先(6月0件問題の回避)。
+        // 選択UIの選択肢・手動選択は従来どおり。旧キャッシュ等で未定義ならローカル pickDefaultSeries() へ。
+        currentSeriesId = GCG.pickDefaultSeriesWithData
+          ? ((GCG.pickDefaultSeriesWithData(allSeries, eventsData) || {}).id || '')
+          : pickDefaultSeries();
       }
 
       renderSeriesSelector();

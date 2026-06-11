@@ -237,7 +237,7 @@
     <div id="footer"></div>
 
     <script src="shared/ntc-rank-consolidator.js?v=1"></script>
-    <script src="js/common.js?v=11"></script>
+    <script src="js/common.js?v=14"></script>
     <script>
         GCG.init();
 
@@ -425,7 +425,7 @@
 
             // シリーズ連動のデフォルト期間: デフォルトシリーズ（active > upcoming > 最新completed）の start_date/end_date を採用。
             // シリーズが取得できない場合のみ半月単位フォールバック。
-            var defaultSeries = GCG.pickDefaultSeries ? GCG.pickDefaultSeries(seriesMap) : null;
+            var defaultSeries = GCG.pickDefaultSeriesWithData ? GCG.pickDefaultSeriesWithData(seriesMap, events) : (GCG.pickDefaultSeries ? GCG.pickDefaultSeries(seriesMap) : null);
             var defaultRange = defaultSeries ? GCG.getSeriesDateRange(defaultSeries) : GCG.getDefaultDateRange();
             if (!defaultRange.start && !defaultRange.end) defaultRange = GCG.getDefaultDateRange();
             const filterArea = document.getElementById('date-filter-area');

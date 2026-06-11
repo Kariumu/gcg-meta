@@ -459,6 +459,53 @@ const GCG = {
     return list[0];
   },
 
+  // data/series.json から「イベントデータが存在するデフォルトシリーズ」を返す(2026-06-11 指示書v5 Task1)
+  // 既存 pickDefaultSeries は変更せず、新メソッドとして追加。
+  // 候補順序は pickDefaultSeries と同思想: active(start昇順) → upcoming(start昇順) → completed(start降順)。
+  // 各候補の start_date〜end_date 範囲内のイベントを eventsObj から探し、1件以上ある最初の候補を返す。
+  // 全候補が0件なら pickDefaultSeries と同じ結果を返す(現行挙動へフォールバック)。
+  // eventsObj は events.json の .events マップ(key→{date,...})。
+  // events.json 全体({events:{...}})を渡された場合も .events を解決して動作する。
+  pickDefaultSeriesWithData: function(seriesInput, eventsObj) {
+    var list;
+    if (Array.isArray(seriesInput)) list = seriesInput.slice();
+    else if (seriesInput && typeof seriesInput === 'object') list = Object.values(seriesInput);
+    else return null;
+    list = list.filter(function(s) { return s && s.id; });
+    if (list.length === 0) return null;
+
+    var byStartAsc  = function(a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); };
+    var byStartDesc = function(a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); };
+    var candidates = []
+      .concat(list.filter(function(s) { return s.status === 'active'; }).sort(byStartAsc))
+      .concat(list.filter(function(s) { return s.status === 'upcoming'; }).sort(byStartAsc))
+      .concat(list.filter(function(s) { return s.status === 'completed'; }).sort(byStartDesc));
+
+    // events.json 全体と .events マップのどちらを渡されても動くよう解決
+    var evMap = (eventsObj && eventsObj.events && typeof eventsObj.events === 'object')
+      ? eventsObj.events
+      : (eventsObj && typeof eventsObj === 'object' ? eventsObj : {});
+
+    for (var i = 0; i < candidates.length; i++) {
+      var s = candidates[i];
+      var start = s.start_date || '';
+      var end = s.end_date || '';
+      var hasData = false;
+      for (var key in evMap) {
+        if (!Object.prototype.hasOwnProperty.call(evMap, key)) continue;
+        var ev = evMap[key];
+        if (!ev || !ev.date) continue;
+        if (start && ev.date < start) continue;
+        if (end && ev.date > end) continue;
+        hasData = true;
+        break; // 1件あれば十分
+      }
+      if (hasData) return s;
+    }
+    // 全候補にデータなし → 既存ロジックの結果へフォールバック
+    return this.pickDefaultSeries(seriesInput);
+  },
+
   // シリーズから {start, end} を返す。指定がなければ空文字
   getSeriesDateRange: function(series) {
     if (!series) return { start: '', end: '' };
