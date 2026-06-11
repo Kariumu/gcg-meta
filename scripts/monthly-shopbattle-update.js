@@ -46,16 +46,9 @@ function main() {
 
   if (!monthLabel) monthLabel = getCurrentMonth();
 
-  // 3日経過チェック（--force で無視）
+  // 3日経過チェックは廃止（毎日 cron で差分取得を進めるため）。
+  // lastRunPath は最終実行日の記録用に後続処理で使用する。
   const lastRunPath = path.join(ROOT, 'data', 'shopbattle', '.last-monthly-run');
-  if (!force && !dryRun && fs.existsSync(lastRunPath)) {
-    const lastRun = new Date(fs.readFileSync(lastRunPath, 'utf8').trim());
-    const daysSince = (Date.now() - lastRun.getTime()) / (1000 * 60 * 60 * 24);
-    if (daysSince < 3) {
-      console.log(`⏭️ 前回実行から${daysSince.toFixed(1)}日。3日経過していないためスキップ`);
-      process.exit(0);
-    }
-  }
 
   const seriesId = SERIES_MAP[monthLabel];
   if (!seriesId) {
@@ -150,7 +143,7 @@ function main() {
     execSync(
       `node ${path.join(ROOT, 'scripts', 'fetch-shopbattle-by-ids.js')} ` +
       `--ids ${tempIdsPath} --month ${monthLabel} --series ${seriesId}`,
-      { stdio: 'inherit', timeout: 8 * 60 * 1000 }  // 8分タイムアウト
+      { stdio: 'inherit' }  // タイムアウト指定なし（最後まで取得させる）
     );
   } catch (err) {
     console.warn(`\n⚠️ 取得中にタイムアウトまたはエラー: ${err.message}`);

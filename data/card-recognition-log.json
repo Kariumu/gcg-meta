@@ -2154,5 +2154,162 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-10": {
+    "recognized_at": "2026-06-10 18:45:37 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2064641221281341577",
+      "https://x.com/GUNDAM_GCG_JP/status/2064633671626424373",
+      "https://x.com/GUNDAM_GCG_JP/status/2064626118431261025",
+      "https://x.com/GUNDAM_GCG_JP/status/2064618574547972144"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-078",
+        "card_name": "ガンダムデスサイズヘル(EW版)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 4,
+        "ap": 5,
+        "hp": 2,
+        "traits": [
+          "〔Gチーム〕"
+        ],
+        "link": "「デュオ・マックスウェル」",
+        "effect": "このユニットは配備したターンに、レストの相手のユニットをアタック先に選んでアタックしてもよい。",
+        "effect_confidence": "high",
+        "effect_length": 47,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "G005-073",
+        "card_name": "アルトロンガンダム (EW版)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 5,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔Gチーム〕",
+          "〔マリーメイア軍〕"
+        ],
+        "link": "「張五飛」",
+        "effect": "【配備時】レストの相手のユニット1つを選ぶ。それは次の相手のターンのスタートフェイズでアクティブにならない。",
+        "effect_confidence": "medium",
+        "effect_length": 54,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-082",
+        "card_name": "戦艦巡航",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】このカードのアクションを発動する。「アクション 各相手プレイヤーのLv.3以下のユニット1つずつを選ぶ。それらを持ち主の手札に戻す。」",
+        "effect_confidence": "medium",
+        "effect_length": 73,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-048",
+        "card_name": "Sガンダム",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "特徴に攻撃型を持つPILOT",
+        "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "high",
+        "effect_length": 33,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-06-11": {
+    "recognized_at": "2026-06-11 18:45:32 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2065003605959262256",
+      "https://x.com/GUNDAM_GCG_JP/status/2064988509690085628",
+      "https://x.com/GUNDAM_GCG_JP/status/2064980964254843376"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-042",
+        "card_name": "シャイニングガンダム",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 2,
+        "cost": 1,
+        "ap": 2,
+        "hp": 2,
+        "traits": [
+          "〔MF〕",
+          "〔シャッフル同盟〕"
+        ],
+        "link": "",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-077",
+        "card_name": "マスターリーグ開幕",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジージェネ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【アクション】レストの〔ジージェネ〕の味方のユニット1つを選ぶ。バトルしている相手のユニットのアタック先をそれにする。",
+        "effect_confidence": "medium",
+        "effect_length": 78,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-088",
+        "card_name": "ミオリネ・レンブラン & 学園艦",
+        "color": "Green",
+        "card_type": "BASE",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔ジージェネ〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】 このカードを配備する。【配備時】 自分のシールド1つを手札に加える。相手のターン中、Lv.3の〔ジージェネ〕の味方のユニットすべてをAP+1する。",
+        "effect_confidence": "medium",
+        "effect_length": 80,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }

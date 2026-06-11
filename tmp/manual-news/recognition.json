@@ -1,0 +1,32 @@
+{
+  "sourceImage": "images\\news\\2026-05-12\\ST10-014.jpg",
+  "recognizedAt": "2026-06-01T22:42:52.734Z",
+  "cards": [
+    {
+      "_rawText": "Lv. 4\nST10-014 CO\nGUNDAM\nCARD GAME\nスタートデッキ\n-START DECK-\nGeneration\nPulse\nジェネレーション パルス\n2026.6.27 on sale\nST10\nBANDAI NAMCO\n日本\n14\nCOMMAND\nCOST\nPARAM\nGUNDAM\n-START DECK\nGeneration Pulse\nジェネレーショ\n*BBAN\n開発経路図の解放\n手札のこのカードをプレイするとき、手札の (ジージェネ)のユニットカー\nド1枚を捨ててもよい。そうしたなら、これをLv.とコストを2としてプレイ\nする。\nメイン 自分は2枚ドローする。\n©SOTSU SUNRISE\n©SOTSU SUNRISE・MBS",
+      "_blocks": 23,
+      "card_number": "ST10-014",
+      "card_name": "開発経路図の解放",
+      "rarity": "C",
+      "card_type": "COMMAND",
+      "level": 4,
+      "cost": 4,
+      "ap": null,
+      "hp": null,
+      "terrain": [],
+      "traits": [],
+      "link": null,
+      "effect": "【メイン】手札のこのカードをプレイするとき、手札の〔ジージェネ〕のユニットカード1枚を捨ててもよい。そうしたなら、これをLv.とコストを2としてプレイする。自分は2枚ドローする。",
+      "color": "Blue",
+      "expansion": "ST10",
+      "release_date": "2026-06-27",
+      "_corrections": [
+        "card_name を OCR テキストから補完",
+        "rarity=C(画像から読取)",
+        "cost=4(画像から読取)",
+        "effect を OCR テキストから整形・補完",
+        "traits を空配列に修正(効果テキスト内の特徴は traits ではない)"
+      ]
+    }
+  ]
+}

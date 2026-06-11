@@ -27,6 +27,22 @@ const isNtcType = makeIsNtcTypeFromSeriesMap(SERIES_MAP_FOR_NTC);
 
 const ROOT = __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
+
+// 公式 Q&A データベース (homepage/data/qa_database.json)
+// スキーマ: { all: [...], by_card: { cardId: [qaId, ...] }, by_category: {...} }
+let qaDatabase = { all: [], by_card: {}, by_category: {} };
+try {
+  qaDatabase = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'qa_database.json'), 'utf-8'));
+  console.log(`  Q&A データベース: ${qaDatabase.total_count || (qaDatabase.all || []).length} 件読み込み`);
+} catch (e) {
+  console.warn('  ⚠ qa_database.json が見つかりません。Q&A セクションは生成されません。');
+}
+// Q&A の id → entry 高速参照マップ
+const qaById = {};
+for (const qa of (qaDatabase.all || [])) {
+  if (qa && qa.id) qaById[qa.id] = qa;
+}
+
 const CARDS_DIR = path.join(ROOT, 'cards');
 const SITE_URL = 'https://gcg-stats.com';
 
@@ -477,6 +493,183 @@ function generateCoUsedSection(cardId, coUsed) {
 }
 
 // SEOテキストセクション生成（A1: カードページ300文字以上確保）
+const FEATURE_ICONS = {
+  draw: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="13" height="18" rx="2"/><path d="M8 7h5M8 11h5M8 15h3"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>',
+  destroy: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m6 6 12 12M18 6 6 18"/></svg>',
+  bolt: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m13 2-10 12h7v8l10-12h-7z"/></svg>',
+  puzzle: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.439 7.85c-.049.322.059.648.289.878l1.568 1.568c.47.47.706 1.087.706 1.704s-.235 1.233-.706 1.704l-1.611 1.611a.98.98 0 0 1-.837.276c-.47-.07-.802-.48-.802-.954v-1.74a1.5 1.5 0 0 0-1.5-1.5h-1.5v-1.5a1.5 1.5 0 0 0-1.5-1.5h-1.74c-.474 0-.884-.331-.954-.802a.98.98 0 0 1 .276-.837l1.611-1.611c.471-.471 1.087-.706 1.704-.706s1.233.235 1.704.706l1.568 1.568c.23.23.556.338.878.289l.347-.053c.95-.144 1.86.527 1.86 1.487z"/><path d="M11.25 14.5h-1.5a1.5 1.5 0 0 0-1.5 1.5v1.74c0 .474-.331.884-.802.954a.98.98 0 0 1-.837-.276L5 16.808a2.41 2.41 0 0 1-.706-1.704c0-.617.235-1.233.706-1.704l1.568-1.568a1 1 0 0 0 .289-.878l-.053-.347c-.144-.95.527-1.86 1.487-1.86h1.74"/></svg>',
+  flame: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 17c1.5 0 3-1.5 3-3.5 0-2-2-3.5-3.5-3.5C9 10 8 8.5 8 7c0-1.5 1.5-3 1.5-3S15 5 15 11c0 5-4 9-7 9-3 0-7-2-7-7 0-3 1-5 2-7 0 1.5 1.5 4.5 5.5 4.5Z"/></svg>',
+  shield: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>',
+  sword: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/></svg>',
+  link: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>',
+  tag: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>',
+  arrowUp: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7M12 19V5"/></svg>',
+  sparkle: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.91 5.82L4 10.91l5.09 1.09L11.18 18 13 12l5.82-1.91L13 8.09Z"/></svg>',
+  flash: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
+  arrows: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7-4 4 4 4M3 11h12M17 17l4-4-4-4M21 13H9"/></svg>',
+};
+
+/**
+ * カードの特徴(キーワード能力 + ステータス特性 + 構築上の特性)を抽出する。
+ * 案 B(アイコン+短文形式)の特徴サマリーセクションに使用。
+ * 返り値: Array<{ icon, color, title, desc }>
+ *
+ * 検出ソース:
+ *  - effect_text 内のキーワード(実データに存在するキーワードのみ採用)
+ *  - リンク条件(masterCard.link)
+ *  - ステータス値(AP/HP/コスト/レベル)
+ *  - 特徴(traits)
+ */
+function detectCardFeatures(masterCard) {
+  if (!masterCard) return [];
+  const effectText = masterCard.effect_text || '';
+  const ct = masterCard.card_type;
+  const ap = (masterCard.stats || {}).ap || 0;
+  const hp = (masterCard.stats || {}).hp || 0;
+  const cost = masterCard.cost || 0;
+  const level = masterCard.level || 0;
+  const traits = masterCard.traits || [];
+  const features = [];
+
+  // === 1. 効果テキスト内キーワード ===
+  // 件数は 2026-05-28 時点で cards_master.json をスキャンして確認済(0 件のキーワードは除外)
+  const KEYWORD_MAP = [
+    { kw: 'ドロー',     icon: 'draw',    color: '#4d9ff7', title: 'ハンドアドバンテージ獲得', desc: 'ドロー効果で手札を補充できる' },
+    { kw: 'リペア',     icon: 'heart',   color: '#34d058', title: '長期戦適性',               desc: '《リペア》でユニットを継続的に回復' },
+    { kw: '破壊',       icon: 'destroy', color: '#f44747', title: '除去効果',                 desc: '相手カードの破壊で盤面に干渉できる' },
+    { kw: '配備時',     icon: 'bolt',    color: '#d4a029', title: 'テンポ展開',               desc: '【配備時】に効果が誘発し即座にアドバンテージを得る' },
+    { kw: 'セット時',   icon: 'puzzle',  color: '#b87aff', title: '起動型シナジー',           desc: '【セット時】にパイロット連携で効果が誘発' },
+    { kw: 'ダメージ',   icon: 'flame',   color: '#f44747', title: 'ダメージ付与',             desc: '相手プレイヤーやユニットへ直接ダメージを与えられる' },
+    { kw: '高機動',     icon: 'arrows',  color: '#4d9ff7', title: '《高機動》',                desc: 'スタンド状態の相手ユニットからの防御を回避できる' },
+    { kw: '制圧',       icon: 'shield',  color: '#d4a029', title: '《制圧》',                  desc: '相手ベースに対しブロックされず通せる' },
+    { kw: '援護',       icon: 'shield',  color: '#34d058', title: '《援護》',                  desc: '味方ユニットを身代わりにして防御力を底上げ' },
+    { kw: '先制攻撃',   icon: 'sword',   color: '#f44747', title: '《先制攻撃》',              desc: 'アタック宣言側として先にダメージ解決' },
+    { kw: '突破',       icon: 'arrowUp', color: '#d4a029', title: '《突破》',                  desc: '撃破時の超過ダメージが相手プレイヤーへ届く' },
+    { kw: '覚醒',       icon: 'sparkle', color: '#b87aff', title: '《覚醒》',                  desc: '条件達成で追加効果が解放される' },
+  ];
+  const seenTitles = new Set();
+  for (const def of KEYWORD_MAP) {
+    if (effectText.includes(def.kw) && !seenTitles.has(def.title)) {
+      features.push({ icon: def.icon, color: def.color, title: def.title, desc: def.desc });
+      seenTitles.add(def.title);
+    }
+  }
+
+  // === 2. リンク条件(UNIT/PILOT) ===
+  const linkList = normalizeLink(masterCard.link);
+  if (linkList.length > 0 && (ct === 'UNIT' || ct === 'PILOT')) {
+    const first = linkList[0];
+    let desc;
+    if (first.startsWith('特徴〔') || first.startsWith('特徴')) {
+      desc = `${first} を持つパイロットとリンク可能`;
+    } else if (ct === 'UNIT') {
+      desc = `「${first}」とリンクして追加効果を得られる`;
+    } else {
+      desc = `「${first}」にセットしてリンクを発動可能`;
+    }
+    features.push({ icon: 'link', color: '#b87aff', title: 'リンク条件あり', desc });
+  }
+
+  // === 3. ステータス特性(UNIT のみ) ===
+  if (ct === 'UNIT') {
+    if (ap >= 4 && hp >= 4) {
+      features.push({ icon: 'shield', color: '#34d058', title: '高戦闘力', desc: `AP${ap}/HP${hp} の高水準ステータスで攻守両立` });
+    } else if (ap >= 4) {
+      features.push({ icon: 'sword', color: '#f44747', title: '高AP', desc: `AP${ap} の攻撃力でアタッカー適性が高い` });
+    } else if (hp >= 4) {
+      features.push({ icon: 'shield', color: '#34d058', title: '高HP', desc: `HP${hp} の耐久力で壁役として機能` });
+    }
+    if (cost <= 2 && level <= 3 && level > 0) {
+      features.push({ icon: 'flash', color: '#d4a029', title: '軽量コスト', desc: `Lv.${level}・コスト${cost} で序盤から展開できる` });
+    }
+  }
+
+  // === 4. 特徴シナジー ===
+  if (traits.length > 0) {
+    const tagText = traits.slice(0, 2).map(t => `〔${t}〕`).join('');
+    const descText = traits.length >= 2
+      ? `${tagText} を持つカードと組み合わせて特徴シナジーを構築可能`
+      : `${tagText} 軸のデッキで採用候補になる`;
+    features.push({ icon: 'tag', color: '#8b95a5', title: '特徴シナジー', desc: descText });
+  }
+
+  return features;
+}
+
+/**
+ * 特徴サマリーセクションの HTML を生成する(案 B: アイコン+短文形式)。
+ * features.length === 0 の場合は空文字列を返す(セクションごと非表示)。
+ */
+function buildFeatureSummaryHtml(features) {
+  if (!features || features.length === 0) return '';
+  // 上限 7 件(縦幅とのバランス)
+  const list = features.slice(0, 7);
+  const rows = list.map(f => `
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span style="flex-shrink:0;color:${f.color};margin-top:2px;line-height:0">${FEATURE_ICONS[f.icon] || FEATURE_ICONS.sparkle}</span>
+          <div style="flex:1;min-width:0">
+            <p style="margin:0;font-size:14px;font-weight:600;color:var(--text-primary)">${escapeHtml(f.title)}</p>
+            <p style="margin:2px 0 0;font-size:13px;line-height:1.6;color:var(--text-secondary)">${escapeHtml(f.desc)}</p>
+          </div>
+        </div>`).join('\n');
+  return `
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 12px;color:var(--text-primary)">このカードの特徴</h3>
+      <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px;padding:14px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg)">
+${rows}
+      </div>`;
+}
+
+/**
+ * 関連 Q&A セクションの HTML を生成する。
+ * - by_card[cardId] に登録された Q&A を表示
+ * - パラレル版の場合は base_card_id でも引く
+ * - 一件もヒットしない場合はセクションごと非表示
+ * - 末尾に公式 FAQ ハブへのリンクを付与
+ */
+function buildQaSectionHtml(cardId, baseCardId) {
+  const byCard = qaDatabase.by_card || {};
+  const ids = new Set();
+  for (const id of (byCard[cardId] || [])) ids.add(id);
+  if (baseCardId && baseCardId !== cardId) {
+    for (const id of (byCard[baseCardId] || [])) ids.add(id);
+  }
+  const qas = Array.from(ids).map(id => qaById[id]).filter(Boolean);
+  if (qas.length === 0) return '';
+
+  const items = qas.map(qa => {
+    const q = escapeHtml(qa.question || '');
+    const a = escapeHtml(qa.answer || '');
+    const rawUrl = qa.source_url || '';
+    // URL スキーム検証: javascript:/data: 等を排除し https:/http:/相対パスのみ許可
+    const isSafeUrl = rawUrl && /^(https?:\/\/|\/)/i.test(rawUrl);
+    const linkHtml = isSafeUrl
+      ? `<a href="${escapeHtml(rawUrl)}" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:12px;color:var(--blue);text-decoration:none">公式ページで確認 →</a>`
+      : '';
+    return `
+        <div style="padding:14px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px">
+          <div style="display:flex;align-items:flex-start;gap:8px;margin-bottom:8px">
+            <span style="flex-shrink:0;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-dim);padding:2px 8px;border-radius:4px;letter-spacing:0.5px">Q</span>
+            <p style="margin:0;font-size:14px;line-height:1.7;color:var(--text-primary);font-weight:500">${q}</p>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:8px">
+            <span style="flex-shrink:0;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--blue);background:var(--blue-dim);padding:2px 8px;border-radius:4px;letter-spacing:0.5px">A</span>
+            <p style="margin:0;font-size:14px;line-height:1.7;color:var(--text-secondary)">${a}</p>
+          </div>
+          ${linkHtml}
+        </div>`;
+  }).join('\n');
+
+  return `
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">このカードに関する公式 Q&A <span style="font-size:12px;font-weight:400;color:var(--text-muted);margin-left:6px">${qas.length}件</span></h3>
+      <p style="font-size:12px;color:var(--text-muted);margin:0 0 12px">バンダイ公式サイトに掲載されている裁定情報です。</p>
+      <div style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px">
+${items}
+      </div>
+      <p style="font-size:13px;margin:0 0 16px"><a href="https://www.gundam-gcg.com/jp/rules/faqs/" target="_blank" rel="noopener" style="color:var(--blue);text-decoration:none">公式 FAQ 一覧を見る →</a></p>`;
+}
+
+// SEOテキストセクション生成（A1: カードページ300文字以上確保）
 function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, usageRate, totalAdoptions, wins, avgCount, typeUsage, coUsed, isParallel) {
   if (!masterCard) return '';
 
@@ -568,119 +761,38 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   // --- 4. 公式情報リンクテキスト ---
   const officialText = `${escapeHtml(cardName)}の公式カード情報やルール詳細はBANDAI公式サイトをご確認ください。`;
 
-  // --- 5. A2拡張: 独自分析セクション ---
-  let effectAnalysis = '';
-  let usageHints = '';
-  let similarCards = '';
+  // --- 5. 特徴サマリー(案 B) と 関連 Q&A 用データ準備(2026-05-28 改修) ---
+  // パラレル版(_pN)は親カードと効果完全同一(memory: gcg-card-id-conventions)のため、
+  // 特徴検出・Q&A 抽出は親カード(base_card_id)を参照する。
+  const baseCardId = (isParallel && masterCard.base_card_id) ? masterCard.base_card_id : cardId;
+  const baseCard = (isParallel && cardsMaster[masterCard.base_card_id]) ? cardsMaster[masterCard.base_card_id] : masterCard;
 
-  // パラレル版向け拡張テキスト
-  if (isParallel) {
-    const baseCard = cardsMaster[masterCard.base_card_id];
-    effectAnalysis = `${escapeHtml(cardName)}はイラスト違いのパラレル版カードです。通常版と同じ効果・ステータスを持ちながら、コレクション性の高い特別なイラストが魅力です。パラレル版はパック開封やキャンペーンなどで入手でき、同じ性能でありながらプレミアム感のある一枚です。`;
-    usageHints = `デッキ構築においては通常版と同一のカードとして扱われるため、性能面での違いはありません。お気に入りのイラストで対戦を楽しめるのがパラレル版の醍醐味です。大会でもパラレル版は通常版と同様に使用可能で、コレクションとしての価値も高いカードです。`;
-    if (baseCard) {
-      const baseColorJp = COLOR_JP[baseCard.color] || baseCard.color || '';
-      const baseTypeJp = TYPE_JP[baseCard.card_type] || baseCard.card_type || '';
-      similarCards = `通常版の${escapeHtml(baseCard.name_jp || masterCard.base_card_id)}（${escapeHtml(masterCard.base_card_id)}）と完全に同一の効果・ステータスを持ちます。${escapeHtml(baseColorJp)}${escapeHtml(baseTypeJp)}カードとしてデッキに最大4枚まで投入でき、通常版とパラレル版を混在させることも可能です。`;
-    }
+  // 特徴サマリー(常に親カード基準で検出)
+  const features = detectCardFeatures(baseCard);
+  const featureSummaryHtml = buildFeatureSummaryHtml(features);
+
+  // Q&A セクション(by_card は通常版 ID で登録されているケースが多いため両方引く)
+  const qaHtml = buildQaSectionHtml(cardId, baseCardId);
+
+  // パラレル版バナー(冒頭に明示)
+  // base_card_id が undefined のときはバナー自体を表示しない(リンク先 ../undefined/ への遷移を防止)
+  let parallelBannerHtml = '';
+  if (isParallel && masterCard.base_card_id) {
+    const baseName = baseCard.name_jp || masterCard.base_card_id;
+    parallelBannerHtml = `
+      <div style="display:flex;align-items:center;gap:10px;margin:0 0 16px;padding:10px 14px;background:var(--accent-dim);border:1px solid var(--border-accent);border-radius:8px">
+        <span style="font-family:var(--font-mono);font-size:11px;font-weight:700;color:var(--accent);background:var(--bg-card);padding:2px 8px;border-radius:4px;letter-spacing:0.5px">PARALLEL</span>
+        <p style="margin:0;font-size:13px;color:var(--text-secondary);line-height:1.6">本カードは <a href="../${escapeHtml(masterCard.base_card_id)}/" style="color:var(--blue);text-decoration:none">${escapeHtml(baseName)}（${escapeHtml(masterCard.base_card_id)}）</a> のパラレル(イラスト違い)版です。効果・ステータス・特徴は完全に同一で、デッキでは合算 4 枚まで投入できます。</p>
+      </div>`;
   }
 
-  if (!isParallel && masterCard.effect_text) {
-    // 効果テキスト解説
-    const effectText = masterCard.effect_text;
-    const effectParts = [];
-
-    // キーワード検出による効果分析
-    const keywords = {
-      'ドロー': 'ドロー効果によりハンドアドバンテージを得ることができます',
-      'ダメージ': '相手にダメージを与える攻撃的な効果を持ちます',
-      'リペア': '回復能力により長期戦での粘り強さが光ります',
-      '破壊': '除去効果を持ち、相手の盤面に干渉できます',
-      '配備': '配備時に効果が発動し、テンポよく展開できます',
-      'セット時': 'セット時に効果が発動するため、タイミングを計った運用が重要です',
-      '覚醒': '覚醒条件を満たすことで真価を発揮するカードです',
-      '指定攻撃': '指定攻撃により、狙った相手ユニットを処理できます',
-      '貫通': '貫通能力により、ユニットを超えてダメージを通すことができます',
-      '速攻': '速攻を持つため配備直後から攻撃に参加でき、奇襲性が高いです',
-      '強襲': '強襲による追加攻撃で、1ターンでの大ダメージが狙えます',
-      '高機動': '高機動により攻防両面で柔軟な立ち回りが可能です',
-      'コスト軽減': 'コスト軽減効果により、効率的なカード展開を支援します',
-      'サーチ': 'デッキからカードを探す効果で、安定したゲームプランを実現します',
-      'バウンス': '相手カードを手札に戻す効果で、テンポアドバンテージを得られます',
-      'ガード': '防御的な効果により、重要なユニットやベースを守ることができます',
-    };
-
-    for (const [kw, desc] of Object.entries(keywords)) {
-      if (effectText.includes(kw)) {
-        effectParts.push(desc);
-      }
-    }
-
-    if (effectParts.length > 0) {
-      effectAnalysis = `${escapeHtml(cardName)}は${effectParts.slice(0, 3).join('。また、')}。`;
-      if (effectParts.length === 1) {
-        effectAnalysis += `このカード固有の能力を活かした戦術を組み立てることで、デッキの勝率向上に貢献します。`;
-      }
-    } else {
-      // 効果テキストが短い/キーワードなしカード向けの充実テキスト
-      if (ct === 'UNIT') {
-        effectAnalysis = `${escapeHtml(cardName)}はバニラ（効果なし）に近いシンプルなユニットですが、コストに対して安定したステータスを持つことが強みです。効果持ちユニットに比べてカウンターされにくく、純粋な戦闘力で盤面に貢献します。特にリミテッド環境やシールド戦では、こうした堅実なステータスを持つカードが活躍する場面が多くあります。`;
-      } else if (ct === 'PILOT') {
-        effectAnalysis = `${escapeHtml(cardName)}はシンプルな能力を持つパイロットカードです。対応するユニットに搭乗させることで戦闘力を底上げし、バトルでの優位を確保します。派手な効果はありませんが、安定した補正値は構築の土台として頼りになります。`;
-      } else if (ct === 'COMMAND') {
-        effectAnalysis = `${escapeHtml(cardName)}はシンプルながら確実な効果を持つコマンドカードです。使い所を見極めて発動することで、戦況を有利に運ぶ一手となります。コマンドカードはタイミングが重要なため、相手の動きを読んで使うことが勝利への鍵です。`;
-      } else {
-        effectAnalysis = `${escapeHtml(cardName)}は独自の効果を持つカードで、特定の戦略において活躍が期待されます。使いこなすことで対戦相手の意表を突く戦術が可能になります。`;
-      }
-    }
-
-    // タイプ別の運用ヒント
-    const hintParts = [];
-    if (ct === 'UNIT') {
-      if (ap >= 4 && hp >= 4) {
-        hintParts.push(`AP${ap}/HP${hp}という高いステータスを誇り、攻守のバランスに優れています`);
-      } else if (ap >= 4) {
-        hintParts.push(`AP${ap}の高い攻撃力を持ち、アタッカーとして優秀です`);
-      } else if (hp >= 4) {
-        hintParts.push(`HP${hp}の高い耐久力を持ち、壁役として機能します`);
-      } else if (cost <= 2) {
-        hintParts.push(`コスト${cost}と軽量なため、序盤の展開を支えるカードです`);
-      } else {
-        hintParts.push(`Lv.${level}・コスト${cost}のユニットとして、デッキのカーブを構成する中堅カードです`);
-      }
-
-      if (traits.length > 0) {
-        hintParts.push(`「${escapeHtml(traits[0])}」特徴を持つため、同特徴のカードとシナジーが期待できます`);
-      }
-    } else if (ct === 'PILOT') {
-      hintParts.push(`Lv.${level}のパイロットとして、対応するユニットの戦闘力を引き上げます`);
-      if (ap >= 3) {
-        hintParts.push(`AP${ap}の高い補正値により、搭乗ユニットの火力が大幅に向上します`);
-      }
-      if (traits.length > 0) {
-        hintParts.push(`「${escapeHtml(traits[0])}」特徴を持つため、同作品のユニットとの組み合わせが自然です`);
-      }
-    } else if (ct === 'COMMAND') {
-      if (cost <= 2) {
-        hintParts.push(`コスト${cost}と軽量なコマンドのため、余ったリソースで柔軟に発動できます`);
-      } else {
-        hintParts.push(`コスト${cost}のコマンドカードとして、ゲーム中盤以降に真価を発揮します`);
-      }
-      hintParts.push(`${escapeHtml(colorJp)}デッキであればどのアーキタイプにも採用を検討できる汎用性があります`);
-    } else if (ct === 'BASE') {
-      hintParts.push(`ベースカードとして、ゲームを通じて継続的なアドバンテージを提供します`);
-      hintParts.push(`HP${hp}を持つため、ベース攻撃に対する耐久ラインを考慮してデッキを構築しましょう`);
-    }
-
-    if (hintParts.length > 0) {
-      usageHints = hintParts.join('。') + '。';
-    }
-
-    // 類似カード比較: 同色・同タイプ・同コスト帯のカードを検索
+  // 類似カード比較(従来ロジック踏襲。同色・同タイプ・近いコスト/Lv 帯のカードを検索)
+  let similarCardsText = '';
+  {
     const similarList = [];
     for (const [sid, sc] of Object.entries(cardsMaster)) {
       if (sid === cardId || sid.includes('_p')) continue;
-      if (sc.color !== masterCard.color || sc.card_type !== ct) continue;
+      if (!sc || sc.color !== baseCard.color || sc.card_type !== ct) continue;
       if (ct === 'UNIT' || ct === 'PILOT') {
         if (Math.abs((sc.level || 0) - level) > 1) continue;
       } else {
@@ -689,91 +801,23 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
       similarList.push(sc);
       if (similarList.length >= 5) break;
     }
-
     if (similarList.length >= 2) {
       const names = similarList.slice(0, 3).map(s => escapeHtml(s.name_jp));
       if (ct === 'UNIT' || ct === 'PILOT') {
-        similarCards = `${escapeHtml(colorJp)}のLv.${level}帯${escapeHtml(typeJp)}カードとしては${names.join('、')}などが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。環境やプレイスタイルに応じて使い分けることで、デッキの対応力を高められます。`;
+        similarCardsText = `${escapeHtml(colorJp)}のLv.${level}帯${escapeHtml(typeJp)}カードとしては${names.join('、')}などが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。`;
       } else {
-        similarCards = `${escapeHtml(colorJp)}のコスト${cost}帯${escapeHtml(typeJp)}カードとしては${names.join('、')}などが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。環境やプレイスタイルに応じて使い分けることで、デッキの対応力を高められます。`;
+        similarCardsText = `${escapeHtml(colorJp)}のコスト${cost}帯${escapeHtml(typeJp)}カードとしては${names.join('、')}などが存在します。それぞれ異なる効果を持つため、デッキのコンセプトに合わせた選択が重要です。`;
       }
     } else if (similarList.length === 1) {
-      similarCards = `${escapeHtml(colorJp)}の同レベル帯で近い役割を持つカードとして${escapeHtml(similarList[0].name_jp)}があります。効果やステータスの違いを比較し、デッキに合った方を選択しましょう。`;
+      similarCardsText = `${escapeHtml(colorJp)}の同レベル帯で近い役割を持つカードとして${escapeHtml(similarList[0].name_jp)}があります。効果やステータスの違いを比較し、デッキに合った方を選択しましょう。`;
     }
-
-    // デッキ構築アドバイス（追加テキスト確保）
-    const deckAdviceParts = [];
-    if (source) {
-      deckAdviceParts.push(`「${escapeHtml(source)}」シリーズのカードと組み合わせることで、テーマデッキとしての一体感が生まれます`);
-    }
-    if (traits.length > 0) {
-      deckAdviceParts.push(`「${escapeHtml(traits[0])}」特徴を持つ他のカードとの組み合わせにより、特徴シナジーを活かした戦術が可能です`);
-      if (traits.length >= 2) {
-        deckAdviceParts.push(`また「${escapeHtml(traits[1])}」特徴も持つため、複数の特徴軸でのデッキ構築に柔軟性があります`);
-      }
-    }
-    if (ct === 'UNIT' && level >= 5) {
-      deckAdviceParts.push(`高レベルユニットとして、序盤を支える低コストカードとの配分バランスに注意が必要です`);
-    } else if (ct === 'UNIT' && level <= 2) {
-      deckAdviceParts.push(`序盤から展開できる低レベルユニットとして、ゲームの主導権を握る役割を担います`);
-    }
-    if (masterCard.link && masterCard.link.length > 0) {
-      deckAdviceParts.push(`リンク対象として「${escapeHtml(masterCard.link[0])}」が設定されており、リンク成功時のボーナスを狙えます`);
-    }
-    // コマンドカード特徴なし向け補完
-    if (ct === 'COMMAND' && traits.length === 0 && !masterCard.link) {
-      deckAdviceParts.push(`${escapeHtml(colorJp)}カードを使うデッキであれば色条件を満たせるため、メインデッキやサイドボードへの投入を検討できます`);
-      if (cost <= 3) {
-        deckAdviceParts.push(`低コストコマンドはゲーム序盤から中盤にかけてテンポよく使用でき、盤面の優位を築く手助けとなります`);
-      } else {
-        deckAdviceParts.push(`高コストコマンドは発動タイミングが限られるものの、効果が強力で試合の流れを変える一枚になり得ます`);
-      }
-      deckAdviceParts.push(`対戦相手のデッキタイプに応じて採用枚数を調整することで、環境への対応力が上がります`);
-    }
-    // ベースカード向け補完
-    if (ct === 'BASE' && traits.length === 0) {
-      deckAdviceParts.push(`ベースカードはゲーム開始時に配置するカードで、試合全体を通じて効果が持続します`);
-      deckAdviceParts.push(`デッキの戦略に合ったベースを選ぶことで、ゲームプランの安定性が大きく向上します`);
-    }
-    // 汎用の追加テキスト（データが少ないカードの底上げ）
-    if (deckAdviceParts.length === 0) {
-      deckAdviceParts.push(`${escapeHtml(setPrefix)}収録のカードとして、同弾のカードとの組み合わせを意識したデッキ構築がおすすめです`);
-      deckAdviceParts.push(`今後のカードプールの拡張により、新たなシナジーが生まれる可能性もあります`);
-    }
-    if (deckAdviceParts.length > 0) {
-      usageHints += ' ' + deckAdviceParts.join('。') + '。';
-    }
-
-    // 収録パック情報テキスト（全カード共通でテキスト量を確保）
-    const setNames = {
-      'GD01': 'ガンダムカードゲーム ブースターパック01「機動戦士ガンダム ～戦場の絆～」',
-      'GD02': 'ガンダムカードゲーム ブースターパック02「宇宙世紀の鼓動」',
-      'GD03': 'ガンダムカードゲーム ブースターパック03「英雄の共鳴」',
-      'GD04': 'ガンダムカードゲーム ブースターパック04「運命の加速」',
-      'ST01': 'スターターデッキ01「地球連邦軍」',
-      'ST02': 'スターターデッキ02「ジオン公国軍」',
-      'ST03': 'スターターデッキ03「ティターンズ」',
-      'ST04': 'スターターデッキ04「エゥーゴ」',
-      'ST05': 'スターターデッキ05「ザフト」',
-      'ST06': 'スターターデッキ06「地球連合」',
-      'ST07': 'スターターデッキ07「ソレスタルビーイング」',
-      'ST08': 'スターターデッキ08「ガンダムマイスターズ」',
-      'ST09': 'スターターデッキ09「ネオ・ジオン」',
-    };
-    const setFullName = setNames[setPrefix] || `${escapeHtml(setPrefix)}パック`;
-    let packInfo = `${escapeHtml(cardName)}は「${escapeHtml(setFullName)}」に収録されています。`;
-    if (setPrefix.startsWith('ST')) {
-      packInfo += `スターターデッキは構築済みのカードセットとして手軽にゲームを始められる商品で、初心者にもおすすめです。スターターのカードを基盤にブースターパックのカードを加えることで、より強力なデッキへと進化させることができます。`;
-    } else {
-      packInfo += `ブースターパックはランダム封入のため、目当てのカードを手に入れるにはトレーディングやシングル購入も有効です。同パックの他カードとの相性も考慮してコレクションを進めましょう。`;
-    }
-    usageHints += ' ' + packInfo;
   }
 
-  // HTMLセクション組み立て
+  // HTMLセクション組み立て(新構成: 概要 / 大会採用 / 相性 / 特徴サマリー / Q&A / 類似カード)
+  // 旧「カードの強み」「運用のヒント」「ガンダムカードゲームについて」は廃止(2026-05-28)
   let html = `
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
-      <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">${escapeHtml(cardName)}について</h2>
+      <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">${escapeHtml(cardName)}について</h2>${parallelBannerHtml}
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${overviewText}</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${analysisText}</p>`;
@@ -784,40 +828,23 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${synergyText}</p>`;
   }
 
-  // A2拡張セクション（採用0カード向け）
-  if (effectAnalysis) {
-    html += `
-      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">カードの強み</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${effectAnalysis}</p>`;
+  // 特徴サマリー(案 B: アイコン+短文)
+  if (featureSummaryHtml) {
+    html += featureSummaryHtml;
   }
 
-  if (usageHints) {
-    html += `
-      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">運用のヒント</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${usageHints}</p>`;
+  // 関連公式 Q&A
+  if (qaHtml) {
+    html += qaHtml;
   }
 
-  if (similarCards) {
+  if (similarCardsText) {
     html += `
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">類似カード</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${similarCards}</p>`;
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${similarCardsText}</p>`;
   }
 
-  // 全カード共通: GCGゲーム情報セクション
-  const colorTip = {
-    '赤': '赤は攻撃的なカードが多く、速攻や高APを活かした積極的な攻めが得意なカラーです。',
-    '青': '青はドローやサーチなどの手札補充に優れ、安定したゲーム展開が可能なカラーです。',
-    '緑': '緑は耐久力やリペアに優れ、長期戦で真価を発揮する防御的なカラーです。',
-    '黄': '黄は多彩な効果を持つカードが揃い、柔軟な戦術を取れるバランス型のカラーです。',
-    '紫': '紫はトリッキーな効果や強力なコマンドを持ち、相手の戦略を崩す妨害に長けたカラーです。',
-    '黒': '黒は高コストながら強力な効果を持つカードが多く、終盤の逆転力が魅力のカラーです。',
-  };
-  const colorInfo = colorTip[colorJp] || `${escapeHtml(colorJp)}カラーは独自の戦略性を持ちます。`;
-  const gameInfo = `${colorInfo}ガンダムカードゲームでは最大4枚まで同名カードをデッキに入れることができ、デッキ枚数は50枚で構成します。大会ではニュータイプチャレンジ形式が主流で、全国の店舗で定期的に開催されています。`;
-
   html += `
-      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">ガンダムカードゲームについて</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">${gameInfo}</p>
       <p style="font-size:13px;line-height:1.6;color:var(--text-muted);margin:0">${officialText}</p>
     </section>`;
 

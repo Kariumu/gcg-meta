@@ -284,6 +284,11 @@ const CARD_ZONES = {
   link:     { x1: 555, y1: 615, x2: 835, y2: 645 },
   // PILOT特徴: カード名の下（UNIT系とは位置が異なる）
   traitsPilot: { x1: 550, y1: 530, x2: 835, y2: 555 },
+  // コマンドパイロット 下部パイロット帯（EB01-084 実測ベース・ST10/EB01 の共通性はホスト確定）
+  cmdPilotName:   { x1: 600, y1: 560, x2: 830, y2: 600 },
+  cmdPilotTraits: { x1: 600, y1: 602, x2: 830, y2: 628 },
+  cmdPilotApHp:   { x1: 828, y1: 575, x2: 935, y2: 662 },
+  cmdPilotLabel:  { x1: 950, y1: 560, x2: 1000, y2: 660 }, // 右端 PILOT 縦ラベル（二面判定）
 };
 
 // fullTextAnnotation から座標ベースでカード情報を抽出
@@ -323,6 +328,15 @@ function parseVisionBlocks(visionResponse) {
   const typeText = zoneText(cardWords, CARD_ZONES.cardType);
   const typeMatch = typeText.match(/(UNIT|PILOT|COMMAND|BASE)/i);
   if (typeMatch) result.card_type = typeMatch[1].toUpperCase();
+
+  // --- コマンドパイロット二面判定（traits抽出より前に確定させる）---
+  // 主: 右端 PILOT 縦ラベル / 補強: 下帯の "+N…+N"。名前ゾーン有無は使わない（誤検出回避）。
+  let hasPilotFace = false;
+  if (result.card_type === 'COMMAND') {
+    const labelText = zoneText(cardWords, CARD_ZONES.cmdPilotLabel).replace(/\s/g, '');
+    const apHpProbe = zoneText(cardWords, CARD_ZONES.cmdPilotApHp);
+    hasPilotFace = /PILOT/i.test(labelText) || /\+\s*\d+.*\+\s*\d+/.test(apHpProbe);
+  }
 
   // --- Lv ---
   const lvZoneWords = wordsInZone(cardWords, CARD_ZONES.lv);
@@ -436,21 +450,28 @@ function parseVisionBlocks(visionResponse) {
   // BASE: traits ゾーン（y590-620, UNITと同ゾーン）
   let traitZone;
   if (result.card_type === 'PILOT') traitZone = CARD_ZONES.traitsPilot;
-  else if (result.card_type === 'COMMAND') traitZone = CARD_ZONES.link; // COMMANDの特徴はlinkゾーン位置
+  else if (result.card_type === 'COMMAND') {
+    // 純コマンド: 従来どおり link ゾーンから自身の所属特徴を抽出
+    // コマンドパイロット: 下帯特徴は pilot.traits 側で取得 → command.traits は空に
+    traitZone = hasPilotFace ? null : CARD_ZONES.link;
+  }
   else if (result.card_type === 'BASE') traitZone = CARD_ZONES.traits;
   else traitZone = CARD_ZONES.traits;
-  const traitZoneWords = wordsInZone(cardWords, traitZone);
-  // フォールバック: 通常のtraitsゾーンも検索
-  if (traitZoneWords.length === 0) {
-    traitZoneWords.push(...wordsInZone(cardWords, CARD_ZONES.traits));
+  if (traitZone) {
+    const traitZoneWords = wordsInZone(cardWords, traitZone);
+    // フォールバック: 通常のtraitsゾーンも検索
+    if (traitZoneWords.length === 0) {
+      traitZoneWords.push(...wordsInZone(cardWords, CARD_ZONES.traits));
+    }
+    traitZoneWords.sort((a, b) => a.left - b.left);
+    const traitText = traitZoneWords.map(w => w.text).join('');
+    // ()や〔〕で囲まれた特徴名を抽出
+    const traitMatches = traitText.match(/[〔(]([^〕)]+)[〕)]/g);
+    if (traitMatches) {
+      result.traits = [...new Set(traitMatches.map(m => m.replace(/^\((.+)\)$/, '〔$1〕')))];
+    }
   }
-  traitZoneWords.sort((a, b) => a.left - b.left);
-  const traitText = traitZoneWords.map(w => w.text).join('');
-  // ()や〔〕で囲まれた特徴名を抽出
-  const traitMatches = traitText.match(/[〔(]([^〕)]+)[〕)]/g);
-  if (traitMatches) {
-    result.traits = [...new Set(traitMatches.map(m => m.replace(/^\((.+)\)$/, '〔$1〕')))];
-  }
+  // traitZone===null（コマンドパイロット）は result.traits=[] のまま
 
   // --- AP/HP ---
   if (result.card_type === 'UNIT') {
@@ -498,13 +519,25 @@ function parseVisionBlocks(visionResponse) {
       result.link = linkContent;
     }
   }
-  // COMMANDカード: パイロット欄（y575-615）から【パイロット】情報を取得
-  if (result.card_type === 'COMMAND') {
-    const pilotZoneText = zoneTextSpaced(cardWords, { x1: 550, y1: 575, x2: 835, y2: 615 });
-    if (pilotZoneText) {
-      result.link = '【パイロット】「' + pilotZoneText + '」';
-    }
+  // COMMANDカード: コマンドパイロットなら下部パイロット帯を pilot サブ構造へ
+  // （hasPilotFace は card_type 確定直後に算出済み。純コマンドは pilot を付けない）
+  if (result.card_type === 'COMMAND' && hasPilotFace) {
+    const pilot = { name: null, traits: [], ap: null, hp: null };
+    // 名前（暗バー上段。記号除去・1行目）
+    const nameText = zoneTextSpaced(cardWords, CARD_ZONES.cmdPilotName);
+    if (nameText) pilot.name = nameText.split('\n')[0].replace(/[「」]/g, '').trim() || null;
+    // 特徴（cmdPilotTraits ゾーン。link ゾーンとは hasPilotFace で排他済）
+    const ptWords = wordsInZone(cardWords, CARD_ZONES.cmdPilotTraits).sort((a, b) => a.left - b.left);
+    const ptText = ptWords.map(w => w.text).join('');
+    const ptM = ptText.match(/[〔(]([^〕)]+)[〕)]/g);
+    if (ptM) pilot.traits = [...new Set(ptM.map(m => m.replace(/^\((.+)\)$/, '〔$1〕')))];
+    // 補正 +AP/+HP（PILOTと同形式 "+N+N"。hp=0 も保持するため直接代入）
+    const apHpText = zoneText(cardWords, CARD_ZONES.cmdPilotApHp);
+    const plusM = apHpText.match(/\+?(\d+).*?\+?(\d+)/);
+    if (plusM) { pilot.ap = parseInt(plusM[1]); pilot.hp = parseInt(plusM[2]); }
+    result.pilot = pilot;
   }
+  // 旧 link 文字列詰め（'【パイロット】「…」'）は廃止。COMMAND の link は空のまま。
 
   return result;
 }
@@ -539,8 +572,8 @@ const COLOR_CROP = { left: 550, top: 130, width: 40, height: 50 };
 // RGB値から属性色を判定
 // 判定順序が重要: 白→緑→青→赤→紫→Unknown
 function classifyColor(r, g, b) {
-  // 白: R,G,B全て180以上かつ差が30以内
-  if (r > 180 && g > 180 && b > 180 && Math.max(r, g, b) - Math.min(r, g, b) < 30) {
+  // 白: R,G,B全て180以上かつ差が30以内（コメント「180以上」に合わせ >= に是正。EB01-052 RGB180を救済）
+  if (r >= 180 && g >= 180 && b >= 180 && Math.max(r, g, b) - Math.min(r, g, b) < 30) {
     return 'White';
   }
   // 緑: Gが最大 & G > 130 & Rより30以上大きい
@@ -754,6 +787,8 @@ function buildUnifiedCardDB(cardsMaster) {
       traits: p.traits || [],
       stats: { ap: p.ap, hp: p.hp },
       link: p.link,
+      pilot: p.pilot || null, // コマンドパイロット: パイロット面（無ければ null）
+      effect: p.effect || '', // 過去カードシナジー強化(2026-05-24): 関連カード考察に効果テキストを利用
       preview: true
     };
   }
@@ -770,7 +805,9 @@ function buildUnifiedCardDB(cardsMaster) {
       traits: m.traits || [],
       stats: m.stats || {},
       link: m.link,
+      pilot: m.pilot || null, // コマンドパイロット: パイロット面（無ければ null）
       source_title: m.source_title,
+      effect: m.effect_text || '', // 過去カードシナジー強化(2026-05-24): cards_master は effect_text フィールド
       preview: false
     };
   }
@@ -778,8 +815,1089 @@ function buildUnifiedCardDB(cardsMaster) {
   return db;
 }
 
+// === 同日公開カードのリンク成立組合せ検出(2026-05-24 追加) ===
+// 目的: 同日に公開された UNIT と PILOT がリンク条件を満たす場合、
+//      記事生成時に「組合せセット」として強調するためのデータを返す。
+// 入力: cardInfoList — その日公開された全カード(認識成功・補完済)
+// 出力: [{ unit: cardInfo, pilots: [cardInfo, ...] }, ...] のリスト
+//      該当ペアがない場合は空配列を返す。
+function detectSameDayLinkPairs(cardInfoList) {
+  if (!Array.isArray(cardInfoList) || cardInfoList.length === 0) return [];
+
+  const units = cardInfoList.filter(c =>
+    c && c.card_type === 'UNIT' && typeof c.link === 'string' && c.link.length > 0
+  );
+  const pilots = cardInfoList.filter(c =>
+    c && c.card_type === 'PILOT'
+  );
+
+  if (units.length === 0 || pilots.length === 0) return [];
+
+  const pairs = [];
+  for (const unit of units) {
+    const matchedPilots = pilots.filter(p => matchesLinkCondition(unit.link, p));
+    if (matchedPilots.length > 0) {
+      pairs.push({ unit, pilots: matchedPilots });
+    }
+  }
+  return pairs;
+}
+
+// リンク条件マッチング(auto-news.js:1497-1532 のロジックを抽出・流用)
+// unit.link のテキストと、対象カード(PILOT)がリンク条件を満たすか判定する。
+// 対応する link 表記:
+//   - カード名指定: 「ユウ・カジマ」など → 完全一致
+//   - 特徴指定: 特徴に支援型を持つPILOT → 対象 PILOT が当該特徴を持つか
+//   - 〔特徴〕指定: 〔ジージェネ〕のPILOT 等
+//   - 特徴の直接指定: (ティターンズ)など → 対象 PILOT が当該特徴を持つか
+function matchesLinkCondition(linkText, candidate) {
+  if (!linkText || !candidate) return false;
+  const cardType = (candidate.card_type || '').toUpperCase();
+
+  // 1. カード名指定(「名前」形式) — 完全一致
+  const nameMatches = linkText.match(/「([^」]+)」/g) || [];
+  for (const nm of nameMatches) {
+    const cleanName = nm.replace(/[「」]/g, '');
+    const isCondition = /特徴|を持つ|PILOT|COMMAND/.test(cleanName);
+    if (!isCondition && candidate.card_name === cleanName) return true;
+  }
+
+  // 2. 特徴指定の抽出(auto-news.js:1516-1518 と同等のロジック)
+  const traitMatch = linkText.match(/特徴[にが]?〔?([^〕を]+)〕?を持つ(PILOT|COMMAND)?/i)
+    || linkText.match(/〔([^〕]+)〕.*(PILOT|COMMAND)/i)
+    || linkText.match(/(ティターンズ|ジオン|地球連邦|エゥーゴ|CB|鉄華団|WB隊|ザフト|ミネルバ隊|フォルドの夜明け|学園|ネオ・ジオン|アナハイム|ジージェネ|攻撃型|支援型|耐久型|防衛型|射撃型|格闘型).*(PILOT|パイロット)/i);
+  if (traitMatch) {
+    const targetTrait = traitMatch[1];
+    const targetType = (traitMatch[2] || 'PILOT').toUpperCase();
+    const candidateTraits = (candidate.traits || []).map(t => String(t).replace(/[〔〕]/g, ''));
+    if (
+      candidateTraits.includes(targetTrait) &&
+      (cardType === targetType || cardType === 'PILOT' || cardType === 'COMMAND')
+    ) {
+      return true;
+    }
+  }
+
+  // 3. 簡易な「(PILOT)」「(特徴名)」表記への対応
+  const parenMatch = linkText.match(/\(([^)]+)\)/);
+  if (parenMatch) {
+    const inside = parenMatch[1];
+    const candidateTraits = (candidate.traits || []).map(t => String(t).replace(/[〔〕]/g, ''));
+    if (candidateTraits.includes(inside) && cardType === 'PILOT') return true;
+  }
+
+  return false;
+}
+
+// === コンボ候補絞り込み(2026-05-25 追加 / 引き継ぎ書 §6 Step 2) ===
+// 目的: 新カードに対して、cards_master.json から「コンボ候補となりうる過去カード」を
+//      機械的スコアリングで上位 N 件に絞り込む。Step 3 の Claude API 評価フェーズに渡す前段。
+// 入力:
+//   - newCard: 新カード情報(cards_preview / cardInfo 形式どちらでも可)
+//   - cardsMasterRaw: cards_master.json の生オブジェクト(buildUnifiedCardDB と同じ入力)
+//   - options: { maxCandidates = 80, sameDayCards = [] }
+// 出力: スコア降順の候補配列(各要素は元カード + score + matchReasons)
+//      同日公開カードは無条件で先頭に追加(score: 999, matchReasons: ['同日公開'])
+//
+// スコアリング基準(2026-05-25 松岡さん承認):
+//   A. 直接リンク成立(双方向)   : 100
+//   B. 同色                     : 30
+//   C. 特徴共有                 : 20/共有特徴
+//   D. キーワード効果共有        : 15/共有
+//   E. 効果テキスト関連語        : 10/共有語
+//   F. コスト帯近接(差≤1)       : 5
+//   G. Lv 帯近接(差≤1)         : 5
+//   H. カード No 連番(同弾±5)  : 3
+//   I. ダメージ→破壊時連鎖候補 : 20
+//   J. 援護→アタック時シナジー : 15
+// 設計詳細: homepage/docs/combo-finder-step2-plan-2026-05-25.md
+function findComboCandidates(newCard, cardsMasterRaw, options = {}) {
+  if (!newCard || !cardsMasterRaw) return [];
+  const { maxCandidates = 80, sameDayCards = [] } = options;
+
+  // 内部用: cardInfo / cards_preview / cards_master / buildUnifiedCardDB の出力 すべてに対応する正規化
+  const normalizeCard = (card) => {
+    if (!card || typeof card !== 'object') return null;
+    return {
+      card_number: card.card_number || card.id || card.code || '',
+      card_name: card.card_name || card.name_jp || card.name || '',
+      color: card.color || '',
+      card_type: (card.card_type || '').toUpperCase(),
+      level: typeof card.level === 'number' ? card.level : null,
+      cost: typeof card.cost === 'number' ? card.cost : null,
+      traits: Array.isArray(card.traits) ? card.traits : [],
+      link: card.link || null,
+      effect: card.effect || card.effect_text || ''
+    };
+  };
+
+  // 〔〕を取り除いて trait を比較するための正規化
+  const normalizeTraits = (arr) =>
+    (arr || []).map(t => String(t).replace(/[〔〕]/g, '').trim()).filter(Boolean);
+
+  // link が配列の場合は join("/") して文字列化(matchesLinkCondition は文字列前提)
+  const linkToText = (link) =>
+    Array.isArray(link) ? link.join(' / ') : (link || '');
+
+  // cards_master の link は配列形式(["アムロ・レイ"] / ["特徴〔WB隊〕"] / ["〔WB隊〕"] 等)で
+  // 要素が「カード名そのもの」「特徴〔○○〕」「〔○○〕」のため、matchesLinkCondition の
+  // 文字列パース(「名前」括弧付きを期待)では拾いきれない。配列要素を直接照合するヘルパ。
+  // 2026-05-25 独立レビューで「特徴〔WB隊〕」が candTraits の「WB隊」と一致しないバグ修正。
+  const matchesLinkArrayItem = (itemRaw, candidate) => {
+    const item = String(itemRaw || '').trim();
+    if (!item) return false;
+    const candName = (candidate.card_name || candidate.name_jp || '').trim();
+    const candTraitsN = normalizeTraits(candidate.traits);
+
+    // 1. 「特徴〔○○〕」「特徴○○」形式: 「特徴」プレフィックスを除いて特徴名のみ照合
+    const traitPrefixMatch = item.match(/特徴〔?([^〕]+)〕?/);
+    if (traitPrefixMatch) {
+      const traitName = traitPrefixMatch[1].trim();
+      if (traitName && candTraitsN.includes(traitName)) return true;
+    }
+
+    // 2. 〔特徴〕単独形式("〔WB隊〕" など)
+    const bareTraitMatch = item.match(/^〔([^〕]+)〕$/);
+    if (bareTraitMatch) {
+      if (candTraitsN.includes(bareTraitMatch[1].trim())) return true;
+    }
+
+    // 3. カード名形式: 完全一致 or 部分一致(リンク条件は「カード名を含むパイロット」で OK)
+    const itemAsName = item.replace(/[〔〕「」]/g, '').replace(/^特徴/, '').trim();
+    if (itemAsName && candName && (candName === itemAsName || candName.includes(itemAsName))) return true;
+
+    // 4. 〔〕除去後の文字列を特徴として直接照合(フォールバック)
+    if (itemAsName && candTraitsN.includes(itemAsName)) return true;
+
+    return false;
+  };
+
+  // newCard / candidate の link(配列/文字列いずれも可)からリンク成立判定
+  const isLinkMatched = (linkValue, candidate) => {
+    if (!linkValue) return false;
+    if (Array.isArray(linkValue)) {
+      return linkValue.some(item => matchesLinkArrayItem(item, candidate));
+    }
+    // 文字列は既存の matchesLinkCondition を使用
+    return matchesLinkCondition(linkValue, candidate);
+  };
+
+  // キーワード効果(2026-05-11 松岡さん教示で確定された 7 種 + 2026-05-25 教示の新キーワード「開発」)
+  // 注: 「開発」は商品未発売(2026-05-25 時点)で公式ルール未記載だが、cards_preview の ST10/EB01 弾に
+  //     既に登場している。プレリリース表記では《》ナシ「【配備時】開発N」形式で書かれる。
+  //     N 値分の自分のトラッシュの特定特徴カードをゲーム外に除外することで追加効果を発動する数字あり系。
+  const KEYWORD_EFFECTS = ['ブロッカー', '制圧', '突破', '援護', 'リペア', '先制攻撃', '高機動', '開発'];
+  const extractKeywordEffects = (text) => {
+    const found = [];
+    for (const kw of KEYWORD_EFFECTS) {
+      if (kw === '開発') {
+        // 「開発」は《》ナシで「開発N」または「・開発N」と書かれる(プレリリース仕様)
+        if (/(?:^|[^a-zA-Z一-鿿])開発\d+/.test(text || '')) found.push(kw);
+      } else {
+        // 既存 7 種: 数値付きキーワードにも対応(《リペア》《リペア1》《リペア:1》《リペア(1)》)
+        const re = new RegExp(`《${kw}(?:[:：(（]?\\d*[)）]?)?》`);
+        if (re.test(text || '')) found.push(kw);
+      }
+    }
+    return found;
+  };
+
+  // 効果テキスト関連語(コンボの種となるキーワード)
+  const EFFECT_WORDS = [
+    'レスト', 'アクティブ', 'ドロー', '破壊', '除外', '回復',
+    '配備', 'セット', 'ダメージ', 'バースト', '手札', 'トラッシュ', 'リンク'
+  ];
+
+  // 新カードを正規化
+  const newN = normalizeCard(newCard);
+  if (!newN) return [];
+  const newTraits = normalizeTraits(newN.traits);
+  const newKW = extractKeywordEffects(newN.effect);
+
+  // 統一 DB を構築(cards_master + cards_preview 統合)
+  const db = buildUnifiedCardDB(cardsMasterRaw);
+
+  // 同日カード(card_number ベース)を除外用 Set として保持(あとで先頭に追加)
+  const sameDayCodes = new Set(
+    sameDayCards.map(c => (c && (c.card_number || c.id || c.code)) || '').filter(Boolean)
+  );
+
+  const scored = [];
+
+  for (const [id, candRaw] of Object.entries(db || {})) {
+    if (id === newN.card_number) continue; // 自分自身は除外
+    if (sameDayCodes.has(id)) continue;     // 同日カードは別途先頭に追加
+    // 絵違い(Parallel/Foil 等)カード除外: card_number 末尾が _p1〜_p7 の派生バージョンは
+    // 親カード(_pN なし)と効果・stats が完全同一で、コンボ候補に重複表示すべきでない。
+    // 2026-05-25 松岡さん指示で追加。cards_master 1175 件中 519 件が該当。
+    if (/_p\d+$/.test(id)) continue;
+
+    const cand = normalizeCard({ ...candRaw, card_number: id });
+    if (!cand) continue;
+    if (cand.card_type === 'RESOURCE' || cand.card_type === '') continue;
+
+    let score = 0;
+    const matchReasons = [];
+
+    // A. 直接リンク成立(双方向)
+    if (newN.card_type === 'UNIT' && newN.link && cand.card_type === 'PILOT') {
+      if (isLinkMatched(newN.link, cand)) {
+        score += 100;
+        matchReasons.push(`リンク条件マッチ: ${linkToText(newN.link)}`);
+      }
+    }
+    if (newN.card_type === 'PILOT' && cand.card_type === 'UNIT' && cand.link) {
+      if (isLinkMatched(cand.link, newN)) {
+        score += 100;
+        matchReasons.push(`リンク条件マッチ(逆): ${linkToText(cand.link)}`);
+      }
+    }
+
+    // B. 同色
+    if (newN.color && cand.color && newN.color === cand.color) {
+      score += 30;
+      matchReasons.push(`同色: ${newN.color}`);
+    }
+
+    // C. 特徴共有
+    const candTraits = normalizeTraits(cand.traits);
+    const sharedTraits = newTraits.filter(t => candTraits.includes(t));
+    if (sharedTraits.length > 0) {
+      score += 20 * sharedTraits.length;
+      matchReasons.push(`共通特徴: ${sharedTraits.join(', ')}`);
+    }
+
+    // D. キーワード効果共有
+    const candKW = extractKeywordEffects(cand.effect);
+    const sharedKW = newKW.filter(k => candKW.includes(k));
+    if (sharedKW.length > 0) {
+      score += 15 * sharedKW.length;
+      matchReasons.push(`共通キーワード効果: ${sharedKW.join(', ')}`);
+    }
+
+    // E. 効果テキスト関連語
+    const newEffect = newN.effect || '';
+    const candEffect = cand.effect || '';
+    const sharedEffectWords = EFFECT_WORDS.filter(w =>
+      newEffect.includes(w) && candEffect.includes(w)
+    );
+    if (sharedEffectWords.length > 0) {
+      score += 10 * sharedEffectWords.length;
+      matchReasons.push(`効果テキスト共通語: ${sharedEffectWords.join(', ')}`);
+    }
+
+    // F. コスト帯近接
+    if (newN.cost !== null && cand.cost !== null) {
+      if (Math.abs(newN.cost - cand.cost) <= 1) {
+        score += 5;
+        matchReasons.push(`コスト近接: ${newN.cost} vs ${cand.cost}`);
+      }
+    }
+
+    // G. Lv 帯近接
+    if (newN.level !== null && cand.level !== null) {
+      if (Math.abs(newN.level - cand.level) <= 1) {
+        score += 5;
+        matchReasons.push(`Lv近接: ${newN.level} vs ${cand.level}`);
+      }
+    }
+
+    // H. カード No 連番(同弾)
+    const newCode = newN.card_number || '';
+    const candCode = cand.card_number || '';
+    const newPack = newCode.split('-')[0];
+    const candPack = candCode.split('-')[0];
+    if (newPack && newPack === candPack) {
+      const newNo = parseInt(newCode.split('-')[1], 10);
+      const candNo = parseInt(candCode.split('-')[1], 10);
+      if (!isNaN(newNo) && !isNaN(candNo) && Math.abs(newNo - candNo) <= 5) {
+        score += 3;
+        matchReasons.push(`同弾近接: ${newCode} vs ${candCode}`);
+      }
+    }
+
+    // I. 効果ダメージ/破壊コンボ
+    const newHasDamage = /ダメージを?(与え|あたえ)/.test(newEffect);
+    const newHasDestroy = /【破壊時】/.test(newEffect);
+    const candHasDamage = /ダメージを?(与え|あたえ)/.test(candEffect);
+    const candHasDestroy = /【破壊時】/.test(candEffect);
+    if ((newHasDamage && candHasDestroy) || (candHasDamage && newHasDestroy)) {
+      score += 20;
+      // 異タイミング誘発のペアリング(同時発動ではない点に注意。Step 3 プロンプトで誤解防止)
+      matchReasons.push('ダメージ→破壊時連鎖候補(異タイミング・連鎖発動)');
+    }
+
+    // J. 援護/AP 強化シナジー
+    const newHasSupport = /《援護|AP\+/.test(newEffect);
+    const newHasAttackTime = /【アタック時】/.test(newEffect);
+    const candHasSupport = /《援護|AP\+/.test(candEffect);
+    const candHasAttackTime = /【アタック時】/.test(candEffect);
+    if ((newHasSupport && candHasAttackTime) || (candHasSupport && newHasAttackTime)) {
+      score += 15;
+      // 異タイミング誘発のペアリング(同時発動ではない点に注意。Step 3 プロンプトで誤解防止)
+      matchReasons.push('援護→アタック時シナジー候補(異タイミング・援護解決後にアタック)');
+    }
+
+    if (score > 0) {
+      scored.push({
+        ...candRaw,
+        card_number: id,
+        score,
+        matchReasons
+      });
+    }
+  }
+
+  // スコア降順ソート
+  scored.sort((a, b) => b.score - a.score);
+
+  // 上位 maxCandidates 件
+  const topCandidates = scored.slice(0, maxCandidates);
+
+  // 同日公開カードを先頭に追加(自身は除く)
+  const newCode = newN.card_number;
+  const sameDayPrepended = sameDayCards
+    .filter(c => c && (c.card_number || c.id || c.code) !== newCode)
+    .map(c => ({
+      ...c,
+      card_number: c.card_number || c.id || c.code,
+      score: 999,
+      matchReasons: ['同日公開']
+    }));
+
+  return [...sameDayPrepended, ...topCandidates];
+}
+
+// === コンボ評価(2026-05-25 追加 / 引き継ぎ書 §6 Step 3) ===
+// 目的: findComboCandidates の出力を Claude API(Opus)に渡し、GCG ルール上確実に成立する
+//      コンボのみを JSON 形式で抽出する。誤コンボ防止のため確信度 0.6 未満は uncertain に振り分け。
+// 入力:
+//   - newCard: 新カード情報(cardInfo / cards_preview / cards_master のいずれかの形式)
+//   - candidates: findComboCandidates の出力(各要素に matchReasons / score 等を含む)
+//   - options: { model = ANTHROPIC_MODEL_OPUS, maxTokens = 4000, topN = 30 }
+// 出力: { combos: [...], uncertain: [...], rawResponse: string, parseError: null|string }
+// 注: 失敗ログ(parseError 検知時の reports/news/{date}-combo-candidates.log への記録)は
+//     **呼び出し元の責務**。本関数は parseError 文字列を返すだけで、ファイル出力は行わない。
+//     Step 4 / Step 5 統合時に呼び出し側で実装する。
+// 設計詳細: homepage/docs/combo-finder-step3-plan-2026-05-25.md
+async function evaluateComboCandidates(newCard, candidates, options = {}) {
+  const {
+    model = ANTHROPIC_MODEL_OPUS,
+    maxTokens = 4000,
+    topN = 30,
+    confidenceThreshold = 0.6  // 将来チューニング用(現状はプロンプトで指定)
+  } = options;
+
+  // 入力ガード
+  if (!newCard) {
+    return { combos: [], uncertain: [], rawResponse: '', parseError: 'newCard is null' };
+  }
+  if (!Array.isArray(candidates) || candidates.length === 0) {
+    return { combos: [], uncertain: [], rawResponse: '', parseError: null };
+  }
+
+  // 候補を topN 件に絞る(score 降順は既に findComboCandidates で適用済)
+  const topCandidates = candidates.slice(0, topN);
+
+  // 入力カードを正規化(cardInfo / cards_master / cards_preview の差異を吸収)
+  const normalize = (c) => {
+    if (!c) return null;
+    return {
+      card_number: c.card_number || c.id || c.code || '',
+      card_name: c.card_name || c.name_jp || c.name || '',
+      color: c.color || '',
+      card_type: (c.card_type || '').toUpperCase(),
+      level: typeof c.level === 'number' ? c.level : '?',
+      cost: typeof c.cost === 'number' ? c.cost : '?',
+      ap: (c.stats && typeof c.stats.ap === 'number' ? c.stats.ap : null)
+        ?? (typeof c.ap === 'number' ? c.ap : '?'),
+      hp: (c.stats && typeof c.stats.hp === 'number' ? c.stats.hp : null)
+        ?? (typeof c.hp === 'number' ? c.hp : '?'),
+      traits: Array.isArray(c.traits) ? c.traits.map(t => String(t).replace(/[〔〕]/g, '')).join(', ') : '',
+      link: Array.isArray(c.link) ? c.link.join(' / ') : (c.link || 'なし'),
+      effect: (c.effect || c.effect_text || '').replace(/\s+/g, ' ').trim()
+    };
+  };
+
+  const newN = normalize(newCard);
+  const candDescs = topCandidates.map((c, i) => {
+    const cn = normalize(c);
+    const reasons = Array.isArray(c.matchReasons) ? c.matchReasons.join(' / ') : '';
+    return `${i + 1}. [${cn.card_number}] ${cn.card_name} (${cn.card_type}, ${cn.color}, Lv${cn.level}/cost${cn.cost}, AP${cn.ap}/HP${cn.hp})
+   特徴: ${cn.traits || 'なし'}
+   リンク条件: ${cn.link}
+   効果: ${cn.effect || 'なし'}
+   絞り込み根拠: ${reasons}`;
+  }).join('\n\n');
+
+  // === プロンプト組立(セクション A〜E)===
+
+  // セクション B: GCG ルールブリーフ(2026-05-25 松岡さん教示 + 既存プロンプト整合版)
+  const ruleBrief = `【GCG ルールブリーフ(本問題の判定に必要な範囲)】
+
+# カードタイプ(4種のみ。リソース除く)
+UNIT / PILOT / COMMAND / BASE
+
+# キーワード効果(7種 + 新キーワード「開発」)
+《ブロッカー》《制圧》《突破》《援護》《リペア》《先制攻撃》《高機動》《開発》(新)
+- 数字あり(《リペア》《突破》《援護》《開発》): 同ユニットに複数付与で **数値加算**
+- 数字なし(《ブロッカー》《制圧》《先制攻撃》《高機動》): 重複不可、1 つとして扱う
+- 上記 8 種以外のキーワード効果は **存在しない**
+- **《開発N》の補足**(2026-05-25 時点で商品未発売・公式ルール未記載・松岡さん事前認識許可済):
+  - プレリリース表記では《》ナシで「【配備時】開発N」形式で記述される
+  - 例: ST10-008 ガンダム・バルバトス(第1形態)「【配備時】開発2 自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。」
+  - N 値分の自分のトラッシュの特定特徴カードをゲーム外に除外することで追加効果を発動する仕組み
+  - 数字あり系として扱う(複数付与で数値加算と推定、ただし公式裁定は未確定)
+  - 効果テキストに「開発N」が記述されているカードでのみ言及可。それ以外のカードで「開発」を主張するコンボは禁止
+
+# タイミングキーワード(10種のみ)
+【配備時】【セット時】【リンク時】【アタック時】【破壊時】【セット中】【リンク中】【起動】【アタック中】【バースト】
+- 「ターン1回」「ターン2回」は発動回数指定であってタイミングキーワードではない
+
+# 2026-05-25 確定ルール(最重要・絶対遵守)
+1. **【配備時】と【セット時】は絶対に同時発生しない**(GCG にそのケースは存在しない)。
+   両者を「同時発動」と書くコンボは **絶対に書かない**。
+2. 「効果による配備」(リクルート、トラッシュからの配備等)でも【配備時】は誘発する。
+3. 《援護》は 1 ターンに何度でも発動可能(アクティブ化と組み合わせ)。
+4. 《先制攻撃》は **攻撃側のみ機能**。被アタック側の《先制攻撃》は発動しない(相打ち先制は発生しない)。
+5. 《高機動》はアタック中に失った場合、ブロッカー発動可能(タイミングによる)。
+6. 《制圧》のシールド残数 1 のとき、本体ダメージは発生しない(1 枚破壊のみ)。
+7. 【破壊時】同時誘発: ターンプレイヤー全部 → 非ターンプレイヤー全部。処理中の新誘発は割り込み優先。
+8. 【セット中】は **常在効果**。セット時誘発の前から効果が乗っている。
+9. 【セット中】単独はトリガーではなく、後続タイミング(【アタック時】等)と複合して動作。
+10. 効果分類: 誘発(条件で自動発動)/ 常在(条件継続中ずっと発動)/ 起動(プレイヤー宣言で発動)の 3 種。
+11. **同一【配備時】効果内の複数アクションは連続処理する(別効果として分離しない)**:
+    - 例: ジュピトリス GD03-123「【配備時】自分のシールド1つを手札に加える。**その後**、〔ジュピトリス〕の味方のユニットがいるなら、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。」
+    - これは 1 つの【配備時】効果で「シールドを手札に加える」→「(条件付き)レストにする」を順次処理する仕組み
+    - 「その後」「そうしたなら」で繋がる複数アクションは同一効果内の連続処理(総合ルール 5-20-1 / 5-20-2)
+    - コンボ説明で「【配備時】効果が2回発動」「2 つの【配備時】効果」のように **別効果として分離する記述は禁止**
+    - 「その後」は前文が解決できなくても後文を解決可能(5-20-2)、「そうしたなら」は前文解決成功時のみ後文を解決(5-20-1)
+
+# 使用禁止用語(出力に含めない)
+- 「捨て札」→ 正しくは「トラッシュ」
+- 「シールドゾーン」→ 正しくは「シールドエリア」
+- 「合体」「アップグレード」「エース効果」「機動ユニット」「Xソリューズ」「ペアリング」「クイック」(GCG に存在しない用語)
+
+# 同時誘発の解決順
+- 自分の効果が同時 2 つ以上: 自分が解決順を選べる
+- 自分と相手の効果が同時: ターンプレイヤー全部 → 非ターンプレイヤー全部
+- 「できない」「受けない」など効果否定は **常に最優先**
+
+# その他の重要ルール
+- 同一カードに複数の重複不可キーワード効果は意味なし(1 つで十分)
+- 【ターン1回】はカード単位の制限(同名複数枚なら各 1 回ずつ発動可)
+- 【バースト】はシールド破壊からのみ発動(手札参照や効果での手札追加では発動しない)
+- **「既にその状態にあるものをその状態にする」行為は『行為自体が行われない』**(総合ルール 1-3-2 / 1-3-2-1):
+  - 例: 既にアクティブのユニットを「アクティブにする」/ 既にレストのユニットを「レストにする」/ 既に手札にあるカードを「手札に加える」
+  - 行為自体が行われない場合、効果は「発動した事にならない」ため、**【ターン1回】等の発動カウントも消費されない**
+  - コンボ評価上の含意: 「既に X 状態のユニットを X にする」効果に依存するコンボは成立しない(行為が行われないため誘発カウントも消費されず、結果として何の効果も生まれない)
+  - 公式 Q&A Q202(GD02-002 ガンダムエピオン)もこのルールに基づく裁定: アクティブの GD02-002 がいる時に他のユニットが相手を破壊しても、アクティブにする行為が行われないため【ターン1回】カウントも消費されない`;
+
+  // セクション C: 新カード情報
+  const newCardDesc = `【新カード】
+- カード番号: ${newN.card_number}
+- カード名: ${newN.card_name}
+- 色: ${newN.color}
+- カードタイプ: ${newN.card_type}
+- コスト/Lv: ${newN.cost}/${newN.level}
+- AP/HP: ${newN.ap}/${newN.hp}
+- 特徴: ${newN.traits || 'なし'}
+- リンク条件: ${newN.link}
+- 効果テキスト: ${newN.effect || 'なし'}`;
+
+  // セクション E: 出力指示
+  const outputInstruction = `【出力ルール(必読)】
+- 確信度 0.6 未満のコンボは "combos" ではなく "uncertain" に入れる
+- GCG ルールで成立確認できないものは "combos" に入れない
+- 「【配備時】+【セット時】同時発動」を主張するコンボは **絶対に書かない**(GCG ルール上存在しない)
+- 上記「使用禁止用語」を含むコンボは書かない
+- combo_description は GCG 公式用語のみで書く(150〜300 字目安)
+- timing_basis にはどのタイミング誘発の組合せかを明記(例: "新カードの【配備時】→候補の【アタック時】")
+- rule_check には参照したルール根拠(例: "総合ルール 10-1-6-6 同時誘発のターンプレイヤー優先")
+- **「絞り込み根拠」は機械的ヒント** であり、タイミング上の正確性は保証していない。
+  例えば「ダメージ→破壊時連鎖候補」は別タイミングの誘発を機械的にペアリングしたもので、
+  最終的なコンボ成立判定は上記の GCG ルールに従って行うこと。絞り込み根拠の文言を理由に
+  「同時発動」と書くことは禁止。
+- JSON 内の文字列で改行が必要な場合は \\n を使う(生改行禁止)
+- 出力は以下の JSON のみ。前後に説明文を付けない(思考過程をコードブロックに入れない)
+
+\`\`\`json
+{
+  "combos": [
+    {
+      "candidate_card_id": "<候補カード番号>",
+      "candidate_card_name": "<候補カード名>",
+      "combo_description": "<コンボの説明(GCG ルール用語のみ)>",
+      "timing_basis": "<タイミング組合せ>",
+      "timing_validity": "certain" または "probable",
+      "confidence": <0.6〜1.0 の数値>,
+      "rule_check": "<参照したルール根拠>"
+    }
+  ],
+  "uncertain": [
+    {
+      "candidate_card_id": "<候補カード番号>",
+      "reason_excluded": "<除外理由>"
+    }
+  ]
+}
+\`\`\``;
+
+  // 全プロンプト組立
+  const prompt = `あなたはガンダムカードゲーム(GCG)の専門家です。
+新カードに対して、過去カードとの「組合せコンボ」を評価してください。
+GCG ルールに照らして確実に成立するコンボのみを JSON で出力し、不確実なものは出力しないでください。
+
+${ruleBrief}
+
+${newCardDesc}
+
+【候補カード(${topCandidates.length}件)】
+${candDescs}
+
+${outputInstruction}`;
+
+  // API 呼び出し
+  let rawResponse = '';
+  try {
+    rawResponse = await callClaude(
+      [{ role: 'user', content: prompt }],
+      maxTokens,
+      model
+    );
+  } catch (e) {
+    return {
+      combos: [],
+      uncertain: [],
+      rawResponse: '',
+      parseError: `API error: ${e.message}`
+    };
+  }
+
+  // JSON パース(3段フォールバック)
+  const parsed = _parseComboResponse(rawResponse);
+  return {
+    combos: Array.isArray(parsed.combos) ? parsed.combos : [],
+    uncertain: Array.isArray(parsed.uncertain) ? parsed.uncertain : [],
+    rawResponse,
+    parseError: parsed.parseError
+  };
+}
+
+// JSON パースのフォールバックヘルパ(3段)
+// 1. ```json ... ``` コードブロックを全件抽出し、"combos" キーを含むものを優先選択
+//    (Opus が思考過程の JSON ブロックを先に書いてから最終 JSON を返すケースを考慮)
+// 2. 最初の { ... } を正規表現で抽出 → JSON.parse
+// 3. 失敗時は空配列(誤コンボ防止優先)
+// 2026-05-25 独立レビューで複数 JSON ブロック対応を強化(推奨修正 1 反映)
+function _parseComboResponse(text) {
+  if (!text || typeof text !== 'string') {
+    return { combos: [], uncertain: [], parseError: 'empty response' };
+  }
+
+  // 1. コードブロックを全件抽出し、"combos" を含むブロックを優先(なければ最後のブロック)
+  const allBlocks = [...text.matchAll(/```(?:json)?\s*([\s\S]*?)```/g)];
+  if (allBlocks.length > 0) {
+    // "combos" キーを含むブロックを優先選択
+    const withCombos = allBlocks.filter(m => m[1] && m[1].includes('"combos"'));
+    const chosen = withCombos.length > 0
+      ? withCombos[withCombos.length - 1]  // combos を含む最後のブロック
+      : allBlocks[allBlocks.length - 1];   // フォールバック: 最後のブロック
+    try {
+      const data = JSON.parse(chosen[1].trim());
+      return { combos: data.combos || [], uncertain: data.uncertain || [], parseError: null };
+    } catch (_e) { /* fall through */ }
+  }
+
+  // 2. 最初の { ... } 抽出
+  const jsonMatch = text.match(/\{[\s\S]*\}/);
+  if (jsonMatch) {
+    try {
+      const data = JSON.parse(jsonMatch[0]);
+      return { combos: data.combos || [], uncertain: data.uncertain || [], parseError: null };
+    } catch (_e) { /* fall through */ }
+  }
+
+  // 3. 失敗時は空(安全側)
+  return { combos: [], uncertain: [], parseError: 'JSON parse failed' };
+}
+
+// === コンボ候補レポート出力(2026-05-25 追加 / 引き継ぎ書 §6 Step 4) ===
+// 目的: evaluateComboCandidates の結果(combos / uncertain / parseError)を
+//      松岡さんレビュー用の Markdown レポートとしてファイル出力する。
+//      本文には直接含めない(§2 設計原則)。
+// 入力:
+//   - dateStr: JST 日付文字列(例: "2026-05-25")
+//   - comboResultsMap: { card_number: evalResult } のマップ
+//   - cardInfoList: 当日の新カード情報配列(レポートのカード見出し用)
+//   - options: { outputDir = `${ROOT}/reports/news`, model = ANTHROPIC_MODEL_OPUS, includeRawResponse = false }
+// 出力: { mdPath: string, logPath: null|string }
+//      logPath は parseError 検知時のみ(rawResponse をログ保存)
+// 採否マーキング: 各候補に `[ ]` チェックボックス。松岡さんが `[x]` に書き換えて採用記録
+// 設計詳細: 本セッション 2026-05-25 提示の Step 4 設計案
+function writeComboCandidatesReport(dateStr, comboResultsMap, cardInfoList, options = {}) {
+  const {
+    outputDir = path.join(ROOT, 'reports', 'news'),
+    model = ANTHROPIC_MODEL_OPUS,
+    includeRawResponse = false,
+    rawResponseMaxLength = 4000  // includeRawResponse=true 時の MD 埋め込み上限。超過分は .log 側で見る
+  } = options;
+
+  if (!dateStr || typeof dateStr !== 'string') {
+    throw new Error('writeComboCandidatesReport: dateStr is required');
+  }
+
+  // 出力ディレクトリ確保
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  const mdPath = path.join(outputDir, `${dateStr}-combo-candidates.md`);
+  const logPath = path.join(outputDir, `${dateStr}-combo-candidates.log`);
+  const nowStr = formatJST(new Date());
+
+  // 同日2回実行時の採否消失警告(独立レビュー指摘の必須修正 2)
+  // 既存ファイルが存在する場合は標準出力に警告(完全上書きするため)
+  if (fs.existsSync(mdPath)) {
+    try { log(`⚠️ writeComboCandidatesReport: 既存 ${path.basename(mdPath)} を上書きします(採否マーク [x] があれば失われます)`); }
+    catch (_e) { console.log(`⚠️ writeComboCandidatesReport: 既存 ${path.basename(mdPath)} を上書きします`); }
+  }
+
+  // === ヘルパ ===
+  // 改行除去(箇条書きの構造を壊さないため、フィールド値は 1 行化)
+  const oneLine = (text) => String(text == null ? '' : text).replace(/\s*\n\s*/g, ' ').trim();
+
+  // rawResponse の details タグ + コードフェンスを無害化(独立レビュー指摘の必須修正 1)
+  // Opus が思考過程に ```json を含めるケースが多く、生埋め込みは details 早期終了の原因となる
+  const sanitizeRaw = (text) => {
+    if (text == null) return '';
+    return String(text)
+      .replace(/```/g, '` ` `')           // バッククォート連続を分割(コードフェンス無効化)
+      .replace(/<\/details>/gi, '<​/details>');  // details 早期終了防止
+  };
+
+  // 長文 truncate(includeRawResponse=true 時、極端に長い rawResponse を MD に直埋めしない)
+  const truncate = (text, max) => {
+    const t = String(text || '');
+    if (t.length <= max) return t;
+    return t.slice(0, max) + `\n\n...(切り詰め: 残り ${t.length - max} 文字。詳細は ${path.basename(logPath)} 参照)`;
+  };
+
+  // === Markdown 組立 ===
+  let md = `# コンボ候補メモ — ${dateStr}\n\n`;
+  md += `> 生成日時: ${nowStr} / モデル: ${model}\n`;
+  md += `> ※ 本ファイルは Claude 評価結果の **草案** です。本文反映前に松岡さんレビュー必須\n`;
+  md += `> 採否マーキング: \`[ ]\` を \`[x]\` に変更すると採用扱い\n`;
+  md += `> 第2段階(§6 Step 6)精度計測時に本ファイルの採否マークを集計します\n\n`;
+  md += `---\n\n`;
+
+  const errors = [];
+  const list = Array.isArray(cardInfoList) ? cardInfoList : [];
+
+  if (list.length === 0) {
+    md += `_(対象カードなし)_\n\n`;
+  }
+
+  for (const card of list) {
+    const cardCode = card.card_number || card.id || card.code || '?';
+    const cardName = card.card_name || card.name_jp || card.name || '?';
+    const cardType = card.card_type || '?';
+    const colorJp = COLOR_JP[card.color] || card.color || '?';
+
+    md += `## カード: [${cardCode}] ${cardName} (${cardType}, ${colorJp})\n\n`;
+
+    const evalResult = comboResultsMap && comboResultsMap[cardCode];
+    if (!evalResult) {
+      md += `_(評価結果なし — Step 3 で skip されたカード)_\n\n---\n\n`;
+      continue;
+    }
+
+    // parseError 検知 → エラーログ収集
+    if (evalResult.parseError) {
+      errors.push({
+        cardCode,
+        parseError: evalResult.parseError,
+        rawResponse: evalResult.rawResponse || ''
+      });
+      md += `> ⚠️ **評価エラー**: ${evalResult.parseError}(詳細は同名 \`.log\` ファイル参照)\n\n`;
+    }
+
+    // combos は元の配列を変更しないようコピー後 confidence 降順ソート(推奨修正 2)
+    const combos = (Array.isArray(evalResult.combos) ? evalResult.combos : [])
+      .slice()
+      .sort((a, b) => (b.confidence || 0) - (a.confidence || 0));
+    const uncertain = Array.isArray(evalResult.uncertain) ? evalResult.uncertain : [];
+
+    // combos セクション
+    md += `### 採用候補(combos: ${combos.length} 件)\n\n`;
+    if (combos.length === 0) {
+      md += `_(該当なし)_\n\n`;
+    } else {
+      combos.forEach((c, i) => {
+        const id = c.candidate_card_id || '?';
+        const name = c.candidate_card_name || '?';
+        const conf = (typeof c.confidence === 'number') ? c.confidence.toFixed(2) : '?';
+        const validity = c.timing_validity || '?';
+        md += `${i + 1}. **[ ] 採用** — 候補: [${id}] ${name}  *(confidence: ${conf}, ${validity})*\n`;
+        md += `   - **コンボ説明**: ${oneLine(c.combo_description) || '(記述なし)'}\n`;
+        md += `   - **タイミング根拠**: ${oneLine(c.timing_basis) || '(記述なし)'}\n`;
+        md += `   - **ルール根拠**: ${oneLine(c.rule_check) || '(記述なし)'}\n\n`;
+      });
+    }
+
+    // uncertain セクション
+    md += `### 検討から除外(uncertain: ${uncertain.length} 件)\n\n`;
+    if (uncertain.length === 0) {
+      md += `_(該当なし)_\n\n`;
+    } else {
+      uncertain.forEach(u => {
+        const id = u.candidate_card_id || '?';
+        const reason = oneLine(u.reason_excluded) || '(理由なし)';
+        md += `- **[${id}]**: ${reason}\n`;
+      });
+      md += `\n`;
+    }
+
+    // includeRawResponse=true 時は応答原文も併記(デバッグ用)
+    // sanitizeRaw + truncate でコードフェンス破壊と巨大埋め込みを防ぐ
+    if (includeRawResponse && evalResult.rawResponse) {
+      const safeRaw = truncate(sanitizeRaw(evalResult.rawResponse), rawResponseMaxLength);
+      md += `<details><summary>Claude 応答原文(デバッグ用・無害化済)</summary>\n\n\`\`\`\n${safeRaw}\n\`\`\`\n\n</details>\n\n`;
+    }
+
+    md += `---\n\n`;
+  }
+
+  // 採否集計欄の初期プレースホルダ(独立レビュー推奨修正 5)
+  // 全カードの combos 総件数を計算しておく
+  let totalCombos = 0;
+  for (const card of list) {
+    const r = comboResultsMap && comboResultsMap[card.card_number || card.id || card.code];
+    if (r && Array.isArray(r.combos)) totalCombos += r.combos.length;
+  }
+
+  // フッタ: 採否集計欄(松岡さんレビュー後の記録用)
+  md += `\n## 採否集計欄(松岡さんレビュー後に記録)\n\n`;
+  md += `- 採用件数: ___ / 全 ${totalCombos} 件\n`;
+  md += `- 不採用件数: ___ / 全 ${totalCombos} 件\n`;
+  md += `- 不採用理由のパターン: \n`;
+  md += `- 漏れていた良コンボ(機械では拾えなかったもの): \n`;
+  md += `- API 失敗カード: ${errors.length} 件\n`;
+
+  // Markdown 書き出し(同期処理、呼び出し元で try/catch することを想定)
+  fs.writeFileSync(mdPath, md, 'utf-8');
+
+  // parseError があった場合は .log ファイルも出力(.gitignore で *.log は既に除外済)
+  let actualLogPath = null;
+  if (errors.length > 0) {
+    let logStr = `# コンボ評価エラーログ — ${dateStr}\n`;
+    logStr += `生成日時: ${nowStr}\n`;
+    logStr += `モデル: ${model}\n\n`;
+    logStr += `本ログは Claude 応答のパース失敗または API エラー時に出力されます。\n\n`;
+    for (const e of errors) {
+      logStr += `---\n\n## カード ${e.cardCode}\n\n`;
+      logStr += `**エラー**: ${e.parseError}\n\n`;
+      // .log は plain text 想定だが、将来 .md 化する可能性を考慮し sanitize 済の生応答を入れる
+      logStr += `### Raw Response\n\n${e.rawResponse || '(空応答)'}\n\n`;
+    }
+    fs.writeFileSync(logPath, logStr, 'utf-8');
+    actualLogPath = logPath;
+  }
+
+  return { mdPath, logPath: actualLogPath };
+}
+
+// === ルール解説評価(2026-05-26 追加 / 新機能 Step R1)===
+// 目的: 新カードの effect_text から、初心者が誤解しやすい「ややこしい裁定」を Claude API(Opus)で抽出する。
+//      対象例: 「そうしたなら」「その後」を含む効果、複数対象選択、【ターン1回】の発動カウント挙動、
+//             【リンク中】【セット中】の常在効果、《突破》《制圧》のシールド残数依存、【バースト】の発動条件 等
+// 入力:
+//   - newCard: 新カード情報(cardInfo / cards_preview / cards_master のいずれかの形式)
+//   - qaDb: qa_database.json の中身(オブジェクト)。null 可(なくても動作するが精度低下)
+//   - options: { model = ANTHROPIC_MODEL_OPUS, maxTokens = 3000, topQAPerCard = 5 }
+// 出力: { clarifications: [...], rawResponse: string, parseError: null|string }
+// 設計詳細: 本セッション 2026-05-26 提示の Plan
+async function evaluateRuleClarifications(newCard, qaDb, options = {}) {
+  const {
+    model = ANTHROPIC_MODEL_OPUS,
+    maxTokens = 3000,
+    topQAPerCard = 5
+  } = options;
+
+  if (!newCard) {
+    return { clarifications: [], rawResponse: '', parseError: 'newCard is null' };
+  }
+
+  const cardNumber = newCard.card_number || newCard.id || newCard.code || '';
+  const cardName = newCard.card_name || newCard.name_jp || newCard.name || '';
+  const cardType = (newCard.card_type || '').toUpperCase();
+  const effect = (newCard.effect || newCard.effect_text || '').trim();
+
+  if (!effect) {
+    // 効果テキストがないカードは解説対象外
+    return { clarifications: [], rawResponse: '', parseError: null };
+  }
+
+  // qa_database.json から本カードに紐づく Q&A を抽出(by_card インデックス利用)
+  let relatedQAs = [];
+  if (qaDb && qaDb.by_card && qaDb.all && cardNumber) {
+    const qIds = qaDb.by_card[cardNumber] || [];
+    relatedQAs = qIds
+      .map(qid => qaDb.all.find(q => q.id === qid))
+      .filter(Boolean)
+      .slice(0, topQAPerCard);
+  }
+
+  const qaSection = relatedQAs.length > 0
+    ? `\n【本カードに紐づく公式 Q&A(${relatedQAs.length} 件)】\n` +
+      relatedQAs.map(q => `■ ${q.id} [${q.category}]\nQ: ${q.question}\nA: ${q.answer}`).join('\n\n')
+    : '\n【本カードに紐づく公式 Q&A】\nなし(公式 Q&A データベースに該当裁定なし)';
+
+  // ルールブリーフ(evaluateComboCandidates と同じ内容を再利用 - 一貫性のため簡略版)
+  const ruleBrief = `【GCG 基本ルール要点】
+
+# カードタイプ: UNIT / PILOT / COMMAND / BASE(リソース除く)
+# キーワード効果(8 種): 《ブロッカー》《制圧》《突破》《援護》《リペア》《先制攻撃》《高機動》《開発》(新)
+# タイミングキーワード(10 種): 【配備時】【セット時】【リンク時】【アタック時】【破壊時】【セット中】【リンク中】【起動】【アタック中】【バースト】
+
+# 初心者が誤解しやすい主要ルール(本機能の核心)
+1. **「そうしたなら」(5-20-1)**: 前文を解決できない場合、後文を解決できない。逆方向(後文不可で前文不可)は明記なし
+2. **「その後」(5-20-2)**: 前文解決できなくても後文を解決できる
+3. **対象選択不可(10-2-2)**: 効果で対象選択が必要で対象がない場合、効果は発動しない
+4. **「行為自体が行われない」(1-3-2-1)**: 既に X 状態のものを X にする指示は実行されず、【ターン1回】カウントも消費されない
+5. **【配備時】と【セット時】は別タイミング**(同時発生なし)
+6. 「効果による配備」でも【配備時】は誘発
+7. 【セット中】【リンク中】は常在効果(セット時誘発の前から効果が乗っている)
+8. 《先制攻撃》は攻撃側のみ機能(被アタック側は発動しない)
+9. 《制圧》《ブロッカー》《先制攻撃》《高機動》は重複不可
+10. 《リペア》《突破》《援護》《開発》は数値加算
+11. 《援護》は 1 ターン何度でも発動可能
+12. 【バースト】はシールド破壊からのみ発動(手札追加経由は不発)
+13. 【破壊時】同時誘発: ターンプレイヤー全部 → 非ターンプレイヤー全部、処理中の新誘発は割り込み優先
+14. 同一【配備時】効果内の複数アクションは連続処理(「その後」「そうしたなら」「■」で繋がる)
+
+# 使用禁止用語: 「捨て札」(→トラッシュ) / 「シールドゾーン」(→シールドエリア) / 「合体」「アップグレード」「エース効果」「機動ユニット」「Xソリューズ」「ペアリング」「クイック」`;
+
+  // === プロンプト組立 ===
+  const prompt = `あなたはガンダムカードゲーム(GCG)のルール解説者です。
+新カード 1 枚の効果テキストから、初心者が誤解しやすい「ややこしい裁定」を 0〜3 件抽出してください。
+**ややこしい部分がなければ空配列を返す**(無理に絞り出さない)。
+GCG ルールに照らして自信を持って解説できるもののみ抽出してください。
+
+${ruleBrief}
+
+【新カード】
+- カード番号: ${cardNumber}
+- カード名: ${cardName}
+- カードタイプ: ${cardType}
+- 効果テキスト: ${effect}
+${qaSection}
+
+【抽出基準(以下のパターンに該当する論点を優先)】
+1. 「そうしたなら」「その後」を含む効果 → 対象不在時の前文/後文の挙動
+2. 複数対象の同時選択 → 片方が選べない場合の挙動
+3. 【ターン1回】+「~にする」効果 → 既に X 状態のとき発動カウントどうなるか
+4. 【リンク中】【セット中】の常在効果と他誘発の組合せ
+5. 《突破》《制圧》のシールド残数依存
+6. 【バースト】の発動条件(シールド破壊起源か否か)
+7. 効果による配備で【配備時】が連鎖する論点
+8. 紐づく公式 Q&A で裁定された特殊ケース
+
+【difficulty(難易度)判定基準】
+- **high(上級)**: 総合ルール参照必須・複数ルール組合せが必要・公式 Q&A で初めて明らかになる裁定
+- **medium(中級)**: キーワード効果の重複/数値加算・タイミングキーワードの相互作用
+- **low(初級)**: 効果テキストから自明・カードゲーム経験者なら直感的に分かるもの
+
+【出力ルール】
+- 自信度の高いものだけ、**最大 3 件**(超えてはいけない)
+- 該当なしなら "clarifications": [] を返す
+- 各論点は 150〜250 字程度で初心者向けに説明
+- 根拠ルール(総合ルール ○-○)または公式 Q&A の ID を明示
+- 「【配備時】+【セット時】同時発動」のような GCG ルール上誤った主張は **絶対に書かない**
+- 「1 つの【配備時】効果を 2 回発動」のような誤解釈も **絶対に書かない**(同一効果内の連続処理として扱う)
+- 使用禁止用語を含めない
+- **効果テキストに想定外のタイミングキーワード(例:【出撃時】【展開時】等、上記 10 種にないもの)が含まれていても、それを解説論点にしない**(画像認識誤りの可能性があり、誤情報拡散を避けるため)
+- 出力は以下の JSON のみ。前後に説明文を付けない
+
+\`\`\`json
+{
+  "clarifications": [
+    {
+      "topic": "<論点の見出し(20〜40字)>",
+      "explanation": "<初心者向けの解説(150〜250字)>",
+      "related_rule": "<総合ルール ○-○ または該当なし>",
+      "related_qa_ids": ["Q001"],
+      "difficulty": "high" | "medium" | "low"
+    }
+  ]
+}
+\`\`\``;
+
+  // API 呼び出し
+  let rawResponse = '';
+  try {
+    rawResponse = await callClaude(
+      [{ role: 'user', content: prompt }],
+      maxTokens,
+      model
+    );
+  } catch (e) {
+    return {
+      clarifications: [],
+      rawResponse: '',
+      parseError: `API error: ${e.message}`
+    };
+  }
+
+  // JSON パース(evaluateComboCandidates と同じ 3 段フォールバック)
+  if (!rawResponse || typeof rawResponse !== 'string') {
+    return { clarifications: [], rawResponse: '', parseError: 'empty response' };
+  }
+
+  // 仕様逸脱防止: clarifications は最大 3 件にクリップ(プロンプトでも指示済だが防御的に)
+  const clipClarifications = (arr) =>
+    Array.isArray(arr) ? arr.slice(0, 3) : [];
+
+  const allBlocks = [...rawResponse.matchAll(/```(?:json)?\s*([\s\S]*?)```/g)];
+  if (allBlocks.length > 0) {
+    const withClar = allBlocks.filter(m => m[1] && m[1].includes('"clarifications"'));
+    const chosen = withClar.length > 0 ? withClar[withClar.length - 1] : allBlocks[allBlocks.length - 1];
+    try {
+      const data = JSON.parse(chosen[1].trim());
+      return { clarifications: clipClarifications(data.clarifications), rawResponse, parseError: null };
+    } catch (_e) { /* fall through */ }
+  }
+
+  const jsonMatch = rawResponse.match(/\{[\s\S]*\}/);
+  if (jsonMatch) {
+    try {
+      const data = JSON.parse(jsonMatch[0]);
+      return { clarifications: clipClarifications(data.clarifications), rawResponse, parseError: null };
+    } catch (_e) { /* fall through */ }
+  }
+
+  return { clarifications: [], rawResponse, parseError: 'JSON parse failed' };
+}
+
+// === ルール解説レポート出力(2026-05-26 追加 / 新機能 Step R1)===
+// 目的: evaluateRuleClarifications の結果を松岡さんレビュー用 Markdown として出力。
+//      本文には直接含めない(コンボメモと同じ運用)。
+// 入力:
+//   - dateStr: JST 日付文字列
+//   - clarMap: { card_number: evalResult } のマップ
+//   - cardInfoList: 当日の新カード情報配列
+//   - options: { outputDir = `${ROOT}/reports/news`, model = ANTHROPIC_MODEL_OPUS }
+// 出力: { mdPath: string, logPath: null|string }
+function writeRuleClarificationsReport(dateStr, clarMap, cardInfoList, options = {}) {
+  const {
+    outputDir = path.join(ROOT, 'reports', 'news'),
+    model = ANTHROPIC_MODEL_OPUS
+  } = options;
+
+  if (!dateStr || typeof dateStr !== 'string') {
+    throw new Error('writeRuleClarificationsReport: dateStr is required');
+  }
+
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir, { recursive: true });
+  }
+
+  const mdPath = path.join(outputDir, `${dateStr}-rule-clarifications.md`);
+  const logPath = path.join(outputDir, `${dateStr}-rule-clarifications.log`);
+  const nowStr = formatJST(new Date());
+
+  // 既存ファイル上書き警告
+  if (fs.existsSync(mdPath)) {
+    try { log(`⚠️ writeRuleClarificationsReport: 既存 ${path.basename(mdPath)} を上書きします`); }
+    catch (_e) { console.log(`⚠️ writeRuleClarificationsReport: 既存 ${path.basename(mdPath)} を上書きします`); }
+  }
+
+  // ヘルパ
+  const oneLine = (text) => String(text == null ? '' : text).replace(/\s*\n\s*/g, ' ').trim();
+  const difficultyLabel = { high: '★★★ 上級', medium: '★★ 中級', low: '★ 初級' };
+
+  let md = `# ルール解説メモ — ${dateStr}\n\n`;
+  md += `> 生成日時: ${nowStr} / モデル: ${model}\n`;
+  md += `> ※ 本ファイルは Claude 評価結果の **草案** です。本文反映前に松岡さんレビュー必須\n`;
+  md += `> 採否マーキング: \`[ ]\` を \`[x]\` に変更すると採用扱い\n\n`;
+  md += `---\n\n`;
+
+  const errors = [];
+  const list = Array.isArray(cardInfoList) ? cardInfoList : [];
+
+  if (list.length === 0) {
+    md += `_(対象カードなし)_\n\n`;
+  }
+
+  let totalClarifications = 0;
+  for (const card of list) {
+    const cardCode = card.card_number || card.id || card.code || '?';
+    const cardName = card.card_name || card.name_jp || card.name || '?';
+    const cardType = card.card_type || '?';
+    const colorJp = COLOR_JP[card.color] || card.color || '?';
+
+    md += `## カード: [${cardCode}] ${cardName} (${cardType}, ${colorJp})\n\n`;
+
+    const evalResult = clarMap && clarMap[cardCode];
+    if (!evalResult) {
+      md += `_(評価結果なし)_\n\n---\n\n`;
+      continue;
+    }
+
+    if (evalResult.parseError) {
+      errors.push({ cardCode, parseError: evalResult.parseError, rawResponse: evalResult.rawResponse });
+      md += `> ⚠️ 評価エラー: ${evalResult.parseError}\n\n`;
+    }
+
+    const clars = Array.isArray(evalResult.clarifications) ? evalResult.clarifications : [];
+    totalClarifications += clars.length;
+
+    if (clars.length === 0) {
+      md += `_(ややこしい裁定なし — 標準的なルールで処理可能)_\n\n---\n\n`;
+      continue;
+    }
+
+    md += `### ルール解説候補 (${clars.length} 件)\n\n`;
+    clars.forEach((c, i) => {
+      const diffLabel = difficultyLabel[c.difficulty] || c.difficulty || '?';
+      const qaIds = Array.isArray(c.related_qa_ids) && c.related_qa_ids.length > 0
+        ? ` / 関連 Q&A: ${c.related_qa_ids.join(', ')}` : '';
+      md += `${i + 1}. **[ ] 採用** — ${oneLine(c.topic) || '(見出しなし)'}  *(難易度: ${diffLabel})*\n`;
+      md += `   - **解説**: ${oneLine(c.explanation) || '(記述なし)'}\n`;
+      md += `   - **根拠**: ${oneLine(c.related_rule) || '(記述なし)'}${qaIds}\n\n`;
+    });
+
+    md += `---\n\n`;
+  }
+
+  // フッタ
+  md += `\n## 採否集計欄(松岡さんレビュー後に記録)\n\n`;
+  md += `- 採用件数: ___ / 全 ${totalClarifications} 件\n`;
+  md += `- 不採用件数: ___ / 全 ${totalClarifications} 件\n`;
+  md += `- 採用された解説の難易度傾向: \n`;
+  md += `- 漏れていた重要な裁定: \n`;
+  md += `- API 失敗カード: ${errors.length} 件\n`;
+
+  fs.writeFileSync(mdPath, md, 'utf-8');
+
+  let actualLogPath = null;
+  if (errors.length > 0) {
+    let logStr = `# ルール解説エラーログ — ${dateStr}\n`;
+    logStr += `生成日時: ${nowStr}\nモデル: ${model}\n\n`;
+    for (const e of errors) {
+      logStr += `---\n\n## カード ${e.cardCode}\n\n**エラー**: ${e.parseError}\n\n### Raw Response\n\n${e.rawResponse || '(空応答)'}\n\n`;
+    }
+    fs.writeFileSync(logPath, logStr, 'utf-8');
+    actualLogPath = logPath;
+  }
+
+  return { mdPath, logPath: actualLogPath };
+}
+
 // === 記事生成: 導入文 ===
-async function generateIntroText(cardInfoList, relatedCards, articleDate) {
+// sameDayLinkPairs: detectSameDayLinkPairs() の出力(2026-05-24 追加)。
+//   省略可。同日公開でリンク条件成立した UNIT × PILOT 組合せの配列。
+async function generateIntroText(cardInfoList, relatedCards, articleDate, sameDayLinkPairs = []) {
   const cardsDesc = cardInfoList.map(c => {
     const colorJp = COLOR_JP[c.color] || c.color;
     // expansion フィールドと release_date と link を含める(改造指示書29 で追加)
@@ -788,6 +1906,14 @@ async function generateIntroText(cardInfoList, relatedCards, articleDate) {
     const linkInfo = c.link ? ` リンク: ${c.link}` : '';
     return `- ${c.card_name} (${c.card_number})${expansionInfo}: ${colorJp}/${c.card_type}${linkInfo}${releaseInfo}`;
   }).join('\n');
+
+  // 同日リンク組合せセクションの組立(2026-05-24 追加)
+  const linkPairsDesc = (sameDayLinkPairs && sameDayLinkPairs.length > 0)
+    ? sameDayLinkPairs.map(pair => {
+        const pilotNames = pair.pilots.map(p => `「${p.card_name}」(${p.card_number})`).join('・');
+        return `- UNIT「${pair.unit.card_name}」(${pair.unit.card_number}, リンク条件: ${pair.unit.link}) ⇔ PILOT ${pilotNames}`;
+      }).join('\n')
+    : '';
 
   const prompt = `あなたはガンダムカードゲーム（GCG）の環境分析レポーターです。
 以下の新カード情報に基づいて、カード紹介記事の「導入文」だけを書いてください。
@@ -869,7 +1995,15 @@ async function generateIntroText(cardInfoList, relatedCards, articleDate) {
 
 【新カード情報】
 ${cardsDesc}
+${linkPairsDesc ? `
+【同日公開でリンク条件が成立するカード組合せ(必ず本文で明示してください)】
+${linkPairsDesc}
 
+これらは同日公開され、リンク条件が成立する「組合せセット」です。
+記事冒頭で「同日公開のUNITとPILOTがリンクで結ばれる組合せ」として明示してください。
+1枚ずつバラバラに紹介せず、組合せの価値・戦術上の意義に言及してください
+(これは認識データに基づく事実であり、推測ではありません)。
+` : ''}
 <p>タグのみ出力してください。`;
 
   log('  導入文生成中 (Claude API, Opus)...');
@@ -878,19 +2012,53 @@ ${cardsDesc}
 }
 
 // === 記事生成: カードごとの考察 ===
-async function generateCardAnalyses(cardInfoList, relatedCards) {
+// sameDayLinkPairs: detectSameDayLinkPairs() の出力(2026-05-24 追加)。
+//   省略可。各カードの考察生成時に、自身が同日リンク組合せに含まれているか参照する。
+async function generateCardAnalyses(cardInfoList, relatedCards, sameDayLinkPairs = []) {
   const analyses = {};
 
   for (const card of cardInfoList) {
     const colorJp = COLOR_JP[card.color] || card.color;
+    // 関連カード説明: 効果テキストも含める(2026-05-24 Step 4 過去カードシナジー強化)
     const relatedDesc = relatedCards
       .filter(r => r.color === colorJp || r.reason.includes('リンク先') || r.reason.includes('リンク対象') || r.reason.includes('同色'))
       .slice(0, 5)
       .map(r => {
         const previewTag = r.preview ? '【新カード】' : '';
-        return `${previewTag}${r.name}(${r.card_id}): ${r.color}系${r.usage_rate > 0 ? 'デッキ内採用率' + r.usage_rate + '%' : '（新カード・採用率未集計）'} — ${r.reason}`;
+        const usageDesc = r.usage_rate > 0 ? `デッキ内採用率${r.usage_rate}%` : '（新カード・採用率未集計）';
+        const typeDesc = r.card_type ? `/${r.card_type}` : '';
+        const effectDesc = r.effect ? `\n  効果: ${r.effect}` : '';
+        return `${previewTag}${r.name}(${r.card_id}): ${r.color}系${typeDesc} ${usageDesc} — ${r.reason}${effectDesc}`;
       })
       .join('\n');
+
+    // このカード自身が同日リンク組合せに含まれているか判定(2026-05-24 追加)
+    const ownPair = (sameDayLinkPairs || []).find(p =>
+      p.unit.card_number === card.card_number ||
+      p.pilots.some(pi => pi.card_number === card.card_number)
+    );
+    let comboDesc = '';
+    if (ownPair) {
+      const partnerCards = (card.card_type === 'UNIT')
+        ? ownPair.pilots
+        : [ownPair.unit];
+      const partnerDesc = partnerCards.map(p =>
+        `「${p.card_name}」(${p.card_number}, ${p.card_type})\n  効果: ${p.effect || '(効果テキストなし)'}`
+      ).join('\n');
+      comboDesc = `
+
+【同日公開・リンク成立組合せ(考察に組み込んでください)】
+このカードは以下のカードと同日公開され、リンク条件が成立する組合せです:
+${partnerDesc}
+
+★ 注意: 両カードを同一ユニット上で運用するシナジーには言及してよいが、
+   両カードの効果を「同時発動」「連続発動」として扱う場合は、
+   それぞれのタイミングキーワード(【配備時】【セット時】【リンク時】等)が
+   GCG ルール上、本当に同一タイミングで発動するか厳密に確認すること。
+   異なるタイミングの効果を勝手に組合せ手順として書くことは禁止。
+   自信が持てない場合は各効果を独立に紹介し、リンクすること自体の意義
+   (リンク中の効果常駐、デッキ構築上の親和性等)に絞って記述すること。`;
+    }
 
     // expansion, release_date, link を追加(改造指示書29 で追加)
     const expansionInfo = card.expansion ? `(${card.expansion})` : '';
@@ -908,8 +2076,8 @@ async function generateCardAnalyses(cardInfoList, relatedCards) {
 - ${linkInfo}
 - ${releaseInfo}
 - 効果テキスト(原文): ${card.effect||'効果なし(バニラ)'}
-
-【関連カード(現環境データ)】
+${comboDesc}
+【関連カード(現環境データ・効果テキスト付き)】
 ${relatedDesc || 'データなし'}
 
 【セット名・拡張パック名のルール(2026-05-14 改造指示書29 で追加)】
@@ -930,6 +2098,47 @@ ${relatedDesc || 'データなし'}
 - 「青色らしいコントロール向け」等の色属性ベースの戦術論は禁止
 - 「既存の○○との連携」「○○系デッキへの影響」等の推測は、関連カードデータに根拠がない場合は禁止
 - 原作世界観の補足(機体性能、機体設定等)は禁止
+
+【タイミングキーワードの厳密区別(2026-05-24 改訂・最重要)】
+GCG のタイミングキーワード(【配備時】【セット時】【リンク時】【アタック時】
+【破壊時】【セット中】【リンク中】【起動】【アタック中】【バースト】)は
+それぞれ **別個のトリガー** であり、発動条件・タイミングが異なる:
+
+- **【配備時】**: ユニットが場に配備された瞬間に発動。後から発動させ直すことは不可。
+- **【セット時】**: パイロットがユニットに搭載された瞬間に発動。配備時とは別タイミング。
+- **【リンク時】**: パイロット搭載によってリンク条件が成立した瞬間に発動。
+- **【アタック時】**: ユニットがアタックを宣言した瞬間に発動。
+- **【破壊時】**: ユニットが破壊された瞬間に発動。
+
+これらは **「同時発動」ではない**。異なるタイミングのトリガー同士を勝手に
+「同時発動して解決順を選べる」と解釈することは絶対に禁止。
+
+考察文で組合せ運用を書く場合、効果テキストとタイミングキーワードを
+正確に読んだ上で、**ルール上実際に成立する組合せのみ** を記述すること。
+判断に確信が持てない場合は、各効果を独立に紹介するに留め、無理な
+コンボ手順は書かないこと。
+
+【例外: カード間相互作用の積極的解説(2026-05-24 追加・改訂版)】
+以下は推測ではなく「認識データ・公式ルールに基づく事実」であり、考察に積極的に含めてよい:
+
+- **同日公開リンク組合せの構造**: 上記【同日公開・リンク成立組合せ】セクションに
+  記載されたカードがリンクで結ばれることは事実。両カードを同一ユニット上で運用する
+  シナジー(同色・同特徴デッキでの併用、リンク中の効果常駐 等)には言及してよい。
+  ただし **「同時発動コンボ」と書く場合、両効果のトリガータイミングが GCG ルール上
+  実際に同一タイミングで発動することが確実な場合に限る**(上記タイミング規律を厳守)。
+
+- **過去カードシナジー**: 上記【関連カード(現環境データ・効果テキスト付き)】に効果テキストが
+  付与されているカードについては、効果テキストを読んだ上で新カードとの組合せ運用に言及してよい。
+  ただし「○○系デッキ」のような抽象的なデッキ論ではなく、具体的な効果同士の相互作用に絞ること。
+  ここでも **タイミングキーワードの厳密区別を遵守** すること。
+
+- **ブロッカー対象/非ブロッカー対象の価値差**: 効果が相手ユニットを対象とする場合、
+  対象がブロッカーを持つか否かで価値が変わる場合は明示してよい。
+
+- **前提条件と能動的成立**: カード単体の効果に「相手に○○がいないと発動できない」等の
+  前提条件がある場合、その状況が一般的にどの程度発生するか(序盤/終盤、相手のデッキタイプ等)
+  には言及してよい。ただし、同日公開の組合せカードの効果でその前提条件を作れると書く場合は、
+  **必ずタイミング規律を確認** し、ルール上実際に成立する場合のみ記述する。
 
 【GCG用語ルール - 厳守】
 - カードタイプは UNIT / PILOT / COMMAND / BASE の4種のみ
@@ -987,6 +2196,9 @@ ${relatedDesc || 'データなし'}
 - 効果テキストに「破壊」がないのに「破壊する」と書く
 - 効果テキストに「EXリソース」がないのに「EXリソース活用」と書く
 - 関連カードデータがないのに「○○との連携」「○○系デッキ」と書く
+  ※ ただし【同日公開・リンク成立組合せ】【関連カード(現環境データ・効果テキスト付き)】
+     に効果テキストが提供されているカードとの相互作用は「データに根拠あり」とみなし、
+     具体的な効果同士の組合せ運用を記述してよい(これは禁止対象外)。
 
 考察文を書いた後、必ず以下の検証を行うこと:
 1. 考察文に含まれるすべての能力・効果が、効果テキストに記載されているか確認
@@ -1093,4 +2305,16 @@ module.exports = {
   // 記事生成
   generateIntroText,
   generateCardAnalyses,
+  // 同日リンク組合せ検出(2026-05-24 追加)
+  detectSameDayLinkPairs,
+  matchesLinkCondition,
+  // コンボ候補絞り込み(2026-05-25 追加 / §6 Step 2)
+  findComboCandidates,
+  // コンボ評価(2026-05-25 追加 / §6 Step 3)
+  evaluateComboCandidates,
+  // コンボ候補レポート出力(2026-05-25 追加 / §6 Step 4)
+  writeComboCandidatesReport,
+  // ルール解説評価 + レポート出力(2026-05-26 追加 / 新機能)
+  evaluateRuleClarifications,
+  writeRuleClarificationsReport,
 };

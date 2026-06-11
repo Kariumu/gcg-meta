@@ -90,6 +90,16 @@ const {
   // 記事生成
   generateIntroText,
   generateCardAnalyses,
+  // 同日リンク組合せ検出(2026-05-24 追加)
+  detectSameDayLinkPairs,
+  // コンボ評価(2026-05-25 追加 / §6 Step 5)
+  // 注: ANTHROPIC_MODEL_OPUS は既に上で import 済(行 45 付近)
+  findComboCandidates,
+  evaluateComboCandidates,
+  writeComboCandidatesReport,
+  // ルール解説評価(2026-05-26 追加 / 新機能 Phase 5)
+  evaluateRuleClarifications,
+  writeRuleClarificationsReport,
 } = require('./scripts/shared/recognition-core.js');
 
 // === セルフチェック: ファイル末尾の // EOF マーカーを確認 ===
@@ -844,7 +854,9 @@ function saveCardPreview(cardInfo, sourceUrl) {
     _pendingReview: cardInfo._pendingReview === true,
     _pendingReviewIssues: cardInfo._pendingReviewIssues || [],
     // 指示書37: 再生成用の記事日付保持(regenerate-article.js から参照)
-    _articleDate: cardInfo._articleDate || null
+    _articleDate: cardInfo._articleDate || null,
+    // コマンドパイロット: パイロット面（無ければキー自体を出力しない）
+    ...(cardInfo.pilot ? { pilot: cardInfo.pilot } : {})
   };
 
   fs.writeFileSync(CARDS_PREVIEW_FILE, JSON.stringify(preview, null, 2), 'utf-8');
@@ -1450,6 +1462,8 @@ function findRelatedCards(cardInfo, unifiedDB, summary) {
     return {
       card_id: id, name: entry.name_jp,
       color: COLOR_JP[entry.color] || entry.color,
+      card_type: entry.card_type || '', // 過去カードシナジー強化(2026-05-24)
+      effect: entry.effect || '',       // 過去カードシナジー強化(2026-05-24): 効果テキストを考察に利用
       usage_rate: cr ? cr.usage_rate : 0, decks: cr ? cr.decks : 0,
       preview: entry.preview || false,
       reason
@@ -1650,52 +1664,61 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   const colorJp = COLOR_JP[card.color] || card.color;
   const traitsStr = (card.traits || []).join('、');
 
-  let html = '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:16px">\n';
-  html += '  <div style="display:flex;gap:16px;align-items:flex-start">\n';
-  // カード画像（250px, クリックで拡大）
-  html += '    <div style="flex-shrink:0;width:250px">\n';
-  html += `      <img src="${imgUrl}" alt="${name}" style="width:250px;border-radius:6px;border:1px solid var(--border);cursor:zoom-in" onclick="openLightbox(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
+  // 2026-05-28 class ベース化リファクタリング(memory: project_card_article_styling)
+  // インラインスタイルから .news-card-* class に移行。
+  // 関連 CSS は css/style.css の「新カード紹介記事(class ベース)」セクション。
+  let html = '<div class="news-card-block">\n';
+  html += '  <div class="news-card-main">\n';
+  // カード画像（PC 250px / モバイル可変、クリックで拡大）
+  html += '    <div class="news-card-image">\n';
+  html += `      <img class="news-card-img" src="${imgUrl}" alt="${name}" onclick="openLightbox(this.src)" onerror="this.onerror=null;this.style.display='none'">\n`;
   html += '    </div>\n';
   // カード情報
-  html += '    <div style="flex:1">\n';
-  html += `      <h3 style="margin:0 0 8px 0;font-size:16px">${name} (${num})</h3>\n`;
-  html += '      <table style="font-size:13px;margin-bottom:8px">\n';
-  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">色</td><td>${escapeHtml(colorJp)}</td>`;
-  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">タイプ</td><td>${escapeHtml(card.card_type)}</td></tr>\n`;
-  html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">Lv</td><td>${card.level != null ? card.level : '-'}</td>`;
-  html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">コスト</td><td>${card.cost != null ? card.cost : '-'}</td></tr>\n`;
+  html += '    <div class="news-card-content">\n';
+  html += `      <h3 class="news-card-title">${name} (${num})</h3>\n`;
+  html += '      <table class="news-card-stats">\n';
+  html += `        <tr><td class="news-card-stat-label">色</td><td>${escapeHtml(colorJp)}</td>`;
+  html += `<td class="news-card-stat-label news-card-stat-label--right">タイプ</td><td>${escapeHtml(card.card_type)}</td></tr>\n`;
+  html += `        <tr><td class="news-card-stat-label">Lv</td><td>${card.level != null ? card.level : '-'}</td>`;
+  html += `<td class="news-card-stat-label news-card-stat-label--right">コスト</td><td>${card.cost != null ? card.cost : '-'}</td></tr>\n`;
   // 指示書37d/37e(2026-05-17): UNIT/BASE は戦闘 AP/HP、PILOT は補正 AP/HP を表示。COMMAND のみ非表示。
   // GCG ルール上、PILOT カードの AP/HP は UNIT にセット時の補正値 → ラベルで明示
   if (card.card_type === 'UNIT' || card.card_type === 'BASE' || card.card_type === 'PILOT') {
     const apLabel = card.card_type === 'PILOT' ? '補正 AP' : 'AP';
     const hpLabel = card.card_type === 'PILOT' ? '補正 HP' : 'HP';
-    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">${apLabel}</td><td>${card.ap != null ? card.ap : '-'}</td>`;
-    html += `<td style="padding-left:16px;padding-right:12px;color:var(--text-muted)">${hpLabel}</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
+    html += `        <tr><td class="news-card-stat-label">${apLabel}</td><td>${card.ap != null ? card.ap : '-'}</td>`;
+    html += `<td class="news-card-stat-label news-card-stat-label--right">${hpLabel}</td><td>${card.hp != null ? card.hp : '-'}</td></tr>\n`;
+  }
+  // コマンドパイロット: pilot 面（名前・補正AP/HP・特徴）を表示
+  if (card.pilot) {
+    const p = card.pilot;
+    const ptr = (p.traits || []).join('、');
+    html += `        <tr><td class="news-card-stat-label">パイロット</td><td colspan="3">${escapeHtml(p.name || '')}（補正 AP+${p.ap != null ? p.ap : '?'} / HP+${p.hp != null ? p.hp : '?'}）${ptr ? '　' + escapeHtml(ptr) : ''}</td></tr>\n`;
   }
   if (traitsStr) {
-    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
+    html += `        <tr><td class="news-card-stat-label">特徴</td><td colspan="3">${escapeHtml(traitsStr)}</td></tr>\n`;
   }
   if (card.link) {
-    html += `        <tr><td style="padding-right:12px;color:var(--text-muted)">リンク条件</td><td colspan="3">${escapeHtml(card.link)}</td></tr>\n`;
+    html += `        <tr><td class="news-card-stat-label">リンク条件</td><td colspan="3">${escapeHtml(card.link)}</td></tr>\n`;
   }
   html += '      </table>\n';
   if (card.effect) {
-    html += `      <p style="font-size:13px;color:var(--text-secondary);margin:0 0 8px 0"><strong>効果:</strong> ${escapeHtml(card.effect)}</p>\n`;
+    html += `      <p class="news-card-effect"><strong>効果:</strong> ${escapeHtml(card.effect)}</p>\n`;
   }
   if (analysis) {
-    html += `      <p style="font-size:14px;margin:0">${analysis}</p>\n`;
+    html += `      <p class="news-card-analysis">${analysis}</p>\n`;
   }
   html += '    </div>\n';
   html += '  </div>\n';
   // インライン関連カード（同色・同特徴 1〜2枚）
   if (inlineRelated && inlineRelated.length > 0) {
-    html += '  <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">\n';
-    html += '    <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">関連カード</div>\n';
+    html += '  <div class="news-card-related">\n';
+    html += '    <div class="news-card-related-label">関連カード</div>\n';
     for (const r of inlineRelated) {
       const rImgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
-      html += '    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">\n';
-      html += `      <a href="../../cards/${r.card_id}/"><img src="${rImgUrl}" alt="${escapeHtml(r.name)}" style="width:36px;border-radius:2px" onerror="this.style.display=\'none\'"></a>\n`;
-      html += `      <a href="../../cards/${r.card_id}/" style="font-size:12px;color:var(--text-primary);text-decoration:none">${escapeHtml(r.name)} (${r.card_id}) — ${escapeHtml(r.color)}系${r.usage_rate}%</a>\n`;
+      html += '    <div class="news-card-related-item">\n';
+      html += `      <a href="../../cards/${r.card_id}/"><img class="news-card-related-thumb" src="${rImgUrl}" alt="${escapeHtml(r.name)}" onerror="this.style.display=\'none\'"></a>\n`;
+      html += `      <a href="../../cards/${r.card_id}/" class="news-card-related-link">${escapeHtml(r.name)} (${r.card_id}) — ${escapeHtml(r.color)}系${r.usage_rate}%</a>\n`;
       html += '    </div>\n';
     }
     html += '  </div>\n';
@@ -1705,13 +1728,13 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
     const linkReason = linkTargets[0].reason || 'リンク対象';
     const labelMatch = linkReason.match(/リンク対象（(.+)）/);
     const linkLabel = labelMatch ? `リンク対象カード（${labelMatch[1]}）` : 'リンク対象カード';
-    html += '  <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">\n';
-    html += `    <div style="font-size:12px;color:var(--text-muted);margin-bottom:4px">${escapeHtml(linkLabel)}</div>\n`;
+    html += '  <div class="news-card-related">\n';
+    html += `    <div class="news-card-related-label">${escapeHtml(linkLabel)}</div>\n`;
     for (const r of linkTargets) {
       const rImgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
-      html += '    <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">\n';
-      html += `      <a href="../../cards/${r.card_id}/"><img src="${rImgUrl}" alt="${escapeHtml(r.name)}" style="width:36px;border-radius:2px" onerror="this.style.display=\'none\'"></a>\n`;
-      html += `      <a href="../../cards/${r.card_id}/" style="font-size:12px;color:var(--text-primary);text-decoration:none">${escapeHtml(r.name)} (${r.card_id})</a>\n`;
+      html += '    <div class="news-card-related-item">\n';
+      html += `      <a href="../../cards/${r.card_id}/"><img class="news-card-related-thumb" src="${rImgUrl}" alt="${escapeHtml(r.name)}" onerror="this.style.display=\'none\'"></a>\n`;
+      html += `      <a href="../../cards/${r.card_id}/" class="news-card-related-link">${escapeHtml(r.name)} (${r.card_id})</a>\n`;
       html += '    </div>\n';
     }
     html += '  </div>\n';
@@ -2333,10 +2356,31 @@ async function main() {
       : null;
     const expansionName = formatExpansionName(dominantExpansion);
 
+    // === タイトル/desc 用セット表記(2026-06-11 指示書v4 Task1)===
+    // セットが1種のみ → 従来どおり formatExpansionName の長い名称
+    // 2種以上の混在日 → セットコードを「+」連結した短い表記(枚数降順、同数はコード昇順)
+    //   例: EB01×2 + GD05×1 → 「EB01+GD05」
+    // ※introHtml フォールバックの expansionName は従来どおり dominant の長い名称(本変更の対象外)
+    const titleExpansionLabel = Object.keys(expansionCounts).length >= 2
+      ? Object.keys(expansionCounts)
+          .sort((a, b) => expansionCounts[b] - expansionCounts[a] || a.localeCompare(b))
+          .join('+')
+      : expansionName;
+
+    // 同日公開でリンク条件成立した UNIT×PILOT 組合せを検出(2026-05-24 追加)
+    const sameDayLinkPairs = detectSameDayLinkPairs(allCardInfos);
+    if (sameDayLinkPairs.length > 0) {
+      log(`同日リンク組合せ検出: ${sameDayLinkPairs.length} 組`);
+      sameDayLinkPairs.forEach(p => {
+        const pilotNames = p.pilots.map(pi => pi.card_number).join(', ');
+        log(`  - UNIT ${p.unit.card_number} ⇔ PILOT ${pilotNames}`);
+      });
+    }
+
     // Claude APIで導入文を生成
     let introHtml;
     try {
-      introHtml = await generateIntroText(allCardInfos, uniqueRelated.slice(0, 10), articleDate);
+      introHtml = await generateIntroText(allCardInfos, uniqueRelated.slice(0, 10), articleDate, sameDayLinkPairs);
     } catch (e) {
       log(`導入文生成失敗: ${e.message}`);
       introHtml = `<p>${expansionName}から新カード${cardCount}枚が公開されました。</p>`;
@@ -2345,7 +2389,7 @@ async function main() {
     // Claude APIでカードごとの考察を生成
     let cardAnalyses = {};
     try {
-      cardAnalyses = await generateCardAnalyses(allCardInfos, uniqueRelated.slice(0, 10));
+      cardAnalyses = await generateCardAnalyses(allCardInfos, uniqueRelated.slice(0, 10), sameDayLinkPairs);
     } catch (e) {
       log(`考察生成失敗: ${e.message}`);
     }
@@ -2355,8 +2399,9 @@ async function main() {
     generatedFiles.push({ repoPath: 'data/cards_preview.json', binary: false });
 
     // 指示書32: 拡張コードを動的に取得(EXPANSION_NAMES マップ経由)
-    const title = `【${dateLbl}公開】${expansionName} 新カード${cardCount}枚まとめ`;
-    const desc = `ガンダムカードゲーム${expansionName}から公開された新カード${cardCount}枚の紹介と環境考察。`;
+    // 指示書v4 Task1(2026-06-11): 混在日は titleExpansionLabel(セットコード「+」連結)を使用
+    const title = `【${dateLbl}公開】${titleExpansionLabel} 新カード${cardCount}枚まとめ`;
+    const desc = `ガンダムカードゲーム${titleExpansionLabel}から公開された新カード${cardCount}枚の紹介と環境考察。`;
     const pageHtml = generateNewsPage(articleDate, title, desc, articleHtml, { displayDate: articleDate.replace(/-/g, '.') });
     const filePath = path.join(NEWS_DIR, `${articleDate}.html`);
     fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
@@ -2444,6 +2489,29 @@ async function main() {
     }
   }
 
+  // === sets/ プレビューセット一覧ページの日次再生成(2026-06-11 指示書v4 Task2)===
+  // 新カードが処理された日(= data/cards_preview.json が push 対象に入った日)のみ実行する。
+  // 新カード0枚の日(記事なし)の挙動は変えない(下の条件が偽となり従来どおりスキップ)。
+  // 失敗しても記事生成・プッシュは止めない(ログ出力のみで継続)。
+  // generate_preview_sets.js は __dirname / NEWS_OUTPUT_ROOT 基準で cwd 非依存。
+  // 環境変数は子プロセスに自動継承されるため、NEWS_OUTPUT_ROOT による隔離検証時も本番 sets/ を汚さない。
+  if (generatedFiles.some((f) => f.repoPath === 'data/cards_preview.json')) {
+    try {
+      const { execFileSync } = require('child_process');
+      const setsLog = execFileSync(process.execPath, [path.join(__dirname, 'generate_preview_sets.js')], { encoding: 'utf-8' });
+      setsLog.trim().split('\n').forEach((l) => log(`[sets] ${l}`));
+      // sets/ 配下に実在する全 .html を push 対象に追加(将来のセット追加に備え、固定ファイル名のハードコードはしない)
+      const setsDir = path.join(ROOT, 'sets');
+      const setsHtml = fs.readdirSync(setsDir).filter((f) => f.endsWith('.html'));
+      for (const f of setsHtml) {
+        generatedFiles.push({ repoPath: `sets/${f}`, binary: false });
+      }
+      log(`[sets] 再生成完了: ${setsHtml.length} ファイルを push 対象に追加`);
+    } catch (e) {
+      log(`[sets] 再生成失敗(記事処理は継続): ${e.message}`);
+    }
+  }
+
   // === Git push ===
   if (generatedFiles.length > 0) {
     try {
@@ -2492,6 +2560,155 @@ async function main() {
     }
   } catch (outerErr) {
     log(`[Phase 3] post-processing 前処理エラー: ${outerErr.message}`);
+  }
+
+  // === Phase 4: コンボ候補評価 + レポート出力(2026-05-25 追加 / §6 Step 5)===
+  // 設計詳細: homepage/docs/combo-finder-step5-plan-2026-05-25.md
+  // 安全装置:
+  //   1. デフォルト無効(API コスト保護)。--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化
+  //   2. 評価対象カード数の上限ガード(--combo-eval-max-cards N、デフォルト 5)
+  //      → 誤って 30 枚評価して $13 飛ぶ事故防止
+  //   3. Phase 4 内のエラーは catch して Phase 1〜3 を中断しない(Phase 3 と同方針)
+  try {
+    const enableComboEval =
+      process.argv.includes('--enable-combo-eval') ||
+      process.env.ENABLE_COMBO_EVAL === 'true';
+
+    // 上限カード数の取得(--combo-eval-max-cards N または COMBO_EVAL_MAX_CARDS=N、デフォルト 5)
+    // 注: 0 や負数を指定した場合はデフォルト 5 にフォールバック(`--enable-combo-eval` を外して完全スキップしてください)
+    let comboEvalMaxCards = 5;
+    const maxCardsIdx = process.argv.indexOf('--combo-eval-max-cards');
+    if (maxCardsIdx !== -1 && process.argv[maxCardsIdx + 1]) {
+      const n = parseInt(process.argv[maxCardsIdx + 1], 10);
+      if (!isNaN(n) && n > 0) comboEvalMaxCards = n;
+    } else if (process.env.COMBO_EVAL_MAX_CARDS) {
+      const n = parseInt(process.env.COMBO_EVAL_MAX_CARDS, 10);
+      if (!isNaN(n) && n > 0) comboEvalMaxCards = n;
+    }
+
+    if (!enableComboEval) {
+      log('[Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)');
+    } else if (!Array.isArray(allCardInfos) || allCardInfos.length === 0) {
+      log('[Phase 4] コンボ評価スキップ: 対象カード 0 件');
+    } else {
+      // dry-run + コンボ評価併用時の課金注意喚起(独立レビュー推奨修正 4)
+      if (process.argv.includes('--dry-run') || process.env.DRY_RUN === 'true') {
+        log('[Phase 4] ⚠️ --dry-run と --enable-combo-eval 併用: git push と X 投稿はスキップされますが、Claude API への課金は発生します');
+      }
+
+      // 評価対象カード(API 課金対象)は上限でスライス
+      const evalTargets = allCardInfos.slice(0, comboEvalMaxCards);
+      const skipped = allCardInfos.length - evalTargets.length;
+      log(`[Phase 4] コンボ評価開始: 評価対象 ${evalTargets.length} 件${skipped > 0 ? ` (上限 ${comboEvalMaxCards} のため ${skipped} 件スキップ・残カードは sameDayCards として参照のみ)` : ''}`);
+
+      const cardsMasterLocal = loadCardsMaster();
+      const comboResultsMap = {};
+      for (const card of evalTargets) {
+        try {
+          // sameDayCards は allCardInfos 全体から自身を除いたものを使用
+          // (上限超過でスキップされたカードもコンボ評価のコンテキストとしては参照する。
+          //  独立レビュー推奨修正 2 / 設計書 §1 サンプルと整合)
+          const candidates = findComboCandidates(card, cardsMasterLocal, {
+            maxCandidates: 80,
+            sameDayCards: allCardInfos.filter(c => c.card_number !== card.card_number)
+          });
+          const evalResult = await evaluateComboCandidates(card, candidates, {
+            model: ANTHROPIC_MODEL_OPUS,
+            topN: 30
+          });
+          comboResultsMap[card.card_number] = evalResult;
+          log(`[Phase 4]   ${card.card_number}: combos=${evalResult.combos.length}, uncertain=${evalResult.uncertain.length}${evalResult.parseError ? ', error=' + evalResult.parseError : ''}`);
+        } catch (e) {
+          log(`[Phase 4]   ${card.card_number} 評価失敗(処理続行): ${e.message}`);
+          comboResultsMap[card.card_number] = { combos: [], uncertain: [], rawResponse: '', parseError: e.message };
+        }
+      }
+
+      // 出力日付の決定: allCardInfos[0]._articleDate 優先、なければ JST 今日
+      const articleDate = (allCardInfos[0] && allCardInfos[0]._articleDate) || dateStrJST(new Date());
+      try {
+        const result = writeComboCandidatesReport(articleDate, comboResultsMap, evalTargets);
+        log(`[Phase 4] レポート出力: ${result.mdPath}${result.logPath ? ' (+ ' + result.logPath + ')' : ''}`);
+      } catch (writeErr) {
+        log(`[Phase 4] レポート書き出しエラー(処理続行): ${writeErr.message}`);
+      }
+    }
+  } catch (outerErr) {
+    log(`[Phase 4] コンボ評価エラー(処理続行): ${outerErr.message}`);
+  }
+
+  // === Phase 5: ルール解説評価 + レポート出力(2026-05-26 追加 / 新機能)===
+  // 設計詳細: 本セッション 2026-05-26 提示の Plan
+  // 安全装置:
+  //   1. デフォルト無効。--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化
+  //   2. 上限ガード(--rule-clarification-max-cards N、デフォルト 5)
+  //   3. Phase 5 内のエラーは catch して Phase 1〜4 を中断しない
+  try {
+    const enableRuleClar =
+      process.argv.includes('--enable-rule-clarification') ||
+      process.env.ENABLE_RULE_CLARIFICATION === 'true';
+
+    let ruleClarMaxCards = 5;
+    const maxIdx = process.argv.indexOf('--rule-clarification-max-cards');
+    if (maxIdx !== -1 && process.argv[maxIdx + 1]) {
+      const n = parseInt(process.argv[maxIdx + 1], 10);
+      if (!isNaN(n) && n > 0) ruleClarMaxCards = n;
+    } else if (process.env.RULE_CLARIFICATION_MAX_CARDS) {
+      const n = parseInt(process.env.RULE_CLARIFICATION_MAX_CARDS, 10);
+      if (!isNaN(n) && n > 0) ruleClarMaxCards = n;
+    }
+
+    if (!enableRuleClar) {
+      log('[Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)');
+    } else if (!Array.isArray(allCardInfos) || allCardInfos.length === 0) {
+      log('[Phase 5] ルール解説評価スキップ: 対象カード 0 件');
+    } else {
+      if (process.argv.includes('--dry-run') || process.env.DRY_RUN === 'true') {
+        log('[Phase 5] ⚠️ --dry-run と --enable-rule-clarification 併用: git push と X 投稿はスキップされますが、Claude API への課金は発生します');
+      }
+
+      const targets = allCardInfos.slice(0, ruleClarMaxCards);
+      const skipped = allCardInfos.length - targets.length;
+      log(`[Phase 5] ルール解説評価開始: 評価対象 ${targets.length} 件${skipped > 0 ? ` (上限 ${ruleClarMaxCards} のため ${skipped} 件スキップ)` : ''}`);
+
+      // qa_database.json をロード(本機能の精度の核)
+      let qaDb = null;
+      try {
+        const qaPath = path.join(ROOT, 'data', 'qa_database.json');
+        if (fs.existsSync(qaPath)) {
+          qaDb = JSON.parse(fs.readFileSync(qaPath, 'utf-8'));
+          log(`[Phase 5] qa_database.json ロード成功 (${qaDb.total_count || 0} 件)`);
+        } else {
+          log('[Phase 5] qa_database.json 未存在(関連 Q&A 参照なしで進行)');
+        }
+      } catch (e) {
+        log(`[Phase 5] qa_database.json ロード失敗(関連 Q&A 参照なしで進行): ${e.message}`);
+      }
+
+      const clarMap = {};
+      for (const card of targets) {
+        try {
+          const result = await evaluateRuleClarifications(card, qaDb, {
+            model: ANTHROPIC_MODEL_OPUS
+          });
+          clarMap[card.card_number] = result;
+          log(`[Phase 5]   ${card.card_number}: clarifications=${result.clarifications.length}${result.parseError ? ', error=' + result.parseError : ''}`);
+        } catch (e) {
+          log(`[Phase 5]   ${card.card_number} 評価失敗(処理続行): ${e.message}`);
+          clarMap[card.card_number] = { clarifications: [], rawResponse: '', parseError: e.message };
+        }
+      }
+
+      const articleDate2 = (allCardInfos[0] && allCardInfos[0]._articleDate) || dateStrJST(new Date());
+      try {
+        const r = writeRuleClarificationsReport(articleDate2, clarMap, targets);
+        log(`[Phase 5] レポート出力: ${r.mdPath}${r.logPath ? ' (+ ' + r.logPath + ')' : ''}`);
+      } catch (writeErr) {
+        log(`[Phase 5] レポート書き出しエラー(処理続行): ${writeErr.message}`);
+      }
+    }
+  } catch (outerErr) {
+    log(`[Phase 5] ルール解説評価エラー(処理続行): ${outerErr.message}`);
   }
 
   // 最終チェック時刻を保存

@@ -2289,17 +2289,173 @@ a.section-badge:hover {
 }
 
 /* ============================================================
- * 新カード紹介記事のスマホ表示調整(2026-05-28 追加)
+ * 新カード紹介記事(class ベース、2026-05-28 リファクタリング)
  *
- * 課題: buildCardBlockHtml(auto-news.js)が生成する HTML が
- *       インラインスタイルで `display:flex; gap:16px; align-items:flex-start` を使い、
- *       画像 250px + テキスト flex:1 の横並びになっている。
- *       スマホ画面(375px 幅)では画像 250px + gap 16px = 266px が固定で、
- *       テキスト領域が約 100px に圧迫され、文字が右側により過ぎて読みづらい。
+ * buildCardBlockHtml(auto-news.js)が出力する HTML 要素に対する
+ * class ベースのスタイル定義。インラインスタイル + 属性セレクタ
+ * の暫定対応(下段)から本対応へ移行。
  *
- * 対応: 768px 以下では縦並び(column)に変更し、画像を中央上配置、
- *       テキストを横幅 100% に展開する。属性セレクタ + !important で
- *       過去記事(既に push 済の HTML)にも遡及適用。
+ * 関連メモリ: project_card_article_styling
+ * 関連実装: auto-news.js の buildCardBlockHtml(class="news-card-*")
+ *
+ * 注: 2026-05-28 以前にデプロイ済の過去記事はインラインスタイル
+ *     形式のままなので、下段の属性セレクタ + !important ブロック
+ *     で後方互換性を維持している(両ブロックは共存させる)。
+ * ============================================================ */
+
+/* === カードブロック全体ラッパー === */
+.news-card-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* === 主コンテナ(画像 + テキストの flex 並び) === */
+.news-card-main {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+/* === カード画像ラッパー === */
+.news-card-image {
+  flex-shrink: 0;
+  width: 250px;
+}
+
+.news-card-img {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+}
+
+/* === カード情報テキストエリア === */
+.news-card-content {
+  flex: 1;
+  min-width: 0; /* テキストオーバーフロー対策(flex 子要素の暴走防止) */
+}
+
+.news-card-title {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+/* === ステータステーブル === */
+/* 注: border-collapse は指定しない(デフォルト separate のまま)。
+   旧インライン版が border-collapse 未指定だったため、視覚的等価性を維持。 */
+.news-card-stats {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.news-card-stat-label {
+  padding-right: 12px;
+  color: var(--text-muted);
+}
+
+/* テーブル右半分のラベル列(タイプ/コスト/HP 等)に追加 padding */
+.news-card-stat-label--right {
+  padding-left: 16px;
+}
+
+/* === 効果テキスト・分析テキスト === */
+.news-card-effect {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 8px 0;
+}
+
+.news-card-analysis {
+  font-size: 14px;
+  margin: 0;
+}
+
+/* === 関連カード / リンク対象カードセクション(共通) === */
+.news-card-related {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+.news-card-related-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.news-card-related-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.news-card-related-thumb {
+  width: 36px;
+  border-radius: 2px;
+}
+
+.news-card-related-link {
+  font-size: 12px;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+/* === 新カード紹介記事 - スマホ表示(768px 以下) === */
+@media (max-width: 768px) {
+  /* カードブロック全体を縦並びに */
+  .news-card-main {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* 画像ラッパーを画面幅に合わせて伸縮(最大 250px) */
+  .news-card-image {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+  }
+
+  /* テキストエリアを横幅 100% に展開 */
+  .news-card-content {
+    width: 100%;
+  }
+
+  /* ステータステーブルが画面幅を超えないように */
+  .news-card-stats {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* 関連カードリンク内の折り返し対策 */
+  .news-card-related-item {
+    flex-wrap: wrap;
+  }
+}
+
+/* ============================================================
+ * 過去記事(インラインスタイル版)用のスマホ表示調整
+ *
+ * 履歴:
+ *  - 2026-05-28 初版追加(commit 0afe517): スマホで画像 250px + テキスト
+ *    flex:1 の横並びが文字を右側に圧迫していた問題への暫定対応。
+ *    インラインスタイル上書きのため属性セレクタ + !important を採用。
+ *  - 2026-05-28 class ベース版へリファクタリング後も、過去記事
+ *    (既に push 済の HTML)は引き続きインラインスタイルなので
+ *    本ブロックを残して後方互換性を維持する。
+ *
+ * 適用対象:
+ *  - 2026-05-28 以前に生成・push された reports/news/*.html
+ *    (buildCardBlockHtml の旧インライン版で出力されたもの)
+ *
+ * 注意:
+ *  - 新規記事は class ベース版(上段)で動くため、本ブロックの
+ *    属性セレクタは新規記事には**マッチしないが、害もない**。
+ *  - 過去記事を一括再生成する運用が確立したら本ブロックは削除可能。
  * ============================================================ */
 @media (max-width: 768px) {
   /* カードブロック全体(display:flex + gap:16px + align-items:flex-start)を縦並びに */

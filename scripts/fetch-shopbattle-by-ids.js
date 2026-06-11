@@ -303,7 +303,10 @@ async function main() {
     manifest.availableMonths.push(monthLabel);
     manifest.availableMonths.sort();
   }
-  manifest.latestMonth = manifest.availableMonths[manifest.availableMonths.length - 1];
+  // latestMonth は既存値を保持（月末の集計切替で手動更新する）。未設定時のみ補完。
+  if (!manifest.latestMonth) {
+    manifest.latestMonth = manifest.availableMonths[manifest.availableMonths.length - 1];
+  }
   manifest.lastUpdated = new Date().toISOString();
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
 }

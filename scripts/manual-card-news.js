@@ -128,14 +128,16 @@ function postProcessVisionResultV2(rawText, visionResult) {
 
   // ─────────────────────────────────
   // 2. rarity 抽出
-  //    card_number の直後の英字 (LR/SR/R/U/C)
+  //    card_number の直後の英字 (LR/R/U/C)
+  //    ※'SR' は GCG に存在しないレアリティのため有効値から除外(2026-06-11 指示書v4 Task3。
+  //      正規表現が "SR" にマッチしても validRarities で弾かれ rarity は未設定のままになる)
   // ─────────────────────────────────
   if (result.card_number) {
     const escaped = result.card_number.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     const rarityMatch = rawText.match(new RegExp(`${escaped}\\s+([LSCRU]R?)\\b`));
     if (rarityMatch) {
       const rawRarity = rarityMatch[1];
-      const validRarities = ['LR', 'SR', 'R', 'U', 'C'];
+      const validRarities = ['LR', 'R', 'U', 'C'];
       if (validRarities.includes(rawRarity)) {
         result.rarity = rawRarity;
       }

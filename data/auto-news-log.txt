@@ -1,0 +1,847 @@
+[2026-05-31 18:29 JST] === regenerate-article 開始 ===
+[2026-05-31 18:29 JST] DRY_RUN: true
+[2026-05-31 18:29 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-05-31 18:29 JST] 対象日付: 2026-05-30
+[2026-05-31 18:29 JST] cards_preview.json: 42 エントリ
+[2026-05-31 18:29 JST] 対象カード(認識成功・補完済): 0 件
+[2026-05-31 18:29 JST] 対象カードなし。終了します。
+[2026-05-31 18:29 JST] 対象なしの場合の確認事項:
+[2026-05-31 18:29 JST]   1. cards_preview.json のエントリに _articleDate が 2026-05-30 と一致するか
+[2026-05-31 18:29 JST]   2. _pendingReview が false(または未設定)であるか
+[2026-05-31 18:30 JST] === regenerate-article 開始 ===
+[2026-05-31 18:30 JST] DRY_RUN: true
+[2026-05-31 18:30 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-05-31 18:30 JST] 対象日付: 2026-05-09
+[2026-05-31 18:30 JST] cards_preview.json: 42 エントリ
+[2026-05-31 18:30 JST] 対象カード(認識成功・補完済): 6 件
+[2026-05-31 18:30 JST] 同日リンク組合せ検出: 2 組
+[2026-05-31 18:30 JST]   - UNIT ST10-006 ⇔ PILOT ST10-012
+[2026-05-31 18:30 JST]   - UNIT EB01-009 ⇔ PILOT EB01-063
+[2026-05-31 18:30 JST]   導入文生成中 (Claude API, Opus)...
+[2026-05-31 18:30 JST]   考察生成中 (Opus): マーク・ギルダー...
+[2026-05-31 18:30 JST]   考察生成中 (Opus): フェニックスガンダム (能力解放) (EX)...
+[2026-05-31 18:30 JST]   考察生成中 (Opus): プレミアムガシャ...
+[2026-05-31 18:30 JST]   考察生成中 (Opus): フルアーマー・ガンダム(サンダーボルト版)(EX)...
+[2026-05-31 18:30 JST]   考察生成中 (Opus): イオ・フレミング...
+[2026-05-31 18:31 JST]   考察生成中 (Opus): ジャスティスガンダム(EX)...
+[2026-05-31 18:31 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-05-09.html
+[2026-05-31 18:31 JST] [Phase 3] post-processing 開始: 6 件 (ST10-012, ST10-006, EB01-078, EB01-009, EB01-063, EB01-044)
+[2026-05-31 18:31 JST] [Phase 3] post-processing 完了: {"date":"2026-05-09","cardNumbers":["ST10-012","ST10-006","EB01-078","EB01-009","EB01-063","EB01-044"],"pageCreated":0,"pageExisting":6,"imgsPlaced":12,"imgsSkipped":0,"textFilesCount":6,"binaryFilesCount":12,"indexHtmlChanged":false,"commitMessage":"auto-news post-process: 2026-05-09 (6 cards)","dryRun":true}
+[2026-05-31 18:31 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-05-31 18:31 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-05-31 18:31 JST] [DRY_RUN] git push スキップ
+[2026-05-31 18:31 JST] [DRY_RUN] X 投稿スキップ。記事URL: https://gcg-stats.com/reports/news/2026-05-09.html
+[2026-05-31 18:31 JST] === regenerate-article 完了 ===
+[2026-05-31 18:40 JST] === auto-news 開始 ===
+[2026-05-31 18:40 JST] DRY_RUN: true
+[2026-05-31 18:40 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-05-31 18:40 JST] ENABLE_SURVEY: false
+[2026-05-31 18:40 JST] USE_VISION_PIPELINE: true
+[2026-05-31 18:40 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-05-31 18:40 JST]   範囲: 2026-05-30T08:40:00.000Z 〜 2026-05-31T08:39:00.000Z
+[2026-05-31 18:40 JST] 公式X投稿を取得中... (since: 2026-05-30T08:40:00.000Z, until: 2026-05-31T08:39:00.000Z)
+[2026-05-31 18:40 JST]   取得: 3件
+[2026-05-31 18:40 JST] 対象投稿: 2件 (新カード: 2, 速報: 0)
+[2026-05-31 18:40 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-05-31 18:40 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-05-31 18:40 JST]   [Step1-B] ピクセル色判定: RGB(197,193,192) → White
+[2026-05-31 18:40 JST]   [Step1-A v2] 画像 1: 認識テキスト 345文字 / ブロック 20
+[2026-05-31 18:40 JST]   [Vision API] 使用量: 1/1000
+[2026-05-31 18:40 JST]   [Pipeline] 統合完了: EB01-084
+[2026-05-31 18:40 JST]   [Step1.5] EB01-084 NOT in master, using OCR values
+[2026-05-31 18:40 JST]     画像保存: EB01-084.jpg (157433 bytes)
+[2026-05-31 18:40 JST]   [Preview] EB01-084 を cards_preview.json に保存
+[2026-05-31 18:40 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-05-31 18:40 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-05-31 18:40 JST]   [Step1-B] ピクセル色判定: RGB(180,181,181) → Unknown
+[2026-05-31 18:40 JST]   [Step1-B] ⚠ 色判定不能: RGB(180,181,181) — 要手動確認
+[2026-05-31 18:40 JST]   [Step1-A v2] 画像 1: 認識テキスト 332文字 / ブロック 22
+[2026-05-31 18:40 JST]   [Vision API] 使用量: 2/1000
+[2026-05-31 18:40 JST]   [Pipeline] 統合完了: EB01-052
+[2026-05-31 18:40 JST]   [Step1.5] EB01-052 NOT in master, using OCR values
+[2026-05-31 18:40 JST]     画像保存: EB01-052.jpg (162581 bytes)
+[2026-05-31 18:40 JST]   [Preview] EB01-052 を cards_preview.json に保存
+[2026-05-31 18:40 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (2枚)
+[2026-05-31 18:40 JST] 記事生成: 認識成功 2 件(全カード認識成功)
+[2026-05-31 18:40 JST]   導入文生成中 (Claude API, Opus)...
+[2026-05-31 18:40 JST]   考察生成中 (Opus): 30cm砲(APFSDS弾)...
+[2026-05-31 18:41 JST]   考察生成中 (Opus): ヒルドルブ...
+[2026-05-31 18:41 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-05-31.html
+[2026-05-31 18:41 JST] [DRY-RUN] media upload スキップ: C:\dev\gcg-meta\images\news\2026-05-31\EB01-084.jpg
+[2026-05-31 18:41 JST] [DRY-RUN] media upload スキップ: C:\dev\gcg-meta\images\news\2026-05-31\EB01-052.jpg
+[2026-05-31 18:41 JST] [X投稿] 画像 0 枚添付
+[2026-05-31 18:41 JST] [DRY-RUN] X投稿スキップ: 【新カード】30cm砲(APFSDS弾)、ヒルドルブ
+
+記事はこちら👇
+https://gcg-stats.com/r...
+[2026-05-31 18:41 JST] [DRY-RUN] git push スキップ: auto-news: 2026-05-31
+[2026-05-31 18:41 JST] [Phase 3] post-processing 開始: 2 件 (EB01-084, EB01-052)
+[2026-05-31 18:41 JST] [Phase 3] post-processing 完了: {"date":"2026-05-31","cardNumbers":["EB01-084","EB01-052"],"pageCreated":2,"pageExisting":0,"imgsPlaced":4,"imgsSkipped":0,"textFilesCount":3,"binaryFilesCount":0,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-05-31 (2 cards)","dryRun":true}
+[2026-05-31 18:41 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-05-31 18:41 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-05-31 18:41 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-05-31 18:41 JST] === auto-news 完了 ===
+[2026-05-31 21:05 JST] === auto-news 開始 ===
+[2026-05-31 21:05 JST] DRY_RUN: true
+[2026-05-31 21:05 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-05-31 21:05 JST] ENABLE_SURVEY: false
+[2026-05-31 21:05 JST] USE_VISION_PIPELINE: true
+[2026-05-31 21:05 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-05-31 21:05 JST]   範囲: 2026-05-30T08:40:00.000Z 〜 2026-05-31T08:39:00.000Z
+[2026-05-31 21:05 JST] 公式X投稿を取得中... (since: 2026-05-30T08:40:00.000Z, until: 2026-05-31T08:39:00.000Z)
+[2026-05-31 21:05 JST]   取得: 3件
+[2026-05-31 21:05 JST] 対象投稿: 2件 (新カード: 2, 速報: 0)
+[2026-05-31 21:05 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-05-31 21:05 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-05-31 21:05 JST]   [Step1-B] ピクセル色判定: RGB(197,193,192) → White
+[2026-05-31 21:05 JST]   [Step1-A v2] 画像 1: 認識テキスト 345文字 / ブロック 20
+[2026-05-31 21:05 JST]   [Vision API] 使用量: 3/1000
+[2026-05-31 21:05 JST]   [Pipeline] 統合完了: EB01-084
+[2026-05-31 21:05 JST]   [Step1.5] EB01-084 NOT in master, using OCR values
+[2026-05-31 21:05 JST]     画像キャッシュ使用: EB01-084.jpg
+[2026-05-31 21:05 JST]   [Preview] EB01-084 を cards_preview.json に保存
+[2026-05-31 21:05 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-05-31 21:05 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-05-31 21:05 JST]   [Step1-B] ピクセル色判定: RGB(180,181,181) → Unknown
+[2026-05-31 21:05 JST]   [Step1-B] ⚠ 色判定不能: RGB(180,181,181) — 要手動確認
+[2026-05-31 21:05 JST]   [Step1-A v2] 画像 1: 認識テキスト 332文字 / ブロック 22
+[2026-05-31 21:05 JST]   [Vision API] 使用量: 4/1000
+[2026-05-31 21:05 JST]   [Pipeline] 統合完了: EB01-052
+[2026-05-31 21:05 JST]   [Step1.5] EB01-052 NOT in master, using OCR values
+[2026-05-31 21:05 JST]     画像キャッシュ使用: EB01-052.jpg
+[2026-05-31 21:05 JST]   [Preview] EB01-052 を cards_preview.json に保存
+[2026-05-31 21:05 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (2枚)
+[2026-05-31 21:05 JST] 記事生成: 認識成功 2 件(全カード認識成功)
+[2026-05-31 21:05 JST]   導入文生成中 (Claude API, Opus)...
+[2026-05-31 21:05 JST]   考察生成中 (Opus): 30cm砲(APFSDS弾)...
+[2026-05-31 21:05 JST]   考察生成中 (Opus): ヒルドルブ...
+[2026-05-31 21:05 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-05-31.html
+[2026-05-31 21:05 JST] [DRY-RUN] media upload スキップ: C:\dev\gcg-meta\images\news\2026-05-31\EB01-084.jpg
+[2026-05-31 21:05 JST] [DRY-RUN] media upload スキップ: C:\dev\gcg-meta\images\news\2026-05-31\EB01-052.jpg
+[2026-05-31 21:05 JST] [X投稿] 画像 0 枚添付
+[2026-05-31 21:05 JST] [DRY-RUN] X投稿スキップ: 【新カード】30cm砲(APFSDS弾)、ヒルドルブ
+
+記事はこちら👇
+https://gcg-stats.com/r...
+[2026-05-31 21:05 JST] [DRY-RUN] git push スキップ: auto-news: 2026-05-31
+[2026-05-31 21:05 JST] [Phase 3] post-processing 開始: 2 件 (EB01-084, EB01-052)
+[2026-05-31 21:05 JST] [Phase 3] post-processing 完了: {"date":"2026-05-31","cardNumbers":["EB01-084","EB01-052"],"pageCreated":2,"pageExisting":0,"imgsPlaced":4,"imgsSkipped":0,"textFilesCount":3,"binaryFilesCount":0,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-05-31 (2 cards)","dryRun":true}
+[2026-05-31 21:05 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-05-31 21:05 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-05-31 21:05 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-05-31 21:05 JST] === auto-news 完了 ===
+[2026-06-01 18:00 JST] === auto-news 開始 ===
+[2026-06-01 18:00 JST] DRY_RUN: false
+[2026-06-01 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-01 18:00 JST] ENABLE_SURVEY: false
+[2026-06-01 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-01 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-01 18:00 JST]   範囲: 2026-05-31T08:40:00.000Z 〜 2026-06-01T08:39:00.000Z
+[2026-06-01 18:00 JST] 公式X投稿を取得中... (since: 2026-05-31T08:40:00.000Z, until: 2026-06-01T08:39:00.000Z)
+[2026-06-01 18:00 JST]   取得: 4件
+[2026-06-01 18:00 JST] 対象投稿: 2件 (新カード: 2, 速報: 0)
+[2026-06-01 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-01 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-01 18:00 JST]   [Step1-B] ピクセル色判定: RGB(83,159,197) → Blue
+[2026-06-01 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 387文字 / ブロック 18
+[2026-06-01 18:00 JST]   [Vision API] 使用量: 1/1000
+[2026-06-01 18:00 JST]   [Pipeline] 統合完了: EB01-086
+[2026-06-01 18:00 JST]   [Step1.5] EB01-086 NOT in master, using OCR values
+[2026-06-01 18:00 JST]     画像保存: EB01-086.jpg (167584 bytes)
+[2026-06-01 18:00 JST]   [Preview] EB01-086 を cards_preview.json に保存
+[2026-06-01 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-01 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-01 18:00 JST]   [Step1-B] ピクセル色判定: RGB(84,139,178) → Blue
+[2026-06-01 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 373文字 / ブロック 23
+[2026-06-01 18:00 JST]   [Vision API] 使用量: 2/1000
+[2026-06-01 18:00 JST]   [Pipeline] 統合完了: EB01-008
+[2026-06-01 18:00 JST]   [Step1.5] EB01-008 NOT in master, using OCR values
+[2026-06-01 18:00 JST]     画像保存: EB01-008.jpg (171620 bytes)
+[2026-06-01 18:00 JST]   [Preview] EB01-008 を cards_preview.json に保存
+[2026-06-01 18:00 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (2枚)
+[2026-06-01 18:00 JST] 記事生成: 認識成功 2 件(全カード認識成功)
+[2026-06-01 18:00 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-01 18:00 JST]   考察生成中 (Opus): キシリア・ザビ & グワジン...
+[2026-06-01 18:00 JST]   考察生成中 (Opus): ガンダムデルタカイ...
+[2026-06-01 18:01 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-01.html
+[2026-06-01 18:01 JST] [media upload] 成功: media_id=2061372446314467328 (EB01-086.jpg)
+[2026-06-01 18:01 JST] [media upload] 成功: media_id=2061372450206826496 (EB01-008.jpg)
+[2026-06-01 18:01 JST] [X投稿] 画像 2 枚添付
+[2026-06-01 18:01 JST] X投稿成功 (画像 2 枚添付)
+[2026-06-01 18:01 JST] GitHub API push 完了
+[2026-06-01 18:01 JST] [Phase 3] post-processing 開始: 2 件 (EB01-086, EB01-008)
+[2026-06-01 18:01 JST] [Phase 3] post-processing 完了: {"date":"2026-06-01","cardNumbers":["EB01-086","EB01-008"],"pageCreated":2,"pageExisting":0,"imgsPlaced":4,"imgsSkipped":0,"textFilesCount":3,"binaryFilesCount":4,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-01 (2 cards)","dryRun":false}
+[2026-06-01 18:01 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-01 18:01 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-01 18:01 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-01 18:01 JST] === auto-news 完了 ===
+[2026-06-01 20:07 JST] === auto-news 開始 ===
+[2026-06-01 20:07 JST] DRY_RUN: true
+[2026-06-01 20:07 JST] TEST_MODE: true (X 投稿は スキップ)
+[2026-06-01 20:07 JST] ENABLE_SURVEY: false
+[2026-06-01 20:07 JST] USE_VISION_PIPELINE: true
+[2026-06-01 20:07 JST] 時刻範囲モード: last-check.json ベース(従来)
+[2026-06-01 20:07 JST]   範囲: 2026-03-31T21:46:29.740Z 〜 現在
+[2026-06-01 20:07 JST] 公式X投稿を取得中... (since: 2026-03-31T21:46:29.740Z)
+[2026-06-01 20:07 JST]   取得: 10件
+[2026-06-01 20:07 JST] 対象投稿: 3件 (新カード: 3, 速報: 0)
+[2026-06-01 20:07 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-01 20:07 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-01 20:07 JST]   [Step1-B] ピクセル色判定: RGB(83,159,197) → Blue
+[2026-06-01 20:07 JST]   [Step1-A v2] 画像 1: 認識テキスト 387文字 / ブロック 18
+[2026-06-01 20:07 JST]   [Vision API] 使用量: 3/1000
+[2026-06-01 20:07 JST]   [Pipeline] 統合完了: EB01-086
+[2026-06-01 20:07 JST]   [Step1.5] EB01-086 NOT in master, using OCR values
+[2026-06-01 20:07 JST]     画像保存: EB01-086.jpg (167584 bytes)
+[2026-06-01 20:07 JST]   [Preview] EB01-086 を cards_preview.json に保存
+[2026-06-01 20:07 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-01 20:07 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-01 20:07 JST]   [Step1-B] ピクセル色判定: RGB(84,139,178) → Blue
+[2026-06-01 20:07 JST]   [Step1-A v2] 画像 1: 認識テキスト 373文字 / ブロック 23
+[2026-06-01 20:07 JST]   [Vision API] 使用量: 4/1000
+[2026-06-01 20:07 JST]   [Pipeline] 統合完了: EB01-008
+[2026-06-01 20:07 JST]   [Step1.5] EB01-008 NOT in master, using OCR values
+[2026-06-01 20:07 JST]     画像保存: EB01-008.jpg (171620 bytes)
+[2026-06-01 20:07 JST]   [Preview] EB01-008 を cards_preview.json に保存
+[2026-06-01 20:07 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-01 20:07 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-01 20:07 JST]   [Step1-B] ピクセル色判定: RGB(197,193,192) → White
+[2026-06-01 20:07 JST]   [Step1-A v2] 画像 1: 認識テキスト 345文字 / ブロック 20
+[2026-06-01 20:07 JST]   [Vision API] 使用量: 5/1000
+[2026-06-01 20:07 JST]   [Pipeline] 統合完了: EB01-084
+[2026-06-01 20:07 JST]   [Step1.5] EB01-084 NOT in master, using OCR values
+[2026-06-01 20:07 JST]     画像キャッシュ使用: EB01-084.jpg
+[2026-06-01 20:07 JST]   [Preview] EB01-084 を cards_preview.json に保存
+[2026-06-01 20:07 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (4枚)
+[2026-06-01 20:07 JST] 記事生成: 認識成功 3 件(全カード認識成功)
+[2026-06-01 20:07 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-01 20:07 JST]   考察生成中 (Opus): キシリア・ザビ & グワジン...
+[2026-06-01 20:08 JST]   考察生成中 (Opus): ガンダムデルタカイ...
+[2026-06-01 20:08 JST]   考察生成中 (Opus): 30cm砲(APFSDS弾)...
+[2026-06-01 20:08 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-05-31.html
+[2026-06-01 20:08 JST] [TEST_MODE] X投稿スキップ。記事URL: https://gcg-stats.com/reports/news/2026-05-31.html
+[2026-06-01 20:08 JST] [DRY-RUN] git push スキップ: auto-news: 2026-06-01
+[2026-06-01 20:08 JST] [Phase 3] post-processing 開始: 3 件 (EB01-086, EB01-008, EB01-084)
+[2026-06-01 20:08 JST] [Phase 3] post-processing 完了: {"date":"2026-05-31","cardNumbers":["EB01-086","EB01-008","EB01-084"],"pageCreated":1,"pageExisting":2,"imgsPlaced":6,"imgsSkipped":0,"textFilesCount":4,"binaryFilesCount":4,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-05-31 (3 cards)","dryRun":true}
+[2026-06-01 20:08 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-01 20:08 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-01 20:08 JST] === auto-news 完了 ===
+[2026-06-01 21:22 JST]   [Step1-B] ピクセル色判定: RGB(215,209,184) → Red
+[2026-06-01 21:26 JST]   [Step1-B] ピクセル色判定: RGB(60,123,168) → Blue
+[2026-06-01 21:26 JST]   [Step1-B] ピクセル色判定: RGB(197,193,192) → White
+[2026-06-01 21:28 JST]   [Step1-B] ピクセル色判定: RGB(66,129,165) → Blue
+[2026-06-01 21:29 JST]   [Step1-B] ピクセル色判定: RGB(154,171,101) → Unknown
+[2026-06-01 21:29 JST]   [Step1-B] ⚠ 色判定不能: RGB(154,171,101) — 要手動確認
+[2026-06-01 21:29 JST]   [Step1-B] ピクセル色判定: RGB(60,123,168) → Blue
+[2026-06-01 21:32 JST]   [Step1-B] ピクセル色判定: RGB(197,193,192) → White
+[2026-06-02 18:00 JST] === auto-news 開始 ===
+[2026-06-02 18:00 JST] DRY_RUN: false
+[2026-06-02 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-02 18:00 JST] ENABLE_SURVEY: false
+[2026-06-02 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-02 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-02 18:00 JST]   範囲: 2026-06-01T08:40:00.000Z 〜 2026-06-02T08:39:00.000Z
+[2026-06-02 18:00 JST] 公式X投稿を取得中... (since: 2026-06-01T08:40:00.000Z, until: 2026-06-02T08:39:00.000Z)
+[2026-06-02 18:00 JST]   取得: 7件
+[2026-06-02 18:00 JST] 対象投稿: 2件 (新カード: 2, 速報: 0)
+[2026-06-02 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-02 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-02 18:00 JST]   [Step1-B] ピクセル色判定: RGB(120,172,122) → Green
+[2026-06-02 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 315文字 / ブロック 16
+[2026-06-02 18:00 JST]   [Vision API] 使用量: 6/1000
+[2026-06-02 18:00 JST]   [Pipeline] 統合完了: EB01-079
+[2026-06-02 18:00 JST]   [Step1.5] EB01-079 NOT in master, using OCR values
+[2026-06-02 18:00 JST]     画像保存: EB01-079.jpg (154594 bytes)
+[2026-06-02 18:00 JST]   [Preview] EB01-079 を cards_preview.json に保存
+[2026-06-02 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-02 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-02 18:00 JST]   [Step1-B] ピクセル色判定: RGB(140,166,101) → Unknown
+[2026-06-02 18:00 JST]   [Step1-B] ⚠ 色判定不能: RGB(140,166,101) — 要手動確認
+[2026-06-02 18:00 JST]   [Pipeline] 画像 1 処理エラー: Vision API JSON parse error: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+[2026-06-02 18:00 JST]   [Pipeline] 統合完了: (card_number なし)
+[2026-06-02 18:00 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (1枚)
+[2026-06-02 18:00 JST] 記事生成: 認識成功 1 件(全カード認識成功)
+[2026-06-02 18:00 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-02 18:00 JST]   考察生成中 (Opus): オプションパーツ...
+[2026-06-02 18:00 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-02.html
+[2026-06-02 18:00 JST] [media upload] 成功: media_id=2061734803725246465 (EB01-079.jpg)
+[2026-06-02 18:00 JST] [X投稿] 画像 1 枚添付
+[2026-06-02 18:00 JST] X投稿成功 (画像 1 枚添付)
+[2026-06-02 18:01 JST] GitHub API push 完了
+[2026-06-02 18:01 JST] [Phase 3] post-processing 開始: 1 件 (EB01-079)
+[2026-06-02 18:01 JST] [Phase 3] post-processing 完了: {"date":"2026-06-02","cardNumbers":["EB01-079"],"pageCreated":1,"pageExisting":0,"imgsPlaced":2,"imgsSkipped":0,"textFilesCount":2,"binaryFilesCount":2,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-02 (1 cards)","dryRun":false}
+[2026-06-02 18:01 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-02 18:01 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-02 18:01 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-02 18:01 JST] === auto-news 完了 ===
+[2026-06-03 18:00 JST] === auto-news 開始 ===
+[2026-06-03 18:00 JST] DRY_RUN: false
+[2026-06-03 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-03 18:00 JST] ENABLE_SURVEY: false
+[2026-06-03 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-03 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-03 18:00 JST]   範囲: 2026-06-02T08:40:00.000Z 〜 2026-06-03T08:39:00.000Z
+[2026-06-03 18:00 JST] 公式X投稿を取得中... (since: 2026-06-02T08:40:00.000Z, until: 2026-06-03T08:39:00.000Z)
+[2026-06-03 18:00 JST]   取得: 3件
+[2026-06-03 18:00 JST] 対象投稿: 2件 (新カード: 2, 速報: 0)
+[2026-06-03 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-03 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-03 18:00 JST]   [Step1-B] ピクセル色判定: RGB(178,179,179) → Unknown
+[2026-06-03 18:00 JST]   [Step1-B] ⚠ 色判定不能: RGB(178,179,179) — 要手動確認
+[2026-06-03 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 305文字 / ブロック 22
+[2026-06-03 18:00 JST]   [Vision API] 使用量: 7/1000
+[2026-06-03 18:00 JST]   [Pipeline] 統合完了: EB01-054
+[2026-06-03 18:00 JST]   [Step1.5] EB01-054 NOT in master, using OCR values
+[2026-06-03 18:00 JST]     画像保存: EB01-054.jpg (162072 bytes)
+[2026-06-03 18:00 JST]   [Preview] EB01-054 を cards_preview.json に保存
+[2026-06-03 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-03 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-03 18:00 JST]   [Step1-B] ピクセル色判定: RGB(172,172,180) → Unknown
+[2026-06-03 18:00 JST]   [Step1-B] ⚠ 色判定不能: RGB(172,172,180) — 要手動確認
+[2026-06-03 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 339文字 / ブロック 25
+[2026-06-03 18:00 JST]   [Vision API] 使用量: 8/1000
+[2026-06-03 18:00 JST]   [Pipeline] 統合完了: EB01-055
+[2026-06-03 18:00 JST]   [Step1.5] EB01-055 NOT in master, using OCR values
+[2026-06-03 18:00 JST]     画像保存: EB01-055.jpg (162009 bytes)
+[2026-06-03 18:00 JST]   [Preview] EB01-055 を cards_preview.json に保存
+[2026-06-03 18:00 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (2枚)
+[2026-06-03 18:00 JST] 記事生成: 認識成功 2 件(全カード認識成功)
+[2026-06-03 18:00 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-03 18:00 JST]   考察生成中 (Opus): ギャプランTR-5〔フライルー〕1号機...
+[2026-06-03 18:00 JST]   考察生成中 (Opus): ドム・グロウスバイル...
+[2026-06-03 18:00 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-03.html
+[2026-06-03 18:00 JST] [media upload] 成功: media_id=2062097150562242560 (EB01-054.jpg)
+[2026-06-03 18:00 JST] [media upload] 成功: media_id=2062097154773299200 (EB01-055.jpg)
+[2026-06-03 18:00 JST] [X投稿] 画像 2 枚添付
+[2026-06-03 18:00 JST] X投稿成功 (画像 2 枚添付)
+[2026-06-03 18:00 JST] GitHub API push 完了
+[2026-06-03 18:00 JST] [Phase 3] post-processing 開始: 2 件 (EB01-054, EB01-055)
+[2026-06-03 18:01 JST] [Phase 3] post-processing 完了: {"date":"2026-06-03","cardNumbers":["EB01-054","EB01-055"],"pageCreated":2,"pageExisting":0,"imgsPlaced":4,"imgsSkipped":0,"textFilesCount":3,"binaryFilesCount":4,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-03 (2 cards)","dryRun":false}
+[2026-06-03 18:01 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-03 18:01 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-03 18:01 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-03 18:01 JST] === auto-news 完了 ===
+[2026-06-04 18:00 JST] === auto-news 開始 ===
+[2026-06-04 18:00 JST] DRY_RUN: false
+[2026-06-04 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-04 18:00 JST] ENABLE_SURVEY: false
+[2026-06-04 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-04 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-04 18:00 JST]   範囲: 2026-06-03T08:40:00.000Z 〜 2026-06-04T08:39:00.000Z
+[2026-06-04 18:00 JST] 公式X投稿を取得中... (since: 2026-06-03T08:40:00.000Z, until: 2026-06-04T08:39:00.000Z)
+[2026-06-04 18:00 JST]   取得: 3件
+[2026-06-04 18:00 JST] 対象投稿: 2件 (新カード: 2, 速報: 0)
+[2026-06-04 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-04 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-04 18:00 JST]   [Step1-B] ピクセル色判定: RGB(73,154,194) → Blue
+[2026-06-04 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 371文字 / ブロック 20
+[2026-06-04 18:00 JST]   [Vision API] 使用量: 9/1000
+[2026-06-04 18:00 JST]   [Pipeline] 統合完了: EB01-085
+[2026-06-04 18:00 JST]   [Step1.5] EB01-085 NOT in master, using OCR values
+[2026-06-04 18:00 JST]     画像保存: EB01-085.jpg (173163 bytes)
+[2026-06-04 18:00 JST]   [Preview] EB01-085 を cards_preview.json に保存
+[2026-06-04 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-04 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-04 18:00 JST]   [Step1-B] ピクセル色判定: RGB(64,138,178) → Blue
+[2026-06-04 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 373文字 / ブロック 19
+[2026-06-04 18:00 JST]   [Vision API] 使用量: 10/1000
+[2026-06-04 18:00 JST]   [Pipeline] 統合完了: EB01-010
+[2026-06-04 18:00 JST]   [Step1.5] EB01-010 NOT in master, using OCR values
+[2026-06-04 18:00 JST]     画像保存: EB01-010.jpg (172798 bytes)
+[2026-06-04 18:00 JST]   [Preview] EB01-010 を cards_preview.json に保存
+[2026-06-04 18:00 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (2枚)
+[2026-06-04 18:00 JST] 記事生成: 認識成功 2 件(全カード認識成功)
+[2026-06-04 18:00 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-04 18:00 JST]   考察生成中 (Opus): クーデリア・藍那・バーンスタイン&イサリビ...
+[2026-06-04 18:00 JST]   考察生成中 (Opus): ガンダム・バルバトス (第6形態)...
+[2026-06-04 18:01 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-04.html
+[2026-06-04 18:01 JST] [media upload] 成功: media_id=2062459642983452673 (EB01-085.jpg)
+[2026-06-04 18:01 JST] [media upload] 成功: media_id=2062459647005794304 (EB01-010.jpg)
+[2026-06-04 18:01 JST] [X投稿] 画像 2 枚添付
+[2026-06-04 18:01 JST] X投稿成功 (画像 2 枚添付)
+[2026-06-04 18:01 JST] GitHub API push 完了
+[2026-06-04 18:01 JST] [Phase 3] post-processing 開始: 2 件 (EB01-085, EB01-010)
+[2026-06-04 18:01 JST] [Phase 3] post-processing 完了: {"date":"2026-06-04","cardNumbers":["EB01-085","EB01-010"],"pageCreated":2,"pageExisting":0,"imgsPlaced":4,"imgsSkipped":0,"textFilesCount":3,"binaryFilesCount":4,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-04 (2 cards)","dryRun":false}
+[2026-06-04 18:01 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-04 18:01 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-04 18:01 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-04 18:01 JST] === auto-news 完了 ===
+[2026-06-05 18:00 JST] === auto-news 開始 ===
+[2026-06-05 18:00 JST] DRY_RUN: false
+[2026-06-05 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-05 18:00 JST] ENABLE_SURVEY: false
+[2026-06-05 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-05 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-05 18:00 JST]   範囲: 2026-06-04T08:40:00.000Z 〜 2026-06-05T08:39:00.000Z
+[2026-06-05 18:00 JST] 公式X投稿を取得中... (since: 2026-06-04T08:40:00.000Z, until: 2026-06-05T08:39:00.000Z)
+[2026-06-05 18:00 JST]   取得: 6件
+[2026-06-05 18:00 JST] 対象投稿なし。終了します。
+[2026-06-05 18:00 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-06 18:00 JST] === auto-news 開始 ===
+[2026-06-06 18:00 JST] DRY_RUN: false
+[2026-06-06 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-06 18:00 JST] ENABLE_SURVEY: false
+[2026-06-06 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-06 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-06 18:00 JST]   範囲: 2026-06-05T08:40:00.000Z 〜 2026-06-06T08:39:00.000Z
+[2026-06-06 18:00 JST] 公式X投稿を取得中... (since: 2026-06-05T08:40:00.000Z, until: 2026-06-06T08:39:00.000Z)
+[2026-06-06 18:00 JST]   取得: 10件
+[2026-06-06 18:00 JST] 対象投稿: 7件 (新カード: 7, 速報: 0)
+[2026-06-06 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-06 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-06 18:00 JST]   [Step1-B] ピクセル色判定: RGB(104,143,95) → Green
+[2026-06-06 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 350文字 / ブロック 20
+[2026-06-06 18:00 JST]   [Vision API] 使用量: 11/1000
+[2026-06-06 18:00 JST]   [Pipeline] 統合完了: EB01-080
+[2026-06-06 18:00 JST]   [Step1.5] EB01-080 NOT in master, using OCR values
+[2026-06-06 18:00 JST]     画像保存: EB01-080.jpg (161281 bytes)
+[2026-06-06 18:00 JST]   [Preview] EB01-080 を cards_preview.json に保存
+[2026-06-06 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-06 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-06 18:00 JST]   [Step1-B] ピクセル色判定: RGB(122,168,100) → Green
+[2026-06-06 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 338文字 / ブロック 24
+[2026-06-06 18:00 JST]   [Vision API] 使用量: 12/1000
+[2026-06-06 18:00 JST]   [Pipeline] 統合完了: EB01-037
+[2026-06-06 18:00 JST]   [Step1.5] EB01-037 NOT in master, using OCR values
+[2026-06-06 18:00 JST]     画像保存: EB01-037.jpg (164467 bytes)
+[2026-06-06 18:00 JST]   [Preview] EB01-037 を cards_preview.json に保存
+[2026-06-06 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-06 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-06 18:00 JST]   [Step1-B] ピクセル色判定: RGB(228,228,228) → White
+[2026-06-06 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 342文字 / ブロック 20
+[2026-06-06 18:00 JST]   [Vision API] 使用量: 13/1000
+[2026-06-06 18:00 JST]   [Pipeline] 統合完了: G005-130
+[2026-06-06 18:00 JST]   [Step1.5] G005-130 NOT in master, using OCR values
+[2026-06-06 18:00 JST]     画像保存: G005-130.jpg (144904 bytes)
+[2026-06-06 18:00 JST]   [Preview] G005-130 を cards_preview.json に保存
+[2026-06-06 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-06 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-06 18:00 JST]   [Step1-B] ピクセル色判定: RGB(229,229,230) → White
+[2026-06-06 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 358文字 / ブロック 22
+[2026-06-06 18:00 JST]   [Vision API] 使用量: 14/1000
+[2026-06-06 18:00 JST]   [Pipeline] 統合完了: G005-098
+[2026-06-06 18:00 JST]   [Step1.5] G005-098 NOT in master, using OCR values
+[2026-06-06 18:00 JST]     画像保存: G005-098.jpg (127760 bytes)
+[2026-06-06 18:00 JST]   [Preview] G005-098 を cards_preview.json に保存
+[2026-06-06 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-06 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-06 18:00 JST]   [Step1-B] ピクセル色判定: RGB(216,215,216) → White
+[2026-06-06 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 354文字 / ブロック 23
+[2026-06-06 18:00 JST]   [Vision API] 使用量: 15/1000
+[2026-06-06 18:00 JST]   [Pipeline] 統合完了: G005-067
+[2026-06-06 18:00 JST]   [Step1.5] G005-067 NOT in master, using OCR values
+[2026-06-06 18:00 JST]     画像保存: G005-067.jpg (148427 bytes)
+[2026-06-06 18:00 JST]   [Preview] G005-067 を cards_preview.json に保存
+[2026-06-06 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-06 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-06 18:00 JST]   [Step1-B] ピクセル色判定: RGB(80,143,183) → Blue
+[2026-06-06 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 340文字 / ブロック 22
+[2026-06-06 18:00 JST]   [Vision API] 使用量: 16/1000
+[2026-06-06 18:00 JST]   [Pipeline] 統合完了: EB01-073
+[2026-06-06 18:00 JST]   [Step1.5] EB01-073 NOT in master, using OCR values
+[2026-06-06 18:00 JST]     画像保存: EB01-073.jpg (157466 bytes)
+[2026-06-06 18:00 JST]   [Preview] EB01-073 を cards_preview.json に保存
+[2026-06-06 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-06 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-06 18:00 JST]   [Step1-B] ピクセル色判定: RGB(69,127,180) → Blue
+[2026-06-06 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 412文字 / ブロック 23
+[2026-06-06 18:01 JST]   [Vision API] 使用量: 17/1000
+[2026-06-06 18:01 JST]   [Pipeline] 統合完了: EB01-002
+[2026-06-06 18:01 JST]   [Step1.5] EB01-002 NOT in master, using OCR values
+[2026-06-06 18:01 JST]     画像保存: EB01-002.jpg (178464 bytes)
+[2026-06-06 18:01 JST]   [Preview] EB01-002 を cards_preview.json に保存
+[2026-06-06 18:01 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (7枚)
+[2026-06-06 18:01 JST] 記事生成: 認識成功 7 件(全カード認識成功)
+[2026-06-06 18:01 JST] 同日リンク組合せ検出: 1 組
+[2026-06-06 18:01 JST]   - UNIT G005-067 ⇔ PILOT G005-098
+[2026-06-06 18:01 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-06 18:01 JST]   考察生成中 (Opus): シュツルム・ファウスト...
+[2026-06-06 18:01 JST]   考察生成中 (Opus): ヅダ（1番機）...
+[2026-06-06 18:01 JST]   考察生成中 (Opus): 大統領府...
+[2026-06-06 18:01 JST]   考察生成中 (Opus): ヒイロ・ユイ...
+[2026-06-06 18:01 JST]   考察生成中 (Opus): ウイングガンダムゼロ(EW版)...
+[2026-06-06 18:02 JST]   考察生成中 (Opus): キャラリクエスト...
+[2026-06-06 18:02 JST]   考察生成中 (Opus): Hi-Vガンダム (EX)...
+[2026-06-06 18:02 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-05.html
+[2026-06-06 18:02 JST] [media upload] 成功: media_id=2063184754892210176 (EB01-080.jpg)
+[2026-06-06 18:02 JST] [media upload] 成功: media_id=2063184758813945857 (EB01-037.jpg)
+[2026-06-06 18:02 JST] [media upload] 成功: media_id=2063184762702012417 (G005-130.jpg)
+[2026-06-06 18:02 JST] [media upload] 成功: media_id=2063184766560817152 (G005-098.jpg)
+[2026-06-06 18:02 JST] [X投稿] カード 7 枚中、最大 4 枚を画像添付 (X 仕様上限)
+[2026-06-06 18:02 JST] [X投稿] 画像 4 枚添付
+[2026-06-06 18:02 JST] X投稿成功 (画像 4 枚添付)
+[2026-06-06 18:02 JST] GitHub API push 完了
+[2026-06-06 18:02 JST] [Phase 3] post-processing 開始: 7 件 (EB01-080, EB01-037, G005-130, G005-098, G005-067, EB01-073, EB01-002)
+[2026-06-06 18:03 JST] [Phase 3] post-processing 完了: {"date":"2026-06-05","cardNumbers":["EB01-080","EB01-037","G005-130","G005-098","G005-067","EB01-073","EB01-002"],"pageCreated":7,"pageExisting":0,"imgsPlaced":14,"imgsSkipped":0,"textFilesCount":8,"binaryFilesCount":14,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-05 (7 cards)","dryRun":false}
+[2026-06-06 18:03 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-06 18:03 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-06 18:03 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-06 18:03 JST] === auto-news 完了 ===
+[2026-06-07 18:00 JST] === auto-news 開始 ===
+[2026-06-07 18:00 JST] DRY_RUN: false
+[2026-06-07 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-07 18:00 JST] ENABLE_SURVEY: false
+[2026-06-07 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-07 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-07 18:00 JST]   範囲: 2026-06-06T08:40:00.000Z 〜 2026-06-07T08:39:00.000Z
+[2026-06-07 18:00 JST] 公式X投稿を取得中... (since: 2026-06-06T08:40:00.000Z, until: 2026-06-07T08:39:00.000Z)
+[2026-06-07 18:00 JST]   取得: 5件
+[2026-06-07 18:00 JST] 対象投稿: 4件 (新カード: 4, 速報: 0)
+[2026-06-07 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-07 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-07 18:00 JST]   [Step1-B] ピクセル色判定: RGB(216,213,218) → White
+[2026-06-07 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 315文字 / ブロック 19
+[2026-06-07 18:00 JST]   [Vision API] 使用量: 18/1000
+[2026-06-07 18:00 JST]   [Pipeline] 統合完了: EB01-081
+[2026-06-07 18:00 JST]   [Step1.5] EB01-081 NOT in master, using OCR values
+[2026-06-07 18:00 JST]     画像保存: EB01-081.jpg (148243 bytes)
+[2026-06-07 18:00 JST]   [Preview] EB01-081 を cards_preview.json に保存
+[2026-06-07 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-07 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-07 18:00 JST]   [Step1-B] ピクセル色判定: RGB(189,196,210) → White
+[2026-06-07 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 386文字 / ブロック 22
+[2026-06-07 18:00 JST]   [Vision API] 使用量: 19/1000
+[2026-06-07 18:00 JST]   [Pipeline] 統合完了: EB01-042
+[2026-06-07 18:00 JST]   [Step1.5] EB01-042 NOT in master, using OCR values
+[2026-06-07 18:00 JST]     画像保存: EB01-042.jpg (166634 bytes)
+[2026-06-07 18:00 JST]   [Preview] EB01-042 を cards_preview.json に保存
+[2026-06-07 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-07 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-07 18:00 JST]   [Step1-B] ピクセル色判定: RGB(53,141,196) → Blue
+[2026-06-07 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 321文字 / ブロック 21
+[2026-06-07 18:00 JST]   [Vision API] 使用量: 20/1000
+[2026-06-07 18:00 JST]   [Pipeline] 統合完了: G005-123
+[2026-06-07 18:00 JST]   [Step1.5] G005-123 NOT in master, using OCR values
+[2026-06-07 18:00 JST]     画像保存: G005-123.jpg (131997 bytes)
+[2026-06-07 18:00 JST]   [Preview] G005-123 を cards_preview.json に保存
+[2026-06-07 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-07 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-07 18:00 JST]   [Step1-B] ピクセル色判定: RGB(91,161,206) → Blue
+[2026-06-07 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 346文字 / ブロック 23
+[2026-06-07 18:00 JST]   [Vision API] 使用量: 21/1000
+[2026-06-07 18:00 JST]   [Pipeline] 統合完了: 6005-004
+[2026-06-07 18:00 JST]   [Step1.5] 6005-004 NOT in master, using OCR values
+[2026-06-07 18:00 JST]     画像保存: 6005-004.jpg (148838 bytes)
+[2026-06-07 18:00 JST]   [Preview] 6005-004 を cards_preview.json に保存
+[2026-06-07 18:00 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (4枚)
+[2026-06-07 18:00 JST] 記事生成: 認識成功 4 件(全カード認識成功)
+[2026-06-07 18:00 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-07 18:00 JST]   考察生成中 (Opus): MAP兵器...
+[2026-06-07 18:00 JST]   考察生成中 (Opus): サイコ・ハロ(EX)...
+[2026-06-07 18:01 JST]   考察生成中 (Opus): アークエンジェル...
+[2026-06-07 18:01 JST]   考察生成中 (Opus): アカツキ(オオワシ)...
+[2026-06-07 18:01 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-06.html
+[2026-06-07 18:01 JST] [media upload] 成功: media_id=2063546895776280576 (EB01-081.jpg)
+[2026-06-07 18:01 JST] [media upload] 成功: media_id=2063546899962155008 (EB01-042.jpg)
+[2026-06-07 18:01 JST] [media upload] 成功: media_id=2063546903925858304 (G005-123.jpg)
+[2026-06-07 18:01 JST] [media upload] 成功: media_id=2063546907801325569 (6005-004.jpg)
+[2026-06-07 18:01 JST] [X投稿] 画像 4 枚添付
+[2026-06-07 18:01 JST] X投稿成功 (画像 4 枚添付)
+[2026-06-07 18:01 JST] GitHub API push 完了
+[2026-06-07 18:01 JST] [Phase 3] post-processing 開始: 4 件 (EB01-081, EB01-042, G005-123, 6005-004)
+[2026-06-07 18:02 JST] [Phase 3] post-processing 完了: {"date":"2026-06-06","cardNumbers":["EB01-081","EB01-042","G005-123","6005-004"],"pageCreated":4,"pageExisting":0,"imgsPlaced":8,"imgsSkipped":0,"textFilesCount":5,"binaryFilesCount":8,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-06 (4 cards)","dryRun":false}
+[2026-06-07 18:02 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-07 18:02 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-07 18:02 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-07 18:02 JST] === auto-news 完了 ===
+[2026-06-08 18:00 JST] === auto-news 開始 ===
+[2026-06-08 18:00 JST] DRY_RUN: false
+[2026-06-08 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-08 18:00 JST] ENABLE_SURVEY: false
+[2026-06-08 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-08 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-08 18:00 JST]   範囲: 2026-06-07T08:40:00.000Z 〜 2026-06-08T08:39:00.000Z
+[2026-06-08 18:00 JST] 公式X投稿を取得中... (since: 2026-06-07T08:40:00.000Z, until: 2026-06-08T08:39:00.000Z)
+[2026-06-08 18:00 JST]   取得: 5件
+[2026-06-08 18:00 JST] 対象投稿: 4件 (新カード: 4, 速報: 0)
+[2026-06-08 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-08 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-08 18:00 JST]   [Step1-B] ピクセル色判定: RGB(66,147,191) → Blue
+[2026-06-08 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 356文字 / ブロック 20
+[2026-06-08 18:00 JST]   [Vision API] 使用量: 22/1000
+[2026-06-08 18:00 JST]   [Pipeline] 統合完了: EB01-062
+[2026-06-08 18:00 JST]   [Step1.5] EB01-062 NOT in master, using OCR values
+[2026-06-08 18:00 JST]   ⚠ 認識精度問題: EB01-062 — card_name が空, PILOT の level が空
+[2026-06-08 18:00 JST]     画像保存: EB01-062.jpg (164691 bytes)
+[2026-06-08 18:00 JST]   [Preview] EB01-062 を cards_preview.json に保存 [PENDING_REVIEW]
+[2026-06-08 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-08 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-08 18:00 JST]   [Step1-B] ピクセル色判定: RGB(88,144,175) → Blue
+[2026-06-08 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 395文字 / ブロック 22
+[2026-06-08 18:00 JST]   [Vision API] 使用量: 23/1000
+[2026-06-08 18:00 JST]   [Pipeline] 統合完了: (card_number なし)
+[2026-06-08 18:00 JST]   ⚠ 認識精度問題: NO_NUMBER — card_number が空, UNIT の ap が空, UNIT の hp が空
+[2026-06-08 18:00 JST]     画像保存: unknown.jpg (169516 bytes)
+[2026-06-08 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-08 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-08 18:00 JST]   [Step1-B] ピクセル色判定: RGB(199,53,116) → Red
+[2026-06-08 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 321文字 / ブロック 21
+[2026-06-08 18:00 JST]   [Vision API] 使用量: 24/1000
+[2026-06-08 18:00 JST]   [Pipeline] 統合完了: (card_number なし)
+[2026-06-08 18:00 JST]   ⚠ 認識精度問題: NO_NUMBER — card_number が空, card_name が空
+[2026-06-08 18:00 JST]     画像キャッシュ使用: unknown.jpg
+[2026-06-08 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-08 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-08 18:00 JST]   [Step1-B] ピクセル色判定: RGB(205,84,137) → Red
+[2026-06-08 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 298文字 / ブロック 23
+[2026-06-08 18:00 JST]   [Vision API] 使用量: 25/1000
+[2026-06-08 18:00 JST]   [Pipeline] 統合完了: GD05-044
+[2026-06-08 18:00 JST]   [Step1.5] GD05-044 NOT in master, using OCR values
+[2026-06-08 18:00 JST]     画像保存: GD05-044.jpg (147252 bytes)
+[2026-06-08 18:00 JST]   [Preview] GD05-044 を cards_preview.json に保存
+[2026-06-08 18:00 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (3枚)
+[2026-06-08 18:00 JST] 
+[2026-06-08 18:00 JST] ========================================
+[2026-06-08 18:00 JST] ⚠ 認識精度問題のため記事生成を全体停止します:
+[2026-06-08 18:00 JST] 以下のカードを手動補完してください:
+[2026-06-08 18:00 JST]   - EB01-062 (NO_NAME): card_name が空, PILOT の level が空
+[2026-06-08 18:00 JST]   - NO_NUMBER (ナラティブガンダムA装備 (EX)): card_number が空, UNIT の ap が空, UNIT の hp が空
+[2026-06-08 18:00 JST]   - NO_NUMBER (NO_NAME): card_number が空, card_name が空
+[2026-06-08 18:00 JST] 手動補完手順:
+[2026-06-08 18:00 JST]   1. data/cards_preview.json を編集し、対象カードを修正
+[2026-06-08 18:00 JST]      (color/cost/ap/hp 等を補完、_pendingReview を false に変更)
+[2026-06-08 18:00 JST]   2. node scripts/regenerate-article.js --date 2026-06-07 で再生成
+[2026-06-08 18:00 JST]   ※ 全カード認識成功 + 補完済の状態で記事生成されます
+[2026-06-08 18:00 JST] ========================================
+[2026-06-08 18:00 JST] 
+[2026-06-08 18:00 JST] 記事生成スキップ: 認識精度問題により全体停止
+[2026-06-08 18:00 JST]   - 認識成功: 1 件
+[2026-06-08 18:00 JST]   - 保留: 3 件
+[2026-06-08 18:00 JST] === auto-news 終了(認識精度問題、全体停止) ===
+[2026-06-09 18:00 JST] === auto-news 開始 ===
+[2026-06-09 18:00 JST] DRY_RUN: false
+[2026-06-09 18:00 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-09 18:00 JST] ENABLE_SURVEY: false
+[2026-06-09 18:00 JST] USE_VISION_PIPELINE: true
+[2026-06-09 18:00 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-09 18:00 JST]   範囲: 2026-06-08T08:40:00.000Z 〜 2026-06-09T08:39:00.000Z
+[2026-06-09 18:00 JST] 公式X投稿を取得中... (since: 2026-06-08T08:40:00.000Z, until: 2026-06-09T08:39:00.000Z)
+[2026-06-09 18:00 JST]   取得: 4件
+[2026-06-09 18:00 JST] 対象投稿: 4件 (新カード: 4, 速報: 0)
+[2026-06-09 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-09 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-09 18:00 JST]   [Step1-B] ピクセル色判定: RGB(149,189,118) → Green
+[2026-06-09 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 387文字 / ブロック 19
+[2026-06-09 18:00 JST]   [Vision API] 使用量: 26/1000
+[2026-06-09 18:00 JST]   [Pipeline] 統合完了: EB01-087
+[2026-06-09 18:00 JST]   [Step1.5] EB01-087 NOT in master, using OCR values
+[2026-06-09 18:00 JST]     画像保存: EB01-087.jpg (170206 bytes)
+[2026-06-09 18:00 JST]   [Preview] EB01-087 を cards_preview.json に保存
+[2026-06-09 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-09 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-09 18:00 JST]   [Step1-B] ピクセル色判定: RGB(122,169,98) → Green
+[2026-06-09 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 340文字 / ブロック 25
+[2026-06-09 18:00 JST]   [Vision API] 使用量: 27/1000
+[2026-06-09 18:00 JST]   [Pipeline] 統合完了: EB01-039
+[2026-06-09 18:00 JST]   [Step1.5] EB01-039 NOT in master, using OCR values
+[2026-06-09 18:00 JST]     画像保存: EB01-039.jpg (171156 bytes)
+[2026-06-09 18:00 JST]   [Preview] EB01-039 を cards_preview.json に保存
+[2026-06-09 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-09 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-09 18:00 JST]   [Step1-B] ピクセル色判定: RGB(132,183,100) → Green
+[2026-06-09 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 291文字 / ブロック 23
+[2026-06-09 18:00 JST]   [Vision API] 使用量: 28/1000
+[2026-06-09 18:00 JST]   [Pipeline] 統合完了: G005-108
+[2026-06-09 18:00 JST]   [Step1.5] G005-108 NOT in master, using OCR values
+[2026-06-09 18:00 JST]     画像保存: G005-108.jpg (131792 bytes)
+[2026-06-09 18:00 JST]   [Preview] G005-108 を cards_preview.json に保存
+[2026-06-09 18:00 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-09 18:00 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-09 18:00 JST]   [Step1-B] ピクセル色判定: RGB(152,194,124) → Green
+[2026-06-09 18:00 JST]   [Step1-A v2] 画像 1: 認識テキスト 315文字 / ブロック 22
+[2026-06-09 18:00 JST]   [Vision API] 使用量: 29/1000
+[2026-06-09 18:00 JST]   [Pipeline] 統合完了: GD05-025
+[2026-06-09 18:00 JST]   [Step1.5] GD05-025 NOT in master, using OCR values
+[2026-06-09 18:00 JST]     画像保存: GD05-025.jpg (136040 bytes)
+[2026-06-09 18:00 JST]   [Preview] GD05-025 を cards_preview.json に保存
+[2026-06-09 18:00 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (4枚)
+[2026-06-09 18:00 JST] 記事生成: 認識成功 4 件(全カード認識成功)
+[2026-06-09 18:00 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-09 18:00 JST]   考察生成中 (Opus): マリナ・イスマイール&プトレマイオス2...
+[2026-06-09 18:01 JST]   考察生成中 (Opus): ライジングフリーダムガンダム...
+[2026-06-09 18:01 JST]   考察生成中 (Opus): 苦難を越えて...
+[2026-06-09 18:01 JST]   考察生成中 (Opus): デミバーディング...
+[2026-06-09 18:01 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-08.html
+[2026-06-09 18:01 JST] [media upload] 成功: media_id=2064271681628364800 (EB01-087.jpg)
+[2026-06-09 18:01 JST] [media upload] 成功: media_id=2064271685692600320 (EB01-039.jpg)
+[2026-06-09 18:01 JST] [media upload] 成功: media_id=2064271689681428480 (G005-108.jpg)
+[2026-06-09 18:01 JST] [media upload] 成功: media_id=2064271693649264640 (GD05-025.jpg)
+[2026-06-09 18:01 JST] [X投稿] 画像 4 枚添付
+[2026-06-09 18:01 JST] X投稿成功 (画像 4 枚添付)
+[2026-06-09 18:01 JST] GitHub API push 完了
+[2026-06-09 18:01 JST] [Phase 3] post-processing 開始: 4 件 (EB01-087, EB01-039, G005-108, GD05-025)
+[2026-06-09 18:02 JST] [Phase 3] post-processing 完了: {"date":"2026-06-08","cardNumbers":["EB01-087","EB01-039","G005-108","GD05-025"],"pageCreated":4,"pageExisting":0,"imgsPlaced":8,"imgsSkipped":0,"textFilesCount":5,"binaryFilesCount":8,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-08 (4 cards)","dryRun":false}
+[2026-06-09 18:02 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-09 18:02 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-09 18:02 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-09 18:02 JST] === auto-news 完了 ===
+[2026-06-10 07:37 JST] === auto-news 開始 ===
+[2026-06-10 07:37 JST] DRY_RUN: false
+[2026-06-10 07:37 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-10 07:37 JST] ENABLE_SURVEY: false
+[2026-06-10 07:37 JST] USE_VISION_PIPELINE: true
+[2026-06-10 07:37 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-10 07:37 JST]   範囲: 2026-06-09T08:39:00.000Z 〜 2026-06-09T09:40:00.000Z
+[2026-06-10 07:37 JST] 公式X投稿を取得中... (since: 2026-06-09T08:39:00.000Z, until: 2026-06-09T09:40:00.000Z)
+[2026-06-10 07:37 JST]   取得: 2件
+[2026-06-10 07:37 JST] 対象投稿: 2件 (新カード: 2, 速報: 0)
+[2026-06-10 07:37 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-10 07:37 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-10 07:37 JST]   [Step1-B] ピクセル色判定: RGB(141,108,167) → Purple
+[2026-06-10 07:37 JST]   [Step1-A v2] 画像 1: 認識テキスト 331文字 / ブロック 17
+[2026-06-10 07:37 JST]   [Vision API] 使用量: 30/1000
+[2026-06-10 07:37 JST]   [Pipeline] 統合完了: G005-094
+[2026-06-10 07:37 JST]   [Step1.5] G005-094 NOT in master, using OCR values
+[2026-06-10 07:37 JST]     画像保存: G005-094.jpg (144161 bytes)
+[2026-06-10 07:37 JST]   [Preview] G005-094 を cards_preview.json に保存
+[2026-06-10 07:37 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-10 07:37 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-10 07:37 JST]   [Step1-B] ピクセル色判定: RGB(158,129,179) → Purple
+[2026-06-10 07:37 JST]   [Step1-A v2] 画像 1: 認識テキスト 308文字 / ブロック 24
+[2026-06-10 07:37 JST]   [Vision API] 使用量: 31/1000
+[2026-06-10 07:37 JST]   [Pipeline] 統合完了: GD05-053
+[2026-06-10 07:37 JST]   [Step1.5] GD05-053 NOT in master, using OCR values
+[2026-06-10 07:37 JST]     画像保存: GD05-053.jpg (145288 bytes)
+[2026-06-10 07:37 JST]   [Preview] GD05-053 を cards_preview.json に保存
+[2026-06-10 07:37 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (2枚)
+[2026-06-10 07:37 JST] 記事生成: 認識成功 2 件(全カード認識成功)
+[2026-06-10 07:37 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-10 07:37 JST]   考察生成中 (Opus): クェス・パラヤ...
+[2026-06-10 07:37 JST]   考察生成中 (Opus): ヤクト・ドーガ(クェス専用機)...
+[2026-06-10 07:37 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-09.html
+[2026-06-10 07:37 JST] [media upload] 成功: media_id=2064477091744436224 (G005-094.jpg)
+[2026-06-10 07:37 JST] [media upload] 成功: media_id=2064477095947034624 (GD05-053.jpg)
+[2026-06-10 07:37 JST] [X投稿] 画像 2 枚添付
+[2026-06-10 07:37 JST] X投稿成功 (画像 2 枚添付)
+[2026-06-10 07:38 JST] GitHub API push 完了
+[2026-06-10 07:38 JST] [Phase 3] post-processing 開始: 2 件 (G005-094, GD05-053)
+[2026-06-10 07:38 JST] [Phase 3] post-processing 完了: {"date":"2026-06-09","cardNumbers":["G005-094","GD05-053"],"pageCreated":2,"pageExisting":0,"imgsPlaced":4,"imgsSkipped":0,"textFilesCount":3,"binaryFilesCount":4,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-09 (2 cards)","dryRun":false}
+[2026-06-10 07:38 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-10 07:38 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-10 07:38 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-10 07:38 JST] === auto-news 完了 ===
+[2026-06-10 18:45 JST] === auto-news 開始 ===
+[2026-06-10 18:45 JST] DRY_RUN: false
+[2026-06-10 18:45 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-10 18:45 JST] ENABLE_SURVEY: false
+[2026-06-10 18:45 JST] USE_VISION_PIPELINE: true
+[2026-06-10 18:45 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-10 18:45 JST]   範囲: 2026-06-09T09:40:00.000Z 〜 2026-06-10T09:39:00.000Z
+[2026-06-10 18:45 JST] 公式X投稿を取得中... (since: 2026-06-09T09:40:00.000Z, until: 2026-06-10T09:39:00.000Z)
+[2026-06-10 18:45 JST]   取得: 4件
+[2026-06-10 18:45 JST] 対象投稿: 4件 (新カード: 4, 速報: 0)
+[2026-06-10 18:45 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-10 18:45 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-10 18:45 JST]   [Step1-B] ピクセル色判定: RGB(213,214,215) → White
+[2026-06-10 18:45 JST]   [Step1-A v2] 画像 1: 認識テキスト 336文字 / ブロック 24
+[2026-06-10 18:45 JST]   [Vision API] 使用量: 32/1000
+[2026-06-10 18:45 JST]   [Pipeline] 統合完了: GD05-078
+[2026-06-10 18:45 JST]   [Step1.5] GD05-078 NOT in master, using OCR values
+[2026-06-10 18:45 JST]     画像保存: GD05-078.jpg (136294 bytes)
+[2026-06-10 18:45 JST]   [Preview] GD05-078 を cards_preview.json に保存
+[2026-06-10 18:45 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-10 18:45 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-10 18:45 JST]   [Step1-B] ピクセル色判定: RGB(211,212,213) → White
+[2026-06-10 18:45 JST]   [Step1-A v2] 画像 1: 認識テキスト 338文字 / ブロック 25
+[2026-06-10 18:45 JST]   [Vision API] 使用量: 33/1000
+[2026-06-10 18:45 JST]   [Pipeline] 統合完了: G005-073
+[2026-06-10 18:45 JST]   [Step1.5] G005-073 NOT in master, using OCR values
+[2026-06-10 18:45 JST]     画像保存: G005-073.jpg (141645 bytes)
+[2026-06-10 18:45 JST]   [Preview] G005-073 を cards_preview.json に保存
+[2026-06-10 18:45 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-10 18:45 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-10 18:45 JST]   [Step1-B] ピクセル色判定: RGB(179,185,189) → Unknown
+[2026-06-10 18:45 JST]   [Step1-B] ⚠ 色判定不能: RGB(179,185,189) — 要手動確認
+[2026-06-10 18:45 JST]   [Step1-A v2] 画像 1: 認識テキスト 317文字 / ブロック 17
+[2026-06-10 18:45 JST]   [Vision API] 使用量: 34/1000
+[2026-06-10 18:45 JST]   [Pipeline] 統合完了: EB01-082
+[2026-06-10 18:45 JST]   [Step1.5] EB01-082 NOT in master, using OCR values
+[2026-06-10 18:45 JST]     画像保存: EB01-082.jpg (148877 bytes)
+[2026-06-10 18:45 JST]   [Preview] EB01-082 を cards_preview.json に保存
+[2026-06-10 18:45 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-10 18:45 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-10 18:45 JST]   [Step1-B] ピクセル色判定: RGB(186,181,183) → White
+[2026-06-10 18:45 JST]   [Step1-A v2] 画像 1: 認識テキスト 309文字 / ブロック 23
+[2026-06-10 18:45 JST]   [Vision API] 使用量: 35/1000
+[2026-06-10 18:45 JST]   [Pipeline] 統合完了: EB01-048
+[2026-06-10 18:45 JST]   [Step1.5] EB01-048 NOT in master, using OCR values
+[2026-06-10 18:45 JST]     画像保存: EB01-048.jpg (166702 bytes)
+[2026-06-10 18:45 JST]   [Preview] EB01-048 を cards_preview.json に保存
+[2026-06-10 18:45 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (4枚)
+[2026-06-10 18:45 JST] 記事生成: 認識成功 4 件(全カード認識成功)
+[2026-06-10 18:45 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-10 18:45 JST]   考察生成中 (Opus): ガンダムデスサイズヘル(EW版)...
+[2026-06-10 18:45 JST]   考察生成中 (Opus): アルトロンガンダム (EW版)...
+[2026-06-10 18:46 JST]   考察生成中 (Opus): 戦艦巡航...
+[2026-06-10 18:46 JST]   考察生成中 (Opus): Sガンダム...
+[2026-06-10 18:46 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-10.html
+[2026-06-10 18:46 JST] [media upload] 成功: media_id=2064645375827521536 (GD05-078.jpg)
+[2026-06-10 18:46 JST] [media upload] 成功: media_id=2064645379770216448 (G005-073.jpg)
+[2026-06-10 18:46 JST] [media upload] 成功: media_id=2064645383897391104 (EB01-082.jpg)
+[2026-06-10 18:46 JST] [media upload] 成功: media_id=2064645388163072000 (EB01-048.jpg)
+[2026-06-10 18:46 JST] [X投稿] 画像 4 枚添付
+[2026-06-10 18:46 JST] X投稿成功 (画像 4 枚添付)
+[2026-06-10 18:46 JST] GitHub API push 完了
+[2026-06-10 18:46 JST] [Phase 3] post-processing 開始: 4 件 (GD05-078, G005-073, EB01-082, EB01-048)
+[2026-06-10 18:47 JST] [Phase 3] post-processing 完了: {"date":"2026-06-10","cardNumbers":["GD05-078","G005-073","EB01-082","EB01-048"],"pageCreated":4,"pageExisting":0,"imgsPlaced":8,"imgsSkipped":0,"textFilesCount":5,"binaryFilesCount":8,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-10 (4 cards)","dryRun":false}
+[2026-06-10 18:47 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-10 18:47 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-10 18:47 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-10 18:47 JST] === auto-news 完了 ===
+[2026-06-11 18:45 JST] === auto-news 開始 ===
+[2026-06-11 18:45 JST] DRY_RUN: false
+[2026-06-11 18:45 JST] TEST_MODE: false (X 投稿は 実行)
+[2026-06-11 18:45 JST] ENABLE_SURVEY: false
+[2026-06-11 18:45 JST] USE_VISION_PIPELINE: true
+[2026-06-11 18:45 JST] 時刻範囲モード: 明示指定 (--start-time / --end-time)
+[2026-06-11 18:45 JST]   範囲: 2026-06-10T09:40:00.000Z 〜 2026-06-11T09:39:00.000Z
+[2026-06-11 18:45 JST] 公式X投稿を取得中... (since: 2026-06-10T09:40:00.000Z, until: 2026-06-11T09:39:00.000Z)
+[2026-06-11 18:45 JST]   取得: 4件
+[2026-06-11 18:45 JST] 対象投稿: 3件 (新カード: 3, 速報: 0)
+[2026-06-11 18:45 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-11 18:45 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-11 18:45 JST]   [Step1-B] ピクセル色判定: RGB(199,52,116) → Red
+[2026-06-11 18:45 JST]   [Step1-A v2] 画像 1: 認識テキスト 256文字 / ブロック 23
+[2026-06-11 18:45 JST]   [Vision API] 使用量: 36/1000
+[2026-06-11 18:45 JST]   [Pipeline] 統合完了: GD05-042
+[2026-06-11 18:45 JST]   [Step1.5] GD05-042 NOT in master, using OCR values
+[2026-06-11 18:45 JST]     画像保存: GD05-042.jpg (129853 bytes)
+[2026-06-11 18:45 JST]   [Preview] GD05-042 を cards_preview.json に保存
+[2026-06-11 18:45 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-11 18:45 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-11 18:45 JST]   [Step1-B] ピクセル色判定: RGB(135,160,113) → Unknown
+[2026-06-11 18:45 JST]   [Step1-B] ⚠ 色判定不能: RGB(135,160,113) — 要手動確認
+[2026-06-11 18:45 JST]   [Step1-A v2] 画像 1: 認識テキスト 344文字 / ブロック 16
+[2026-06-11 18:45 JST]   [Vision API] 使用量: 37/1000
+[2026-06-11 18:45 JST]   [Pipeline] 統合完了: EB01-077
+[2026-06-11 18:45 JST]   [Step1.5] EB01-077 NOT in master, using OCR values
+[2026-06-11 18:45 JST]     画像保存: EB01-077.jpg (172179 bytes)
+[2026-06-11 18:45 JST]   [Preview] EB01-077 を cards_preview.json に保存
+[2026-06-11 18:45 JST]   postSurvey スキップ(--enable-survey 指定なし)
+[2026-06-11 18:45 JST]   [Pipeline] Vision AI + Claude 分離パイプライン使用
+[2026-06-11 18:45 JST]   [Step1-B] ピクセル色判定: RGB(144,188,106) → Green
+[2026-06-11 18:45 JST]   [Step1-A v2] 画像 1: 認識テキスト 341文字 / ブロック 17
+[2026-06-11 18:45 JST]   [Vision API] 使用量: 38/1000
+[2026-06-11 18:45 JST]   [Pipeline] 統合完了: EB01-088
+[2026-06-11 18:45 JST]   [Step1.5] EB01-088 NOT in master, using OCR values
+[2026-06-11 18:45 JST]     画像保存: EB01-088.jpg (164892 bytes)
+[2026-06-11 18:45 JST]   [Preview] EB01-088 を cards_preview.json に保存
+[2026-06-11 18:45 JST]   認識ログ保存: C:\dev\gcg-meta\data\card-recognition-log.json (3枚)
+[2026-06-11 18:45 JST] 記事生成: 認識成功 3 件(全カード認識成功)
+[2026-06-11 18:45 JST]   導入文生成中 (Claude API, Opus)...
+[2026-06-11 18:45 JST]   考察生成中 (Opus): シャイニングガンダム...
+[2026-06-11 18:45 JST]   考察生成中 (Opus): マスターリーグ開幕...
+[2026-06-11 18:45 JST]   考察生成中 (Opus): ミオリネ・レンブラン & 学園艦...
+[2026-06-11 18:46 JST] 記事保存: C:\dev\gcg-meta\reports\news\2026-06-11.html
+[2026-06-11 18:46 JST] [media upload] 成功: media_id=2065007696064217088 (GD05-042.jpg)
+[2026-06-11 18:46 JST] [media upload] 成功: media_id=2065007700380196864 (EB01-077.jpg)
+[2026-06-11 18:46 JST] [media upload] 成功: media_id=2065007704570224640 (EB01-088.jpg)
+[2026-06-11 18:46 JST] [X投稿] 画像 3 枚添付
+[2026-06-11 18:46 JST] X投稿成功 (画像 3 枚添付)
+[2026-06-11 18:46 JST] GitHub API push 完了
+[2026-06-11 18:46 JST] [Phase 3] post-processing 開始: 3 件 (GD05-042, EB01-077, EB01-088)
+[2026-06-11 18:46 JST] [Phase 3] post-processing 完了: {"date":"2026-06-11","cardNumbers":["GD05-042","EB01-077","EB01-088"],"pageCreated":3,"pageExisting":0,"imgsPlaced":6,"imgsSkipped":0,"textFilesCount":4,"binaryFilesCount":6,"indexHtmlChanged":true,"commitMessage":"auto-news post-process: 2026-06-11 (3 cards)","dryRun":false}
+[2026-06-11 18:46 JST] [Phase 4] コンボ評価スキップ(--enable-combo-eval または ENABLE_COMBO_EVAL=true で有効化)
+[2026-06-11 18:46 JST] [Phase 5] ルール解説評価スキップ(--enable-rule-clarification または ENABLE_RULE_CLARIFICATION=true で有効化)
+[2026-06-11 18:46 JST] --start-time 明示指定のため last-check.json を更新しません
+[2026-06-11 18:46 JST] === auto-news 完了 ===

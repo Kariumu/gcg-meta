@@ -1,0 +1,20 @@
+const cheerio = require("cheerio");
+const fs = require("fs");
+const html = fs.readFileSync("/tmp/ntc_list.html", "utf-8");
+const $ = cheerio.load(html);
+const events = [];
+$("a.shopListDetailInner").each((_, el) => {
+  const href = $(el).attr("href") || "";
+  const timeEl = $(el).find("span.shopDate time");
+  const dateText = timeEl.attr("datetime") || timeEl.text().trim();
+  const store = $(el).find("h4.shopName").text().trim();
+  const sm = href.match(/series=(\d+)/), em = href.match(/event=(\d+)/);
+  if (sm && em) events.push({ series: sm[1], event: em[1], date: dateText.replace(/\./g, "-"), store });
+});
+console.log("total events on page:", events.length);
+const bySeries = {};
+for (const e of events) bySeries[e.series] = (bySeries[e.series] || 0) + 1;
+console.log("by series:", JSON.stringify(bySeries));
+const dates = [...new Set(events.map(e => e.date))].sort();
+console.log("date range:", dates[0], "to", dates[dates.length - 1]);
+console.log("all dates:", JSON.stringify(dates));

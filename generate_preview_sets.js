@@ -25,7 +25,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = __dirname;
+// ROOT は auto-news.js と同じく NEWS_OUTPUT_ROOT で切替可能(2026-06-11 指示書v4 Task2)。
+// 通常運用は未設定(= __dirname)で従来どおり。隔離検証時のみ別ディレクトリを指定し、
+// 本番の data/ 読み取り・sets/ 書き込みを汚さない。
+const ROOT = process.env.NEWS_OUTPUT_ROOT || __dirname;
 const DATA_DIR = path.join(ROOT, 'data');
 const OUT_DIR = path.join(ROOT, 'sets');
 const SITE_URL = 'https://gcg-stats.com';
