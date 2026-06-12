@@ -2243,11 +2243,12 @@
     "status": "pending_review"
   },
   "2026-06-11": {
-    "recognized_at": "2026-06-11 18:45:32 JST",
+    "recognized_at": "2026-06-12 18:45:16 JST",
     "source_tweets": [
       "https://x.com/GUNDAM_GCG_JP/status/2065003605959262256",
       "https://x.com/GUNDAM_GCG_JP/status/2064988509690085628",
-      "https://x.com/GUNDAM_GCG_JP/status/2064980964254843376"
+      "https://x.com/GUNDAM_GCG_JP/status/2064980964254843376",
+      "https://x.com/GUNDAM_GCG_JP/status/2065011155656163525"
     ],
     "cards": [
       {
@@ -2306,6 +2307,25 @@
         "effect": "【バースト】 このカードを配備する。【配備時】 自分のシールド1つを手札に加える。相手のターン中、Lv.3の〔ジージェネ〕の味方のユニットすべてをAP+1する。",
         "effect_confidence": "medium",
         "effect_length": 80,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-036",
+        "card_name": "ゴッドガンダム",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 4,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔MF〕"
+        ],
+        "link": "「マスター・アジア」",
+        "effect": "【セット時】このユニット以外の、アクティブの〔MF〕の自分のユニット1つを選んでもよい。それをレストにする。そうしたなら、それのLv.以下の相手のユニットすべてに2ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 91,
         "image_url": null,
         "confidence": "medium"
       }
