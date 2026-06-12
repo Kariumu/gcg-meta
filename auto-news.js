@@ -2512,6 +2512,45 @@ async function main() {
     }
   }
 
+  // === data/articles.json(記事マニフェスト)への追記(2026-06-12 指示書v7 Task 1-2)===
+  // この実行で生成された reports/news/*.html を articles.json に冪等追記(同pathは上書き)。
+  // 失敗しても記事公開・pushは止めない(ログ出力のみで継続)。
+  try {
+    const newsGenerated = generatedFiles.filter(
+      (f) => !f.binary && /^reports\/news\/[^/]+\.html$/.test(f.repoPath)
+    );
+    if (newsGenerated.length > 0) {
+      const manifestPath = path.join(ROOT, 'data', 'articles.json');
+      let manifest = [];
+      try {
+        const parsed = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+        if (Array.isArray(parsed)) manifest = parsed;
+      } catch (_) { /* 無ければ新規作成 */ }
+
+      for (const f of newsGenerated) {
+        const html = fs.readFileSync(path.join(ROOT, f.repoPath), 'utf-8');
+        const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+        const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*)"/);
+        const base = path.basename(f.repoPath, '.html');
+        const entry = {
+          path: f.repoPath,
+          title: titleMatch ? titleMatch[1].replace(/\s*[|｜]\s*GCG STATS\s*$/, '').trim() : base,
+          category: 'news',
+          date: /^\d{4}-\d{2}-\d{2}$/.test(base) ? base : date, // notice-* は当日付
+          description: descMatch ? descMatch[1].trim() : ''
+        };
+        const idx = manifest.findIndex((e) => e && e.path === entry.path);
+        if (idx >= 0) manifest[idx] = entry; else manifest.push(entry);
+      }
+      manifest.sort((a, b) => b.date.localeCompare(a.date) || a.path.localeCompare(b.path));
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
+      generatedFiles.push({ repoPath: 'data/articles.json', binary: false });
+      log(`[manifest] articles.json 更新: ${newsGenerated.length} 件追記(計 ${manifest.length} 記事)`);
+    }
+  } catch (e) {
+    log(`[manifest] articles.json 更新失敗(記事処理は継続): ${e.message}`);
+  }
+
   // === Git push ===
   if (generatedFiles.length > 0) {
     try {

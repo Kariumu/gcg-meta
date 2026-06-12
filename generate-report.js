@@ -569,53 +569,79 @@ articleHtml + '\n' +
  * レポート一覧ページを更新
  */
 function updateReportIndex() {
-  if (!fs.existsSync(REPORTS_DIR)) return;
-
-  // 地域別レポートのサフィックス一覧
-  const regionSuffixes = Object.values(REGIONS);
-  const files = fs.readdirSync(REPORTS_DIR)
-    .filter(f => {
-      if (!f.endsWith('.html') || f === 'index.html') return false;
-      // 地域別レポート（例: 2026-03-week2-kanto.html）は除外
-      const base = f.replace('.html', '');
-      for (const suffix of regionSuffixes) {
-        if (base.endsWith('-' + suffix)) return false;
-      }
-      return true;
-    })
-    .map(f => {
-      const filePath = path.join(REPORTS_DIR, f);
-      const stat = fs.statSync(filePath);
-      return { name: f, mtime: stat.mtime };
-    })
-    .sort((a, b) => b.mtime - a.mtime) // 更新日時の新しい順
-    .map(item => item.name);
-
-  let listHtml = '';
-  for (const f of files) {
-    const wId = f.replace('.html', '');
-    const filePath = path.join(REPORTS_DIR, f);
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const titleMatch = content.match(/<h1[^>]*>(.*?)<\/h1>/);
-    const title = titleMatch ? titleMatch[1] : wId;
-    // ファイルの更新日時から投稿日時を取得
-    const stat = fs.statSync(filePath);
-    const d = stat.mtime;
-    const dateStr = d.getFullYear() + '.' + String(d.getMonth() + 1).padStart(2, '0') + '.' + String(d.getDate()).padStart(2, '0');
-    listHtml += '      <a href="' + f + '" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">\n' +
-      '        <span style="font-size:15px;font-weight:600">' + title + '</span>\n' +
-      '        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">' + dateStr + '</span>\n' +
-      '      </a>\n';
+  // 指示書v7 Task 1-3(2026-06-12): data/articles.json(記事マニフェスト)を唯一の正として
+  // カテゴリ別一覧を機械生成する。ディレクトリ走査・mtime 依存を廃止。
+  const manifestPath = path.join(DATA_DIR, 'articles.json');
+  let articles;
+  try {
+    articles = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+    if (!Array.isArray(articles)) throw new Error('articles.json が配列ではありません');
+  } catch (e) {
+    // マニフェストが読めない場合は既存 index.html を壊さない(更新スキップ)
+    console.warn('  ⚠ articles.json を読めないため reports/index.html は更新しません: ' + e.message);
+    return;
   }
 
-  if (files.length === 0) {
-    listHtml = '      <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">レポートはまだありません</div>\n';
+  const CATEGORIES = [
+    { id: 'news', label: '新カード速報' },
+    { id: 'msa', label: '環境メタ分析(MSA)' },
+    { id: 'tournament', label: '大会分析' },
+    { id: 'cards', label: 'カード・デッキ考察' },
+    { id: 'other', label: 'その他' }
+  ];
+  const NEWS_VISIBLE = 10; // news は直近10件+折りたたみ(details/summary、JSなしで全件閲覧可)
+
+  const byCat = {};
+  for (const a of articles) {
+    const cat = CATEGORIES.some(c => c.id === a.category) ? a.category : 'other';
+    (byCat[cat] = byCat[cat] || []).push(a);
+  }
+  for (const k of Object.keys(byCat)) {
+    byCat[k].sort((x, y) => y.date.localeCompare(x.date) || x.path.localeCompare(y.path));
   }
 
-  const noscriptLinks = files.map(f => {
-    const wId = f.replace('.html', '');
-    return '<li><a href="' + f + '">' + wId + '</a></li>';
-  }).join('');
+  const totalCount = articles.length;
+  const fmtDate = (d) => String(d || '').replace(/-/g, '.');
+  const relHref = (p) => String(p || '').replace(/^reports\//, ''); // reports/index.html からの相対パス
+  const cardHtml = (a) =>
+    '      <a href="' + relHref(a.path) + '" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">\n' +
+    '        <span style="font-size:15px;font-weight:600">' + a.title + '</span>\n' +
+    '        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">' + fmtDate(a.date) + '</span>\n' +
+    '      </a>\n';
+
+  let sectionsHtml = '';
+  for (const c of CATEGORIES) {
+    const list = byCat[c.id] || [];
+    if (list.length === 0) continue; // 0件カテゴリはセクションごと非表示
+    sectionsHtml += '    <section id="' + c.id + '" style="margin-top:32px">\n' +
+      '      <div class="section-header">\n' +
+      '        <h2 class="section-title" style="font-size:18px">' + c.label + '</h2>\n' +
+      '        <span class="section-badge">' + list.length + '件</span>\n' +
+      '      </div>\n' +
+      '      <div class="event-list" style="margin-top:12px">\n';
+    if (c.id === 'news' && list.length > NEWS_VISIBLE) {
+      sectionsHtml += list.slice(0, NEWS_VISIBLE).map(cardHtml).join('') +
+        '      </div>\n' +
+        '      <details style="margin-top:8px">\n' +
+        '        <summary style="cursor:pointer;font-size:13px;color:var(--text-muted);padding:8px 4px">過去の速報をすべて表示(残り' + (list.length - NEWS_VISIBLE) + '件)</summary>\n' +
+        '        <div class="event-list" style="margin-top:8px">\n' +
+        list.slice(NEWS_VISIBLE).map(cardHtml).join('') +
+        '        </div>\n' +
+        '      </details>\n';
+    } else {
+      sectionsHtml += list.map(cardHtml).join('') +
+        '      </div>\n';
+    }
+    sectionsHtml += '    </section>\n';
+  }
+
+  if (totalCount === 0) {
+    sectionsHtml = '      <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">記事はまだありません</div>\n';
+  }
+
+  const noscriptLinks = articles.map(a =>
+    '<li><a href="' + relHref(a.path) + '">' + a.title + '</a></li>'
+  ).join('');
 
   const html = '<!DOCTYPE html>\n' +
 '<html lang="ja">\n' +
@@ -630,18 +656,25 @@ function updateReportIndex() {
 '  </script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
-'  <title>環境レポート一覧 | GCG STATS</title>\n' +
-'  <meta name="description" content="ガンダムカードゲームの週次環境レポート一覧。デッキタイプ分布や注目カードの分析を毎週お届け。">\n' +
+'  <link rel="icon" type="image/svg+xml" href="/favicon.svg">\n' +
+'  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">\n' +
+'  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">\n' +
+'  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">\n' +
+'  <link rel="shortcut icon" href="/favicon.ico">\n' +
+'  <meta name="theme-color" content="#d4a029">\n' +
+'  <title>分析記事一覧 | GCG STATS</title>\n' +
+'  <meta name="description" content="ガンダムカードゲームの分析記事一覧。新カード速報・MSA環境メタ分析・大会分析・カード考察をカテゴリ別に掲載。">\n' +
 '  <!-- OGP -->\n' +
 '  <meta property="og:site_name" content="GCG STATS">\n' +
 '  <meta property="og:locale" content="ja_JP">\n' +
-'  <meta property="og:title" content="環境レポート一覧 | GCG STATS">\n' +
-'  <meta property="og:description" content="ガンダムカードゲームの週次環境レポート一覧">\n' +
+'  <meta property="og:title" content="分析記事一覧 | GCG STATS">\n' +
+'  <meta property="og:description" content="ガンダムカードゲームの分析記事一覧">\n' +
 '  <meta property="og:type" content="website">\n' +
 '  <meta property="og:url" content="' + SITE_URL + '/reports/">\n' +
 '  <meta property="og:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
 '  <meta name="twitter:card" content="summary_large_image">\n' +
 '  <meta name="twitter:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
+'  <meta name="twitter:site" content="@gcg_stats">\n' +
 '  <link rel="canonical" href="' + SITE_URL + '/reports/">\n' +
 '  <link rel="preconnect" href="https://fonts.googleapis.com">\n' +
 '  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">\n' +
@@ -652,20 +685,18 @@ function updateReportIndex() {
 '\n' +
 '  <main class="container">\n' +
 '    <div class="section-header">\n' +
-'      <h1 class="section-title">環境レポート</h1>\n' +
-'      <span class="section-badge">' + files.length + '件</span>\n' +
+'      <h1 class="section-title">分析記事一覧</h1>\n' +
+'      <span class="section-badge">' + totalCount + '件</span>\n' +
 '    </div>\n' +
 '\n' +
-'    <div class="event-list" style="margin-top:20px">\n' +
-listHtml +
-'    </div>\n' +
+sectionsHtml +
 '  </main>\n' +
 '\n' +
-'  <noscript><h2>環境レポート一覧</h2><ul>' + noscriptLinks + '</ul></noscript>\n' +
+'  <noscript><h2>分析記事一覧</h2><ul>' + noscriptLinks + '</ul></noscript>\n' +
 '\n' +
 '  <div id="footer"></div>\n' +
 '\n' +
-'  <script src="../js/common.js?v=5"></script>\n' +
+'  <script src="../js/common.js?v=13"></script>\n' +
 '  <script>\n' +
 '    GCG.init();\n' +
 '    document.getElementById(\'header\').innerHTML = GCG.renderHeader(\'reports\');\n' +

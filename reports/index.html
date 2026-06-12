@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-3MY17P4E7F");</script>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>環境レポート一覧 | GCG STATS</title>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <meta name="theme-color" content="#d4a029">
-  <meta name="description" content="GCG環境レポートの一覧。週ごとのデッキ分布・カード採用率データを分析。">
-  <link rel="canonical" href="https://gcg-stats.com/reports/">
-  <meta property="og:title" content="環境レポート一覧 | GCG STATS">
-  <meta property="og:description" content="GCG環境レポートの一覧。週ごとのデッキ分布・カード採用率データを分析。">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://gcg-stats.com/reports/">
+  <title>分析記事一覧 | GCG STATS</title>
+  <meta name="description" content="ガンダムカードゲームの分析記事一覧。新カード速報・MSA環境メタ分析・大会分析・カード考察をカテゴリ別に掲載。">
+  <!-- OGP -->
   <meta property="og:site_name" content="GCG STATS">
   <meta property="og:locale" content="ja_JP">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:title" content="分析記事一覧 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲームの分析記事一覧">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/reports/">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <meta name="twitter:site" content="@gcg_stats">
+  <link rel="canonical" href="https://gcg-stats.com/reports/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
@@ -29,54 +39,318 @@
   <div id="header"></div>
 
   <main class="container">
-    <div class="section-header" style="margin-bottom:4px"><div><h1 class="section-title">環境レポート</h1></div></div>
-    <div class="card-list" style="margin-top:20px">
+    <div class="section-header">
+      <h1 class="section-title">分析記事一覧</h1>
+      <span class="section-badge">73件</span>
+    </div>
 
-      <!-- MSA環境レポート -->
+    <section id="news" style="margin-top:32px">
+      <div class="section-header">
+        <h2 class="section-title" style="font-size:18px">新カード速報</h2>
+        <span class="section-badge">44件</span>
+      </div>
+      <div class="event-list" style="margin-top:12px">
+      <a href="news/2026-06-11.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/11公開】GD05 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.11</span>
+      </a>
+      <a href="news/2026-06-10.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/10公開】EB01 Eternal Nexus 新カード4枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.10</span>
+      </a>
+      <a href="news/2026-06-09.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/9公開】Freedom Ascension 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.09</span>
+      </a>
+      <a href="news/2026-06-08.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/8公開】EB01 Eternal Nexus 新カード4枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.08</span>
+      </a>
+      <a href="news/2026-06-06.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/6公開】EB01 Eternal Nexus 新カード4枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.06</span>
+      </a>
+      <a href="news/2026-06-05.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/5公開】EB01 Eternal Nexus 新カード7枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.05</span>
+      </a>
+      <a href="news/2026-06-04.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/4公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.04</span>
+      </a>
+      <a href="news/2026-06-03.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/3公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.03</span>
+      </a>
+      <a href="news/2026-06-02.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/2公開】EB01 Eternal Nexus 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.02</span>
+      </a>
+      <a href="news/2026-06-01.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【6/1公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.01</span>
+      </a>
+      </div>
+      <details style="margin-top:8px">
+        <summary style="cursor:pointer;font-size:13px;color:var(--text-muted);padding:8px 4px">過去の速報をすべて表示(残り34件)</summary>
+        <div class="event-list" style="margin-top:8px">
+      <a href="news/2026-05-31.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/31公開】EB01 Eternal Nexus 新カード3枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.31</span>
+      </a>
+      <a href="news/2026-05-28.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/28公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.28</span>
+      </a>
+      <a href="news/2026-05-27.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/27公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.27</span>
+      </a>
+      <a href="news/2026-05-26.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/26公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.26</span>
+      </a>
+      <a href="news/2026-05-25.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/25公開】ST10 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.25</span>
+      </a>
+      <a href="news/2026-05-24.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/24公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.24</span>
+      </a>
+      <a href="news/2026-05-20.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/20公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.20</span>
+      </a>
+      <a href="news/2026-05-19.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/19公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.19</span>
+      </a>
+      <a href="news/2026-05-18.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/18公開】ST10 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.18</span>
+      </a>
+      <a href="news/2026-05-17.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/17公開】EB01 Eternal Nexus 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.17</span>
+      </a>
+      <a href="news/2026-05-16.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/16公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.16</span>
+      </a>
+      <a href="news/2026-05-15.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/15公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.15</span>
+      </a>
+      <a href="news/2026-05-14.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/14公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.14</span>
+      </a>
+      <a href="news/2026-05-13.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/13公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.13</span>
+      </a>
+      <a href="news/2026-05-12.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/12公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.12</span>
+      </a>
+      <a href="news/2026-05-11.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/11公開】 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.11</span>
+      </a>
+      <a href="news/2026-05-10.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/10公開】EB01 Eternal Nexus 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.10</span>
+      </a>
+      <a href="news/2026-05-09.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【5/9公開】 新カード6枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.09</span>
+      </a>
+      <a href="news/2026-04-19.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/19公開】GD04 Phantom Aria 新カード3枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.19</span>
+      </a>
+      <a href="news/2026-04-18.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/18公開】GD04 Phantom Aria 新カード3枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.18</span>
+      </a>
+      <a href="news/2026-04-17.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/17公開】GD04 Phantom Aria 新カード5枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.17</span>
+      </a>
+      <a href="news/2026-04-14.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/14公開】GD04 Phantom Aria 新カード8枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.14</span>
+      </a>
+      <a href="news/2026-04-09.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/9公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.09</span>
+      </a>
+      <a href="news/2026-04-08.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/8公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.08</span>
+      </a>
+      <a href="news/2026-04-07.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/7公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.07</span>
+      </a>
+      <a href="news/2026-04-06.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/6公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.06</span>
+      </a>
+      <a href="news/2026-04-05.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/5公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.05</span>
+      </a>
+      <a href="news/2026-04-04.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/4公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.04</span>
+      </a>
+      <a href="news/2026-04-03.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/3公開】GD04 Phantom Aria 新カード3枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.03</span>
+      </a>
+      <a href="news/2026-04-01.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【4/1公開】GD04 Phantom Aria 新カード2枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.01</span>
+      </a>
+      <a href="news/2026-03-31.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/31公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.31</span>
+      </a>
+      <a href="news/2026-03-30.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/30公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.30</span>
+      </a>
+      <a href="news/2026-03-29.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/29公開】GD04 Phantom Aria 新カード1枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.29</span>
+      </a>
+      <a href="news/2026-03-28.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">【3/28公開】GD04 Phantom Aria 新カード7枚まとめ</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+        </div>
+      </details>
+    </section>
+    <section id="msa" style="margin-top:32px">
+      <div class="section-header">
+        <h2 class="section-title" style="font-size:18px">環境メタ分析(MSA)</h2>
+        <span class="section-badge">12件</span>
+      </div>
+      <div class="event-list" style="margin-top:12px">
       <a href="msa-gd04-week6.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 6 — 青紫アグロが使用率1位を6週連続維持（11.1%）、勝率首位も奪還</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 6（2026/5/31〜6/6）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.09</span>
       </a>
       <a href="msa-gd04-week5.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 5 — 青紫アグロが使用率1位を5週連続維持（10.1%）、フリーダム ブロッカーが勝率1位へ浮上</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 5（2026/5/24〜5/30）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.03</span>
       </a>
       <a href="msa-gd04-week4.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 4 — 青紫アグロが使用率1位継続（10.0%）、ウイングゼロ ブロッカーが使用率2位へ浮上</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 4（2026/5/17〜5/23）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.27</span>
       </a>
       <a href="msa-gd04-week3.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 3 — 青紫アグロが使用率1位独走、ジャスティス ブロッカーが勝率2位に新登場</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 3（2026/5/10〜5/16）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.19</span>
       </a>
       <a href="msa-gd04-week2.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 2 — 一年戦争が使用率1位維持、青紫アグロが使用率2位へ急浮上</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 2（2026/5/3〜5/9）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.12</span>
       </a>
       <a href="msa-gd04-week1.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 1 — 一年戦争が使用率1位&amp;勝率62.4%で2冠</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート GD04環境 Week 1（2026/4/26〜5/2）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.07</span>
       </a>
+      <a href="msa-week10-preview.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 10（2026/4/5〜4/11）</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.01</span>
+      </a>
+      <a href="msa-week11-PREVIEW.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 11（2026/4/12〜4/18）</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.01</span>
+      </a>
+      <a href="msa-week12.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 12（2026/4/19〜4/25）</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.29</span>
+      </a>
       <a href="msa-introduction.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">Mobile Suit Arena（MSA）とは？— ブラウザで遊べるオンラインプラットフォーム</span>
+        <span style="font-size:15px;font-weight:600">Mobile Suit Arena（MSA）とは？ガンダムカードゲームをブラウザで遊べるオンラインプラットフォーム</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.26</span>
       </a>
       <a href="msa-week11.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 11 — 青紫アグロが2週連続首位</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 11（2026/4/12〜4/18）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.26</span>
       </a>
       <a href="msa-week10.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 10 — 環境分析</span>
+        <span style="font-size:15px;font-weight:600">MSA環境レポート Week 10（2026/4/5〜4/11）</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.12</span>
       </a>
-
-      <!-- NTC総括 -->
+      </div>
+    </section>
+    <section id="tournament" style="margin-top:32px">
+      <div class="section-header">
+        <h2 class="section-title" style="font-size:18px">大会分析</h2>
+        <span class="section-badge">12件</span>
+      </div>
+      <div class="event-list" style="margin-top:12px">
+      <a href="ntc-mission3-gd04-analysis.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GD04 Phantom Aria リリース直後の大会環境 — 5月NTC入賞データ分析</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.16</span>
+      </a>
+      <a href="ntc-mission3-meta-shift.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">NTC MISSION2（3月）→ MISSION3（5月）環境変化レポート</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.05.16</span>
+      </a>
       <a href="ntc-2026-mission2-recap.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">ニュータイプチャレンジ 2026 MISSION2（3月）総括 — 全国298店舗1,190デッキの分析</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.24</span>
       </a>
-
-      <!-- GD04 LR考察 -->
+      <a href="2026-03-report.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 2026.03.01〜2026.03.15</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-restriction.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">コルシカ基地制限＜2＞の影響考察</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-chubu.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 中部地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-chugoku.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 中国地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-kansai.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 関西地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-kanto.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 関東地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-kyushu.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 九州地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-report.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      <a href="2026-03-week4-tohoku.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GCG環境レポート 東北地域 2026.03.16〜2026.03.22</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
+      </a>
+      </div>
+    </section>
+    <section id="cards" style="margin-top:32px">
+      <div class="section-header">
+        <h2 class="section-title" style="font-size:18px">カード・デッキ考察</h2>
+        <span class="section-badge">5件</span>
+      </div>
+      <div class="event-list" style="margin-top:12px">
       <a href="gd04-lr-blue.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">GD04 青LR考察 — 地球連邦の新たな切り札たち</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
@@ -85,61 +359,23 @@
         <span style="font-size:15px;font-weight:600">GD04 緑LR考察 — ジオングの脅威と学園の新鋭</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
       </a>
-      <a href="gd04-lr-red.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">GD04 赤LR考察 — 圧倒のネオ・ジオングと超兵キュリオス</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
-      </a>
       <a href="gd04-lr-purple.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">GD04 紫LR考察 — サテライトキャノンの衝撃とデスティニーの疾走</span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
+      </a>
+      <a href="gd04-lr-red.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span style="font-size:15px;font-weight:600">GD04 赤LR考察 — 圧倒のネオ・ジオングと超兵キュリオス</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
       </a>
       <a href="gd04-lr-white.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span style="font-size:15px;font-weight:600">GD04 白LR考察 — UC決戦と∀の可能性</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.04.11</span>
       </a>
-
-      <!-- 環境レポート -->
-      <a href="2026-03-week4-report.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">環境レポート 2026.03.16〜2026.03.22</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-      <a href="2026-03-report.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">環境レポート 2026.03.01〜2026.03.15</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-      <a href="2026-03-restriction.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">コルシカ基地制限＜2＞の影響考察</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-
-      <!-- 地域別レポート -->
-      <a href="2026-03-week4-kanto.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">GCG環境レポート 関東地域 2026.03.16〜2026.03.22</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-      <a href="2026-03-week4-kansai.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">GCG環境レポート 関西地域 2026.03.16〜2026.03.22</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-      <a href="2026-03-week4-chubu.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">GCG環境レポート 中部地域 2026.03.16〜2026.03.22</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-      <a href="2026-03-week4-kyushu.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">GCG環境レポート 九州地域 2026.03.16〜2026.03.22</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-      <a href="2026-03-week4-chugoku.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">GCG環境レポート 中国地域 2026.03.16〜2026.03.22</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-      <a href="2026-03-week4-tohoku.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span style="font-size:15px;font-weight:600">GCG環境レポート 東北地域 2026.03.16〜2026.03.22</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
-      </a>
-
-    </div>
+      </div>
+    </section>
   </main>
+
+  <noscript><h2>分析記事一覧</h2><ul><li><a href="news/2026-06-11.html">【6/11公開】GD05 新カード1枚まとめ</a></li><li><a href="news/2026-06-10.html">【6/10公開】EB01 Eternal Nexus 新カード4枚まとめ</a></li><li><a href="msa-gd04-week6.html">MSA環境レポート GD04環境 Week 6（2026/5/31〜6/6）</a></li><li><a href="news/2026-06-09.html">【6/9公開】Freedom Ascension 新カード2枚まとめ</a></li><li><a href="news/2026-06-08.html">【6/8公開】EB01 Eternal Nexus 新カード4枚まとめ</a></li><li><a href="news/2026-06-06.html">【6/6公開】EB01 Eternal Nexus 新カード4枚まとめ</a></li><li><a href="news/2026-06-05.html">【6/5公開】EB01 Eternal Nexus 新カード7枚まとめ</a></li><li><a href="news/2026-06-04.html">【6/4公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="msa-gd04-week5.html">MSA環境レポート GD04環境 Week 5（2026/5/24〜5/30）</a></li><li><a href="news/2026-06-03.html">【6/3公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="news/2026-06-02.html">【6/2公開】EB01 Eternal Nexus 新カード1枚まとめ</a></li><li><a href="news/2026-06-01.html">【6/1公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="news/2026-05-31.html">【5/31公開】EB01 Eternal Nexus 新カード3枚まとめ</a></li><li><a href="news/2026-05-28.html">【5/28公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="msa-gd04-week4.html">MSA環境レポート GD04環境 Week 4（2026/5/17〜5/23）</a></li><li><a href="news/2026-05-27.html">【5/27公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="news/2026-05-26.html">【5/26公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="news/2026-05-25.html">【5/25公開】ST10 新カード2枚まとめ</a></li><li><a href="news/2026-05-24.html">【5/24公開】 新カード2枚まとめ</a></li><li><a href="news/2026-05-20.html">【5/20公開】 新カード2枚まとめ</a></li><li><a href="msa-gd04-week3.html">MSA環境レポート GD04環境 Week 3（2026/5/10〜5/16）</a></li><li><a href="news/2026-05-19.html">【5/19公開】 新カード2枚まとめ</a></li><li><a href="news/2026-05-18.html">【5/18公開】ST10 新カード2枚まとめ</a></li><li><a href="news/2026-05-17.html">【5/17公開】EB01 Eternal Nexus 新カード1枚まとめ</a></li><li><a href="news/2026-05-16.html">【5/16公開】 新カード2枚まとめ</a></li><li><a href="ntc-mission3-gd04-analysis.html">GD04 Phantom Aria リリース直後の大会環境 — 5月NTC入賞データ分析</a></li><li><a href="ntc-mission3-meta-shift.html">NTC MISSION2（3月）→ MISSION3（5月）環境変化レポート</a></li><li><a href="news/2026-05-15.html">【5/15公開】 新カード2枚まとめ</a></li><li><a href="news/2026-05-14.html">【5/14公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="news/2026-05-13.html">【5/13公開】 新カード2枚まとめ</a></li><li><a href="msa-gd04-week2.html">MSA環境レポート GD04環境 Week 2（2026/5/3〜5/9）</a></li><li><a href="news/2026-05-12.html">【5/12公開】 新カード2枚まとめ</a></li><li><a href="news/2026-05-11.html">【5/11公開】 新カード2枚まとめ</a></li><li><a href="news/2026-05-10.html">【5/10公開】EB01 Eternal Nexus 新カード2枚まとめ</a></li><li><a href="news/2026-05-09.html">【5/9公開】 新カード6枚まとめ</a></li><li><a href="msa-gd04-week1.html">MSA環境レポート GD04環境 Week 1（2026/4/26〜5/2）</a></li><li><a href="msa-week10-preview.html">MSA環境レポート Week 10（2026/4/5〜4/11）</a></li><li><a href="msa-week11-PREVIEW.html">MSA環境レポート Week 11（2026/4/12〜4/18）</a></li><li><a href="msa-week12.html">MSA環境レポート Week 12（2026/4/19〜4/25）</a></li><li><a href="msa-introduction.html">Mobile Suit Arena（MSA）とは？ガンダムカードゲームをブラウザで遊べるオンラインプラットフォーム</a></li><li><a href="msa-week11.html">MSA環境レポート Week 11（2026/4/12〜4/18）</a></li><li><a href="ntc-2026-mission2-recap.html">ニュータイプチャレンジ 2026 MISSION2（3月）総括 — 全国298店舗1,190デッキの分析</a></li><li><a href="news/2026-04-19.html">【4/19公開】GD04 Phantom Aria 新カード3枚まとめ</a></li><li><a href="news/2026-04-18.html">【4/18公開】GD04 Phantom Aria 新カード3枚まとめ</a></li><li><a href="news/2026-04-17.html">【4/17公開】GD04 Phantom Aria 新カード5枚まとめ</a></li><li><a href="news/2026-04-14.html">【4/14公開】GD04 Phantom Aria 新カード8枚まとめ</a></li><li><a href="msa-week10.html">MSA環境レポート Week 10（2026/4/5〜4/11）</a></li><li><a href="gd04-lr-blue.html">GD04 青LR考察 — 地球連邦の新たな切り札たち</a></li><li><a href="gd04-lr-green.html">GD04 緑LR考察 — ジオングの脅威と学園の新鋭</a></li><li><a href="gd04-lr-purple.html">GD04 紫LR考察 — サテライトキャノンの衝撃とデスティニーの疾走</a></li><li><a href="gd04-lr-red.html">GD04 赤LR考察 — 圧倒のネオ・ジオングと超兵キュリオス</a></li><li><a href="gd04-lr-white.html">GD04 白LR考察 — UC決戦と∀の可能性</a></li><li><a href="news/2026-04-09.html">【4/9公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-04-08.html">【4/8公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-04-07.html">【4/7公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-04-06.html">【4/6公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-04-05.html">【4/5公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-04-04.html">【4/4公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-04-03.html">【4/3公開】GD04 Phantom Aria 新カード3枚まとめ</a></li><li><a href="news/2026-04-01.html">【4/1公開】GD04 Phantom Aria 新カード2枚まとめ</a></li><li><a href="news/2026-03-31.html">【3/31公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-03-30.html">【3/30公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="news/2026-03-29.html">【3/29公開】GD04 Phantom Aria 新カード1枚まとめ</a></li><li><a href="2026-03-report.html">GCG環境レポート 2026.03.01〜2026.03.15</a></li><li><a href="2026-03-restriction.html">コルシカ基地制限＜2＞の影響考察</a></li><li><a href="2026-03-week4-chubu.html">GCG環境レポート 中部地域 2026.03.16〜2026.03.22</a></li><li><a href="2026-03-week4-chugoku.html">GCG環境レポート 中国地域 2026.03.16〜2026.03.22</a></li><li><a href="2026-03-week4-kansai.html">GCG環境レポート 関西地域 2026.03.16〜2026.03.22</a></li><li><a href="2026-03-week4-kanto.html">GCG環境レポート 関東地域 2026.03.16〜2026.03.22</a></li><li><a href="2026-03-week4-kyushu.html">GCG環境レポート 九州地域 2026.03.16〜2026.03.22</a></li><li><a href="2026-03-week4-report.html">GCG環境レポート 2026.03.16〜2026.03.22</a></li><li><a href="2026-03-week4-tohoku.html">GCG環境レポート 東北地域 2026.03.16〜2026.03.22</a></li><li><a href="news/2026-03-28.html">【3/28公開】GD04 Phantom Aria 新カード7枚まとめ</a></li></ul></noscript>
 
   <div id="footer"></div>
 
