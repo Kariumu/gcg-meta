@@ -547,6 +547,7 @@ function detectCardFeatures(masterCard) {
     { kw: '先制攻撃',   icon: 'sword',   color: '#f44747', title: '《先制攻撃》',              desc: 'アタック宣言側として先にダメージ解決' },
     { kw: '突破',       icon: 'arrowUp', color: '#d4a029', title: '《突破》',                  desc: '撃破時の超過ダメージが相手プレイヤーへ届く' },
     { kw: '覚醒',       icon: 'sparkle', color: '#b87aff', title: '《覚醒》',                  desc: '条件達成で追加効果が解放される' },
+    { kw: '開発',       icon: 'tag',     color: '#34d058', title: '《開発》',                  desc: 'トラッシュの〔ジージェネ〕カードを指定枚数除外して追加効果を発動できる(総合ルール13-1-8)' },
   ];
   const seenTitles = new Set();
   for (const def of KEYWORD_MAP) {
