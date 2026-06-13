@@ -21,6 +21,7 @@
     .recap-table th, .recap-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
     .recap-table th { background:var(--bg-elevated); color:var(--text-muted); font-weight:600; font-size:12px; }
     .recap-table td.num { font-family:var(--font-mono); text-align:right; }
+    .recap-table th.num { text-align:right; }
     .recap-table tr.highlight td { background:rgba(255,200,0,0.05); }
     .stat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px; margin:16px 0; }
     .stat-card { padding:14px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
@@ -102,7 +103,7 @@
       </p>
 
       <table class="recap-table">
-        <tr><th>採用枚数</th><th class="num">デッキ数</th><th class="num">採用デッキ内シェア</th><th>位置づけ</th></tr>
+        <tr><th class="num">採用枚数</th><th class="num">デッキ数</th><th class="num">採用デッキ内シェア</th><th>位置づけ</th></tr>
         <tr class="highlight"><td class="num">1〜4枚（タッチ）</td><td class="num">424</td><td class="num"><strong>43.9%</strong></td><td>既存デッキの部分強化</td></tr>
         <tr><td class="num">5〜8枚</td><td class="num">213</td><td class="num">22.0%</td><td>部分換装</td></tr>
         <tr><td class="num">9〜12枚</td><td class="num">148</td><td class="num">15.3%</td><td>中核入れ替え</td></tr>
@@ -126,7 +127,7 @@
 
       <table class="recap-table">
         <tr>
-          <th style="width:36px">#</th>
+          <th class="num" style="width:36px">#</th>
           <th>カード名</th>
           <th class="num">採用デッキ数</th>
           <th class="num">採用率</th>

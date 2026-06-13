@@ -69,7 +69,7 @@ function buildTypeTable() {
         </tr>`).join('');
   return `
       <table class="recap-table">
-        <thead><tr><th>デッキタイプ(色)</th><th>使用数</th><th>シェア</th><th>優勝数</th><th>優勝率</th><th>優勝シェア</th></tr></thead>
+        <thead><tr><th>デッキタイプ(色)</th><th class="num">使用数</th><th class="num">シェア</th><th class="num">優勝数</th><th class="num">優勝率</th><th class="num">優勝シェア</th></tr></thead>
         <tbody>${rows}
         </tbody>
       </table>`;
@@ -85,7 +85,7 @@ function buildCompareTable() {
         </tr>`).join('');
   return `
       <table class="recap-table">
-        <thead><tr><th>デッキタイプ</th><th>6月シェア</th><th>5月シェア</th><th>増減</th></tr></thead>
+        <thead><tr><th>デッキタイプ</th><th class="num">6月シェア</th><th class="num">5月シェア</th><th class="num">増減</th></tr></thead>
         <tbody>${rows}
         </tbody>
       </table>`;
@@ -103,7 +103,7 @@ function buildRegionTable() {
         </tr>`).join('');
   return `
       <table class="recap-table">
-        <thead><tr><th>地域</th><th>イベント</th><th>入賞デッキ</th><th>上位タイプ(件数)</th></tr></thead>
+        <thead><tr><th>地域</th><th class="num">イベント</th><th class="num">入賞デッキ</th><th>上位タイプ(件数)</th></tr></thead>
         <tbody>${rows}
         </tbody>
       </table>`;
@@ -113,7 +113,7 @@ function buildRankTable() {
   const ranks = Object.keys(J.rank_distribution).sort((a, b) => Number(a) - Number(b));
   return `
       <table class="recap-table">
-        <thead><tr>${ranks.map(r => `<th>${r}位</th>`).join('')}</tr></thead>
+        <thead><tr>${ranks.map(r => `<th class="num">${r}位</th>`).join('')}</tr></thead>
         <tbody><tr>${ranks.map(r => `<td class="num">${J.rank_distribution[r]}</td>`).join('')}</tr></tbody>
       </table>`;
 }
@@ -209,6 +209,7 @@ function buildPage(introHtml, analysisHtml) {
     .recap-table th, .recap-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
     .recap-table th { background:var(--bg-elevated); color:var(--text-muted); font-weight:600; font-size:12px; }
     .recap-table td.num { font-family:var(--font-mono); text-align:right; }
+    .recap-table th.num { text-align:right; }
     .recap-table tr.highlight td { background:rgba(255,200,0,0.05); }
     .delta-up { color:#7cd99c; font-weight:600; }
     .delta-down { color:#ff7b7b; font-weight:600; }

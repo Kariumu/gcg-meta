@@ -29,6 +29,7 @@
     .recap-table th, .recap-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
     .recap-table th { background:var(--bg-elevated); color:var(--text-muted); font-weight:600; font-size:12px; }
     .recap-table td.num { font-family:var(--font-mono); text-align:right; }
+    .recap-table th.num { text-align:right; }
     .recap-table tr.highlight td { background:rgba(255,200,0,0.05); }
     .chart-wrap { margin:20px 0; padding:16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); }
     .chart-wrap svg { display:block; margin:0 auto; max-width:100%; height:auto; }
@@ -76,7 +77,7 @@
 <h2>大会規模</h2>
 
 <table class="recap-table">
-  <tr><th>項目</th><th>数字</th></tr>
+  <tr><th>項目</th><th class="num">数字</th></tr>
   <tr><td>開催店舗数</td><td class="num">298 店舗</td></tr>
   <tr><td>対象地方</td><td class="num">全 8 地方</td></tr>
   <tr><td>記録された TOP4 デッキ</td><td class="num">1,190 デッキ</td></tr>
@@ -93,7 +94,7 @@
 <p>まず TOP4入賞デッキの色分布を確認します。</p>
 
 <table class="recap-table">
-  <tr><th>順位</th><th>デッキ色</th><th>件数</th><th>シェア</th></tr>
+  <tr><th class="num">順位</th><th>デッキ色</th><th class="num">件数</th><th class="num">シェア</th></tr>
   <tr class="highlight"><td class="num">1</td><td><strong>青/紫</strong></td><td class="num">401</td><td class="num"><strong>33.7%</strong></td></tr>
   <tr><td class="num">2</td><td>緑/白</td><td class="num">193</td><td class="num">16.2%</td></tr>
   <tr><td class="num">3</td><td>赤/白</td><td class="num">165</td><td class="num">13.9%</td></tr>
@@ -182,7 +183,7 @@
 <p>次に優勝296件の分布を見ます。</p>
 
 <table class="recap-table">
-  <tr><th>順位</th><th>デッキ色</th><th>優勝数</th><th>優勝率</th></tr>
+  <tr><th class="num">順位</th><th>デッキ色</th><th class="num">優勝数</th><th class="num">優勝率</th></tr>
   <tr class="highlight"><td class="num">1</td><td><strong>青/紫</strong></td><td class="num">104</td><td class="num"><strong>35.1%</strong></td></tr>
   <tr><td class="num">2</td><td>緑/白</td><td class="num">48</td><td class="num">16.2%</td></tr>
   <tr><td class="num">3</td><td>赤/白</td><td class="num">45</td><td class="num">15.2%</td></tr>
@@ -195,7 +196,7 @@
 <p>TOP4入賞に対して優勝までどれだけ勝ち切れたかを示すのが「変換率」です。標準ラインは25%前後（TOP4の4人に1人が優勝）で、それを大きく超える・下回るデッキは性能の偏りを持っています。</p>
 
 <table class="recap-table">
-  <tr><th>デッキ色</th><th>TOP4</th><th>優勝</th><th>変換率</th></tr>
+  <tr><th>デッキ色</th><th class="num">TOP4</th><th class="num">優勝</th><th class="num">変換率</th></tr>
   <tr class="highlight"><td><strong>青/緑</strong></td><td class="num">127</td><td class="num">38</td><td class="num"><strong>29.9%</strong></td></tr>
   <tr><td>赤/紫</td><td class="num">40</td><td class="num">12</td><td class="num">30.0%</td></tr>
   <tr><td>赤/白</td><td class="num">165</td><td class="num">45</td><td class="num">27.3%</td></tr>
@@ -216,7 +217,7 @@
 <p>同じ3月環境でも、地域によって顔ぶれは少しずつ異なります。</p>
 
 <table class="recap-table">
-  <tr><th>地域</th><th>大会数</th><th>1位</th><th>2位</th><th>3位</th></tr>
+  <tr><th>地域</th><th class="num">大会数</th><th>1位</th><th>2位</th><th>3位</th></tr>
   <tr><td>関東</td><td class="num">90</td><td>青/紫(39%)</td><td>緑/白(21%)</td><td>赤/白(12%)</td></tr>
   <tr><td>中部</td><td class="num">62</td><td>青/紫(29%)</td><td>赤/白(23%)</td><td>緑/白(16%)</td></tr>
   <tr><td>関西</td><td class="num">50</td><td>青/紫(24%)</td><td>赤/白(22%)</td><td>青/緑(20%)</td></tr>
@@ -234,7 +235,7 @@
 <p>次に、月を通じた優勝デッキの週別推移を見ます。</p>
 
 <table class="recap-table">
-  <tr><th>週</th><th>大会数</th><th>青/紫</th><th>緑/白</th><th>赤/白</th><th>青/緑</th><th>青/白</th></tr>
+  <tr><th>週</th><th class="num">大会数</th><th class="num">青/紫</th><th class="num">緑/白</th><th class="num">赤/白</th><th class="num">青/緑</th><th class="num">青/白</th></tr>
   <tr><td>第1週 (3/1-7)</td><td class="num">62</td><td class="num">24 (39%)</td><td class="num">12 (19%)</td><td class="num">1 (2%)</td><td class="num">9 (15%)</td><td class="num">10 (16%)</td></tr>
   <tr><td>第2週 (3/8-14)</td><td class="num">81</td><td class="num">27 (33%)</td><td class="num">13 (16%)</td><td class="num">13 (16%)</td><td class="num">8 (10%)</td><td class="num">5 (6%)</td></tr>
   <tr><td>第3週 (3/15-21)</td><td class="num">75</td><td class="num">22 (29%)</td><td class="num">12 (16%)</td><td class="num"><strong>16 (21%)</strong></td><td class="num">13 (17%)</td><td class="num">2 (3%)</td></tr>
@@ -278,7 +279,7 @@
 <p>3月環境のトップメタである青/紫の優勝デッキ104件から、採用率の高いコアカードを抽出しました。具体的なレシピは大会ごとに微妙に異なりますが、採用率99%のカードはほぼ全員が4枚フル投入しており、「固定枠」として機能していたことが分かります。</p>
 
 <table class="recap-table">
-  <tr><th>採用率</th><th>カード</th><th>種別</th><th>平均枚数</th></tr>
+  <tr><th class="num">採用率</th><th>カード</th><th>種別</th><th class="num">平均枚数</th></tr>
   <tr><td class="num">99%</td><td><a href="../cards/ST01-001/">ガンダム (ST01-001)</a></td><td>UNIT・青</td><td class="num">4.0</td></tr>
   <tr><td class="num">99%</td><td><a href="../cards/ST01-010/">アムロ・レイ (ST01-010)</a></td><td>PILOT・青</td><td class="num">4.0</td></tr>
   <tr><td class="num">99%</td><td><a href="../cards/ST05-010/">三日月・オーガス (ST05-010)</a></td><td>PILOT・紫</td><td class="num">4.0</td></tr>
@@ -302,7 +303,7 @@
 <p>3月中に TOP4 入賞した全 2,835 デッキにおけるコルシカ基地の採用状況は以下の通りでした。</p>
 
 <table class="recap-table">
-  <tr><th>デッキ色</th><th>TOP4件数</th><th>コルシカ採用</th><th>採用率</th></tr>
+  <tr><th>デッキ色</th><th class="num">TOP4件数</th><th class="num">コルシカ採用</th><th class="num">採用率</th></tr>
   <tr class="highlight"><td><strong>青/紫</strong></td><td class="num">401</td><td class="num">399</td><td class="num"><strong>99.5%</strong></td></tr>
   <tr class="highlight"><td><strong>青/緑</strong></td><td class="num">127</td><td class="num">125</td><td class="num"><strong>98.4%</strong></td></tr>
   <tr><td>青/赤</td><td class="num">97</td><td class="num">21</td><td class="num">21.6%</td></tr>
