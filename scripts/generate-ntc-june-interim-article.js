@@ -4,7 +4,7 @@
  * 「NTC 2026 MISSION3(6月開催)中間レポート」記事を生成する。
  *
  * 設計:
- *  - 数値(統計カード・デッキタイプ表・5月比較表・入賞分布・地域表)は
+ *  - 数値(統計カード・デッキタイプ表・5月比較表・地域表)は
  *    data/analysis/ntc-2026-06-interim.json から機械生成
  *    → 記事数値 = interim.json 完全一致を構造的に保証
  *  - 文章(はじめに・考察)のみ generate-report.js の callClaudeAPI で生成
@@ -106,15 +106,6 @@ function buildRegionTable() {
         <thead><tr><th>地域</th><th class="num">イベント</th><th class="num">入賞デッキ</th><th>上位タイプ(件数)</th></tr></thead>
         <tbody>${rows}
         </tbody>
-      </table>`;
-}
-
-function buildRankTable() {
-  const ranks = Object.keys(J.rank_distribution).sort((a, b) => Number(a) - Number(b));
-  return `
-      <table class="recap-table">
-        <thead><tr>${ranks.map(r => `<th class="num">${r}位</th>`).join('')}</tr></thead>
-        <tbody><tr>${ranks.map(r => `<td class="num">${J.rank_distribution[r]}</td>`).join('')}</tr></tbody>
       </table>`;
 }
 
@@ -257,9 +248,6 @@ ${buildTypeTable()}
 
       <h2>5月(MISSION3 5月開催)とのシェア比較</h2>
 ${buildCompareTable()}
-
-      <h2>ベスト8換算の入賞分布</h2>
-${buildRankTable()}
 
       <h2>地域別の傾向</h2>
 ${buildRegionTable()}
