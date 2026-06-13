@@ -245,7 +245,7 @@ async function main() {
     console.error('❌ インクリメンタル違反: 件数が減少。書き込みを中止します。'); process.exit(1);
   }
 
-  if (DRY_RUN) { console.log('— --dry-run のため書き込みなし —'); return; }
+    if (DRY_RUN || DEBUG) { console.log(`— ${DRY_RUN ? '--dry-run' : '--debug'} のため書き込みなし —`); return; }
   if (emptyQ > 0) { console.error(`❌ question/answer が空の取得分が ${emptyQ} 件あります。parser未確定のため本書き込みを中止します。--debug で構造を確認し、HTMLを共有してください。`); process.exit(1); }
   if (!fs.existsSync(BACKUP_PATH)) { fs.copyFileSync(QA_PATH, BACKUP_PATH); console.log(`💾 バックアップ: ${BACKUP_PATH}`); }
   fs.writeFileSync(QA_PATH, JSON.stringify(db, null, 2) + '\n', 'utf-8');
