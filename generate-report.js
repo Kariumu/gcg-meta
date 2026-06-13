@@ -709,6 +709,49 @@ sectionsHtml +
 }
 
 /**
+ * data/articles.json(記事マニフェスト)への冪等追記(指示書v8 A-3)
+ * auto-news.js Task1-2 と同規則(同pathは上書き、日付降順・同日path昇順)。
+ * 相違点: articles.json が読めない場合は「空から再構築」せず追記をスキップして
+ * 警告のみ出す(既存マニフェストを壊さない安全側の挙動)。
+ * @param {Array<{path: string, category?: string, date?: string}>} items
+ */
+function appendToArticlesManifest(items) {
+  const manifestPath = path.join(DATA_DIR, 'articles.json');
+  let manifest = [];
+  try {
+    const parsed = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+    if (!Array.isArray(parsed)) throw new Error('articles.json が配列ではありません');
+    manifest = parsed;
+  } catch (e) {
+    console.warn('  ⚠ articles.json を読めないため追記をスキップ: ' + e.message);
+    return false;
+  }
+  const today = new Date().toISOString().split('T')[0];
+  let added = 0;
+  for (const it of items) {
+    let html = '';
+    try { html = fs.readFileSync(path.join(ROOT, it.path), 'utf-8'); } catch (_) { continue; }
+    const titleMatch = html.match(/<title>([^<]*)<\/title>/);
+    const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]*)"/);
+    const base = path.basename(it.path, '.html');
+    const entry = {
+      path: it.path,
+      title: titleMatch ? titleMatch[1].replace(/\s*[|｜]\s*GCG STATS\s*$/, '').trim() : base,
+      category: it.category || 'tournament',
+      date: it.date || today,
+      description: descMatch ? descMatch[1].trim() : ''
+    };
+    const idx = manifest.findIndex(e => e && e.path === entry.path);
+    if (idx >= 0) manifest[idx] = entry; else manifest.push(entry);
+    added++;
+  }
+  manifest.sort((a, b) => String(b.date).localeCompare(String(a.date)) || a.path.localeCompare(b.path));
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n', 'utf-8');
+  console.log('  → data/articles.json 追記: ' + added + ' 件(計 ' + manifest.length + ' 記事)');
+  return true;
+}
+
+/**
  * sitemap.xml にレポートURLを追加
  */
 function updateSitemap() {
@@ -985,6 +1028,13 @@ async function main() {
   fs.writeFileSync(outputPath, pageHtml, 'utf-8');
   console.log('  → ' + wId + '.html を保存しました');
 
+  // 記事マニフェストへ冪等追記(指示書v8 A-3。category='tournament')
+  // フェーズ1の既知の抜け(週次記事がマニフェスト未登録で一覧に載らない)の修正
+  appendToArticlesManifest([
+    { path: `reports/${wId}.html`, category: 'tournament' },
+    ...regionalLinks.map(r => ({ path: `reports/${r.wId}.html`, category: 'tournament' }))
+  ]);
+
   // 一覧ページ更新
   updateReportIndex();
   console.log('  → reports/index.html を更新しました');
@@ -997,12 +1047,26 @@ async function main() {
   const filesToPush = [
     { path: `reports/${wId}.html`, content: fs.readFileSync(outputPath, 'utf-8') },
     { path: 'reports/index.html', content: fs.readFileSync(path.join(ROOT, 'reports', 'index.html'), 'utf-8') },
+    { path: 'data/articles.json', content: fs.readFileSync(path.join(DATA_DIR, 'articles.json'), 'utf-8') },
     { path: 'sitemap.xml', content: fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf-8') }
   ];
   await pushFiles(filesToPush, `Add weekly report ${wId}`);
 }
 
-main().catch(err => {
-  console.error('エラー:', err.message);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error('エラー:', err.message);
+    process.exit(1);
+  });
+}
+
+// 他スクリプトからの再利用用エクスポート(指示書v8 A-3)
+// require された場合は main() は実行されない(require.main ガード)
+module.exports = {
+  callClaudeAPI,
+  updateReportIndex,
+  updateSitemap,
+  appendToArticlesManifest,
+  generateReportPage
+};
+// EOF

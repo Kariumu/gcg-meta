@@ -30,7 +30,7 @@
   // NTC の既知シリーズID(フォールバック用ハードコードリスト)。
   // 通常は series.json の type='ntc' で判定するが、呼び出し側が isNtcType を渡せない場合の保険。
   // 新シリーズ追加時はここにも追記しておくと、series.json 未ロードの状況でも判定できる。
-  var NTC_SERIES_IDS = ['6226', '6776'];
+  var NTC_SERIES_IDS = ['6226', '6776', '6791'];
 
   function isTargetSeries(event, options) {
     if (!event || event.series_id == null) return false;

@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
+       crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ST10「スタートデッキ Generation Pulse」 発売前判明カード一覧 | GCG STATS</title>
+  <meta name="description" content="ガンダムカードゲーム ST10「スタートデッキ Generation Pulse」 の発売前判明カード12枚の一覧。公式X発表に基づく非公式まとめ（毎日自動更新）。カード番号（型番）順に掲載。">
+  <meta property="og:title" content="ST10「スタートデッキ Generation Pulse」 発売前判明カード一覧 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲーム ST10「スタートデッキ Generation Pulse」 の発売前判明カード12枚の一覧。公式X発表に基づく非公式まとめ（毎日自動更新）。カード番号（型番）順に掲載。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/sets/st10.html">
+  <link rel="canonical" href="https://gcg-stats.com/sets/st10.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .preview-notice {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-lg);
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .preview-notice strong { color: var(--text-primary); }
+    .val-pending {
+      color: var(--text-muted);
+      font-size: 12px;
+      border: 1px dashed var(--border);
+      border-radius: 4px;
+      padding: 0 6px;
+    }
+    .pcard {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+    .pcard-head {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .pcard-number {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .pcard-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+    .pcard-rarity {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 8px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.4);
+    }
+    .rarity-LR { color: #ffd700; border: 1px solid rgba(255,215,0,0.4); }
+    .rarity-R  { color: #ff8844; border: 1px solid rgba(255,136,68,0.4); }
+    .rarity-U  { color: #88bbff; border: 1px solid rgba(136,187,255,0.4); }
+    .rarity-C  { color: #aabbcc; border: 1px solid rgba(170,187,204,0.3); }
+    .rarity-unknown { color: var(--text-muted); border: 1px dashed var(--border); }
+    .pcard-pending-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: #ffcc44;
+      border: 1px solid rgba(255,204,68,0.45);
+      border-radius: 4px;
+      padding: 1px 8px;
+      background: rgba(255,204,68,0.08);
+    }
+    .pcard-media { margin-bottom: 10px; }
+    .pcard-media img {
+      max-width: 100%;
+      width: 420px;
+      height: auto;
+      display: block;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .pcard-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .pcard-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .pcard-tag-color { border: 1px solid; background: transparent; }
+    /* ステータス専用枠（2026-06-10 v3: Lv/コスト/AP/HP を大きく見やすく） */
+    .pcard-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+      gap: 8px;
+      margin-bottom: 12px;
+      max-width: 420px;
+    }
+    .pcard-stat {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 6px;
+      text-align: center;
+    }
+    .pcard-stat-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+    .pcard-stat-value {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .pcard-stat-value .val-pending { font-size: 11px; font-weight: 400; }
+    .pcard-field-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin-bottom: 2px;
+    }
+    /* パイロット修正値（ユニットへの修正値のため + 表記） */
+    .pcard-pilot-mods {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-top: 6px;
+    }
+    /* 画像ライトボックス（素のJS+CSS。JS無効時は .pcard-media img の表示のみで無害） */
+    .pcard-media img { cursor: zoom-in; }
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      cursor: zoom-out;
+      padding: 24px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(96vw, 1200px);
+      max-height: 92vh;
+      border-radius: 8px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .pcard-row { margin-bottom: 8px; font-size: 13px; color: var(--text-primary); line-height: 1.7; }
+    .pcard-row .pcard-field-label { margin-bottom: 3px; }
+    .pcard-effect {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+    }
+    .pcard-pilot {
+      border: 1px solid var(--border);
+      border-left: 3px solid #88bbff;
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      background: var(--bg-secondary);
+    }
+    .pcard-pilot-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #88bbff;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+    .pcard-source {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+    }
+    .pcard-source a { color: var(--accent); text-decoration: none; }
+    .pcard-source a:hover { text-decoration: underline; }
+    .set-index-list { list-style: none; padding: 0; }
+    .set-index-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      margin-bottom: 12px;
+      transition: border-color 0.15s;
+    }
+    .set-index-item:hover { border-color: var(--border-hover); }
+    .set-index-item a {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 16px 18px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .set-index-code { font-family: var(--font-mono); font-size: 16px; font-weight: 700; color: var(--accent); }
+    .set-index-label { font-size: 13px; color: var(--text-primary); }
+    .set-index-meta { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); margin-left: auto; }
+    .breadcrumb-simple { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; }
+    .breadcrumb-simple a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="breadcrumb-simple"><a href="/sets/">新弾プレビュー一覧</a> › ST10</div>
+    <div class="section-header">
+      <h1 class="section-title">ST10「スタートデッキ Generation Pulse」 判明カード</h1>
+      <span class="section-badge">12 CARDS</span>
+    </div>
+    <div class="preview-notice">
+      <strong>発売前の判明カード一覧（毎日自動更新）</strong><br>
+      公式X（@GUNDAM_GCG_JP）の発表に基づく非公式まとめです。発売日: 2026-06-27。現在 <strong>12 枚</strong>のカード情報を掲載しています。
+      正式なカード情報は公式発表をご確認ください。「確認中」の項目は未判明のため推測掲載を行っていません。
+    </div>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-001</span>
+        <h3 class="pcard-name">Zガンダム (EX)</h3>
+        <span class="pcard-rarity rarity-LR">LR</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-25/ST10-001.jpg" alt="Zガンダム (EX)" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#4488ff;border-color:#4488ff">青</span>
+        <span class="pcard-tag">ユニット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">7</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">6</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">5</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">5</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>「カミーユ・ビダン」</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、これをアクティブにし、このターン中、これは同じ相手プレイヤー/相手チームをアタック先に選べない。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2058820363778433249" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-004</span>
+        <h3 class="pcard-name">スーパーガンダム</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-15/ST10-004.jpg" alt="スーパーガンダム" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#4488ff;border-color:#4488ff">青</span>
+        <span class="pcard-tag">ユニット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">3</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">3</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">《リペア(2)》(自分のターン終了時、このユニットを指定の数回復する)</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2055558875919892768" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-006</span>
+        <h3 class="pcard-name">フェニックスガンダム (能力解放) (EX)</h3>
+        <span class="pcard-rarity rarity-LR">LR</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-09/ST10-006.jpg" alt="フェニックスガンダム (能力解放) (EX)" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#cccccc;border-color:#cccccc">白</span>
+        <span class="pcard-tag">ユニット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">5</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">3</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">4</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>「マーク・ギルダー」</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">【セット中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2052982960295743753" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-007</span>
+        <h3 class="pcard-name">ガンダム・バルバトス (第4形態)</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-22/ST10-007.jpg" alt="ガンダム・バルバトス (第4形態)" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#cccccc;border-color:#cccccc">白</span>
+        <span class="pcard-tag">ユニット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">6</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">5</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">5</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>特徴にジージェネを持つPILOT</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">【リンク時・開発2】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分のトラッシュのLv.4以下のコマンドカード1枚を選ぶ。それを手札に加える。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2058103138683441230" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-008</span>
+        <h3 class="pcard-name">ガンダム・バルバトス (第1形態)</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-18/ST10-008.jpg" alt="ガンダム・バルバトス (第1形態)" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#cccccc;border-color:#cccccc">白</span>
+        <span class="pcard-tag">ユニット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">3</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">3</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>特徴にジージェネを持つPILOT</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">【配備時】開発2 自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分は相手プレイヤーの人数と同じ数だけドローする。その後、自分の手札をこの効果でドローした枚数と同じだけトラッシュする。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2056283649952170302" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-010</span>
+        <h3 class="pcard-name">鉄華団モビルワーカー</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-13/ST10-010.jpg" alt="鉄華団モビルワーカー" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#cccccc;border-color:#cccccc">白</span>
+        <span class="pcard-tag">ユニット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">2</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">2</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">2</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">1</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">《ブロッカー》(レストにすることでアタック先をこのユニットにする)</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2054471713715273874" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-011</span>
+        <h3 class="pcard-name">カミーユ・ビダン</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-25/ST10-011.jpg" alt="カミーユ・ビダン" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#4488ff;border-color:#4488ff">青</span>
+        <span class="pcard-tag">パイロット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">1</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">2</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">1</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕 〔攻撃型〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">【バースト】このカードを手札に加える。【リンク時】レストのユニットが2つ以上いるなら、このユニットのLv.以下の相手のユニット1つを選ぶ。それをレストにする。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2058827912523272552" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-012</span>
+        <h3 class="pcard-name">マーク・ギルダー</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-09/ST10-012.jpg" alt="マーク・ギルダー" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#cccccc;border-color:#cccccc">白</span>
+        <span class="pcard-tag">パイロット</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">1</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">2</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">1</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕 〔支援型〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">【バースト】このカードを手札に加える。【セット時】Lv.5以下の相手のユニット1つを選ぶ。このターン中、それをAP-2する。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2052983382666350634" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-013</span>
+        <h3 class="pcard-name">戦術訓練</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-18/ST10-013.jpg" alt="戦術訓練" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#4488ff;border-color:#4488ff">青</span>
+        <span class="pcard-tag">コマンド</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">3</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">1</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">【バースト】このカードを手札に加える。【メイン/アクション】Lv.5以上の〔ジージェネ〕のユニット1つを選ぶ。それを2回復し、このターン中、AP+2する。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2056291197933473968" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-014</span>
+        <h3 class="pcard-name">開発経路図の解放</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-12/ST10-014.jpg" alt="開発経路図の解放" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#4488ff;border-color:#4488ff">青</span>
+        <span class="pcard-tag">コマンド</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">1</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">2</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">手札のこのカードをプレイするとき、手札の〔ジージェネ〕のユニットカード1枚を捨ててもよい。そうしたなら、これをLv.1とコストを2としてプレイする。 メイン 自分は2枚ドローする。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2054116870849228986" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-015</span>
+        <h3 class="pcard-name">拡散ビーム砲</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-22/ST10-015.jpg" alt="拡散ビーム砲" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#cccccc;border-color:#cccccc">白</span>
+        <span class="pcard-tag">コマンド</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">3</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">1</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-pilot">
+        <div class="pcard-pilot-title">PILOT（付属パイロット情報）</div>
+        <div class="pcard-row"><span class="pcard-field-label">名前</span>クレア・ヒースロー</div>
+        <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕 〔耐久型〕</div>
+        <div class="pcard-pilot-mods">AP +1 / HP +0</div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">〔ジージェネ〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。このバトル中、それをAP-3する。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2058095592392266197" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <article class="pcard">
+      <div class="pcard-head">
+        <span class="pcard-number">ST10-016</span>
+        <h3 class="pcard-name">ルーナ・マナ&amp;キャリー・ベース</h3>
+        <span class="pcard-rarity rarity-C">C</span>
+      </div>
+      <div class="pcard-media"><img src="/images/news/2026-05-13/ST10-016.jpg" alt="ルーナ・マナ&amp;キャリー・ベース" loading="lazy"></div>
+      <div class="pcard-tags">
+        <span class="pcard-tag pcard-tag-color" style="color:#4488ff;border-color:#4488ff">青</span>
+        <span class="pcard-tag">ベース</span>
+      </div>
+      <div class="pcard-stats">
+        <div class="pcard-stat"><span class="pcard-stat-label">Lv</span><span class="pcard-stat-value">4</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">COST</span><span class="pcard-stat-value">1</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">AP</span><span class="pcard-stat-value">0</span></div>
+        <div class="pcard-stat"><span class="pcard-stat-label">HP</span><span class="pcard-stat-value">5</span></div>
+      </div>
+      <div class="pcard-row"><span class="pcard-field-label">特徴</span>〔ジージェネ〕 〔艦船〕</div>
+      <div class="pcard-row"><span class="pcard-field-label">リンク</span>ー</div>
+      <div class="pcard-row"><span class="pcard-field-label">効果</span><div class="pcard-effect">【バースト】 このカードを配備する。【配備時】 自分のシールド1つを手札に加える。その後、〔ジージェネ〕の味方のユニットすべてを1回復する。</div></div>
+      <div class="pcard-source">出典: <a href="https://x.com/GUNDAM_GCG_JP/status/2054479258203181233" target="_blank" rel="noopener">公式Xポスト</a></div>
+    </article>
+    <p style="font-size:12px;color:var(--text-muted);margin-top:20px">最終更新: 2026-06-12</p>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- 画像ライトボックス（外部ライブラリなし。JS無効時は表示されず無害） -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="拡大画像"><img id="lightbox-img" src="" alt=""></div>
+  <script>
+    (function () {
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightbox-img');
+      if (!lb || !lbImg) return;
+      function close() { lb.classList.remove('open'); lbImg.src = ''; lbImg.alt = ''; }
+      Array.prototype.forEach.call(document.querySelectorAll('.pcard-media img'), function (img) {
+        img.addEventListener('click', function () {
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lb.classList.add('open');
+        });
+      });
+      lb.addEventListener('click', close);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+    })();
+  </script>
+
+  <script src="/js/common.js"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('sets');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>

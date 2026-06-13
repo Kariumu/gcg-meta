@@ -554,6 +554,13 @@ function generateSetPage(setName, cards) {
   html += `      <h1 class="section-title">${escapeHtml(titleSet)} 判明カード</h1>\n`;
   html += `      <span class="section-badge">${cards.length} CARDS</span>\n`;
   html += '    </div>\n';
+  // 指示書v8 B-3: 正式カードリスト公開済みセットへの案内(発売日までプレビューは従来どおり維持)
+  const OFFICIAL_LIST_SETS = ['ST10', 'EB01']; // 公式カードリスト公開済み(2026-06-13)
+  if (OFFICIAL_LIST_SETS.includes(setName)) {
+    html += '    <div style="margin:12px 0 16px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:13px">\n';
+    html += `      公式カードリストが公開されました。<a href="../cards.html?set=${setName}">カードリスト(${escapeHtml(setName)} 全カード)</a>もご覧いただけます。本ページは発売日(${release || '未定'})までプレビューとして従来どおり更新されます。\n`;
+    html += '    </div>\n';
+  }
   const scope = release ? `発売日: ${release}。` : '';
   html += noticeBlock(cards.length, scope);
   for (const card of cards) {

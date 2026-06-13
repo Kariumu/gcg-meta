@@ -28513,17 +28513,17 @@
       "ap": 6,
       "hp": 4
     },
-    "source_title": "",
-    "link": [
-      "特徴〔支援型〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "【配備時】レストの他のプレイヤーのユニット1つを選ぶ。それをアクティブにし、自分は1枚ドローする。"
+    "effect_text": "【配備時】レストの他のプレイヤーのユニット1つを選ぶ。それをアクティブにし、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-006": {
     "id": "EB01-006",
-    "name_jp": "ガンダムアストレイゴールドフレーム天",
-    "rarity": "R",
+    "name_jp": "ガンダムアストレイ ゴールドフレーム天",
+    "rarity": "U",
     "card_type": "UNIT",
     "color": "Blue",
     "level": 4,
@@ -28535,16 +28535,16 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "",
-    "link": [
-      "特徴〔攻撃型〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "【配備時】自分のユニット1つを選ぶ。このターン中、それは《リペア(1)》を得る。(自分のターン終了時、このユニットを指定の数回復する)"
+    "effect_text": "【配備時】自分のユニット1つを選ぶ。このターン中、それは《リペア1》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-009": {
     "id": "EB01-009",
-    "name_jp": "フルアーマー・ガンダム(サンダーボルト版)(EX)",
+    "name_jp": "フルアーマー・ガンダム（サンダーボルト版）（EX）",
     "rarity": "U",
     "card_type": "UNIT",
     "color": "Blue",
@@ -28557,12 +28557,14 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [
       "イオ・フレミング"
     ],
     "package_set": "EB01",
-    "effect_text": "【配備時】相手プレイヤーすべては、それぞれアクティブの自身のユニット1つを選ぶ。それらをレストにする。"
+    "effect_text": "【配備時】相手プレイヤーすべては、それぞれアクティブの自身のユニット1つを選ぶ。それらをレストにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-017": {
     "id": "EB01-017",
@@ -28579,19 +28581,21 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【破壊時】このユニットがバトルダメージで破壊されたなら、自分とこのユニットを破壊したプレイヤーは1枚ドローする。"
+    "effect_text": "【破壊時】このユニットがバトルダメージで破壊されたなら、自分とこのユニットを破壊したプレイヤーは1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-021": {
     "id": "EB01-021",
-    "name_jp": "ビルドストライクガンダム(フルパッケージ)(EX)",
-    "rarity": "R",
+    "name_jp": "ビルドストライクガンダム（フルパッケージ）（EX）",
+    "rarity": "LR",
     "card_type": "UNIT",
     "color": "Green",
-    "level": 2,
-    "cost": 5,
+    "level": 5,
+    "cost": 4,
     "traits": [
       "ジージェネ"
     ],
@@ -28599,16 +28603,18 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [
       "レイジ"
     ],
     "package_set": "EB01",
-    "effect_text": "《突破(4)》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット時】〔ジージェネ〕のパイロット 自分のトラッシュに〔ジージェネ〕のユニットカードが2枚以上あるなら、自分はリソース1つをレストで置く"
+    "effect_text": "《突破4》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット時・〔ジージェネ〕のパイロット】自分のトラッシュに〔ジージェネ〕のユニットカードが2枚以上あるなら、自分はリソース1つをレストで置く。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-022": {
     "id": "EB01-022",
-    "name_jp": "ガンダムエクシア(EX)",
+    "name_jp": "ガンダムエクシア（EX）",
     "rarity": "LR",
     "card_type": "UNIT",
     "color": "Green",
@@ -28621,16 +28627,16 @@
       "ap": 6,
       "hp": 5
     },
-    "source_title": "",
-    "link": [
-      "特徴〔攻撃型〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "《突破(5)》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット中】〔ジージェネ〕のパイロット 自分のターン終了時、このユニットを破壊してもよい。そうしたなら、「ガンダムエクシア」(〔ジージェネ〕・AP2HP2)のユニットトークン3つを配備する。"
+    "effect_text": "《突破5》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット中・〔ジージェネ〕のパイロット】自分のターン終了時、このユニットを破壊してもよい。そうしたなら、「ガンダムエクシア」(〔ジージェネ〕・AP2・HP2)のユニットトークン3つを配備する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-024": {
     "id": "EB01-024",
-    "name_jp": "クィン・マンサ (オメガ・サイコミュ起動時)",
+    "name_jp": "GQuuuuuuX（オメガ・サイコミュ起動時）",
     "rarity": "R",
     "card_type": "UNIT",
     "color": "Green",
@@ -28643,16 +28649,16 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "",
-    "link": [
-      "特徴〔攻撃型〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "《突破3》 (アタックで相手のユニットを破壊したとき、 その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【アタック時】 ブロッカーを持つLv.5以下の相手のユニット1つを選ぶ。 それに2ダメージを与える。"
+    "effect_text": "《突破3》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【アタック時】《ブロッカー》を持つLv.5以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-025": {
     "id": "EB01-025",
-    "name_jp": "トールギスII",
+    "name_jp": "トールギスⅡ",
     "rarity": "R",
     "card_type": "UNIT",
     "color": "Green",
@@ -28662,15 +28668,15 @@
       "ジージェネ"
     ],
     "stats": {
-      "ap": 6,
-      "hp": 5
+      "ap": 5,
+      "hp": 4
     },
-    "source_title": "",
-    "link": [
-      "特徴〔ジージェネ〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "【配備時】・開発2 自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■プレイヤーすべてはEXリソース1つを置く。【セット中】 相手のEXリソースがある間、このユニットはLv.5以下の相手のユニットからバトルダメージを受けない。"
+    "effect_text": "【配備時・開発2】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■プレイヤーすべてはEXリソース1つを置く。【セット中】相手のEXリソースがある間、このユニットはLv.5以下の相手のユニットからバトルダメージを受けない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-028": {
     "id": "EB01-028",
@@ -28678,7 +28684,7 @@
     "rarity": "U",
     "card_type": "UNIT",
     "color": "Green",
-    "level": 1,
+    "level": 4,
     "cost": 3,
     "traits": [
       "ジージェネ"
@@ -28687,12 +28693,14 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [
       "シャル・アクスティカ"
     ],
     "package_set": "EB01",
-    "effect_text": "ターン1回 このユニット以外のユニットが、相手のユニットにアタックしたとき、これがレストしているなら、このバトル中、アタックしているユニットは《突破(2)》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)"
+    "effect_text": "【ターン1回】このユニット以外のユニットが、相手のユニットにアタックしたとき、これがレストしているなら、このバトル中、アタックしているユニットは《突破2》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-034": {
     "id": "EB01-034",
@@ -28709,12 +28717,12 @@
       "ap": 2,
       "hp": 2
     },
-    "source_title": "",
-    "link": [
-      "特徴〔ジージェネ〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "【リンク時】自分のデッキを上から3枚見て、その中の、Lv.3の〔ジージェネ〕のユニットカード1枚を公開して、手札に加えてもよい。残ったカードは無作為に下に戻す。"
+    "effect_text": "【リンク時】自分のデッキを上から3枚見て、その中の、Lv.3の〔ジージェネ〕のユニットカード1枚を公開して、手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-035": {
     "id": "EB01-035",
@@ -28731,16 +28739,16 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "",
-    "link": [
-      "特徴〔支援型〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "このユニット以外の、Lv.3の〔ジージェネ〕の味方のユニットが配備されたとき、このターン中、これは《突破(1)》を得る。"
+    "effect_text": "このユニット以外の、Lv.3の〔ジージェネ〕の味方のユニットが配備されたとき、このターン中、これは《突破1》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-043": {
     "id": "EB01-043",
-    "name_jp": "ブルーディスティニー1号機(EX)",
+    "name_jp": "ブルーディスティニー1号機（EX）",
     "rarity": "R",
     "card_type": "UNIT",
     "color": "White",
@@ -28753,58 +28761,40 @@
       "ap": 5,
       "hp": 3
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [
       "ユウ・カジマ"
     ],
     "package_set": "EB01",
-    "effect_text": "【アタック時】ブロッカーを持つ味方のユニットがいるなら、Lv.5以下の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。"
+    "effect_text": "【アタック時】《ブロッカー》を持つ味方のユニットがいるなら、Lv.5以下の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+    "terrain": "地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-044": {
     "id": "EB01-044",
-    "name_jp": "ジャスティスガンダム(EX)",
-    "rarity": "R",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 6,
-    "cost": 5,
-    "traits": [
-      "耐久型"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 4
-    },
-    "source_title": "",
-    "link": [],
-    "package_set": "EB01",
-    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【配備時】相手プレイヤーが2人以上いるなら、最もユニットが多い相手プレイヤーのユニット1つを選ぶ。それを持ち主の手札に戻す。"
-  },
-  "EB01-045R": {
-    "id": "EB01-045R",
-    "name_jp": "サイコ・ザク (EX)",
+    "name_jp": "ジャスティスガンダム（EX）",
     "rarity": "R",
     "card_type": "UNIT",
     "color": "White",
-    "level": 7,
+    "level": 6,
     "cost": 5,
     "traits": [
       "ジージェネ"
     ],
     "stats": {
-      "ap": 4,
-      "hp": 6
+      "ap": 5,
+      "hp": 4
     },
-    "source_title": "",
-    "link": [
-      "ダリル・ローレンツ"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "《制圧》（アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる） セット《リペア》を持つ相手のユニット1つを選ぶ。それを持ち主の手札に戻す。"
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【配備時】相手プレイヤーが2人以上いるなら、最もユニットが多い相手プレイヤーのユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-046": {
     "id": "EB01-046",
-    "name_jp": "ストライカー・カスタム(EX)",
+    "name_jp": "ストライカー・カスタム（EX）",
     "rarity": "U",
     "card_type": "UNIT",
     "color": "White",
@@ -28817,17 +28807,21 @@
       "ap": 3,
       "hp": 3
     },
-    "source_title": "",
-    "link": [],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "イットウ・ツルギ"
+    ],
     "package_set": "EB01",
-    "effect_text": "【セット中】【アタック時】Lv.4以上の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。"
+    "effect_text": "【セット中】【アタック時】Lv.4以上の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-047": {
     "id": "EB01-047",
     "name_jp": "キャスバル専用ガンダム",
     "rarity": "U",
     "card_type": "UNIT",
-    "color": "Red",
+    "color": "White",
     "level": 4,
     "cost": 3,
     "traits": [
@@ -28837,19 +28831,19 @@
       "ap": 3,
       "hp": 4
     },
-    "source_title": "",
-    "link": [
-      "特徴〔ジージェネ〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "【セット時】・【開発】 自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)"
+    "effect_text": "【セット時・開発1】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-050": {
     "id": "EB01-050",
     "name_jp": "サイコロガンダム",
     "rarity": "U",
     "card_type": "UNIT",
-    "color": "Blue",
+    "color": "White",
     "level": 6,
     "cost": 6,
     "traits": [
@@ -28859,10 +28853,12 @@
       "ap": 5,
       "hp": 6
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【アタック時】自分のデッキを上から1枚、自分のトラッシュに置く。この効果でLv.3以上のカードを置いたなら、相手のユニット1つを選ぶ。このバトル中、それをAP-2する。"
+    "effect_text": "【アタック時】自分のデッキを上から1枚、自分のトラッシュに置く。この効果でLv.3以上のカードを置いたなら、相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-061": {
     "id": "EB01-061",
@@ -28880,17 +28876,19 @@
       "ap": 1,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。【セット時】〔ジージェネ〕の味方のユニットがいるなら、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。"
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】〔ジージェネ〕の味方のユニットがいるなら、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-063": {
     "id": "EB01-063",
     "name_jp": "イオ・フレミング",
     "rarity": "C",
     "card_type": "PILOT",
-    "color": "White",
+    "color": "Blue",
     "level": 4,
     "cost": 1,
     "traits": [
@@ -28901,10 +28899,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。このユニット以外の、レストのユニットが2つ以上いるなら、これは《リペア2》を得る。(自分のターン終了時、このユニットを指定の数回復する)"
+    "effect_text": "【バースト】このカードを手札に加える。このユニット以外の、レストのユニットが2つ以上いるなら、これは《リペア2》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-064": {
     "id": "EB01-064",
@@ -28922,10 +28922,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。このユニットが《リペア》を持つ間、これは《突破1》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)"
+    "effect_text": "【バースト】このカードを手札に加える。このユニットが《リペア》を持つ間、これは《突破1》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-065": {
     "id": "EB01-065",
@@ -28943,12 +28945,12 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "",
-    "link": [
-      "特徴〔ジージェネ〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。【リンク中】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それは《突破(1)》を得る。"
+    "effect_text": "【バースト】このカードを手札に加える。【リンク時】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それは《突破1》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-066": {
     "id": "EB01-066",
@@ -28966,12 +28968,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
-    "link": [
-      "特徴〔ジージェネ〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。【セット時】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それは《ブロッカー》を持つアクティブの相手のユニットをアタック先に選んでもよい。"
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それは《ブロッカー》を持つアクティブの相手のユニットをアタック先に選んでもよい。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-068": {
     "id": "EB01-068",
@@ -28989,15 +28991,17 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。【リンク中】【破壊時】このユニットにセットされていたパイロットカードを持ち主のデッキの上に戻してもよい。"
+    "effect_text": "【バースト】このカードを手札に加える。【リンク中】【破壊時】このユニットにセットされていたカードを持ち主のデッキの上に戻してもよい。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-070": {
     "id": "EB01-070",
     "name_jp": "ダリル・ローレンツ",
-    "rarity": "SR",
+    "rarity": "U",
     "card_type": "PILOT",
     "color": "White",
     "level": 4,
@@ -29010,10 +29014,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。【リンク中】【起動・アクション】ターン1回 1:相手のターンなら、ユニット1つを選ぶ。このバトル中、それをAP+1する。"
+    "effect_text": "【バースト】このカードを手札に加える。【リンク中】【起動・アクション】【ターン1回】①：相手のターンなら、ユニット1つを選ぶ。このバトル中、それをAP+1する。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-071": {
     "id": "EB01-071",
@@ -29031,10 +29037,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。【リンク中】このユニットをAP+1する。"
+    "effect_text": "【バースト】このカードを手札に加える。【リンク中】このユニットをAP+1する。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-072": {
     "id": "EB01-072",
@@ -29052,10 +29060,12 @@
       "ap": 1,
       "hp": 2
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを手札に加える。【セット時】《ブロッカー》を持つアクティブの味方のユニット1つと、Lv.4以下の相手のユニット1つを選ぶ。それらをレストにする。"
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】《ブロッカー》を持つアクティブの味方のユニット1つと、Lv.4以下の相手のユニット1つを選ぶ。それらをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-075": {
     "id": "EB01-075",
@@ -29067,10 +29077,12 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "メインアクション HP2以下の相手のユニット1~2つを選ぶ。それらをレストにする。"
+    "effect_text": "【メイン】/【アクション】HP2以下の相手のユニット1～2つを選ぶ。それらをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-078": {
     "id": "EB01-078",
@@ -29082,14 +29094,16 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "メインプレイヤーすべてはそれぞれ自身のデッキを上から1枚見る。それがユニットカードなら公開して自身の手札に加えてもよい。残ったカードは上か下に戻す。"
+    "effect_text": "【メイン】プレイヤーすべてはそれぞれ自身のデッキを上から1枚見る。それがユニットカードなら公開して自身の手札に加えてもよい。残ったカードは上か下に戻す。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "EB01-090": {
     "id": "EB01-090",
-    "name_jp": "ティファ・アディール&フリーデン",
+    "name_jp": "ティファ・アディール＆フリーデン",
     "rarity": "C",
     "card_type": "BASE",
     "color": "White",
@@ -29100,17 +29114,18 @@
       "艦船"
     ],
     "stats": {
-      "ap": 0,
       "hp": 4
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "EB01",
-    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、各相手プレイヤーのHP2以下のユニット1つずつを選ぶ。それらを持ち主の手札に戻す。"
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、各相手プレイヤーのHP2以下のユニット1つずつを選ぶ。それらを持ち主の手札に戻す。",
+    "terrain": "地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
   },
   "ST10-001": {
     "id": "ST10-001",
-    "name_jp": "Zガンダム (EX)",
+    "name_jp": "Ζガンダム（EX）",
     "rarity": "LR",
     "card_type": "UNIT",
     "color": "Blue",
@@ -29123,12 +29138,14 @@
       "ap": 5,
       "hp": 5
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [
       "カミーユ・ビダン"
     ],
     "package_set": "ST10",
-    "effect_text": "このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、これをアクティブにし、このターン中、これは同じ相手プレイヤー/相手チームをアタック先に選べない。"
+    "effect_text": "このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、これをアクティブにし、このターン中、これは同じ、相手プレイヤー/相手チームをアタック先に選べない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-004": {
     "id": "ST10-004",
@@ -29142,17 +29159,19 @@
       "ジージェネ"
     ],
     "stats": {
-      "ap": 4,
-      "hp": 3
+      "ap": 3,
+      "hp": 4
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "《リペア(2)》(自分のターン終了時、このユニットを指定の数回復する)"
+    "effect_text": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-006": {
     "id": "ST10-006",
-    "name_jp": "フェニックスガンダム (能力解放) (EX)",
+    "name_jp": "フェニックスガンダム（能力解放）（EX）",
     "rarity": "LR",
     "card_type": "UNIT",
     "color": "White",
@@ -29165,38 +29184,40 @@
       "ap": 4,
       "hp": 4
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [
       "マーク・ギルダー"
     ],
     "package_set": "ST10",
-    "effect_text": "【セット中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。"
+    "effect_text": "【セット中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-007": {
     "id": "ST10-007",
-    "name_jp": "ガンダム・バルバトス (第4形態)",
+    "name_jp": "ガンダム・バルバトス（第4形態）",
     "rarity": "C",
     "card_type": "UNIT",
     "color": "White",
-    "level": 4,
+    "level": 6,
     "cost": 5,
     "traits": [
       "ジージェネ"
     ],
     "stats": {
-      "ap": 6,
+      "ap": 4,
       "hp": 5
     },
-    "source_title": "",
-    "link": [
-      "特徴〔ジージェネ〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "ST10",
-    "effect_text": "【リンク時】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分のトラッシュのLv.4以下のコマンドカード1枚を選ぶ。それを手札に加える。"
+    "effect_text": "【リンク時・開発2】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分のトラッシュのLv.4以下のコマンドカード1枚を選ぶ。それを手札に加える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-008": {
     "id": "ST10-008",
-    "name_jp": "ガンダム・バルバトス (第1形態)",
+    "name_jp": "ガンダム・バルバトス（第1形態）",
     "rarity": "C",
     "card_type": "UNIT",
     "color": "White",
@@ -29209,12 +29230,12 @@
       "ap": 4,
       "hp": 3
     },
-    "source_title": "",
-    "link": [
-      "特徴〔ジージェネ〕"
-    ],
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
     "package_set": "ST10",
-    "effect_text": "【配備時】開発2 自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分は相手プレイヤーの人数と同じ数だけドローする。その後、自分の手札をこの効果でドローした枚数と同じだけトラッシュする。"
+    "effect_text": "【配備時・開発2】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■自分は相手プレイヤーの人数と同じ数だけドローする。その後、自分の手札をこの効果でドローした枚数と同じだけ捨てる。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-010": {
     "id": "ST10-010",
@@ -29231,10 +29252,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)"
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "地球",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-011": {
     "id": "ST10-011",
@@ -29252,10 +29275,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "【バースト】このカードを手札に加える。【リンク時】レストのユニットが2つ以上いるなら、このユニットのLv.以下の相手のユニット1つを選ぶ。それをレストにする。"
+    "effect_text": "【バースト】このカードを手札に加える。【リンク時】レストのユニットが2つ以上いるなら、このユニットのLv.以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-012": {
     "id": "ST10-012",
@@ -29273,10 +29298,12 @@
       "ap": 2,
       "hp": 1
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "【バースト】このカードを手札に加える。【セット時】Lv.5以下の相手のユニット1つを選ぶ。このターン中、それをAP-2する。"
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】Lv.5以下の相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "terrain": "-",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-013": {
     "id": "ST10-013",
@@ -29288,10 +29315,12 @@
     "cost": 1,
     "traits": [],
     "stats": {},
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "【バースト】このカードを手札に加える。【メイン/アクション】Lv.5以上の〔ジージェネ〕のユニット1つを選ぶ。それを2回復し、このターン中、AP+2する。"
+    "effect_text": "【バースト】このカードを手札に加える。【メイン】/【アクション】Lv.5以上の〔ジージェネ〕のユニット1つを選ぶ。それを2回復し、このターン中、AP＋2する。",
+    "terrain": "-",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-014": {
     "id": "ST10-014",
@@ -29299,37 +29328,43 @@
     "rarity": "C",
     "card_type": "COMMAND",
     "color": "Blue",
-    "level": 1,
-    "cost": 2,
-    "traits": [
-      "ジージェネ"
-    ],
+    "level": 4,
+    "cost": 4,
+    "traits": [],
     "stats": {},
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "手札のこのカードをプレイするとき、手札の〔ジージェネ〕のユニットカード1枚を捨ててもよい。そうしたなら、これをLv.1とコストを2としてプレイする。 メイン 自分は2枚ドローする。"
+    "effect_text": "手札のこのカードをプレイするとき、手札の〔ジージェネ〕のユニットカード1枚を捨ててもよい。そうしたなら、これをLv.とコストを2としてプレイする。【メイン】自分は2枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-015": {
     "id": "ST10-015",
     "name_jp": "拡散ビーム砲",
     "rarity": "C",
     "card_type": "COMMAND",
-    "color": "Red",
+    "color": "White",
     "level": 3,
     "cost": 1,
     "traits": [
-      "ジージェネ"
+      "ジージェネ",
+      "耐久型"
     ],
-    "stats": {},
-    "source_title": "",
+    "stats": {
+      "ap": 1,
+      "hp": 0
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "〔ジージェネ〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。このバトル中、それをAP-3する。"
+    "effect_text": "【アクション】〔ジージェネ〕の味方のユニットがいるなら、相手のユニット1つを選ぶ。このバトル中、それをAP-3する。【パイロット】「クレア・ヒースロー」",
+    "terrain": "-",
+    "acquisition_info": "Generation Pulse [ST10]"
   },
   "ST10-016": {
     "id": "ST10-016",
-    "name_jp": "ルーナ・マナ&キャリー・ベース",
+    "name_jp": "ルーナ・マナ＆キャリー・ベース",
     "rarity": "C",
     "card_type": "BASE",
     "color": "Blue",
@@ -29340,12 +29375,1450 @@
       "艦船"
     ],
     "stats": {
-      "ap": 0,
       "hp": 5
     },
-    "source_title": "",
+    "source_title": "SDガンダム ジージェネレーション エターナル",
     "link": [],
     "package_set": "ST10",
-    "effect_text": "【バースト】 このカードを配備する。【配備時】 自分のシールド1つを手札に加える。その後、〔ジージェネ〕の味方のユニットすべてを1回復する。"
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、〔ジージェネ〕の味方のユニットすべてを1回復する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
+  },
+  "EB01-001": {
+    "id": "EB01-001",
+    "name_jp": "ガンダムアストレイ レッドフレーム改（EX）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "ロウ・ギュール"
+    ],
+    "package_set": "EB01",
+    "effect_text": "【起動・メイン】【ターン1回】自分のトラッシュのコマンドカード2枚をゲームから除外する：ダメージを受けているLv.7以下の相手のユニット1つを選ぶ。それをレストにし、それは次の相手のターンのスタートフェイズでアクティブにならない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-002": {
+    "id": "EB01-002",
+    "name_jp": "Hi-νガンダム（EX）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 8,
+    "cost": 7,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 6,
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時】このユニット以外の、〔ジージェネ〕の味方のユニットがいるなら、各相手プレイヤーのユニット1つずつを選ぶ。それらをレストにする。【リンク中】【アタック時】【ターン1回】このユニット以外の、レストのユニットが3つ以上いるなら、これをアクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-003": {
+    "id": "EB01-003",
+    "name_jp": "ナラティブガンダムA装備（EX）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "ヨナ・バシュタ"
+    ],
+    "package_set": "EB01",
+    "effect_text": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)自分のターン終了時、このユニットがレストしているなら、ユニットすべてをレストにする。この効果で3つ以上レストにしたなら、自分は1枚ドローする。",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-004": {
+    "id": "EB01-004",
+    "name_jp": "ガンダム・バルバトスルプスレクス（EX）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)【ターン1回】自分のターン中、このユニットが回復したとき、レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-007": {
+    "id": "EB01-007",
+    "name_jp": "ガンダムTR-1［ヘイズル・ラー］",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-008": {
+    "id": "EB01-008",
+    "name_jp": "ガンダムデルタカイ",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時・開発1】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■味方のユニット1つを選ぶ。それを2回復する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-010": {
+    "id": "EB01-010",
+    "name_jp": "ガンダム・バルバトス（第6形態）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時・開発3】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■レストの相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-011": {
+    "id": "EB01-011",
+    "name_jp": "ビギニングガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-012": {
+    "id": "EB01-012",
+    "name_jp": "ドム・バインニヒツ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-013": {
+    "id": "EB01-013",
+    "name_jp": "赤いガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【アタック時】手札が6枚以上ある相手プレイヤーがいるなら、このターン中、このユニットをAP+2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-014": {
+    "id": "EB01-014",
+    "name_jp": "グフ・ヴィジャンタ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "相手のターン中、このユニットはLv.5以下の相手のユニットから効果ダメージを受けない。",
+    "terrain": "地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-015": {
+    "id": "EB01-015",
+    "name_jp": "試作アッシマーTR-3［キハール］",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【破壊時】このユニット以外の、レストのユニットが2つ以上いるなら、レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-016": {
+    "id": "EB01-016",
+    "name_jp": "トルネードガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-018": {
+    "id": "EB01-018",
+    "name_jp": "ガンダムアストレイ ブルーフレーム セカンドL",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【アタック時】味方のユニット1つを選ぶ。それを1回復する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-019": {
+    "id": "EB01-019",
+    "name_jp": "ガンダム・ピクシー",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【アタック時】このユニット以外の、レストのユニットが2つ以上いるなら、このバトル中、これは《高機動》を得る。(このユニットはブロックされない)",
+    "terrain": "地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-020": {
+    "id": "EB01-020",
+    "name_jp": "ガンダムMk-Ⅲ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【リンク中】【起動・アクション】【ターン1回】ユニット1つを選ぶ。それを1回復する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-023": {
+    "id": "EB01-023",
+    "name_jp": "ル・シーニュ（EX）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "アスナ・エルマリート"
+    ],
+    "package_set": "EB01",
+    "effect_text": "【アタック時】プレイヤーすべては、それぞれ自身のデッキを上から1枚見る。それがLv.5以上のカードなら、公開して自身の手札に加えてもよい。残ったカードは上か下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-026": {
+    "id": "EB01-026",
+    "name_jp": "ガンダム・アスタロトオリジン",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-027": {
+    "id": "EB01-027",
+    "name_jp": "トールギス",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時・開発2】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それは《突破1》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-029": {
+    "id": "EB01-029",
+    "name_jp": "ガンダム・アスタロトリナシメント（EX）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時】相手のユニットが5つ以上いるなら、《ブロッカー》を持つLv.4以下のユニットすべてに2ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-030": {
+    "id": "EB01-030",
+    "name_jp": "ビグ・ラング",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時】自分のデッキを上から3枚見て、その中の、Lv.3の〔ジージェネ〕のユニットカード1枚を公開して、手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-031": {
+    "id": "EB01-031",
+    "name_jp": "オッゴ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "このユニットは、アクティブのLv.3以下の相手のユニットをアタック先に選んでもよい。",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-032": {
+    "id": "EB01-032",
+    "name_jp": "ガンダムEz8 ハイモビリティカスタム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-033": {
+    "id": "EB01-033",
+    "name_jp": "トーラス（サンクキングダム仕様）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【起動・アクション】【ターン1回】①：このユニット以外の、アタックされているユニット1つを選ぶ。このバトル中、それをAP+1する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-036": {
+    "id": "EB01-036",
+    "name_jp": "ダリルバルデ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "自分のターン中、このユニット以外の、Lv.3の〔ジージェネ〕のユニットすべてをAP+1する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-037": {
+    "id": "EB01-037",
+    "name_jp": "ヅダ（1番機）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 1
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "ジャン・リュック・デュバル"
+    ],
+    "package_set": "EB01",
+    "effect_text": "自分のターン中、このユニットが《ブロッカー》を持つ相手のユニットとバトルしている間、これはバトルダメージを受けない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-038": {
+    "id": "EB01-038",
+    "name_jp": "G-セルフ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時】自分はEXリソース1つを置く。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-039": {
+    "id": "EB01-039",
+    "name_jp": "ライジングフリーダムガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "手札のこのカードをプレイするとき、相手のユニットが3つ以上いるなら、これをLv.とコストを3としてプレイする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-040": {
+    "id": "EB01-040",
+    "name_jp": "ガンダムエピオン",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 8,
+    "cost": 7,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 6,
+      "hp": 6
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時】相手プレイヤーが2人以上いるなら、味方のユニット1～3つを選ぶ。このターン中、それらは《突破3》を得る。(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-041": {
+    "id": "EB01-041",
+    "name_jp": "ストライクフリーダムガンダム（EX）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "《高機動》(このユニットはブロックされない)【配備時】各相手プレイヤーのHP4以下のユニット1つずつを選ぶ。それらを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-042": {
+    "id": "EB01-042",
+    "name_jp": "サイコ・ハロ （EX）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 8,
+    "cost": 7,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 6,
+      "hp": 6
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "このユニットがレストの間、ユニットすべては《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)【アタック時】このバトル中、Lv.7以下のユニットすべては《ブロッカー》を発動できない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-045": {
+    "id": "EB01-045",
+    "name_jp": "サイコ・ザク（EX）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 6
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "ダリル・ローレンツ"
+    ],
+    "package_set": "EB01",
+    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【セット時】《リペア》を持つ相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-048": {
+    "id": "EB01-048",
+    "name_jp": "Sガンダム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-049": {
+    "id": "EB01-049",
+    "name_jp": "ペイルライダー（陸戦重装仕様）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "《ブロッカー》を持つ〔ジージェネ〕の味方のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)",
+    "terrain": "地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-051": {
+    "id": "EB01-051",
+    "name_jp": "ゼーゴック",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-052": {
+    "id": "EB01-052",
+    "name_jp": "ヒルドルブ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時】相手のユニットが3つ以上いるなら、HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-053": {
+    "id": "EB01-053",
+    "name_jp": "ガンダム試作0号機",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-054": {
+    "id": "EB01-054",
+    "name_jp": "ギャプランTR-5［フライルー］1号機",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-055": {
+    "id": "EB01-055",
+    "name_jp": "ドム・グロウスバイル",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "相手プレイヤーが2人以上いて、このユニットがレストしているなら、味方のシールドは相手のユニットからバトルダメージを受けない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-056": {
+    "id": "EB01-056",
+    "name_jp": "ガンダムジェミナス01",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-057": {
+    "id": "EB01-057",
+    "name_jp": "ガンダムジェミナス02",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【配備時】アクティブのLv.3の味方のユニット1つを選んでもよい。それをレストにする。そうしたなら、Lv.2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-058": {
+    "id": "EB01-058",
+    "name_jp": "エクストリームガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "相手プレイヤーが2人以上いるなら、このユニットは《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-059": {
+    "id": "EB01-059",
+    "name_jp": "サイコ・ザク",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "ダリル・ローレンツ"
+    ],
+    "package_set": "EB01",
+    "effect_text": "【リンク中】【アタック時】【ターン1回】プレイヤーすべては、それぞれ自身のリソース1つを選ぶ。それらをアクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-060": {
+    "id": "EB01-060",
+    "name_jp": "ガンダムアクエリアス",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【セット時・開発3】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-062": {
+    "id": "EB01-062",
+    "name_jp": "ヨナ・バシュタ",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "耐久型"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを手札に加える。【アタック時】【ターン1回】相手プレイヤー1人を選ぶ。そのプレイヤーは1枚ドローしてもよい。この効果でドローしたなら、自分は1枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-067": {
+    "id": "EB01-067",
+    "name_jp": "アスナ・エルマリート",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "支援型"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】自分のデッキを上から3枚見て、その中の〔ジージェネ〕のユニットカード1枚を公開してデッキの上に戻してもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-069": {
+    "id": "EB01-069",
+    "name_jp": "ビサイド・ペイン",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "耐久型"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを手札に加える。【アタック時】《ブロッカー》を持つ味方のユニット1つを選ぶ。このターン中、それをAP+2する。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-073": {
+    "id": "EB01-073",
+    "name_jp": "キャラリクエスト",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 6,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】自分は1枚ドローする。【メイン】レストのユニットが6つ以上いるなら、自分は2枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-074": {
+    "id": "EB01-074",
+    "name_jp": "エターナルロード",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】HP3以下の相手のユニット1つを選ぶ。それをレストにする。【メイン】/【アクション】アクティブの〔ジージェネ〕の味方のユニット1つを選ぶ。それをレストにする。そうしたなら、相手プレイヤーすべては、それぞれアクティブの自身のユニット1つを選ぶ。それらをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-076": {
+    "id": "EB01-076",
+    "name_jp": "ガーベラ・ストレート",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "耐久型"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【メイン】/【アクション】〔ジージェネ〕の味方のユニット1つを選ぶ。それを3回復する。【パイロット】「ロウ・ギュール」",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-077": {
+    "id": "EB01-077",
+    "name_jp": "マスターリーグ開幕",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを手札に加える。【アクション】レストの〔ジージェネ〕の味方のユニット1つを選ぶ。バトルしている相手のユニットのアタック先をそれにする。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-079": {
+    "id": "EB01-079",
+    "name_jp": "オプションパーツ",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【メイン】〔ジージェネ〕の味方のユニット1つを選ぶ。このターン中、それはLv.3以下の相手のユニットからバトルダメージを受けない。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-080": {
+    "id": "EB01-080",
+    "name_jp": "シュツルム・ファウスト",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "支援型"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【メイン】/【アクション】〔ジージェネ〕のユニット1つを選ぶ。このターン中、それはアクティブの相手のユニットをアタック先に選んでもよい。【パイロット】「ジャン・リュック・デュバル」",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-081": {
+    "id": "EB01-081",
+    "name_jp": "MAP兵器",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを手札に加える。【メイン】/【アクション】HP2以下の相手のユニット1～2つを選ぶ。それらを持ち主の手札に戻す。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-082": {
+    "id": "EB01-082",
+    "name_jp": "戦艦巡航",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードの【アクション】を発動する。【アクション】各相手プレイヤーのLv.3以下のユニット1つずつを選ぶ。それらを持ち主の手札に戻す。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-083": {
+    "id": "EB01-083",
+    "name_jp": "SP化チップ",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【アクション】相手のターンなら、ユニット1つを選ぶ。このターン中、それをAP+3する。",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-084": {
+    "id": "EB01-084",
+    "name_jp": "30cm砲（APFSDS弾）",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "攻撃型"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【メイン】/【アクション】《ブロッカー》を持つユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。【パイロット】「デメジエール・ソンネン」",
+    "terrain": "-",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-085": {
+    "id": "EB01-085",
+    "name_jp": "クーデリア・藍那・バーンスタイン＆イサリビ",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "Blue",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、アクティブの青の〔ジージェネ〕の味方のユニット1つと相手のユニット1つを選んでもよい。それらをレストにする。",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-086": {
+    "id": "EB01-086",
+    "name_jp": "キシリア・ザビ＆グワジン",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Blue",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジージェネ",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。【ターン1回】〔ジージェネ〕の味方のユニットがリンクしたとき、このターン中、それは《リペア2》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-087": {
+    "id": "EB01-087",
+    "name_jp": "マリナ・イスマイール＆プトレマイオス2",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。【ターン1回】自分のターン中、緑の〔ジージェネ〕の味方のユニットがバトルダメージで相手のユニットを破壊したとき、味方のユニット1つを選ぶ。それを2回復する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-088": {
+    "id": "EB01-088",
+    "name_jp": "ミオリネ・レンブラン＆学園艦",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジージェネ",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。相手のターン中、Lv.3の〔ジージェネ〕の味方のユニットすべてをAP+1する。",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "EB01-089": {
+    "id": "EB01-089",
+    "name_jp": "ラクス・クライン＆エターナル",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "EB01",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、レストの白の〔ジージェネ〕の味方のユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
+    "terrain": "宇宙",
+    "acquisition_info": "Eternal Nexus [EB01]"
+  },
+  "ST10-002": {
+    "id": "ST10-002",
+    "name_jp": "Ζガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "カミーユ・ビダン"
+    ],
+    "package_set": "ST10",
+    "effect_text": "【配備時・開発2】自分のトラッシュの〔ジージェネ〕のカードを指定の数ゲームから除外してもよい。そうしたなら、以下の効果を発動する。■HP4以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
+  },
+  "ST10-003": {
+    "id": "ST10-003",
+    "name_jp": "ガンダムMk-II（エゥーゴ仕様）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [
+      "カミーユ・ビダン"
+    ],
+    "package_set": "ST10",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
+  },
+  "ST10-005": {
+    "id": "ST10-005",
+    "name_jp": "ネモ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "ST10",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
+  },
+  "ST10-009": {
+    "id": "ST10-009",
+    "name_jp": "グレイズ（決闘仕様）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジージェネ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "SDガンダム ジージェネレーション エターナル",
+    "link": [],
+    "package_set": "ST10",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Generation Pulse [ST10]"
   }
 }

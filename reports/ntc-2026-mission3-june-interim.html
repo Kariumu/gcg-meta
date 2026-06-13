@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NTC 2026 MISSION3（6月開催）中間レポート（第1週時点） — 全国108店舗・998デッキの分布と5月比較 | GCG STATS</title>
+  <meta name="description" content="ニュータイプチャレンジ 2026 MISSION3（6月開催）の中間集計。6/1〜6/7の108イベント・入賞998デッキのデッキタイプ分布・優勝率（64名定員大会は優勝2名換算）・5月との比較。">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="NTC 2026 MISSION3（6月開催）中間レポート — 全国108店舗・998デッキの分布と5月比較 | GCG STATS">
+  <meta property="og:description" content="ニュータイプチャレンジ 2026 MISSION3（6月開催）の中間集計。6/1〜6/7の108イベント・入賞998デッキのデッキタイプ分布・優勝率（64名定員大会は優勝2名換算）・5月との比較。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://gcg-stats.com/reports/ntc-2026-mission3-june-interim.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:site" content="@gcg_stats">
+  <link rel="canonical" href="https://gcg-stats.com/reports/ntc-2026-mission3-june-interim.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .recap-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:13px; }
+    .recap-table th, .recap-table td { padding:8px 10px; border-bottom:1px solid var(--border); text-align:left; }
+    .recap-table th { background:var(--bg-elevated); color:var(--text-muted); font-weight:600; font-size:12px; }
+    .recap-table td.num { font-family:var(--font-mono); text-align:right; }
+    .recap-table tr.highlight td { background:rgba(255,200,0,0.05); }
+    .delta-up { color:#7cd99c; font-weight:600; }
+    .delta-down { color:#ff7b7b; font-weight:600; }
+    .stat-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:12px; margin:16px 0; }
+    .stat-card { padding:14px 16px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
+    .stat-card .stat-label { font-size:12px; color:var(--text-muted); margin-bottom:4px; }
+    .stat-card .stat-value { font-family:var(--font-mono); font-size:22px; font-weight:700; color:var(--text-primary); }
+    .stat-card .stat-sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
+    .method-note { margin:16px 0; padding:12px 16px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius); font-size:12px; color:var(--text-muted); line-height:1.7; }
+    @media (max-width: 640px) {
+      .recap-table { font-size:12px; }
+      .recap-table th, .recap-table td { padding:6px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <a href="../reports/" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a>
+
+    <div class="section-header" style="margin-top:16px">
+      <h1 class="section-title">NTC 2026 MISSION3（6月開催）中間レポート（第1週時点）</h1>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:4px">
+        全国108店舗・入賞998デッキ(ベスト8換算)の分布と5月比較
+      </p>
+      <p style="color:var(--text-muted);font-size:12px;margin-top:4px">
+        対象大会: NTC 2026 MISSION3（series=6791、6/1〜6/7開催・公式掲載6/12時点）｜ 公開: 2026.06.13
+      </p>
+    </div>
+
+    <article class="report-article" style="margin-top:24px;line-height:1.8;font-size:14px">
+
+      <h2>はじめに</h2>
+<p>ニュータイプチャレンジ2026 MISSION3の6月開催分について、6月12日時点で公開された大会結果をもとに中間レポートをお届けします。本集計は6月1日から7日までの前半1週間が対象で、108イベント・入賞デッキ998件・優勝125回分のデータを分析したものです。</p>
+<p>本記事は2026年6月1日〜7日（第1週）に公開された大会結果の集計であり、MISSION3開催期間（2026年6月30日まで）の途中経過です。</p>
+
+<p>GD04「Phantom Aria」環境も後期に入り、6月27日には新弾GD05・EB01・ST10の発売を控える中、現環境での最後の大きなトーナメントシーズンとなっています。環境の成熟とともに各デッキタイプの立ち位置にも変化が見られ、特に上位陣のシェア推移が注目されます。</p>
+
+      <h2>集計サマリー</h2>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-label">対象イベント</div><div class="stat-value">108</div><div class="stat-sub">うち64名定員 20 大会</div></div>
+        <div class="stat-card"><div class="stat-label">入賞デッキ(ベスト8換算)</div><div class="stat-value">998</div><div class="stat-sub">デッキデータあり・rank8位以内</div></div>
+        <div class="stat-card"><div class="stat-label">優勝数</div><div class="stat-value">125</div><div class="stat-sub">64名定員大会は各2名で換算</div></div>
+        <div class="stat-card"><div class="stat-label">集計期間</div><div class="stat-value">6/1〜6/7</div><div class="stat-sub">公式掲載 6/12 時点</div></div>
+      </div>
+      <div class="method-note">
+        <strong>集計規則:</strong> 入賞16名が公開される64名定員大会は、松岡さん指定ルールに基づき「ベスト8・各順位2名」に換算しています(優勝も2名としてカウント)。集計対象は8位以内かつデッキデータが公開されている入賞のみです。デッキタイプは使用カードの色構成による分類です。
+      </div>
+
+      <h2>デッキタイプ別の使用数と優勝率</h2>
+
+      <table class="recap-table">
+        <thead><tr><th>デッキタイプ(色)</th><th>使用数</th><th>シェア</th><th>優勝数</th><th>優勝率</th><th>優勝シェア</th></tr></thead>
+        <tbody>
+        <tr class="highlight">
+          <td>青/紫</td>
+          <td class="num">259</td>
+          <td class="num">26%</td>
+          <td class="num">42</td>
+          <td class="num">16.2%</td>
+          <td class="num">33.6%</td>
+        </tr>
+        <tr>
+          <td>赤/白</td>
+          <td class="num">205</td>
+          <td class="num">20.5%</td>
+          <td class="num">25</td>
+          <td class="num">12.2%</td>
+          <td class="num">20%</td>
+        </tr>
+        <tr>
+          <td>青/白</td>
+          <td class="num">137</td>
+          <td class="num">13.7%</td>
+          <td class="num">14</td>
+          <td class="num">10.2%</td>
+          <td class="num">11.2%</td>
+        </tr>
+        <tr>
+          <td>緑/白</td>
+          <td class="num">127</td>
+          <td class="num">12.7%</td>
+          <td class="num">16</td>
+          <td class="num">12.6%</td>
+          <td class="num">12.8%</td>
+        </tr>
+        <tr>
+          <td>青/緑</td>
+          <td class="num">91</td>
+          <td class="num">9.1%</td>
+          <td class="num">9</td>
+          <td class="num">9.9%</td>
+          <td class="num">7.2%</td>
+        </tr>
+        <tr>
+          <td>白/紫</td>
+          <td class="num">69</td>
+          <td class="num">6.9%</td>
+          <td class="num">9</td>
+          <td class="num">13%</td>
+          <td class="num">7.2%</td>
+        </tr>
+        <tr>
+          <td>青/赤</td>
+          <td class="num">57</td>
+          <td class="num">5.7%</td>
+          <td class="num">5</td>
+          <td class="num">8.8%</td>
+          <td class="num">4%</td>
+        </tr>
+        <tr>
+          <td>赤/緑</td>
+          <td class="num">31</td>
+          <td class="num">3.1%</td>
+          <td class="num">4</td>
+          <td class="num">12.9%</td>
+          <td class="num">3.2%</td>
+        </tr>
+        <tr>
+          <td>赤/紫</td>
+          <td class="num">19</td>
+          <td class="num">1.9%</td>
+          <td class="num">1</td>
+          <td class="num">5.3%</td>
+          <td class="num">0.8%</td>
+        </tr>
+        <tr>
+          <td>緑/紫</td>
+          <td class="num">2</td>
+          <td class="num">0.2%</td>
+          <td class="num">0</td>
+          <td class="num">0%</td>
+          <td class="num">0%</td>
+        </tr>
+        <tr>
+          <td>青</td>
+          <td class="num">1</td>
+          <td class="num">0.1%</td>
+          <td class="num">0</td>
+          <td class="num">0%</td>
+          <td class="num">0%</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h2>5月(MISSION3 5月開催)とのシェア比較</h2>
+
+      <table class="recap-table">
+        <thead><tr><th>デッキタイプ</th><th>6月シェア</th><th>5月シェア</th><th>増減</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>赤/白</td>
+          <td class="num">20.5%</td>
+          <td class="num">15.7%</td>
+          <td class="num"><span class="delta-up">+4.8pt</span></td>
+        </tr>
+        <tr>
+          <td>白/紫</td>
+          <td class="num">6.9%</td>
+          <td class="num">4.3%</td>
+          <td class="num"><span class="delta-up">+2.6pt</span></td>
+        </tr>
+        <tr>
+          <td>緑/白</td>
+          <td class="num">12.7%</td>
+          <td class="num">11.6%</td>
+          <td class="num"><span class="delta-up">+1.1pt</span></td>
+        </tr>
+        <tr>
+          <td>青/赤</td>
+          <td class="num">5.7%</td>
+          <td class="num">4.9%</td>
+          <td class="num"><span class="delta-up">+0.8pt</span></td>
+        </tr>
+        <tr>
+          <td>青</td>
+          <td class="num">0.1%</td>
+          <td class="num">0%</td>
+          <td class="num"><span class="delta-up">+0.1pt</span></td>
+        </tr>
+        <tr>
+          <td>青/白</td>
+          <td class="num">13.7%</td>
+          <td class="num">13.8%</td>
+          <td class="num"><span class="delta-down">-0.1pt</span></td>
+        </tr>
+        <tr>
+          <td>緑/紫</td>
+          <td class="num">0.2%</td>
+          <td class="num">0.3%</td>
+          <td class="num"><span class="delta-down">-0.1pt</span></td>
+        </tr>
+        <tr>
+          <td>緑</td>
+          <td class="num">0%</td>
+          <td class="num">0.1%</td>
+          <td class="num"><span class="delta-down">-0.1pt</span></td>
+        </tr>
+        <tr>
+          <td>赤/紫</td>
+          <td class="num">1.9%</td>
+          <td class="num">2.2%</td>
+          <td class="num"><span class="delta-down">-0.3pt</span></td>
+        </tr>
+        <tr>
+          <td>赤/緑</td>
+          <td class="num">3.1%</td>
+          <td class="num">4.1%</td>
+          <td class="num"><span class="delta-down">-1pt</span></td>
+        </tr>
+        <tr>
+          <td>青/紫</td>
+          <td class="num">26%</td>
+          <td class="num">29.7%</td>
+          <td class="num"><span class="delta-down">-3.7pt</span></td>
+        </tr>
+        <tr>
+          <td>青/緑</td>
+          <td class="num">9.1%</td>
+          <td class="num">13.4%</td>
+          <td class="num"><span class="delta-down">-4.3pt</span></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h2>ベスト8換算の入賞分布</h2>
+
+      <table class="recap-table">
+        <thead><tr><th>1位</th><th>2位</th><th>3位</th><th>4位</th><th>5位</th><th>6位</th><th>7位</th><th>8位</th></tr></thead>
+        <tbody><tr><td class="num">125</td><td class="num">126</td><td class="num">124</td><td class="num">127</td><td class="num">123</td><td class="num">126</td><td class="num">123</td><td class="num">124</td></tr></tbody>
+      </table>
+
+      <h2>地域別の傾向</h2>
+
+      <table class="recap-table">
+        <thead><tr><th>地域</th><th>イベント</th><th>入賞デッキ</th><th>上位タイプ(件数)</th></tr></thead>
+        <tbody>
+        <tr>
+          <td>関東</td>
+          <td class="num">27</td>
+          <td class="num">287</td>
+          <td>青/紫(78) / 赤/白(65) / 青/白(41)</td>
+        </tr>
+        <tr>
+          <td>中部</td>
+          <td class="num">17</td>
+          <td class="num">168</td>
+          <td>青/紫(38) / 赤/白(28) / 青/白(23)</td>
+        </tr>
+        <tr>
+          <td>関西</td>
+          <td class="num">18</td>
+          <td class="num">160</td>
+          <td>青/紫(47) / 赤/白(36) / 緑/白(20)</td>
+        </tr>
+        <tr>
+          <td>その他</td>
+          <td class="num">19</td>
+          <td class="num">152</td>
+          <td>青/紫(33) / 赤/白(31) / 青/白(26)</td>
+        </tr>
+        <tr>
+          <td>九州</td>
+          <td class="num">12</td>
+          <td class="num">97</td>
+          <td>青/紫(24) / 赤/白(23) / 緑/白(14)</td>
+        </tr>
+        <tr>
+          <td>中国</td>
+          <td class="num">7</td>
+          <td class="num">62</td>
+          <td>青/紫(15) / 赤/白(12) / 緑/白(12)</td>
+        </tr>
+        <tr>
+          <td>東北</td>
+          <td class="num">4</td>
+          <td class="num">40</td>
+          <td>青/紫(16) / 赤/白(6) / 青/白(5)</td>
+        </tr>
+        <tr>
+          <td>四国</td>
+          <td class="num">2</td>
+          <td class="num">16</td>
+          <td>青/緑(4) / 青/紫(3) / 青/白(2)</td>
+        </tr>
+        <tr>
+          <td>北海道</td>
+          <td class="num">2</td>
+          <td class="num">16</td>
+          <td>青/紫(5) / 緑/白(3) / 青/白(3)</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h2>考察</h2>
+<p><strong>青/紫デッキが引き続き環境トップ</strong>を維持していますが、シェアは5月の29.7%から26%へと3.7ポイント減少しました。それでも259デッキ・優勝42回・優勝率16.2%と圧倒的な存在感を示しており、依然として環境の中心的存在であることは間違いありません。</p>
+
+<p>一方で大きく躍進を見せたのが<strong>赤/白デッキ</strong>です。5月の15.7%から20.5%へと4.8ポイントもシェアを拡大し、205デッキ・優勝25回を記録しました。優勝率12.2%という数値も環境上位陣として十分な結果を残しており、青/紫に次ぐ第2勢力としての地位を確立したと言えるでしょう。</p>
+
+<p>対照的に<strong>青/緑デッキは苦戦</strong>が目立ちます。5月の13.4%から9.1%へと4.3ポイントの大幅減となり、優勝率も9.9%と他の上位デッキタイプと比べて低い数値となっています。環境の変化に対応しきれていない可能性が示唆されます。</p>
+
+<p>緑/白デッキは12.7%のシェアで127デッキを記録し、優勝率12.6%と安定した強さを見せています。また、白/紫デッキも4.3%から6.9%へと2.6ポイント上昇するなど、<strong>白色を含むデッキタイプの躍進</strong>が今月の特徴として挙げられます。ただし、これらは月前半のみの中間データであることを考慮し、月末までの推移を注視する必要があります。</p>
+
+      <p style="color:var(--text-muted);font-size:12px;margin-top:24px">
+        ※本記事は6/7開催分まで(公式掲載6/12時点)の中間集計です。月末の最終集計で数値は変動します。<br>
+        ※データソース: <a href="https://gcg-stats.com/series/ntc-2026-mission3-june.html">NTC 2026 MISSION3(6月開催)イベント一覧</a>
+      </p>
+
+    </article>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="../js/common.js?v=13"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>

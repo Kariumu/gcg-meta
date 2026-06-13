@@ -363,7 +363,7 @@ breadcrumbNav +
 '\n' +
 '  <div id="footer"></div>\n' +
 '\n' +
-'  <script src="../shared/ntc-rank-consolidator.js?v=1"></script>\n' +
+'  <script src="../shared/ntc-rank-consolidator.js?v=3"></script>\n' +
 '  <script src="../js/common.js?v=11"></script>\n' +
 '  <script>\n' +
 clientJs +

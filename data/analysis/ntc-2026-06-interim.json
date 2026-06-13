@@ -1,0 +1,534 @@
+{
+  "generated_at": "2026-06-12T22:13:01.697Z",
+  "series_id": "6791",
+  "period": {
+    "from": "2026-06-01",
+    "to": "2026-06-07"
+  },
+  "methodology": "64名定員大会(results>=16)は consolidator で「ベスト8・各順位2名(優勝2名)」に換算。集計対象は rank<=8 かつデッキデータあり。デッキタイプは scraper.js getDeckColors の色組み合わせ。5月(6776)も同一規則で算出。",
+  "june": {
+    "events": 108,
+    "consolidated_events": 20,
+    "decks": 998,
+    "winners": 125,
+    "deck_types": [
+      {
+        "type_key": "Blue+Purple",
+        "colors": [
+          "Blue",
+          "Purple"
+        ],
+        "label": "青/紫",
+        "count": 259,
+        "wins": 42,
+        "share": 26,
+        "win_rate": 16.2,
+        "win_share": 33.6
+      },
+      {
+        "type_key": "Red+White",
+        "colors": [
+          "Red",
+          "White"
+        ],
+        "label": "赤/白",
+        "count": 205,
+        "wins": 25,
+        "share": 20.5,
+        "win_rate": 12.2,
+        "win_share": 20
+      },
+      {
+        "type_key": "Blue+White",
+        "colors": [
+          "Blue",
+          "White"
+        ],
+        "label": "青/白",
+        "count": 137,
+        "wins": 14,
+        "share": 13.7,
+        "win_rate": 10.2,
+        "win_share": 11.2
+      },
+      {
+        "type_key": "Green+White",
+        "colors": [
+          "Green",
+          "White"
+        ],
+        "label": "緑/白",
+        "count": 127,
+        "wins": 16,
+        "share": 12.7,
+        "win_rate": 12.6,
+        "win_share": 12.8
+      },
+      {
+        "type_key": "Blue+Green",
+        "colors": [
+          "Blue",
+          "Green"
+        ],
+        "label": "青/緑",
+        "count": 91,
+        "wins": 9,
+        "share": 9.1,
+        "win_rate": 9.9,
+        "win_share": 7.2
+      },
+      {
+        "type_key": "White+Purple",
+        "colors": [
+          "White",
+          "Purple"
+        ],
+        "label": "白/紫",
+        "count": 69,
+        "wins": 9,
+        "share": 6.9,
+        "win_rate": 13,
+        "win_share": 7.2
+      },
+      {
+        "type_key": "Blue+Red",
+        "colors": [
+          "Blue",
+          "Red"
+        ],
+        "label": "青/赤",
+        "count": 57,
+        "wins": 5,
+        "share": 5.7,
+        "win_rate": 8.8,
+        "win_share": 4
+      },
+      {
+        "type_key": "Red+Green",
+        "colors": [
+          "Red",
+          "Green"
+        ],
+        "label": "赤/緑",
+        "count": 31,
+        "wins": 4,
+        "share": 3.1,
+        "win_rate": 12.9,
+        "win_share": 3.2
+      },
+      {
+        "type_key": "Red+Purple",
+        "colors": [
+          "Red",
+          "Purple"
+        ],
+        "label": "赤/紫",
+        "count": 19,
+        "wins": 1,
+        "share": 1.9,
+        "win_rate": 5.3,
+        "win_share": 0.8
+      },
+      {
+        "type_key": "Green+Purple",
+        "colors": [
+          "Green",
+          "Purple"
+        ],
+        "label": "緑/紫",
+        "count": 2,
+        "wins": 0,
+        "share": 0.2,
+        "win_rate": 0,
+        "win_share": 0
+      },
+      {
+        "type_key": "Blue",
+        "colors": [
+          "Blue"
+        ],
+        "label": "青",
+        "count": 1,
+        "wins": 0,
+        "share": 0.1,
+        "win_rate": 0,
+        "win_share": 0
+      }
+    ],
+    "rank_distribution": {
+      "1": 125,
+      "2": 126,
+      "3": 124,
+      "4": 127,
+      "5": 123,
+      "6": 126,
+      "7": 123,
+      "8": 124
+    },
+    "regions": [
+      {
+        "region": "関東",
+        "events": 27,
+        "decks": 287,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 78
+          },
+          {
+            "type_key": "Red+White",
+            "count": 65
+          },
+          {
+            "type_key": "Blue+White",
+            "count": 41
+          }
+        ]
+      },
+      {
+        "region": "中部",
+        "events": 17,
+        "decks": 168,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 38
+          },
+          {
+            "type_key": "Red+White",
+            "count": 28
+          },
+          {
+            "type_key": "Blue+White",
+            "count": 23
+          }
+        ]
+      },
+      {
+        "region": "関西",
+        "events": 18,
+        "decks": 160,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 47
+          },
+          {
+            "type_key": "Red+White",
+            "count": 36
+          },
+          {
+            "type_key": "Green+White",
+            "count": 20
+          }
+        ]
+      },
+      {
+        "region": "その他",
+        "events": 19,
+        "decks": 152,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 33
+          },
+          {
+            "type_key": "Red+White",
+            "count": 31
+          },
+          {
+            "type_key": "Blue+White",
+            "count": 26
+          }
+        ]
+      },
+      {
+        "region": "九州",
+        "events": 12,
+        "decks": 97,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 24
+          },
+          {
+            "type_key": "Red+White",
+            "count": 23
+          },
+          {
+            "type_key": "Green+White",
+            "count": 14
+          }
+        ]
+      },
+      {
+        "region": "中国",
+        "events": 7,
+        "decks": 62,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 15
+          },
+          {
+            "type_key": "Red+White",
+            "count": 12
+          },
+          {
+            "type_key": "Green+White",
+            "count": 12
+          }
+        ]
+      },
+      {
+        "region": "東北",
+        "events": 4,
+        "decks": 40,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 16
+          },
+          {
+            "type_key": "Red+White",
+            "count": 6
+          },
+          {
+            "type_key": "Blue+White",
+            "count": 5
+          }
+        ]
+      },
+      {
+        "region": "四国",
+        "events": 2,
+        "decks": 16,
+        "top_types": [
+          {
+            "type_key": "Blue+Green",
+            "count": 4
+          },
+          {
+            "type_key": "Blue+Purple",
+            "count": 3
+          },
+          {
+            "type_key": "Blue+White",
+            "count": 2
+          }
+        ]
+      },
+      {
+        "region": "北海道",
+        "events": 2,
+        "decks": 16,
+        "top_types": [
+          {
+            "type_key": "Blue+Purple",
+            "count": 5
+          },
+          {
+            "type_key": "Green+White",
+            "count": 3
+          },
+          {
+            "type_key": "Blue+White",
+            "count": 3
+          }
+        ]
+      }
+    ]
+  },
+  "may_baseline": {
+    "events": 227,
+    "decks": 2107,
+    "winners": 263,
+    "deck_types": [
+      {
+        "type_key": "Blue+Purple",
+        "label": "青/紫",
+        "count": 625,
+        "share": 29.7,
+        "wins": 94,
+        "win_rate": 15,
+        "win_share": 35.7
+      },
+      {
+        "type_key": "Red+White",
+        "label": "赤/白",
+        "count": 330,
+        "share": 15.7,
+        "wins": 48,
+        "win_rate": 14.5,
+        "win_share": 18.3
+      },
+      {
+        "type_key": "Blue+White",
+        "label": "青/白",
+        "count": 291,
+        "share": 13.8,
+        "wins": 28,
+        "win_rate": 9.6,
+        "win_share": 10.6
+      },
+      {
+        "type_key": "Blue+Green",
+        "label": "青/緑",
+        "count": 283,
+        "share": 13.4,
+        "wins": 22,
+        "win_rate": 7.8,
+        "win_share": 8.4
+      },
+      {
+        "type_key": "Green+White",
+        "label": "緑/白",
+        "count": 245,
+        "share": 11.6,
+        "wins": 34,
+        "win_rate": 13.9,
+        "win_share": 12.9
+      },
+      {
+        "type_key": "Blue+Red",
+        "label": "青/赤",
+        "count": 103,
+        "share": 4.9,
+        "wins": 8,
+        "win_rate": 7.8,
+        "win_share": 3
+      },
+      {
+        "type_key": "White+Purple",
+        "label": "白/紫",
+        "count": 90,
+        "share": 4.3,
+        "wins": 13,
+        "win_rate": 14.4,
+        "win_share": 4.9
+      },
+      {
+        "type_key": "Red+Green",
+        "label": "赤/緑",
+        "count": 86,
+        "share": 4.1,
+        "wins": 9,
+        "win_rate": 10.5,
+        "win_share": 3.4
+      },
+      {
+        "type_key": "Red+Purple",
+        "label": "赤/紫",
+        "count": 46,
+        "share": 2.2,
+        "wins": 5,
+        "win_rate": 10.9,
+        "win_share": 1.9
+      },
+      {
+        "type_key": "Green+Purple",
+        "label": "緑/紫",
+        "count": 6,
+        "share": 0.3,
+        "wins": 1,
+        "win_rate": 16.7,
+        "win_share": 0.4
+      },
+      {
+        "type_key": "Green",
+        "label": "緑",
+        "count": 2,
+        "share": 0.1,
+        "wins": 1,
+        "win_rate": 50,
+        "win_share": 0.4
+      }
+    ]
+  },
+  "share_comparison": [
+    {
+      "type_key": "Red+White",
+      "label": "赤/白",
+      "june_share": 20.5,
+      "may_share": 15.7,
+      "diff": 4.8
+    },
+    {
+      "type_key": "White+Purple",
+      "label": "白/紫",
+      "june_share": 6.9,
+      "may_share": 4.3,
+      "diff": 2.6
+    },
+    {
+      "type_key": "Green+White",
+      "label": "緑/白",
+      "june_share": 12.7,
+      "may_share": 11.6,
+      "diff": 1.1
+    },
+    {
+      "type_key": "Blue+Red",
+      "label": "青/赤",
+      "june_share": 5.7,
+      "may_share": 4.9,
+      "diff": 0.8
+    },
+    {
+      "type_key": "Blue",
+      "label": "青",
+      "june_share": 0.1,
+      "may_share": 0,
+      "diff": 0.1
+    },
+    {
+      "type_key": "Blue+White",
+      "label": "青/白",
+      "june_share": 13.7,
+      "may_share": 13.8,
+      "diff": -0.1
+    },
+    {
+      "type_key": "Green+Purple",
+      "label": "緑/紫",
+      "june_share": 0.2,
+      "may_share": 0.3,
+      "diff": -0.1
+    },
+    {
+      "type_key": "Green",
+      "label": "緑",
+      "june_share": 0,
+      "may_share": 0.1,
+      "diff": -0.1
+    },
+    {
+      "type_key": "Red+Purple",
+      "label": "赤/紫",
+      "june_share": 1.9,
+      "may_share": 2.2,
+      "diff": -0.3
+    },
+    {
+      "type_key": "Red+Green",
+      "label": "赤/緑",
+      "june_share": 3.1,
+      "may_share": 4.1,
+      "diff": -1
+    },
+    {
+      "type_key": "Blue+Purple",
+      "label": "青/紫",
+      "june_share": 26,
+      "may_share": 29.7,
+      "diff": -3.7
+    },
+    {
+      "type_key": "Blue+Green",
+      "label": "青/緑",
+      "june_share": 9.1,
+      "may_share": 13.4,
+      "diff": -4.3
+    }
+  ]
+}
