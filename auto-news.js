@@ -1656,6 +1656,17 @@ function isUnreleasedCard(cardNumber) {
   return false;
 }
 
+// 未発売カード(cards/{番号}/ 未生成)は sets/{セット}.html#{番号} へ誘導し404回避
+// 指示書v7-p2 Task2-2: 実ファイル存在で判定(番号ヒューリスティックは使わない)
+function cardHref(cardId) {
+  if (fs.existsSync(path.join(ROOT, 'cards', cardId))) return `../../cards/${cardId}/`;
+  const setPrefix = String(cardId).split('-')[0].toLowerCase();
+  if (setPrefix && fs.existsSync(path.join(ROOT, 'sets', `${setPrefix}.html`))) {
+    return `../../sets/${setPrefix}.html#${cardId}`;
+  }
+  return `../../cards/${cardId}/`; // どちらも無ければ従来どおり(挙動不変)
+}
+
 // === カードブロックHTML（画像+ステータス+考察+インライン関連カードをセット表示） ===
 function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   const num = escapeHtml(card.card_number);
@@ -1717,8 +1728,8 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
     for (const r of inlineRelated) {
       const rImgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
       html += '    <div class="news-card-related-item">\n';
-      html += `      <a href="../../cards/${r.card_id}/"><img class="news-card-related-thumb" src="${rImgUrl}" alt="${escapeHtml(r.name)}" onerror="this.style.display=\'none\'"></a>\n`;
-      html += `      <a href="../../cards/${r.card_id}/" class="news-card-related-link">${escapeHtml(r.name)} (${r.card_id}) — ${escapeHtml(r.color)}系${r.usage_rate}%</a>\n`;
+      html += `      <a href="${cardHref(r.card_id)}"><img class="news-card-related-thumb" src="${rImgUrl}" alt="${escapeHtml(r.name)}" onerror="this.style.display=\'none\'"></a>\n`;
+      html += `      <a href="${cardHref(r.card_id)}" class="news-card-related-link">${escapeHtml(r.name)} (${r.card_id}) — ${escapeHtml(r.color)}系${r.usage_rate}%</a>\n`;
       html += '    </div>\n';
     }
     html += '  </div>\n';
@@ -1733,8 +1744,8 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
     for (const r of linkTargets) {
       const rImgUrl = `${CARD_IMAGE_BASE}/${r.card_id}.webp`;
       html += '    <div class="news-card-related-item">\n';
-      html += `      <a href="../../cards/${r.card_id}/"><img class="news-card-related-thumb" src="${rImgUrl}" alt="${escapeHtml(r.name)}" onerror="this.style.display=\'none\'"></a>\n`;
-      html += `      <a href="../../cards/${r.card_id}/" class="news-card-related-link">${escapeHtml(r.name)} (${r.card_id})</a>\n`;
+      html += `      <a href="${cardHref(r.card_id)}"><img class="news-card-related-thumb" src="${rImgUrl}" alt="${escapeHtml(r.name)}" onerror="this.style.display=\'none\'"></a>\n`;
+      html += `      <a href="${cardHref(r.card_id)}" class="news-card-related-link">${escapeHtml(r.name)} (${r.card_id})</a>\n`;
       html += '    </div>\n';
     }
     html += '  </div>\n';
@@ -1765,11 +1776,11 @@ function buildRelatedCardsHtml(relatedCards, articleDate) {
       : `${escapeHtml(r.color)}系デッキ内採用率${r.usage_rate}% (${r.decks}デッキ)`;
 
     html += '<li style="display:flex;align-items:center;gap:10px;margin-bottom:8px">\n';
-    html += `  <a href="../../cards/${r.card_id}/" style="flex-shrink:0">\n`;
+    html += `  <a href="${cardHref(r.card_id)}" style="flex-shrink:0">\n`;
     html += `    <img src="${imgUrl}" alt="${escapeHtml(r.name)}" style="width:40px;height:56px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display='none'">\n`;
     html += '  </a>\n';
     html += '  <div>\n';
-    html += `    <a href="../../cards/${r.card_id}/" style="color:var(--text-primary);text-decoration:none;font-weight:600">${escapeHtml(r.name)}<span style="color:var(--text-muted);font-weight:400;margin-left:4px">(${escapeHtml(r.card_id)})</span>${previewBadge}</a>\n`;
+    html += `    <a href="${cardHref(r.card_id)}" style="color:var(--text-primary);text-decoration:none;font-weight:600">${escapeHtml(r.name)}<span style="color:var(--text-muted);font-weight:400;margin-left:4px">(${escapeHtml(r.card_id)})</span>${previewBadge}</a>\n`;
     html += `    <div style="font-size:12px;color:var(--text-secondary)">${statsText}</div>\n`;
     html += '  </div>\n';
     html += '</li>\n';

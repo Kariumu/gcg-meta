@@ -465,7 +465,7 @@ function cardBlock(card) {
   const rarityCls = VALID_RARITIES.includes(card.rarity) ? `rarity-${card.rarity}` : 'rarity-unknown';
   const rarityText = card.rarity === null || card.rarity === undefined ? '確認中' : escapeHtml(card.rarity);
 
-  let html = '    <article class="pcard">\n';
+  let html = '    <article class="pcard" id="' + escapeHtml(card.key) + '">\n';
   // ヘッダ行: 番号 / 名前 / レアリティ / データ確認中バッジ
   html += '      <div class="pcard-head">\n';
   html += `        <span class="pcard-number">${escapeHtml(card.key)}</span>\n`;

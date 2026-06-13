@@ -232,6 +232,7 @@ const GCG = {
     schedule: { main: 'tournaments', sub: 'schedule' },
     meta:     { main: 'analysis',    sub: null       },
     cards:    { main: 'cards',       sub: null       },
+    sets:     { main: 'sets',        sub: null       },
     reports:  { main: 'reports',     sub: null       },
     stores:   { main: 'venues',      sub: 'stores'   },
     regions:  { main: 'venues',      sub: 'regions'  }
@@ -243,6 +244,7 @@ const GCG = {
     { key: 'tournaments', href: 'events.html',  label: '大会データ'  },
     { key: 'analysis',    href: 'meta.html',    label: '環境分析'   },
     { key: 'cards',       href: 'cards.html',   label: 'カードリスト' },
+    { key: 'sets',        href: 'sets/',        label: '新弾プレビュー' },
     { key: 'reports',     href: 'reports/',     label: 'レポート'   },
     { key: 'venues',      href: 'stores.html',  label: '店舗・地域'  }
   ],

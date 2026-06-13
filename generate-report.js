@@ -910,6 +910,17 @@ function buildRegionalPrompt(mondayStr, sundayStr, regionEvents, regionStats, re
 }
 
 async function main() {
+  // --index-only: 記事生成(ANTHROPIC_API_KEY 必須)をスキップし、
+  // articles.json から reports/index.html と sitemap を再生成するだけのモード(API不使用)。
+  // 指示書v7-p2: rebuild-site.bat / 通常運用で「一覧だけ」更新したい場合に使用。
+  if (process.argv.includes('--index-only')) {
+    console.log('=== --index-only: reports/index.html と sitemap を再生成(API不使用) ===');
+    updateReportIndex();
+    updateSitemap();
+    console.log('  → 完了(記事本文の生成はスキップ)');
+    return;
+  }
+
   console.log('=== 環境レポート生成 ===');
 
   const eventsData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'events.json'), 'utf-8'));

@@ -765,7 +765,7 @@ ${setOrder.map(prefix => `          <button class="filter-chip" data-value="${pr
   <button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="ページ上部へ">&#x25B2;</button>
 
 ${generateNoscriptContent()}
-  <script src="js/common.js"></script>
+  <script src="js/common.js?v=15"></script>
   <script>
     // === Card Data (embedded at build time) ===
     var CARDS = ${generateCardsDataJS()};
