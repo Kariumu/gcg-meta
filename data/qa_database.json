@@ -1,10 +1,11 @@
 {
   "version": "1.0",
-  "generated_at": "2026-05-26T18:36:18+09:00",
+  "generated_at": "2026-06-13T09:19:34+09:00",
   "source": "https://www.gundam-gcg.com/jp/rules/faqs/",
-  "total_count": 238,
+  "total_count": 363,
   "categories": [
     "AP",
+    "EB01",
     "GD01",
     "GD02",
     "GD03",
@@ -18,6 +19,7 @@
     "ST07",
     "ST08",
     "ST09",
+    "ST10",
     "その他",
     "アタック時",
     "ゲームの準備",
@@ -35,6 +37,9 @@
     "メインフェイズ -カードのプレイ-",
     "メインフェイズ -カードの効果発動-",
     "メインフェイズ -ユニットのアタック-",
+    "メインフェイズ+-カードのプレイ-",
+    "メインフェイズ+-カードの効果発動-",
+    "メインフェイズ+-ユニットのアタック-",
     "ユニット",
     "リソースフェイズ",
     "リペア",
@@ -3006,6 +3011,1583 @@
       ],
       "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST04",
       "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q239",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-001 Ζガンダム（EX）",
+      "question": "自分を含む4人でのバトルロワイヤル戦で、相手プレイヤーAのシールドを破壊したことでこの効果によってアクティブになりました。この後、まだアタックしていない他の相手プレイヤーBとCにはアタックできますか？",
+      "answer": "はい、アタックできます。",
+      "card_ids": [
+        "ST10-001"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q240",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-002 Ζガンダム",
+      "question": "この【配備時・開発2】は、HP4以下の相手のユニットがいなくても該当カードを除外して発動することはできますか？",
+      "answer": "はい、発動できます。",
+      "card_ids": [
+        "ST10-002"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q241",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-007 ガンダム・バルバトス（第4形態）",
+      "question": "この【リンク時・開発2】は、自分のトラッシュにLv.4以下のコマンドカードがなくても該当カードを除外して発動することはできますか？",
+      "answer": "はい、発動できます。",
+      "card_ids": [
+        "ST10-007"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q242",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-008 ガンダム・バルバトス（第1形態）",
+      "question": "この効果をチーム戦で発動した場合、相手プレイヤーが2人いるので2枚ドローした後に2枚捨てるということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "ST10-008"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q243",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-008 ガンダム・バルバトス（第1形態）",
+      "question": "この効果をバトルロワイヤル戦で発動した場合、相手プレイヤーが3人残っているのであれば3枚ドローした後に3枚捨てるということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "ST10-008"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q244",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-011 カミーユ・ビダン",
+      "question": "この効果は、味方と相手問わずレストのユニットが2つ以上いれば条件を満たしますか？",
+      "answer": "はい、満たします。",
+      "card_ids": [
+        "ST10-011"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q245",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-011 カミーユ・ビダン",
+      "question": "このパイロットをLv.4のユニットにセットして【リンク時】効果が発動した場合、この効果で選ぶ対象はLv.4以下のユニットという事でしょうか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "ST10-011"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q246",
+      "category": "ST10",
+      "source_type": "product",
+      "title": "ST10-013 戦術訓練",
+      "question": "この効果は、味方と相手問わず選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "ST10-013"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST10",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q247",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-002 Hi-νガンダム（EX）",
+      "question": "2つ目の効果は、味方と相手問わず、このユニット以外のレストのユニットが3つ以上いれば条件を満たしますか？",
+      "answer": "はい、満たします。",
+      "card_ids": [
+        "EB01-002"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q248",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-003 ナラティブガンダムA装備（EX）",
+      "question": "2つ目の効果は味方のユニットもレストにしますか？",
+      "answer": "はい、レストにします。",
+      "card_ids": [
+        "EB01-003"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q249",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-005 Zガンダム3号機P2型",
+      "question": "この効果はチーム戦でレストの味方のユニットも選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "EB01-005"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q250",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-009 フルアーマー・ガンダム（サンダーボルト版）（EX）",
+      "question": "「相手プレイヤーすべては、それぞれアクティブの自身のユニット1つを選ぶ。」とは、相手プレイヤーがそれぞれ、そのプレイヤーが持ち主であるユニット1つを選ぶという事ですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "EB01-009"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q251",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-009 フルアーマー・ガンダム（サンダーボルト版）（EX）",
+      "question": "この効果は相手プレイヤー全員が同時に行うのですか？",
+      "answer": "アクティブプレイヤーを起点として、ゲーム開始時に決めた回り順で相手のプレイヤーは順に行ってください。 効果としては同時に行われた扱いとなります。",
+      "card_ids": [
+        "EB01-009"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q252",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-010 ガンダム・バルバトス（第6形態）",
+      "question": "この【配備時・開発3】は、レストの相手のユニットがいなくても該当カードを除外して発動することはできますか？",
+      "answer": "はい、発動できます。",
+      "card_ids": [
+        "EB01-010"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q253",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-015 試作アッシマーTR-3[キハール]",
+      "question": "この効果は、味方と相手問わずレストのユニットが2つ以上いれば条件を満たしますか？",
+      "answer": "はい、満たします。",
+      "card_ids": [
+        "EB01-015"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q254",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-019 ガンダム・ピクシー",
+      "question": "この効果は、味方と相手問わずレストのユニットが2つ以上いれば条件を満たしますか？",
+      "answer": "はい、満たします。",
+      "card_ids": [
+        "EB01-019"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q255",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-020 ガンダムMk-Ⅲ",
+      "question": "【起動・アクション】効果は、相手のユニットも選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "EB01-020"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q256",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-023 ル・シーニュ（EX）",
+      "question": "この効果はプレイヤー全員が同時に行うのですか？",
+      "answer": "ゲーム開始時に決めた回り順でアクティブプレイヤーから順に行ってください。 効果としては同時に行われた扱いとなります。",
+      "card_ids": [
+        "EB01-023"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q257",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-025 トールギスⅡ",
+      "question": "この効果はプレイヤー全員が同時に行うのですか？",
+      "answer": "ゲーム開始時に決めた回り順でアクティブプレイヤーから順に行ってください。 効果としては同時に行われた扱いとなります。",
+      "card_ids": [
+        "EB01-025"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q258",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-059 サイコ・ザク",
+      "question": "この効果はプレイヤー全員が同時に行うのですか？",
+      "answer": "ゲーム開始時に決めた回り順でアクティブプレイヤーから順に行ってください。 効果としては同時に行われた扱いとなります。",
+      "card_ids": [
+        "EB01-059"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q259",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-059 サイコ・ザク",
+      "question": "この効果はアクティブのリソースを選べますか？",
+      "answer": "はい、選べます。但し、既にアクティブですので何も起きません。",
+      "card_ids": [
+        "EB01-059"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q260",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-059 サイコ・ザク",
+      "question": "この効果はアクティブのEXリソースを選べますか？",
+      "answer": "はい、EXリソースもリソースとして選べます。但し、既にアクティブですので何も起きません。",
+      "card_ids": [
+        "EB01-059"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q261",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-060 ガンダムアクエリアス",
+      "question": "この【配備時・開発3】は、Lv.4以下の相手のユニットがいなくても該当カードを除外して発動することはできますか？",
+      "answer": "はい、発動できます。",
+      "card_ids": [
+        "EB01-060"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q262",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-063 イオ・フレミング",
+      "question": "この効果は、味方と相手問わずレストのユニットが2つ以上いれば条件を満たしますか？",
+      "answer": "はい、満たします。",
+      "card_ids": [
+        "EB01-063"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q263",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-070 ダリル・ローレンツ",
+      "question": "この効果は、味方と相手問わず選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "EB01-070"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q264",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-072 ユウ・カジマ",
+      "question": "この効果は、自分のユニットがいないときに相手のユニット1つだけを選んで発動できますか？",
+      "answer": "いいえ、両方選べなければ発動しません。",
+      "card_ids": [
+        "EB01-072"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q265",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-073 キャラリクエスト",
+      "question": "この効果は、味方と相手問わずレストのユニットが6つ以上いれば条件を満たしますか？",
+      "answer": "はい、満たします。",
+      "card_ids": [
+        "EB01-073"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q266",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-074 エターナルロード",
+      "question": "「相手プレイヤーすべては、それぞれアクティブの自身のユニット1つを選ぶ。」とは、相手プレイヤーがそれぞれ、そのプレイヤーが持ち主であるユニット1つを選ぶのですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "EB01-074"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q267",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-074 エターナルロード",
+      "question": "この効果は相手プレイヤー全員が同時に行うのですか？",
+      "answer": "アクティブプレイヤーを起点として、ゲーム開始時に決めた回り順で相手のプレイヤーは順に行ってください。 効果としては同時に行われた扱いとなります。",
+      "card_ids": [
+        "EB01-074"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q268",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-078 プレミアムガシャ",
+      "question": "この効果はプレイヤー全員が同時に行うのですか？",
+      "answer": "ゲーム開始時に決めた回り順でアクティブプレイヤーから順に行ってください。 効果としては同時に行われた扱いとなります。",
+      "card_ids": [
+        "EB01-078"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q269",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-080 シュツルム・ファウスト",
+      "question": "この効果は、味方と相手問わず選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "EB01-080"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q270",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-083 SP化チップ",
+      "question": "この効果は、味方と相手問わず選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "EB01-083"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q271",
+      "category": "EB01",
+      "source_type": "product",
+      "title": "EB01-084 30cm砲（APFSDS弾）",
+      "question": "この効果は、味方と相手問わず選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "EB01-084"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=EB01",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q272",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-053 ブレイズザクファントム（レイ専用機）",
+      "question": "「軽減」とは何ですか？",
+      "answer": "「軽減」とは受けるダメージを減らす意味を持ちます。例えば3ダメージを受ける際に「1軽減」とあれば、受けるダメージは2になります。",
+      "card_ids": [
+        "GD04-053"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q273",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-065 ユニコーンガンダム2号機 バンシィ・ノルン（デストロイモード）",
+      "question": "「相手プレイヤーをアタック先に選べない」とは、相手のベースやシールドにもアタックできないということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "GD04-065"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q274",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-067 ∀ガンダム",
+      "question": "この効果でトラッシュにある《ブロッカー》と《リペア》を持つ「GD03-003 メッサーラ」を選びました。このとき、このユニットはこのターン中、《ブロッカー》と《リペア》を得ますか？",
+      "answer": "はい、《ブロッカー》と《リペア》を得ます。",
+      "card_ids": [
+        "GD04-067"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q275",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-067 ∀ガンダム",
+      "question": "この効果でトラッシュにある、条件で《高機動》を得る「GD03-040 ガンダムヴァサーゴ&ガンダムアシュタロン」は選べますか？",
+      "answer": "いいえ、選べません。",
+      "card_ids": [
+        "GD04-067"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q276",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-068 シルヴァ・バレト",
+      "question": "「軽減」とは何ですか？",
+      "answer": "「軽減」とは受けるダメージを減らす意味を持ちます。例えば3ダメージを受ける際に「1軽減」とあれば、受けるダメージは2になります。",
+      "card_ids": [
+        "GD04-068"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q277",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-090 ハレルヤ・ハプティズム",
+      "question": "この効果は、バトルでお互いのユニットが破壊されたときでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD04-090"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q278",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-093 レイ・ザ・バレル",
+      "question": "「軽減」とは何ですか？",
+      "answer": "「軽減」とは受けるダメージを減らす意味を持ちます。例えば3ダメージを受ける際に「1軽減」とあれば、受けるダメージは2になります。",
+      "card_ids": [
+        "GD04-093"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q279",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-096 エニル・エル",
+      "question": "このユニットがAP0のとき、このユニットの効果で破壊できますか？",
+      "answer": "いいえ、AP0はダメージを与えた事にはならないので破壊できません。",
+      "card_ids": [
+        "GD04-096"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q280",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-098 リディ・マーセナス",
+      "question": "「軽減」とは何ですか？",
+      "answer": "「軽減」とは受けるダメージを減らす意味を持ちます。例えば3ダメージを受ける際に「1軽減」とあれば、受けるダメージは2になります。",
+      "card_ids": [
+        "GD04-098"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q281",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-100 ソシエ・ハイム",
+      "question": "この効果は「GD03-051 ガンダムXディバイダー」の効果でユニットを配備するときに支払うコストでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD04-100"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q282",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-102 束の間の休息",
+      "question": "この効果で選んだユニットは、「GD01-121 空中換装」の【バースト】で発動した【メイン】の効果ではアクティブになりますか？",
+      "answer": "はい、アクティブになります。指定されたターンのスタートフェイズにアクティブにならないだけで、別のフェイズに効果でアクティブにするのは有効です。",
+      "card_ids": [
+        "GD04-102"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q283",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-107 宿命の戦い",
+      "question": "「相手のユニットはアタックするとき、可能ならレストのこのユニットをアタック先に選ぶ。」を持つ「GD03-019 ガンダムAGE-2 ノーマル」がいるとき、他のレストの自分のユニットを選んでこの効果を発動しました。このとき、相手はどちらを優先してアタックしますか？",
+      "answer": "相手のユニットはアタックするとき、この効果で選ばれたユニットを優先しなければいけません。",
+      "card_ids": [
+        "GD04-107"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q284",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-108 地球の魔女",
+      "question": "「軽減」とは何ですか？",
+      "answer": "「軽減」とは受けるダメージを減らす意味を持ちます。例えば3ダメージを受ける際に「1軽減」とあれば、受けるダメージは2になります。",
+      "card_ids": [
+        "GD04-108"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q285",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-113 ダメージコントロール",
+      "question": "「軽減」とは何ですか？",
+      "answer": "「軽減」とは受けるダメージを減らす意味を持ちます。例えば3ダメージを受ける際に「1軽減」とあれば、受けるダメージは2になります。",
+      "card_ids": [
+        "GD04-113"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q286",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-114 変革をもたらすもの",
+      "question": "この効果は、相手のユニットがいないときに自分のユニット1つだけを選んで発動できますか？",
+      "answer": "いいえ、両方選べなければ発動しません。",
+      "card_ids": [
+        "GD04-114"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q287",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-115 バックアップ",
+      "question": "このユニットがAP0のとき、このユニットの効果で破壊できますか？",
+      "answer": "いいえ、AP0はダメージを与えた事にはならないので破壊できません。",
+      "card_ids": [
+        "GD04-115"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q288",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-129 ウィルゲム",
+      "question": "この効果は「GD03-051 ガンダムXディバイダー」の効果でユニットを配備するときに支払うコストでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD04-129"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-04-10"
+    },
+    {
+      "id": "Q289",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-107 宿命の戦い",
+      "question": "相手のユニットがアタックした後のアクションステップに、このカードをプレイしました。このとき、現在アタックしているユニットのアタック先はこの効果の対象ユニットに変更されますか？",
+      "answer": "いいえ、変更されません。",
+      "card_ids": [
+        "GD04-107"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q290",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-107 宿命の戦い",
+      "question": "この効果の対象ユニットが場から離れた場合、相手のユニットはアタックできますか？",
+      "answer": "はい、アタックできます。 この効果の対象ユニットがいないため、レストの相手のユニットやプレイヤーの中から選んでアタックできます。",
+      "card_ids": [
+        "GD04-107"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q291",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-107 宿命の戦い",
+      "question": "この効果の対象ユニットがアクティブである場合、相手のユニットはアタックできますか？",
+      "answer": "はい、アタックできます。 この効果の対象ユニットがルール上選べなくなったため、他のレストの相手のユニットやプレイヤーの中から選んでアタックできます。",
+      "card_ids": [
+        "GD04-107"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q292",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-107 宿命の戦い",
+      "question": "この効果の対象ユニットがアクティブである場合、「アクティブの相手のユニットをアタック先に選んでもよい」効果を持つ相手のユニットはアタックする時にその対象ユニットを選ばなければなりませんか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "GD04-107"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q293",
+      "category": "GD04",
+      "source_type": "product",
+      "title": "GD04-033 ネオ・ジオング",
+      "question": "「【リンク中】自分のユニットすべては〔ネオ・ジオン〕を得る。」とは、手札やトラッシュなどにあるユニットカードも〔ネオ・ジオン〕を得ますか？",
+      "answer": "いいえ、自分のバトルエリアにいるユニットだけが〔ネオ・ジオン〕を得ます。",
+      "card_ids": [
+        "GD04-033"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD04",
+      "updated_at": "2026-06-12"
+    },
+    {
+      "id": "Q294",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-015 バウンド・ドック",
+      "question": "この効果で除外したカードはどこに置かれますか？",
+      "answer": "除外エリアに置かれます。トラッシュとは異なりますので、除外されたカード（トークン以外）だけが置かれる領域を用意して置きます。",
+      "card_ids": [
+        "GD03-015"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q295",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-022 ガンダムキュリオス",
+      "question": "この効果は、バトルでお互いのユニットが破壊されたときでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD03-022"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q296",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-029 ガンダムヘビーアームズ改",
+      "question": "この効果は、バトルでお互いのユニットが破壊されたときでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD03-029"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q297",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-030 ガンダムキュリオス（テールユニット装備）（飛行形態）",
+      "question": "このカードの効果は、Lvも下がりますか？",
+      "answer": "いいえ、下がりません。",
+      "card_ids": [
+        "GD03-030"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q298",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-035 GFreD",
+      "question": "この効果で除外したカードはどこに置かれますか？",
+      "answer": "除外エリアに置かれます。トラッシュとは異なりますので、除外されたカード（トークン以外）だけが置かれる領域を用意して置きます。",
+      "card_ids": [
+        "GD03-035"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q299",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-050 ガンダム・バルバトスルプス",
+      "question": "この効果で除外したカードはどこに置かれますか？",
+      "answer": "除外エリアに置かれます。トラッシュとは異なりますので、除外されたカード（トークン以外）だけが置かれる領域を用意して置きます。",
+      "card_ids": [
+        "GD03-050"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q300",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-051 ガンダムXディバイダー",
+      "question": "この効果で配備されたユニットが【配備時】効果を持っていたとき、その効果は発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD03-051"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q301",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-054 ゼイドラ",
+      "question": "この効果で除外したカードはどこに置かれますか？",
+      "answer": "除外エリアに置かれます。トラッシュとは異なりますので、除外されたカード（トークン以外）だけが置かれる領域を用意して置きます。",
+      "card_ids": [
+        "GD03-054"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q302",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-056 ガンダム・バルバトスアダプト",
+      "question": "この効果は、相手のユニットがいないときに自分のユニット1つだけを選んで発動できますか？",
+      "answer": "いいえ、両方選べなければ発動しません。",
+      "card_ids": [
+        "GD03-056"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q303",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-058 ファルシア",
+      "question": "このカードの効果は、Lvも下がりますか？",
+      "answer": "いいえ、下がりません。",
+      "card_ids": [
+        "GD03-058"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q304",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-059 ゼダスR",
+      "question": "この効果で除外したカードはどこに置かれますか？",
+      "answer": "除外エリアに置かれます。トラッシュとは異なりますので、除外されたカード（トークン以外）だけが置かれる領域を用意して置きます。",
+      "card_ids": [
+        "GD03-059"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q305",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-082 ユニオンフラッグ",
+      "question": "このカードの効果は、Lvも下がりますか？",
+      "answer": "いいえ、下がりません。",
+      "card_ids": [
+        "GD03-082"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q306",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-085 クリスチーナ・マッケンジー",
+      "question": "このカードの効果は、Lvも下がりますか？",
+      "answer": "いいえ、下がりません。",
+      "card_ids": [
+        "GD03-085"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q307",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-097 ウィスタリオ・アファム",
+      "question": "この効果は、バトルでお互いのユニットが破壊されたときでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD03-097"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q308",
+      "category": "GD03",
+      "source_type": "product",
+      "title": "GD03-130 ダウネス",
+      "question": "この効果で配備されたユニットが【配備時】効果を持っていたとき、その効果は発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD03-130"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD03",
+      "updated_at": "2026-01-16"
+    },
+    {
+      "id": "Q309",
+      "category": "ST08",
+      "source_type": "product",
+      "title": "ST08-009 陸戦用ジェガンＡ型 マン・ハンター仕様",
+      "question": "この効果で選んだユニットは、「GD01-121 空中換装」の【バースト】で発動した【メイン】の効果ではアクティブになりますか？",
+      "answer": "はい、アクティブになります。指定されたターンのスタートフェイズにアクティブにならないだけで、別のフェイズに効果でアクティブにするのは有効です。",
+      "card_ids": [
+        "ST08-009"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST08",
+      "updated_at": "2026-01-09"
+    },
+    {
+      "id": "Q310",
+      "category": "ST07",
+      "source_type": "product",
+      "title": "ST07-004 ガンダムヴァーチェ",
+      "question": "この効果の条件を満たして《ブロッカー》を得たこのユニットが相手のユニットをブロックしました。この後、この効果の条件を満たさなくなり、《ブロッカー》を失いました。このとき、このユニットのブロックはどうなりますか？",
+      "answer": "既にブロックは成立しているため、そのままユニット同士のバトルとなります。",
+      "card_ids": [
+        "ST07-004"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST07",
+      "updated_at": "2026-01-09"
+    },
+    {
+      "id": "Q311",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-004 バイアラン",
+      "question": "この効果で選んだユニットは、「GD01-121 空中換装」の【バースト】で発動した【メイン】の効果ではアクティブになりますか？",
+      "answer": "はい、アクティブになります。指定されたターンのスタートフェイズにアクティブにならないだけで、別のフェイズに効果でアクティブにするのは有効です。",
+      "card_ids": [
+        "GD02-004"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q312",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-018 トーラス",
+      "question": "「相手プレイヤーをアタック先に選べない」とは、相手のベースやシールドにもアタックできないということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "GD02-018"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q313",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-035 軍警ザク 特殊部隊仕様",
+      "question": "「相手プレイヤーをアタック先に選べない」とは、相手のベースやシールドにもアタックできないということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "GD02-035"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q314",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-066 ガフラン",
+      "question": "「相手プレイヤーをアタック先に選べない」とは、相手のベースやシールドにもアタックできないということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "GD02-066"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q315",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-069 Ζガンダム",
+      "question": "「相手プレイヤーをアタック先に選べない」とは、相手のベースやシールドにもアタックできないということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "GD02-069"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q316",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-076 バスターガンダム",
+      "question": "この効果の条件を満たして《ブロッカー》を得たこのユニットが相手のユニットをブロックしました。この後、この効果の条件を満たさなくなり、《ブロッカー》を失いました。このとき、このユニットのブロックはどうなりますか？",
+      "answer": "既にブロックは成立しているため、そのままユニット同士のバトルとなります。",
+      "card_ids": [
+        "GD02-076"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q317",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-082 シュヴァルベ・グレイズ（ガエリオ機）",
+      "question": "この効果の条件を満たして《ブロッカー》を得たこのユニットが相手のユニットをブロックしました。この後、この効果の条件を満たさなくなり、《ブロッカー》を失いました。このとき、このユニットのブロックはどうなりますか？",
+      "answer": "既にブロックは成立しているため、そのままユニット同士のバトルとなります。",
+      "card_ids": [
+        "GD02-082"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q318",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-093 オルバ・フロスト",
+      "question": "この効果は、バトルでお互いのユニットが破壊されたときでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD02-093"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q319",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-110 目覚める力",
+      "question": "この効果で配備されたユニットが【配備時】効果を持っていたとき、その効果は発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD02-110"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q320",
+      "category": "GD02",
+      "source_type": "product",
+      "title": "GD02-111 決戦の切り札",
+      "question": "この効果で除外したカードはどこに置かれますか？",
+      "answer": "除外エリアに置かれます。トラッシュとは異なりますので、除外されたカード（トークン以外）だけが置かれる領域を用意して置きます。",
+      "card_ids": [
+        "GD02-111"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD02",
+      "updated_at": "2025-10-24"
+    },
+    {
+      "id": "Q321",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-016 ジェガン",
+      "question": "このカードの効果は、Lvも下がりますか？",
+      "answer": "いいえ、下がりません。",
+      "card_ids": [
+        "GD01-016"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q322",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-027 ビグ・ザム",
+      "question": "【配備時】効果は、自分のユニットにもダメージを与えますか？",
+      "answer": "はい、与えます。",
+      "card_ids": [
+        "GD01-027"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q323",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-028 ガンダムサンドロック",
+      "question": "【配備時】効果でユニットを配備するとき、そのユニットのコストを支払う必要はありますか？",
+      "answer": "いいえ、その必要はありません。",
+      "card_ids": [
+        "GD01-028"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q324",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-028 ガンダムサンドロック",
+      "question": "【配備時】効果で配備されたユニットが【配備時】効果を持っていたとき、その効果は発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD01-028"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q325",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-070 ガンダム・エアリアル",
+      "question": "このカードの効果は、Lvも下がりますか？",
+      "answer": "いいえ、下がりません。",
+      "card_ids": [
+        "GD01-070"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q326",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-081 M1アストレイ",
+      "question": "この効果の条件を満たして【ブロッカー】を得たこのユニットが相手のユニットをブロックしました。この後、この効果の条件を満たさなくなり、【ブロッカー】を失いました。このとき、このユニットのブロックはどうなりますか？",
+      "answer": "既にブロックは成立しているため、そのままユニット同士のバトルとなります。",
+      "card_ids": [
+        "GD01-081"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q327",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-125 ザンジバル",
+      "question": "【配備時】効果でユニットを配備するとき、そのユニットのコストを支払う必要はありますか？",
+      "answer": "いいえ、その必要はありません。",
+      "card_ids": [
+        "GD01-125"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q328",
+      "category": "GD01",
+      "source_type": "product",
+      "title": "GD01-125 ザンジバル",
+      "question": "この効果で配備されたユニットが【配備時】効果を持っていたとき、その効果は発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "GD01-125"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=GD01",
+      "updated_at": "2025-07-11"
+    },
+    {
+      "id": "Q329",
+      "category": "ST05",
+      "source_type": "product",
+      "title": "ST05-010 三日月・オーガス",
+      "question": "この効果は、相手のユニットがいないときに自分のユニット1つだけを選んで発動できますか？",
+      "answer": "いいえ、両方選べなければ発動しません。",
+      "card_ids": [
+        "ST05-010"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST05",
+      "updated_at": "2025-09-26"
+    },
+    {
+      "id": "Q330",
+      "category": "ST05",
+      "source_type": "product",
+      "title": "ST05-011 昭弘・アルトランド",
+      "question": "この効果は、バトルでお互いのユニットが破壊されたときでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "ST05-011"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST05",
+      "updated_at": "2025-09-26"
+    },
+    {
+      "id": "Q331",
+      "category": "ST01",
+      "source_type": "product",
+      "title": "ST01-009 ザウォート",
+      "question": "「相手プレイヤーをアタック先に選べない」とは、相手のベースやシールドにもアタックできないということですか？",
+      "answer": "はい、その通りです。",
+      "card_ids": [
+        "ST01-009"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST01",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q332",
+      "category": "ST01",
+      "source_type": "product",
+      "title": "ST01-011 スレッタ・マーキュリー",
+      "question": "【アタック時】効果はアクティブのリソースを選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "ST01-011"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST01",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q333",
+      "category": "ST01",
+      "source_type": "product",
+      "title": "ST01-011 スレッタ・マーキュリー",
+      "question": "【アタック時】効果はEXリソースを選べますか？",
+      "answer": "はい、選べます。",
+      "card_ids": [
+        "ST01-011"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST01",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q334",
+      "category": "ST02",
+      "source_type": "product",
+      "title": "ST02-011 ゼクス・マーキス",
+      "question": "この効果は、バトルでお互いのユニットが破壊されたときでも発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "ST02-011"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST02",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q335",
+      "category": "ST03",
+      "source_type": "product",
+      "title": "ST03-001 シナンジュ",
+      "question": "2つ目の効果は、相手のベースとシールドどちらを破壊しても発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "ST03-001"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST03",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q336",
+      "category": "ST03",
+      "source_type": "product",
+      "title": "ST03-009 グフ",
+      "question": "既にバトルエリアに配備されている自分のユニットが5つのとき、このユニットを配備しました。このとき、【配備時】効果で配備されるトークンはどうなりますか？",
+      "answer": "既にバトルエリアにいるユニットの中から1つをトラッシュに置いて、そのトークンを配備します。",
+      "card_ids": [
+        "ST03-009"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST03",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q337",
+      "category": "ST03",
+      "source_type": "product",
+      "title": "ST03-010 フル・フロンタル",
+      "question": "【セット時】効果でユニットを配備するとき、そのユニットのコストを支払う必要はありますか？",
+      "answer": "いいえ、その必要はありません。",
+      "card_ids": [
+        "ST03-010"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST03",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q338",
+      "category": "ST03",
+      "source_type": "product",
+      "title": "ST03-010 フル・フロンタル",
+      "question": "【セット時】効果で配備されたユニットが【配備時】効果を持っていたとき、その効果は発動しますか？",
+      "answer": "はい、発動します。",
+      "card_ids": [
+        "ST03-010"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST03",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q339",
+      "category": "ST04",
+      "source_type": "product",
+      "title": "ST04-015 アークエンジェル",
+      "question": "この効果でアクティブにしたユニットは、そのターンに《ブロッカー》を失ったとき、アタックできるようになりますか？",
+      "answer": "いいえ、そのターン中はアタックできません。",
+      "card_ids": [
+        "ST04-015"
+      ],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?series=ST04",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q340",
+      "category": "ゲームの準備",
+      "source_type": "rule_category",
+      "title": "ゲームの準備",
+      "question": "「ST01-001 ガンダム」と「GD01-013 ガンダム」を、デッキにそれぞれ4枚ずつ入れることはできますか？",
+      "answer": "はい、できます。カードナンバーが異なるカードであればカード名が同じでも、別のカードとしてそれぞれ4枚までデッキに入れることができます。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%82%B2%E3%83%BC%E3%83%A0%E3%81%AE%E6%BA%96%E5%82%99",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q341",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "カードをプレイするとき参照するLvは、リソースエリアにあるEXリソースも含めますか？",
+      "answer": "はい、含めます。リソースが2枚とEXリソースが1枚ある場合、Lv.3のカードまでプレイすることができます。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q342",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "カードをプレイするときEXリソースでコストを支払ったため、EXリソースがゲームから取り除かれました。この後、プレイできるカードのLvはどうなりますか？",
+      "answer": "EXリソースがゲームから取り除かれてリソースの数が減ったため、その分だけプレイできるカードのLvは下がります。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q343",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "パイロットを持つコマンドカードは、どのようにパイロットとしてプレイすればいいですか？",
+      "answer": "通常のカードのプレイのようにコストを支払った後、コマンド効果を発動するかわりにそのままユニットにパイロットとしてセットします。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q344",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "既にバトルエリアに配備されているユニットと、同じカード名のユニットを配備することはできますか？",
+      "answer": "はい、できます。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q345",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "既にバトルエリアでユニットにセットされているパイロットと、同じカード名のパイロットを他のユニットにセットすることはできますか？",
+      "answer": "はい、できます。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q346",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "バトルエリアに配備できるユニットの枚数に上限はありますか？",
+      "answer": "はい、あります。バトルエリアに配備できるユニットの上限は6枚になります。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q347",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "既にユニットが6枚配備されているとき、新たにユニットを配備することはできますか？",
+      "answer": "はい、できます。上限を満たしているときに新たにユニットを配備したい場合、既に配備されているユニットをトラッシュに置き、新たにユニットを配備します。このときトラッシュに置かれたユニットは「破壊」扱いではありません。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q348",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "シールドエリア（ベース置き場）に配備できるベースの枚数に上限はありますか？",
+      "answer": "はい、あります。シールドエリア（ベース置き場）に配備できるベースの上限は1枚になります。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q349",
+      "category": "メインフェイズ+-カードのプレイ-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードのプレイ-",
+      "question": "既にベースが配備されているとき、新たにベースを配備させることはできますか？",
+      "answer": "はい、できます。既に配備されているベースをトラッシュに置き、新たにベースを配備します。このときトラッシュに置かれたベースは「破壊」扱いではありません。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E3%83%97%E3%83%AC%E3%82%A4-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q350",
+      "category": "メインフェイズ+-カードの効果発動-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-カードの効果発動-",
+      "question": "【起動・メイン】の効果は配備したばかりのユニットでもそのターンに発動することはできますか？",
+      "answer": "はい、できます。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%82%AB%E3%83%BC%E3%83%89%E3%81%AE%E5%8A%B9%E6%9E%9C%E7%99%BA%E5%8B%95-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q351",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "先攻のプレイヤーは自分の最初のターンにアタックすることはできますか？",
+      "answer": "はい、できます。ただし、ユニットは配備されたターンにはすぐアタックすることはできません。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q352",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "「プレイヤーへのアタック」を行った場合はどうなりますか？",
+      "answer": "プレイヤーへアタックした場合、シールドエリアにカードがあるかチェックします。ベースがあればベースに、ベースがなければ先頭のシールドにアタックします。シールドエリアにカードが1枚もない場合は、相手のプレイヤー自身に直接アタックします。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q353",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "アタック中のユニットやアタックの対象となっているユニットが別の領域に移動した場合、アタックはどうなりますか？",
+      "answer": "次のステップには移行せず、バトル終了ステップに移行します。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q354",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "AP0のユニットはアタックできますか？",
+      "answer": "はい、できます。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q355",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "AP0のユニットのアタックで相手のシールドを破壊できますか？",
+      "answer": "いいえ、できません。シールドはそれぞれがHP「1」を持つものとして扱います。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q356",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "破壊するシールドは選べますか？",
+      "answer": "いいえ、選べません。シールドが複数枚ある場合、先頭のシールドを破壊します。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q357",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "ベースを破壊せずにシールドを破壊できますか？",
+      "answer": "いいえ、できません。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q358",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "【アクション】のタイミングでプレイできるコマンドがパイロットを持っている場合、アクションステップでパイロットとしてセットできますか？",
+      "answer": "いいえ、できません。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q359",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "ユニット同士でのバトルが成立した場合、ダメージはどのように与え合いますか？",
+      "answer": "自身のAPに等しいダメージを同時にお互いに与え合います。アタック中のユニットが《先制攻撃》を持つ場合は先にそのユニットがダメージを与えます。その結果もう片方のユニットが破壊された場合、アタック中のユニットはダメージを受けません。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q360",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "シールドが破壊された場合、そのシールドはどうなりますか？",
+      "answer": "破壊したシールドは表にしてトラッシュに置かれます。そのシールドが【バースト】を持つ場合、トラッシュに置かれる前に【バースト】の効果を発動するか選べます。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q361",
+      "category": "メインフェイズ+-ユニットのアタック-",
+      "source_type": "rule_category",
+      "title": "メインフェイズ+-ユニットのアタック-",
+      "question": "パイロットがセットされているユニットが破壊や効果などで別の領域に移動する場合、セットされたパイロットはどうなりますか？",
+      "answer": "ユニットの移動先と同じ領域に移動します。破壊の場合はトラッシュに、手札に戻された場合は一緒に手札に移動します。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%A1%E3%82%A4%E3%83%B3%E3%83%95%E3%82%A7%E3%82%A4%E3%82%BA+-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%81%AE%E3%82%A2%E3%82%BF%E3%83%83%E3%82%AF-",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q362",
+      "category": "パイロット",
+      "source_type": "rule_category",
+      "title": "パイロット",
+      "question": "リンク条件「アムロ・レイ」のユニットに「ST03-011 シャア・アズナブル」をセットしました。このとき、そのユニットはAPとHPは加算され、【アタック時】効果は発動しますか？",
+      "answer": "はい、APとHPは加算され、【アタック時】効果も発動します。リンク条件とは条件を満たしていれば配備されたターンでもすぐアタックできるというもので、条件を満たしていなければ数値の加算や効果が発動しなくなるというものではありません。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%83%91%E3%82%A4%E3%83%AD%E3%83%83%E3%83%88",
+      "updated_at": "2025-07-04"
+    },
+    {
+      "id": "Q363",
+      "category": "コマンド",
+      "source_type": "rule_category",
+      "title": "コマンド",
+      "question": "「穏やかな音色（ST02-013）」のような【パイロット】を持つコマンドカードは、いつパイロットとして扱われますか？",
+      "answer": "バトルエリアでユニットにセットされている間のみパイロットとして扱われます。それ以外の領域ではコマンドカードです。",
+      "card_ids": [],
+      "source_url": "https://www.gundam-gcg.com/jp/rules/faqs/list.php?sub_category=%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89",
+      "updated_at": "2025-07-25"
     }
   ],
   "by_category": {
@@ -3021,7 +4603,8 @@
       "Q009",
       "Q010",
       "Q011",
-      "Q012"
+      "Q012",
+      "Q340"
     ],
     "スタートフェイズ": [
       "Q013"
@@ -3174,13 +4757,15 @@
       "Q102",
       "Q103",
       "Q104",
-      "Q105"
+      "Q105",
+      "Q362"
     ],
     "コマンド": [
       "Q106",
       "Q107",
       "Q108",
-      "Q109"
+      "Q109",
+      "Q363"
     ],
     "その他": [
       "Q110",
@@ -3216,12 +4801,39 @@
       "Q138",
       "Q139",
       "Q140",
-      "Q141"
+      "Q141",
+      "Q272",
+      "Q273",
+      "Q274",
+      "Q275",
+      "Q276",
+      "Q277",
+      "Q278",
+      "Q279",
+      "Q280",
+      "Q281",
+      "Q282",
+      "Q283",
+      "Q284",
+      "Q285",
+      "Q286",
+      "Q287",
+      "Q288",
+      "Q289",
+      "Q290",
+      "Q291",
+      "Q292",
+      "Q293"
+    ],
+    "ST09": [
+      "Q142",
+      "Q143",
+      "Q144",
+      "Q145",
+      "Q146",
+      "Q147"
     ],
     "GD03": [
-      "Q121",
-      "Q126",
-      "Q143",
       "Q148",
       "Q149",
       "Q150",
@@ -3253,20 +4865,39 @@
       "Q176",
       "Q177",
       "Q178",
-      "Q179"
+      "Q179",
+      "Q294",
+      "Q295",
+      "Q296",
+      "Q297",
+      "Q298",
+      "Q299",
+      "Q300",
+      "Q301",
+      "Q302",
+      "Q303",
+      "Q304",
+      "Q305",
+      "Q306",
+      "Q307",
+      "Q308"
     ],
-    "ST05": [
-      "Q121",
-      "Q126",
-      "Q230"
+    "ST08": [
+      "Q180",
+      "Q181",
+      "Q182",
+      "Q309"
+    ],
+    "ST07": [
+      "Q183",
+      "Q184",
+      "Q185",
+      "Q186",
+      "Q187",
+      "Q188",
+      "Q310"
     ],
     "GD02": [
-      "Q122",
-      "Q126",
-      "Q137",
-      "Q143",
-      "Q150",
-      "Q182",
       "Q189",
       "Q190",
       "Q191",
@@ -3280,40 +4911,19 @@
       "Q199",
       "Q200",
       "Q201",
-      "Q202"
-    ],
-    "ST01": [
-      "Q122",
-      "Q146",
-      "Q147",
-      "Q231",
-      "Q232",
-      "Q233"
-    ],
-    "ST02": [
-      "Q126",
-      "Q234",
-      "Q235"
-    ],
-    "ST08": [
-      "Q137",
-      "Q180",
-      "Q181",
-      "Q182"
-    ],
-    "ST09": [
-      "Q142",
-      "Q143",
-      "Q144",
-      "Q145",
-      "Q146",
-      "Q147"
+      "Q202",
+      "Q311",
+      "Q312",
+      "Q313",
+      "Q314",
+      "Q315",
+      "Q316",
+      "Q317",
+      "Q318",
+      "Q319",
+      "Q320"
     ],
     "GD01": [
-      "Q143",
-      "Q151",
-      "Q193",
-      "Q194",
       "Q203",
       "Q204",
       "Q205",
@@ -3340,28 +4950,109 @@
       "Q226",
       "Q227",
       "Q228",
-      "Q229"
+      "Q229",
+      "Q321",
+      "Q322",
+      "Q323",
+      "Q324",
+      "Q325",
+      "Q326",
+      "Q327",
+      "Q328"
     ],
-    "ST07": [
-      "Q182",
-      "Q183",
-      "Q184",
-      "Q185",
-      "Q186",
-      "Q187",
-      "Q188"
+    "ST05": [
+      "Q230",
+      "Q329",
+      "Q330"
+    ],
+    "ST01": [
+      "Q231",
+      "Q232",
+      "Q233",
+      "Q331",
+      "Q332",
+      "Q333"
+    ],
+    "ST02": [
+      "Q234",
+      "Q235",
+      "Q334"
     ],
     "ST03": [
-      "Q189",
-      "Q211",
-      "Q212",
-      "Q217",
       "Q236",
-      "Q237"
+      "Q237",
+      "Q335",
+      "Q336",
+      "Q337",
+      "Q338"
     ],
     "ST04": [
-      "Q226",
-      "Q238"
+      "Q238",
+      "Q339"
+    ],
+    "ST10": [
+      "Q239",
+      "Q240",
+      "Q241",
+      "Q242",
+      "Q243",
+      "Q244",
+      "Q245",
+      "Q246"
+    ],
+    "EB01": [
+      "Q247",
+      "Q248",
+      "Q249",
+      "Q250",
+      "Q251",
+      "Q252",
+      "Q253",
+      "Q254",
+      "Q255",
+      "Q256",
+      "Q257",
+      "Q258",
+      "Q259",
+      "Q260",
+      "Q261",
+      "Q262",
+      "Q263",
+      "Q264",
+      "Q265",
+      "Q266",
+      "Q267",
+      "Q268",
+      "Q269",
+      "Q270",
+      "Q271"
+    ],
+    "メインフェイズ+-カードのプレイ-": [
+      "Q341",
+      "Q342",
+      "Q343",
+      "Q344",
+      "Q345",
+      "Q346",
+      "Q347",
+      "Q348",
+      "Q349"
+    ],
+    "メインフェイズ+-カードの効果発動-": [
+      "Q350"
+    ],
+    "メインフェイズ+-ユニットのアタック-": [
+      "Q351",
+      "Q352",
+      "Q353",
+      "Q354",
+      "Q355",
+      "Q356",
+      "Q357",
+      "Q358",
+      "Q359",
+      "Q360",
+      "Q361"
     ]
   },
   "by_card": {
@@ -3407,7 +5098,8 @@
       "Q124"
     ],
     "GD04-033": [
-      "Q125"
+      "Q125",
+      "Q293"
     ],
     "GD04-035": [
       "Q126"
@@ -3424,7 +5116,9 @@
     "GD04-067": [
       "Q129",
       "Q130",
-      "Q131"
+      "Q131",
+      "Q274",
+      "Q275"
     ],
     "GD03-040": [
       "Q130"
@@ -3439,10 +5133,12 @@
       "Q134"
     ],
     "GD03-051": [
-      "Q135"
+      "Q135",
+      "Q300"
     ],
     "GD04-100": [
-      "Q135"
+      "Q135",
+      "Q281"
     ],
     "GD04-101": [
       "Q136"
@@ -3452,7 +5148,8 @@
       "Q226"
     ],
     "GD04-102": [
-      "Q137"
+      "Q137",
+      "Q282"
     ],
     "GD03-019": [
       "Q138",
@@ -3460,7 +5157,12 @@
     ],
     "GD04-107": [
       "Q138",
-      "Q139"
+      "Q139",
+      "Q283",
+      "Q289",
+      "Q290",
+      "Q291",
+      "Q292"
     ],
     "GD04-123": [
       "Q140"
@@ -3501,7 +5203,8 @@
       "Q154"
     ],
     "GD03-035": [
-      "Q155"
+      "Q155",
+      "Q298"
     ],
     "GD03-092": [
       "Q155"
@@ -3731,10 +5434,255 @@
       "Q236"
     ],
     "ST03-001": [
-      "Q237"
+      "Q237",
+      "Q335"
     ],
     "ST04-006": [
       "Q238"
+    ],
+    "ST10-001": [
+      "Q239"
+    ],
+    "ST10-002": [
+      "Q240"
+    ],
+    "ST10-007": [
+      "Q241"
+    ],
+    "ST10-008": [
+      "Q242",
+      "Q243"
+    ],
+    "ST10-011": [
+      "Q244",
+      "Q245"
+    ],
+    "ST10-013": [
+      "Q246"
+    ],
+    "EB01-002": [
+      "Q247"
+    ],
+    "EB01-003": [
+      "Q248"
+    ],
+    "EB01-005": [
+      "Q249"
+    ],
+    "EB01-009": [
+      "Q250",
+      "Q251"
+    ],
+    "EB01-010": [
+      "Q252"
+    ],
+    "EB01-015": [
+      "Q253"
+    ],
+    "EB01-019": [
+      "Q254"
+    ],
+    "EB01-020": [
+      "Q255"
+    ],
+    "EB01-023": [
+      "Q256"
+    ],
+    "EB01-025": [
+      "Q257"
+    ],
+    "EB01-059": [
+      "Q258",
+      "Q259",
+      "Q260"
+    ],
+    "EB01-060": [
+      "Q261"
+    ],
+    "EB01-063": [
+      "Q262"
+    ],
+    "EB01-070": [
+      "Q263"
+    ],
+    "EB01-072": [
+      "Q264"
+    ],
+    "EB01-073": [
+      "Q265"
+    ],
+    "EB01-074": [
+      "Q266",
+      "Q267"
+    ],
+    "EB01-078": [
+      "Q268"
+    ],
+    "EB01-080": [
+      "Q269"
+    ],
+    "EB01-083": [
+      "Q270"
+    ],
+    "EB01-084": [
+      "Q271"
+    ],
+    "GD04-053": [
+      "Q272"
+    ],
+    "GD04-065": [
+      "Q273"
+    ],
+    "GD04-068": [
+      "Q276"
+    ],
+    "GD04-090": [
+      "Q277"
+    ],
+    "GD04-093": [
+      "Q278"
+    ],
+    "GD04-096": [
+      "Q279"
+    ],
+    "GD04-098": [
+      "Q280"
+    ],
+    "GD04-108": [
+      "Q284"
+    ],
+    "GD04-113": [
+      "Q285"
+    ],
+    "GD04-114": [
+      "Q286"
+    ],
+    "GD04-115": [
+      "Q287"
+    ],
+    "GD04-129": [
+      "Q288"
+    ],
+    "GD03-015": [
+      "Q294"
+    ],
+    "GD03-022": [
+      "Q295"
+    ],
+    "GD03-029": [
+      "Q296"
+    ],
+    "GD03-030": [
+      "Q297"
+    ],
+    "GD03-050": [
+      "Q299"
+    ],
+    "GD03-054": [
+      "Q301"
+    ],
+    "GD03-056": [
+      "Q302"
+    ],
+    "GD03-058": [
+      "Q303"
+    ],
+    "GD03-059": [
+      "Q304"
+    ],
+    "GD03-082": [
+      "Q305"
+    ],
+    "GD03-085": [
+      "Q306"
+    ],
+    "GD03-097": [
+      "Q307"
+    ],
+    "GD03-130": [
+      "Q308"
+    ],
+    "ST08-009": [
+      "Q309"
+    ],
+    "ST07-004": [
+      "Q310"
+    ],
+    "GD02-004": [
+      "Q311"
+    ],
+    "GD02-018": [
+      "Q312"
+    ],
+    "GD02-035": [
+      "Q313"
+    ],
+    "GD02-066": [
+      "Q314"
+    ],
+    "GD02-069": [
+      "Q315"
+    ],
+    "GD02-076": [
+      "Q316"
+    ],
+    "GD02-082": [
+      "Q317"
+    ],
+    "GD02-093": [
+      "Q318"
+    ],
+    "GD02-110": [
+      "Q319"
+    ],
+    "GD02-111": [
+      "Q320"
+    ],
+    "GD01-016": [
+      "Q321"
+    ],
+    "GD01-027": [
+      "Q322"
+    ],
+    "GD01-028": [
+      "Q323",
+      "Q324"
+    ],
+    "GD01-070": [
+      "Q325"
+    ],
+    "GD01-081": [
+      "Q326"
+    ],
+    "GD01-125": [
+      "Q327",
+      "Q328"
+    ],
+    "ST05-010": [
+      "Q329"
+    ],
+    "ST05-011": [
+      "Q330"
+    ],
+    "ST01-009": [
+      "Q331"
+    ],
+    "ST01-011": [
+      "Q332",
+      "Q333"
+    ],
+    "ST02-011": [
+      "Q334"
+    ],
+    "ST03-009": [
+      "Q336"
+    ],
+    "ST03-010": [
+      "Q337",
+      "Q338"
+    ],
+    "ST04-015": [
+      "Q339"
     ]
   }
 }
