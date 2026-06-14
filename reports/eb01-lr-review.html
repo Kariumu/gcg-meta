@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EB01「Eternal Nexus」LR全6種 徹底考察 — 〔ジージェネ〕デッキのシナジーと使い方 | GCG STATS</title>
+  <meta name="description" content="ブースターパック Eternal Nexus [EB01] の最高レアリティ LR 全6種を1枚ずつ考察。カード画像・ステータス・効果テキスト（公式準拠）に加え、初心者向けの効果解説と〔ジージェネ〕デッキでのシナジーを紹介します。">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="EB01「Eternal Nexus」LR全6種 徹底考察 — 〔ジージェネ〕デッキのシナジーと使い方 | GCG STATS">
+  <meta property="og:description" content="ブースターパック Eternal Nexus [EB01] の最高レアリティ LR 全6種を1枚ずつ考察。カード画像・ステータス・公式効果テキスト・初心者向け解説・〔ジージェネ〕シナジーを掲載。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://gcg-stats.com/reports/eb01-lr-review.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:site" content="@gcg_stats">
+  <link rel="canonical" href="https://gcg-stats.com/reports/eb01-lr-review.html">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .lr-intro { font-size:14px; line-height:1.9; color:var(--text-secondary); margin:16px 0 8px; }
+    .lr-toc { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 28px; }
+    .lr-toc a { font-size:12px; padding:6px 12px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:999px; color:var(--text-secondary); text-decoration:none; transition:border-color .15s,color .15s; }
+    .lr-toc a:hover { border-color:var(--accent,#7cd99c); color:var(--text-primary); }
+    .lr-card { display:grid; grid-template-columns:240px 1fr; gap:24px; margin:0 0 14px; padding:20px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); }
+    .lr-card__imgwrap { align-self:start; }
+    .lr-card__img { width:100%; border-radius:8px; cursor:zoom-in; display:block; box-shadow:0 4px 16px rgba(0,0,0,0.3); transition:transform .15s; }
+    .lr-card__img:hover { transform:translateY(-2px); }
+    .lr-card__imgcap { font-size:11px; color:var(--text-muted); text-align:center; margin-top:6px; }
+    .lr-card__body { min-width:0; }
+    .lr-card__no { font-family:var(--font-mono); font-size:12px; color:var(--text-muted); letter-spacing:.04em; }
+    .lr-card__name { font-size:20px; font-weight:700; color:var(--text-primary); margin:2px 0 2px; }
+    .lr-card__sub { font-size:12px; color:var(--text-muted); margin:0 0 12px; }
+    .lr-stats { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 14px; }
+    .lr-stat { font-family:var(--font-mono); font-size:12px; padding:4px 10px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:6px; color:var(--text-secondary); }
+    .lr-stat b { color:var(--text-primary); font-weight:700; }
+    .lr-effect { font-size:13px; line-height:1.85; color:var(--text-secondary); background:var(--bg-elevated); border:1px solid var(--border); border-left:3px solid var(--accent,#7cd99c); border-radius:6px; padding:12px 14px; margin:0 0 16px; white-space:normal; }
+    .lr-effect .lr-effect__label { display:block; font-size:11px; color:var(--text-muted); margin-bottom:6px; font-weight:600; letter-spacing:.04em; }
+    .lr-block { margin:0 0 14px; }
+    .lr-block h4 { font-size:13px; font-weight:700; color:var(--text-primary); margin:0 0 6px; display:flex; align-items:center; gap:7px; }
+    .lr-block h4 .tag { font-size:10px; font-weight:600; padding:2px 8px; border-radius:999px; letter-spacing:.03em; }
+    .tag-basic { background:rgba(124,217,156,0.14); color:#7cd99c; }
+    .tag-comp { background:rgba(120,170,255,0.14); color:#8ab4ff; }
+    .lr-block p { font-size:13px; line-height:1.85; color:var(--text-secondary); margin:0; }
+    .lr-synergy { font-size:12px; color:var(--text-muted); line-height:1.8; margin:8px 0 0; padding-top:10px; border-top:1px dashed var(--border); }
+    .lr-synergy b { color:var(--text-secondary); }
+    .method-note { margin:24px 0 8px; padding:12px 16px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius); font-size:12px; color:var(--text-muted); line-height:1.8; }
+    .disclaimer { margin:16px 0; font-size:12px; color:var(--text-muted); line-height:1.8; }
+    @media (max-width: 640px) {
+      .lr-card { grid-template-columns:1fr; gap:14px; padding:16px; }
+      .lr-card__imgwrap { max-width:220px; margin:0 auto; }
+      .lr-card__name { font-size:18px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <a href="../reports/" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a>
+
+    <div class="section-header" style="margin-top:16px">
+      <h1 class="section-title">EB01「Eternal Nexus」LR全6種 徹底考察</h1>
+      <p style="color:var(--text-muted);font-size:14px;margin-top:4px">最高レアリティ LR を1枚ずつ — 効果の読み解きと〔ジージェネ〕デッキでのシナジー</p>
+    </div>
+
+    <p class="lr-intro">
+      ブースターパック「Eternal Nexus [EB01]」は、アプリゲーム『SDガンダム ジージェネレーション エターナル』とのコラボ商品です。収録カードの大半が〔ジージェネ〕の特徴を持ち、特徴を参照し合うことでシナジーが生まれる設計になっています。本記事では、その最高レアリティである <b>LR（レジェンドレア）全6種</b> を1枚ずつ取り上げ、効果の意味（初心者向け）と、〔ジージェネ〕デッキでどう活きるか（競技視点）の両面から考察します。
+    </p>
+    <p class="lr-intro" style="font-size:13px;color:var(--text-muted)">
+      ※ 効果テキスト・ステータスは公式カード画像と照合済みです。考察は記事公開時点の見解であり、実際のカードプール・大会環境により評価は変わります。
+    </p>
+
+    <div class="lr-toc">
+      <a href="#eb01-001">EB01-001 アストレイ レッドフレーム改</a>
+      <a href="#eb01-002">EB01-002 Hi-νガンダム</a>
+      <a href="#eb01-021">EB01-021 ビルドストライク</a>
+      <a href="#eb01-022">EB01-022 ガンダムエクシア</a>
+      <a href="#eb01-041">EB01-041 ストライクフリーダム</a>
+      <a href="#eb01-042">EB01-042 サイコ・ハロ</a>
+    </div>
+
+    <!-- ============ EB01-001 ============ -->
+    <section class="lr-card" id="eb01-001">
+      <div class="lr-card__imgwrap">
+        <img class="lr-card__img" src="../images/cards/EB01-001.webp" alt="EB01-001 ガンダムアストレイ レッドフレーム改（EX）" loading="lazy" onclick="openLightbox(this.src)">
+        <p class="lr-card__imgcap">画像をタップで拡大</p>
+      </div>
+      <div class="lr-card__body">
+        <span class="lr-card__no">EB01-001 ／ LR ／ UNIT</span>
+        <h2 class="lr-card__name">ガンダムアストレイ レッドフレーム改（EX）</h2>
+        <p class="lr-card__sub">MBF-P02KAI ／ 出典：SDガンダム ジージェネレーション エターナル</p>
+        <div class="lr-stats">
+          <span class="lr-stat">色 <b>青</b></span>
+          <span class="lr-stat">Lv. <b>6</b></span>
+          <span class="lr-stat">COST <b>5</b></span>
+          <span class="lr-stat">AP <b>5</b></span>
+          <span class="lr-stat">HP <b>4</b></span>
+          <span class="lr-stat">特徴 <b>〔ジージェネ〕</b></span>
+          <span class="lr-stat">リンク <b>ロウ・ギュール</b></span>
+        </div>
+        <div class="lr-effect">
+          <span class="lr-effect__label">効果テキスト（公式）</span>
+          【起動・メイン】【ターン1回】自分のトラッシュのコマンドカード2枚をゲームから除外する：ダメージを受けているLv.7以下の相手のユニット1つを選ぶ。それをレストにし、それは次の相手のターンのスタートフェイズでアクティブにならない。
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-basic">初心者向け</span>効果の意味</h4>
+          <p>自分のメインフェイズに、トラッシュ（捨て札）にあるコマンドカードを2枚ゲームから除外することで起動できる能力です。発動すると、すでにダメージを受けているLv.7以下の相手ユニット1つをレスト（横向き＝行動不能の状態）にし、しかも相手は次のターンの開始時にそれを起こせません。つまり、弱った相手のユニットを2ターンにわたって機能停止させられます。「ターン1回」なので、1ターンに使えるのは1回までです。</p>
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-comp">競技視点</span>評価とねらい</h4>
+          <p>レスト拘束は、相手のアタッカーやブロッカーを実質1体減らす効果に近く、盤面の主導権を握る手段になります。発動条件が「すでにダメージを受けているユニット」である点がポイントで、自分の他のユニットや効果で先に傷をつけてから狙うと安定します。コストがリソースではなく「トラッシュのコマンド2枚の除外」である点も特徴で、リソースを使わず毎ターン起動できる一方、トラッシュにコマンドを貯める必要があります。</p>
+        </div>
+        <p class="lr-synergy"><b>〔ジージェネ〕シナジー：</b>コストがトラッシュのコマンドカードなので、コマンドを使って自然にトラッシュへ送れるEB01のコマンド群（「ガーベラ・ストレート」「シュツルム・ファウスト」など全12種）と相性が良く、撃ったコマンドがそのまま起動コストの燃料になります。アタッカーというより、盤面を膠着させて〔ジージェネ〕の盤面構築を通すための「制圧役」として機能します。</p>
+      </div>
+    </section>
+
+    <!-- ============ EB01-002 ============ -->
+    <section class="lr-card" id="eb01-002">
+      <div class="lr-card__imgwrap">
+        <img class="lr-card__img" src="../images/cards/EB01-002.webp" alt="EB01-002 Hi-νガンダム（EX）" loading="lazy" onclick="openLightbox(this.src)">
+        <p class="lr-card__imgcap">画像をタップで拡大</p>
+      </div>
+      <div class="lr-card__body">
+        <span class="lr-card__no">EB01-002 ／ LR ／ UNIT</span>
+        <h2 class="lr-card__name">Hi-νガンダム（EX）</h2>
+        <p class="lr-card__sub">RX-93-ν2 ／ 出典：SDガンダム ジージェネレーション エターナル</p>
+        <div class="lr-stats">
+          <span class="lr-stat">色 <b>青</b></span>
+          <span class="lr-stat">Lv. <b>8</b></span>
+          <span class="lr-stat">COST <b>7</b></span>
+          <span class="lr-stat">AP <b>6</b></span>
+          <span class="lr-stat">HP <b>5</b></span>
+          <span class="lr-stat">特徴 <b>〔ジージェネ〕</b></span>
+          <span class="lr-stat">リンク <b>特徴〔ジージェネ〕</b></span>
+        </div>
+        <div class="lr-effect">
+          <span class="lr-effect__label">効果テキスト（公式）</span>
+          【配備時】このユニット以外の、〔ジージェネ〕の味方のユニットがいるなら、各相手プレイヤーのユニット1つずつを選ぶ。それらをレストにする。【リンク中】【アタック時】【ターン1回】このユニット以外の、レストのユニットが3つ以上いるなら、これをアクティブにする。
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-basic">初心者向け</span>効果の意味</h4>
+          <p>2つの効果を持ちます。1つ目は配備時（場に出したとき）で、他に〔ジージェネ〕の味方ユニットがいれば、各相手プレイヤーのユニットを1つずつレスト（行動不能）にできます。2つ目はリンク中（リンク条件を満たすパイロットがセットされている間）のアタック時で、自分以外にレスト状態のユニットが3つ以上いれば、アタックした後にこのユニットを再びアクティブ（縦向き＝行動可能）に戻せます。1つ目で相手をレストさせ、2つ目の条件を自分で満たしにいく流れが噛み合っています。</p>
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-comp">競技視点</span>評価とねらい</h4>
+          <p>Lv.8 AP6 HP5 の大型アタッカーで、自己アンタップ（アクティブ化）による連続攻撃が魅力です。アクティブに戻れば、攻撃と次の相手ターンでのブロックの両方をこなせます。鍵は「レストのユニットが3つ以上」という条件で、相手をレストさせる手段（1つ目の効果やEB01-001など）や、味方をレストさせるカードと組み合わせて能動的に満たしにいくと、フィニッシャーとして安定します。多人数戦では1つ目の効果が各相手に及ぶため、より刺さりやすくなります。</p>
+        </div>
+        <p class="lr-synergy"><b>〔ジージェネ〕シナジー：</b>1つ目の効果が「〔ジージェネ〕の味方ユニットがいること」を条件にするため、〔ジージェネ〕で固めたデッキでこそ最大限に働きます。盤面に〔ジージェネ〕ユニットを並べる構築と一致し、レスト拘束→自己アクティブ化のループで攻守を兼ねます。</p>
+      </div>
+    </section>
+
+    <!-- ============ EB01-021 ============ -->
+    <section class="lr-card" id="eb01-021">
+      <div class="lr-card__imgwrap">
+        <img class="lr-card__img" src="../images/cards/EB01-021.webp" alt="EB01-021 ビルドストライクガンダム（フルパッケージ）（EX）" loading="lazy" onclick="openLightbox(this.src)">
+        <p class="lr-card__imgcap">画像をタップで拡大</p>
+      </div>
+      <div class="lr-card__body">
+        <span class="lr-card__no">EB01-021 ／ LR ／ UNIT</span>
+        <h2 class="lr-card__name">ビルドストライクガンダム（フルパッケージ）（EX）</h2>
+        <p class="lr-card__sub">GAT-X105B/FP ／ 出典：SDガンダム ジージェネレーション エターナル</p>
+        <div class="lr-stats">
+          <span class="lr-stat">色 <b>緑</b></span>
+          <span class="lr-stat">Lv. <b>5</b></span>
+          <span class="lr-stat">COST <b>4</b></span>
+          <span class="lr-stat">AP <b>4</b></span>
+          <span class="lr-stat">HP <b>4</b></span>
+          <span class="lr-stat">特徴 <b>〔ジージェネ〕</b></span>
+          <span class="lr-stat">リンク <b>レイジ</b></span>
+        </div>
+        <div class="lr-effect">
+          <span class="lr-effect__label">効果テキスト（公式）</span>
+          《突破4》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット時・〔ジージェネ〕のパイロット】自分のトラッシュに〔ジージェネ〕のユニットカードが2枚以上あるなら、自分はリソース1つをレストで置く。
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-basic">初心者向け</span>効果の意味</h4>
+          <p>《突破4》は、アタックで相手ユニットを破壊したとき、相手のシールド（またはベース）に追加で4ダメージを与えるキーワード能力です。盤面を取りながら相手のライフ（シールド）も削れます。もう1つの【セット時・〔ジージェネ〕のパイロット】は、〔ジージェネ〕のパイロットをこのユニットにセットしたときに誘発し、トラッシュに〔ジージェネ〕のユニットカードが2枚以上あれば、リソースを1つ追加で置けます（実質的に展開を早める加速）。</p>
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-comp">競技視点</span>評価とねらい</h4>
+          <p>Lv.5と軽めながら《突破4》で攻撃時の圧力が高く、リソース加速によって次の大型展開に繋げられる「中継ぎ役」です。セット時効果はリソースブースト（加速）なので、ゲーム序盤〜中盤に置ければ展開速度で優位に立てます。条件である「トラッシュに〔ジージェネ〕ユニット2枚以上」は、開発キーワード（後述のカード群）でトラッシュを肥やしながら達成しやすく、デッキ全体の動きと噛み合います。</p>
+        </div>
+        <p class="lr-synergy"><b>〔ジージェネ〕シナジー：</b>セット時効果の相方となる〔ジージェネ〕パイロットがEB01に12種（レイジ、エリス・クロードなど）収録されており、リンク先「レイジ」を含め選択肢が豊富です。トラッシュに〔ジージェネ〕ユニットを送る《開発》持ちユニットや、ユニットを破壊・除外するカードと合わせると、加速条件を能動的に満たせます。</p>
+      </div>
+    </section>
+
+    <!-- ============ EB01-022 ============ -->
+    <section class="lr-card" id="eb01-022">
+      <div class="lr-card__imgwrap">
+        <img class="lr-card__img" src="../images/cards/EB01-022.webp" alt="EB01-022 ガンダムエクシア（EX）" loading="lazy" onclick="openLightbox(this.src)">
+        <p class="lr-card__imgcap">画像をタップで拡大</p>
+      </div>
+      <div class="lr-card__body">
+        <span class="lr-card__no">EB01-022 ／ LR ／ UNIT</span>
+        <h2 class="lr-card__name">ガンダムエクシア（EX）</h2>
+        <p class="lr-card__sub">GN-001 ／ 出典：SDガンダム ジージェネレーション エターナル</p>
+        <div class="lr-stats">
+          <span class="lr-stat">色 <b>緑</b></span>
+          <span class="lr-stat">Lv. <b>8</b></span>
+          <span class="lr-stat">COST <b>7</b></span>
+          <span class="lr-stat">AP <b>6</b></span>
+          <span class="lr-stat">HP <b>5</b></span>
+          <span class="lr-stat">特徴 <b>〔ジージェネ〕</b></span>
+          <span class="lr-stat">リンク <b>特徴〔攻撃型〕</b></span>
+        </div>
+        <div class="lr-effect">
+          <span class="lr-effect__label">効果テキスト（公式）</span>
+          《突破5》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット中・〔ジージェネ〕のパイロット】自分のターン終了時、このユニットを破壊してもよい。そうしたなら、「ガンダムエクシア」(〔ジージェネ〕・AP2・HP2)のユニットトークン3つを配備する。
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-basic">初心者向け</span>効果の意味</h4>
+          <p>《突破5》により、相手ユニットを破壊したとき相手のシールドへ5ダメージを追加で与えられます。もう1つの【セット中・〔ジージェネ〕のパイロット】は、〔ジージェネ〕パイロットがセットされている間に働く効果で、自分のターン終了時にこのユニットを破壊する代わりに、AP2・HP2の「ガンダムエクシア」トークンを3体展開できます。1体の大型ユニットを、3体の小型ユニットに「分裂」させるイメージです。</p>
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-comp">競技視点</span>評価とねらい</h4>
+          <p>突破5の高い攻撃性能に加え、トークン3体への変換は、横展開（盤面の数を増やす）への切り替え手段になります。単体除去に対して耐性を持ち、数で攻める展開や、他のカードの「ユニットの数」を参照する効果との相乗が見込めます。破壊は任意（してもよい）なので、盤面状況に応じてアタッカーのまま残すか、トークン3体に展開するかを選べる柔軟さが強みです。</p>
+        </div>
+        <p class="lr-synergy"><b>〔ジージェネ〕シナジー：</b>トークン変換の条件が「〔ジージェネ〕パイロットのセット中」であるため、EB01の〔ジージェネ〕パイロット群が前提になります。生成されるトークンも〔ジージェネ〕特徴を持つため、〔ジージェネ〕の数を参照するカード（Hi-νガンダムのレスト条件や、トラッシュ／盤面の〔ジージェネ〕枚数を見る効果）の達成材料としても働きます。</p>
+      </div>
+    </section>
+
+    <!-- ============ EB01-041 ============ -->
+    <section class="lr-card" id="eb01-041">
+      <div class="lr-card__imgwrap">
+        <img class="lr-card__img" src="../images/cards/EB01-041.webp" alt="EB01-041 ストライクフリーダムガンダム（EX）" loading="lazy" onclick="openLightbox(this.src)">
+        <p class="lr-card__imgcap">画像をタップで拡大</p>
+      </div>
+      <div class="lr-card__body">
+        <span class="lr-card__no">EB01-041 ／ LR ／ UNIT</span>
+        <h2 class="lr-card__name">ストライクフリーダムガンダム（EX）</h2>
+        <p class="lr-card__sub">ZGMF-X20A ／ 出典：SDガンダム ジージェネレーション エターナル</p>
+        <div class="lr-stats">
+          <span class="lr-stat">色 <b>白</b></span>
+          <span class="lr-stat">Lv. <b>7</b></span>
+          <span class="lr-stat">COST <b>6</b></span>
+          <span class="lr-stat">AP <b>5</b></span>
+          <span class="lr-stat">HP <b>5</b></span>
+          <span class="lr-stat">特徴 <b>〔ジージェネ〕</b></span>
+          <span class="lr-stat">リンク <b>特徴〔攻撃型〕</b></span>
+        </div>
+        <div class="lr-effect">
+          <span class="lr-effect__label">効果テキスト（公式）</span>
+          《高機動》(このユニットはブロックされない)【配備時】各相手プレイヤーのHP4以下のユニット1つずつを選ぶ。それらを持ち主の手札に戻す。
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-basic">初心者向け</span>効果の意味</h4>
+          <p>《高機動》は「このユニットはブロックされない」キーワード能力で、相手のブロッカーを無視して攻撃を通せます。【配備時】効果では、場に出したときに各相手プレイヤーのHP4以下のユニットを1つずつ選び、持ち主の手札に戻します（バウンス）。手札に戻されたユニットは、相手が再びコストを払って出し直す必要があるため、相手の盤面とテンポ（手数）を削げます。</p>
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-comp">競技視点</span>評価とねらい</h4>
+          <p>「ブロックされない」攻撃性能と、配備時の除去（バウンス）を1枚で兼ね備えた、攻防に優れたユニットです。HP4以下が対象なので万能除去ではありませんが、低〜中コストのユニットには広く刺さります。バウンスは破壊と違い「破壊時」効果を誘発させずに退かせる利点があり、相手の盤面を安全に崩せます。高機動で確実に打点を通せるため、終盤の詰めにも信頼できます。</p>
+        </div>
+        <p class="lr-synergy"><b>〔ジージェネ〕シナジー：</b>このカード自体は〔ジージェネ〕の枚数を直接参照しませんが、特徴〔ジージェネ〕を持つため、〔ジージェネ〕の数を参照する他カード（Hi-νガンダムの配備時条件など）の「味方〔ジージェネ〕ユニット」要員になります。白を含む〔ジージェネ〕デッキで、ブロック無視の安定打点＋除去として組み込めます。</p>
+      </div>
+    </section>
+
+    <!-- ============ EB01-042 ============ -->
+    <section class="lr-card" id="eb01-042">
+      <div class="lr-card__imgwrap">
+        <img class="lr-card__img" src="../images/cards/EB01-042.webp" alt="EB01-042 サイコ・ハロ（EX）" loading="lazy" onclick="openLightbox(this.src)">
+        <p class="lr-card__imgcap">画像をタップで拡大</p>
+      </div>
+      <div class="lr-card__body">
+        <span class="lr-card__no">EB01-042 ／ LR ／ UNIT</span>
+        <h2 class="lr-card__name">サイコ・ハロ（EX）</h2>
+        <p class="lr-card__sub">HARO-86-2 ／ 出典：SDガンダム ジージェネレーション エターナル</p>
+        <div class="lr-stats">
+          <span class="lr-stat">色 <b>白</b></span>
+          <span class="lr-stat">Lv. <b>8</b></span>
+          <span class="lr-stat">COST <b>7</b></span>
+          <span class="lr-stat">AP <b>6</b></span>
+          <span class="lr-stat">HP <b>6</b></span>
+          <span class="lr-stat">特徴 <b>〔ジージェネ〕</b></span>
+          <span class="lr-stat">リンク <b>特徴〔ジージェネ〕</b></span>
+        </div>
+        <div class="lr-effect">
+          <span class="lr-effect__label">効果テキスト（公式）</span>
+          このユニットがレストの間、ユニットすべては《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)【アタック時】このバトル中、Lv.7以下のユニットすべては《ブロッカー》を発動できない。
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-basic">初心者向け</span>効果の意味</h4>
+          <p>2つの効果を持つ、変わったユニットです。1つ目は「このユニットがレスト（横向き）の間、すべてのユニットが《ブロッカー》を得る」という常時効果です。《ブロッカー》はレストすることで相手の攻撃先を自分に変えられる能力なので、自分のユニットを守る盾として機能します。2つ目は【アタック時】で、自分がアタックするバトルの間はLv.7以下のユニットが《ブロッカー》を発動できなくなり、相手のブロックを封じて攻撃を通せます。AP6 HP6 と打たれ強いのも特徴です。</p>
+        </div>
+        <div class="lr-block">
+          <h4><span class="tag tag-comp">競技視点</span>評価とねらい</h4>
+          <p>守り（全体ブロッカー付与）と攻め（相手のブロック封じ）を状況で切り替えられる、攻防両用のユニットです。自分のターンはアタッカーとして相手のブロックを無視して殴り、相手ターンにはレストしている状態を活かして味方を守る、という使い分けが噛み合います。HP6で場持ちが良く、盤面の「軸」として長く居座れる点も評価できます。なお1つ目の効果は敵味方すべてのユニットに《ブロッカー》を与える点に注意が必要で、運用には盤面状況の読みが求められます。</p>
+        </div>
+        <p class="lr-synergy"><b>〔ジージェネ〕シナジー：</b>特徴〔ジージェネ〕を持ち、〔ジージェネ〕の数を参照するカードの要員になります。白系〔ジージェネ〕デッキの「中核」として、HP6の堅牢さと攻防両対応の柔軟性で盤面を支える役割が見込めます。</p>
+      </div>
+    </section>
+
+    <div class="method-note">
+      <b>本記事のデータについて：</b>各カードの効果テキスト・ステータスは、GCG STATS が保有するカードデータと公式カード画像を1枚ずつ照合し、一致を確認したうえで掲載しています。考察は記事公開時点（EB01発売時期）の見解です。実際のカードプールの広がりや大会環境により、各カードの評価は変動します。カードの正式なルール・裁定については、ガンダムカードゲーム公式サイトおよび公式Q&Aをご確認ください。
+    </div>
+
+    <div id="share-buttons" style="margin-top:24px"></div>
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;cursor:zoom-out;justify-content:center;align-items:center"
+       onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt=""
+         style="max-width:90vw;max-height:90vh;border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.6);object-fit:contain;animation:lbFadeIn 0.2s ease">
+    <button onclick="closeLightbox()" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:32px;cursor:pointer;opacity:0.7;transition:opacity 0.15s;line-height:1" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">&times;</button>
+  </div>
+  <style>
+    @keyframes lbFadeIn { from { opacity:0; transform:scale(0.92); } to { opacity:1; transform:scale(1); } }
+  </style>
+  <script>
+    function openLightbox(src) {
+      var lb = document.getElementById('lightbox');
+      document.getElementById('lightbox-img').src = src;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+  <script src="../js/common.js?v=15"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById("footer").innerHTML = GCG.renderFooter();
+    GCG.renderShareButtons('share-buttons', 'EB01「Eternal Nexus」LR全6種 徹底考察 | GCG STATS');
+  </script>
+</body>
+</html>
