@@ -2443,5 +2443,95 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-13": {
+    "recognized_at": "2026-06-14 18:45:44 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2066083229057355998",
+      "https://x.com/GUNDAM_GCG_JP/status/2066075670934138904",
+      "https://x.com/GUNDAM_GCG_JP/status/2066068121581191198",
+      "https://x.com/GUNDAM_GCG_JP/status/2065735937980788832"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-024",
+        "card_name": "ガンダムAGE-2 ノーマル (SPカラー)",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔地球連邦〕",
+          "〔AGEシステム〕"
+        ],
+        "link": "「アセム・アスノ」",
+        "effect": "【破壊時】自分のトラッシュの緑の〔地球連邦〕のパイロットカード1枚を選ぶ。それを手札に加える。そうしたなら、自分の手札1枚を捨てる。",
+        "effect_confidence": "medium",
+        "effect_length": 66,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-021",
+        "card_name": "ガンダムAGE-2 ダブルバレット",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 4,
+        "hp": 5,
+        "traits": [
+          "〔地球連邦〕",
+          "〔AGEシステム〕"
+        ],
+        "link": "「アセム・アスノ」",
+        "effect": "【起動】アクション ターン1回 1: このバトル中、このユニットをAP+4する。〔地球連邦〕の自分のパイロットがいるなら、このユニットが相手からダメージを受けるとき、そのダメージを2軽減する。",
+        "effect_confidence": "medium",
+        "effect_length": 96,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-043",
+        "card_name": "ブルーディスティニー1号機（EX）",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 3,
+        "ap": 5,
+        "hp": 3,
+        "traits": [
+          "ジージェネ"
+        ],
+        "link": "ユウ・カジマ",
+        "effect": "【アタック時】《ブロッカー》を持つ味方のユニットがいるなら、Lv.5以下の相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+        "effect_confidence": "medium",
+        "effect_length": 67,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-012",
+        "card_name": "フォビドゥンガンダム",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔地球連合〕"
+        ],
+        "link": "特徴に生体CPUを持つPILOT",
+        "effect": "【リンク時】レストのLv.3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+        "effect_confidence": "high",
+        "effect_length": 43,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
