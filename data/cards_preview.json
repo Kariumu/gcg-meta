@@ -907,7 +907,7 @@
   },
   "EB01-006": {
     "card_number": "EB01-006",
-    "card_name": "ガンダムアストレイゴールドフレーム天",
+    "card_name": "ガンダムアストレイ ゴールドフレーム天",
     "color": "Blue",
     "card_type": "UNIT",
     "level": 4,
@@ -916,17 +916,17 @@
     "hp": 3,
     "terrain": [],
     "traits": [
-      "〔ジージェネ〕"
+      "ジージェネ"
     ],
-    "link": "特徴に攻撃型を持つPILOT",
-    "rarity": "R",
-    "effect": "【配備時】自分のユニット1つを選ぶ。このターン中、それは《リペア(1)》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2059545146891587823",
-    "created_at": "2026-05-27 18:00:29 JST",
+    "link": "",
+    "rarity": "U",
+    "effect": "【配備時】自分のユニット1つを選ぶ。このターン中、それは《リペア(1)》を得る。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2066434044792115619",
+    "created_at": "2026-06-15 18:45:30 JST",
     "preview": true,
     "_pendingReview": false,
     "_pendingReviewIssues": [],
-    "_articleDate": "2026-05-27"
+    "_articleDate": "2026-06-15"
   },
   "EB01-050": {
     "card_number": "EB01-050",
@@ -2014,5 +2014,49 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-06-13"
+  },
+  "GD05-118": {
+    "card_number": "GD05-118",
+    "card_name": "火種",
+    "color": "White",
+    "card_type": "COMMAND",
+    "level": 3,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [],
+    "link": "",
+    "rarity": "U",
+    "effect": "【メイン】相手のユニット1つを選ぶ。このターン中、それをAP-2する。EXリソースを使用してこのカードをプレイしたなら、それをレストにする。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2066445609062523383",
+    "created_at": "2026-06-15 18:45:12 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-15"
+  },
+  "GD05-074": {
+    "card_number": "GD05-074",
+    "card_name": "トーラス(ノイン機)",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 2,
+    "cost": 2,
+    "ap": 3,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔プリベンター〕"
+    ],
+    "link": "「ルクレツィア・ノイン」",
+    "rarity": "U",
+    "effect": "【破壊時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2066438058623357312",
+    "created_at": "2026-06-15 18:45:21 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-15"
   }
 }

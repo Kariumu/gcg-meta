@@ -2533,5 +2533,71 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-15": {
+    "recognized_at": "2026-06-15 18:45:31 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2066445609062523383",
+      "https://x.com/GUNDAM_GCG_JP/status/2066438058623357312",
+      "https://x.com/GUNDAM_GCG_JP/status/2066434044792115619"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-118",
+        "card_name": "火種",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【メイン】相手のユニット1つを選ぶ。このターン中、それをAP-2する。EXリソースを使用してこのカードをプレイしたなら、それをレストにする。",
+        "effect_confidence": "medium",
+        "effect_length": 70,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-074",
+        "card_name": "トーラス(ノイン機)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 2,
+        "cost": 2,
+        "ap": 3,
+        "hp": 1,
+        "traits": [
+          "〔プリベンター〕"
+        ],
+        "link": "「ルクレツィア・ノイン」",
+        "effect": "【破壊時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
+        "effect_confidence": "high",
+        "effect_length": 32,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-006",
+        "card_name": "ガンダムアストレイ ゴールドフレーム天",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "ジージェネ"
+        ],
+        "link": "",
+        "effect": "【配備時】自分のユニット1つを選ぶ。このターン中、それは《リペア(1)》を得る。",
+        "effect_confidence": "high",
+        "effect_length": 40,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
