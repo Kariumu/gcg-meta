@@ -155,6 +155,11 @@
       background: var(--bg-card);
       border-color: var(--accent);
     }
+    .expert-badge {
+      font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 999px;
+      background: rgba(255,193,71,0.15); color: #e0a528; margin-left: 6px;
+      white-space: nowrap; vertical-align: middle;
+    }
   </style>
 </head>
 <body>
@@ -202,6 +207,9 @@
         <option value="sb-count">SB開催回数順</option>
         <option value="sb-total">SB総参加者数順</option>
       </select>
+      <label class="filter-input" style="display:flex;align-items:center;gap:6px;min-width:auto;cursor:pointer">
+        <input type="checkbox" id="expert-only"> エキスパートショップのみ
+      </label>
     </div>
 
     <div id="stores-root" class="stores-collapsible" data-state="loading">
@@ -268,6 +276,15 @@
         return;
       }
 
+      // エキスパートショップ判定用データ読み込み（失敗してもページ全体は壊さない）
+      let expertIds = new Set();
+      try {
+        const expertData = await fetch('/data/expert-shops.json').then(r => { if (!r.ok) throw new Error('expert-shops.json HTTP ' + r.status); return r.json(); });
+        expertIds = new Set(expertData.expertStoreIds || []);
+      } catch (err) {
+        console.warn('エキスパートショップデータの読み込み失敗:', err);
+      }
+
       // ショップバトルデータ読み込み
       let shopbattleData = null;
       let shopbattleLatestMonth = null;
@@ -316,7 +333,8 @@
           region: REGION_MAP[pref_code] || '(その他)',
           city: s.city || '',
           area: extractArea(s.city || ''),
-          address: s.address || ''
+          address: s.address || '',
+          isExpert: expertIds.has(s.id != null ? s.id : Number(id))
         };
         storeObj.sbInfo = getShopbattleInfo(storeObj);
         stores.push(storeObj);
@@ -415,8 +433,10 @@
         const pref = prefSelect.value;
         const city = citySelect.value;
         const sortBy = document.getElementById('sort-by').value;
+        const expertOnly = document.getElementById('expert-only').checked;
 
         let list = stores.slice();
+        if (expertOnly) list = list.filter(s => s.isExpert);
         if (region) list = list.filter(s => s.region === region);
         if (pref) list = list.filter(s => s.pref_code === pref);
         if (city === '__unknown__') list = list.filter(s => !s.area);
@@ -554,7 +574,7 @@
         var sbHistory = (s.sbInfo && s.sbInfo.eventCount >= 2) ? renderShopbattleHistory(s.sbInfo) : '';
         return '<div class="store-row" style="display:block">'
           + '<a href="' + href + '" style="text-decoration:none;color:inherit">'
-          + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + '</div>'
+          + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + (s.isExpert ? ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>' : '') + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
           + sbBadge
           + '</a>'
@@ -638,6 +658,7 @@
       });
       citySelect.addEventListener('change', applyFilters);
       document.getElementById('sort-by').addEventListener('change', applyFilters);
+      document.getElementById('expert-only').addEventListener('change', applyFilters);
 
       applyFilters();
       root.setAttribute('data-state', 'ready');
