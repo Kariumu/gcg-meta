@@ -196,24 +196,26 @@
   },
   "EB01-021": {
     "card_number": "EB01-021",
-    "card_name": "ビルドストライクガンダム(フルパッケージ)(EX)",
+    "card_name": "ビルドストライクガンダム（フルパッケージ）（EX）",
     "color": "Green",
     "card_type": "UNIT",
-    "level": 2,
-    "cost": 5,
+    "level": 5,
+    "cost": 4,
     "ap": 4,
     "hp": 4,
     "terrain": [],
     "traits": [
-      "〔ジージェネ〕"
+      "ジージェネ"
     ],
-    "link": "「レイジ」",
-    "rarity": "R",
-    "effect": "《突破(4)》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット時】〔ジージェネ〕のパイロット 自分のトラッシュに〔ジージェネ〕のユニットカードが2枚以上あるなら、自分はリソース1つをレストで置く",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2053746934188560670",
-    "created_at": "2026-05-17 08:27:15 JST",
+    "link": "レイジ",
+    "rarity": "LR",
+    "effect": "突破4 (アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)セット時・ジージェネ)のパイロット 自分のドラッシュに(ジージェネ)このユニットカードが2枚以上あるなら、自分はリソース1つをレストで置",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2067880067146088804",
+    "created_at": "2026-06-19 18:45:12 JST",
     "preview": true,
-    "_articleDate": "2026-05-11"
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-06-19"
   },
   "ST10-014": {
     "card_number": "ST10-014",
@@ -383,7 +385,7 @@
   },
   "EB01-022": {
     "card_number": "EB01-022",
-    "card_name": "ガンダムエクシア(EX)",
+    "card_name": "ガンダムエクシア（EX）",
     "color": "Green",
     "card_type": "UNIT",
     "level": 8,
@@ -392,17 +394,17 @@
     "hp": 5,
     "terrain": [],
     "traits": [
-      "〔ジージェネ〕"
+      "ジージェネ"
     ],
-    "link": "特徴に攻撃型を持つPILOT",
-    "rarity": "LR",
-    "effect": "《突破(5)》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)【セット中】〔ジージェネ〕のパイロット 自分のターン終了時、このユニットを破壊してもよい。そうしたなら、「ガンダムエクシア」(〔ジージェネ〕・AP2HP2)のユニットトークン3つを配備する。",
-    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2055921261466042778",
-    "created_at": "2026-05-18 19:40:04 JST",
+    "link": "",
+    "rarity": null,
+    "effect": "突破5 (アタックで相手のユニットを破壊したとき、 その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)セット中・ジージェネ)のパイロット 自分のターン終了時、このユニットを破壊してもよい。そうしたなら、 「ガンダムエクシア」 (ジージェネAP2・HP2)のユニットトークン3つを配備する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2066792902290796690",
+    "created_at": "2026-06-16 18:45:12 JST",
     "preview": true,
     "_pendingReview": false,
     "_pendingReviewIssues": [],
-    "_articleDate": "2026-05-17"
+    "_articleDate": "2026-06-16"
   },
   "EB01-075": {
     "card_number": "EB01-075",
@@ -2058,5 +2060,62 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-06-15"
+  },
+  "GD05-104": {
+    "card_number": "GD05-104",
+    "card_name": null,
+    "color": "Blue",
+    "card_type": "COMMAND",
+    "level": 3,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [
+      "〔シュラク隊〕",
+      "〔リガ・ミリティア〕",
+      "〔リガ・ミリティア〕",
+      "〔シュラク隊〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2066807999692189946",
+    "created_at": "2026-06-16 18:45:06 JST",
+    "preview": true,
+    "_pendingReview": true,
+    "_pendingReviewIssues": [
+      "card_name が空"
+    ],
+    "_articleDate": "2026-06-16"
+  },
+  "GD05-026": {
+    "card_number": "GD05-026",
+    "card_name": null,
+    "color": "Green",
+    "card_type": "UNIT",
+    "level": 5,
+    "cost": null,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [
+      "〔改修型〕",
+      "〔クワイエット・ゼロ〕"
+    ],
+    "link": "「ガンダム・ルブリス」",
+    "rarity": null,
+    "effect": "",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2067177932968341910",
+    "created_at": "2026-06-17 18:45:06 JST",
+    "preview": true,
+    "_pendingReview": true,
+    "_pendingReviewIssues": [
+      "card_name が空",
+      "UNIT の cost が空",
+      "UNIT の ap が空",
+      "UNIT の hp が空"
+    ],
+    "_articleDate": "2026-06-17"
   }
 }
