@@ -655,6 +655,10 @@ async function fetchOfficialTweets(sinceTime, endTime = null) {
 
 // === 記事タイプ判定 ===
 function classifyTweet(tweet) {
+  // パラレルカード紹介は処理対象外（既出カードのイラスト違い版。新カードではない）
+  // 公式ポスト本文に「パラレルカード」表記がある場合は new_card/notice どちらにも分類せず、
+  // 画像認識も記事作成も一切行わない（最上流で除外）。
+  if (tweet.text.includes('パラレルカード')) return null;
   if (tweet.text.includes('【収録カード紹介】')) return 'new_card';
   if (tweet.text.includes('【重要なお知らせ】')) return 'notice';
   return null;
