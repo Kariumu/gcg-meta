@@ -2750,5 +2750,70 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-28": {
+    "recognized_at": "2026-06-29 07:56:25 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2071149101119685060",
+      "https://x.com/GUNDAM_GCG_JP/status/2071141553322492215"
+    ],
+    "cards": [
+      {
+        "card_number": "不明",
+        "card_name": "不明",
+        "color": "Green",
+        "card_type": "不明",
+        "level": 8,
+        "cost": null,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "「スレッタ・マーキュリー」",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-107",
+        "card_name": "紡がれる祝福",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 10,
+        "cost": 10,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】自分はEXリソース1つを置く。【メイン】相手プレイヤー1人を選ぶ。そのプレイヤーのシールドエリアのカードを先頭から2つ破壊する。",
+        "effect_confidence": "medium",
+        "effect_length": 70,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-018",
+        "card_name": "ガンダム・キャリバーン",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 8,
+        "cost": 7,
+        "ap": 7,
+        "hp": 5,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "「スレッタ・マーキュリー」",
+        "effect": "自分のEXリソースがゲームから除外されたとき、自分のユニット1つを選んでもよい。このターン中、それが相手からダメージを受けるとき、そのダメージを3軽減する。【配備時】自分はEXリソース3つを置く。",
+        "effect_confidence": "medium",
+        "effect_length": 98,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
