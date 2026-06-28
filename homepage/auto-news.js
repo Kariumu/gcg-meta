@@ -37,8 +37,8 @@ const CARD_IMAGE_BASE = '../../images/cards'; // ローカル画像パス（記�
 
 const OFFICIAL_USER_ID = '1837069552842330114'; // @GUNDAM_GCG_JP
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
-const ANTHROPIC_MODEL_SONNET = 'claude-sonnet-4-20250514';
-const ANTHROPIC_MODEL_OPUS = 'claude-opus-4-20250514';
+const ANTHROPIC_MODEL_SONNET = 'claude-sonnet-4-6';
+const ANTHROPIC_MODEL_OPUS = 'claude-opus-4-8';
 const RECOGNITION_LOG_FILE = path.join(DATA_DIR, 'card-recognition-log.json');
 const CARDS_PREVIEW_FILE = path.join(DATA_DIR, 'cards_preview.json');
 

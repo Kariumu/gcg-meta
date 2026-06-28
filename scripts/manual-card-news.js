@@ -678,7 +678,7 @@ ${hasImage ? '画像で明確に確認できる値(特に level, cost, ap, hp �
     : userPrompt;
 
   const data = JSON.stringify({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 2000,
     system: systemPrompt,
     messages: [{ role: 'user', content: userContent }],
