@@ -31458,7 +31458,7 @@
     "link": [
       "マーク・ギルダー"
     ],
-    "package_set": "ST10",
+    "package_set": "EB01",
     "effect_text": "【セット中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
     "effect": "【セット中】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
     "terrain": "宇宙 地球",
@@ -31730,5 +31730,55 @@
     "is_promo": false,
     "parallel_number": 1,
     "base_card_id": "ST10-016"
+  },
+  "GD02-110_p3": {
+    "id": "GD02-110_p3",
+    "name_jp": "目覚める力",
+    "rarity": "R+",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 6,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】自分のトラッシュのLv.5以下のユニットカード1枚を選ぶ。それをコストを支払って配備する。",
+    "effect": "【メイン】自分のトラッシュのLv.5以下のユニットカード1枚を選ぶ。それをコストを支払って配備する。",
+    "terrain": "-",
+    "acquisition_info": "プレミアムグッズセット -機動戦士ガンダム 鉄血のオルフェンズ- [PB02]",
+    "is_parallel": true,
+    "parallel_number": 3,
+    "base_card_id": "GD02-110",
+    "is_promo": true
+  },
+  "ST05-010_p4": {
+    "id": "ST05-010_p4",
+    "name_jp": "三日月・オーガス",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "鉄華団",
+      "阿頼耶識"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】自分のユニット1つと、相手のユニット1つを選ぶ。それらに1ダメージを与える。",
+    "effect": "【バースト】このカードを手札に加える。【セット時】自分のユニット1つと、相手のユニット1つを選ぶ。それらに1ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "プレミアムグッズセット -機動戦士ガンダム 鉄血のオルフェンズ- [PB02]",
+    "is_parallel": true,
+    "parallel_number": 4,
+    "base_card_id": "ST05-010",
+    "is_promo": true
   }
 }
