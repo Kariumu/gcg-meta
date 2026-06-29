@@ -2815,5 +2815,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-29": {
+    "recognized_at": "2026-06-30 07:27:52 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2071511490880757867",
+      "https://x.com/GUNDAM_GCG_JP/status/2071503939795894282"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-095",
+        "card_name": "ギュネイ・ガス",
+        "color": "Purple",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔ネオ・ジオン〕",
+          "〔強化人間〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。このユニットが〔ネオ・ジオン〕の間、これは《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "medium",
+        "effect_length": 77,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-057",
+        "card_name": "ヤクト・ドーガ(ギュネイ専用機)",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "「ギュネイ・ガス」",
+        "effect": "【起動】・メイン ターン1回 このユニット以外の、自分のユニット1つを選ぶ。それを破壊する。そうしたなら、このユニットをアクティブにし、このターン中、これは相手プレイヤーをアタック先に選べない。",
+        "effect_confidence": "medium",
+        "effect_length": 97,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
