@@ -2864,5 +2864,72 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-30": {
+    "recognized_at": "2026-06-30 22:12:14 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2071881432281346062",
+      "https://x.com/GUNDAM_GCG_JP/status/2071873879098933589",
+      "https://x.com/GUNDAM_GCG_JP/status/2071866326239387900"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-063",
+        "card_name": "ヤクト・ドーガ(ギュネイ専用機)",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "特徴にネオ・ジオンを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-121",
+        "card_name": "サイクロンパンチ",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン 相手のユニット1つを選ぶ。このターン中、それをAP-2する。このカードの メイン 発動後、トラッシュのこれを〔MF〕の自分のユニットにセットしてもよい。",
+        "effect_confidence": "medium",
+        "effect_length": 80,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-069",
+        "card_name": "ガンダムマックスター",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔MF〕",
+          "〔シャッフル同盟〕"
+        ],
+        "link": "「チボデー・クロケット」",
+        "effect": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のデッキを上から4枚見て、その中の(必殺技)のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【リンク中】【アタック時】このユニットにセットしているカードのメインを発動する。",
+        "effect_confidence": "low",
+        "effect_length": 143,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
