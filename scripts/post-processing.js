@@ -276,7 +276,10 @@ function updateIndexHtml(date, cardNumbers, cardsPreview, dryRun) {
   const sectionStartRe = /(<div class="site-nav-card-title">ニュース・速報<\/div>\s*<ul[^>]*>\s*)/;
   const match = html.match(sectionStartRe);
   if (!match) {
-    log('  ★ 警告: index.html にニュース・速報セクション見つからず、更新スキップ');
+    // 2026-06-13 の v7-p2(commit a994e0eb6)で index.html のトップ記事は articles.json 連動の
+    // 動的表示に移行し、静的「ニュース・速報」枠は廃止済み。auto-news は articles.json を更新
+    // しているため新記事はホームに動的反映される。この静的更新は不要なので正常スキップ。
+    log('  index.html: トップ記事は articles.json 動的表示のため静的ニュース枠の更新は不要（スキップ）');
     return { changed: false };
   }
 
