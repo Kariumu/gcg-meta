@@ -205,11 +205,27 @@
             }
             const upcoming = allSeries.filter(s => s.status === 'upcoming')
                 .sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
-            if (upcoming.length > 0) return { series: upcoming[0], mode: 'upcoming' };
+            if (upcoming.length > 0) {
+                const next = upcoming[0];
+                // 応募期間中（apply_start_date〜apply_end_date に今日が含まれる）なら「応募受付中」扱い
+                const today = new Date().toISOString().slice(0, 10);
+                if (next.apply_start_date && next.apply_end_date
+                    && today >= next.apply_start_date && today <= next.apply_end_date) {
+                    return { series: next, mode: 'accepting' };
+                }
+                return { series: next, mode: 'upcoming' };
+            }
             const completed = allSeries.filter(s => s.status === 'completed')
                 .sort((a, b) => (b.start_date || '').localeCompare(a.start_date || ''));
             if (completed.length > 0) return { series: completed[0], mode: 'completed-fallback' };
             return null;
+        }
+
+        function formatApplyDeadline(d) {
+            // "2026-07-20" -> "2026/7/20"
+            const parts = String(d || '').split('-');
+            if (parts.length !== 3) return d || '';
+            return parts[0] + '/' + parseInt(parts[1], 10) + '/' + parseInt(parts[2], 10);
         }
 
         function renderHeroSeries(pick, summary) {
@@ -221,6 +237,7 @@
             const s = pick.series;
             const mode = pick.mode;
             const headline = mode === 'active' ? '開催中'
+                : mode === 'accepting' ? '応募受付中'
                 : mode === 'upcoming' ? '次回開催'
                     : '直近開催（最新シリーズ）';
             const statusBadge = GCG.renderStatusBadge ? GCG.renderStatusBadge(s.status) : '';
@@ -245,10 +262,11 @@
                 + '<h1 class="series-hero-title">' + GCG.escapeHtml(s.display_name || s.official_name || '') + '</h1>'
                 + (s.subtitle ? '<p class="series-hero-subtitle">' + GCG.escapeHtml(s.subtitle) + '</p>' : '')
                 + '<p class="series-hero-period">開催期間: ' + GCG.escapeHtml(period) + '</p>'
+                + (mode === 'accepting' && s.apply_end_date ? '<p class="series-hero-apply" style="margin:8px 0;padding:8px 12px;background:rgba(34,197,94,0.12);border:1px solid #22c55e;border-radius:6px;color:#22c55e;font-weight:700;font-family:var(--font-mono);display:inline-block">応募受付中 ／ 応募締切 ' + GCG.escapeHtml(formatApplyDeadline(s.apply_end_date)) + '</p>' : '')
                 + (s.description ? '<p class="series-hero-desc">' + GCG.escapeHtml(s.description) + '</p>' : '')
                 + statsHtml
                 + '<div class="series-hero-actions">'
-                + '<a href="' + detailHref + '" class="series-hero-cta">シリーズ詳細へ →</a>'
+                + '<a href="' + (mode === 'accepting' ? 'schedule.html' : detailHref) + '" class="series-hero-cta">' + (mode === 'accepting' ? '開催スケジュールを見る →' : 'シリーズ詳細へ →') + '</a>'
                 + '<a href="series/" class="series-hero-cta-sub">シリーズ一覧</a>'
                 + '</div>';
         }
@@ -533,10 +551,10 @@
             }
             if (dashPieChart) { dashPieChart.destroy(); dashPieChart = null; }
 
-            // Top3 表示（スペックに基づく。ドーナツは上位8タイプを継続表示）
+            // 全タイプ表示（松岡さん要望: 上位3件制限を撤廃し全件表示。ドーナツは上位8タイプを継続表示）
             const container = document.getElementById('decktype-cards');
             const maxShare = deckTypes[0] ? deckTypes[0].share : 100;
-            container.innerHTML = deckTypes.slice(0, 3).map(dt => {
+            container.innerHTML = deckTypes.map(dt => {
                 const primaryColor = GCG.primaryColorHex(dt.colors);
                 return ''
                     + '<a href="meta.html?type=' + dt.type_key + '" class="decktype-card">'
