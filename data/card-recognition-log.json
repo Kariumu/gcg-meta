@@ -2931,5 +2931,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-01": {
+    "recognized_at": "2026-07-02 07:06:17 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2072236266402254986",
+      "https://x.com/GUNDAM_GCG_JP/status/2072228719247188003"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-083",
+        "card_name": "カガリ・ユラ・アスハ",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 3,
+        "cost": 1,
+        "ap": 1,
+        "hp": 1,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】HP1の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 55,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-005",
+        "card_name": "ストライクルージュ(オオトリ装備)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "特徴にオーブを持つPILOT",
+        "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "high",
+        "effect_length": 33,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
