@@ -2750,5 +2750,234 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-06-28": {
+    "recognized_at": "2026-06-29 07:56:25 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2071149101119685060",
+      "https://x.com/GUNDAM_GCG_JP/status/2071141553322492215"
+    ],
+    "cards": [
+      {
+        "card_number": "不明",
+        "card_name": "不明",
+        "color": "Green",
+        "card_type": "不明",
+        "level": 8,
+        "cost": null,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "「スレッタ・マーキュリー」",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-107",
+        "card_name": "紡がれる祝福",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 10,
+        "cost": 10,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】自分はEXリソース1つを置く。【メイン】相手プレイヤー1人を選ぶ。そのプレイヤーのシールドエリアのカードを先頭から2つ破壊する。",
+        "effect_confidence": "medium",
+        "effect_length": 70,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-018",
+        "card_name": "ガンダム・キャリバーン",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 8,
+        "cost": 7,
+        "ap": 7,
+        "hp": 5,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "「スレッタ・マーキュリー」",
+        "effect": "自分のEXリソースがゲームから除外されたとき、自分のユニット1つを選んでもよい。このターン中、それが相手からダメージを受けるとき、そのダメージを3軽減する。【配備時】自分はEXリソース3つを置く。",
+        "effect_confidence": "medium",
+        "effect_length": 98,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-06-29": {
+    "recognized_at": "2026-06-30 07:27:52 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2071511490880757867",
+      "https://x.com/GUNDAM_GCG_JP/status/2071503939795894282"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-095",
+        "card_name": "ギュネイ・ガス",
+        "color": "Purple",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔ネオ・ジオン〕",
+          "〔強化人間〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。このユニットが〔ネオ・ジオン〕の間、これは《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "medium",
+        "effect_length": 77,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-057",
+        "card_name": "ヤクト・ドーガ(ギュネイ専用機)",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "「ギュネイ・ガス」",
+        "effect": "【起動】・メイン ターン1回 このユニット以外の、自分のユニット1つを選ぶ。それを破壊する。そうしたなら、このユニットをアクティブにし、このターン中、これは相手プレイヤーをアタック先に選べない。",
+        "effect_confidence": "medium",
+        "effect_length": 97,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-06-30": {
+    "recognized_at": "2026-06-30 22:12:14 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2071881432281346062",
+      "https://x.com/GUNDAM_GCG_JP/status/2071873879098933589",
+      "https://x.com/GUNDAM_GCG_JP/status/2071866326239387900"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-063",
+        "card_name": "ヤクト・ドーガ(ギュネイ専用機)",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "特徴にネオ・ジオンを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-121",
+        "card_name": "サイクロンパンチ",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン 相手のユニット1つを選ぶ。このターン中、それをAP-2する。このカードの メイン 発動後、トラッシュのこれを〔MF〕の自分のユニットにセットしてもよい。",
+        "effect_confidence": "medium",
+        "effect_length": 80,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-069",
+        "card_name": "ガンダムマックスター",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔MF〕",
+          "〔シャッフル同盟〕"
+        ],
+        "link": "「チボデー・クロケット」",
+        "effect": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のデッキを上から4枚見て、その中の(必殺技)のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【リンク中】【アタック時】このユニットにセットしているカードのメインを発動する。",
+        "effect_confidence": "low",
+        "effect_length": 143,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-07-01": {
+    "recognized_at": "2026-07-02 07:06:17 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2072236266402254986",
+      "https://x.com/GUNDAM_GCG_JP/status/2072228719247188003"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-083",
+        "card_name": "カガリ・ユラ・アスハ",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 3,
+        "cost": 1,
+        "ap": 1,
+        "hp": 1,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】HP1の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 55,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-005",
+        "card_name": "ストライクルージュ(オオトリ装備)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "特徴にオーブを持つPILOT",
+        "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "high",
+        "effect_length": 33,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
