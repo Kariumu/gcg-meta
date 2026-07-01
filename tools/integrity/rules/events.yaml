@@ -1,0 +1,31 @@
+# イベント整合性ルール(Phase 1)
+# Step 0承認事項3: events/index.html は元々存在しない(一覧の実体はルートの events.html)。
+# EVT-001 は「events.json の各イベントに個別ページが存在する」として実装し、
+# events/index.html へのリンク切れは EVT-010(internal_links_valid)で捕捉する。
+
+- id: EVT-001
+  name: events.json の各イベントに個別ページが存在する
+  severity: error
+  checker: file_exists_for_each
+  params:
+    source: data/events.json
+    source_root: events
+    target_pattern: events/{key}.html
+
+- id: EVT-002
+  name: events.json の各イベントに必須フィールドが揃っている
+  severity: error
+  checker: required_fields
+  params:
+    source: data/events.json
+    source_root: events
+    fields: [event_id, series_id, date, store, results]
+  note: 設計書の「形式」はイベント単位に存在せず series.json 側の type が該当するため、実データのスキーマに合わせた
+
+- id: EVT-010
+  name: イベント個別ページの内部リンクが有効
+  severity: error
+  checker: internal_links_valid
+  params:
+    scope: events
+  note: events/index.html 欠損の恒久検知(Step 0承認事項3)。設計書 EVT-003(date_freshness、Phase 3予定)とのID衝突を避けて 010 を採番
