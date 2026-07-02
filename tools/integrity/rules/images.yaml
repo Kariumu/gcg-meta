@@ -1,0 +1,18 @@
+# 画像整合性ルール(Phase 3)
+
+- id: IMG-001
+  name: サイト全域(reports/以外)のimg参照先が実在する
+  severity: error
+  checker: image_refs_valid
+  params:
+    scope: .
+    exclude: [reports, tmp, homepage, recognition-test]
+  note: reports/ は NEWS-003 が担当するため除外し二重計上を防ぐ。.git/node_modules/tools は常時除外
+
+- id: IMG-002
+  name: 画像ファイルサイズが閾値以下
+  severity: warning
+  checker: image_size_max
+  params:
+    scan_dir: images
+    threshold_kb: 500

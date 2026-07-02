@@ -22,6 +22,17 @@
     fields: [event_id, series_id, date, store, results]
   note: 設計書の「形式」はイベント単位に存在せず series.json 側の type が該当するため、実データのスキーマに合わせた
 
+- id: EVT-003
+  name: イベントデータの最新日付が実行日から一定日数以内
+  severity: warning
+  checker: date_freshness
+  params:
+    source: data/events.json
+    source_root: events
+    date_field: date
+    threshold_days: 7
+  note: 取得漏れ・月末バックアップ運用の失念検知(設計書EVT-003)
+
 - id: EVT-010
   name: イベント個別ページの内部リンクが有効
   severity: error

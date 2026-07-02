@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * GCG STATS サイト整合性監視システム (Site Integrity Monitor) - Phase 2
- * 設計書: design-site-integrity-monitor.md 準拠(4.1〜4.4)
+ * GCG STATS サイト整合性監視システム (Site Integrity Monitor) - Phase 3
+ * 設計書: design-site-integrity-monitor.md 準拠(3.3〜3.4 / 4.1〜4.4)
  *
  * 使い方:
  *   node tools/integrity/scan.js                     フルスキャン(検出詳細+サマリー+report.html生成)
@@ -20,9 +20,11 @@
  *   ※ resolved への手動遷移コマンドは意図的に存在しない(「直したつもり」防止)
  *   ※ checker が実行失敗したルールの issue は誤 resolved を防ぐため遷移させない
  *
- * Phase 1 からの checker(検出ロジックは無変更):
- *   file_exists_for_each / internal_links_valid / image_refs_valid
- *   no_orphan_files / cross_data_consistent / required_fields
+ * checker 一覧:
+ *   Phase 1(検出ロジック無変更): file_exists_for_each / internal_links_valid / image_refs_valid
+ *                                no_orphan_files / cross_data_consistent / required_fields
+ *   Phase 3: embedded_index_contains / date_freshness / no_orphan_images / image_size_max
+ *            required_meta_tags / sitemap_coverage / files_exist / forbidden_fields
  *
  * 制約(設計書7章 / Step 0承認事項):
  *   - サイト公開ファイル・データソースへの書き込みは行わない(書き込みは state/ と reports/ のみ)
@@ -163,8 +165,18 @@ function normalizeKeys(keys, mode) {
   return keys;
 }
 
-function listHtmlFiles(dirRel) {
+// 公開対象外ディレクトリ(スキャナ自身の出力を含む)は常に走査から除外する
+const ALWAYS_EXCLUDE = ['.git', 'node_modules', 'tools'];
+
+/** repo相対パスが除外プレフィックスに該当するか */
+function isExcluded(relPath, excludes) {
+  const all = ALWAYS_EXCLUDE.concat(excludes || []);
+  return all.some((ex) => relPath === ex || relPath.startsWith(ex.replace(/\/$/, '') + '/'));
+}
+
+function listFiles(dirRel, excludes, filterFn) {
   const out = [];
+  const baseAbs = dirRel === '.' ? ROOT : path.join(ROOT, dirRel);
   const walk = (dirAbs) => {
     let entries;
     try {
@@ -174,12 +186,18 @@ function listHtmlFiles(dirRel) {
     }
     for (const e of entries) {
       const p = path.join(dirAbs, e.name);
+      const rel = path.relative(ROOT, p).split(path.sep).join('/');
+      if (isExcluded(rel, excludes)) continue;
       if (e.isDirectory()) walk(p);
-      else if (e.isFile() && e.name.endsWith('.html')) out.push(p);
+      else if (e.isFile() && (!filterFn || filterFn(e.name))) out.push(p);
     }
   };
-  walk(path.join(ROOT, dirRel));
+  walk(baseAbs);
   return out;
+}
+
+function listHtmlFiles(dirRel, excludes) {
+  return listFiles(dirRel, excludes, (name) => name.endsWith('.html'));
 }
 
 /** リンク/画像参照の対象外判定(外部URL・アンカー・ビルド時テンプレート断片など) */
@@ -224,7 +242,7 @@ function scanRefs(rule, extractRegexes) {
   const missing = new Map(); // 欠損先パス → { referrers:Set, refCount:number }
   let scannedFiles = 0;
   for (const scope of scopes) {
-    for (const fileAbs of listHtmlFiles(scope)) {
+    for (const fileAbs of listHtmlFiles(scope, rule.params.exclude)) {
       scannedFiles++;
       const html = fs.readFileSync(fileAbs, 'utf8');
       const fileRel = path.relative(ROOT, fileAbs).split(path.sep).join('/');
@@ -351,6 +369,234 @@ const CHECKERS = {
   image_refs_valid(rule) {
     return scanRefs(rule, [/<img\b[^>]*?\bsrc\s*=\s*"([^"]*)"/gi, /<img\b[^>]*?\bsrc\s*=\s*'([^']*)'/gi]);
   },
+
+  /** HTML埋め込みのJS配列(var CARDS = [...] 等)がデータソースの全IDを含むか */
+  embedded_index_contains(rule) {
+    const p = rule.params;
+    const html = fs.readFileSync(path.join(ROOT, p.file), 'utf8');
+    const markerRe = new RegExp(p.marker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\[[\\s\\S]*?\\]);');
+    const m = html.match(markerRe);
+    if (!m) throw new Error(`${p.file} に埋め込み配列 "${p.marker}" が見つかりません`);
+    const arr = JSON.parse(m[1]);
+    const idField = p.id_field || 'id';
+    const embedded = new Set(arr.map((x) => x[idField]));
+    const findings = [];
+    for (const [key] of sourceEntries(p, 'source')) {
+      if (!embedded.has(key)) {
+        findings.push({
+          target: `${p.file}#${key}`,
+          detail: `"${key}" が ${p.file} の埋め込み検索インデックス(${p.marker}...)に含まれていない`,
+        });
+      }
+    }
+    return { findings, checked: embedded.size };
+  },
+
+  /** データソースの最新日付が閾値日数以内か(取得漏れ検知) */
+  date_freshness(rule) {
+    const p = rule.params;
+    const entries = sourceEntries(p, 'source');
+    const dateField = p.date_field || 'date';
+    let latest = '';
+    for (const [, v] of entries) {
+      const d = v && v[dateField];
+      if (typeof d === 'string' && d > latest) latest = d;
+    }
+    if (!latest) throw new Error(`${p.source} に日付フィールド "${dateField}" が見つかりません`);
+    const today = jstToday();
+    const days = daysBetween(latest, today);
+    const threshold = Number(p.threshold_days || 7);
+    const findings = [];
+    if (days > threshold) {
+      findings.push({
+        target: `${p.source}#${dateField}`,
+        detail: `最新${dateField}が ${latest}(${days}日前)。閾値 ${threshold} 日を超過 — 取得漏れの可能性`,
+      });
+    }
+    return { findings, checked: entries.length };
+  },
+
+  /** 画像ディレクトリ配下で、対象HTMLから参照されていない孤児画像がないか */
+  no_orphan_images(rule) {
+    const p = rule.params;
+    const scopes = Array.isArray(p.referenced_from) ? p.referenced_from : [p.referenced_from];
+    const referenced = new Set();
+    const refRes = [
+      /<img\b[^>]*?\bsrc\s*=\s*"([^"]*)"/gi,
+      /<img\b[^>]*?\bsrc\s*=\s*'([^']*)'/gi,
+      /<a\b[^>]*?\bhref\s*=\s*"([^"]*)"/gi,
+    ];
+    for (const scope of scopes) {
+      for (const fileAbs of listHtmlFiles(scope)) {
+        const html = fs.readFileSync(fileAbs, 'utf8');
+        for (const re of refRes) {
+          re.lastIndex = 0;
+          let m;
+          while ((m = re.exec(html)) !== null) {
+            if (isSkippableRef(m[1])) continue;
+            let t = m[1].split('#')[0].split('?')[0];
+            try {
+              t = decodeURIComponent(t);
+            } catch (_) {}
+            const abs = t.startsWith('/') ? path.join(ROOT, t) : path.resolve(path.dirname(fileAbs), t);
+            if (abs.startsWith(ROOT + path.sep)) {
+              referenced.add(path.relative(ROOT, abs).split(path.sep).join('/'));
+            }
+          }
+        }
+      }
+    }
+    const findings = [];
+    const images = listFiles(p.images_dir, [], () => true);
+    for (const imgAbs of images) {
+      const rel = path.relative(ROOT, imgAbs).split(path.sep).join('/');
+      if (!referenced.has(rel)) {
+        findings.push({ target: rel, detail: `${scopes.join(', ')} 配下のどの記事からも参照されていない孤児画像` });
+      }
+    }
+    return { findings, checked: images.length };
+  },
+
+  /** 画像ファイルサイズが閾値以下か(表示速度対策) */
+  image_size_max(rule) {
+    const p = rule.params;
+    const threshold = Number(p.threshold_kb || 500) * 1024;
+    const findings = [];
+    const files = listFiles(p.scan_dir, [], () => true);
+    for (const fAbs of files) {
+      const size = fs.statSync(fAbs).size;
+      if (size > threshold) {
+        findings.push({
+          target: path.relative(ROOT, fAbs).split(path.sep).join('/'),
+          detail: `ファイルサイズ ${(size / 1024).toFixed(0)}KB が閾値 ${p.threshold_kb || 500}KB を超過`,
+        });
+      }
+    }
+    return { findings, checked: files.length };
+  },
+
+  /** 各HTMLに必須metaタグ(lang/viewport/description/canonical/OG)があるか */
+  required_meta_tags(rule) {
+    const p = rule.params;
+    const scopes = Array.isArray(p.scope) ? p.scope : [p.scope];
+    const CHECKS = [
+      ['lang', (h) => /<html\b[^>]*\blang\s*=/i.test(h)],
+      ['viewport', (h) => /<meta\b[^>]*name\s*=\s*["']viewport["']/i.test(h)],
+      ['description', (h) => /<meta\b[^>]*name\s*=\s*["']description["']/i.test(h)],
+      ['canonical', (h) => /<link\b[^>]*rel\s*=\s*["']canonical["']/i.test(h)],
+      ['og', (h) => /<meta\b[^>]*property\s*=\s*["']og:/i.test(h)],
+    ];
+    const findings = [];
+    let checked = 0;
+    for (const scope of scopes) {
+      for (const fileAbs of listHtmlFiles(scope, p.exclude)) {
+        checked++;
+        const html = fs.readFileSync(fileAbs, 'utf8');
+        const missing = CHECKS.filter(([, fn]) => !fn(html)).map(([name]) => name);
+        if (missing.length > 0) {
+          findings.push({
+            target: path.relative(ROOT, fileAbs).split(path.sep).join('/'),
+            detail: `必須metaタグ欠落: ${missing.join(', ')}`,
+          });
+        }
+      }
+    }
+    return { findings, checked };
+  },
+
+  /** 公開HTMLが sitemap.xml に全て掲載されているか */
+  sitemap_coverage(rule) {
+    const p = rule.params;
+    const xml = fs.readFileSync(path.join(ROOT, p.sitemap), 'utf8');
+    const base = (p.base_url || '').replace(/\/$/, '');
+    const listed = new Set();
+    for (const m of xml.matchAll(/<loc>([^<]+)<\/loc>/g)) {
+      let u = m[1].trim();
+      if (u.startsWith(base)) u = u.slice(base.length);
+      u = u.split('#')[0].split('?')[0];
+      if (u === '' || u === '/') u = '/';
+      listed.add(u);
+      // /dir/ 形式と /dir/index.html 形式は同一視する
+      if (u.endsWith('/')) listed.add(u + 'index.html');
+      else if (u.endsWith('/index.html')) listed.add(u.slice(0, -'index.html'.length));
+    }
+    const scopes = Array.isArray(p.scope) ? p.scope : [p.scope];
+    const findings = [];
+    let checked = 0;
+    for (const scope of scopes) {
+      for (const fileAbs of listHtmlFiles(scope, p.exclude)) {
+        checked++;
+        const rel = path.relative(ROOT, fileAbs).split(path.sep).join('/');
+        let url = '/' + rel;
+        if (url === '/index.html') url = '/';
+        const dirForm = url.endsWith('/index.html') ? url.slice(0, -'index.html'.length) : null;
+        if (!listed.has(url) && !(dirForm && listed.has(dirForm))) {
+          findings.push({ target: rel, detail: `${p.sitemap} に未掲載` });
+        }
+      }
+    }
+    return { findings, checked };
+  },
+
+  /** 指定ファイルの実在チェック */
+  files_exist(rule) {
+    const files = rule.params.files || [];
+    const findings = [];
+    for (const f of files) {
+      if (!fs.existsSync(path.join(ROOT, f))) {
+        findings.push({ target: f, detail: `必須ファイル ${f} が存在しない` });
+      }
+    }
+    return { findings, checked: files.length };
+  },
+
+  /** JSONデータに禁止フィールド(プライバシー系)が含まれていないか */
+  forbidden_fields(rule) {
+    const p = rule.params;
+    const forbidden = new Set((p.forbidden || []).map((k) => String(k).toLowerCase()));
+    const sources = Array.isArray(p.sources) ? p.sources : [p.sources];
+    const findings = [];
+    let checked = 0;
+    const jsonFiles = [];
+    for (const src of sources) {
+      const abs = path.join(ROOT, src);
+      if (!fs.existsSync(abs)) continue;
+      if (fs.statSync(abs).isDirectory()) {
+        for (const fAbs of listFiles(src, [], (n) => n.endsWith('.json'))) jsonFiles.push(fAbs);
+      } else {
+        jsonFiles.push(abs);
+      }
+    }
+    for (const fAbs of jsonFiles) {
+      checked++;
+      const rel = path.relative(ROOT, fAbs).split(path.sep).join('/');
+      let data;
+      try {
+        data = JSON.parse(fs.readFileSync(fAbs, 'utf8'));
+      } catch (e) {
+        findings.push({ target: rel, detail: `JSONとして読めない(${e.message})`, severity: 'warning' });
+        continue;
+      }
+      const hits = new Map(); // 禁止キー → 出現数
+      const walk = (o) => {
+        if (Array.isArray(o)) return o.forEach(walk);
+        if (o && typeof o === 'object') {
+          for (const k of Object.keys(o)) {
+            if (forbidden.has(k.toLowerCase())) hits.set(k, (hits.get(k) || 0) + 1);
+            walk(o[k]);
+          }
+        }
+      };
+      walk(data);
+      for (const [key, count] of hits) {
+        findings.push({
+          target: `${rel}#${key}`,
+          detail: `禁止フィールド "${key}" が ${count} 箇所に存在(プライバシー方針違反の可能性 — 即時確認要)`,
+        });
+      }
+    }
+    return { findings, checked };
+  },
 };
 
 // ===================================================================
@@ -395,6 +641,11 @@ function saveIssues(issues) {
 // ===================================================================
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/** 日付基準はJST(UTC+9)で統一(2026-07-02 Phase 3)。issue_id には日付を含まないため連続性への影響なし */
+function jstToday() {
+  return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
 }
 
 function daysBetween(fromYmd, toYmd) {
@@ -585,7 +836,7 @@ function runStatusCommand(cmd, id) {
 // ===================================================================
 function runScan() {
   const startedAt = Date.now();
-  const today = new Date().toISOString().slice(0, 10);
+  const today = jstToday();
 
   // 台帳を先に読み込む(破損していればここで停止し、何も書き換えない)
   const ledger = loadIssuesStrict();
@@ -733,6 +984,18 @@ function runScan() {
         console.log(`${C.gray}  ... 他 ${fs_.length - SHOW} 件(全件は state/issues.json を参照)${C.reset}`);
       }
     }
+  }
+
+  // 台帳の孤児issue可視化: ルールがYAMLに存在しないissueは自動削除せず警告表示のみ(Phase 2引き継ぎ事項)
+  const yamlRuleIds = new Set(rules.map((r) => r.id));
+  const orphanIssues = updated.filter((i) => !yamlRuleIds.has(i.rule_id));
+  if (orphanIssues.length > 0) {
+    const orphanRules = [...new Set(orphanIssues.map((i) => i.rule_id))].sort();
+    console.log(
+      `\n${C.yellow}[WARN]${C.reset} 台帳に、ルール定義(rules/*.yaml)が存在しない issue が ${orphanIssues.length} 件あります` +
+        `(ルール: ${orphanRules.join(', ')})`
+    );
+    console.log(`${C.gray}       状態遷移は保留されています。ルール廃止済みなら台帳からの手動間引きを検討してください${C.reset}`);
   }
 
   const sevCount = { error: 0, warning: 0, info: 0 };

@@ -1,0 +1,36 @@
+# サイト全域ルール(Phase 3)
+
+- id: SITE-001
+  name: 全HTMLに必須metaタグ(lang/viewport/description/canonical/OG)がある
+  severity: error
+  checker: required_meta_tags
+  params:
+    scope: .
+    exclude: [tmp, homepage, recognition-test, googlecaa8f7df680d0774.html]
+  note: googlecaa8... はGoogleサイト所有権確認ファイルのため対象外(SEO Week1修正の恒久化)
+
+- id: SITE-002
+  name: 公開HTMLが sitemap.xml に全て掲載されている
+  severity: warning
+  checker: sitemap_coverage
+  params:
+    sitemap: sitemap.xml
+    base_url: https://gcg-stats.com
+    scope: .
+    exclude: [tmp, homepage, recognition-test, googlecaa8f7df680d0774.html]
+
+- id: SITE-003
+  name: robots.txt・プライバシーポリシー・お問い合わせページが存在する
+  severity: error
+  checker: files_exist
+  params:
+    files: [robots.txt, privacy.html, contact.html]
+
+- id: SITE-004
+  name: ショップバトルデータに個人特定フィールドが含まれていない(最重要)
+  severity: error
+  checker: forbidden_fields
+  params:
+    sources: [data/shopbattle, data/summary.json]
+    forbidden: [winner, winner_name, winnerName, user, user_name, userName, user_id, userId, player, player_name, playerName, nickname, nick_name, twitter, twitter_id, twitterId, x_id]
+  note: プライバシー方針の恒久検知。禁止キーは実データスキーマ調査に基づく(playerCount等の集計数値キーは対象外)。検出時は修正せず即報告
