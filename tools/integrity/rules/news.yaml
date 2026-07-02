@@ -9,6 +9,14 @@
     scope: reports
   note: aタグの href のみ検査。imgタグの src は NEWS-003(image_refs_valid)が担当し二重計上を防ぐ
 
+- id: NEWS-002
+  name: images/news/ 配下に記事から参照されていない孤児画像がない
+  severity: info
+  checker: no_orphan_images
+  params:
+    images_dir: images/news
+    referenced_from: reports
+
 - id: NEWS-003
   name: 記事が参照する画像が実在する
   severity: error

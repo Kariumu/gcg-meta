@@ -30,3 +30,14 @@
     right_only_severity: error
     left_only_severity: warning
   note: card_texts.json のみに存在するID = error / テキスト未収録カード = warning(Step 0承認事項1)
+
+- id: CARD-004
+  name: カード検索インデックス(cards.html埋め込み)が全カードを含む
+  severity: error
+  checker: embedded_index_contains
+  params:
+    file: cards.html
+    marker: "var CARDS = "
+    id_field: id
+    source: data/cards_master.json
+  note: 検索インデックスは独立ファイルではなく cards.html にビルド時埋め込み(Step 0調査5)。正規表現+JSON.parseで抽出
