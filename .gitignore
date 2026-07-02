@@ -12,6 +12,11 @@ add-breadcrumb-*.js
 # RGB ログ収集ファイル(2026-05-24 追加、classifyColor 閾値調整用、肥大化するためリポ管理外)
 data/color-classification-log.jsonl
 
-# �o�b�N�A�b�v�t�@�C��(���[�J���ۊǁE���|�W�g���ɂ͊܂߂Ȃ�)
+# �o�b�N�A�b�v�t�@�C��(���[�J���ۊǁE���|�W�g���ɂ͊܂߂Ȃ�)
 *.bak
 *.bak-*
+
+# サイト整合性監視(tools/integrity)のローカル専用出力(2026-07-01 Step 0承認事項2)
+# 問題台帳・レポートは公開リポジトリに含めない。scan.js / rules/*.yaml はコミット対象
+tools/integrity/state/
+tools/integrity/reports/

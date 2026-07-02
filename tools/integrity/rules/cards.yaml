@@ -1,0 +1,32 @@
+# カード整合性ルール(Phase 1)
+# Step 0承認事項1: ソースは data/cards_master.json(cards_data.js はリポジトリ外のため)
+# パラレルID(_pN)は strip_parallel でベースIDに正規化して比較する
+
+- id: CARD-001
+  name: 全カードに個別ページが存在する
+  severity: error
+  checker: file_exists_for_each
+  params:
+    source: data/cards_master.json
+    target_pattern: cards/{key}/index.html
+  note: cards_master.json が正、ページが従(パラレル _pN も個別ページを持つため正規化しない)
+
+- id: CARD-002
+  name: 個別ページに対応するカードが cards_master.json に存在する(孤児ページなし)
+  severity: warning
+  checker: no_orphan_files
+  params:
+    scan_dir: cards
+    source: data/cards_master.json
+
+- id: CARD-003
+  name: cards_master.json と card_texts.json のカードIDが一致する
+  severity: error
+  checker: cross_data_consistent
+  params:
+    left: data/cards_master.json
+    left_normalize: strip_parallel
+    right: data/card_texts.json
+    right_only_severity: error
+    left_only_severity: warning
+  note: card_texts.json のみに存在するID = error / テキスト未収録カード = warning(Step 0承認事項1)

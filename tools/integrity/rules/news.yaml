@@ -1,0 +1,18 @@
+# ニュース・記事整合性ルール(Phase 1)
+# 対象は reports/ 配下全記事(reports/news/ の自動ニュースを含む)
+
+- id: NEWS-001
+  name: 記事内の内部リンクが全て有効
+  severity: error
+  checker: internal_links_valid
+  params:
+    scope: reports
+  note: aタグの href のみ検査。imgタグの src は NEWS-003(image_refs_valid)が担当し二重計上を防ぐ
+
+- id: NEWS-003
+  name: 記事が参照する画像が実在する
+  severity: error
+  checker: image_refs_valid
+  params:
+    scope: reports
+  note: 画像消失問題の恒久検知(既存136件の主因: images/news/{date}/ の欠損)
