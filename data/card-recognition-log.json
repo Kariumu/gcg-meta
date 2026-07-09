@@ -3290,5 +3290,56 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-09": {
+    "recognized_at": "2026-07-09 22:07:41 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2075135366504550488",
+      "https://x.com/GUNDAM_GCG_JP/status/2075127818724290601"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-085",
+        "card_name": "アムロ・レイ",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": 5,
+        "cost": 1,
+        "ap": 2,
+        "hp": 2,
+        "traits": [
+          "〔地球連邦〕",
+          "〔ロンド・ベル〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、これを2回復する。",
+        "effect_confidence": "medium",
+        "effect_length": 66,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-017",
+        "card_name": "νガンダム",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 5,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔地球連邦〕",
+          "〔ロンド・ベル〕"
+        ],
+        "link": "「アムロ・レイ」",
+        "effect": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
+        "effect_confidence": "low",
+        "effect_length": 182,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
