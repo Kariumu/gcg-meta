@@ -2979,5 +2979,320 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-03": {
+    "recognized_at": "2026-07-04 14:06:34 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2073016404199219681",
+      "https://x.com/GUNDAM_GCG_JP/status/2073015146533036065",
+      "https://x.com/GUNDAM_GCG_JP/status/2073013904943243484"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-128",
+        "card_name": "ガンダムファイト",
+        "color": "Red",
+        "card_type": "BASE",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔MF〕",
+          "〔拠点〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。【起動】メイン このベースをレストにする:〔MF〕の味方のリンクユニットがいるなら、味方のユニット1つを選ぶ。このターン中、それをAP+2する。",
+        "effect_confidence": "low",
+        "effect_length": 111,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-110",
+        "card_name": "ダークネスフィンガー",
+        "color": "Red",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "「マスターガンダム」",
+        "effect": "【バースト】このカードのメインを発動する。【メイン】【アクション】相手のユニット1つを選ぶ。それに2ダメージを与える。その後、カード名に「マスターガンダム」を含む自分のユニットがいるなら、自分は1枚ドローする。(必殺技)",
+        "effect_confidence": "low",
+        "effect_length": 110,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-033",
+        "card_name": "マスターガンダム",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 5,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔MF〕",
+          "〔DG細胞〕"
+        ],
+        "link": "「マスター・アジア」",
+        "effect": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 90,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-07-04": {
+    "recognized_at": "2026-07-04 18:42:32 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2073323428803649619",
+      "https://x.com/GUNDAM_GCG_JP/status/2073315883251122430"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-114",
+        "card_name": "広域殲滅",
+        "color": "Purple",
+        "card_type": "COMMAND",
+        "level": 6,
+        "cost": 6,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン Lv.4以下のユニットすべてを破壊する。",
+        "effect_confidence": "high",
+        "effect_length": 24,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-050",
+        "card_name": "ガンダムエクシアリペア",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 2,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔CB〕",
+          "〔GNドライヴ〕"
+        ],
+        "link": "「刹那・F・セイエイ」",
+        "effect": "このユニットが、パイロットがセットされていないLv.4以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。【破壊時】自分のデッキを上から2枚、自分のトラッシュに置く。",
+        "effect_confidence": "medium",
+        "effect_length": 97,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-07-05": {
+    "recognized_at": "2026-07-06 22:24:38 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2074048205126508785",
+      "https://x.com/GUNDAM_GCG_JP/status/2074040653823311938",
+      "https://x.com/GUNDAM_GCG_JP/status/2073685815088021695",
+      "https://x.com/GUNDAM_GCG_JP/status/2073678269053038598"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-102",
+        "card_name": "光の翼",
+        "color": "Blue",
+        "card_type": "COMMAND",
+        "level": 5,
+        "cost": 2,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "アクション このカードをプレイするとき、以下の効果から1つを選択し発動する。■HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。■ユニット1つを選ぶ。それを3回復する。",
+        "effect_confidence": "medium",
+        "effect_length": 91,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-124",
+        "card_name": "ホワイトアーク",
+        "color": "Blue",
+        "card_type": "BASE",
+        "level": 2,
+        "cost": 1,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔リガ・ミリティア〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。自分のターン中、〔リガ・ミリティア〕の味方のユニットの効果でユニットをレストするとき、かわりにこのベースをレストにしてもよい。",
+        "effect_confidence": "low",
+        "effect_length": 102,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-099",
+        "card_name": "トロワ・バートン",
+        "color": "White",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 1,
+        "hp": 2,
+        "traits": [
+          "〔Gチーム〕",
+          "〔オペレーションメテオ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分は1枚ドローする。その後、自分の手札1枚を捨てる。",
+        "effect_confidence": "medium",
+        "effect_length": 84,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-068",
+        "card_name": "シャイニングガンダム(スーパーモード)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 4,
+        "hp": 5,
+        "traits": [
+          "〔MF〕",
+          "〔シャッフル同盟〕"
+        ],
+        "link": "「ドモン・カッシュ」",
+        "effect": "自分が(必殺技)のコマンドのメイン/アクションを発動したとき、このターン中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【リンク中】【アタック時】このバトル中、このユニットをAP+2する。",
+        "effect_confidence": "low",
+        "effect_length": 123,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-07-08": {
+    "recognized_at": "2026-07-09 20:08:50 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2075135366504550488",
+      "https://x.com/GUNDAM_GCG_JP/status/2075127818724290601",
+      "https://x.com/GUNDAM_GCG_JP/status/2074818281433616480",
+      "https://x.com/GUNDAM_GCG_JP/status/2074772979603673346",
+      "https://x.com/GUNDAM_GCG_JP/status/2074765431374766189"
+    ],
+    "cards": [
+      {
+        "card_number": "GD05-085",
+        "card_name": "アムロ・レイ",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": 5,
+        "cost": 1,
+        "ap": 2,
+        "hp": 2,
+        "traits": [
+          "〔地球連邦〕",
+          "〔ロンド・ベル〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、これを2回復する。",
+        "effect_confidence": "medium",
+        "effect_length": 66,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-017",
+        "card_name": "νガンダム",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 5,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔地球連邦〕",
+          "〔ロンド・ベル〕"
+        ],
+        "link": "「アムロ・レイ」",
+        "effect": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
+        "effect_confidence": "low",
+        "effect_length": 182,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-052",
+        "card_name": "サザビー",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 4,
+        "ap": 5,
+        "hp": 4,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "「シャア・アズナブル」",
+        "effect": "【配備時】このユニット以外の、自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、自分のデッキを上から3枚、自分のトラッシュに置く。この効果でデッキから置いた〔ネオ・ジオン〕のユニットカード1枚を手札に加える。",
+        "effect_confidence": "low",
+        "effect_length": 111,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-111",
+        "card_name": "機体奪取",
+        "color": "Red",
+        "card_type": "COMMAND",
+        "level": 1,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン 自分の手札1枚を捨てる。そうしたなら、自分は2枚ドローする。",
+        "effect_confidence": "high",
+        "effect_length": 34,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD05-037",
+        "card_name": "デストロイガンダム(GFAS-X1)",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 9,
+        "cost": 8,
+        "ap": 6,
+        "hp": 6,
+        "traits": [
+          "〔地球連合〕",
+          "〔ファントムペイン〕",
+          "〔生体CPU〕"
+        ],
+        "link": "特徴に生体CPUを持つPILOT",
+        "effect": "トラッシュにカードが7枚以上ある相手プレイヤーがいる間、手札のこのカードをLv.-3、コスト-3する。【リンク中】このユニットは《突破(3)》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+        "effect_confidence": "low",
+        "effect_length": 149,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
