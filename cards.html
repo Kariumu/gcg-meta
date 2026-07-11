@@ -92,6 +92,25 @@
     .filter-chip[data-color="White"].active { background: rgba(200,200,200,0.12); border-color: #cccccc; color: #cccccc; }
     .filter-chip[data-color="Purple"].active { background: rgba(180,68,255,0.12); border-color: #b444ff; color: #b444ff; }
 
+    /* 収録弾チップの行グループ（3行化＋行ごと色分け 2026-07-11）
+       通常弾=金 / デッキ=シアン / 特殊・プロモ=紫系（カード色フィルタとの混同回避の配色） */
+    .filter-set-rows { display: flex; flex-direction: column; gap: 6px; }
+    .filter-set-row { display: flex; align-items: flex-start; gap: 10px; }
+    .filter-set-rowlabel {
+      flex-shrink: 0; min-width: 64px; padding-top: 7px;
+      font-size: 10px; color: var(--text-muted);
+      font-family: var(--font-mono); letter-spacing: 1px;
+    }
+    .filter-chip[data-setgroup="booster"] { border-color: rgba(212,160,41,0.4); }
+    .filter-chip[data-setgroup="booster"]:hover { border-color: #d4a029; color: #d4a029; }
+    .filter-chip[data-setgroup="booster"].active { background: rgba(212,160,41,0.12); border-color: #d4a029; color: #d4a029; }
+    .filter-chip[data-setgroup="deck"] { border-color: rgba(63,184,196,0.4); }
+    .filter-chip[data-setgroup="deck"]:hover { border-color: #3fb8c4; color: #3fb8c4; }
+    .filter-chip[data-setgroup="deck"].active { background: rgba(63,184,196,0.12); border-color: #3fb8c4; color: #3fb8c4; }
+    .filter-chip[data-setgroup="special"] { border-color: rgba(169,112,230,0.4); }
+    .filter-chip[data-setgroup="special"]:hover { border-color: #a970e6; color: #a970e6; }
+    .filter-chip[data-setgroup="special"].active { background: rgba(169,112,230,0.12); border-color: #a970e6; color: #a970e6; }
+
     /* Search + Sort row */
     .filter-controls {
       display: flex;
@@ -444,6 +463,7 @@
       .card-rarity-badge { font-size: 9px; padding: 1px 4px; top: 4px; right: 4px; }
       .cardlist-filters { padding: 14px; }
       .filter-chip { padding: 5px 10px; font-size: 11px; }
+      .filter-set-rowlabel { min-width: 52px; font-size: 9px; }
     }
   </style>
 </head>
@@ -494,27 +514,33 @@
       <!-- 収録弾フィルター -->
       <div class="filter-group">
         <span class="filter-group-label">収録弾 / Set</span>
-        <div class="filter-chips" id="filter-set">
-          <button class="filter-chip active" data-value="all">全て</button>
-          <button class="filter-chip" data-value="GD01">GD01</button>
-          <button class="filter-chip" data-value="GD02">GD02</button>
-          <button class="filter-chip" data-value="GD03">GD03</button>
-          <button class="filter-chip" data-value="GD04">GD04</button>
-          <button class="filter-chip" data-value="GD05">GD05</button>
-          <button class="filter-chip" data-value="ST01">ST01</button>
-          <button class="filter-chip" data-value="ST02">ST02</button>
-          <button class="filter-chip" data-value="ST03">ST03</button>
-          <button class="filter-chip" data-value="ST04">ST04</button>
-          <button class="filter-chip" data-value="ST05">ST05</button>
-          <button class="filter-chip" data-value="ST06">ST06</button>
-          <button class="filter-chip" data-value="ST07">ST07</button>
-          <button class="filter-chip" data-value="ST08">ST08</button>
-          <button class="filter-chip" data-value="ST09">ST09</button>
-          <button class="filter-chip" data-value="ST10">ST10</button>
-          <button class="filter-chip" data-value="EB01">EB01</button>
-          <button class="filter-chip" data-value="β">β</button>
-          <button class="filter-chip" data-value="PROMO">プロモ</button>
-          <button class="filter-chip" data-value="SC01">SC01</button>
+        <div id="filter-set" class="filter-set-rows">
+          <div class="filter-set-row"><span class="filter-set-rowlabel">通常弾</span><div class="filter-chips">
+            <button class="filter-chip active" data-value="all">全て</button>
+            <button class="filter-chip" data-setgroup="booster" data-value="GD01">GD01</button>
+            <button class="filter-chip" data-setgroup="booster" data-value="GD02">GD02</button>
+            <button class="filter-chip" data-setgroup="booster" data-value="GD03">GD03</button>
+            <button class="filter-chip" data-setgroup="booster" data-value="GD04">GD04</button>
+            <button class="filter-chip" data-setgroup="booster" data-value="GD05">GD05</button>
+          </div></div>
+          <div class="filter-set-row"><span class="filter-set-rowlabel">デッキ</span><div class="filter-chips">
+            <button class="filter-chip" data-setgroup="deck" data-value="ST01">ST01</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST02">ST02</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST03">ST03</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST04">ST04</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST05">ST05</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST06">ST06</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST07">ST07</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST08">ST08</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST09">ST09</button>
+            <button class="filter-chip" data-setgroup="deck" data-value="ST10">ST10</button>
+          </div></div>
+          <div class="filter-set-row"><span class="filter-set-rowlabel">特殊セット・プロモ・その他</span><div class="filter-chips">
+            <button class="filter-chip" data-setgroup="special" data-value="EB01">EB01</button>
+            <button class="filter-chip" data-setgroup="special" data-value="SC01">SC01</button>
+            <button class="filter-chip" data-setgroup="special" data-value="β">β</button>
+            <button class="filter-chip" data-setgroup="special" data-value="PROMO">プロモ</button>
+          </div></div>
         </div>
       </div>
 
@@ -2101,7 +2127,7 @@
     var TYPE_JP = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース' };
     var RARITY_ORDER = { LR: 0, R: 1, U: 2, C: 3 };
     var TOTAL_CARDS = 1491;
-    var SET_ORDER = ["GD01","GD02","GD03","GD04","GD05","ST01","ST02","ST03","ST04","ST05","ST06","ST07","ST08","ST09","ST10","EB01","β","PROMO","SC01"];
+    var SET_ORDER = ["GD01","GD02","GD03","GD04","GD05","ST01","ST02","ST03","ST04","ST05","ST06","ST07","ST08","ST09","ST10","EB01","SC01","β","PROMO"];
     var SET_LABELS = {"GD01":"第1弾ブースターパック","GD02":"第2弾ブースターパック","GD03":"第3弾ブースターパック","ST01":"スタートデッキ 地球連邦","ST02":"スタートデッキ ジオン","ST03":"スタートデッキ アナハイム","ST04":"スタートデッキ OZ","ST05":"スタートデッキ ザフト","ST06":"スタートデッキ ソレスタルビーイング","ST07":"スタートデッキ ネオ・ジオン","ST08":"スタートデッキ ティターンズ","ST09":"スタートデッキ インパルス","GD05":"第5弾ブースターパック","ST10":"スタートデッキ Generation Pulse","EB01":"Eternal Nexus"};
 
     // === Filter State ===

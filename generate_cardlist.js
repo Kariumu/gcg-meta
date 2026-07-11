@@ -105,7 +105,19 @@ function getCardSet(card) {
 //   通常販売パック群の末尾（ST の後）かつ特殊枠（β/PROMO）の前に配置。
 //   ※「G005」は GD05 の OCR 誤読でありセットとして存在しないため除去
 //     （2026-06-10 指示書 cowork-instr-g005-merge-images Task E）
-const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','β','PROMO'];
+const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','SC01','β','PROMO'];
+
+// === 収録弾チップの行グループ（2026-07-11 松岡さん承認: 3行化＋行ごと色分け）===
+// 行1=通常弾(GDxx) / 行2=デッキ(STxx) / 行3=特殊セット・プロモ・その他(残り全部。未知セットも自動でここへ)
+const SET_CHIP_GROUPS = [
+  { key: 'booster', label: '通常弾', match: (s) => /^GD\d+$/i.test(s) },
+  { key: 'deck', label: 'デッキ', match: (s) => /^ST\d+$/i.test(s) },
+  { key: 'special', label: '特殊セット・プロモ・その他', match: () => true },
+];
+function getSetChipGroup(prefix) {
+  for (const g of SET_CHIP_GROUPS) { if (g.match(prefix)) return g; }
+  return SET_CHIP_GROUPS[SET_CHIP_GROUPS.length - 1];
+}
 
 // === 収録弾 表示名対応表（生値 → 画面表示名）===
 // 既存の SET_LABELS（収録弾の長い説明文。例 "第1弾ブースターパック"。GD01-03/ST01-09 のみ定義）
@@ -283,6 +295,25 @@ function generateHTML() {
     .filter-chip[data-color="Red"].active { background: rgba(255,68,68,0.12); border-color: #ff4444; color: #ff4444; }
     .filter-chip[data-color="White"].active { background: rgba(200,200,200,0.12); border-color: #cccccc; color: #cccccc; }
     .filter-chip[data-color="Purple"].active { background: rgba(180,68,255,0.12); border-color: #b444ff; color: #b444ff; }
+
+    /* 収録弾チップの行グループ（3行化＋行ごと色分け 2026-07-11）
+       通常弾=金 / デッキ=シアン / 特殊・プロモ=紫系（カード色フィルタとの混同回避の配色） */
+    .filter-set-rows { display: flex; flex-direction: column; gap: 6px; }
+    .filter-set-row { display: flex; align-items: flex-start; gap: 10px; }
+    .filter-set-rowlabel {
+      flex-shrink: 0; min-width: 64px; padding-top: 7px;
+      font-size: 10px; color: var(--text-muted);
+      font-family: var(--font-mono); letter-spacing: 1px;
+    }
+    .filter-chip[data-setgroup="booster"] { border-color: rgba(212,160,41,0.4); }
+    .filter-chip[data-setgroup="booster"]:hover { border-color: #d4a029; color: #d4a029; }
+    .filter-chip[data-setgroup="booster"].active { background: rgba(212,160,41,0.12); border-color: #d4a029; color: #d4a029; }
+    .filter-chip[data-setgroup="deck"] { border-color: rgba(63,184,196,0.4); }
+    .filter-chip[data-setgroup="deck"]:hover { border-color: #3fb8c4; color: #3fb8c4; }
+    .filter-chip[data-setgroup="deck"].active { background: rgba(63,184,196,0.12); border-color: #3fb8c4; color: #3fb8c4; }
+    .filter-chip[data-setgroup="special"] { border-color: rgba(169,112,230,0.4); }
+    .filter-chip[data-setgroup="special"]:hover { border-color: #a970e6; color: #a970e6; }
+    .filter-chip[data-setgroup="special"].active { background: rgba(169,112,230,0.12); border-color: #a970e6; color: #a970e6; }
 
     /* Search + Sort row */
     .filter-controls {
@@ -636,6 +667,7 @@ function generateHTML() {
       .card-rarity-badge { font-size: 9px; padding: 1px 4px; top: 4px; right: 4px; }
       .cardlist-filters { padding: 14px; }
       .filter-chip { padding: 5px 10px; font-size: 11px; }
+      .filter-set-rowlabel { min-width: 52px; font-size: 9px; }
     }
   </style>
 </head>
@@ -686,9 +718,14 @@ function generateHTML() {
       <!-- 収録弾フィルター -->
       <div class="filter-group">
         <span class="filter-group-label">収録弾 / Set</span>
-        <div class="filter-chips" id="filter-set">
-          <button class="filter-chip active" data-value="all">全て</button>
-${setOrder.map(prefix => `          <button class="filter-chip" data-value="${prefix}">${getSetDisplayName(prefix)}</button>`).join('\n')}
+        <div id="filter-set" class="filter-set-rows">
+${SET_CHIP_GROUPS.map((g, gi) => {
+  const chips = setOrder
+    .filter(prefix => getSetChipGroup(prefix).key === g.key)
+    .map(prefix => `            <button class="filter-chip" data-setgroup="${g.key}" data-value="${prefix}">${getSetDisplayName(prefix)}</button>`);
+  const allChip = gi === 0 ? `            <button class="filter-chip active" data-value="all">全て</button>\n` : '';
+  return `          <div class="filter-set-row"><span class="filter-set-rowlabel">${g.label}</span><div class="filter-chips">\n${allChip}${chips.join('\n')}\n          </div></div>`;
+}).join('\n')}
         </div>
       </div>
 
