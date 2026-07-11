@@ -31,6 +31,46 @@ try {
   summary = { card_ranking: [], total_events: 0, total_decks: 0 };
 }
 
+// === 直近シーズン（結果データのある最新シリーズ）の採用カード集合（2026-07-11 松岡さん承認） ===
+// events.json の各イベントから「デッキ付き結果を持つ」シリーズごとの最終開催日を取り、最新を直近シーズンとする。
+// MISSION4 等の新シーズンのデータが入り始めたら自動で切り替わる。
+// デッキ内 card_id は通常版番号のため、パラレルはベース番号（_pN除去）で判定＝別バージョン含む。
+let recentSeasonSet = new Set();
+let recentSeasonLabel = '';
+try {
+  const evData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'events.json'), 'utf-8'));
+  let seriesMeta = {};
+  try { seriesMeta = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'series.json'), 'utf-8')); } catch (e) { /* 表示名なしで続行 */ }
+  const events = (evData && evData.events) || {};
+  const lastDateBySeries = {};
+  for (const ev of Object.values(events)) {
+    const sid = String(ev.series_id || '');
+    const hasDeck = (ev.results || []).some(r => r && Array.isArray(r.deck) && r.deck.length > 0);
+    if (!sid || !hasDeck) continue;
+    const d = String(ev.date || '');
+    if (!lastDateBySeries[sid] || d > lastDateBySeries[sid]) lastDateBySeries[sid] = d;
+  }
+  const latestSid = Object.keys(lastDateBySeries).sort((x, y) => (lastDateBySeries[x] < lastDateBySeries[y] ? 1 : -1))[0];
+  if (latestSid) {
+    for (const ev of Object.values(events)) {
+      if (String(ev.series_id) !== latestSid) continue;
+      for (const r of (ev.results || [])) {
+        for (const c of (r.deck || [])) {
+          if (c && c.card_id) recentSeasonSet.add(String(c.card_id));
+        }
+      }
+    }
+    const meta = seriesMeta[latestSid] || {};
+    recentSeasonLabel = (meta.display_name || meta.official_name || ('シリーズ' + latestSid)) + (meta.subtitle ? '（' + meta.subtitle + '）' : '');
+    console.log(`  直近シーズン: ${recentSeasonLabel} / 期間末日 ${lastDateBySeries[latestSid]} / 採用 ${recentSeasonSet.size} 種（ベース番号）`);
+  } else {
+    console.warn('  ⚠ 直近シーズンを特定できません（デッキ付きイベントなし）。全カード未入賞扱いで生成します。');
+  }
+} catch (e) {
+  console.warn('  ⚠ events.json 読み込み失敗。直近シーズン判定なしで生成: ' + e.message);
+}
+const isRecentSeason = (cardId) => recentSeasonSet.has(String(cardId).replace(/_p\d+$/, ''));
+
 // === 定数 ===
 const COLOR_JP = {
   'Blue': '青', 'Green': '緑', 'Red': '赤',
@@ -134,6 +174,7 @@ function getSetDisplayName(set) {
 const allCards = Object.values(cardsMaster).sort((a, b) => a.id.localeCompare(b.id));
 const totalCards = allCards.length;
 const tournamentCards = allCards.filter(c => cardRankingMap[c.id]).length;
+const recentSeasonCards = allCards.filter(c => isRecentSeason(c.id)).length;
 
 // 収録弾リスト（出現順）
 const setOrder = [];
@@ -154,6 +195,7 @@ setOrder.sort((a, b) => {
 });
 
 console.log(`  全カード: ${totalCards} 枚 (入賞実績あり: ${tournamentCards} 枚)`);
+console.log(`  直近シーズン入賞: ${recentSeasonCards} 枚（パラレル含む）`);
 console.log(`  収録弾: ${setOrder.length} セット`);
 
 // === HTMLテンプレート生成 ===
@@ -193,7 +235,8 @@ function generateCardsDataJS() {
       usage: ranking ? ranking.usage_rate : 0,
       decks: ranking ? ranking.decks : 0,
       wins: ranking ? ranking.wins : 0,
-      hasTournament: !!ranking
+      hasTournament: !!ranking,
+      recentSeason: isRecentSeason(card.id) ? 1 : 0
     };
   });
   return JSON.stringify(cardsArr);
@@ -720,12 +763,12 @@ function generateHTML() {
         <div class="stat-value" style="color:var(--accent)">${totalCards}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">大会入賞あり</div>
-        <div class="stat-value" style="color:var(--green)">${tournamentCards}</div>
+        <div class="stat-label">直近シーズン入賞</div>
+        <div class="stat-value" style="color:var(--green)">${recentSeasonCards}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">未入賞</div>
-        <div class="stat-value" style="color:var(--text-muted)">${totalCards - tournamentCards}</div>
+        <div class="stat-label">直近シーズン未入賞</div>
+        <div class="stat-value" style="color:var(--text-muted)">${totalCards - recentSeasonCards}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">分析イベント数</div>
@@ -791,8 +834,8 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
         <span class="filter-group-label">採用状況 / Tournament</span>
         <div class="filter-chips" id="filter-tournament">
           <button class="filter-chip active" data-value="all">全て</button>
-          <button class="filter-chip" data-tourn="yes" data-value="yes">大会入賞あり</button>
-          <button class="filter-chip" data-value="no">未入賞</button>
+          <button class="filter-chip" data-tourn="yes" data-value="yes" title="${escapeHtml(recentSeasonLabel)}の入賞デッキに採用（パラレル版含む）">直近シーズン入賞</button>
+          <button class="filter-chip" data-value="no" title="${escapeHtml(recentSeasonLabel)}の入賞デッキに不採用">直近シーズン未入賞</button>
         </div>
       </div>
 
@@ -921,8 +964,8 @@ ${generateNoscriptContent()}
         // Rarity filter
         if (filterState.rarities.length > 0 && filterState.rarities.indexOf(card.rarity) < 0) return false;
         // Tournament filter
-        if (filterState.tournament === 'yes' && !card.hasTournament) return false;
-        if (filterState.tournament === 'no' && card.hasTournament) return false;
+        if (filterState.tournament === 'yes' && !card.recentSeason) return false;
+        if (filterState.tournament === 'no' && card.recentSeason) return false;
         // Search filter
         if (filterState.search) {
           var q = filterState.search.toLowerCase();
