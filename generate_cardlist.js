@@ -300,11 +300,6 @@ function generateHTML() {
        通常弾=金 / デッキ=シアン / 特殊・プロモ=紫系（カード色フィルタとの混同回避の配色） */
     .filter-set-rows { display: flex; flex-direction: column; gap: 6px; }
     .filter-set-row { display: flex; align-items: flex-start; gap: 10px; }
-    .filter-set-rowlabel {
-      flex-shrink: 0; min-width: 64px; padding-top: 7px;
-      font-size: 10px; color: var(--text-muted);
-      font-family: var(--font-mono); letter-spacing: 1px;
-    }
     .filter-chip[data-setgroup="booster"] { border-color: rgba(212,160,41,0.4); }
     .filter-chip[data-setgroup="booster"]:hover { border-color: #d4a029; color: #d4a029; }
     .filter-chip[data-setgroup="booster"].active { background: rgba(212,160,41,0.12); border-color: #d4a029; color: #d4a029; }
@@ -314,6 +309,45 @@ function generateHTML() {
     .filter-chip[data-setgroup="special"] { border-color: rgba(169,112,230,0.4); }
     .filter-chip[data-setgroup="special"]:hover { border-color: #a970e6; color: #a970e6; }
     .filter-chip[data-setgroup="special"].active { background: rgba(169,112,230,0.12); border-color: #a970e6; color: #a970e6; }
+
+    /* 色/タイプ/レアリティ/採用状況チップの色分け（2026-07-11 v2 松岡さん指示） */
+    .filter-chip[data-color="Blue"] { border-color: rgba(68,136,255,0.4); }
+    .filter-chip[data-color="Blue"]:hover { border-color: #4488ff; color: #4488ff; }
+    .filter-chip[data-color="Green"] { border-color: rgba(68,204,100,0.4); }
+    .filter-chip[data-color="Green"]:hover { border-color: #44cc64; color: #44cc64; }
+    .filter-chip[data-color="Red"] { border-color: rgba(255,68,68,0.4); }
+    .filter-chip[data-color="Red"]:hover { border-color: #ff4444; color: #ff4444; }
+    .filter-chip[data-color="White"] { border-color: rgba(204,204,204,0.4); }
+    .filter-chip[data-color="White"]:hover { border-color: #cccccc; color: #cccccc; }
+    .filter-chip[data-color="Purple"] { border-color: rgba(180,68,255,0.4); }
+    .filter-chip[data-color="Purple"]:hover { border-color: #b444ff; color: #b444ff; }
+    .filter-chip[data-cardtype="UNIT"] { border-color: rgba(232,131,74,0.4); }
+    .filter-chip[data-cardtype="UNIT"]:hover { border-color: #e8834a; color: #e8834a; }
+    .filter-chip[data-cardtype="UNIT"].active { background: rgba(232,131,74,0.12); border-color: #e8834a; color: #e8834a; }
+    .filter-chip[data-cardtype="PILOT"] { border-color: rgba(224,111,168,0.4); }
+    .filter-chip[data-cardtype="PILOT"]:hover { border-color: #e06fa8; color: #e06fa8; }
+    .filter-chip[data-cardtype="PILOT"].active { background: rgba(224,111,168,0.12); border-color: #e06fa8; color: #e06fa8; }
+    .filter-chip[data-cardtype="COMMAND"] { border-color: rgba(93,184,232,0.4); }
+    .filter-chip[data-cardtype="COMMAND"]:hover { border-color: #5db8e8; color: #5db8e8; }
+    .filter-chip[data-cardtype="COMMAND"].active { background: rgba(93,184,232,0.12); border-color: #5db8e8; color: #5db8e8; }
+    .filter-chip[data-cardtype="BASE"] { border-color: rgba(201,162,94,0.4); }
+    .filter-chip[data-cardtype="BASE"]:hover { border-color: #c9a25e; color: #c9a25e; }
+    .filter-chip[data-cardtype="BASE"].active { background: rgba(201,162,94,0.12); border-color: #c9a25e; color: #c9a25e; }
+    .filter-chip[data-rarity="LR"] { border-color: rgba(232,195,74,0.45); }
+    .filter-chip[data-rarity="LR"]:hover { border-color: #e8c34a; color: #e8c34a; }
+    .filter-chip[data-rarity="LR"].active { background: rgba(232,195,74,0.12); border-color: #e8c34a; color: #e8c34a; }
+    .filter-chip[data-rarity="R"] { border-color: rgba(194,208,226,0.5); }
+    .filter-chip[data-rarity="R"]:hover { border-color: #c2d0e2; color: #c2d0e2; }
+    .filter-chip[data-rarity="R"].active { background: rgba(170,184,202,0.12); border-color: #c2d0e2; color: #c2d0e2; }
+    .filter-chip[data-rarity="U"] { border-color: rgba(204,138,92,0.45); }
+    .filter-chip[data-rarity="U"]:hover { border-color: #cc8a5c; color: #cc8a5c; }
+    .filter-chip[data-rarity="U"].active { background: rgba(204,138,92,0.12); border-color: #cc8a5c; color: #cc8a5c; }
+    .filter-chip[data-rarity="C"] { border-color: rgba(127,138,153,0.5); }
+    .filter-chip[data-rarity="C"]:hover { border-color: #7f8a99; color: #7f8a99; }
+    .filter-chip[data-rarity="C"].active { background: rgba(154,164,178,0.12); border-color: #7f8a99; color: #7f8a99; }
+    .filter-chip[data-tourn="yes"] { border-color: rgba(212,160,41,0.4); }
+    .filter-chip[data-tourn="yes"]:hover { border-color: #d4a029; color: #d4a029; }
+    .filter-chip[data-tourn="yes"].active { background: rgba(212,160,41,0.12); border-color: #d4a029; color: #d4a029; }
 
     /* Search + Sort row */
     .filter-controls {
@@ -667,7 +701,6 @@ function generateHTML() {
       .card-rarity-badge { font-size: 9px; padding: 1px 4px; top: 4px; right: 4px; }
       .cardlist-filters { padding: 14px; }
       .filter-chip { padding: 5px 10px; font-size: 11px; }
-      .filter-set-rowlabel { min-width: 52px; font-size: 9px; }
     }
   </style>
 </head>
@@ -724,7 +757,7 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
     .filter(prefix => getSetChipGroup(prefix).key === g.key)
     .map(prefix => `            <button class="filter-chip" data-setgroup="${g.key}" data-value="${prefix}">${getSetDisplayName(prefix)}</button>`);
   const allChip = gi === 0 ? `            <button class="filter-chip active" data-value="all">全て</button>\n` : '';
-  return `          <div class="filter-set-row"><span class="filter-set-rowlabel">${g.label}</span><div class="filter-chips">\n${allChip}${chips.join('\n')}\n          </div></div>`;
+  return `          <div class="filter-set-row"><div class="filter-chips">\n${allChip}${chips.join('\n')}\n          </div></div>`;
 }).join('\n')}
         </div>
       </div>
@@ -734,10 +767,10 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
         <span class="filter-group-label">タイプ / Type</span>
         <div class="filter-chips" id="filter-type">
           <button class="filter-chip active" data-value="all">全て</button>
-          <button class="filter-chip" data-value="UNIT">ユニット</button>
-          <button class="filter-chip" data-value="PILOT">パイロット</button>
-          <button class="filter-chip" data-value="COMMAND">コマンド</button>
-          <button class="filter-chip" data-value="BASE">ベース</button>
+          <button class="filter-chip" data-cardtype="UNIT" data-value="UNIT">ユニット</button>
+          <button class="filter-chip" data-cardtype="PILOT" data-value="PILOT">パイロット</button>
+          <button class="filter-chip" data-cardtype="COMMAND" data-value="COMMAND">コマンド</button>
+          <button class="filter-chip" data-cardtype="BASE" data-value="BASE">ベース</button>
         </div>
       </div>
 
@@ -746,10 +779,10 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
         <span class="filter-group-label">レアリティ / Rarity</span>
         <div class="filter-chips" id="filter-rarity">
           <button class="filter-chip active" data-value="all">全て</button>
-          <button class="filter-chip" data-value="LR">LR</button>
-          <button class="filter-chip" data-value="R">R</button>
-          <button class="filter-chip" data-value="U">U</button>
-          <button class="filter-chip" data-value="C">C</button>
+          <button class="filter-chip" data-rarity="LR" data-value="LR">LR</button>
+          <button class="filter-chip" data-rarity="R" data-value="R">R</button>
+          <button class="filter-chip" data-rarity="U" data-value="U">U</button>
+          <button class="filter-chip" data-rarity="C" data-value="C">C</button>
         </div>
       </div>
 
@@ -758,7 +791,7 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
         <span class="filter-group-label">採用状況 / Tournament</span>
         <div class="filter-chips" id="filter-tournament">
           <button class="filter-chip active" data-value="all">全て</button>
-          <button class="filter-chip" data-value="yes">大会入賞あり</button>
+          <button class="filter-chip" data-tourn="yes" data-value="yes">大会入賞あり</button>
           <button class="filter-chip" data-value="no">未入賞</button>
         </div>
       </div>
