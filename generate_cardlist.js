@@ -176,6 +176,54 @@ const totalCards = allCards.length;
 const tournamentCards = allCards.filter(c => cardRankingMap[c.id]).length;
 const recentSeasonCards = allCards.filter(c => isRecentSeason(c.id)).length;
 
+// === 詳細検索用の辞書・範囲（2026-07-11 松岡さん承認: 折りたたみ詳細検索）===
+// 出典作品は「作品の公開順」（松岡さん指示）。データに現れた未知タイトルは末尾（名前順）。
+const SOURCE_RELEASE_ORDER = [
+  '機動戦士ガンダム', '機動戦士Zガンダム', '機動戦士ガンダム 逆襲のシャア',
+  '機動戦士ガンダム0080 ポケットの中の戦争', '機動戦士Vガンダム', '機動武闘伝Gガンダム',
+  '新機動戦記ガンダムW', '機動新世紀ガンダムX', '新機動戦記ガンダムW Endless Waltz',
+  '∀ガンダム', '機動戦士ガンダムSEED', '機動戦士ガンダムSEED DESTINY',
+  '機動戦士ガンダム00', '機動戦士ガンダムUC', '機動戦士ガンダムAGE',
+  '機動戦士ガンダム 鉄血のオルフェンズ', '機動戦士ガンダム 閃光のハサウェイ',
+  '機動戦士ガンダム 水星の魔女', '機動戦士Gundam GQuuuuuuX(ジークアクス)',
+  '機動戦士ガンダムGQuuuuuuX', 'SDガンダム ジージェネレーション エターナル',
+];
+const _srcSet = new Set(); const _traitCount = {}; const _kwCount = {};
+const _rng = { lv: [99, 0], cs: [99, 0], ap: [99, 0], hp: [99, 0] };
+const _bump = (k, v) => { if (typeof v === 'number' && isFinite(v)) { if (v < _rng[k][0]) _rng[k][0] = v; if (v > _rng[k][1]) _rng[k][1] = v; } };
+for (const c of allCards) {
+  if (c.source_title) _srcSet.add(c.source_title);
+  for (const t of (c.traits || [])) _traitCount[t] = (_traitCount[t] || 0) + 1;
+  const fx = c.effect_text || c.effect || '';
+  for (const m of fx.matchAll(/《([^》]+)》/g)) { const k = m[1].replace(/\d+$/, ''); _kwCount[k] = (_kwCount[k] || 0) + 1; }
+  if (/開発\d/.test(fx)) _kwCount['開発'] = (_kwCount['開発'] || 0) + 1; // 【配備時・開発N】等（総合ルール13-1-8）
+  _bump('lv', c.level); _bump('cs', c.cost);
+  if (c.stats) { _bump('ap', c.stats.ap); _bump('hp', c.stats.hp); }
+}
+const ADV_SOURCES = SOURCE_RELEASE_ORDER.filter(t => _srcSet.has(t))
+  .concat([..._srcSet].filter(t => !SOURCE_RELEASE_ORDER.includes(t)).sort());
+const ADV_TRAITS = Object.keys(_traitCount).sort((a, b) => _traitCount[b] - _traitCount[a] || a.localeCompare(b));
+const ADV_KEYWORDS = Object.keys(_kwCount).sort((a, b) => _kwCount[b] - _kwCount[a] || a.localeCompare(b));
+const ADV_RANGES = _rng;
+const _srcIdx = {}; ADV_SOURCES.forEach((t, i) => { _srcIdx[t] = i; });
+const _trIdx = {}; ADV_TRAITS.forEach((t, i) => { _trIdx[t] = i; });
+const _kwIdx = {}; ADV_KEYWORDS.forEach((t, i) => { _kwIdx[t] = i; });
+function advFields(card) {
+  const o = {};
+  if (card.source_title && _srcIdx[card.source_title] !== undefined) o.st = _srcIdx[card.source_title];
+  const tr = (card.traits || []).map(t => _trIdx[t]).filter(i => i !== undefined);
+  if (tr.length) o.tr = tr;
+  let kw = 0;
+  const fx = card.effect_text || card.effect || '';
+  for (const m of fx.matchAll(/《([^》]+)》/g)) { const i = _kwIdx[m[1].replace(/\d+$/, '')]; if (i !== undefined) kw |= (1 << i); }
+  if (/開発\d/.test(fx) && _kwIdx['開発'] !== undefined) kw |= (1 << _kwIdx['開発']);
+  if (kw) o.kw = kw;
+  if (card.is_parallel) o.pl = 1;
+  if (fx) o.fx = fx;
+  return o;
+}
+console.log(`  詳細検索: 出典 ${ADV_SOURCES.length} / 特徴 ${ADV_TRAITS.length} / 固有ルール ${ADV_KEYWORDS.length} (${ADV_KEYWORDS.join('・')})`);
+
 // 収録弾リスト（出現順）
 const setOrder = [];
 const setCardCounts = {};
@@ -236,7 +284,8 @@ function generateCardsDataJS() {
       decks: ranking ? ranking.decks : 0,
       wins: ranking ? ranking.wins : 0,
       hasTournament: !!ranking,
-      recentSeason: isRecentSeason(card.id) ? 1 : 0
+      recentSeason: isRecentSeason(card.id) ? 1 : 0,
+      ...advFields(card)
     };
   });
   return JSON.stringify(cardsArr);
@@ -391,6 +440,28 @@ function generateHTML() {
     .filter-chip[data-tourn="yes"] { border-color: rgba(212,160,41,0.4); }
     .filter-chip[data-tourn="yes"]:hover { border-color: #d4a029; color: #d4a029; }
     .filter-chip[data-tourn="yes"].active { background: rgba(212,160,41,0.12); border-color: #d4a029; color: #d4a029; }
+
+    /* 詳細検索（折りたたみパネル 2026-07-11） */
+    .adv-toggle { display:flex; align-items:center; gap:8px; width:100%; text-align:left; background:var(--bg-elevated); border:1px solid var(--border); color:var(--text-secondary); padding:8px 14px; border-radius:6px; font-size:13px; font-family:var(--font-mono); cursor:pointer; transition:all var(--transition-fast); }
+    .adv-toggle:hover { border-color:var(--border-hover); color:var(--text-primary); }
+    .adv-badge { background:var(--accent-dim); border:1px solid var(--accent); color:var(--accent); font-size:11px; padding:1px 8px; border-radius:10px; }
+    #adv-panel { margin-top:10px; padding:14px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:6px; }
+    .adv-sliders { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px 24px; }
+    .adv-range-out { color:var(--accent); margin-left:6px; }
+    .adv-range-pair { position:relative; height:26px; }
+    .adv-range-track { position:absolute; top:11px; left:0; right:0; height:4px; background:var(--border); border-radius:2px; }
+    .adv-range-fill { position:absolute; top:11px; height:4px; background:var(--accent); border-radius:2px; }
+    .adv-range-pair input[type=range] { position:absolute; top:0; left:0; width:100%; margin:0; height:26px; background:transparent; -webkit-appearance:none; appearance:none; pointer-events:none; }
+    .adv-range-pair input[type=range]::-webkit-slider-runnable-track { background:transparent; height:26px; }
+    .adv-range-pair input[type=range]::-moz-range-track { background:transparent; }
+    .adv-range-pair input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; pointer-events:auto; width:16px; height:16px; border-radius:50%; background:var(--accent); border:2px solid var(--bg-card); cursor:pointer; margin-top:5px; }
+    .adv-range-pair input[type=range]::-moz-range-thumb { pointer-events:auto; width:13px; height:13px; border-radius:50%; background:var(--accent); border:2px solid var(--bg-card); cursor:pointer; }
+    .adv-trait-filter { width:240px; max-width:100%; background:var(--bg-input); border:1px solid var(--border); color:var(--text-primary); padding:6px 10px; border-radius:6px; font-size:12px; margin-bottom:8px; }
+    .adv-footer { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:14px; }
+    .adv-noparallel { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-secondary); cursor:pointer; user-select:none; }
+    .adv-noparallel input { accent-color:var(--accent); width:15px; height:15px; }
+    .adv-clear { background:transparent; border:1px solid var(--border); color:var(--text-muted); padding:6px 14px; border-radius:6px; font-size:12px; cursor:pointer; }
+    .adv-clear:hover { border-color:#ff4444; color:#ff4444; }
 
     /* Search + Sort row */
     .filter-controls {
@@ -744,6 +815,7 @@ function generateHTML() {
       .card-rarity-badge { font-size: 9px; padding: 1px 4px; top: 4px; right: 4px; }
       .cardlist-filters { padding: 14px; }
       .filter-chip { padding: 5px 10px; font-size: 11px; }
+      .adv-sliders { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -839,12 +911,73 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
         </div>
       </div>
 
+      <!-- 詳細検索（2026-07-11 追加。既定は折りたたみ） -->
+      <div class="filter-group">
+        <button type="button" id="adv-toggle" class="adv-toggle">
+          <span id="adv-arrow">▸</span> 詳細検索
+          <span id="adv-badge" class="adv-badge" style="display:none"></span>
+        </button>
+        <div id="adv-panel" style="display:none">
+          <div class="adv-sliders">
+            <div>
+              <div class="filter-group-label">Lv. <span class="adv-range-out" id="adv-lv-out"></span></div>
+              <div class="adv-range-pair">
+                <div class="adv-range-track"></div><div class="adv-range-fill" id="adv-lv-fill"></div>
+                <input type="range" id="adv-lv-min" min="${ADV_RANGES.lv[0]}" max="${ADV_RANGES.lv[1]}" value="${ADV_RANGES.lv[0]}" step="1" aria-label="Lv. 下限">
+                <input type="range" id="adv-lv-max" min="${ADV_RANGES.lv[0]}" max="${ADV_RANGES.lv[1]}" value="${ADV_RANGES.lv[1]}" step="1" aria-label="Lv. 上限">
+              </div>
+            </div>
+            <div>
+              <div class="filter-group-label">コスト <span class="adv-range-out" id="adv-cs-out"></span></div>
+              <div class="adv-range-pair">
+                <div class="adv-range-track"></div><div class="adv-range-fill" id="adv-cs-fill"></div>
+                <input type="range" id="adv-cs-min" min="${ADV_RANGES.cs[0]}" max="${ADV_RANGES.cs[1]}" value="${ADV_RANGES.cs[0]}" step="1" aria-label="コスト 下限">
+                <input type="range" id="adv-cs-max" min="${ADV_RANGES.cs[0]}" max="${ADV_RANGES.cs[1]}" value="${ADV_RANGES.cs[1]}" step="1" aria-label="コスト 上限">
+              </div>
+            </div>
+            <div>
+              <div class="filter-group-label">AP <span class="adv-range-out" id="adv-ap-out"></span></div>
+              <div class="adv-range-pair">
+                <div class="adv-range-track"></div><div class="adv-range-fill" id="adv-ap-fill"></div>
+                <input type="range" id="adv-ap-min" min="${ADV_RANGES.ap[0]}" max="${ADV_RANGES.ap[1]}" value="${ADV_RANGES.ap[0]}" step="1" aria-label="AP 下限">
+                <input type="range" id="adv-ap-max" min="${ADV_RANGES.ap[0]}" max="${ADV_RANGES.ap[1]}" value="${ADV_RANGES.ap[1]}" step="1" aria-label="AP 上限">
+              </div>
+            </div>
+            <div>
+              <div class="filter-group-label">HP <span class="adv-range-out" id="adv-hp-out"></span></div>
+              <div class="adv-range-pair">
+                <div class="adv-range-track"></div><div class="adv-range-fill" id="adv-hp-fill"></div>
+                <input type="range" id="adv-hp-min" min="${ADV_RANGES.hp[0]}" max="${ADV_RANGES.hp[1]}" value="${ADV_RANGES.hp[0]}" step="1" aria-label="HP 下限">
+                <input type="range" id="adv-hp-max" min="${ADV_RANGES.hp[0]}" max="${ADV_RANGES.hp[1]}" value="${ADV_RANGES.hp[1]}" step="1" aria-label="HP 上限">
+              </div>
+            </div>
+          </div>
+          <div class="filter-group-label" style="margin-top:16px;display:block">出典作品（公開順・複数選択）</div>
+          <div class="filter-chips" id="adv-source">
+${ADV_SOURCES.map((t, i) => `            <button class="filter-chip" data-adv="src" data-idx="${i}">${escapeHtml(t)}</button>`).join('\n')}
+          </div>
+          <div class="filter-group-label" style="margin-top:16px;display:block">特徴（複数選択）</div>
+          <input type="text" id="adv-trait-filter" class="adv-trait-filter" placeholder="特徴名で絞り込み（例: オーブ）">
+          <div class="filter-chips" id="adv-traits">
+${ADV_TRAITS.map((t, i) => `            <button class="filter-chip" data-adv="tr" data-idx="${i}">${escapeHtml(t)}</button>`).join('\n')}
+          </div>
+          <div class="filter-group-label" style="margin-top:16px;display:block">固有ルール（複数選択）</div>
+          <div class="filter-chips" id="adv-keywords">
+${ADV_KEYWORDS.map((t, i) => `            <button class="filter-chip" data-adv="kw" data-idx="${i}">${escapeHtml(t)}</button>`).join('\n')}
+          </div>
+          <div class="adv-footer">
+            <label class="adv-noparallel"><input type="checkbox" id="adv-noparallel"> パラレルカードを表示しない</label>
+            <button type="button" id="adv-clear" class="adv-clear">詳細条件をクリア</button>
+          </div>
+        </div>
+      </div>
+
       <!-- 検索 + ソート -->
       <div class="filter-group">
         <div class="filter-controls">
           <div class="search-wrapper">
             <span class="search-icon">&#x1F50D;</span>
-            <input type="text" class="search-input" id="search-input" placeholder="カード名・IDで検索..." autocomplete="off">
+            <input type="text" class="search-input" id="search-input" placeholder="カード名・ID・効果テキストで検索..." autocomplete="off">
           </div>
           <select class="sort-select" id="sort-select">
             <option value="id-asc">カードID順</option>
@@ -882,6 +1015,10 @@ ${generateNoscriptContent()}
   <script>
     // === Card Data (embedded at build time) ===
     var CARDS = ${generateCardsDataJS()};
+    var ADV_SOURCES = ${JSON.stringify(ADV_SOURCES)};
+    var ADV_TRAITS = ${JSON.stringify(ADV_TRAITS)};
+    var ADV_KEYWORDS = ${JSON.stringify(ADV_KEYWORDS)};
+    var ADV_RANGES = ${JSON.stringify(ADV_RANGES)};
 
     // === Constants ===
     var COLOR_JP = { Blue:'青', Green:'緑', Red:'赤', White:'白', Purple:'紫', Colorless:'無色' };
@@ -899,6 +1036,7 @@ ${generateNoscriptContent()}
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
+      adv: { lv: null, cs: null, ap: null, hp: null, src: [], tr: [], kwMask: 0, nopl: false },
       search: '',
       sort: 'id-asc'
     };
@@ -966,10 +1104,25 @@ ${generateNoscriptContent()}
         // Tournament filter
         if (filterState.tournament === 'yes' && !card.recentSeason) return false;
         if (filterState.tournament === 'no' && card.recentSeason) return false;
+        // 詳細検索（2026-07-11）: 枠内OR・枠間AND
+        var A = filterState.adv;
+        if (A.nopl && card.pl) return false;
+        if (A.src.length > 0 && A.src.indexOf(card.st) < 0) return false;
+        if (A.tr.length > 0) {
+          var trHit = false, ctr = card.tr || [];
+          for (var ti = 0; ti < ctr.length; ti++) { if (A.tr.indexOf(ctr[ti]) >= 0) { trHit = true; break; } }
+          if (!trHit) return false;
+        }
+        if (A.kwMask !== 0 && ((card.kw || 0) & A.kwMask) === 0) return false;
+        if (A.lv && !(card.level >= A.lv[0] && card.level <= A.lv[1])) return false;
+        if (A.cs && !(card.cost >= A.cs[0] && card.cost <= A.cs[1])) return false;
+        if (A.ap && !(typeof card.ap === 'number' && card.ap >= A.ap[0] && card.ap <= A.ap[1])) return false;
+        if (A.hp && !(typeof card.hp === 'number' && card.hp >= A.hp[0] && card.hp <= A.hp[1])) return false;
         // Search filter
         if (filterState.search) {
           var q = filterState.search.toLowerCase();
-          if (card.name.toLowerCase().indexOf(q) < 0 && card.id.toLowerCase().indexOf(q) < 0) return false;
+          var fxs = card.fx ? card.fx.toLowerCase() : '';
+          if (card.name.toLowerCase().indexOf(q) < 0 && card.id.toLowerCase().indexOf(q) < 0 && fxs.indexOf(q) < 0) return false;
         }
         return true;
       });
@@ -1098,6 +1251,101 @@ ${generateNoscriptContent()}
     setupFilterGroup('filter-type', 'types', true);
     setupFilterGroup('filter-rarity', 'rarities', true);
     setupFilterGroup('filter-tournament', 'tournament', false);
+
+    // === 詳細検索（折りたたみパネル 2026-07-11）===
+    (function setupAdvanced() {
+      var panel = document.getElementById('adv-panel');
+      if (!panel) return;
+      var toggle = document.getElementById('adv-toggle');
+      var arrow = document.getElementById('adv-arrow');
+      var badge = document.getElementById('adv-badge');
+      function activeCount() {
+        var A = filterState.adv, n = 0;
+        if (A.lv) n++; if (A.cs) n++; if (A.ap) n++; if (A.hp) n++;
+        if (A.src.length) n++; if (A.tr.length) n++; if (A.kwMask) n++; if (A.nopl) n++;
+        return n;
+      }
+      function updateBadge() {
+        var n = activeCount();
+        badge.style.display = (n > 0 && panel.style.display === 'none') ? 'inline-block' : 'none';
+        badge.textContent = n + '件適用中';
+      }
+      toggle.addEventListener('click', function () {
+        var open = panel.style.display !== 'none';
+        panel.style.display = open ? 'none' : 'block';
+        arrow.textContent = open ? '▸' : '▾';
+        updateBadge();
+      });
+      var updFns = [];
+      ['lv', 'cs', 'ap', 'hp'].forEach(function (k) {
+        var lo = document.getElementById('adv-' + k + '-min');
+        var hi = document.getElementById('adv-' + k + '-max');
+        var out = document.getElementById('adv-' + k + '-out');
+        var fill = document.getElementById('adv-' + k + '-fill');
+        if (!lo || !hi) return;
+        function upd(skipRender) {
+          var a2 = Math.min(+lo.value, +hi.value), b2 = Math.max(+lo.value, +hi.value);
+          var mn = +lo.min, mx = +lo.max;
+          out.textContent = a2 + ' 〜 ' + b2;
+          var full = (a2 === mn && b2 === mx);
+          filterState.adv[k] = full ? null : [a2, b2];
+          var span = (mx - mn) || 1;
+          fill.style.left = ((a2 - mn) / span * 100) + '%';
+          fill.style.width = ((b2 - a2) / span * 100) + '%';
+          if (!skipRender) { updateBadge(); renderCards(); }
+        }
+        lo.addEventListener('input', function () { upd(false); });
+        hi.addEventListener('input', function () { upd(false); });
+        updFns.push(upd);
+        upd(true);
+      });
+      function collect(id) {
+        var out = [];
+        document.querySelectorAll('#' + id + ' .filter-chip.active').forEach(function (c2) { out.push(+c2.getAttribute('data-idx')); });
+        return out;
+      }
+      function bindChips(id, onToggle) {
+        document.querySelectorAll('#' + id + ' .filter-chip').forEach(function (chip) {
+          chip.addEventListener('click', function () {
+            chip.classList.toggle('active');
+            onToggle();
+            updateBadge(); renderCards();
+          });
+        });
+      }
+      bindChips('adv-source', function () { filterState.adv.src = collect('adv-source'); });
+      bindChips('adv-traits', function () { filterState.adv.tr = collect('adv-traits'); });
+      bindChips('adv-keywords', function () {
+        var m2 = 0; collect('adv-keywords').forEach(function (i) { m2 |= (1 << i); });
+        filterState.adv.kwMask = m2;
+      });
+      var tf = document.getElementById('adv-trait-filter');
+      if (tf) tf.addEventListener('input', function () {
+        var q2 = this.value.trim();
+        document.querySelectorAll('#adv-traits .filter-chip').forEach(function (c2) {
+          c2.style.display = (!q2 || c2.textContent.indexOf(q2) >= 0) ? '' : 'none';
+        });
+      });
+      var np = document.getElementById('adv-noparallel');
+      if (np) np.addEventListener('change', function () {
+        filterState.adv.nopl = this.checked;
+        updateBadge(); renderCards();
+      });
+      var clearBtn = document.getElementById('adv-clear');
+      if (clearBtn) clearBtn.addEventListener('click', function () {
+        ['lv', 'cs', 'ap', 'hp'].forEach(function (k) {
+          var lo = document.getElementById('adv-' + k + '-min');
+          var hi = document.getElementById('adv-' + k + '-max');
+          if (lo && hi) { lo.value = lo.min; hi.value = hi.max; }
+        });
+        updFns.forEach(function (f) { f(true); });
+        document.querySelectorAll('#adv-panel .filter-chip.active').forEach(function (c2) { c2.classList.remove('active'); });
+        if (tf) { tf.value = ''; document.querySelectorAll('#adv-traits .filter-chip').forEach(function (c2) { c2.style.display = ''; }); }
+        if (np) np.checked = false;
+        filterState.adv = { lv: null, cs: null, ap: null, hp: null, src: [], tr: [], kwMask: 0, nopl: false };
+        updateBadge(); renderCards();
+      });
+    })();
 
     searchInput.addEventListener('input', function() {
       filterState.search = this.value.trim();
