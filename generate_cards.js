@@ -573,14 +573,71 @@ function findTokenProducers(token, allCards) {
   out.sort((a, b) => a.id.localeCompare(b.id));
   return out;
 }
-// 効果テキストが参照する特徴（出現順・重複除去）
-function findReferencedTraits(card) {
-  const seen = new Set();
-  const out = [];
-  for (const m of (card.effect_text || '').matchAll(/〔([^〕]+)〕/g)) {
-    if (!seen.has(m[1])) { seen.add(m[1]); out.push(m[1]); }
+// 効果テキストが参照する特徴と対象種別（2026-07-12 松岡さん指示: 参照範囲を対象種別まで解析）
+// 種別スコープ（総合ルール準拠）:
+//  ・「ユニット」= 盤面参照 → UNIT+TOKEN（トークンも盤面ではユニット）
+//  ・「ユニットカード」= 盤面外参照 → UNIT のみ（トークンはカードではない）
+//  ・「パイロット」= 盤面参照 → PILOT+パイロット効果コマンド（3-4-6-3: セット中はパイロット）
+//  ・「パイロットカード」→ PILOT のみ / 「コマンド(カード)」→ COMMAND / 「ベース(カード)」→ BASE
+//  ・「カード」→ UNIT/PILOT/COMMAND/BASE（トークン除外）
+//  ・トークン生成スペック括弧（〔X〕・APn…）→ UNIT+TOKEN（ユニットトークンの特徴）
+//  ・上記で判別できない参照 → 全種別（従来通り、安全側）
+const TRAIT_SCOPE = {
+  'ユニットトークン': ['TOKEN'],
+  'ユニットカード':   ['UNIT'],
+  'ユニット':         ['UNIT', 'TOKEN'],
+  'パイロットカード': ['PILOT'],
+  'パイロット':       ['PILOT', 'PILOTCMD'],
+  'コマンドカード':   ['COMMAND'],
+  'コマンド':         ['COMMAND'],
+  'ベースカード':     ['BASE'],
+  'ベース':           ['BASE'],
+  'カード':           ['UNIT', 'PILOT', 'COMMAND', 'BASE'],
+};
+const TRAIT_SCOPE_ALL = ['UNIT', 'PILOT', 'COMMAND', 'BASE', 'TOKEN'];
+function findTraitReferences(card) {
+  const fx = card.effect_text || '';
+  const refs = new Map(); // trait -> { types:Set, labels:Set }
+  const TYPE_WORDS = 'ユニットトークン|ユニットカード|パイロットカード|コマンドカード|ベースカード|ユニット|パイロット|コマンド|ベース|カード';
+  // 後続文字列は先読みで捕捉（消費しない）。消費すると近接する次の〔X〕参照が
+  // matchAll でスキップされ、セクションが欠落する（2026-07-12 二次確認の指摘で修正）
+  const re = new RegExp('((?:〔[^〕]+〕[/／]?)+)(?=([\\s\\S]{0,40}))', 'g');
+  for (const m of fx.matchAll(re)) {
+    const traits = [...m[1].matchAll(/〔([^〕]+)〕/g)].map(x => x[1]);
+    let after = m[2];
+    let types = null; let label = null;
+    const headRe = new RegExp('^の?、?(自分の|味方の|相手の)?、?(?:リンク)?(' + TYPE_WORDS + ')');
+    const sm = after.match(headRe);
+    if (sm) {
+      types = new Set(TRAIT_SCOPE[sm[2]]);
+      const words = [sm[2]];
+      // 種別の列挙（例:「〔学園〕の、ユニットカード1枚/コマンドカード1枚」）を連続解析
+      after = after.slice(sm[0].length);
+      const contRe = new RegExp('^(?:\\d+[枚つ個])?[/／](?:自分の|味方の|相手の)?(' + TYPE_WORDS + ')');
+      let cm;
+      while ((cm = after.match(contRe)) !== null) {
+        for (const t of TRAIT_SCOPE[cm[1]]) types.add(t);
+        words.push(cm[1]);
+        after = after.slice(cm[0].length);
+      }
+      types = [...types];
+      label = 'の' + words.join('/');
+    }
+    else if (/^[・]/.test(m[2])) { types = TRAIT_SCOPE['ユニット']; label = 'のユニット'; } // トークン生成スペック括弧
+    if (!types) { types = TRAIT_SCOPE_ALL; label = null; }
+    for (const tr of traits) {
+      if (!refs.has(tr)) refs.set(tr, { types: new Set(), labels: new Set(), any: false });
+      const r = refs.get(tr);
+      for (const t of types) r.types.add(t);
+      if (label) r.labels.add(label); else r.any = true;
+    }
   }
-  return out;
+  return [...refs.entries()].map(([trait, r]) => ({
+    trait,
+    types: r.types,
+    // タイトル用: 参照形が1種類ならそれを表示、複数/不明なら汎用表現
+    label: (!r.any && r.labels.size === 1) ? [...r.labels][0] : null,
+  }));
 }
 
 /**
@@ -1116,15 +1173,24 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       for (const r of (summary.card_ranking || [])) rankRate[r.card_id] = r.usage_rate || 0;
       const REF_LIMIT = 12;
       const parts = [];
-      for (const tr of findReferencedTraits(refCard)) {
+      const matchScope = (c, types) => {
+        if (types.has(c.card_type)) return true;
+        // PILOTCMD = パイロット効果を持つコマンド（総合ルール3-4-6-3: セット中はパイロット）
+        if (types.has('PILOTCMD') && c.card_type === 'COMMAND' && (c.effect_text || '').includes('【パイロット】')) return true;
+        return false;
+      };
+      for (const ref of findTraitReferences(refCard)) {
         const holders = Object.values(cardsMaster).filter(c =>
-          !c.is_parallel && c.id !== refCard.id && (c.traits || []).includes(tr));
+          !c.is_parallel && c.id !== refCard.id && (c.traits || []).includes(ref.trait) && matchScope(c, ref.types));
         if (holders.length === 0) continue;
         holders.sort((a, b) => (rankRate[b.id] || 0) - (rankRate[a.id] || 0) || a.id.localeCompare(b.id));
         const shown = holders.slice(0, REF_LIMIT);
         const rest = holders.length - shown.length;
         const note = rest > 0 ? `※採用率順に上位${REF_LIMIT}枚を表示（ほか${rest}枚）` : '';
-        parts.push(relSection(`効果が参照する特徴 〔${escapeHtml(tr)}〕 を持つカード（全${holders.length}枚）`, shown, note));
+        const title = ref.label
+          ? `効果が参照する 〔${escapeHtml(ref.trait)}〕${escapeHtml(ref.label)}（全${holders.length}枚）`
+          : `効果が参照する特徴 〔${escapeHtml(ref.trait)}〕 を持つカード（全${holders.length}枚）`;
+        parts.push(relSection(title, shown, note));
       }
       traitRefHtml = parts.join('\n');
     }
