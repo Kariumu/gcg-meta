@@ -553,24 +553,67 @@ function detectCardFeatures(masterCard) {
 
   // === 1. 効果テキスト内キーワード ===
   // 件数は 2026-05-28 時点で cards_master.json をスキャンして確認済(0 件のキーワードは除外)
+  // 2026-07-12 松岡さん指摘(EB01-068)により「破壊」「ダメージ」を文脈判定に修正:
+  //  ・注釈（括弧内リマインダー）を除いた本文で判定
+  //  ・「除去効果」は相手カード等を破壊する効果のみ。【破壊時】(自分の被破壊誘発)/破壊された/
+  //    破壊されない/〜を破壊したとき(誘発条件)/自壊(これを破壊・このユニットを破壊)は除外
+  //  ・「ダメージ付与」は「ダメージを与える」効果のみ。被ダメージ・軽減・与えたとき誘発は除外
+  //  ・《覚醒》はルール上存在しないため削除(カード名「能力の覚醒」への誤ヒットのみだった)
+  const effectBody = effectText.replace(/（[^）]*）/g, '').replace(/\([^)]*\)/g, '');
+  // 文単位で対象（相手/味方/自身）を判定。「それを〜」は直前の文の対象を参照する
+  const sentences = effectBody.split('。');
+  const refIsFriendly = (prev) => {
+    if (!prev) return false;
+    if (prev.includes('相手')) return false;
+    return /(?:自分|味方)の|この(?:ユニット|カード|ベース)/.test(prev);
+  };
+  let hasRemoval = false;
+  let hasDamageDeal = false;
+  for (let si = 0; si < sentences.length; si++) {
+    const sen = sentences[si];
+    // --- 除去効果: 能動的に相手カード等を破壊する効果のみ ---
+    const senActive = sen
+      .replace(/【破壊時】/g, '')
+      .replace(/破壊され[^、：]*/g, '')      // 受動形（〜された/されている/されない 等）
+      .replace(/破壊してい[^、：]*/g, '')    // 「破壊しているなら」等の条件節
+      .replace(/を破壊したとき/g, '')
+      .replace(/破壊したプレイヤー/g, '')
+      .replace(/(?:これ|この(?:ユニット|カード))を破壊[^、。：]*/g, '');  // 自壊コスト
+    if (/破壊(?:する|してもよい|し[、て])/.test(senActive)) {
+      if (senActive.includes('相手')) hasRemoval = true;
+      else if (/(?:自分|味方)の[^、]*を破壊/.test(senActive)) { /* 味方対象の破壊は除外 */ }
+      else if (/それら?を破壊/.test(senActive)) { if (!refIsFriendly(sentences[si - 1])) hasRemoval = true; }
+      else hasRemoval = true;
+    }
+    // --- ダメージ付与: 相手側へ与えるもののみ（自軍への自傷コストは除外） ---
+    if (/ダメージを与え(?!たとき)/.test(sen)) {
+      if (sen.includes('相手')) hasDamageDeal = true;
+      else if (/それら?[とに]/.test(sen)) {
+        // 「それ」は直前の文の対象を参照（例: 相手のユニット1つを選ぶ。それに2ダメージ）
+        if (!refIsFriendly(sentences[si - 1])) hasDamageDeal = true;
+      }
+      else if (/この(?:ユニット|カード|ベース)に[^、。]*ダメージを与え|(?:自分|味方)の[^、。]*に\d*ダメージを与え/.test(sen)) { /* 自傷・味方対象 */ }
+      else hasDamageDeal = true;
+    }
+  }
   const KEYWORD_MAP = [
     { kw: 'ドロー',     icon: 'draw',    color: '#4d9ff7', title: 'ハンドアドバンテージ獲得', desc: 'ドロー効果で手札を補充できる' },
     { kw: 'リペア',     icon: 'heart',   color: '#34d058', title: '長期戦適性',               desc: '《リペア》でユニットを継続的に回復' },
-    { kw: '破壊',       icon: 'destroy', color: '#f44747', title: '除去効果',                 desc: '相手カードの破壊で盤面に干渉できる' },
+    { test: hasRemoval, icon: 'destroy', color: '#f44747', title: '除去効果',                 desc: '相手カードの破壊で盤面に干渉できる' },
     { kw: '配備時',     icon: 'bolt',    color: '#d4a029', title: 'テンポ展開',               desc: '【配備時】に効果が誘発し即座にアドバンテージを得る' },
     { kw: 'セット時',   icon: 'puzzle',  color: '#b87aff', title: '起動型シナジー',           desc: '【セット時】にパイロット連携で効果が誘発' },
-    { kw: 'ダメージ',   icon: 'flame',   color: '#f44747', title: 'ダメージ付与',             desc: '相手プレイヤーやユニットへ直接ダメージを与えられる' },
+    { test: hasDamageDeal, icon: 'flame', color: '#f44747', title: 'ダメージ付与',             desc: '相手プレイヤーやユニットへ直接ダメージを与えられる' },
     { kw: '高機動',     icon: 'arrows',  color: '#4d9ff7', title: '《高機動》',                desc: 'スタンド状態の相手ユニットからの防御を回避できる' },
     { kw: '制圧',       icon: 'shield',  color: '#d4a029', title: '《制圧》',                  desc: '相手ベースに対しブロックされず通せる' },
     { kw: '援護',       icon: 'shield',  color: '#34d058', title: '《援護》',                  desc: '味方ユニットを身代わりにして防御力を底上げ' },
     { kw: '先制攻撃',   icon: 'sword',   color: '#f44747', title: '《先制攻撃》',              desc: 'アタック宣言側として先にダメージ解決' },
     { kw: '突破',       icon: 'arrowUp', color: '#d4a029', title: '《突破》',                  desc: '撃破時の超過ダメージが相手プレイヤーへ届く' },
-    { kw: '覚醒',       icon: 'sparkle', color: '#b87aff', title: '《覚醒》',                  desc: '条件達成で追加効果が解放される' },
     { kw: '開発',       icon: 'tag',     color: '#34d058', title: '《開発》',                  desc: 'トラッシュの〔ジージェネ〕カードを指定枚数除外して追加効果を発動できる(総合ルール13-1-8)' },
   ];
   const seenTitles = new Set();
   for (const def of KEYWORD_MAP) {
-    if (effectText.includes(def.kw) && !seenTitles.has(def.title)) {
+    const hit = def.test !== undefined ? def.test : effectText.includes(def.kw);
+    if (hit && !seenTitles.has(def.title)) {
       features.push({ icon: def.icon, color: def.color, title: def.title, desc: def.desc });
       seenTitles.add(def.title);
     }
