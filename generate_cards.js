@@ -194,7 +194,7 @@ function findLinkedCards(cardId, allCards) {
       }
 
       if (c.card_type === 'COMMAND') {
-        const effect = c.effect || '';
+        const effect = c.effect_text || c.effect || ''; // 現行マスターはeffect_text（2026-07-12修正）
         if (effect.includes('【パイロット】')) {
           if (matchesLinkCondition(c, linkConditions)) {
             results.push(c);
@@ -204,7 +204,7 @@ function findLinkedCards(cardId, allCards) {
     }
 
   } else if (card.card_type === 'PILOT' ||
-             (card.card_type === 'COMMAND' && (card.effect || '').includes('【パイロット】'))) {
+             (card.card_type === 'COMMAND' && (card.effect_text || card.effect || '').includes('【パイロット】'))) {
     const pilotName = card.name_jp;
     const pilotTraits = card.traits || [];
 
