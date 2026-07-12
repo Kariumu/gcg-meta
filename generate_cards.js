@@ -686,6 +686,8 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   const cost = masterCard.cost || 0;
   const ap = (masterCard.stats && masterCard.stats.ap) || 0;
   const hp = (masterCard.stats && masterCard.stats.hp) || 0;
+  const apMod = masterCard.stats && typeof masterCard.stats.ap_mod === 'number' ? masterCard.stats.ap_mod : null;
+  const hpMod = masterCard.stats && typeof masterCard.stats.hp_mod === 'number' ? masterCard.stats.hp_mod : null;
   const traits = masterCard.traits || [];
   const source = masterCard.source_title || '';
   const setPrefix = cardId.replace(/_p\d+$/, '').replace(/-\d+$/, '');
@@ -700,14 +702,19 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
       overviewParts.push(`特徴は「${escapeHtml(traits.join('」「'))}」です。`);
     }
   } else if (ct === 'PILOT') {
-    overviewParts.push(`Lv.${level}のパイロットで、AP${ap}を持ちます。`);
+    // 公式表記準拠: パイロットはLv/コストとAP/HPの補正値(+N)を持つ（2026-07-12修正）
+    overviewParts.push(`Lv.${level}・コスト${cost}のパイロットで、AP+${apMod ?? 0}/HP+${hpMod ?? 0}の補正を持ちます。`);
     if (traits.length > 0) {
       overviewParts.push(`特徴は「${escapeHtml(traits.join('」「'))}」です。`);
     }
   } else if (ct === 'COMMAND') {
-    overviewParts.push(`コスト${cost}のコマンドカードです。`);
+    if (apMod !== null || hpMod !== null) {
+      overviewParts.push(`Lv.${level}・コスト${cost}のコマンドカードで、AP+${apMod ?? 0}/HP+${hpMod ?? 0}の補正を持ちます。`);
+    } else {
+      overviewParts.push(`Lv.${level}・コスト${cost}のコマンドカードです。`);
+    }
   } else if (ct === 'BASE') {
-    overviewParts.push(`HP${hp}を持つベースカードです。`);
+    overviewParts.push(`Lv.${level}・コスト${cost}で、HP${hp}を持つベースカードです。`);
   }
 
   if (rarity) {
@@ -1127,16 +1134,16 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">${escapeHtml(RARITY_LABEL[masterCard.rarity] || masterCard.rarity)}</span>
         </div>
         ${(() => {
-          const ct = masterCard.card_type;
-          const showAP = ct === 'UNIT' || ct === 'PILOT';
-          const showHP = ct === 'UNIT' || ct === 'BASE';
-          const showLv = ct === 'UNIT' || ct === 'PILOT';
-          const showCost = ct !== 'PILOT';
+          // 公式カード詳細の表記準拠（2026-07-12 松岡さん指示: 公式detail.php全数照合に基づく）
+          // 全タイプ Lv/コスト表示。AP/HPは絶対値(ap/hp)または補正値(ap_mod/hp_mod=+N表記、+0も公式通り表示)
+          const st = masterCard.stats || {};
           const cards = [];
-          if (showLv) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">Lv.</div><div class="stat-value">' + (masterCard.level || 0) + '</div></div>');
-          if (showCost) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">コスト</div><div class="stat-value">' + (masterCard.cost || 0) + '</div></div>');
-          if (showAP) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">AP</div><div class="stat-value" style="color:#ff6b6b">' + ((masterCard.stats && masterCard.stats.ap) || 0) + '</div></div>');
-          if (showHP) cards.push('<div class="stat-card card-stat-card"><div class="stat-label">HP</div><div class="stat-value" style="color:#66cc88">' + ((masterCard.stats && masterCard.stats.hp) || 0) + '</div></div>');
+          if (typeof masterCard.level === 'number') cards.push('<div class="stat-card card-stat-card"><div class="stat-label">Lv.</div><div class="stat-value">' + masterCard.level + '</div></div>');
+          if (typeof masterCard.cost === 'number') cards.push('<div class="stat-card card-stat-card"><div class="stat-label">コスト</div><div class="stat-value">' + masterCard.cost + '</div></div>');
+          if (typeof st.ap === 'number') cards.push('<div class="stat-card card-stat-card"><div class="stat-label">AP</div><div class="stat-value" style="color:#ff6b6b">' + st.ap + '</div></div>');
+          else if (typeof st.ap_mod === 'number') cards.push('<div class="stat-card card-stat-card"><div class="stat-label">AP</div><div class="stat-value" style="color:#ff6b6b">+' + st.ap_mod + '</div></div>');
+          if (typeof st.hp === 'number') cards.push('<div class="stat-card card-stat-card"><div class="stat-label">HP</div><div class="stat-value" style="color:#66cc88">' + st.hp + '</div></div>');
+          else if (typeof st.hp_mod === 'number') cards.push('<div class="stat-card card-stat-card"><div class="stat-label">HP</div><div class="stat-value" style="color:#66cc88">+' + st.hp_mod + '</div></div>');
           if (cards.length === 0) return '';
           return '<div class="card-stats-grid">' + cards.join('') + '</div>';
         })()}

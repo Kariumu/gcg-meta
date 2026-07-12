@@ -198,7 +198,8 @@ for (const c of allCards) {
   for (const m of fx.matchAll(/《([^》]+)》/g)) { const k = m[1].replace(/\d+$/, ''); _kwCount[k] = (_kwCount[k] || 0) + 1; }
   if (/開発\d/.test(fx)) _kwCount['開発'] = (_kwCount['開発'] || 0) + 1; // 【配備時・開発N】等（総合ルール13-1-8）
   _bump('lv', c.level); _bump('cs', c.cost);
-  if (c.stats) { _bump('ap', c.stats.ap); _bump('hp', c.stats.hp); }
+  // AP/HPは絶対値(ユニット等)または補正値(パイロット等のap_mod/hp_mod)を数値として扱う（2026-07-12修正）
+  if (c.stats) { _bump('ap', c.stats.ap ?? c.stats.ap_mod); _bump('hp', c.stats.hp ?? c.stats.hp_mod); }
 }
 const ADV_SOURCES = SOURCE_RELEASE_ORDER.filter(t => _srcSet.has(t))
   .concat([..._srcSet].filter(t => !SOURCE_RELEASE_ORDER.includes(t)).sort());
@@ -278,8 +279,9 @@ function generateCardsDataJS() {
       set: getCardSet(card),  // 収録弾の正 = package_set（フォールバック付き）
       level: card.level || 0,
       cost: card.cost || 0,
-      ap: card.stats ? card.stats.ap : 0,
-      hp: card.stats ? card.stats.hp : 0,
+      // AP/HPを持たないカード(公式表記が「-」)はフィールド自体を省略し、スライダー絞り込み時は対象外になる（2026-07-12修正）
+      ap: card.stats ? (card.stats.ap ?? card.stats.ap_mod) : undefined,
+      hp: card.stats ? (card.stats.hp ?? card.stats.hp_mod) : undefined,
       usage: ranking ? ranking.usage_rate : 0,
       decks: ranking ? ranking.decks : 0,
       wins: ranking ? ranking.wins : 0,
