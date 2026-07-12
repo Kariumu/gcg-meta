@@ -94,13 +94,19 @@ function escapeHtml(str) {
  */
 function formatEffectText(text) {
   if (!text) return '';
-  let html = escapeHtml(text);
+  // 効果ブロック単位の改行表示（2026-07-11 松岡さん指示: パイロット等の複数効果を行分け）
+  // 取得時に公式カードテキストの改行が失われ連結されているため、
+  // 文末（。 ） ) 」）の直後にキーワード（【…】《…》）が始まる位置を効果の区切りとして改行する。
+  const withBreaks = String(text).replace(/([。）)」])\s*(?=[【《])/g, '$1\n');
+  let html = escapeHtml(withBreaks);
   // 【...】 タイミング → 青
   html = html.replace(/【([^】]+)】/g, '<span class="effect-timing">【$1】</span>');
   // 《...》 キーワード能力 → 緑
   html = html.replace(/《([^》]+)》/g, '<span class="effect-keyword">《$1》</span>');
   // 〔...〕 特徴/種別 → オレンジ
   html = html.replace(/〔([^〕]+)〕/g, '<span class="effect-trait">〔$1〕</span>');
+  // 効果区切り（および元データ由来の改行）を<br>に変換
+  html = html.replace(/\n/g, '<br>');
   return html;
 }
 
