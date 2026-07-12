@@ -156,9 +156,22 @@ function normalizeLink(link) {
 /**
  * カードがリンク条件にマッチするか判定
  */
+function getPilotNames(card) {
+  // パイロットとして扱える名前一覧（2026-07-12 松岡さん指示）
+  // PILOT: カード名。COMMAND: 効果の【パイロット】「X」で宣言された名前
+  // （カード名と異なる。例: EB01-076 ガーベラ・ストレート→ロウ・ギュール）
+  const names = [];
+  if (card.card_type === 'PILOT') names.push(card.name_jp);
+  const fx = card.effect_text || card.effect || '';
+  for (const m of fx.matchAll(/【パイロット】「([^」]+)」/g)) names.push(m[1]);
+  if (names.length === 0) names.push(card.name_jp);
+  return names;
+}
+
 function matchesLinkCondition(card, conditions) {
+  const pilotNames = getPilotNames(card);
   for (const condition of conditions) {
-    if (!condition.startsWith('特徴') && card.name_jp === condition) {
+    if (!condition.startsWith('特徴') && pilotNames.includes(condition)) {
       return true;
     }
     if (condition.startsWith('特徴〔')) {
@@ -205,7 +218,7 @@ function findLinkedCards(cardId, allCards) {
 
   } else if (card.card_type === 'PILOT' ||
              (card.card_type === 'COMMAND' && (card.effect_text || card.effect || '').includes('【パイロット】'))) {
-    const pilotName = card.name_jp;
+    const pilotNames = getPilotNames(card); // 【パイロット】「X」宣言名を含む（2026-07-12修正）
     const pilotTraits = card.traits || [];
 
     for (const [id, c] of Object.entries(allCards)) {
@@ -216,7 +229,7 @@ function findLinkedCards(cardId, allCards) {
       if (unitLinks.length === 0) continue;
 
       for (const condition of unitLinks) {
-        if (!condition.startsWith('特徴') && condition === pilotName) {
+        if (!condition.startsWith('特徴') && pilotNames.includes(condition)) {
           results.push(c);
           break;
         }
