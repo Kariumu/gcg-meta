@@ -62,7 +62,7 @@ const COLOR_JP = {
 
 // カードタイプの日本語変換
 const TYPE_JP = {
-  'UNIT': 'ユニット', 'PILOT': 'パイロット', 'COMMAND': 'コマンド', 'BASE': 'ベース'
+  'UNIT': 'ユニット', 'PILOT': 'パイロット', 'COMMAND': 'コマンド', 'BASE': 'ベース', 'TOKEN': 'トークン'
 };
 
 // レアリティ表示
@@ -529,6 +529,60 @@ const FEATURE_ICONS = {
   arrows: '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 7-4 4 4 4M3 11h12M17 17l4-4-4-4M21 13H9"/></svg>',
 };
 
+// === トークン・特徴参照の関連カード検索（2026-07-12 松岡さん指示） ===
+function escapeRegExp(str) {
+  return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+// 全角/半角括弧を正規化（効果テキストとトークン名で表記が揺れるため）
+function normParen(str) {
+  return String(str).replace(/（/g, '(').replace(/）/g, ')');
+}
+// 効果テキスト fx がトークン名 name のトークンを生成するか判定。
+// 対応形式: ①「名前」(スペック)?の?ユニットトークン（直後形）
+//           ②「名前」(スペック)、…「別名」(スペック)のユニットトークン（列挙形。ST01-015等）
+//   ②は「名前」(…) が『ユニットトークン』を含む同一文（。区切り）にあれば生成とみなす
+function producesToken(fx, name) {
+  const nm = escapeRegExp(normParen(name));
+  if (new RegExp('「' + nm + '」\\s*(?:\\([^)]*\\))?の?ユニットトークン').test(fx)) return true;
+  const reSpec = new RegExp('「' + nm + '」\\s*\\([^)]*\\)');
+  for (const sen of fx.split('。')) {
+    if (sen.includes('ユニットトークン') && reSpec.test(sen)) return true;
+  }
+  return false;
+}
+// このカードの効果が生成するトークン
+function findTokensProduced(card, allCards) {
+  const fx = normParen(card.effect_text || '');
+  if (!fx.includes('トークン')) return [];
+  const out = [];
+  for (const c of Object.values(allCards)) {
+    if (c.card_type !== 'TOKEN') continue;
+    if (producesToken(fx, c.name_jp)) out.push(c);
+  }
+  out.sort((a, b) => a.id.localeCompare(b.id));
+  return out;
+}
+// このトークンを生成するカード（ベースのみ）
+function findTokenProducers(token, allCards) {
+  const out = [];
+  for (const c of Object.values(allCards)) {
+    if (c.is_parallel || c.card_type === 'TOKEN') continue;
+    const fx = normParen(c.effect_text || '');
+    if (fx.includes('トークン') && producesToken(fx, token.name_jp)) out.push(c);
+  }
+  out.sort((a, b) => a.id.localeCompare(b.id));
+  return out;
+}
+// 効果テキストが参照する特徴（出現順・重複除去）
+function findReferencedTraits(card) {
+  const seen = new Set();
+  const out = [];
+  for (const m of (card.effect_text || '').matchAll(/〔([^〕]+)〕/g)) {
+    if (!seen.has(m[1])) { seen.add(m[1]); out.push(m[1]); }
+  }
+  return out;
+}
+
 /**
  * カードの特徴(キーワード能力 + ステータス特性 + 構築上の特性)を抽出する。
  * 案 B(アイコン+短文形式)の特徴サマリーセクションに使用。
@@ -750,7 +804,12 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
 
   // --- 1. このカードの概要 ---
   let overviewParts = [];
-  overviewParts.push(`${escapeHtml(cardName)}は${escapeHtml(source ? '「' + source + '」に登場する' : '')}${escapeHtml(colorJp)}の${escapeHtml(typeJp)}カードです。`);
+  if (ct === 'TOKEN') {
+    // トークンは色を持たないため色表記なし（2026-07-12）
+    overviewParts.push(`${escapeHtml(cardName)}は${escapeHtml(source ? '「' + source + '」に登場する' : '')}ユニットトークンです。`);
+  } else {
+    overviewParts.push(`${escapeHtml(cardName)}は${escapeHtml(source ? '「' + source + '」に登場する' : '')}${escapeHtml(colorJp)}の${escapeHtml(typeJp)}カードです。`);
+  }
 
   if (ct === 'UNIT') {
     overviewParts.push(`Lv.${level}・コスト${cost}で、AP${ap}/HP${hp}のステータスを持ちます。`);
@@ -771,9 +830,12 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
     }
   } else if (ct === 'BASE') {
     overviewParts.push(`Lv.${level}・コスト${cost}で、HP${hp}を持つベースカードです。`);
+  } else if (ct === 'TOKEN') {
+    const apTxt = masterCard.stats && typeof masterCard.stats.ap === 'number' ? String(masterCard.stats.ap) : '-';
+    overviewParts.push(`AP${apTxt}/HP${hp}のステータスを持ちます。通常のデッキには入れられず、カードの効果によって戦場に生成されます。`);
   }
 
-  if (rarity) {
+  if (rarity && ct !== 'TOKEN') {
     overviewParts.push(`レアリティは${escapeHtml(rarity)}で、${escapeHtml(setPrefix)}に収録されています。`);
   }
 
@@ -971,7 +1033,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     ? String(_packageSet).trim()
     : setPrefix;
   // 表示名対応表（第1段階 SET_DISPLAY_NAMES と同一。現状 PROMO のみ日本語表示「プロモ」）
-  const SET_DISPLAY_NAMES = { 'PROMO': 'プロモ' };
+  const SET_DISPLAY_NAMES = { 'PROMO': 'プロモ', 'TOKEN': 'トークン' };
   const setLinkLabel = SET_DISPLAY_NAMES[setLinkValue] || setLinkValue;
   // URL は旧 #<set> ではなく ?set=<set>（cards.html の URL パラメータ仕様に一致）。βは encodeURIComponent で安全化。
   const setLinkHref = `cards.html?set=${encodeURIComponent(setLinkValue)}`;
@@ -1009,6 +1071,62 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
             }).join('\n')}
           </div>
         </div>`;
+    }
+  }
+
+  // === トークン関連・特徴参照セクション（2026-07-12 松岡さん指示） ===
+  let tokenHtml = '';
+  let traitRefHtml = '';
+  if (masterCard) {
+    const relColorMap = { Blue: '#4488ff', Green: '#44cc64', Red: '#ff4444', White: '#cccccc', Purple: '#b444ff' };
+    const relTile = (c) => {
+      const colorHex = relColorMap[c.color] || '#888';
+      const tJp = TYPE_JP[c.card_type] || c.card_type || '';
+      return `<a href="../${c.id}/" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 10px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px;transition:border-color 0.15s"
+                   onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+                  <img src="/images/cards/${c.id}.webp" alt="${escapeHtml(c.name_jp)}"
+                       style="width:36px;height:50px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
+                       onerror="this.style.display='none'">
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--text-primary)">${escapeHtml(c.name_jp)}</div>
+                    <div style="font-size:11px;color:var(--text-muted);font-family:var(--font-mono)">${c.id}
+                      <span style="color:${colorHex};margin-left:4px">${tJp}</span>
+                    </div>
+                  </div>
+                </a>`;
+    };
+    const relSection = (title, cards, note) => `
+        <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+          <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:1px">${title}</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px">
+            ${cards.map(relTile).join('\n')}
+          </div>${note ? `\n          <p style="font-size:11px;color:var(--text-muted);margin:8px 0 0">${note}</p>` : ''}
+        </div>`;
+    const refCard = isParallel ? (cardsMaster[baseCardId] || masterCard) : masterCard;
+    if (masterCard.card_type === 'TOKEN') {
+      const producers = findTokenProducers(masterCard, cardsMaster);
+      if (producers.length > 0) tokenHtml = relSection('このトークンを出すカード', producers, '');
+    } else {
+      const toks = findTokensProduced(refCard, cardsMaster);
+      if (toks.length > 0) tokenHtml = relSection('このカードが出すトークン', toks, '');
+    }
+    // 効果が参照する特徴 → その特徴を持つカード（採用率順に上位12枚、松岡さん承認済み）
+    if (masterCard.card_type !== 'TOKEN') {
+      const rankRate = {};
+      for (const r of (summary.card_ranking || [])) rankRate[r.card_id] = r.usage_rate || 0;
+      const REF_LIMIT = 12;
+      const parts = [];
+      for (const tr of findReferencedTraits(refCard)) {
+        const holders = Object.values(cardsMaster).filter(c =>
+          !c.is_parallel && c.id !== refCard.id && (c.traits || []).includes(tr));
+        if (holders.length === 0) continue;
+        holders.sort((a, b) => (rankRate[b.id] || 0) - (rankRate[a.id] || 0) || a.id.localeCompare(b.id));
+        const shown = holders.slice(0, REF_LIMIT);
+        const rest = holders.length - shown.length;
+        const note = rest > 0 ? `※採用率順に上位${REF_LIMIT}枚を表示（ほか${rest}枚）` : '';
+        parts.push(relSection(`効果が参照する特徴 〔${escapeHtml(tr)}〕 を持つカード（全${holders.length}枚）`, shown, note));
+      }
+      traitRefHtml = parts.join('\n');
     }
   }
 
@@ -1215,7 +1333,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
           公式カード情報を見る →
         </a>
 
-        ${linkedHtml}
+        ${linkedHtml}${tokenHtml}${traitRefHtml}
         ${generateOtherVersionsHtml(cardId, cardsMaster)}
 
         <div class="stats-grid" style="margin-top:16px">

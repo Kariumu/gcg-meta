@@ -82,7 +82,7 @@ const COLOR_HEX = {
 };
 const TYPE_JP = {
   'UNIT': 'ユニット', 'PILOT': 'パイロット',
-  'COMMAND': 'コマンド', 'BASE': 'ベース'
+  'COMMAND': 'コマンド', 'BASE': 'ベース', 'TOKEN': 'トークン'
 };
 const RARITY_ORDER = ['LR', 'R', 'U', 'C'];
 
@@ -113,6 +113,7 @@ const SET_LABELS = {
   // 2026-06-10 新弾追加（発売後の備え）。※「G005」は GD05 の OCR 誤読でありセットとして存在しない
   'GD05': '第5弾ブースターパック',
   'ST10': 'スタートデッキ Generation Pulse',
+  'TOKEN': 'トークンカード',
   'EB01': 'Eternal Nexus',
 };
 
@@ -145,7 +146,7 @@ function getCardSet(card) {
 //   通常販売パック群の末尾（ST の後）かつ特殊枠（β/PROMO）の前に配置。
 //   ※「G005」は GD05 の OCR 誤読でありセットとして存在しないため除去
 //     （2026-06-10 指示書 cowork-instr-g005-merge-images Task E）
-const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','SC01','β','PROMO'];
+const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','SC01','β','PROMO','TOKEN'];
 
 // === 収録弾チップの行グループ（2026-07-11 松岡さん承認: 3行化＋行ごと色分け）===
 // 行1=通常弾(GDxx) / 行2=デッキ(STxx) / 行3=特殊セット・プロモ・その他(残り全部。未知セットも自動でここへ)
@@ -427,6 +428,9 @@ function generateHTML() {
     .filter-chip[data-cardtype="BASE"] { border-color: rgba(201,162,94,0.4); }
     .filter-chip[data-cardtype="BASE"]:hover { border-color: #c9a25e; color: #c9a25e; }
     .filter-chip[data-cardtype="BASE"].active { background: rgba(201,162,94,0.12); border-color: #c9a25e; color: #c9a25e; }
+    .filter-chip[data-cardtype="TOKEN"] { border-color: rgba(139,149,165,0.4); }
+    .filter-chip[data-cardtype="TOKEN"]:hover { border-color: #8b95a5; color: #8b95a5; }
+    .filter-chip[data-cardtype="TOKEN"].active { background: rgba(139,149,165,0.12); border-color: #8b95a5; color: #8b95a5; }
     .filter-chip[data-rarity="LR"] { border-color: rgba(232,195,74,0.45); }
     .filter-chip[data-rarity="LR"]:hover { border-color: #e8c34a; color: #e8c34a; }
     .filter-chip[data-rarity="LR"].active { background: rgba(232,195,74,0.12); border-color: #e8c34a; color: #e8c34a; }
@@ -888,6 +892,7 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
           <button class="filter-chip" data-cardtype="PILOT" data-value="PILOT">パイロット</button>
           <button class="filter-chip" data-cardtype="COMMAND" data-value="COMMAND">コマンド</button>
           <button class="filter-chip" data-cardtype="BASE" data-value="BASE">ベース</button>
+          <button class="filter-chip" data-cardtype="TOKEN" data-value="TOKEN">トークン</button>
         </div>
       </div>
 
@@ -1025,7 +1030,7 @@ ${generateNoscriptContent()}
     // === Constants ===
     var COLOR_JP = { Blue:'青', Green:'緑', Red:'赤', White:'白', Purple:'紫', Colorless:'無色' };
     var COLOR_HEX = { Blue:'#4488ff', Green:'#44cc64', Red:'#ff4444', White:'#cccccc', Purple:'#b444ff', Colorless:'#888888' };
-    var TYPE_JP = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース' };
+    var TYPE_JP = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース', TOKEN:'トークン' };
     var RARITY_ORDER = { LR: 0, R: 1, U: 2, C: 3 };
     var TOTAL_CARDS = ${totalCards};
     var SET_ORDER = ${JSON.stringify(setOrder)};
