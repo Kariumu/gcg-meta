@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- SEO: 個人用ページのため noindex（2026-07-16 指示書39 §5.4） -->
+  <meta name="robots" content="noindex">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>マイページ | GCG STATS</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="theme-color" content="#d4a029">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    /* お気に入り☆ボタン（favorites.js 利用ページ共通・定義内容は全ページ一致させること） */
+    .fav-star {
+      background: none;
+      border: none;
+      padding: 0 4px;
+      margin: 0;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-family: inherit;
+      transition: color 0.12s, transform 0.12s;
+    }
+    .fav-star.is-on { color: var(--accent); }
+    .fav-star:hover { transform: scale(1.15); }
+    .fav-star[disabled] { cursor: not-allowed; opacity: 0.4; transform: none; }
+
+    /* マイページ固有 */
+    .mypage-note {
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      margin: 0 0 24px;
+      line-height: 1.6;
+    }
+    .mypage-empty {
+      padding: 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+    .mypage-empty a { color: var(--accent); text-decoration: none; }
+    .fav-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 999px;
+      white-space: nowrap;
+      vertical-align: middle;
+      font-family: var(--font-mono);
+    }
+    .fav-badge-store { background: rgba(255,193,71,0.15); color: #e0a528; }
+    .fav-badge-event { background: rgba(77,159,247,0.15); color: #4d9ff7; }
+    .fav-event-row { padding: 10px 16px; border-bottom: 1px solid var(--border); }
+    .fav-event-row:last-child { border-bottom: none; }
+    .fav-event-store { display: inline-block; font-size: 15px; font-weight: 600; color: var(--text-primary); text-decoration: none; }
+    .fav-event-store:hover { text-decoration: underline; }
+    .fav-missing-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding: 8px 16px; border-bottom: 1px solid var(--border);
+      font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);
+    }
+    .fav-missing-row:last-child { border-bottom: none; }
+    #fav-past-details > summary {
+      cursor: pointer; list-style: none; user-select: none;
+      font-size: 13px; color: var(--text-secondary); padding: 8px 0;
+    }
+    #fav-past-details > summary::-webkit-details-marker { display: none; }
+    #fav-past-details > summary::before {
+      content: '▼'; display: inline-block; color: var(--text-muted);
+      font-size: 11px; margin-right: 8px; transition: transform 0.15s ease;
+    }
+    #fav-past-details:not([open]) > summary::before { transform: rotate(-90deg); }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main style="max-width:900px;margin:0 auto;padding:20px">
+    <div class="section-header">
+      <h1 class="section-title">マイページ</h1>
+    </div>
+
+    <p class="mypage-note">
+      お気に入りはこのブラウザ内にのみ保存されます（サーバには送信されません）。端末・ブラウザが変わると引き継がれません。ブラウザのサイトデータ削除で消去されます。
+    </p>
+
+    <noscript>
+      <p class="mypage-note" style="color:#ff5050">
+        このページはJavaScriptを使用しています。お気に入りの表示にはJavaScriptを有効にしてください。
+      </p>
+    </noscript>
+
+    <div id="fav-unavailable" class="mypage-note" style="display:none;color:#ff5050">
+      この環境ではお気に入りを保存できません（ブラウザの設定・プライベートブラウズ等でローカル保存が無効の可能性があります）。
+    </div>
+
+    <!-- お気に入り店舗 -->
+    <section style="margin-bottom:28px">
+      <div class="section-header">
+        <h2 class="section-title">お気に入り店舗</h2>
+        <span class="section-badge" id="fav-stores-count">--</span>
+      </div>
+      <div id="fav-stores"></div>
+    </section>
+
+    <!-- お気に入りイベントまとめ -->
+    <section id="fav-events-section" style="margin-bottom:28px">
+      <div class="section-header">
+        <h2 class="section-title">お気に入りイベントまとめ</h2>
+        <span class="section-badge" id="fav-events-count">--</span>
+      </div>
+      <div id="loading" style="text-align:center;padding:40px;color:var(--text-muted)">読み込み中...</div>
+
+      <div id="fav-calendar-wrap" style="display:none">
+        <div id="calendar"></div>
+      </div>
+
+      <div id="fav-list-wrap" style="display:none;margin-top:24px">
+        <h3 style="font-size:14px;font-weight:600;color:var(--accent);margin:0 0 8px">開催予定（開催日順）</h3>
+        <div id="fav-upcoming"></div>
+        <details id="fav-past-details" style="margin-top:16px">
+          <summary>終了したイベント（<span id="fav-past-count">0</span>件）</summary>
+          <div id="fav-past"></div>
+        </details>
+      </div>
+
+      <div id="fav-missing-wrap" style="display:none;margin-top:24px">
+        <h3 style="font-size:14px;font-weight:600;color:var(--text-muted);margin:0 0 8px">開催終了・情報なし</h3>
+        <p style="font-size:12px;color:var(--text-muted);margin:0 0 8px">
+          お気に入り登録したイベントが最新のスケジュールデータに見つかりませんでした（開催終了などでデータから削除された可能性があります）。自動削除はしません。
+        </p>
+        <div id="fav-missing"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="/js/common.js?v=15"></script>
+  <script src="/js/favorites.js?v=1"></script>
+  <script>
+    // 都道府県コードの辞書（ISO 3166-2 形式。data/schedule.json の pref_code に一致）
+    var PREF_MAP = {
+      'JP-01':'北海道','JP-02':'青森県','JP-03':'岩手県','JP-04':'宮城県','JP-05':'秋田県','JP-06':'山形県','JP-07':'福島県',
+      'JP-08':'茨城県','JP-09':'栃木県','JP-10':'群馬県','JP-11':'埼玉県','JP-12':'千葉県','JP-13':'東京都','JP-14':'神奈川県',
+      'JP-15':'新潟県','JP-16':'富山県','JP-17':'石川県','JP-18':'福井県','JP-19':'山梨県','JP-20':'長野県','JP-21':'岐阜県',
+      'JP-22':'静岡県','JP-23':'愛知県','JP-24':'三重県','JP-25':'滋賀県','JP-26':'京都府','JP-27':'大阪府','JP-28':'兵庫県',
+      'JP-29':'奈良県','JP-30':'和歌山県','JP-31':'鳥取県','JP-32':'島根県','JP-33':'岡山県','JP-34':'広島県','JP-35':'山口県',
+      'JP-36':'徳島県','JP-37':'香川県','JP-38':'愛媛県','JP-39':'高知県','JP-40':'福岡県','JP-41':'佐賀県','JP-42':'長崎県',
+      'JP-43':'熊本県','JP-44':'大分県','JP-45':'宮崎県','JP-46':'鹿児島県','JP-47':'沖縄県',
+      'CN-HK':'香港'
+    };
+
+    var HOLIDAYS_2026 = [
+      '2026-01-01', '2026-01-12', '2026-02-11', '2026-02-23',
+      '2026-03-20', '2026-04-29', '2026-05-03', '2026-05-04',
+      '2026-05-05', '2026-05-06', '2026-07-20', '2026-08-11',
+      '2026-09-21', '2026-09-22', '2026-09-23', '2026-10-12',
+      '2026-11-03', '2026-11-23', '2026-12-23'
+    ];
+    function isHoliday(dateStr) { return HOLIDAYS_2026.indexOf(dateStr) !== -1; }
+
+    // store.html と同じ配色・短縮ルール
+    var EVENT_COLORS = {
+      'ニュータイプチャレンジ': '#f59e0b',
+      'WORLD CHAMPIONSHIPS': '#ef4444',
+      'ショップバトル': '#3b82f6',
+      'ビギナーズバトル': '#22c55e'
+    };
+    function getEventColor(seriesTitle) {
+      for (var key in EVENT_COLORS) {
+        if (String(seriesTitle).indexOf(key) !== -1) return EVENT_COLORS[key];
+      }
+      return '#6b7280';
+    }
+    function shortenTitle(seriesTitle) {
+      seriesTitle = String(seriesTitle || '');
+      if (seriesTitle.indexOf('ニュータイプチャレンジ') !== -1) return 'ニュータイプ…';
+      if (seriesTitle.indexOf('WORLD CHAMPIONSHIPS') !== -1) return 'WC予選';
+      if (seriesTitle.indexOf('ショップバトル') !== -1) return 'ショップ…';
+      if (seriesTitle.indexOf('ビギナーズバトル') !== -1) return 'ビギナーズ…';
+      if (seriesTitle.indexOf('新弾構築戦') !== -1) return '新弾構築戦';
+      if (seriesTitle.indexOf('限定戦') !== -1) return '限定戦';
+      if (seriesTitle.indexOf('ティーチング') !== -1) return 'ティーチング…';
+      if (seriesTitle.indexOf('バトルロワイヤル') !== -1) return 'バトロワ…';
+      if (seriesTitle.length > 12) return seriesTitle.substring(0, 10) + '…';
+      return seriesTitle;
+    }
+
+    var DOW_NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+    function getDateColor(d) {
+      var dateKey = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      if (isHoliday(dateKey) || d.getDay() === 0) return '#ef4444';
+      if (d.getDay() === 6) return '#3b82f6';
+      return 'var(--text-primary)';
+    }
+
+    // ===== 状態 =====
+    var STORE_MAP = {};
+    var SERIES_MAP = {};
+    var EVENT_INDEX = {};
+    var calendarEvents = [];
+    var currentYear = new Date().getFullYear();
+    var currentMonth = new Date().getMonth();
+    var popup = null;
+
+    function buildIndex(data) {
+      STORE_MAP = data.stores || {};
+      SERIES_MAP = {};
+      (data.series || []).forEach(function (s) {
+        SERIES_MAP[String(s.event_series_id)] = s;
+      });
+      EVENT_INDEX = {};
+      Object.keys(data.events || {}).forEach(function (sid) {
+        (data.events[sid] || []).forEach(function (e) {
+          if (e == null || e.id == null) return;
+          EVENT_INDEX[String(e.id)] = {
+            id: e.id,
+            start_datetime: e.start_datetime || '',
+            max_join_count: e.max_join_count,
+            entry_fee: e.entry_fee,
+            pref_code: e.pref_code || '',
+            organizer_id: e.organizer_id,
+            series_id: sid,
+            series_title: SERIES_MAP[sid] ? SERIES_MAP[sid].event_series_title : '不明'
+          };
+        });
+      });
+    }
+
+    // お気に入り店舗のイベント（①）と 個別お気に入りイベント（②）を1リストへ統合（重複排除）
+    function collectFavoriteEvents() {
+      var favStoreSet = {};
+      GCGFav.getStores().forEach(function (id) { favStoreSet[String(id)] = true; });
+      var favEventIds = GCGFav.getEvents();
+
+      var byId = {};
+      // ① organizer_id（数値）と stores キー（文字列）を String() で揃えて突合
+      Object.keys(EVENT_INDEX).forEach(function (eid) {
+        var e = EVENT_INDEX[eid];
+        if (favStoreSet[String(e.organizer_id)]) {
+          byId[eid] = Object.assign({}, e, { viaStore: true, viaEvent: false });
+        }
+      });
+      // ②
+      var missing = [];
+      favEventIds.forEach(function (eid) {
+        var key = String(eid);
+        if (EVENT_INDEX[key]) {
+          if (byId[key]) { byId[key].viaEvent = true; }
+          else { byId[key] = Object.assign({}, EVENT_INDEX[key], { viaStore: false, viaEvent: true }); }
+        } else {
+          missing.push(eid);
+        }
+      });
+
+      var list = Object.keys(byId).map(function (k) { return byId[k]; });
+      list.sort(compareByStartAsc);
+      return { list: list, missing: missing };
+    }
+
+    // 開催日昇順。空文字/null は末尾。同時刻は id 昇順で安定化
+    function compareByStartAsc(a, b) {
+      var av = a.start_datetime || '';
+      var bv = b.start_datetime || '';
+      if (av === '' && bv === '') return Number(a.id) - Number(b.id);
+      if (av === '') return 1;
+      if (bv === '') return -1;
+      if (av === bv) return Number(a.id) - Number(b.id);
+      return av < bv ? -1 : 1;
+    }
+
+    function todayStartMs() {
+      var d = new Date();
+      d.setHours(0, 0, 0, 0);
+      return d.getTime();
+    }
+    // 日時不明（空文字）は過去扱いにせず、開催予定リストの末尾に置く
+    function isPastEvent(e) {
+      if (!e.start_datetime) return false;
+      var d = new Date(e.start_datetime);
+      if (isNaN(d.getTime())) return false;
+      return d.getTime() < todayStartMs();
+    }
+
+    function badgesHtml(e) {
+      var html = '';
+      if (e.viaStore) html += '<span class="fav-badge fav-badge-store">★店舗</span>';
+      if (e.viaEvent) html += '<span class="fav-badge fav-badge-event">★イベント</span>';
+      return html;
+    }
+
+    function formatStartLabel(e) {
+      if (!e.start_datetime) return { text: '日時未定', color: 'var(--text-muted)' };
+      var d = new Date(e.start_datetime);
+      if (isNaN(d.getTime())) return { text: '日時未定', color: 'var(--text-muted)' };
+      var text = (d.getMonth() + 1) + '/' + d.getDate() + '(' + DOW_NAMES[d.getDay()] + ') '
+        + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+      return { text: text, color: getDateColor(d) };
+    }
+
+    // schedule-detail.html の行デザインに準拠し、指示書39 §5.4 の表示項目を追加
+    function renderEventRowHtml(e) {
+      var store = STORE_MAP[String(e.organizer_id)] || {};
+      var start = formatStartLabel(e);
+      var prefName = PREF_MAP[e.pref_code] || (store.pref_code ? (PREF_MAP[store.pref_code] || '') : '');
+      var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + encodeURIComponent(e.id);
+      var storeHref = '/store.html?id=' + encodeURIComponent(e.organizer_id);
+      var storeName = store.name || '店舗情報なし';
+      var fee = (Number(e.entry_fee) === 0) ? '無料' : (Number(e.entry_fee) || 0) + '円';
+
+      return '<div class="fav-event-row">'
+        + '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">'
+        +   '<div style="flex:1;min-width:0">'
+        +     '<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px;flex-wrap:wrap">'
+        +       '<span style="font-size:15px;font-weight:700;color:' + start.color + ';font-family:var(--font-mono)">' + GCG.escapeHtml(start.text) + '</span>'
+        +       badgesHtml(e)
+        +     '</div>'
+        +     '<div style="display:flex;align-items:center;gap:4px;min-width:0">'
+        +       GCGFav.starButtonHtml('event', e.id)
+        +       '<a href="' + storeHref + '" class="fav-event-store" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + GCG.escapeHtml(storeName) + '</a>'
+        +     '</div>'
+        +     '<div style="font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'
+        +       (prefName ? GCG.escapeHtml(prefName) : '')
+        +       (store.city ? ' ' + GCG.escapeHtml(store.city) : '')
+        +     '</div>'
+        +     '<div style="font-size:13px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + GCG.escapeHtml(e.series_title || '') + '</div>'
+        +     '<div style="font-size:13px;color:var(--text-muted);margin-top:1px;font-family:var(--font-mono)">定員' + (Number(e.max_join_count) || 0) + '名　参加費' + GCG.escapeHtml(fee) + '</div>'
+        +   '</div>'
+        +   '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener" style="flex-shrink:0;padding:6px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;font-family:var(--font-mono);white-space:nowrap">詳細・応募</a>'
+        + '</div>'
+        + '</div>';
+    }
+
+    function renderFavStores() {
+      var favIds = GCGFav.getStores();
+      var el = document.getElementById('fav-stores');
+      document.getElementById('fav-stores-count').textContent = favIds.length + ' 店舗';
+      if (!favIds.length) {
+        el.innerHTML = '<div class="mypage-empty">お気に入り店舗はまだありません。'
+          + '<a href="/stores.html">店舗一覧</a>から☆でお気に入り登録できます。</div>';
+        return;
+      }
+      var rows = favIds.map(function (id) {
+        var s = STORE_MAP[String(id)] || null;
+        return {
+          id: String(id),
+          name: s ? String(s.name || '') : '',
+          pref_code: s ? (s.pref_code || '') : '',
+          city: s ? (s.city || '') : '',
+          found: !!s
+        };
+      });
+      rows.sort(function (a, b) {
+        if (a.found !== b.found) return a.found ? -1 : 1;
+        if (a.pref_code !== b.pref_code) return a.pref_code.localeCompare(b.pref_code);
+        return a.name.localeCompare(b.name, 'ja');
+      });
+      el.innerHTML = '<div class="store-grid">' + rows.map(function (s) {
+        var sub = s.found
+          ? (GCG.escapeHtml(PREF_MAP[s.pref_code] || '(不明)') + (s.city ? ' ' + GCG.escapeHtml(s.city) : ''))
+          : '店舗情報が見つかりません（ID: ' + GCG.escapeHtml(s.id) + '）';
+        return '<div class="store-row" style="display:flex;align-items:center;gap:8px">'
+          + GCGFav.starButtonHtml('store', s.id)
+          + '<a href="/store.html?id=' + encodeURIComponent(s.id) + '" style="flex:1;min-width:0;text-decoration:none;color:inherit">'
+          +   '<div class="store-row-name">' + GCG.escapeHtml(s.found ? s.name : ('店舗 ' + s.id)) + '</div>'
+          +   '<div class="store-row-sub">' + sub + '</div>'
+          + '</a>'
+          + '</div>';
+      }).join('') + '</div>';
+    }
+
+    function renderFavEvents() {
+      var result = collectFavoriteEvents();
+      var list = result.list;
+      var upcoming = list.filter(function (e) { return !isPastEvent(e); });
+      var past = list.filter(isPastEvent).slice().reverse(); // 終了分は降順
+
+      document.getElementById('fav-events-count').textContent = list.length + '件';
+      document.getElementById('fav-list-wrap').style.display = '';
+      document.getElementById('fav-calendar-wrap').style.display = list.length ? '' : 'none';
+
+      var upEl = document.getElementById('fav-upcoming');
+      upEl.innerHTML = upcoming.length
+        ? upcoming.map(renderEventRowHtml).join('')
+        : '<div class="mypage-empty">開催予定のお気に入りイベントはありません。'
+          + '<a href="/stores.html">店舗一覧</a>や<a href="/schedule.html">スケジュール</a>から☆でお気に入り登録できます。</div>';
+
+      document.getElementById('fav-past-count').textContent = past.length;
+      document.getElementById('fav-past-details').style.display = past.length ? '' : 'none';
+      document.getElementById('fav-past').innerHTML = past.map(renderEventRowHtml).join('');
+
+      // 開催終了・情報なし
+      var missWrap = document.getElementById('fav-missing-wrap');
+      if (result.missing.length) {
+        missWrap.style.display = '';
+        document.getElementById('fav-missing').innerHTML = result.missing.map(function (id) {
+          return '<div class="fav-missing-row">'
+            + '<span>イベントID: ' + GCG.escapeHtml(String(id)) + '</span>'
+            + GCGFav.starButtonHtml('event', id)
+            + '</div>';
+        }).join('');
+      } else {
+        missWrap.style.display = 'none';
+      }
+
+      calendarEvents = list;
+      drawCalendar();
+    }
+
+    // ===== カレンダー（store.html の開催スケジュール表示に準拠） =====
+    function drawCalendar() {
+      var container = document.getElementById('calendar');
+      container.innerHTML = '';
+
+      var header = document.createElement('div');
+      header.style.cssText = 'display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px';
+      var prevBtn = document.createElement('button');
+      prevBtn.type = 'button';
+      prevBtn.textContent = '◀';
+      prevBtn.style.cssText = 'background:none;border:1px solid var(--border);color:var(--text-primary);padding:6px 12px;border-radius:4px;cursor:pointer;font-size:16px';
+      prevBtn.addEventListener('click', prevMonth);
+      var label = document.createElement('span');
+      label.style.cssText = 'font-size:18px;font-weight:700;color:var(--text-primary);font-family:var(--font-mono);min-width:150px;text-align:center';
+      label.textContent = currentYear + '年' + (currentMonth + 1) + '月';
+      var nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.textContent = '▶';
+      nextBtn.style.cssText = 'background:none;border:1px solid var(--border);color:var(--text-primary);padding:6px 12px;border-radius:4px;cursor:pointer;font-size:16px';
+      nextBtn.addEventListener('click', nextMonth);
+      header.appendChild(prevBtn);
+      header.appendChild(label);
+      header.appendChild(nextBtn);
+      container.appendChild(header);
+
+      var dayColors = ['#ef4444', 'inherit', 'inherit', 'inherit', 'inherit', 'inherit', '#3b82f6'];
+      var dowHeader = document.createElement('div');
+      dowHeader.style.cssText = 'display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px';
+      DOW_NAMES.forEach(function (name, i) {
+        var cell = document.createElement('div');
+        cell.style.cssText = 'text-align:center;font-size:12px;font-weight:600;color:' + dayColors[i] + ';padding:4px 0;font-family:var(--font-mono)';
+        cell.textContent = name;
+        dowHeader.appendChild(cell);
+      });
+      container.appendChild(dowHeader);
+
+      var eventsByDate = {};
+      calendarEvents.forEach(function (e) {
+        if (!e.start_datetime) return;
+        var d = new Date(e.start_datetime);
+        if (isNaN(d.getTime())) return;
+        if (d.getFullYear() === currentYear && d.getMonth() === currentMonth) {
+          var dateKey = d.getDate();
+          if (!eventsByDate[dateKey]) eventsByDate[dateKey] = [];
+          eventsByDate[dateKey].push(e);
+        }
+      });
+
+      var grid = document.createElement('div');
+      grid.style.cssText = 'display:grid;grid-template-columns:repeat(7,1fr);gap:2px';
+
+      var firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      var daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      for (var i = 0; i < firstDay; i++) {
+        var empty = document.createElement('div');
+        empty.style.cssText = 'min-height:80px';
+        grid.appendChild(empty);
+      }
+
+      for (var day = 1; day <= daysInMonth; day++) {
+        var cell = document.createElement('div');
+        var dateObj = new Date(currentYear, currentMonth, day);
+        cell.style.cssText = 'min-height:80px;border:1px solid var(--border);border-radius:4px;padding:4px;position:relative;overflow:hidden';
+
+        var dateLabel = '<div style="font-size:13px;font-weight:600;color:' + getDateColor(dateObj) + ';font-family:var(--font-mono);margin-bottom:2px">' + day + '</div>';
+
+        var bars = '';
+        var dayEvents = eventsByDate[day] || [];
+        dayEvents.sort(compareByStartAsc);
+        dayEvents.forEach(function (e) {
+          var time = new Date(e.start_datetime);
+          var timeStr = String(time.getHours()).padStart(2, '0') + ':' + String(time.getMinutes()).padStart(2, '0');
+          var color = getEventColor(e.series_title);
+          bars += '<div style="font-size:9px;line-height:1.3;padding:1px 3px;margin-bottom:1px;border-left:3px solid ' + color + ';background:' + color + '20;border-radius:0 2px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-secondary);cursor:pointer">'
+            + GCG.escapeHtml(timeStr + ' ' + shortenTitle(e.series_title)) + '</div>';
+        });
+
+        cell.innerHTML = dateLabel + bars;
+
+        if (dayEvents.length > 0) {
+          cell.style.cursor = 'pointer';
+          cell.addEventListener('click', (function (d) {
+            return function () { showPopup(d); };
+          })(day));
+        }
+
+        grid.appendChild(cell);
+      }
+
+      container.appendChild(grid);
+    }
+
+    function prevMonth() {
+      currentMonth--;
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      closePopup();
+      drawCalendar();
+    }
+
+    function nextMonth() {
+      currentMonth++;
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      closePopup();
+      drawCalendar();
+    }
+
+    function showPopup(day) {
+      closePopup();
+
+      var dayEvents = calendarEvents.filter(function (e) {
+        if (!e.start_datetime) return false;
+        var d = new Date(e.start_datetime);
+        if (isNaN(d.getTime())) return false;
+        return d.getFullYear() === currentYear && d.getMonth() === currentMonth && d.getDate() === day;
+      }).sort(compareByStartAsc);
+
+      if (dayEvents.length === 0) return;
+
+      var dateObj = new Date(currentYear, currentMonth, day);
+
+      popup = document.createElement('div');
+      popup.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:20px;z-index:1000;max-width:420px;width:90%;max-height:80vh;overflow-y:auto;box-shadow:0 8px 40px rgba(0,0,0,0.4)';
+
+      var headerHtml = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)">'
+        + '<span style="font-size:16px;font-weight:700;color:' + getDateColor(dateObj) + ';font-family:var(--font-mono)">'
+        +   (currentMonth + 1) + '/' + day + '(' + DOW_NAMES[dateObj.getDay()] + ')'
+        + '</span>'
+        + '<button type="button" id="popup-close" style="background:none;border:none;color:var(--text-muted);font-size:20px;cursor:pointer;padding:0 4px">✕</button>'
+        + '</div>';
+
+      var eventsHtml = dayEvents.map(function (e, index) {
+        var store = STORE_MAP[String(e.organizer_id)] || {};
+        var time = new Date(e.start_datetime);
+        var timeStr = String(time.getHours()).padStart(2, '0') + ':' + String(time.getMinutes()).padStart(2, '0');
+        var color = getEventColor(e.series_title);
+        var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + encodeURIComponent(e.id);
+        var separator = index > 0 ? 'border-top:1px solid var(--border);padding-top:10px;margin-top:10px;' : '';
+        var fee = (Number(e.entry_fee) === 0) ? '無料' : (Number(e.entry_fee) || 0) + '円';
+        return '<div style="' + separator + '">'
+          + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">'
+          +   '<div style="width:4px;height:16px;border-radius:2px;background:' + color + '"></div>'
+          +   '<span style="font-size:14px;font-weight:600;color:var(--text-primary)">' + GCG.escapeHtml(e.series_title || '') + '</span>'
+          + '</div>'
+          + '<div style="display:flex;align-items:center;gap:4px;margin-bottom:4px">'
+          +   GCGFav.starButtonHtml('event', e.id)
+          +   '<a href="/store.html?id=' + encodeURIComponent(e.organizer_id) + '" class="fav-event-store" style="font-size:13px">' + GCG.escapeHtml(store.name || '店舗情報なし') + '</a>'
+          +   badgesHtml(e)
+          + '</div>'
+          + '<div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-mono);margin-bottom:4px">開催時間 ' + timeStr + '</div>'
+          + '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">'
+          +   '<span style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">定員' + (Number(e.max_join_count) || 0) + '名　参加費' + GCG.escapeHtml(fee) + '</span>'
+          +   '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener" style="padding:5px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;font-family:var(--font-mono);white-space:nowrap">詳細・応募</a>'
+          + '</div>'
+          + '</div>';
+      }).join('');
+
+      popup.innerHTML = headerHtml + eventsHtml;
+
+      var overlay = document.createElement('div');
+      overlay.id = 'popup-overlay';
+      overlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:999';
+      overlay.addEventListener('click', closePopup);
+
+      document.body.appendChild(overlay);
+      document.body.appendChild(popup);
+      GCGFav.bindStarButtons(popup);
+      var closeBtn = document.getElementById('popup-close');
+      if (closeBtn) closeBtn.addEventListener('click', closePopup);
+    }
+
+    function closePopup() {
+      if (popup) { popup.remove(); popup = null; }
+      var overlay = document.getElementById('popup-overlay');
+      if (overlay) overlay.remove();
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closePopup();
+    });
+
+    (async function init() {
+      GCG.init();
+      document.getElementById('header').innerHTML = GCG.renderHeader('mypage');
+      document.getElementById('footer').innerHTML = GCG.renderFooter();
+      try { GCG.initHeaderSearch(); } catch (e) {}
+
+      if (!GCGFav.available()) {
+        document.getElementById('fav-unavailable').style.display = '';
+      }
+
+      try {
+        var res = await fetch('/data/schedule.json');
+        if (!res.ok) throw new Error('schedule.json HTTP ' + res.status);
+        var data = await res.json();
+        buildIndex(data);
+
+        document.getElementById('loading').style.display = 'none';
+        GCGFav.bindStarButtons(document.body);
+        renderFavStores();
+        renderFavEvents();
+
+        // ☆トグル時にマイページ内の一覧を即時再描画（解除した項目を消すため）
+        document.addEventListener('gcgfav:change', function () {
+          renderFavStores();
+          renderFavEvents();
+        });
+      } catch (e) {
+        document.getElementById('loading').textContent = '情報の取得に失敗しました: ' + e.message;
+        document.getElementById('loading').style.color = '#ff5050';
+      }
+    })();
+  </script>
+</body>
+</html>

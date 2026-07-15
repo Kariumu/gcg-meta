@@ -30,6 +30,22 @@
     #event-list a:hover {
       text-decoration: underline;
     }
+    /* お気に入り☆ボタン（favorites.js 利用ページ共通・定義内容は全ページ一致させること） */
+    .fav-star {
+      background: none;
+      border: none;
+      padding: 0 4px;
+      margin: 0;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-family: inherit;
+      transition: color 0.12s, transform 0.12s;
+    }
+    .fav-star.is-on { color: var(--accent); }
+    .fav-star:hover { transform: scale(1.15); }
+    .fav-star[disabled] { cursor: not-allowed; opacity: 0.4; transform: none; }
   </style>
 </head>
 <body>
@@ -67,6 +83,7 @@
 
   <script src="shared/ntc-rank-consolidator.js?v=3"></script>
   <script src="js/common.js?v=15"></script>
+  <script src="/js/favorites.js?v=1"></script>
   <script>
     var currentYear = new Date().getFullYear();
     var currentMonth = new Date().getMonth();
@@ -231,7 +248,10 @@
       var phone = store.phone ? formatPhone(store.phone) : '';
 
       container.innerHTML =
-        '<h1 style="font-size:20px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0">' + store.name + '</h1>' +
+        '<h1 style="font-size:20px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;display:flex;align-items:center;gap:6px">'
+          + GCG.escapeHtml(store.name || '')
+          + GCGFav.starButtonHtml('store', store.id != null ? store.id : getUrlParam('id'))
+        + '</h1>' +
         '<div style="font-size:14px;color:var(--text-secondary);margin-bottom:4px">' + address + mapLink + '</div>' +
         (phone ? '<div style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">TEL: ' + phone + '</div>' : '');
     }
@@ -420,6 +440,7 @@
       GCG.init();
       document.getElementById('header').innerHTML = GCG.renderHeader('stores');
       document.getElementById('footer').innerHTML = GCG.renderFooter();
+      GCGFav.bindStarButtons(document.body);
 
       var storeId = getUrlParam('id');
       if (!storeId) {

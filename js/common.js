@@ -234,7 +234,9 @@ const GCG = {
     cards:    { main: 'cards',       sub: null       },
     sets:     { main: 'sets',        sub: null       },
     reports:  { main: 'reports',     sub: null       },
-    stores:   { main: 'venues',      sub: null       }
+    stores:   { main: 'venues',      sub: null       },
+    mypage:   { main: 'mypage',      sub: null       }
+    // mypage は 2026-07-16 追加（お気に入り/マイページ、指示書39 松岡さん指示）
     // regions は 2026-07-15 削除（ショップバトル地域別ランキング廃止、松岡さん指示）
     // '' (contact/privacy/about 等) は主タブもサブもアクティブ無し
   },
@@ -246,7 +248,8 @@ const GCG = {
     { key: 'cards',       href: 'cards.html',   label: 'カードリスト' },
     { key: 'sets',        href: 'sets/',        label: '新弾プレビュー' },
     { key: 'reports',     href: 'reports/',     label: 'レポート'   },
-    { key: 'venues',      href: 'stores.html',  label: '店舗一覧'  }
+    { key: 'venues',      href: 'stores.html',  label: '店舗一覧'  },
+    { key: 'mypage',      href: 'mypage.html',  label: 'マイページ' }
   ],
 
   _SUB_NAV: {
@@ -265,7 +268,8 @@ const GCG = {
     analysis:    '環境分析',
     cards:       'カードリスト',
     reports:     'レポート',
-    venues:      '店舗一覧'
+    venues:      '店舗一覧',
+    mypage:      'マイページ'
   },
 
   // 共通ヘッダーHTML生成

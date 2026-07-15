@@ -126,6 +126,23 @@
       background: rgba(255,193,71,0.15); color: #e0a528; margin-left: 6px;
       white-space: nowrap; vertical-align: middle;
     }
+
+    /* お気に入り☆ボタン（favorites.js 利用ページ共通・定義内容は全ページ一致させること） */
+    .fav-star {
+      background: none;
+      border: none;
+      padding: 0 4px;
+      margin: 0;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-family: inherit;
+      transition: color 0.12s, transform 0.12s;
+    }
+    .fav-star.is-on { color: var(--accent); }
+    .fav-star:hover { transform: scale(1.15); }
+    .fav-star[disabled] { cursor: not-allowed; opacity: 0.4; transform: none; }
   </style>
 </head>
 <body>
@@ -186,6 +203,7 @@
   <div id="footer"></div>
 
   <script src="/js/common.js?v=15"></script>
+  <script src="/js/favorites.js?v=1"></script>
   <script>
     // 都道府県コードの辞書（ISO 3166-2 形式。data/schedule.json の pref_code に一致）
     const PREF_MAP = {
@@ -230,6 +248,8 @@
       document.getElementById('header').innerHTML = GCG.renderHeader('stores');
       document.getElementById('footer').innerHTML = GCG.renderFooter();
       try { GCG.initHeaderSearch(); } catch (e) {}
+      // ☆は body へのイベント委譲で処理（フィルタ/検索/現在地検索の再描画後も有効）
+      GCGFav.bindStarButtons(document.body);
 
       const root = document.getElementById('stores-root');
 
@@ -468,11 +488,12 @@
           var d = s._dist < 1 ? Math.round(s._dist * 1000) + 'm' : s._dist.toFixed(1) + 'km';
           distBadge = ' <span style="color:var(--accent);font-family:var(--font-mono);font-size:12px">約' + d + '</span>';
         }
-        return '<div class="store-row" style="display:block">'
-          + '<a href="' + href + '" style="text-decoration:none;color:inherit">'
+        return '<div class="store-row" style="display:flex;align-items:center;gap:8px">'
+          + '<a href="' + href + '" style="flex:1;min-width:0;text-decoration:none;color:inherit">'
           + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + (s.isExpert ? ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>' : '') + distBadge + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
           + '</a>'
+          + GCGFav.starButtonHtml('store', s.id)
           + '</div>';
       }
 
