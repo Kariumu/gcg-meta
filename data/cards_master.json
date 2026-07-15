@@ -36681,5 +36681,256 @@
     "effect_text": "",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "T-015_p1": {
+    "id": "T-015_p1",
+    "name_jp": "CGSモビルワーカー",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "鉄華団"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-015"
+  },
+  "T-016_p1": {
+    "id": "T-016_p1",
+    "name_jp": "グレイズ改",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "鉄華団"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-016"
+  },
+  "T-017_p1": {
+    "id": "T-017_p1",
+    "name_jp": "ガンダム・バルバトス（第4形態）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "鉄華団"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-017"
+  },
+  "T-018_p1": {
+    "id": "T-018_p1",
+    "name_jp": "赤いガンダム",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "クラン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-018"
+  },
+  "T-019_p1": {
+    "id": "T-019_p1",
+    "name_jp": "GQuuuuuuX（オメガ・サイコミュ起動時）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "クラン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-019"
+  },
+  "T-020_p1": {
+    "id": "T-020_p1",
+    "name_jp": "GFreD",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-020"
+  },
+  "GD04-024_p1": {
+    "id": "GD04-024_p1",
+    "name_jp": "ガンダム・エアリアル（改修型）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "link": [
+      "スレッタ・マーキュリー"
+    ],
+    "effect": "【配備時】自分のデッキを上から3枚見て、その中の(学園)の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "effect_tags": [
+      "配備時"
+    ],
+    "is_parallel": true,
+    "is_promo": true,
+    "acquisition_info": "新弾構築戦[GD04] 参加・優勝記念品",
+    "package_set": "PROMO",
+    "effect_text": "【配備時】自分のデッキを上から3枚見て、その中の〔学園〕の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "parallel_number": 1,
+    "base_card_id": "GD04-024"
+  },
+  "GD04-085_p2": {
+    "id": "GD04-085_p2",
+    "name_jp": "スレッタ・マーキュリー",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "link": [],
+    "effect": "【バースト】 このカードを手札に加える。\n\n【リンク中】 【ターン1回】 自分がEXリソースを使用して(学園)のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。",
+    "effect_tags": [
+      "リンク中",
+      "バースト",
+      "ターン1回"
+    ],
+    "is_parallel": true,
+    "is_promo": true,
+    "acquisition_info": "新弾構築戦[GD04] 参加・優勝記念品",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【リンク中】【ターン1回】自分がEXリソースを使用して〔学園〕のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。",
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "parallel_number": 2,
+    "base_card_id": "GD04-085"
+  },
+  "GD05-042_p1": {
+    "id": "GD05-042_p1",
+    "name_jp": "シャイニングガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "新弾限定戦[GD05] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-042"
+  },
+  "GD05-120_p1": {
+    "id": "GD05-120_p1",
+    "name_jp": "シャイニングフィンガー",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "シャッフル同盟",
+      "必殺技"
+    ],
+    "stats": {},
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【メイン】/【アクション】HP4以下の相手のユニット1つを選ぶ。それをレストにする。その後、カード名に「シャイニングガンダム」を含む自分のユニット1つを選んでもよい。このターン中、それは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "新弾限定戦[GD05] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-120"
   }
 }

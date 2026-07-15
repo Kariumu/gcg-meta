@@ -659,6 +659,11 @@ function classifyTweet(tweet) {
   // 公式ポスト本文に「パラレルカード」表記がある場合は new_card/notice どちらにも分類せず、
   // 画像認識も記事作成も一切行わない（最上流で除外）。
   if (tweet.text.includes('パラレルカード')) return null;
+  // 2026-07-16 松岡さん指示: SPカードも記事作成しない（パラレル同様、既出カードの別版）
+  if (tweet.text.includes('SPカード')) return null;
+  // 2026-07-16 松岡さん指示: EXリソース/EXベース/リソースはサイトで表示していないため記事作成しない
+  // （「リソース」は EXリソース も包含するが、明示のため3種とも列挙）
+  if (tweet.text.includes('EXリソース') || tweet.text.includes('EXベース') || tweet.text.includes('リソース')) return null;
   if (tweet.text.includes('【収録カード紹介】')) return 'new_card';
   if (tweet.text.includes('【重要なお知らせ】')) return 'notice';
   return null;
@@ -2252,6 +2257,13 @@ async function main() {
       }
 
       for (const ci of cardInfoList) {
+        // 2026-07-16 松岡さん指示: 認識されたカード番号が cards_master に既存 = パラレル/SP/再録
+        // → 記事対象外。画像保存・preview保存もしない
+        // （7/10 にティザーパラレルが記事化され images/cards/ のベース画像を上書きした事故の再発防止）
+        if (ci.card_number && ci.card_number !== '不明' && cardsMaster[ci.card_number]) {
+          log(`  スキップ: ${ci.card_number} は既存カード番号（パラレル/SP/再録とみなす）→ 記事・画像保存なし`);
+          continue;
+        }
         ci._tweetUrl = tweetUrl;
         ci._articleDate = articleDate; // 指示書37: 再生成用の記事日付
         // 指示書37: 認識精度問題判定(手動補完戦略)
@@ -2344,6 +2356,10 @@ async function main() {
     }
 
     // 全カード認識成功時のみ通常の記事生成へ
+    if (validCards.length === 0) {
+      // 2026-07-16: 全カードがスキップ（パラレル/既存/リソース系）の場合は記事生成を省略して速報処理へ
+      log('新カード記事: 対象カードなし（全てスキップ）。記事生成を省略します。');
+    } else {
     log(`記事生成: 認識成功 ${validCards.length} 件(全カード認識成功)`);
     allCardInfos = validCards; // 念のため明示
 
@@ -2460,6 +2476,7 @@ async function main() {
         log(`X投稿生成/送信失敗: ${e.message}`);
       }
     }
+    } // else（validCards.length === 0 スキップガード、2026-07-16）
   }
 
   // === 速報記事 ===

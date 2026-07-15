@@ -629,6 +629,7 @@ function findTokensProduced(card, allCards) {
   const out = [];
   for (const c of Object.values(allCards)) {
     if (c.card_type !== 'TOKEN') continue;
+    if (c.is_parallel) continue; // トークンのパラレル版は「出すトークン」には並べない（ベース版のみ。2026-07-16）
     if (producesToken(fx, c.name_jp)) out.push(c);
   }
   out.sort((a, b) => a.id.localeCompare(b.id));
