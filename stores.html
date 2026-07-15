@@ -168,11 +168,15 @@
       <button type="button" id="geo-search-btn" class="filter-input" style="cursor:pointer;min-width:auto">現在地から探す</button>
       <select id="geo-radius" class="filter-input" style="min-width:110px;display:none" aria-label="検索範囲"></select>
       <button type="button" id="geo-clear-btn" class="filter-input" style="cursor:pointer;min-width:auto;display:none">解除</button>
+      <button type="button" id="map-toggle-btn" class="filter-input" style="cursor:pointer;min-width:auto">地図で表示</button>
       <span id="geo-status" style="font-size:12px;color:var(--text-muted)"></span>
     </div>
     <p style="color:var(--text-muted);font-size:11px;margin:0 0 16px">
       ※位置情報はボタンを押したときのみブラウザから取得し、端末内での距離計算だけに使用します（サーバへの送信・保存はありません）。距離は直線距離です。
     </p>
+
+    <!-- 地図表示（2026-07-15 松岡さん指示: OpenStreetMap+Leaflet、初回表示時のみ読み込み） -->
+    <div id="store-map" style="display:none;height:480px;margin-bottom:16px;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden"></div>
 
     <div id="stores-root" class="stores-collapsible" data-state="loading">
       <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">読み込み中...</div>
@@ -388,11 +392,15 @@
           list.sort((a, b) => a._dist - b._dist);
           const radius = parseInt(document.getElementById('geo-radius').value, 10) || 10;
           document.getElementById('geo-status').textContent = '現在地から' + radius + 'km以内: ' + list.length + '店舗（近い順）';
+          lastList = list;
           render(list, 'distance');
+          if (mapVisible) updateMap();
           return;
         }
 
+        lastList = list;
         render(list, sortBy);
+        if (mapVisible) updateMap();
       }
 
       function render(list, sortBy) {
@@ -514,6 +522,120 @@
           { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
         );
       });
+      // === 地図表示（2026-07-15 松岡さん指示: OpenStreetMap+Leaflet+クラスタリング） ===
+      let lastList = stores.slice();
+      let mapVisible = false;
+      let leafletReady = false;
+      let leafletLoading = false;
+      let map = null, clusterGroup = null, posMarker = null, radiusCircle = null;
+      const mapDiv = document.getElementById('store-map');
+      const mapBtn = document.getElementById('map-toggle-btn');
+
+      function loadLeaflet() {
+        // 初回表示時のみCDNから読み込み（通常閲覧のページ速度に影響させない）
+        return new Promise((resolve, reject) => {
+          if (leafletReady) return resolve();
+          const css1 = document.createElement('link');
+          css1.rel = 'stylesheet';
+          css1.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css';
+          document.head.appendChild(css1);
+          const css2 = document.createElement('link');
+          css2.rel = 'stylesheet';
+          css2.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.min.css';
+          document.head.appendChild(css2);
+          const css3 = document.createElement('link');
+          css3.rel = 'stylesheet';
+          css3.href = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.min.css';
+          document.head.appendChild(css3);
+          const js1 = document.createElement('script');
+          js1.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js';
+          js1.onload = () => {
+            const js2 = document.createElement('script');
+            js2.src = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.min.js';
+            js2.onload = () => { leafletReady = true; resolve(); };
+            js2.onerror = reject;
+            document.head.appendChild(js2);
+          };
+          js1.onerror = reject;
+          document.head.appendChild(js1);
+        });
+      }
+
+      function updateMap() {
+        if (!leafletReady || !map) return;
+        clusterGroup.clearLayers();
+        const markers = [];
+        for (const s of lastList) {
+          if (s.lat == null || s.lng == null) continue;
+          const m = L.circleMarker([s.lat, s.lng], {
+            radius: 7, color: '#d4a029', weight: 2, fillColor: '#d4a029', fillOpacity: 0.6
+          });
+          const dist = (userPos && typeof s._dist === 'number')
+            ? '<div style="font-family:monospace;font-size:12px">約' + (s._dist < 1 ? Math.round(s._dist * 1000) + 'm' : s._dist.toFixed(1) + 'km') + '</div>' : '';
+          m.bindPopup(
+            '<div style="min-width:160px"><strong>' + GCG.escapeHtml(s.name) + '</strong>'
+            + '<div style="font-size:12px;color:#666">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
+            + dist
+            + '<a href="/store.html?id=' + encodeURIComponent(s.id) + '">店舗ページへ →</a></div>'
+          );
+          markers.push(m);
+        }
+        clusterGroup.addLayers(markers);
+        if (posMarker) { map.removeLayer(posMarker); posMarker = null; }
+        if (radiusCircle) { map.removeLayer(radiusCircle); radiusCircle = null; }
+        if (userPos) {
+          posMarker = L.circleMarker([userPos.lat, userPos.lng], {
+            radius: 9, color: '#4d9ff7', weight: 3, fillColor: '#4d9ff7', fillOpacity: 0.9
+          }).addTo(map).bindPopup('現在地');
+          const radius = parseInt(geoRadius.value, 10) || 10;
+          radiusCircle = L.circle([userPos.lat, userPos.lng], {
+            radius: radius * 1000, color: '#4d9ff7', weight: 1, fillOpacity: 0.05
+          }).addTo(map);
+          map.fitBounds(radiusCircle.getBounds(), { padding: [20, 20] });
+        } else if (markers.length > 0) {
+          map.fitBounds(clusterGroup.getBounds(), { padding: [20, 20] });
+        } else {
+          map.setView([36.5, 138], 5);
+        }
+      }
+
+      mapBtn.addEventListener('click', async () => {
+        if (!mapVisible) {
+          if (!leafletReady && !leafletLoading) {
+            leafletLoading = true;
+            mapBtn.disabled = true;
+            mapBtn.textContent = '地図を読み込み中...';
+            try {
+              await loadLeaflet();
+            } catch (e) {
+              mapBtn.textContent = '地図を読み込めませんでした';
+              mapBtn.disabled = false;
+              leafletLoading = false;
+              return;
+            }
+            mapBtn.disabled = false;
+            leafletLoading = false;
+            map = L.map('store-map');
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+            clusterGroup = L.markerClusterGroup({ chunkedLoading: true, maxClusterRadius: 48 });
+            map.addLayer(clusterGroup);
+          }
+          mapVisible = true;
+          mapDiv.style.display = '';
+          mapBtn.textContent = '一覧で表示';
+          document.getElementById('stores-root').style.display = 'none';
+          setTimeout(() => { map.invalidateSize(); updateMap(); }, 50);
+        } else {
+          mapVisible = false;
+          mapDiv.style.display = 'none';
+          mapBtn.textContent = '地図で表示';
+          document.getElementById('stores-root').style.display = '';
+        }
+      });
+
       geoRadius.addEventListener('change', applyFilters);
       geoClear.addEventListener('click', () => {
         userPos = null;
