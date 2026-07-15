@@ -838,14 +838,30 @@ ${rows}
  * - 一件もヒットしない場合はセクションごと非表示
  * - 末尾に公式 FAQ ハブへのリンクを付与
  */
-function buildQaSectionHtml(cardId, baseCardId) {
+function buildQaSectionHtml(cardId, baseCardId, cardType) {
   const byCard = qaDatabase.by_card || {};
-  const ids = new Set();
-  for (const id of (byCard[cardId] || [])) ids.add(id);
-  if (baseCardId && baseCardId !== cardId) {
-    for (const id of (byCard[baseCardId] || [])) ids.add(id);
+  let qas;
+  let heading = 'このカードに関する公式 Q&A';
+  let note = 'バンダイ公式サイトに掲載されている裁定情報です。';
+  if (cardType === 'TOKEN') {
+    // トークン共通の公式Q&A（2026-07-15 松岡さん指示・承認: 共通裁定のみ表示、生成カード側QAは転載しない）
+    // 公式FAQにはトークン個別（T-番号/トークン名指定）のQAが存在しないため、
+    // カテゴリ「トークン」+ 質問文がトークンに言及する一般QA（準備/用語）を全トークンページ共通で表示する
+    qas = (qaDatabase.all || []).filter(qa =>
+      (!qa.card_ids || qa.card_ids.length === 0) && (
+        qa.category === 'トークン' ||
+        ((qa.category === 'ゲームの準備' || qa.category === '基本的な用語') && (qa.question || '').includes('トークン'))
+      ));
+    heading = 'トークンに関する公式 Q&A';
+    note = 'バンダイ公式サイトに掲載されている、トークン共通の裁定情報です。';
+  } else {
+    const ids = new Set();
+    for (const id of (byCard[cardId] || [])) ids.add(id);
+    if (baseCardId && baseCardId !== cardId) {
+      for (const id of (byCard[baseCardId] || [])) ids.add(id);
+    }
+    qas = Array.from(ids).map(id => qaById[id]).filter(Boolean);
   }
-  const qas = Array.from(ids).map(id => qaById[id]).filter(Boolean);
   if (qas.length === 0) return '';
 
   const items = qas.map(qa => {
@@ -872,8 +888,8 @@ function buildQaSectionHtml(cardId, baseCardId) {
   }).join('\n');
 
   return `
-      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">このカードに関する公式 Q&A <span style="font-size:12px;font-weight:400;color:var(--text-muted);margin-left:6px">${qas.length}件</span></h3>
-      <p style="font-size:12px;color:var(--text-muted);margin:0 0 12px">バンダイ公式サイトに掲載されている裁定情報です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">${heading} <span style="font-size:12px;font-weight:400;color:var(--text-muted);margin-left:6px">${qas.length}件</span></h3>
+      <p style="font-size:12px;color:var(--text-muted);margin:0 0 12px">${note}</p>
       <div style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px">
 ${items}
       </div>
@@ -998,7 +1014,7 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   const featureSummaryHtml = buildFeatureSummaryHtml(features);
 
   // Q&A セクション(by_card は通常版 ID で登録されているケースが多いため両方引く)
-  const qaHtml = buildQaSectionHtml(cardId, baseCardId);
+  const qaHtml = buildQaSectionHtml(cardId, baseCardId, masterCard?.card_type);
 
   // パラレル版バナー(冒頭に明示)
   // base_card_id が undefined のときはバナー自体を表示しない(リンク先 ../undefined/ への遷移を防止)
