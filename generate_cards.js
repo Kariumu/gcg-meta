@@ -398,7 +398,16 @@ function main() {
 
   // DEBUG mode: 4枚のみ生成（テスト用）
   const DEBUG_IDS = ['GD04-001', 'GD04-001_p1', 'GD04-017_p2', 'GD01-002_p2'];
-  const targetCardIds = process.env.DEBUG ? DEBUG_IDS : [...allCardIds];
+  let targetCardIds = process.env.DEBUG ? DEBUG_IDS : [...allCardIds];
+  // GEN_SLICE="i,j": targetCardIds.slice(i,j) のみ生成（サンドボックスの実行時間制限用、2026-07-15）
+  // 指定時は sitemap を更新しない（全件の最終スライス実行後に別途 GEN_SLICE なしで sitemap のみ更新するか、
+  // 最終スライスで GEN_SITEMAP=1 を付ける）
+  const GEN_SLICE = process.env.GEN_SLICE || '';
+  if (GEN_SLICE) {
+    const [si, sj] = GEN_SLICE.split(',').map(Number);
+    targetCardIds = targetCardIds.slice(si, sj);
+    console.log(`  GEN_SLICE=${si},${sj} → ${targetCardIds.length} 枚のみ生成`);
+  }
 
   for (const cardId of targetCardIds) {
     generatedCardIds.push(cardId);
@@ -459,9 +468,11 @@ function main() {
 
   console.log(`  → ${generatedCardIds.length} ページ生成完了`);
 
-  // sitemap.xml 更新
-  updateSitemap(generatedCardIds);
-  console.log('  → sitemap.xml 更新完了');
+  // sitemap.xml 更新（GEN_SLICE 指定時は GEN_SITEMAP=1 のときのみ全件で更新）
+  if (!GEN_SLICE || process.env.GEN_SITEMAP === '1') {
+    updateSitemap([...allCardIds]);
+    console.log('  → sitemap.xml 更新完了');
+  }
 }
 
 function generateCoUsedSection(cardId, coUsed) {
@@ -597,47 +608,73 @@ const TRAIT_SCOPE = {
 const TRAIT_SCOPE_ALL = ['UNIT', 'PILOT', 'COMMAND', 'BASE', 'TOKEN'];
 function findTraitReferences(card) {
   const fx = card.effect_text || '';
-  const refs = new Map(); // trait -> { types:Set, labels:Set }
+  const refs = new Map(); // trait -> { specs:[], any:false }
   const TYPE_WORDS = 'ユニットトークン|ユニットカード|パイロットカード|コマンドカード|ベースカード|ユニット|パイロット|コマンド|ベース|カード';
+  const COLOR_EN = { '青': 'Blue', '緑': 'Green', '赤': 'Red', '白': 'White', '紫': 'Purple' };
   // 後続文字列は先読みで捕捉（消費しない）。消費すると近接する次の〔X〕参照が
   // matchAll でスキップされ、セクションが欠落する（2026-07-12 二次確認の指摘で修正）
   const re = new RegExp('((?:〔[^〕]+〕[/／]?)+)(?=([\\s\\S]{0,40}))', 'g');
+  // 種別語の直後が「名」の場合（「カード名に…」）は種別語ではない（2026-07-12 GD02-088）
+  const headRe = new RegExp('^の?、?(自分の|味方の|相手の)?、?(?:リンク)?(' + TYPE_WORDS + ')(?!名)');
+  const contRe = new RegExp('^(?:\\d+[枚つ個])?[/／](?:自分の|味方の|相手の)?(' + TYPE_WORDS + ')(?!名)');
   for (const m of fx.matchAll(re)) {
     const traits = [...m[1].matchAll(/〔([^〕]+)〕/g)].map(x => x[1]);
+    // --- 前置修飾（色・Lv・AP等）の解析（2026-07-12 松岡さん指摘: 緑の〔地球連邦〕は緑のみ対象） ---
+    let pre = fx.slice(Math.max(0, m.index - 20), m.index);
+    let colors = null, lvQ = null, apQ = null, costQ = null, hpQ = null;
+    let mq;
+    for (;;) {
+      if ((mq = pre.match(/((?:青|緑|赤|白|紫)(?:[/／](?:青|緑|赤|白|紫))*)の$/))) {
+        colors = mq[1].split(/[/／]/).map(c => COLOR_EN[c]);
+      } else if ((mq = pre.match(/Lv\.(\d+)(以下|以上)の$/))) {
+        lvQ = [mq[2], parseInt(mq[1], 10)];
+      } else if ((mq = pre.match(/AP(\d+)(以下|以上)の$/))) {
+        apQ = [mq[2], parseInt(mq[1], 10)];
+      } else if ((mq = pre.match(/HP(\d+)(以下|以上)の$/))) {
+        hpQ = [mq[2], parseInt(mq[1], 10)];
+      } else if ((mq = pre.match(/コスト(\d+)(以下|以上)の$/))) {
+        costQ = [mq[2], parseInt(mq[1], 10)];
+      } else break;
+      pre = pre.slice(0, pre.length - mq[0].length);
+    }
+    const qualText = fx.slice(Math.max(0, m.index - 20) + pre.length, m.index);
+    // --- 後続の種別解析 ---
     let after = m[2];
-    let types = null; let label = null;
-    const headRe = new RegExp('^の?、?(自分の|味方の|相手の)?、?(?:リンク)?(' + TYPE_WORDS + ')');
+    let types = null; let typeLabel = null;
     const sm = after.match(headRe);
     if (sm) {
-      types = new Set(TRAIT_SCOPE[sm[2]]);
+      const tset = new Set(TRAIT_SCOPE[sm[2]]);
       const words = [sm[2]];
-      // 種別の列挙（例:「〔学園〕の、ユニットカード1枚/コマンドカード1枚」）を連続解析
       after = after.slice(sm[0].length);
-      const contRe = new RegExp('^(?:\\d+[枚つ個])?[/／](?:自分の|味方の|相手の)?(' + TYPE_WORDS + ')');
       let cm;
       while ((cm = after.match(contRe)) !== null) {
-        for (const t of TRAIT_SCOPE[cm[1]]) types.add(t);
+        for (const t of TRAIT_SCOPE[cm[1]]) tset.add(t);
         words.push(cm[1]);
         after = after.slice(cm[0].length);
       }
-      types = [...types];
-      label = 'の' + words.join('/');
+      types = [...tset];
+      typeLabel = 'の' + words.join('/');
     }
-    else if (/^[・]/.test(m[2])) { types = TRAIT_SCOPE['ユニット']; label = 'のユニット'; } // トークン生成スペック括弧
-    if (!types) { types = TRAIT_SCOPE_ALL; label = null; }
+    else if (/^[・]/.test(m[2])) { types = TRAIT_SCOPE['ユニット']; typeLabel = 'のユニット'; } // トークン生成スペック括弧
+    const anyRef = !types;
+    if (!types) types = TRAIT_SCOPE_ALL;
     for (const tr of traits) {
-      if (!refs.has(tr)) refs.set(tr, { types: new Set(), labels: new Set(), any: false });
+      if (!refs.has(tr)) refs.set(tr, { specs: [], any: false });
       const r = refs.get(tr);
-      for (const t of types) r.types.add(t);
-      if (label) r.labels.add(label); else r.any = true;
+      if (anyRef) { r.any = true; r.specs.push({ types, colors: null, lvQ: null, apQ: null, hpQ: null, costQ: null, label: null, typeLabel: null }); }
+      else r.specs.push({ types, colors, lvQ, apQ, hpQ, costQ, label: qualText + '〔' + tr + '〕' + typeLabel, typeLabel });
     }
   }
-  return [...refs.entries()].map(([trait, r]) => ({
-    trait,
-    types: r.types,
-    // タイトル用: 参照形が1種類ならそれを表示、複数/不明なら汎用表現
-    label: (!r.any && r.labels.size === 1) ? [...r.labels][0] : null,
-  }));
+  return [...refs.entries()].map(([trait, r]) => {
+    const labels = new Set(r.specs.map(sp => sp.label).filter(Boolean));
+    const typeLabels = new Set(r.specs.map(sp => sp.typeLabel).filter(Boolean));
+    // タイトル用: 参照形が1種類ならそれを表示。修飾だけが異なり種別が共通なら修飾なしの種別表記、
+    // それ以外（種別も混在/不明参照あり）は汎用表現
+    let label = null;
+    if (!r.any && labels.size === 1) label = [...labels][0];
+    else if (!r.any && typeLabels.size === 1) label = '〔' + trait + '〕' + [...typeLabels][0];
+    return { trait, specs: r.specs, label };
+  });
 }
 
 /**
@@ -1174,21 +1211,37 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       const REF_LIMIT = 12;
       const parts = [];
       const matchScope = (c, types) => {
-        if (types.has(c.card_type)) return true;
+        if (types.includes(c.card_type)) return true;
         // PILOTCMD = パイロット効果を持つコマンド（総合ルール3-4-6-3: セット中はパイロット）
-        if (types.has('PILOTCMD') && c.card_type === 'COMMAND' && (c.effect_text || '').includes('【パイロット】')) return true;
+        if (types.includes('PILOTCMD') && c.card_type === 'COMMAND' && (c.effect_text || '').includes('【パイロット】')) return true;
         return false;
+      };
+      const cmpQ = (val, q) => {
+        if (!q) return true;
+        if (typeof val !== 'number') return false;
+        return q[0] === '以下' ? val <= q[1] : val >= q[1];
+      };
+      // 修飾（色・Lv・AP等）込みでいずれかの参照形に合致するか（2026-07-12 松岡さん指摘）
+      const matchesSpec = (c, sp) => {
+        if (!matchScope(c, sp.types)) return false;
+        if (sp.colors && !sp.colors.includes(c.color)) return false;
+        if (!cmpQ(c.level, sp.lvQ)) return false;
+        if (!cmpQ(c.cost, sp.costQ)) return false;
+        const st = c.stats || {};
+        if (!cmpQ(st.ap ?? st.ap_mod, sp.apQ)) return false;
+        if (!cmpQ(st.hp ?? st.hp_mod, sp.hpQ)) return false;
+        return true;
       };
       for (const ref of findTraitReferences(refCard)) {
         const holders = Object.values(cardsMaster).filter(c =>
-          !c.is_parallel && c.id !== refCard.id && (c.traits || []).includes(ref.trait) && matchScope(c, ref.types));
+          !c.is_parallel && c.id !== refCard.id && (c.traits || []).includes(ref.trait) && ref.specs.some(sp => matchesSpec(c, sp)));
         if (holders.length === 0) continue;
         holders.sort((a, b) => (rankRate[b.id] || 0) - (rankRate[a.id] || 0) || a.id.localeCompare(b.id));
         const shown = holders.slice(0, REF_LIMIT);
         const rest = holders.length - shown.length;
         const note = rest > 0 ? `※採用率順に上位${REF_LIMIT}枚を表示（ほか${rest}枚）` : '';
         const title = ref.label
-          ? `効果が参照する 〔${escapeHtml(ref.trait)}〕${escapeHtml(ref.label)}（全${holders.length}枚）`
+          ? `効果が参照する ${escapeHtml(ref.label)}（全${holders.length}枚）`
           : `効果が参照する特徴 〔${escapeHtml(ref.trait)}〕 を持つカード（全${holders.length}枚）`;
         parts.push(relSection(title, shown, note));
       }
