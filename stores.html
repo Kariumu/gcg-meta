@@ -163,6 +163,17 @@
       </label>
     </div>
 
+    <!-- 現在地から探す（2026-07-15 松岡さん指示: 希望者がボタンで位置情報検索・10km単位の範囲指定） -->
+    <div class="filter-bar" style="margin-bottom:6px;flex-wrap:wrap;align-items:center">
+      <button type="button" id="geo-search-btn" class="filter-input" style="cursor:pointer;min-width:auto">現在地から探す</button>
+      <select id="geo-radius" class="filter-input" style="min-width:110px;display:none" aria-label="検索範囲"></select>
+      <button type="button" id="geo-clear-btn" class="filter-input" style="cursor:pointer;min-width:auto;display:none">解除</button>
+      <span id="geo-status" style="font-size:12px;color:var(--text-muted)"></span>
+    </div>
+    <p style="color:var(--text-muted);font-size:11px;margin:0 0 16px">
+      ※位置情報はボタンを押したときのみブラウザから取得し、端末内での距離計算だけに使用します（サーバへの送信・保存はありません）。距離は直線距離です。
+    </p>
+
     <div id="stores-root" class="stores-collapsible" data-state="loading">
       <div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">読み込み中...</div>
     </div>
@@ -236,6 +247,9 @@
         console.warn('エキスパートショップデータの読み込み失敗:', err);
       }
 
+      // 現在地検索の状態（ボタン押下時のみ取得。2026-07-15）
+      let userPos = null;
+
       const stores = [];
       for (const [id, s] of Object.entries(schedule.stores || {})) {
         if (!s || !s.name) continue;
@@ -250,7 +264,10 @@
           city: s.city || '',
           area: extractArea(s.city || ''),
           address: s.address || '',
-          isExpert: expertIds.has(s.id != null ? s.id : Number(id))
+          isExpert: expertIds.has(s.id != null ? s.id : Number(id)),
+          // 公式データの geo（x=緯度, y=経度）。現在地検索の距離計算に使用
+          lat: (s.geo && typeof s.geo.x === 'number') ? s.geo.x : null,
+          lng: (s.geo && typeof s.geo.y === 'number') ? s.geo.y : null
         };
         stores.push(storeObj);
       }
@@ -336,6 +353,10 @@
         const expertOnly = document.getElementById('expert-only').checked;
 
         let list = stores.slice();
+        if (userPos) {
+          const radius = parseInt(document.getElementById('geo-radius').value, 10) || 10;
+          list = list.filter(s => typeof s._dist === 'number' && s._dist <= radius);
+        }
         if (expertOnly) list = list.filter(s => s.isExpert);
         if (region) list = list.filter(s => s.region === region);
         if (pref) list = list.filter(s => s.pref_code === pref);
@@ -361,6 +382,14 @@
           });
         } else if (sortBy === 'name') {
           list.sort((a, b) => a.name.localeCompare(b.name, 'ja'));
+        }
+        if (userPos) {
+          // 現在地検索中は近い順を優先し、フラット表示にする
+          list.sort((a, b) => a._dist - b._dist);
+          const radius = parseInt(document.getElementById('geo-radius').value, 10) || 10;
+          document.getElementById('geo-status').textContent = '現在地から' + radius + 'km以内: ' + list.length + '店舗（近い順）';
+          render(list, 'distance');
+          return;
         }
 
         render(list, sortBy);
@@ -426,13 +455,73 @@
 
       function renderStoreRow(s) {
         var href = '/store.html?id=' + encodeURIComponent(s.id);
+        var distBadge = '';
+        if (userPos && typeof s._dist === 'number') {
+          var d = s._dist < 1 ? Math.round(s._dist * 1000) + 'm' : s._dist.toFixed(1) + 'km';
+          distBadge = ' <span style="color:var(--accent);font-family:var(--font-mono);font-size:12px">約' + d + '</span>';
+        }
         return '<div class="store-row" style="display:block">'
           + '<a href="' + href + '" style="text-decoration:none;color:inherit">'
-          + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + (s.isExpert ? ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>' : '') + '</div>'
+          + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + (s.isExpert ? ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>' : '') + distBadge + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
           + '</a>'
           + '</div>';
       }
+
+      // === 現在地から探す（2026-07-15 松岡さん指示） ===
+      const geoBtn = document.getElementById('geo-search-btn');
+      const geoRadius = document.getElementById('geo-radius');
+      const geoClear = document.getElementById('geo-clear-btn');
+      const geoStatus = document.getElementById('geo-status');
+      for (let km = 10; km <= 100; km += 10) {
+        const opt = document.createElement('option');
+        opt.value = km;
+        opt.textContent = km + 'km以内';
+        geoRadius.appendChild(opt);
+      }
+      function haversineKm(lat1, lng1, lat2, lng2) {
+        const R = 6371;
+        const toRad = (x) => x * Math.PI / 180;
+        const dLat = toRad(lat2 - lat1);
+        const dLng = toRad(lng2 - lng1);
+        const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+        return 2 * R * Math.asin(Math.sqrt(a));
+      }
+      geoBtn.addEventListener('click', () => {
+        if (!navigator.geolocation) {
+          geoStatus.textContent = 'このブラウザは位置情報に対応していません';
+          return;
+        }
+        geoStatus.textContent = '位置情報を取得中...';
+        geoBtn.disabled = true;
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+            for (const s of stores) {
+              s._dist = (s.lat != null && s.lng != null) ? haversineKm(userPos.lat, userPos.lng, s.lat, s.lng) : null;
+            }
+            geoRadius.style.display = '';
+            geoClear.style.display = '';
+            geoBtn.disabled = false;
+            applyFilters();
+          },
+          (err) => {
+            geoBtn.disabled = false;
+            geoStatus.textContent = err.code === 1
+              ? '位置情報の利用が許可されませんでした（ブラウザの設定から許可できます）'
+              : '位置情報を取得できませんでした';
+          },
+          { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+        );
+      });
+      geoRadius.addEventListener('change', applyFilters);
+      geoClear.addEventListener('click', () => {
+        userPos = null;
+        geoRadius.style.display = 'none';
+        geoClear.style.display = 'none';
+        geoStatus.textContent = '';
+        applyFilters();
+      });
 
       // イベントリスナ
       document.getElementById('store-search').addEventListener('input', applyFilters);
