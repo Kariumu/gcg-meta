@@ -170,6 +170,58 @@ function getPilotNames(card) {
   return names;
 }
 
+// === 参照spec照合の共通ヘルパー（順方向セクションと逆引きで共用、2026-07-15） ===
+function refNpn(t) { return String(t).replace(/（/g, '(').replace(/）/g, ')'); }
+function refMatchScope(c, types) {
+  if (types.includes(c.card_type)) return true;
+  // PILOTCMD = パイロット効果を持つコマンド（総合ルール3-4-6-3: セット中はパイロット）
+  if (types.includes('PILOTCMD') && c.card_type === 'COMMAND' && (c.effect_text || '').includes('【パイロット】')) return true;
+  return false;
+}
+function refCmpQ(val, q) {
+  if (!q) return true;
+  if (typeof val !== 'number') return false;
+  if (q[0] === '=') return val === q[1]; // 「Lv.Nの」（ちょうど）
+  return q[0] === '以下' ? val <= q[1] : val >= q[1];
+}
+function refMatchesSpec(c, sp) {
+  if (!refMatchScope(c, sp.types)) return false;
+  if (sp.nameNot && getCardNames(c).some(nm2 => sp.nameNot.some(nn => refNpn(nm2).includes(refNpn(nn))))) return false;
+  if (sp.colors && !sp.colors.includes(c.color)) return false;
+  if (!refCmpQ(c.level, sp.lvQ)) return false;
+  if (!refCmpQ(c.cost, sp.costQ)) return false;
+  const st = c.stats || {};
+  if (!refCmpQ(st.ap ?? st.ap_mod, sp.apQ)) return false;
+  if (!refCmpQ(st.hp ?? st.hp_mod, sp.hpQ)) return false;
+  return true;
+}
+function refKeyMatch(ref, c) {
+  return ref.kind === 'trait'
+    ? (c.traits || []).includes(ref.key)
+    : getCardNames(c).some(nm2 => refNpn(nm2).includes(refNpn(ref.key))); // カード名参照は別名込み
+}
+
+// このカードを参照するカード（カード名参照の逆引き、2026-07-15 松岡さん承認: 名前参照のみ）
+let _nameRefReverse = null;
+function getNameRefReverse(cardsMaster) {
+  if (_nameRefReverse) return _nameRefReverse;
+  _nameRefReverse = {};
+  for (const r of Object.values(cardsMaster)) {
+    if (r.is_parallel) continue;
+    for (const ref of findEffectReferences(r)) {
+      if (ref.kind !== 'name') continue;
+      for (const c of Object.values(cardsMaster)) {
+        if (c.is_parallel || c.id === r.id) continue;
+        if (!refKeyMatch(ref, c)) continue;
+        if (!ref.specs.some(sp => refMatchesSpec(c, sp))) continue;
+        (_nameRefReverse[c.id] = _nameRefReverse[c.id] || []).push(r.id);
+      }
+    }
+  }
+  for (const k of Object.keys(_nameRefReverse)) _nameRefReverse[k] = [...new Set(_nameRefReverse[k])].sort();
+  return _nameRefReverse;
+}
+
 // カードの名前一覧（カード名+「としても扱う」別名）。カード名参照の照合用（2026-07-15）
 function getCardNames(card) {
   const names = [card.name_jp || ''];
@@ -1294,37 +1346,9 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       for (const r of (summary.card_ranking || [])) rankRate[r.card_id] = r.usage_rate || 0;
       const REF_LIMIT = 12;
       const parts = [];
-      const matchScope = (c, types) => {
-        if (types.includes(c.card_type)) return true;
-        // PILOTCMD = パイロット効果を持つコマンド（総合ルール3-4-6-3: セット中はパイロット）
-        if (types.includes('PILOTCMD') && c.card_type === 'COMMAND' && (c.effect_text || '').includes('【パイロット】')) return true;
-        return false;
-      };
-      const cmpQ = (val, q) => {
-        if (!q) return true;
-        if (typeof val !== 'number') return false;
-        if (q[0] === '=') return val === q[1]; // 「Lv.Nの」（ちょうど）
-        return q[0] === '以下' ? val <= q[1] : val >= q[1];
-      };
-      // 修飾（色・Lv・AP等）込みでいずれかの参照形に合致するか（2026-07-12 松岡さん指摘）
-      const matchesSpec = (c, sp) => {
-        if (!matchScope(c, sp.types)) return false;
-        if (sp.nameNot && getCardNames(c).some(nm2 => sp.nameNot.some(nn => npn(nm2).includes(npn(nn))))) return false; // 否定名条件（ST09-002）
-        if (sp.colors && !sp.colors.includes(c.color)) return false;
-        if (!cmpQ(c.level, sp.lvQ)) return false;
-        if (!cmpQ(c.cost, sp.costQ)) return false;
-        const st = c.stats || {};
-        if (!cmpQ(st.ap ?? st.ap_mod, sp.apQ)) return false;
-        if (!cmpQ(st.hp ?? st.hp_mod, sp.hpQ)) return false;
-        return true;
-      };
-      const npn = (t) => String(t).replace(/（/g, '(').replace(/）/g, ')');
       for (const ref of findEffectReferences(refCard)) {
-        const keyMatch = ref.kind === 'trait'
-          ? (c) => (c.traits || []).includes(ref.key)
-          : (c) => getCardNames(c).some(nm2 => npn(nm2).includes(npn(ref.key))); // カード名に「X」を含む（としても扱う別名込み）
         const holders = Object.values(cardsMaster).filter(c =>
-          !c.is_parallel && c.id !== refCard.id && keyMatch(c) && ref.specs.some(sp => matchesSpec(c, sp)));
+          !c.is_parallel && c.id !== refCard.id && refKeyMatch(ref, c) && ref.specs.some(sp => refMatchesSpec(c, sp)));
         if (holders.length === 0) continue;
         holders.sort((a, b) => (rankRate[b.id] || 0) - (rankRate[a.id] || 0) || a.id.localeCompare(b.id));
         const shown = holders.slice(0, REF_LIMIT);
@@ -1339,6 +1363,18 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
         parts.push(relSection(title, shown, note));
       }
       traitRefHtml = parts.join('\n');
+    }
+    // このカードを参照するカード（カード名参照の逆引き、トークン含む全タイプ対象。2026-07-15 松岡さん指示・承認）
+    const refBy = (getNameRefReverse(cardsMaster)[refCard.id] || []).map(id => cardsMaster[id]).filter(Boolean);
+    if (refBy.length > 0) {
+      const rankRateR = {};
+      for (const r of (summary.card_ranking || [])) rankRateR[r.card_id] = r.usage_rate || 0;
+      refBy.sort((a, b) => (rankRateR[b.id] || 0) - (rankRateR[a.id] || 0) || a.id.localeCompare(b.id));
+      const REF_BY_LIMIT = 12;
+      const shownR = refBy.slice(0, REF_BY_LIMIT);
+      const restR = refBy.length - shownR.length;
+      const noteR = restR > 0 ? `※採用率順に上位${REF_BY_LIMIT}枚を表示（ほか${restR}枚）` : '';
+      traitRefHtml += relSection(`このカードを参照するカード（全${refBy.length}枚）`, shownR, noteR);
     }
   }
 
