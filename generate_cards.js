@@ -160,11 +160,20 @@ function getPilotNames(card) {
   // パイロットとして扱える名前一覧（2026-07-12 松岡さん指示）
   // PILOT: カード名。COMMAND: 効果の【パイロット】「X」で宣言された名前
   // （カード名と異なる。例: EB01-076 ガーベラ・ストレート→ロウ・ギュール）
+  // 「カード名は「X」としても扱う」の別名も含む（GD02-098 クワトロ=シャア、2026-07-15 追加）
   const names = [];
   if (card.card_type === 'PILOT') names.push(card.name_jp);
   const fx = card.effect_text || card.effect || '';
   for (const m of fx.matchAll(/【パイロット】「([^」]+)」/g)) names.push(m[1]);
   if (names.length === 0) names.push(card.name_jp);
+  for (const m of fx.matchAll(/カード名は「([^」]+)」としても扱う/g)) names.push(m[1]);
+  return names;
+}
+
+// カードの名前一覧（カード名+「としても扱う」別名）。カード名参照の照合用（2026-07-15）
+function getCardNames(card) {
+  const names = [card.name_jp || ''];
+  for (const m of (card.effect_text || '').matchAll(/カード名は「([^」]+)」としても扱う/g)) names.push(m[1]);
   return names;
 }
 
@@ -666,7 +675,7 @@ function findEffectReferences(card) {
       else if ((mq = pre.match(/AP(\d+)(以下|以上)の$/))) apQ = [mq[2], parseInt(mq[1], 10)];
       else if ((mq = pre.match(/HP(\d+)(以下|以上)の$/))) hpQ = [mq[2], parseInt(mq[1], 10)];
       else if ((mq = pre.match(/コスト(\d+)(以下|以上)の$/))) costQ = [mq[2], parseInt(mq[1], 10)];
-      else if ((mq = pre.match(/カード名に「([^」]+)」を含まない、?$/))) nameNot = mq[1]; // 否定名条件（ST09-002、2026-07-15）
+      else if ((mq = pre.match(/カード名に、?((?:「[^」]+」[/／]?)+)を含まない、?$/))) nameNot = [...mq[1].matchAll(/「([^」]+)」/g)].map(x => x[1]); // 否定名条件（ST09-002、列挙対応）
       else break;
       pre = pre.slice(0, pre.length - mq[0].length);
     }
@@ -684,9 +693,10 @@ function findEffectReferences(card) {
   }
   // === 2. カード名参照（カード名に「X」を含む…、2026-07-15 松岡さん指示 GD05-126） ===
   // 修飾（Lv等）は「含む」の後ろに付く（例: を含むLv.5以上の自分のユニット）
-  const reName = new RegExp('カード名に「([^」]+)」を含む(?=([\\s\\S]{0,40}))', 'g');
+  // 列挙形「カード名に、「X」/「Y」を含む」対応（GD05-026/088、2026-07-15 松岡さん指摘）
+  const reName = new RegExp('カード名に、?((?:「[^」]+」[/／]?)+)を含む(?=([\\s\\S]{0,40}))', 'g');
   for (const m of fx.matchAll(reName)) {
-    const nm = m[1];
+    const nmList = [...m[1].matchAll(/「([^」]+)」/g)].map(x => x[1]);
     // 前置修飾（例: GD01-002「Lv.5のカード名に…を含む自分のリンクユニット」、2026-07-15 二次確認の指摘で追加）
     let pre = fx.slice(Math.max(0, m.index - 20), m.index);
     const preQ = { colors: null, lvQ: null, apQ: null, hpQ: null, costQ: null };
@@ -707,19 +717,21 @@ function findEffectReferences(card) {
     let types = pt.types;
     const anyRef = !types;
     if (!types) types = TRAIT_SCOPE_ALL;
-    const label = anyRef
-      ? 'カード名に「' + nm + '」を含むカード'
-      : preText + 'カード名に「' + nm + '」を含む' + pq.text + pt.words.join('/');
-    addSpec('name', nm, {
-      types,
-      colors: pq.quals.colors || preQ.colors,
-      lvQ: pq.quals.lvQ || preQ.lvQ,
-      apQ: pq.quals.apQ || preQ.apQ,
-      hpQ: pq.quals.hpQ || preQ.hpQ,
-      costQ: pq.quals.costQ || preQ.costQ,
-      nameNot: null,
-      label: anyRef ? null : label, typeLabel: pt.words ? pt.words.join('/') : null,
-    }, anyRef);
+    for (const nm of nmList) {
+      const label = anyRef
+        ? 'カード名に「' + nm + '」を含むカード'
+        : preText + 'カード名に「' + nm + '」を含む' + pq.text + pt.words.join('/');
+      addSpec('name', nm, {
+        types,
+        colors: pq.quals.colors || preQ.colors,
+        lvQ: pq.quals.lvQ || preQ.lvQ,
+        apQ: pq.quals.apQ || preQ.apQ,
+        hpQ: pq.quals.hpQ || preQ.hpQ,
+        costQ: pq.quals.costQ || preQ.costQ,
+        nameNot: null,
+        label: anyRef ? null : label, typeLabel: pt.words ? pt.words.join('/') : null,
+      }, anyRef);
+    }
   }
   return [...refs.values()].map(r => {
     const labels = new Set(r.specs.map(sp => sp.label).filter(Boolean));
@@ -1297,7 +1309,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       // 修飾（色・Lv・AP等）込みでいずれかの参照形に合致するか（2026-07-12 松岡さん指摘）
       const matchesSpec = (c, sp) => {
         if (!matchScope(c, sp.types)) return false;
-        if (sp.nameNot && npn(c.name_jp || '').includes(npn(sp.nameNot))) return false; // 否定名条件（ST09-002）
+        if (sp.nameNot && getCardNames(c).some(nm2 => sp.nameNot.some(nn => npn(nm2).includes(npn(nn))))) return false; // 否定名条件（ST09-002）
         if (sp.colors && !sp.colors.includes(c.color)) return false;
         if (!cmpQ(c.level, sp.lvQ)) return false;
         if (!cmpQ(c.cost, sp.costQ)) return false;
@@ -1310,7 +1322,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       for (const ref of findEffectReferences(refCard)) {
         const keyMatch = ref.kind === 'trait'
           ? (c) => (c.traits || []).includes(ref.key)
-          : (c) => npn(c.name_jp || '').includes(npn(ref.key)); // カード名に「X」を含む
+          : (c) => getCardNames(c).some(nm2 => npn(nm2).includes(npn(ref.key))); // カード名に「X」を含む（としても扱う別名込み）
         const holders = Object.values(cardsMaster).filter(c =>
           !c.is_parallel && c.id !== refCard.id && keyMatch(c) && ref.specs.some(sp => matchesSpec(c, sp)));
         if (holders.length === 0) continue;
