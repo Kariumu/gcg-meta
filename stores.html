@@ -568,7 +568,8 @@
         for (const s of lastList) {
           if (s.lat == null || s.lng == null) continue;
           const m = L.circleMarker([s.lat, s.lng], {
-            radius: 7, color: '#d4a029', weight: 2, fillColor: '#d4a029', fillOpacity: 0.6
+            // マゼンタ+白縁: OSMのオレンジ系市街地でも識別しやすい配色（2026-07-15 松岡さん指示）
+            radius: 8, color: '#ffffff', weight: 2, fillColor: '#e91e63', fillOpacity: 0.95
           });
           const dist = (userPos && typeof s._dist === 'number')
             ? '<div style="font-family:monospace;font-size:12px">約' + (s._dist < 1 ? Math.round(s._dist * 1000) + 'm' : s._dist.toFixed(1) + 'km') + '</div>' : '';
@@ -585,7 +586,7 @@
         if (radiusCircle) { map.removeLayer(radiusCircle); radiusCircle = null; }
         if (userPos) {
           posMarker = L.circleMarker([userPos.lat, userPos.lng], {
-            radius: 9, color: '#4d9ff7', weight: 3, fillColor: '#4d9ff7', fillOpacity: 0.9
+            radius: 9, color: '#ffffff', weight: 2, fillColor: '#4d9ff7', fillOpacity: 0.95
           }).addTo(map).bindPopup('現在地');
           const radius = parseInt(geoRadius.value, 10) || 10;
           radiusCircle = L.circle([userPos.lat, userPos.lng], {
