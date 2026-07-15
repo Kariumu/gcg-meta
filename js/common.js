@@ -224,7 +224,7 @@ const GCG = {
   //   2026-05-24 案B採用(主タブ4つ + サブナビ)
   //   2026-05-24 主タブ再編 → カードリスト/レポートを独立タブに昇格、検索欄削除
   // activePage は既存呼び出し互換のため文字列キーを維持
-  // ('home','series','events','meta','cards','stores','regions','schedule','reports','')
+  // ('home','series','events','meta','cards','stores','schedule','reports','')
   _PAGE_MAP: {
     home:     { main: 'home',        sub: null       },
     events:   { main: 'tournaments', sub: 'events'   },
@@ -234,8 +234,8 @@ const GCG = {
     cards:    { main: 'cards',       sub: null       },
     sets:     { main: 'sets',        sub: null       },
     reports:  { main: 'reports',     sub: null       },
-    stores:   { main: 'venues',      sub: 'stores'   },
-    regions:  { main: 'venues',      sub: 'regions'  }
+    stores:   { main: 'venues',      sub: null       }
+    // regions は 2026-07-15 削除（ショップバトル地域別ランキング廃止、松岡さん指示）
     // '' (contact/privacy/about 等) は主タブもサブもアクティブ無し
   },
 
@@ -246,7 +246,7 @@ const GCG = {
     { key: 'cards',       href: 'cards.html',   label: 'カードリスト' },
     { key: 'sets',        href: 'sets/',        label: '新弾プレビュー' },
     { key: 'reports',     href: 'reports/',     label: 'レポート'   },
-    { key: 'venues',      href: 'stores.html',  label: '店舗・地域'  }
+    { key: 'venues',      href: 'stores.html',  label: '店舗一覧'  }
   ],
 
   _SUB_NAV: {
@@ -255,11 +255,8 @@ const GCG = {
       { key: 'series',   href: 'series/',       label: 'シリーズ'    },
       { key: 'schedule', href: 'schedule.html', label: 'スケジュール' }
     ],
-    venues: [
-      { key: 'stores',  href: 'stores.html',  label: '店舗一覧' },
-      { key: 'regions', href: 'regions.html', label: '地域別'  }
-    ]
-    // analysis / cards / reports / home はサブナビ無し
+    // venues のサブナビは 2026-07-15 廃止（地域別ランキング削除に伴い店舗一覧のみ）
+    // analysis / cards / reports / home / venues はサブナビ無し
   },
 
   _MAIN_LABEL: {
@@ -268,7 +265,7 @@ const GCG = {
     analysis:    '環境分析',
     cards:       'カードリスト',
     reports:     'レポート',
-    venues:      '店舗・地域'
+    venues:      '店舗一覧'
   },
 
   // 共通ヘッダーHTML生成
