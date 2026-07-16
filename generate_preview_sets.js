@@ -574,12 +574,32 @@ function generateSetPage(setName, cards) {
 }
 
 // === インデックスページ生成 ===
+// 掲載0件のときは「0 CARDS」バッジ・空グリッドを出さず、公開期間外である旨と
+// 誘導リンクを表示する（2026-07-16 指示書41 Part A 松岡さん指示）
 function generateIndexPage(totalShown) {
   const title = '新弾プレビュー（発売前判明カード一覧） | GCG STATS';
-  const description = `ガンダムカードゲーム新弾の発売前判明カード一覧。公式X発表に基づく非公式まとめ（毎日自動更新）。現在${totalShown}枚掲載。セット別にカード番号（型番）順で確認できます。`;
+  const description = totalShown === 0
+    ? 'ガンダムカードゲーム新弾の発売前判明カード一覧。公式X発表に基づく非公式まとめ（毎日自動更新）。現在は公開期間外です。新カードが公開され次第、随時掲載します。'
+    : `ガンダムカードゲーム新弾の発売前判明カード一覧。公式X発表に基づく非公式まとめ（毎日自動更新）。現在${totalShown}枚掲載。セット別にカード番号（型番）順で確認できます。`;
   const canonical = `${SITE_URL}/sets/`;
 
   let html = pageHead({ title, description, canonical });
+
+  if (totalShown === 0) {
+    html += '    <div class="section-header">\n';
+    html += '      <h1 class="section-title">新弾プレビュー</h1>\n';
+    html += '    </div>\n';
+    html += '    <div class="preview-notice">\n';
+    html += '      現在、新弾プレビューの公開期間ではありません。公式X（@GUNDAM_GCG_JP）で新カードが公開されると、このページに随時掲載されます。\n';
+    html += '    </div>\n';
+    html += '    <p style="margin-bottom:8px"><a href="/cards.html" style="color:var(--accent);text-decoration:none;font-size:14px">カードリストを見る →</a></p>\n';
+    html += '    <p style="margin-bottom:8px"><a href="/reports/" style="color:var(--accent);text-decoration:none;font-size:14px">最新のレポートを見る →</a></p>\n';
+    html += `    <p style="font-size:12px;color:var(--text-muted);margin-top:20px">最終更新: ${today}</p>\n`;
+    html += pageFoot();
+    fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf-8');
+    return;
+  }
+
   html += '    <div class="section-header">\n';
   html += '      <h1 class="section-title">新弾プレビュー</h1>\n';
   html += `      <span class="section-badge">${totalShown} CARDS</span>\n`;

@@ -1495,6 +1495,9 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     gtag('js', new Date());
     gtag('config', 'G-3MY17P4E7F');
   </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
+       crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${escapeHtml(pageTitle)}</title>

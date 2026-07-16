@@ -327,6 +327,9 @@ function generateEventPage(eventId, evRaw, seriesName) {
 '    gtag(\'js\', new Date());\n' +
 '    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
 '  </script>\n' +
+'  <!-- Google AdSense -->\n' +
+'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"\n' +
+'       crossorigin="anonymous"></script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
 '  <title>' + storeName + ' ' + dateFormatted + ' GCG大会結果 | GCG STATS</title>\n' +
