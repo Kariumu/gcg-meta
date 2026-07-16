@@ -385,7 +385,7 @@
         var sub = s.found
           ? (GCG.escapeHtml(PREF_MAP[s.pref_code] || '(不明)') + (s.city ? ' ' + GCG.escapeHtml(s.city) : ''))
           : '店舗情報が見つかりません（ID: ' + GCG.escapeHtml(s.id) + '）';
-        return '<div class="store-row" style="display:flex;align-items:center;gap:8px">'
+        return '<div class="store-row" style="display:flex;flex-direction:row;align-items:center;gap:8px">'
           + GCGFav.starButtonHtml('store', s.id)
           + '<a href="/store.html?id=' + encodeURIComponent(s.id) + '" style="flex:1;min-width:0;text-decoration:none;color:inherit">'
           +   '<div class="store-row-name">' + GCG.escapeHtml(s.found ? s.name : ('店舗 ' + s.id)) + '</div>'

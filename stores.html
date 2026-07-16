@@ -488,7 +488,7 @@
           var d = s._dist < 1 ? Math.round(s._dist * 1000) + 'm' : s._dist.toFixed(1) + 'km';
           distBadge = ' <span style="color:var(--accent);font-family:var(--font-mono);font-size:12px">約' + d + '</span>';
         }
-        return '<div class="store-row" style="display:flex;align-items:center;gap:8px">'
+        return '<div class="store-row" style="display:flex;flex-direction:row;align-items:center;gap:8px">'
           + '<a href="' + href + '" style="flex:1;min-width:0;text-decoration:none;color:inherit">'
           + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + (s.isExpert ? ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>' : '') + distBadge + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
