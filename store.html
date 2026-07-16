@@ -240,7 +240,7 @@
 
       var mapLink = '';
       if (store.geo && store.geo.x && store.geo.y) {
-        var mapsUrl = 'https://www.google.com/maps?q=' + store.geo.x + ',' + store.geo.y;
+        var mapsUrl = 'https://www.google.com/maps?q=' + encodeURIComponent(store.geo.x) + ',' + encodeURIComponent(store.geo.y);
         mapLink = ' <a href="' + mapsUrl + '" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;font-size:15px" title="地図を開く">📍</a>';
       }
 
@@ -252,8 +252,8 @@
           + GCG.escapeHtml(store.name || '')
           + GCGFav.starButtonHtml('store', store.id != null ? store.id : getUrlParam('id'))
         + '</h1>' +
-        '<div style="font-size:14px;color:var(--text-secondary);margin-bottom:4px">' + address + mapLink + '</div>' +
-        (phone ? '<div style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">TEL: ' + phone + '</div>' : '');
+        '<div style="font-size:14px;color:var(--text-secondary);margin-bottom:4px">' + GCG.escapeHtml(address) + mapLink + '</div>' +
+        (phone ? '<div style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">TEL: ' + GCG.escapeHtml(phone) + '</div>' : '');
     }
 
     function renderCalendar(events) {
@@ -330,7 +330,7 @@
           var timeStr = String(time.getHours()).padStart(2, '0') + ':' + String(time.getMinutes()).padStart(2, '0');
           var color = getEventColor(e.series_title);
           var shortTitle = shortenTitle(e.series_title);
-          bars += '<div style="font-size:9px;line-height:1.3;padding:1px 3px;margin-bottom:1px;border-left:3px solid ' + color + ';background:' + color + '20;border-radius:0 2px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-secondary);cursor:pointer" data-date="' + day + '">' + timeStr + ' ' + shortTitle + '</div>';
+          bars += '<div style="font-size:9px;line-height:1.3;padding:1px 3px;margin-bottom:1px;border-left:3px solid ' + color + ';background:' + color + '20;border-radius:0 2px 2px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-secondary);cursor:pointer" data-date="' + day + '">' + timeStr + ' ' + GCG.escapeHtml(shortTitle) + '</div>';
         });
 
         cell.innerHTML = dateLabel + bars;
@@ -395,18 +395,18 @@
         var time = new Date(e.start_datetime);
         var timeStr = String(time.getHours()).padStart(2, '0') + ':' + String(time.getMinutes()).padStart(2, '0');
         var color = getEventColor(e.series_title);
-        var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + e.id;
+        var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + encodeURIComponent(e.id);
         var separator = index > 0 ? 'border-top:1px solid var(--border);padding-top:10px;margin-top:10px;' : '';
 
         eventsHtml +=
           '<div style="' + separator + '">' +
             '<div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">' +
               '<div style="width:4px;height:16px;border-radius:2px;background:' + color + '"></div>' +
-              '<span style="font-size:14px;font-weight:600;color:var(--text-primary)">' + e.series_title + '</span>' +
+              '<span style="font-size:14px;font-weight:600;color:var(--text-primary)">' + GCG.escapeHtml(e.series_title || '') + '</span>' +
             '</div>' +
             '<div style="font-size:13px;color:var(--text-secondary);font-family:var(--font-mono);margin-bottom:4px">開催時間 ' + timeStr + '</div>' +
             '<div style="display:flex;justify-content:space-between;align-items:center">' +
-              '<span style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">定員' + (e.max_join_count || 0) + '名　参加費' + (e.entry_fee || 0) + '円</span>' +
+              '<span style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">定員' + (Number(e.max_join_count) || 0) + '名　参加費' + (Number(e.entry_fee) || 0) + '円</span>' +
               '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener" style="padding:5px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;font-family:var(--font-mono);white-space:nowrap">詳細・応募</a>' +
             '</div>' +
           '</div>';

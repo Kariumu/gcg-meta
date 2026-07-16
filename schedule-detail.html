@@ -357,7 +357,7 @@
       var hours = String(d.getHours()).padStart(2, '0');
       var minutes = String(d.getMinutes()).padStart(2, '0');
       var address = ((store.city || '') + ' ' + (store.address || '')).trim();
-      var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + event.id;
+      var tcgPlusUrl = 'https://www.bandai-tcg-plus.com/event/' + encodeURIComponent(event.id);
       var row = document.createElement('div');
       row.style.cssText = 'padding:10px 16px;border-bottom:1px solid var(--border)';
       row.innerHTML =
@@ -372,8 +372,8 @@
               '<a href="store.html?id=' + encodeURIComponent(event.organizer_id) + '" style="flex:1;min-width:0;font-size:15px;font-weight:600;color:var(--text-primary);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + GCG.escapeHtml(store.name || '未定') + '</a>' +
               GCGFav.starButtonHtml('store', event.organizer_id) +
             '</div>' +
-            '<div style="font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + address + '</div>' +
-            '<div style="font-size:13px;color:var(--text-muted);margin-top:1px;font-family:var(--font-mono)">定員' + (event.max_join_count || 0) + '名　参加費' + (event.entry_fee || 0) + '円</div>' +
+            '<div style="font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + GCG.escapeHtml(address) + '</div>' +
+            '<div style="font-size:13px;color:var(--text-muted);margin-top:1px;font-family:var(--font-mono)">定員' + (Number(event.max_join_count) || 0) + '名　参加費' + (Number(event.entry_fee) || 0) + '円</div>' +
           '</div>' +
           '<a href="' + tcgPlusUrl + '" target="_blank" rel="noopener" style="flex-shrink:0;padding:6px 10px;background:var(--accent);color:#fff;border-radius:4px;font-size:11px;font-weight:600;text-decoration:none;font-family:var(--font-mono);white-space:nowrap">詳細・応募</a>' +
         '</div>';

@@ -579,7 +579,9 @@ GCG.renderBreadcrumbJsonLd = function(items) {
       return el;
     })
   };
-  return `<script type="application/ld+json">${JSON.stringify(data)}</script>`;
+  // `</script>` による script コンテキスト脱出を防ぐ（2026-07-16 指示書42 §1-1）。
+  // JSON文字列内の \u003c は JSON.parse で `<` に戻るため構造化データの内容は不変。
+  return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
 };
 
 // ---- Task D: シリーズバッジ ----
