@@ -80,16 +80,17 @@
       font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);
     }
     .fav-missing-row:last-child { border-bottom: none; }
-    #fav-past-details > summary {
+    /* 折りたたみ（2026-07-16 指示書40 §3.1: #fav-past-details 専用CSSをクラスに一般化。内容は現行と同一） */
+    .mypage-collapse > summary {
       cursor: pointer; list-style: none; user-select: none;
       font-size: 13px; color: var(--text-secondary); padding: 8px 0;
     }
-    #fav-past-details > summary::-webkit-details-marker { display: none; }
-    #fav-past-details > summary::before {
+    .mypage-collapse > summary::-webkit-details-marker { display: none; }
+    .mypage-collapse > summary::before {
       content: '▼'; display: inline-block; color: var(--text-muted);
       font-size: 11px; margin-right: 8px; transition: transform 0.15s ease;
     }
-    #fav-past-details:not([open]) > summary::before { transform: rotate(-90deg); }
+    .mypage-collapse:not([open]) > summary::before { transform: rotate(-90deg); }
   </style>
 </head>
 <body>
@@ -116,11 +117,13 @@
 
     <!-- お気に入り店舗 -->
     <section style="margin-bottom:28px">
-      <div class="section-header">
-        <h2 class="section-title">お気に入り店舗</h2>
-        <span class="section-badge" id="fav-stores-count">--</span>
-      </div>
-      <div id="fav-stores"></div>
+      <details id="fav-stores-details" class="mypage-collapse">
+        <summary class="section-header">
+          <h2 class="section-title" style="flex:1">お気に入り店舗</h2>
+          <span class="section-badge" id="fav-stores-count">--</span>
+        </summary>
+        <div id="fav-stores"></div>
+      </details>
     </section>
 
     <!-- お気に入りイベントまとめ -->
@@ -136,9 +139,11 @@
       </div>
 
       <div id="fav-list-wrap" style="display:none;margin-top:24px">
-        <h3 style="font-size:14px;font-weight:600;color:var(--accent);margin:0 0 8px">開催予定（開催日順）</h3>
-        <div id="fav-upcoming"></div>
-        <details id="fav-past-details" style="margin-top:16px">
+        <details id="fav-upcoming-details" class="mypage-collapse">
+          <summary>開催予定（開催日順）（<span id="fav-upcoming-count">0</span>件）</summary>
+          <div id="fav-upcoming"></div>
+        </details>
+        <details id="fav-past-details" class="mypage-collapse" style="margin-top:16px">
           <summary>終了したイベント（<span id="fav-past-count">0</span>件）</summary>
           <div id="fav-past"></div>
         </details>
@@ -400,6 +405,7 @@
       document.getElementById('fav-list-wrap').style.display = '';
       document.getElementById('fav-calendar-wrap').style.display = list.length ? '' : 'none';
 
+      document.getElementById('fav-upcoming-count').textContent = upcoming.length;
       var upEl = document.getElementById('fav-upcoming');
       upEl.innerHTML = upcoming.length
         ? upcoming.map(renderEventRowHtml).join('')
