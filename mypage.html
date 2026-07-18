@@ -164,6 +164,18 @@
   <script src="/js/common.js?v=15"></script>
   <script src="/js/favorites.js?v=1"></script>
   <script>
+    // favorites.js 読込失敗（404・ネット断）時のフォールバック（指示書45-1）:
+    // ☆（お気に入り）機能のみ無効化し、一覧・詳細の描画は通常どおり継続する。
+    // favorites.js が正常に読めた場合は GCGFavSafe === GCGFav で挙動は完全に同一。
+    var GCGFavSafe = (typeof GCGFav !== 'undefined' && GCGFav) ? GCGFav : {
+      available: function () { return false; },
+      starButtonHtml: function () { return ''; },
+      bindStarButtons: function () {},
+      getStores: function () { return []; },
+      getEvents: function () { return []; }
+    };
+  </script>
+  <script>
     // 都道府県コードの辞書（ISO 3166-2 形式。data/schedule.json の pref_code に一致）
     var PREF_MAP = {
       'JP-01':'北海道','JP-02':'青森県','JP-03':'岩手県','JP-04':'宮城県','JP-05':'秋田県','JP-06':'山形県','JP-07':'福島県',
@@ -256,8 +268,8 @@
     // お気に入り店舗のイベント（①）と 個別お気に入りイベント（②）を1リストへ統合（重複排除）
     function collectFavoriteEvents() {
       var favStoreSet = {};
-      GCGFav.getStores().forEach(function (id) { favStoreSet[String(id)] = true; });
-      var favEventIds = GCGFav.getEvents();
+      GCGFavSafe.getStores().forEach(function (id) { favStoreSet[String(id)] = true; });
+      var favEventIds = GCGFavSafe.getEvents();
 
       var byId = {};
       // ① organizer_id（数値）と stores キー（文字列）を String() で揃えて突合
@@ -342,7 +354,7 @@
         +       badgesHtml(e)
         +     '</div>'
         +     '<div style="display:flex;align-items:center;gap:4px;min-width:0">'
-        +       GCGFav.starButtonHtml('event', e.id)
+        +       GCGFavSafe.starButtonHtml('event', e.id)
         +       '<a href="' + storeHref + '" class="fav-event-store" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + GCG.escapeHtml(storeName) + '</a>'
         +     '</div>'
         +     '<div style="font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'
@@ -358,7 +370,7 @@
     }
 
     function renderFavStores() {
-      var favIds = GCGFav.getStores();
+      var favIds = GCGFavSafe.getStores();
       var el = document.getElementById('fav-stores');
       document.getElementById('fav-stores-count').textContent = favIds.length + ' 店舗';
       if (!favIds.length) {
@@ -386,7 +398,7 @@
           ? (GCG.escapeHtml(PREF_MAP[s.pref_code] || '(不明)') + (s.city ? ' ' + GCG.escapeHtml(s.city) : ''))
           : '店舗情報が見つかりません（ID: ' + GCG.escapeHtml(s.id) + '）';
         return '<div class="store-row" style="display:flex;flex-direction:row;align-items:center;gap:8px">'
-          + GCGFav.starButtonHtml('store', s.id)
+          + GCGFavSafe.starButtonHtml('store', s.id)
           + '<a href="/store.html?id=' + encodeURIComponent(s.id) + '" style="flex:1;min-width:0;text-decoration:none;color:inherit">'
           +   '<div class="store-row-name">' + GCG.escapeHtml(s.found ? s.name : ('店舗 ' + s.id)) + '</div>'
           +   '<div class="store-row-sub">' + sub + '</div>'
@@ -423,7 +435,7 @@
         document.getElementById('fav-missing').innerHTML = result.missing.map(function (id) {
           return '<div class="fav-missing-row">'
             + '<span>イベントID: ' + GCG.escapeHtml(String(id)) + '</span>'
-            + GCGFav.starButtonHtml('event', id)
+            + GCGFavSafe.starButtonHtml('event', id)
             + '</div>';
         }).join('');
       } else {
@@ -579,7 +591,7 @@
           +   '<span style="font-size:14px;font-weight:600;color:var(--text-primary)">' + GCG.escapeHtml(e.series_title || '') + '</span>'
           + '</div>'
           + '<div style="display:flex;align-items:center;gap:4px;margin-bottom:4px">'
-          +   GCGFav.starButtonHtml('event', e.id)
+          +   GCGFavSafe.starButtonHtml('event', e.id)
           +   '<a href="/store.html?id=' + encodeURIComponent(e.organizer_id) + '" class="fav-event-store" style="font-size:13px">' + GCG.escapeHtml(store.name || '店舗情報なし') + '</a>'
           +   badgesHtml(e)
           + '</div>'
@@ -600,7 +612,7 @@
 
       document.body.appendChild(overlay);
       document.body.appendChild(popup);
-      GCGFav.bindStarButtons(popup);
+      GCGFavSafe.bindStarButtons(popup);
       var closeBtn = document.getElementById('popup-close');
       if (closeBtn) closeBtn.addEventListener('click', closePopup);
     }
@@ -621,7 +633,7 @@
       document.getElementById('footer').innerHTML = GCG.renderFooter();
       try { GCG.initHeaderSearch(); } catch (e) {}
 
-      if (!GCGFav.available()) {
+      if (!GCGFavSafe.available()) {
         document.getElementById('fav-unavailable').style.display = '';
       }
 
@@ -632,7 +644,7 @@
         buildIndex(data);
 
         document.getElementById('loading').style.display = 'none';
-        GCGFav.bindStarButtons(document.body);
+        GCGFavSafe.bindStarButtons(document.body);
         renderFavStores();
         renderFavEvents();
 

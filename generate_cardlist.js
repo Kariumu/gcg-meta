@@ -174,6 +174,26 @@ function getSetDisplayName(set) {
 // === 全カードのソート済みリスト ===
 const allCards = Object.values(cardsMaster).sort((a, b) => a.id.localeCompare(b.id));
 const totalCards = allCards.length;
+// 禁止・制限データ（指示書43。base番号で判定し、パラレル版は継承）
+let RESTRICTIONS = null;
+try {
+  RESTRICTIONS = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'restrictions.json'), 'utf-8'));
+} catch (e) {
+  console.warn('  ⚠ restrictions.json が見つかりません。規制フィルタなしで生成します。');
+}
+// 規制種別: 'b'=禁止 / 'r'=制限 / 'p'=禁止ペア（specific・groupとも）
+function regOf(cardId) {
+  if (!RESTRICTIONS) return undefined;
+  const b = String(cardId).replace(/_p\d+$/, '');
+  if ((RESTRICTIONS.banned || []).includes(b)) return 'b';
+  if ((RESTRICTIONS.restricted || []).some(r => r.id === b)) return 'r';
+  const sp = (RESTRICTIONS.banned_pairs && RESTRICTIONS.banned_pairs.specific) || [];
+  if (sp.some(pair => pair[0] === b || pair[1] === b)) return 'p';
+  const g = RESTRICTIONS.banned_pairs && RESTRICTIONS.banned_pairs.group;
+  if (g && (g.members || []).includes(b)) return 'p';
+  return undefined;
+}
+
 const tournamentCards = allCards.filter(c => cardRankingMap[c.id]).length;
 const recentSeasonCards = allCards.filter(c => isRecentSeason(c.id)).length;
 
@@ -288,6 +308,7 @@ function generateCardsDataJS() {
       wins: ranking ? ranking.wins : 0,
       hasTournament: !!ranking,
       recentSeason: isRecentSeason(card.id) ? 1 : 0,
+      reg: regOf(card.id),  // 規制状況（指示書43）: b=禁止/r=制限/p=禁止ペア（undefinedは省略される）
       ...advFields(card)
     };
   });
@@ -612,6 +633,15 @@ function generateHTML() {
     }
 
     /* Card rarity badge */
+    /* 規制状況（指示書43）: チップ配色は既存フィルタチップに準拠 */
+    .filter-chip[data-reg="b"].active { background: rgba(255,91,91,0.12); border-color: #ff5b5b; color: #ff5b5b; }
+    .filter-chip[data-reg="r"].active { background: rgba(255,169,77,0.12); border-color: #ffa94d; color: #ffa94d; }
+    .filter-chip[data-reg="p"].active { background: rgba(177,151,252,0.12); border-color: #b197fc; color: #b197fc; }
+    .card-reg-badge { position: absolute; top: 6px; left: 6px; padding: 1px 6px; border-radius: 4px; font-size: 10px; font-weight: bold; font-family: var(--font-mono); background: rgba(15,15,20,0.85); }
+    .card-reg-badge.reg-b { color: #ff5b5b; border: 1px solid rgba(255,91,91,0.55); }
+    .card-reg-badge.reg-r { color: #ffa94d; border: 1px solid rgba(255,169,77,0.55); }
+    .card-reg-badge.reg-p { color: #b197fc; border: 1px solid rgba(177,151,252,0.55); }
+
     .card-rarity-badge {
       position: absolute;
       top: 6px;
@@ -918,6 +948,17 @@ ${SET_CHIP_GROUPS.map((g, gi) => {
         </div>
       </div>
 
+      <!-- 規制状況フィルター（指示書43、2026-07-25施行の禁止・制限） -->
+      <div class="filter-group">
+        <span class="filter-group-label">規制状況 / Restriction</span>
+        <div class="filter-chips" id="filter-regulation">
+          <button class="filter-chip active" data-value="all">全て</button>
+          <button class="filter-chip" data-reg="b" data-value="b">禁止</button>
+          <button class="filter-chip" data-reg="r" data-value="r">制限</button>
+          <button class="filter-chip" data-reg="p" data-value="p">禁止ペア</button>
+        </div>
+      </div>
+
       <!-- 詳細検索（2026-07-11 追加。既定は折りたたみ） -->
       <div class="filter-group">
         <button type="button" id="adv-toggle" class="adv-toggle">
@@ -1043,6 +1084,7 @@ ${generateNoscriptContent()}
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
+      regulation: 'all', // 'all', 'b'(禁止), 'r'(制限), 'p'(禁止ペア)（指示書43）
       adv: { lv: null, cs: null, ap: null, hp: null, src: [], tr: [], kwMask: 0, nopl: false },
       search: '',
       sort: 'id-asc'
@@ -1111,6 +1153,8 @@ ${generateNoscriptContent()}
         // Tournament filter
         if (filterState.tournament === 'yes' && !card.recentSeason) return false;
         if (filterState.tournament === 'no' && card.recentSeason) return false;
+        // 規制状況フィルタ（指示書43）
+        if (filterState.regulation !== 'all' && card.reg !== filterState.regulation) return false;
         // 詳細検索（2026-07-11）: 枠内OR・枠間AND
         var A = filterState.adv;
         if (A.nopl && card.pl) return false;
@@ -1173,6 +1217,7 @@ ${generateNoscriptContent()}
           '<img class="card-item-img" src="' + imgSrc + '" alt="' + escapeAttr(card.name) + '" loading="lazy" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;flex&quot;">' +
           '<div class="card-item-fallback"><div class="card-item-fallback-id">' + card.id + '</div><div class="card-item-fallback-name">' + escapeAttr(card.name) + '</div></div>' +
           '<span class="card-rarity-badge rarity-' + card.rarity + '">' + card.rarity + '</span>' +
+          (card.reg ? '<span class="card-reg-badge reg-' + card.reg + '">' + (card.reg === 'b' ? '禁止' : card.reg === 'r' ? '制限' : '禁止ペア') + '</span>' : '') +
         '</div>' +
         '<div class="card-item-info">' +
           '<div class="card-item-name">' + escapeAttr(card.name) + '</div>' +
@@ -1258,6 +1303,7 @@ ${generateNoscriptContent()}
     setupFilterGroup('filter-type', 'types', true);
     setupFilterGroup('filter-rarity', 'rarities', true);
     setupFilterGroup('filter-tournament', 'tournament', false);
+    setupFilterGroup('filter-regulation', 'regulation', false);
 
     // === 詳細検索（折りたたみパネル 2026-07-11）===
     (function setupAdvanced() {

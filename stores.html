@@ -208,6 +208,18 @@
   <script src="/js/common.js?v=15"></script>
   <script src="/js/favorites.js?v=1"></script>
   <script>
+    // favorites.js 読込失敗（404・ネット断）時のフォールバック（指示書45-1）:
+    // ☆（お気に入り）機能のみ無効化し、一覧・詳細の描画は通常どおり継続する。
+    // favorites.js が正常に読めた場合は GCGFavSafe === GCGFav で挙動は完全に同一。
+    var GCGFavSafe = (typeof GCGFav !== 'undefined' && GCGFav) ? GCGFav : {
+      available: function () { return false; },
+      starButtonHtml: function () { return ''; },
+      bindStarButtons: function () {},
+      getStores: function () { return []; },
+      getEvents: function () { return []; }
+    };
+  </script>
+  <script>
     // 都道府県コードの辞書（ISO 3166-2 形式。data/schedule.json の pref_code に一致）
     const PREF_MAP = {
       'JP-01':'北海道','JP-02':'青森県','JP-03':'岩手県','JP-04':'宮城県','JP-05':'秋田県','JP-06':'山形県','JP-07':'福島県',
@@ -252,7 +264,7 @@
       document.getElementById('footer').innerHTML = GCG.renderFooter();
       try { GCG.initHeaderSearch(); } catch (e) {}
       // ☆は body へのイベント委譲で処理（フィルタ/検索/現在地検索の再描画後も有効）
-      GCGFav.bindStarButtons(document.body);
+      GCGFavSafe.bindStarButtons(document.body);
 
       const root = document.getElementById('stores-root');
 
@@ -496,7 +508,7 @@
           + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + (s.isExpert ? ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>' : '') + distBadge + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
           + '</a>'
-          + GCGFav.starButtonHtml('store', s.id)
+          + GCGFavSafe.starButtonHtml('store', s.id)
           + '</div>';
       }
 

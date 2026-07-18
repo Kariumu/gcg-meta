@@ -85,6 +85,18 @@
   <script src="js/common.js?v=15"></script>
   <script src="/js/favorites.js?v=1"></script>
   <script>
+    // favorites.js 読込失敗（404・ネット断）時のフォールバック（指示書45-1）:
+    // ☆（お気に入り）機能のみ無効化し、一覧・詳細の描画は通常どおり継続する。
+    // favorites.js が正常に読めた場合は GCGFavSafe === GCGFav で挙動は完全に同一。
+    var GCGFavSafe = (typeof GCGFav !== 'undefined' && GCGFav) ? GCGFav : {
+      available: function () { return false; },
+      starButtonHtml: function () { return ''; },
+      bindStarButtons: function () {},
+      getStores: function () { return []; },
+      getEvents: function () { return []; }
+    };
+  </script>
+  <script>
     var currentYear = new Date().getFullYear();
     var currentMonth = new Date().getMonth();
     var allStoreEvents = [];
@@ -250,7 +262,7 @@
       container.innerHTML =
         '<h1 style="font-size:20px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;display:flex;align-items:center;gap:6px">'
           + GCG.escapeHtml(store.name || '')
-          + GCGFav.starButtonHtml('store', store.id != null ? store.id : getUrlParam('id'))
+          + GCGFavSafe.starButtonHtml('store', store.id != null ? store.id : getUrlParam('id'))
         + '</h1>' +
         '<div style="font-size:14px;color:var(--text-secondary);margin-bottom:4px">' + GCG.escapeHtml(address) + mapLink + '</div>' +
         (phone ? '<div style="font-size:13px;color:var(--text-muted);font-family:var(--font-mono)">TEL: ' + GCG.escapeHtml(phone) + '</div>' : '');
@@ -440,7 +452,7 @@
       GCG.init();
       document.getElementById('header').innerHTML = GCG.renderHeader('stores');
       document.getElementById('footer').innerHTML = GCG.renderFooter();
-      GCGFav.bindStarButtons(document.body);
+      GCGFavSafe.bindStarButtons(document.body);
 
       var storeId = getUrlParam('id');
       if (!storeId) {

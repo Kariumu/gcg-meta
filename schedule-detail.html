@@ -152,6 +152,18 @@
   <script src="js/common.js?v=15"></script>
   <script src="/js/favorites.js?v=1"></script>
   <script>
+    // favorites.js 読込失敗（404・ネット断）時のフォールバック（指示書45-1）:
+    // ☆（お気に入り）機能のみ無効化し、一覧・詳細の描画は通常どおり継続する。
+    // favorites.js が正常に読めた場合は GCGFavSafe === GCGFav で挙動は完全に同一。
+    var GCGFavSafe = (typeof GCGFav !== 'undefined' && GCGFav) ? GCGFav : {
+      available: function () { return false; },
+      starButtonHtml: function () { return ''; },
+      bindStarButtons: function () {},
+      getStores: function () { return []; },
+      getEvents: function () { return []; }
+    };
+  </script>
+  <script>
     // Regions data with JP codes
     var REGIONS = [
       {
@@ -367,13 +379,13 @@
         '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
           '<div style="flex:1;min-width:0">' +
             '<div style="display:flex;align-items:center;gap:8px;margin-bottom:2px">' +
-              GCGFav.starButtonHtml('event', event.id) +
+              GCGFavSafe.starButtonHtml('event', event.id) +
               '<span style="font-size:15px;font-weight:700;color:' + dateColor + ';font-family:var(--font-mono)">' + month + '/' + day + '(' + dow + ')</span>' +
               '<span style="font-size:14px;color:var(--text-muted);font-family:var(--font-mono)">開催時間 ' + hours + ':' + minutes + '</span>' +
             '</div>' +
             '<div style="display:flex;align-items:center;gap:4px;min-width:0">' +
               '<a href="store.html?id=' + encodeURIComponent(event.organizer_id) + '" style="flex:1;min-width:0;font-size:15px;font-weight:600;color:var(--text-primary);text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + GCG.escapeHtml(store.name || '未定') + '</a>' +
-              GCGFav.starButtonHtml('store', event.organizer_id) +
+              GCGFavSafe.starButtonHtml('store', event.organizer_id) +
             '</div>' +
             '<div style="font-size:13px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + GCG.escapeHtml(address) + '</div>' +
             '<div style="font-size:13px;color:var(--text-muted);margin-top:1px;font-family:var(--font-mono)">定員' + (Number(event.max_join_count) || 0) + '名　参加費' + (Number(event.entry_fee) || 0) + '円</div>' +
@@ -577,7 +589,7 @@
       document.getElementById('header').innerHTML = GCG.renderHeader('schedule');
       document.getElementById('footer').innerHTML = GCG.renderFooter();
       // ☆は body へのイベント委譲で処理（フィルタ再描画後も有効）
-      GCGFav.bindStarButtons(document.body);
+      GCGFavSafe.bindStarButtons(document.body);
 
       var seriesId = getUrlParam('series_id');
       if (!seriesId) {

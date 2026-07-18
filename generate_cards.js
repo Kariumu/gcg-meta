@@ -55,6 +55,15 @@ try {
   console.warn('  ⚠ cards_master.json が見つかりません。カード名なしで生成します。');
 }
 
+// 禁止・制限データ（指示書43。一次ソース: 公式ニュース 01_277.html、2026-07-25施行）
+let RESTRICTIONS = null;
+try {
+  RESTRICTIONS = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'restrictions.json'), 'utf-8'));
+  console.log('  禁止・制限データ: 読み込みOK');
+} catch (e) {
+  console.warn('  ⚠ restrictions.json が見つかりません。規制バッジなしで生成します。');
+}
+
 // 色の日本語変換
 const COLOR_JP = {
   'Blue': '青', 'Green': '緑', 'Red': '赤', 'White': '白', 'Purple': '紫', 'Colorless': '無色'
@@ -464,6 +473,13 @@ function main() {
   // 指定時は sitemap を更新しない（全件の最終スライス実行後に別途 GEN_SLICE なしで sitemap のみ更新するか、
   // 最終スライスで GEN_SITEMAP=1 を付ける）
   const GEN_SLICE = process.env.GEN_SLICE || '';
+  // GEN_IDS="id1,id2,...": 指定カードIDのみ生成（指示書43: 対象限定再生成用。sitemapは更新しない）
+  const GEN_IDS = process.env.GEN_IDS || '';
+  if (GEN_IDS) {
+    const want = new Set(GEN_IDS.split(',').map(x => x.trim()).filter(Boolean));
+    targetCardIds = targetCardIds.filter(id => want.has(id));
+    console.log(`  GEN_IDS → ${targetCardIds.length} 枚のみ生成`);
+  }
   if (GEN_SLICE) {
     const [si, sj] = GEN_SLICE.split(',').map(Number);
     targetCardIds = targetCardIds.slice(si, sj);
@@ -530,7 +546,7 @@ function main() {
   console.log(`  → ${generatedCardIds.length} ページ生成完了`);
 
   // sitemap.xml 更新（GEN_SLICE 指定時は GEN_SITEMAP=1 のときのみ全件で更新）
-  if (!GEN_SLICE || process.env.GEN_SITEMAP === '1') {
+  if ((!GEN_SLICE && !process.env.GEN_IDS) || process.env.GEN_SITEMAP === '1') {
     updateSitemap([...allCardIds]);
     console.log('  → sitemap.xml 更新完了');
   }
@@ -1214,6 +1230,53 @@ function generateSeoTextSections(cardId, masterCard, cardName, colorJp, typeJp, 
   return html;
 }
 
+// 規制バッジHTML（指示書43）。パラレル版は base 番号で規制を継承。
+// 文言は公式ニュース（01_277.html）の表現に準拠。施行前は「YYYY年M月D日施行の」を前置し、
+// 施行後はクライアント側スクリプトが .reg-pre を消す（再生成不要の自動切替）。
+function regulationBadgeHtml(cardId) {
+  if (!RESTRICTIONS) return '';
+  const baseId = String(cardId).replace(/_p\d+$/, '');
+  const eff = RESTRICTIONS.effective_date;
+  const effJp = eff.replace(/(\d+)-0?(\d+)-0?(\d+)/, '$1年$2月$3日');
+  const article = '/reports/2026-07-restriction.html';
+  const pre = '<span class="reg-pre">' + effJp + '施行の</span>';
+  const link = ' <a href="' + article + '" style="color:var(--blue)">詳細（考察記事）→</a>';
+  const badge = (hex, label) => '<span style="display:inline-block;padding:2px 10px;border-radius:4px;font-size:12px;font-weight:bold;font-family:var(--font-mono);background:' + hex + '22;color:' + hex + ';border:1px solid ' + hex + '55">' + label + '</span>';
+  const txt = (html) => '<p style="font-size:12px;color:var(--text-secondary);margin:6px 0 0;line-height:1.7">' + html + '</p>';
+  const parts = [];
+  if ((RESTRICTIONS.banned || []).includes(baseId)) {
+    parts.push(badge('#ff5b5b', '禁止') + txt(pre + '【禁止カード】です。デッキやサイドデッキに1枚も入れることができません。' + link));
+  }
+  const rst = (RESTRICTIONS.restricted || []).find(r => r.id === baseId);
+  if (rst) {
+    parts.push(badge('#ffa94d', '制限＜' + rst.count + '＞') + txt('【制限カード＜' + rst.count + '＞】です。デッキとサイドデッキ合わせて' + rst.count + '枚までしか入れることができません。' + link));
+  }
+  const pairs = (RESTRICTIONS.banned_pairs && RESTRICTIONS.banned_pairs.specific) || [];
+  const partners = [];
+  for (const [a, b] of pairs) {
+    if (a === baseId) partners.push(b);
+    else if (b === baseId) partners.push(a);
+  }
+  if (partners.length > 0) {
+    const links = partners.map(p => {
+      const nm = cardsMaster[p] ? cardsMaster[p].name_jp : '';
+      return '<a href="/cards/' + p + '/" style="color:var(--blue)">' + p + (nm ? ' ' + escapeHtml(nm) : '') + '</a>';
+    }).join('、');
+    parts.push(badge('#b197fc', '禁止ペア') + txt(pre + '【禁止ペア】対象です。次のカードと同時にデッキに入れることができません: ' + links + link));
+  }
+  const grp = RESTRICTIONS.banned_pairs && RESTRICTIONS.banned_pairs.group;
+  if (grp && (grp.members || []).includes(baseId)) {
+    let extra = '';
+    if (baseId === 'ST05-004' || baseId === 'ST05-009') {
+      extra = '※「スタートデッキ Iron Bloom [ST05]」はデッキの内容を一切変更しない場合のみ、公認・公式イベントでも使用することができます。';
+    }
+    parts.push(badge('#b197fc', '禁止ペア') + txt(pre + '【禁止ペア】対象です。「' + escapeHtml(grp.label) + '」（全' + grp.members.length + '種）は全ての組み合わせが【禁止ペア】となり、1種類のみ・4枚までしかデッキに入れることができません。' + extra + link));
+  }
+  if (parts.length === 0) return '';
+  return '<div class="reg-badge" data-effective="' + eff + '" style="margin:0 0 12px">' + parts.join('<div style="height:6px"></div>') + '</div>' +
+    '<script>(function(){try{if(new Date()>=new Date("' + eff + 'T00:00:00+09:00")){document.querySelectorAll(".reg-badge .reg-pre").forEach(function(x){x.textContent="";});}}catch(e){}})();</' + 'script>';
+}
+
 function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCard, coUsed) {
   const hasData = !!card;
   const decks = hasData ? card.decks : 0;
@@ -1554,6 +1617,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       <div style="flex:1;min-width:280px">
         <h1 style="font-family:var(--font-mono);font-size:22px;margin-bottom:4px">${masterCard ? escapeHtml(cardName) : escapeHtml(cardId)}</h1>
         ${masterCard ? `<p style="font-family:var(--font-mono);font-size:13px;color:var(--text-muted);margin:0 0 12px">${escapeHtml(cardId)}</p>` : ''}
+        ${regulationBadgeHtml(cardId)}
         ${masterCard ? `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex}22;color:${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex};border:1px solid ${(DECK_COLORS[masterCard.color] || DECK_COLORS.Unknown).hex}44">${escapeHtml(colorJp)}</span>
           <span style="display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-family:var(--font-mono);background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border)">${escapeHtml(typeJp)}</span>
