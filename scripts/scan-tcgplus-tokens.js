@@ -33,12 +33,17 @@
  * - 生スキャン結果（全タイトル分）は tmp/ 配下に保存し、push禁止（ローカルのみ）。
  *   push対象は data/tcgplus_tokenmap.json と本スクリプトのみ。
  *
- * 【新弾運用（指示書47 §5）】
- * - 新弾発売時: cards_master にあり変換表に無いカードが出たら差分スキャン:
- *   前回の未走査窓（raw の skip/presumed 記録）と既知割当末尾以降を
- *   `--start <index>` で走査（state は tmp/tcgplus-scan-state.json 退避後に初期化）。
- * - 登録有無の軽量確認: api/user/card/list?game_title_id=15（1リクエスト・認証不要）。
+ * 【新弾運用（指示書48で --diff モード実装済み。こちらを使うこと）】
+ * - 新カードを cards_master に取り込んだ直後に実行:
+ *     node scripts/scan-tcgplus-tokens.js --diff --dry-run   # 対象列挙と計画のみ（APIアクセスなし）
+ *     node scripts/scan-tcgplus-tokens.js --diff             # 差分取得（チェックポイント再開型）
+ * - 処理: 対象抽出（master−変換表）→ 既存raw採用（API 0）→ card/list登録ゲート →
+ *   候補域スキャン（前回割当端以降→未走査窓、上限 --cap 既定500）→ build再生成 → 整合検証。
+ * - diff用stateは tmp/tcgplus-scan-diff-state.json（47の本stateとは分離）。
+ * - card/list はWAFによりブラウザ系UA+Referer/Origin必須（limit/offsetページング・id降順・認証不要）。
  *   ※card/list の id と deck/recipe の code は独立採番で id→code は計算不可。
+ * - 注意: 3文字トークン空間の残りは少ない（2026-07-18時点で生存最大253,950/262,143）。
+ *   枯渇後にTCG+側が4文字等へ移行した場合は本スキャナの改修が必要。
  *
  * 【代表トークン選定（指示書47 §2）】
  * - 大会由来があるカード: 指示書46の最頻トークンを維持（上書きしない）
@@ -50,6 +55,7 @@
  *   node scripts/scan-tcgplus-tokens.js --status                     # 進捗表示
  *   node scripts/scan-tcgplus-tokens.js --verify                     # 生データ被覆検証
  *   node scripts/scan-tcgplus-tokens.js --build                      # 変換表v2生成（整合性検証込み）
+ *   node scripts/scan-tcgplus-tokens.js --diff [--dry-run] [--cap N] # 新弾差分取得（指示書48）
  */
 'use strict';
 
@@ -92,6 +98,20 @@ function argVal(name, dflt) {
 const BUDGET_MS = parseInt(argVal('--budget-ms', '38000'), 10);
 const INTERVAL_MS = parseInt(argVal('--interval-ms', '1500'), 10);
 const START_OVERRIDE = argVal('--start', null);
+const DIFF_CAP = parseInt(argVal('--cap', '500'), 10); // --diff の総リクエスト上限（超過見込みは要承認）
+const DRY_RUN = args.includes('--dry-run');
+
+// --diff 用（指示書48）: 本stateと分離
+const DIFF_STATE_PATH = path.join(TMP, 'tcgplus-scan-diff-state.json');
+const DIFF_CACHE_PATH = path.join(TMP, 'tcgplus-scan-diff-callcache.json');
+const CARDLIST_API = 'https://api.bandai-tcg-plus.com/api/user/card/list';
+// card/list はWAFがUA種別で選別するためブラウザ系UA（身元併記）+Referer/Originが必要
+const CARDLIST_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 gcg-stats-tokenmap/1.0 (+https://gcg-stats.com)',
+  'Accept': 'application/json',
+  'Referer': 'https://www.bandai-tcg-plus.com/',
+  'Origin': 'https://www.bandai-tcg-plus.com',
+};
 
 function idxToToken(i) {
   return ALPHABET[(i >> 12) & 63] + ALPHABET[(i >> 6) & 63] + ALPHABET[i & 63];
@@ -129,22 +149,23 @@ async function pace() {
 // 分割木の途中結果をコール間で持ち越すAPIコールキャッシュ
 // （45秒予算内に収まらない大きな分割木でも累積的に前進できるようにする）
 const CALL_CACHE_PATH = path.join(TMP, 'tcgplus-scan-callcache.json');
+let activeCachePath = CALL_CACHE_PATH; // --diff 時は DIFF_CACHE_PATH に切替（47キャッシュの旧404を再利用しないため）
 let callCache = new Map();
 function loadCallCache() {
   try {
-    if (fs.existsSync(CALL_CACHE_PATH)) callCache = new Map(Object.entries(JSON.parse(fs.readFileSync(CALL_CACHE_PATH, 'utf8'))));
+    if (fs.existsSync(activeCachePath)) callCache = new Map(Object.entries(JSON.parse(fs.readFileSync(activeCachePath, 'utf8'))));
   } catch (_) { callCache = new Map(); }
 }
 function saveCallCache() {
-  fs.writeFileSync(CALL_CACHE_PATH, JSON.stringify(Object.fromEntries(callCache)) + '\n');
+  fs.writeFileSync(activeCachePath, JSON.stringify(Object.fromEntries(callCache)) + '\n');
 }
 function clearCallCache() {
   callCache = new Map();
   try {
-    if (fs.existsSync(CALL_CACHE_PATH)) fs.unlinkSync(CALL_CACHE_PATH);
+    if (fs.existsSync(activeCachePath)) fs.unlinkSync(activeCachePath);
   } catch (_) {
     // 削除保護環境では空で上書き（キャッシュ実質クリア）
-    try { fs.writeFileSync(CALL_CACHE_PATH, '{}\n'); } catch (_) {}
+    try { fs.writeFileSync(activeCachePath, '{}\n'); } catch (_) {}
   }
 }
 
@@ -542,6 +563,13 @@ function cmdBuild() {
       tournament: v1meta,
     },
   };
+  // --diff 実行履歴（指示書48）: diff stateの履歴を_metaに反映（州ファイル由来なのでbuildは冪等のまま）
+  try {
+    if (fs.existsSync(DIFF_STATE_PATH)) {
+      const ds = JSON.parse(fs.readFileSync(DIFF_STATE_PATH, 'utf8'));
+      if (Array.isArray(ds.history) && ds.history.length) map._meta.diff_history = ds.history;
+    }
+  } catch (_) { /* diff履歴は補助情報。読めなくてもbuildは続行 */ }
   for (const [k, v] of Object.entries(out)) map[k] = v;
   fs.writeFileSync(MAP_PATH, JSON.stringify(map, null, 2) + '\n');
   console.log(`BUILD OK: cards=${allNums.size} (tournament=${v1cards.length}, scan_only=${scanOnly}, needs_review=${needsReview}, EN_only=${enOnly.join(',') || 'なし'})`);
@@ -581,11 +609,220 @@ function cmdBuild() {
   return 0;
 }
 
+// ============================================================
+// --diff モード（指示書48）: 新カード取り込み時の差分トークン取得
+// ============================================================
+
+function loadDiffState() {
+  if (fs.existsSync(DIFF_STATE_PATH)) return JSON.parse(fs.readFileSync(DIFF_STATE_PATH, 'utf8'));
+  return {
+    phase: 'idle', targets: [], scan_targets: [], found: {}, unfound: [],
+    cand: [], cand_idx: 0, probe_pos: null,
+    requests: 0, gate_requests: 0,
+    errors: { http429: 0, http5xx: 0, http4xx_other: 0, network: 0, protocol: 0 },
+    backoff_events: 0, history: [], started_at: null, updated_at: null,
+  };
+}
+function saveDiffState(st) {
+  st.updated_at = new Date().toISOString();
+  const tmp = DIFF_STATE_PATH + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(st, null, 2) + '\n');
+  fs.renameSync(tmp, DIFF_STATE_PATH);
+}
+
+// raw（ndjson）から被覆を読み、候補域（非生存域）を構築する
+// 順序: (a) 全域生存最大index+1〜MAX_INDEX →(b) 76,473以上の presumed/skip 窓（昇順）→(c) それ未満（昇順）
+function computeCandidates() {
+  const { cov } = buildCoverage(readRawLines());
+  let globalMax = -1;
+  for (const [i, s] of cov) if (s === 'alive' && i > globalMax) globalMax = i;
+  const isOpen = i => { const s = cov.get(i); return s !== 'alive' && s !== 'dead'; }; // presumed/sampled_skip/未被覆が対象
+  const wins = [];
+  let a = null;
+  for (let i = 0; i <= MAX_INDEX; i++) {
+    if (isOpen(i)) { if (a === null) a = i; }
+    else if (a !== null) { wins.push([a, i - 1]); a = null; }
+  }
+  if (a !== null) wins.push([a, MAX_INDEX]);
+  const tail = wins.filter(([x]) => x > globalMax);
+  const hi = wins.filter(([x, y]) => x <= globalMax && y > 76472);
+  const lo = wins.filter(([, y]) => y <= 76472);
+  return { globalMax, candidates: [...tail, ...hi, ...lo] };
+}
+
+async function gateCardList(st, targetSet) {
+  // card/list全件を舐め、登録済みcard_number集合を返す（id降順なので新弾は先頭页）
+  const registered = new Set();
+  let offset = 0, total = Infinity;
+  while (offset < total && offset < 5000) {
+    if (remainMs() < 4000) throw new BudgetExceeded(); // 45秒制限対策（再開時はゲート取り直し）
+    await pace(); lastReqStart = Date.now();
+    const url = `${CARDLIST_API}?game_title_id=15&encode=0&app_version=9.9.9&limit=100&offset=${offset}`;
+    const res = await fetch(url, { headers: CARDLIST_HEADERS });
+    st.requests++; st.gate_requests++;
+    if (res.status !== 200) throw new FatalApi(`card/list HTTP ${res.status} (offset=${offset})`);
+    const j = await res.json().catch(() => null);
+    const cards = j && j.success && j.success.cards;
+    if (!Array.isArray(cards)) throw new FatalApi('card/list 応答形状が想定外');
+    total = j.success.total || 0;
+    for (const c of cards) registered.add(String(c.card_number));
+    offset += 100;
+    // 対象が全部確認できたら途中終了（新弾はid降順で先頭に来る）
+    if ([...targetSet].every(t => registered.has(t))) break;
+  }
+  return { registered, total };
+}
+
+// 発見済み判定用: raw行からGCG numを抽出
+function gcgNumOf(c) {
+  const img = String(c.image_url || '');
+  if (!GCG_IMG_RE.test(img)) return null;
+  return String(c.card_number || '');
+}
+
+async function cmdDiff() {
+  fs.mkdirSync(TMP, { recursive: true });
+  activeCachePath = DIFF_CACHE_PATH;
+  // 1. 対象抽出（master − 変換表）
+  const cm = JSON.parse(fs.readFileSync(CARDS_MASTER, 'utf8'));
+  const entries = Array.isArray(cm) ? cm : Object.values(cm);
+  const bases = new Set();
+  for (const c of entries) bases.add(String(c.id || '').replace(/_p\d+$/, ''));
+  const map = JSON.parse(fs.readFileSync(MAP_PATH, 'utf8'));
+  const targets = [...bases].filter(b => b && !map[b]).sort(naturalCardSort);
+  if (targets.length === 0) { console.log('DIFF: 差分なし（cards_master全ベースが変換表に収載済み）。APIアクセスなしで終了'); return 0; }
+  console.log(`DIFF targets(${targets.length}): ${targets.join(',')}`);
+
+  // 1.5 既存rawからの採用（APIアクセスなしで解決できる分）
+  const lines = readRawLines();
+  const byNum = new Map();
+  for (const o of lines) {
+    const arr = o.i0 !== undefined ? o.cards : (o.probe !== undefined && o.alive && o.card ? [o.card] : []);
+    for (const c of arr) { const n = gcgNumOf(c); if (n) { if (!byNum.has(n)) byNum.set(n, []); byNum.get(n).push(c); } }
+  }
+  const adopted = targets.filter(t => byNum.has(t));
+  const remaining = targets.filter(t => !byNum.has(t));
+  console.log(`DIFF raw採用: ${adopted.length}件${adopted.length ? '（' + adopted.join(',') + '）' : ''} / 要スキャン候補: ${remaining.length}件`);
+
+  // 計画（候補域）
+  const { globalMax, candidates } = computeCandidates();
+  const candTokens = candidates.reduce((s, [x, y]) => s + (y - x + 1), 0);
+  console.log(`DIFF 計画: 生存最大index=${globalMax} 候補域=${candidates.length}窓 計${candTokens}トークン（探索は256刻みプローブ+発見時局所密走査、上限${DIFF_CAP}リクエスト）`);
+
+  if (DRY_RUN) { console.log('DRY-RUN: APIアクセスなしで終了（登録ゲート・スキャン・build未実行）'); return 0; }
+
+  const st = loadDiffState();
+  if (st.phase === 'idle') { st.phase = 'run'; st.started_at = new Date().toISOString(); st.targets = targets; }
+  loadCallCache();
+
+  let unregistered = [], scanTargets = [];
+  try {
+    // 2. 登録ゲート（要スキャン分のみ。結果はstateに保存し、budget再開時は再実行しない）
+    if (remaining.length > 0) {
+      const remKey = remaining.join(',');
+      if (st.gate_key === remKey && st.gate_result) {
+        unregistered = st.gate_result.unregistered;
+        scanTargets = st.gate_result.scan_targets;
+        console.log(`DIFF 登録ゲート: 前回結果を再利用（未登録${unregistered.length}/スキャン対象${scanTargets.length}）`);
+      } else {
+        const { registered, total } = await gateCardList(st, new Set(remaining));
+        unregistered = remaining.filter(t => !registered.has(t));
+        scanTargets = remaining.filter(t => registered.has(t));
+        st.gate_key = remKey;
+        st.gate_result = { unregistered, scan_targets: scanTargets };
+        saveDiffState(st);
+        console.log(`DIFF 登録ゲート: card/list total=${total} gate_requests=${st.gate_requests} → TCG+未登録=${unregistered.length}件${unregistered.length ? '（' + unregistered.join(',') + '＝スキャン対象外）' : ''} / スキャン対象=${scanTargets.length}件`);
+      }
+    }
+
+    // 3. 候補域スキャン（256刻みプローブ → 生存ヒットで局所密走査）
+    const foundNums = new Set();
+    if (scanTargets.length > 0) {
+      const targetSet = new Set(scanTargets);
+      const allFound = () => [...targetSet].every(t => foundNums.has(t));
+      outer:
+      for (let ci = st.cand_idx || 0; ci < candidates.length; ci++) {
+        st.cand_idx = ci;
+        const [a, b] = candidates[ci];
+        for (let p = (st.probe_pos != null && st.probe_pos >= a && st.probe_pos <= b) ? st.probe_pos : a;
+             p <= b; p += ISLAND_STRIDE) {
+          if (st.requests >= DIFF_CAP) { console.log(`DIFF 上限${DIFF_CAP}リクエスト到達`); break outer; }
+          if (remainMs() < 4500) { st.probe_pos = p; saveDiffState(st); saveCallCache(); console.log(`DIFF PAUSED(budget) cand=${ci} probe=${p} req=${st.requests}`); return 3; }
+          const pr = await apiCall(st, [idxToToken(p)]);
+          const c = pr.status === 200 ? pr.byCode.get(idxToToken(p)) : null;
+          if (c) {
+            // 生存ヒット → 周辺を50個バッチで密走査（両側にデッド境界まで拡張）
+            appendRaw({ probe: p, alive: true, t: new Date().toISOString(), card: { i: p, token: idxToToken(p), ...pickCardFields(c) }, diff: 1 });
+            const n = gcgNumOf({ ...c }); if (n) foundNums.add(n);
+            let lo = Math.max(a, p - 255), hi = Math.min(b, p + 255);
+            for (let x = lo; x <= hi; x += BATCH) {
+              if (st.requests >= DIFF_CAP) break outer;
+              if (remainMs() < 4500) { st.probe_pos = p; saveDiffState(st); saveCallCache(); console.log(`DIFF PAUSED(budget) 局所走査中 req=${st.requests}`); return 3; }
+              const i1 = Math.min(x + BATCH - 1, hi);
+              const out = { cards: [], invalid: [], presumed: [] };
+              await resolveRange(st, x, i1, out);
+              const seen = new Map();
+              for (const cc of out.cards) seen.set(cc.i, cc);
+              out.cards = [...seen.values()].sort((q, w) => q.i - w.i);
+              out.invalid = [...new Set(out.invalid)].filter(i => !seen.has(i)).sort((q, w) => q - w);
+              appendRaw({ i0: x, i1, t: new Date().toISOString(), cards: out.cards, invalid: out.invalid, presumed: out.presumed, diff: 1 });
+              clearCallCache();
+              for (const cc of out.cards) { const nn = gcgNumOf(cc); if (nn) foundNums.add(nn); }
+              if (allFound()) break outer;
+            }
+          }
+          st.probe_pos = p + ISLAND_STRIDE; saveDiffState(st);
+          if (allFound()) break outer;
+        }
+        st.probe_pos = null;
+      }
+    }
+
+    // 4-6. 変換表・raw再生成（採用/発見が1件でもあれば build を通す）
+    const foundList = [...foundNums].filter(n => scanTargets.includes(n)).sort(naturalCardSort);
+    const unfound = scanTargets.filter(t => !foundNums.has(t));
+    st.unfound = unfound; st.found = foundList;
+    st.history.push({
+      date: new Date().toISOString().slice(0, 10), targets: targets.length,
+      adopted: adopted.length, scanned_found: foundList.length,
+      unregistered: unregistered.length, unfound: unfound.length,
+      requests: st.requests, gate_requests: st.gate_requests,
+    });
+    st.phase = 'idle'; st.cand_idx = 0; st.probe_pos = null;
+    st.gate_key = null; st.gate_result = null; // 次回キャンペーンはゲートを取り直す
+    saveDiffState(st); clearCallCache();
+
+    if (adopted.length + foundList.length > 0) {
+      // 既存エントリ無変更検証のためのスナップショット
+      const before = {};
+      for (const [k, v] of Object.entries(map)) if (k !== '_meta') before[k] = JSON.stringify(v);
+      const rc = cmdBuild();
+      if (rc !== 0) { console.error('DIFF: build失敗'); return 4; }
+      const after = JSON.parse(fs.readFileSync(MAP_PATH, 'utf8'));
+      let changed = [];
+      for (const k of Object.keys(before)) {
+        if (JSON.stringify(after[k]) !== before[k]) changed.push(k);
+      }
+      if (changed.length) { console.error(`DIFF_ERROR: 既存エントリが変更された: ${changed.slice(0, 10).join(',')}`); return 4; }
+      const added = Object.keys(after).filter(k => k !== '_meta' && !(k in before)).sort(naturalCardSort);
+      console.log(`DIFF 追記: ${added.length}件（${added.join(',')}） 既存${Object.keys(before).length}件は無変更（全エントリ一致確認済み）`);
+    }
+    console.log(`DIFF 完了: 対象${targets.length} raw採用${adopted.length} スキャン発見${(st.found || []).length} TCG+未登録${unregistered.length} 未発見${st.unfound.length}${st.unfound.length ? '（' + st.unfound.join(',') + '）' : ''} リクエスト${st.requests}（うちゲート${st.gate_requests}）`);
+    return st.unfound.length > 0 ? 5 : 0;
+  } catch (e) {
+    saveDiffState(st); saveCallCache();
+    if (e instanceof BudgetExceeded) { console.log(`DIFF PAUSED(budget) req=${st.requests} — 再実行で継続`); return 3; }
+    if (e instanceof FatalApi) { console.error(`DIFF FATAL: ${e.message}`); return 4; }
+    console.error('DIFF UNCAUGHT', e); return 4;
+  }
+}
+
 (async () => {
   let rc = 0;
   if (args.includes('--status')) rc = cmdStatus();
   else if (args.includes('--verify')) rc = cmdVerify();
   else if (args.includes('--build')) rc = cmdBuild();
+  else if (args.includes('--diff')) rc = await cmdDiff();
   else rc = await cmdScan();
   process.exit(rc);
 })().catch(e => { console.error('UNCAUGHT', e); process.exit(4); });

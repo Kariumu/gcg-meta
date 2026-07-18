@@ -100,6 +100,21 @@ https://www.gundam-gcg.com/jp/tournament-results/players_deck.php?series={series
 
 `series_id` は毎月変わる可能性あり。詳細は `gcg-meta-cowork-handoff.md` を参照。
 
+## 新弾取り込み運用（TCG+トークン差分取得、指示書48）
+
+新カードを `data/cards_master.json` に取り込んだ直後（フェッチ→マスター更新→ページ生成の後）に、
+TCG+トークン変換表（`data/tcgplus_tokenmap.json`）の差分取得を実行する:
+
+```bash
+node scripts/scan-tcgplus-tokens.js --diff --dry-run   # 対象列挙と計画の確認（APIアクセスなし）
+node scripts/scan-tcgplus-tokens.js --diff             # 差分取得（1.5秒間隔・既定上限500リクエスト）
+```
+
+- 差分0件なら即終了（冪等）。TCG+側未登録カードは card/list 登録ゲートで自動除外して報告
+- 中断しても再実行で継続（diff用state: `tmp/tcgplus-scan-diff-state.json`。47の本stateとは分離）
+- 想定リクエスト数が500を超える見込みの場合は実行前に松岡さんへ規模提示・承認（指示書48 §0）
+- 非公式API（BANDAI TCG+）依存。仕様・制約はスクリプト冒頭コメントを参照
+
 ## デプロイ設定
 
 - リポジトリ: `kariumu/gcg-meta`(Public)
