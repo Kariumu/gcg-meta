@@ -111,6 +111,8 @@ function generateEvents(summary, eventsData) {
 
   const totalEvents = Object.keys(eventsData.events).length;
   const totalDecks = summary.total_decks;
+  // 指示書50 Task5-2: meta/og/twitter description を同一文面(同一変数)で出力し、数値ドリフトを防ぐ
+  const metaDesc = `ガンダムカードゲーム ニュータイプチャレンジの大会結果一覧。全国${totalEvents}件のイベント・${totalDecks}デッキのデータを掲載。`;
 
   content = content.replace(
     /<title>[^<]*<\/title>/,
@@ -118,7 +120,15 @@ function generateEvents(summary, eventsData) {
   );
   content = content.replace(
     /<meta name="description" content="[^"]*">/,
-    `<meta name="description" content="ガンダムカードゲーム ニュータイプチャレンジの大会結果一覧。全国${totalEvents}件のイベント・${totalDecks}デッキのデータを掲載。">`
+    `<meta name="description" content="${metaDesc}">`
+  );
+  content = content.replace(
+    /<meta property="og:description" content="[^"]*">/,
+    `<meta property="og:description" content="${metaDesc}">`
+  );
+  content = content.replace(
+    /<meta name="twitter:description" content="[^"]*">/,
+    `<meta name="twitter:description" content="${metaDesc}">`
   );
 
   // SEOコンテンツ

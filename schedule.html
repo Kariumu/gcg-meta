@@ -13,13 +13,13 @@
   <meta name="description" content="GCGイベントスケジュール検索 - 開催予定のイベント一覧、応募受付情報、開催中イベントを毎日自動更新で表示">
   <meta property="og:title" content="イベントスケジュール | GCG STATS">
   <meta property="og:description" content="GCGイベントスケジュール検索 - 開催予定のイベント一覧、応募受付情報、開催中イベントを毎日自動更新で表示">
-  <meta property="og:image" content="https://gcg-stats.com/og-image.png">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
   <meta property="og:url" content="https://gcg-stats.com/schedule.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="イベントスケジュール | GCG STATS">
   <meta name="twitter:description" content="GCGイベントスケジュール検索 - 開催予定のイベント一覧、応募受付情報、開催中イベントを毎日自動更新で表示">
-  <meta name="twitter:image" content="https://gcg-stats.com/og-image.png">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="canonical" href="https://gcg-stats.com/schedule.html">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,7 +43,7 @@
     <div style="margin-bottom:24px">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <h1 style="margin:0;font-size:28px;font-weight:700">イベントスケジュール</h1>
-        <span style="display:inline-block;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;color:#fff;background:#3b82f6;font-family:var(--font-mono)">毎日更新</span>
+        <span id="update-badge" style="display:inline-block;padding:4px 10px;border-radius:4px;font-size:12px;font-weight:600;color:#fff;background:#3b82f6;font-family:var(--font-mono)">毎日更新</span>
       </div>
       <div id="last-updated" style="margin-top:6px;font-size:12px;color:var(--text-muted);font-family:var(--font-mono)"></div>
     </div>
@@ -208,6 +208,20 @@
         if (meta) {
           meta.textContent = '最終更新: ' + formatLastUpdated(result.lastUpdated);
         }
+        // フェイルセーフ(指示書50 Task1-5): last_updated が48時間を超過している場合は
+        // 「毎日更新」バッジを「最終更新: M月D日」(グレー)へ差し替え、更新停止を可視化する。
+        // 48時間以内なら現状どおり「毎日更新」を維持する。
+        (function() {
+          var badge = document.getElementById('update-badge');
+          if (!badge) return;
+          var lu = result.lastUpdated ? new Date(result.lastUpdated) : null;
+          var valid = lu && !isNaN(lu.getTime());
+          var stale = !valid || (Date.now() - lu.getTime() > 48 * 60 * 60 * 1000);
+          if (stale) {
+            badge.textContent = valid ? ('最終更新: ' + (lu.getMonth() + 1) + '月' + lu.getDate() + '日') : '更新停止中';
+            badge.style.background = '#6b7280';
+          }
+        })();
         var list = document.getElementById('series-list');
         if (result.series.length === 0) {
           list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-muted)">現在予定されているイベントはありません</div>';

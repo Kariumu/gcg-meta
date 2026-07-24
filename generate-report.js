@@ -927,6 +927,15 @@ async function main() {
     return;
   }
 
+  // --index-html-only: reports/index.html のみ再生成(sitemap非対象・API不使用)。指示書50 Task2。
+  // auto-news の日次フローから呼ぶ用途。sitemap は古いローカルを基に本番を後退させ得るため触らない。
+  if (process.argv.includes('--index-html-only')) {
+    console.log('=== --index-html-only: reports/index.html のみ再生成(API不使用) ===');
+    updateReportIndex();
+    console.log('  → 完了(sitemap・記事本文は対象外)');
+    return;
+  }
+
   console.log('=== 環境レポート生成 ===');
 
   const eventsData = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'events.json'), 'utf-8'));

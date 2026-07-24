@@ -1452,9 +1452,13 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
       description = `${cardName}（${cardId}）は${baseCardId}のパラレル版です。色:${colorJp} タイプ:${typeJp} レアリティ:${masterCard.rarity} 採用率データは通常版と共通です。`;
     }
   } else if (masterCard) {
-    description = `${cardName}（${cardId}）のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。色:${colorJp} タイプ:${typeJp}`;
+    description = totalAdoptions === 0
+      ? `${cardName}（${cardId}）はガンダムカードゲーム ニュータイプチャレンジのカードです。まだ大会での採用データはありません。色:${colorJp} タイプ:${typeJp}`
+      : `${cardName}（${cardId}）のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。色:${colorJp} タイプ:${typeJp}`;
   } else {
-    description = `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。`;
+    description = totalAdoptions === 0
+      ? `${cardId}はガンダムカードゲーム ニュータイプチャレンジのカードです。まだ大会での採用データはありません。`
+      : `${cardId}のニュータイプチャレンジ大会での採用率は${usageRate}%。${totalAdoptions}デッキで採用されています。`;
   }
   // SEO用 title
   const pageTitle = masterCard
@@ -1652,7 +1656,10 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
         ${linkedHtml}${tokenHtml}${traitRefHtml}
         ${generateOtherVersionsHtml(cardId, cardsMaster)}
 
-        <div class="stats-grid" style="margin-top:16px">
+        ${totalAdoptions === 0 ? `<div style="margin-top:16px;padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;text-align:center">
+          <div style="font-size:15px;font-weight:600;color:var(--text-primary)">まだ大会での採用データがありません</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">大会での使用が確認され次第、採用率などの統計を表示します。</div>
+        </div>` : `<div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
             <div class="stat-label">採用デッキ数</div>
             <div class="stat-value">${totalAdoptions}<span class="unit"> デッキ</span></div>
@@ -1669,7 +1676,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
             <div class="stat-label">平均採用枚数</div>
             <div class="stat-value">${avgCount}<span class="unit">枚</span></div>
           </div>
-        </div>
+        </div>`}
         ${isParallel ? `<p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
           ※採用率データは通常版（<a href="../${baseCardId}/" style="color:var(--accent)">${baseCardId}</a>）と共通です
         </p>` : ''}
@@ -1717,7 +1724,7 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', '${escapeHtml(cardName || cardId)}（${cardId}）${isParallel ? 'パラレル版' : ''}採用率${usageRate}% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', '${escapeHtml(cardName || cardId)}（${cardId}）${isParallel ? 'パラレル版' : ''}${totalAdoptions === 0 ? '' : `採用率${usageRate}%`} | GCG STATS');
   </script>
 </body>
 </html>`;

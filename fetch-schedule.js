@@ -9,19 +9,45 @@ const { pushFiles } = require('./git-push');
 
 const API_BASE = 'https://api.bandai-tcg-plus.com';
 const GCG_GAME_TITLE_ID = 15;
-const OUTPUT_PATH = path.join(__dirname, '..', 'data', 'schedule.json');
+const OUTPUT_PATH = path.join(__dirname, 'data', 'schedule.json');
 
-function fetchJSON(url) {
+// TCG+ のWAFはUA種別で選別するため、ブラウザ系UA(身元併記)+Referer/Origin を付与する
+// (既知知見: scripts/scan-tcgplus-tokens.js L108-113)
+const TCGPLUS_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 gcg-stats-schedule/1.0 (+https://gcg-stats.com)',
+  'Accept': 'application/json',
+  'Referer': 'https://www.bandai-tcg-plus.com/',
+  'Origin': 'https://www.bandai-tcg-plus.com'
+};
+
+function fetchJSONOnce(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
+    https.get(url, { headers: TCGPLUS_HEADERS }, (res) => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
+        if (res.statusCode >= 400) {
+          reject(new Error('HTTP ' + res.statusCode + ': ' + String(data).slice(0, 120)));
+          return;
+        }
         try { resolve(JSON.parse(data)); }
-        catch(e) { reject(e); }
+        catch (e) { reject(new Error('JSON parse failed (HTTP ' + res.statusCode + '): ' + String(data).slice(0, 120))); }
       });
     }).on('error', reject);
   });
+}
+
+// WAF/瞬断対策: 最大3回まで指数バックオフで再試行
+async function fetchJSON(url, attempts = 3) {
+  let lastErr;
+  for (let i = 0; i < attempts; i++) {
+    try { return await fetchJSONOnce(url); }
+    catch (e) {
+      lastErr = e;
+      if (i < attempts - 1) await new Promise(r => setTimeout(r, 1000 * (i + 1)));
+    }
+  }
+  throw lastErr;
 }
 
 async function main() {

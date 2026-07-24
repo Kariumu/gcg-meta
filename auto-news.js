@@ -2113,6 +2113,32 @@ async function gitPush(message, generatedFiles) {
 }
 
 // === メイン処理 ===
+// 指示書50 Task3: 記事公開前ガード
+// - タイトルが括弧ラベル(【..】)のみで実体語が無い場合はスキップ
+// - 本文(3層描画前の articleHtml=1回分)に実質同一の文が複数回出現する場合はスキップ
+//   ※ 表示用<article>+<noscript>+SEO隠しdiv の3層描画は generateNewsPage 側で行うため、
+//     ここでは3層化前の articleHtml のみを検査し、意図的な3層描画を誤検知しない。
+function checkArticleGuard(title, articleHtml) {
+  const titleCore = String(title || '')
+    .replace(/【[^】]*】/g, '')
+    .replace(/[\s　。、，．・…!！?？「」『』（）()\[\]\-—〜~:：;；]/g, '');
+  if (titleCore.length === 0) {
+    return { skip: true, reason: `タイトルが定型ラベルのみで実体語なし: "${title}"` };
+  }
+  const text = String(articleHtml || '').replace(/<[^>]+>/g, '\n');
+  const seen = new Map();
+  for (let sentence of text.split(/[\n。]/)) {
+    sentence = sentence.replace(/\s+/g, ' ').trim();
+    if (sentence.length < 20) continue;
+    const n = (seen.get(sentence) || 0) + 1;
+    seen.set(sentence, n);
+    if (n >= 2) {
+      return { skip: true, reason: `本文に同一文の複数回出現: "${sentence.slice(0, 30)}…"` };
+    }
+  }
+  return { skip: false, reason: '' };
+}
+
 async function main() {
   log('=== auto-news 開始 ===');
 
@@ -2501,6 +2527,12 @@ async function main() {
       const firstLine = (tweet.text.split('\n').find(l => l.trim()) || '速報').trim().slice(0, 40);
       const title = `【速報】${firstLine}`;
       const desc = firstLine;
+      // 指示書50 Task3: 公開前ガード — 定型ラベルのみタイトル/本文重複ならこの投稿は記事化せずスキップ
+      const _guard = checkArticleGuard(title, articleHtml);
+      if (_guard.skip) {
+        log(`[GUARD] 速報記事をスキップ: ${_guard.reason} (${pageId})`);
+        continue;
+      }
       const pageHtml = generateNewsPage(pageId, title, desc, articleHtml, { displayDate: tweetDate.replace(/-/g, '.') });
       const filePath = path.join(NEWS_DIR, `${pageId}.html`);
       fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
@@ -2584,6 +2616,22 @@ async function main() {
     }
   } catch (e) {
     log(`[manifest] articles.json 更新失敗(記事処理は継続): ${e.message}`);
+  }
+
+  // === reports/index.html(記事一覧)の再生成+push(指示書50 Task2, 2026-07-24)===
+  // articles.json を更新した実行のみ、generate-report.js --index-html-only で一覧を再生成し
+  // reports/index.html を push 対象に追加する。「記事は増えたのに一覧に出ない」構造問題を恒久解消。
+  // sitemap は古いローカルを基に本番を後退させ得るため --index-html-only では触らない。失敗しても継続。
+  if (generatedFiles.some((f) => f.repoPath === 'data/articles.json')) {
+    try {
+      const { execFileSync } = require('child_process');
+      const idxLog = execFileSync(process.execPath, [path.join(__dirname, 'generate-report.js'), '--index-html-only'], { encoding: 'utf-8' });
+      idxLog.trim().split('\n').forEach((l) => log(`[index] ${l}`));
+      generatedFiles.push({ repoPath: 'reports/index.html', binary: false });
+      log('[index] reports/index.html を再生成し push 対象に追加');
+    } catch (e) {
+      log(`[index] reports/index.html 再生成失敗(記事処理は継続): ${e.message}`);
+    }
   }
 
   // === Git push ===
