@@ -633,11 +633,18 @@
           <button class="filter-chip active" data-value="all">全て</button>
           <button class="filter-chip" data-rarity="LR" data-value="LR">LR</button>
           <button class="filter-chip" data-rarity="R" data-value="R">R</button>
-          <button class="filter-chip" data-rarity="R" data-value="LKR+">LKR+</button>
           <button class="filter-chip" data-rarity="U" data-value="U">U</button>
-          <button class="filter-chip" data-rarity="U" data-value="LKU+">LKU+</button>
           <button class="filter-chip" data-rarity="C" data-value="C">C</button>
-          <button class="filter-chip" data-rarity="C" data-value="LKC+">LKC+</button>
+        </div>
+      </div>
+
+      <!-- バージョンフィルター（通常/パラレル、2026-07-25） -->
+      <div class="filter-group">
+        <span class="filter-group-label">バージョン / Version</span>
+        <div class="filter-chips" id="filter-version">
+          <button class="filter-chip active" data-value="all">全て</button>
+          <button class="filter-chip" data-value="normal">通常のみ</button>
+          <button class="filter-chip" data-value="parallel">パラレルのみ</button>
         </div>
       </div>
 
@@ -2473,6 +2480,7 @@
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
+      version: 'all', // 'all', 'normal', 'parallel'（バージョン: 通常/パラレル、2026-07-25）
       regulation: 'all', // 'all', 'b'(禁止), 'r'(制限), 'p'(禁止ペア)（指示書43）
       adv: { lv: null, cs: null, ap: null, hp: null, src: [], tr: [], kwMask: 0, nopl: false },
       search: '',
@@ -2542,6 +2550,9 @@
         // Tournament filter
         if (filterState.tournament === 'yes' && !card.recentSeason) return false;
         if (filterState.tournament === 'no' && card.recentSeason) return false;
+        // バージョンフィルタ（通常/パラレル、2026-07-25）: card.pl=1 がパラレル版
+        if (filterState.version === 'normal' && card.pl) return false;
+        if (filterState.version === 'parallel' && !card.pl) return false;
         // 規制状況フィルタ（指示書43）
         if (filterState.regulation !== 'all' && card.reg !== filterState.regulation) return false;
         // 詳細検索（2026-07-11）: 枠内OR・枠間AND
@@ -2692,6 +2703,7 @@
     setupFilterGroup('filter-type', 'types', true);
     setupFilterGroup('filter-rarity', 'rarities', true);
     setupFilterGroup('filter-tournament', 'tournament', false);
+    setupFilterGroup('filter-version', 'version', false);
     setupFilterGroup('filter-regulation', 'regulation', false);
 
     // === 詳細検索（折りたたみパネル 2026-07-11）===
