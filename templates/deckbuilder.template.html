@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-3MY17P4E7F');
+</script>
+<title>デッキビルダー — 大会採用データ連動・TCG＋登録対応 | GCG STATS</title>
+<meta name="description" content="ガンダムカードゲームのデッキビルダー。大会採用データを見ながら構築でき、禁止・制限の自動チェック、TCG＋登録用URL生成、URL共有、TCG＋/GCG DOCK/EXBURST形式のインポートに対応した非公式ツールです。">
+<link rel="canonical" href="https://gcg-stats.com/deck-builder.html">
+<meta property="og:site_name" content="GCG STATS">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="デッキビルダー — 大会採用データ連動・TCG＋登録対応 | GCG STATS">
+<meta property="og:description" content="大会採用データを見ながらデッキを構築。禁止・制限の自動チェックとTCG＋登録用URL生成に対応した非公式デッキビルダー。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://gcg-stats.com/deck-builder.html">
+<meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="デッキビルダー — 大会採用データ連動・TCG＋登録対応 | GCG STATS">
+<meta name="twitter:description" content="大会採用データを見ながらデッキを構築。禁止・制限の自動チェックとTCG＋登録用URL生成に対応。">
+<meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+<!-- 生成元: templates/deckbuilder.template.html + generate_deckbuilder.js（データ埋め込み・LF出力） -->
+<!-- UI: Claude Design 原本の 3a(モバイル検索)/2a(モバイルデッキ)/4a(タブレット)/5a(PC) を忠実移植（2026-07-22 最終版） -->
+<!-- 広告: AdSense却下(2026-07-25)により当面は挿入しない。.ad-slot は既定非表示のまま温存し、承認取得後に body.ads-on＋ユニット挿入で有効化する方針（公開時にnoindexは解除済み）。 -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<style>
+/* ===== 原本トークン（実測値） ===== */
+.db-page {
+  --fg:#e8ecf2; --fg2:#c9cdd6; --fg3:#96a0b0; --mut:#8b95a5; --dim:#5a6577;
+  --bg:#0a0e14; --panel:#111820; --card:#151c27; --card2:#0f1620; --barbg:#0d131c; --side:#0b0f16; --nav:#0b1017;
+  --line:#1e2a3a; --line2:#2a3a50;
+  --gold:#d4a029; --gold-t:#e8c15a;
+  --vred:#f44747; --vred-t:#f7a3a3; --vred-t2:#d6c2c2;
+  --vorange:#e2772e; --vpurple:#b87aff; --vprev:#c9b458;
+  --okg:#34d058; --okg-t:#6ee7a0;
+  --mono:'IBM Plex Mono',monospace;
+  font-family:'IBM Plex Sans JP','Inter',-apple-system,sans-serif;
+  color:var(--fg); background:var(--bg);
+}
+.db-page * { box-sizing:border-box; }
+.db-hidden { display:none !important; }
+/* hidden属性の強制（.tile等のdisplay:flex指定がUAのhiddenを上書きしてしまうため。弾折りたたみの必須修正・2026-07-23） */
+.db-page [hidden] { display:none !important; }
+.mono { font-family:var(--mono); }
+
+/* ---- ヘッダー折りたたみ（残タスク#18・2026-07-23）:
+        スマホ/縦置き小型タブレット/横画面（低背丈）では共通ヘッダーを畳み、コンパクトバー＋「メニュー」開閉に置き換える。
+        共通 js/common.js には手を入れず、このページのCSS/JSだけで完結（他ページ無影響）。 ---- */
+.hdr-mini { display:none; align-items:center; gap:10px; padding:8px 14px; background:var(--barbg); border-bottom:1px solid var(--line); }
+.hdr-mini .t { display:flex; align-items:center; gap:9px; font-size:14px; font-weight:700; color:var(--fg); letter-spacing:.02em; text-decoration:none; }
+.hdr-mini .logo { width:22px; height:22px; border-radius:6px; background:var(--gold); color:var(--bg); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; font-family:var(--mono); }
+.hdr-mini .pg { font-size:12px; color:var(--dim); }
+.hdr-mini .sp { flex:1; }
+.hdr-mini .tg { padding:7px 12px; border-radius:8px; background:var(--card); border:1px solid var(--line); color:var(--mut); font-size:12px; cursor:pointer; font-family:inherit; }
+@media (max-width:599.9px), (max-width:899.9px) and (orientation:portrait), (max-height:520px) {
+  #header { display:none; }                        /* 共通ヘッダーは畳む（DOMはそのまま） */
+  body.hdr-open #header { display:block; }         /* 「メニュー」で展開＝元のナビ全体が出る */
+  .hdr-mini { display:flex; }
+}
+
+/* ---- タブ（モバイル・下線式） ---- */
+.db-tabs { display:flex; padding:2px 12px 0; gap:4px; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:30; background:var(--bg); }
+.db-tab { flex:1; padding:12px 0 13px; background:transparent; border:none; border-bottom:2px solid transparent; color:var(--mut); font-size:13.5px; font-weight:600; cursor:pointer; font-family:inherit; }
+.db-tab.on { border-bottom-color:var(--gold); color:var(--fg); font-weight:700; }
+.db-tab .cnt { font-family:var(--mono); }
+.num.over { color:var(--vred); } .num.ok { color:var(--okg); } .num.under { color:var(--fg); }
+.den { color:var(--dim); }
+
+/* ---- 共通部品 ---- */
+.btn { padding:10px 13px; border-radius:9px; border:1px solid var(--line2); background:var(--card); color:var(--fg); font-size:13px; cursor:pointer; min-height:40px; font-family:inherit; }
+.btn:disabled { opacity:.4; cursor:not-allowed; }
+.btn.gold { background:var(--gold); border-color:var(--gold); color:var(--bg); font-weight:700; }
+.mini-btn { flex:none; width:34px; height:34px; border-radius:8px; background:var(--card); border:1px solid var(--line); color:var(--mut); font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:inherit; }
+.mini-btn:disabled { opacity:.38; cursor:not-allowed; }
+.btn-par { display:inline-flex; align-items:center; gap:6px; height:30px; padding:0 11px; border-radius:8px; background:var(--card); border:1px solid var(--line2); color:var(--mut); font-size:11.5px; cursor:pointer; font-family:inherit; flex:none; }
+.btn-par .st { font-family:var(--mono); font-weight:700; color:var(--dim); }
+.btn-par.on { background:#d4a0291f; border-color:#d4a02988; color:var(--gold-t); font-weight:600; }
+.btn-par.on .st { color:var(--gold-t); }
+.seg-size { display:flex; align-items:center; gap:3px; flex:none; }
+.seg-size button { height:28px; padding:0 9px; border-radius:7px; background:var(--panel); border:1px solid var(--line); color:var(--mut); font-size:11.5px; cursor:pointer; font-family:inherit; }
+.seg-size button.on { background:#1a2333; border-color:var(--line2); color:var(--fg); font-weight:600; }
+.a-chip { flex:none; display:inline-flex; align-items:center; gap:5px; padding:4px 9px; border-radius:8px; background:#d4a0291a; border:1px solid #d4a02955; color:var(--gold-t); font-size:11.5px; cursor:pointer; white-space:nowrap; font-family:inherit; }
+.a-chip .x { font-weight:700; }
+.a-clear { flex:none; color:var(--mut); font-size:11.5px; text-decoration:underline; background:none; border:none; cursor:pointer; font-family:inherit; }
+
+/* ---- 検索入力 ---- */
+.s-input { display:flex; align-items:center; gap:8px; height:44px; padding:0 12px; background:var(--panel); border:1px solid var(--line); border-radius:10px; min-width:0; }
+.s-input input { flex:1; min-width:0; background:transparent; border:none; outline:none; color:var(--fg); font-size:13px; font-family:inherit; }
+.s-input input::placeholder { color:var(--dim); }
+
+/* ---- 検索ヘッダ（モバイル=3a） ---- */
+.s-head { padding:11px 13px 10px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:9px; background:var(--bg); }
+.s-searchrow { display:flex; align-items:center; gap:8px; }
+.s-searchrow .s-input { flex:1; }
+.btn-filter { flex:none; height:44px; padding:0 13px; display:flex; align-items:center; gap:7px; background:var(--card); border:1px solid var(--line2); border-radius:10px; color:var(--fg); font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; }
+.fcnt { min-width:17px; height:17px; padding:0 4px; border-radius:9px; background:var(--gold); color:var(--bg); font-size:10px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+.s-chips { display:flex; align-items:center; gap:6px; overflow-x:auto; scrollbar-width:none; }
+.s-chips::-webkit-scrollbar { display:none; }
+.s-meta { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.s-meta-l { display:flex; align-items:center; gap:9px; }
+.res-cnt { font-size:12px; color:var(--mut); flex:none; }
+.res-cnt b { color:var(--fg); font-weight:700; font-family:var(--mono); font-size:14px; }
+
+/* ---- 検索ヘッダ（≥600 = 4a/5a） ---- */
+.r-head { display:none; padding:13px 20px; border-bottom:1px solid var(--line); align-items:center; gap:10px 13px; flex-wrap:wrap; }
+.rh-l { flex:1 1 340px; min-width:0; display:flex; align-items:center; gap:13px; }
+.rh-r { flex:0 0 auto; margin-left:auto; display:flex; align-items:center; gap:10px; }
+.r-head .s-input { flex:1; height:40px; max-width:420px; min-width:150px; }
+.sort-w { font-size:12px; color:var(--dim); flex:none; display:flex; align-items:center; gap:5px; }
+.sort-w select { background:transparent; border:none; color:var(--fg2); font-size:12px; font-family:inherit; cursor:pointer; outline:none; }
+.sort-w select option { background:var(--panel); }
+
+/* ---- 弾見出し（弾・型番順のときのみ・タップで折りたたみ／既定は展開・2026-07-23） ---- */
+.set-h { grid-column:1/-1; display:flex; align-items:baseline; gap:8px; padding:4px 2px 0; background:none; border:none; cursor:pointer; text-align:left; font-family:inherit; }
+.set-h .ar { font-size:10px; color:var(--dim); width:12px; }
+.set-h .t { font-size:12.5px; font-weight:700; color:var(--mut); letter-spacing:.06em; font-family:var(--mono); }
+.set-h .n { font-size:11px; color:var(--dim); font-family:var(--mono); }
+.set-h .ln { flex:1; height:1px; background:var(--line); align-self:center; }
+
+/* ---- 検索結果グリッド ---- */
+.s-scroll { flex:1; overflow-y:auto; padding:13px; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .s-scroll { padding:16px; } }
+@media (min-width:1024px) { .s-scroll { padding:18px 20px; } }
+#results { display:grid; gap:11px; }
+@media (min-width:1024px) { #results { gap:15px; } }
+#results.s-s { grid-template-columns:repeat(4,minmax(0,1fr)); }
+#results.s-m { grid-template-columns:repeat(3,minmax(0,1fr)); }
+#results.s-l { grid-template-columns:repeat(2,minmax(0,1fr)); }
+@media (min-width:1024px) {
+  #results.s-s { grid-template-columns:repeat(6,minmax(0,1fr)); }
+  #results.s-m { grid-template-columns:repeat(5,minmax(0,1fr)); }
+  #results.s-l { grid-template-columns:repeat(4,minmax(0,1fr)); }
+}
+.tile { display:flex; flex-direction:column; gap:6px; }
+.timg { position:relative; aspect-ratio:63/88; border-radius:9px; border:1.5px solid var(--tac,var(--line)); box-shadow:0 4px 14px var(--tacs,transparent); overflow:hidden; background:var(--card2); cursor:pointer; }
+.timg img { display:block; width:100%; height:100%; object-fit:cover; }
+.timg .ph { position:absolute; inset:0; display:flex; flex-direction:column; gap:3px; align-items:center; justify-content:center; text-align:center; padding:7px; background:repeating-linear-gradient(45deg,var(--card2),var(--card2) 8px,var(--panel) 8px,var(--panel) 16px); }
+.timg .ph .pno { font-family:var(--mono); font-size:8px; color:var(--dim); letter-spacing:.03em; }
+.timg .ph .pname { font-size:11px; font-weight:600; color:#aeb7c5; line-height:1.25; }
+.tbadges { position:absolute; top:5px; right:5px; display:flex; flex-direction:column; gap:3px; align-items:flex-end; }
+.tb { font-size:9.5px; font-weight:800; padding:2px 6px; border-radius:5px; color:var(--bg); box-shadow:0 1px 5px rgba(0,0,0,.45); }
+.tb.banned { background:var(--vred); } .tb.limited { background:var(--vorange); } .tb.pair { background:var(--vpurple); } .tb.pv { background:var(--vprev); }
+.tqty { position:absolute; top:5px; left:5px; display:inline-flex; align-items:center; font-size:10px; font-weight:800; padding:2px 7px; border-radius:5px; color:var(--fg); background:#0a0e14cc; border:1px solid var(--line2); font-family:var(--mono); }
+.stepper { display:flex; align-items:center; background:var(--card); border:1px solid var(--line); border-radius:9px; overflow:hidden; }
+.stepper button { flex:1; min-width:0; height:44px; border:none; background:transparent; color:var(--fg); font-size:19px; line-height:1; cursor:pointer; font-family:inherit; }
+@media (min-width:1024px) { .stepper button { height:40px; } }
+.stepper button:disabled { color:var(--dim); cursor:not-allowed; }
+.stepper .qty { flex:none; min-width:22px; text-align:center; font-family:var(--mono); font-size:14px; font-weight:700; color:var(--fg); border-left:1px solid var(--line); border-right:1px solid var(--line); height:44px; display:flex; align-items:center; justify-content:center; padding:0 3px; }
+@media (min-width:1024px) { .stepper .qty { height:40px; font-size:15px; } }
+.stepper .maxed { flex:1; min-width:0; height:44px; display:flex; align-items:center; justify-content:center; color:var(--dim); font-size:10px; font-weight:700; white-space:nowrap; background:var(--card2); }
+@media (min-width:1024px) { .stepper .maxed { height:40px; } }
+
+/* ---- デッキパネル ---- */
+.d-head { flex:none; padding:11px 14px 10px; border-bottom:1px solid var(--line); display:flex; flex-direction:column; gap:9px; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .d-head { padding:15px 17px 12px; gap:11px; } }
+.d-namerow { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+.d-name { display:flex; align-items:center; gap:7px; min-width:0; flex:1; }
+.d-name input { flex:1; min-width:0; background:transparent; border:none; outline:none; color:var(--fg); font-size:15px; font-weight:700; font-family:inherit; padding:4px 0; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .d-name input { font-size:17px; } }
+.d-name input::placeholder { color:var(--dim); font-weight:600; }
+.d-name .pen { color:var(--dim); font-size:12px; flex:none; }
+.d-pills { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.pill { display:inline-flex; align-items:center; gap:6px; padding:4px 9px; border-radius:7px; font-size:12px; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .pill { padding:5px 11px; border-radius:8px; font-size:13px; } }
+.pill-count { font-family:var(--mono); font-weight:600; }
+.pill-count.over { background:#f4474714; border:1px solid #f4474733; color:#f47b7b; }
+.pill-count.over .den { color:#7a5a5a; } .pill-count.over .delta { color:var(--vred); }
+.pill-count.ok { background:#34d05812; border:1px solid #34d05833; color:var(--okg-t); }
+.pill-count.ok .den { color:#4a6a55; }
+.pill-count.under { background:var(--card); border:1px solid var(--line); color:var(--mut); }
+.pill-colors { background:var(--card); border:1px solid var(--line); color:var(--mut); }
+.pill-colors .dots { display:inline-flex; gap:3px; }
+.pill-colors .dot { width:9px; height:9px; border-radius:50%; }
+
+/* ---- 違反サマリバー ---- */
+.vio { flex:none; border-bottom:1px solid var(--line); }
+.vio-sum { width:100%; display:flex; align-items:center; gap:10px; padding:11px 13px; border:none; cursor:pointer; text-align:left; font-family:inherit; background:#f4474712; border-left:3px solid var(--vred); }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .vio-sum { padding:11px 16px; } }
+.vio.ok .vio-sum { background:#34d0580d; border-left-color:var(--okg); cursor:default; }
+.vio-ic { width:22px; height:22px; border-radius:6px; color:var(--bg); font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none; background:var(--vred); }
+.vio.ok .vio-ic { background:var(--okg); }
+.vio-t { flex:1; font-size:13px; font-weight:700; color:var(--vred-t); }
+.vio.ok .vio-t { color:var(--okg-t); }
+.vio-sq { display:flex; gap:3px; flex:none; }
+.vio-sq span { width:9px; height:9px; border-radius:2px; }
+.vio-more { font-size:11px; color:#a9b1bf; display:flex; align-items:center; gap:4px; flex:none; }
+.vio-more .ar { font-size:9px; }
+.vio-body { display:none; background:#150f12; padding:2px 9px 6px; flex-direction:column; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .vio-body { padding:2px 13px 7px; } }
+.vio.open .vio-body { display:flex; }
+.vio-item { display:flex; align-items:center; gap:9px; padding:6px 5px; background:none; border:none; border-top:1px solid #ffffff08; cursor:pointer; text-align:left; width:100%; font-family:inherit; }
+.vio-item:first-child { border-top:none; }
+.vio-item .sq { width:8px; height:8px; border-radius:2px; flex:none; }
+.vio-item .tx { flex:1; font-size:11.5px; color:var(--vred-t2); line-height:1.35; }
+.vio-item .go { color:var(--dim); font-size:13px; }
+.vio-note { padding:5px 5px 2px; font-size:10px; color:var(--dim); line-height:1.3; }
+
+/* ---- 注意バー（先行=5a実測 / 未解決） ---- */
+.note-bar { margin:0; padding:9px 11px; border-radius:9px; display:flex; gap:9px; font-size:11px; line-height:1.5; }
+.note-bar.pv { background:#c9b4581a; border:1px solid #c9b45840; color:var(--fg2); }
+.note-bar.pv .ic { color:#d4c06a; font-size:14px; flex:none; }
+.note-bar.pv .names { color:var(--mut); }
+.note-bar.un { background:var(--panel); border:1px solid var(--line); color:var(--mut); }
+
+/* ---- デッキ本体 ---- */
+.d-scroll { flex:1; overflow-y:auto; padding:13px 13px 16px; display:flex; flex-direction:column; gap:17px; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .d-scroll { padding:13px 15px 15px; gap:15px; } }
+.dsec { display:flex; flex-direction:column; gap:9px; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) { .dsec { gap:8px; } }
+.dsec-h { display:flex; align-items:baseline; gap:8px; padding:0 2px; }
+.dsec-h .t { font-size:12.5px; font-weight:700; color:var(--mut); letter-spacing:.06em; }
+.dsec-h .n { font-size:11px; color:var(--dim); font-family:var(--mono); }
+.dsec-h .ln { flex:1; height:1px; background:var(--line); }
+.dgrid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+.drows { display:flex; flex-direction:column; gap:7px; }
+.drow { display:flex; align-items:center; gap:10px; padding:6px 9px; background:var(--card); border:1px solid var(--rac,var(--line)); border-left:3px solid var(--rac,var(--line)); border-radius:8px; }
+.drow.viol { background:var(--rbg,var(--card)); }
+.drow .rthumb { position:relative; width:30px; height:42px; border-radius:4px; border:1px solid var(--line); background:var(--card2); flex:none; overflow:hidden; cursor:pointer; }
+.drow .rthumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.drow .rthumb .ph { position:absolute; inset:0; background:repeating-linear-gradient(45deg,var(--card2),var(--card2) 5px,var(--panel) 5px,var(--panel) 10px); }
+.drow .rmain { flex:1; min-width:0; display:flex; flex-direction:column; gap:2px; cursor:pointer; }
+.drow .rn { display:flex; align-items:center; gap:6px; }
+.drow .rname { font-size:12.5px; font-weight:600; color:var(--fg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tb-o { font-size:9px; font-weight:700; padding:1px 5px; border-radius:4px; white-space:nowrap; flex:none; border:1px solid; }
+.tb-o.banned { color:var(--vred); background:#f4474714; border-color:#f4474755; }
+.tb-o.limited { color:var(--vorange); background:#e2772e14; border-color:#e2772e55; }
+.tb-o.pair { color:var(--vpurple); background:#b87aff14; border-color:#b87aff55; }
+.tb-o.pv { color:var(--vprev); background:#c9b45814; border-color:#c9b45855; }
+.drow .rno { font-family:var(--mono); font-size:10px; color:var(--dim); }
+.rstep { display:flex; align-items:center; background:var(--card2); border:1px solid var(--line); border-radius:7px; overflow:hidden; flex:none; }
+.rstep button { width:32px; height:36px; border:none; background:transparent; color:var(--fg); font-size:17px; cursor:pointer; font-family:inherit; }
+.rstep button:disabled { color:var(--dim); cursor:not-allowed; }
+.rstep .qty { min-width:20px; text-align:center; font-family:var(--mono); font-size:13px; font-weight:700; color:var(--fg); }
+
+/* ---- 診断（コスト曲線=divバー・色/タイプ比率=枚数行表示〈2026-07-22 松岡さん指示で円グラフから変更〉） ---- */
+.diag { display:flex; flex-direction:column; gap:11px; padding:13px; border-radius:11px; background:var(--barbg); border:1px solid var(--line); }
+.diag-h { display:flex; align-items:center; gap:8px; }
+.diag-h .t { font-size:13px; font-weight:700; color:var(--fg); }
+.diag-h .avg { font-size:10.5px; color:var(--dim); }
+.diag-h .avg b { color:var(--fg2); font-family:var(--mono); font-weight:600; }
+.diag-lb { font-size:10.5px; color:var(--mut); }
+.curve { display:flex; align-items:flex-end; gap:5px; height:74px; padding:2px 0; }
+.curve .col { flex:1; display:flex; flex-direction:column; align-items:center; gap:3px; justify-content:flex-end; height:100%; }
+.curve .bar { width:100%; background:linear-gradient(180deg,#d4a029,#a87c1d); border-radius:3px 3px 0 0; min-height:2px; }
+.curve .k { font-size:8.5px; color:var(--dim); font-family:var(--mono); }
+.pies { display:flex; gap:14px; }
+.pie-w { flex:1; min-width:0; display:flex; flex-direction:column; gap:6px; }
+/* 色/タイプ比率＝枚数の行表示（2026-07-22 松岡さん指示で円グラフから変更） */
+.diag-rows { display:flex; flex-direction:column; gap:4px; }
+.drw { display:flex; align-items:center; gap:7px; font-size:11px; color:var(--fg2); }
+.drw .dot { width:9px; height:9px; border-radius:50%; flex:none; }
+.drw .lb { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.drw .n { margin-left:auto; font-family:var(--mono); font-weight:600; color:var(--fg); }
+.drw .n small { color:var(--dim); font-weight:400; }
+.diag-toggle { display:flex; align-items:center; justify-content:space-between; padding:13px 14px; border-radius:11px; background:var(--panel); border:1px solid var(--line); color:var(--fg); font-size:13px; font-weight:600; cursor:pointer; text-align:left; font-family:inherit; }
+.diag-toggle .sub { color:var(--dim); font-weight:400; margin-left:9px; font-size:11px; }
+.diag-toggle .ar { color:var(--mut); }
+
+/* ---- デッキ下部（5a: 縦2段） ---- */
+.d-foot { flex:none; display:none; padding:12px 15px; border-top:1px solid var(--line); background:var(--barbg); flex-direction:column; gap:8px; }
+.btn-tcg { width:100%; height:46px; border:none; border-radius:10px; background:var(--gold); color:var(--bg); font-size:14px; font-weight:700; cursor:pointer; box-shadow:0 4px 14px rgba(212,160,41,.28); font-family:inherit; }
+.btn-tcg.is-disabled { opacity:.45; cursor:not-allowed; box-shadow:none; }
+.d-foot-row { display:flex; gap:8px; }
+.d-foot-row .fb { flex:1; height:40px; border-radius:9px; background:var(--card); border:1px solid var(--line2); color:var(--fg2); font-size:12.5px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px; font-family:inherit; }
+.d-foot-row .fb.sq { flex:none; width:52px; color:var(--mut); font-size:12px; }
+.tcg-reason { font-size:10.5px; color:var(--dim); line-height:1.45; }
+
+/* ---- モバイル下部バー（2a/3a） ---- */
+.abar-wrap { display:none; }
+.sbar-wrap { display:none; }
+.abar { padding:11px 13px calc(11px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); background:var(--barbg); display:flex; align-items:center; gap:9px; }
+.abar .btn-tcg { flex:1; height:48px; border-radius:11px; font-size:14.5px; }
+.btn-ico { width:48px; height:48px; border-radius:11px; background:var(--card); border:1px solid var(--line2); color:var(--fg2); cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.abar-reason { padding:8px 13px 0; background:var(--barbg); font-size:10.5px; color:var(--dim); line-height:1.45; }
+.sbar { padding:10px 13px calc(10px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); background:var(--barbg); display:flex; align-items:center; justify-content:space-between; }
+.sbar .sum { font-size:12.5px; color:var(--mut); }
+.sbar .sum .num, .sbar .sum .den { font-family:var(--mono); font-weight:700; }
+.btn-godeck { height:38px; padding:0 15px; border-radius:10px; background:var(--card); border:1px solid var(--line2); color:var(--fg); font-size:12.5px; font-weight:600; cursor:pointer; display:flex; align-items:center; gap:6px; font-family:inherit; }
+.btn-godeck .ar { color:var(--mut); }
+
+/* ---- 空状態 ---- */
+.empty { text-align:center; padding:34px 14px; color:var(--fg3); font-size:13px; border:1px dashed var(--line); border-radius:12px; margin:13px; }
+.empty .big { font-size:26px; display:block; margin-bottom:8px; }
+.empty .links { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
+
+/* ---- フィルタ（モバイル=シート / タブレット=アコーディオン(4a) / PC=左ペイン(5a)） ---- */
+#paneFilter { background:var(--nav); }
+.f-acc { display:none; width:100%; align-items:center; gap:11px; padding:12px 20px; background:transparent; border:none; cursor:pointer; text-align:left; font-family:inherit; }
+.f-acc .t { display:flex; align-items:center; gap:7px; color:var(--fg); font-size:13.5px; font-weight:700; }
+.f-acc .chips-inline { display:flex; align-items:center; gap:6px; overflow:hidden; }
+.f-acc .sp { flex:1; }
+.f-acc .cl { font-size:12px; color:var(--mut); text-decoration:underline; }
+.f-acc .oc { color:var(--mut); font-size:12px; flex:none; }
+.f-title { display:none; padding:15px 16px 12px; border-bottom:1px solid var(--line); align-items:center; justify-content:space-between; }
+.f-title .t { display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:700; color:var(--fg); }
+.f-title .cl { font-size:11.5px; color:var(--mut); text-decoration:underline; cursor:pointer; background:none; border:none; font-family:inherit; }
+.f-body { padding:14px; }
+.fgroup { display:flex; flex-direction:column; gap:9px; margin-bottom:15px; }
+.fgroup h4 { margin:0; font-size:11.5px; color:var(--mut); font-weight:700; }
+.chips { display:flex; flex-wrap:wrap; gap:7px; }
+.chip { display:inline-flex; align-items:center; gap:6px; padding:6px 11px; border-radius:8px; background:var(--card); border:1.5px solid var(--line); color:var(--mut); font-size:12px; cursor:pointer; font-family:inherit; }
+.chip.on { background:#d4a0291f; border-color:#d4a02988; color:var(--gold-t); font-weight:600; }
+.chip .cdot { width:10px; height:10px; border-radius:50%; }
+.chip.c-on { color:#dfe9f7; font-weight:600; }   /* 色チップは色ごとにJSで着色 */
+.chip.mono { font-family:var(--mono); }
+/* コマンド＋展開（5a実測: 分割チップ＋破線サブチップ「↳＆パイロット」） */
+.chip-split { display:inline-flex; align-items:stretch; border-radius:8px; overflow:hidden; border:1.5px solid var(--line); }
+.chip-split.on { border-color:#d4a02988; }
+.cs-main { padding:6px 11px; background:var(--card); color:var(--mut); border:none; font-size:12px; cursor:pointer; font-family:inherit; display:flex; align-items:center; }
+.chip-split.on .cs-main { background:#d4a0291f; color:var(--gold-t); font-weight:600; }
+.cs-x { padding:0 9px; background:var(--panel); border:none; border-left:1px solid var(--line); color:var(--mut); font-size:14px; line-height:1; cursor:pointer; display:flex; align-items:center; font-family:inherit; }
+.chip.subp { border-style:dashed; border-color:var(--line2); color:var(--fg2); }
+.chip.subp .arr { color:var(--dim); margin-right:2px; }
+.chip.subp.on { border-style:solid; border-color:#d4a02988; color:var(--gold-t); background:#d4a0291f; font-weight:600; }
+.frow { display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:12.5px; color:var(--mut); }
+.frow select { padding:8px; border-radius:8px; border:1px solid var(--line); background:var(--panel); color:var(--fg); font-size:12.5px; font-family:inherit; max-width:100%; }
+/* デュアルレンジ（4a/5a実測: 金トラック＋白サム） */
+.range-h { display:flex; align-items:baseline; justify-content:space-between; }
+.range-h .v { font-size:11.5px; font-family:var(--mono); color:var(--mut); }
+.range-h .v.on { color:var(--gold-t); font-weight:600; }
+.drange { position:relative; height:15px; margin:4px 8px; }
+.drange .track { position:absolute; left:0; right:0; top:50%; transform:translateY(-50%); height:4px; background:var(--line); border-radius:2px; }
+.drange .fill { position:absolute; top:50%; transform:translateY(-50%); height:4px; background:#3a4658; border-radius:2px; }
+.drange .fill.on { background:var(--gold); }
+.drange input[type=range] { position:absolute; inset:0; width:100%; margin:0; -webkit-appearance:none; appearance:none; background:none; pointer-events:none; height:15px; }
+.drange input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:15px; height:15px; border-radius:50%; background:#e8ecf2; border:none; pointer-events:auto; cursor:pointer; }
+.drange input[type=range]::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:#e8ecf2; border:none; pointer-events:auto; cursor:pointer; }
+.factions { display:flex; gap:8px; margin-top:4px; }
+
+/* ---- 広告枠（§6.6・既定非表示。公開時に body.ads-on ＋ ユニット挿入で有効化） ---- */
+.ad-slot { display:none; }
+body.ads-on .ad-slot { display:block; margin-top:16px; min-height:100px; border-radius:10px; background:var(--panel); border:1px solid var(--line); overflow:hidden; }
+body.ads-on .ad-slot::before { content:'広告'; display:block; font-size:9px; color:var(--dim); letter-spacing:.1em; padding:4px 8px 0; }
+body.ads-on .ad-slot ins { display:block; }
+
+/* ---- インポート（§10.4/§10.6） ---- */
+.imp-ta { width:100%; min-height:120px; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--fg); font-size:12.5px; font-family:var(--mono); line-height:1.6; outline:none; }
+.imp-ta:focus { border-color:var(--line2); }
+.imp-prev { margin-top:9px; font-size:12px; color:var(--fg2); line-height:1.7; }
+.imp-prev .k { display:inline-block; font-size:10.5px; font-weight:700; padding:2px 8px; border-radius:6px; background:#d4a0291f; border:1px solid #d4a02955; color:var(--gold-t); margin-right:7px; }
+.imp-prev .num { font-family:var(--mono); font-weight:700; color:var(--fg); }
+.imp-prev .un { color:var(--vred-t); font-size:11px; }
+.imp-prev .dim { color:var(--dim); font-size:11px; }
+
+/* ---- モーダル・メニュー・トースト ---- */
+.ovl { position:fixed; inset:0; background:rgba(4,6,10,.66); z-index:1190; display:none; }
+.ovl.open { display:block; }
+.modal { position:fixed; z-index:1195; left:50%; top:50%; transform:translate(-50%,-50%); width:min(560px,calc(100vw - 24px)); max-height:86vh; overflow:auto; background:var(--barbg); border:1px solid var(--line2); border-radius:15px; padding:15px; display:none; color:var(--fg); }
+.modal.open { display:block; }
+.modal h3 { margin:0 0 10px; font-size:15px; }
+.modal .x { position:absolute; top:10px; right:10px; }
+.menu { position:absolute; z-index:1196; background:var(--barbg); border:1px solid var(--line2); border-radius:11px; padding:6px; min-width:190px; box-shadow:0 12px 34px rgba(0,0,0,.5); display:none; }
+.menu.open { display:block; }
+.menu button { display:block; width:100%; text-align:left; padding:10px 12px; background:none; border:none; border-radius:8px; color:var(--fg); font-size:13px; cursor:pointer; font-family:inherit; }
+.menu button:hover { background:#1a2333; }
+.menu hr { border:none; border-top:1px solid var(--line); margin:5px 0; }
+#toast { position:fixed; z-index:1220; left:50%; bottom:88px; transform:translateX(-50%); background:var(--barbg); border:1px solid var(--line2); color:var(--fg); border-radius:10px; padding:10px 14px; font-size:13px; display:none; align-items:center; gap:10px; max-width:calc(100vw - 30px); box-shadow:0 10px 30px rgba(0,0,0,.5); font-family:'IBM Plex Sans JP',sans-serif; }
+#toast.err { border-color:#f4474766; }
+#toast.show { display:flex; }
+#toast button { border:1px solid var(--gold); background:none; color:var(--gold-t); border-radius:7px; padding:5px 10px; font-size:12px; cursor:pointer; font-family:inherit; }
+
+/* ---- カード詳細（6a/6b/6c 実測移植） ---- */
+#cardModal { padding:0; background:#0c111a; border:1px solid #263344; display:none; flex-direction:column; overflow:hidden; }
+#cardModal.open { display:flex; }
+#cardModalBody { display:flex; flex-direction:column; min-height:0; flex:1; }
+.cm2-cols { display:flex; min-height:0; flex:1; overflow:hidden; }
+.cm2-left { display:flex; flex-direction:column; gap:14px; }
+.cm2-right { flex:1; min-width:0; display:flex; flex-direction:column; gap:15px; overflow-y:auto; }
+.cm2-art { position:relative; aspect-ratio:63/88; border-radius:12px; border:1.5px solid var(--cac,#4d9ff7); background:var(--card2); box-shadow:0 12px 34px var(--cacs,transparent); overflow:hidden; flex:none; }
+.cm2-art img { width:100%; height:100%; object-fit:cover; display:block; }
+.cm2-art .ph { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-size:11px; color:#7d8797; background:repeating-linear-gradient(45deg,var(--card2),var(--card2) 8px,var(--panel) 8px,var(--panel) 16px); }
+.cm2-art .b-pv { position:absolute; top:9px; left:9px; font-size:11px; font-weight:800; padding:3px 9px; border-radius:6px; color:var(--bg); background:var(--vprev); box-shadow:0 2px 7px rgba(0,0,0,.4); }
+.cm2-art .b-rar { position:absolute; top:9px; right:9px; font-size:11px; font-weight:800; padding:3px 9px; border-radius:6px; color:var(--bg); background:var(--fg); font-family:var(--mono); }
+.cm2-art .b-reg { position:absolute; bottom:9px; right:9px; display:flex; gap:4px; }
+.cm2-name { font-size:21px; font-weight:700; color:var(--fg); line-height:1.2; }
+.cm2-idrow { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.cm2-id { font-family:var(--mono); font-size:12px; color:var(--dim); }
+.cm2-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.cm2-stat { display:flex; flex-direction:column; align-items:center; gap:3px; padding:10px 0; background:var(--panel); border:1px solid var(--line); border-radius:10px; }
+.cm2-stat .k { font-size:10px; color:var(--mut); }
+.cm2-stat .v { font-size:20px; font-weight:700; color:var(--fg); font-family:var(--mono); }
+.cm2-effect { display:flex; flex-direction:column; gap:7px; padding:12px 13px; background:#0f151e; border:1px solid var(--line); border-radius:11px; }
+.cm2-effect .k { font-size:11px; font-weight:700; color:var(--mut); letter-spacing:.04em; }
+.cm2-effect .tx { font-size:12.5px; line-height:1.65; color:#d3d9e2; white-space:pre-line; }
+.cm2-pv { display:flex; gap:9px; padding:9px 11px; border-radius:9px; background:#c9b4581a; border:1px solid #c9b45840; font-size:11px; line-height:1.5; color:var(--fg2); }
+.cm2-pv .ic { color:#d4c06a; font-size:13px; flex:none; }
+/* 折りたたみセクション（絵柄バージョン／リンク対象カード） */
+.cm2-sec { border:1px solid var(--line); border-radius:11px; background:var(--panel); overflow:hidden; flex:none; }
+.cm2-sech { width:100%; display:flex; align-items:center; gap:7px; padding:11px 13px; background:none; border:none; cursor:pointer; text-align:left; font-family:inherit; }
+.cm2-sech .t { font-size:11px; font-weight:700; color:var(--mut); letter-spacing:.04em; }
+.cm2-sech .n { font-size:10px; color:var(--dim); font-family:var(--mono); }
+.cm2-sech .ar { margin-left:auto; color:var(--mut); font-size:11px; }
+.cm2-secb { display:none; padding:0 11px 11px; }
+.cm2-sec.open .cm2-secb { display:block; }
+.cm2-vers { display:flex; gap:9px; flex-wrap:wrap; }
+.cm2-ver { width:calc(25% - 7px); display:flex; flex-direction:column; align-items:center; gap:5px; padding:6px; border-radius:10px; background:var(--card2); border:1.5px solid transparent; cursor:pointer; font-family:inherit; }
+.cm2-ver.on { border-color:var(--gold); }
+.cm2-ver .vi { position:relative; width:100%; aspect-ratio:63/88; border-radius:6px; overflow:hidden; background:var(--card2); }
+.cm2-ver .vi img { width:100%; height:100%; object-fit:cover; display:block; }
+.cm2-ver .vi .ph { position:absolute; inset:0; background:repeating-linear-gradient(45deg,var(--card2),var(--card2) 6px,var(--panel) 6px,var(--panel) 12px); }
+.cm2-ver .vl { font-size:9px; color:var(--fg2); font-weight:600; text-align:center; line-height:1.25; }
+.cm2-ver .vl .r { color:var(--mut); font-family:var(--mono); }
+.cm2-links { display:flex; flex-direction:column; gap:6px; }
+.cm2-lrow { display:flex; align-items:center; gap:9px; padding:6px 8px; background:var(--card2); border:1px solid var(--line); border-radius:8px; cursor:pointer; text-align:left; font-family:inherit; width:100%; }
+.cm2-lrow .lt { position:relative; width:26px; height:36px; border-radius:4px; overflow:hidden; background:var(--card2); flex:none; }
+.cm2-lrow .lt img { width:100%; height:100%; object-fit:cover; display:block; }
+.cm2-lrow .lt .ph { position:absolute; inset:0; background:repeating-linear-gradient(45deg,var(--card2),var(--card2) 5px,var(--panel) 5px,var(--panel) 10px); }
+.cm2-lrow .ln { flex:1; min-width:0; font-size:12px; font-weight:600; color:var(--fg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.cm2-lrow .li { font-family:var(--mono); font-size:10px; color:var(--dim); flex:none; }
+.cm2-lrow .go { color:var(--dim); flex:none; }
+.cm2-lraw { font-size:11px; color:var(--mut); padding:5px 8px; background:var(--card2); border:1px dashed var(--line2); border-radius:8px; }
+.cm2-page { display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-radius:10px; background:var(--panel); border:1px solid var(--line); color:#8fc3ff; font-size:12.5px; font-weight:600; text-decoration:none; flex:none; }
+.cm2-foot { flex:none; padding:11px 14px calc(11px + env(safe-area-inset-bottom)); border-top:1px solid var(--line); background:var(--barbg); display:flex; align-items:center; gap:11px; }
+.cm2-step { flex:none; display:flex; align-items:center; background:var(--card); border:1px solid var(--line2); border-radius:11px; overflow:hidden; }
+.cm2-step button { width:46px; height:48px; border:none; background:transparent; color:var(--fg); font-size:22px; cursor:pointer; font-family:inherit; }
+.cm2-step button:disabled { color:var(--dim); cursor:not-allowed; }
+.cm2-step .q { min-width:30px; text-align:center; font-family:var(--mono); font-size:17px; font-weight:700; color:var(--fg); }
+.cm2-step .mx { width:46px; height:48px; display:flex; align-items:center; justify-content:center; color:var(--dim); font-size:10px; font-weight:700; }
+.cm2-max { font-size:12px; color:var(--mut); display:none; }
+.cm2-add { flex:1; height:48px; border:none; border-radius:11px; background:var(--gold); color:var(--bg); font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; }
+.cm2-add:disabled { opacity:.45; cursor:not-allowed; }
+.cm2-add .x { font-family:var(--mono); margin-left:7px; }
+.cm2-close2 { display:none; flex:none; height:46px; padding:0 22px; border-radius:11px; background:var(--card); border:1px solid var(--line2); color:var(--fg2); font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; }
+.cm2-head { flex:none; display:flex; align-items:center; justify-content:space-between; padding:12px 16px 0; }
+.cm2-head .t { font-size:12px; color:var(--mut); font-family:var(--mono); letter-spacing:.05em; }
+.cm2-handle { flex:none; display:flex; justify-content:center; padding:9px 0 4px; }
+.cm2-handle span { width:38px; height:4px; border-radius:2px; background:var(--line2); }
+/* モバイル(6a): ボトムシート＋縦1カラム */
+@media (max-width:599.9px), (max-width:899.9px) and (orientation:portrait) {
+  #cardModal { top:auto; left:0; right:0; bottom:0; transform:none; width:100%; max-height:90vh; border-radius:22px 22px 0 0; border-bottom:none; box-shadow:0 -20px 50px rgba(0,0,0,.5); }
+  .cm2-cols { flex-direction:column; overflow-y:auto; padding:6px 16px 14px; gap:15px; }
+  .cm2-left { align-items:center; }
+  .cm2-art { width:200px; }
+  .cm2-right { overflow:visible; }
+  .cm2-vleft { display:contents; }
+  /* 6a の縦順: アート → 情報 → 絵柄バージョン → リンク対象カード */
+  .cm2-left { order:0; }
+  .cm2-right { order:1; }
+  #cmSecV { order:2; }
+  #cmSecL { order:3; }
+}
+/* ワイド(6b/6c): 中央ダイアログ・左右2カラム */
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) {
+  #cardModal { width:min(672px,calc(100vw - 40px)); border-radius:20px; }
+  .cm2-handle, .cm2-head { display:none; }
+  .cm2-cols { flex-direction:row; }
+  .cm2-vleft { flex:none; width:260px; padding:22px; display:flex; flex-direction:column; gap:14px; border-right:1px solid var(--line); background:#0a0f17; overflow-y:auto; }
+  .cm2-right { padding:22px 24px; }
+  .cm2-name { font-size:24px; }
+  .cm2-stat .v { font-size:22px; }
+  .cm2-effect .tx { font-size:13px; line-height:1.7; }
+  .cm2-vers { gap:8px; }
+  .cm2-ver { width:calc(50% - 6px); }
+  .cm2-max { display:inline; }
+  .cm2-add { flex:none; padding:0 30px; }
+  .cm2-foot { padding:14px 24px; justify-content:flex-end; }
+  .cm2-step { margin-right:auto; }
+}
+@media (min-width:1024px) {
+  #cardModal { width:min(820px,calc(100vw - 60px)); }
+  .cm2-vleft { width:312px; padding:26px; }
+  .cm2-right { padding:26px 28px; gap:17px; }
+  .cm2-name { font-size:27px; }
+  .cm2-stat .v { font-size:25px; }
+  .cm2-effect .tx { font-size:14px; line-height:1.75; }
+  .cm2-close2 { display:flex; align-items:center; }
+}
+
+/* ---- デッキ詳細（8a/8b/8c 実測移植） ---- */
+#deckDetail { position:fixed; inset:0; z-index:1100; background:var(--bg); display:none; flex-direction:column; color:var(--fg); font-family:'IBM Plex Sans JP','Inter',sans-serif; }  /* ovl(90)/modal(95)より下＝上に開くカード詳細で暗幕が効く */
+#deckDetail.open { display:flex; }
+.dd-top { flex:none; display:flex; align-items:center; gap:10px; padding:8px 12px; border-bottom:1px solid var(--line); background:var(--barbg); }
+.dd-toplbl { font-size:13px; color:var(--mut); font-family:var(--mono); letter-spacing:.05em; }
+.dd-topsub { font-size:13px; color:var(--dim); }
+.dd-head { flex:none; padding:13px 15px; border-bottom:1px solid var(--line); display:flex; align-items:flex-start; gap:18px; }
+.dd-thumb { display:none; position:relative; flex:none; width:96px; height:134px; border-radius:9px; border:1px solid var(--line); background:var(--card2); overflow:hidden; }
+.dd-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.dd-thumb .ph { position:absolute; inset:0; background:repeating-linear-gradient(135deg,#4d9ff730 0 6px,#4d9ff710 6px 13px), var(--card2); }
+.dd-info { flex:1; min-width:0; display:flex; flex-direction:column; gap:11px; }
+.dd-namerow { display:flex; align-items:center; gap:8px; min-width:0; }
+.dd-name { font-size:18px; font-weight:700; color:var(--fg); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.dd-pen { color:var(--dim); font-size:13px; flex:none; cursor:pointer; background:none; border:none; font-family:inherit; }
+.dd-pills { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.dd-cnt { display:inline-flex; align-items:center; gap:5px; font-size:11.5px; font-family:var(--mono); font-weight:600; padding:3px 9px; border-radius:6px; }
+.dd-cnt.over { color:#f47b7b; background:#f4474714; border:1px solid #f4474740; }
+.dd-cnt.ok { color:var(--okg-t); background:#34d05812; border:1px solid #34d05840; }
+.dd-cnt.under { color:var(--mut); background:var(--card); border:1px solid var(--line); }
+.dd-dots { display:inline-flex; gap:3px; }
+.dd-dots span { width:9px; height:9px; border-radius:50%; }
+.dd-upd { font-size:11.5px; color:var(--dim); }
+.dd-vio { display:flex; align-items:center; gap:8px; padding:8px 11px; border-radius:9px; background:#f4474712; border:1px solid #f4474733; cursor:pointer; text-align:left; font-family:inherit; width:100%; }
+.dd-vio.ok { background:#34d0580d; border-color:#34d05833; cursor:default; }
+.dd-vio .ic { width:18px; height:18px; border-radius:5px; background:var(--vred); color:var(--bg); font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex:none; }
+.dd-vio.ok .ic { background:var(--okg); }
+.dd-vio .t { font-size:12px; color:var(--vred-t); font-weight:600; }
+.dd-vio.ok .t { color:var(--okg-t); }
+.dd-vio .go { margin-left:auto; font-size:11px; color:var(--mut); }
+.dd-acts { display:flex; flex-direction:column; gap:8px; }
+.dd-open { width:100%; height:46px; border:none; border-radius:10px; background:var(--gold); color:var(--bg); font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; }
+.dd-row2 { display:flex; gap:8px; }
+.dd-b { flex:1; height:40px; border-radius:9px; background:var(--card); border:1px solid var(--line); color:var(--fg2); font-size:12px; cursor:pointer; font-family:inherit; }
+.dd-del { flex:none; width:44px; height:40px; border-radius:9px; background:var(--card); border:1px solid var(--line); color:#f47b7b; font-size:15px; cursor:pointer; font-family:inherit; }
+.dd-tcg { width:100%; height:44px; border-radius:10px; background:#d4a02914; border:1px solid #d4a02988; color:var(--gold-t); font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:7px; font-family:inherit; }
+.dd-tcg .pi { width:18px; height:18px; border-radius:5px; background:var(--gold); color:var(--bg); font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center; font-family:var(--mono); }
+.dd-scroll { flex:1; overflow-y:auto; padding:13px 15px 18px; display:flex; flex-direction:column; gap:16px; }
+.dd-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.dd-card { display:flex; flex-direction:column; gap:5px; cursor:pointer; }
+.dd-ci { position:relative; aspect-ratio:63/88; border-radius:8px; border:1.5px solid var(--dac,var(--line)); overflow:hidden; background:var(--card2); }
+.dd-ci img { width:100%; height:100%; object-fit:cover; display:block; }
+.dd-ci .ph { position:absolute; inset:0; background:repeating-linear-gradient(45deg,var(--card2),var(--card2) 6px,var(--panel) 6px,var(--panel) 12px); }
+.dd-ci .bq { position:absolute; bottom:4px; right:4px; font-size:10px; font-weight:800; padding:1px 6px; border-radius:5px; color:var(--bg); background:var(--fg); font-family:var(--mono); }
+.dd-ci .bb { position:absolute; top:4px; left:4px; display:flex; gap:3px; }
+.dd-cn { font-size:9.5px; color:#aeb7c5; text-align:center; line-height:1.2; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) {
+  .dd-top { height:56px; padding:0 18px; }
+  .dd-toplbl { font-size:15px; font-weight:700; color:var(--fg); font-family:inherit; letter-spacing:0; }
+  .dd-head { padding:18px 22px; }
+  .dd-thumb { display:block; }
+  .dd-name { font-size:22px; }
+  .dd-acts { flex-direction:row; align-items:center; flex-wrap:wrap; padding-top:2px; }
+  .dd-open { width:auto; height:42px; padding:0 22px; font-size:13.5px; }
+  .dd-tcg { width:auto; height:42px; padding:0 16px; font-size:12.5px; }
+  .dd-row2 { display:contents; }
+  .dd-b { flex:none; height:42px; padding:0 15px; font-size:12.5px; border-color:var(--line2); }
+  .dd-del { height:42px; border-color:var(--line2); }
+  .dd-vio { width:auto; padding:0; background:none; border:none; }
+  .dd-scroll { padding:18px 22px; gap:18px; }
+  .dd-grid { grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+  .dd-cn { font-size:10.5px; }
+}
+@media (min-width:1024px) {
+  .dd-head { align-items:center; gap:16px; padding:18px 26px; }
+  .dd-info { gap:9px; }
+  .dd-name { font-size:24px; }
+  .dd-thumb { width:78px; height:109px; }
+  .dd-acts { padding-top:0; }
+  .dd-scroll { padding:20px 26px; gap:20px; }
+  .dd-grid { grid-template-columns:repeat(8,minmax(0,1fr)); gap:14px; }
+  .dd-cn { font-size:11px; }
+}
+
+/* ---- 保存デッキ一覧 ---- */
+.dk-cap { font-family:var(--mono); font-size:12px; color:var(--fg3); margin-bottom:9px; }
+.dk-row { display:flex; gap:9px; align-items:center; border:1px solid var(--line); border-radius:10px; background:var(--card); padding:9px 10px; margin-bottom:7px; }
+.dk-info { flex:1; min-width:0; }
+.dk-name { font-size:13.5px; font-weight:700; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.dk-sub { font-size:11px; color:var(--dim); margin-top:2px; font-family:var(--mono); display:flex; align-items:center; gap:5px; }
+.dk-sub .dot { width:9px; height:9px; border-radius:50%; display:inline-block; }
+.dk-ops { display:flex; gap:5px; flex:none; }
+.dk-ops .btn { padding:7px 9px; min-height:36px; font-size:12px; }
+
+/* ---- レイアウト分岐 ---- */
+@media (max-width:599.9px), (max-width:899.9px) and (orientation:portrait) {
+  body[data-tab="search"] #paneDeck { display:none; }
+  body[data-tab="deck"] #paneSearch { display:none; }
+  #paneFilter { position:fixed; z-index:1100; left:0; right:0; bottom:0; max-height:76vh; overflow:auto; border-top:1px solid var(--line2); border-radius:16px 16px 0 0; transform:translateY(105%); transition:transform .2s; background:var(--barbg); }
+  #paneFilter.open { transform:translateY(0); }
+  .abar-wrap { display:block; position:fixed; left:0; right:0; bottom:0; z-index:40; }
+  body[data-tab="search"] .abar-wrap { display:none; }
+  .sbar-wrap { display:block; position:fixed; left:0; right:0; bottom:0; z-index:40; }
+  body[data-tab="deck"] .sbar-wrap { display:none; }
+  .s-scroll { padding-bottom:84px; }
+  .d-scroll { padding-bottom:100px; }
+  .diag { display:none; }
+  .diag.m-open { display:flex; }
+}
+@media (min-width:900px), (min-width:600px) and (orientation:landscape) {
+  .db-tabs { display:none; }
+  .s-head { display:none; }
+  .r-head { display:flex; }
+  .d-foot { display:flex; }
+  .db-main { display:flex; flex-direction:column; height:calc(100vh - var(--hh,0px)); }
+  .db-cols { flex:1; display:flex; overflow:hidden; min-height:0; }
+  #paneSearch { flex:1.35; display:flex; flex-direction:column; min-width:0; border-right:1px solid var(--line); }
+  #paneDeck { flex:1; min-width:340px; max-width:420px; display:flex; flex-direction:column; background:var(--side); }
+  #paneFilter { flex:none; border-bottom:1px solid var(--line); }
+  .f-acc { display:flex; }
+  #paneFilter .f-body { display:none; }
+  #paneFilter.open .f-body { display:grid; grid-template-columns:repeat(3,1fr); gap:16px 24px; padding:6px 20px 18px; }
+  #paneFilter.open .f-body .fgroup { margin-bottom:0; }
+  #paneFilter .factions, #paneFilter .f-title, #paneFilter .f-q { display:none; }
+  .diag-toggle { display:none; }
+}
+@media (min-width:1024px) {
+  /* 5a: フィルタ288px｜検索flex｜デッキ384px の横3ペイン */
+  .db-main { flex-direction:row; }
+  .db-cols { flex:1; min-width:0; }
+  #paneFilter { flex:none; width:288px; border-right:1px solid var(--line); border-bottom:none; background:var(--side); display:flex; flex-direction:column; overflow:hidden; }
+  .f-acc { display:none; }
+  .f-title { display:flex; }
+  #paneFilter .f-body { display:flex !important; flex-direction:column; overflow-y:auto; padding:16px; gap:0; }
+  #paneFilter .f-q { display:flex; margin-bottom:15px; height:38px; }
+  #paneSearch { border-right:1px solid var(--line); }
+  #paneDeck { flex:none; width:384px; max-width:384px; }
+  .r-head .s-input { display:none; }
+}
+.only-pc { display:none; } @media (min-width:900px), (min-width:600px) and (orientation:landscape) { .only-sp { display:none; } .only-pc { display:inline; } }
+</style>
+</head>
+<body class="db-page" data-tab="search">
+<div id="header"></div>
+<!-- #18: 折りたたみ時のコンパクトバー（共通ヘッダー非表示中のみ表示） -->
+<div class="hdr-mini">
+  <a class="t" href="index.html"><span class="logo">G</span>GCG STATS</a>
+  <span class="pg">デッキビルダー</span>
+  <span class="sp"></span>
+  <button class="tg" id="hdrToggle">メニュー ▾</button>
+</div>
+
+<div class="db-tabs">
+  <button class="db-tab on" data-tab="search">カードを探す</button>
+  <button class="db-tab" data-tab="deck">デッキ <span class="cnt"><span class="num under" id="tabNum">0</span><span class="den">/50</span></span></button>
+</div>
+
+<main class="db-main">
+  <!-- フィルタ -->
+  <div id="paneFilter">
+    <button class="f-acc" id="accBtn">
+      <span class="t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>絞り込み</span>
+      <span class="fcnt db-hidden" id="fcntAcc">0</span>
+      <span class="chips-inline" id="accChips"></span>
+      <span class="sp"></span>
+      <span class="cl" id="accClear">クリア</span>
+      <span class="oc" id="accOc">開く ▼</span>
+    </button>
+    <div class="f-title">
+      <span class="t"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>フィルタ</span>
+      <button class="cl" id="pcClear">クリア</button>
+    </div>
+    <div class="f-body">
+      <div class="s-input f-q">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5a6577" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q2" type="search" placeholder="カード名・効果・型番" autocomplete="off">
+      </div>
+      <div class="fgroup"><h4>色</h4><div class="chips" id="fColors"></div></div>
+      <div class="fgroup"><h4>カードタイプ</h4><div class="chips" id="fTypes"></div></div>
+      <div class="fgroup"><h4>レアリティ</h4><div class="chips" id="fRarities"></div></div>
+      <div class="fgroup">
+        <div class="range-h"><h4>レベル</h4><span class="v" id="rgLvV">-</span></div>
+        <div class="drange" id="rgLv"></div>
+      </div>
+      <div class="fgroup">
+        <div class="range-h"><h4>コスト</h4><span class="v" id="rgCostV">-</span></div>
+        <div class="drange" id="rgCost"></div>
+      </div>
+      <div class="fgroup">
+        <div class="range-h"><h4>AP</h4><span class="v" id="rgApV">-</span></div>
+        <div class="drange" id="rgAp"></div>
+      </div>
+      <div class="fgroup">
+        <div class="range-h"><h4>HP</h4><span class="v" id="rgHpV">-</span></div>
+        <div class="drange" id="rgHp"></div>
+      </div>
+      <div class="fgroup"><h4>収録弾</h4><div class="chips" id="fSets"></div></div>
+      <div class="fgroup"><h4>出典作品</h4><div class="frow"><select id="fSrc"><option value="">すべて</option></select></div></div>
+      <div class="factions">
+        <button class="btn" id="btnFilterClear">フィルタをクリア</button>
+        <button class="btn" id="btnFilterClose">閉じる</button>
+      </div>
+      <!-- §6.6 広告枠①: フィルタ列の最下部（公開時にディスプレイユニットを挿入） -->
+      <div class="ad-slot" id="adFilterEnd"></div>
+    </div>
+  </div>
+
+  <div class="db-cols">
+    <!-- 検索ペイン -->
+    <section id="paneSearch">
+      <!-- モバイルヘッダ（3a） -->
+      <div class="s-head">
+        <div class="s-searchrow">
+          <div class="s-input">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a6577" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q" type="search" placeholder="カード名・効果・型番" autocomplete="off">
+          </div>
+          <button class="btn-filter" id="btnFilterOpen">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg>
+            絞り込み
+            <span class="fcnt db-hidden" id="fcnt">0</span>
+          </button>
+        </div>
+        <div class="s-chips db-hidden" id="activeChips"></div>
+        <div class="s-meta">
+          <div class="s-meta-l">
+            <span class="res-cnt"><b id="resCnt">0</b> 件</span>
+            <button class="btn-par" id="btnPar">パラレル非表示 <span class="st">OFF</span></button>
+          </div>
+          <div class="seg-size" id="segSize">
+            <button data-s="s">小</button><button data-s="m" class="on">中</button><button data-s="l">大</button>
+          </div>
+        </div>
+      </div>
+      <!-- ≥600 ヘッダ（4a/5a） -->
+      <div class="r-head">
+        <div class="rh-l">
+          <div class="s-input">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5a6577" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <input id="q3" type="search" placeholder="カード名・効果・型番" autocomplete="off">
+          </div>
+          <span class="res-cnt">検索結果 <b id="resCnt2">0</b> 件</span>
+          <!-- 並び替えUIは一旦非表示（2026-07-23 松岡さん確定: 弾・型番順で固定）。再表示する場合はこのセレクトを復活させ prefs.sort 連動を戻す -->
+
+        </div>
+        <div class="rh-r">
+          <button class="btn-par" id="btnPar2">パラレル非表示 <span class="st">OFF</span></button>
+          <div class="seg-size" id="segSize2">
+            <button data-s="s">小</button><button data-s="m" class="on">中</button><button data-s="l">大</button>
+          </div>
+        </div>
+      </div>
+      <div class="s-scroll">
+        <div id="results" class="s-m"></div>
+        <div id="resEmpty" class="empty db-hidden"><span class="big">🔍</span>該当するカードが見つかりません<div class="links"><button class="btn" id="btnFilterClear2">フィルタをクリア</button></div></div>
+        <div id="moreSentinel" style="height:8px"></div>
+        <!-- §6.6 広告枠②: 検索結果の末尾（無限スクロール終端の後） -->
+        <div class="ad-slot" id="adSearchEnd"></div>
+      </div>
+      <div class="sbar-wrap"><div class="sbar">
+        <span class="sum">デッキ <span class="num under" id="sbarNum">0</span><span class="den">/50</span> 枚<span id="sbarColors"></span></span>
+        <button class="btn-godeck" id="btnGoDeck">デッキを見る <span class="ar">›</span></button>
+      </div></div>
+    </section>
+
+    <!-- デッキペイン（2a=モバイル / 5a=PC・タブレット） -->
+    <aside id="paneDeck">
+      <div class="d-head">
+        <div class="d-namerow">
+          <div class="d-name">
+            <input id="deckName" maxlength="30" placeholder="無題のデッキ">
+            <span class="pen">✎</span>
+          </div>
+          <button class="mini-btn" id="btnDecks" title="マイデッキ（保存したデッキ一覧）">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </button>
+          <button class="mini-btn" id="btnUndo" title="元に戻す (Ctrl+Z)">↺</button>
+          <button class="mini-btn" id="btnRedo" title="やり直す (Ctrl+Shift+Z)">↻</button>
+          <button class="mini-btn" id="btnMenu" title="メニュー" style="letter-spacing:2px">⋯</button>
+        </div>
+        <div class="d-pills">
+          <span class="pill pill-count under" id="cntPill">0<span class="den">/50</span> 枚</span>
+          <span class="pill pill-colors db-hidden" id="colPill"></span>
+        </div>
+      </div>
+
+      <div class="vio ok" id="vioBar">
+        <button class="vio-sum" id="vioSum" type="button" aria-live="polite"></button>
+        <div class="vio-body" id="vioBody"></div>
+      </div>
+
+      <div id="deckEmpty" class="empty">
+        <span class="big">🃏</span>まだカードがありません。<span class="only-sp">「カードを探す」タブ</span><span class="only-pc">検索</span>から ＋ で追加できます
+        <div class="links"><button class="btn" id="btnOpenDecks0">保存デッキを読込</button></div>
+      </div>
+
+      <div class="d-scroll" id="deckScroll">
+        <div class="note-bar pv db-hidden" id="pvBar"></div>
+        <div class="note-bar un db-hidden" id="unBar"></div>
+        <div id="deckGrid" style="display:flex;flex-direction:column;gap:inherit"></div>
+        <button class="diag-toggle db-hidden" id="btnDiag">
+          <span>診断を見る<span class="sub">コスト曲線 / 色比率 / 平均コスト</span></span>
+          <span class="ar" id="diagAr">▾</span>
+        </button>
+        <div class="diag db-hidden" id="diagBox">
+          <div class="diag-h"><span class="t">診断</span><span class="avg">平均コスト <b id="diagAvg">-</b></span></div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <span class="diag-lb">コスト曲線</span>
+            <div class="curve" id="diagCurve"></div>
+          </div>
+          <div class="pies">
+            <div class="pie-w"><span class="diag-lb">色比率</span><div class="diag-rows" id="diagColors"></div></div>
+            <div class="pie-w"><span class="diag-lb">タイプ比率</span><div class="diag-rows" id="diagTypes"></div></div>
+          </div>
+        </div>
+        <!-- §6.6 広告枠③: デッキパネルのスクロール末尾（診断の下・固定バーからは十分な距離） -->
+        <div class="ad-slot" id="adDeckEnd"></div>
+      </div>
+
+      <!-- ≥600: 5a フッター -->
+      <div class="d-foot">
+        <div class="tcg-reason db-hidden" id="tcgReason"></div>
+        <button class="btn-tcg" id="btnTcg">TCG＋に登録</button>
+        <div class="d-foot-row">
+          <button class="fb" id="btnShare"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/></svg>URL共有</button>
+          <button class="fb" id="btnSave"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/><path d="M12 3v13"/><path d="m7 12 5 5 5-5"/></svg>保存</button>
+          <button class="fb sq" id="btnClearF">クリア</button>
+        </div>
+      </div>
+
+      <!-- モバイル: 2a 下部固定バー -->
+      <div class="abar-wrap">
+        <div class="abar-reason db-hidden" id="tcgReasonM"></div>
+        <div class="abar">
+          <button class="btn-tcg" id="btnTcgM">TCG＋に登録</button>
+          <button class="btn-ico" id="btnSaveM" title="端末に保存">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/><path d="M12 3v13"/><path d="m7 12 5 5 5-5"/></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="menu" id="deckMenu">
+  <button data-m="new">新規作成</button>
+  <button data-m="open">保存デッキを読込</button>
+  <button data-m="import">インポート（TCG＋/URL/テキスト）</button>
+  <button data-m="dup">複製</button>
+  <hr>
+  <button data-m="clearAll">すべてクリア</button>
+  <button data-m="clearColor">色を選んでクリア</button>
+</div>
+
+<div class="ovl" id="ovl"></div>
+
+<div class="modal" id="cardModal">
+  <div id="cardModalBody"></div>
+</div>
+
+<!-- デッキ詳細（8a/8b/8c）: 保存デッキ一覧から遷移する読み取り専用ビュー -->
+<div id="deckDetail">
+  <div class="dd-top">
+    <button class="mini-btn" id="ddBack" style="width:36px;height:36px;font-size:17px">‹</button>
+    <span class="dd-toplbl">デッキ詳細</span>
+    <span style="flex:1"></span>
+    <span class="dd-topsub only-pc">マイデッキ</span>
+  </div>
+  <div class="dd-head" id="ddHead"></div>
+  <div class="dd-scroll" id="ddGridWrap">
+    <div id="ddGrid" style="display:flex;flex-direction:column;gap:inherit"></div>
+    <!-- §6.6 広告枠④: デッキ詳細のグリッド末尾（読み取り専用ビュー＝最も安全） -->
+    <div class="ad-slot" id="adDetailEnd"></div>
+  </div>
+</div>
+
+<div class="modal" id="decksModal">
+  <button class="mini-btn x" data-close>✕</button>
+  <h3>保存したデッキ</h3>
+  <div class="dk-cap" id="dkCap"></div>
+  <div id="dkList"></div>
+</div>
+
+<div class="modal" id="importModal">
+  <button class="mini-btn x" data-close>✕</button>
+  <h3>デッキをインポート</h3>
+  <div style="font-size:11.5px;color:var(--fg3);line-height:1.6;margin-bottom:9px">
+    TCG＋のデッキURL・当サイトの共有URL・他サイトの書き出しテキスト（例: <span class="mono">デッキ名|GD01-001:4|…</span> ／ <span class="mono">4 GD01-001</span> の行）・型番の羅列を貼り付けると自動で判別します
+  </div>
+  <textarea id="impText" class="imp-ta" placeholder="ここに貼り付け" spellcheck="false"></textarea>
+  <div class="imp-prev" id="impPrev"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+    <button class="btn" data-close>キャンセル</button>
+    <button class="btn gold" id="impApply" disabled>読み込む（現在の編集内容は置き換わります）</button>
+  </div>
+</div>
+
+<div class="modal" id="confirmModal">
+  <h3 id="cfTitle"></h3>
+  <div id="cfMsg" style="font-size:13px;color:var(--fg3);margin-bottom:14px"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end">
+    <button class="btn" id="cfNo">キャンセル</button>
+    <button class="btn gold" id="cfYes">OK</button>
+  </div>
+</div>
+
+<div class="modal" id="colorClearModal">
+  <button class="mini-btn x" data-close>✕</button>
+  <h3>色を選んでクリア</h3>
+  <div style="font-size:12px;color:var(--fg3);margin-bottom:10px">選んだ色のカードだけをデッキから削除します</div>
+  <div class="chips" id="ccChips"></div>
+  <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+    <button class="btn" data-close>キャンセル</button>
+    <button class="btn gold" id="ccDo">削除する</button>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="js/deckbuilder-core.js"></script>
+<script>window.GCG_DATA = __GCG_DATA_JSON__;</script>
+<script>
+(function () {
+'use strict';
+var C = DeckCore;
+var esc = C.escapeHtml;
+var D = window.GCG_DATA;
+var db = C.buildDb(D.cards, D.preview);
+var R = D.restrictions || {};
+var TOKENS = D.tokenmap || {};
+var COLOR_HEX = { Blue:'#4d9ff7', Green:'#34d058', Red:'#f44747', White:'#c8cfdb', Purple:'#b87aff' };
+var VIO_HEX = { banned:'#f44747', pair:'#b87aff', group:'#b87aff', limited:'#e2772e', over4:'#e2772e', count:'#f44747', colors:'#f44747' };
+var TYPE_JA = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース' };
+var TYPE_HEX = { UNIT:'#d4a029', PILOT:'#4d9ff7', COMMAND:'#b87aff', BASE:'#34d058' };
+var TYPE_ORDER = ['UNIT','PILOT','COMMAND','BASE'];
+var SET_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','SC01','β','PROMO'];
+var RARITY_ORDER = ['LR++','LR+','LR','R+','R','U+','U','C+','C'];
+// ワイド判定＝CSSと同一条件（≥900px、または600〜899pxの横置き。小型タブレット縦置きはスマホ表示・2026-07-22 実機FB）
+var isWide = window.matchMedia('(min-width:900px), (min-width:600px) and (orientation:landscape)');
+
+/* ========== 状態 ========== */
+var state = { id: null, name: '', cards: {} };
+var history = [], future = [];
+var prefs = loadJson('gcg_db_prefs') || { size:'m' };
+prefs.sort = 'set';   // 並び順は「弾・型番順」で固定（2026-07-23 松岡さん確定。切替UIは非表示・保存値も無視）
+var filters = defaultFilters();
+var filtered = [];
+var renderedCount = 0;
+var CHUNK = 60;
+var diagOpen = false;
+function defaultFilters(){ return { q:'', colors:[], types:[], rarities:[], sets:[], lvMin:'', lvMax:'', costMin:'', costMax:'', apMin:'', apMax:'', hpMin:'', hpMax:'', src:'', hidePar:true, andPilot:false }; }   // パラレル非表示は既定ON（2026-07-23 松岡さん確定）
+// パイロット要素を持つコマンド（実データ判定: COMMANDかつ補正値ap_mod/hp_mod保持＝84種・2026-07-22検証）
+function isPilotCmd(c){ return c.type === 'COMMAND' && (c.apm != null || c.hpm != null); }
+
+/* ========== localStorage ========== */
+var LS_KEY = 'gcg_decks';
+var lsOk = (function(){ try { localStorage.setItem('__gcg_db_probe__','1'); localStorage.removeItem('__gcg_db_probe__'); return true; } catch(e){ return false; } })();
+function loadJson(k){ try { return JSON.parse(localStorage.getItem(k)); } catch(e){ return null; } }
+function sanitizeCards(cards){
+  var out = {};
+  if (!cards || typeof cards !== 'object') return out;
+  Object.keys(cards).forEach(function(id){
+    if (typeof id !== 'string' || !id) return;
+    var q = Math.floor(Number(cards[id]));
+    if (isFinite(q) && q > 0) out[id] = Math.min(q, 99);
+  });
+  return out;
+}
+function loadStore(){
+  var s = loadJson(LS_KEY);
+  if (!s || typeof s !== 'object' || !Array.isArray(s.decks)) s = { version:1, decks:[], draft:null };
+  return s;
+}
+function saveStore(s){
+  if (!lsOk) { toast('この環境では保存できません（プライベートモード等でlocalStorageが無効です）', true); return false; }
+  try { localStorage.setItem(LS_KEY, JSON.stringify(s)); return true; }
+  catch(e){
+    if (e && (e.name === 'QuotaExceededError' || e.code === 22)) toast('保存領域が満杯のため保存できません。不要なデッキを削除してください', true);
+    else toast('保存に失敗しました（' + (e && e.name || 'エラー') + '）', true);
+    return false;
+  }
+}
+function savePrefs(){ try { localStorage.setItem('gcg_db_prefs', JSON.stringify(prefs)); } catch(e){} }
+var draftTimer = null;
+function saveDraft(){
+  if (!lsOk) return;
+  clearTimeout(draftTimer);
+  draftTimer = setTimeout(function(){
+    var s = loadStore();
+    s.draft = { id: state.id, name: state.name, cards: state.cards, updated: new Date().toISOString() };
+    try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch(e){}
+  }, 250);
+}
+
+/* ========== ユーティリティ ========== */
+function $(id){ return document.getElementById(id); }
+function el(html){ var d=document.createElement('div'); d.innerHTML=html; return d.firstElementChild; }
+function jaColor(c){ return C.COLOR_JA[c] || c; }
+function imgHtml(card){
+  return '<img loading="lazy" src="images/cards/'+esc(card.id)+'.webp" alt="" data-phid="'+esc(card.id)+'" data-phname="'+esc(card.name)+'">';
+}
+document.addEventListener('error', function(ev){
+  var t = ev.target;
+  if (!(t && t.tagName === 'IMG' && t.dataset && t.dataset.phid)) return;
+  var d = document.createElement('div');
+  d.className = 'ph';
+  var no = document.createElement('span'); no.className='pno'; no.textContent = t.dataset.phid;
+  var nm = document.createElement('span'); nm.className='pname'; nm.textContent = t.dataset.phname || '';
+  d.appendChild(no); d.appendChild(nm);
+  t.replaceWith(d);
+}, true);
+var toastTimer = null;
+function toast(msg, isErr, undoFn){
+  var t = $('toast');
+  t.className = 'show' + (isErr ? ' err' : '');
+  t.innerHTML = '<span>'+esc(msg)+'</span>' + (undoFn ? '<button id="toastUndo">元に戻す</button>' : '');
+  if (undoFn) $('toastUndo').onclick = function(){ undoFn(); hideToast(); };
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(hideToast, undoFn ? 6000 : 3200);
+}
+function hideToast(){ $('toast').className = ''; }
+function confirmDlg(title, msg){
+  return new Promise(function(res){
+    $('cfTitle').textContent = title; $('cfMsg').textContent = msg;
+    openModal('confirmModal');
+    $('cfYes').onclick = function(){ closeModals(); res(true); };
+    $('cfNo').onclick = function(){ closeModals(); res(false); };
+  });
+}
+function openModal(id){ $('ovl').classList.add('open'); $(id).classList.add('open'); }
+function closeModals(){
+  $('ovl').classList.remove('open');
+  ['cardModal','decksModal','confirmModal','colorClearModal','importModal'].forEach(function(m){ $(m).classList.remove('open'); });
+}
+
+/* ========== 履歴 ========== */
+function pushHistory(){
+  history.push(JSON.stringify(state.cards));
+  if (history.length > 50) history.shift();
+  future = [];
+  updateUndoBtns();
+}
+function undo(){ if (!history.length) return; future.push(JSON.stringify(state.cards)); state.cards = JSON.parse(history.pop()); afterMutate(); }
+function redo(){ if (!future.length) return; history.push(JSON.stringify(state.cards)); state.cards = JSON.parse(future.pop()); afterMutate(); }
+function clearHistory(){ history = []; future = []; updateUndoBtns(); }
+function updateUndoBtns(){ $('btnUndo').disabled = !history.length; $('btnRedo').disabled = !future.length; }
+
+/* ========== デッキ操作 ========== */
+function addCard(id, n){
+  var can = C.addableCount(state.cards, id, db.byId);
+  var add = Math.min(n || 1, can);
+  if (add <= 0) { toast('同名カードは4枚までです'); return; }
+  pushHistory();
+  state.cards[id] = (state.cards[id] || 0) + add;
+  afterMutate();
+}
+function subCard(id){
+  if (!(state.cards[id] > 0)) return;
+  pushHistory();
+  state.cards[id]--;
+  if (!state.cards[id]) delete state.cards[id];
+  afterMutate();
+}
+function afterMutate(){
+  renderDeck();
+  refreshSearchQtys();
+  saveDraft();
+  updateUndoBtns();
+}
+
+/* ========== バッジ ========== */
+function badgeHtml(c, outline){
+  var cls = outline ? 'tb-o' : 'tb';
+  var h = '';
+  var rb = C.regBadge(c.base, R);
+  if (rb === 'banned') h += '<span class="'+cls+' banned">禁止</span>';
+  else if (rb === 'limited') h += '<span class="'+cls+' limited">制限</span>';
+  else if (rb === 'pair') h += '<span class="'+cls+' pair">ペア</span>';
+  if (c.pv) h += '<span class="'+cls+' pv">先行</span>';
+  return h;
+}
+
+/* ========== 検索タイル（3a/5a: 画像＋左上×N＋下ステッパー・上限で「最大」） ========== */
+function tileNode(c){
+  var qty = state.cards[c.id] || 0;
+  var can = C.addableCount(state.cards, c.id, db.byId);
+  var hex = COLOR_HEX[c.color] || '#3a4658';
+  var plus = (can > 0) ? '<button data-act="add">＋</button>' : '<span class="maxed">最大</span>';
+  var n = el('<div class="tile" data-id="'+esc(c.id)+'">' +
+    '<div class="timg" style="--tac:'+hex+';--tacs:'+hex+'1f">' + imgHtml(c) +
+    '<span class="tbadges">'+badgeHtml(c)+'</span>' +
+    (qty ? '<span class="tqty">×'+qty+'</span>' : '') + '</div>' +
+    '<div class="stepper">' +
+    '<button data-act="sub"'+(qty>0?'':' disabled')+'>−</button>' +
+    '<span class="qty">'+qty+'</span>' + plus +
+    '</div></div>');
+  n.querySelector('.timg').onclick = function(){ openCardModal(c.id); };
+  wireActs(n, c.id);
+  return n;
+}
+function wireActs(node, id){
+  node.querySelectorAll('button[data-act]').forEach(function(b){
+    b.onclick = function(ev){
+      ev.stopPropagation();
+      if (b.dataset.act === 'add') addCard(id, 1);
+      else subCard(id);
+    };
+  });
+}
+
+/* ========== 検索・フィルタ ========== */
+var searchable = new Map();
+db.cards.forEach(function(c){
+  searchable.set(c.id, (c.id + ' ' + c.name + ' ' + c.traits.join(' ') + ' ' + c.effect).toUpperCase());
+});
+function activeFilterCount(){
+  return filters.colors.length + filters.types.length + filters.rarities.length + filters.sets.length +
+    ((filters.lvMin!==''||filters.lvMax!=='')?1:0) + ((filters.costMin!==''||filters.costMax!=='')?1:0) +
+    ((filters.apMin!==''||filters.apMax!=='')?1:0) + ((filters.hpMin!==''||filters.hpMax!=='')?1:0) +
+    (filters.src?1:0) + (filters.andPilot?1:0);
+}
+function sortFn(a,b){
+  // 「弾・型番順」固定: 通常弾GD→特殊弾EB→デッキST→特殊セット(SC/β/PROMO)。
+  // 弾内は「通常カード型番順 → SP(パラレル)型番順」（SPは収録弾の末尾・2026-07-23 松岡さん確定）
+  return (C.setGroupRank(a.set) - C.setGroupRank(b.set)) || (a.par - b.par) || (a.id<b.id?-1:1);
+}
+function applyFilters(){
+  var q = filters.q.trim().toUpperCase();
+  filtered = db.cards.filter(function(c){
+    if (filters.hidePar && c.par) return false;
+    if (filters.colors.length && filters.colors.indexOf(c.color) === -1) return false;
+    // タイプ判定（2026-07-22 松岡さん確定の連動仕様）:
+    //   ＆パイロット＝「パイロット要素持ちコマンド84種」を担当する独立チップ。
+    //   通常カードはタイプ選択、84種は＆パイロットの状態だけで判定する。
+    //   （コマンドON＋＆パイロットOFF＝84種を除いた純コマンド／＆パイロット単体ON＝84種のみ／未選択＝制約なし）
+    var constrained = filters.types.length > 0 || filters.andPilot;
+    if (constrained) {
+      if (isPilotCmd(c)) { if (!filters.andPilot) return false; }
+      else if (!filters.types.length || filters.types.indexOf(c.type) === -1) return false;
+    }
+    if (filters.rarities.length && filters.rarities.indexOf(c.rarity) === -1) return false;
+    if (filters.sets.length && filters.sets.indexOf(c.set) === -1) return false;
+    if (filters.lvMin !== '' && !(c.level != null && c.level >= +filters.lvMin)) return false;
+    if (filters.lvMax !== '' && !(c.level != null && c.level <= +filters.lvMax)) return false;
+    if (filters.costMin !== '' && !(c.cost != null && c.cost >= +filters.costMin)) return false;
+    if (filters.costMax !== '' && !(c.cost != null && c.cost <= +filters.costMax)) return false;
+    if (filters.apMin !== '' && !(c.ap != null && c.ap >= +filters.apMin)) return false;
+    if (filters.apMax !== '' && !(c.ap != null && c.ap <= +filters.apMax)) return false;
+    if (filters.hpMin !== '' && !(c.hp != null && c.hp >= +filters.hpMin)) return false;
+    if (filters.hpMax !== '' && !(c.hp != null && c.hp <= +filters.hpMax)) return false;
+    if (filters.src && c.src !== filters.src) return false;
+    if (q && searchable.get(c.id).indexOf(q) === -1) return false;
+    return true;
+  });
+  filtered.sort(sortFn);
+  renderedCount = 0;
+  renderLastSet = null;
+  collapsedSets.clear();                 // 検索・フィルタ・並び替えの変更で全展開に戻す（ヒットが隠れる誤解を防ぐ）
+  setCounts = {};
+  if (prefs.sort === 'set') filtered.forEach(function(c){ setCounts[c.set] = (setCounts[c.set] || 0) + 1; });
+  $('results').innerHTML = '';
+  $('results').className = 's-' + prefs.size;
+  $('resCnt').textContent = filtered.length;
+  $('resCnt2').textContent = filtered.length;
+  $('resEmpty').classList.toggle('db-hidden', filtered.length > 0);
+  renderActiveChips();
+  var fc = activeFilterCount();
+  [$('fcnt'), $('fcntAcc')].forEach(function(b){ b.textContent = fc; b.classList.toggle('db-hidden', fc === 0); });
+  renderMore();
+}
+var renderLastSet = null;
+var collapsedSets = new Set();
+var setCounts = {};
+function setHeaderNode(set){
+  var open = !collapsedSets.has(set);
+  var h = el('<button class="set-h" data-set="'+esc(set)+'">' +
+    '<span class="ar">'+(open?'▾':'▸')+'</span><span class="t">'+esc(set)+'</span>' +
+    '<span class="n">'+(setCounts[set]||0)+'件</span><span class="ln"></span></button>');
+  h.onclick = function(){
+    var willCollapse = !collapsedSets.has(set);
+    if (willCollapse) collapsedSets.add(set); else collapsedSets.delete(set);
+    h.querySelector('.ar').textContent = willCollapse ? '▸' : '▾';
+    document.querySelectorAll('#results .tile[data-set="'+CSS.escape(set)+'"]').forEach(function(n){ n.hidden = willCollapse; });
+  };
+  return h;
+}
+function renderMore(){
+  var frag = document.createDocumentFragment();
+  var end = Math.min(renderedCount + CHUNK, filtered.length);
+  var bySet = prefs.sort === 'set';
+  for (var i = renderedCount; i < end; i++) {
+    var c = filtered[i];
+    if (bySet && c.set !== renderLastSet) {          // 弾の切り替わりで見出しを挿入
+      frag.appendChild(setHeaderNode(c.set));
+      renderLastSet = c.set;
+    }
+    var node = tileNode(c);
+    if (bySet) {
+      node.dataset.set = c.set;
+      if (collapsedSets.has(c.set)) node.hidden = true;   // 畳み中の弾に後続チャンクが追加された場合
+    }
+    frag.appendChild(node);
+  }
+  renderedCount = end;
+  $('results').appendChild(frag);
+}
+function refreshSearchQtys(){
+  document.querySelectorAll('#results .tile[data-id]').forEach(function(node){
+    var id = node.dataset.id;
+    var c = db.byId.get(id);
+    if (!c) return;
+    var qty = state.cards[id] || 0;
+    var can = C.addableCount(state.cards, id, db.byId);
+    node.querySelector('.qty').textContent = qty;
+    var sub = node.querySelector('[data-act="sub"]');
+    if (sub) sub.disabled = !(qty > 0);
+    var tq = node.querySelector('.tqty');
+    if (qty && !tq) node.querySelector('.timg').insertAdjacentHTML('beforeend','<span class="tqty">×'+qty+'</span>');
+    else if (qty && tq) tq.textContent = '×'+qty;
+    else if (!qty && tq) tq.remove();
+    var last = node.querySelector('.stepper').lastElementChild;
+    var isBtn = last.tagName === 'BUTTON' && last.dataset.act === 'add';
+    if (can > 0 && !isBtn) {
+      var b = el('<button data-act="add">＋</button>');
+      b.onclick = function(ev){ ev.stopPropagation(); addCard(id, 1); };
+      last.replaceWith(b);
+    } else if (can <= 0 && isBtn) {
+      last.replaceWith(el('<span class="maxed">最大</span>'));
+    }
+  });
+}
+
+/* ---- 有効フィルタのチップ（3a/4a: モバイル行＋タブレットアコーディオン内） ---- */
+function renderActiveChips(){
+  var chips = [];
+  filters.colors.forEach(function(cv){
+    var hex = COLOR_HEX[cv];
+    chips.push('<button class="a-chip" data-g="colors" data-v="'+cv+'" style="background:'+hex+'1a;border-color:'+hex+'55;color:'+hex+'">'+esc(jaColor(cv))+' <span class="x">✕</span></button>');
+  });
+  filters.types.forEach(function(t){ chips.push(chipBtn('types', t, TYPE_JA[t]||t)); });
+  filters.rarities.forEach(function(r){ chips.push(chipBtn('rarities', r, r)); });
+  filters.sets.forEach(function(s){ chips.push(chipBtn('sets', s, s)); });
+  if (filters.lvMin!=='' || filters.lvMax!=='') chips.push(chipBtn('lv', '', 'Lv '+(filters.lvMin||'-')+'–'+(filters.lvMax||'-')));
+  if (filters.costMin!=='' || filters.costMax!=='') chips.push(chipBtn('cost', '', 'コスト '+(filters.costMin||'-')+'–'+(filters.costMax||'-')));
+  if (filters.apMin!=='' || filters.apMax!=='') chips.push(chipBtn('ap', '', 'AP '+(filters.apMin||'-')+'–'+(filters.apMax||'-')));
+  if (filters.hpMin!=='' || filters.hpMax!=='') chips.push(chipBtn('hp', '', 'HP '+(filters.hpMin||'-')+'–'+(filters.hpMax||'-')));
+  if (filters.src) chips.push(chipBtn('src', '', filters.src));
+  if (filters.andPilot) chips.push(chipBtn('cmdp', '', '＆パイロット'));
+  var has = chips.length > 0;
+  var mob = $('activeChips');
+  mob.classList.toggle('db-hidden', !has);
+  mob.innerHTML = has ? chips.join('') + '<button class="a-clear" data-ac>クリア</button>' : '';
+  $('accChips').innerHTML = chips.join('');
+  [mob, $('accChips')].forEach(function(box){
+    box.querySelectorAll('.a-chip').forEach(function(b){
+      b.onclick = function(ev){
+        ev.stopPropagation();
+        removeFilterChip(b.dataset.g, b.dataset.v);
+      };
+    });
+    var ac = box.querySelector('[data-ac]');
+    if (ac) ac.onclick = function(ev){ ev.stopPropagation(); clearFilters(); };
+  });
+}
+function chipBtn(g, v, label){
+  return '<button class="a-chip" data-g="'+g+'" data-v="'+esc(v)+'">'+esc(label)+' <span class="x">✕</span></button>';
+}
+function removeFilterChip(g, v){
+  if (g==='colors'||g==='types'||g==='rarities'||g==='sets') {
+    var arr = filters[g]; var i = arr.indexOf(v); if (i!==-1) arr.splice(i,1);
+    syncSheetChip(g, v, false);
+  }
+  else if (g==='lv') { filters.lvMin=''; filters.lvMax=''; rgLv.reset(); }
+  else if (g==='cost') { filters.costMin=''; filters.costMax=''; rgCost.reset(); }
+  else if (g==='ap') { filters.apMin=''; filters.apMax=''; rgAp.reset(); }
+  else if (g==='hp') { filters.hpMin=''; filters.hpMax=''; rgHp.reset(); }
+  else if (g==='src') { filters.src=''; $('fSrc').value=''; }
+  else if (g==='cmdp') { setAndPilot(false); }
+  applyFilters();
+}
+
+/* ========== デッキ描画（モバイル=2aタイル / ≥600=5a行リスト） ========== */
+function renderDeck(){
+  var total = C.totalCount(state.cards);
+  var colors = C.deckColors(state.cards, db.byId);
+  var violations = C.validate(state.cards, db, R);
+  var stateCls = total === 50 ? 'ok' : (total > 50 ? 'over' : 'under');
+
+  $('tabNum').textContent = total;
+  $('tabNum').className = 'num ' + stateCls;
+  $('sbarNum').textContent = total;
+  $('sbarNum').className = 'num ' + stateCls;
+  $('sbarColors').textContent = colors.length ? ' · ' + colors.length + '色' : '';
+  var cp = $('cntPill');
+  cp.className = 'pill pill-count ' + stateCls;
+  cp.innerHTML = total + '<span class="den">/50</span> 枚' +
+    (total > 50 ? ' <span class="delta">▲' + (total-50) + '</span>' : (total === 50 ? ' ✓' : ''));
+  var colP = $('colPill');
+  if (colors.length) {
+    colP.classList.remove('db-hidden');
+    colP.innerHTML = colors.length + '色 <span class="dots">' +
+      colors.map(function(c){ return '<span class="dot" style="background:'+COLOR_HEX[c]+'"></span>'; }).join('') + '</span>';
+  } else colP.classList.add('db-hidden');
+
+  $('deckEmpty').classList.toggle('db-hidden', total > 0);
+  $('btnDiag').classList.toggle('db-hidden', total === 0);
+  $('diagBox').classList.toggle('db-hidden', total === 0);
+
+  // タイプ別
+  var byType = {};
+  TYPE_ORDER.forEach(function(t){ byType[t] = []; });
+  var unresolved = [];
+  Object.keys(state.cards).forEach(function(id){
+    if (!(state.cards[id] > 0)) return;
+    var c = db.byId.get(id);
+    if (!c) unresolved.push(id);
+    var t = (c && TYPE_ORDER.indexOf(c.type) !== -1) ? c.type : 'UNIT';
+    byType[t].push(c || {id:id, name:id, cost:null, color:'-', base:id, pv:0, traits:[], effect:'', link:[], unresolved:true});
+  });
+  var un = $('unBar');
+  if (unresolved.length) {
+    un.classList.remove('db-hidden');
+    un.innerHTML = '<div><b>' + unresolved.length + '件</b> のカードを解決できませんでした（データ未収載の型番）: ' + esc(unresolved.join(' / ')) + '</div>';
+  } else un.classList.add('db-hidden');
+
+  var wide = isWide.matches;
+  var grid = $('deckGrid');
+  grid.innerHTML = '';
+  TYPE_ORDER.forEach(function(t){
+    var arr = byType[t];
+    if (!arr.length) return;
+    arr.sort(function(a,b){ return ((a.cost==null?99:a.cost)-(b.cost==null?99:b.cost)) || (a.id<b.id?-1:1); });
+    var sub = arr.reduce(function(s,c){ return s + state.cards[c.id]; }, 0);
+    var sec = el('<div class="dsec"><div class="dsec-h"><span class="t">'+TYPE_JA[t]+'</span><span class="n">'+sub+'</span><span class="ln"></span></div>' +
+      '<div class="'+(wide?'drows':'dgrid')+'"></div></div>');
+    var g = sec.querySelector(wide ? '.drows' : '.dgrid');
+    arr.forEach(function(c){
+      var fk = C.frameKind(c.id, db.byId, violations);
+      g.appendChild(wide ? deckRowNode(c, fk) : deckTileNode(c, fk));
+    });
+    grid.appendChild(sec);
+  });
+
+  renderViolations(violations);
+  renderPreviewBar();
+  renderDiag(total, colors, byType);
+  updateTcgButton(violations);
+}
+// 2a: デッキタイル（画像＋下ステッパー・枠=違反色orゲーム色）
+function deckTileNode(c, fk){
+  var qty = state.cards[c.id];
+  var can = C.addableCount(state.cards, c.id, db.byId);
+  var hex = fk ? VIO_HEX[fk] : (COLOR_HEX[c.color] || '#3a4658');
+  var n = el('<div class="tile" data-deckid="'+esc(c.id)+'">' +
+    '<div class="timg" style="--tac:'+hex+';--tacs:'+hex+'1f">' + imgHtml(c) +
+    '<span class="tbadges">'+badgeHtml(c)+'</span></div>' +
+    '<div class="stepper">' +
+    '<button data-act="sub">−</button>' +
+    '<span class="qty">'+qty+'</span>' +
+    '<button data-act="add"'+(can>0?'':' disabled')+'>＋</button>' +
+    '</div></div>');
+  n.querySelector('.timg').onclick = function(){ openCardModal(c.id); };
+  wireActs(n, c.id);
+  return n;
+}
+// 5a: デッキ行（30x42サムネ＋名前/型番＋小ステッパー）
+function deckRowNode(c, fk){
+  var qty = state.cards[c.id];
+  var can = C.addableCount(state.cards, c.id, db.byId);
+  var hex = fk ? VIO_HEX[fk] : (COLOR_HEX[c.color] || '#3a4658');
+  var n = el('<div class="drow'+(fk?' viol':'')+'" data-deckid="'+esc(c.id)+'" style="--rac:'+hex+(fk?';--rbg:'+hex+'0d':'')+'">' +
+    '<div class="rthumb">'+imgHtml(c)+'</div>' +
+    '<div class="rmain"><div class="rn"><span class="rname">'+esc(c.name)+'</span>'+badgeHtml(c, true)+'</div>' +
+    '<span class="rno">'+esc(c.id)+'</span></div>' +
+    '<div class="rstep">' +
+    '<button data-act="sub">−</button>' +
+    '<span class="qty">'+qty+'</span>' +
+    '<button data-act="add"'+(can>0?'':' disabled')+'>＋</button>' +
+    '</div></div>');
+  n.querySelector('.rthumb').onclick = function(){ openCardModal(c.id); };
+  n.querySelector('.rmain').onclick = function(){ openCardModal(c.id); };
+  wireActs(n, c.id);
+  return n;
+}
+
+/* ---- 診断（実データ描画: コスト曲線=divバー・色/タイプ比率=枚数の行表示） ---- */
+function renderDiag(total, colors, byType){
+  if (!total) return;
+  var sumCost = 0, nCost = 0;
+  var buckets = {};
+  var maxCost = 0;
+  Object.keys(state.cards).forEach(function(id){
+    var q = state.cards[id];
+    if (!(q > 0)) return;
+    var c = db.byId.get(id);
+    if (!c || c.cost == null) return;
+    sumCost += c.cost * q; nCost += q;
+    buckets[c.cost] = (buckets[c.cost] || 0) + q;
+    if (c.cost > maxCost) maxCost = c.cost;
+  });
+  $('diagAvg').textContent = nCost ? (sumCost / nCost).toFixed(1) : '-';
+  var peak = 1;
+  Object.keys(buckets).forEach(function(k){ if (buckets[k] > peak) peak = buckets[k]; });
+  var ch = '';
+  for (var k = 0; k <= Math.max(maxCost, 1); k++) {
+    var v = buckets[k] || 0;
+    ch += '<div class="col"><div class="bar" style="height:'+Math.round(v/peak*100)+'%"></div><span class="k">'+k+'</span></div>';
+  }
+  $('diagCurve').innerHTML = ch;
+  // 色比率＝枚数の行表示（枚数降順・2026-07-22 松岡さん指示）
+  var colorQty = {};
+  Object.keys(state.cards).forEach(function(id){
+    var c = db.byId.get(id);
+    if (!c || !c.color || c.color === '-') return;
+    colorQty[c.color] = (colorQty[c.color] || 0) + state.cards[id];
+  });
+  $('diagColors').innerHTML = Object.keys(colorQty)
+    .sort(function(a,b){ return colorQty[b] - colorQty[a]; })
+    .map(function(cv){
+      return '<div class="drw"><span class="dot" style="background:'+COLOR_HEX[cv]+'"></span>' +
+        '<span class="lb">'+esc(jaColor(cv))+'</span><span class="n">'+colorQty[cv]+'<small> 枚</small></span></div>';
+    }).join('') || '<div class="drw"><span class="lb" style="color:var(--dim)">-</span></div>';
+  // タイプ比率＝枚数の行表示（タイプ順）
+  $('diagTypes').innerHTML = TYPE_ORDER.map(function(t){
+    var arr = byType[t] || [];
+    var s = arr.reduce(function(a,c){ return a + state.cards[c.id]; }, 0);
+    if (!s) return '';
+    return '<div class="drw"><span class="dot" style="background:'+TYPE_HEX[t]+'"></span>' +
+      '<span class="lb">'+TYPE_JA[t]+'</span><span class="n">'+s+'<small> 枚</small></span></div>';
+  }).join('');
+}
+
+/* ---- 違反サマリバー ---- */
+var vioOpen = false;
+var lastViolations = [];
+function renderViolations(violations){
+  lastViolations = violations;
+  var bar = $('vioBar');
+  var sum = $('vioSum');
+  var body = $('vioBody');
+  if (!violations.length) {
+    bar.className = 'vio ok';
+    sum.innerHTML = '<span class="vio-ic">✓</span><span class="vio-t">大会構築適合</span>';
+    body.innerHTML = '';
+    vioOpen = false;
+    return;
+  }
+  bar.className = 'vio bad' + (vioOpen ? ' open' : '');
+  var squares = violations.slice(0,6).map(function(v){
+    return '<span style="background:'+VIO_HEX[v.kind]+'"></span>';
+  }).join('');
+  sum.innerHTML = '<span class="vio-ic">!</span>' +
+    '<span class="vio-t">ルール違反 ' + violations.length + '件</span>' +
+    '<span class="vio-sq">' + squares + '</span>' +
+    '<span class="vio-more">' + (vioOpen ? '閉じる <span class="ar">▲</span>' : '詳細 <span class="ar">▼</span>') + '</span>';
+  var h = '';
+  violations.forEach(function(v, i){
+    h += '<button class="vio-item" data-vi="'+i+'">' +
+      '<span class="sq" style="background:'+VIO_HEX[v.kind]+'"></span>' +
+      '<span class="tx">'+esc(v.msg)+'</span><span class="go">›</span></button>';
+    if (v.note) h += '<div class="vio-note">※'+esc(v.note)+'</div>';
+  });
+  body.innerHTML = h;
+  body.querySelectorAll('[data-vi]').forEach(function(b){
+    b.onclick = function(){
+      var v = violations[+b.dataset.vi];
+      if (v.ids && v.ids.length) scrollToCard(v.ids[0]);
+    };
+  });
+}
+function scrollToCard(id){
+  var node = document.querySelector('#deckGrid [data-deckid="'+CSS.escape(id)+'"]');
+  if (!node) return;
+  if (document.body.dataset.tab !== 'deck' && !isWide.matches) setTab('deck');
+  node.scrollIntoView({ behavior:'smooth', block:'center' });
+  node.classList.remove('flash'); void node.offsetWidth; node.classList.add('flash');
+}
+
+/* ---- 先行カード注意バー（5a実測スタイル） ---- */
+function renderPreviewBar(){
+  var ids = C.previewIdsInDeck(state.cards, db.byId);
+  var bar = $('pvBar');
+  if (!ids.length) { bar.classList.add('db-hidden'); return; }
+  bar.classList.remove('db-hidden');
+  var names = ids.map(function(id){ var c = db.byId.get(id); return c ? c.name : id; });
+  bar.innerHTML = '<span class="ic">△</span><div>公式発表前の暫定データです。内容が変わる場合があります <span class="names">— 該当: ' + esc(names.join(' / ')) + '</span></div>';
+}
+
+/* ---- TCG＋ボタン（デスクトップ＋モバイル両方を同期） ---- */
+var lastTcgUrl = null;
+var lastTcgReason = null;
+function updateTcgButton(violations){
+  var st = C.tcgStatus(state.cards, db, TOKENS, violations);
+  lastTcgReason = st.reason;
+  lastTcgUrl = st.ok ? C.tcgUrl(state.cards, db, TOKENS) : null;
+  var msg = '';
+  if (st.reason === 'violation') msg = 'デッキに違反があるため登録できません（違反を直すと登録できます）';
+  else if (st.reason === 'preview') msg = '先行カードのため、TCG＋にはまだ登録できません（公式登録後に可能になります）: ' + st.items.join(', ');
+  else if (st.reason === 'unmapped') msg = 'TCG＋未対応のため登録できません: ' + st.items.join(', ');
+  [['btnTcg','tcgReason'],['btnTcgM','tcgReasonM']].forEach(function(pair){
+    var btn = $(pair[0]), rs = $(pair[1]);
+    btn.classList.toggle('is-disabled', !st.ok);
+    btn.setAttribute('aria-disabled', st.ok ? 'false' : 'true');
+    rs.textContent = msg;
+    rs.classList.toggle('db-hidden', !msg);
+  });
+}
+function tcgClick(){
+  if (lastTcgUrl) {
+    // 遷移前に確認（2026-07-22 松岡さん指示）
+    confirmDlg('TCG＋に登録', 'TCG＋のデッキ登録ページへ移動しますか？（新しいタブで開きます）').then(function(ok){
+      if (ok && lastTcgUrl) window.open(lastTcgUrl, '_blank', 'noopener');
+    });
+    return;
+  }
+  if (lastTcgReason === 'violation') {
+    vioOpen = true;
+    renderViolations(lastViolations);
+    $('vioBar').scrollIntoView({ behavior:'smooth', block:'nearest' });
+  }
+}
+$('btnTcg').onclick = tcgClick;
+$('btnTcgM').onclick = tcgClick;
+
+/* ========== カード詳細（6a/6b/6c 実測移植・2026-07-22） ========== */
+var cmVerOpen = false, cmLinkOpen = false;   // 折りたたみ状態（開いている間の版切替では維持・開き直しでリセット）
+function openCardModal(id){
+  var c = db.byId.get(id);
+  if (!c) return;
+  cmVerOpen = false; cmLinkOpen = false;     // 松岡さん指示: 別バージョン/リンク対象は折りたたみ既定
+  drawCardModal(c);
+  openModal('cardModal');
+}
+// 効果テキストの【キーワード】色付け（6a実測: 出撃時=青/常時=緑 等）
+var KW_HEX = { '出撃時':'#4d9ff7', '常時':'#34d058', '攻撃時':'#f47b7b', '破壊時':'#e2772e', 'バースト':'#e8c15a', 'セット時':'#b87aff', 'リンク':'#8fc3ff', 'ターン開始時':'#6ee7a0', 'ターン終了時':'#6ee7a0', '起動':'#e8c15a' };
+function effectHtml(effect){
+  return esc(effect).replace(/【([^】]{1,12})】/g, function(m, k){
+    return '<span style="color:'+(KW_HEX[k]||'#e8c15a')+';font-weight:600">【'+k+'】</span>';
+  });
+}
+// リンク対象カードの解決はコア（C.linkTargets）に集約:
+//   カード名一致＋コマンド＋パイロット型のパイロット面名（pname）一致＋特徴形（タスク#19対応・2026-07-22）
+function linkTargets(c){ return C.linkTargets(c, db); }
+function drawCardModal(c){
+  var vers = db.byBase.get(c.base) || [c];
+  var per = C.perBaseCounts(state.cards, db.byId);
+  var can = C.MAX_PER_NAME - (per.get(c.base) || 0);
+  var qty = state.cards[c.id] || 0;
+  var hex = COLOR_HEX[c.color] || '#3a4658';
+  // リンク対象: UNIT側＝リンク条件の先（パイロット等）／PILOT・パイロットコマンド側＝逆引き（このカードとリンクできるユニット）
+  var lk = linkTargets(c);
+  if (c.type === 'PILOT' || isPilotCmd(c)) {
+    var rev = C.linkableUnits(c, db);
+    var seenB = new Set(lk.cards.map(function(x){ return x.base; }));
+    rev.cards.forEach(function(x){ if (!seenB.has(x.base)) { seenB.add(x.base); lk.cards.push(x); } });
+    lk.more += rev.more;
+    if (lk.cards.length > 40) { lk.more += lk.cards.length - 40; lk.cards = lk.cards.slice(0, 40); }
+  }
+  var rb = badgeHtml(c, true).replace(/tb-o pv/g, 'tb-o pv db-hidden'); // 先行はアート左上バッジで示すため右下では抑止
+
+  // 数値パネル（PILOT／パイロット要素持ちコマンドは補正表示・欠損は-）
+  var stats;
+  if (c.type === 'PILOT' || isPilotCmd(c)) {
+    stats = [['Lv', c.level], ['コスト', c.cost], ['AP補正', c.apm==null?null:'+'+c.apm], ['HP補正', c.hpm==null?null:'+'+c.hpm]];
+  } else {
+    stats = [['Lv', c.level], ['コスト', c.cost], ['AP', c.ap], ['HP', c.hp]];
+  }
+  var statsHtml = stats.map(function(s){
+    return '<div class="cm2-stat"><span class="k">'+s[0]+'</span><span class="v">'+(s[1]==null?'-':esc(String(s[1])))+'</span></div>';
+  }).join('');
+
+  // 折りたたみ: 絵柄バージョン
+  var versSec = '';
+  if (vers.length > 1) {
+    versSec = '<div class="cm2-sec'+(cmVerOpen?' open':'')+'" id="cmSecV">' +
+      '<button class="cm2-sech" id="cmSecVH"><span class="t">絵柄バージョン</span><span class="n">'+vers.length+'種</span><span class="ar">'+(cmVerOpen?'▴':'▾')+'</span></button>' +
+      '<div class="cm2-secb"><div class="cm2-vers">' +
+      vers.map(function(v){
+        return '<button class="cm2-ver'+(v.id===c.id?' on':'')+'" data-ver="'+esc(v.id)+'">' +
+          '<span class="vi"><img loading="lazy" src="images/cards/'+esc(v.id)+'.webp" alt="" data-phid="'+esc(v.id)+'" data-phname=""></span>' +
+          '<span class="vl">'+(v.par?'パラレル '+esc(v.id.split('_')[1]||''):'通常版')+'<br><span class="r">'+esc(v.rarity)+'</span></span></button>';
+      }).join('') + '</div></div></div>';
+  }
+  // 折りたたみ: リンク対象カード（松岡さん指示・別バージョンの下）
+  var linkSec = '';
+  if (lk.cards.length || lk.raw.length) {
+    var rows = lk.cards.map(function(t){
+      return '<button class="cm2-lrow" data-lk="'+esc(t.id)+'">' +
+        '<span class="lt"><img loading="lazy" src="images/cards/'+esc(t.id)+'.webp" alt="" data-phid="'+esc(t.id)+'" data-phname=""></span>' +
+        '<span class="ln">'+esc(t.name)+'</span><span class="li">'+esc(t.id)+'</span><span class="go">›</span></button>';
+    }).join('');
+    if (lk.more) rows += '<div class="cm2-lraw">ほか '+lk.more+' 件</div>';
+    lk.raw.forEach(function(e){ rows += '<div class="cm2-lraw">'+esc(e)+'（当サイト未収載）</div>'; });
+    linkSec = '<div class="cm2-sec'+(cmLinkOpen?' open':'')+'" id="cmSecL">' +
+      '<button class="cm2-sech" id="cmSecLH"><span class="t">リンク対象カード</span><span class="n">'+(lk.cards.length + lk.raw.length)+'</span><span class="ar">'+(cmLinkOpen?'▴':'▾')+'</span></button>' +
+      '<div class="cm2-secb"><div class="cm2-links">'+rows+'</div></div></div>';
+  }
+
+  var h =
+    '<div class="cm2-handle"><span></span></div>' +
+    '<div class="cm2-head"><span class="t">カード詳細</span><button class="mini-btn" data-close style="width:30px;height:30px">✕</button></div>' +
+    '<div class="cm2-cols">' +
+      '<div class="cm2-vleft"><div class="cm2-left">' +
+        '<div class="cm2-art" style="--cac:'+hex+';--cacs:'+hex+'33">' + imgHtml(c) +
+        (c.pv ? '<span class="b-pv">先行</span>' : '') +
+        '<span class="b-rar">'+esc(c.rarity||'-')+'</span>' +
+        '<span class="b-reg">'+rb+'</span>' +
+        '</div>' +
+      '</div>' + versSec + linkSec + '</div>' +
+      '<div class="cm2-right">' +
+        '<div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">' +
+          '<div style="display:flex;flex-direction:column;gap:7px;min-width:0">' +
+            '<span class="cm2-name">'+esc(c.name)+'</span>' +
+            '<div class="cm2-idrow"><span class="cm2-id">'+esc(c.id)+'</span>'+badgeHtml(c, true)+'</div>' +
+          '</div>' +
+          '<button class="mini-btn only-pc" data-close style="flex:none">✕</button>' +
+        '</div>' +
+        '<div class="cm2-stats">'+statsHtml+'</div>' +
+        (c.effect ? '<div class="cm2-effect"><span class="k">効果</span><div class="tx">'+effectHtml(c.effect)+'</div></div>' : '') +
+        (c.pv ? '<div class="cm2-pv"><span class="ic">△</span><span>公式発表前の暫定データです。内容が変わる場合があります。</span></div>' : '') +
+        '<a class="cm2-page" href="cards/'+encodeURIComponent(c.id)+'/index.html" target="_blank" rel="noopener">カード詳細ページを開く<span>›</span></a>' +
+      '</div>' +
+    '</div>' +
+    '<div class="cm2-foot">' +
+      '<div class="cm2-step">' +
+        '<button id="cmSub"'+(qty>0?'':' disabled')+'>−</button>' +
+        '<span class="q">'+qty+'</span>' +
+        (can>0 ? '<button id="cmAdd2">＋</button>' : '<span class="mx">最大</span>') +
+      '</div>' +
+      '<span class="cm2-max">現在デッキに <b class="mono" style="color:var(--fg)">'+qty+'</b> 枚 ・ 最大4枚</span>' +
+      '<button class="cm2-close2" data-close>閉じる</button>' +
+      '<button class="cm2-add" id="cmAdd"'+(can>0?'':' disabled')+'>デッキに入れる<span class="x">×'+qty+'</span></button>' +
+    '</div>';
+  $('cardModalBody').innerHTML = h;
+
+  var body = $('cardModalBody');
+  body.querySelectorAll('[data-close]').forEach(function(b){ b.onclick = closeModals; });
+  body.querySelectorAll('[data-ver]').forEach(function(b){
+    b.onclick = function(){ var v = db.byId.get(b.dataset.ver); if (v) drawCardModal(v); };
+  });
+  body.querySelectorAll('[data-lk]').forEach(function(b){
+    b.onclick = function(){
+      var t = db.byId.get(b.dataset.lk);
+      if (t) { cmVerOpen = false; cmLinkOpen = false; drawCardModal(t); }
+    };
+  });
+  var vh = $('cmSecVH'); if (vh) vh.onclick = function(){ cmVerOpen = !cmVerOpen; $('cmSecV').classList.toggle('open', cmVerOpen); vh.querySelector('.ar').textContent = cmVerOpen?'▴':'▾'; };
+  var lh = $('cmSecLH'); if (lh) lh.onclick = function(){ cmLinkOpen = !cmLinkOpen; $('cmSecL').classList.toggle('open', cmLinkOpen); lh.querySelector('.ar').textContent = cmLinkOpen?'▴':'▾'; };
+  var add = function(){ addCard(c.id, 1); drawCardModal(c); };
+  $('cmAdd').onclick = add;
+  var a2 = $('cmAdd2'); if (a2) a2.onclick = add;
+  $('cmSub').onclick = function(){ subCard(c.id); drawCardModal(c); };
+}
+
+/* ========== 保存・読込 ========== */
+function doSave(){
+  var s = loadStore();
+  state.name = $('deckName').value.trim();
+  var idx = state.id ? s.decks.findIndex(function(d){ return d.id === state.id; }) : -1;
+  if (idx !== -1) {
+    var d = s.decks[idx];
+    d.name = state.name || '無題のデッキ';
+    d.cards = state.cards;
+    d.colors = C.deckColors(state.cards, db.byId);
+    d.updated = new Date().toISOString();
+    s.draft = { id: state.id, name: d.name, cards: state.cards, updated: d.updated };
+    if (saveStore(s)) toast('上書き保存しました');
+  } else {
+    if (s.decks.length >= C.MAX_SAVED_DECKS) {
+      toast('保存できるデッキは50件までです。不要なデッキを削除してください', true);
+      return;
+    }
+    var nd = C.newDeckObject(state.name || '無題のデッキ', state.cards, db.byId);
+    s.decks.push(nd);
+    s.draft = { id: nd.id, name: nd.name, cards: state.cards, updated: nd.updated };
+    if (saveStore(s)) { state.id = nd.id; toast('保存しました（保存 ' + s.decks.length + ' / 50 件）'); }
+  }
+}
+function renderDecksModal(){
+  var s = loadStore();
+  var full = s.decks.length >= C.MAX_SAVED_DECKS;
+  $('dkCap').textContent = '保存 ' + s.decks.length + ' / 50 件' + (full ? '（上限）' : '');
+  var list = $('dkList');
+  if (!s.decks.length) {
+    list.innerHTML = '<div class="empty" style="margin:0">保存したデッキはまだありません。デッキを作って〔保存〕しましょう</div>';
+    return;
+  }
+  var decks = s.decks.slice().sort(function(a,b){ return (b.updated||'') < (a.updated||'') ? -1 : 1; });
+  list.innerHTML = '';
+  decks.forEach(function(d){
+    var total = C.totalCount(d.cards||{});
+    var dots = (d.colors||[]).map(function(c){ return '<span class="dot" style="background:'+(COLOR_HEX[c]||'#555')+'"></span>'; }).join('');
+    var row = el('<div class="dk-row"><div class="dk-info"><div class="dk-name">'+esc(d.name||'無題のデッキ')+'</div>' +
+      '<div class="dk-sub">'+dots+' '+total+'枚 ・ '+esc((d.updated||'').slice(0,10))+'</div></div>' +
+      '<div class="dk-ops">' +
+      '<button class="btn" data-op="open">開く</button>' +
+      '<button class="btn" data-op="dup"'+(full?' disabled title="保存上限50件のため複製できません"':'')+'>複製</button>' +
+      '<button class="btn" data-op="ren">改名</button>' +
+      '<button class="btn" data-op="del">削除</button></div></div>');
+    row.querySelector('[data-op="open"]').onclick = function(){ openDeck(d.id); };
+    row.querySelector('[data-op="dup"]').onclick = function(){ duplicateDeck(d.id); };
+    row.querySelector('[data-op="ren"]').onclick = function(){ renameDeck(d.id); };
+    row.querySelector('[data-op="del"]').onclick = function(){ deleteDeck(d.id); };
+    var info = row.querySelector('.dk-info');
+    info.style.cursor = 'pointer';
+    info.onclick = function(){ openDeckDetail(d.id); };   // 行タップ→デッキ詳細（8a）
+    list.appendChild(row);
+  });
+}
+function openDeck(id){
+  var s = loadStore();
+  var d = s.decks.find(function(x){ return x.id === id; });
+  if (!d) return;
+  state = { id: d.id, name: d.name || '', cards: sanitizeCards(d.cards) };
+  $('deckName').value = state.name;
+  clearHistory();
+  closeModals();
+  afterMutate();
+  if (!isWide.matches) setTab('deck');
+}
+function duplicateDeck(id){
+  var s = loadStore();
+  if (s.decks.length >= C.MAX_SAVED_DECKS) { toast('保存上限50件のため複製できません。不要なデッキを削除してください', true); return; }
+  var d = s.decks.find(function(x){ return x.id === id; });
+  if (!d) return;
+  var nd = C.newDeckObject((d.name||'無題のデッキ')+' のコピー', sanitizeCards(d.cards), db.byId);
+  s.decks.push(nd);
+  if (saveStore(s)) { openDeck(nd.id); toast('複製して開きました'); }
+}
+function renameDeck(id){
+  var s = loadStore();
+  var d = s.decks.find(function(x){ return x.id === id; });
+  if (!d) return;
+  var nm = prompt('デッキ名（全角30字まで）', d.name || '');
+  if (nm === null) return;
+  d.name = nm.trim().slice(0,30) || '無題のデッキ';
+  d.updated = new Date().toISOString();
+  if (saveStore(s)) {
+    if (state.id === id) { state.name = d.name; $('deckName').value = d.name; saveDraft(); }
+    renderDecksModal();
+  }
+}
+function deleteDeck(id){
+  confirmDlg('デッキを削除', 'この保存デッキを削除します。よろしいですか？（元に戻せません）').then(function(ok){
+    if (!ok) return;
+    var s = loadStore();
+    s.decks = s.decks.filter(function(x){ return x.id !== id; });
+    if (saveStore(s)) {
+      if (state.id === id) state.id = null;
+      renderDecksModal();
+      toast('削除しました');
+    }
+  });
+}
+
+/* ========== デッキ詳細（8a/8b/8c・保存デッキの読み取り専用ビュー） ========== */
+var ddDeckId = null;
+function relTime(iso){
+  if (!iso) return '';
+  var ms = Date.now() - new Date(iso).getTime();
+  if (!isFinite(ms) || ms < 0) return (iso||'').slice(0,10);
+  var m = Math.floor(ms/60000);
+  if (m < 1) return '更新 たった今';
+  if (m < 60) return '更新 ' + m + '分前';
+  var h = Math.floor(m/60);
+  if (h < 24) return '更新 ' + h + '時間前';
+  var dd = Math.floor(h/24);
+  if (dd < 30) return '更新 ' + dd + '日前';
+  return '更新 ' + iso.slice(0,10);
+}
+// 代表カード（§12.1: デッキ内の最高コストユニット、なければ先頭カード）
+function repCardOf(cards){
+  var best = null;
+  Object.keys(cards).forEach(function(id){
+    var c = db.byId.get(id);
+    if (!c || c.type !== 'UNIT') return;
+    if (!best || (c.cost||0) > (best.cost||0)) best = c;
+  });
+  if (!best) { var k = Object.keys(cards).sort()[0]; best = k ? db.byId.get(k) : null; }
+  return best;
+}
+function openDeckDetail(id){
+  ddDeckId = id;
+  closeModals();
+  renderDeckDetail();
+  $('deckDetail').classList.add('open');
+}
+function closeDeckDetail(reopenList){
+  $('deckDetail').classList.remove('open');
+  if (reopenList) { renderDecksModal(); openModal('decksModal'); }
+}
+$('ddBack').onclick = function(){ closeDeckDetail(true); };
+function renderDeckDetail(){
+  var s = loadStore();
+  var d = s.decks.find(function(x){ return x.id === ddDeckId; });
+  if (!d) { closeDeckDetail(true); return; }
+  var cards = sanitizeCards(d.cards);
+  var total = C.totalCount(cards);
+  var colors = C.deckColors(cards, db.byId);
+  var vio = C.validate(cards, db, R);
+  var stCls = total === 50 ? 'ok' : (total > 50 ? 'over' : 'under');
+  var rep = repCardOf(cards);
+
+  var head = $('ddHead');
+  head.innerHTML =
+    '<div class="dd-thumb">' + (rep ? imgHtml(rep) : '<div class="ph"></div>') + '</div>' +
+    '<div class="dd-info">' +
+      '<div class="dd-namerow"><span class="dd-name">'+esc(d.name||'無題のデッキ')+'</span><button class="dd-pen" id="ddPen" title="リネーム">✎</button></div>' +
+      '<div class="dd-pills">' +
+        '<span class="dd-cnt '+stCls+'">'+total+'/50枚'+(total>50?' ▲'+(total-50):(total===50?' ✓':''))+'</span>' +
+        (colors.length?'<span class="dd-dots">'+colors.map(function(c){return '<span style="background:'+COLOR_HEX[c]+'"></span>';}).join('')+'</span>':'') +
+        '<span class="dd-upd">'+esc(relTime(d.updated))+'</span>' +
+      '</div>' +
+      '<button class="dd-vio'+(vio.length?'':' ok')+'" id="ddVio">' +
+        '<span class="ic">'+(vio.length?'!':'✓')+'</span>' +
+        '<span class="t">'+(vio.length?('ルール違反 '+vio.length+'件'):'大会構築適合')+'</span>' +
+        (vio.length?'<span class="go">ビルダーで修正 ›</span>':'') +
+      '</button>' +
+      '<div class="dd-acts">' +
+        '<button class="dd-open" id="ddOpen">このデッキを開く</button>' +
+        '<button class="dd-tcg" id="ddTcg"><span class="pi">＋</span>TCG＋に登録</button>' +
+        '<div class="dd-row2">' +
+          '<button class="dd-b" id="ddDup">複製</button>' +
+          '<button class="dd-b" id="ddRen">リネーム</button>' +
+          '<button class="dd-b" id="ddExp">書き出し</button>' +
+          '<button class="dd-del" id="ddDel">🗑</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+
+  // タイプ別グリッド（読み取り専用: 枠=違反色orゲーム色・左上バッジ・右下×N・下に名前）
+  var byType = {};
+  TYPE_ORDER.forEach(function(t){ byType[t] = []; });
+  Object.keys(cards).forEach(function(id){
+    if (!(cards[id] > 0)) return;
+    var c = db.byId.get(id);
+    var t = (c && TYPE_ORDER.indexOf(c.type) !== -1) ? c.type : 'UNIT';
+    byType[t].push(c || {id:id, name:id, cost:null, color:'-', base:id, pv:0, traits:[], unresolved:true});
+  });
+  var g = $('ddGrid');
+  g.innerHTML = '';
+  TYPE_ORDER.forEach(function(t){
+    var arr = byType[t];
+    if (!arr.length) return;
+    arr.sort(function(a,b){ return ((a.cost==null?99:a.cost)-(b.cost==null?99:b.cost)) || (a.id<b.id?-1:1); });
+    var sub = arr.reduce(function(x,c){ return x + cards[c.id]; }, 0);
+    var sec = el('<div><div class="dsec-h"><span class="t">'+TYPE_JA[t]+'</span><span class="n">'+sub+'</span><span class="ln"></span></div><div class="dd-grid"></div></div>');
+    var gr = sec.querySelector('.dd-grid');
+    arr.forEach(function(c){
+      var fk = C.frameKind(c.id, db.byId, vio);
+      var hex = fk ? VIO_HEX[fk] : (COLOR_HEX[c.color] || '#3a4658');
+      var n = el('<div class="dd-card" data-id="'+esc(c.id)+'">' +
+        '<div class="dd-ci" style="--dac:'+hex+'">'+imgHtml(c)+
+        '<span class="bb">'+badgeHtml(c, true)+'</span>' +
+        '<span class="bq">×'+cards[c.id]+'</span></div>' +
+        '<span class="dd-cn">'+esc(c.name)+'</span></div>');
+      n.onclick = function(){ openCardModal(c.id); };
+      gr.appendChild(n);
+    });
+    g.appendChild(sec);
+  });
+
+  // アクション配線
+  var goBuilder = function(){ openDeck(d.id); closeDeckDetail(false); };
+  $('ddOpen').onclick = goBuilder;
+  if (vio.length) $('ddVio').onclick = goBuilder;
+  $('ddPen').onclick = function(){ renameDeck(d.id); renderDeckDetail(); };
+  $('ddRen').onclick = function(){ renameDeck(d.id); renderDeckDetail(); };
+  $('ddDup').onclick = function(){
+    var st = loadStore();
+    if (st.decks.length >= C.MAX_SAVED_DECKS) { toast('保存上限50件のため複製できません。不要なデッキを削除してください', true); return; }
+    duplicateDeck(d.id);       // 複製先をビルダーで開く（§8）
+    closeDeckDetail(false);
+  };
+  $('ddExp').onclick = function(){ toast('デッキの書き出し（テキスト/一括）はフェーズ2で追加予定です'); };
+  $('ddDel').onclick = function(){
+    confirmDlg('デッキを削除', 'この保存デッキを削除します。よろしいですか？（元に戻せません）').then(function(ok){
+      if (!ok) return;
+      var st = loadStore();
+      st.decks = st.decks.filter(function(x){ return x.id !== d.id; });
+      if (saveStore(st)) {
+        if (state.id === d.id) state.id = null;
+        toast('削除しました');
+        closeDeckDetail(true);
+      }
+    });
+  };
+  $('ddTcg').onclick = function(){
+    var st = C.tcgStatus(cards, db, TOKENS, vio);
+    if (st.ok) {
+      confirmDlg('TCG＋に登録', 'TCG＋のデッキ登録ページへ移動しますか？（新しいタブで開きます）').then(function(ok){
+        if (ok) window.open(C.tcgUrl(cards, db, TOKENS), '_blank', 'noopener');
+      });
+      return;
+    }
+    var msg = st.reason === 'violation' ? 'デッキに違反があるため登録できません（ビルダーで修正してください）'
+      : st.reason === 'preview' ? '先行カードのため、TCG＋にはまだ登録できません: ' + st.items.join(', ')
+      : st.reason === 'unmapped' ? 'TCG＋未対応のため登録できません: ' + st.items.join(', ')
+      : 'デッキが空のため登録できません';
+    toast(msg, true);
+  };
+}
+
+/* ========== 貼り付けインポート（§10.4/§10.6・2026-07-22 実装） ========== */
+// TCG＋token → 型番 の逆引き（TCG＋URLインポート用）
+var TOKENS_REV = {};
+Object.keys(TOKENS).forEach(function(id){ if (!(TOKENS[id] in TOKENS_REV)) TOKENS_REV[TOKENS[id]] = id; });
+var IMP_KIND = { siteurl:'当サイト共有URL', tcgplus:'TCG＋デッキURL', gcgdock:'GCG DOCK形式', exburst:'EXBURST形式', generic:'型番リスト（汎用）' };
+var pendingImport = null;
+function openImportModal(){
+  pendingImport = null;
+  $('impText').value = '';
+  $('impPrev').innerHTML = '<span class="dim">貼り付けると内容をプレビューします</span>';
+  $('impApply').disabled = true;
+  openModal('importModal');
+  setTimeout(function(){ $('impText').focus(); }, 50);
+}
+var impTimer = null;
+$('impText').addEventListener('input', function(){
+  clearTimeout(impTimer);
+  impTimer = setTimeout(analyzeImport, 250);   // 取り込み前は常にプレビュー（§10.6 確定）
+});
+function analyzeImport(){
+  var res = C.parsePastedDeck($('impText').value, db, TOKENS_REV);
+  var prev = $('impPrev');
+  pendingImport = null;
+  var totalQ = 0, kinds = 0;
+  Object.keys(res.cards).forEach(function(id){ totalQ += res.cards[id]; kinds++; });
+  if (res.kind === 'none' || (!kinds && !res.unresolved.length)) {
+    prev.innerHTML = '<span class="un">読み込めるカードがありませんでした。形式をご確認ください（例: <span class="mono">4 GD01-001</span> ／ <span class="mono">deck=</span> のURL）</span>';
+    $('impApply').disabled = true;
+    return;
+  }
+  var h = '<span class="k">'+IMP_KIND[res.kind]+'</span>';
+  if (res.name) h += 'デッキ名: <span class="num">'+esc(res.name)+'</span> ／ ';
+  h += '合計 <span class="num">'+totalQ+'</span> 枚 ・ <span class="num">'+kinds+'</span> 種類';
+  if (res.unresolved.length) {
+    var list = res.unresolved.slice(0, 10).map(esc).join(', ') + (res.unresolved.length > 10 ? ' ほか' : '');
+    h += '<br><span class="un">'+res.unresolved.length+'件解決できず（データ未収載）: '+list+'</span>';
+  }
+  if (res.truncated) h += '<br><span class="dim">※入力が長すぎるため先頭20,000字のみ解析しました</span>';
+  h += '<br><span class="dim">※構築違反（枚数・禁止制限など）があってもそのまま取り込み、違反バーでお知らせします</span>';
+  prev.innerHTML = h;
+  $('impApply').disabled = !kinds;
+  if (kinds) pendingImport = res;
+}
+$('impApply').onclick = function(){
+  if (!pendingImport) return;
+  var res = pendingImport;
+  state = { id: null, name: (res.name || '').slice(0,30), cards: sanitizeCards(res.cards) };
+  $('deckName').value = state.name;
+  clearHistory();                                 // インポート読込は履歴の起点（§8）
+  closeModals();
+  afterMutate();
+  if (!isWide.matches) setTab('deck');
+  var un = res.unresolved.length;
+  toast('読み込みました（' + C.totalCount(state.cards) + '枚）' + (un ? ' ／ ' + un + '件解決できず' : ''));
+};
+
+/* ========== メニュー・クリア ========== */
+function clearAllConfirm(){
+  confirmDlg('すべてクリア', 'デッキ内の全カードを空にします。よろしいですか？').then(function(ok){
+    if (!ok) return;
+    pushHistory();
+    state.cards = {};
+    afterMutate();
+    toast('すべてクリアしました', false, undo);
+  });
+}
+$('btnMenu').onclick = function(e){
+  e.stopPropagation();
+  var m = $('deckMenu');
+  var r = this.getBoundingClientRect();
+  m.style.top = (r.bottom + 6 + window.scrollY) + 'px';
+  m.style.left = Math.max(8, Math.min(window.innerWidth - 205, r.right - 200) + window.scrollX) + 'px';
+  m.classList.toggle('open');
+};
+document.addEventListener('click', function(){ $('deckMenu').classList.remove('open'); });
+$('deckMenu').querySelectorAll('[data-m]').forEach(function(b){
+  b.onclick = function(){
+    $('deckMenu').classList.remove('open');
+    var m = b.dataset.m;
+    if (m === 'new') {
+      confirmDlg('新規作成', '新しいデッキを作成します。現在の編集内容は下書きから置き換わります。').then(function(ok){
+        if (!ok) return;
+        state = { id:null, name:'', cards:{} };
+        $('deckName').value = '';
+        clearHistory(); afterMutate();
+      });
+    }
+    else if (m === 'open') { renderDecksModal(); openModal('decksModal'); }
+    else if (m === 'import') { openImportModal(); }
+    else if (m === 'dup') {
+      var s = loadStore();
+      if (s.decks.length >= C.MAX_SAVED_DECKS) { toast('保存上限50件のため複製できません。不要なデッキを削除してください', true); return; }
+      var nd = C.newDeckObject(($('deckName').value.trim()||'無題のデッキ')+' のコピー', JSON.parse(JSON.stringify(state.cards)), db.byId);
+      s.decks.push(nd);
+      s.draft = { id: nd.id, name: nd.name, cards: nd.cards, updated: nd.updated };
+      if (saveStore(s)) { openDeck(nd.id); toast('複製して開きました'); }
+    }
+    else if (m === 'clearAll') clearAllConfirm();
+    else if (m === 'clearColor') {
+      var colors = C.deckColors(state.cards, db.byId);
+      if (!colors.length) { toast('デッキにカードがありません'); return; }
+      var chips = $('ccChips');
+      chips.innerHTML = colors.map(function(c){
+        return '<button class="chip" data-c="'+c+'"><span class="cdot" style="background:'+COLOR_HEX[c]+'"></span>'+jaColor(c)+'</button>';
+      }).join('');
+      chips.querySelectorAll('.chip').forEach(function(ch){ ch.onclick = function(){ ch.classList.toggle('on'); }; });
+      openModal('colorClearModal');
+    }
+  };
+});
+$('ccDo').onclick = function(){
+  var sel = Array.from($('ccChips').querySelectorAll('.chip.on')).map(function(ch){ return ch.dataset.c; });
+  if (!sel.length) { toast('色を選んでください'); return; }
+  pushHistory();
+  Object.keys(state.cards).forEach(function(id){
+    var c = db.byId.get(id);
+    if (c && sel.indexOf(c.color) !== -1) delete state.cards[id];
+  });
+  closeModals();
+  afterMutate();
+  toast(sel.map(jaColor).join('・') + ' のカードを削除しました', false, undo);
+};
+
+/* ========== フィルタUI ========== */
+var sheetChipEls = {};
+function chipSet(elId, group, items, getHtml, sel, colorMap){
+  var box = $(elId);
+  box.innerHTML = '';
+  sheetChipEls[group] = {};
+  items.forEach(function(it){
+    var b = el('<button class="chip'+(colorMap?'':'')+'">'+getHtml(it)+'</button>');
+    sheetChipEls[group][it] = b;
+    b.onclick = function(){
+      var i = sel.indexOf(it);
+      var on = i === -1;
+      if (on) sel.push(it); else sel.splice(i,1);
+      setChipOn(b, on, colorMap ? colorMap[it] : null);
+      applyFilters();
+    };
+    box.appendChild(b);
+  });
+}
+function setChipOn(b, on, hex){
+  b.classList.toggle('on', on);
+  if (hex) {                                   // 色チップは色つき強調（4a/5a実測）
+    b.classList.toggle('c-on', on);
+    b.style.borderColor = on ? hex : '';
+    b.style.background = on ? hex + '1f' : '';
+  }
+}
+function syncSheetChip(group, value, on){
+  var m = sheetChipEls[group];
+  if (m && m[value]) setChipOn(m[value], on, group === 'colors' ? COLOR_HEX[value] : null);
+}
+/* デュアルレンジ（4a/5a実測: 金トラック＋白サム15px） */
+function makeDualRange(elId, labelId, min, max, apply){
+  var box = $(elId);
+  box.innerHTML = '<div class="track"></div><div class="fill"></div>' +
+    '<input type="range" min="'+min+'" max="'+max+'" value="'+min+'" step="1">' +
+    '<input type="range" min="'+min+'" max="'+max+'" value="'+max+'" step="1">';
+  var fill = box.querySelector('.fill');
+  var inputs = box.querySelectorAll('input');
+  var lo = min, hi = max;
+  function draw(){
+    var full = (lo === min && hi === max);
+    var l = ((lo - min) / (max - min || 1)) * 100;
+    var r = ((hi - min) / (max - min || 1)) * 100;
+    fill.style.left = l + '%';
+    fill.style.width = (r - l) + '%';
+    fill.classList.toggle('on', !full);
+    var lb = $(labelId);
+    lb.textContent = full ? '-' : (lo + ' — ' + hi);
+    lb.classList.toggle('on', !full);
+  }
+  function onInput(){
+    var a = +inputs[0].value, b = +inputs[1].value;
+    lo = Math.min(a, b); hi = Math.max(a, b);
+    draw();
+    var full = (lo === min && hi === max);
+    apply(full ? '' : String(lo), full ? '' : String(hi));
+  }
+  inputs.forEach(function(inp){ inp.addEventListener('input', onInput); });
+  draw();
+  return {
+    reset: function(){ lo = min; hi = max; inputs[0].value = min; inputs[1].value = max; draw(); }
+  };
+}
+var rgLv, rgCost, rgAp, rgHp;
+var cmdExpanded = false;
+// ＆パイロットの状態変更を一箇所に集約（UI同期込み）
+function setAndPilot(v){
+  filters.andPilot = v;
+  var sub = $('chipCmdPilot');
+  if (sub) {
+    sub.classList.toggle('on', v);
+    if (v) sub.classList.remove('db-hidden');          // 連動ONで自動展開
+  }
+  var ex = document.querySelector('#fTypes .cs-x');
+  if (ex && sub) ex.textContent = sub.classList.contains('db-hidden') ? '＋' : '−';
+}
+// タイプチップ: ユニット/パイロット/[コマンド|＋]→(↳＆パイロット)/ベース（5a実測）
+// 連動仕様（2026-07-22 松岡さん確定）:
+//   ・コマンド／パイロットをONにすると ＆パイロットも連動ON（既にONなら維持）
+//   ・親をOFFにしたとき、もう一方の親も選択されていなければ ＆パイロットもOFF
+//   ・＆パイロット単体のクリックは独立トグル（単体ONで84種のみ表示できる）
+function buildTypeChips(){
+  var box = $('fTypes');
+  box.innerHTML = '';
+  sheetChipEls.types = {};
+  function parentToggle(t, uiToggle){
+    var i = filters.types.indexOf(t);
+    var turningOn = i === -1;
+    if (turningOn) filters.types.push(t); else filters.types.splice(i,1);
+    uiToggle(turningOn);
+    if (t === 'COMMAND' || t === 'PILOT') {
+      if (turningOn) setAndPilot(true);
+      else if (filters.types.indexOf('COMMAND') === -1 && filters.types.indexOf('PILOT') === -1) setAndPilot(false);
+    }
+    applyFilters();
+  }
+  TYPE_ORDER.forEach(function(t){
+    if (t !== 'COMMAND') {
+      var b = el('<button class="chip">'+TYPE_JA[t]+'</button>');
+      sheetChipEls.types[t] = b;
+      if (filters.types.indexOf(t) !== -1) b.classList.add('on');
+      b.onclick = function(){ parentToggle(t, function(on){ b.classList.toggle('on', on); }); };
+      box.appendChild(b);
+      return;
+    }
+    // コマンド: 分割チップ（本体トグル＋展開ボタン）
+    var sp = el('<span class="chip-split"><button class="cs-main">コマンド</button><button class="cs-x" title="パイロット要素を持つコマンドで絞り込み">＋</button></span>');
+    var main = sp.querySelector('.cs-main');
+    var ex = sp.querySelector('.cs-x');
+    sheetChipEls.types.COMMAND = sp;
+    if (filters.types.indexOf('COMMAND') !== -1) sp.classList.add('on');
+    main.onclick = function(){ parentToggle('COMMAND', function(on){ sp.classList.toggle('on', on); }); };
+    var sub = el('<button class="chip subp'+(filters.andPilot?' on':'')+(cmdExpanded||filters.andPilot?'':' db-hidden')+'" id="chipCmdPilot"><span class="arr">↳</span>＆パイロット</button>');
+    ex.onclick = function(){
+      sub.classList.toggle('db-hidden');
+      cmdExpanded = !sub.classList.contains('db-hidden');
+      ex.textContent = sub.classList.contains('db-hidden') ? '＋' : '−';
+    };
+    if (cmdExpanded || filters.andPilot) ex.textContent = '−';
+    sub.onclick = function(){
+      setAndPilot(!filters.andPilot);                  // 単体トグル（親には触らない）
+      applyFilters();
+    };
+    box.appendChild(sp);
+    box.appendChild(sub);
+  });
+}
+function buildFilters(){
+  chipSet('fColors', 'colors', ['Blue','Green','Red','White','Purple'], function(c){
+    return '<span class="cdot" style="background:'+COLOR_HEX[c]+'"></span>'+jaColor(c);
+  }, filters.colors, COLOR_HEX);
+  buildTypeChips();   // コマンドは＋展開つき分割チップ（5a）
+  var rset = new Set(); db.cards.forEach(function(c){ if (c.rarity) rset.add(c.rarity); });
+  var rar = RARITY_ORDER.filter(function(r){ return rset.has(r); });
+  rset.forEach(function(r){ if (rar.indexOf(r) === -1) rar.push(r); });
+  chipSet('fRarities', 'rarities', rar, function(r){ return '<span class="mono">'+esc(r)+'</span>'; }, filters.rarities);
+  var sset = new Set(); db.cards.forEach(function(c){ if (c.set) sset.add(c.set); });
+  var sets = SET_ORDER.filter(function(s){ return sset.has(s); });
+  sset.forEach(function(s){ if (sets.indexOf(s) === -1) sets.push(s); });
+  chipSet('fSets', 'sets', sets, function(s){ return '<span class="mono">'+esc(s)+'</span>'; }, filters.sets);
+  var lvMin = 99, lvMax = 0, cMin = 99, cMax = 0, aMin = 99, aMax = 0, hMin = 99, hMax = 0;
+  db.cards.forEach(function(c){
+    if (c.level != null) { if (c.level < lvMin) lvMin = c.level; if (c.level > lvMax) lvMax = c.level; }
+    if (c.cost != null) { if (c.cost < cMin) cMin = c.cost; if (c.cost > cMax) cMax = c.cost; }
+    if (c.ap != null) { if (c.ap < aMin) aMin = c.ap; if (c.ap > aMax) aMax = c.ap; }
+    if (c.hp != null) { if (c.hp < hMin) hMin = c.hp; if (c.hp > hMax) hMax = c.hp; }
+  });
+  rgLv = makeDualRange('rgLv', 'rgLvV', lvMin, lvMax, function(lo,hi){ filters.lvMin = lo; filters.lvMax = hi; applyFilters(); });
+  rgCost = makeDualRange('rgCost', 'rgCostV', cMin, cMax, function(lo,hi){ filters.costMin = lo; filters.costMax = hi; applyFilters(); });
+  rgAp = makeDualRange('rgAp', 'rgApV', aMin, aMax, function(lo,hi){ filters.apMin = lo; filters.apMax = hi; applyFilters(); });
+  rgHp = makeDualRange('rgHp', 'rgHpV', hMin, hMax, function(lo,hi){ filters.hpMin = lo; filters.hpMax = hi; applyFilters(); });
+  var srcs = new Set(); db.cards.forEach(function(c){ if (c.src) srcs.add(c.src); });
+  var so = $('fSrc');
+  Array.from(srcs).sort().forEach(function(s){ so.appendChild(el('<option value="'+esc(s)+'">'+esc(s)+'</option>')); });
+  so.onchange = function(){ filters.src = so.value; applyFilters(); };
+}
+function clearFilters(){
+  filters = defaultFilters();
+  ['q','q2','q3'].forEach(function(id){ $(id).value = ''; });
+  $('fSrc').value = '';
+  rgLv.reset(); rgCost.reset(); rgAp.reset(); rgHp.reset();
+  Object.keys(sheetChipEls).forEach(function(g){
+    Object.keys(sheetChipEls[g]).forEach(function(v){ setChipOn(sheetChipEls[g][v], false, g==='colors' ? COLOR_HEX[v] : null); });
+  });
+  setAndPilot(false);
+  updateParBtns();
+  applyFilters();
+}
+function updateParBtns(){
+  ['btnPar','btnPar2'].forEach(function(id){
+    var b = $(id);
+    b.classList.toggle('on', filters.hidePar);
+    b.querySelector('.st').textContent = filters.hidePar ? 'ON' : 'OFF';
+  });
+}
+
+/* ========== イベント配線 ========== */
+['q','q2','q3'].forEach(function(id){
+  $(id).addEventListener('input', function(){
+    filters.q = this.value;
+    ['q','q2','q3'].forEach(function(o){ if (o !== id) $(o).value = filters.q; });
+    applyFilters();
+  });
+});
+$('btnFilterClear').onclick = clearFilters;
+$('btnFilterClear2').onclick = clearFilters;
+$('pcClear').onclick = clearFilters;
+$('accClear').onclick = function(e){ e.stopPropagation(); clearFilters(); };
+$('btnFilterOpen').onclick = function(){ $('paneFilter').classList.add('open'); };
+$('btnFilterClose').onclick = function(){ $('paneFilter').classList.remove('open'); };
+$('accBtn').onclick = function(){
+  var p = $('paneFilter');
+  p.classList.toggle('open');
+  $('accOc').textContent = p.classList.contains('open') ? '閉じる ▲' : '開く ▼';
+};
+$('btnPar').onclick = togglePar;
+$('btnPar2').onclick = togglePar;
+function togglePar(){ filters.hidePar = !filters.hidePar; updateParBtns(); applyFilters(); }
+$('vioSum').onclick = function(){
+  if ($('vioBar').classList.contains('ok')) return;
+  vioOpen = !vioOpen;
+  renderViolations(lastViolations);
+};
+// 保存は確認してから（2026-07-22 松岡さん指示）
+function saveClick(){
+  confirmDlg('サイト内に保存', 'デッキをこの端末（ブラウザ）に保存しますか？').then(function(ok){ if (ok) doSave(); });
+}
+$('btnSave').onclick = saveClick;
+$('btnSaveM').onclick = saveClick;
+// URL共有（§11・2026-07-22 実装）: 型番ビット詰め方式で生成→確認→クリップボードへ
+function copyText(text){
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text).then(function(){ return true; }, function(){ return copyFallback(text); });
+  }
+  return Promise.resolve(copyFallback(text));
+}
+function copyFallback(text){
+  try {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    var ok = document.execCommand('copy');
+    ta.remove();
+    if (!ok) prompt('このURLをコピーしてください', text);
+    return true;
+  } catch(e){ prompt('このURLをコピーしてください', text); return true; }
+}
+function shareUrlBase(){ return location.href.split(/[?#]/)[0]; }
+$('btnShare').onclick = function(){
+  var st = C.encodeShareCode(state.cards, db.byId);
+  if (!st.ok) {
+    if (st.reason === 'empty') toast('デッキが空のため共有できません');
+    else if (st.reason === 'preview') toast('先行カードが含まれるため、URL共有はまだできません（公式登録後に可能になります）: ' + st.items.join(', '), true);
+    else toast('データ未収載のカードが含まれるため共有できません: ' + st.items.join(', '), true);
+    return;
+  }
+  var name = $('deckName').value.trim();
+  var url = shareUrlBase() + '?d=' + st.code + (name ? '&n=' + encodeURIComponent(name) : '');
+  confirmDlg('URL共有', '共有用URLを作成してコピーしますか？（URLを開くと同じデッキを再現できます）').then(function(ok){
+    if (!ok) return;
+    copyText(url).then(function(){ toast('共有URLをコピーしました（' + url.length + '文字）'); });
+  });
+};
+$('btnClearF').onclick = clearAllConfirm;
+$('btnUndo').onclick = undo;
+$('btnRedo').onclick = redo;
+document.addEventListener('keydown', function(e){
+  if (e.key === 'Escape') {                       // ESCで最前面から閉じる
+    if ($('ovl').classList.contains('open')) { closeModals(); return; }
+    if ($('deckDetail').classList.contains('open')) { closeDeckDetail(true); return; }
+    if ($('paneFilter').classList.contains('open') && !isWide.matches) { $('paneFilter').classList.remove('open'); return; }
+  }
+  if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+  if ((e.ctrlKey||e.metaKey) && !e.altKey && (e.key==='z'||e.key==='Z')) {
+    e.preventDefault();
+    if (e.shiftKey) redo(); else undo();
+  }
+});
+$('deckName').addEventListener('input', function(){ state.name = this.value; saveDraft(); });
+$('btnOpenDecks0').onclick = function(){ renderDecksModal(); openModal('decksModal'); };
+$('btnDecks').onclick = function(){ renderDecksModal(); openModal('decksModal'); };   // 常時見える入口（発見性FB・2026-07-22）
+$('btnGoDeck').onclick = function(){ setTab('deck'); };
+$('btnDiag').onclick = function(){
+  diagOpen = !diagOpen;
+  $('diagBox').classList.toggle('m-open', diagOpen);
+  $('diagAr').textContent = diagOpen ? '▴' : '▾';
+};
+$('ovl').onclick = closeModals;
+document.querySelectorAll('[data-close]').forEach(function(b){ b.onclick = closeModals; });
+document.querySelectorAll('.db-tab').forEach(function(b){ b.onclick = function(){ setTab(b.dataset.tab); }; });
+function setTab(t){
+  document.body.dataset.tab = t;
+  document.querySelectorAll('.db-tab').forEach(function(b){ b.classList.toggle('on', b.dataset.tab === t); });
+}
+function wireSize(segId){
+  $(segId).querySelectorAll('button').forEach(function(b){
+    b.classList.toggle('on', b.dataset.s === prefs.size);
+    b.onclick = function(){
+      prefs.size = b.dataset.s; savePrefs();
+      ['segSize','segSize2'].forEach(function(sid){
+        $(sid).querySelectorAll('button').forEach(function(x){ x.classList.toggle('on', x.dataset.s === prefs.size); });
+      });
+      applyFilters();
+    };
+  });
+}
+wireSize('segSize'); wireSize('segSize2');
+new IntersectionObserver(function(en){
+  if (en[0].isIntersecting && renderedCount < filtered.length) renderMore();
+}, { rootMargin: '600px' }).observe($('moreSentinel'));
+isWide.addEventListener ? isWide.addEventListener('change', renderDeck) : isWide.addListener(renderDeck);
+// ヘッダ実高（≥600 の 100vh レイアウト用）: 共通ヘッダー＋コンパクトバーの見えている分を合算（非表示は0）
+function setHH(){
+  var h = document.getElementById('header');
+  var mini = document.querySelector('.hdr-mini');
+  var total = (h ? h.offsetHeight : 0) + (mini ? mini.offsetHeight : 0);
+  document.body.style.setProperty('--hh', total + 'px');
+}
+// #18: ヘッダー開閉（畳み時のみバーが見えている）
+$('hdrToggle').onclick = function(){
+  var open = document.body.classList.toggle('hdr-open');
+  this.textContent = open ? '閉じる ▴' : 'メニュー ▾';
+  setHH();
+};
+window.addEventListener('resize', setHH);
+setTimeout(setHH, 0); setTimeout(setHH, 400);
+
+/* ========== 起動 ========== */
+(function boot(){
+  var s = loadStore();
+  if (s.draft && s.draft.cards && Object.keys(s.draft.cards).length) {
+    state = { id: s.draft.id || null, name: s.draft.name || '', cards: sanitizeCards(s.draft.cards) };
+    $('deckName').value = state.name;
+  }
+  buildFilters();
+  updateParBtns();
+  applyFilters();
+  renderDeck();
+  updateUndoBtns();
+  if (!lsOk) toast('localStorage が使えないため、保存機能は無効です（デッキ編集は可能）', true);
+
+  // 共有URL（?d=）からの復元（§11）
+  try {
+    var qp = new URLSearchParams(location.search);
+    var code = qp.get('d');
+    if (code) {
+      var res = C.decodeShareCode(code, db.byId);
+      var clean = function(){ try { history.replaceState({}, '', shareUrlBase()); } catch(e){} };
+      if (!res.ok) {
+        toast(res.reason === 'version' ? '共有URLが新しい形式のため読み込めません' : '共有URLを読み込めませんでした', true);
+        clean();
+      } else if (!Object.keys(res.cards).length) {
+        toast('共有URLに読み込めるカードがありませんでした', true);
+        clean();
+      } else {
+        var nm = (qp.get('n') || '').slice(0, 30);
+        confirmDlg('共有デッキを読み込む', 'URLのデッキを読み込みますか？（現在の編集内容は下書きから置き換わります）').then(function(ok){
+          clean();
+          if (!ok) return;
+          state = { id: null, name: nm, cards: sanitizeCards(res.cards) };
+          $('deckName').value = nm;
+          clearHistory();
+          afterMutate();
+          if (!isWide.matches) setTab('deck');
+          toast('共有デッキを読み込みました（' + C.totalCount(state.cards) + '枚）'
+            + (res.skipped.length ? ' ／ ' + res.skipped.length + '件解決できず: ' + res.skipped.join(', ') : ''));
+        });
+      }
+    }
+  } catch(e){ /* URLSearchParams非対応等は無視 */ }
+})();
+})();
+</script>
+<footer class="db-foot" style="max-width:1400px;margin:22px auto 40px;padding:16px 18px;border-top:1px solid var(--line);color:var(--fg3);font-size:12.5px;line-height:1.85">
+  <details style="margin-bottom:10px">
+    <summary style="cursor:pointer;color:var(--fg2);font-weight:600">このツールの使い方</summary>
+    <div style="margin-top:8px">左の検索・フィルタからカードを探し、「＋」で50枚デッキに追加します。上部の違反バーが禁止・制限・ペア規制・枚数・色数を自動チェックし、適合すると「TCG＋に登録」ボタンから公式登録用URLを生成できます。作成したデッキは端末内に保存でき、共有URL（?d=）での受け渡しや、TCG＋・GCG DOCK・EXBURST形式の貼り付けインポートにも対応しています。</div>
+  </details>
+  <details>
+    <summary style="cursor:pointer;color:var(--fg2);font-weight:600">免責・非公式について</summary>
+    <div style="margin-top:8px">本ツールは非公式ファンサイト「GCG STATS」が提供するもので、バンダイ・サンライズおよび BANDAI TCG＋ の認可・許諾を受けたものではありません。禁止・制限や収録カードは公式情報を基に随時反映していますが、最新の公式ルールを優先してください。「TCG＋に登録」は公式サービスへのリンクを生成する機能で、登録の完了を保証するものではありません。©SOTSU・SUNRISE ©BANDAI</div>
+  </details>
+</footer>
+<script src="js/common.js"></script>
+<script>
+try { document.getElementById('header').innerHTML = GCG.renderHeader('deck-builder'); } catch (e) { /* ignore */ }
+</script>
+</body>
+</html>

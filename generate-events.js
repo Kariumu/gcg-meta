@@ -415,6 +415,12 @@ function updateSitemap(eventIds) {
 '    <lastmod>' + now + '</lastmod>\n' +
 '  </url>\n' +
 '  <url>\n' +
+'    <loc>' + SITE_URL + '/deck-builder.html</loc>\n' +
+'    <changefreq>weekly</changefreq>\n' +
+'    <priority>0.8</priority>\n' +
+'    <lastmod>' + now + '</lastmod>\n' +
+'  </url>\n' +
+'  <url>\n' +
 '    <loc>' + SITE_URL + '/privacy.html</loc>\n' +
 '    <changefreq>monthly</changefreq>\n' +
 '    <priority>0.3</priority>\n' +
