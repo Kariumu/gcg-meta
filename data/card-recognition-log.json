@@ -3341,5 +3341,143 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-10": {
+    "recognized_at": "2026-07-11 20:00:48 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2075549344414237139",
+      "https://x.com/GUNDAM_GCG_JP/status/2075548086236254509",
+      "https://x.com/GUNDAM_GCG_JP/status/2075546827961639059",
+      "https://x.com/GUNDAM_GCG_JP/status/2075545569540362251"
+    ],
+    "cards": [
+      {
+        "card_number": "EXR-010",
+        "card_name": "EXリソース",
+        "color": "Unknown",
+        "card_type": "リソース",
+        "level": null,
+        "cost": null,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "EB01-054",
+        "card_name": "ギャプランTR-5［フライルー］1号機",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "ジージェネ"
+        ],
+        "link": "",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST07-009",
+        "card_name": "刹那・F・セイエイ",
+        "color": "Purple",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "CB"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【アタック時】このターン中、このユニットをAP+1する。自分のトラッシュに〔CB〕のカードが7枚以上あるなら、かわりに〔CB〕の自分のユニットすべてをAP+1する。",
+        "effect_confidence": "low",
+        "effect_length": 101,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST02-010",
+        "card_name": "ヒイロ・ユイ",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "オペレーション・メテオ"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットをAP+1、HP+1する。",
+        "effect_confidence": "high",
+        "effect_length": 44,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-07-15": {
+    "recognized_at": "2026-07-15 20:00:14 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2077302148417675721"
+    ],
+    "cards": [
+      {
+        "card_number": "EXR-007",
+        "card_name": "EXリソース",
+        "color": "Unknown",
+        "card_type": "リソース",
+        "level": null,
+        "cost": null,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-07-25": {
+    "recognized_at": "2026-07-25 20:00:18 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2080926031008154072"
+    ],
+    "cards": [
+      {
+        "card_number": "ST12-005",
+        "card_name": "GQuuuuuuX(オメガ・サイコミュ起動時)",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [],
+        "link": "「アマテ・ユズリハ(マチュ)」/「ニャアン」",
+        "effect": "【アタック時】自分の手札1枚を捨ててもよい。そうしたなら、自分は1枚ドローする。",
+        "effect_confidence": "high",
+        "effect_length": 40,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
