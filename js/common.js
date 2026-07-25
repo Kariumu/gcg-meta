@@ -246,7 +246,7 @@ const GCG = {
     { key: 'tournaments', href: 'events.html',  label: '大会データ'  },
     { key: 'analysis',    href: 'meta.html',    label: '環境分析'   },
     { key: 'cards',       href: 'cards.html',   label: 'カードリスト' },
-    { key: 'sets',        href: 'sets/',        label: '新弾プレビュー' },
+    { key: 'sets',        href: 'sets/',        label: '新弾情報' },
     { key: 'reports',     href: 'reports/',     label: 'レポート'   },
     { key: 'venues',      href: 'stores.html',  label: '店舗一覧'  },
     { key: 'mypage',      href: 'mypage.html',  label: 'マイページ' }

@@ -69,19 +69,43 @@ const VALID_RARITIES = ['LR', 'R', 'U', 'C'];
 // 注: 'G005' は GD05 の OCR 誤読でありセットとして存在しない（2026-06-10 統合済み）
 const SET_ORDER_HINT = ['ST10', 'EB01', 'GD05'];
 
-// セットの公式呼称（判明分のみ。未確定のセットは生値表示のフォールバック）
-const SET_LABELS_PREVIEW = {
+// セットの公式呼称・発売日は data/sets_meta.json を「正」とし、既存表はフォールバックとして残す
+// （指示書52 Task1: 二重管理を避けるため sets_meta を優先。sets_meta 未登録のセットは従来表を使用）
+const SET_LABELS_FALLBACK = {
   'ST10': 'スタートデッキ Generation Pulse',
   'EB01': 'Eternal Nexus',
   'GD05': '第5弾ブースターパック',
 };
-
-// 発売日（判明分のみ表示）
-const SET_RELEASE_DATES = {
+const SET_RELEASE_FALLBACK = {
   'ST10': '2026-06-27',
   'EB01': '2026-06-27',
   'GD05': '2026-07-25',
 };
+
+// data/sets_meta.json を読み込み（新設・任意。無ければフォールバックのみで従来動作）
+let setsMeta = [];
+try {
+  const rawMeta = fs.readFileSync(path.join(DATA_DIR, 'sets_meta.json'), 'utf-8')
+    .replace(/^\uFEFF/, '')
+    .replace(/[\u0000\s]+$/, '');
+  setsMeta = JSON.parse(rawMeta);
+  if (!Array.isArray(setsMeta)) setsMeta = [];
+  console.log(`  sets_meta.json: ${setsMeta.length} 件読み込み`);
+} catch (e) {
+  console.warn('  ⚠ data/sets_meta.json が読めません（フォールバック表を使用）: ' + e.message);
+  setsMeta = [];
+}
+const SET_META_BY_CODE = {};
+for (const m of setsMeta) { if (m && m.code) SET_META_BY_CODE[m.code] = m; }
+
+// 実効の呼称・発売日: フォールバックを基に sets_meta（正）で上書き
+const SET_LABELS_PREVIEW = Object.assign({}, SET_LABELS_FALLBACK);
+const SET_RELEASE_DATES = Object.assign({}, SET_RELEASE_FALLBACK);
+for (const m of setsMeta) {
+  if (!m || !m.code) continue;
+  if (m.name_jp) SET_LABELS_PREVIEW[m.code] = m.name_jp;
+  if (m.release_date) SET_RELEASE_DATES[m.code] = m.release_date;
+}
 
 // === カード画像インデックス（2026-06-10 追加、松岡さん指示）===
 // images/news/ 配下の全日付フォルダを走査し {card_number}.(jpg|jpeg|png|webp) を検索する。
@@ -158,7 +182,7 @@ for (const s of setNames) {
 const today = new Date().toISOString().split('T')[0];
 
 // === 共通HTMLパーツ ===
-function pageHead({ title, description, canonical }) {
+function pageHead({ title, description, canonical, ogImage }) {
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -180,7 +204,12 @@ function pageHead({ title, description, canonical }) {
   <meta property="og:title" content="${escapeHtml(title)}">
   <meta property="og:description" content="${escapeHtml(description)}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="${canonical}">
+  <meta property="og:url" content="${canonical}">${ogImage ? `
+  <meta property="og:image" content="${SITE_URL}/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(title)}">
+  <meta name="twitter:description" content="${escapeHtml(description)}">
+  <meta name="twitter:image" content="${SITE_URL}/images/ogp-default.png">` : ''}
   <link rel="canonical" href="${canonical}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -549,7 +578,7 @@ function generateSetPage(setName, cards) {
   const canonical = `${SITE_URL}/sets/${fileName}`;
 
   let html = pageHead({ title, description, canonical });
-  html += '    <div class="breadcrumb-simple"><a href="/sets/">新弾プレビュー一覧</a> › ' + escapeHtml(setName) + '</div>\n';
+  html += '    <div class="breadcrumb-simple"><a href="/sets/">新弾情報</a> › ' + escapeHtml(setName) + '</div>\n';
   html += '    <div class="section-header">\n';
   html += `      <h1 class="section-title">${escapeHtml(titleSet)} 判明カード</h1>\n`;
   html += `      <span class="section-badge">${cards.length} CARDS</span>\n`;
@@ -576,52 +605,220 @@ function generateSetPage(setName, cards) {
 // === インデックスページ生成 ===
 // 掲載0件のときは「0 CARDS」バッジ・空グリッドを出さず、公開期間外である旨と
 // 誘導リンクを表示する（2026-07-16 指示書41 Part A 松岡さん指示）
-function generateIndexPage(totalShown) {
-  const title = '新弾プレビュー（発売前判明カード一覧） | GCG STATS';
-  const description = totalShown === 0
-    ? 'ガンダムカードゲーム新弾の発売前判明カード一覧。公式X発表に基づく非公式まとめ（毎日自動更新）。現在は公開期間外です。新カードが公開され次第、随時掲載します。'
-    : `ガンダムカードゲーム新弾の発売前判明カード一覧。公式X発表に基づく非公式まとめ（毎日自動更新）。現在${totalShown}枚掲載。セット別にカード番号（型番）順で確認できます。`;
-  const canonical = `${SITE_URL}/sets/`;
+// === 指示書52 Task2: 新弾ハブ用の追加データ・ヘルパー（追加入力はすべて任意。無くても従来動作を壊さない）===
+function loadJsonSafe(fileName, fallback) {
+  try {
+    const raw = fs.readFileSync(path.join(DATA_DIR, fileName), 'utf-8')
+      .replace(/^\uFEFF/, '').replace(/[\u0000\s]+$/, '');
+    return JSON.parse(raw);
+  } catch (e) { return fallback; }
+}
+const hubArticlesRaw = loadJsonSafe('articles.json', []);
+const hubArticles = Array.isArray(hubArticlesRaw) ? hubArticlesRaw : (hubArticlesRaw.articles || []);
+const hubSummary = loadJsonSafe('summary.json', {});
+const hubCardsMasterRaw = loadJsonSafe('cards_master.json', {});
+const hubCardsArr = Array.isArray(hubCardsMasterRaw) ? hubCardsMasterRaw : Object.values(hubCardsMasterRaw);
 
-  let html = pageHead({ title, description, canonical });
+// 生成時のJST日付（バッチは20:00 JST）。release_date 比較にのみ使用し、ページには一切出力しない
+// （＝日次で差分を生まない。指示書52 Task2-α「定常時は差分ゼロ」を成立させるため「最終更新: 今日」も撤去）
+const TODAY_JST = new Date(Date.now() + 9 * 3600 * 1000).toISOString().split('T')[0];
 
-  if (totalShown === 0) {
-    html += '    <div class="section-header">\n';
-    html += '      <h1 class="section-title">新弾プレビュー</h1>\n';
-    html += '    </div>\n';
-    html += '    <div class="preview-notice">\n';
-    html += '      現在、新弾プレビューの公開期間ではありません。公式X（@GUNDAM_GCG_JP）で新カードが公開されると、このページに随時掲載されます。\n';
-    html += '    </div>\n';
-    html += '    <p style="margin-bottom:8px"><a href="/cards.html" style="color:var(--accent);text-decoration:none;font-size:14px">カードリストを見る →</a></p>\n';
-    html += '    <p style="margin-bottom:8px"><a href="/reports/" style="color:var(--accent);text-decoration:none;font-size:14px">最新のレポートを見る →</a></p>\n';
-    html += `    <p style="font-size:12px;color:var(--text-muted);margin-top:20px">最終更新: ${today}</p>\n`;
-    html += pageFoot();
-    fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf-8');
-    return;
+function cardIdOf(c) { return (c && (c.card_id || c.card_number || c.number || c.id)) || ''; }
+function setPrefixOf(id) { return String(id).split('-')[0]; }
+const hubCardNameById = {};
+for (const c of hubCardsArr) { const id = cardIdOf(c); if (id) hubCardNameById[id] = c.card_name || c.name || id; }
+
+// cards_master を code 接頭辞で集計（基本＝is_parallel!==true、パラレル＝is_parallel===true。パラレルはpackage_set=PROMOだが接頭辞で数える）
+function countSetCards(code) {
+  let base = 0, parallel = 0;
+  for (const c of hubCardsArr) {
+    if (setPrefixOf(cardIdOf(c)) !== code) continue;
+    if (c.is_parallel === true) parallel++; else base++;
   }
+  return { base, parallel };
+}
+// 関連記事: pinned 先頭 → title に code または name_jp を含む記事を新しい順・重複除外・上限8
+function collectRelatedArticles(code, nameJp, pinned) {
+  const byPath = {};
+  for (const a of hubArticles) if (a && a.path) byPath[a.path] = a;
+  const result = [], seen = new Set();
+  for (const p of (pinned || [])) {
+    if (seen.has(p)) continue;
+    seen.add(p);
+    result.push(byPath[p] || { path: p, title: p, date: '' });
+    if (result.length >= 8) return result;
+  }
+  const matched = hubArticles.filter((a) => a && a.title && a.path && !seen.has(a.path) &&
+    (String(a.title).includes(code) || (nameJp && String(a.title).includes(nameJp))))
+    .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+  for (const a of matched) { seen.add(a.path); result.push(a); if (result.length >= 8) break; }
+  return result;
+}
+// 初動採用率: summary.card_ranking に code 接頭辞・decks>0 があれば TOP10、無ければ null（プレースホルダ表示）
+function collectAdoption(code) {
+  const cr = (hubSummary && hubSummary.card_ranking) || [];
+  const rows = cr.filter((r) => r && setPrefixOf(r.card_id || '') === code && (r.decks || 0) > 0);
+  if (!rows.length) return null;
+  return rows.slice().sort((a, b) => (b.decks || 0) - (a.decks || 0)).slice(0, 10);
+}
+function releasedSetsMeta() {
+  return setsMeta.filter((m) => m && m.code && m.release_date && m.release_date <= TODAY_JST)
+    .sort((a, b) => String(b.release_date).localeCompare(String(a.release_date)));
+}
+function upcomingSetsMeta() {
+  return setsMeta.filter((m) => m && m.code && m.release_date && m.release_date > TODAY_JST)
+    .sort((a, b) => String(a.release_date).localeCompare(String(b.release_date)));
+}
+function fmtJpDate(iso) {
+  const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return m ? `${+m[1]}年${+m[2]}月${+m[3]}日` : String(iso);
+}
+function setDisplayName(meta) { return meta.name_jp || SET_LABELS_PREVIEW[meta.code] || meta.code; }
 
-  html += '    <div class="section-header">\n';
-  html += '      <h1 class="section-title">新弾プレビュー</h1>\n';
-  html += `      <span class="section-badge">${totalShown} CARDS</span>\n`;
-  html += '    </div>\n';
-  html += noticeBlock(totalShown, '');
-  html += '    <ul class="set-index-list">\n';
+// --- ハブ セクション部品（新CSSクラスは足さずインラインstyleで完結＝プレビューページ側は無改変）---
+function hubRelatedArticlesHtml(meta) {
+  const arts = collectRelatedArticles(meta.code, meta.name_jp, meta.pinned_articles);
+  if (!arts.length) return '';
+  let h = '      <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;color:var(--text-primary)">関連記事</h3>\n';
+  h += '      <ul style="list-style:none;padding:0;margin:0">\n';
+  for (const a of arts) {
+    const href = '/' + String(a.path).replace(/^\//, '');
+    h += `        <li style="padding:7px 0;border-bottom:1px solid var(--border);font-size:14px"><a href="${href}" style="color:var(--accent);text-decoration:none">${escapeHtml(a.title || a.path)}</a>` +
+         (a.date ? ` <span style="color:var(--text-muted);font-size:12px;font-family:var(--font-mono)">${escapeHtml(a.date)}</span>` : '') + '</li>\n';
+  }
+  h += '      </ul>\n';
+  return h;
+}
+function hubAdoptionHtml(meta) {
+  const rows = collectAdoption(meta.code);
+  let h = '      <h3 style="font-size:15px;font-weight:700;margin:20px 0 8px;color:var(--text-primary)">初動採用率</h3>\n';
+  if (!rows) {
+    h += '      <div class="preview-notice">発売後の大会データが集まり次第、初動採用率をここに掲載します（次シーズン開幕後に自動更新）。</div>\n';
+    return h;
+  }
+  h += '      <table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr>' +
+       '<th style="text-align:left;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text-muted)">カード</th>' +
+       '<th style="text-align:right;padding:6px 8px;border-bottom:1px solid var(--border);color:var(--text-muted)">採用デッキ数</th></tr></thead><tbody>\n';
+  for (const r of rows) {
+    const id = r.card_id;
+    const name = hubCardNameById[id] || id;
+    h += `        <tr><td style="padding:6px 8px;border-bottom:1px solid var(--border)"><a href="/cards/${escapeHtml(id)}/" style="color:var(--accent);text-decoration:none">${escapeHtml(name)}</a> <span style="color:var(--text-muted);font-size:11px;font-family:var(--font-mono)">${escapeHtml(id)}</span></td>` +
+         `<td style="padding:6px 8px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums">${r.decks}</td></tr>\n`;
+  }
+  h += '      </tbody></table>\n';
+  return h;
+}
+// 最新弾まとめ（asUpcoming=true のときは「発売済み0件」の境界仕様＝次弾の詳細版として見出しを変える）
+function hubSetSummaryBlock(meta, asUpcoming) {
+  const name = setDisplayName(meta);
+  const cnt = countSetCards(meta.code);
+  let h = '    <section style="margin:28px 0 8px">\n';
+  if (asUpcoming) {
+    h += `      <h2 class="section-title" style="margin-bottom:4px">もうすぐ発売：${escapeHtml(meta.code)} ${escapeHtml(name)}</h2>\n`;
+    h += `      <p style="color:var(--text-secondary);font-size:14px;margin:4px 0 12px">${fmtJpDate(meta.release_date)}発売予定。</p>\n`;
+  } else {
+    h += `      <h2 class="section-title" style="margin-bottom:4px">最新弾：${escapeHtml(meta.code)} ${escapeHtml(name)}</h2>\n`;
+    h += `      <p style="color:var(--text-secondary);font-size:14px;margin:4px 0 12px">${fmtJpDate(meta.release_date)}発売。</p>\n`;
+  }
+  if (cnt.base > 0) {
+    const par = cnt.parallel > 0 ? `＋関連パラレル${cnt.parallel}種` : '';
+    h += `      <p style="font-size:14px;margin:0 0 12px">収録カード：<strong>基本${cnt.base}種</strong>${par}</p>\n`;
+    h += `      <p style="margin:0 0 4px"><a href="/cards.html?set=${escapeHtml(meta.code)}" style="display:inline-block;padding:9px 18px;background:var(--accent);color:#fff;border-radius:var(--radius);text-decoration:none;font-size:14px;font-weight:600">収録カードを一覧で見る（基本${cnt.base}種）</a></p>\n`;
+  }
+  h += hubRelatedArticlesHtml(meta);
+  h += hubAdoptionHtml(meta);
+  h += '    </section>\n';
+  return h;
+}
+function hubUpcomingHtml(upcoming) {
+  if (!upcoming.length) {
+    return '    <section style="margin:28px 0 8px">\n' +
+      '      <h2 class="section-title">もうすぐ発売</h2>\n' +
+      '      <div class="preview-notice">新カードが公式X（@GUNDAM_GCG_JP）で公開されると、このページに随時掲載されます。</div>\n' +
+      '    </section>\n';
+  }
+  let h = '    <section style="margin:28px 0 8px">\n      <h2 class="section-title">もうすぐ発売</h2>\n      <ul style="list-style:none;padding:0;margin:8px 0 0">\n';
+  for (const m of upcoming) {
+    h += `        <li style="padding:7px 0;border-bottom:1px solid var(--border);font-size:14px">${escapeHtml(m.code)} ${escapeHtml(setDisplayName(m))} — ${fmtJpDate(m.release_date)}発売予定</li>\n`;
+  }
+  h += '      </ul>\n    </section>\n';
+  return h;
+}
+// プレビュー枠（従来の set-index-list。有効件数>0のときのみ表示）
+function hubPreviewSectionHtml(totalShown) {
+  if (totalShown <= 0) return '';
+  let h = '    <section style="margin:28px 0 8px">\n';
+  h += '      <div class="section-header">\n';
+  h += '        <h2 class="section-title">発売前プレビュー</h2>\n';
+  h += `        <span class="section-badge">${totalShown} CARDS</span>\n`;
+  h += '      </div>\n';
+  h += noticeBlock(totalShown, '');
+  h += '      <ul class="set-index-list">\n';
   for (const s of setNames) {
     const label = SET_LABELS_PREVIEW[s];
     const release = SET_RELEASE_DATES[s];
-    html += '      <li class="set-index-item">\n';
-    html += `        <a href="/sets/${s.toLowerCase()}.html">\n`;
-    html += `          <span class="set-index-code">${escapeHtml(s)}</span>\n`;
-    if (label) html += `          <span class="set-index-label">${escapeHtml(label)}</span>\n`;
-    if (release) html += `          <span class="set-index-label" style="color:var(--text-muted)">発売日 ${release}</span>\n`;
-    html += `          <span class="set-index-meta">${setMap[s].length} 枚判明</span>\n`;
-    html += '        </a>\n';
-    html += '      </li>\n';
+    h += '        <li class="set-index-item">\n';
+    h += `          <a href="/sets/${s.toLowerCase()}.html">\n`;
+    h += `            <span class="set-index-code">${escapeHtml(s)}</span>\n`;
+    if (label) h += `            <span class="set-index-label">${escapeHtml(label)}</span>\n`;
+    if (release) h += `            <span class="set-index-label" style="color:var(--text-muted)">発売日 ${release}</span>\n`;
+    h += `            <span class="set-index-meta">${setMap[s].length} 枚判明</span>\n`;
+    h += '          </a>\n';
+    h += '        </li>\n';
   }
-  html += '    </ul>\n';
-  html += `    <p style="font-size:12px;color:var(--text-muted);margin-top:20px">最終更新: ${today}</p>\n`;
-  html += pageFoot();
+  h += '      </ul>\n    </section>\n';
+  return h;
+}
 
+// === インデックス（新弾情報ハブ）生成 ===
+// 指示書52: プレビュー期間外・発売後でも常に中身のある「新弾情報ハブ」にする。
+// 「最終更新: 今日」は出力しない（日次差分を出さず、Task2-α の「変更時のみpush」を成立させる）。
+function generateIndexPage(totalShown) {
+  const released = releasedSetsMeta();
+  const upcoming = upcomingSetsMeta();
+  const latest = released[0] || null;
+  const focus = latest || upcoming[0] || null;
+
+  let title, description;
+  if (latest) {
+    const nm = setDisplayName(latest);
+    title = `${latest.code} ${nm} 新弾情報 — 収録カード・考察・初動採用率 | GCG STATS`;
+    description = `ガンダムカードゲーム ${latest.code} ${nm}（${fmtJpDate(latest.release_date)}発売）の新弾情報。収録カード一覧・関連考察記事・初動採用率をまとめた非公式ハブ。`;
+  } else if (focus) {
+    const nm = setDisplayName(focus);
+    title = `${focus.code} ${nm} 新弾情報（発売前） | GCG STATS`;
+    description = `ガンダムカードゲーム ${focus.code} ${nm}（${fmtJpDate(focus.release_date)}発売予定）の新弾情報。判明カード・関連記事をまとめた非公式ハブ。`;
+  } else {
+    title = '新弾情報 | GCG STATS';
+    description = 'ガンダムカードゲームの新弾情報ハブ。発売前の判明カード、発売後の弾まとめ・初動採用率、次弾の案内を掲載する非公式まとめ。';
+  }
+  const canonical = `${SITE_URL}/sets/`;
+
+  let html = pageHead({ title, description, canonical, ogImage: true });
+  html += '    <div class="section-header">\n';
+  html += '      <h1 class="section-title">新弾情報</h1>\n';
+  html += '    </div>\n';
+
+  // 1. プレビュー（有効件数>0のときのみ）
+  html += hubPreviewSectionHtml(totalShown);
+
+  // 2. 最新弾まとめ / 境界仕様（発売済み0件なら次弾を詳細版で表示＝空にしない）
+  if (latest) {
+    html += hubSetSummaryBlock(latest, false);
+    html += hubUpcomingHtml(upcoming);
+  } else if (upcoming.length) {
+    html += hubSetSummaryBlock(upcoming[0], true);
+    html += hubUpcomingHtml(upcoming.slice(1));
+  } else if (totalShown <= 0) {
+    // sets_meta 空 かつ プレビューも無い最終フォールバック（従来の空状態文言）
+    html += '    <div class="preview-notice">\n';
+    html += '      現在、新弾情報の公開期間ではありません。公式X（@GUNDAM_GCG_JP）で新カードが公開されると、このページに随時掲載されます。\n';
+    html += '    </div>\n';
+    html += '    <p style="margin-bottom:8px"><a href="/cards.html" style="color:var(--accent);text-decoration:none;font-size:14px">カードリストを見る →</a></p>\n';
+    html += '    <p style="margin-bottom:8px"><a href="/reports/" style="color:var(--accent);text-decoration:none;font-size:14px">最新のレポートを見る →</a></p>\n';
+  }
+
+  html += pageFoot();
   fs.writeFileSync(path.join(OUT_DIR, 'index.html'), html, 'utf-8');
 }
 

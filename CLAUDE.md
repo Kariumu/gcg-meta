@@ -114,6 +114,7 @@ node scripts/scan-tcgplus-tokens.js --diff             # 差分取得（1.5秒�
 - 中断しても再実行で継続（diff用state: `tmp/tcgplus-scan-diff-state.json`。47の本stateとは分離）
 - 想定リクエスト数が500を超える見込みの場合は実行前に松岡さんへ規模提示・承認（指示書48 §0）
 - 非公式API（BANDAI TCG+）依存。仕様・制約はスクリプト冒頭コメントを参照
+- 新弾を公式が発表したら `data/sets_meta.json` に1行追記する（`code` / `name_jp` / `release_date`(YYYY-MM-DD) / `kind`、任意で `pinned_articles`）。新弾情報ハブ `sets/`（指示書52）の最新弾判定・発売日表示・関連記事ピン留めに使用
 
 ## デプロイ設定
 

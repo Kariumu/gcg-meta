@@ -2556,24 +2556,36 @@ async function main() {
     }
   }
 
-  // === sets/ プレビューセット一覧ページの日次再生成(2026-06-11 指示書v4 Task2)===
-  // 新カードが処理された日(= data/cards_preview.json が push 対象に入った日)のみ実行する。
-  // 新カード0枚の日(記事なし)の挙動は変えない(下の条件が偽となり従来どおりスキップ)。
-  // 失敗しても記事生成・プッシュは止めない(ログ出力のみで継続)。
-  // generate_preview_sets.js は __dirname / NEWS_OUTPUT_ROOT 基準で cwd 非依存。
-  // 環境変数は子プロセスに自動継承されるため、NEWS_OUTPUT_ROOT による隔離検証時も本番 sets/ を汚さない。
-  if (generatedFiles.some((f) => f.repoPath === 'data/cards_preview.json')) {
+  // === sets/ 新弾情報ハブの日次再生成(指示書52 Task2-α: 毎日無条件＋変更分のみpush)===
+  // 旧(指示書v4)は cards_preview.json が更新された日のみ実行 → プレビュー期間外・発売後にハブが更新されない問題を解消。
+  // 毎日生成し、生成前後の内容をバイト比較して「変わったファイルだけ」を push 対象に加える。
+  // ハブは日次日付を出力しない設計のため、内容不変の日は差分ゼロ＝push なし。
+  // 失敗しても記事生成・プッシュは止めない(ログ出力のみで継続)。generate_preview_sets.js は __dirname / NEWS_OUTPUT_ROOT 基準で cwd 非依存。
+  {
     try {
+      const setsDir = path.join(ROOT, 'sets');
+      // 生成前スナップショット(既存 sets/*.html の内容)
+      const beforeSnap = {};
+      try {
+        for (const nm of fs.readdirSync(setsDir).filter((n) => n.endsWith('.html'))) {
+          beforeSnap[nm] = fs.readFileSync(path.join(setsDir, nm));
+        }
+      } catch (e) { /* sets/ 未作成なら空スナップショット */ }
       const { execFileSync } = require('child_process');
       const setsLog = execFileSync(process.execPath, [path.join(__dirname, 'generate_preview_sets.js')], { encoding: 'utf-8' });
       setsLog.trim().split('\n').forEach((l) => log(`[sets] ${l}`));
-      // sets/ 配下に実在する全 .html を push 対象に追加(将来のセット追加に備え、固定ファイル名のハードコードはしない)
-      const setsDir = path.join(ROOT, 'sets');
-      const setsHtml = fs.readdirSync(setsDir).filter((f) => f.endsWith('.html'));
-      for (const f of setsHtml) {
-        generatedFiles.push({ repoPath: `sets/${f}`, binary: false });
+      // 生成後、内容が変わった/新規のファイルだけを push 対象へ(固定ファイル名はハードコードしない)
+      const afterHtml = fs.readdirSync(setsDir).filter((nm) => nm.endsWith('.html'));
+      let changed = 0;
+      for (const nm of afterHtml) {
+        const now = fs.readFileSync(path.join(setsDir, nm));
+        const prev = beforeSnap[nm];
+        if (!prev || !prev.equals(now)) {
+          generatedFiles.push({ repoPath: `sets/${nm}`, binary: false });
+          changed++;
+        }
       }
-      log(`[sets] 再生成完了: ${setsHtml.length} ファイルを push 対象に追加`);
+      log(`[sets] 再生成完了: ${afterHtml.length} ファイル中 ${changed} 件が変更 → push 対象に追加`);
     } catch (e) {
       log(`[sets] 再生成失敗(記事処理は継続): ${e.message}`);
     }
