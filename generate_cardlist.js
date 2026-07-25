@@ -160,6 +160,11 @@ function getSetChipGroup(prefix) {
   return SET_CHIP_GROUPS[SET_CHIP_GROUPS.length - 1];
 }
 
+// === 収録弾フィルタの初期選択（2026-07-25 GD05発売）===
+// 新弾発売時はここを変更するだけで初期表示弾を切替（例: 'GD06'）。'' にすると従来どおり「全て」既定。
+// 指定弾が実データ(setOrder)に無い場合は自動的に「全て」既定へフォールバック。
+const DEFAULT_SET_FILTER = 'GD05';
+
 // === 収録弾 表示名対応表（生値 → 画面表示名）===
 // 既存の SET_LABELS（収録弾の長い説明文。例 "第1弾ブースターパック"。GD01-03/ST01-09 のみ定義）
 // とは役割が異なるため統合せず別表として新設する。
@@ -906,8 +911,9 @@ function generateHTML() {
 ${SET_CHIP_GROUPS.map((g, gi) => {
   const chips = setOrder
     .filter(prefix => getSetChipGroup(prefix).key === g.key)
-    .map(prefix => `            <button class="filter-chip" data-setgroup="${g.key}" data-value="${prefix}">${getSetDisplayName(prefix)}</button>`);
-  const allChip = gi === 0 ? `            <button class="filter-chip active" data-value="all">全て</button>\n` : '';
+    .map(prefix => `            <button class="filter-chip${prefix === DEFAULT_SET_FILTER ? ' active' : ''}" data-setgroup="${g.key}" data-value="${prefix}">${getSetDisplayName(prefix)}</button>`);
+  const allActive = (DEFAULT_SET_FILTER && setOrder.includes(DEFAULT_SET_FILTER)) ? '' : ' active';
+  const allChip = gi === 0 ? `            <button class="filter-chip${allActive}" data-value="all">全て</button>\n` : '';
   return `          <div class="filter-set-row"><div class="filter-chips">\n${allChip}${chips.join('\n')}\n          </div></div>`;
 }).join('\n')}
         </div>
@@ -1090,7 +1096,7 @@ ${generateNoscriptContent()}
     // === Filter State ===
     var filterState = {
       colors: [],      // empty = all
-      sets: [],        // empty = all
+      sets: ${JSON.stringify(DEFAULT_SET_FILTER && setOrder.includes(DEFAULT_SET_FILTER) ? [DEFAULT_SET_FILTER] : [])},  // 初期値=新弾(DEFAULT_SET_FILTER)。空=全て
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
@@ -1448,7 +1454,7 @@ ${generateNoscriptContent()}
         var sets = params.get('set').split(',');
         filterState.sets = sets;
         var chips = document.querySelectorAll('#filter-set .filter-chip');
-        chips[0].classList.remove('active');
+        chips.forEach(function(c) { c.classList.remove('active'); });
         chips.forEach(function(c) { if (sets.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
       }
       if (params.get('type')) {

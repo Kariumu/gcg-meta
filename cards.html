@@ -584,12 +584,12 @@
         <span class="filter-group-label">収録弾 / Set</span>
         <div id="filter-set" class="filter-set-rows">
           <div class="filter-set-row"><div class="filter-chips">
-            <button class="filter-chip active" data-value="all">全て</button>
+            <button class="filter-chip" data-value="all">全て</button>
             <button class="filter-chip" data-setgroup="booster" data-value="GD01">GD01</button>
             <button class="filter-chip" data-setgroup="booster" data-value="GD02">GD02</button>
             <button class="filter-chip" data-setgroup="booster" data-value="GD03">GD03</button>
             <button class="filter-chip" data-setgroup="booster" data-value="GD04">GD04</button>
-            <button class="filter-chip" data-setgroup="booster" data-value="GD05">GD05</button>
+            <button class="filter-chip active" data-setgroup="booster" data-value="GD05">GD05</button>
           </div></div>
           <div class="filter-set-row"><div class="filter-chips">
             <button class="filter-chip" data-setgroup="deck" data-value="ST01">ST01</button>
@@ -2476,7 +2476,7 @@
     // === Filter State ===
     var filterState = {
       colors: [],      // empty = all
-      sets: [],        // empty = all
+      sets: ["GD05"],  // 初期値=新弾(DEFAULT_SET_FILTER)。空=全て
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
@@ -2834,7 +2834,7 @@
         var sets = params.get('set').split(',');
         filterState.sets = sets;
         var chips = document.querySelectorAll('#filter-set .filter-chip');
-        chips[0].classList.remove('active');
+        chips.forEach(function(c) { c.classList.remove('active'); });
         chips.forEach(function(c) { if (sets.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
       }
       if (params.get('type')) {
