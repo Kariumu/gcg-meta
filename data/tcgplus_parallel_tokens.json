@@ -2,9 +2,9 @@
  "_meta": {
   "source": "frontier-scan(GD05) + id-join(card/list×tokens_scan, set-folder+id-order)",
   "scan_date": "2026-07-25",
-  "count": 652,
-  "method": "master _pN の package_set を TCG+画像フォルダに対応させ、セット内はid順で照合。tokens_scanのidでtoken確定。GD05はfrontier scan。残余パラレルはユーザー作成のTCG+デッキ(deck recipe API)からトークンを取得し、card/listのid順+package_set(folder)+rarityで各_pNへ対応(2026-07-25、独立検証で127/127一致)。",
-  "note": "未対応(=本体トークンへフォールバック)は T-015_p1〜T-020_p1 の6件のみ(ユーザーデッキにT系トークン無し)。ST05-002/013はp1=箔BPへ修正済(2026-07-25独立検証反映)。"
+  "count": 658,
+  "method": "master _pN の package_set を TCG+画像フォルダに対応させ、セット内はid順で照合。tokens_scanのidでtoken確定。GD05はfrontier scan。残余パラレルはユーザー作成TCG+デッキ(deck recipe API)から127件、T系6件はtokens_scanのJP版PC1/PC2印刷から確定(2026-07-25、全件独立/実機検証)。",
+  "note": "全658パラレルを対応(未対応=本体トークンへのフォールバックは0件)。T-015〜T-020_p1はJP版(_PC1/_PC2_dummy_JP)を採用。ST05-002/013はp1=箔BPへ修正済。"
  },
  "EB01-001_p1": "SYT",
  "EB01-002_p1": "SYU",
@@ -657,5 +657,11 @@
  "ST10-013_p1": "SYw",
  "ST10-014_p1": "SYx",
  "ST10-015_p1": "SYy",
- "ST10-016_p1": "SYz"
+ "ST10-016_p1": "SYz",
+ "T-015_p1": "QVR",
+ "T-016_p1": "QVS",
+ "T-017_p1": "QVT",
+ "T-018_p1": "QVY",
+ "T-019_p1": "QVZ",
+ "T-020_p1": "QVa"
 }
