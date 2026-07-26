@@ -3479,5 +3479,34 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-26": {
+    "recognized_at": "2026-07-26 20:00:24 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2081288415417356693"
+    ],
+    "cards": [
+      {
+        "card_number": "ST14-005",
+        "card_name": "GファルコンDX",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 6,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔バルチャー〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "特徴にバルチャーを持つPILOT",
+        "effect": "【配備時】Lv.6以下の相手のユニット1つを選ぶ。それをレストにする。その後、自分のトラッシュにカードが7枚以上あるなら、このターン中、それをAP-2する。",
+        "effect_confidence": "medium",
+        "effect_length": 78,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
