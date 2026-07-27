@@ -3508,5 +3508,34 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-27": {
+    "recognized_at": "2026-07-27 20:00:15 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2081650807951495339"
+    ],
+    "cards": [
+      {
+        "card_number": "ST11-009",
+        "card_name": "カブル",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 1,
+        "cost": 1,
+        "ap": 1,
+        "hp": 1,
+        "traits": [
+          "〔ミリシャ〕",
+          "〔水中〕"
+        ],
+        "link": "(ミリシャ)(水中)",
+        "effect": "【破壊時】相手のターンで、〔水中〕の味方のユニットがいるなら、自分は1枚ドローする。",
+        "effect_confidence": "high",
+        "effect_length": 42,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
