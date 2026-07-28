@@ -1,0 +1,12 @@
+{
+  "note": "cards_master.json に未登録だが、意図的に公開しているカードページの許可リスト。scripts/check-official-cardlist-sync.js が参照する。ここに無いマスタ未登録ページは不正（OCR誤認識由来の残骸等）として検出される。",
+  "updated": "2026-07-28",
+  "preview_pages": [
+    { "id": "ST12-005", "reason": "公式X 新カード紹介", "since": "2026-07-25" },
+    { "id": "ST14-005", "reason": "公式X 新カード紹介", "since": "2026-07-26" },
+    { "id": "ST11-009", "reason": "公式X 新カード紹介", "since": "2026-07-27" },
+    { "id": "ST12-007", "reason": "公式X 新カード紹介", "since": "2026-07-28" }
+  ],
+  "excluded_ids": [],
+  "excluded_note": "公式カードリストに存在するが、松岡さんの判断で cards_master.json に取り込まないと決めた個別ID。リソース/ベース系（R- / EXB- / EXR- / RP- / EXBP- / EXRP-）はプレフィックスで自動除外されるため、ここに書く必要はない。判断保留のIDは書かないこと（書くとチェックで検出されなくなる）。"
+}

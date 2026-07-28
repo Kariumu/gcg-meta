@@ -73,11 +73,19 @@ function listCandidates() {
   for (const rel of ['data/cards_master.json', 'cards.html', 'deck-builder.html', 'sitemap.xml', 'scripts/fetch-gd05-reprint-parallels.js', 'scripts/push-gd05-reprint-20260728.js']) {
     if (fs.existsSync(path.join(ROOT, rel))) text.push(rel);
   }
+  // 【2026-07-28 修正】ディスク上の全ディレクトリではなく cards_master.json のキーで絞る。
+  // 旧版はディスク走査だったため、マスタ未登録の残骸ページ9件（OCR誤認識由来の不正ID）を
+  // 公開リポジトリへ巻き込んで push してしまった。マスタが正であり、ページの正当性はマスタで判定する。
+  const master = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'cards_master.json'), 'utf-8'));
   const cardsDir = path.join(ROOT, 'cards');
+  const skipped = [];
   for (const name of fs.readdirSync(cardsDir)) {
     const idx = path.join(cardsDir, name, 'index.html');
-    if (fs.existsSync(idx)) text.push('cards/' + name + '/index.html');
+    if (!fs.existsSync(idx)) continue;
+    if (!master[name]) { skipped.push(name); continue; }
+    text.push('cards/' + name + '/index.html');
   }
+  if (skipped.length) console.log('マスタ未登録のため候補から除外: ' + skipped.length + '件 → ' + skipped.join(', '));
   for (const id of NEW_IDS) {
     const rel = 'images/cards/' + id + '.webp';
     if (fs.existsSync(path.join(ROOT, rel))) bin.push(rel);
