@@ -7190,6 +7190,34 @@
     "package_set": "GD01",
     "effect_text": "【バースト】このカードを手札に加える。 【リンク中】【アタック時】このユニットのLv.以下の相手のユニット1つを選ぶ。それに1ダメージを与える。"
   },
+  "GD01-093_p2": {
+    "id": "GD01-093_p2",
+    "name_jp": "マリーダ・クルス",
+    "rarity": "R+",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "強化人間"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【リンク中】【アタック時】このユニットのLv.以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "effect": "【バースト】このカードを手札に加える。【リンク中】【アタック時】このユニットのLv.以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 2,
+    "base_card_id": "GD01-093"
+  },
   "GD01-093_p3": {
     "id": "GD01-093_p3",
     "name_jp": "マリーダ・クルス",
@@ -19207,6 +19235,37 @@
     "effect_text": "【配備時】自分のデッキを上から3枚見て、その中の〔学園〕の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
     "source_title": "機動戦士ガンダム 水星の魔女"
   },
+  "GD04-024_p1": {
+    "id": "GD04-024_p1",
+    "name_jp": "ガンダム・エアリアル（改修型）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "link": [
+      "スレッタ・マーキュリー"
+    ],
+    "effect": "【配備時】自分のデッキを上から3枚見て、その中の(学園)の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "effect_tags": [
+      "配備時"
+    ],
+    "is_parallel": true,
+    "is_promo": true,
+    "acquisition_info": "新弾構築戦[GD04] 参加・優勝記念品",
+    "package_set": "PROMO",
+    "effect_text": "【配備時】自分のデッキを上から3枚見て、その中の〔学園〕の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "parallel_number": 1,
+    "base_card_id": "GD04-024"
+  },
   "GD04-025": {
     "id": "GD04-025",
     "name_jp": "ガンヴォルヴァ",
@@ -21370,6 +21429,37 @@
     "package_set": "GD04",
     "effect_text": "【バースト】このカードを手札に加える。 【リンク中】【ターン1回】自分がEXリソースを使用して〔学園〕のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。"
   },
+  "GD04-085_p2": {
+    "id": "GD04-085_p2",
+    "name_jp": "スレッタ・マーキュリー",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "link": [],
+    "effect": "【バースト】 このカードを手札に加える。\n\n【リンク中】 【ターン1回】 自分がEXリソースを使用して(学園)のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。",
+    "effect_tags": [
+      "リンク中",
+      "バースト",
+      "ターン1回"
+    ],
+    "is_parallel": true,
+    "is_promo": true,
+    "acquisition_info": "新弾構築戦[GD04] 参加・優勝記念品",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【リンク中】【ターン1回】自分がEXリソースを使用して〔学園〕のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。",
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "parallel_number": 2,
+    "base_card_id": "GD04-085"
+  },
   "GD04-086": {
     "id": "GD04-086",
     "name_jp": "ガルマ・ザビ",
@@ -22784,6 +22874,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-001_p1": {
+    "id": "GD05-001_p1",
+    "name_jp": "V2ガンダム",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 5
+    },
+    "source_title": "機動戦士Vガンダム",
+    "link": [
+      "ウッソ・エヴィン"
+    ],
+    "package_set": "GD05",
+    "effect_text": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)【起動・メイン】【ターン1回】自分のユニット2つをレストにする：このユニットをアクティブにする。",
+    "effect": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)【起動・メイン】【ターン1回】自分のユニット2つをレストにする：このユニットをアクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-001"
+  },
   "GD05-002": {
     "id": "GD05-002",
     "name_jp": "ストライクフリーダムガンダム",
@@ -22807,6 +22927,64 @@
     "effect_text": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-002_p1": {
+    "id": "GD05-002_p1",
+    "name_jp": "ストライクフリーダムガンダム",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 8,
+    "cost": 6,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "キラ・ヤマト"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
+    "effect": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-002"
+  },
+  "GD05-002_p2": {
+    "id": "GD05-002_p2",
+    "name_jp": "ストライクフリーダムガンダム",
+    "rarity": "LR++",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 8,
+    "cost": 6,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "キラ・ヤマト"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
+    "effect": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 2,
+    "base_card_id": "GD05-002"
   },
   "GD05-003": {
     "id": "GD05-003",
@@ -22832,6 +23010,35 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-003_p1": {
+    "id": "GD05-003_p1",
+    "name_jp": "ムラサメ（アンドリュー・バルトフェルド専用機）",
+    "rarity": "LKR+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "アンドリュー・バルトフェルド"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【破壊時】〔オーブ〕の自分のパイロットがいるなら、自分は1枚ドローする。",
+    "effect": "【破壊時】〔オーブ〕の自分のパイロットがいるなら、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-003"
+  },
   "GD05-004": {
     "id": "GD05-004",
     "name_jp": "アカツキ（オオワシ）",
@@ -22855,6 +23062,35 @@
     "effect_text": "Lv.6以上の自分のユニットがいない間、手札のこのカードを〔オーブ〕の自分のユニット1つにつき、Lv.-1、コスト-1する。【リンク時】Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-004_p1": {
+    "id": "GD05-004_p1",
+    "name_jp": "アカツキ（オオワシ）",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 6,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔オーブ〕"
+    ],
+    "package_set": "GD05",
+    "effect_text": "Lv.6以上の自分のユニットがいない間、手札のこのカードを〔オーブ〕の自分のユニット1つにつき、Lv.-1、コスト-1する。【リンク時】Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "effect": "Lv.6以上の自分のユニットがいない間、手札のこのカードを〔オーブ〕の自分のユニット1つにつき、Lv.-1、コスト-1する。【リンク時】Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-004"
   },
   "GD05-005": {
     "id": "GD05-005",
@@ -22880,6 +23116,35 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-005_p1": {
+    "id": "GD05-005_p1",
+    "name_jp": "ストライクルージュ（オオトリ装備）",
+    "rarity": "LKR+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔オーブ〕"
+    ],
+    "package_set": "GD05",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-005"
+  },
   "GD05-006": {
     "id": "GD05-006",
     "name_jp": "ハシュマル",
@@ -22901,6 +23166,33 @@
     "effect_text": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のカードを破壊したとき、「プルーマ」(〔厄祭戦〕・AP2・HP1)のユニットトークン1つを配備する。このユニットは〔厄祭戦〕の自分のユニットトークンと同じ数だけ《リペア1》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-006_p1": {
+    "id": "GD05-006_p1",
+    "name_jp": "ハシュマル",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "厄祭戦"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のカードを破壊したとき、「プルーマ」(〔厄祭戦〕・AP2・HP1)のユニットトークン1つを配備する。このユニットは〔厄祭戦〕の自分のユニットトークンと同じ数だけ《リペア1》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
+    "effect": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のカードを破壊したとき、「プルーマ」(〔厄祭戦〕・AP2・HP1)のユニットトークン1つを配備する。このユニットは〔厄祭戦〕の自分のユニットトークンと同じ数だけ《リペア1》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-006"
   },
   "GD05-007": {
     "id": "GD05-007",
@@ -23162,6 +23454,66 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-017_p1": {
+    "id": "GD05-017_p1",
+    "name_jp": "νガンダム",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "アムロ・レイ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
+    "effect": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-017"
+  },
+  "GD05-017_p2": {
+    "id": "GD05-017_p2",
+    "name_jp": "νガンダム",
+    "rarity": "LR++",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "アムロ・レイ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
+    "effect": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 2,
+    "base_card_id": "GD05-017"
+  },
   "GD05-018": {
     "id": "GD05-018",
     "name_jp": "ガンダム・キャリバーン",
@@ -23185,6 +23537,35 @@
     "effect_text": "自分のEXリソースがゲームから除外されたとき、自分のユニット1つを選んでもよい。このターン中、それが相手からダメージを受けるとき、そのダメージを3軽減する。【配備時】自分はEXリソース3つを置く。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-018_p1": {
+    "id": "GD05-018_p1",
+    "name_jp": "ガンダム・キャリバーン",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 8,
+    "cost": 7,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap": 7,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [
+      "スレッタ・マーキュリー"
+    ],
+    "package_set": "GD05",
+    "effect_text": "自分のEXリソースがゲームから除外されたとき、自分のユニット1つを選んでもよい。このターン中、それが相手からダメージを受けるとき、そのダメージを3軽減する。【配備時】自分はEXリソース3つを置く。",
+    "effect": "自分のEXリソースがゲームから除外されたとき、自分のユニット1つを選んでもよい。このターン中、それが相手からダメージを受けるとき、そのダメージを3軽減する。【配備時】自分はEXリソース3つを置く。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-018"
   },
   "GD05-019": {
     "id": "GD05-019",
@@ -23237,6 +23618,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-020_p1": {
+    "id": "GD05-020_p1",
+    "name_jp": "νガンダム",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "アムロ・レイ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【セット中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【配備時】自分のトラッシュに〔ロンド・ベル〕のカードが2枚以上あるなら、自分はEXリソース1つを置く。",
+    "effect": "【セット中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【配備時】自分のトラッシュに〔ロンド・ベル〕のカードが2枚以上あるなら、自分はEXリソース1つを置く。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-020"
+  },
   "GD05-021": {
     "id": "GD05-021",
     "name_jp": "ガンダムAGE-2 ダブルバレット",
@@ -23261,6 +23672,36 @@
     "effect_text": "【起動・アクション】【ターン1回】①：このバトル中、このユニットをAP+4する。【ターン1回】〔地球連邦〕の自分のパイロットがいるなら、このユニットが相手からダメージを受けるとき、そのダメージを2軽減する。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-021_p1": {
+    "id": "GD05-021_p1",
+    "name_jp": "ガンダムAGE-2 ダブルバレット",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "地球連邦",
+      "AGEシステム"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダムAGE",
+    "link": [
+      "アセム・アスノ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【起動・アクション】【ターン1回】①：このバトル中、このユニットをAP+4する。【ターン1回】〔地球連邦〕の自分のパイロットがいるなら、このユニットが相手からダメージを受けるとき、そのダメージを2軽減する。",
+    "effect": "【起動・アクション】【ターン1回】①：このバトル中、このユニットをAP+4する。【ターン1回】〔地球連邦〕の自分のパイロットがいるなら、このユニットが相手からダメージを受けるとき、そのダメージを2軽減する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-021"
   },
   "GD05-022": {
     "id": "GD05-022",
@@ -23361,6 +23802,35 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-025_p1": {
+    "id": "GD05-025_p1",
+    "name_jp": "デミバーディング",
+    "rarity": "LKU+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [
+      "チュアチュリー・パンランチ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【配備時】自分のデッキを上から3枚見て、その中のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "effect": "【配備時】自分のデッキを上から3枚見て、その中のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-025"
+  },
   "GD05-026": {
     "id": "GD05-026",
     "name_jp": "ガンダム・エアリアル（改修型）",
@@ -23459,6 +23929,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-029_p1": {
+    "id": "GD05-029_p1",
+    "name_jp": "リ・ガズィ（ケーラ機）",
+    "rarity": "LKC+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "ケーラ・スゥ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【配備時】自分のデッキを上から1枚見て、上か下に戻す。",
+    "effect": "【配備時】自分のデッキを上から1枚見て、上か下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-029"
+  },
   "GD05-030": {
     "id": "GD05-030",
     "name_jp": "ミカエリス",
@@ -23556,6 +24056,66 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-033_p1": {
+    "id": "GD05-033_p1",
+    "name_jp": "マスターガンダム",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "MF",
+      "DG細胞"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "マスター・アジア"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
+    "effect": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-033"
+  },
+  "GD05-033_p2": {
+    "id": "GD05-033_p2",
+    "name_jp": "マスターガンダム",
+    "rarity": "LR++",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "MF",
+      "DG細胞"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "マスター・アジア"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
+    "effect": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 2,
+    "base_card_id": "GD05-033"
+  },
   "GD05-034": {
     "id": "GD05-034",
     "name_jp": "ガイアガンダム",
@@ -23580,6 +24140,36 @@
     "effect_text": "【セット中】【ターン1回】このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、その相手プレイヤーは自身の手札1枚を捨ててもよい。そうしなかったなら、自分の手札のLv.4以下の〔ファントムペイン〕のユニットカード1枚を配備してもよい。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-034_p1": {
+    "id": "GD05-034_p1",
+    "name_jp": "ガイアガンダム",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "地球連合",
+      "ファントムペイン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "ステラ・ルーシェ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【セット中】【ターン1回】このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、その相手プレイヤーは自身の手札1枚を捨ててもよい。そうしなかったなら、自分の手札のLv.4以下の〔ファントムペイン〕のユニットカード1枚を配備してもよい。",
+    "effect": "【セット中】【ターン1回】このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、その相手プレイヤーは自身の手札1枚を捨ててもよい。そうしなかったなら、自分の手札のLv.4以下の〔ファントムペイン〕のユニットカード1枚を配備してもよい。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-034"
   },
   "GD05-035": {
     "id": "GD05-035",
@@ -23606,6 +24196,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-035_p1": {
+    "id": "GD05-035_p1",
+    "name_jp": "ドラゴンガンダム",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "サイ・サイシー"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【ターン1回】このユニットがダメージで相手のシールドエリアのカードを破壊したとき、AP3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
+    "effect": "【ターン1回】このユニットがダメージで相手のシールドエリアのカードを破壊したとき、AP3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-035"
+  },
   "GD05-036": {
     "id": "GD05-036",
     "name_jp": "クーロンガンダム",
@@ -23629,6 +24249,35 @@
     "effect_text": "【セット時】このユニット以外の、アクティブの〔MF〕の自分のユニット1つを選んでもよい。それをレストにする。そうしたなら、それのLv.以下の相手のユニットすべてに2ダメージを与える。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-036_p1": {
+    "id": "GD05-036_p1",
+    "name_jp": "クーロンガンダム",
+    "rarity": "LKR+",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "MF"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "マスター・アジア"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【セット時】このユニット以外の、アクティブの〔MF〕の自分のユニット1つを選んでもよい。それをレストにする。そうしたなら、それのLv.以下の相手のユニットすべてに2ダメージを与える。",
+    "effect": "【セット時】このユニット以外の、アクティブの〔MF〕の自分のユニット1つを選んでもよい。それをレストにする。そうしたなら、それのLv.以下の相手のユニットすべてに2ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-036"
   },
   "GD05-037": {
     "id": "GD05-037",
@@ -23654,6 +24303,36 @@
     "effect_text": "トラッシュにカードが7枚以上ある相手プレイヤーがいる間、手札のこのカードをLv.-3、コスト-3する。【リンク中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-037_p1": {
+    "id": "GD05-037_p1",
+    "name_jp": "デストロイガンダム",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 9,
+    "cost": 8,
+    "traits": [
+      "地球連合",
+      "ファントムペイン"
+    ],
+    "stats": {
+      "ap": 6,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔生体CPU〕"
+    ],
+    "package_set": "GD05",
+    "effect_text": "トラッシュにカードが7枚以上ある相手プレイヤーがいる間、手札のこのカードをLv.-3、コスト-3する。【リンク中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "effect": "トラッシュにカードが7枚以上ある相手プレイヤーがいる間、手札のこのカードをLv.-3、コスト-3する。【リンク中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-037"
   },
   "GD05-038": {
     "id": "GD05-038",
@@ -23755,6 +24434,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-041_p1": {
+    "id": "GD05-041_p1",
+    "name_jp": "ガイアガンダム（MA形態）",
+    "rarity": "LKU+",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連合",
+      "ファントムペイン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "ステラ・ルーシェ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "自分の効果で相手の手札を捨てたターンの間、手札のこのカードをコスト-2する。",
+    "effect": "自分の効果で相手の手札を捨てたターンの間、手札のこのカードをコスト-2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-041"
+  },
   "GD05-042": {
     "id": "GD05-042",
     "name_jp": "シャイニングガンダム",
@@ -23777,6 +24486,33 @@
     "effect_text": "-",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-042_p1": {
+    "id": "GD05-042_p1",
+    "name_jp": "シャイニングガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "新弾限定戦[GD05] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-042"
   },
   "GD05-043": {
     "id": "GD05-043",
@@ -23926,6 +24662,37 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-048_p1": {
+    "id": "GD05-048_p1",
+    "name_jp": "ガンダムキュリオス（飛行形態）",
+    "rarity": "LKC+",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [
+      "アレルヤ・ハプティズム",
+      "ハレルヤ・ハプティズム"
+    ],
+    "package_set": "GD05",
+    "effect_text": "このユニットは配備したターンに、レストの相手のユニットをアタック先に選んでアタックしてもよい。",
+    "effect": "このユニットは配備したターンに、レストの相手のユニットをアタック先に選んでアタックしてもよい。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-048"
+  },
   "GD05-049": {
     "id": "GD05-049",
     "name_jp": "サザビー",
@@ -23949,6 +24716,64 @@
     "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-049_p1": {
+    "id": "GD05-049_p1",
+    "name_jp": "サザビー",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "GD05",
+    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
+    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-049"
+  },
+  "GD05-049_p2": {
+    "id": "GD05-049_p2",
+    "name_jp": "サザビー",
+    "rarity": "LR++",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "GD05",
+    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
+    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 2,
+    "base_card_id": "GD05-049"
   },
   "GD05-050": {
     "id": "GD05-050",
@@ -23975,6 +24800,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-050_p1": {
+    "id": "GD05-050_p1",
+    "name_jp": "ガンダムエクシアリペア",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [
+      "刹那・F・セイエイ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "このユニットが、パイロットがセットされていないLv.4以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。【破壊時】自分のデッキを上から2枚、自分のトラッシュに置く。",
+    "effect": "このユニットが、パイロットがセットされていないLv.4以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。【破壊時】自分のデッキを上から2枚、自分のトラッシュに置く。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-050"
+  },
   "GD05-051": {
     "id": "GD05-051",
     "name_jp": "ガンダム・バルバトスルプスレクス",
@@ -24000,6 +24855,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-051_p1": {
+    "id": "GD05-051_p1",
+    "name_jp": "ガンダム・バルバトスルプスレクス",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "鉄華団",
+      "ガンダム・フレーム"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [
+      "三日月・オーガス"
+    ],
+    "package_set": "GD05",
+    "effect_text": "このユニットを、これが受けているダメージと同じ数だけAP+する。自分のターン終了時、〔鉄華団〕の自分のユニット1つを選んでもよい。それに1ダメージを与え、アクティブにする。",
+    "effect": "このユニットを、これが受けているダメージと同じ数だけAP+する。自分のターン終了時、〔鉄華団〕の自分のユニット1つを選んでもよい。それに1ダメージを与え、アクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-051"
+  },
   "GD05-052": {
     "id": "GD05-052",
     "name_jp": "サザビー",
@@ -24024,6 +24909,35 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-052_p1": {
+    "id": "GD05-052_p1",
+    "name_jp": "サザビー",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【配備時】このユニット以外の、自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、自分のデッキを上から3枚、自分のトラッシュに置く。この効果でデッキから置いた〔ネオ・ジオン〕のユニットカード1枚を手札に加える。",
+    "effect": "【配備時】このユニット以外の、自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、自分のデッキを上から3枚、自分のトラッシュに置く。この効果でデッキから置いた〔ネオ・ジオン〕のユニットカード1枚を手札に加える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-052"
+  },
   "GD05-053": {
     "id": "GD05-053",
     "name_jp": "ヤクト・ドーガ（クェス専用機）",
@@ -24047,6 +24961,35 @@
     "effect_text": "【破壊時】〔ネオ・ジオン〕の自分のカードの効果で破壊されているなら、トラッシュのこのカードを手札に加える。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-053_p1": {
+    "id": "GD05-053_p1",
+    "name_jp": "ヤクト・ドーガ（クェス専用機）",
+    "rarity": "LKR+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "クェス・パラヤ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【破壊時】〔ネオ・ジオン〕の自分のカードの効果で破壊されているなら、トラッシュのこのカードを手札に加える。",
+    "effect": "【破壊時】〔ネオ・ジオン〕の自分のカードの効果で破壊されているなら、トラッシュのこのカードを手札に加える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-053"
   },
   "GD05-054": {
     "id": "GD05-054",
@@ -24096,6 +25039,36 @@
     "effect_text": "《先制攻撃》(アタック中のこのユニットは、相手より先にダメージを与える)【ターン1回】このユニットが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-055_p1": {
+    "id": "GD05-055_p1",
+    "name_jp": "デスティニーガンダム",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 8,
+    "cost": 7,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "シン・アスカ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "《先制攻撃》(アタック中のこのユニットは、相手より先にダメージを与える)【ターン1回】このユニットが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "effect": "《先制攻撃》(アタック中のこのユニットは、相手より先にダメージを与える)【ターン1回】このユニットが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-055"
   },
   "GD05-056": {
     "id": "GD05-056",
@@ -24193,6 +25166,36 @@
     "effect_text": "【アタック時】アクティブの〔ギャラルホルン〕の自分のユニット1つを選ぶ。それをレストにする。そうしたなら、自分は1枚ドローし、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-059_p1": {
+    "id": "GD05-059_p1",
+    "name_jp": "ガンダム・バルバトスルプス",
+    "rarity": "LKU+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "鉄華団",
+      "ガンダム・フレーム"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [
+      "三日月・オーガス"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【アタック時】アクティブの〔ギャラルホルン〕の自分のユニット1つを選ぶ。それをレストにする。そうしたなら、自分は1枚ドローし、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+    "effect": "【アタック時】アクティブの〔ギャラルホルン〕の自分のユニット1つを選ぶ。それをレストにする。そうしたなら、自分は1枚ドローし、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-059"
   },
   "GD05-060": {
     "id": "GD05-060",
@@ -24312,6 +25315,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-064_p1": {
+    "id": "GD05-064_p1",
+    "name_jp": "フォースインパルスガンダム",
+    "rarity": "LKC+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "ルナマリア・ホーク"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【配備時】このユニットをトラッシュから配備したなら、自分のトラッシュのカード名に「シン・アスカ」を含むパイロットカード1枚を選ぶ。それを手札に加える。",
+    "effect": "【配備時】このユニットをトラッシュから配備したなら、自分のトラッシュのカード名に「シン・アスカ」を含むパイロットカード1枚を選ぶ。それを手札に加える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-064"
+  },
   "GD05-065": {
     "id": "GD05-065",
     "name_jp": "ランドマン・ロディ",
@@ -24361,6 +25394,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-066_p1": {
+    "id": "GD05-066_p1",
+    "name_jp": "シャイニングガンダム",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "ドモン・カッシュ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【配備時】自分のトラッシュの〔MF〕のユニットカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、自分のトラッシュの〔必殺技〕のコマンドカード1枚を選ぶ。それを手札に加える。【アタック時】【ターン1回】レストの自分のリソース1つを選ぶ。それをアクティブにする。",
+    "effect": "【配備時】自分のトラッシュの〔MF〕のユニットカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、自分のトラッシュの〔必殺技〕のコマンドカード1枚を選ぶ。それを手札に加える。【アタック時】【ターン1回】レストの自分のリソース1つを選ぶ。それをアクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-066"
+  },
   "GD05-067": {
     "id": "GD05-067",
     "name_jp": "ウイングガンダムゼロ（EW版）",
@@ -24384,6 +25447,64 @@
     "effect_text": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-067_p1": {
+    "id": "GD05-067_p1",
+    "name_jp": "ウイングガンダムゼロ（EW版）",
+    "rarity": "LR+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "ヒイロ・ユイ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
+    "effect": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-067"
+  },
+  "GD05-067_p2": {
+    "id": "GD05-067_p2",
+    "name_jp": "ウイングガンダムゼロ（EW版）",
+    "rarity": "LR++",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "ヒイロ・ユイ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
+    "effect": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 2,
+    "base_card_id": "GD05-067"
   },
   "GD05-068": {
     "id": "GD05-068",
@@ -24409,6 +25530,36 @@
     "effect_text": "自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動したとき、このターン中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【リンク中】【アタック時】このバトル中、このユニットをAP+2する。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-068_p1": {
+    "id": "GD05-068_p1",
+    "name_jp": "シャイニングガンダム（スーパーモード）",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 5
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "ドモン・カッシュ"
+    ],
+    "package_set": "GD05",
+    "effect_text": "自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動したとき、このターン中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【リンク中】【アタック時】このバトル中、このユニットをAP+2する。",
+    "effect": "自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動したとき、このターン中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【リンク中】【アタック時】このバトル中、このユニットをAP+2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-068"
   },
   "GD05-069": {
     "id": "GD05-069",
@@ -24459,6 +25610,35 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-070_p1": {
+    "id": "GD05-070_p1",
+    "name_jp": "トールギスⅢ",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "プリベンター"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "ゼクス・マーキス"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、レストの〔プリベンター〕/〔Gチーム〕の自分のリンクユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
+    "effect": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、レストの〔プリベンター〕/〔Gチーム〕の自分のリンクユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-070"
+  },
   "GD05-071": {
     "id": "GD05-071",
     "name_jp": "ガンダムサンドロック改（EW版）",
@@ -24482,6 +25662,35 @@
     "effect_text": "【アタック時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-071_p1": {
+    "id": "GD05-071_p1",
+    "name_jp": "ガンダムサンドロック改（EW版）",
+    "rarity": "LKR+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "カトル・ラバーバ・ウィナー"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【アタック時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "effect": "【アタック時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-071"
   },
   "GD05-072": {
     "id": "GD05-072",
@@ -24674,6 +25883,35 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-079_p1": {
+    "id": "GD05-079_p1",
+    "name_jp": "ガンダムヘビーアームズ改（EW版）",
+    "rarity": "LKC+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "トロワ・バートン"
+    ],
+    "package_set": "GD05",
+    "effect_text": "【起動・メイン】【ターン1回】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、Lv.4以下の相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
+    "effect": "【起動・メイン】【ターン1回】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、Lv.4以下の相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-079"
+  },
   "GD05-080": {
     "id": "GD05-080",
     "name_jp": "ギャバン専用ボルジャーノン",
@@ -24720,6 +25958,34 @@
     "effect_text": "【バースト】このカードを手札に加える。【リンク時】このユニットが〔オーブ〕/〔三隻同盟〕なら、自分は1枚ドローする。",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-081_p1": {
+    "id": "GD05-081_p1",
+    "name_jp": "キラ・ヤマト",
+    "rarity": "R+",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "オーブ",
+      "コーディネイター"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【リンク時】このユニットが〔オーブ〕/〔三隻同盟〕なら、自分は1枚ドローする。",
+    "effect": "【バースト】このカードを手札に加える。【リンク時】このユニットが〔オーブ〕/〔三隻同盟〕なら、自分は1枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-081"
   },
   "GD05-082": {
     "id": "GD05-082",
@@ -24812,6 +26078,35 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-085_p1": {
+    "id": "GD05-085_p1",
+    "name_jp": "アムロ・レイ",
+    "rarity": "R+",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、これを2回復する。",
+    "effect": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、これを2回復する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-085"
+  },
   "GD05-086": {
     "id": "GD05-086",
     "name_jp": "ケーラ・スゥ",
@@ -24901,6 +26196,33 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-089_p1": {
+    "id": "GD05-089_p1",
+    "name_jp": "マスター・アジア",
+    "rarity": "LR+",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 6,
+    "cost": 1,
+    "traits": [
+      "ガンダムファイター"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。自分のトラッシュに〔MF〕のカードが3枚以上あるなら、かわりにこれを(AP3・HP3)のユニットとして配備してもよい。(パイロットとしては扱わない)【リンク中】【アタック時】このターン中、自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動していたなら、相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "effect": "【バースト】このカードを手札に加える。自分のトラッシュに〔MF〕のカードが3枚以上あるなら、かわりにこれを(AP3・HP3)のユニットとして配備してもよい。(パイロットとしては扱わない)【リンク中】【アタック時】このターン中、自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動していたなら、相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-089"
+  },
   "GD05-090": {
     "id": "GD05-090",
     "name_jp": "ステラ・ルーシェ",
@@ -24924,6 +26246,35 @@
     "effect_text": "【バースト】このカードを手札に加える。【破壊時】自分のデッキを上から1枚見る。それが〔ファントムペイン〕のカードなら公開して手札に加えてもよい。残ったカードは下に戻す。",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-090_p1": {
+    "id": "GD05-090_p1",
+    "name_jp": "ステラ・ルーシェ",
+    "rarity": "R+",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "地球連合",
+      "ファントムペイン",
+      "生体CPU"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 0
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【破壊時】自分のデッキを上から1枚見る。それが〔ファントムペイン〕のカードなら公開して手札に加えてもよい。残ったカードは下に戻す。",
+    "effect": "【バースト】このカードを手札に加える。【破壊時】自分のデッキを上から1枚見る。それが〔ファントムペイン〕のカードなら公開して手札に加えてもよい。残ったカードは下に戻す。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-090"
   },
   "GD05-091": {
     "id": "GD05-091",
@@ -24995,6 +26346,34 @@
     "effect_text": "【バースト】このカードを手札に加える。【リンク時】自分のトラッシュの〔ネオ・ジオン〕のベースカード1枚を選んでもよい。それを配備する。",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-093_p1": {
+    "id": "GD05-093_p1",
+    "name_jp": "シャア・アズナブル",
+    "rarity": "R+",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【リンク時】自分のトラッシュの〔ネオ・ジオン〕のベースカード1枚を選んでもよい。それを配備する。",
+    "effect": "【バースト】このカードを手札に加える。【リンク時】自分のトラッシュの〔ネオ・ジオン〕のベースカード1枚を選んでもよい。それを配備する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-093"
   },
   "GD05-094": {
     "id": "GD05-094",
@@ -25088,6 +26467,34 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-097_p1": {
+    "id": "GD05-097_p1",
+    "name_jp": "ドモン・カッシュ",
+    "rarity": "R+",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ガンダムファイター",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。この効果で〔必殺技〕のコマンドカードを捨てたなら、それの【メイン】を発動してもよい。",
+    "effect": "【バースト】このカードを手札に加える。【セット時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。この効果で〔必殺技〕のコマンドカードを捨てたなら、それの【メイン】を発動してもよい。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-097"
+  },
   "GD05-098": {
     "id": "GD05-098",
     "name_jp": "ヒイロ・ユイ",
@@ -25110,6 +26517,34 @@
     "effect_text": "【バースト】このカードを手札に加える。このユニットがダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-098_p1": {
+    "id": "GD05-098_p1",
+    "name_jp": "ヒイロ・ユイ",
+    "rarity": "R+",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "Gチーム",
+      "オペレーション・メテオ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。このユニットがダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "effect": "【バースト】このカードを手札に加える。このユニットがダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-098"
   },
   "GD05-099": {
     "id": "GD05-099",
@@ -25196,6 +26631,28 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-102_p1": {
+    "id": "GD05-102_p1",
+    "name_jp": "光の翼",
+    "rarity": "R+",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 5,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Vガンダム",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。■HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。■ユニット1つを選ぶ。それを3回復する。",
+    "effect": "【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。■HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。■ユニット1つを選ぶ。それを3回復する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-102"
+  },
   "GD05-103": {
     "id": "GD05-103",
     "name_jp": "散弾ではなぁ！",
@@ -25274,6 +26731,28 @@
     "effect_text": "【メイン】このカードをプレイするとき、以下の効果から1つを選択し発動する。■自分はリソース1つをレストで置く。■自分のトラッシュのLv.5以上のパイロットカード1枚を選ぶ。それを手札に加える。",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-106_p1": {
+    "id": "GD05-106_p1",
+    "name_jp": "惹かれ合う心",
+    "rarity": "R+",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 3,
+    "cost": 3,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【メイン】このカードをプレイするとき、以下の効果から1つを選択し発動する。■自分はリソース1つをレストで置く。■自分のトラッシュのLv.5以上のパイロットカード1枚を選ぶ。それを手札に加える。",
+    "effect": "【メイン】このカードをプレイするとき、以下の効果から1つを選択し発動する。■自分はリソース1つをレストで置く。■自分のトラッシュのLv.5以上のパイロットカード1枚を選ぶ。それを手札に加える。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-106"
   },
   "GD05-107": {
     "id": "GD05-107",
@@ -25437,6 +26916,28 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-114_p1": {
+    "id": "GD05-114_p1",
+    "name_jp": "広域殲滅",
+    "rarity": "R+",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 6,
+    "cost": 6,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【メイン】Lv.4以下のユニットすべてを破壊する。",
+    "effect": "【メイン】Lv.4以下のユニットすべてを破壊する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-114"
+  },
   "GD05-115": {
     "id": "GD05-115",
     "name_jp": "NT研究所所長",
@@ -25538,6 +27039,33 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-119_p1": {
+    "id": "GD05-119_p1",
+    "name_jp": "火消しの風",
+    "rarity": "R+",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "プリベンター"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【アクション】Lv.5以上の自分のユニットとバトルしている相手のユニット1つを選ぶ。このバトル中、それをAP-3する。【パイロット】「ゼクス・マーキス」",
+    "effect": "【アクション】Lv.5以上の自分のユニットとバトルしている相手のユニット1つを選ぶ。このバトル中、それをAP-3する。【パイロット】「ゼクス・マーキス」",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "GD05-119"
+  },
   "GD05-120": {
     "id": "GD05-120",
     "name_jp": "シャイニングフィンガー",
@@ -25557,6 +27085,30 @@
     "effect_text": "【バースト】このカードを手札に加える。【メイン】/【アクション】HP4以下の相手のユニット1つを選ぶ。それをレストにする。その後、カード名に「シャイニングガンダム」を含む自分のユニット1つを選んでもよい。このターン中、それは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-120_p1": {
+    "id": "GD05-120_p1",
+    "name_jp": "シャイニングフィンガー",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "シャッフル同盟",
+      "必殺技"
+    ],
+    "stats": {},
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【メイン】/【アクション】HP4以下の相手のユニット1つを選ぶ。それをレストにする。その後、カード名に「シャイニングガンダム」を含む自分のユニット1つを選んでもよい。このターン中、それは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "新弾限定戦[GD05] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-120"
   },
   "GD05-121": {
     "id": "GD05-121",
@@ -26670,6 +28222,35 @@
     "package_set": "PROMO",
     "effect_text": "【バースト】このカードを手札に加える。 【セット時】HP5以下の相手のユニット1つを選ぶ。それをレストにする。"
   },
+  "ST01-010_p4": {
+    "id": "ST01-010_p4",
+    "name_jp": "アムロ・レイ",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "WB隊",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】HP5以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "effect": "【バースト】このカードを手札に加える。【セット時】HP5以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 4,
+    "base_card_id": "ST01-010"
+  },
   "ST01-010_p5": {
     "id": "ST01-010_p5",
     "name_jp": "アムロ・レイ",
@@ -26826,6 +28407,33 @@
     "acquisition_info": "ニュータイプチャレンジ 2025 MISSION1上位入賞記念品",
     "package_set": "PROMO",
     "effect_text": "【バースト】このカードを手札に加える。 【アタック時】【ターン1回】自分のリソース1つを選ぶ。それをアクティブにする。"
+  },
+  "ST01-011_p5": {
+    "id": "ST01-011_p5",
+    "name_jp": "スレッタ・マーキュリー",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【アタック時】【ターン1回】自分のリソース1つを選ぶ。それをアクティブにする。",
+    "effect": "【バースト】このカードを手札に加える。【アタック時】【ターン1回】自分のリソース1つを選ぶ。それをアクティブにする。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 5,
+    "base_card_id": "ST01-011"
   },
   "ST01-012": {
     "id": "ST01-012",
@@ -28099,6 +29707,33 @@
     "package_set": "PROMO",
     "effect_text": "【バースト】このカードを手札に加える。 【リンク中】このユニットをAP+1、HP+1する。"
   },
+  "ST02-010_p5": {
+    "id": "ST02-010_p5",
+    "name_jp": "ヒイロ・ユイ",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "オペレーション・メテオ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "新機動戦記ガンダムW",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【リンク中】このユニットをAP+1、HP+1する。",
+    "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットをAP+1、HP+1する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 5,
+    "base_card_id": "ST02-010"
+  },
   "ST02-010_p6": {
     "id": "ST02-010_p6",
     "name_jp": "ヒイロ・ユイ",
@@ -29208,6 +30843,34 @@
     "package_set": "ST03",
     "effect_text": "【バースト】このカードを手札に加える。 【セット時】自分の手札の、Lv.4以下の、〔ネオ・ジオン〕/〔ジオン〕のユニットカード1枚を配備してもよい。"
   },
+  "ST03-010_p2": {
+    "id": "ST03-010_p2",
+    "name_jp": "フル・フロンタル",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 6,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "強化人間"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】自分の手札の、Lv.4以下の、〔ネオ・ジオン〕/〔ジオン〕のユニットカード1枚を配備してもよい。",
+    "effect": "【バースト】このカードを手札に加える。【セット時】自分の手札の、Lv.4以下の、〔ネオ・ジオン〕/〔ジオン〕のユニットカード1枚を配備してもよい。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 2,
+    "base_card_id": "ST03-010"
+  },
   "ST03-010_p3": {
     "id": "ST03-010_p3",
     "name_jp": "フル・フロンタル",
@@ -29340,6 +31003,34 @@
     "acquisition_info": "リミテッドBOX Ver.β",
     "package_set": "β",
     "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。 (このユニットはブロックされない)"
+  },
+  "ST03-011_p4": {
+    "id": "ST03-011_p4",
+    "name_jp": "シャア・アズナブル",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。(このユニットはブロックされない)",
+    "effect": "【バースト】このカードを手札に加える。【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。(このユニットはブロックされない)",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 4,
+    "base_card_id": "ST03-011"
   },
   "ST03-012": {
     "id": "ST03-012",
@@ -30574,6 +32265,34 @@
     "acquisition_info": "Destiny Ignition [ST09]",
     "package_set": "ST09",
     "effect_text": "【バースト】このカードを手札に加える。 【アタック時】相手のユニット1つを選ぶ。このバトル中、それをAP-2する。"
+  },
+  "ST04-010_p6": {
+    "id": "ST04-010_p6",
+    "name_jp": "キラ・ヤマト",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "地球連合",
+      "コーディネイター"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【アタック時】相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+    "effect": "【バースト】このカードを手札に加える。【アタック時】相手のユニット1つを選ぶ。このバトル中、それをAP-2する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 6,
+    "base_card_id": "ST04-010"
   },
   "ST04-010_p7": {
     "id": "ST04-010_p7",
@@ -33859,6 +35578,33 @@
     "package_set": "ST07",
     "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このターン中、このユニットをAP+1する。自分のトラッシュに〔CB〕のカードが7枚以上あるなら、かわりに〔CB〕の自分のユニットすべてをAP+1する。"
   },
+  "ST07-009_p3": {
+    "id": "ST07-009_p3",
+    "name_jp": "刹那・F・セイエイ",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "CB"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [],
+    "package_set": "GD05",
+    "effect_text": "【バースト】このカードを手札に加える。【アタック時】このターン中、このユニットをAP+1する。自分のトラッシュに〔CB〕のカードが7枚以上あるなら、かわりに〔CB〕の自分のユニットすべてをAP+1する。",
+    "effect": "【バースト】このカードを手札に加える。【アタック時】このターン中、このユニットをAP+1する。自分のトラッシュに〔CB〕のカードが7枚以上あるなら、かわりに〔CB〕の自分のユニットすべてをAP+1する。",
+    "terrain": "-",
+    "acquisition_info": "Freedom Ascension [GD05]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 3,
+    "base_card_id": "ST07-009"
+  },
   "ST07-010": {
     "id": "ST07-010",
     "name_jp": "ティエリア・アーデ",
@@ -36686,6 +38432,30 @@
     "acquisition_info": "Steel Requiem[GD03]",
     "link": []
   },
+  "T-015_p1": {
+    "id": "T-015_p1",
+    "name_jp": "CGSモビルワーカー",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "鉄華団"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-015",
+    "link": []
+  },
   "T-016": {
     "id": "T-016",
     "name_jp": "グレイズ改",
@@ -36704,6 +38474,30 @@
     "effect_text": "",
     "terrain": "-",
     "acquisition_info": "Steel Requiem[GD03]",
+    "link": []
+  },
+  "T-016_p1": {
+    "id": "T-016_p1",
+    "name_jp": "グレイズ改",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "鉄華団"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-016",
     "link": []
   },
   "T-017": {
@@ -36726,6 +38520,30 @@
     "acquisition_info": "Steel Requiem[GD03]",
     "link": []
   },
+  "T-017_p1": {
+    "id": "T-017_p1",
+    "name_jp": "ガンダム・バルバトス（第4形態）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "鉄華団"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-017",
+    "link": []
+  },
   "T-018": {
     "id": "T-018",
     "name_jp": "赤いガンダム",
@@ -36744,6 +38562,30 @@
     "effect_text": "",
     "terrain": "-",
     "acquisition_info": "Steel Requiem[GD03]",
+    "link": []
+  },
+  "T-018_p1": {
+    "id": "T-018_p1",
+    "name_jp": "赤いガンダム",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "クラン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-018",
     "link": []
   },
   "T-019": {
@@ -36766,6 +38608,30 @@
     "acquisition_info": "Steel Requiem[GD03]",
     "link": []
   },
+  "T-019_p1": {
+    "id": "T-019_p1",
+    "name_jp": "GQuuuuuuX（オメガ・サイコミュ起動時）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "クラン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-019",
+    "link": []
+  },
   "T-020": {
     "id": "T-020",
     "name_jp": "GFreD",
@@ -36784,6 +38650,30 @@
     "effect_text": "",
     "terrain": "-",
     "acquisition_info": "Steel Requiem[GD03]",
+    "link": []
+  },
+  "T-020_p1": {
+    "id": "T-020_p1",
+    "name_jp": "GFreD",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-020",
     "link": []
   },
   "T-021": {
@@ -36925,1673 +38815,5 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]",
     "link": []
-  },
-  "T-015_p1": {
-    "id": "T-015_p1",
-    "name_jp": "CGSモビルワーカー",
-    "rarity": "T",
-    "card_type": "TOKEN",
-    "color": "-",
-    "traits": [
-      "鉄華団"
-    ],
-    "stats": {
-      "ap": 1,
-      "hp": 1
-    },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "package_set": "PROMO",
-    "effect_text": "",
-    "terrain": "-",
-    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "T-015",
-    "link": []
-  },
-  "T-016_p1": {
-    "id": "T-016_p1",
-    "name_jp": "グレイズ改",
-    "rarity": "T",
-    "card_type": "TOKEN",
-    "color": "-",
-    "traits": [
-      "鉄華団"
-    ],
-    "stats": {
-      "ap": 2,
-      "hp": 2
-    },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "package_set": "PROMO",
-    "effect_text": "",
-    "terrain": "-",
-    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "T-016",
-    "link": []
-  },
-  "T-017_p1": {
-    "id": "T-017_p1",
-    "name_jp": "ガンダム・バルバトス（第4形態）",
-    "rarity": "T",
-    "card_type": "TOKEN",
-    "color": "-",
-    "traits": [
-      "鉄華団"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "package_set": "PROMO",
-    "effect_text": "",
-    "terrain": "-",
-    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士ガンダム 鉄血のオルフェンズ -[PC01A]",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "T-017",
-    "link": []
-  },
-  "T-018_p1": {
-    "id": "T-018_p1",
-    "name_jp": "赤いガンダム",
-    "rarity": "T",
-    "card_type": "TOKEN",
-    "color": "-",
-    "traits": [
-      "クラン"
-    ],
-    "stats": {
-      "ap": 2,
-      "hp": 3
-    },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "package_set": "PROMO",
-    "effect_text": "",
-    "terrain": "-",
-    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "T-018",
-    "link": []
-  },
-  "T-019_p1": {
-    "id": "T-019_p1",
-    "name_jp": "GQuuuuuuX（オメガ・サイコミュ起動時）",
-    "rarity": "T",
-    "card_type": "TOKEN",
-    "color": "-",
-    "traits": [
-      "クラン"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 2
-    },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "package_set": "PROMO",
-    "effect_text": "",
-    "terrain": "-",
-    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "T-019",
-    "link": []
-  },
-  "T-020_p1": {
-    "id": "T-020_p1",
-    "name_jp": "GFreD",
-    "rarity": "T",
-    "card_type": "TOKEN",
-    "color": "-",
-    "traits": [
-      "ジオン"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 3
-    },
-    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
-    "package_set": "PROMO",
-    "effect_text": "",
-    "terrain": "-",
-    "acquisition_info": "プレミアムカードコレクション ガンダムアッセンブルセット - 機動戦士Gundam GQuuuuuuX -[PC02A]",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "T-020",
-    "link": []
-  },
-  "GD04-024_p1": {
-    "id": "GD04-024_p1",
-    "name_jp": "ガンダム・エアリアル（改修型）",
-    "rarity": "U",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 7,
-    "cost": 5,
-    "traits": [
-      "学園"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 5
-    },
-    "link": [
-      "スレッタ・マーキュリー"
-    ],
-    "effect": "【配備時】自分のデッキを上から3枚見て、その中の(学園)の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect_tags": [
-      "配備時"
-    ],
-    "is_parallel": true,
-    "is_promo": true,
-    "acquisition_info": "新弾構築戦[GD04] 参加・優勝記念品",
-    "package_set": "PROMO",
-    "effect_text": "【配備時】自分のデッキを上から3枚見て、その中の〔学園〕の、ユニットカード1枚/コマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "parallel_number": 1,
-    "base_card_id": "GD04-024"
-  },
-  "GD04-085_p2": {
-    "id": "GD04-085_p2",
-    "name_jp": "スレッタ・マーキュリー",
-    "rarity": "R",
-    "card_type": "PILOT",
-    "color": "Green",
-    "level": 5,
-    "cost": 1,
-    "traits": [
-      "学園"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 2
-    },
-    "link": [],
-    "effect": "【バースト】 このカードを手札に加える。\n\n【リンク中】 【ターン1回】 自分がEXリソースを使用して(学園)のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。",
-    "effect_tags": [
-      "リンク中",
-      "バースト",
-      "ターン1回"
-    ],
-    "is_parallel": true,
-    "is_promo": true,
-    "acquisition_info": "新弾構築戦[GD04] 参加・優勝記念品",
-    "package_set": "PROMO",
-    "effect_text": "【バースト】このカードを手札に加える。 【リンク中】【ターン1回】自分がEXリソースを使用して〔学園〕のコマンドカードをプレイし発動したとき、自分のEXリソースがないなら、自分はEXリソース1つをレストで置く。",
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "parallel_number": 2,
-    "base_card_id": "GD04-085"
-  },
-  "GD05-042_p1": {
-    "id": "GD05-042_p1",
-    "name_jp": "シャイニングガンダム",
-    "rarity": "C",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 2,
-    "cost": 1,
-    "traits": [
-      "MF",
-      "シャッフル同盟"
-    ],
-    "stats": {
-      "ap": 2,
-      "hp": 2
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [],
-    "package_set": "PROMO",
-    "effect_text": "-",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "新弾限定戦[GD05] 参加記念品",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "GD05-042"
-  },
-  "GD05-120_p1": {
-    "id": "GD05-120_p1",
-    "name_jp": "シャイニングフィンガー",
-    "rarity": "U",
-    "card_type": "COMMAND",
-    "color": "White",
-    "level": 4,
-    "cost": 1,
-    "traits": [
-      "シャッフル同盟",
-      "必殺技"
-    ],
-    "stats": {},
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [],
-    "package_set": "PROMO",
-    "effect_text": "【バースト】このカードを手札に加える。【メイン】/【アクション】HP4以下の相手のユニット1つを選ぶ。それをレストにする。その後、カード名に「シャイニングガンダム」を含む自分のユニット1つを選んでもよい。このターン中、それは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)",
-    "terrain": "-",
-    "acquisition_info": "新弾限定戦[GD05] 参加記念品",
-    "is_parallel": true,
-    "is_promo": true,
-    "parallel_number": 1,
-    "base_card_id": "GD05-120"
-  },
-  "GD05-001_p1": {
-    "id": "GD05-001_p1",
-    "name_jp": "V2ガンダム",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Blue",
-    "level": 6,
-    "cost": 4,
-    "traits": [
-      "リガ・ミリティア",
-      "ヴィクトリータイプ"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 5
-    },
-    "source_title": "機動戦士Vガンダム",
-    "link": [
-      "ウッソ・エヴィン"
-    ],
-    "package_set": "GD05",
-    "effect_text": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)【起動・メイン】【ターン1回】自分のユニット2つをレストにする：このユニットをアクティブにする。",
-    "effect": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)【起動・メイン】【ターン1回】自分のユニット2つをレストにする：このユニットをアクティブにする。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-001"
-  },
-  "GD05-002_p1": {
-    "id": "GD05-002_p1",
-    "name_jp": "ストライクフリーダムガンダム",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Blue",
-    "level": 8,
-    "cost": 6,
-    "traits": [
-      "オーブ"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 6
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "キラ・ヤマト"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
-    "effect": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-002"
-  },
-  "GD05-002_p2": {
-    "id": "GD05-002_p2",
-    "name_jp": "ストライクフリーダムガンダム",
-    "rarity": "LR++",
-    "card_type": "UNIT",
-    "color": "Blue",
-    "level": 8,
-    "cost": 6,
-    "traits": [
-      "オーブ"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 6
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "キラ・ヤマト"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
-    "effect": "【配備時】自分のユニット1～2つを選ぶ。このターン中、それらがバトルダメージで相手のカードを破壊したとき、自分は1枚ドローする。【セット中】【アタック時】自分の手札2枚を捨ててもよい。そうしたなら、最もLv.が低い相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 2,
-    "base_card_id": "GD05-002"
-  },
-  "GD05-003_p1": {
-    "id": "GD05-003_p1",
-    "name_jp": "ムラサメ（アンドリュー・バルトフェルド専用機）",
-    "rarity": "LKR+",
-    "card_type": "UNIT",
-    "color": "Blue",
-    "level": 3,
-    "cost": 2,
-    "traits": [
-      "オーブ"
-    ],
-    "stats": {
-      "ap": 2,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "アンドリュー・バルトフェルド"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【破壊時】〔オーブ〕の自分のパイロットがいるなら、自分は1枚ドローする。",
-    "effect": "【破壊時】〔オーブ〕の自分のパイロットがいるなら、自分は1枚ドローする。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-003"
-  },
-  "GD05-004_p1": {
-    "id": "GD05-004_p1",
-    "name_jp": "アカツキ（オオワシ）",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Blue",
-    "level": 6,
-    "cost": 6,
-    "traits": [
-      "オーブ"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "特徴〔オーブ〕"
-    ],
-    "package_set": "GD05",
-    "effect_text": "Lv.6以上の自分のユニットがいない間、手札のこのカードを〔オーブ〕の自分のユニット1つにつき、Lv.-1、コスト-1する。【リンク時】Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "effect": "Lv.6以上の自分のユニットがいない間、手札のこのカードを〔オーブ〕の自分のユニット1つにつき、Lv.-1、コスト-1する。【リンク時】Lv.4以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-004"
-  },
-  "GD05-005_p1": {
-    "id": "GD05-005_p1",
-    "name_jp": "ストライクルージュ（オオトリ装備）",
-    "rarity": "LKR+",
-    "card_type": "UNIT",
-    "color": "Blue",
-    "level": 4,
-    "cost": 3,
-    "traits": [
-      "オーブ"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "特徴〔オーブ〕"
-    ],
-    "package_set": "GD05",
-    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-005"
-  },
-  "GD05-006_p1": {
-    "id": "GD05-006_p1",
-    "name_jp": "ハシュマル",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Blue",
-    "level": 7,
-    "cost": 6,
-    "traits": [
-      "厄祭戦"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 6
-    },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のカードを破壊したとき、「プルーマ」(〔厄祭戦〕・AP2・HP1)のユニットトークン1つを配備する。このユニットは〔厄祭戦〕の自分のユニットトークンと同じ数だけ《リペア1》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
-    "effect": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のカードを破壊したとき、「プルーマ」(〔厄祭戦〕・AP2・HP1)のユニットトークン1つを配備する。このユニットは〔厄祭戦〕の自分のユニットトークンと同じ数だけ《リペア1》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-006"
-  },
-  "GD05-017_p1": {
-    "id": "GD05-017_p1",
-    "name_jp": "νガンダム",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 7,
-    "cost": 5,
-    "traits": [
-      "地球連邦",
-      "ロンド・ベル"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 5
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "アムロ・レイ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
-    "effect": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-017"
-  },
-  "GD05-017_p2": {
-    "id": "GD05-017_p2",
-    "name_jp": "νガンダム",
-    "rarity": "LR++",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 7,
-    "cost": 5,
-    "traits": [
-      "地球連邦",
-      "ロンド・ベル"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 5
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "アムロ・レイ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
-    "effect": "《突破5》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】自分のトラッシュの〔ロンド・ベル〕のカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 2,
-    "base_card_id": "GD05-017"
-  },
-  "GD05-018_p1": {
-    "id": "GD05-018_p1",
-    "name_jp": "ガンダム・キャリバーン",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 8,
-    "cost": 7,
-    "traits": [
-      "学園"
-    ],
-    "stats": {
-      "ap": 7,
-      "hp": 5
-    },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "link": [
-      "スレッタ・マーキュリー"
-    ],
-    "package_set": "GD05",
-    "effect_text": "自分のEXリソースがゲームから除外されたとき、自分のユニット1つを選んでもよい。このターン中、それが相手からダメージを受けるとき、そのダメージを3軽減する。【配備時】自分はEXリソース3つを置く。",
-    "effect": "自分のEXリソースがゲームから除外されたとき、自分のユニット1つを選んでもよい。このターン中、それが相手からダメージを受けるとき、そのダメージを3軽減する。【配備時】自分はEXリソース3つを置く。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-018"
-  },
-  "GD05-020_p1": {
-    "id": "GD05-020_p1",
-    "name_jp": "νガンダム",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 5,
-    "cost": 4,
-    "traits": [
-      "地球連邦",
-      "ロンド・ベル"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "アムロ・レイ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【セット中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【配備時】自分のトラッシュに〔ロンド・ベル〕のカードが2枚以上あるなら、自分はEXリソース1つを置く。",
-    "effect": "【セット中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【配備時】自分のトラッシュに〔ロンド・ベル〕のカードが2枚以上あるなら、自分はEXリソース1つを置く。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-020"
-  },
-  "GD05-021_p1": {
-    "id": "GD05-021_p1",
-    "name_jp": "ガンダムAGE-2 ダブルバレット",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 6,
-    "cost": 5,
-    "traits": [
-      "地球連邦",
-      "AGEシステム"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 5
-    },
-    "source_title": "機動戦士ガンダムAGE",
-    "link": [
-      "アセム・アスノ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【起動・アクション】【ターン1回】①：このバトル中、このユニットをAP+4する。【ターン1回】〔地球連邦〕の自分のパイロットがいるなら、このユニットが相手からダメージを受けるとき、そのダメージを2軽減する。",
-    "effect": "【起動・アクション】【ターン1回】①：このバトル中、このユニットをAP+4する。【ターン1回】〔地球連邦〕の自分のパイロットがいるなら、このユニットが相手からダメージを受けるとき、そのダメージを2軽減する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-021"
-  },
-  "GD05-025_p1": {
-    "id": "GD05-025_p1",
-    "name_jp": "デミバーディング",
-    "rarity": "LKU+",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 4,
-    "cost": 2,
-    "traits": [
-      "学園"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 2
-    },
-    "source_title": "機動戦士ガンダム 水星の魔女",
-    "link": [
-      "チュアチュリー・パンランチ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【配備時】自分のデッキを上から3枚見て、その中のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "effect": "【配備時】自分のデッキを上から3枚見て、その中のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-025"
-  },
-  "GD05-029_p1": {
-    "id": "GD05-029_p1",
-    "name_jp": "リ・ガズィ（ケーラ機）",
-    "rarity": "LKC+",
-    "card_type": "UNIT",
-    "color": "Green",
-    "level": 3,
-    "cost": 2,
-    "traits": [
-      "地球連邦",
-      "ロンド・ベル"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 3
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "ケーラ・スゥ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【配備時】自分のデッキを上から1枚見て、上か下に戻す。",
-    "effect": "【配備時】自分のデッキを上から1枚見て、上か下に戻す。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-029"
-  },
-  "GD05-033_p1": {
-    "id": "GD05-033_p1",
-    "name_jp": "マスターガンダム",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 7,
-    "cost": 5,
-    "traits": [
-      "MF",
-      "DG細胞"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 5
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [
-      "マスター・アジア"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
-    "effect": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-033"
-  },
-  "GD05-033_p2": {
-    "id": "GD05-033_p2",
-    "name_jp": "マスターガンダム",
-    "rarity": "LR++",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 7,
-    "cost": 5,
-    "traits": [
-      "MF",
-      "DG細胞"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 5
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [
-      "マスター・アジア"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
-    "effect": "【アタック時】自分のトラッシュの〔必殺技〕のコマンドカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、相手のシールドエリアの先頭のカード1つに5ダメージを与える。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 2,
-    "base_card_id": "GD05-033"
-  },
-  "GD05-034_p1": {
-    "id": "GD05-034_p1",
-    "name_jp": "ガイアガンダム",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 3,
-    "cost": 2,
-    "traits": [
-      "地球連合",
-      "ファントムペイン"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 3
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "ステラ・ルーシェ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【セット中】【ターン1回】このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、その相手プレイヤーは自身の手札1枚を捨ててもよい。そうしなかったなら、自分の手札のLv.4以下の〔ファントムペイン〕のユニットカード1枚を配備してもよい。",
-    "effect": "【セット中】【ターン1回】このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、その相手プレイヤーは自身の手札1枚を捨ててもよい。そうしなかったなら、自分の手札のLv.4以下の〔ファントムペイン〕のユニットカード1枚を配備してもよい。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-034"
-  },
-  "GD05-035_p1": {
-    "id": "GD05-035_p1",
-    "name_jp": "ドラゴンガンダム",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 5,
-    "cost": 3,
-    "traits": [
-      "MF",
-      "シャッフル同盟"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 4
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [
-      "サイ・サイシー"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【ターン1回】このユニットがダメージで相手のシールドエリアのカードを破壊したとき、AP3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
-    "effect": "【ターン1回】このユニットがダメージで相手のシールドエリアのカードを破壊したとき、AP3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-035"
-  },
-  "GD05-036_p1": {
-    "id": "GD05-036_p1",
-    "name_jp": "クーロンガンダム",
-    "rarity": "LKR+",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 6,
-    "cost": 4,
-    "traits": [
-      "MF"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 4
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [
-      "マスター・アジア"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【セット時】このユニット以外の、アクティブの〔MF〕の自分のユニット1つを選んでもよい。それをレストにする。そうしたなら、それのLv.以下の相手のユニットすべてに2ダメージを与える。",
-    "effect": "【セット時】このユニット以外の、アクティブの〔MF〕の自分のユニット1つを選んでもよい。それをレストにする。そうしたなら、それのLv.以下の相手のユニットすべてに2ダメージを与える。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-036"
-  },
-  "GD05-037_p1": {
-    "id": "GD05-037_p1",
-    "name_jp": "デストロイガンダム",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 9,
-    "cost": 8,
-    "traits": [
-      "地球連合",
-      "ファントムペイン"
-    ],
-    "stats": {
-      "ap": 6,
-      "hp": 6
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "特徴〔生体CPU〕"
-    ],
-    "package_set": "GD05",
-    "effect_text": "トラッシュにカードが7枚以上ある相手プレイヤーがいる間、手札のこのカードをLv.-3、コスト-3する。【リンク中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
-    "effect": "トラッシュにカードが7枚以上ある相手プレイヤーがいる間、手札のこのカードをLv.-3、コスト-3する。【リンク中】このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-037"
-  },
-  "GD05-041_p1": {
-    "id": "GD05-041_p1",
-    "name_jp": "ガイアガンダム（MA形態）",
-    "rarity": "LKU+",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 4,
-    "cost": 3,
-    "traits": [
-      "地球連合",
-      "ファントムペイン"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 3
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "ステラ・ルーシェ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "自分の効果で相手の手札を捨てたターンの間、手札のこのカードをコスト-2する。",
-    "effect": "自分の効果で相手の手札を捨てたターンの間、手札のこのカードをコスト-2する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-041"
-  },
-  "GD05-048_p1": {
-    "id": "GD05-048_p1",
-    "name_jp": "ガンダムキュリオス（飛行形態）",
-    "rarity": "LKC+",
-    "card_type": "UNIT",
-    "color": "Red",
-    "level": 3,
-    "cost": 2,
-    "traits": [
-      "CB",
-      "GNドライヴ"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 1
-    },
-    "source_title": "機動戦士ガンダム00",
-    "link": [
-      "アレルヤ・ハプティズム",
-      "ハレルヤ・ハプティズム"
-    ],
-    "package_set": "GD05",
-    "effect_text": "このユニットは配備したターンに、レストの相手のユニットをアタック先に選んでアタックしてもよい。",
-    "effect": "このユニットは配備したターンに、レストの相手のユニットをアタック先に選んでアタックしてもよい。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-048"
-  },
-  "GD05-049_p1": {
-    "id": "GD05-049_p1",
-    "name_jp": "サザビー",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 7,
-    "cost": 5,
-    "traits": [
-      "ネオ・ジオン"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 5
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "シャア・アズナブル"
-    ],
-    "package_set": "GD05",
-    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
-    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-049"
-  },
-  "GD05-049_p2": {
-    "id": "GD05-049_p2",
-    "name_jp": "サザビー",
-    "rarity": "LR++",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 7,
-    "cost": 5,
-    "traits": [
-      "ネオ・ジオン"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 5
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "シャア・アズナブル"
-    ],
-    "package_set": "GD05",
-    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
-    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 2,
-    "base_card_id": "GD05-049"
-  },
-  "GD05-050_p1": {
-    "id": "GD05-050_p1",
-    "name_jp": "ガンダムエクシアリペア",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 2,
-    "cost": 1,
-    "traits": [
-      "CB",
-      "GNドライヴ"
-    ],
-    "stats": {
-      "ap": 2,
-      "hp": 1
-    },
-    "source_title": "機動戦士ガンダム00",
-    "link": [
-      "刹那・F・セイエイ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "このユニットが、パイロットがセットされていないLv.4以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。【破壊時】自分のデッキを上から2枚、自分のトラッシュに置く。",
-    "effect": "このユニットが、パイロットがセットされていないLv.4以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。【破壊時】自分のデッキを上から2枚、自分のトラッシュに置く。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-050"
-  },
-  "GD05-051_p1": {
-    "id": "GD05-051_p1",
-    "name_jp": "ガンダム・バルバトスルプスレクス",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 7,
-    "cost": 6,
-    "traits": [
-      "鉄華団",
-      "ガンダム・フレーム"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 6
-    },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "link": [
-      "三日月・オーガス"
-    ],
-    "package_set": "GD05",
-    "effect_text": "このユニットを、これが受けているダメージと同じ数だけAP+する。自分のターン終了時、〔鉄華団〕の自分のユニット1つを選んでもよい。それに1ダメージを与え、アクティブにする。",
-    "effect": "このユニットを、これが受けているダメージと同じ数だけAP+する。自分のターン終了時、〔鉄華団〕の自分のユニット1つを選んでもよい。それに1ダメージを与え、アクティブにする。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-051"
-  },
-  "GD05-052_p1": {
-    "id": "GD05-052_p1",
-    "name_jp": "サザビー",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 5,
-    "cost": 4,
-    "traits": [
-      "ネオ・ジオン"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "シャア・アズナブル"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【配備時】このユニット以外の、自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、自分のデッキを上から3枚、自分のトラッシュに置く。この効果でデッキから置いた〔ネオ・ジオン〕のユニットカード1枚を手札に加える。",
-    "effect": "【配備時】このユニット以外の、自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、自分のデッキを上から3枚、自分のトラッシュに置く。この効果でデッキから置いた〔ネオ・ジオン〕のユニットカード1枚を手札に加える。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-052"
-  },
-  "GD05-053_p1": {
-    "id": "GD05-053_p1",
-    "name_jp": "ヤクト・ドーガ（クェス専用機）",
-    "rarity": "LKR+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 3,
-    "cost": 2,
-    "traits": [
-      "ネオ・ジオン"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 2
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [
-      "クェス・パラヤ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【破壊時】〔ネオ・ジオン〕の自分のカードの効果で破壊されているなら、トラッシュのこのカードを手札に加える。",
-    "effect": "【破壊時】〔ネオ・ジオン〕の自分のカードの効果で破壊されているなら、トラッシュのこのカードを手札に加える。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-053"
-  },
-  "GD05-055_p1": {
-    "id": "GD05-055_p1",
-    "name_jp": "デスティニーガンダム",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 8,
-    "cost": 7,
-    "traits": [
-      "ザフト",
-      "ミネルバ隊"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 6
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "シン・アスカ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "《先制攻撃》(アタック中のこのユニットは、相手より先にダメージを与える)【ターン1回】このユニットが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
-    "effect": "《先制攻撃》(アタック中のこのユニットは、相手より先にダメージを与える)【ターン1回】このユニットが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-055"
-  },
-  "GD05-059_p1": {
-    "id": "GD05-059_p1",
-    "name_jp": "ガンダム・バルバトスルプス",
-    "rarity": "LKU+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 6,
-    "cost": 4,
-    "traits": [
-      "鉄華団",
-      "ガンダム・フレーム"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
-    "link": [
-      "三日月・オーガス"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【アタック時】アクティブの〔ギャラルホルン〕の自分のユニット1つを選ぶ。それをレストにする。そうしたなら、自分は1枚ドローし、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
-    "effect": "【アタック時】アクティブの〔ギャラルホルン〕の自分のユニット1つを選ぶ。それをレストにする。そうしたなら、自分は1枚ドローし、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-059"
-  },
-  "GD05-064_p1": {
-    "id": "GD05-064_p1",
-    "name_jp": "フォースインパルスガンダム",
-    "rarity": "LKC+",
-    "card_type": "UNIT",
-    "color": "Purple",
-    "level": 4,
-    "cost": 3,
-    "traits": [
-      "ザフト",
-      "ミネルバ隊"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 4
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [
-      "ルナマリア・ホーク"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【配備時】このユニットをトラッシュから配備したなら、自分のトラッシュのカード名に「シン・アスカ」を含むパイロットカード1枚を選ぶ。それを手札に加える。",
-    "effect": "【配備時】このユニットをトラッシュから配備したなら、自分のトラッシュのカード名に「シン・アスカ」を含むパイロットカード1枚を選ぶ。それを手札に加える。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-064"
-  },
-  "GD05-066_p1": {
-    "id": "GD05-066_p1",
-    "name_jp": "シャイニングガンダム",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "White",
-    "level": 4,
-    "cost": 3,
-    "traits": [
-      "MF",
-      "シャッフル同盟"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 4
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [
-      "ドモン・カッシュ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【配備時】自分のトラッシュの〔MF〕のユニットカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、自分のトラッシュの〔必殺技〕のコマンドカード1枚を選ぶ。それを手札に加える。【アタック時】【ターン1回】レストの自分のリソース1つを選ぶ。それをアクティブにする。",
-    "effect": "【配備時】自分のトラッシュの〔MF〕のユニットカード2枚を選んでもよい。それらをゲームから除外する。そうしたなら、自分のトラッシュの〔必殺技〕のコマンドカード1枚を選ぶ。それを手札に加える。【アタック時】【ターン1回】レストの自分のリソース1つを選ぶ。それをアクティブにする。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-066"
-  },
-  "GD05-067_p1": {
-    "id": "GD05-067_p1",
-    "name_jp": "ウイングガンダムゼロ（EW版）",
-    "rarity": "LR+",
-    "card_type": "UNIT",
-    "color": "White",
-    "level": 6,
-    "cost": 5,
-    "traits": [
-      "Gチーム"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 4
-    },
-    "source_title": "新機動戦記ガンダムW Endless Waltz",
-    "link": [
-      "ヒイロ・ユイ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
-    "effect": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-067"
-  },
-  "GD05-067_p2": {
-    "id": "GD05-067_p2",
-    "name_jp": "ウイングガンダムゼロ（EW版）",
-    "rarity": "LR++",
-    "card_type": "UNIT",
-    "color": "White",
-    "level": 6,
-    "cost": 5,
-    "traits": [
-      "Gチーム"
-    ],
-    "stats": {
-      "ap": 5,
-      "hp": 4
-    },
-    "source_title": "新機動戦記ガンダムW Endless Waltz",
-    "link": [
-      "ヒイロ・ユイ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
-    "effect": "レストの相手のユニットがいる間、これは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【アタック時】相手のユニット1つを選ぶ。それをレストにする。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 2,
-    "base_card_id": "GD05-067"
-  },
-  "GD05-068_p1": {
-    "id": "GD05-068_p1",
-    "name_jp": "シャイニングガンダム（スーパーモード）",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "White",
-    "level": 6,
-    "cost": 5,
-    "traits": [
-      "MF",
-      "シャッフル同盟"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 5
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [
-      "ドモン・カッシュ"
-    ],
-    "package_set": "GD05",
-    "effect_text": "自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動したとき、このターン中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【リンク中】【アタック時】このバトル中、このユニットをAP+2する。",
-    "effect": "自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動したとき、このターン中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)【リンク中】【アタック時】このバトル中、このユニットをAP+2する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-068"
-  },
-  "GD05-070_p1": {
-    "id": "GD05-070_p1",
-    "name_jp": "トールギスⅢ",
-    "rarity": "R+",
-    "card_type": "UNIT",
-    "color": "White",
-    "level": 5,
-    "cost": 3,
-    "traits": [
-      "プリベンター"
-    ],
-    "stats": {
-      "ap": 4,
-      "hp": 4
-    },
-    "source_title": "新機動戦記ガンダムW Endless Waltz",
-    "link": [
-      "ゼクス・マーキス"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、レストの〔プリベンター〕/〔Gチーム〕の自分のリンクユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
-    "effect": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、レストの〔プリベンター〕/〔Gチーム〕の自分のリンクユニット1つを選ぶ。それをアクティブにし、このターン中、それはアタックできない。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-070"
-  },
-  "GD05-071_p1": {
-    "id": "GD05-071_p1",
-    "name_jp": "ガンダムサンドロック改（EW版）",
-    "rarity": "LKR+",
-    "card_type": "UNIT",
-    "color": "White",
-    "level": 4,
-    "cost": 3,
-    "traits": [
-      "Gチーム"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 4
-    },
-    "source_title": "新機動戦記ガンダムW Endless Waltz",
-    "link": [
-      "カトル・ラバーバ・ウィナー"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【アタック時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect": "【アタック時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-071"
-  },
-  "GD05-079_p1": {
-    "id": "GD05-079_p1",
-    "name_jp": "ガンダムヘビーアームズ改（EW版）",
-    "rarity": "LKC+",
-    "card_type": "UNIT",
-    "color": "White",
-    "level": 3,
-    "cost": 2,
-    "traits": [
-      "Gチーム"
-    ],
-    "stats": {
-      "ap": 3,
-      "hp": 3
-    },
-    "source_title": "新機動戦記ガンダムW Endless Waltz",
-    "link": [
-      "トロワ・バートン"
-    ],
-    "package_set": "GD05",
-    "effect_text": "【起動・メイン】【ターン1回】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、Lv.4以下の相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
-    "effect": "【起動・メイン】【ターン1回】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、Lv.4以下の相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
-    "terrain": "宇宙 地球",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-079"
-  },
-  "GD05-081_p1": {
-    "id": "GD05-081_p1",
-    "name_jp": "キラ・ヤマト",
-    "rarity": "R+",
-    "card_type": "PILOT",
-    "color": "Blue",
-    "level": 5,
-    "cost": 1,
-    "traits": [
-      "オーブ",
-      "コーディネイター"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 2
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【バースト】このカードを手札に加える。【リンク時】このユニットが〔オーブ〕/〔三隻同盟〕なら、自分は1枚ドローする。",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】このユニットが〔オーブ〕/〔三隻同盟〕なら、自分は1枚ドローする。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-081"
-  },
-  "GD05-085_p1": {
-    "id": "GD05-085_p1",
-    "name_jp": "アムロ・レイ",
-    "rarity": "R+",
-    "card_type": "PILOT",
-    "color": "Green",
-    "level": 5,
-    "cost": 1,
-    "traits": [
-      "地球連邦",
-      "ロンド・ベル",
-      "ニュータイプ"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 2
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、これを2回復する。",
-    "effect": "【バースト】このカードを手札に加える。自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、これを2回復する。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-085"
-  },
-  "GD05-089_p1": {
-    "id": "GD05-089_p1",
-    "name_jp": "マスター・アジア",
-    "rarity": "LR+",
-    "card_type": "PILOT",
-    "color": "Red",
-    "level": 6,
-    "cost": 1,
-    "traits": [
-      "ガンダムファイター"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 2
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【バースト】このカードを手札に加える。自分のトラッシュに〔MF〕のカードが3枚以上あるなら、かわりにこれを(AP3・HP3)のユニットとして配備してもよい。(パイロットとしては扱わない)【リンク中】【アタック時】このターン中、自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動していたなら、相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "effect": "【バースト】このカードを手札に加える。自分のトラッシュに〔MF〕のカードが3枚以上あるなら、かわりにこれを(AP3・HP3)のユニットとして配備してもよい。(パイロットとしては扱わない)【リンク中】【アタック時】このターン中、自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動していたなら、相手のユニット1つを選ぶ。それに2ダメージを与える。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-089"
-  },
-  "GD05-090_p1": {
-    "id": "GD05-090_p1",
-    "name_jp": "ステラ・ルーシェ",
-    "rarity": "R+",
-    "card_type": "PILOT",
-    "color": "Red",
-    "level": 3,
-    "cost": 1,
-    "traits": [
-      "地球連合",
-      "ファントムペイン",
-      "生体CPU"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 0
-    },
-    "source_title": "機動戦士ガンダムSEED DESTINY",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【バースト】このカードを手札に加える。【破壊時】自分のデッキを上から1枚見る。それが〔ファントムペイン〕のカードなら公開して手札に加えてもよい。残ったカードは下に戻す。",
-    "effect": "【バースト】このカードを手札に加える。【破壊時】自分のデッキを上から1枚見る。それが〔ファントムペイン〕のカードなら公開して手札に加えてもよい。残ったカードは下に戻す。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-090"
-  },
-  "GD05-093_p1": {
-    "id": "GD05-093_p1",
-    "name_jp": "シャア・アズナブル",
-    "rarity": "R+",
-    "card_type": "PILOT",
-    "color": "Purple",
-    "level": 5,
-    "cost": 1,
-    "traits": [
-      "ネオ・ジオン",
-      "ニュータイプ"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 2
-    },
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【バースト】このカードを手札に加える。【リンク時】自分のトラッシュの〔ネオ・ジオン〕のベースカード1枚を選んでもよい。それを配備する。",
-    "effect": "【バースト】このカードを手札に加える。【リンク時】自分のトラッシュの〔ネオ・ジオン〕のベースカード1枚を選んでもよい。それを配備する。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-093"
-  },
-  "GD05-097_p1": {
-    "id": "GD05-097_p1",
-    "name_jp": "ドモン・カッシュ",
-    "rarity": "R+",
-    "card_type": "PILOT",
-    "color": "White",
-    "level": 4,
-    "cost": 1,
-    "traits": [
-      "ガンダムファイター",
-      "シャッフル同盟"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 1
-    },
-    "source_title": "機動武闘伝Gガンダム",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【バースト】このカードを手札に加える。【セット時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。この効果で〔必殺技〕のコマンドカードを捨てたなら、それの【メイン】を発動してもよい。",
-    "effect": "【バースト】このカードを手札に加える。【セット時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。この効果で〔必殺技〕のコマンドカードを捨てたなら、それの【メイン】を発動してもよい。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-097"
-  },
-  "GD05-098_p1": {
-    "id": "GD05-098_p1",
-    "name_jp": "ヒイロ・ユイ",
-    "rarity": "R+",
-    "card_type": "PILOT",
-    "color": "White",
-    "level": 4,
-    "cost": 1,
-    "traits": [
-      "Gチーム",
-      "オペレーション・メテオ"
-    ],
-    "stats": {
-      "ap_mod": 2,
-      "hp_mod": 1
-    },
-    "source_title": "新機動戦記ガンダムW Endless Waltz",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【バースト】このカードを手札に加える。このユニットがダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "effect": "【バースト】このカードを手札に加える。このユニットがダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-098"
-  },
-  "GD05-102_p1": {
-    "id": "GD05-102_p1",
-    "name_jp": "光の翼",
-    "rarity": "R+",
-    "card_type": "COMMAND",
-    "color": "Blue",
-    "level": 5,
-    "cost": 2,
-    "traits": [],
-    "stats": {},
-    "source_title": "機動戦士Vガンダム",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。■HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。■ユニット1つを選ぶ。それを3回復する。",
-    "effect": "【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。■HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。■ユニット1つを選ぶ。それを3回復する。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-102"
-  },
-  "GD05-106_p1": {
-    "id": "GD05-106_p1",
-    "name_jp": "惹かれ合う心",
-    "rarity": "R+",
-    "card_type": "COMMAND",
-    "color": "Green",
-    "level": 3,
-    "cost": 3,
-    "traits": [],
-    "stats": {},
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【メイン】このカードをプレイするとき、以下の効果から1つを選択し発動する。■自分はリソース1つをレストで置く。■自分のトラッシュのLv.5以上のパイロットカード1枚を選ぶ。それを手札に加える。",
-    "effect": "【メイン】このカードをプレイするとき、以下の効果から1つを選択し発動する。■自分はリソース1つをレストで置く。■自分のトラッシュのLv.5以上のパイロットカード1枚を選ぶ。それを手札に加える。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-106"
-  },
-  "GD05-114_p1": {
-    "id": "GD05-114_p1",
-    "name_jp": "広域殲滅",
-    "rarity": "R+",
-    "card_type": "COMMAND",
-    "color": "Purple",
-    "level": 6,
-    "cost": 6,
-    "traits": [],
-    "stats": {},
-    "source_title": "機動戦士ガンダム 逆襲のシャア",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【メイン】Lv.4以下のユニットすべてを破壊する。",
-    "effect": "【メイン】Lv.4以下のユニットすべてを破壊する。",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-114"
-  },
-  "GD05-119_p1": {
-    "id": "GD05-119_p1",
-    "name_jp": "火消しの風",
-    "rarity": "R+",
-    "card_type": "COMMAND",
-    "color": "White",
-    "level": 5,
-    "cost": 1,
-    "traits": [
-      "プリベンター"
-    ],
-    "stats": {
-      "ap_mod": 1,
-      "hp_mod": 2
-    },
-    "source_title": "新機動戦記ガンダムW Endless Waltz",
-    "link": [],
-    "package_set": "GD05",
-    "effect_text": "【アクション】Lv.5以上の自分のユニットとバトルしている相手のユニット1つを選ぶ。このバトル中、それをAP-3する。【パイロット】「ゼクス・マーキス」",
-    "effect": "【アクション】Lv.5以上の自分のユニットとバトルしている相手のユニット1つを選ぶ。このバトル中、それをAP-3する。【パイロット】「ゼクス・マーキス」",
-    "terrain": "-",
-    "acquisition_info": "Freedom Ascension [GD05]",
-    "is_parallel": true,
-    "is_promo": false,
-    "parallel_number": 1,
-    "base_card_id": "GD05-119"
   }
 }
