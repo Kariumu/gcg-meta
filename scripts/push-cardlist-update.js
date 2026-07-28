@@ -11,6 +11,7 @@
  *  そのまま push まで進めてしまった。本スクリプトは次の2点でこれを防ぐ。
  *   (1) 候補は cards_master.json のキー＋ data/preview_card_pages.json の許可リストに限定する
  *       （ディスク走査ではなくマスタが正。不正IDは構造的に候補へ入らない）
+ *       許可リストは data/cards_preview.json（自動蓄積）と data/preview_card_pages.json（手動例外）の和集合
  *   (2) push 対象が --max（既定200）を超えたら自動停止する。続行には --force-count が必要
  *
  * 【処理】
@@ -19,7 +20,7 @@
  *  事前検証: HTML終端 / JSONパース / XML終端 / NUL混入 / 空ファイル / webp署名。
  *
  * 【対象】
- *  - data/cards_master.json, data/preview_card_pages.json
+ *  - data/cards_master.json, data/preview_card_pages.json, data/cards_preview.json
  *  - cards.html, deck-builder.html, sitemap.xml
  *  - cards/<id>/index.html （id は master のキー ∪ 許可リストのプレビューID）
  *  - images/cards/<id>.webp （同上）
@@ -41,6 +42,7 @@ const ROOT = path.resolve(__dirname, '..');
 const OWNER = 'kariumu', REPO = 'gcg-meta', BRANCH = 'main';
 const MASTER_PATH = path.join(ROOT, 'data', 'cards_master.json');
 const ALLOW_PATH = path.join(ROOT, 'data', 'preview_card_pages.json');
+const PREVIEW_DATA_PATH = path.join(ROOT, 'data', 'cards_preview.json');
 const STATE_PATH = path.join(ROOT, 'tmp', 'push-cardlist-state.json');
 const CHUNK_BYTES = parseInt(process.env.PUSH_CHUNK_BYTES || '1500000', 10);
 
@@ -88,14 +90,22 @@ async function api(method, url, body, label) {
 
 function listCandidates() {
   const master = JSON.parse(fs.readFileSync(MASTER_PATH, 'utf-8'));
-  let preview = [];
+  // 正当なページIDは3系統の和集合。scripts/check-official-cardlist-sync.js と同じ判定にする。
+  //  (1) cards_master.json のキー
+  //  (2) data/cards_preview.json のキー（auto-news.js が公式Xの新カード紹介から自動蓄積）
+  //  (3) data/preview_card_pages.json の preview_pages（手動の例外リスト）
+  const preview = new Set();
+  if (fs.existsSync(PREVIEW_DATA_PATH)) {
+    try { Object.keys(JSON.parse(fs.readFileSync(PREVIEW_DATA_PATH, 'utf-8'))).forEach((id) => preview.add(id)); }
+    catch (e) { console.warn('  警告: data/cards_preview.json を読めません: ' + e.message); }
+  }
   if (fs.existsSync(ALLOW_PATH)) {
-    preview = (JSON.parse(fs.readFileSync(ALLOW_PATH, 'utf-8')).preview_pages || []).map((p) => p.id);
+    (JSON.parse(fs.readFileSync(ALLOW_PATH, 'utf-8')).preview_pages || []).forEach((p) => preview.add(p.id));
   }
   const validIds = new Set([...Object.keys(master), ...preview]);
 
   const text = [], bin = [];
-  for (const rel of ['data/cards_master.json', 'data/preview_card_pages.json', 'cards.html', 'deck-builder.html', 'sitemap.xml']) {
+  for (const rel of ['data/cards_master.json', 'data/preview_card_pages.json', 'data/cards_preview.json', 'cards.html', 'deck-builder.html', 'sitemap.xml']) {
     if (fs.existsSync(path.join(ROOT, rel))) text.push(rel);
   }
   for (const rel of EXTRA) {
@@ -115,7 +125,7 @@ function listCandidates() {
     const rel = 'images/cards/' + id + '.webp';
     if (fs.existsSync(path.join(ROOT, rel))) bin.push(rel);
   }
-  return { text, bin, skipped, masterCount: Object.keys(master).length, previewCount: preview.length };
+  return { text, bin, skipped, masterCount: Object.keys(master).length, previewCount: preview.size };
 }
 
 function validate(rel, isBin) {

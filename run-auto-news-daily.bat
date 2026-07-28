@@ -8,6 +8,7 @@ REM Schedule: Daily 20:00 JST via Windows Task Scheduler
 REM           (Task name: GCG-STATS-auto-news)
 REM Time range: previous day 20:01 JST to run time (~current day 20:00 JST)
 REM Updated: 2026-07-09 (18:45->20:00; start=prev 20:01; end omitted=up to run time; X-post OFF locked; repoint C:\dev\gcg-meta -> E:\GCGSTATS)
+REM Updated: 2026-07-28 (append official card list sync check; task fails when it reports action-required)
 REM Logging: auto-news-schtasks.log (append)
 REM X-post: DISABLED, locked via --test-mode. To post to X, replace --test-mode with --no-test-mode.
 REM ============================================================
@@ -30,5 +31,28 @@ echo ============================================================ >> auto-news-s
 REM --- Schedule fetch (added 2026-07-24, shijisho-50) ---
 echo [%date% %time%] fetch-schedule START >> auto-news-schtasks.log
 node fetch-schedule.js >> auto-news-schtasks.log 2>&1
-echo [%date% %time%] fetch-schedule END: exit code %ERRORLEVEL% >> auto-news-schtasks.log
-exit /b %ERRORLEVEL%
+set FETCHRC=%ERRORLEVEL%
+echo [%date% %time%] fetch-schedule END: exit code %FETCHRC% >> auto-news-schtasks.log
+REM ============================================================
+REM --- Official card list sync check (added 2026-07-28) ---
+REM     Compares the official card list (gundam-gcg.com, 21 categories) against
+REM     data\cards_master.json and the generated pages. Read-only; writes nothing
+REM     except tmp\cardlist-sync-report.json.
+REM     Exit codes: 0=no problem / 1=action required / 2=execution error
+REM     Takes about 40 seconds (22 requests at 1.5s intervals, same politeness rule
+REM     as the other fetch scripts).
+REM     To skip temporarily, comment out the node line below.
+REM ============================================================
+echo [%date% %time%] cardlist-sync START >> auto-news-schtasks.log
+node scripts\check-official-cardlist-sync.js >> auto-news-schtasks.log 2>&1
+set SYNCRC=%ERRORLEVEL%
+if "%SYNCRC%"=="1" echo [%date% %time%] *** ACTION REQUIRED *** cardlist-sync found unregistered cards or junk pages. See tmp\cardlist-sync-report.json >> auto-news-schtasks.log
+if "%SYNCRC%"=="2" echo [%date% %time%] *** ERROR *** cardlist-sync could not run (official site structure change or network failure?). See log above. >> auto-news-schtasks.log
+echo [%date% %time%] cardlist-sync END: exit code %SYNCRC% >> auto-news-schtasks.log
+echo ============================================================ >> auto-news-schtasks.log
+REM --- Final exit code ---
+REM     When cardlist-sync reports a problem, surface it as a task failure so it is
+REM     visible in Task Scheduler history without reading the log every day.
+REM     Otherwise keep the previous behaviour (fetch-schedule's exit code).
+if not "%SYNCRC%"=="0" exit /b %SYNCRC%
+exit /b %FETCHRC%

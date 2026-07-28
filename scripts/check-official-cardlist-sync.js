@@ -14,6 +14,7 @@
  *
  * 検査内容:
  *  [L1] cards/ 配下の各ディレクトリが master または許可リストに存在するか（不正ページ検出）
+ *       許可リストは data/cards_preview.json（自動蓄積）と data/preview_card_pages.json（手動例外）の和集合
  *  [L2] master の各IDに cards/<id>/index.html が存在するか（ページ生成漏れ）
  *  [L3] master の各IDに images/cards/<id>.webp が存在するか（画像欠落）
  *  [O1] 公式のカテゴリ一覧が既知のものと一致するか（新弾追加の検知）
@@ -42,6 +43,7 @@ const cheerio = require('cheerio');
 const ROOT = path.resolve(__dirname, '..');
 const MASTER_PATH = process.env.CARDS_MASTER_PATH || path.join(ROOT, 'data', 'cards_master.json');
 const ALLOW_PATH = path.join(ROOT, 'data', 'preview_card_pages.json');
+const PREVIEW_DATA_PATH = path.join(ROOT, 'data', 'cards_preview.json');
 const REPORT_PATH = path.join(ROOT, 'tmp', 'cardlist-sync-report.json');
 const REQUEST_DELAY_MS = 1500; // 公式サーバ配慮（変更禁止）
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
@@ -105,16 +107,45 @@ function parseList(html) {
   return { reported, ids };
 }
 
+/**
+ * 意図的な公開ページの許可リストを2系統から読む。
+ *  (1) data/cards_preview.json … 毎日のニュース生成（auto-news.js）が公式Xの新カード紹介から蓄積し、
+ *      scripts/post-processing.js がこれを元に cards/<id>/index.html を生成する。自動・追記不要。
+ *  (2) data/preview_card_pages.json … 手動の例外リスト。(1) から古いエントリが整理された後も
+ *      ページが残っている場合の受け皿（cards_preview.json は過去に大きく削減された実績がある）。
+ * どちらかに載っていれば正当なページとして扱う。
+ */
 function loadAllow() {
-  if (!fs.existsSync(ALLOW_PATH)) {
-    return { preview: new Set(), excluded: new Set(), missingFile: true };
+  const preview = new Set();
+  const sources = [];
+  let excluded = new Set();
+  let missingFile = false;
+
+  if (fs.existsSync(PREVIEW_DATA_PATH)) {
+    try {
+      const pv = JSON.parse(fs.readFileSync(PREVIEW_DATA_PATH, 'utf-8'));
+      const ids = Object.keys(pv);
+      ids.forEach((id) => preview.add(id));
+      sources.push('cards_preview.json ' + ids.length + '件');
+    } catch (e) {
+      sources.push('cards_preview.json 読込失敗(' + e.message + ')');
+    }
+  } else {
+    sources.push('cards_preview.json なし');
   }
-  const j = JSON.parse(fs.readFileSync(ALLOW_PATH, 'utf-8'));
-  return {
-    preview: new Set((j.preview_pages || []).map((p) => p.id)),
-    excluded: new Set(j.excluded_ids || []),
-    missingFile: false,
-  };
+
+  if (fs.existsSync(ALLOW_PATH)) {
+    const j = JSON.parse(fs.readFileSync(ALLOW_PATH, 'utf-8'));
+    const ids = (j.preview_pages || []).map((p) => p.id);
+    ids.forEach((id) => preview.add(id));
+    excluded = new Set(j.excluded_ids || []);
+    sources.push('preview_card_pages.json ' + ids.length + '件');
+  } else {
+    missingFile = true;
+    sources.push('preview_card_pages.json なし');
+  }
+
+  return { preview, excluded, missingFile, sources };
 }
 
 (async () => {
@@ -127,8 +158,9 @@ function loadAllow() {
 
   log('GCG STATS カードリスト整合性チェック' + (OFFLINE ? '（--offline: ローカルのみ）' : ''));
   log('  master: ' + masterIds.size + ' 件');
-  if (allow.missingFile) notices.push('data/preview_card_pages.json が見つかりません（許可リスト無しとして続行）');
-  else log('  許可リスト: プレビュー ' + allow.preview.size + ' 件 / 承認済み除外 ' + allow.excluded.size + ' 件');
+  if (allow.missingFile && allow.preview.size === 0) notices.push('許可リストが1件も読めません（data/cards_preview.json と data/preview_card_pages.json の両方が不在）');
+  log('  許可リスト: プレビュー ' + allow.preview.size + ' 件 / 承認済み除外 ' + allow.excluded.size + ' 件'
+    + '（出典: ' + allow.sources.join(' + ') + '）');
 
   // ---- [L1] cards/ 配下にマスタ未登録・許可リスト外のページが無いか ----
   log('\n[L1] cards/ 配下の不正ページ検査');
