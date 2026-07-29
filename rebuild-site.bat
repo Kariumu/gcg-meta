@@ -1,34 +1,34 @@
 @echo off
 chcp 65001 >nul
 REM ============================================================
-REM  rebuild-site.bat  -  GCG STATS サイト再生成バッチ (v7-p2)
-REM  5つの生成スクリプトを正しい順序で実行する(順序ミス防止)。
-REM  事前に「git pull」を済ませてから実行。完了後に git add / commit / push。
-REM  ※ generate_cards.js(カード追加時の sitemap 全再生成)を回す場合は、
-REM    このバッチの「前」に実行すること(本バッチは sitemap 処理の最後を担うため)。
+REM  rebuild-site.bat  -  GCG STATS site rebuild batch (v7-p2)
+REM  Runs the 5 generator scripts in the correct order to avoid order mistakes.
+REM  Run "git pull" first. After it finishes, do git add / commit / push.
+REM  NOTE: generate_cards.js regenerates the whole sitemap when cards are added.
+REM        Run it BEFORE this batch, because this batch owns the last sitemap step.
 REM ============================================================
 cd /d "%~dp0"
 
-echo [1/5] articles.json 再生成 (記事HTMLの ^<title^> を正に同期)
+echo [1/5] Rebuilding articles.json - syncs article HTML titles as the source of truth
 call node scripts\build-articles-manifest.js || goto :err
 
-echo [2/5] reports/index.html 再生成 (一覧 title 同期) + sitemap reports/ 更新 (API不使用)
+echo [2/5] Rebuilding reports/index.html - index title sync + sitemap reports/ update, no API use
 call node generate-report.js --index-only || goto :err
 
-echo [3/5] sets/ 再生成 (各カードに id アンカー付与)
+echo [3/5] Rebuilding sets/ - adds id anchors to each card
 call node generate_preview_sets.js || goto :err
 
-echo [4/5] cards.html 再生成 (common.js?v=15 反映)
+echo [4/5] Rebuilding cards.html - reflects common.js?v=15
 call node generate_cardlist.js || goto :err
 
-echo [5/5] sitemap に series/ / sets/ / reports/news/ を追記 (必ず最後)
+echo [5/5] Appending series/, sets/, reports/news/ and events/ to sitemap - must be last
 call node generate-sitemap-extra.js || goto :err
 
 echo.
-echo === 完了: 全5ステップ成功。git status で差分を確認し、コミット/プッシュしてください。 ===
+echo === DONE: all 5 steps succeeded. Check the diff with git status, then commit and push. ===
 exit /b 0
 
 :err
 echo.
-echo !!! エラー: 直前のステップが失敗しました。中断します。上のログを確認してください。 !!!
+echo !!! ERROR: the previous step failed. Aborting. Check the log above. !!!
 exit /b 1

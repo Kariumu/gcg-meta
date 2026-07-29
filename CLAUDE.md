@@ -125,14 +125,16 @@ node generate_cards.js                 # カード個別ページ + sitemap(カ�
 node generate_cardlist.js              # cards.html
 node generate_deckbuilder.js           # deck-builder.html
 node generate-report.js --index-only   # reports/index.html + sitemap(reports/*.html 分)
-node generate-sitemap-extra.js         # sitemap に series/sets/reports-news を追記(最後)
+node generate-sitemap-extra.js         # sitemap に series/sets/reports-news/events を追記(最後)
 ```
 
 - `generate-report.js --index-only` は `data/articles.json` を唯一の正として `reports/index.html` と sitemap の reports 部分を書き出す(API不使用)
 - `generate-sitemap-extra.js` は追記専用。必ず最後に回すこと
+- `events/*.html`(780件)の sitemap 収載も `generate-sitemap-extra.js` の担当(指示書56 Task 2 で追加)。`generate-events.js` が書いた events URL は `generate_cards.js` の全再生成で必ず破棄されるため、最後の extra が毎回戻す構造になっている。events の lastmod は `data/events.json` の `events[<イベントID>].date`(イベント開催日)で、実行日ではない
 - 実際に起きた事故(いずれも 2026-07-29):
   - `--index-only` の後に `generate-sitemap-extra.js` を回さず、sitemap から `reports/news/*.html` 62件が一時消失
   - 逆に `generate_cards.js` → `generate-sitemap-extra.js` だけを回していた期間があり、`reports/*.html` 41件(MSA記事・LR考察・NTC分析)が長期間 sitemap 未登録だった
+  - `events/*.html` 780件が全コミット一貫して sitemap 未登録だった(generate-events.js が書く → generate_cards.js が破棄 → extra が戻さない構造。指示書56 Task 2 で解消)
 - 再生成後は URL 数が実行前より減っていないことを必ず確認する
 
 ## 記事公開・整合性チェックのスクリプト(2026-07-29 追加)
