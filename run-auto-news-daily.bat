@@ -50,6 +50,36 @@ if "%SYNCRC%"=="1" echo [%date% %time%] *** ACTION REQUIRED *** cardlist-sync fo
 if "%SYNCRC%"=="2" echo [%date% %time%] *** ERROR *** cardlist-sync could not run (official site structure change or network failure?). See log above. >> auto-news-schtasks.log
 echo [%date% %time%] cardlist-sync END: exit code %SYNCRC% >> auto-news-schtasks.log
 echo ============================================================ >> auto-news-schtasks.log
+REM --- NTC results ingest (added 2026-07-25, shijisho-51) ---
+echo [%date% %time%] ntc-results START >> auto-news-schtasks.log
+node fetch-ntc-results.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%] ntc-results FETCH exit %ERRORLEVEL% >> auto-news-schtasks.log
+REM fetch-ntc-results.js creates .sched-run-tmp\ntc-new-events.flag when new events exist; deletes it when zero.
+if not exist ".sched-run-tmp\ntc-new-events.flag" goto ntc_skip
+echo [%date% %time%] ntc-results: new events found - regen+deploy start >> auto-news-schtasks.log
+node scripts\build-series-summary.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   build-series-summary exit %ERRORLEVEL% >> auto-news-schtasks.log
+node scripts\build-series-pages.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   build-series-pages exit %ERRORLEVEL% >> auto-news-schtasks.log
+node generate-events.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   generate-events exit %ERRORLEVEL% >> auto-news-schtasks.log
+node generate.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   generate exit %ERRORLEVEL% >> auto-news-schtasks.log
+node generate_cards.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   generate_cards exit %ERRORLEVEL% >> auto-news-schtasks.log
+REM   generate-report.js --index-only: re-adds reports/*.html URLs to sitemap.xml (no API use).
+REM   generate_cards.js rewrites the whole sitemap, so without this step the 41 reports URLs vanish.
+REM   Must run before generate-sitemap-extra.js (extra re-adds reports/news/ to keep it consistent).
+node generate-report.js --index-only >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   generate-report --index-only exit %ERRORLEVEL% >> auto-news-schtasks.log
+node generate-sitemap-extra.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   generate-sitemap-extra exit %ERRORLEVEL% >> auto-news-schtasks.log
+node deploy-results.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   deploy-results exit %ERRORLEVEL% >> auto-news-schtasks.log
+goto ntc_done
+:ntc_skip
+echo [%date% %time%] ntc-results: no new events - skip regen/deploy >> auto-news-schtasks.log
+:ntc_done
 REM --- Final exit code ---
 REM     When cardlist-sync reports a problem, surface it as a task failure so it is
 REM     visible in Task Scheduler history without reading the log every day.
