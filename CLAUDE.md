@@ -116,6 +116,37 @@ node scripts/scan-tcgplus-tokens.js --diff             # 差分取得（1.5秒�
 - 非公式API（BANDAI TCG+）依存。仕様・制約はスクリプト冒頭コメントを参照
 - 新弾を公式が発表したら `data/sets_meta.json` に1行追記する（`code` / `name_jp` / `release_date`(YYYY-MM-DD) / `kind`、任意で `pinned_articles`）。新弾情報ハブ `sets/`（指示書52）の最新弾判定・発売日表示・関連記事ピン留めに使用
 
+## ページ再生成とサイトマップの順序(2026-07-29 追加)
+
+`sitemap.xml` は複数のスクリプトが分担して書き出す。順序を守らないと記事が欠落する。
+
+```bash
+node generate_cards.js                 # カード個別ページ + sitemap(カード分)
+node generate_cardlist.js              # cards.html
+node generate_deckbuilder.js           # deck-builder.html
+node generate-report.js --index-only   # reports/index.html + sitemap(reports/*.html 分)
+node generate-sitemap-extra.js         # sitemap に series/sets/reports-news を追記(最後)
+```
+
+- `generate-report.js --index-only` は `data/articles.json` を唯一の正として `reports/index.html` と sitemap の reports 部分を書き出す(API不使用)
+- `generate-sitemap-extra.js` は追記専用。必ず最後に回すこと
+- 実際に起きた事故(いずれも 2026-07-29):
+  - `--index-only` の後に `generate-sitemap-extra.js` を回さず、sitemap から `reports/news/*.html` 62件が一時消失
+  - 逆に `generate_cards.js` → `generate-sitemap-extra.js` だけを回していた期間があり、`reports/*.html` 41件(MSA記事・LR考察・NTC分析)が長期間 sitemap 未登録だった
+- 再生成後は URL 数が実行前より減っていないことを必ず確認する
+
+## 記事公開・整合性チェックのスクリプト(2026-07-29 追加)
+
+| スクリプト | 用途 |
+|---|---|
+| `scripts/msa-publish.js <slug> --publish` | MSA環境レポートの 記事生成→検証→push→X投稿 を1コマンドで実行。入力は `tmp/<slug>.json`(PDFを読んだ Cowork が作成)。既定は DRY RUN、`--build` で生成のみ。サイトマップ順序も内部で固定済み |
+| `scripts/check-official-cardlist-sync.js` | 公式カードリスト21カテゴリと `cards_master.json`・生成ページの整合性チェック。`run-auto-news-daily.bat` に組込済で毎日20:00に実行。要対応があれば終了コード1(タスクスケジューラ上で失敗表示) |
+| `scripts/push-cardlist-update.js` | GitHubへの push。候補は `cards_master.json` のキー＋許可リストに限定(ディスク走査しない)。200件超で自動停止(`--force-count` で続行)。`--extra` は拡張子でテキスト/バイナリを振り分ける |
+
+- `data/cards_preview.json`(auto-news が公式Xから自動蓄積)が「マスタ未登録だが正当なページ」の許可リストとして自動参照される。`data/preview_card_pages.json` は手動の例外リストで、通常は追記不要
+- `translation-dictionary-v1.md` はデッキ名の対訳辞書。**MSA記事を書く前に必ず参照する**。新規訳語は記事公開時に追記する(`msa-publish.js` が自動実行)
+- OGP画像は `images/ogp/<slug>.png`(1200x630)。`push-cardlist-update.js` の既定候補に含まれる
+
 ## デプロイ設定
 
 - リポジトリ: `kariumu/gcg-meta`(Public)
