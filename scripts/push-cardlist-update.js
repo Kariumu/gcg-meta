@@ -24,6 +24,7 @@
  *  - cards.html, deck-builder.html, sitemap.xml
  *  - cards/<id>/index.html （id は master のキー ∪ 許可リストのプレビューID）
  *  - images/cards/<id>.webp （同上）
+ *  - images/ogp/*.png （記事のOGP画像。全件を候補にし、差分のあるものだけ push）
  *  - --extra=... で明示指定したファイル（スクリプト等。既定では対象外＝無関係なローカル編集を巻き込まない）
  *
  * 【使い方】（E:\GCGSTATS）
@@ -45,6 +46,8 @@ const ALLOW_PATH = path.join(ROOT, 'data', 'preview_card_pages.json');
 const PREVIEW_DATA_PATH = path.join(ROOT, 'data', 'cards_preview.json');
 const STATE_PATH = path.join(ROOT, 'tmp', 'push-cardlist-state.json');
 const CHUNK_BYTES = parseInt(process.env.PUSH_CHUNK_BYTES || '1500000', 10);
+/** バイナリとして送るファイルの拡張子 */
+const BINARY_EXT = /\.(webp|png|jpe?g|gif|ico)$/i;
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run') || process.env.DRY_RUN === '1';
@@ -108,9 +111,11 @@ function listCandidates() {
   for (const rel of ['data/cards_master.json', 'data/preview_card_pages.json', 'data/cards_preview.json', 'cards.html', 'deck-builder.html', 'sitemap.xml']) {
     if (fs.existsSync(path.join(ROOT, rel))) text.push(rel);
   }
+  // --extra は拡張子でテキスト/バイナリを振り分ける。
+  // 画像をテキストとして送るとバイナリが壊れるため（2026-07-29 修正）。
   for (const rel of EXTRA) {
-    if (fs.existsSync(path.join(ROOT, rel))) text.push(rel);
-    else console.warn('  警告: --extra で指定された ' + rel + ' が見つかりません');
+    if (!fs.existsSync(path.join(ROOT, rel))) { console.warn('  警告: --extra で指定された ' + rel + ' が見つかりません'); continue; }
+    (BINARY_EXT.test(rel) ? bin : text).push(rel);
   }
   const cardsDir = path.join(ROOT, 'cards');
   const skipped = [];
@@ -125,6 +130,13 @@ function listCandidates() {
     const rel = 'images/cards/' + id + '.webp';
     if (fs.existsSync(path.join(ROOT, rel))) bin.push(rel);
   }
+  // OGP画像（記事のog:imageが参照する。2026-07-29 に候補へ追加）
+  const ogpDir = path.join(ROOT, 'images', 'ogp');
+  if (fs.existsSync(ogpDir)) {
+    for (const name of fs.readdirSync(ogpDir)) {
+      if (BINARY_EXT.test(name)) bin.push('images/ogp/' + name);
+    }
+  }
   return { text, bin, skipped, masterCount: Object.keys(master).length, previewCount: preview.size };
 }
 
@@ -133,7 +145,11 @@ function validate(rel, isBin) {
   if (isBin) {
     const b = fs.readFileSync(p);
     if (b.length < 1000) errs.push('サイズ異常(' + b.length + ')');
-    if (b.slice(0, 4).toString('ascii') !== 'RIFF' || b.slice(8, 12).toString('ascii') !== 'WEBP') errs.push('webp署名不正');
+    if (/\.webp$/i.test(rel)) {
+      if (b.slice(0, 4).toString('ascii') !== 'RIFF' || b.slice(8, 12).toString('ascii') !== 'WEBP') errs.push('webp署名不正');
+    } else if (/\.png$/i.test(rel)) {
+      if (b.slice(0, 8).toString('hex') !== '89504e470d0a1a0a') errs.push('png署名不正');
+    }
     return errs;
   }
   const c = fs.readFileSync(p, 'utf-8');
