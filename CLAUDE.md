@@ -149,12 +149,24 @@ node generate-sitemap-extra.js         # sitemap に series/sets/reports-news/ev
 - `translation-dictionary-v1.md` はデッキ名の対訳辞書。**MSA記事を書く前に必ず参照する**。新規訳語は記事公開時に追記する(`msa-publish.js` が自動実行)
 - OGP画像は `images/ogp/<slug>.png`(1200x630)。`push-cardlist-update.js` の既定候補に含まれる
 
+## 禁止・制限ページの更新運用(2026-07-30 追加・指示書57)
+
+禁止・制限が改定されたら、`data/restrictions.json` を更新したうえで次を実行する。
+
+```bash
+node generate_restrictions.js   # restrictions.html を再生成(単体実行。夜間チェーンには非組込)
+```
+
+- `restrictions.html` の表示値はすべて `data/restrictions.json` から生成される。HTML を直接編集しないこと
+- 生成後は `restrictions.html` と `sitemap.xml`(必要なら導線を変えた静的ページ)を push する
+- sitemap の静的一覧は `generate-events.js` と `generate_cards.js` の**両方**にハードコードされている。URL を増減するときは両方に反映する(片方だけだと他方の実行で消える)
+
 ## デプロイ設定
 
 - リポジトリ: `kariumu/gcg-meta`(Public)
 - デプロイ: GitHub Pages
 - `git-push.js` が `BRANCH = 'main'` に GitHub REST API で push
-- ローカル `homepage/.git/HEAD` は `refs/heads/master` を指すが、push は `main`(整合性確認は必須5 で実施)
+- ローカル `E:\GCGSTATS\.git\HEAD` は `refs/heads/main` を指す(2026-07-30 現物確認。旧記述の `refs/heads/master` は誤りだったため修正)。push 先も `main` で一致
 
 ## 関連ドキュメント
 

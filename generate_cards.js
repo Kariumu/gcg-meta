@@ -1766,6 +1766,12 @@ function updateSitemap(cardIds) {
     <lastmod>${now}</lastmod>
   </url>
   <url>
+    <loc>${SITE_URL}/restrictions.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <lastmod>${now}</lastmod>
+  </url>
+  <url>
     <loc>${SITE_URL}/privacy.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
