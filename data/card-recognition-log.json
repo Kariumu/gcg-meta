@@ -3623,5 +3623,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-31": {
+    "recognized_at": "2026-07-31 22:01:51 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2083162007029551528",
+      "https://x.com/GUNDAM_GCG_JP/status/2083160747899605408"
+    ],
+    "cards": [
+      {
+        "card_number": "ST14-012",
+        "card_name": "バナージ・リンクス",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔民間〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】Lv.5以上の味方のユニット1つを選ぶ。このターン中、それはアクティブのAP5以下の相手のユニットをアタック先に選んでもよい。",
+        "effect_confidence": "medium",
+        "effect_length": 88,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST14-006",
+        "card_name": "フルアーマー・ユニコーンガンダム(デストロイモード)",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 8,
+        "cost": 6,
+        "ap": 3,
+        "hp": 6,
+        "traits": [
+          "〔民間〕"
+        ],
+        "link": "「バナージ・リンクス」",
+        "effect": "【配備時】自分のデッキを上から3枚見て、その中のカードを相手プレイヤーの人数と同じ数だけ公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【セット中】ターン1回 このユニットは、これのAP以下の相手のユニットからバトルダメージを受けるとき、そのダメージを受けない。",
+        "effect_confidence": "low",
+        "effect_length": 137,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
