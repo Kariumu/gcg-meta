@@ -149,6 +149,34 @@ node generate-sitemap-extra.js         # sitemap に series/sets/reports-news/ev
 - `translation-dictionary-v1.md` はデッキ名の対訳辞書。**MSA記事を書く前に必ず参照する**。新規訳語は記事公開時に追記する(`msa-publish.js` が自動実行)
 - OGP画像は `images/ogp/<slug>.png`(1200x630)。`push-cardlist-update.js` の既定候補に含まれる
 
+## 公式ツイート取得のページング(2026-07-31 追加)
+
+`auto-news.js` の `fetchOfficialTweets()` は、以前 `max_results: '10'` 固定でページング未実装だった。
+そのため指定期間内の公式ポストが 10 件を超えると、古い側が**無言で切り捨て**られていた。
+
+- 実際に起きた事故: 2026-07-24 20:32〜20:37 JST の【収録カード紹介】5 件が取り込まれず、`reports/news/2026-07-24.html` が生成されなかった
+- 修正内容(2026-07-31): `TWEETS_PAGE_SIZE = 100`(X API v2 の上限)へ引き上げ、`meta.next_token` によるページングを実装。`TWEETS_MAX_PAGES = 5`(最大 500 件)を安全弁とし、上限到達時はログに `*** 警告 ***` を出す
+- ページ間は 1 秒スリープ。同一 `pagination_token` が繰り返された場合は打ち切る
+- `tools/check-uncovered-news.js` も同じ関数を使うため、掲載漏れ検知の取りこぼしも同時に解消される
+
+### 復旧実行時の注意(期間は 1 日ずつ区切る)
+
+記事日付は「窓内で最も古い新カード投稿の日付」で決まる(`auto-news.js` 2271 行)。
+なおここで使うのは `created_at` の **UTC 日付**であり JST ではない(公式ポストは 20 時台 JST = 11 時台 UTC が通例なので通常は一致するが、00:00〜08:59 JST の投稿が最古になると記事日付が 1 日前にずれる)。
+広い期間を指定すると複数日ぶんの新カードが 1 本の記事に統合され、`reports/news/<最も古い日付>.html` を上書きしてしまう。
+上限が 10 件から 500 件に上がったことでこのリスクは顕在化しやすくなったため、**取りこぼし復旧は `--start-time` / `--end-time` で 1 日(できれば数十分)ずつ区切って実行する**こと。
+
+### `--dry-run` の効果範囲(誤解しやすい点)
+
+`--dry-run` がガードするのは **X への投稿(`uploadMediaToX` / `postTweet` / `postSurvey`)と `git-push` のみ**。
+Google Vision / Anthropic API の呼び出しは `--dry-run` でも実行され、**課金は発生する**。
+「`--dry-run` で API 課金リスク回避」という表現は X 投稿系についてのみ正しい。
+
+### 旧コピーの残存
+
+`homepage/auto-news.js`、`tmp/shijisho50-handover/` および `tmp/shijisho52-handover/` 配下の `auto-news.js` は `max_results: '10'` のままの旧版(`tmp/shijisho58-handover/auto-news.js` は本改修の引き渡し用コピーで修正版)。
+現行の実行経路(`run-auto-news-daily.bat` → `E:\GCGSTATS\auto-news.js`、`tools/check-uncovered-news.js` の require)はいずれも修正版を通るため実害はないが、混同しないこと。
+
 ## 禁止・制限ページの更新運用(2026-07-30 追加・指示書57)
 
 禁止・制限が改定されたら、`data/restrictions.json` を更新したうえで次を実行する。

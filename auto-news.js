@@ -121,6 +121,11 @@ const LAST_CHECK_FILE = path.join(DATA_DIR, 'last-check.json');
 const CARD_IMAGE_BASE = '../../images/cards'; // ローカル画像パス（記事HTMLからの相対パス）
 
 const OFFICIAL_USER_ID = '1837069552842330114'; // @GUNDAM_GCG_JP
+
+// === 公式ツイート取得のページング設定 (2026-07-31 追加) ===
+// X API v2 の max_results 上限は 100。TWEETS_MAX_PAGES は暴走防止の安全弁。
+const TWEETS_PAGE_SIZE = 100;
+const TWEETS_MAX_PAGES = 5;
 const RECOGNITION_LOG_FILE = path.join(DATA_DIR, 'card-recognition-log.json');
 
 const NEWS_IMAGE_DIR = path.join(ROOT, 'images', 'news'); // 新カード画像保存先
@@ -623,33 +628,76 @@ function parseSince() {
 // 指示書33: endTime オプション引数追加(未指定なら従来通り start_time のみ)
 async function fetchOfficialTweets(sinceTime, endTime = null) {
   log(`公式X投稿を取得中... (since: ${sinceTime}${endTime ? `, until: ${endTime}` : ''})`);
-  const params = {
+  const baseParams = {
     'start_time': sinceTime,
     'tweet.fields': 'created_at,text,attachments',
     'expansions': 'attachments.media_keys',
     'media.fields': 'url,type,preview_image_url',
-    'max_results': '10'
+    // 2026-07-31 修正: 旧値は '10'。ページング未実装だったため、
+    // 期間内の投稿が 10 件を超えると古い側が無言で切り捨てられていた
+    // (2026-07-24 20:32〜20:37 JST の新カード紹介 5 件が取りこぼしとなった真因)。
+    'max_results': String(TWEETS_PAGE_SIZE)
   };
   // 指示書33: end_time 指定(--end-time / --auto-window 経由)
   // X API v2 制約: start_time/end_time は 10 秒以上前であること
   if (endTime) {
-    params['end_time'] = endTime;
+    baseParams['end_time'] = endTime;
   }
 
-  const data = await xGet(`/2/users/${OFFICIAL_USER_ID}/tweets`, params);
+  const tweets = [];
+  const seenIds = new Set();
+  let nextToken = null;
+  let prevToken = null;
+  let page = 0;
 
-  const mediaMap = {};
-  if (data.includes && data.includes.media) {
-    data.includes.media.forEach(m => { mediaMap[m.media_key] = m; });
+  // ページングループ。meta.next_token が無くなるまで繰り返す。
+  while (page < TWEETS_MAX_PAGES) {
+    page++;
+    const params = { ...baseParams };
+    if (nextToken) params['pagination_token'] = nextToken;
+
+    const data = await xGet(`/2/users/${OFFICIAL_USER_ID}/tweets`, params);
+
+    const mediaMap = {};
+    if (data.includes && data.includes.media) {
+      data.includes.media.forEach(m => { mediaMap[m.media_key] = m; });
+    }
+
+    const pageTweets = (data.data || []).map(tw => {
+      const mediaKeys = tw.attachments?.media_keys || [];
+      const images = mediaKeys.map(mk => mediaMap[mk]).filter(m => m && m.type === 'photo').map(m => m.url);
+      return { id: tw.id, text: tw.text, created_at: tw.created_at, images };
+    });
+
+    // 同一 ID の重複取り込みを防ぐ(ページ境界での保険)
+    for (const tw of pageTweets) {
+      if (seenIds.has(tw.id)) continue;
+      seenIds.add(tw.id);
+      tweets.push(tw);
+    }
+
+    nextToken = (data.meta && data.meta.next_token) || null;
+    if (page > 1 || nextToken) {
+      log(`  ページ${page}: ${pageTweets.length}件取得 (累計 ${tweets.length}件)`);
+    }
+    if (!nextToken) break;
+    // 同じ next_token が返り続ける異常時に、無駄な呼び出しと誤った警告を防ぐ
+    if (nextToken === prevToken) {
+      log(`  同一の pagination_token が繰り返されたためページングを終了します`);
+      nextToken = null;
+      break;
+    }
+    prevToken = nextToken;
+    await sleep(1000); // レートリミット回避
   }
 
-  const tweets = (data.data || []).map(tw => {
-    const mediaKeys = tw.attachments?.media_keys || [];
-    const images = mediaKeys.map(mk => mediaMap[mk]).filter(m => m && m.type === 'photo').map(m => m.url);
-    return { id: tw.id, text: tw.text, created_at: tw.created_at, images };
-  });
+  if (nextToken) {
+    // 上限ページに達してもまだ続きがある = 取りこぼしの可能性がある。
+    // 黙って打ち切らず、必ずログに警告を残す。
+    log(`  *** 警告 *** ${TWEETS_MAX_PAGES}ページ(最大 ${TWEETS_MAX_PAGES * TWEETS_PAGE_SIZE}件)を超える投稿が存在します。取得し切れていない可能性があります。期間を分割して再実行してください。`);
+  }
 
-  log(`  取得: ${tweets.length}件`);
+  log(`  取得: ${tweets.length}件 (${page}ページ)`);
   return tweets;
 }
 
