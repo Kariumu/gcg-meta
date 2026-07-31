@@ -54,6 +54,34 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* 指示書60 Task2: サイトコンテンツ枠の視覚圧縮。
+           css/style.css は全ページ共有のため変更せず、本ページ内で .home-site-nav 配下だけに適用する。
+           同じ .site-nav-grid を使う「最新の分析記事」には影響しない。 */
+        .home-site-nav .site-nav-grid {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+        }
+        .home-site-nav .site-nav-card { padding: 10px 12px; }
+        .home-site-nav .site-nav-card-title { font-size: 13px; margin-bottom: 2px; }
+        .home-site-nav .site-nav-card-desc { font-size: 11px; line-height: 1.45; }
+        /* モバイルは2列を維持（共有CSSの1列指定を本ページ分だけ上書き） */
+        @media (max-width: 640px) {
+            .home-site-nav .site-nav-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+            }
+        }
+
+        /* 指示書60 Task3: 日付フィルタ操作時の遅延ロード表示 */
+        .dash-filter-loading {
+            margin-top: 8px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
+        }
+    </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
 <body>
@@ -63,20 +91,6 @@
         <!-- Hero: 開催中シリーズ（active/upcoming/completed-fallback） -->
         <section id="series-hero" class="series-hero-section" aria-label="現在のシリーズ">
             <div class="series-hero-loading">データを読み込み中</div>
-        </section>
-
-        <!-- 店舗検索セクション -->
-        <section class="home-store-search mb-32" aria-label="店舗検索">
-            <div class="home-store-search-inner">
-                <div>
-                    <h2 class="home-store-search-title">店舗検索</h2>
-                    <p class="home-store-search-sub">全国<span id="store-count">--</span>店舗から、店舗名で検索できます。都道府県別一覧は<a href="stores.html">店舗一覧</a>をご覧ください。</p>
-                </div>
-                <div class="home-store-search-box">
-                    <input type="search" id="home-store-input" class="home-store-input" placeholder="店舗名を入力（例：カードラボ）" autocomplete="off">
-                    <div id="home-store-suggestions" class="home-store-suggestions" hidden></div>
-                </div>
-            </div>
         </section>
 
         <!-- 環境トレンド（Top3） -->
@@ -136,19 +150,33 @@
             </div>
         </section>
 
+        <!-- 店舗検索セクション（指示書60 Task2: 大会結果の直後へ移動） -->
+        <section class="home-store-search mb-32" aria-label="店舗検索">
+            <div class="home-store-search-inner">
+                <div>
+                    <h2 class="home-store-search-title">店舗検索</h2>
+                    <p class="home-store-search-sub">全国<span id="store-count">--</span>店舗から、店舗名で検索できます。都道府県別一覧は<a href="stores.html">店舗一覧</a>をご覧ください。</p>
+                </div>
+                <div class="home-store-search-box">
+                    <input type="search" id="home-store-input" class="home-store-input" placeholder="店舗名を入力（例：カードラボ）" autocomplete="off">
+                    <div id="home-store-suggestions" class="home-store-suggestions" hidden></div>
+                </div>
+            </div>
+        </section>
+
         <!-- サイトコンテンツ導線 -->
-        <section class="mb-32">
+        <section class="mb-32 home-site-nav">
             <div class="section-header">
                 <h2 class="section-title">サイトコンテンツ</h2>
             </div>
             <div class="site-nav-grid">
                 <a href="series/" class="site-nav-card">
                     <div class="site-nav-card-title">シリーズ一覧</div>
-                    <div class="site-nav-card-desc">開催中・過去のシリーズ別集計ページ。</div>
+                    <div class="site-nav-card-desc">開催中・過去のシリーズ別集計。</div>
                 </a>
                 <a href="stores.html" class="site-nav-card">
                     <div class="site-nav-card-title">店舗一覧</div>
-                    <div class="site-nav-card-desc">都道府県別・開催回数別に全店舗を一覧表示。</div>
+                    <div class="site-nav-card-desc">都道府県別に全店舗を一覧表示。</div>
                 </a>
                 <a href="events.html" class="site-nav-card">
                     <div class="site-nav-card-title">イベント一覧</div>
@@ -164,11 +192,11 @@
                 </a>
                 <a href="deck-builder.html" class="site-nav-card">
                     <div class="site-nav-card-title">デッキビルダー</div>
-                    <div class="site-nav-card-desc">大会採用データを見ながらデッキを構築。禁止制限の自動チェックとTCG＋登録に対応。</div>
+                    <div class="site-nav-card-desc">大会採用データでデッキ構築。禁止制限チェックとTCG＋登録に対応。</div>
                 </a>
                 <a href="restrictions.html" class="site-nav-card">
                     <div class="site-nav-card-title">禁止・制限カード</div>
-                    <div class="site-nav-card-desc">最新の禁止・制限・禁止ペアを施行日つきで一覧。ビルダーの自動チェックと連動。</div>
+                    <div class="site-nav-card-desc">最新の禁止・制限・禁止ペアを施行日つきで一覧。</div>
                 </a>
                 <a href="schedule.html" class="site-nav-card">
                     <div class="site-nav-card-title">スケジュール</div>
@@ -202,8 +230,11 @@
 
         let dashEventsData = null;
         let dashCardColors = {};
-        let dashSummary = null;
         let dashPieChart = null;
+        // 指示書60 Task3: 初期表示は data/top_stats.json だけで描画し、events.json(14.0MB) は
+        // 日付フィルタが操作されたときに初めて読み込む。
+        let dashHeavyPromise = null;   // events.json + card_colors.json の遅延ロード（1回だけ走る）
+        let dashHeavyLoaded = false;
 
         var SET_COLORS = { ST01: 'Blue', ST02: 'Red', ST03: 'Green', ST04: 'White', ST05: 'Green', ST06: 'Red', ST07: 'Purple', ST08: 'Blue', ST09: 'White' };
         function getColor(id) { return dashCardColors[id] || SET_COLORS[id.split('-')[0]] || 'Unknown'; }
@@ -388,34 +419,136 @@
             }).catch(() => { });
         }
 
-        async function renderDashboard() {
-            var basePath = GCG.getBasePath();
-            var [summary, events, colors, seriesMap] = await Promise.all([
-                GCG.loadSummary(),
+        // 日付フィルタUIを組み立て、イベントを接続する（初期値は呼び出し側が渡す）
+        function setupDateFilter(startVal, endVal, onChange) {
+            const filterArea = document.getElementById('date-filter-area');
+            filterArea.innerHTML = GCG.renderDateFilterHTML(startVal, endVal);
+            document.getElementById('date-start').addEventListener('change', onChange);
+            document.getElementById('date-end').addEventListener('change', onChange);
+            document.getElementById('date-reset-btn').addEventListener('click', function () {
+                document.getElementById('date-start').value = '';
+                document.getElementById('date-end').value = '';
+                onChange();
+            });
+        }
+
+        // events.json + card_colors.json を遅延ロード（日付フィルタ操作時に1回だけ）
+        // 注意: GCG.loadEvents() は失敗しても reject せず空データ({series:{},events:{}})を返す。
+        //       そのまま成功扱いでメモ化すると、一度の通信失敗が「0件表示」のまま固定され、
+        //       リロードするまで復帰できなくなる。ここで空を検出したらメモ化を解除して再試行可能にする。
+        function ensureHeavyData() {
+            if (dashHeavyPromise) return dashHeavyPromise;
+            const basePath = GCG.getBasePath();
+            dashHeavyPromise = Promise.all([
                 GCG.loadEvents(),
-                fetch(basePath + 'data/card_colors.json').then(r => r.json()).catch(() => ({})),
-                fetch(basePath + 'data/series.json').then(r => r.ok ? r.json() : {}).catch(() => ({}))
-            ]);
-            dashSummary = summary;
-            dashEventsData = events;
-            dashCardColors = colors;
+                fetch(basePath + 'data/card_colors.json').then(r => r.json()).catch(() => ({}))
+            ]).then(function (arr) {
+                const ev = arr[0];
+                if (!ev || !ev.events || Object.keys(ev.events).length === 0) {
+                    dashHeavyPromise = null;   // 次の操作で再試行できるようにする
+                    throw new Error('events.json を読み込めませんでした');
+                }
+                dashEventsData = ev;
+                dashCardColors = arr[1];
+                dashHeavyLoaded = true;
+            }, function (e) {
+                dashHeavyPromise = null;
+                throw e;
+            });
+            return dashHeavyPromise;
+        }
+
+        function setFilterLoading(on) {
+            const area = document.getElementById('date-filter-area');
+            if (!area) return;
+            let el = document.getElementById('dash-filter-loading');
+            if (on) {
+                if (!el) {
+                    el = document.createElement('div');
+                    el.id = 'dash-filter-loading';
+                    el.className = 'dash-filter-loading';
+                    area.appendChild(el);
+                }
+                el.textContent = '集計データを読み込み中...';
+            } else if (el) {
+                el.parentNode.removeChild(el);
+            }
+        }
+
+        function setFilterError(message) {
+            const area = document.getElementById('date-filter-area');
+            if (!area) return;
+            let el = document.getElementById('dash-filter-loading');
+            if (!el) {
+                el = document.createElement('div');
+                el.id = 'dash-filter-loading';
+                el.className = 'dash-filter-loading';
+                area.appendChild(el);
+            }
+            el.textContent = message;
+        }
+
+        // 日付フィルタが操作されたとき: 初回だけ events.json を取得してから再集計する。
+        // ローディング表示は再集計・再描画が終わるまで出しておく（取得完了時点で消すと空振りに見えるため）。
+        async function onDateFilterChange() {
+            const needsLoad = !dashHeavyLoaded;
+            if (needsLoad) setFilterLoading(true);
+            try {
+                await ensureHeavyData();
+                await refreshDashboard();
+                setFilterLoading(false);
+            } catch (e) {
+                // 失敗を握りつぶすと「押しても何も起きない」状態になるため、明示的に表示する。
+                // ensureHeavyData 側でメモ化を解除済みなので、もう一度操作すれば再試行される。
+                console.error('日付フィルタの再集計に失敗:', e);
+                setFilterError('集計データを読み込めませんでした。もう一度操作すると再試行します。');
+            }
+        }
+
+        // 初期表示: data/top_stats.json だけで描画する（events.json は読み込まない）
+        async function renderDashboard() {
+            const basePath = GCG.getBasePath();
+            let top = null;
+            try {
+                const res = await fetch(basePath + 'data/top_stats.json');
+                if (res.ok) top = await res.json();
+            } catch (e) { /* 取得失敗は下のフォールバックで処理 */ }
+
+            const t = top && top.totals;
+            const schemaOk = !!top && !!top.default_range && !!t
+                && typeof t.events === 'number' && typeof t.decks === 'number' && typeof t.types === 'number'
+                && Array.isArray(top.deck_type_ranking) && Array.isArray(top.card_ranking) && Array.isArray(top.recent_events);
+            if (!schemaOk) {
+                console.warn('top_stats.json を利用できないため、events.json から集計する従来経路にフォールバックします');
+                return renderDashboardLegacy();
+            }
+
+            setupDateFilter(top.default_range.start || '', top.default_range.end || '', onDateFilterChange);
+
+            GCG.animateNumber(document.getElementById('stat-events'), top.totals.events);
+            GCG.animateNumber(document.getElementById('stat-decks'), top.totals.decks);
+            GCG.animateNumber(document.getElementById('stat-types'), top.totals.types);
+
+            renderDeckTypes(top.deck_type_ranking);
+            renderCardTop10(top.card_ranking, top.card_ranking_denominator != null ? top.card_ranking_denominator : top.totals.decks);
+            renderRecentEvents(top.recent_events);
+        }
+
+        // フォールバック経路: top_stats.json が取得できない場合の従来どおりの初期描画
+        async function renderDashboardLegacy() {
+            var basePath = GCG.getBasePath();
+            var seriesMap = await fetch(basePath + 'data/series.json').then(r => r.ok ? r.json() : {}).catch(() => ({}));
+            await ensureHeavyData();
+            var events = dashEventsData;
 
             // シリーズ連動のデフォルト期間: デフォルトシリーズ（active > upcoming > 最新completed）の start_date/end_date を採用。
             // シリーズが取得できない場合のみ半月単位フォールバック。
             var defaultSeries = GCG.pickDefaultSeriesWithData ? GCG.pickDefaultSeriesWithData(seriesMap, events) : (GCG.pickDefaultSeries ? GCG.pickDefaultSeries(seriesMap) : null);
             var defaultRange = defaultSeries ? GCG.getSeriesDateRange(defaultSeries) : GCG.getDefaultDateRange();
             if (!defaultRange.start && !defaultRange.end) defaultRange = GCG.getDefaultDateRange();
-            const filterArea = document.getElementById('date-filter-area');
-            filterArea.innerHTML = GCG.renderDateFilterHTML(defaultRange.start, defaultRange.end);
-            document.getElementById('date-start').addEventListener('change', refreshDashboard);
-            document.getElementById('date-end').addEventListener('change', refreshDashboard);
-            document.getElementById('date-reset-btn').addEventListener('click', function () {
-                document.getElementById('date-start').value = '';
-                document.getElementById('date-end').value = '';
-                refreshDashboard();
-            });
+            setupDateFilter(defaultRange.start, defaultRange.end, onDateFilterChange);
 
-            refreshDashboard();
+            await refreshDashboard();
         }
 
         async function refreshDashboard() {
@@ -501,12 +634,31 @@
             })).sort((a, b) => b.usage_rate - a.usage_rate || b.decks - a.decks);
             renderCardTop10(cardRanking, totalResults);
 
-            const events = allEvents.sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, 10);
+            // 64名NTC大会のみ「ベスト8(各順位2名)」表記に変換(指示書 NTC順位集計統合, 軽量モード)
+            // 描画は renderRecentEvents に集約（top_stats.json 経路と同じ関数を通すことで表示差が出ないようにする）
+            const events = allEvents
+                .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+                .slice(0, 10)
+                .map(evRaw => {
+                    const ev = GCG.consolidateNtcRank(evRaw);
+                    return {
+                        event_id: ev.event_id,
+                        date: ev.date,
+                        store: ev.store,
+                        top4_colors: (ev.top4_colors || []).map(t => ({ rank: t.rank, colors: t.colors }))
+                    };
+                });
+            renderRecentEvents(events);
+        }
+
+        // 「最新の大会結果」10件を描画する。
+        // items = [{ event_id, date, store, top4_colors: [{rank, colors}] }]
+        // top_stats.json 経路と events.json 再集計経路の両方から同じ関数を使う。
+        function renderRecentEvents(items) {
+            const events = items || [];
             const eventsContainer = document.getElementById('recent-events');
-            eventsContainer.innerHTML = events.map(evRaw => {
-                // 64名NTC大会のみ「ベスト8(各順位2名)」表記に変換(指示書 NTC順位集計統合, 軽量モード)
-                const ev = GCG.consolidateNtcRank(evRaw);
-                const top4 = (ev.top4_colors || []).sort((a, b) => a.rank - b.rank);
+            eventsContainer.innerHTML = events.map(ev => {
+                const top4 = (ev.top4_colors || []).slice().sort((a, b) => a.rank - b.rank);
                 const top4Html = top4.map((t, i) => {
                     const rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
                     const sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';

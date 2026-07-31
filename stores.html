@@ -146,6 +146,27 @@
     .fav-star.is-on { color: var(--accent); }
     .fav-star:hover { transform: scale(1.15); }
     .fav-star[disabled] { cursor: not-allowed; opacity: 0.4; transform: none; }
+
+    /* ホーム店舗検索からの着地ハイライト（指示書60 Task1）
+       CSS は本ページ内で完結させる（css/style.css は全ページ共有のため変更しない） */
+    .store-row-highlight {
+      border-radius: 6px;
+      animation: storeRowFlash 2.2s ease-out 1;
+    }
+    /* 100% は行の通常背景(--bg-card)に戻す。transparent にするとクラス除去時に一瞬ちらつく */
+    @keyframes storeRowFlash {
+      0%   { background: rgba(212,160,41,0.38); box-shadow: 0 0 0 2px var(--accent); }
+      60%  { background: rgba(212,160,41,0.20); box-shadow: 0 0 0 2px rgba(212,160,41,0.55); }
+      100% { background: var(--bg-card);        box-shadow: 0 0 0 2px transparent; }
+    }
+    /* 動きを減らす設定の環境ではアニメーションを止め、静的な強調のみ残す */
+    @media (prefers-reduced-motion: reduce) {
+      .store-row-highlight {
+        animation: none;
+        background: rgba(212,160,41,0.20);
+        box-shadow: 0 0 0 2px var(--accent);
+      }
+    }
   </style>
 </head>
 <body>
@@ -503,7 +524,11 @@
           var d = s._dist < 1 ? Math.round(s._dist * 1000) + 'm' : s._dist.toFixed(1) + 'km';
           distBadge = ' <span style="color:var(--accent);font-family:var(--font-mono);font-size:12px">約' + d + '</span>';
         }
-        return '<div class="store-row" style="display:flex;flex-direction:row;align-items:center;gap:8px">'
+        // 指示書60 Task1: ホーム店舗検索の候補リンク(stores.html#store-<id>)の受けアンカー。
+        // 描画パスは複数(都道府県2段/フラット/現在地検索)あるが、id 付与をこの1箇所に入れることで全経路をカバーする。
+        // 実測では店舗idは全1,159件が数値だが、属性値として安全に埋めるため引用符も含めてエスケープする
+        var rowId = 'store-' + String(s.id).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+        return '<div class="store-row" id="' + rowId + '" style="display:flex;flex-direction:row;align-items:center;gap:8px">'
           + '<a href="' + href + '" style="flex:1;min-width:0;text-decoration:none;color:inherit">'
           + '<div class="store-row-name">' + GCG.escapeHtml(s.name) + (s.isExpert ? ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>' : '') + distBadge + '</div>'
           + '<div class="store-row-sub">' + GCG.escapeHtml(s.pref) + (s.city ? ' ' + GCG.escapeHtml(s.city) : '') + '</div>'
@@ -712,8 +737,57 @@
       document.getElementById('sort-by').addEventListener('change', applyFilters);
       document.getElementById('expert-only').addEventListener('change', applyFilters);
 
+      // === ホーム店舗検索からの着地（指示書60 Task1） ===
+      // index.html の候補リンクは stores.html#store-<encodeURIComponent(id)>。
+      // 店舗一覧は非同期ロードのため DOMContentLoaded では早すぎる。描画完了後の本箇所で判定する。
+      function focusStoreFromHash() {
+        var hash = window.location.hash || '';
+        var PREFIX = '#store-';
+        if (hash.slice(0, PREFIX.length) !== PREFIX) return;
+
+        var rawId;
+        try {
+          rawId = decodeURIComponent(hash.slice(PREFIX.length));
+        } catch (e) {
+          // 不正なパーセントエンコード（例: "#store-%"）は URIError を投げる。
+          // ここで確実に握りつぶし、後続の初期化・イベント処理を巻き添えにしない。
+          return;
+        }
+        if (!rawId) return;
+
+        var el = document.getElementById('store-' + rawId);
+        // 同ページには store-count / store-map / store-search という既存idがある。
+        // 万一 id が衝突しても地図コンテナ等へ飛ばないよう、店舗行であることを確認する。
+        if (!el || !el.classList || !el.classList.contains('store-row')) return; // 不在id・非表示は無害に no-op
+
+        // 祖先の <details>（地域ブロック・都道府県ブロック）をすべて開く
+        var p = el.parentElement;
+        while (p) {
+          if (p.tagName === 'DETAILS') p.open = true;
+          p = p.parentElement;
+        }
+
+        // アクセシビリティ: 動きを減らす設定を尊重し、フォーカスも対象行へ移す
+        var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        try {
+          el.scrollIntoView({ block: 'center', behavior: reduceMotion ? 'auto' : 'smooth' });
+        } catch (e) {
+          el.scrollIntoView();
+        }
+        el.setAttribute('tabindex', '-1');
+        try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (e2) {} }
+
+        // 一時ハイライト（約2秒でフェード）。連続クリックでも再始動するよう一度クラスを外す
+        el.classList.remove('store-row-highlight');
+        void el.offsetWidth;
+        el.classList.add('store-row-highlight');
+        window.setTimeout(function () { el.classList.remove('store-row-highlight'); }, 2200);
+      }
+
       applyFilters();
       root.setAttribute('data-state', 'ready');
+      focusStoreFromHash();
+      window.addEventListener('hashchange', focusStoreFromHash);
     })();
   </script>
 </body>

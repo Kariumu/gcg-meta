@@ -43,6 +43,8 @@ function listLocalTargets() {
   add('data/events.json', path.join(ROOT, 'data', 'events.json'));
   add('data/summary.json', path.join(ROOT, 'data', 'summary.json'));
   add('data/missing_data.json', path.join(ROOT, 'data', 'missing_data.json'));
+  // 指示書60 Task3: トップページ初期表示用の事前集計。generate-events.js が出力する。
+  add('data/top_stats.json', path.join(ROOT, 'data', 'top_stats.json'));
   if (process.env.INCLUDE_SERIES_JSON === '1') {
     add('data/series.json', path.join(ROOT, 'data', 'series.json'));
   }
@@ -83,7 +85,10 @@ function listLocalTargets() {
   }
 
   // ルート静的ページ + sitemap（cards.html は対象外）
-  for (const n of ['index.html', 'events.html', 'meta.html', 'sitemap.xml']) {
+  // stores.html を追加（指示書60・松岡さん裁定 2026-08-01）:
+  // 従来は候補に無く、手で push しない限り本番へ出ない状態だった。
+  // SHA差分方式なので、変更が無ければ push されない（no-op 保証は維持）。
+  for (const n of ['index.html', 'events.html', 'meta.html', 'stores.html', 'sitemap.xml']) {
     add(n, path.join(ROOT, n));
   }
 

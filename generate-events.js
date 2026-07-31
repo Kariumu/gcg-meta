@@ -15,6 +15,7 @@ const { pushFiles } = require('./git-push');
 // NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
 const {
   consolidateNtcRank,
+  isTargetEvent,
   makeIsNtcTypeFromSeriesMap
 } = require('./shared/ntc-rank-consolidator');
 
@@ -375,6 +376,292 @@ clientJs +
 '</html>';
 }
 
+// ===================================================================
+// 指示書60 Task3: data/top_stats.json 出力
+//
+// 目的: トップページ(index.html)の初期表示から events.json(14.0MB) を外す。
+//       初期表示に必要な集計結果だけを事前計算して静的JSONに落とす。
+//
+// 重要な前提:
+//  - 出力は決定性が必須（同一 events.json に対して2回生成するとバイト一致すること）。
+//    そのため実行時刻（new Date() / Date.now()）は一切含めない・使わない。
+//  - 集計ロジックは index.html の refreshDashboard() と1対1で対応させている。
+//    どちらかを直したら必ず両方直し、パリティ照合をやり直すこと。
+//  - card_colors.json / series.json を手で更新した場合は、本スクリプトを手動で
+//    再実行して top_stats.json を追随させること（CLAUDE.md 参照）。
+// ===================================================================
+
+// index.html のインライン定義 SET_COLORS と同一内容（index.html 側を変えたらここも変える）
+const SET_COLORS = { ST01: 'Blue', ST02: 'Red', ST03: 'Green', ST04: 'White', ST05: 'Green', ST06: 'Red', ST07: 'Purple', ST08: 'Blue', ST09: 'White' };
+// js/common.js の GCG.DECK_COLORS の jp 部分と同一
+const DECK_COLORS_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫', Unknown: '不明' };
+// index.html refreshDashboard() の色ソート順と同一
+const COLOR_SORT_ORDER = ['Blue', 'Red', 'Green', 'White', 'Purple'];
+
+// js/common.js の GCG.pickDefaultSeries と同一ロジック
+function pickDefaultSeries(seriesInput) {
+  let list;
+  if (Array.isArray(seriesInput)) list = seriesInput.slice();
+  else if (seriesInput && typeof seriesInput === 'object') list = Object.values(seriesInput);
+  else return null;
+  list = list.filter((s) => s && s.id);
+  if (list.length === 0) return null;
+  const actives = list.filter((s) => s.status === 'active')
+    .sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
+  if (actives.length > 0) return actives[0];
+  const upcoming = list.filter((s) => s.status === 'upcoming')
+    .sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
+  if (upcoming.length > 0) return upcoming[0];
+  const completed = list.filter((s) => s.status === 'completed')
+    .sort((a, b) => (b.start_date || '').localeCompare(a.start_date || ''));
+  if (completed.length > 0) return completed[0];
+  return list[0];
+}
+
+// js/common.js の GCG.pickDefaultSeriesWithData と同一ロジック
+function pickDefaultSeriesWithData(seriesInput, eventsObj) {
+  let list;
+  if (Array.isArray(seriesInput)) list = seriesInput.slice();
+  else if (seriesInput && typeof seriesInput === 'object') list = Object.values(seriesInput);
+  else return null;
+  list = list.filter((s) => s && s.id);
+  if (list.length === 0) return null;
+
+  const byStartAsc = (a, b) => (a.start_date || '').localeCompare(b.start_date || '');
+  const byStartDesc = (a, b) => (b.start_date || '').localeCompare(a.start_date || '');
+  const candidates = []
+    .concat(list.filter((s) => s.status === 'active').sort(byStartAsc))
+    .concat(list.filter((s) => s.status === 'upcoming').sort(byStartAsc))
+    .concat(list.filter((s) => s.status === 'completed').sort(byStartDesc));
+
+  const evMap = (eventsObj && eventsObj.events && typeof eventsObj.events === 'object')
+    ? eventsObj.events
+    : (eventsObj && typeof eventsObj === 'object' ? eventsObj : {});
+
+  for (let i = 0; i < candidates.length; i++) {
+    const s = candidates[i];
+    const start = s.start_date || '';
+    const end = s.end_date || '';
+    let hasData = false;
+    for (const key in evMap) {
+      if (!Object.prototype.hasOwnProperty.call(evMap, key)) continue;
+      const ev = evMap[key];
+      if (!ev || !ev.date) continue;
+      if (start && ev.date < start) continue;
+      if (end && ev.date > end) continue;
+      hasData = true;
+      break;
+    }
+    if (hasData) return s;
+  }
+  return pickDefaultSeries(seriesInput);
+}
+
+// js/common.js の GCG.getDefaultDateRange（半月単位）と同一ルール。
+// ただし基準日は「実行日(new Date())」ではなく events.json の最新イベント日付を使う。
+// 実行時刻を混ぜると生成の決定性（2回生成でバイト一致）が壊れるため。
+function halfMonthRangeFromDate(baseDateStr) {
+  const parts = String(baseDateStr || '').split('-');
+  if (parts.length !== 3) return { start: '', end: '' };
+  const y = parseInt(parts[0], 10);
+  const m = parseInt(parts[1], 10) - 1; // 0-indexed
+  const d = parseInt(parts[2], 10);
+  if (isNaN(y) || isNaN(m) || isNaN(d)) return { start: '', end: '' };
+
+  let startDate, endDate;
+  if (d <= 7) {
+    const prevMonth = m === 0 ? 11 : m - 1;
+    const prevYear = m === 0 ? y - 1 : y;
+    startDate = new Date(prevYear, prevMonth, 16);
+    endDate = new Date(prevYear, prevMonth + 1, 0);
+  } else if (d <= 15) {
+    startDate = new Date(y, m, 1);
+    endDate = new Date(y, m, 15);
+  } else if (d <= 22) {
+    startDate = new Date(y, m, 1);
+    endDate = new Date(y, m, 15);
+  } else {
+    startDate = new Date(y, m, 16);
+    endDate = new Date(y, m + 1, 0);
+  }
+  const fmt = (dt) => dt.getFullYear() + '-'
+    + String(dt.getMonth() + 1).padStart(2, '0') + '-'
+    + String(dt.getDate()).padStart(2, '0');
+  return { start: fmt(startDate), end: fmt(endDate) };
+}
+
+// js/common.js の GCG.filterEventsObjByDate と同一ロジック
+function filterEventsObjByDate(eventsObj, startDate, endDate) {
+  if (!startDate && !endDate) return eventsObj;
+  const filtered = {};
+  for (const [key, ev] of Object.entries(eventsObj)) {
+    if (!ev.date) continue;
+    if (startDate && ev.date < startDate) continue;
+    if (endDate && ev.date > endDate) continue;
+    filtered[key] = ev;
+  }
+  return filtered;
+}
+
+function buildTopStats(eventsData, cardColors, seriesMap) {
+  const eventsObj = eventsData.events || {};
+
+  // --- 既定レンジ（index.html renderDashboard() と同一の決め方） ---
+  const defaultSeries = pickDefaultSeriesWithData(seriesMap, eventsObj);
+  let range = defaultSeries
+    ? { start: defaultSeries.start_date || '', end: defaultSeries.end_date || '' }
+    : { start: '', end: '' };
+  let rangeFallbackUsed = false;
+  // events.json の最新イベント日付（フォールバック基準・source メタ用）
+  let latestEventDate = '';
+  for (const key in eventsObj) {
+    if (!Object.prototype.hasOwnProperty.call(eventsObj, key)) continue;
+    const ev = eventsObj[key];
+    if (ev && ev.date && ev.date > latestEventDate) latestEventDate = ev.date;
+  }
+  if (!range.start && !range.end) {
+    range = halfMonthRangeFromDate(latestEventDate);
+    rangeFallbackUsed = true;
+  }
+
+  // --- 集計（index.html refreshDashboard() と1対1対応） ---
+  const getColor = (id) => cardColors[id] || SET_COLORS[String(id).split('-')[0]] || 'Unknown';
+  const isNtcTypeFn = makeIsNtcTypeFromSeriesMap(seriesMap);
+
+  const filteredEventsObj = filterEventsObjByDate(eventsObj, range.start, range.end);
+  const allEvents = Object.values(filteredEventsObj);
+
+  let totalResults = 0;
+  const allTypeKeys = {};
+  const deckTypeMap = {};
+  const cardUsageMap = {};
+
+  for (let i = 0; i < allEvents.length; i++) {
+    const evRaw_i = allEvents[i];
+    const ev_i = consolidateNtcRank(evRaw_i, { isNtcType: isNtcTypeFn });
+    const isNtc64 = isTargetEvent(evRaw_i, { isNtcType: isNtcTypeFn });
+    const rankThreshold = isNtc64 ? 8 : 4;
+    const results = ev_i.results || [];
+    for (let j = 0; j < results.length; j++) {
+      const r = results[j];
+      if (r.rank > rankThreshold) continue;
+      const deck = r.deck;
+      if (!deck || deck.length === 0) continue;
+      totalResults++;
+      const cc = {};
+      for (let k = 0; k < deck.length; k++) {
+        const col = getColor(deck[k].card_id);
+        if (col !== 'Unknown' && col !== 'Colorless') cc[col] = (cc[col] || 0) + deck[k].count;
+        if (!cardUsageMap[deck[k].card_id]) cardUsageMap[deck[k].card_id] = { card_id: deck[k].card_id, decks: 0 };
+        cardUsageMap[deck[k].card_id].decks++;
+      }
+      const sorted = Object.entries(cc).sort((a, b) => b[1] - a[1]);
+      const colors = sorted.length >= 2
+        ? [sorted[0][0], sorted[1][0]].sort((a, b) => COLOR_SORT_ORDER.indexOf(a) - COLOR_SORT_ORDER.indexOf(b))
+        : sorted.length === 1 ? [sorted[0][0]] : ['Unknown'];
+      const typeKey = colors.join('+');
+      allTypeKeys[typeKey] = 1;
+
+      if (!deckTypeMap[typeKey]) {
+        deckTypeMap[typeKey] = {
+          type_key: typeKey,
+          colors: colors,
+          label: colors.map((c) => DECK_COLORS_JP[c] || DECK_COLORS_JP.Unknown).join('/'),
+          count: 0, wins: 0, totalRank: 0
+        };
+      }
+      deckTypeMap[typeKey].count++;
+      if (r.rank === 1) deckTypeMap[typeKey].wins++;
+      deckTypeMap[typeKey].totalRank += r.rank;
+    }
+  }
+
+  // デッキタイプランキング（全件。トップは上位3件ではなく全件表示のため）
+  const deckTypeRanking = Object.values(deckTypeMap).map((t) => {
+    const share = totalResults > 0 ? Math.round(t.count / totalResults * 1000) / 10 : 0;
+    const winRate = t.count > 0 ? Math.round(t.wins / t.count * 1000) / 10 : 0;
+    const avgRank = t.count > 0 ? Math.round(t.totalRank / t.count * 10) / 10 : 0;
+    return {
+      type_key: t.type_key, colors: t.colors, label: t.label,
+      count: t.count, share: share, win_rate: winRate, avg_rank: avgRank, wins: t.wins
+    };
+  }).sort((a, b) => b.count - a.count);
+
+  // カード使用率（表示はTOP10。分母は totals.decks と同値）
+  const cardRanking = Object.values(cardUsageMap).map((c) => ({
+    card_id: c.card_id,
+    decks: c.decks,
+    usage_rate: totalResults > 0 ? Math.round(c.decks / totalResults * 1000) / 10 : 0
+  })).sort((a, b) => b.usage_rate - a.usage_rate || b.decks - a.decks);
+
+  // 最新の大会結果（10件）
+  const recentEvents = allEvents
+    .sort((a, b) => (b.date || '').localeCompare(a.date || ''))
+    .slice(0, 10)
+    .map((evRaw) => {
+      const ev = consolidateNtcRank(evRaw, { isNtcType: isNtcTypeFn });
+      return {
+        event_id: ev.event_id,
+        date: ev.date,
+        store: ev.store,
+        top4_colors: (ev.top4_colors || []).map((t) => ({ rank: t.rank, colors: t.colors }))
+      };
+    });
+
+  return {
+    stats: {
+      default_range: {
+        start: range.start,
+        end: range.end,
+        series_slug: (defaultSeries && defaultSeries.slug) ? defaultSeries.slug : ''
+      },
+      totals: {
+        events: allEvents.length,
+        decks: totalResults,
+        types: Object.keys(allTypeKeys).length
+      },
+      deck_type_ranking: deckTypeRanking,
+      card_ranking: cardRanking.slice(0, 10),
+      card_ranking_denominator: totalResults,
+      recent_events: recentEvents,
+      source: {
+        latest_event_date: latestEventDate,
+        event_count: Object.keys(eventsObj).length
+      }
+    },
+    rangeFallbackUsed: rangeFallbackUsed
+  };
+}
+
+function generateTopStats(eventsData) {
+  // card_colors.json と series.json は集計の必須入力。
+  // 読めないまま空オブジェクトで続行すると「デッキタイプ分布が壊れた top_stats.json」を
+  // 黙って生成し、そのまま deploy-results.js が本番へ配信してしまう。
+  // 欠損時は生成をスキップして既存ファイルを温存し、終了コードで気づけるようにする。
+  let cardColors, seriesMap;
+  try {
+    cardColors = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'card_colors.json'), 'utf-8'));
+    seriesMap = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'series.json'), 'utf-8'));
+  } catch (e) {
+    console.error('  *** 警告 *** top_stats.json の生成をスキップしました: ' + e.message);
+    console.error('      card_colors.json / series.json は集計の必須入力です。既存の data/top_stats.json はそのまま残します。');
+    process.exitCode = 1;
+    return null;
+  }
+  const built = buildTopStats(eventsData, cardColors, seriesMap);
+  const out = built.stats;
+  fs.writeFileSync(path.join(DATA_DIR, 'top_stats.json'), JSON.stringify(out, null, 2) + '\n', 'utf-8');
+  console.log('  → data/top_stats.json 生成完了'
+    + ' (range ' + (out.default_range.start || '(なし)') + '〜' + (out.default_range.end || '(なし)')
+    + ' / slug ' + (out.default_range.series_slug || '(なし)')
+    + ' / events ' + out.totals.events + ' / decks ' + out.totals.decks + ' / types ' + out.totals.types
+    + ' / deck_types ' + out.deck_type_ranking.length + ' 件)');
+  if (built.rangeFallbackUsed) {
+    console.log('  ※ 既定レンジはシリーズ走査で決まらず、最新イベント日付からの半月フォールバックを使用しました');
+  }
+  return out;
+}
+
 function updateSitemap(eventIds) {
   const now = new Date().toISOString().split('T')[0];
 
@@ -489,6 +776,9 @@ function main() {
   updateSitemap(eventIds);
   console.log('  → sitemap.xml 更新完了');
 
+  // トップページ初期表示用の事前集計（指示書60 Task3）
+  generateTopStats(eventsData);
+
   // --push オプション付きで実行した場合、GitHub API経由でpush
   if (process.argv.includes('--push')) {
     const filesToPush = [];
@@ -502,6 +792,12 @@ function main() {
       path: 'sitemap.xml',
       content: fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf-8')
     });
+    // 同一実行で再生成した top_stats.json も一緒に push する
+    // （events ページだけ更新して top_stats.json が本番に残ると表示が食い違うため）
+    const topStatsPath = path.join(DATA_DIR, 'top_stats.json');
+    if (fs.existsSync(topStatsPath)) {
+      filesToPush.push({ path: 'data/top_stats.json', content: fs.readFileSync(topStatsPath, 'utf-8') });
+    }
     return pushFiles(filesToPush, `Update event pages (${generated} pages)`);
   }
 }

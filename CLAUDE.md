@@ -196,6 +196,19 @@ node generate_restrictions.js   # restrictions.html を再生成(単体実行。
 - `git-push.js` が `BRANCH = 'main'` に GitHub REST API で push
 - ローカル `E:\GCGSTATS\.git\HEAD` は `refs/heads/main` を指す(2026-07-30 現物確認。旧記述の `refs/heads/master` は誤りだったため修正)。push 先も `main` で一致
 
+## トップページ高速化と data/top_stats.json(2026-07-31 追加・指示書60)
+
+トップページ(`index.html`)の初期表示は `data/top_stats.json` だけで描画する。`data/events.json`(14.0MB)は
+日付フィルタが操作されたときに初めて読み込む(初期転送量 15.9MB → 2.2MB を実測)。
+
+- `data/top_stats.json` は `generate-events.js` が出力する(夜間チェーンで自動追随。bat は無変更)
+- `data/card_colors.json` / `data/series.json` を手動更新したら `node generate-events.js` を手動再実行して top_stats.json を追随させる(集計値がこの2ファイルに依存するため)
+- 集計ロジックは `index.html` の `refreshDashboard()` と1対1対応。片方だけ直すと表示が食い違うので必ず両方直し、パリティ照合をやり直すこと
+- 出力は決定性が必須(同一 events.json で2回生成するとバイト一致)。実行時刻(`new Date()`/`Date.now()`)を混ぜないこと
+- `top_stats.json` が取得できない場合は `events.json` から集計する従来経路へ自動フォールバックする(表示は退行しない)
+- **警告**: `scraper.js --deploy` / `AUTO_DEPLOY=1` の経路は `generate-events.js` を呼ばず `top_stats.json` を更新も push もしない。この経路を使うときは `node generate-events.js` の併走が必須(怠ると events.json だけ新しくなり、トップの初期表示が**エラーも出さずに旧集計値を表示し続ける**。ファイルは200で取得できるためフォールバックも効かない)。scraper.js 本体の改修はバックログ
+- `index.html` の `<noscript>` / `.seo-content` は `generate.js` が夜間に書き換える生成ブロック。`</main>` 直前という位置が置換アンカーになっているため、移動・削除しないこと
+
 ## 関連ドキュメント
 
 - `gcg-meta-cowork-handoff.md`: プロジェクト全体の引き継ぎ文書(歴史・経緯)
