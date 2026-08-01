@@ -3672,5 +3672,117 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-07-24": {
+    "recognized_at": "2026-08-01 09:25:13 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2080618433184706870",
+      "https://x.com/GUNDAM_GCG_JP/status/2080618285960425776",
+      "https://x.com/GUNDAM_GCG_JP/status/2080617627194724781",
+      "https://x.com/GUNDAM_GCG_JP/status/2080617267843543199",
+      "https://x.com/GUNDAM_GCG_JP/status/2080617064809849226"
+    ],
+    "cards": [
+      {
+        "card_number": "ST13-011",
+        "card_name": "ハマーン・カーン",
+        "color": "Green",
+        "card_type": "PILOT",
+        "level": 6,
+        "cost": 1,
+        "ap": 2,
+        "hp": 2,
+        "traits": [
+          "〔ネオ・ジオン〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】自分のデッキを上から5枚見て、その中の、このユニットのLv.以下のパイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 99,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST13-001",
+        "card_name": "キュベレイ",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 5,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "「ハマーン・カーン」",
+        "effect": "ターン1回 自分のターン中、自分のユニットにパイロットをセットしたとき、「ビット/ファンネル」((遠隔兵器) AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1～2つを配備する。【起動・メイン】ターン1回:自分のユニットトークン1つと相手のユニット1つを選ぶ。それらでバトルに移行し、ダメージステップのみを行う。",
+        "effect_confidence": "low",
+        "effect_length": 178,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-002",
+        "card_name": "アッガイ",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 1,
+        "traits": [
+          "〔ジオン〕",
+          "〔水中〕"
+        ],
+        "link": "特徴にジオンを持つPILOT",
+        "effect": "相手のターン中、このユニットがレストの間、HP2以下の〔水中〕の味方のユニットすべては、相手から効果ダメージを受けない。",
+        "effect_confidence": "medium",
+        "effect_length": 60,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-011",
+        "card_name": "シャア・アズナブル",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔ジオン〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】このターン中、〔水中〕の味方のユニットすべてをAP+1する。",
+        "effect_confidence": "medium",
+        "effect_length": 55,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-001",
+        "card_name": "シャア専用ズゴック",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジオン〕",
+          "〔水中〕"
+        ],
+        "link": "「シャア・アズナブル」",
+        "effect": "【セット中】このユニット以外の〔水中〕の味方のユニットが2つ以上いる間、相手のユニットは、これをアタック先に選べない。【配備時】このユニット以外の〔水中〕の味方のユニットがいるなら、Lv.2以下の相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
+        "effect_confidence": "low",
+        "effect_length": 127,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
