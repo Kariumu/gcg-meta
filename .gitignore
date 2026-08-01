@@ -20,3 +20,7 @@ data/color-classification-log.jsonl
 # 問題台帳・レポートは公開リポジトリに含めない。scan.js / rules/*.yaml はコミット対象
 tools/integrity/state/
 tools/integrity/reports/
+
+# X毎日投稿の実行状態(2026-08-01 追加、指示書61)
+# .sched-run-tmp/ はローカル専用の実行状態置き場。リポジトリには含めない
+.sched-run-tmp/

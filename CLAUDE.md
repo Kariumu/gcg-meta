@@ -209,6 +209,52 @@ node generate_restrictions.js   # restrictions.html を再生成(単体実行。
 - **警告**: `scraper.js --deploy` / `AUTO_DEPLOY=1` の経路は `generate-events.js` を呼ばず `top_stats.json` を更新も push もしない。この経路を使うときは `node generate-events.js` の併走が必須(怠ると events.json だけ新しくなり、トップの初期表示が**エラーも出さずに旧集計値を表示し続ける**。ファイルは200で取得できるためフォールバックも効かない)。scraper.js 本体の改修はバックログ
 - `index.html` の `<noscript>` / `.seo-content` は `generate.js` が夜間に書き換える生成ブロック。`</main>` 直前という位置が置換アンカーになっているため、移動・削除しないこと
 
+## X 毎日投稿の運用(2026-08-01 追加・指示書61)
+
+`post-x-daily.js` が夜間バッチから 1 工程だけ呼ばれ、X(@gcg_stats) へ自動投稿する。
+
+- **今日のカード**: 毎晩 1 件。既定レンジ(`data/top_stats.json` の `default_range`)の採用デッキ数上位 100 枚・採用 5 デッキ以上をプールとし、日付シードで決定論的に 1 枚選ぶ。直近 60 日に投稿したカードはスキップして次候補へ回る
+- **週次ムーバー**: 月曜のみ。前週(月〜日)と前々週(月〜日)の採用デッキ数の増分 TOP3〜5。前々週窓が 20 デッキ未満なら「前週の採用TOP」へ自動切替、両窓とも 20 未満ならムーバー自体をスキップする
+- `data/cards_preview.json` 収載のプレビューカードは常時プールから除外する(auto-news の新カード投稿との重複回避)
+
+### 実行前の確認は必ず --dry-run
+
+```bash
+node post-x-daily.js --dry-run                  # 選定・文面・加重文字数・添付予定を表示するのみ
+node post-x-daily.js --dry-run --date 2026-08-03  # 日付を偽装(曜日判定・窓・状態キー・ガード・文面日付が一括で追随)
+node post-x-daily.js --dry-run --only mover
+```
+
+- `--dry-run` では **postTweet / メディアアップロード / 状態ファイル書き込みのいずれも実行しない**。状態ファイルの「読み」だけは行う(選定・ガードに必要)
+- 書き込みを行う関数はすべて先頭に `assertNotDryRun()` があり、dry-run 中に到達したら例外を投げる
+- `--dry-run=true` のような `=` 付きの書き方でも dry-run と判定される
+
+### run-auto-news-daily.bat を手動で叩かないこと
+
+bat を手で実行すると auto-news と post-x-daily の **X 投稿が発火する**。動作確認は上記の `--dry-run` で行い、実投稿は 20:00 のタスクスケジューラに任せる。
+bat を書き換える場合は **20:00±15 分を避ける**(実行中の書き換えは破壊的挙動を起こす)。追記行は全 ASCII・LF 厳守。
+
+### 状態ファイル .sched-run-tmp/x-daily-log.json
+
+- **ローカル専用。git に入れない・push しない・deploy 候補にも入れない**(`.gitignore` に `.sched-run-tmp/` を登録済み)
+- キーは `daily:<JST日付>` と `mover:<JST週の月曜日付>` に分離
+- **起動時に当日(当週)キーが存在すれば status を問わず無条件でスキップする**(at-most-once)。同夜 2 回走行やクラッシュ再走で二重投稿しないための最重要ガード。「今日投稿済みのカードが 60 日ガードに引っかかって 2 枚目を選ぶ」実装にしてはいけない
+- 投稿直前に `status:"attempting"` を原子的に記録(tmp 書き→rename)し、成功後に `posted` ＋ `tweet_id` へ更新する
+- JSON が壊れていた場合は**当夜の投稿を中止**し(fail-close)、破損ファイルを `.corrupt-<時刻>` へ退避して空ファイルを作り直す。60 日ぶんの再登場ガード履歴は失われるのでログに残る
+- 手で消すと再登場ガードがリセットされ、直近に投稿したカードが再び選ばれうる
+
+### 投稿失敗はバッチの終了コードに伝播しない
+
+`post-x-daily.js` は `process.exitCode` を常に 0 に固定する。bat 側も `XPOSTRC` に記録するだけで最終 exit には使わない(最終 exit は従来どおり `SYNCRC` / `FETCHRC` のみ)。X 投稿の失敗でタスクスケジューラが失敗表示になることはない。
+
+### 画像の扱い
+
+`images/cards/<id>.jpg` があればそれを、無ければ `<id>.webp` を **sharp で jpeg に変換**して添付する(一時ファイルは `.sched-run-tmp/x-media/`、投稿後に削除)。X は webp も受け付けるが、実績のある jpg で送るための措置。sharp は既存依存で追加インストールは不要。アップロードに失敗した場合は画像なしで投稿し、ログに残す。
+
+### 既定レンジは top_stats.json 依存
+
+`scraper.js --deploy` / `AUTO_DEPLOY=1` の経路で `top_stats.json` が古いまま取り残されると、post-x-daily も**エラーを出さずに旧期間で集計し続ける**。当該経路を使ったら `node generate-events.js` を必ず併走させること(トップページ側と同じ注意)。
+
 ## 関連ドキュメント
 
 - `gcg-meta-cowork-handoff.md`: プロジェクト全体の引き継ぎ文書(歴史・経緯)

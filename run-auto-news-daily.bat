@@ -80,6 +80,20 @@ goto ntc_done
 :ntc_skip
 echo [%date% %time%] ntc-results: no new events - skip regen/deploy >> auto-news-schtasks.log
 :ntc_done
+REM ============================================================
+REM --- X daily post (added 2026-08-01, shijisho-61) ---
+REM     Posts one "card of the day" every night, plus the weekly mover on
+REM     Mondays (the weekday check lives inside post-x-daily.js).
+REM     Placed right after :ntc_done so it runs on both the :ntc_skip and the
+REM     regen/deploy path. Post failures are logged only and are NOT allowed to
+REM     change this batch exit code (XPOSTRC is recorded but never returned).
+REM     Dry run (safe, posts nothing): node post-x-daily.js --dry-run
+REM ============================================================
+echo [%date% %time%] post-x-daily START >> auto-news-schtasks.log
+node post-x-daily.js >> auto-news-schtasks.log 2>&1
+set XPOSTRC=%ERRORLEVEL%
+echo [%date% %time%] post-x-daily END: exit code %XPOSTRC% >> auto-news-schtasks.log
+echo ============================================================ >> auto-news-schtasks.log
 REM --- Final exit code ---
 REM     When cardlist-sync reports a problem, surface it as a task failure so it is
 REM     visible in Task Scheduler history without reading the log every day.
