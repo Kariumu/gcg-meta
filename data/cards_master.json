@@ -38911,5 +38911,508 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]",
     "link": []
+  },
+  "GD01-088_p5": {
+    "id": "GD01-088_p5",
+    "name_jp": "バナージ・リンクス",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "民間",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードを手札に加える。【リンク時】自分は1枚ドローする。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 5,
+    "base_card_id": "GD01-088",
+    "acquisition_info": "ニュータイプチャレンジ 2026 MISSION 4 上位入賞記念品",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【リンク時】自分は1枚ドローする。"
+  },
+  "GD01-098_p1": {
+    "id": "GD01-098_p1",
+    "name_jp": "エラン・ケレス（強化人士4号）",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードを手札に加える。【起動・アクション】【ターン1回】AP1以下の相手のユニットがいるなら、このユニットを1回復する。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD01-098",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【起動・アクション】【ターン1回】AP1以下の相手のユニットがいるなら、このユニットを1回復する。"
+  },
+  "GD01-098_p2": {
+    "id": "GD01-098_p2",
+    "name_jp": "エラン・ケレス（強化人士4号）",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードを手札に加える。【起動・アクション】【ターン1回】AP1以下の相手のユニットがいるなら、このユニットを1回復する。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD01-098",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【起動・アクション】【ターン1回】AP1以下の相手のユニットがいるなら、このユニットを1回復する。"
+  },
+  "GD02-079_p1": {
+    "id": "GD02-079_p1",
+    "name_jp": "リック・ディアス",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "エゥーゴ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士Zガンダム",
+    "terrain": "宇宙 地球",
+    "link": [],
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD02-079",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)"
+  },
+  "GD02-079_p2": {
+    "id": "GD02-079_p2",
+    "name_jp": "リック・ディアス",
+    "rarity": "C+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "エゥーゴ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士Zガンダム",
+    "terrain": "宇宙 地球",
+    "link": [],
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD02-079",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)"
+  },
+  "GD02-095_p1": {
+    "id": "GD02-095_p1",
+    "name_jp": "ラフタ・フランクランド",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "テイワズ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードを手札に加える。【アタック時】このユニットがダメージを受けていてLv.5以下なら、このバトル中、これは《高機動》を得る。(このユニットはブロックされない)",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD02-095",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このユニットがダメージを受けていてLv.5以下なら、このバトル中、これは《高機動》を得る。 (このユニットはブロックされない)"
+  },
+  "GD02-095_p2": {
+    "id": "GD02-095_p2",
+    "name_jp": "ラフタ・フランクランド",
+    "rarity": "U+",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "テイワズ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードを手札に加える。【アタック時】このユニットがダメージを受けていてLv.5以下なら、このバトル中、これは《高機動》を得る。(このユニットはブロックされない)",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD02-095",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このユニットがダメージを受けていてLv.5以下なら、このバトル中、これは《高機動》を得る。 (このユニットはブロックされない)"
+  },
+  "GD03-005_p1": {
+    "id": "GD03-005_p1",
+    "name_jp": "クシャトリヤ・ベッセルング",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "terrain": "宇宙 地球",
+    "link": [
+      "マリーダ・クルス"
+    ],
+    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)【配備時】自分は1枚ドローする。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD03-005",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する) 【配備時】自分は1枚ドローする。"
+  },
+  "GD03-005_p2": {
+    "id": "GD03-005_p2",
+    "name_jp": "クシャトリヤ・ベッセルング",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "terrain": "宇宙 地球",
+    "link": [
+      "マリーダ・クルス"
+    ],
+    "effect": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する)【配備時】自分は1枚ドローする。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD03-005",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "《リペア1》(自分のターン終了時、このユニットを指定の数回復する) 【配備時】自分は1枚ドローする。"
+  },
+  "GD03-024_p1": {
+    "id": "GD03-024_p1",
+    "name_jp": "ハイゴッグ",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "サイクロプス隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
+    "terrain": "地球",
+    "link": [
+      "特徴〔サイクロプス隊〕"
+    ],
+    "effect": "【リンク時】このユニット以外の、〔サイクロプス隊〕の自分のユニットがいるなら、「ハイゴッグ」(〔サイクロプス隊〕・AP2・HP1)のユニットトークン1つをレストで配備する。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD03-024",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "【リンク時】このユニット以外の、〔サイクロプス隊〕の自分のユニットがいるなら、「ハイゴッグ」(〔サイクロプス隊〕・AP2・HP1)のユニットトークン1つをレストで配備する。"
+  },
+  "GD03-024_p2": {
+    "id": "GD03-024_p2",
+    "name_jp": "ハイゴッグ",
+    "rarity": "U+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "サイクロプス隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
+    "terrain": "地球",
+    "link": [
+      "特徴〔サイクロプス隊〕"
+    ],
+    "effect": "【リンク時】このユニット以外の、〔サイクロプス隊〕の自分のユニットがいるなら、「ハイゴッグ」(〔サイクロプス隊〕・AP2・HP1)のユニットトークン1つをレストで配備する。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD03-024",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "【リンク時】このユニット以外の、〔サイクロプス隊〕の自分のユニットがいるなら、「ハイゴッグ」(〔サイクロプス隊〕・AP2・HP1)のユニットトークン1つをレストで配備する。"
+  },
+  "GD03-063_p1": {
+    "id": "GD03-063_p1",
+    "name_jp": "0ガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム00",
+    "terrain": "宇宙 地球",
+    "link": [],
+    "effect": "-",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD03-063",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "-"
+  },
+  "GD03-063_p2": {
+    "id": "GD03-063_p2",
+    "name_jp": "0ガンダム",
+    "rarity": "C+",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム00",
+    "terrain": "宇宙 地球",
+    "link": [],
+    "effect": "-",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD03-063",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "-"
+  },
+  "GD03-110_p1": {
+    "id": "GD03-110_p1",
+    "name_jp": "標的の排除",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 6,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動新世紀ガンダムX",
+    "terrain": "-",
+    "link": [],
+    "effect": "【メイン】/【アクション】Lv.5以下の相手のユニットにセットされているパイロット1つを選ぶ。それを破壊する。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD03-110",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "【メイン】/【アクション】Lv.5以下の相手のユニットにセットされているパイロット1つを選ぶ。それを破壊する。"
+  },
+  "GD03-110_p2": {
+    "id": "GD03-110_p2",
+    "name_jp": "標的の排除",
+    "rarity": "U+",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 6,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動新世紀ガンダムX",
+    "terrain": "-",
+    "link": [],
+    "effect": "【メイン】/【アクション】Lv.5以下の相手のユニットにセットされているパイロット1つを選ぶ。それを破壊する。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD03-110",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "【メイン】/【アクション】Lv.5以下の相手のユニットにセットされているパイロット1つを選ぶ。それを破壊する。"
+  },
+  "GD04-066_p2": {
+    "id": "GD04-066_p2",
+    "name_jp": "ユニコーンガンダム（覚醒）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "民間"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "terrain": "宇宙 地球",
+    "link": [
+      "バナージ・リンクス"
+    ],
+    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)自分がコマンドの【メイン】/【アクション】を発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD04-066",
+    "acquisition_info": "ニュータイプチャレンジ 2026 MISSION 4 優勝記念品",
+    "package_set": "PROMO",
+    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる) 自分がコマンドの【メイン】/【アクション】を発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。"
+  },
+  "GD04-101_p1": {
+    "id": "GD04-101_p1",
+    "name_jp": "優しい心根",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Vガンダム",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】このターン中、味方のユニットすべては相手の効果で破壊されない。その後、自分は1枚ドローする。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD04-101",
+    "acquisition_info": "ショップバトル2026 SEASON3　参加者パック",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードの【メイン】を発動する。 【メイン】/【アクション】このターン中、味方のユニットすべては相手の効果で破壊されない。その後、自分は1枚ドローする。"
+  },
+  "GD04-101_p2": {
+    "id": "GD04-101_p2",
+    "name_jp": "優しい心根",
+    "rarity": "R+",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Vガンダム",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】このターン中、味方のユニットすべては相手の効果で破壊されない。その後、自分は1枚ドローする。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD04-101",
+    "acquisition_info": "ショップバトル2026 SEASON3　優勝者パック",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードの【メイン】を発動する。 【メイン】/【アクション】このターン中、味方のユニットすべては相手の効果で破壊されない。その後、自分は1枚ドローする。"
+  },
+  "GD04-117_p2": {
+    "id": "GD04-117_p2",
+    "name_jp": "優雅な物腰",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "∀ガンダム",
+    "terrain": "-",
+    "link": [],
+    "effect": "【バースト】このカードの【アクション】を発動する。【アクション】Lv.3以下の相手のユニット1～2つを選ぶ。それらを持ち主の手札に戻す。",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD04-117",
+    "acquisition_info": "ニュータイプチャレンジ 2026 MISSION 4 参加記念品",
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードの【アクション】を発動する。 【アクション】Lv.3以下の相手のユニット1～2つを選ぶ。それらを持ち主の手札に戻す。"
   }
 }
