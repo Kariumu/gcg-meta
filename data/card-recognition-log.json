@@ -3802,5 +3802,33 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-02": {
+    "recognized_at": "2026-08-02 20:00:16 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2083825130548121927"
+    ],
+    "cards": [
+      {
+        "card_number": "ST13-010",
+        "card_name": "赤いガンダム（0079）",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 4,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔ジオン〕"
+        ],
+        "link": "特徴にニュータイプを持つPILOT",
+        "effect": "【起動・メイン】ターン1回 味方のユニットトークン1つを破壊する:このターン中、このユニットは《突破(3)》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+        "effect_confidence": "low",
+        "effect_length": 132,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
