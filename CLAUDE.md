@@ -255,6 +255,112 @@ bat を書き換える場合は **20:00±15 分を避ける**(実行中の書き
 
 `scraper.js --deploy` / `AUTO_DEPLOY=1` の経路で `top_stats.json` が古いまま取り残されると、post-x-daily も**エラーを出さずに旧期間で集計し続ける**。当該経路を使ったら `node generate-events.js` を必ず併走させること(トップページ側と同じ注意)。
 
+## NTC公式集計の取込(2026-08-03 追加・指示書63 Step 1-N)
+
+公式デッキログ(BANDAI TCG+ の `d.bandai-tcg-plus.com/gcgja`)が公開している
+ニュータイプチャレンジの**集計値**を取り込み、`ntc-official.html` として公開する。
+
+### データの所在と役割
+
+| ファイル | 役割 |
+|---|---|
+| `data/ntc_dashboard.json` | 取込データ(シリーズ別に集計値・履歴・店舗行を累積) |
+| `fetch-ntc-dashboard.js` | 取得・累積マージ |
+| `generate-ntc-dashboard.js` | `ntc-official.html` を静的生成 |
+| `deploy-ntc-dashboard.js` | 上記2つ+`sitemap.xml` の差分push |
+
+### 既存のNTC統計とは混ぜない(重要)
+
+`data/events.json` / `data/top_stats.json` / `data/series.json` などの**当サイト独自集計とは別系統**。
+`ntc_dashboard.json` を既存統計の母集団に足さないこと。ページも独立(`ntc-official.html`)。
+公式集計は「参加者全体の登録デッキ」が母数と推定され、当サイトの入賞デッキ集計とは分母が違う。
+
+### 取得元の制約(指示書63 Step 0b の実測)
+
+- 取得は **RSCヘッダ**(`RSC: 1` / `Accept: text/x-component`)。同じURLをHTMLで取ると14MB、RSCなら約37KB
+- **集計値は累積**なので1日1回の取得で常に完全
+- **店舗行は最新20件の窓**しか返らない(ページング無し)。毎晩取って差分を貯める設計。過去分は取り戻せない
+  - 取得時に「店舗行が全件新規かつ20件」だった場合は**取りこぼしの疑い**として警告ログを出す。
+    これが続くようなら取得頻度の見直しが必要(現状は毎晩1回・松岡さん了承済み)
+- シリーズ一覧(`/gcgja/tournament` の `sanctionedTournamentList`)には**開催中のシリーズしか載らない**。
+  一覧から消えても `data` に記録済みのIDは直接取得を続ける
+- 存在しないIDは **HTTP 200 + `NEXT_HTTP_ERROR_FALLBACK;404`** を返す。これを404扱いにして `fetch_stopped: true` を立てる
+- **JSチャンクの解析は禁止**(取得元の規約に配慮)。ページング手段の再探索もしない
+
+### 対象シリーズは手動オプトイン(2026-08-03 松岡さん指示)
+
+**新しいシリーズを見つけても自動では取り込まない。** 一覧に出てきたら夜間ログに
+
+```
+[ntc-dashboard] 新しいシリーズを検出(未取得): <ULID> ニュータイプチャレンジ …（9月開催） 2026/9/1〜2026/9/30
+[ntc-dashboard]   → 取り込む場合は: node fetch-ntc-dashboard.js --add <ULID>
+```
+
+と出るだけ。**結果が出てから `--add` で1回追加する**。
+(9月シリーズは結果がまだ無いため、意図的に取得対象外にしている)
+
+あわせて、**結果が1件も公開されていないシリーズはページに表示しない**。
+データには残るので、結果が出た日の生成から自動的に表示に切り替わる。
+
+### 使い方
+
+```powershell
+# まず必ず dry-run(取得・解析はするが書き込み0件)
+node fetch-ntc-dashboard.js --dry-run
+
+# 本番取得(登録済みシリーズのみ。data/ntc_dashboard.json を原子書き込みで更新)
+node fetch-ntc-dashboard.js
+
+# 新しいシリーズを取り込む(手動オプトイン。結果が出てから実行する)
+node fetch-ntc-dashboard.js --add <ULID>
+
+# 登録済みシリーズだけ取り直す(未登録IDを渡すと拒否される)
+node fetch-ntc-dashboard.js --once 01KYXTCZ5G4513GTX5E892G33Q
+
+# ページ生成 → push(差分があるものだけ)
+node generate-ntc-dashboard.js
+node deploy-ntc-dashboard.js --dry-run
+node deploy-ntc-dashboard.js
+```
+
+- 3スクリプトとも**終了コードは常に0**。異常は `auto-news-schtasks.log` のログで判別する
+  (夜間バッチの最終exitを汚さないため。post-x-daily.js と同じ方針)
+- 隔離検証用に `NTC_DASHBOARD_ROOT` で site ルートを差し替えられる
+
+### 夜間バッチ
+
+`run-auto-news-daily.bat` の post-x-daily 工程の直後に `ntc-dashboard` 工程を追加済み。
+`NTCDASHRC` はログ記録専用で、バッチの最終 exit code には**使わない**(従来どおり SYNCRC / FETCHRC)。
+3スクリプトが exit 0 固定のため、`NTCDASHRC` は設計上つねに 0 になる(飾りの記録)。
+
+### sitemap
+
+`ntc-official.html` の登録は **generate-sitemap-extra.js** 側で行う
+(`generate-events.js` / `generate_cards.js` のハードコード一覧はNTC系のため触らない)。
+削除正規表現は **loc完全一致**で書いてある(前方一致にすると同名前方一致のURLを巻き込む)。
+lastmod は `data/ntc_dashboard.json` の全シリーズ `aggregates_latest.date` の最大値。
+generate-sitemap-extra.js は「新イベントflagの夜」しか走らないため、
+`ntc-official.html` の sitemap 収載は**初回だけ手動で1回**実行して入れておく。
+
+### 色の扱い
+
+先方は色を数値(1〜5)で返す。当サイトは **{1:青, 2:緑, 3:赤, 4:紫, 5:白}** で表示している。
+これは指示書63 Step 0 の WCS 72デッキから**唯一解として逆算した対応**であり、公式定義の確認は取れていない。
+ページには「色分類は当サイトの推定対応」と注記済み。
+`tests/test-04-colors.js` がこの唯一性を毎回再証明するので、テストが落ちたら表示を止めて再調査すること。
+`[]`(空配列)は「色情報なし」と表示する(単色は `[1]` のような1要素配列で来るため別物)。
+
+### 注意
+
+- `js/common.js` の `DECK_COLORS`(hex)は generate-ntc-dashboard.js 内に**写し**を持っている
+  (common.js はブラウザ専用で require できないため)。common.js 側の色を変えたら生成器の写しも直すこと。
+  `tests/test-03-generate.js` が両者の一致を機械照合する
+- `_PAGE_MAP` に `'ntc-official'` を追加済み(主タブ「大会データ」が点灯)。
+  `sub: null` だが `main: 'tournaments'` のため**大会データ系の共通サブナビ帯は表示される**
+  (イベント/シリーズ/スケジュールが並び、どれもアクティブにならない)。この見え方でよいかは発行元判断
+- **このページには AdSense タグを入れていない**(指示書63 Step 0b の方針変更「サイトはAdSense収益化を恒久的に行わない」に従う)。
+  既存ページの AdSense タグ撤去と CLAUDE.md「デプロイ設定」節の収益記述の更新は 63 の範囲外。別途要対応
+
 ## 関連ドキュメント
 
 - `gcg-meta-cowork-handoff.md`: プロジェクト全体の引き継ぎ文書(歴史・経緯)

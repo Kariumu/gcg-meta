@@ -94,6 +94,23 @@ node post-x-daily.js >> auto-news-schtasks.log 2>&1
 set XPOSTRC=%ERRORLEVEL%
 echo [%date% %time%] post-x-daily END: exit code %XPOSTRC% >> auto-news-schtasks.log
 echo ============================================================ >> auto-news-schtasks.log
+REM ============================================================
+REM  NTC official dashboard (shijisho 63 Step 1-N)
+REM     Fetches the official NTC aggregate page (RSC, ~37KB), regenerates
+REM     ntc-official.html and pushes the 3 changed files via the GitHub API.
+REM     All three scripts always exit 0; NTCDASHRC is recorded for the log only
+REM     and is never returned as this batch's exit code.
+REM     Dry run (safe, writes nothing): node fetch-ntc-dashboard.js --dry-run
+REM ============================================================
+echo [%date% %time%] ntc-dashboard START >> auto-news-schtasks.log
+node fetch-ntc-dashboard.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   fetch-ntc-dashboard exit %ERRORLEVEL% >> auto-news-schtasks.log
+node generate-ntc-dashboard.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   generate-ntc-dashboard exit %ERRORLEVEL% >> auto-news-schtasks.log
+node deploy-ntc-dashboard.js >> auto-news-schtasks.log 2>&1
+set NTCDASHRC=%ERRORLEVEL%
+echo [%date% %time%] ntc-dashboard END: exit code %NTCDASHRC% >> auto-news-schtasks.log
+echo ============================================================ >> auto-news-schtasks.log
 REM --- Final exit code ---
 REM     When cardlist-sync reports a problem, surface it as a task failure so it is
 REM     visible in Task Scheduler history without reading the log every day.

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ニュータイプチャレンジ 公式集計 - GCG STATS</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="theme-color" content="#d4a029">
+  <meta name="description" content="ニュータイプチャレンジの公式集計(色ペア別使用率・優勝数・店舗別優勝デッキ色)をまとめたページです。">
+  <link rel="canonical" href="https://gcg-stats.com/ntc-official.html">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="ニュータイプチャレンジ 公式集計 | GCG STATS">
+  <meta property="og:description" content="公式が公開している色ペア別使用率・優勝数・店舗別優勝デッキ色の集計。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/ntc-official.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .ntc-intro { max-width: 900px; font-size: 13px; color: var(--text-secondary); line-height: 1.9; }
+    .ntc-series { margin-top: 32px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); padding: 24px; }
+    .ntc-series-title { font-size: 18px; margin: 0 0 8px; color: var(--text-primary); }
+    .ntc-series-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px;
+      color: var(--text-muted); font-family: var(--font-mono); }
+    .ntc-h3 { font-size: 14px; margin: 24px 0 8px; color: var(--text-primary); }
+    .ntc-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .ntc-table th { text-align: left; font-size: 11px; color: var(--text-muted);
+      border-bottom: 1px solid var(--border); padding: 6px 8px; font-weight: 600; }
+    .ntc-table td { border-bottom: 1px solid var(--border); padding: 7px 8px;
+      color: var(--text-secondary); vertical-align: middle; }
+    .ntc-col-num { text-align: right; font-family: var(--font-mono); white-space: nowrap; }
+    .ntc-col-rank { width: 56px; }
+    .ntc-col-cap { width: 72px; }
+    .ntc-col-date { font-family: var(--font-mono); white-space: nowrap; }
+    .ntc-col-bar { width: 38%; }
+    .ntc-bar { display: block; height: 8px; border-radius: 4px; background: var(--accent); }
+    .ntc-colors { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+    .ntc-swatch { display: inline-block; width: 12px; height: 12px; border-radius: 3px; }
+    .ntc-colors-label { font-size: 12px; }
+    .ntc-pref { font-size: 11px; color: var(--text-muted); }
+    .ntc-empty { font-size: 12px; color: var(--text-muted); margin: 4px 0 0; }
+    .ntc-note { font-size: 11px; color: var(--text-muted); margin-top: 16px; }
+    .ntc-notes { margin-top: 28px; padding: 16px 18px; border: 1px solid var(--border);
+      border-radius: var(--radius); background: var(--bg-elevated); font-size: 11.5px;
+      color: var(--text-muted); line-height: 1.9; }
+    .ntc-notes ul { margin: 6px 0 0 18px; }
+    @media (max-width: 640px) {
+      .ntc-series { padding: 16px; }
+      .ntc-col-bar { display: none; }
+      .ntc-table { font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="section-header">
+      <h1 class="section-title">ニュータイプチャレンジ 公式集計</h1>
+    </div>
+
+    <p class="ntc-intro">公式のデッキログサービスが公開している、ニュータイプチャレンジの集計値をまとめたページです。
+      色ペア別の使用率・優勝数と、店舗別の優勝デッキ色を掲載しています。当サイト独自の大会結果集計とは別系統のデータです。</p>
+
+    <section class="ntc-series" data-ntc="series">
+      <div class="ntc-series-head">
+        <h2 class="ntc-series-title">ニュータイプチャレンジ 2026 MISSION4（8月開催）</h2>
+        <div class="ntc-series-meta">
+          <span>開催期間: 2026-08-01 〜 2026-08-31</span>
+          <span>集計対象: 1,294 デッキ</span>
+          <span>集計日: 2026-08-03</span>
+        </div>
+      </div>
+
+      <h3 class="ntc-h3">色ペア別 使用率</h3>
+      <table class="ntc-table">
+        <thead><tr><th>デッキ色</th><th class="ntc-col-num">使用率</th><th class="ntc-col-num">デッキ数</th><th></th></tr></thead>
+        <tbody>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+          <td class="ntc-col-num">34.23%</td>
+          <td class="ntc-col-num">443</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:100%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">青/白</span></span></td>
+          <td class="ntc-col-num">14.91%</td>
+          <td class="ntc-col-num">193</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:44%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">青/紫</span></span></td>
+          <td class="ntc-col-num">11.44%</td>
+          <td class="ntc-col-num">148</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:33%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">赤/白</span></span></td>
+          <td class="ntc-col-num">10.28%</td>
+          <td class="ntc-col-num">133</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:30%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">緑/白</span></span></td>
+          <td class="ntc-col-num">6.80%</td>
+          <td class="ntc-col-num">88</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:20%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#888888"></span><span class="ntc-colors-label">色情報なし</span></span></td>
+          <td class="ntc-col-num">5.87%</td>
+          <td class="ntc-col-num">76</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:17%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-colors-label">青/赤</span></span></td>
+          <td class="ntc-col-num">5.64%</td>
+          <td class="ntc-col-num">73</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:16%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">緑/紫</span></span></td>
+          <td class="ntc-col-num">5.41%</td>
+          <td class="ntc-col-num">70</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:16%"></span></td>
+        </tr>
+        <tr data-ntc="usage-row">
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">赤/紫</span></span></td>
+          <td class="ntc-col-num">5.41%</td>
+          <td class="ntc-col-num">70</td>
+          <td class="ntc-col-bar"><span class="ntc-bar" style="width:16%"></span></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h3 class="ntc-h3">色ペア別 優勝数</h3>
+      <table class="ntc-table">
+        <thead><tr><th class="ntc-col-num ntc-col-rank">順位</th><th>デッキ色</th><th class="ntc-col-num">優勝数</th></tr></thead>
+        <tbody>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">1</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+          <td class="ntc-col-num">13</td>
+        </tr>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">2</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">青/白</span></span></td>
+          <td class="ntc-col-num">7</td>
+        </tr>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">3</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">赤/白</span></span></td>
+          <td class="ntc-col-num">5</td>
+        </tr>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">4</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">緑/紫</span></span></td>
+          <td class="ntc-col-num">5</td>
+        </tr>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">5</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">紫/白</span></span></td>
+          <td class="ntc-col-num">2</td>
+        </tr>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">6</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">青/紫</span></span></td>
+          <td class="ntc-col-num">1</td>
+        </tr>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">7</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-colors-label">青/赤</span></span></td>
+          <td class="ntc-col-num">1</td>
+        </tr>
+        <tr data-ntc="win-row">
+          <td class="ntc-col-num ntc-col-rank">8</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">緑/白</span></span></td>
+          <td class="ntc-col-num">1</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h3 class="ntc-h3">店舗別 優勝デッキ色</h3>
+      <table class="ntc-table">
+        <thead><tr><th>開催日</th><th>店舗</th><th class="ntc-col-num ntc-col-cap">定員</th><th>優勝デッキ色</th></tr></thead>
+        <tbody>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">Duel Stade Ganryu 入間店 <span class="ntc-pref">埼玉県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">TSUTAYA BOOK STORE ビバモール寝屋川店 <span class="ntc-pref">大阪府</span></td>
+          <td class="ntc-col-num ntc-col-cap">64</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">緑/紫</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">TSUTAYA BOOKSTORE AIZU <span class="ntc-pref">福島県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">TSUTAYA瀬戸店 <span class="ntc-pref">愛知県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">青/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">カードショップラフテリア <span class="ntc-pref">兵庫県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">紫/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">カードショップ彩々アミュプラザ鹿児島店 <span class="ntc-pref">鹿児島県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">カードボックス本の王国大垣店 <span class="ntc-pref">岐阜県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">赤/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">カードラボアバンティ京都店 <span class="ntc-pref">京都府</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">ゲームスペース鶴岡 <span class="ntc-pref">山形県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">コミかる伊勢崎店 <span class="ntc-pref">群馬県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">青/紫</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">トレカプラザ55大須アメ横店 <span class="ntc-pref">愛知県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">トレカ専門店 スーパートレ☆スタ宮崎恒久店 <span class="ntc-pref">宮崎県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">青/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">トレーディングカードショップシエル <span class="ntc-pref">大分県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">緑/紫</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">トーナメントセンターバトロコ富山駅前 <span class="ntc-pref">富山県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">青/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">バトロコ新津田沼駅前 <span class="ntc-pref">千葉県</span></td>
+          <td class="ntc-col-num ntc-col-cap">64</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">ブックオフ港北綱島西店 <span class="ntc-pref">神奈川県</span></td>
+          <td class="ntc-col-num ntc-col-cap">64</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">緑/紫</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">ホビーステーション金沢店 <span class="ntc-pref">石川県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">赤/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">古本市場 福山曙店 <span class="ntc-pref">広島県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#ff4444" title="赤"></span><span class="ntc-colors-label">青/赤</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">竜星のPAO中野店 <span class="ntc-pref">東京都</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-swatch" style="background:#b444ff" title="紫"></span><span class="ntc-colors-label">緑/紫</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-02</td>
+          <td class="ntc-col-place">竜星の嵐名古屋店 <span class="ntc-pref">愛知県</span></td>
+          <td class="ntc-col-num ntc-col-cap">64</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">青/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-01</td>
+          <td class="ntc-col-place">POCKET HOBBY <span class="ntc-pref">鹿児島県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#cccccc" title="白"></span><span class="ntc-colors-label">青/白</span></span></td>
+        </tr>
+        <tr data-ntc="shop-row">
+          <td class="ntc-col-date">2026-08-01</td>
+          <td class="ntc-col-place">ビデオインアメリカ尼崎店 <span class="ntc-pref">兵庫県</span></td>
+          <td class="ntc-col-num ntc-col-cap">32</td>
+          <td class="ntc-col-colors"><span class="ntc-colors"><span class="ntc-swatch" style="background:#4488ff" title="青"></span><span class="ntc-swatch" style="background:#44cc64" title="緑"></span><span class="ntc-colors-label">青/緑</span></span></td>
+        </tr>
+        </tbody>
+      </table>
+      <p class="ntc-note">出典: <a href="https://d.bandai-tcg-plus.com/gcgja/tournament/sanctioned/01KYXTCZ5G4513GTX5E892G33Q" target="_blank" rel="noopener">BANDAI TCG+ 大会データ</a></p>
+    </section>
+
+    <div class="ntc-notes">
+      <strong>ご利用にあたって</strong>
+      <ul>
+        <li>出典: BANDAI TCG+ 大会データ(各シリーズの公式ページへのリンクを上記に掲載しています)。掲載内容に問題がある場合は <a href="contact.html">お問い合わせ</a> よりご連絡ください。速やかに対応いたします。</li>
+        <li>店舗一覧は取得元の表示仕様により全件でない場合があります。</li>
+        <li>色分類は当サイトの推定対応です(公式定義と異なる可能性があります)。</li>
+      </ul>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js?v=15"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('ntc-official');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>

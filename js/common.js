@@ -236,7 +236,11 @@ const GCG = {
     sets:     { main: 'sets',        sub: null       },
     reports:  { main: 'reports',     sub: null       },
     stores:   { main: 'venues',      sub: null       },
-    mypage:   { main: 'mypage',      sub: null       }
+    mypage:   { main: 'mypage',      sub: null       },
+    'ntc-official': { main: 'tournaments', sub: null }
+    // ntc-official は 2026-08-03 追加(指示書63 Step 1-N。NTC公式集計ページ)。
+    // sub は持たないが、main='tournaments' のため大会データ系の共通サブナビ帯は表示される
+    // (イベント/シリーズ/スケジュールが並び、どれもアクティブにならない)
     // mypage は 2026-07-16 追加（お気に入り/マイページ、指示書39 松岡さん指示）
     // regions は 2026-07-15 削除（ショップバトル地域別ランキング廃止、松岡さん指示）
     // '' (contact/privacy/about 等) は主タブもサブもアクティブ無し

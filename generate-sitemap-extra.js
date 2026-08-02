@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 /**
  * generate-sitemap-extra.js
- * sitemap.xml に series/ ・ sets/ ・ reports/news/ ・ events/ の URL を追記する補助スクリプト。
+ * sitemap.xml に series/ ・ sets/ ・ reports/news/ ・ events/ ・ ntc-official.html の URL を追記する補助スクリプト。
  * 指示書 v7-フェーズ2 Task 2-3(c)。events/ は指示書56 Task 2 で追加。
+ * ntc-official.html は指示書63 Step 1-N §3 で追加。
  *
  * 【重要・実行順序】
  *   - sitemap.xml を全再生成する generate_cards.js の「後」に実行すること
@@ -12,7 +13,14 @@
  *     本スクリプトは sitemap を触る一連の処理の「最後」に実行すること
  *     (順序を誤ると reports/news/ 分が generate-report.js に消される)。
  *
- * 冪等: 既存の series/ ・ sets/ ・ reports/news/ ・ events/ ブロックを一旦削除してから再追記。
+ * 冪等: 既存の series/ ・ sets/ ・ reports/news/ ・ events/ ・ ntc-official.html ブロックを
+ *       一旦削除してから再追記。
+ *
+ * 【ntc-official.html の注意】
+ *   - 削除正規表現は loc の「完全一致」で書く(prefix一致にすると同名前方一致のURLを巻き込む。
+ *     events/ で実事故があったため同型の事故を避ける)。
+ *   - lastmod は data/ntc_dashboard.json の全シリーズ aggregates_latest.date の最大値。
+ *     読めない・値が無い場合のみ実行日(now)へフォールバックする(夜間無人実行のためクラッシュ禁止)。
  *
  * 【events/ の注意】
  *   - 削除正規表現は `/events/`(末尾スラッシュ必須)。スラッシュ無しで書くと
@@ -68,6 +76,30 @@ function loadEventDates() {
   return dates;
 }
 
+// data/ntc_dashboard.json から lastmod(全シリーズ aggregates_latest.date の最大値)を得る。
+// 読めない・壊れている・値が無い場合は null を返し、呼び出し側が now にフォールバックする。
+// 夜間チェーン内で無人実行されるため、ここでのクラッシュは絶対に避ける。
+function loadNtcLastmod() {
+  try {
+    const p = path.join(ROOT, 'data', 'ntc_dashboard.json');
+    if (!fs.existsSync(p)) return null;
+    const j = JSON.parse(fs.readFileSync(p, 'utf-8'));
+    const series = (j && j.series) || {};
+    let max = null;
+    for (const k of Object.keys(series)) {
+      const d = series[k] && series[k].aggregates_latest && series[k].aggregates_latest.date;
+      if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d)) {
+        if (max === null || d > max) max = d;
+      }
+    }
+    return max;
+  } catch (e) {
+    console.warn('  ! data/ntc_dashboard.json の読み込みに失敗しました(' + e.message +
+      ')。ntc-official.html の lastmod は実行日にフォールバックします。');
+    return null;
+  }
+}
+
 function urlBlock(loc, changefreq, priority, lastmod) {
   return '\n  <url>\n' +
     '    <loc>' + loc + '</loc>\n' +
@@ -94,9 +126,11 @@ function main() {
   xml = xml.replace(/\s*<url>\s*<loc>https:\/\/gcg-stats\.com\/reports\/news\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
   // events/ は末尾スラッシュ必須(スラッシュ無しだと一覧ページ /events.html を巻き込む)
   xml = xml.replace(/\s*<url>\s*<loc>https:\/\/gcg-stats\.com\/events\/[^<]*<\/loc>[\s\S]*?<\/url>/g, '');
+  // ntc-official.html は loc 完全一致で削除(前方一致にしない)
+  xml = xml.replace(/\s*<url>\s*<loc>https:\/\/gcg-stats\.com\/ntc-official\.html<\/loc>[\s\S]*?<\/url>/g, '');
 
   let blocks = '';
-  let counts = { series: 0, sets: 0, news: 0, events: 0, eventsFallback: 0 };
+  let counts = { series: 0, sets: 0, news: 0, events: 0, eventsFallback: 0, ntc: 0, ntcFallback: 0 };
   const eventDates = loadEventDates();
 
   // series/ (ディレクトリ + 各シリーズページ)
@@ -132,13 +166,23 @@ function main() {
     counts.events++;
   }
 
+  // ntc-official.html (指示書63 Step 1-N。data が無い環境では追加しない)
+  if (fs.existsSync(path.join(ROOT, 'ntc-official.html'))) {
+    const ntcDate = loadNtcLastmod();
+    if (!ntcDate) counts.ntcFallback++;
+    blocks += urlBlock(SITE_URL + '/ntc-official.html', 'daily', '0.6', ntcDate || now);
+    counts.ntc++;
+  }
+
   xml = xml.replace('</urlset>', blocks + '\n</urlset>');
   fs.writeFileSync(sitemapPath, xml, 'utf-8');
 
   console.log('  → sitemap.xml 追記完了: series ' + counts.series +
     ' / sets ' + counts.sets + ' / reports-news ' + counts.news +
     ' / events ' + counts.events + ' 件' +
-    (counts.eventsFallback ? ' (events lastmod 実行日フォールバック ' + counts.eventsFallback + ' 件)' : ''));
+    (counts.eventsFallback ? ' (events lastmod 実行日フォールバック ' + counts.eventsFallback + ' 件)' : '') +
+    ' / ntc-official ' + counts.ntc + ' 件' +
+    (counts.ntcFallback ? ' (ntc lastmod 実行日フォールバック)' : ''));
 }
 
 main();
