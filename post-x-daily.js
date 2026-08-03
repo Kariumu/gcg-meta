@@ -1041,6 +1041,9 @@ module.exports = {
   weightedLength,
   hash32,
   dayOfWeek, addDays, diffDays, mondayOf,
+  // loadInputs は指示書64（post-x-weekly-pack.js）から再利用するために公開した。
+  // 実装は未変更。パック側が自前で JSON を読むと readJsonSafe の耐障害挙動と乖離するため。
+  loadInputs,
   aggregateUsage, buildDailyPool, resolveDefaultRange, halfMonthRangeFromDate,
   planDaily, planMover, buildDailyText, buildMoverText,
   readState, writeStateAtomic, lastPostedDateByCard, executeItem,
