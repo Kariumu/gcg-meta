@@ -244,12 +244,6 @@
       return '';
     }
 
-    // シリーズIDから {start, end} を返す。'' (全シリーズ) の場合は全期間を意味する空文字。
-    function getSeriesRangeById(sid) {
-      if (!sid) return { start: '', end: '' };
-      var s = allSeriesMap[sid];
-      return GCG.getSeriesDateRange ? GCG.getSeriesDateRange(s) : { start: s ? s.start_date || '' : '', end: s ? s.end_date || '' : '' };
-    }
     // シリーズごとのイベント件数を数える(タブの出し分けに使う)
     function countEventsBySeries() {
       var c = {};
@@ -259,6 +253,53 @@
         if (sid) c[sid] = (c[sid] || 0) + 1;
       });
       return c;
+    }
+
+    // ---- 同名シリーズのまとめ表示(2026-08-03 松岡さん指示「重複分は1つにまとめる」) ----
+    // 公式のNTCは同じ名前で月ごとに別シリーズとして登録されている。
+    //   例: 「NTC MISSION3」= 5月開催(id 6776) + 6月開催(id 6791)
+    // タブが同じ名前で2つ並ぶと選び分けられないため、**表示上は1つのタブにまとめて**
+    // 両方の結果をあわせて集計する。データ・URL・シリーズページ(SEO)は変更しない。
+    // 月ごとに見たい場合は、まとめたタブを選んだあとに期間フィルターを絞れば分けられる。
+    function seriesGroupKey(s) {
+      return String((s && (s.short_name || s.display_name || s.id)) || '');
+    }
+    // シリーズID → 同じ名前でまとめる対象のID一覧。
+    // 結果が0件のシリーズは(タブに出さないのと同じ理由で)まとめ対象から外す。
+    // ただし今選ばれているID自身は必ず含める(選択中の表示が消えないように)。
+    function seriesGroupIds(sid) {
+      if (!sid) return [];
+      var map = allSeriesMap || {};
+      var self = map[sid];
+      if (!self) return [String(sid)];
+      var key = seriesGroupKey(self);
+      var counts = countEventsBySeries();
+      var ids = Object.keys(map).filter(function(id){
+        return seriesGroupKey(map[id]) === key &&
+          ((counts[String(id)] || 0) > 0 || String(id) === String(sid));
+      }).map(String);
+      if (ids.indexOf(String(sid)) < 0) ids.push(String(sid));
+      return ids;
+    }
+
+    // シリーズIDから {start, end} を返す。'' (全シリーズ) の場合は全期間を意味する空文字。
+    // 同名シリーズをまとめている場合は、まとめた全体の期間(最小start〜最大end)を返す。
+    function getSeriesRangeById(sid) {
+      if (!sid) return { start: '', end: '' };
+      var ids = seriesGroupIds(sid);
+      var start = '', end = '';
+      // 期間が未設定のシリーズがまとめ対象に含まれる場合は、その側を「制限なし」にする。
+      // (兄弟シリーズの狭い期間を当ててしまい、結果が日付フィルターで落ちるのを防ぐ)
+      var noStart = false, noEnd = false;
+      ids.forEach(function(id){
+        var s = allSeriesMap[id];
+        if (!s) return;
+        var r = GCG.getSeriesDateRange ? GCG.getSeriesDateRange(s)
+          : { start: s.start_date || '', end: s.end_date || '' };
+        if (r.start) { if (!start || r.start < start) start = r.start; } else { noStart = true; }
+        if (r.end) { if (!end || r.end > end) end = r.end; } else { noEnd = true; }
+      });
+      return { start: noStart ? '' : start, end: noEnd ? '' : end };
     }
 
     function renderSeriesSelector() {
@@ -273,12 +314,21 @@
         .filter(function(s){ return (counts[String(s.id)] || 0) > 0 || String(s.id) === String(currentSeriesId); })
         .sort(function(a,b){return (b.start_date||'').localeCompare(a.start_date||'');});
       if (!list.length) { el.innerHTML = ''; return; }
+      // 同名シリーズは1つのタブにまとめる(代表は新しい方。list は start_date の降順)
+      var groupIndex = Object.create(null); // シリーズ名が __proto__ 等でも壊れないように
+      var groups = [];
+      list.forEach(function(s){
+        var key = seriesGroupKey(s);
+        if (groupIndex[key] !== undefined) { groups[groupIndex[key]].ids.push(String(s.id)); return; }
+        groupIndex[key] = groups.length;
+        groups.push({ rep: s, ids: [String(s.id)] });
+      });
       var tabs = [];
       tabs.push('<button type="button" class="series-tab' + (currentSeriesId === '' ? ' is-active' : '') + '" data-sid="">全シリーズ</button>');
-      list.forEach(function(s){
-        var isActive = currentSeriesId === s.id;
-        var label = GCG.escapeHtml(s.short_name || s.display_name || s.id);
-        tabs.push('<button type="button" class="series-tab' + (isActive ? ' is-active' : '') + '" data-sid="' + GCG.escapeHtml(s.id) + '">' + label + '</button>');
+      groups.forEach(function(g){
+        var isActive = g.ids.indexOf(String(currentSeriesId)) >= 0;
+        var label = GCG.escapeHtml(g.rep.short_name || g.rep.display_name || g.rep.id);
+        tabs.push('<button type="button" class="series-tab' + (isActive ? ' is-active' : '') + '" data-sid="' + GCG.escapeHtml(g.rep.id) + '">' + label + '</button>');
       });
       el.innerHTML = tabs.join('');
       el.querySelectorAll('.series-tab').forEach(function(btn){
@@ -343,11 +393,12 @@
       if (currentDateStart || currentDateEnd) {
         events = GCG.filterEventsObjByDate(events, currentDateStart, currentDateEnd);
       }
-      // シリーズフィルター適用
+      // シリーズフィルター適用(同名シリーズをまとめている場合は、そのグループ全体を対象にする)
       if (currentSeriesId) {
+        const sIds = seriesGroupIds(currentSeriesId);
         const sFiltered = {};
         for (const [key, ev] of Object.entries(events)) {
-          if (String(ev.series_id || '') === currentSeriesId) sFiltered[key] = ev;
+          if (sIds.indexOf(String(ev.series_id || '')) >= 0) sFiltered[key] = ev;
         }
         events = sFiltered;
       }
