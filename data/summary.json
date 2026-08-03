@@ -18686,8 +18686,8 @@
   "region_ranking": [
     {
       "region": "関東",
-      "events": 209,
-      "decks": 1701,
+      "events": 227,
+      "decks": 1797,
       "top_deck_types": [
         {
           "type_key": "Blue+Purple",
@@ -18696,8 +18696,8 @@
             "Purple"
           ],
           "label": "青/紫",
-          "count": 496,
-          "wins": 92
+          "count": 525,
+          "wins": 99
         },
         {
           "type_key": "Red+White",
@@ -18706,8 +18706,8 @@
             "White"
           ],
           "label": "赤/白",
-          "count": 248,
-          "wins": 48
+          "count": 267,
+          "wins": 51
         },
         {
           "type_key": "Green+White",
@@ -18716,8 +18716,8 @@
             "White"
           ],
           "label": "緑/白",
-          "count": 247,
-          "wins": 42
+          "count": 259,
+          "wins": 45
         },
         {
           "type_key": "Blue+White",
@@ -18726,8 +18726,8 @@
             "White"
           ],
           "label": "青/白",
-          "count": 207,
-          "wins": 29
+          "count": 219,
+          "wins": 31
         },
         {
           "type_key": "Blue+Green",
@@ -18736,14 +18736,71 @@
             "Green"
           ],
           "label": "青/緑",
-          "count": 201,
+          "count": 208,
           "wins": 27
         }
       ]
     },
     {
       "region": "中部",
-      "events": 148,
+      "events": 178,
+      "decks": 941,
+      "top_deck_types": [
+        {
+          "type_key": "Blue+Purple",
+          "colors": [
+            "Blue",
+            "Purple"
+          ],
+          "label": "青/紫",
+          "count": 285,
+          "wins": 67
+        },
+        {
+          "type_key": "Red+White",
+          "colors": [
+            "Red",
+            "White"
+          ],
+          "label": "赤/白",
+          "count": 150,
+          "wins": 36
+        },
+        {
+          "type_key": "Green+White",
+          "colors": [
+            "Green",
+            "White"
+          ],
+          "label": "緑/白",
+          "count": 141,
+          "wins": 26
+        },
+        {
+          "type_key": "Blue+White",
+          "colors": [
+            "Blue",
+            "White"
+          ],
+          "label": "青/白",
+          "count": 117,
+          "wins": 23
+        },
+        {
+          "type_key": "Blue+Green",
+          "colors": [
+            "Blue",
+            "Green"
+          ],
+          "label": "青/緑",
+          "count": 107,
+          "wins": 18
+        }
+      ]
+    },
+    {
+      "region": "関西",
+      "events": 137,
       "decks": 784,
       "top_deck_types": [
         {
@@ -18753,8 +18810,8 @@
             "Purple"
           ],
           "label": "青/紫",
-          "count": 235,
-          "wins": 56
+          "count": 268,
+          "wins": 52
         },
         {
           "type_key": "Red+White",
@@ -18763,28 +18820,8 @@
             "White"
           ],
           "label": "赤/白",
-          "count": 126,
-          "wins": 32
-        },
-        {
-          "type_key": "Green+White",
-          "colors": [
-            "Green",
-            "White"
-          ],
-          "label": "緑/白",
-          "count": 118,
-          "wins": 21
-        },
-        {
-          "type_key": "Blue+White",
-          "colors": [
-            "Blue",
-            "White"
-          ],
-          "label": "青/白",
-          "count": 91,
-          "wins": 15
+          "count": 135,
+          "wins": 40
         },
         {
           "type_key": "Blue+Green",
@@ -18793,44 +18830,7 @@
             "Green"
           ],
           "label": "青/緑",
-          "count": 91,
-          "wins": 17
-        }
-      ]
-    },
-    {
-      "region": "関西",
-      "events": 128,
-      "decks": 748,
-      "top_deck_types": [
-        {
-          "type_key": "Blue+Purple",
-          "colors": [
-            "Blue",
-            "Purple"
-          ],
-          "label": "青/紫",
-          "count": 257,
-          "wins": 50
-        },
-        {
-          "type_key": "Red+White",
-          "colors": [
-            "Red",
-            "White"
-          ],
-          "label": "赤/白",
-          "count": 127,
-          "wins": 34
-        },
-        {
-          "type_key": "Blue+Green",
-          "colors": [
-            "Blue",
-            "Green"
-          ],
-          "label": "青/緑",
-          "count": 93,
+          "count": 96,
           "wins": 17
         },
         {
@@ -18840,7 +18840,7 @@
             "White"
           ],
           "label": "緑/白",
-          "count": 87,
+          "count": 89,
           "wins": 16
         },
         {
@@ -18850,15 +18850,15 @@
             "White"
           ],
           "label": "青/白",
-          "count": 66,
+          "count": 70,
           "wins": 10
         }
       ]
     },
     {
-      "region": "その他",
-      "events": 105,
-      "decks": 481,
+      "region": "九州",
+      "events": 118,
+      "decks": 519,
       "top_deck_types": [
         {
           "type_key": "Blue+Purple",
@@ -18867,8 +18867,8 @@
             "Purple"
           ],
           "label": "青/紫",
-          "count": 148,
-          "wins": 37
+          "count": 154,
+          "wins": 42
         },
         {
           "type_key": "Red+White",
@@ -18877,7 +18877,17 @@
             "White"
           ],
           "label": "赤/白",
-          "count": 84,
+          "count": 95,
+          "wins": 17
+        },
+        {
+          "type_key": "Blue+Green",
+          "colors": [
+            "Blue",
+            "Green"
+          ],
+          "label": "青/緑",
+          "count": 65,
           "wins": 20
         },
         {
@@ -18887,168 +18897,7 @@
             "White"
           ],
           "label": "青/白",
-          "count": 63,
-          "wins": 14
-        },
-        {
-          "type_key": "Blue+Green",
-          "colors": [
-            "Blue",
-            "Green"
-          ],
-          "label": "青/緑",
-          "count": 57,
-          "wins": 8
-        },
-        {
-          "type_key": "Green+White",
-          "colors": [
-            "Green",
-            "White"
-          ],
-          "label": "緑/白",
-          "count": 55,
-          "wins": 15
-        }
-      ]
-    },
-    {
-      "region": "九州",
-      "events": 95,
-      "decks": 427,
-      "top_deck_types": [
-        {
-          "type_key": "Blue+Purple",
-          "colors": [
-            "Blue",
-            "Purple"
-          ],
-          "label": "青/紫",
-          "count": 125,
-          "wins": 34
-        },
-        {
-          "type_key": "Red+White",
-          "colors": [
-            "Red",
-            "White"
-          ],
-          "label": "赤/白",
-          "count": 77,
-          "wins": 13
-        },
-        {
-          "type_key": "Blue+Green",
-          "colors": [
-            "Blue",
-            "Green"
-          ],
-          "label": "青/緑",
-          "count": 54,
-          "wins": 18
-        },
-        {
-          "type_key": "Blue+White",
-          "colors": [
-            "Blue",
-            "White"
-          ],
-          "label": "青/白",
-          "count": 48,
-          "wins": 10
-        },
-        {
-          "type_key": "Green+White",
-          "colors": [
-            "Green",
-            "White"
-          ],
-          "label": "緑/白",
-          "count": 43,
-          "wins": 8
-        }
-      ]
-    },
-    {
-      "region": "中国",
-      "events": 54,
-      "decks": 263,
-      "top_deck_types": [
-        {
-          "type_key": "Blue+Purple",
-          "colors": [
-            "Blue",
-            "Purple"
-          ],
-          "label": "青/紫",
-          "count": 92,
-          "wins": 25
-        },
-        {
-          "type_key": "Red+White",
-          "colors": [
-            "Red",
-            "White"
-          ],
-          "label": "赤/白",
-          "count": 40,
-          "wins": 6
-        },
-        {
-          "type_key": "Green+White",
-          "colors": [
-            "Green",
-            "White"
-          ],
-          "label": "緑/白",
-          "count": 33,
-          "wins": 6
-        },
-        {
-          "type_key": "Blue+White",
-          "colors": [
-            "Blue",
-            "White"
-          ],
-          "label": "青/白",
-          "count": 31,
-          "wins": 4
-        },
-        {
-          "type_key": "Blue+Green",
-          "colors": [
-            "Blue",
-            "Green"
-          ],
-          "label": "青/緑",
-          "count": 29,
-          "wins": 8
-        }
-      ]
-    },
-    {
-      "region": "東北",
-      "events": 39,
-      "decks": 277,
-      "top_deck_types": [
-        {
-          "type_key": "Blue+Purple",
-          "colors": [
-            "Blue",
-            "Purple"
-          ],
-          "label": "青/紫",
-          "count": 72,
-          "wins": 14
-        },
-        {
-          "type_key": "Red+White",
-          "colors": [
-            "Red",
-            "White"
-          ],
-          "label": "赤/白",
-          "count": 54,
+          "count": 58,
           "wins": 12
         },
         {
@@ -19058,7 +18907,158 @@
             "White"
           ],
           "label": "緑/白",
+          "count": 56,
+          "wins": 13
+        }
+      ]
+    },
+    {
+      "region": "中国",
+      "events": 62,
+      "decks": 295,
+      "top_deck_types": [
+        {
+          "type_key": "Blue+Purple",
+          "colors": [
+            "Blue",
+            "Purple"
+          ],
+          "label": "青/紫",
+          "count": 100,
+          "wins": 28
+        },
+        {
+          "type_key": "Red+White",
+          "colors": [
+            "Red",
+            "White"
+          ],
+          "label": "赤/白",
+          "count": 43,
+          "wins": 7
+        },
+        {
+          "type_key": "Blue+Green",
+          "colors": [
+            "Blue",
+            "Green"
+          ],
+          "label": "青/緑",
+          "count": 38,
+          "wins": 9
+        },
+        {
+          "type_key": "Blue+White",
+          "colors": [
+            "Blue",
+            "White"
+          ],
+          "label": "青/白",
+          "count": 34,
+          "wins": 5
+        },
+        {
+          "type_key": "Green+White",
+          "colors": [
+            "Green",
+            "White"
+          ],
+          "label": "緑/白",
+          "count": 33,
+          "wins": 6
+        }
+      ]
+    },
+    {
+      "region": "東北",
+      "events": 47,
+      "decks": 309,
+      "top_deck_types": [
+        {
+          "type_key": "Blue+Purple",
+          "colors": [
+            "Blue",
+            "Purple"
+          ],
+          "label": "青/紫",
+          "count": 85,
+          "wins": 17
+        },
+        {
+          "type_key": "Red+White",
+          "colors": [
+            "Red",
+            "White"
+          ],
+          "label": "赤/白",
+          "count": 59,
+          "wins": 12
+        },
+        {
+          "type_key": "Green+White",
+          "colors": [
+            "Green",
+            "White"
+          ],
+          "label": "緑/白",
+          "count": 43,
+          "wins": 9
+        },
+        {
+          "type_key": "Blue+White",
+          "colors": [
+            "Blue",
+            "White"
+          ],
+          "label": "青/白",
           "count": 40,
+          "wins": 4
+        },
+        {
+          "type_key": "Blue+Green",
+          "colors": [
+            "Blue",
+            "Green"
+          ],
+          "label": "青/緑",
+          "count": 36,
+          "wins": 6
+        }
+      ]
+    },
+    {
+      "region": "四国",
+      "events": 30,
+      "decks": 168,
+      "top_deck_types": [
+        {
+          "type_key": "Blue+Purple",
+          "colors": [
+            "Blue",
+            "Purple"
+          ],
+          "label": "青/紫",
+          "count": 50,
+          "wins": 11
+        },
+        {
+          "type_key": "Green+White",
+          "colors": [
+            "Green",
+            "White"
+          ],
+          "label": "緑/白",
+          "count": 25,
+          "wins": 4
+        },
+        {
+          "type_key": "Red+White",
+          "colors": [
+            "Red",
+            "White"
+          ],
+          "label": "赤/白",
+          "count": 24,
           "wins": 7
         },
         {
@@ -19068,64 +19068,7 @@
             "White"
           ],
           "label": "青/白",
-          "count": 35,
-          "wins": 3
-        },
-        {
-          "type_key": "Blue+Green",
-          "colors": [
-            "Blue",
-            "Green"
-          ],
-          "label": "青/緑",
-          "count": 33,
-          "wins": 5
-        }
-      ]
-    },
-    {
-      "region": "四国",
-      "events": 23,
-      "decks": 140,
-      "top_deck_types": [
-        {
-          "type_key": "Blue+Purple",
-          "colors": [
-            "Blue",
-            "Purple"
-          ],
-          "label": "青/紫",
-          "count": 44,
-          "wins": 9
-        },
-        {
-          "type_key": "Green+White",
-          "colors": [
-            "Green",
-            "White"
-          ],
-          "label": "緑/白",
           "count": 24,
-          "wins": 4
-        },
-        {
-          "type_key": "Blue+White",
-          "colors": [
-            "Blue",
-            "White"
-          ],
-          "label": "青/白",
-          "count": 21,
-          "wins": 5
-        },
-        {
-          "type_key": "Red+White",
-          "colors": [
-            "Red",
-            "White"
-          ],
-          "label": "赤/白",
-          "count": 17,
           "wins": 5
         },
         {
@@ -19135,15 +19078,15 @@
             "Green"
           ],
           "label": "青/緑",
-          "count": 15,
-          "wins": 0
+          "count": 21,
+          "wins": 2
         }
       ]
     },
     {
       "region": "北海道",
-      "events": 11,
-      "decks": 44,
+      "events": 13,
+      "decks": 52,
       "top_deck_types": [
         {
           "type_key": "Blue+Purple",
@@ -19152,8 +19095,8 @@
             "Purple"
           ],
           "label": "青/紫",
-          "count": 16,
-          "wins": 5
+          "count": 18,
+          "wins": 6
         },
         {
           "type_key": "Green+White",
@@ -19162,7 +19105,7 @@
             "White"
           ],
           "label": "緑/白",
-          "count": 9,
+          "count": 10,
           "wins": 5
         },
         {
@@ -19172,8 +19115,8 @@
             "Green"
           ],
           "label": "青/緑",
-          "count": 6,
-          "wins": 0
+          "count": 8,
+          "wins": 1
         },
         {
           "type_key": "Blue+White",
@@ -19192,11 +19135,11 @@
             "Green"
           ],
           "label": "赤/緑",
-          "count": 2,
+          "count": 3,
           "wins": 1
         }
       ]
     }
   ],
-  "updated_at": "2026-08-03T11:02:43.785Z"
+  "updated_at": "2026-08-03T11:42:30.323Z"
 }

@@ -240,7 +240,24 @@
         function getColor(id) { return dashCardColors[id] || SET_COLORS[id.split('-')[0]] || 'Unknown'; }
 
         // ---- Hero Series selection logic ----
+        // status は data/series.json の手入力値。開催が始まっても upcoming のまま残ることがあるため、
+        // start_date / end_date から今日基準で判定し直す(2026-08-03 松岡さん指示)。
+        // 判定ルールは scripts/build-series-summary.js と同じ:
+        //   今日 < start_date → upcoming / end_date 以前 → active / それ以降 → completed
+        // 日付が入っていないシリーズは series.json の値をそのまま使う。
+        function effectiveStatus(s) {
+            if (!s) return '';
+            const start = s.start_date || '';
+            const end = s.end_date || '';
+            if (!start || !end) return s.status || '';
+            const today = new Date().toISOString().slice(0, 10);
+            if (today < start) return 'upcoming';
+            if (today <= end) return 'active';
+            return 'completed';
+        }
         function pickHeroSeries(allSeries) {
+            // 判定し直した status を持つ複製で選ぶ(series.json の値は書き換えない)
+            allSeries = (allSeries || []).map(s => Object.assign({}, s, { status: effectiveStatus(s) }));
             const active = allSeries.filter(s => s.status === 'active');
             if (active.length > 0) {
                 return { series: active.sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''))[0], mode: 'active' };

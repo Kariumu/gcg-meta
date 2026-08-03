@@ -30,6 +30,13 @@
     #event-list a:hover {
       text-decoration: underline;
     }
+    /* エキスパートショップのバッジ（stores.html と定義内容を一致させること） */
+    .expert-badge {
+      font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 999px;
+      background: rgba(255,193,71,0.15); color: #e0a528; margin-left: 6px;
+      white-space: nowrap; vertical-align: middle;
+    }
+
     /* お気に入り☆ボタン（favorites.js 利用ページ共通・定義内容は全ページ一致させること） */
     .fav-star {
       background: none;
@@ -247,6 +254,28 @@
       return url.searchParams.get(name);
     }
 
+    // エキスパートショップ判定（data/expert-shops.json の expertStoreIds を見る。
+    // stores.html と同じ判定・同じ表記にそろえる。取得に失敗したらバッジを出さないだけ）
+    var expertIds = null;
+    async function loadExpertIds() {
+      if (expertIds) return expertIds;
+      try {
+        var res = await fetch(GCG.getBasePath() + 'data/expert-shops.json');
+        if (!res.ok) throw new Error('expert-shops.json HTTP ' + res.status);
+        var j = await res.json();
+        expertIds = new Set(j.expertStoreIds || []);
+      } catch (e) {
+        console.warn('expert-shops.json の読み込みに失敗（バッジは出しません）:', e);
+        expertIds = new Set();
+      }
+      return expertIds;
+    }
+    function expertBadgeHtml(store) {
+      var id = store && store.id != null ? store.id : Number(getUrlParam('id'));
+      if (!expertIds || !expertIds.has(id)) return '';
+      return ' <span class="expert-badge" title="エキスパートショップ（公認大会開催店）">★エキスパート</span>';
+    }
+
     function renderStoreInfo(store) {
       var container = document.getElementById('store-info');
 
@@ -262,6 +291,7 @@
       container.innerHTML =
         '<h1 style="font-size:20px;font-weight:700;color:var(--text-primary);margin:0 0 8px 0;display:flex;align-items:center;gap:6px">'
           + GCG.escapeHtml(store.name || '')
+          + expertBadgeHtml(store)
           + GCGFavSafe.starButtonHtml('store', store.id != null ? store.id : getUrlParam('id'))
         + '</h1>' +
         '<div style="font-size:14px;color:var(--text-secondary);margin-bottom:4px">' + GCG.escapeHtml(address) + mapLink + '</div>' +
@@ -515,6 +545,7 @@
         document.getElementById('breadcrumb-container').innerHTML = GCG.renderBreadcrumb(bcItems)
           + GCG.renderBreadcrumbJsonLd(bcItems, 'https://gcg-stats.com/');
 
+        await loadExpertIds();
         renderStoreInfo(store);
         renderStoreMap(store);
         renderStoreResults(storeId, store.name);
