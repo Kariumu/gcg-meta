@@ -102,9 +102,23 @@
           </div>
         </div>
 
-        <div style="margin-top:16px;padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;text-align:center">
-          <div style="font-size:15px;font-weight:600;color:var(--text-primary)">まだ大会での採用データがありません</div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">大会での使用が確認され次第、採用率などの統計を表示します。</div>
+        <div class="stats-grid" style="margin-top:16px">
+          <div class="stat-card">
+            <div class="stat-label">採用デッキ数</div>
+            <div class="stat-value">2<span class="unit"> デッキ</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">全体採用率</div>
+            <div class="stat-value">0.2<span class="unit">%</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">優勝デッキ数</div>
+            <div class="stat-value">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">平均採用枚数</div>
+            <div class="stat-value">1<span class="unit">枚</span></div>
+          </div>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
           ※採用率データは通常版（<a href="../GD05-102/" style="color:var(--accent)">GD05-102</a>）と共通です
@@ -113,14 +127,188 @@
     </div>
 
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">デッキタイプ別採用状況</h2>
+            <span class="toggle-icon"></span>
+          </summary>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>デッキタイプ</th>
+                <th style="width:90px">採用数</th>
+                <th style="width:180px">採用率</th>
+                <th style="width:60px">平均枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-green">緑</span></td>
+                <td class="text-mono">1 / 554</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:0.2%;background:#4488ff"></div>
+                    </div>
+                    <span class="usage-rate">0.2%</span>
+                  </div>
+                </td>
+                <td class="text-mono">1</td>
+              </tr>
+              <tr>
+                <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-red">赤</span></td>
+                <td class="text-mono">1 / 297</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:0.3%;background:#4488ff"></div>
+                    </div>
+                    <span class="usage-rate">0.3%</span>
+                  </div>
+                </td>
+                <td class="text-mono">1</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">一緒によく使われるカード</h2>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">TOP8</span><span class="toggle-icon"></span></div>
+          </summary>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
+          <div class="co-cards-grid">
+          <a href="../../cards/GD03-019/" class="co-card-item" title="ガンダムAGE-2 ノーマル" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD03-019.webp" alt="ガンダムAGE-2 ノーマル" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD03-019</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダムAGE-2 ノーマル</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD03-088/" class="co-card-item" title="アセム・アスノ" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD03-088.webp" alt="アセム・アスノ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD03-088</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">アセム・アスノ</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD05-017/" class="co-card-item" title="νガンダム" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD05-017.webp" alt="νガンダム" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD05-017</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">νガンダム</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD05-018/" class="co-card-item" title="ガンダム・キャリバーン" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD05-018.webp" alt="ガンダム・キャリバーン" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD05-018</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダム・キャリバーン</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD05-019/" class="co-card-item" title="リ・ガズィ" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD05-019.webp" alt="リ・ガズィ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD05-019</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">リ・ガズィ</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD05-020/" class="co-card-item" title="νガンダム" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD05-020.webp" alt="νガンダム" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD05-020</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">νガンダム</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD05-021/" class="co-card-item" title="ガンダムAGE-2 ダブルバレット" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD05-021.webp" alt="ガンダムAGE-2 ダブルバレット" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD05-021</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ガンダムAGE-2 ダブルバレット</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD05-023/" class="co-card-item" title="リ・ガズィ （BWS）" data-rate="mid">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD05-023.webp" alt="リ・ガズィ （BWS）" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD05-023</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">リ・ガズィ （BWS）</div>
+              <div class="co-card-rate"><span class="co-rate-value">50</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          </div>
+          <noscript>
+            <h3>一緒によく使われるカード</h3>
+            <ul>
+            <li><a href="/cards/GD03-019/">ガンダムAGE-2 ノーマル（GD03-019）- 50%</a></li>
+            <li><a href="/cards/GD03-088/">アセム・アスノ（GD03-088）- 50%</a></li>
+            <li><a href="/cards/GD05-017/">νガンダム（GD05-017）- 50%</a></li>
+            <li><a href="/cards/GD05-018/">ガンダム・キャリバーン（GD05-018）- 50%</a></li>
+            <li><a href="/cards/GD05-019/">リ・ガズィ（GD05-019）- 50%</a></li>
+            <li><a href="/cards/GD05-020/">νガンダム（GD05-020）- 50%</a></li>
+            <li><a href="/cards/GD05-021/">ガンダムAGE-2 ダブルバレット（GD05-021）- 50%</a></li>
+            <li><a href="/cards/GD05-023/">リ・ガズィ （BWS）（GD05-023）- 50%</a></li>
+            </ul>
+          </noscript>
+        </details>
     
         <details class="collapsible-section">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">TOP4 採用実績</h2>
-            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">0件</span><span class="toggle-icon"></span></div>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">1件</span><span class="toggle-icon"></span></div>
           </summary>
-          <div style="text-align:center;padding:32px;color:var(--text-muted)">TOP4での採用実績がありません</div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>店舗</th>
+                <th>プレイヤー</th>
+                <th style="width:60px">順位</th>
+                <th style="width:60px">枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.08.02</td>
+                <td><a href="../../events/ntcd-01KZ0CT02043AX4RT4GMZRWD6B.html" style="color:var(--text-primary);text-decoration:none">トレーディングカードショップシエル</a></td>
+                <td>えんもる</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×1</td>
+              </tr>
+            </tbody>
+          </table>
+          
         </details>
     
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
@@ -131,7 +319,9 @@
       </div>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">光の翼は「機動戦士Vガンダム」に登場する青のコマンドカードです。Lv.5・コスト2のコマンドカードです。レアリティはR+で、GD05に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は0.2%で、特定のデッキタイプで活躍しています。合計2デッキで採用されており、平均1枚で投入されています。最も採用率が高いデッキタイプは青緑系（0.2%）です。</p>
+      <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてガンダムAGE-2 ノーマル（同時採用率50%）、アセム・アスノ（同時採用率50%）、νガンダム（同時採用率50%）などがあります。デッキ構築の参考にしてください。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">このカードに関する公式 Q&A <span style="font-size:12px;font-weight:400;color:var(--text-muted);margin-left:6px">2件</span></h3>
       <p style="font-size:12px;color:var(--text-muted);margin:0 0 12px">バンダイ公式サイトに掲載されている裁定情報です。</p>
       <div style="display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px">
@@ -202,7 +392,7 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', '光の翼（GD05-102_p1）パラレル版 | GCG STATS');
+    GCG.renderShareButtons('share-buttons', '光の翼（GD05-102_p1）パラレル版採用率0.2% | GCG STATS');
   </script>
 </body>
 </html>
