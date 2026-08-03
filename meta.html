@@ -250,10 +250,27 @@
       var s = allSeriesMap[sid];
       return GCG.getSeriesDateRange ? GCG.getSeriesDateRange(s) : { start: s ? s.start_date || '' : '', end: s ? s.end_date || '' : '' };
     }
+    // シリーズごとのイベント件数を数える(タブの出し分けに使う)
+    function countEventsBySeries() {
+      var c = {};
+      var evs = (eventsDataGlobal && eventsDataGlobal.events) || {};
+      Object.keys(evs).forEach(function(k){
+        var sid = String((evs[k] && evs[k].series_id) || '');
+        if (sid) c[sid] = (c[sid] || 0) + 1;
+      });
+      return c;
+    }
+
     function renderSeriesSelector() {
       var el = document.getElementById('series-selector-area');
       if (!el) return;
+      // 結果が1件も無いシリーズはタブに出さない(2026-08-03 松岡さん指示)。
+      // 例: 8月時点では「MISSION4 9月開催」を選ぶ理由が無い。
+      // 結果が入った時点で自動的に表示される(日付ではなくデータ件数で判定するため)。
+      // ただし URL で明示的に選択されているシリーズは、選択中の表示が消えないよう残す。
+      var counts = countEventsBySeries();
       var list = Object.values(allSeriesMap || {})
+        .filter(function(s){ return (counts[String(s.id)] || 0) > 0 || String(s.id) === String(currentSeriesId); })
         .sort(function(a,b){return (b.start_date||'').localeCompare(a.start_date||'');});
       if (!list.length) { el.innerHTML = ''; return; }
       var tabs = [];
