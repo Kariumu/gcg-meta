@@ -1,0 +1,199 @@
+# .github/workflows/ntc-access-check.yml
+#
+# 目的: GitHub Actions の実行環境(データセンター)から、大会結果の取得元に
+#       アクセスできるかを確認する。**手動実行のみ**(自動では動きません)。
+#
+# やること
+#   1. 実行環境の送信元IPを表示                       … api.ipify.org へ1回
+#   2. deck-log の大会一覧を取得(ブロック確認の本命)   … 取得元へ1回
+#   3. deck-log のシリーズページを取得(店舗一覧20件)   … 取得元へ1回
+#   4. 公式サイトの大会結果一覧を取得                  … 取得元へ1回
+#   → 取得元へは最大3リクエスト(2の時点でシリーズIDが読めなければ2リクエスト)。
+#     ほかにIP確認で1リクエスト(取得元とは別サイト)。
+#
+# アクセス節度: 同時1接続・リクエスト間隔2秒以上・リトライなし。
+# 既知のURL形式のみを使い、ページング手段の探索やJSチャンクの解析は行いません。
+# データの書き込み・コミットは一切しません(権限は読み取りのみ)。秘密情報は使いません。
+#
+# ---------------------------------------------------------------------------
+# 使い方
+#   1. このファイルを .github/workflows/ntc-access-check.yml として**既定ブランチ
+#      (main)** に置く。※ workflow_dispatch は既定ブランチに無いと Actions タブに
+#        「Run workflow」ボタンが出ません(PRのブランチに置いただけでは動きません)
+#   2. リポジトリの Settings → Actions で Actions が有効になっていることを確認
+#   3. Actions タブ → 左の "NTC access check" → "Run workflow" を押す
+#   4. 実行が終わったらログを開き、各行の「判定」を見る
+#
+# 注意: 公開リポジトリの場合、**実行ログは誰でも閲覧できます**(送信元IPも出ます)。
+#       気になる場合は非公開リポジトリで試すか、確認後にログを削除してください。
+#
+# 判断の目安(赤くなった/★異常が出たときの切り分け)
+#   HTTP が 200 で件数も出ている            → 正常。Actions から取得できます
+#   HTTP が 403 / 405 / 202                 → WAF等で弾かれている可能性
+#   HTTP が 301 / 302                       → リダイレクト。Location を見て再確認
+#   HTTP が ERROR (getaddrinfo/ECONNRESET等) → 接続そのものが通っていない
+#   HTTP が 200 なのに件数0                  → 通ってはいるが中身が変わった/チャレンジ画面
+#   ★想定外の例外 と出た                     → このワークフロー側の不具合
+#
+# 1回通っただけでは移行の保証になりません(時間帯やWAFの設定で変わり得ます)。
+# 判断材料にするなら、日時を変えて2〜3回手動実行してください。
+# ---------------------------------------------------------------------------
+
+name: NTC access check
+
+"on":
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 送信元IP
+        shell: bash
+        run: |
+          echo "===== 実行環境の送信元IP ====="
+          curl -s --max-time 20 https://api.ipify.org || echo "(IP取得失敗)"
+          echo ""
+
+      - name: 取得元へのアクセス確認
+        shell: bash
+        run: |
+          cat > check.js <<'EOF'
+          'use strict';
+          const https = require('https');
+
+          const UA_DECKLOG = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36';
+          // 公式サイト指定の日本語UA。Node はヘッダ値を Latin-1 でしか送れないため、
+          // UTF-8のバイト列を Latin-1 文字列に置き換えて渡す(送信されるバイトは curl と同一)。
+          const UA_OFFICIAL = Buffer.from('GCG-META-FanSite/1.0 (非公式ファンサイト)', 'utf8').toString('latin1');
+
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+          /** 1リクエスト。例外は投げずに status:'ERROR' で返す。リダイレクトは最大3回追う */
+          function get(url, headers, hop) {
+            hop = hop || 0;
+            return new Promise((resolve) => {
+              let req;
+              try {
+                req = https.get(url, { headers: headers }, (res) => {
+                  const chunks = [];
+                  res.on('data', (c) => chunks.push(c));
+                  res.on('end', () => {
+                    const loc = res.headers['location'];
+                    if (loc && res.statusCode >= 300 && res.statusCode < 400 && hop < 3) {
+                      const next = new URL(loc, url).toString();
+                      console.log('  (リダイレクト ' + res.statusCode + ' → ' + next + ')');
+                      resolve(get(next, headers, hop + 1));
+                      return;
+                    }
+                    resolve({
+                      status: res.statusCode,
+                      headers: res.headers,
+                      body: Buffer.concat(chunks).toString('utf8')
+                    });
+                  });
+                });
+              } catch (e) {
+                // https.get はヘッダ不正などで同期的に例外を投げる
+                resolve({ status: 'ERROR', error: e.message, headers: {}, body: '' });
+                return;
+              }
+              req.setTimeout(30000, () => req.destroy(new Error('timeout after 30s')));
+              req.on('error', (e) => resolve({ status: 'ERROR', error: e.message, headers: {}, body: '' }));
+            });
+          }
+
+          const BLOCK_RE = /Access Denied|403 Forbidden|Request blocked|<title>ERROR|The request could not be satisfied|Sorry, you have been blocked|Attention Required|Just a moment|awswaf/i;
+
+          function show(label, r) {
+            console.log('----- ' + label + ' -----');
+            console.log('  HTTP        : ' + r.status + (r.error ? ' (' + r.error + ')' : ''));
+            console.log('  bytes       : ' + (r.body ? r.body.length : 0));
+            console.log('  content-type: ' + (r.headers['content-type'] || '-'));
+            console.log('  server/cdn  : ' + (r.headers['server'] || '-') + ' / ' + (r.headers['via'] || '-'));
+            console.log('  x-cache     : ' + (r.headers['x-cache'] || '-') + ' / ' + (r.headers['x-amz-cf-id'] || '-'));
+            if (r.headers['location']) console.log('  location    : ' + r.headers['location']);
+            if (r.headers['cf-ray'] || r.headers['cf-mitigated']) {
+              console.log('  cloudflare  : ' + (r.headers['cf-ray'] || '') + ' ' + (r.headers['cf-mitigated'] || ''));
+            }
+          }
+
+          /** 判定を出す。異常なら本文の先頭も出して原因を追えるようにする */
+          function verdict(r, contentOk) {
+            const is3xx = typeof r.status === 'number' && r.status >= 300 && r.status < 400;
+            const blocked = BLOCK_RE.test(r.body) || !!r.headers['cf-mitigated'];
+            if (r.status === 200 && contentOk && !blocked) { console.log('  判定: 正常'); return true; }
+            if (is3xx) { console.log('  判定: ★リダイレクト(要確認) location を見てください'); }
+            else if (blocked) { console.log('  判定: ★異常(ブロックされている可能性)'); }
+            else { console.log('  判定: ★異常(HTTPまたは中身が想定外)'); }
+            if (r.body) console.log('  本文先頭    : ' + r.body.slice(0, 300).replace(/\s+/g, ' '));
+            return false;
+          }
+
+          (async () => {
+            const RSC = { 'User-Agent': UA_DECKLOG, 'RSC': '1', 'Accept': 'text/x-component' };
+            const BASE = 'https://d.bandai-tcg-plus.com/gcgja';
+            const ok = [];
+
+            // (1) deck-log 大会一覧
+            const list = await get(BASE + '/tournament', RSC);
+            show('deck-log 大会一覧 /tournament', list);
+            const hasSeries = /ニュータイプチャレンジ/.test(list.body);
+            console.log('  シリーズ名を読めたか: ' + (hasSeries ? 'はい' : 'いいえ'));
+            ok.push(verdict(list, hasSeries));
+
+            // シリーズID(26桁)を取り出す。1レコード=1トーナメントに分割し、
+            // 「ニュータイプチャレンジ」を含むレコードのIDだけを採用する。
+            let sid = null;
+            for (const part of list.body.split('"tournamentId":"').slice(1)) {
+              const id = (part.match(/^([0-9A-HJKMNP-TV-Z]{26})/) || [])[1];
+              if (id && /ニュータイプチャレンジ/.test(part)) { sid = id; break; }
+            }
+            console.log('  シリーズID  : ' + (sid || '(取り出せませんでした)'));
+
+            // (2) deck-log シリーズページ
+            if (sid) {
+              await sleep(2000);
+              const ser = await get(BASE + '/tournament/sanctioned/' + sid, RSC);
+              show('deck-log シリーズページ', ser);
+              const shopRows = (ser.body.match(/"shop":\{/g) || []).length;
+              const wins = (ser.body.match(/"winCount":/g) || []).length;
+              console.log('  店舗行の数  : ' + shopRows + ' (通常20) / 優勝色の行: ' + wins);
+              ok.push(verdict(ser, shopRows > 0));
+            } else {
+              console.log('  → シリーズIDが読めなかったので、シリーズページの確認は省略します');
+              ok.push(false);
+            }
+
+            // (3) 公式サイト
+            await sleep(2000);
+            const off = await get('https://www.gundam-gcg.com/jp/tournament-results/', { 'User-Agent': UA_OFFICIAL });
+            show('公式サイト 大会結果一覧', off);
+            const shopLinks = (off.body.match(/shopListDetailInner/g) || []).length;
+            console.log('  大会リンク数: ' + shopLinks);
+            ok.push(verdict(off, shopLinks > 0));
+
+            console.log('');
+            console.log('===== まとめ =====');
+            console.log('  deck-log 一覧      : ' + (ok[0] ? '正常' : '★要確認'));
+            console.log('  deck-log シリーズ  : ' + (ok[1] ? '正常' : '★要確認'));
+            console.log('  公式サイト         : ' + (ok[2] ? '正常' : '★要確認'));
+            console.log('');
+            if (ok[0] && ok[1] && ok[2]) {
+              console.log('すべて正常です。GitHub Actions から両方の取得元にアクセスできます。');
+              console.log('ただし1回通っただけでは保証になりません。日時を変えて2〜3回試してください。');
+            } else {
+              console.log('★要確認があります。上の HTTP / server-cdn / 本文先頭 を見て、');
+              console.log('  ファイル冒頭の「判断の目安」で切り分けてください。');
+            }
+          })().catch((e) => {
+            console.log('');
+            console.log('★想定外の例外: ' + (e && e.message));
+            console.log('  → 取得元の問題ではなく、このワークフロー側の不具合です。');
+          });
+          EOF
+          node check.js
