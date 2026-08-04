@@ -15,6 +15,7 @@
 | 2026-05-19 | GD04 Week 3 新規訳語追加: Dynames Rush / Barbatos Lupus / Barbatos Rush (Purple Red) / Blue Red Agro / Militia Rush / Neo Zeong & League Militaire | reports/msa-gd04-week3.html |
 | 2026-05-27 | GD04 Week 4 新規訳語追加: Freedom Blockers / Justice & Providence Blockers / Clan | reports/msa-gd04-week4.html |
 | 2026-07-29 | GD05 Week 0 新規訳語追加: Nu Gundam / Sazabi / Shining & Master Gundam / Strike Freedom Blockers / Strike Freedom & Marida's Banshee | reports/msa-gd05-week0.html |
+| 2026-08-04 | GD05 Week 1 新規訳語追加: G Fighters (MF) / Strike Freedom & League Militaire / Strike Freedom & Marida's Banshee (Burn) / Strike Freedom, League Militaire & Marida's Banshee / Strike Freedom & Barbatos Lupus / Sazabi (Purple Green) / Sazabi Other / Sazabi & League Militaire / Barbatos Rush (Char Aznable) | reports/msa-gd05-week1.html |
 
 ## デッキ名・アーキタイプ訳語
 
@@ -55,6 +56,15 @@
 | Shining & Master Gundam | **Gガンダム** | シャイニング & マスターガンダム | 作品名を採用（松岡さん指示 2026-07-29） |
 | Strike Freedom Blockers | **ストライクフリーダム ブロッカー** |  |  |
 | Strike Freedom & Marida's Banshee | **フリーダムバンシィ** |  | 短縮形を採用（松岡さん指示 2026-07-29） |
+| G Fighters (MF) | **Gファイターズ（MF）** | Gガンダム / シャイニング & マスターガンダム | GD05 Week 1 新規。Week 0 の Shining & Master Gundam と同系統と見られるが元記事に改称の明記なし。原表記寄りを採用（松岡さん指示 2026-08-04） |
+| Strike Freedom & League Militaire | **ストライクフリーダム & リーグ・ミリタリー** |  | GD05 Week 1 新規 |
+| Strike Freedom & Marida's Banshee (Burn) | **フリーダムバンシィ（バーン）** |  | GD05 Week 1 新規。元記事のアーキタイプ分類見直しで (Burn) 区分が追加 |
+| Strike Freedom, League Militaire & Marida's Banshee | **ストライクフリーダム & リーグ・ミリタリー & バンシィ** |  | GD05 Week 1 新規 |
+| Strike Freedom & Barbatos Lupus | **ストライクフリーダム & バルバトス ルプス** |  | GD05 Week 1 新規 |
+| Sazabi (Purple Green) | **サザビー（紫緑）** |  | GD05 Week 1 新規。色違い派生。既存の Barbatos Rush (Purple Red)＝バルバトス アグロ（紫赤）に合わせ英語順で表記 |
+| Sazabi Other | **サザビー その他** |  | GD05 Week 1 新規。既存の Grampa Other＝グランパ その他 の表記に準拠 |
+| Sazabi & League Militaire | **サザビー & リーグ・ミリタリー** |  | GD05 Week 1 新規。元記事の見出しは閉じ括弧が余分な「Sazabi & League Militaire)」表記 |
+| Barbatos Rush (Char Aznable) | **バルバトス アグロ（シャア・アズナブル）** | バルバトスラッシュ（シャア） | GD05 Week 1 新規。既存の Barbatos Rush＝バルバトス アグロ に準拠 |
 
 ## カラータイプ表記
 
