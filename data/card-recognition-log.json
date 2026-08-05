@@ -3908,5 +3908,33 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-05": {
+    "recognized_at": "2026-08-05 20:00:14 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2084912289699045820"
+    ],
+    "cards": [
+      {
+        "card_number": "ST13-007",
+        "card_name": "ヤクト・ドーガ(ギュネイ専用機)",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔ネオ・ジオン〕"
+        ],
+        "link": "特徴にネオ・ジオンを持つPILOT",
+        "effect": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
+        "effect_confidence": "medium",
+        "effect_length": 55,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
