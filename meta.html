@@ -11,26 +11,26 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>環境分析 | GCG STATS</title>
+  <title>環境分析・大会結果一覧 | GCG STATS</title>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <meta name="theme-color" content="#d4a029">
-  <meta name="description" content="ガンダムカードゲームの環境メタ分析。デッキタイプ別シェア・カード採用率ランキング・地域別メタを数値で確認できます。">
+  <meta name="description" content="ガンダムカードゲームの環境メタ分析と大会結果一覧。全国841件のイベント・TOP4合計5053デッキから、デッキタイプ別シェア・カード採用率・地域別メタを集計しています。">
   <link rel="canonical" href="https://gcg-stats.com/meta.html">
   <!-- OGP -->
   <meta property="og:site_name" content="GCG STATS">
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:title" content="環境分析 | GCG STATS">
-  <meta property="og:description" content="ガンダムカードゲームの環境メタ分析。デッキタイプ別シェア・カード採用率ランキング・地域別メタをデータで可視化。">
+  <meta property="og:title" content="環境分析・大会結果一覧 | GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲームの環境メタ分析と大会結果一覧。全国841件のイベント・TOP4合計5053デッキから、デッキタイプ別シェア・カード採用率・地域別メタを集計しています。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://gcg-stats.com/meta.html">
   <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="環境分析 | GCG STATS">
-  <meta name="twitter:description" content="ガンダムカードゲームの環境メタ分析。デッキタイプ別シェア・カード採用率ランキング・地域別メタをデータで可視化。">
+  <meta name="twitter:title" content="環境分析・大会結果一覧 | GCG STATS">
+  <meta name="twitter:description" content="ガンダムカードゲームの環境メタ分析と大会結果一覧。全国841件のイベント・TOP4合計5053デッキから、デッキタイプ別シェア・カード採用率・地域別メタを集計しています。">
   <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
       <h1 class="section-title">環境分析</h1>
       <span class="section-badge" id="meta-info">TOP4 集計</span>
     </div>
-    <p class="page-lead">カード採用率・デッキタイプ分布・地域別メタを分析します。大会結果の全件一覧は <a href="events.html">イベント一覧</a> をご覧ください。</p>
+    <p class="page-lead">カード採用率・デッキタイプ分布・地域別メタを分析します。デッキタイプを選ぶと、そのタイプの入賞デッキが出た大会だけに<a href="#events">イベント一覧</a>を絞り込めます。</p>
     <div id="share-buttons"></div>
 
     <!-- シリーズ絞り込み（最上位） -->
@@ -103,13 +103,51 @@
         color: var(--accent);
         font-weight: 600;
       }
+      /* デッキタイプ絞り込みチップ（2026-08-06 指示書67） */
+      .type-chip-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+        min-height: 30px;
+      }
+      .type-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-dim, rgba(255, 170, 0, 0.1));
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 6px 8px 6px 12px;
+        border-radius: var(--radius);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .type-chip-clear {
+        background: transparent;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 1;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      .type-chip-clear:hover { background: rgba(255,255,255,0.12); }
+      .type-chip-hint { font-size: 12px; color: var(--text-muted); }
+      .lazy-note { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+      tr.decktype-row.is-selected td { background: var(--accent-dim, rgba(255,170,0,0.1)); }
     </style>
 
-    <!-- 地域フィルター -->
-    <div style="display:flex;gap:6px;margin-bottom:24px;flex-wrap:wrap;align-items:center" id="region-filter">
+    <!-- 地域フィルター（2026-08-06 指示書67: 並びは北から南へ固定） -->
+    <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;align-items:center" id="region-filter">
       <span style="font-size:12px;color:var(--text-muted);margin-right:4px">地域:</span>
       <button class="region-filter-btn active" data-region="" onclick="setRegion(null)">全地域</button>
     </div>
+
+    <!-- デッキタイプ絞り込みの状態表示 -->
+    <div class="type-chip-bar" id="type-chip-bar"></div>
 
     <!-- 統計サマリー -->
     <div class="stats-grid" id="stats-summary">
@@ -197,13 +235,31 @@
       </div>
     </details>
 
-    <!-- イベント一覧は /events.html に集約（役割明確化） -->
-    <div class="event-list-redirect mb-32" role="note">
-      <div class="event-list-redirect-title">イベント一覧は <a href="events.html">/events.html</a> に移動しました</div>
-      <div class="event-list-redirect-desc">全大会の日付・店舗・シリーズ絞り込み付き一覧は「イベント一覧」ページでご覧いただけます。</div>
-    </div>
-    <noscript><h2>環境分析データ</h2><h3>デッキタイプ別シェア</h3><ul><li>青/紫：1513デッキ（シェア29.9%、優勝328回、優勝率21.7%、平均順位3.3）</li><li>赤/白：806デッキ（シェア16%、優勝181回、優勝率22.5%、平均順位3.2）</li><li>緑/白：660デッキ（シェア13.1%、優勝125回、優勝率18.9%、平均順位3.5）</li><li>青/緑：657デッキ（シェア13%、優勝113回、優勝率17.2%、平均順位3.5）</li><li>青/白：583デッキ（シェア11.5%、優勝94回、優勝率16.1%、平均順位3.5）</li><li>青/赤：314デッキ（シェア6.2%、優勝46回、優勝率14.6%、平均順位3.5）</li><li>白/紫：180デッキ（シェア3.6%、優勝37回、優勝率20.6%、平均順位3.5）</li><li>赤/緑：146デッキ（シェア2.9%、優勝19回、優勝率13%、平均順位3.7）</li><li>赤/紫：122デッキ（シェア2.4%、優勝23回、優勝率18.9%、平均順位3.3）</li><li>緑/紫：67デッキ（シェア1.3%、優勝11回、優勝率16.4%、平均順位3.8）</li><li>緑：2デッキ（シェア0%、優勝1回、優勝率50%、平均順位3.5）</li><li>紫：2デッキ（シェア0%、優勝0回、優勝率0%、平均順位3.5）</li><li>青：1デッキ（シェア0%、優勝0回、優勝率0%、平均順位8）</li></ul><h3>カード採用率ランキング（TOP30）</h3><ol><li><a href="cards/ST01-010/">ST01-010</a>：採用率56.7%（2866デッキ、優勝552回、平均3.9枚）</li><li><a href="cards/ST01-001/">ST01-001</a>：採用率55.6%（2810デッキ、優勝538回、平均3.9枚）</li><li><a href="cards/GD01-100/">GD01-100</a>：採用率51.1%（2580デッキ、優勝484回、平均2.4枚）</li><li><a href="cards/ST02-016/">ST02-016</a>：採用率42%（2124デッキ、優勝419回、平均2.8枚）</li><li><a href="cards/GD01-118/">GD01-118</a>：採用率40.9%（2066デッキ、優勝415回、平均3.7枚）</li><li><a href="cards/GD01-008/">GD01-008</a>：採用率39.3%（1988デッキ、優勝402回、平均3.8枚）</li><li><a href="cards/GD01-086/">GD01-086</a>：採用率36.9%（1863デッキ、優勝365回、平均3.8枚）</li><li><a href="cards/ST05-010/">ST05-010</a>：採用率36%（1821デッキ、優勝390回、平均4枚）</li><li><a href="cards/GD03-056/">GD03-056</a>：採用率36%（1819デッキ、優勝389回、平均4枚）</li><li><a href="cards/GD02-054/">GD02-054</a>：採用率34.9%（1763デッキ、優勝381回、平均4枚）</li><li><a href="cards/ST04-001/">ST04-001</a>：採用率34.6%（1749デッキ、優勝347回、平均3.9枚）</li><li><a href="cards/ST04-010/">ST04-010</a>：採用率34.4%（1737デッキ、優勝342回、平均3.9枚）</li><li><a href="cards/GD01-020/">GD01-020</a>：採用率33.6%（1696デッキ、優勝341回、平均3.5枚）</li><li><a href="cards/ST01-005/">ST01-005</a>：採用率32%（1616デッキ、優勝328回、平均3.7枚）</li><li><a href="cards/ST05-004/">ST05-004</a>：採用率31.1%（1573デッキ、優勝344回、平均3.9枚）</li><li><a href="cards/ST05-006/">ST05-006</a>：採用率31%（1564デッキ、優勝332回、平均3.8枚）</li><li><a href="cards/GD02-079/">GD02-079</a>：採用率29.8%（1506デッキ、優勝294回、平均3.2枚）</li><li><a href="cards/ST03-013/">ST03-013</a>：採用率23.8%（1205デッキ、優勝234回、平均3.9枚）</li><li><a href="cards/GD01-073/">GD01-073</a>：採用率21.9%（1106デッキ、優勝228回、平均2.9枚）</li><li><a href="cards/GD01-018/">GD01-018</a>：採用率21.8%（1103デッキ、優勝203回、平均2.8枚）</li><li><a href="cards/GD01-066/">GD01-066</a>：採用率21.3%（1074デッキ、優勝234回、平均3枚）</li><li><a href="cards/GD02-055/">GD02-055</a>：採用率20.6%（1039デッキ、優勝228回、平均3.1枚）</li><li><a href="cards/ST04-012/">ST04-012</a>：採用率20.1%（1018デッキ、優勝190回、平均2.8枚）</li><li><a href="cards/GD03-034/">GD03-034</a>：採用率19.5%（986デッキ、優勝196回、平均2.8枚）</li><li><a href="cards/GD04-068/">GD04-068</a>：採用率17.9%（907デッキ、優勝177回、平均3枚）</li><li><a href="cards/GD02-013/">GD02-013</a>：採用率17.8%（901デッキ、優勝168回、平均3.1枚）</li><li><a href="cards/ST03-008/">ST03-008</a>：採用率14.9%（753デッキ、優勝129回、平均4枚）</li><li><a href="cards/GD03-050/">GD03-050</a>：採用率14.6%（740デッキ、優勝167回、平均2.4枚）</li><li><a href="cards/GD04-077/">GD04-077</a>：採用率14.6%（736デッキ、優勝135回、平均2.9枚）</li><li><a href="cards/GD01-024/">GD01-024</a>：採用率14.2%（719デッキ、優勝133回、平均3.8枚）</li></ol><h3>地域別メタ</h3><ul><li>関東：238イベント・1877デッキ（上位: 青/紫、赤/白、緑/白）</li><li>中部：183イベント・973デッキ（上位: 青/紫、赤/白、緑/白）</li><li>関西：139イベント・804デッキ（上位: 青/紫、赤/白、青/緑）</li><li>九州：121イベント・531デッキ（上位: 青/紫、赤/白、青/緑）</li><li>中国：63イベント・311デッキ（上位: 青/紫、青/緑、赤/白）</li><li>東北：53イベント・333デッキ（上位: 青/紫、赤/白、青/緑）</li><li>四国：30イベント・168デッキ（上位: 青/紫、緑/白、赤/白）</li><li>北海道：14イベント・56デッキ（上位: 青/紫、緑/白、青/緑）</li></ul></noscript>
-    <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"><h2>環境分析データ</h2><h3>デッキタイプ別シェア</h3><ul><li>青/紫：1513デッキ（シェア29.9%、優勝328回、優勝率21.7%、平均順位3.3）</li><li>赤/白：806デッキ（シェア16%、優勝181回、優勝率22.5%、平均順位3.2）</li><li>緑/白：660デッキ（シェア13.1%、優勝125回、優勝率18.9%、平均順位3.5）</li><li>青/緑：657デッキ（シェア13%、優勝113回、優勝率17.2%、平均順位3.5）</li><li>青/白：583デッキ（シェア11.5%、優勝94回、優勝率16.1%、平均順位3.5）</li><li>青/赤：314デッキ（シェア6.2%、優勝46回、優勝率14.6%、平均順位3.5）</li><li>白/紫：180デッキ（シェア3.6%、優勝37回、優勝率20.6%、平均順位3.5）</li><li>赤/緑：146デッキ（シェア2.9%、優勝19回、優勝率13%、平均順位3.7）</li><li>赤/紫：122デッキ（シェア2.4%、優勝23回、優勝率18.9%、平均順位3.3）</li><li>緑/紫：67デッキ（シェア1.3%、優勝11回、優勝率16.4%、平均順位3.8）</li><li>緑：2デッキ（シェア0%、優勝1回、優勝率50%、平均順位3.5）</li><li>紫：2デッキ（シェア0%、優勝0回、優勝率0%、平均順位3.5）</li><li>青：1デッキ（シェア0%、優勝0回、優勝率0%、平均順位8）</li></ul><h3>カード採用率ランキング（TOP30）</h3><ol><li><a href="cards/ST01-010/">ST01-010</a>：採用率56.7%（2866デッキ、優勝552回、平均3.9枚）</li><li><a href="cards/ST01-001/">ST01-001</a>：採用率55.6%（2810デッキ、優勝538回、平均3.9枚）</li><li><a href="cards/GD01-100/">GD01-100</a>：採用率51.1%（2580デッキ、優勝484回、平均2.4枚）</li><li><a href="cards/ST02-016/">ST02-016</a>：採用率42%（2124デッキ、優勝419回、平均2.8枚）</li><li><a href="cards/GD01-118/">GD01-118</a>：採用率40.9%（2066デッキ、優勝415回、平均3.7枚）</li><li><a href="cards/GD01-008/">GD01-008</a>：採用率39.3%（1988デッキ、優勝402回、平均3.8枚）</li><li><a href="cards/GD01-086/">GD01-086</a>：採用率36.9%（1863デッキ、優勝365回、平均3.8枚）</li><li><a href="cards/ST05-010/">ST05-010</a>：採用率36%（1821デッキ、優勝390回、平均4枚）</li><li><a href="cards/GD03-056/">GD03-056</a>：採用率36%（1819デッキ、優勝389回、平均4枚）</li><li><a href="cards/GD02-054/">GD02-054</a>：採用率34.9%（1763デッキ、優勝381回、平均4枚）</li><li><a href="cards/ST04-001/">ST04-001</a>：採用率34.6%（1749デッキ、優勝347回、平均3.9枚）</li><li><a href="cards/ST04-010/">ST04-010</a>：採用率34.4%（1737デッキ、優勝342回、平均3.9枚）</li><li><a href="cards/GD01-020/">GD01-020</a>：採用率33.6%（1696デッキ、優勝341回、平均3.5枚）</li><li><a href="cards/ST01-005/">ST01-005</a>：採用率32%（1616デッキ、優勝328回、平均3.7枚）</li><li><a href="cards/ST05-004/">ST05-004</a>：採用率31.1%（1573デッキ、優勝344回、平均3.9枚）</li><li><a href="cards/ST05-006/">ST05-006</a>：採用率31%（1564デッキ、優勝332回、平均3.8枚）</li><li><a href="cards/GD02-079/">GD02-079</a>：採用率29.8%（1506デッキ、優勝294回、平均3.2枚）</li><li><a href="cards/ST03-013/">ST03-013</a>：採用率23.8%（1205デッキ、優勝234回、平均3.9枚）</li><li><a href="cards/GD01-073/">GD01-073</a>：採用率21.9%（1106デッキ、優勝228回、平均2.9枚）</li><li><a href="cards/GD01-018/">GD01-018</a>：採用率21.8%（1103デッキ、優勝203回、平均2.8枚）</li><li><a href="cards/GD01-066/">GD01-066</a>：採用率21.3%（1074デッキ、優勝234回、平均3枚）</li><li><a href="cards/GD02-055/">GD02-055</a>：採用率20.6%（1039デッキ、優勝228回、平均3.1枚）</li><li><a href="cards/ST04-012/">ST04-012</a>：採用率20.1%（1018デッキ、優勝190回、平均2.8枚）</li><li><a href="cards/GD03-034/">GD03-034</a>：採用率19.5%（986デッキ、優勝196回、平均2.8枚）</li><li><a href="cards/GD04-068/">GD04-068</a>：採用率17.9%（907デッキ、優勝177回、平均3枚）</li><li><a href="cards/GD02-013/">GD02-013</a>：採用率17.8%（901デッキ、優勝168回、平均3.1枚）</li><li><a href="cards/ST03-008/">ST03-008</a>：採用率14.9%（753デッキ、優勝129回、平均4枚）</li><li><a href="cards/GD03-050/">GD03-050</a>：採用率14.6%（740デッキ、優勝167回、平均2.4枚）</li><li><a href="cards/GD04-077/">GD04-077</a>：採用率14.6%（736デッキ、優勝135回、平均2.9枚）</li><li><a href="cards/GD01-024/">GD01-024</a>：採用率14.2%（719デッキ、優勝133回、平均3.8枚）</li></ol><h3>地域別メタ</h3><ul><li>関東：238イベント・1877デッキ（上位: 青/紫、赤/白、緑/白）</li><li>中部：183イベント・973デッキ（上位: 青/紫、赤/白、緑/白）</li><li>関西：139イベント・804デッキ（上位: 青/紫、赤/白、青/緑）</li><li>九州：121イベント・531デッキ（上位: 青/紫、赤/白、青/緑）</li><li>中国：63イベント・311デッキ（上位: 青/紫、青/緑、赤/白）</li><li>東北：53イベント・333デッキ（上位: 青/紫、赤/白、青/緑）</li><li>四国：30イベント・168デッキ（上位: 青/紫、緑/白、赤/白）</li><li>北海道：14イベント・56デッキ（上位: 青/紫、緑/白、青/緑）</li></ul></div>
+    <!-- ===== イベント一覧（2026-08-06 指示書67: events.html から統合） ===== -->
+    <section id="events" class="mb-32" style="scroll-margin-top:96px">
+      <div class="section-header">
+        <h2 class="section-title">イベント一覧</h2>
+        <span class="section-badge" id="event-count">--</span>
+      </div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px" id="event-list-lead">
+        上のシリーズ・期間・地域・デッキタイプの絞り込みがそのまま反映されます。
+      </p>
+      <div class="filter-bar">
+        <input type="text" class="filter-input" id="search-input" placeholder="店舗名・プレイヤー名で検索...">
+      </div>
+      <div class="lazy-note" id="search-lazy-note" hidden>プレイヤー名の検索データを読み込んでいます…（初回のみ）</div>
+
+      <div class="event-list" id="events-list">
+        <div class="loading">データを読み込み中</div>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </section>
+
+    <!-- SEO:BEGIN -->
+    <noscript><h2>環境分析データ</h2><h3>デッキタイプ別シェア</h3><ul><li>青/紫：1513デッキ（シェア29.9%、優勝328回、優勝率21.7%、平均順位3.3）</li><li>赤/白：806デッキ（シェア16%、優勝181回、優勝率22.5%、平均順位3.2）</li><li>緑/白：660デッキ（シェア13.1%、優勝125回、優勝率18.9%、平均順位3.5）</li><li>青/緑：657デッキ（シェア13%、優勝113回、優勝率17.2%、平均順位3.5）</li><li>青/白：583デッキ（シェア11.5%、優勝94回、優勝率16.1%、平均順位3.5）</li><li>青/赤：314デッキ（シェア6.2%、優勝46回、優勝率14.6%、平均順位3.5）</li><li>白/紫：180デッキ（シェア3.6%、優勝37回、優勝率20.6%、平均順位3.5）</li><li>赤/緑：146デッキ（シェア2.9%、優勝19回、優勝率13%、平均順位3.7）</li><li>赤/紫：122デッキ（シェア2.4%、優勝23回、優勝率18.9%、平均順位3.3）</li><li>緑/紫：67デッキ（シェア1.3%、優勝11回、優勝率16.4%、平均順位3.8）</li><li>緑：2デッキ（シェア0%、優勝1回、優勝率50%、平均順位3.5）</li><li>紫：2デッキ（シェア0%、優勝0回、優勝率0%、平均順位3.5）</li><li>青：1デッキ（シェア0%、優勝0回、優勝率0%、平均順位8）</li></ul><h3>カード採用率ランキング（TOP30）</h3><ol><li><a href="cards/ST01-010/">ST01-010</a>：採用率56.7%（2866デッキ、優勝552回、平均3.9枚）</li><li><a href="cards/ST01-001/">ST01-001</a>：採用率55.6%（2810デッキ、優勝538回、平均3.9枚）</li><li><a href="cards/GD01-100/">GD01-100</a>：採用率51.1%（2580デッキ、優勝484回、平均2.4枚）</li><li><a href="cards/ST02-016/">ST02-016</a>：採用率42%（2124デッキ、優勝419回、平均2.8枚）</li><li><a href="cards/GD01-118/">GD01-118</a>：採用率40.9%（2066デッキ、優勝415回、平均3.7枚）</li><li><a href="cards/GD01-008/">GD01-008</a>：採用率39.3%（1988デッキ、優勝402回、平均3.8枚）</li><li><a href="cards/GD01-086/">GD01-086</a>：採用率36.9%（1863デッキ、優勝365回、平均3.8枚）</li><li><a href="cards/ST05-010/">ST05-010</a>：採用率36%（1821デッキ、優勝390回、平均4枚）</li><li><a href="cards/GD03-056/">GD03-056</a>：採用率36%（1819デッキ、優勝389回、平均4枚）</li><li><a href="cards/GD02-054/">GD02-054</a>：採用率34.9%（1763デッキ、優勝381回、平均4枚）</li><li><a href="cards/ST04-001/">ST04-001</a>：採用率34.6%（1749デッキ、優勝347回、平均3.9枚）</li><li><a href="cards/ST04-010/">ST04-010</a>：採用率34.4%（1737デッキ、優勝342回、平均3.9枚）</li><li><a href="cards/GD01-020/">GD01-020</a>：採用率33.6%（1696デッキ、優勝341回、平均3.5枚）</li><li><a href="cards/ST01-005/">ST01-005</a>：採用率32%（1616デッキ、優勝328回、平均3.7枚）</li><li><a href="cards/ST05-004/">ST05-004</a>：採用率31.1%（1573デッキ、優勝344回、平均3.9枚）</li><li><a href="cards/ST05-006/">ST05-006</a>：採用率31%（1564デッキ、優勝332回、平均3.8枚）</li><li><a href="cards/GD02-079/">GD02-079</a>：採用率29.8%（1506デッキ、優勝294回、平均3.2枚）</li><li><a href="cards/ST03-013/">ST03-013</a>：採用率23.8%（1205デッキ、優勝234回、平均3.9枚）</li><li><a href="cards/GD01-073/">GD01-073</a>：採用率21.9%（1106デッキ、優勝228回、平均2.9枚）</li><li><a href="cards/GD01-018/">GD01-018</a>：採用率21.8%（1103デッキ、優勝203回、平均2.8枚）</li><li><a href="cards/GD01-066/">GD01-066</a>：採用率21.3%（1074デッキ、優勝234回、平均3枚）</li><li><a href="cards/GD02-055/">GD02-055</a>：採用率20.6%（1039デッキ、優勝228回、平均3.1枚）</li><li><a href="cards/ST04-012/">ST04-012</a>：採用率20.1%（1018デッキ、優勝190回、平均2.8枚）</li><li><a href="cards/GD03-034/">GD03-034</a>：採用率19.5%（986デッキ、優勝196回、平均2.8枚）</li><li><a href="cards/GD04-068/">GD04-068</a>：採用率17.9%（907デッキ、優勝177回、平均3枚）</li><li><a href="cards/GD02-013/">GD02-013</a>：採用率17.8%（901デッキ、優勝168回、平均3.1枚）</li><li><a href="cards/ST03-008/">ST03-008</a>：採用率14.9%（753デッキ、優勝129回、平均4枚）</li><li><a href="cards/GD03-050/">GD03-050</a>：採用率14.6%（740デッキ、優勝167回、平均2.4枚）</li><li><a href="cards/GD04-077/">GD04-077</a>：採用率14.6%（736デッキ、優勝135回、平均2.9枚）</li><li><a href="cards/GD01-024/">GD01-024</a>：採用率14.2%（719デッキ、優勝133回、平均3.8枚）</li></ol><h3>地域別メタ（北から南の順）</h3><ul><li>北海道：14イベント・56デッキ（上位: 青/紫、緑/白、青/緑）</li><li>東北：53イベント・333デッキ（上位: 青/紫、赤/白、青/緑）</li><li>関東：238イベント・1877デッキ（上位: 青/紫、赤/白、緑/白）</li><li>中部：183イベント・973デッキ（上位: 青/紫、赤/白、緑/白）</li><li>関西：139イベント・804デッキ（上位: 青/紫、赤/白、青/緑）</li><li>中国：63イベント・311デッキ（上位: 青/紫、青/緑、赤/白）</li><li>四国：30イベント・168デッキ（上位: 青/紫、緑/白、赤/白）</li><li>九州：121イベント・531デッキ（上位: 青/紫、赤/白、青/緑）</li></ul><h3>イベント一覧（全841件中 直近200件）</h3><ul><li><a href="events/ntcd-01KZB4496CFMH47GF3G81HBRNA.html">2026.08.06 カードキングダム溝の口店</a> 優勝: ぎゅーい</li><li><a href="events/ntcd-01KZB448J0HZJ7WJF5KCGPQWNS.html">2026.08.06 カードボックス川口店</a> 優勝: ナス科</li><li><a href="events/ntcd-01KZB0PDPQQ3FGM569WKXMY4T4.html">2026.08.06 アメニティードリーム立川店</a> 優勝: MarMar</li><li><a href="events/ntcd-01KZB0PCST5NM33D4G48DSECC6.html">2026.08.06 カードボックス青馬堂矢向店</a> 優勝: 春ヰ</li><li><a href="events/ntcd-01KZBN9NQ0MFMFXVCSNGZMANEB.html">2026.08.06 パピー弥富店</a> 優勝: シェア</li><li><a href="events/ntcd-01KZBHVVW9YTSFNZT1Y4RFZ2FM.html">2026.08.06 G-PROJECT本店</a> 優勝: ムラタ・アズラエル</li><li><a href="events/ntcd-01KZB7J5RCZ9F7Y4E56KHASPYE.html">2026.08.06 ドラゴンスター日本橋3号店</a> 優勝: もつ</li><li><a href="events/ntcd-01KZB7J4GT9B78GHCNCFF8DFA7.html">2026.08.06 トーナメントセンターバトロコ札幌狸小路</a> 優勝: $$$$</li><li><a href="events/ntcd-01KZ8N5E073EREQCDKF7BZ0EXQ.html">2026.08.05 トレカチャンピオン江南店</a> 優勝: くまお</li><li><a href="events/ntcd-01KZ8HQNGYN3MKD6BS054RHQBN.html">2026.08.05 トレカチャンピオン豊橋牛川店</a> 優勝: Leo</li><li><a href="events/ntcd-01KZ8HQMBMQKYKDSGK5YPXBWDB.html">2026.08.05 トレーディングカードショップワールド熊谷石原店</a> 優勝: あしながコアラ</li><li><a href="events/ntcd-01KZ8E9M1CZQVTX2KVFZ2FGHA3.html">2026.08.05 カードラボ郡山店</a> 優勝: にんにん</li><li><a href="events/ntcd-01KZ8AWSQA2TKFC9GTC0528F6H.html">2026.08.05 アメニティードリーム横浜店</a> 優勝: ヒグえもん</li><li><a href="events/ntcd-01KZ5ZAXTENY7CJ9TNC79DBGAW.html">2026.08.04 ブックオフイオン橋本店</a> 優勝: ガツキ</li><li><a href="events/ntcd-01KZ5ZAYGVEX1FMGTX8WBGX6C4.html">2026.08.04 遊Vic中野店</a> 優勝: Hoichi</li><li><a href="events/ntcd-01KZ5ZB01RNX8Y0ZAAZYTEJ63J.html">2026.08.04 CloveBase秋葉原</a> 優勝: カムン</li><li><a href="events/ntcd-01KZ3KSWC91432VDGR3ZYN4MF2.html">2026.08.03 トレカチャンピオン各務原店</a> 優勝: K。</li><li><a href="events/ntcd-01KZ3GBW54QNVXWGFPTKJN9G9T.html">2026.08.03 トレカショップ竜のしっぽ 布施店</a> 優勝: トワ</li><li><a href="events/ntcd-01KZ3GBTXPDZC0R8EBKP608C16.html">2026.08.03 カードショップ札屋</a> 優勝: マツ</li><li><a href="events/ntcd-01KZ3CY6WRWJ7XBH49RMEWVGB6.html">2026.08.03 Japan TCG Center吉祥寺駅北口店</a> 優勝: koi</li><li><a href="events/ntcd-01KZ3CY4ZC88DF60M84V0ZBZS9.html">2026.08.03 ドラゴンスター町田店</a> 優勝: よし村</li><li><a href="events/ntcd-01KZ32MSK502K0AQRHEVBECEWC.html">2026.08.03 TSUTAYA Trading Card 北千住店</a> 優勝: らぼた</li><li><a href="events/ntcd-01KZ3TNGMCW87Q5X2ENXD45VSY.html">2026.08.03 TSUTAYA 田崎店</a> 優勝: マツシタ</li><li><a href="events/ntcd-01KZ1BPK4EGBZDJ7WVZDTHZJSH.html">2026.08.02 古本市場 福山曙店</a> 優勝: やなだー</li><li><a href="events/ntcd-01KZ1BPJ048WBWXJWABCPNAQDV.html">2026.08.02 カードショップラフテリア</a> 優勝: たかやん</li><li><a href="events/ntcd-01KZ14TPJAQ4AP8M7DGZ0ZPS2C.html">2026.08.02 TSUTAYA BOOK STORE ビバモール寝屋川店</a> 優勝: ヤドン</li><li><a href="events/ntcd-01KZ11D5R7DQW27ETVM7SQ8YH4.html">2026.08.02 トレカ専門店 スーパートレ☆スタ宮崎恒久店</a> 優勝: かべやま</li><li><a href="events/ntcd-01KZ0XZADNTWD2E3CW8HYTWX8N.html">2026.08.02 TSUTAYA BOOKSTORE AIZU</a> 優勝: その場しのぎ</li><li><a href="events/ntcd-01KZ0XZ9TGMEH47NARW0F5MD78.html">2026.08.02 竜星のPAO中野店</a> 優勝: SSQ</li><li><a href="events/ntcd-01KZ0THVJA8M3RMJQEPTFWR8X5.html">2026.08.02 カードラボアバンティ京都店</a> 優勝: ステ</li><li><a href="events/ntcd-01KZ0THTG2EPJK15PKY0PCVXA7.html">2026.08.02 ブックオフ港北綱島西店</a> 優勝: モチモチのベーコン</li><li><a href="events/ntcd-01KZ0THSNVD90M4PT46BGREMZ3.html">2026.08.02 トレカプラザ55大須アメ横店</a> 優勝: ノレア</li><li><a href="events/ntcd-01KZ0Q3DXEJDG2TDK7X1D08ACK.html">2026.08.02 トーナメントセンターバトロコ富山駅前</a> 優勝: まさやん</li><li><a href="events/ntcd-01KZ0Q3D6YW8K9J8GFN61P2B2D.html">2026.08.02 ホビーステーション金沢店</a> 優勝: ウエダジロウ</li><li><a href="events/ntcd-01KZ0Q3BSQ1NJ4F85AAQJ26KHD.html">2026.08.02 TSUTAYA瀬戸店</a> 優勝: なかさん</li><li><a href="events/ntcd-01KZ0Q3B3S7KSPVKW0RWY35KKD.html">2026.08.02 カードショップ彩々アミュプラザ鹿児島店</a> 優勝: ナッカー</li><li><a href="events/ntcd-01KZ0Q3ABFWAEH49TA8PSJN4B4.html">2026.08.02 竜星の嵐名古屋店</a> 優勝: はんぺん</li><li><a href="events/ntcd-01KZ0Q39JZJ62KMRJF5R1Z447W.html">2026.08.02 Duel Stade Ganryu 入間店</a> 優勝: 58</li><li><a href="events/ntcd-01KZ0KPT30YTG4ZQ7J55XN5HMY.html">2026.08.02 ゲームスペース鶴岡</a> 優勝: きょん。</li><li><a href="events/ntcd-01KZ0KPSFYQP5X9PRWE00ZMQ52.html">2026.08.02 バトロコ新津田沼駅前</a> 優勝: mato.</li><li><a href="events/ntcd-01KZ0G8RHTKNAYXRXA76KPDQ9G.html">2026.08.02 カードボックス本の王国大垣店</a> 優勝: K。</li><li><a href="events/ntcd-01KZ0CT02043AX4RT4GMZRWD6B.html">2026.08.02 トレーディングカードショップシエル</a> 優勝: ユニバース師匠</li><li><a href="events/ntcd-01KZ0CSZD9QX255GCVH6FNJFBY.html">2026.08.02 コミかる伊勢崎店</a> 優勝: 春夏冬風見</li><li><a href="events/ntcd-01KZ3CY6225DTB00S2AJYFYWM4.html">2026.08.02 トレカショップ トレカ99</a> 優勝: ひろはむ</li><li><a href="events/ntcd-01KZ2RB2F0K60ZX7DW7KYP58VH.html">2026.08.02 アメニティードリーム秋葉原店</a> 優勝: たぼー</li><li><a href="events/ntcd-01KZ2MX2B8M6WT7N881TY15H9H.html">2026.08.02 フタバ図書TSUTAYA三次店</a> 優勝: 神崎</li><li><a href="events/ntcd-01KYYSAH7V4EGQS9CMF8EDZVCK.html">2026.08.01 ビデオインアメリカ尼崎店</a> 優勝: ハスオ</li><li><a href="events/ntcd-01KYYSAGJP96DJAZYKA1TM3MT7.html">2026.08.01 POCKET HOBBY</a> 優勝: バリアント</li><li><a href="events/ntcd-01KYYF0RM0XZSSFSXETXAQD9XE.html">2026.08.01 GIRAFULL京都店</a> 優勝: ELIE</li><li><a href="events/ntcd-01KYXTCZ5G4513GTX5EAN7KB2A.html">2026.08.01 港北いわや</a> 優勝: 次元</li><li><a href="events/ntcd-01KYXXVNTR0BKDCNNMDWC792ZT.html">2026.08.01 トレーディングカードゲームショップ193名駅太閤店</a> 優勝: SYLPHY</li><li><a href="events/ntcd-01KYXXVPG6H5CY32D4J4EKRJ45.html">2026.08.01 お宝弁財天 feat. パンドラ</a> 優勝: ニンニン。</li><li><a href="events/ntcd-01KYY191ZYHAJ1D63HA8G07J83.html">2026.08.01 アメニティードリーム池袋パワー9店</a> 優勝: クボタンク</li><li><a href="events/ntcd-01KYY192M758S24QKF7Z44JBSM.html">2026.08.01 カードラボ新潟店</a> 優勝: ジャグ</li><li><a href="events/ntcd-01KYY4PXV6S92WJ2NJ4Q8CCW6T.html">2026.08.01 カードTVゲームショップりらい</a> 優勝: たなっきー</li><li><a href="events/ntcd-01KYY4PYQRT4X5QE507YBXNDWV.html">2026.08.01 TSUTAYA宮古店</a> 優勝: あにゃお</li><li><a href="events/ntcd-01KYY84RTEWH7JVP86A4WPETAD.html">2026.08.01 コーギーアール本店</a> 優勝: かん</li><li><a href="events/ntcd-01KYY84VCAHED4WXQ3NV4Y5RZY.html">2026.08.01 トレカ専門店 スーパートレ☆スタ宮崎駅前店</a> 優勝: ゾノ</li><li><a href="events/ntcd-01KYYBJFKZ81YVZSHW5HGAMWJV.html">2026.08.01 カードゲームのシーガル イオン福島店</a> 優勝: ラキお</li><li><a href="events/ntcd-01KYY84SFTJNK7FSC8S4ZH2MX7.html">2026.08.01 エディオンなんば本店 トレカキャピタルなんば</a> 優勝: クボ</li><li><a href="events/ntcd-01KYY84TQXYX1GDFBDK4AVPCYG.html">2026.08.01 ストレージワン</a> 優勝: カイリキー</li><li><a href="events/6306505.html">2026.06.28 カードランド秋葉原店</a> 優勝: アリマ</li><li><a href="events/6318317.html">2026.06.28 S CARD OASIS 大垣店</a> 優勝: モリモリ</li><li><a href="events/6320771.html">2026.06.28 カードラボ岐阜店</a> 優勝: ノブナガ</li><li><a href="events/6357511.html">2026.06.28 ホビーショップぼっけもん</a> 優勝: こあん</li><li><a href="events/6359513.html">2026.06.28 カードTVゲームショップりらい</a> 優勝: ヒラタク</li><li><a href="events/6362479.html">2026.06.28 マスターズギルド</a> 優勝: ふかまる</li><li><a href="events/6485174.html">2026.06.28 カードキングダム徳島店</a> 優勝: A-XIN</li><li><a href="events/6494549.html">2026.06.28 TSUTAYA新居浜店</a> 優勝: のりまToon</li><li><a href="events/6510550.html">2026.06.28 イエローサブマリンマジッカーズ福岡店</a> 優勝: じぇい</li><li><a href="events/6512345.html">2026.06.28 ブックオフプラス福岡糸島トレカ館</a> 優勝: ぽるんが</li><li><a href="events/6516351.html">2026.06.28 カードゲームショップ オレタン岡山本店</a> 優勝: ナナシ</li><li><a href="events/6516745.html">2026.06.28 TSUTAYA BOOKSTORE AIZU</a> 優勝: ハク</li><li><a href="events/6517780.html">2026.06.28 Japan TCG Center那覇沖映通り店</a> 優勝: AQUA</li><li><a href="events/6529874.html">2026.06.28 PAO青梅</a> 優勝: たなみ</li><li><a href="events/6535965.html">2026.06.28 カードボックス イオンモール徳島店</a> 優勝: 零影ゼロ</li><li><a href="events/6642660.html">2026.06.28 ガンダムカードゲーム 公式ショップ 埼玉 越谷レイクタウン店</a> 優勝: ふう</li><li><a href="events/6380714.html">2026.06.27 トレカプラザ55大須アメ横店</a> 優勝: K</li><li><a href="events/6424224.html">2026.06.27 カードボックス福山店</a> 優勝: ユッキー</li><li><a href="events/6442716.html">2026.06.27 カード＆ホビーショップ ドラグーン住吉</a> 優勝: ふる</li><li><a href="events/6474159.html">2026.06.27 マナソース和歌山駅前店</a> 優勝: マーボ</li><li><a href="events/6508795.html">2026.06.27 TCGショップ193 ザザシティ浜松店</a> 優勝: クリーム池田</li><li><a href="events/6553965.html">2026.06.26 プレイズ大阪日本橋本店</a> 優勝: なまもの</li><li><a href="events/6306509.html">2026.06.25 S CARD OASIS 鳳店</a> 優勝: sefi</li><li><a href="events/6487525.html">2026.06.25 G-PROJECT本店</a> 優勝: mao</li><li><a href="events/6535076.html">2026.06.25 ブックオフチャチャタウン小倉店</a> 優勝: ソーキ</li><li><a href="events/6551387.html">2026.06.25 カードラボ大阪日本橋店</a> 優勝: ポムランタン</li><li><a href="events/6332571.html">2026.06.24 BOOKOFF SUPER BAZAAR イトーヨーカドー八王子店</a> 優勝: TAC</li><li><a href="events/6402194.html">2026.06.24 ハリケーン川西店</a> 優勝: K</li><li><a href="events/6494133.html">2026.06.24 BOOKOFFSUPERBAZAARノースポート･モール店</a> 優勝: カナアド</li><li><a href="events/6510266.html">2026.06.24 アメニティードリーム吉祥寺店</a> 優勝: 70</li><li><a href="events/6347169.html">2026.06.23 チェルモサード</a> 優勝: 隠居カービィ</li><li><a href="events/6403433.html">2026.06.22 カードショップ＠ほ～む。熊本店</a> 優勝: とも</li><li><a href="events/6493382.html">2026.06.22 カードラボ名古屋駅前店</a> 優勝: からち</li><li><a href="events/6318795.html">2026.06.21 レプトンカード館五日市店</a> 優勝: シンタ</li><li><a href="events/6348172.html">2026.06.21 カードショップアヴァロン</a> 優勝: 天下</li><li><a href="events/6410779.html">2026.06.21 TSUTAYA BOOKSTORE宮交シティ</a> 優勝: HRZ</li><li><a href="events/6412561.html">2026.06.21 +upside（アップサイド）</a> 優勝: クロエ</li><li><a href="events/6451453.html">2026.06.21 カードボックス玉島店</a> 優勝: 楠木たいほーん</li><li><a href="events/6455989.html">2026.06.21 フルコンプ福岡天神店</a> 優勝: Nラティブ(ナラティブ)@九州LABO会</li><li><a href="events/6472623.html">2026.06.21 トレカショップ　トレカ99</a> 優勝: NationalKaikan</li><li><a href="events/6472629.html">2026.06.21 ビデオインアメリカ一宮店</a> 優勝: タケル</li><li><a href="events/6473160.html">2026.06.21 カードゲームのシーガル仙台駅前店</a> 優勝: あゆむ</li><li><a href="events/6485520.html">2026.06.21 TSUTAYA光吉店</a> 優勝: るるいえ</li><li><a href="events/6492566.html">2026.06.21 BOOKOFF西尾下町店</a> 優勝: ヒロ</li><li><a href="events/6503874.html">2026.06.21 カードショップ彩々 鹿児島店</a> 優勝: こあん</li><li><a href="events/6514978.html">2026.06.21 カードボックスイオンモール高知店</a> 優勝: ふなっく</li><li><a href="events/6515567.html">2026.06.21 カードラボ豊橋店</a> 優勝: 負け猫</li><li><a href="events/6547014.html">2026.06.21 トーナメントセンターバトロコ旭川駅前</a> 優勝: water.</li><li><a href="events/6336364.html">2026.06.20 ふるいちイオンモール白山店</a> 優勝: Ripple</li><li><a href="events/6368671.html">2026.06.20 カードゲームのシーガル郡山店</a> 優勝: rua</li><li><a href="events/6392290.html">2026.06.20 お宝弁財天 feat. パンドラ</a> 優勝: アンピージャー</li><li><a href="events/6399790.html">2026.06.20 TSUTAYA宮古店</a> 優勝: しん</li><li><a href="events/6441740.html">2026.06.20 TSUTAYA田宮店</a> 優勝: あきますたー</li><li><a href="events/6457139.html">2026.06.20 カードゲームのシーガル イオン福島店</a> 優勝: ラキ</li><li><a href="events/6457761.html">2026.06.20 ビデオインアメリカ大徳寺店</a> 優勝: RinnE</li><li><a href="events/6474465.html">2026.06.20 竜星の嵐 高松店</a> 優勝: つよし</li><li><a href="events/6486934.html">2026.06.20 ホビーショップ パワーナイン</a> 優勝: キクショー</li><li><a href="events/6509663.html">2026.06.20 カードショップ彩々 国分店</a> 優勝: ちょこみん</li><li><a href="events/6537249.html">2026.06.20 カードラボ千葉中央店</a> 優勝: ワン</li><li><a href="events/6642658.html">2026.06.20 ガンダムカードゲーム 公式ショップ 福岡 キャナルシティ博多店</a> 優勝: ウミエル</li><li><a href="events/6371094.html">2026.06.19 カードボックス横浜西口店/(株)ネクスト･ワン</a> 優勝: NEPA</li><li><a href="events/6472345.html">2026.06.19 ドラゴンスター日本橋2号店</a> 優勝: ミヤタ</li><li><a href="events/6422011.html">2026.06.18 青馬堂本店</a> 優勝: アクア</li><li><a href="events/6485066.html">2026.06.18 ホビーステーション名古屋大須本店</a> 優勝: のっぽ</li><li><a href="events/6502416.html">2026.06.18 ドラゴンスター秋葉原駅前店</a> 優勝: 人民武力省</li><li><a href="events/6504500.html">2026.06.18 カードラボオタロード本店</a> 優勝: 藤村　和晃</li><li><a href="events/6346315.html">2026.06.17 カードラボ宇都宮店</a> 優勝: ゼンマイ忍者</li><li><a href="events/6484697.html">2026.06.17 ホビーステーション大宮店</a> 優勝: koi</li><li><a href="events/6539694.html">2026.06.17 カードボックスオーサカ店</a> 優勝: ろく</li><li><a href="events/6474120.html">2026.06.16 スポーツカード＆カードゲームショップ MINT名古屋店</a> 優勝: Moth（もす）</li><li><a href="events/6483461.html">2026.06.16 蔦屋書店茂原店</a> 優勝: 宇宙海賊</li><li><a href="events/6494225.html">2026.06.16 トーナメントセンターバトロコ柏駅前</a> 優勝: Aimer</li><li><a href="events/6503336.html">2026.06.16 TSUTAYA流山おおたかの森駅前店</a> 優勝: シグナ</li><li><a href="events/6535316.html">2026.06.16 トレカチャンピオン江南店</a> 優勝: ヌル</li><li><a href="events/6334740.html">2026.06.15 アメニティードリーム町田店</a> 優勝: べーなー</li><li><a href="events/6305945.html">2026.06.14 TSUTAYA瀬戸店</a> 優勝: marìa</li><li><a href="events/6308822.html">2026.06.14 カードショップラフテリア</a> 優勝: なり</li><li><a href="events/6317159.html">2026.06.14 ホビーステーション金沢店</a> 優勝: なかなか</li><li><a href="events/6349354.html">2026.06.14 蔦屋書店熊本三年坂</a> 優勝: nao</li><li><a href="events/6359453.html">2026.06.14 フルコンプPLAYERS CENTER 札幌駅前店</a> 優勝: 限界社畜おじさんゴッド限界社畜おじさん</li><li><a href="events/6360774.html">2026.06.14 GameSpace&amp;cafeドラグーン博多</a> 優勝: くまがわ</li><li><a href="events/6378078.html">2026.06.14 イエローサブマリン名古屋GAMESHOP</a> 優勝: ヒロ</li><li><a href="events/6392767.html">2026.06.14 レプトン出汐店</a> 優勝: AK310</li><li><a href="events/6392844.html">2026.06.14 ブックエース小名浜住吉店</a> 優勝: キョム</li><li><a href="events/6401408.html">2026.06.14 トーナメントセンターバトロコ富山駅前</a> 優勝: OKD</li><li><a href="events/6411338.html">2026.06.14 トレカエース下妻店（ブックエースTSUTAYA下妻店）</a> 優勝: ユウシュン</li><li><a href="events/6434616.html">2026.06.14 竜星の嵐名古屋店</a> 優勝: まるまる</li><li><a href="events/6456705.html">2026.06.14 ゲームスペースあなーば</a> 優勝: ぶー</li><li><a href="events/6463865.html">2026.06.14 古本市場 福山曙店</a> 優勝: あべかわ</li><li><a href="events/6486153.html">2026.06.14 ゲーム館ビート</a> 優勝: ゴップ提督</li><li><a href="events/6494193.html">2026.06.14 CARDBOXアリオン塩冶店</a> 優勝: ヨシヤマ</li><li><a href="events/6494938.html">2026.06.14 コミかる高崎店</a> 優勝: キクチ</li><li><a href="events/6495373.html">2026.06.14 BOOKSながしま</a> 優勝: アスラ</li><li><a href="events/6503450.html">2026.06.14 MINT GAMES 池袋店</a> 優勝: ウニすけ</li><li><a href="events/6506629.html">2026.06.14 カードゲームショップどみなり屋</a> 優勝: しんく</li><li><a href="events/6506712.html">2026.06.14 プレイズ西尾シャオ店</a> 優勝: 智也</li><li><a href="events/6510980.html">2026.06.14 アメニティードリームなんば2号店</a> 優勝: アンブレラ将軍</li><li><a href="events/6515378.html">2026.06.14 G-PROJECT中津店</a> 優勝: ぽるんが</li><li><a href="events/6517252.html">2026.06.14 アメニティードリーム札幌店</a> 優勝: $$$</li><li><a href="events/6529498.html">2026.06.14 TSUTAYAデイズタウンつくば</a> 優勝: Dwan(ダン)</li><li><a href="events/6530779.html">2026.06.14 シーガル泉中央店</a> 優勝: スズキ</li><li><a href="events/6304280.html">2026.06.13 トレカショップ竜のしっぽ　布施店</a> 優勝: ザクザク</li><li><a href="events/6330734.html">2026.06.13 カードラボなんば店</a> 優勝: まききゅ〜</li><li><a href="events/6346148.html">2026.06.13 BOOKOFFSUPERBAZAAR甲府貢川店</a> 優勝: ナベ</li><li><a href="events/6349051.html">2026.06.13 ブックオフイトーヨーカドー溝ノ口店</a> 優勝: 青騎士</li><li><a href="events/6369822.html">2026.06.13 遊ING浜町店</a> 優勝: まめ</li><li><a href="events/6391584.html">2026.06.13 リバティ鑑定倶楽部王子店</a> 優勝: メサキ</li><li><a href="events/6398952.html">2026.06.13 TSUTAYA BOOK STORE ビバモール寝屋川店</a> 優勝: ヤマ</li><li><a href="events/6422920.html">2026.06.13 トレーディングカードゲームショップ193大須店</a> 優勝: かなー</li><li><a href="events/6443358.html">2026.06.13 タッチ松本店</a> 優勝: スクショ後輩</li><li><a href="events/6450983.html">2026.06.13 サンエイト沼津店</a> 優勝: オータニ</li><li><a href="events/6467579.html">2026.06.13 ブックマーケット 野々市新庄店</a> 優勝: ヒ◯</li><li><a href="events/6476188.html">2026.06.13 カードラボ池袋店</a> 優勝: しゃかぐき</li><li><a href="events/6485559.html">2026.06.13 TSUTAYA AVクラブ 玉名店</a> 優勝: きゃうぇうぇ</li><li><a href="events/6492360.html">2026.06.13 TSUTAYA AVクラブ 岡富店</a> 優勝: yozora</li><li><a href="events/6494246.html">2026.06.13 TSUTAYAブックセンター名豊刈谷店</a> 優勝: ポッケ</li><li><a href="events/6494478.html">2026.06.13 TCGShop193秋葉原店</a> 優勝: サトウキビ</li><li><a href="events/6494895.html">2026.06.13 カードボックス広島店</a> 優勝: トウマ</li><li><a href="events/6503923.html">2026.06.13 トレカショップ竜のしっぽ 姫路店</a> 優勝: yyy</li><li><a href="events/6510464.html">2026.06.13 TSUTAYA Trading Card錦糸町</a> 優勝: アリマ</li><li><a href="events/6510802.html">2026.06.13 V100徳島藍住店</a> 優勝: 木野潤</li><li><a href="events/6529276.html">2026.06.13 DuelStadeGanryuひたち野うしく店</a> 優勝: シリュウ</li><li><a href="events/6529512.html">2026.06.13 カードラボ所沢店</a> 優勝: テルテル</li><li><a href="events/6529790.html">2026.06.13 TSUTAYAあべの橋店</a> 優勝: ゆうや</li><li><a href="events/6567484.html">2026.06.13 TSUTAYA西友町田店</a> 優勝: カズノコ</li><li><a href="events/6503781.html">2026.06.12 元野木書店</a> 優勝: mao</li><li><a href="events/6511666.html">2026.06.12 ビデオインアメリカ京都西七条店</a> 優勝: ジュウザ</li><li><a href="events/6504334.html">2026.06.11 アメニティードリーム立川店</a> 優勝: あまとう</li><li><a href="events/6512257.html">2026.06.11 ドラゴンスター日本橋3号店</a> 優勝: さべ</li><li><a href="events/6307256.html">2026.06.10 BANDAI CARD GAMES 公式ショップ デクスタ ー DECKS STADIUM―(デックス スタジアム）</a> 優勝: とうま</li><li><a href="events/6504984.html">2026.06.10 カードラボ浜松店</a> 優勝: はたぼー</li><li><a href="events/6522142.html">2026.06.10 トレカチャンピオン豊橋牛川店</a> 優勝: ユーリ</li><li><a href="events/6567304.html">2026.06.10 カードラボ郡山店</a> 優勝: ユウ@宮城勢</li><li><a href="events/6333552.html">2026.06.09 コーギーアール大宮駅前店</a> 優勝: テルテル</li><li><a href="events/6334065.html">2026.06.09 CloveBase秋葉原</a> 優勝: 地蔵要塞カムイ</li><li><a href="events/6335990.html">2026.06.09 カードラボ広島店</a> 優勝: お父さん</li><li><a href="events/6390368.html">2026.06.09 遊Vic中野店</a> 優勝: shige32</li><li><a href="events/6410781.html">2026.06.09 Card Secret</a> 優勝: しりゅーじいちゃん</li><li><a href="events/6515569.html">2026.06.09 ブックオフイオン橋本店</a> 優勝: にゃんたろ</li></ul><p>全841件のイベント個別ページは sitemap.xml に収載しています。</p></noscript>
+    <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap"><h2>環境分析データ</h2><h3>デッキタイプ別シェア</h3><ul><li>青/紫：1513デッキ（シェア29.9%、優勝328回、優勝率21.7%、平均順位3.3）</li><li>赤/白：806デッキ（シェア16%、優勝181回、優勝率22.5%、平均順位3.2）</li><li>緑/白：660デッキ（シェア13.1%、優勝125回、優勝率18.9%、平均順位3.5）</li><li>青/緑：657デッキ（シェア13%、優勝113回、優勝率17.2%、平均順位3.5）</li><li>青/白：583デッキ（シェア11.5%、優勝94回、優勝率16.1%、平均順位3.5）</li><li>青/赤：314デッキ（シェア6.2%、優勝46回、優勝率14.6%、平均順位3.5）</li><li>白/紫：180デッキ（シェア3.6%、優勝37回、優勝率20.6%、平均順位3.5）</li><li>赤/緑：146デッキ（シェア2.9%、優勝19回、優勝率13%、平均順位3.7）</li><li>赤/紫：122デッキ（シェア2.4%、優勝23回、優勝率18.9%、平均順位3.3）</li><li>緑/紫：67デッキ（シェア1.3%、優勝11回、優勝率16.4%、平均順位3.8）</li><li>緑：2デッキ（シェア0%、優勝1回、優勝率50%、平均順位3.5）</li><li>紫：2デッキ（シェア0%、優勝0回、優勝率0%、平均順位3.5）</li><li>青：1デッキ（シェア0%、優勝0回、優勝率0%、平均順位8）</li></ul><h3>カード採用率ランキング（TOP30）</h3><ol><li><a href="cards/ST01-010/">ST01-010</a>：採用率56.7%（2866デッキ、優勝552回、平均3.9枚）</li><li><a href="cards/ST01-001/">ST01-001</a>：採用率55.6%（2810デッキ、優勝538回、平均3.9枚）</li><li><a href="cards/GD01-100/">GD01-100</a>：採用率51.1%（2580デッキ、優勝484回、平均2.4枚）</li><li><a href="cards/ST02-016/">ST02-016</a>：採用率42%（2124デッキ、優勝419回、平均2.8枚）</li><li><a href="cards/GD01-118/">GD01-118</a>：採用率40.9%（2066デッキ、優勝415回、平均3.7枚）</li><li><a href="cards/GD01-008/">GD01-008</a>：採用率39.3%（1988デッキ、優勝402回、平均3.8枚）</li><li><a href="cards/GD01-086/">GD01-086</a>：採用率36.9%（1863デッキ、優勝365回、平均3.8枚）</li><li><a href="cards/ST05-010/">ST05-010</a>：採用率36%（1821デッキ、優勝390回、平均4枚）</li><li><a href="cards/GD03-056/">GD03-056</a>：採用率36%（1819デッキ、優勝389回、平均4枚）</li><li><a href="cards/GD02-054/">GD02-054</a>：採用率34.9%（1763デッキ、優勝381回、平均4枚）</li><li><a href="cards/ST04-001/">ST04-001</a>：採用率34.6%（1749デッキ、優勝347回、平均3.9枚）</li><li><a href="cards/ST04-010/">ST04-010</a>：採用率34.4%（1737デッキ、優勝342回、平均3.9枚）</li><li><a href="cards/GD01-020/">GD01-020</a>：採用率33.6%（1696デッキ、優勝341回、平均3.5枚）</li><li><a href="cards/ST01-005/">ST01-005</a>：採用率32%（1616デッキ、優勝328回、平均3.7枚）</li><li><a href="cards/ST05-004/">ST05-004</a>：採用率31.1%（1573デッキ、優勝344回、平均3.9枚）</li><li><a href="cards/ST05-006/">ST05-006</a>：採用率31%（1564デッキ、優勝332回、平均3.8枚）</li><li><a href="cards/GD02-079/">GD02-079</a>：採用率29.8%（1506デッキ、優勝294回、平均3.2枚）</li><li><a href="cards/ST03-013/">ST03-013</a>：採用率23.8%（1205デッキ、優勝234回、平均3.9枚）</li><li><a href="cards/GD01-073/">GD01-073</a>：採用率21.9%（1106デッキ、優勝228回、平均2.9枚）</li><li><a href="cards/GD01-018/">GD01-018</a>：採用率21.8%（1103デッキ、優勝203回、平均2.8枚）</li><li><a href="cards/GD01-066/">GD01-066</a>：採用率21.3%（1074デッキ、優勝234回、平均3枚）</li><li><a href="cards/GD02-055/">GD02-055</a>：採用率20.6%（1039デッキ、優勝228回、平均3.1枚）</li><li><a href="cards/ST04-012/">ST04-012</a>：採用率20.1%（1018デッキ、優勝190回、平均2.8枚）</li><li><a href="cards/GD03-034/">GD03-034</a>：採用率19.5%（986デッキ、優勝196回、平均2.8枚）</li><li><a href="cards/GD04-068/">GD04-068</a>：採用率17.9%（907デッキ、優勝177回、平均3枚）</li><li><a href="cards/GD02-013/">GD02-013</a>：採用率17.8%（901デッキ、優勝168回、平均3.1枚）</li><li><a href="cards/ST03-008/">ST03-008</a>：採用率14.9%（753デッキ、優勝129回、平均4枚）</li><li><a href="cards/GD03-050/">GD03-050</a>：採用率14.6%（740デッキ、優勝167回、平均2.4枚）</li><li><a href="cards/GD04-077/">GD04-077</a>：採用率14.6%（736デッキ、優勝135回、平均2.9枚）</li><li><a href="cards/GD01-024/">GD01-024</a>：採用率14.2%（719デッキ、優勝133回、平均3.8枚）</li></ol><h3>地域別メタ（北から南の順）</h3><ul><li>北海道：14イベント・56デッキ（上位: 青/紫、緑/白、青/緑）</li><li>東北：53イベント・333デッキ（上位: 青/紫、赤/白、青/緑）</li><li>関東：238イベント・1877デッキ（上位: 青/紫、赤/白、緑/白）</li><li>中部：183イベント・973デッキ（上位: 青/紫、赤/白、緑/白）</li><li>関西：139イベント・804デッキ（上位: 青/紫、赤/白、青/緑）</li><li>中国：63イベント・311デッキ（上位: 青/紫、青/緑、赤/白）</li><li>四国：30イベント・168デッキ（上位: 青/紫、緑/白、赤/白）</li><li>九州：121イベント・531デッキ（上位: 青/紫、赤/白、青/緑）</li></ul><h3>イベント一覧（全841件中 直近200件）</h3><ul><li><a href="events/ntcd-01KZB4496CFMH47GF3G81HBRNA.html">2026.08.06 カードキングダム溝の口店</a> 優勝: ぎゅーい</li><li><a href="events/ntcd-01KZB448J0HZJ7WJF5KCGPQWNS.html">2026.08.06 カードボックス川口店</a> 優勝: ナス科</li><li><a href="events/ntcd-01KZB0PDPQQ3FGM569WKXMY4T4.html">2026.08.06 アメニティードリーム立川店</a> 優勝: MarMar</li><li><a href="events/ntcd-01KZB0PCST5NM33D4G48DSECC6.html">2026.08.06 カードボックス青馬堂矢向店</a> 優勝: 春ヰ</li><li><a href="events/ntcd-01KZBN9NQ0MFMFXVCSNGZMANEB.html">2026.08.06 パピー弥富店</a> 優勝: シェア</li><li><a href="events/ntcd-01KZBHVVW9YTSFNZT1Y4RFZ2FM.html">2026.08.06 G-PROJECT本店</a> 優勝: ムラタ・アズラエル</li><li><a href="events/ntcd-01KZB7J5RCZ9F7Y4E56KHASPYE.html">2026.08.06 ドラゴンスター日本橋3号店</a> 優勝: もつ</li><li><a href="events/ntcd-01KZB7J4GT9B78GHCNCFF8DFA7.html">2026.08.06 トーナメントセンターバトロコ札幌狸小路</a> 優勝: $$$$</li><li><a href="events/ntcd-01KZ8N5E073EREQCDKF7BZ0EXQ.html">2026.08.05 トレカチャンピオン江南店</a> 優勝: くまお</li><li><a href="events/ntcd-01KZ8HQNGYN3MKD6BS054RHQBN.html">2026.08.05 トレカチャンピオン豊橋牛川店</a> 優勝: Leo</li><li><a href="events/ntcd-01KZ8HQMBMQKYKDSGK5YPXBWDB.html">2026.08.05 トレーディングカードショップワールド熊谷石原店</a> 優勝: あしながコアラ</li><li><a href="events/ntcd-01KZ8E9M1CZQVTX2KVFZ2FGHA3.html">2026.08.05 カードラボ郡山店</a> 優勝: にんにん</li><li><a href="events/ntcd-01KZ8AWSQA2TKFC9GTC0528F6H.html">2026.08.05 アメニティードリーム横浜店</a> 優勝: ヒグえもん</li><li><a href="events/ntcd-01KZ5ZAXTENY7CJ9TNC79DBGAW.html">2026.08.04 ブックオフイオン橋本店</a> 優勝: ガツキ</li><li><a href="events/ntcd-01KZ5ZAYGVEX1FMGTX8WBGX6C4.html">2026.08.04 遊Vic中野店</a> 優勝: Hoichi</li><li><a href="events/ntcd-01KZ5ZB01RNX8Y0ZAAZYTEJ63J.html">2026.08.04 CloveBase秋葉原</a> 優勝: カムン</li><li><a href="events/ntcd-01KZ3KSWC91432VDGR3ZYN4MF2.html">2026.08.03 トレカチャンピオン各務原店</a> 優勝: K。</li><li><a href="events/ntcd-01KZ3GBW54QNVXWGFPTKJN9G9T.html">2026.08.03 トレカショップ竜のしっぽ 布施店</a> 優勝: トワ</li><li><a href="events/ntcd-01KZ3GBTXPDZC0R8EBKP608C16.html">2026.08.03 カードショップ札屋</a> 優勝: マツ</li><li><a href="events/ntcd-01KZ3CY6WRWJ7XBH49RMEWVGB6.html">2026.08.03 Japan TCG Center吉祥寺駅北口店</a> 優勝: koi</li><li><a href="events/ntcd-01KZ3CY4ZC88DF60M84V0ZBZS9.html">2026.08.03 ドラゴンスター町田店</a> 優勝: よし村</li><li><a href="events/ntcd-01KZ32MSK502K0AQRHEVBECEWC.html">2026.08.03 TSUTAYA Trading Card 北千住店</a> 優勝: らぼた</li><li><a href="events/ntcd-01KZ3TNGMCW87Q5X2ENXD45VSY.html">2026.08.03 TSUTAYA 田崎店</a> 優勝: マツシタ</li><li><a href="events/ntcd-01KZ1BPK4EGBZDJ7WVZDTHZJSH.html">2026.08.02 古本市場 福山曙店</a> 優勝: やなだー</li><li><a href="events/ntcd-01KZ1BPJ048WBWXJWABCPNAQDV.html">2026.08.02 カードショップラフテリア</a> 優勝: たかやん</li><li><a href="events/ntcd-01KZ14TPJAQ4AP8M7DGZ0ZPS2C.html">2026.08.02 TSUTAYA BOOK STORE ビバモール寝屋川店</a> 優勝: ヤドン</li><li><a href="events/ntcd-01KZ11D5R7DQW27ETVM7SQ8YH4.html">2026.08.02 トレカ専門店 スーパートレ☆スタ宮崎恒久店</a> 優勝: かべやま</li><li><a href="events/ntcd-01KZ0XZADNTWD2E3CW8HYTWX8N.html">2026.08.02 TSUTAYA BOOKSTORE AIZU</a> 優勝: その場しのぎ</li><li><a href="events/ntcd-01KZ0XZ9TGMEH47NARW0F5MD78.html">2026.08.02 竜星のPAO中野店</a> 優勝: SSQ</li><li><a href="events/ntcd-01KZ0THVJA8M3RMJQEPTFWR8X5.html">2026.08.02 カードラボアバンティ京都店</a> 優勝: ステ</li><li><a href="events/ntcd-01KZ0THTG2EPJK15PKY0PCVXA7.html">2026.08.02 ブックオフ港北綱島西店</a> 優勝: モチモチのベーコン</li><li><a href="events/ntcd-01KZ0THSNVD90M4PT46BGREMZ3.html">2026.08.02 トレカプラザ55大須アメ横店</a> 優勝: ノレア</li><li><a href="events/ntcd-01KZ0Q3DXEJDG2TDK7X1D08ACK.html">2026.08.02 トーナメントセンターバトロコ富山駅前</a> 優勝: まさやん</li><li><a href="events/ntcd-01KZ0Q3D6YW8K9J8GFN61P2B2D.html">2026.08.02 ホビーステーション金沢店</a> 優勝: ウエダジロウ</li><li><a href="events/ntcd-01KZ0Q3BSQ1NJ4F85AAQJ26KHD.html">2026.08.02 TSUTAYA瀬戸店</a> 優勝: なかさん</li><li><a href="events/ntcd-01KZ0Q3B3S7KSPVKW0RWY35KKD.html">2026.08.02 カードショップ彩々アミュプラザ鹿児島店</a> 優勝: ナッカー</li><li><a href="events/ntcd-01KZ0Q3ABFWAEH49TA8PSJN4B4.html">2026.08.02 竜星の嵐名古屋店</a> 優勝: はんぺん</li><li><a href="events/ntcd-01KZ0Q39JZJ62KMRJF5R1Z447W.html">2026.08.02 Duel Stade Ganryu 入間店</a> 優勝: 58</li><li><a href="events/ntcd-01KZ0KPT30YTG4ZQ7J55XN5HMY.html">2026.08.02 ゲームスペース鶴岡</a> 優勝: きょん。</li><li><a href="events/ntcd-01KZ0KPSFYQP5X9PRWE00ZMQ52.html">2026.08.02 バトロコ新津田沼駅前</a> 優勝: mato.</li><li><a href="events/ntcd-01KZ0G8RHTKNAYXRXA76KPDQ9G.html">2026.08.02 カードボックス本の王国大垣店</a> 優勝: K。</li><li><a href="events/ntcd-01KZ0CT02043AX4RT4GMZRWD6B.html">2026.08.02 トレーディングカードショップシエル</a> 優勝: ユニバース師匠</li><li><a href="events/ntcd-01KZ0CSZD9QX255GCVH6FNJFBY.html">2026.08.02 コミかる伊勢崎店</a> 優勝: 春夏冬風見</li><li><a href="events/ntcd-01KZ3CY6225DTB00S2AJYFYWM4.html">2026.08.02 トレカショップ トレカ99</a> 優勝: ひろはむ</li><li><a href="events/ntcd-01KZ2RB2F0K60ZX7DW7KYP58VH.html">2026.08.02 アメニティードリーム秋葉原店</a> 優勝: たぼー</li><li><a href="events/ntcd-01KZ2MX2B8M6WT7N881TY15H9H.html">2026.08.02 フタバ図書TSUTAYA三次店</a> 優勝: 神崎</li><li><a href="events/ntcd-01KYYSAH7V4EGQS9CMF8EDZVCK.html">2026.08.01 ビデオインアメリカ尼崎店</a> 優勝: ハスオ</li><li><a href="events/ntcd-01KYYSAGJP96DJAZYKA1TM3MT7.html">2026.08.01 POCKET HOBBY</a> 優勝: バリアント</li><li><a href="events/ntcd-01KYYF0RM0XZSSFSXETXAQD9XE.html">2026.08.01 GIRAFULL京都店</a> 優勝: ELIE</li><li><a href="events/ntcd-01KYXTCZ5G4513GTX5EAN7KB2A.html">2026.08.01 港北いわや</a> 優勝: 次元</li><li><a href="events/ntcd-01KYXXVNTR0BKDCNNMDWC792ZT.html">2026.08.01 トレーディングカードゲームショップ193名駅太閤店</a> 優勝: SYLPHY</li><li><a href="events/ntcd-01KYXXVPG6H5CY32D4J4EKRJ45.html">2026.08.01 お宝弁財天 feat. パンドラ</a> 優勝: ニンニン。</li><li><a href="events/ntcd-01KYY191ZYHAJ1D63HA8G07J83.html">2026.08.01 アメニティードリーム池袋パワー9店</a> 優勝: クボタンク</li><li><a href="events/ntcd-01KYY192M758S24QKF7Z44JBSM.html">2026.08.01 カードラボ新潟店</a> 優勝: ジャグ</li><li><a href="events/ntcd-01KYY4PXV6S92WJ2NJ4Q8CCW6T.html">2026.08.01 カードTVゲームショップりらい</a> 優勝: たなっきー</li><li><a href="events/ntcd-01KYY4PYQRT4X5QE507YBXNDWV.html">2026.08.01 TSUTAYA宮古店</a> 優勝: あにゃお</li><li><a href="events/ntcd-01KYY84RTEWH7JVP86A4WPETAD.html">2026.08.01 コーギーアール本店</a> 優勝: かん</li><li><a href="events/ntcd-01KYY84VCAHED4WXQ3NV4Y5RZY.html">2026.08.01 トレカ専門店 スーパートレ☆スタ宮崎駅前店</a> 優勝: ゾノ</li><li><a href="events/ntcd-01KYYBJFKZ81YVZSHW5HGAMWJV.html">2026.08.01 カードゲームのシーガル イオン福島店</a> 優勝: ラキお</li><li><a href="events/ntcd-01KYY84SFTJNK7FSC8S4ZH2MX7.html">2026.08.01 エディオンなんば本店 トレカキャピタルなんば</a> 優勝: クボ</li><li><a href="events/ntcd-01KYY84TQXYX1GDFBDK4AVPCYG.html">2026.08.01 ストレージワン</a> 優勝: カイリキー</li><li><a href="events/6306505.html">2026.06.28 カードランド秋葉原店</a> 優勝: アリマ</li><li><a href="events/6318317.html">2026.06.28 S CARD OASIS 大垣店</a> 優勝: モリモリ</li><li><a href="events/6320771.html">2026.06.28 カードラボ岐阜店</a> 優勝: ノブナガ</li><li><a href="events/6357511.html">2026.06.28 ホビーショップぼっけもん</a> 優勝: こあん</li><li><a href="events/6359513.html">2026.06.28 カードTVゲームショップりらい</a> 優勝: ヒラタク</li><li><a href="events/6362479.html">2026.06.28 マスターズギルド</a> 優勝: ふかまる</li><li><a href="events/6485174.html">2026.06.28 カードキングダム徳島店</a> 優勝: A-XIN</li><li><a href="events/6494549.html">2026.06.28 TSUTAYA新居浜店</a> 優勝: のりまToon</li><li><a href="events/6510550.html">2026.06.28 イエローサブマリンマジッカーズ福岡店</a> 優勝: じぇい</li><li><a href="events/6512345.html">2026.06.28 ブックオフプラス福岡糸島トレカ館</a> 優勝: ぽるんが</li><li><a href="events/6516351.html">2026.06.28 カードゲームショップ オレタン岡山本店</a> 優勝: ナナシ</li><li><a href="events/6516745.html">2026.06.28 TSUTAYA BOOKSTORE AIZU</a> 優勝: ハク</li><li><a href="events/6517780.html">2026.06.28 Japan TCG Center那覇沖映通り店</a> 優勝: AQUA</li><li><a href="events/6529874.html">2026.06.28 PAO青梅</a> 優勝: たなみ</li><li><a href="events/6535965.html">2026.06.28 カードボックス イオンモール徳島店</a> 優勝: 零影ゼロ</li><li><a href="events/6642660.html">2026.06.28 ガンダムカードゲーム 公式ショップ 埼玉 越谷レイクタウン店</a> 優勝: ふう</li><li><a href="events/6380714.html">2026.06.27 トレカプラザ55大須アメ横店</a> 優勝: K</li><li><a href="events/6424224.html">2026.06.27 カードボックス福山店</a> 優勝: ユッキー</li><li><a href="events/6442716.html">2026.06.27 カード＆ホビーショップ ドラグーン住吉</a> 優勝: ふる</li><li><a href="events/6474159.html">2026.06.27 マナソース和歌山駅前店</a> 優勝: マーボ</li><li><a href="events/6508795.html">2026.06.27 TCGショップ193 ザザシティ浜松店</a> 優勝: クリーム池田</li><li><a href="events/6553965.html">2026.06.26 プレイズ大阪日本橋本店</a> 優勝: なまもの</li><li><a href="events/6306509.html">2026.06.25 S CARD OASIS 鳳店</a> 優勝: sefi</li><li><a href="events/6487525.html">2026.06.25 G-PROJECT本店</a> 優勝: mao</li><li><a href="events/6535076.html">2026.06.25 ブックオフチャチャタウン小倉店</a> 優勝: ソーキ</li><li><a href="events/6551387.html">2026.06.25 カードラボ大阪日本橋店</a> 優勝: ポムランタン</li><li><a href="events/6332571.html">2026.06.24 BOOKOFF SUPER BAZAAR イトーヨーカドー八王子店</a> 優勝: TAC</li><li><a href="events/6402194.html">2026.06.24 ハリケーン川西店</a> 優勝: K</li><li><a href="events/6494133.html">2026.06.24 BOOKOFFSUPERBAZAARノースポート･モール店</a> 優勝: カナアド</li><li><a href="events/6510266.html">2026.06.24 アメニティードリーム吉祥寺店</a> 優勝: 70</li><li><a href="events/6347169.html">2026.06.23 チェルモサード</a> 優勝: 隠居カービィ</li><li><a href="events/6403433.html">2026.06.22 カードショップ＠ほ～む。熊本店</a> 優勝: とも</li><li><a href="events/6493382.html">2026.06.22 カードラボ名古屋駅前店</a> 優勝: からち</li><li><a href="events/6318795.html">2026.06.21 レプトンカード館五日市店</a> 優勝: シンタ</li><li><a href="events/6348172.html">2026.06.21 カードショップアヴァロン</a> 優勝: 天下</li><li><a href="events/6410779.html">2026.06.21 TSUTAYA BOOKSTORE宮交シティ</a> 優勝: HRZ</li><li><a href="events/6412561.html">2026.06.21 +upside（アップサイド）</a> 優勝: クロエ</li><li><a href="events/6451453.html">2026.06.21 カードボックス玉島店</a> 優勝: 楠木たいほーん</li><li><a href="events/6455989.html">2026.06.21 フルコンプ福岡天神店</a> 優勝: Nラティブ(ナラティブ)@九州LABO会</li><li><a href="events/6472623.html">2026.06.21 トレカショップ　トレカ99</a> 優勝: NationalKaikan</li><li><a href="events/6472629.html">2026.06.21 ビデオインアメリカ一宮店</a> 優勝: タケル</li><li><a href="events/6473160.html">2026.06.21 カードゲームのシーガル仙台駅前店</a> 優勝: あゆむ</li><li><a href="events/6485520.html">2026.06.21 TSUTAYA光吉店</a> 優勝: るるいえ</li><li><a href="events/6492566.html">2026.06.21 BOOKOFF西尾下町店</a> 優勝: ヒロ</li><li><a href="events/6503874.html">2026.06.21 カードショップ彩々 鹿児島店</a> 優勝: こあん</li><li><a href="events/6514978.html">2026.06.21 カードボックスイオンモール高知店</a> 優勝: ふなっく</li><li><a href="events/6515567.html">2026.06.21 カードラボ豊橋店</a> 優勝: 負け猫</li><li><a href="events/6547014.html">2026.06.21 トーナメントセンターバトロコ旭川駅前</a> 優勝: water.</li><li><a href="events/6336364.html">2026.06.20 ふるいちイオンモール白山店</a> 優勝: Ripple</li><li><a href="events/6368671.html">2026.06.20 カードゲームのシーガル郡山店</a> 優勝: rua</li><li><a href="events/6392290.html">2026.06.20 お宝弁財天 feat. パンドラ</a> 優勝: アンピージャー</li><li><a href="events/6399790.html">2026.06.20 TSUTAYA宮古店</a> 優勝: しん</li><li><a href="events/6441740.html">2026.06.20 TSUTAYA田宮店</a> 優勝: あきますたー</li><li><a href="events/6457139.html">2026.06.20 カードゲームのシーガル イオン福島店</a> 優勝: ラキ</li><li><a href="events/6457761.html">2026.06.20 ビデオインアメリカ大徳寺店</a> 優勝: RinnE</li><li><a href="events/6474465.html">2026.06.20 竜星の嵐 高松店</a> 優勝: つよし</li><li><a href="events/6486934.html">2026.06.20 ホビーショップ パワーナイン</a> 優勝: キクショー</li><li><a href="events/6509663.html">2026.06.20 カードショップ彩々 国分店</a> 優勝: ちょこみん</li><li><a href="events/6537249.html">2026.06.20 カードラボ千葉中央店</a> 優勝: ワン</li><li><a href="events/6642658.html">2026.06.20 ガンダムカードゲーム 公式ショップ 福岡 キャナルシティ博多店</a> 優勝: ウミエル</li><li><a href="events/6371094.html">2026.06.19 カードボックス横浜西口店/(株)ネクスト･ワン</a> 優勝: NEPA</li><li><a href="events/6472345.html">2026.06.19 ドラゴンスター日本橋2号店</a> 優勝: ミヤタ</li><li><a href="events/6422011.html">2026.06.18 青馬堂本店</a> 優勝: アクア</li><li><a href="events/6485066.html">2026.06.18 ホビーステーション名古屋大須本店</a> 優勝: のっぽ</li><li><a href="events/6502416.html">2026.06.18 ドラゴンスター秋葉原駅前店</a> 優勝: 人民武力省</li><li><a href="events/6504500.html">2026.06.18 カードラボオタロード本店</a> 優勝: 藤村　和晃</li><li><a href="events/6346315.html">2026.06.17 カードラボ宇都宮店</a> 優勝: ゼンマイ忍者</li><li><a href="events/6484697.html">2026.06.17 ホビーステーション大宮店</a> 優勝: koi</li><li><a href="events/6539694.html">2026.06.17 カードボックスオーサカ店</a> 優勝: ろく</li><li><a href="events/6474120.html">2026.06.16 スポーツカード＆カードゲームショップ MINT名古屋店</a> 優勝: Moth（もす）</li><li><a href="events/6483461.html">2026.06.16 蔦屋書店茂原店</a> 優勝: 宇宙海賊</li><li><a href="events/6494225.html">2026.06.16 トーナメントセンターバトロコ柏駅前</a> 優勝: Aimer</li><li><a href="events/6503336.html">2026.06.16 TSUTAYA流山おおたかの森駅前店</a> 優勝: シグナ</li><li><a href="events/6535316.html">2026.06.16 トレカチャンピオン江南店</a> 優勝: ヌル</li><li><a href="events/6334740.html">2026.06.15 アメニティードリーム町田店</a> 優勝: べーなー</li><li><a href="events/6305945.html">2026.06.14 TSUTAYA瀬戸店</a> 優勝: marìa</li><li><a href="events/6308822.html">2026.06.14 カードショップラフテリア</a> 優勝: なり</li><li><a href="events/6317159.html">2026.06.14 ホビーステーション金沢店</a> 優勝: なかなか</li><li><a href="events/6349354.html">2026.06.14 蔦屋書店熊本三年坂</a> 優勝: nao</li><li><a href="events/6359453.html">2026.06.14 フルコンプPLAYERS CENTER 札幌駅前店</a> 優勝: 限界社畜おじさんゴッド限界社畜おじさん</li><li><a href="events/6360774.html">2026.06.14 GameSpace&amp;cafeドラグーン博多</a> 優勝: くまがわ</li><li><a href="events/6378078.html">2026.06.14 イエローサブマリン名古屋GAMESHOP</a> 優勝: ヒロ</li><li><a href="events/6392767.html">2026.06.14 レプトン出汐店</a> 優勝: AK310</li><li><a href="events/6392844.html">2026.06.14 ブックエース小名浜住吉店</a> 優勝: キョム</li><li><a href="events/6401408.html">2026.06.14 トーナメントセンターバトロコ富山駅前</a> 優勝: OKD</li><li><a href="events/6411338.html">2026.06.14 トレカエース下妻店（ブックエースTSUTAYA下妻店）</a> 優勝: ユウシュン</li><li><a href="events/6434616.html">2026.06.14 竜星の嵐名古屋店</a> 優勝: まるまる</li><li><a href="events/6456705.html">2026.06.14 ゲームスペースあなーば</a> 優勝: ぶー</li><li><a href="events/6463865.html">2026.06.14 古本市場 福山曙店</a> 優勝: あべかわ</li><li><a href="events/6486153.html">2026.06.14 ゲーム館ビート</a> 優勝: ゴップ提督</li><li><a href="events/6494193.html">2026.06.14 CARDBOXアリオン塩冶店</a> 優勝: ヨシヤマ</li><li><a href="events/6494938.html">2026.06.14 コミかる高崎店</a> 優勝: キクチ</li><li><a href="events/6495373.html">2026.06.14 BOOKSながしま</a> 優勝: アスラ</li><li><a href="events/6503450.html">2026.06.14 MINT GAMES 池袋店</a> 優勝: ウニすけ</li><li><a href="events/6506629.html">2026.06.14 カードゲームショップどみなり屋</a> 優勝: しんく</li><li><a href="events/6506712.html">2026.06.14 プレイズ西尾シャオ店</a> 優勝: 智也</li><li><a href="events/6510980.html">2026.06.14 アメニティードリームなんば2号店</a> 優勝: アンブレラ将軍</li><li><a href="events/6515378.html">2026.06.14 G-PROJECT中津店</a> 優勝: ぽるんが</li><li><a href="events/6517252.html">2026.06.14 アメニティードリーム札幌店</a> 優勝: $$$</li><li><a href="events/6529498.html">2026.06.14 TSUTAYAデイズタウンつくば</a> 優勝: Dwan(ダン)</li><li><a href="events/6530779.html">2026.06.14 シーガル泉中央店</a> 優勝: スズキ</li><li><a href="events/6304280.html">2026.06.13 トレカショップ竜のしっぽ　布施店</a> 優勝: ザクザク</li><li><a href="events/6330734.html">2026.06.13 カードラボなんば店</a> 優勝: まききゅ〜</li><li><a href="events/6346148.html">2026.06.13 BOOKOFFSUPERBAZAAR甲府貢川店</a> 優勝: ナベ</li><li><a href="events/6349051.html">2026.06.13 ブックオフイトーヨーカドー溝ノ口店</a> 優勝: 青騎士</li><li><a href="events/6369822.html">2026.06.13 遊ING浜町店</a> 優勝: まめ</li><li><a href="events/6391584.html">2026.06.13 リバティ鑑定倶楽部王子店</a> 優勝: メサキ</li><li><a href="events/6398952.html">2026.06.13 TSUTAYA BOOK STORE ビバモール寝屋川店</a> 優勝: ヤマ</li><li><a href="events/6422920.html">2026.06.13 トレーディングカードゲームショップ193大須店</a> 優勝: かなー</li><li><a href="events/6443358.html">2026.06.13 タッチ松本店</a> 優勝: スクショ後輩</li><li><a href="events/6450983.html">2026.06.13 サンエイト沼津店</a> 優勝: オータニ</li><li><a href="events/6467579.html">2026.06.13 ブックマーケット 野々市新庄店</a> 優勝: ヒ◯</li><li><a href="events/6476188.html">2026.06.13 カードラボ池袋店</a> 優勝: しゃかぐき</li><li><a href="events/6485559.html">2026.06.13 TSUTAYA AVクラブ 玉名店</a> 優勝: きゃうぇうぇ</li><li><a href="events/6492360.html">2026.06.13 TSUTAYA AVクラブ 岡富店</a> 優勝: yozora</li><li><a href="events/6494246.html">2026.06.13 TSUTAYAブックセンター名豊刈谷店</a> 優勝: ポッケ</li><li><a href="events/6494478.html">2026.06.13 TCGShop193秋葉原店</a> 優勝: サトウキビ</li><li><a href="events/6494895.html">2026.06.13 カードボックス広島店</a> 優勝: トウマ</li><li><a href="events/6503923.html">2026.06.13 トレカショップ竜のしっぽ 姫路店</a> 優勝: yyy</li><li><a href="events/6510464.html">2026.06.13 TSUTAYA Trading Card錦糸町</a> 優勝: アリマ</li><li><a href="events/6510802.html">2026.06.13 V100徳島藍住店</a> 優勝: 木野潤</li><li><a href="events/6529276.html">2026.06.13 DuelStadeGanryuひたち野うしく店</a> 優勝: シリュウ</li><li><a href="events/6529512.html">2026.06.13 カードラボ所沢店</a> 優勝: テルテル</li><li><a href="events/6529790.html">2026.06.13 TSUTAYAあべの橋店</a> 優勝: ゆうや</li><li><a href="events/6567484.html">2026.06.13 TSUTAYA西友町田店</a> 優勝: カズノコ</li><li><a href="events/6503781.html">2026.06.12 元野木書店</a> 優勝: mao</li><li><a href="events/6511666.html">2026.06.12 ビデオインアメリカ京都西七条店</a> 優勝: ジュウザ</li><li><a href="events/6504334.html">2026.06.11 アメニティードリーム立川店</a> 優勝: あまとう</li><li><a href="events/6512257.html">2026.06.11 ドラゴンスター日本橋3号店</a> 優勝: さべ</li><li><a href="events/6307256.html">2026.06.10 BANDAI CARD GAMES 公式ショップ デクスタ ー DECKS STADIUM―(デックス スタジアム）</a> 優勝: とうま</li><li><a href="events/6504984.html">2026.06.10 カードラボ浜松店</a> 優勝: はたぼー</li><li><a href="events/6522142.html">2026.06.10 トレカチャンピオン豊橋牛川店</a> 優勝: ユーリ</li><li><a href="events/6567304.html">2026.06.10 カードラボ郡山店</a> 優勝: ユウ@宮城勢</li><li><a href="events/6333552.html">2026.06.09 コーギーアール大宮駅前店</a> 優勝: テルテル</li><li><a href="events/6334065.html">2026.06.09 CloveBase秋葉原</a> 優勝: 地蔵要塞カムイ</li><li><a href="events/6335990.html">2026.06.09 カードラボ広島店</a> 優勝: お父さん</li><li><a href="events/6390368.html">2026.06.09 遊Vic中野店</a> 優勝: shige32</li><li><a href="events/6410781.html">2026.06.09 Card Secret</a> 優勝: しりゅーじいちゃん</li><li><a href="events/6515569.html">2026.06.09 ブックオフイオン橋本店</a> 優勝: にゃんたろ</li></ul><p>全841件のイベント個別ページは sitemap.xml に収載しています。</p></div>
+    <!-- SEO:END -->
   </main>
 
   <div id="footer"></div>
@@ -213,40 +269,169 @@
   <script>
     GCG.init();
 
-    let currentFilter = 'top4'; // 'win', 'top4', 'all'
-    let currentRegion = null;   // null = 全地域, or region name string
-    let currentDateStart = '';
-    let currentDateEnd = '';
-    let deckTypes = [];
-    let selectedType = null;
-    let cardNames = {};
-    let cardColors = {};
-    let eventsDataGlobal = null;
-    let summaryDataGlobal = null;
-    let pieChart = null;
-    let allSeriesMap = {};
-    let currentSeriesId = '';
+    // ============================================================
+    // 2026-08-06 指示書67: 環境分析 × イベント一覧の一体化
+    //
+    // 【データの取り方】
+    //   初期表示は data/events_index.json(軽量索引) と data/meta_stats.json(事前集計) だけで描く。
+    //   data/events.json(14.5MB) は「デッキの中身が要る操作」に入ったときだけ遅延ロードする:
+    //     - 既定条件から外れた状態でカード採用率を見るとき
+    //     - 店舗名/プレイヤー名検索を使うとき(索引に選手名を入れていないため。裁定②)
+    //
+    // 【type_key(デッキタイプ識別子)】
+    //   発行元裁定①により、サイト全体で「上位2色・GCG.DECK_COLOR_ORDER 順」を正とする。
+    //   以前は meta.html だけ辞書順で、index.html からの ?type= が
+    //   Red+Purple / White+Purple / Red+Green の3タイプで着地しなかった。
+    //   受け取り側は normalizeTypeKey() で旧並びの URL も拾う(後方互換)。
+    //
+    // 【common.js の ?v= は据え置き(鉄則)】
+    //   そのため common.js に足した新関数は「あれば使う / 無ければローカル実装」で必ず受ける。
+    // ============================================================
 
-    function pickDefaultSeries() {
-      var list = Object.values(allSeriesMap || {});
-      if (!list.length) return '';
-      var active = list.filter(function(s){return s.status === 'active';});
-      if (active.length) return active.sort(function(a,b){return (a.start_date||'').localeCompare(b.start_date||'');})[0].id;
-      var upcoming = list.filter(function(s){return s.status === 'upcoming';})
-        .sort(function(a,b){return (a.start_date||'').localeCompare(b.start_date||'');});
-      if (upcoming.length) return upcoming[0].id;
-      var completed = list.filter(function(s){return s.status === 'completed';})
-        .sort(function(a,b){return (b.start_date||'').localeCompare(a.start_date||'');});
-      if (completed.length) return completed[0].id;
-      return '';
+    // ---- common.js 未更新キャッシュへの備え(既存の防御パターン踏襲) ----
+    var DECK_COLOR_ORDER = (GCG.DECK_COLOR_ORDER && GCG.DECK_COLOR_ORDER.length)
+      ? GCG.DECK_COLOR_ORDER : ['Blue', 'Red', 'Green', 'White', 'Purple'];
+    var REGION_ORDER = (GCG.REGION_ORDER && GCG.REGION_ORDER.length)
+      ? GCG.REGION_ORDER : ['北海道', '東北', '関東', '中部', '関西', '中国', '四国', '九州', 'その他'];
+
+    function sortDeckColors(colors) {
+      if (GCG.sortDeckColors) return GCG.sortDeckColors(colors);
+      return (colors || []).slice().sort(function (a, b) {
+        var ia = DECK_COLOR_ORDER.indexOf(a), ib = DECK_COLOR_ORDER.indexOf(b);
+        if (ia < 0) ia = DECK_COLOR_ORDER.length;
+        if (ib < 0) ib = DECK_COLOR_ORDER.length;
+        return ia - ib;
+      });
+    }
+    // 区切りに空白も許す(重要):
+    //   index.html は `meta.html?type=Blue+Purple` のように **+ を生のまま** 出す。
+    //   クエリ文字列の `+` は URLSearchParams が半角スペースへデコードするため、
+    //   受け側には 'Blue Purple' として届く。'+' しか見ないと2色タイプが1つも着地しない。
+    //   古い common.js がキャッシュされている場合は GCG 側が旧実装(+のみ)になり得るので、
+    //   URL 由来の値はここで先に空白を + へ寄せてから渡す。
+    function normalizeTypeKey(key) {
+      if (!key) return '';
+      var k = String(key).trim().replace(/\s+/g, '+');
+      if (GCG.normalizeTypeKey) return GCG.normalizeTypeKey(k);
+      return sortDeckColors(k.split(/[+\s]+/).filter(Boolean)).join('+');
+    }
+    function regionRank(name) {
+      if (GCG.regionRank) return GCG.regionRank(name);
+      var i = REGION_ORDER.indexOf(name);
+      return i < 0 ? REGION_ORDER.length : i;
+    }
+    function sortRegionNames(names) {
+      if (GCG.sortRegions) return GCG.sortRegions(names);
+      return (names || []).slice().sort(function (a, b) {
+        var d = regionRank(a) - regionRank(b);
+        return d !== 0 ? d : String(a).localeCompare(String(b));
+      });
+    }
+    async function loadEventsIndex() {
+      if (GCG.loadEventsIndex) return GCG.loadEventsIndex();
+      try {
+        var res = await fetch(GCG.getBasePath() + 'data/events_index.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return await res.json();
+      } catch (e) {
+        console.error('events_index.json の読み込みに失敗:', e);
+        return null;
+      }
     }
 
-    // シリーズごとのイベント件数を数える(タブの出し分けに使う)
+    // ---- 状態 ----
+    const ITEMS_PER_PAGE = 30;
+    let currentFilter = 'top4';   // 'win' | 'top4' | 'all'
+    let currentRegion = null;     // null = 全地域
+    let currentDateStart = '';
+    let currentDateEnd = '';
+    let currentSeriesId = '';
+    let selectedType = null;      // カード採用率タブの選択(従来どおり必ず1つ選ばれる)
+    let filterType = null;        // イベント一覧の絞り込み(未選択なら null)
+    let currentPage = 1;
+    let searchText = '';
+
+    let indexData = null;         // events_index.json
+    let metaStats = null;         // meta_stats.json
+    let allSeriesMap = {};
+    let cardNames = {};
+    let deckTypes = [];           // 現在の条件で集計したデッキタイプ一覧
+    let filteredEvents = [];      // 現在の条件を通ったイベント(索引の形)
+    let pieChart = null;
+
+    // 遅延ロード分
+    let eventsDataGlobal = null;  // events.json
+    let cardColors = null;        // card_colors.json
+    let heavyPromise = null;      // 多重取得の防止
+
+    // ============================================================
+    // 遅延ロード
+    // ============================================================
+    // events.json を1回だけ取りに行く。
+    // GCG.loadEvents() は失敗しても reject せず {series:{},events:{}} を返すので、
+    // 「取れたが空」を失敗として扱い、メモ化を解除して次の操作でやり直せるようにする
+    // (1回の通信失敗でセッション中ずっと検索とカード採用率が死ぬのを避ける)。
+    function ensureHeavyData() {
+      if (heavyPromise) return heavyPromise;
+      heavyPromise = (async function () {
+        const ev = await GCG.loadEvents();
+        const ok = !!(ev && ev.events && Object.keys(ev.events).length);
+        if (!ok) {
+          GCG._eventsData = null;   // common.js 側のキャッシュも捨てて再取得できるようにする
+          heavyPromise = null;
+          throw new Error('events.json を取得できませんでした');
+        }
+        eventsDataGlobal = ev;
+        return true;
+      })();
+      return heavyPromise;
+    }
+
+    // 索引が使えないときだけ必要になる(通常経路では取得しない)
+    async function ensureCardColors() {
+      if (cardColors) return cardColors;
+      try {
+        const r = await fetch(GCG.getBasePath() + 'data/card_colors.json');
+        cardColors = r.ok ? await r.json() : {};
+      } catch (_) { cardColors = {}; }
+      return cardColors;
+    }
+
+    function getCardColor(cardId) {
+      return (cardColors && cardColors[cardId]) || 'Unknown';
+    }
+
+    // デッキ(カード配列)→ 上位2色。索引生成側 deckTypeColorsOf() と同一規則。
+    function detectDeckColors(deck) {
+      if (GCG.deckTypeColors) return GCG.deckTypeColors(deck, getCardColor);
+      const counts = {};
+      for (const card of deck) {
+        const col = getCardColor(card.card_id);
+        if (!col || col === 'Unknown' || col === 'Colorless') continue;
+        counts[col] = (counts[col] || 0) + card.count;
+      }
+      const sorted = Object.entries(counts).sort(function (a, b) { return b[1] - a[1]; });
+      if (sorted.length >= 2) return sortDeckColors([sorted[0][0], sorted[1][0]]);
+      if (sorted.length === 1) return [sorted[0][0]];
+      return ['Unknown'];
+    }
+
+    function colorsOfTypeKey(typeKey) {
+      return String(typeKey || '').split('+').filter(Boolean);
+    }
+    function labelOfTypeKey(typeKey) {
+      return colorsOfTypeKey(typeKey)
+        .map(function (c) { return (GCG.DECK_COLORS[c] || GCG.DECK_COLORS.Unknown).jp; })
+        .join('/');
+    }
+
+    // ============================================================
+    // シリーズ(既存ロジックをそのまま継承)
+    // ============================================================
     function countEventsBySeries() {
       var c = {};
-      var evs = (eventsDataGlobal && eventsDataGlobal.events) || {};
-      Object.keys(evs).forEach(function(k){
-        var sid = String((evs[k] && evs[k].series_id) || '');
+      ((indexData && indexData.events) || []).forEach(function (ev) {
+        var sid = String(ev.s || '');
         if (sid) c[sid] = (c[sid] || 0) + 1;
       });
       return c;
@@ -255,15 +440,11 @@
     // ---- 同名シリーズのまとめ表示(2026-08-03 松岡さん指示「重複分は1つにまとめる」) ----
     // 公式のNTCは同じ名前で月ごとに別シリーズとして登録されている。
     //   例: 「NTC MISSION3」= 5月開催(id 6776) + 6月開催(id 6791)
-    // タブが同じ名前で2つ並ぶと選び分けられないため、**表示上は1つのタブにまとめて**
+    // タブが同じ名前で2つ並ぶと選び分けられないため、表示上は1つのタブにまとめて
     // 両方の結果をあわせて集計する。データ・URL・シリーズページ(SEO)は変更しない。
-    // 月ごとに見たい場合は、まとめたタブを選んだあとに期間フィルターを絞れば分けられる。
     function seriesGroupKey(s) {
       return String((s && (s.short_name || s.display_name || s.id)) || '');
     }
-    // シリーズID → 同じ名前でまとめる対象のID一覧。
-    // 結果が0件のシリーズは(タブに出さないのと同じ理由で)まとめ対象から外す。
-    // ただし今選ばれているID自身は必ず含める(選択中の表示が消えないように)。
     function seriesGroupIds(sid) {
       if (!sid) return [];
       var map = allSeriesMap || {};
@@ -271,7 +452,7 @@
       if (!self) return [String(sid)];
       var key = seriesGroupKey(self);
       var counts = countEventsBySeries();
-      var ids = Object.keys(map).filter(function(id){
+      var ids = Object.keys(map).filter(function (id) {
         return seriesGroupKey(map[id]) === key &&
           ((counts[String(id)] || 0) > 0 || String(id) === String(sid));
       }).map(String);
@@ -279,16 +460,13 @@
       return ids;
     }
 
-    // シリーズIDから {start, end} を返す。'' (全シリーズ) の場合は全期間を意味する空文字。
-    // 同名シリーズをまとめている場合は、まとめた全体の期間(最小start〜最大end)を返す。
     function getSeriesRangeById(sid) {
       if (!sid) return { start: '', end: '' };
       var ids = seriesGroupIds(sid);
       var start = '', end = '';
       // 期間が未設定のシリーズがまとめ対象に含まれる場合は、その側を「制限なし」にする。
-      // (兄弟シリーズの狭い期間を当ててしまい、結果が日付フィルターで落ちるのを防ぐ)
       var noStart = false, noEnd = false;
-      ids.forEach(function(id){
+      ids.forEach(function (id) {
         var s = allSeriesMap[id];
         if (!s) return;
         var r = GCG.getSeriesDateRange ? GCG.getSeriesDateRange(s)
@@ -299,22 +477,32 @@
       return { start: noStart ? '' : start, end: noEnd ? '' : end };
     }
 
+    function pickDefaultSeries() {
+      var list = Object.values(allSeriesMap || {});
+      if (!list.length) return '';
+      var active = list.filter(function (s) { return s.status === 'active'; });
+      if (active.length) return active.sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); })[0].id;
+      var upcoming = list.filter(function (s) { return s.status === 'upcoming'; })
+        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); });
+      if (upcoming.length) return upcoming[0].id;
+      var completed = list.filter(function (s) { return s.status === 'completed'; })
+        .sort(function (a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); });
+      if (completed.length) return completed[0].id;
+      return '';
+    }
+
     function renderSeriesSelector() {
       var el = document.getElementById('series-selector-area');
       if (!el) return;
       // 結果が1件も無いシリーズはタブに出さない(2026-08-03 松岡さん指示)。
-      // 例: 8月時点では「MISSION4 9月開催」を選ぶ理由が無い。
-      // 結果が入った時点で自動的に表示される(日付ではなくデータ件数で判定するため)。
-      // ただし URL で明示的に選択されているシリーズは、選択中の表示が消えないよう残す。
       var counts = countEventsBySeries();
       var list = Object.values(allSeriesMap || {})
-        .filter(function(s){ return (counts[String(s.id)] || 0) > 0 || String(s.id) === String(currentSeriesId); })
-        .sort(function(a,b){return (b.start_date||'').localeCompare(a.start_date||'');});
+        .filter(function (s) { return (counts[String(s.id)] || 0) > 0 || String(s.id) === String(currentSeriesId); })
+        .sort(function (a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); });
       if (!list.length) { el.innerHTML = ''; return; }
-      // 同名シリーズは1つのタブにまとめる(代表は新しい方。list は start_date の降順)
-      var groupIndex = Object.create(null); // シリーズ名が __proto__ 等でも壊れないように
+      var groupIndex = Object.create(null);
       var groups = [];
-      list.forEach(function(s){
+      list.forEach(function (s) {
         var key = seriesGroupKey(s);
         if (groupIndex[key] !== undefined) { groups[groupIndex[key]].ids.push(String(s.id)); return; }
         groupIndex[key] = groups.length;
@@ -322,16 +510,16 @@
       });
       var tabs = [];
       tabs.push('<button type="button" class="series-tab' + (currentSeriesId === '' ? ' is-active' : '') + '" data-sid="">全シリーズ</button>');
-      groups.forEach(function(g){
+      groups.forEach(function (g) {
         var isActive = g.ids.indexOf(String(currentSeriesId)) >= 0;
         var label = GCG.escapeHtml(g.rep.short_name || g.rep.display_name || g.rep.id);
         tabs.push('<button type="button" class="series-tab' + (isActive ? ' is-active' : '') + '" data-sid="' + GCG.escapeHtml(g.rep.id) + '">' + label + '</button>');
       });
       el.innerHTML = tabs.join('');
-      el.querySelectorAll('.series-tab').forEach(function(btn){
-        btn.addEventListener('click', function(){
+      el.querySelectorAll('.series-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
           currentSeriesId = btn.getAttribute('data-sid') || '';
-          el.querySelectorAll('.series-tab').forEach(function(b){ b.classList.remove('is-active'); });
+          el.querySelectorAll('.series-tab').forEach(function (b) { b.classList.remove('is-active'); });
           btn.classList.add('is-active');
           // シリーズ切替時: 期間を新シリーズの start_date/end_date に自動更新
           var r = getSeriesRangeById(currentSeriesId);
@@ -342,246 +530,260 @@
           currentDateStart = r.start || '';
           currentDateEnd = r.end || '';
           renderWithFilter();
-          var u = new URL(window.location.href);
-          if (currentSeriesId) u.searchParams.set('series_id', currentSeriesId);
-          else u.searchParams.delete('series_id');
-          window.history.replaceState({}, '', u.toString());
+          syncUrl();
         });
       });
     }
 
-    async function loadCardNames() {
-      try {
-        const resp = await fetch(GCG.getBasePath() + 'data/card_names.json');
-        if (resp.ok) cardNames = await resp.json();
-      } catch (e) { /* ignore */ }
+    // ============================================================
+    // NTC64(64名定員)の順位変換
+    //   索引は「変換前の rank」と「results 総数(c)」を持つ。
+    //   events.json 経路と同じ規則をここで再現する(rank→ceil(rank/2), 集計上限 TOP8)。
+    // ============================================================
+    function isNtc64(ev) {
+      if (!ev || (ev.c || 0) < 16) return false;
+      var sid = String(ev.s || '');
+      var s = allSeriesMap[sid];
+      if (s && s.type === 'ntc') return true;
+      // series.json が取れなかった場合の保険。
+      // shared/ntc-rank-consolidator.js の NTC_SERIES_IDS と同じ役割で、
+      // 同ファイルの isTargetEvent() 側にもこの保険があるため、判定を揃えておく
+      // (揃えないと「デッキタイプ表は閾値4 / カード採用率は閾値8」の食い違いが起きる)。
+      var ids = (window.NtcRankConsolidator && window.NtcRankConsolidator.NTC_SERIES_IDS) || [];
+      return ids.indexOf(sid) >= 0;
     }
 
-    async function loadCardColors() {
-      try {
-        const resp = await fetch(GCG.getBasePath() + 'data/card_colors.json');
-        if (resp.ok) cardColors = await resp.json();
-      } catch (e) { /* ignore */ }
-    }
-
-    function getCardName(cardId) {
-      return cardNames[cardId] || '';
-    }
-
-    // デッキのカラーを判定（カードの色の上位2色）
-    function detectDeckColors(deck) {
-      const colorCount = {};
-      for (const card of deck) {
-        const color = cardColors[card.card_id];
-        if (color && color !== 'Unknown') {
-          colorCount[color] = (colorCount[color] || 0) + card.count;
-        }
+    // 索引1件を、順位フィルタに通る [{pos, rank, type_key}] へ変換して返す。
+    // pos は「デッキを持つ結果」を results の並び順で数えた位置。
+    // events.json 側を同じ規則で走査すれば位置で対応づけられる
+    // (rank は同一イベント内で重複しうるのでキーに使えない)。
+    function passingResults(ev, filter) {
+      var ntc = isNtc64(ev);
+      var threshold = ntc ? 8 : 4;
+      var out = [];
+      for (var i = 0; i < (ev.r || []).length; i++) {
+        var rank = ev.r[i][0];
+        var key = ev.r[i][1];
+        if (ntc) rank = Math.ceil(rank / 2);
+        if (filter === 'win' && rank !== 1) continue;
+        if (filter === 'top4' && rank > threshold) continue;
+        out.push({ pos: i, rank: rank, type_key: key });
       }
-      const sorted = Object.entries(colorCount).sort((a, b) => b[1] - a[1]);
-      if (sorted.length >= 2) return [sorted[0][0], sorted[1][0]].sort();
-      if (sorted.length === 1) return [sorted[0][0]];
-      return ['Unknown'];
+      return out;
     }
 
-    // イベントデータを日付+地域+シリーズでフィルターして返す
-    function getFilteredEvents(eventsData, region) {
-      let events = eventsData.events;
-      // 日付フィルター適用
-      if (currentDateStart || currentDateEnd) {
-        events = GCG.filterEventsObjByDate(events, currentDateStart, currentDateEnd);
+    // イベント一覧の色ドット表示用(現行 events.html と同じ = 元rank<=4 を results 順で)
+    function displayTop4(ev) {
+      var ntc = isNtc64(ev);
+      var out = [];
+      for (var i = 0; i < (ev.r || []).length; i++) {
+        var rank = ev.r[i][0];
+        if (rank > 4) continue;
+        out.push({ rank: ntc ? Math.ceil(rank / 2) : rank, colors: colorsOfTypeKey(ev.r[i][1]) });
       }
-      // シリーズフィルター適用(同名シリーズをまとめている場合は、そのグループ全体を対象にする)
+      return out;
+    }
+
+    // ============================================================
+    // 絞り込み・集計（すべて索引だけで行う）
+    // ============================================================
+    function eventPassesBaseFilters(ev) {
+      if (currentDateStart && (!ev.d || ev.d < currentDateStart)) return false;
+      if (currentDateEnd && (!ev.d || ev.d > currentDateEnd)) return false;
       if (currentSeriesId) {
-        const sIds = seriesGroupIds(currentSeriesId);
-        const sFiltered = {};
-        for (const [key, ev] of Object.entries(events)) {
-          if (sIds.indexOf(String(ev.series_id || '')) >= 0) sFiltered[key] = ev;
-        }
-        events = sFiltered;
+        var ids = seriesGroupIds(currentSeriesId);
+        if (ids.indexOf(String(ev.s || '')) < 0) return false;
       }
-      if (!region) return { events: events };
-      const filtered = { events: {} };
-      for (const [key, ev] of Object.entries(events)) {
-        if (ev.region === region) {
-          filtered.events[key] = ev;
-        }
-      }
-      return filtered;
+      if (currentRegion && ev.g !== currentRegion) return false;
+      return true;
     }
 
-    // フィルターに基づいてeventsDataからデッキタイプランキングを動的に集計
-    // === NTC順位集計統合(2026-05-19): 64名NTC は consolidateNtcRank で順位変換 + TOP8 拡張 ===
-    function computeDeckTypeRanking(eventsData, filter) {
+    // 「そのデッキタイプの入賞デッキを含む」= 順位フィルタを通る結果に type_key が1件以上ある
+    function eventHasType(ev, typeKey, filter) {
+      if (!typeKey) return true;
+      var rs = passingResults(ev, filter);
+      for (var i = 0; i < rs.length; i++) if (rs[i].type_key === typeKey) return true;
+      return false;
+    }
+
+    function computeDeckTypeRankingFromIndex(events, filter) {
       const typeMap = {};
-
-      for (const evRaw of Object.values(eventsData.events)) {
-        // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換
-        // 32名・他大会は no-op で素通し(R2/R5 厳守)
-        const ev = GCG.consolidateNtcRank ? GCG.consolidateNtcRank(evRaw) : evRaw;
-        const isNtc64 = !!(typeof window !== 'undefined' && window.NtcRankConsolidator
-          && window.NtcRankConsolidator.isTargetEvent
-          && window.NtcRankConsolidator.isTargetEvent(evRaw,
-              (GCG._seriesData && window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap)
-                ? { isNtcType: window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap(GCG._seriesData) }
-                : undefined));
-        // 64名NTC大会では集計対象を TOP4 → TOP8 に拡張(松岡さん回答 追加確認1: B案)
-        const topThreshold = isNtc64 ? 8 : 4;
-        const results = ev.results || [];
-        for (const r of results) {
-          if (filter === 'win' && r.rank !== 1) continue;
-          if (filter === 'top4' && r.rank > topThreshold) continue;
-
-          if (!r.deck || r.deck.length === 0) continue;
-
-          const colors = detectDeckColors(r.deck);
-          const typeKey = colors.join('+');
-
-          if (!typeMap[typeKey]) {
-            typeMap[typeKey] = {
-              type_key: typeKey,
-              colors: colors,
-              label: colors.map(c => (GCG.DECK_COLORS[c] || GCG.DECK_COLORS.Unknown).jp).join('/'),
-              decks: [],
-              wins: 0,
-              totalRank: 0
+      let totalDecks = 0;
+      for (const ev of events) {
+        const rs = passingResults(ev, filter);
+        for (const r of rs) {
+          totalDecks++;
+          if (!typeMap[r.type_key]) {
+            typeMap[r.type_key] = {
+              type_key: r.type_key,
+              colors: colorsOfTypeKey(r.type_key),
+              label: labelOfTypeKey(r.type_key),
+              count: 0, wins: 0, totalRank: 0
             };
           }
-
-          typeMap[typeKey].decks.push({ deck: r.deck, rank: r.rank, isWin: r.rank === 1 });
-          if (r.rank === 1) typeMap[typeKey].wins++;
-          typeMap[typeKey].totalRank += r.rank;
+          const t = typeMap[r.type_key];
+          t.count++;
+          t.totalRank += r.rank;
+          if (r.rank === 1) t.wins++;
         }
       }
-
-      const totalDecks = Object.values(typeMap).reduce((s, t) => s + t.decks.length, 0);
-      const ranking = Object.values(typeMap).map(t => {
-        const count = t.decks.length;
-        const share = totalDecks > 0 ? Math.round(count / totalDecks * 1000) / 10 : 0;
-        const winRate = count > 0 ? Math.round(t.wins / count * 1000) / 10 : 0;
-        const avgRank = count > 0 ? Math.round(t.totalRank / count * 10) / 10 : 0;
-
-        // カード採用率の集計
-        const cardMap = {};
-        for (const d of t.decks) {
-          for (const card of d.deck) {
-            if (!cardMap[card.card_id]) {
-              cardMap[card.card_id] = { card_id: card.card_id, decks: 0, wins: 0, counts: [], totalCount: 0 };
-            }
-            cardMap[card.card_id].decks++;
-            if (d.isWin) cardMap[card.card_id].wins++;
-            cardMap[card.card_id].counts.push(card.count);
-            cardMap[card.card_id].totalCount += card.count;
-          }
-        }
-        const cardRanking = Object.values(cardMap).map(c => {
-          c.counts.sort((a, b) => a - b);
-          return {
-            card_id: c.card_id,
-            decks: c.decks,
-            usage_rate: Math.round(c.decks / count * 1000) / 10,
-            wins: c.wins,
-            win_rate: c.decks > 0 ? Math.round(c.wins / c.decks * 1000) / 10 : 0,
-            avg_count: Math.round(c.totalCount / c.decks * 10) / 10,
-            median_count: c.counts[Math.floor(c.counts.length / 2)],
-            max_count: c.counts[c.counts.length - 1],
-            min_count: c.counts[0]
-          };
-        }).sort((a, b) => b.usage_rate - a.usage_rate || b.decks - a.decks);
-
+      const ranking = Object.values(typeMap).map(function (t) {
         return {
           type_key: t.type_key,
           colors: t.colors,
           label: t.label,
-          count: count,
-          share: share,
+          count: t.count,
+          share: totalDecks > 0 ? Math.round(t.count / totalDecks * 1000) / 10 : 0,
           wins: t.wins,
-          win_rate: winRate,
-          avg_rank: avgRank,
-          card_ranking: cardRanking
+          win_rate: t.count > 0 ? Math.round(t.wins / t.count * 1000) / 10 : 0,
+          avg_rank: t.count > 0 ? Math.round(t.totalRank / t.count * 10) / 10 : 0
         };
-      }).sort((a, b) => b.count - a.count);
-
-      return { ranking, totalDecks };
+      }).sort(function (a, b) { return b.count - a.count || a.type_key.localeCompare(b.type_key); });
+      return { ranking: ranking, totalDecks: totalDecks };
     }
 
+    function computeRegionRankingFromIndex(events, filter) {
+      const regionMap = {};
+      for (const ev of events) {
+        const region = ev.g;
+        if (!region) continue;
+        if (!regionMap[region]) regionMap[region] = { region: region, eventIds: {}, typeMap: {}, decks: 0 };
+        const rs = passingResults(ev, filter);
+        if (rs.length) regionMap[region].eventIds[ev.i] = 1;
+        for (const r of rs) {
+          regionMap[region].decks++;
+          if (!regionMap[region].typeMap[r.type_key]) {
+            regionMap[region].typeMap[r.type_key] = {
+              type_key: r.type_key, colors: colorsOfTypeKey(r.type_key),
+              label: labelOfTypeKey(r.type_key), count: 0, wins: 0
+            };
+          }
+          regionMap[region].typeMap[r.type_key].count++;
+          if (r.rank === 1) regionMap[region].typeMap[r.type_key].wins++;
+        }
+      }
+      return Object.values(regionMap).map(function (r) {
+        return {
+          region: r.region,
+          events: Object.keys(r.eventIds).length,
+          decks: r.decks,
+          top_deck_types: Object.values(r.typeMap)
+            .sort(function (a, b) { return b.count - a.count || a.type_key.localeCompare(b.type_key); })
+            .slice(0, 5)
+        };
+      }).filter(function (r) { return r.decks > 0; })
+        // 2026-08-06 指示書67: 件数降順ではなく北順
+        .sort(function (a, b) {
+          var d = regionRank(a.region) - regionRank(b.region);
+          return d !== 0 ? d : String(a.region).localeCompare(String(b.region));
+        });
+    }
+
+    // ============================================================
+    // 描画
+    // ============================================================
     function setFilter(filter) {
       currentFilter = filter;
-      document.querySelectorAll('.rank-filter-btn').forEach(btn => {
+      document.querySelectorAll('.rank-filter-btn').forEach(function (btn) {
         btn.classList.toggle('active', btn.dataset.filter === filter);
       });
       renderWithFilter();
+      syncUrl();
     }
 
     function setRegion(region) {
       currentRegion = region;
-      document.querySelectorAll('.region-filter-btn').forEach(btn => {
+      document.querySelectorAll('.region-filter-btn').forEach(function (btn) {
         btn.classList.toggle('active', (btn.dataset.region || null) === (region || null));
       });
       renderWithFilter();
+      syncUrl();
     }
 
-    // 地域フィルターボタンを動的に生成
-    function buildRegionFilterButtons(eventsData) {
-      const regionSet = {};
-      for (const ev of Object.values(eventsData.events)) {
-        if (ev.region) {
-          if (!regionSet[ev.region]) regionSet[ev.region] = 0;
-          regionSet[ev.region]++;
-        }
+    // 地域フィルターボタン（北順・固定）
+    function buildRegionFilterButtons() {
+      const present = {};
+      for (const ev of ((indexData && indexData.events) || [])) {
+        if (ev.g) present[ev.g] = true;
       }
-      const regions = Object.entries(regionSet)
-        .sort((a, b) => b[1] - a[1])
-        .map(e => e[0]);
-
+      const regions = sortRegionNames(Object.keys(present));
       const container = document.getElementById('region-filter');
       container.innerHTML = '<span style="font-size:12px;color:var(--text-muted);margin-right:4px">地域:</span>' +
         '<button class="region-filter-btn active" data-region="" onclick="setRegion(null)">全地域</button>' +
-        regions.map(r =>
-          `<button class="region-filter-btn" data-region="${GCG.escapeHtml(r)}" onclick="setRegion('${GCG.escapeHtml(r)}')">${GCG.escapeHtml(r)}</button>`
-        ).join('');
+        regions.map(function (r) {
+          return '<button class="region-filter-btn" data-region="' + GCG.escapeHtml(r) + '" onclick="setRegion(\'' + GCG.escapeHtml(r) + '\')">' + GCG.escapeHtml(r) + '</button>';
+        }).join('');
+    }
+
+    function renderTypeChip() {
+      const bar = document.getElementById('type-chip-bar');
+      if (!filterType) {
+        bar.innerHTML = '<span class="type-chip-hint">デッキタイプの行やシェア凡例をクリックすると、そのタイプが入賞した大会だけに一覧を絞り込めます。</span>';
+        return;
+      }
+      bar.innerHTML = '<span class="type-chip">'
+        + GCG.renderColorDots(colorsOfTypeKey(filterType))
+        + '<span>' + GCG.escapeHtml(labelOfTypeKey(filterType)) + ' の入賞デッキがある大会</span>'
+        + '<button type="button" class="type-chip-clear" onclick="clearTypeFilter()" aria-label="デッキタイプの絞り込みを解除">✕</button>'
+        + '</span>'
+        + '<span class="type-chip-hint">※ 上の集計値は絞り込みの影響を受けません（分布を見るため全体のままにしています）</span>';
+    }
+
+    function setTypeFilter(typeKey) {
+      filterType = normalizeTypeKey(typeKey) || null;
+      selectType(filterType);
+      renderTypeChip();
+      renderDeckTypeTable(deckTypes);
+      currentPage = 1;
+      renderEventList();
+      syncUrl();
+      jumpToEvents();
+    }
+
+    function clearTypeFilter() {
+      filterType = null;
+      renderTypeChip();
+      renderDeckTypeTable(deckTypes);
+      currentPage = 1;
+      renderEventList();
+      syncUrl();
+    }
+
+    function jumpToEvents() {
+      var el = document.getElementById('events');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     function renderWithFilter() {
-      if (!eventsDataGlobal) return;
+      if (!indexData) return;
 
-      // 地域フィルターを適用したイベントデータ
-      const filteredEvents = getFilteredEvents(eventsDataGlobal, currentRegion);
-      const totalEvents = Object.keys(filteredEvents.events).length;
+      filteredEvents = (indexData.events || []).filter(eventPassesBaseFilters);
 
-      // 地域選択時 or TOP4以外 or 日付フィルター時は常に動的計算
-      // TOP4 + 全地域 + 日付フィルターなしのときだけpre-computed summaryを使える
-      if (currentFilter === 'top4' && !currentRegion && !currentDateStart && !currentDateEnd) {
-        deckTypes = summaryDataGlobal.deck_type_ranking || [];
-        const totalDecks = summaryDataGlobal.total_decks;
-        const totalEventsAll = summaryDataGlobal.total_events;
+      const res = computeDeckTypeRankingFromIndex(filteredEvents, currentFilter);
+      deckTypes = res.ranking;
+      const totalDecks = res.totalDecks;
+      const totalEvents = filteredEvents.length;
 
-        document.getElementById('s-events').textContent = totalEventsAll.toLocaleString();
-        document.getElementById('s-decks').textContent = totalDecks.toLocaleString();
-        document.getElementById('s-decks-label').textContent = 'TOP4 デッキ数';
-        document.getElementById('s-types').textContent = deckTypes.length.toLocaleString();
-        document.getElementById('meta-info').textContent =
-          `${totalEventsAll}イベント / ${totalDecks}デッキ (TOP4)`;
-      } else {
-        const { ranking, totalDecks } = computeDeckTypeRanking(filteredEvents, currentFilter);
-        deckTypes = ranking;
+      const filterLabel = currentFilter === 'win' ? '優勝のみ' : currentFilter === 'top4' ? 'TOP4' : '全て';
+      const regionLabel = currentRegion ? ' / ' + currentRegion : '';
 
-        const filterLabel = currentFilter === 'win' ? '優勝のみ' :
-                            currentFilter === 'top4' ? 'TOP4' : '全て';
-        const regionLabel = currentRegion ? ` / ${currentRegion}` : '';
+      document.getElementById('s-events').textContent = totalEvents.toLocaleString();
+      document.getElementById('s-decks').textContent = totalDecks.toLocaleString();
+      document.getElementById('s-decks-label').textContent =
+        currentFilter === 'win' ? '優勝デッキ数' : currentFilter === 'top4' ? 'TOP4 デッキ数' : '全デッキ数';
+      document.getElementById('s-types').textContent = deckTypes.length.toLocaleString();
+      document.getElementById('meta-info').textContent =
+        totalEvents + 'イベント / ' + totalDecks + 'デッキ (' + filterLabel + regionLabel + ')';
 
-        document.getElementById('s-events').textContent = totalEvents.toLocaleString();
-        document.getElementById('s-decks').textContent = totalDecks.toLocaleString();
-        document.getElementById('s-decks-label').textContent =
-          currentFilter === 'win' ? '優勝デッキ数' :
-          currentFilter === 'top4' ? 'TOP4 デッキ数' : '全デッキ数';
-        document.getElementById('s-types').textContent = deckTypes.length.toLocaleString();
-        document.getElementById('meta-info').textContent =
-          `${totalEvents}イベント / ${totalDecks}デッキ (${filterLabel}${regionLabel})`;
+      // 絞り込み中のタイプが今の条件で消えたら解除する
+      if (filterType && !deckTypes.some(function (d) { return d.type_key === filterType; })) {
+        filterType = null;
       }
 
       renderDeckTypeTable(deckTypes);
       renderPieChart(deckTypes);
       renderTypeTabs(deckTypes);
+      renderTypeChip();
 
       // 地域別メタ（全地域のときのみ表示）
       const regionSection = document.getElementById('region-section');
@@ -589,136 +791,78 @@
         regionSection.style.display = 'none';
       } else {
         regionSection.style.display = '';
-        const regionRanking = computeRegionRanking(filteredEvents, currentFilter);
-        renderRegionSection(regionRanking);
+        renderRegionSection(computeRegionRankingFromIndex(filteredEvents, currentFilter));
       }
 
-      // イベント一覧は /events.html に移動済（Task K で削除）
-
-      // Re-select type if available
-      if (selectedType) {
-        const dt = deckTypes.find(d => d.type_key === selectedType);
-        if (dt) {
-          selectType(dt.type_key);
-        } else if (deckTypes.length > 0) {
-          selectType(deckTypes[0].type_key);
-        }
+      // タイプ選択の維持
+      if (selectedType && deckTypes.some(function (d) { return d.type_key === selectedType; })) {
+        selectType(selectedType);
       } else if (deckTypes.length > 0) {
         selectType(deckTypes[0].type_key);
+      } else {
+        selectType(null);
       }
+
+      currentPage = 1;
+      renderEventList();
     }
 
     function onDateFilterChange() {
       currentDateStart = document.getElementById('date-start').value;
       currentDateEnd = document.getElementById('date-end').value;
       renderWithFilter();
-    }
-
-    async function init() {
-      // breadcrumb
-      var bcItems = [
-        { name: 'トップ', href: GCG.getBasePath() },
-        { name: '環境分析' }
-      ];
-      document.getElementById('breadcrumb-container').innerHTML = GCG.renderBreadcrumb(bcItems)
-        + GCG.renderBreadcrumbJsonLd(bcItems, 'https://gcg-stats.com/');
-
-      await Promise.all([loadCardNames(), loadCardColors()]);
-      summaryDataGlobal = await GCG.loadSummary();
-      eventsDataGlobal = await GCG.loadEvents();
-      // series データを GCG キャッシュ + ローカル allSeriesMap 両方に展開
-      // (GCG.consolidateNtcRank が GCG._seriesData を参照して type='ntc' 判定に使う)
-      try {
-        allSeriesMap = await GCG.loadSeries();
-      } catch (_) { allSeriesMap = {}; }
-      var urlParams = new URLSearchParams(window.location.search);
-      var paramSeries = urlParams.get('series_id') || urlParams.get('series');
-      if (paramSeries && allSeriesMap[paramSeries]) currentSeriesId = paramSeries;
-      // 2026-06-11 指示書v6: 初期選択のみ「イベントデータのあるシリーズ」を優先(6月0件問題の回避)。
-      // 選択UIの選択肢・手動選択は従来どおり。旧キャッシュ等で未定義ならローカル pickDefaultSeries() へ。
-      else currentSeriesId = GCG.pickDefaultSeriesWithData
-        ? ((GCG.pickDefaultSeriesWithData(allSeriesMap, eventsDataGlobal) || {}).id || '')
-        : pickDefaultSeries();
-      renderSeriesSelector();
-
-      // 日付フィルター設置（シリーズ連動: 選択シリーズの start_date/end_date を初期値に）
-      const initialRange = getSeriesRangeById(currentSeriesId);
-      const filterArea = document.getElementById('date-filter-area');
-      filterArea.innerHTML = GCG.renderDateFilterHTML(initialRange.start, initialRange.end);
-      currentDateStart = initialRange.start;
-      currentDateEnd = initialRange.end;
-      document.getElementById('date-start').addEventListener('change', onDateFilterChange);
-      document.getElementById('date-end').addEventListener('change', onDateFilterChange);
-      document.getElementById('date-reset-btn').addEventListener('click', function() {
-        document.getElementById('date-start').value = '';
-        document.getElementById('date-end').value = '';
-        onDateFilterChange();
-      });
-
-      // 地域フィルターボタンを生成
-      buildRegionFilterButtons(eventsDataGlobal);
-
-      renderWithFilter();
-
-      // URLパラメータからタイプ選択
-      const paramType = GCG.getParam('type');
-      if (paramType) {
-        const dt = deckTypes.find(d => d.type_key === paramType);
-        if (dt) selectType(dt.type_key);
-      }
+      syncUrl();
     }
 
     function renderDeckTypeTable(types) {
-      const maxShare = types[0]?.share || 100;
+      const maxShare = types[0] ? types[0].share : 100;
       const tbody = document.getElementById('decktype-body');
-      tbody.innerHTML = types.map(dt => {
+      if (!types.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted)">該当するデータがありません</td></tr>';
+        return;
+      }
+      tbody.innerHTML = types.map(function (dt) {
         const primaryColor = GCG.primaryColorHex(dt.colors);
-        return `<tr style="cursor:pointer" onclick="selectType('${dt.type_key}');document.getElementById('deck-card-section').scrollIntoView({behavior:'smooth',block:'start'})">
-          <td>${GCG.renderColorTags(dt.colors)}</td>
-          <td class="text-mono">${dt.count}</td>
-          <td>
-            <div class="flex items-center gap-8">
-              <div class="usage-bar-container">
-                <div class="usage-bar" style="width:${(dt.share / maxShare) * 100}%;background:${primaryColor}"></div>
-              </div>
-              <span class="usage-rate">${dt.share}%</span>
-            </div>
-          </td>
-          <td class="text-mono">${dt.wins}</td>
-          <td class="text-mono" style="color:var(--green)">${dt.win_rate}%</td>
-          <td class="text-mono" style="color:var(--accent)">${dt.avg_rank}</td>
-        </tr>`;
+        const sel = (filterType === dt.type_key) ? ' is-selected' : '';
+        return '<tr class="decktype-row' + sel + '" style="cursor:pointer" title="クリックでこのタイプの大会だけに絞り込みます"'
+          + ' onclick="setTypeFilter(\'' + dt.type_key + '\')">'
+          + '<td>' + GCG.renderColorTags(dt.colors) + '</td>'
+          + '<td class="text-mono">' + dt.count + '</td>'
+          + '<td><div class="flex items-center gap-8">'
+          + '<div class="usage-bar-container"><div class="usage-bar" style="width:' + ((dt.share / (maxShare || 1)) * 100) + '%;background:' + primaryColor + '"></div></div>'
+          + '<span class="usage-rate">' + dt.share + '%</span></div></td>'
+          + '<td class="text-mono">' + dt.wins + '</td>'
+          + '<td class="text-mono" style="color:var(--green)">' + dt.win_rate + '%</td>'
+          + '<td class="text-mono" style="color:var(--accent)">' + dt.avg_rank + '</td>'
+          + '</tr>';
       }).join('');
     }
 
     function renderPieChart(types) {
-      if (pieChart) {
-        pieChart.destroy();
-        pieChart = null;
-      }
-
+      if (pieChart) { pieChart.destroy(); pieChart = null; }
       const top8 = types.slice(0, 8);
-      const labels = top8.map(d => d.label);
-      const data = top8.map(d => d.count);
+      const labels = top8.map(function (d) { return d.label; });
+      const data = top8.map(function (d) { return d.count; });
       const canvas = document.getElementById('decktype-pie');
+      if (!canvas) return;
       const ctx = canvas.getContext('2d');
 
       // 初期色（プラグインで上書きされる）
-      const bgColors = top8.map(function(d) {
-        var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+      const bgColors = top8.map(function (d) {
+        var hexArr = d.colors.map(function (c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
         return hexArr[0];
       });
 
       // Chart.jsプラグイン: 2色デッキはグラデーションで描画
       const gradientPlugin = {
         id: 'gradientColor',
-        beforeDatasetsDraw: function(chart) {
+        beforeDatasetsDraw: function (chart) {
           var cctx = chart.ctx;
           var area = chart.chartArea;
           if (!area) return;
           var meta = chart.getDatasetMeta(0);
-          top8.forEach(function(d, i) {
-            var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+          top8.forEach(function (d, i) {
+            var hexArr = d.colors.map(function (c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
             if (hexArr.length >= 2 && meta.data[i]) {
               var grad = cctx.createLinearGradient(area.left, area.top, area.right, area.bottom);
               grad.addColorStop(0, hexArr[0]);
@@ -731,13 +875,14 @@
 
       // HTML凡例を生成（2色はグラデーション丸）
       var legendEl = document.getElementById('decktype-legend');
-      legendEl.innerHTML = top8.map(function(d) {
-        var hexArr = d.colors.map(function(c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+      legendEl.innerHTML = top8.map(function (d) {
+        var hexArr = d.colors.map(function (c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
         var bg = hexArr.length === 1 ? hexArr[0]
           : 'linear-gradient(135deg, ' + hexArr[0] + ' 0%, ' + hexArr[1] + ' 100%)';
-        return '<div style="display:flex;align-items:center;gap:6px">' +
-          '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>' +
-          '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
+        return '<div style="display:flex;align-items:center;gap:6px;cursor:pointer" title="クリックでこのタイプの大会だけに絞り込みます"'
+          + ' onclick="setTypeFilter(\'' + d.type_key + '\')">'
+          + '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>'
+          + '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
       }).join('');
 
       pieChart = new Chart(ctx, {
@@ -754,18 +899,13 @@
           plugins: {
             legend: { display: false },
             tooltip: {
-              backgroundColor: '#1e2736',
-              titleColor: '#e8ecf2',
-              bodyColor: '#8b95a5',
-              borderColor: '#2a3a50',
-              borderWidth: 1,
-              cornerRadius: 8,
-              padding: 10,
+              backgroundColor: '#1e2736', titleColor: '#e8ecf2', bodyColor: '#8b95a5',
+              borderColor: '#2a3a50', borderWidth: 1, cornerRadius: 8, padding: 10,
               callbacks: {
-                label: (ctx) => {
-                  const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                  const pct = Math.round(ctx.raw / total * 100);
-                  return ` ${ctx.label}: ${ctx.raw}デッキ (${pct}%)`;
+                label: function (ctx) {
+                  const total = ctx.dataset.data.reduce(function (a, b) { return a + b; }, 0);
+                  const pct = total > 0 ? Math.round(ctx.raw / total * 100) : 0;
+                  return ' ' + ctx.label + ': ' + ctx.raw + 'デッキ (' + pct + '%)';
                 }
               }
             }
@@ -776,24 +916,92 @@
 
     function renderTypeTabs(types) {
       const container = document.getElementById('type-tabs');
-      container.innerHTML = types.map(dt => {
-        const primaryColor = GCG.primaryColorHex(dt.colors);
-        return `<button class="type-tab" data-type="${dt.type_key}"
-          style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);
-            padding:8px 14px;border-radius:var(--radius);font-size:12px;font-family:var(--font-mono);
-            cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:6px"
-          onclick="selectType('${dt.type_key}')">
-          ${GCG.renderColorDots(dt.colors)}
-          <span>${dt.label}</span>
-          <span style="opacity:0.5;font-size:10px">(${dt.count})</span>
-        </button>`;
+      if (!types.length) {
+        container.innerHTML = '<div style="color:var(--text-muted);font-size:12px">該当するデッキタイプがありません</div>';
+        return;
+      }
+      container.innerHTML = types.map(function (dt) {
+        return '<button class="type-tab" data-type="' + dt.type_key + '"'
+          + ' style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);'
+          + 'padding:8px 14px;border-radius:var(--radius);font-size:12px;font-family:var(--font-mono);'
+          + 'cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:6px"'
+          + ' onclick="selectType(\'' + dt.type_key + '\')">'
+          + GCG.renderColorDots(dt.colors)
+          + '<span>' + dt.label + '</span>'
+          + '<span style="opacity:0.5;font-size:10px">(' + dt.count + ')</span>'
+          + '</button>';
       }).join('');
+    }
+
+    // ============================================================
+    // カード採用率
+    //   既定条件(事前集計と同じ条件)なら meta_stats.json をそのまま使う。
+    //   それ以外は events.json を遅延ロードして従来どおり再集計する。
+    // ============================================================
+    function canUseMetaStats() {
+      if (!metaStats || !metaStats.default_range) return false;
+      if (currentFilter !== 'top4') return false;
+      if (currentRegion) return false;
+      if ((currentDateStart || '') !== (metaStats.default_range.start || '')) return false;
+      if ((currentDateEnd || '') !== (metaStats.default_range.end || '')) return false;
+      // シリーズ絞り込みで対象が減っていたら事前集計とは別物になる
+      if (filteredEvents.length !== (metaStats.totals && metaStats.totals.events)) return false;
+      return true;
+    }
+
+    // 絞り込み条件つきのカード採用率を events.json から集計する。
+    //
+    // 【デッキタイプの判定は索引の type_key をそのまま使う】
+    //   ブラウザ側で色を再計算すると、索引生成側(card_colors → cards_master → セット接頭辞)と
+    //   ブラウザ側(card_colors のみ)で引ける色が違い、card_colors.json が新弾に追いつくまでの間
+    //   デッキタイプ分布とカード採用率が食い違う。索引の値を正として使えばその不一致は起きない。
+    //   索引の r[] と events.json の「デッキを持つ結果」は同じ並び順なので、位置で対応づける。
+    function cardRankingFromEventsJson(typeKey) {
+      const cardMap = {};
+      let deckCount = 0;
+      for (const ev of filteredEvents) {
+        const raw = eventsDataGlobal && eventsDataGlobal.events && eventsDataGlobal.events[ev.i];
+        if (!raw) continue;
+        const decks = (raw.results || []).filter(function (r) { return r.deck && r.deck.length; });
+        for (const p of passingResults(ev, currentFilter)) {
+          if (p.type_key !== typeKey) continue;
+          const r = decks[p.pos];
+          if (!r) continue;
+          deckCount++;
+          const isWin = p.rank === 1;
+          for (const card of r.deck) {
+            if (!cardMap[card.card_id]) {
+              cardMap[card.card_id] = { card_id: card.card_id, decks: 0, wins: 0, counts: [], total: 0 };
+            }
+            const c = cardMap[card.card_id];
+            c.decks++;
+            if (isWin) c.wins++;
+            c.counts.push(card.count);
+            c.total += card.count;
+          }
+        }
+      }
+      const list = Object.values(cardMap).map(function (c) {
+        c.counts.sort(function (a, b) { return a - b; });
+        return {
+          card_id: c.card_id,
+          decks: c.decks,
+          usage_rate: deckCount > 0 ? Math.round(c.decks / deckCount * 1000) / 10 : 0,
+          wins: c.wins,
+          win_rate: c.decks > 0 ? Math.round(c.wins / c.decks * 1000) / 10 : 0,
+          avg_count: Math.round(c.total / c.decks * 10) / 10,
+          median_count: c.counts[Math.floor(c.counts.length / 2)],
+          max_count: c.counts[c.counts.length - 1],
+          min_count: c.counts[0]
+        };
+      }).sort(function (a, b) { return b.usage_rate - a.usage_rate || b.decks - a.decks || a.card_id.localeCompare(b.card_id); });
+      return { cards: list, deckCount: deckCount };
     }
 
     function selectType(typeKey) {
       selectedType = typeKey;
 
-      document.querySelectorAll('.type-tab').forEach(tab => {
+      document.querySelectorAll('.type-tab').forEach(function (tab) {
         if (tab.dataset.type === typeKey) {
           tab.style.borderColor = 'var(--accent)';
           tab.style.color = 'var(--accent)';
@@ -805,139 +1013,79 @@
         }
       });
 
-      const dt = deckTypes.find(d => d.type_key === typeKey);
-      if (!dt) return;
-
-      const cards = dt.card_ranking || [];
       const container = document.getElementById('deck-card-content');
-
-      if (cards.length === 0) {
-        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">カードデータがありません</div>';
+      const dt = deckTypes.find(function (d) { return d.type_key === typeKey; });
+      if (!dt) {
+        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted);font-size:13px">上のタブからデッキタイプを選択してください</div>';
         return;
       }
 
-      const filterLabel = currentFilter === 'win' ? '優勝デッキ' :
-                          currentFilter === 'top4' ? 'TOP4デッキ' : '全デッキ';
-
-      container.innerHTML = `
-        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">
-          ${GCG.escapeHtml(dt.label)} デッキ カード採用率 （${dt.count}${filterLabel}中）
-        </div>
-        <div style="overflow-x:auto">
-        <table class="data-table" style="--th-position:static">
-          <thead>
-            <tr>
-              <th style="width:36px;position:static">#</th>
-              <th style="position:static">カード</th>
-              <th style="width:90px;position:static">採用デッキ数</th>
-              <th style="width:70px;position:static">採用率</th>
-              <th style="width:55px;position:static">優勝数</th>
-              <th style="width:60px;position:static">優勝率</th>
-              <th style="width:60px;position:static">最大枚数</th>
-              <th style="width:60px;position:static">最小枚数</th>
-              <th style="width:60px;position:static">中央枚数</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${cards.map((c, i) => {
-              const name = getCardName(c.card_id);
-              const winRate = c.win_rate !== undefined ? c.win_rate :
-                (c.decks > 0 ? Math.round((c.wins / c.decks) * 1000) / 10 : 0);
-              return `<tr>
-                <td class="rank-cell ${GCG.rankClass(i + 1)}">${i + 1}</td>
-                <td>
-                  <a href="${GCG.getBasePath()}cards/${c.card_id}/?from=meta"
-                     style="color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:8px">
-                    <img src="${GCG.cardImageUrl(c.card_id)}" alt="" style="width:28px;height:39px;border-radius:3px;object-fit:cover;border:1px solid var(--border)"
-                         onerror="this.style.display='none'">
-                    <div>
-                      <div style="font-family:var(--font-mono);font-size:12px">${GCG.escapeHtml(c.card_id)}</div>
-                      ${name ? `<div style="font-size:11px;color:var(--text-secondary);margin-top:1px">${GCG.escapeHtml(name)}</div>` : ''}
-                    </div>
-                  </a>
-                </td>
-                <td class="text-mono" style="white-space:nowrap">${c.decks} / ${dt.count}</td>
-                <td>
-                  <span class="usage-rate" style="font-weight:600">${c.usage_rate}%</span>
-                </td>
-                <td class="text-mono">${c.wins}</td>
-                <td class="text-mono" style="color:var(--green)">${winRate}%</td>
-                <td class="text-mono">${c.max_count || '-'}</td>
-                <td class="text-mono">${c.min_count || '-'}</td>
-                <td class="text-mono">${c.median_count !== undefined ? c.median_count : (c.avg_count || '-')}</td>
-              </tr>`;
-            }).join('')}
-          </tbody>
-        </table>
-        </div>`;
-    }
-
-    // 地域別メタをフィルターに基づいて動的に集計
-    // === NTC順位集計統合(2026-05-19): 64名NTC は consolidateNtcRank で順位変換 + TOP8 拡張 ===
-    function computeRegionRanking(eventsData, filter) {
-      const regionMap = {};
-
-      for (const evRaw of Object.values(eventsData.events)) {
-        const region = evRaw.region;
-        if (!region) continue;
-
-        if (!regionMap[region]) {
-          regionMap[region] = { region: region, eventIds: new Set(), typeMap: {}, deckCount: 0 };
-        }
-
-        // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換、TOP8 集計対象に拡張
-        const ev = GCG.consolidateNtcRank ? GCG.consolidateNtcRank(evRaw) : evRaw;
-        const isNtc64 = !!(typeof window !== 'undefined' && window.NtcRankConsolidator
-          && window.NtcRankConsolidator.isTargetEvent
-          && window.NtcRankConsolidator.isTargetEvent(evRaw,
-              (GCG._seriesData && window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap)
-                ? { isNtcType: window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap(GCG._seriesData) }
-                : undefined));
-        const topThreshold = isNtc64 ? 8 : 4;
-        const results = ev.results || [];
-        let hasMatchingPlayer = false;
-
-        for (const r of results) {
-          if (filter === 'win' && r.rank !== 1) continue;
-          if (filter === 'top4' && r.rank > topThreshold) continue;
-          if (!r.deck || r.deck.length === 0) continue;
-
-          hasMatchingPlayer = true;
-          regionMap[region].deckCount++;
-          const colors = detectDeckColors(r.deck);
-          const typeKey = colors.join('+');
-
-          if (!regionMap[region].typeMap[typeKey]) {
-            regionMap[region].typeMap[typeKey] = {
-              type_key: typeKey,
-              colors: colors,
-              label: colors.map(function(c) { return (GCG.DECK_COLORS[c] || GCG.DECK_COLORS.Unknown).jp; }).join('/'),
-              count: 0,
-              wins: 0
-            };
-          }
-          regionMap[region].typeMap[typeKey].count++;
-          if (r.rank === 1) regionMap[region].typeMap[typeKey].wins++;
-        }
-
-        if (hasMatchingPlayer) {
-          regionMap[region].eventIds.add(ev.event_id);
-        }
+      if (canUseMetaStats()) {
+        const pre = (metaStats.deck_type_ranking || []).find(function (t) { return t.type_key === typeKey; });
+        if (pre) { renderCardTable(dt, pre.card_ranking || [], pre.count); return; }
       }
 
-      return Object.values(regionMap).map(function(r) {
-        const topTypes = Object.values(r.typeMap)
-          .sort(function(a, b) { return b.count - a.count; })
-          .slice(0, 5);
-        const totalDecks = r.deckCount;
-        return {
-          region: r.region,
-          events: r.eventIds.size,
-          decks: totalDecks,
-          top_deck_types: topTypes
-        };
-      }).filter(function(r) { return r.decks > 0; })
-        .sort(function(a, b) { return b.decks - a.decks; });
+      // 事前集計で賄えない条件 → events.json を遅延ロード
+      container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted);font-size:13px">'
+        + 'この絞り込み条件でカード採用率を集計しています…<br><span style="font-size:11px">（大会データの初回読み込みに数秒かかります）</span></div>';
+      const wanted = typeKey;
+      ensureHeavyData().then(function () {
+        if (selectedType !== wanted) return; // 待っている間に選択が変わった
+        const r = cardRankingFromEventsJson(wanted);
+        renderCardTable(dt, r.cards, r.deckCount || dt.count);
+      }).catch(function (e) {
+        console.error(e);
+        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">カード採用率を取得できませんでした</div>';
+      });
+    }
+
+    function renderCardTable(dt, cards, deckCount) {
+      const container = document.getElementById('deck-card-content');
+      if (!cards || cards.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">カードデータがありません</div>';
+        return;
+      }
+      const filterLabel = currentFilter === 'win' ? '優勝デッキ' : currentFilter === 'top4' ? 'TOP4デッキ' : '全デッキ';
+      const denom = deckCount || dt.count;
+      container.innerHTML = ''
+        + '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">'
+        + GCG.escapeHtml(dt.label) + ' デッキ カード採用率 （' + denom + filterLabel + '中）'
+        + '</div>'
+        + '<div style="overflow-x:auto">'
+        + '<table class="data-table" style="--th-position:static">'
+        + '<thead><tr>'
+        + '<th style="width:36px;position:static">#</th>'
+        + '<th style="position:static">カード</th>'
+        + '<th style="width:90px;position:static">採用デッキ数</th>'
+        + '<th style="width:70px;position:static">採用率</th>'
+        + '<th style="width:55px;position:static">優勝数</th>'
+        + '<th style="width:60px;position:static">優勝率</th>'
+        + '<th style="width:60px;position:static">最大枚数</th>'
+        + '<th style="width:60px;position:static">最小枚数</th>'
+        + '<th style="width:60px;position:static">中央枚数</th>'
+        + '</tr></thead><tbody>'
+        + cards.map(function (c, i) {
+          const name = cardNames[c.card_id] || '';
+          const winRate = c.win_rate !== undefined ? c.win_rate
+            : (c.decks > 0 ? Math.round((c.wins / c.decks) * 1000) / 10 : 0);
+          return '<tr>'
+            + '<td class="rank-cell ' + GCG.rankClass(i + 1) + '">' + (i + 1) + '</td>'
+            + '<td><a href="' + GCG.getBasePath() + 'cards/' + c.card_id + '/?from=meta"'
+            + ' style="color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:8px">'
+            + '<img src="' + GCG.cardImageUrl(c.card_id) + '" alt="" style="width:28px;height:39px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display=\'none\'">'
+            + '<div><div style="font-family:var(--font-mono);font-size:12px">' + GCG.escapeHtml(c.card_id) + '</div>'
+            + (name ? '<div style="font-size:11px;color:var(--text-secondary);margin-top:1px">' + GCG.escapeHtml(name) + '</div>' : '')
+            + '</div></a></td>'
+            + '<td class="text-mono" style="white-space:nowrap">' + c.decks + ' / ' + denom + '</td>'
+            + '<td><span class="usage-rate" style="font-weight:600">' + c.usage_rate + '%</span></td>'
+            + '<td class="text-mono">' + c.wins + '</td>'
+            + '<td class="text-mono" style="color:var(--green)">' + winRate + '%</td>'
+            + '<td class="text-mono">' + (c.max_count || '-') + '</td>'
+            + '<td class="text-mono">' + (c.min_count || '-') + '</td>'
+            + '<td class="text-mono">' + (c.median_count !== undefined ? c.median_count : (c.avg_count || '-')) + '</td>'
+            + '</tr>';
+        }).join('')
+        + '</tbody></table></div>';
     }
 
     // 地域別メタ
@@ -947,34 +1095,285 @@
         container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">地域データがありません</div>';
         return;
       }
-      container.innerHTML = `
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
-          ${regions.map(r => `
-            <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all 0.15s"
-                 onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'"
-                 onclick="setRegion('${GCG.escapeHtml(r.region)}');window.scrollTo({top:0,behavior:'smooth'})">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-                <span style="font-weight:600;font-size:15px;color:var(--text-primary)">${GCG.escapeHtml(r.region)}</span>
-                <span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">${r.events}イベント / ${r.decks}デッキ</span>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:6px">
-                ${r.top_deck_types.map(dt => `
-                  <div style="display:flex;align-items:center;justify-content:space-between;font-size:12px">
-                    <span>${GCG.renderColorDots(dt.colors)} <span style="color:var(--text-secondary)">${GCG.escapeHtml(dt.label)}</span></span>
-                    <span class="text-mono" style="color:var(--text-muted)">${dt.count}デッキ</span>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          `).join('')}
-        </div>`;
+      container.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">'
+        + regions.map(function (r) {
+          return '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all 0.15s"'
+            + ' onmouseover="this.style.borderColor=\'var(--accent)\'" onmouseout="this.style.borderColor=\'var(--border)\'"'
+            + ' onclick="setRegion(\'' + GCG.escapeHtml(r.region) + '\');window.scrollTo({top:0,behavior:\'smooth\'})">'
+            + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
+            + '<span style="font-weight:600;font-size:15px;color:var(--text-primary)">' + GCG.escapeHtml(r.region) + '</span>'
+            + '<span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">' + r.events + 'イベント / ' + r.decks + 'デッキ</span>'
+            + '</div><div style="display:flex;flex-direction:column;gap:6px">'
+            + r.top_deck_types.map(function (dt) {
+              return '<div style="display:flex;align-items:center;justify-content:space-between;font-size:12px">'
+                + '<span>' + GCG.renderColorDots(dt.colors) + ' <span style="color:var(--text-secondary)">' + GCG.escapeHtml(dt.label) + '</span></span>'
+                + '<span class="text-mono" style="color:var(--text-muted)">' + dt.count + 'デッキ</span></div>';
+            }).join('')
+            + '</div></div>';
+        }).join('')
+        + '</div>';
+    }
+
+    // ============================================================
+    // イベント一覧
+    // ============================================================
+    function eventsForList() {
+      let list = filteredEvents;
+      if (filterType) {
+        list = list.filter(function (ev) { return eventHasType(ev, filterType, currentFilter); });
+      }
+      if (searchText) {
+        const q = searchText.toLowerCase();
+        list = list.filter(function (ev) {
+          if (String(ev.n || '').toLowerCase().indexOf(q) >= 0) return true;
+          // プレイヤー名は索引に持たない(裁定②)。events.json が届いていれば併せて見る。
+          const src = eventsDataGlobal && eventsDataGlobal.events && eventsDataGlobal.events[ev.i];
+          if (src) {
+            const names = (src.results || []).filter(function (r) { return r.rank <= 4; })
+              .map(function (r) { return r.player || ''; }).join(' ').toLowerCase();
+            if (names.indexOf(q) >= 0) return true;
+          }
+          return false;
+        });
+      }
+      return list;
+    }
+
+    function renderEventList() {
+      const list = eventsForList();
+      document.getElementById('event-count').textContent = list.length + '件';
+
+      const lead = document.getElementById('event-list-lead');
+      lead.textContent = filterType
+        ? labelOfTypeKey(filterType) + ' の入賞デッキが出た大会だけを表示しています。'
+        : '上のシリーズ・期間・地域・デッキタイプの絞り込みがそのまま反映されます。';
+
+      const totalPages = Math.ceil(list.length / ITEMS_PER_PAGE);
+      if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const pageEvents = list.slice(start, start + ITEMS_PER_PAGE);
+
+      const container = document.getElementById('events-list');
+      if (pageEvents.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">該当するイベントがありません</div>';
+      } else {
+        container.innerHTML = pageEvents.map(function (ev) {
+          const top4 = displayTop4(ev).sort(function (a, b) { return a.rank - b.rank; });
+          const top4Html = top4.map(function (t, i) {
+            const rankLabel = t.rank === 1 ? '優勝' : t.rank === 2 ? '準優勝' : t.rank + '位';
+            const sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';
+            return sep + '<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">'
+              + '<span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">' + rankLabel + '</span>'
+              + GCG.renderColorDots(t.colors)
+              + '</span>';
+          }).join('');
+          const seriesMeta = ev.s && allSeriesMap[ev.s] ? allSeriesMap[ev.s] : null;
+          const seriesBadgeHtml = seriesMeta && GCG.renderSeriesBadge
+            ? GCG.renderSeriesBadge(seriesMeta.short_name || seriesMeta.display_name, seriesMeta.slug) : '';
+          return '<a href="events/' + ev.i + '.html" class="event-card">'
+            + '<span class="event-date">' + GCG.formatDate(ev.d) + '</span>'
+            + '<span class="event-store">' + GCG.escapeHtml(ev.n) + '</span>'
+            + (seriesBadgeHtml ? '<span class="event-card-series">' + seriesBadgeHtml + '</span>' : '')
+            + '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+            + (top4Html || '<span style="color:var(--text-muted);font-size:11px">データなし</span>')
+            + '</span></a>';
+        }).join('');
+      }
+
+      // ページネーション
+      const pag = document.getElementById('pagination');
+      if (totalPages <= 1) { pag.innerHTML = ''; return; }
+      let html = '';
+      if (currentPage > 1) html += '<button onclick="goPage(' + (currentPage - 1) + ')">←</button>';
+      for (let i = 1; i <= totalPages; i++) {
+        if (totalPages > 10 && Math.abs(i - currentPage) > 2 && i > 2 && i < totalPages - 1) {
+          if (i === currentPage - 3 || i === currentPage + 3) html += '<button disabled>...</button>';
+          continue;
+        }
+        html += '<button class="' + (i === currentPage ? 'active' : '') + '" onclick="goPage(' + i + ')">' + i + '</button>';
+      }
+      if (currentPage < totalPages) html += '<button onclick="goPage(' + (currentPage + 1) + ')">→</button>';
+      pag.innerHTML = html;
+    }
+
+    function goPage(p) {
+      currentPage = p;
+      renderEventList();
+      jumpToEvents();
+    }
+
+    function onSearchInput() {
+      searchText = document.getElementById('search-input').value.trim();
+      currentPage = 1;
+      renderEventList();
+      // プレイヤー名でも引けるように、初回入力で events.json を裏で取りに行く(裁定②)
+      if (searchText && !eventsDataGlobal) {
+        const note = document.getElementById('search-lazy-note');
+        note.hidden = false;
+        ensureHeavyData().then(function () {
+          note.hidden = true;
+          renderEventList();
+        }).catch(function () { note.hidden = true; });
+      }
+    }
+
+    // ============================================================
+    // URL 同期
+    // ============================================================
+    function syncUrl() {
+      var u = new URL(window.location.href);
+      if (currentSeriesId) u.searchParams.set('series_id', currentSeriesId); else u.searchParams.delete('series_id');
+      if (filterType) u.searchParams.set('type', filterType); else u.searchParams.delete('type');
+      if (currentRegion) u.searchParams.set('region', currentRegion); else u.searchParams.delete('region');
+      if (currentFilter && currentFilter !== 'top4') u.searchParams.set('rank', currentFilter); else u.searchParams.delete('rank');
+      window.history.replaceState({}, '', u.toString());
+    }
+
+    // pickDefaultSeriesWithData は {key:{date}} 形式を期待するので索引から作る
+    function indexEventsAsObj() {
+      var o = {};
+      ((indexData && indexData.events) || []).forEach(function (ev) { o[ev.i] = { date: ev.d }; });
+      return o;
+    }
+
+    // ============================================================
+    // 初期化
+    // ============================================================
+    async function init() {
+      // breadcrumb
+      var bcItems = [
+        { name: 'トップ', href: GCG.getBasePath() },
+        { name: '環境分析' }
+      ];
+      document.getElementById('breadcrumb-container').innerHTML = GCG.renderBreadcrumb(bcItems)
+        + GCG.renderBreadcrumbJsonLd(bcItems, 'https://gcg-stats.com/');
+
+      const basePath = GCG.getBasePath();
+      const [idx, ms, names] = await Promise.all([
+        loadEventsIndex(),
+        fetch(basePath + 'data/meta_stats.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+        fetch(basePath + 'data/card_names.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+      ]);
+      cardNames = names || {};
+      metaStats = ms;
+
+      // series データ(NTC判定・バッジ・タブに使う)
+      try { allSeriesMap = await GCG.loadSeries(); } catch (_) { allSeriesMap = {}; }
+
+      if (idx && idx.events) {
+        indexData = idx;
+      } else {
+        // 索引が取れないときは従来どおり events.json から索引相当を組み立てる(表示を落とさない)
+        console.warn('events_index.json を利用できないため events.json から再構成します');
+        await ensureHeavyData();
+        await ensureCardColors();
+        const evs = Object.values((eventsDataGlobal && eventsDataGlobal.events) || {});
+        indexData = {
+          events: evs.map(function (v) {
+            return {
+              i: v.event_id, d: v.date || '', s: String(v.series_id || ''), n: v.store || '',
+              g: v.region || '', c: (v.results || []).length,
+              r: (v.results || []).filter(function (r) { return r.deck && r.deck.length; })
+                .map(function (r) { return [r.rank, detectDeckColors(r.deck).join('+')]; })
+            };
+          }).sort(function (a, b) { return (b.d || '').localeCompare(a.d || '') || String(a.i).localeCompare(String(b.i)); })
+        };
+      }
+
+      // --- URL パラメータ ---
+      var urlParams = new URLSearchParams(window.location.search);
+      var paramSeries = urlParams.get('series_id') || urlParams.get('series');
+      if (paramSeries && allSeriesMap[paramSeries]) currentSeriesId = paramSeries;
+      // 2026-06-11 指示書v6: 初期選択のみ「イベントデータのあるシリーズ」を優先(6月0件問題の回避)。
+      else currentSeriesId = GCG.pickDefaultSeriesWithData
+        ? ((GCG.pickDefaultSeriesWithData(allSeriesMap, { events: indexEventsAsObj() }) || {}).id || '')
+        : pickDefaultSeries();
+
+      var paramRank = urlParams.get('rank');
+      if (paramRank === 'win' || paramRank === 'all' || paramRank === 'top4') currentFilter = paramRank;
+      document.querySelectorAll('.rank-filter-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+      });
+
+      renderSeriesSelector();
+
+      // 日付フィルター設置（シリーズ連動: 選択シリーズの start_date/end_date を初期値に）
+      const initialRange = getSeriesRangeById(currentSeriesId);
+      const filterArea = document.getElementById('date-filter-area');
+      filterArea.innerHTML = GCG.renderDateFilterHTML(initialRange.start, initialRange.end);
+      currentDateStart = initialRange.start;
+      currentDateEnd = initialRange.end;
+      document.getElementById('date-start').addEventListener('change', onDateFilterChange);
+      document.getElementById('date-end').addEventListener('change', onDateFilterChange);
+      document.getElementById('date-reset-btn').addEventListener('click', function () {
+        document.getElementById('date-start').value = '';
+        document.getElementById('date-end').value = '';
+        onDateFilterChange();
+      });
+
+      buildRegionFilterButtons();
+
+      // 地域(URL)
+      var paramRegion = urlParams.get('region');
+      if (paramRegion) {
+        currentRegion = paramRegion;
+        document.querySelectorAll('.region-filter-btn').forEach(function (btn) {
+          btn.classList.toggle('active', (btn.dataset.region || null) === currentRegion);
+        });
+      }
+
+      // デッキタイプ(URL)
+      //   ・旧並び(辞書順)のリンクも normalizeTypeKey で受ける(後方互換)
+      //   ・クエリの `+` は半角スペースにデコードされるため normalizeTypeKey 側で吸収する
+      var paramType = urlParams.get('type') || (GCG.getParam ? GCG.getParam('type') : '');
+      var wantType = paramType ? normalizeTypeKey(paramType) : '';
+      if (wantType) filterType = wantType;
+
+      renderWithFilter();
+
+      // 指定タイプが既定期間に存在しないときだけ、全期間へ広げて拾い直す。
+      // 「全期間にも存在しないタイプ(打ち間違い等)」で期間やシリーズを消してしまわないよう、
+      // 広げる前に全期間の集計へ実在するかを確かめる。
+      if (wantType && !deckTypes.some(function (d) { return d.type_key === wantType; })) {
+        var existsAnywhere = computeDeckTypeRankingFromIndex(indexData.events || [], currentFilter)
+          .ranking.some(function (d) { return d.type_key === wantType; });
+        if (existsAnywhere) {
+          filterType = wantType;
+          currentDateStart = '';
+          currentDateEnd = '';
+          currentSeriesId = '';
+          var dsEl = document.getElementById('date-start');
+          var deEl = document.getElementById('date-end');
+          if (dsEl) dsEl.value = '';
+          if (deEl) deEl.value = '';
+          renderSeriesSelector();
+          renderWithFilter();
+        } else {
+          // どこにも無いタイプ → 絞り込みを掛けずに既定表示のままにする
+          filterType = null;
+          renderTypeChip();
+        }
+      }
+      if (filterType) {
+        selectType(filterType);
+        renderTypeChip();
+        renderDeckTypeTable(deckTypes);
+        renderEventList();
+      }
+
+      document.getElementById('search-input').addEventListener('input', onSearchInput);
+
+      // 画面の状態と URL を一致させる(受け付けなかった type を消し、正規化後の値に揃える)
+      syncUrl();
+
+      if (window.location.hash === '#events') jumpToEvents();
     }
 
     document.getElementById('header').innerHTML = GCG.renderHeader('meta');
     document.getElementById('footer').innerHTML = GCG.renderFooter();
 
     init();
-    GCG.renderShareButtons('share-buttons', '環境分析 | GCG STATS');
+    GCG.renderShareButtons('share-buttons', '環境分析・大会結果一覧 | GCG STATS');
   </script>
 </body>
 </html>

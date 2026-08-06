@@ -20,6 +20,97 @@ const GCG = {
     Unknown: { hex: '#888888', jp: '不明', cssClass: '' }
   },
 
+  // === デッキタイプ識別子(type_key)の正 ===
+  // 2026-08-06(指示書67 発行元裁定①): サイト全体で導出を1つに統一する。
+  //   ・対象は「枚数の多い上位2色」
+  //   ・並びは DECK_COLOR_ORDER 固定(辞書順ではない)
+  // これ以前は scraper.js / generate-events.js(buildTopStats) / meta.html の3系統で
+  // 並び順が食い違い、index.html の meta.html?type=... が
+  // Red+Purple / White+Purple / Red+Green の3タイプで着地しない不具合があった。
+  // 保存済みJSON(events.json の top4_colors 等)は書き換えず、読むときに正規化して吸収する。
+  DECK_COLOR_ORDER: ['Blue', 'Red', 'Green', 'White', 'Purple'],
+
+  // 色配列を正の並びへ整える(入力は破壊しない)
+  sortDeckColors: function (colors) {
+    var order = this.DECK_COLOR_ORDER;
+    return (colors || []).slice().sort(function (a, b) {
+      var ia = order.indexOf(a), ib = order.indexOf(b);
+      if (ia < 0) ia = order.length;
+      if (ib < 0) ib = order.length;
+      return ia - ib;
+    });
+  },
+
+  // デッキ(=[{card_id,count}])から上位2色を正の並びで返す。
+  // getColor は card_id → 色名 を返す関数。未指定なら Unknown 扱い。
+  deckTypeColors: function (deck, getColor) {
+    var counts = {};
+    var fn = typeof getColor === 'function' ? getColor : function () { return 'Unknown'; };
+    for (var i = 0; i < (deck || []).length; i++) {
+      var col = fn(deck[i].card_id);
+      if (!col || col === 'Unknown' || col === 'Colorless') continue;
+      counts[col] = (counts[col] || 0) + deck[i].count;
+    }
+    var sorted = Object.keys(counts).map(function (k) { return [k, counts[k]]; })
+      .sort(function (a, b) { return b[1] - a[1]; });
+    if (sorted.length >= 2) return this.sortDeckColors([sorted[0][0], sorted[1][0]]);
+    if (sorted.length === 1) return [sorted[0][0]];
+    return ['Unknown'];
+  },
+
+  deckTypeKey: function (deck, getColor) {
+    return this.deckTypeColors(deck, getColor).join('+');
+  },
+
+  // 既存データ・既存URLの type_key を正の並びへ寄せる(後方互換の受け口)。
+  // 例: 'Purple+Red' → 'Red+Purple' / 'Green+Red' → 'Red+Green'
+  //
+  // 区切りに空白も許すのが重要:
+  //   index.html は `meta.html?type=Blue+Purple` のように **+ を生のまま** URL に出す。
+  //   クエリ文字列の `+` は URLSearchParams が**半角スペースにデコード**するため、
+  //   受け側では 'Blue Purple' として届く。ここで '+' しか見ないと 2色タイプが
+  //   1つも着地しない(2026-08-06 指示書67 二次確認で検出)。
+  normalizeTypeKey: function (key) {
+    if (!key) return '';
+    return this.sortDeckColors(String(key).split(/[+\s]+/).filter(Boolean)).join('+');
+  },
+
+  // === 地域の並び(2026-08-06 指示書67 発行元裁定③: 北から南へ) ===
+  // 粒度は従来どおり8地方。scraper.js の REGION_BY_PREF_NAME と同じ区分
+  // (三重=中部 / 新潟・山梨・長野=中部 / 沖縄=九州)。
+  REGION_ORDER: ['北海道', '東北', '関東', '中部', '関西', '中国', '四国', '九州', 'その他'],
+
+  regionRank: function (name) {
+    var i = this.REGION_ORDER.indexOf(name);
+    return i < 0 ? this.REGION_ORDER.length : i;
+  },
+
+  // 地域名の配列を北順に並べ替える(未知の地域は末尾・名前順)
+  sortRegions: function (names) {
+    var self = this;
+    return (names || []).slice().sort(function (a, b) {
+      var d = self.regionRank(a) - self.regionRank(b);
+      return d !== 0 ? d : String(a).localeCompare(String(b));
+    });
+  },
+
+  // === 軽量索引(data/events_index.json)の読み込み ===
+  // 2026-08-06(指示書67): 統合ページの初期表示は events.json(14.5MB)ではなくこの索引で描く。
+  _eventsIndex: null,
+  async loadEventsIndex() {
+    if (this._eventsIndex) return this._eventsIndex;
+    try {
+      const res = await fetch(this.DATA_PATH + 'events_index.json');
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      this._eventsIndex = await res.json();
+      return this._eventsIndex;
+    } catch (e) {
+      console.error('events_index.json の読み込みに失敗:', e);
+      this._eventsIndex = null;
+      return null;
+    }
+  },
+
   // カード画像URL（ローカル保存済み画像を優先、なければ公式サーバー）
   cardImageUrl(cardId) {
     return `${this.getBasePath()}images/cards/${cardId}.webp`;
@@ -337,7 +428,9 @@ const GCG = {
     // analysis 配下へ移し、環境分析・公式集計を加えた5項目に再編
     analysis: [
       { key: 'meta',         href: 'meta.html',         label: '環境分析'    },
-      { key: 'events',       href: 'events.html',       label: 'イベント'    },
+      // 2026-08-06(指示書67): イベント一覧を meta.html へ統合。events.html はリダイレクトスタブ。
+      // 導線の言葉は残したいので、タブ自体は残して統合ページの一覧セクションへ飛ばす。
+      { key: 'events',       href: 'meta.html#events',  label: 'イベント'    },
       { key: 'series',       href: 'series/',           label: 'シリーズ'    },
       { key: 'schedule',     href: 'schedule.html',     label: 'スケジュール' },
       { key: 'ntc-official', href: 'ntc-official.html', label: '公式集計'    }

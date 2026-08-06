@@ -159,7 +159,8 @@
       if (typeof GCG.renderBreadcrumb === 'function') {
         var bcItems = [
           { name: 'トップ', href: GCG.getBasePath() },
-          { name: 'イベント', href: GCG.getBasePath() + 'events.html' }
+          // 2026-08-06(指示書67): イベント一覧は meta.html へ統合。#events は一覧セクション
+          { name: 'イベント', href: GCG.getBasePath() + 'meta.html#events' }
         ];
         if (seriesName && ev.series_id) {
           bcItems.push({ name: seriesName, href: GCG.getBasePath() + 'series/' });
