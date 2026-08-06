@@ -219,28 +219,103 @@ const GCG = {
     requestAnimationFrame(step);
   },
 
+  // === イベントページ → デッキビルダー受け渡し(2026-08-06 追加・指示書66 §4) ===
+  // イベント個別ページの「デッキビルダーで開く」から呼ばれる。
+  // 重い依存(deckbuilder-core.js / cards_master.json / cards_preview.json)は
+  // 初回クリック時にだけ取得する。イベントページの初期表示転送量は増やさない。
+  //
+  // byId は deck-builder.html 自身がビルドされる元(generate_deckbuilder.js)と
+  // 同一の ID 集合を再現する: cards_master.json 全件 → master に無い型番だけ
+  // cards_preview.json から補う。encodeShareCode が使うのは「型番の実在」と
+  // 「先行カードか否か(pv)」だけなので、これで十分かつ過不足がない。
+  // 緩いデータ源(card_names.json 等)を使うと、ビルダー側が知らない型番でも
+  // encode が通ってしまい、開いた先で silent skip され 50 枚に満たなくなる。
+  _shareDbP: null,
+  loadShareDb() {
+    if (this._shareDbP) return this._shareDbP;
+    const base = this.getBasePath();
+    const p = new Promise((resolve, reject) => {
+      if (window.DeckCore) return resolve();
+      const sc = document.createElement('script');
+      sc.src = base + 'js/deckbuilder-core.js';
+      sc.onload = () => (window.DeckCore ? resolve() : reject(new Error('core-missing')));
+      sc.onerror = () => reject(new Error('core-load'));
+      document.head.appendChild(sc);
+    }).then(() => Promise.all([
+      fetch(base + 'data/cards_master.json').then(r => {
+        if (!r.ok) throw new Error('master-' + r.status);
+        return r.json();
+      }),
+      fetch(base + 'data/cards_preview.json')
+        .then(r => (r.ok ? r.json() : {}))
+        .catch(() => ({}))
+    ])).then(([masterRaw, previewRaw]) => {
+      const mArr = Array.isArray(masterRaw) ? masterRaw : Object.values(masterRaw || {});
+      const pArr = Array.isArray(previewRaw) ? previewRaw : Object.values(previewRaw || {});
+      const byId = new Map();
+      mArr.forEach(c => { if (c && c.id) byId.set(c.id, { id: c.id, pv: 0 }); });
+      pArr.forEach(c => {
+        const id = c && c.card_number;
+        if (id && !byId.has(id)) byId.set(id, { id, pv: 1 });
+      });
+      if (!byId.size) throw new Error('empty-db');
+      return byId;
+    });
+    p.catch(() => { this._shareDbP = null; });   // 失敗時は次のクリックで再試行できるようにする
+    this._shareDbP = p;
+    return p;
+  },
+
+  // deck = events.json の results[].deck([{card_id,count}])。
+  // 成功時は deck-builder.html?d=<共有コード>&n=<大会名> へ遷移する。
+  // 失敗(スクリプト/通信/encode)時はその場で従来の「デッキリストをコピー」に退避し、
+  // ボタン表記も戻す。以後そのボタンはコピー動作になる。
+  openDeckInBuilder(deck, btn, deckName) {
+    if (!deck || !deck.length) return;
+    const copy = () => this.copyToClipboard(this.deckToText(deck), btn);
+    if (btn.getAttribute('data-mode') === 'copy') return copy();
+    if (btn.getAttribute('data-busy')) return;
+    btn.setAttribute('data-busy', '1');
+    btn.textContent = '\u23F3 \u8AAD\u307F\u8FBC\u307F\u4E2D\u2026';
+    this.loadShareDb().then(byId => {
+      const counts = {};
+      deck.forEach(c => { counts[c.card_id] = (counts[c.card_id] || 0) + c.count; });
+      const r = window.DeckCore.encodeShareCode(counts, byId);
+      if (!r.ok) throw new Error('encode-' + r.reason);
+      location.href = this.getBasePath() + 'deck-builder.html?d=' + encodeURIComponent(r.code)
+        + '&n=' + encodeURIComponent(deckName || '');
+    }).catch(() => {
+      btn.removeAttribute('data-busy');
+      btn.setAttribute('data-mode', 'copy');
+      btn.textContent = '\u{1F4CB} \u30C7\u30C3\u30AD\u30EA\u30B9\u30C8\u3092\u30B3\u30D4\u30FC';
+      copy();
+    });
+  },
+
   // === 共通ヘッダー(2段ナビ構成、2026-05-24 修正版) ===
   // 変更履歴:
   //   2026-05-24 案B採用(主タブ4つ + サブナビ)
   //   2026-05-24 主タブ再編 → カードリスト/レポートを独立タブに昇格、検索欄削除
+  //   2026-08-06 主タブ「大会データ」を廃止し「環境分析」へ統合(9→8タブ・指示書66)
   // activePage は既存呼び出し互換のため文字列キーを維持
   // ('home','series','events','meta','cards','stores','schedule','reports','')
   _PAGE_MAP: {
-    home:     { main: 'home',        sub: null       },
-    events:   { main: 'tournaments', sub: 'events'   },
-    series:   { main: 'tournaments', sub: 'series'   },
-    schedule: { main: 'tournaments', sub: 'schedule' },
-    meta:     { main: 'analysis',    sub: null       },
-    cards:    { main: 'cards',       sub: null       },
+    home:     { main: 'home',     sub: null       },
+    events:   { main: 'analysis', sub: 'events'   },
+    series:   { main: 'analysis', sub: 'series'   },
+    schedule: { main: 'analysis', sub: 'schedule' },
+    meta:     { main: 'analysis', sub: 'meta'     },
+    cards:    { main: 'cards',    sub: null       },
     'deck-builder': { main: 'deck-builder', sub: null },
-    sets:     { main: 'sets',        sub: null       },
-    reports:  { main: 'reports',     sub: null       },
-    stores:   { main: 'venues',      sub: null       },
-    mypage:   { main: 'mypage',      sub: null       },
-    'ntc-official': { main: 'tournaments', sub: null }
+    sets:     { main: 'sets',     sub: null       },
+    reports:  { main: 'reports',  sub: null       },
+    stores:   { main: 'venues',   sub: null       },
+    mypage:   { main: 'mypage',   sub: null       },
+    'ntc-official': { main: 'analysis', sub: 'ntc-official' }
     // ntc-official は 2026-08-03 追加(指示書63 Step 1-N。NTC公式集計ページ)。
-    // sub は持たないが、main='tournaments' のため大会データ系の共通サブナビ帯は表示される
-    // (イベント/シリーズ/スケジュールが並び、どれもアクティブにならない)
+    // 2026-08-06(指示書66): 主タブ「大会データ」を廃止し「環境分析」へ統合。
+    // events/series/schedule/meta/ntc-official はいずれも main='analysis' で、
+    // 環境分析のサブナビ帯に並び、それぞれ sub キーでアクティブ点灯する
     // mypage は 2026-07-16 追加（お気に入り/マイページ、指示書39 松岡さん指示）
     // regions は 2026-07-15 削除（ショップバトル地域別ランキング廃止、松岡さん指示）
     // '' (contact/privacy/about 等) は主タブもサブもアクティブ無し
@@ -248,7 +323,6 @@ const GCG = {
 
   _MAIN_TABS: [
     { key: 'home',        href: '',             label: 'ホーム'     },
-    { key: 'tournaments', href: 'events.html',  label: '大会データ'  },
     { key: 'analysis',    href: 'meta.html',    label: '環境分析'   },
     { key: 'cards',       href: 'cards.html',   label: 'カードリスト' },
     { key: 'deck-builder', href: 'deck-builder.html', label: 'デッキビルダー' },
@@ -259,18 +333,21 @@ const GCG = {
   ],
 
   _SUB_NAV: {
-    tournaments: [
-      { key: 'events',   href: 'events.html',   label: 'イベント'    },
-      { key: 'series',   href: 'series/',       label: 'シリーズ'    },
-      { key: 'schedule', href: 'schedule.html', label: 'スケジュール' }
+    // 2026-08-06(指示書66): 主タブ「大会データ」廃止に伴い、旧「大会データ」のサブナビを
+    // analysis 配下へ移し、環境分析・公式集計を加えた5項目に再編
+    analysis: [
+      { key: 'meta',         href: 'meta.html',         label: '環境分析'    },
+      { key: 'events',       href: 'events.html',       label: 'イベント'    },
+      { key: 'series',       href: 'series/',           label: 'シリーズ'    },
+      { key: 'schedule',     href: 'schedule.html',     label: 'スケジュール' },
+      { key: 'ntc-official', href: 'ntc-official.html', label: '公式集計'    }
     ],
     // venues のサブナビは 2026-07-15 廃止（地域別ランキング削除に伴い店舗一覧のみ）
-    // analysis / cards / reports / home / venues はサブナビ無し
+    // cards / reports / home / venues / sets / deck-builder / mypage はサブナビ無し
   },
 
   _MAIN_LABEL: {
     home:        'ホーム',
-    tournaments: '大会データ',
     analysis:    '環境分析',
     cards:       'カードリスト',
     reports:     'レポート',
@@ -291,7 +368,7 @@ const GCG = {
       return `<a href="${basePath}${t.href}" class="${cls}">${t.label}</a>`;
     }).join('');
 
-    // サブナビ（_SUB_NAV に定義のあるカテゴリのみ表示。home/cards/reports/analysis等は非表示）
+    // サブナビ（_SUB_NAV に定義のあるカテゴリのみ表示。現在は analysis のみ定義。home/cards/reports等は非表示）
     let subNavHtml = '';
     if (activeMain && this._SUB_NAV[activeMain]) {
       const items = this._SUB_NAV[activeMain].map(s => {

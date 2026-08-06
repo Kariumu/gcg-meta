@@ -82,7 +82,9 @@ function generateSeoContent(ev, seriesName, { linkCards = false } = {}) {
   for (const r of results) {
     // Top 3 finishers get linked cards (noscript only), rest plain text
     const deckHtml = (linkCards && r.rank <= 3) ? deckToLinkedHtml(r.deck) : escapeHtml(deckToText(r.deck));
-    h += '<li>' + rankText(r.rank) + ': ' + escapeHtml(r.player) + ' - デッキ: ' + deckHtml + '</li>';
+    // 選手名を持たないデータ(デッキログ由来・指示書63)では名前欄を出さない
+    const nameText = r.player ? ': ' + escapeHtml(r.player) : '';
+    h += '<li>' + rankText(r.rank) + nameText + ' - デッキ: ' + deckHtml + '</li>';
   }
   h += '</ol>';
   // Internal links section
@@ -97,10 +99,35 @@ function generateSeoContent(ev, seriesName, { linkCards = false } = {}) {
 
 // クライアントサイドJSテンプレート（event.htmlからコピーし、パスを ../に調整）
 // ${EVENT_ID} は生成時に置換される
+//
+// === 入賞デッキ → デッキビルダー導線（2026-08-06 追加・指示書66 §4） ===
+// 「🛠 デッキビルダーで開く」ボタンを全デッキに描画する（TCG+リンクがある場合は併記）。
+// 実装本体は js/common.js の GCG.loadShareDb() / GCG.openDeckInBuilder() 側にあり、
+// ここに置くのは最小のスタブ（デッキのレジストリと onclick の受け口）だけ。
+// 理由: このテンプレートは 833 ページすべてにインライン展開されるため、ここに実装を
+//       書くとページ数ぶん初期転送量が増える。common.js は全ページ共通で1回だけ
+//       取得・キャッシュされるので、実装はそちらに置く。
+// 依存の取得は「初回クリック時のみ」（deckbuilder-core.js / cards_master.json /
+// cards_preview.json）。初期表示では一切取得しない。
+// 旧い common.js がキャッシュされている環境では GCG.openDeckInBuilder が未定義に
+// なるため、その場合は従来の「デッキリストをコピー」動作へ静かに退避する
+// （common.js の ?v= はバンプしない方針のため。指示書66 §7）。
 const CLIENT_JS_TEMPLATE = `
     GCG.init();
 
     var currentEventStore = '';
+
+    // shijisho-66: deck -> builder. Logic lives in common.js (see generate-events.js).
+    var _deckReg = [];
+    function openInBuilder(i, btn) {
+      var d = _deckReg[i];
+      if (!d || !d.length) return;
+      if (typeof GCG.openDeckInBuilder !== 'function') {
+        btn.textContent = '\\u{1F4CB} \\u30C7\\u30C3\\u30AD\\u30EA\\u30B9\\u30C8\\u3092\\u30B3\\u30D4\\u30FC';
+        return GCG.copyToClipboard(GCG.deckToText(d), btn);
+      }
+      GCG.openDeckInBuilder(d, btn, currentEventStore);
+    }
 
     function renderPlayerCard(player, animDelay) {
       const hasDeck = player.deck && player.deck.length > 0;
@@ -115,10 +142,11 @@ const CLIENT_JS_TEMPLATE = `
           '\\u{1F517} BANDAI TCG+ \\u3067\\u898B\\u308B' +
           '<span style="font-size:10px;color:var(--text-muted);margin-left:2px">\\u203BTCG+\\u306B\\u9077\\u79FB\\u3057\\u307E\\u3059</span>' +
           '</a>';
-      } else if (hasDeck) {
-        linkHtml = '<button class="btn-copy" onclick="GCG.copyToClipboard(GCG.deckToText(' +
-          JSON.stringify(player.deck).replace(/"/g, '&quot;') + '), this)">' +
-          '\\u{1F4CB} \\u30C7\\u30C3\\u30AD\\u30EA\\u30B9\\u30C8\\u3092\\u30B3\\u30D4\\u30FC</button>';
+      }
+      if (hasDeck) {
+        var deckIdx = _deckReg.push(player.deck) - 1;
+        linkHtml += '<button class="btn-copy" onclick="openInBuilder(' + deckIdx + ', this)">' +
+          '\\u{1F6E0}\\uFE0F \\u30C7\\u30C3\\u30AD\\u30D3\\u30EB\\u30C0\\u30FC\\u3067\\u958B\\u304F</button>';
       }
 
       let deckHtml = '';
@@ -290,6 +318,8 @@ function generateEventPage(eventId, evRaw, seriesName) {
   // 64名NTC大会では新rank=1 が2名いるが、find は先頭1件のみ取得(OG/twitter card 用途のため許容)
   const winnerResult = (ev.results || []).find(r => r.rank === 1);
   const winnerName = winnerResult ? escapeHtml(winnerResult.player) : '';
+  // 選手名が無いデータ(デッキログ由来・指示書63)では「優勝: 」を出さない
+  const winnerText = winnerName ? '優勝: ' + winnerName : '';
   const noscriptContent = generateSeoContent(ev, seriesName, { linkCards: true });
   const seoContent = generateSeoContent(ev, seriesName, { linkCards: false });
 
@@ -328,18 +358,15 @@ function generateEventPage(eventId, evRaw, seriesName) {
 '    gtag(\'js\', new Date());\n' +
 '    gtag(\'config\', \'G-3MY17P4E7F\');\n' +
 '  </script>\n' +
-'  <!-- Google AdSense -->\n' +
-'  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"\n' +
-'       crossorigin="anonymous"></script>\n' +
 '  <meta charset="UTF-8">\n' +
 '  <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
 '  <title>' + storeName + ' ' + dateFormatted + ' GCG大会結果 | GCG STATS</title>\n' +
-'  <meta name="description" content="' + dateFormatted + ' ' + storeName + 'で開催されたガンダムカードゲーム ニュータイプチャレンジの大会結果。優勝: ' + winnerName + '">\n' +
+'  <meta name="description" content="' + dateFormatted + ' ' + storeName + 'で開催されたガンダムカードゲーム ニュータイプチャレンジの大会結果。' + winnerText + '">\n' +
 '  <!-- OGP -->\n' +
 '  <meta property="og:site_name" content="GCG STATS">\n' +
 '  <meta property="og:locale" content="ja_JP">\n' +
 '  <meta property="og:title" content="' + storeName + ' ' + dateFormatted + ' GCG大会結果 | GCG STATS">\n' +
-'  <meta property="og:description" content="優勝: ' + winnerName + ' - ガンダムカードゲーム大会結果">\n' +
+'  <meta property="og:description" content="' + (winnerText ? winnerText + ' - ' : '') + 'ガンダムカードゲーム大会結果">\n' +
 '  <meta property="og:type" content="article">\n' +
 '  <meta property="og:url" content="' + SITE_URL + '/events/' + eventId + '.html">\n' +
 '  <meta property="og:image" content="' + SITE_URL + '/images/ogp-default.png">\n' +
@@ -525,7 +552,10 @@ function buildTopStats(eventsData, cardColors, seriesMap) {
   }
 
   // --- 集計（index.html refreshDashboard() と1対1対応） ---
-  const getColor = (id) => cardColors[id] || SET_COLORS[String(id).split('-')[0]] || 'Unknown';
+  // card_colors.json → cards_master.json の color → セット推定 の順に引く(2026-08-03)。
+  // card_colors.json は新弾が反映されない静的ファイルなので、cards_master を必ず挟む。
+  const masterColor = (id) => (cardsMaster[id] && cardsMaster[id].color) || null;
+  const getColor = (id) => cardColors[id] || masterColor(id) || SET_COLORS[String(id).split('-')[0]] || 'Unknown';
   const isNtcTypeFn = makeIsNtcTypeFromSeriesMap(seriesMap);
 
   const filteredEventsObj = filterEventsObjByDate(eventsObj, range.start, range.end);

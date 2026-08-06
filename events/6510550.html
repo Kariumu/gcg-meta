@@ -9,9 +9,6 @@
     gtag('js', new Date());
     gtag('config', 'G-3MY17P4E7F');
   </script>
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344"
-       crossorigin="anonymous"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>イエローサブマリンマジッカーズ福岡店 2026.06.28 GCG大会結果 | GCG STATS</title>
@@ -62,6 +59,18 @@
 
     var currentEventStore = '';
 
+    // shijisho-66: deck -> builder. Logic lives in common.js (see generate-events.js).
+    var _deckReg = [];
+    function openInBuilder(i, btn) {
+      var d = _deckReg[i];
+      if (!d || !d.length) return;
+      if (typeof GCG.openDeckInBuilder !== 'function') {
+        btn.textContent = '\u{1F4CB} \u30C7\u30C3\u30AD\u30EA\u30B9\u30C8\u3092\u30B3\u30D4\u30FC';
+        return GCG.copyToClipboard(GCG.deckToText(d), btn);
+      }
+      GCG.openDeckInBuilder(d, btn, currentEventStore);
+    }
+
     function renderPlayerCard(player, animDelay) {
       const hasDeck = player.deck && player.deck.length > 0;
       const tagClass = player.rank === 1 ? 'tag-win' : 'tag-rate';
@@ -75,10 +84,11 @@
           '\u{1F517} BANDAI TCG+ \u3067\u898B\u308B' +
           '<span style="font-size:10px;color:var(--text-muted);margin-left:2px">\u203BTCG+\u306B\u9077\u79FB\u3057\u307E\u3059</span>' +
           '</a>';
-      } else if (hasDeck) {
-        linkHtml = '<button class="btn-copy" onclick="GCG.copyToClipboard(GCG.deckToText(' +
-          JSON.stringify(player.deck).replace(/"/g, '&quot;') + '), this)">' +
-          '\u{1F4CB} \u30C7\u30C3\u30AD\u30EA\u30B9\u30C8\u3092\u30B3\u30D4\u30FC</button>';
+      }
+      if (hasDeck) {
+        var deckIdx = _deckReg.push(player.deck) - 1;
+        linkHtml += '<button class="btn-copy" onclick="openInBuilder(' + deckIdx + ', this)">' +
+          '\u{1F6E0}\uFE0F \u30C7\u30C3\u30AD\u30D3\u30EB\u30C0\u30FC\u3067\u958B\u304F</button>';
       }
 
       let deckHtml = '';
