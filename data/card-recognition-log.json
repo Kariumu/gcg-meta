@@ -3936,5 +3936,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-07": {
+    "recognized_at": "2026-08-07 22:01:41 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2085698721774182573",
+      "https://x.com/GUNDAM_GCG_JP/status/2085697467727892598"
+    ],
+    "cards": [
+      {
+        "card_number": "ST12-012",
+        "card_name": "プルトゥエルブ",
+        "color": "Purple",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 1,
+        "hp": 2,
+        "traits": [
+          "〔地球連邦〕",
+          "〔強化人間〕"
+        ],
+        "link": "「マリーダ・クルス」",
+        "effect": "このカードのカード名は「マリーダ・クルス」としても扱う。【バースト】このカードを手札に加える。【リンク時】自分のデッキを上から2枚見て、その中のカード1枚を上に戻す。残ったカードは自分のトラッシュに置く。シールドが3つ以下のプレイヤーがいるなら、デッキに戻すかわりに手札に加える。",
+        "effect_confidence": "low",
+        "effect_length": 140,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST12-006",
+        "card_name": "ユニコーンガンダム2号機 バンシィ(デストロイモード)",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 5,
+        "hp": 4,
+        "traits": [
+          "〔地球連邦〕"
+        ],
+        "link": "「マリーダ・クルス」",
+        "effect": "【セット中】【起動・メイン】自分のトラッシュのカード4枚をゲームから除外する: このターン中、このユニットは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)【起動・アクション】自分のトラッシュのカード4枚をゲームから除外する: このバトル中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)",
+        "effect_confidence": "low",
+        "effect_length": 188,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
