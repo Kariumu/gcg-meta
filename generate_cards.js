@@ -1727,6 +1727,10 @@ function generateCardPage(cardId, card, typeUsage, adoptions, summary, masterCar
 </html>`;
 }
 
+// 2026-08-06(指示書67): 静的URL一覧から /events.html を除去した。
+// events.html は meta.html へ統合され、noindex のリダイレクトスタブになったため。
+// 【重要】この静的一覧は generate-events.js の updateSitemap() にも**同じ内容が**
+// ハードコードされている。片方だけ直すと、もう片方の実行で必ず復活する。
 function updateSitemap(cardIds) {
   const now = new Date().toISOString().split('T')[0];
 
@@ -1736,12 +1740,6 @@ function updateSitemap(cardIds) {
     <loc>${SITE_URL}/</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <lastmod>${now}</lastmod>
-  </url>
-  <url>
-    <loc>${SITE_URL}/events.html</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
     <lastmod>${now}</lastmod>
   </url>
   <url>
@@ -1775,6 +1773,11 @@ function updateSitemap(cardIds) {
   </url>
   <url>
     <loc>${SITE_URL}/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>${SITE_URL}/data-usage.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

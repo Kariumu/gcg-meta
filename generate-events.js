@@ -217,7 +217,8 @@ const CLIENT_JS_TEMPLATE = `
       if (typeof GCG.renderBreadcrumb === 'function') {
         var bcItems = [
           { name: 'トップ', href: GCG.getBasePath() },
-          { name: 'イベント', href: GCG.getBasePath() + 'events.html' }
+          // 2026-08-06(指示書67): イベント一覧は meta.html へ統合。#events は一覧セクション
+          { name: 'イベント', href: GCG.getBasePath() + 'meta.html#events' }
         ];
         if (seriesName && ev.series_id) {
           bcItems.push({ name: seriesName, href: GCG.getBasePath() + 'series/' });
@@ -663,6 +664,255 @@ function buildTopStats(eventsData, cardColors, seriesMap) {
   };
 }
 
+// ============================================================
+// 指示書67(2026-08-06): 環境分析(meta.html)とイベント一覧の一体化
+//   統合ページの初期表示から data/events.json(14.5MB) を外すための事前集計。
+//   - data/events_index.json … 全イベント×全順位の [rank, type_key] を持つ軽量索引
+//   - data/meta_stats.json  … 既定レンジのデッキタイプ分布 + タイプ別カード採用率 + 地域別メタ
+//   どちらも buildTopStats() と同じ入力・同じ色判定を使うので、集計規則が二重定義にならない。
+//   決定論: 実行日時(wall-clock)は書き込まない。件数と入力ファイル名だけを持つ。
+// ============================================================
+
+// card_id → 色。buildTopStats() の getColor と同一規則(card_colors → cards_master → セット接頭辞)
+function makeGetColor(cardColors) {
+  const masterColor = (id) => (cardsMaster[id] && cardsMaster[id].color) || null;
+  return (id) => cardColors[id] || masterColor(id) || SET_COLORS[String(id).split('-')[0]] || 'Unknown';
+}
+
+// デッキ → 上位2色(COLOR_SORT_ORDER 順)。js/common.js の GCG.deckTypeColors と同一規則。
+// 指示書67 発行元裁定①: サイト全体でこの導出を正とする。
+function deckTypeColorsOf(deck, getColor) {
+  const cc = {};
+  for (let i = 0; i < deck.length; i++) {
+    const col = getColor(deck[i].card_id);
+    if (col === 'Unknown' || col === 'Colorless') continue;
+    cc[col] = (cc[col] || 0) + deck[i].count;
+  }
+  const sorted = Object.entries(cc).sort((a, b) => b[1] - a[1]);
+  if (sorted.length >= 2) {
+    return [sorted[0][0], sorted[1][0]]
+      .sort((a, b) => COLOR_SORT_ORDER.indexOf(a) - COLOR_SORT_ORDER.indexOf(b));
+  }
+  if (sorted.length === 1) return [sorted[0][0]];
+  return ['Unknown'];
+}
+
+// 地域の並び(北→南)。scraper.js の REGION_BY_PREF_NAME と同じ8区分 + フォールバック。
+const REGION_ORDER = ['北海道', '東北', '関東', '中部', '関西', '中国', '四国', '九州', 'その他'];
+
+/**
+ * data/events_index.json を生成する。
+ * - r は「デッキを持つ全順位」を results の並び順で保持する。
+ *   ※ rank をキーにしたマップにしてはいけない: 同一イベント内に rank が重複する行が
+ *     実データに存在する(2026-08-06 実測で32イベント・33行。例 5868346 の ranks=1,2,2,4)。
+ * - NTC64 の順位変換(ceil(rank/2))は行わない。変換前の rank と results 総数(c)を持ち、
+ *   読み出し側(meta.html)で events.json と同じ規則で変換する(events.json 不変原則と同じ思想)。
+ * - プレイヤー名は入れない(指示書67 発行元裁定②。SITE-004 の精神に沿って
+ *   個人名を常時ロードされる新ファイルへ複製しない)。店舗/プレイヤー検索は
+ *   初回使用時に events.json を遅延ロードして従来どおり動かす。
+ */
+function buildEventsIndex(eventsData, cardColors) {
+  const getColor = makeGetColor(cardColors);
+  const eventsObj = eventsData.events || {};
+  const list = [];
+  let results = 0;
+  let missingRegion = 0;
+  for (const key of Object.keys(eventsObj)) {
+    const ev = eventsObj[key];
+    if (!ev) continue;
+    const region = ev.region || '';
+    if (!region || region === 'その他') missingRegion++;
+    const r = [];
+    for (const res of (ev.results || [])) {
+      if (!res.deck || res.deck.length === 0) continue;
+      r.push([res.rank, deckTypeColorsOf(res.deck, getColor).join('+')]);
+    }
+    results += r.length;
+    list.push({
+      i: ev.event_id,
+      d: ev.date || '',
+      s: String(ev.series_id || ''),
+      n: ev.store || '',
+      g: region,
+      c: (ev.results || []).length,
+      r: r
+    });
+  }
+  // 日付降順(events.html の GCG.sortedEvents と同じ既定順)。同日は event_id で安定化。
+  list.sort((a, b) => (b.d || '').localeCompare(a.d || '') || String(a.i).localeCompare(String(b.i)));
+  return {
+    index: {
+      schema: 1,
+      generated_from: 'data/events.json',
+      region_order: REGION_ORDER,
+      totals: { events: list.length, results: results },
+      events: list
+    },
+    missingRegion: missingRegion
+  };
+}
+
+/**
+ * data/meta_stats.json を生成する(統合ページの初期表示用)。
+ * 既定レンジ(= top_stats.json と同じ決め方)・全地域・TOP4 での
+ * デッキタイプ分布 / タイプ別カード採用率 / 地域別メタ を丸ごと事前集計する。
+ * カード採用率は上位N件に切らず**全件**入れる(実測 raw 73KB / gzip 6KB。
+ * 機能を削らないことを優先。指示書67 §2「機能完全継承」)。
+ */
+function buildMetaStats(eventsData, cardColors, seriesMap, range) {
+  const getColor = makeGetColor(cardColors);
+  const isNtcTypeFn = makeIsNtcTypeFromSeriesMap(seriesMap);
+  const eventsObj = filterEventsObjByDate(eventsData.events || {}, range.start, range.end);
+  const allEvents = Object.values(eventsObj);
+
+  const typeMap = {};
+  const regionMap = {};
+  let totalDecks = 0;
+
+  for (const evRaw of allEvents) {
+    const ev = consolidateNtcRank(evRaw, { isNtcType: isNtcTypeFn });
+    const threshold = isTargetEvent(evRaw, { isNtcType: isNtcTypeFn }) ? 8 : 4;
+    const region = evRaw.region || 'その他';
+    if (!regionMap[region]) {
+      regionMap[region] = { region: region, eventIds: new Set(), typeMap: {}, decks: 0 };
+    }
+    let hasMatch = false;
+
+    for (const r of (ev.results || [])) {
+      if (r.rank > threshold) continue;
+      if (!r.deck || r.deck.length === 0) continue;
+      hasMatch = true;
+      totalDecks++;
+
+      const colors = deckTypeColorsOf(r.deck, getColor);
+      const typeKey = colors.join('+');
+      const label = colors.map((c) => DECK_COLORS_JP[c] || DECK_COLORS_JP.Unknown).join('/');
+
+      if (!typeMap[typeKey]) {
+        typeMap[typeKey] = { type_key: typeKey, colors: colors, label: label, count: 0, wins: 0, rankSum: 0, cards: {} };
+      }
+      const t = typeMap[typeKey];
+      t.count++;
+      t.rankSum += r.rank;
+      if (r.rank === 1) t.wins++;
+      for (const card of r.deck) {
+        if (!t.cards[card.card_id]) {
+          t.cards[card.card_id] = { card_id: card.card_id, decks: 0, wins: 0, counts: [], total: 0 };
+        }
+        const cs = t.cards[card.card_id];
+        cs.decks++;
+        if (r.rank === 1) cs.wins++;
+        cs.counts.push(card.count);
+        cs.total += card.count;
+      }
+
+      const rm = regionMap[region];
+      rm.decks++;
+      if (!rm.typeMap[typeKey]) {
+        rm.typeMap[typeKey] = { type_key: typeKey, colors: colors, label: label, count: 0, wins: 0 };
+      }
+      rm.typeMap[typeKey].count++;
+      if (r.rank === 1) rm.typeMap[typeKey].wins++;
+    }
+
+    if (hasMatch) regionMap[region].eventIds.add(evRaw.event_id);
+  }
+
+  const deckTypeRanking = Object.values(typeMap).map((t) => {
+    const cardRanking = Object.values(t.cards).map((c) => {
+      c.counts.sort((a, b) => a - b);
+      return {
+        card_id: c.card_id,
+        decks: c.decks,
+        usage_rate: Math.round((c.decks / t.count) * 1000) / 10,
+        wins: c.wins,
+        win_rate: c.decks > 0 ? Math.round((c.wins / c.decks) * 1000) / 10 : 0,
+        avg_count: Math.round((c.total / c.decks) * 10) / 10,
+        median_count: c.counts[Math.floor(c.counts.length / 2)],
+        max_count: c.counts[c.counts.length - 1],
+        min_count: c.counts[0]
+      };
+    }).sort((a, b) => b.usage_rate - a.usage_rate || b.decks - a.decks || a.card_id.localeCompare(b.card_id));
+    return {
+      type_key: t.type_key,
+      colors: t.colors,
+      label: t.label,
+      count: t.count,
+      share: totalDecks > 0 ? Math.round((t.count / totalDecks) * 1000) / 10 : 0,
+      wins: t.wins,
+      win_rate: t.count > 0 ? Math.round((t.wins / t.count) * 1000) / 10 : 0,
+      avg_rank: t.count > 0 ? Math.round((t.rankSum / t.count) * 10) / 10 : 0,
+      card_ranking: cardRanking
+    };
+  }).sort((a, b) => b.count - a.count || a.type_key.localeCompare(b.type_key));
+
+  // 地域別メタは**北順**で並べる(指示書67 発行元裁定③)。件数降順ではない。
+  const regionRanking = Object.values(regionMap)
+    .filter((r) => r.decks > 0)
+    .map((r) => ({
+      region: r.region,
+      events: r.eventIds.size,
+      decks: r.decks,
+      top_deck_types: Object.values(r.typeMap)
+        .sort((a, b) => b.count - a.count || a.type_key.localeCompare(b.type_key))
+        .slice(0, 5)
+    }))
+    .sort((a, b) => {
+      const ia = REGION_ORDER.indexOf(a.region), ib = REGION_ORDER.indexOf(b.region);
+      return (ia < 0 ? REGION_ORDER.length : ia) - (ib < 0 ? REGION_ORDER.length : ib)
+        || String(a.region).localeCompare(String(b.region));
+    });
+
+  return {
+    schema: 1,
+    generated_from: 'data/events.json',
+    default_range: range,
+    region_order: REGION_ORDER,
+    totals: { events: allEvents.length, decks: totalDecks, types: deckTypeRanking.length },
+    deck_type_ranking: deckTypeRanking,
+    region_ranking: regionRanking
+  };
+}
+
+// events_index.json と meta_stats.json を書き出す。
+// top_stats.json と同じく、必須入力が読めないときは既存ファイルを温存して終了コードで気づけるようにする。
+function generateMetaIndexes(eventsData, topStats) {
+  let cardColors, seriesMap;
+  try {
+    cardColors = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'card_colors.json'), 'utf-8'));
+    seriesMap = JSON.parse(fs.readFileSync(path.join(DATA_DIR, 'series.json'), 'utf-8'));
+  } catch (e) {
+    console.error('  *** 警告 *** events_index.json / meta_stats.json の生成をスキップしました: ' + e.message);
+    console.error('      card_colors.json / series.json は集計の必須入力です。既存ファイルはそのまま残します。');
+    process.exitCode = 1;
+    return null;
+  }
+
+  const built = buildEventsIndex(eventsData, cardColors);
+  fs.writeFileSync(path.join(DATA_DIR, 'events_index.json'), JSON.stringify(built.index) + '\n', 'utf-8');
+  console.log('  → data/events_index.json 生成完了 (events ' + built.index.totals.events
+    + ' / results ' + built.index.totals.results + ')');
+  if (built.missingRegion > 0) {
+    // 8地方に落ちなかった店舗があると、地域フィルタから漏れる。夜間ログで気づけるようにする。
+    console.log('  ※ 地域が未判定/「その他」のイベントが ' + built.missingRegion
+      + ' 件あります(data/shop_master.json への追記を検討してください)');
+  }
+
+  // 既定レンジは top_stats.json と必ず同じものを使う(2ファイルで期間がずれると画面が食い違う)
+  const range = (topStats && topStats.default_range)
+    ? { start: topStats.default_range.start || '', end: topStats.default_range.end || '' }
+    : { start: '', end: '' };
+  const metaStats = buildMetaStats(eventsData, cardColors, seriesMap, range);
+  if (topStats && topStats.default_range && topStats.default_range.series_slug) {
+    metaStats.default_range.series_slug = topStats.default_range.series_slug;
+  }
+  fs.writeFileSync(path.join(DATA_DIR, 'meta_stats.json'), JSON.stringify(metaStats) + '\n', 'utf-8');
+  console.log('  → data/meta_stats.json 生成完了 (range ' + (range.start || '(なし)') + '〜' + (range.end || '(なし)')
+    + ' / events ' + metaStats.totals.events + ' / decks ' + metaStats.totals.decks
+    + ' / types ' + metaStats.totals.types + ' / regions ' + metaStats.region_ranking.length + ')');
+  return metaStats;
+}
+
 function generateTopStats(eventsData) {
   // card_colors.json と series.json は集計の必須入力。
   // 読めないまま空オブジェクトで続行すると「デッキタイプ分布が壊れた top_stats.json」を
@@ -713,12 +963,9 @@ function updateSitemap(eventIds) {
 '    <priority>1.0</priority>\n' +
 '    <lastmod>' + now + '</lastmod>\n' +
 '  </url>\n' +
-'  <url>\n' +
-'    <loc>' + SITE_URL + '/events.html</loc>\n' +
-'    <changefreq>daily</changefreq>\n' +
-'    <priority>0.9</priority>\n' +
-'    <lastmod>' + now + '</lastmod>\n' +
-'  </url>\n' +
+// 2026-08-06(指示書67): /events.html は meta.html へ統合し、noindex のリダイレクトスタブになったため
+// sitemap の静的一覧から除去した。この一覧は generate_cards.js L1742 付近にも**同じ内容が**
+// ハードコードされている。片方だけ直すともう片方の実行で必ず復活するので、必ず両方を直すこと。
 '  <url>\n' +
 '    <loc>' + SITE_URL + '/meta.html</loc>\n' +
 '    <changefreq>daily</changefreq>\n' +
@@ -750,6 +997,11 @@ function updateSitemap(eventIds) {
 '  </url>\n' +
 '  <url>\n' +
 '    <loc>' + SITE_URL + '/contact.html</loc>\n' +
+'    <changefreq>monthly</changefreq>\n' +
+'    <priority>0.3</priority>\n' +
+'  </url>\n' +
+'  <url>\n' +
+'    <loc>' + SITE_URL + '/data-usage.html</loc>\n' +
 '    <changefreq>monthly</changefreq>\n' +
 '    <priority>0.3</priority>\n' +
 '  </url>\n';
@@ -807,7 +1059,11 @@ function main() {
   console.log('  → sitemap.xml 更新完了');
 
   // トップページ初期表示用の事前集計（指示書60 Task3）
-  generateTopStats(eventsData);
+  const topStats = generateTopStats(eventsData);
+
+  // 統合ページ(meta.html)初期表示用の軽量索引と事前集計（指示書67）
+  // top_stats.json の既定レンジをそのまま使うため、必ず generateTopStats の後に呼ぶ。
+  generateMetaIndexes(eventsData, topStats);
 
   // --push オプション付きで実行した場合、GitHub API経由でpush
   if (process.argv.includes('--push')) {
@@ -827,6 +1083,14 @@ function main() {
     const topStatsPath = path.join(DATA_DIR, 'top_stats.json');
     if (fs.existsSync(topStatsPath)) {
       filesToPush.push({ path: 'data/top_stats.json', content: fs.readFileSync(topStatsPath, 'utf-8') });
+    }
+    // 指示書67: 統合ページの初期表示はこの2ファイルだけで描くため、events ページと必ず同時に出す。
+    // (片方だけ古いと、一覧の件数と環境分析の集計が食い違って見える)
+    for (const name of ['events_index.json', 'meta_stats.json']) {
+      const p = path.join(DATA_DIR, name);
+      if (fs.existsSync(p)) {
+        filesToPush.push({ path: 'data/' + name, content: fs.readFileSync(p, 'utf-8') });
+      }
     }
     return pushFiles(filesToPush, `Update event pages (${generated} pages)`);
   }

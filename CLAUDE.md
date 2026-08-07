@@ -3,7 +3,8 @@
 ## プロジェクト概要
 
 GCG STATS(`https://gcg-stats.com`)は、ガンダムカードゲーム(GCG)公式大会結果を自動収集・集計・公開する非公式ファンサイト。
-収益は Google AdSense。デプロイは GitHub Pages(`kariumu/gcg-meta`)。
+収益化は行わない(非営利ファンサイト。指示書63 Step 0b で AdSense 恒久中止を決定し、
+指示書68 の発行元裁定 2026-08-07 で確定)。デプロイは GitHub Pages(`kariumu/gcg-meta`)。
 
 ## auto-news.js の運用について
 
@@ -355,11 +356,11 @@ generate-sitemap-extra.js は「新イベントflagの夜」しか走らない�
 - `js/common.js` の `DECK_COLORS`(hex)は generate-ntc-dashboard.js 内に**写し**を持っている
   (common.js はブラウザ専用で require できないため)。common.js 側の色を変えたら生成器の写しも直すこと。
   `tests/test-03-generate.js` が両者の一致を機械照合する
-- `_PAGE_MAP` に `'ntc-official'` を追加済み(主タブ「大会データ」が点灯)。
-  `sub: null` だが `main: 'tournaments'` のため**大会データ系の共通サブナビ帯は表示される**
-  (イベント/シリーズ/スケジュールが並び、どれもアクティブにならない)。この見え方でよいかは発行元判断
+- `_PAGE_MAP` に `'ntc-official'` を追加済み(主タブ「環境分析」が点灯)。
+  `main: 'analysis'` / `sub: 'ntc-official'`(指示書66・67で更新。旧記述の `main: 'tournaments'` は誤り)
 - **このページには AdSense タグを入れていない**(指示書63 Step 0b の方針変更「サイトはAdSense収益化を恒久的に行わない」に従う)。
-  既存ページの AdSense タグ撤去と CLAUDE.md「デプロイ設定」節の収益記述の更新は 63 の範囲外。別途要対応
+  CLAUDE.md の収益記述と privacy.html の AdSense 記述は指示書68 §2-D で撤去済み(2026-08-07)。
+  残件: `templates/deckbuilder.template.html` の広告枠(`.ad-slot` 4枠・既定非表示)
 
 ## X 予約投稿用 週次パック(2026-08-02 追加・指示書64)
 

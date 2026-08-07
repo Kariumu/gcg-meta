@@ -501,7 +501,7 @@ const GCG = {
     return `
       <footer class="site-footer">
         <div class="footer-disclaimer">
-          本サイトはガンダムカードゲームの非公式ファンサイトです。<br>
+          本サイトはガンダムカードゲームの非公式・非営利のファンサイトです。<br>
           バンダイ・サンライズの認可・許諾は得ていません。<br>
           掲載情報は公式大会結果を基に自動集計しています。<br>
           カード画像・テキスト等は<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">公式サイト</a>より引用しています。<br>
@@ -516,6 +516,7 @@ const GCG = {
           <a href="${basePath}privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">プライバシーポリシー</a>
           <a href="${basePath}contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
           <a href="${basePath}about.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">サイトについて</a>
+          <a href="${basePath}data-usage.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">データ利用について</a>
         </div>
       </footer>`;
   },

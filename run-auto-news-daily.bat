@@ -54,6 +54,16 @@ REM --- NTC results ingest (added 2026-07-25, shijisho-51) ---
 echo [%date% %time%] ntc-results START >> auto-news-schtasks.log
 node fetch-ntc-results.js >> auto-news-schtasks.log 2>&1
 echo [%date% %time%] ntc-results FETCH exit %ERRORLEVEL% >> auto-news-schtasks.log
+REM   --- deck-log ingest (shijisho 63, added 2026-08-03) ---
+REM     fetch-ntc-dashboard.js: pulls the NTC aggregate page plus each shop's winner
+REM       decks (RSC, ~57KB per shop). Only shops whose decks are not stored yet.
+REM     import-ntc-decks.js: writes those decks into data/events.json (no player names)
+REM       and sets the same ntc-new-events.flag, so the regen+deploy chain below picks
+REM       them up in the same run. Official-site records win on (date, store) collision.
+node fetch-ntc-dashboard.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   fetch-ntc-dashboard exit %ERRORLEVEL% >> auto-news-schtasks.log
+node import-ntc-decks.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   import-ntc-decks exit %ERRORLEVEL% >> auto-news-schtasks.log
 REM fetch-ntc-results.js creates .sched-run-tmp\ntc-new-events.flag when new events exist; deletes it when zero.
 if not exist ".sched-run-tmp\ntc-new-events.flag" goto ntc_skip
 echo [%date% %time%] ntc-results: new events found - regen+deploy start >> auto-news-schtasks.log
@@ -67,6 +77,12 @@ node generate.js >> auto-news-schtasks.log 2>&1
 echo [%date% %time%]   generate exit %ERRORLEVEL% >> auto-news-schtasks.log
 node generate_cards.js >> auto-news-schtasks.log 2>&1
 echo [%date% %time%]   generate_cards exit %ERRORLEVEL% >> auto-news-schtasks.log
+REM   generate_cardlist.js: rebuilds cards.html. The "recent season" flag on each card is
+REM   derived from events.json, so it changes whenever new tournament results land.
+REM   Added 2026-08-05: it was never in this chain and cards.html was not a deploy candidate,
+REM   so the card list kept showing MISSION3 (June) while the August series was running.
+node generate_cardlist.js >> auto-news-schtasks.log 2>&1
+echo [%date% %time%]   generate_cardlist exit %ERRORLEVEL% >> auto-news-schtasks.log
 REM   generate-report.js --index-only: re-adds reports/*.html URLs to sitemap.xml (no API use).
 REM   generate_cards.js rewrites the whole sitemap, so without this step the 41 reports URLs vanish.
 REM   Must run before generate-sitemap-extra.js (extra re-adds reports/news/ to keep it consistent).
@@ -96,20 +112,35 @@ echo [%date% %time%] post-x-daily END: exit code %XPOSTRC% >> auto-news-schtasks
 echo ============================================================ >> auto-news-schtasks.log
 REM ============================================================
 REM  NTC official dashboard (shijisho 63 Step 1-N)
-REM     Fetches the official NTC aggregate page (RSC, ~37KB), regenerates
-REM     ntc-official.html and pushes the 3 changed files via the GitHub API.
-REM     All three scripts always exit 0; NTCDASHRC is recorded for the log only
+REM     Regenerates ntc-official.html from the data fetched earlier in this run and
+REM     pushes the 3 changed files via the GitHub API (fetch happens with ntc-results).
+REM     All ntc scripts always exit 0; NTCDASHRC is recorded for the log only
 REM     and is never returned as this batch's exit code.
 REM     Dry run (safe, writes nothing): node fetch-ntc-dashboard.js --dry-run
 REM ============================================================
 echo [%date% %time%] ntc-dashboard START >> auto-news-schtasks.log
-node fetch-ntc-dashboard.js >> auto-news-schtasks.log 2>&1
-echo [%date% %time%]   fetch-ntc-dashboard exit %ERRORLEVEL% >> auto-news-schtasks.log
 node generate-ntc-dashboard.js >> auto-news-schtasks.log 2>&1
 echo [%date% %time%]   generate-ntc-dashboard exit %ERRORLEVEL% >> auto-news-schtasks.log
 node deploy-ntc-dashboard.js >> auto-news-schtasks.log 2>&1
 set NTCDASHRC=%ERRORLEVEL%
 echo [%date% %time%] ntc-dashboard END: exit code %NTCDASHRC% >> auto-news-schtasks.log
+echo ============================================================ >> auto-news-schtasks.log
+REM ============================================================
+REM  Friday preview material (shijisho 68 section 2-B)
+REM     Builds the image + post text + booking guide for the Friday 13:00 post,
+REM     so it is ready on Thursday night for manual scheduling on X.
+REM     Runs only on Thursday (JST); the weekday check lives inside the script.
+REM     It never posts to X, never uploads media, and never touches the
+REM     post-x-daily state file. Output goes to tmp\x-weekly-pack\friday-<date>\
+REM     and is not a push target.
+REM     The script always exits 0. FRIPREVRC is recorded for the log only and is
+REM     never returned as this batch's exit code (same rule as XPOSTRC/NTCDASHRC).
+REM     Dry run (safe, writes nothing): node generate-friday-preview.js --dry-run
+REM ============================================================
+echo [%date% %time%] friday-preview START >> auto-news-schtasks.log
+node generate-friday-preview.js >> auto-news-schtasks.log 2>&1
+set FRIPREVRC=%ERRORLEVEL%
+echo [%date% %time%] friday-preview END: exit code %FRIPREVRC% >> auto-news-schtasks.log
 echo ============================================================ >> auto-news-schtasks.log
 REM --- Final exit code ---
 REM     When cardlist-sync reports a problem, surface it as a task failure so it is

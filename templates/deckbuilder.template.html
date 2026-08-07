@@ -27,7 +27,6 @@
 <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
 <!-- 生成元: templates/deckbuilder.template.html + generate_deckbuilder.js（データ埋め込み・LF出力） -->
 <!-- UI: Claude Design 原本の 3a(モバイル検索)/2a(モバイルデッキ)/4a(タブレット)/5a(PC) を忠実移植（2026-07-22 最終版） -->
-<!-- 広告: AdSense却下(2026-07-25)により当面は挿入しない。.ad-slot は既定非表示のまま温存し、承認取得後に body.ads-on＋ユニット挿入で有効化する方針（公開時にnoindexは解除済み）。 -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
@@ -334,12 +333,6 @@
 .drange input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:15px; height:15px; border-radius:50%; background:#e8ecf2; border:none; pointer-events:auto; cursor:pointer; }
 .drange input[type=range]::-moz-range-thumb { width:15px; height:15px; border-radius:50%; background:#e8ecf2; border:none; pointer-events:auto; cursor:pointer; }
 .factions { display:flex; gap:8px; margin-top:4px; }
-
-/* ---- 広告枠（§6.6・既定非表示。公開時に body.ads-on ＋ ユニット挿入で有効化） ---- */
-.ad-slot { display:none; }
-body.ads-on .ad-slot { display:block; margin-top:16px; min-height:100px; border-radius:10px; background:var(--panel); border:1px solid var(--line); overflow:hidden; }
-body.ads-on .ad-slot::before { content:'広告'; display:block; font-size:9px; color:var(--dim); letter-spacing:.1em; padding:4px 8px 0; }
-body.ads-on .ad-slot ins { display:block; }
 
 /* ---- インポート（§10.4/§10.6） ---- */
 .imp-ta { width:100%; min-height:120px; resize:vertical; padding:10px 12px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--fg); font-size:12.5px; font-family:var(--mono); line-height:1.6; outline:none; }
@@ -665,8 +658,6 @@ body.ads-on .ad-slot ins { display:block; }
         <button class="btn" id="btnFilterClear">フィルタをクリア</button>
         <button class="btn" id="btnFilterClose">閉じる</button>
       </div>
-      <!-- §6.6 広告枠①: フィルタ列の最下部（公開時にディスプレイユニットを挿入） -->
-      <div class="ad-slot" id="adFilterEnd"></div>
     </div>
   </div>
 
@@ -719,8 +710,6 @@ body.ads-on .ad-slot ins { display:block; }
         <div id="results" class="s-m"></div>
         <div id="resEmpty" class="empty db-hidden"><span class="big">🔍</span>該当するカードが見つかりません<div class="links"><button class="btn" id="btnFilterClear2">フィルタをクリア</button></div></div>
         <div id="moreSentinel" style="height:8px"></div>
-        <!-- §6.6 広告枠②: 検索結果の末尾（無限スクロール終端の後） -->
-        <div class="ad-slot" id="adSearchEnd"></div>
       </div>
       <div class="sbar-wrap"><div class="sbar">
         <span class="sum">デッキ <span class="num under" id="sbarNum">0</span><span class="den">/50</span> 枚<span id="sbarColors"></span></span>
@@ -778,8 +767,6 @@ body.ads-on .ad-slot ins { display:block; }
             <div class="pie-w"><span class="diag-lb">タイプ比率</span><div class="diag-rows" id="diagTypes"></div></div>
           </div>
         </div>
-        <!-- §6.6 広告枠③: デッキパネルのスクロール末尾（診断の下・固定バーからは十分な距離） -->
-        <div class="ad-slot" id="adDeckEnd"></div>
       </div>
 
       <!-- ≥600: 5a フッター -->
@@ -834,8 +821,6 @@ body.ads-on .ad-slot ins { display:block; }
   <div class="dd-head" id="ddHead"></div>
   <div class="dd-scroll" id="ddGridWrap">
     <div id="ddGrid" style="display:flex;flex-direction:column;gap:inherit"></div>
-    <!-- §6.6 広告枠④: デッキ詳細のグリッド末尾（読み取り専用ビュー＝最も安全） -->
-    <div class="ad-slot" id="adDetailEnd"></div>
   </div>
 </div>
 

@@ -11,6 +11,10 @@
  *   node post-x-weekly-pack.js --start 2026-08-10 --days 7
  *   node post-x-weekly-pack.js --unmark 2026-08-12        # 予約しなかった日を夜間自動へ戻す
  *
+ * 実行想定（指示書68 §2-A）: **日曜 21:30 以降**。
+ *   その週（月〜日）の大会結果が出そろってから走らせることで、同時に出力する
+ *   「月曜まとめ」の集計がその週の確定値になる。日曜以外でも動くが警告を出す。
+ *
  * 設計上の鉄則（指示書64 §1/§2/§6）:
  *   - X 投稿・メディアアップロードへ到達する経路を持たない
  *     （postTweet / uploadMediaToX / executeItem を require しても呼ばない）
@@ -23,6 +27,7 @@
  *   - 出力順序は「日別ファイル → 状態ファイル 1 回 → チェックリスト（完了マーカー）」
  *
  * 作成: 2026-08-02（指示書64 実装セッション）
+ * 更新: 2026-08-07（指示書68 §2-A: 月曜まとめの画像・文面・チェックリスト行を追加）
  */
 'use strict';
 
@@ -63,6 +68,10 @@ const PACK = {
   JPEG_QUALITY: 90,             // webp→jpeg 変換品質（post-x-daily prepareMediaFile と同値）
   OUT_BASE: path.join(ROOT, 'tmp', 'x-weekly-pack'),
   CHECKLIST_NAME: '予約チェックリスト.md',
+  // --- 指示書68 §2-A: 月曜まとめ ---
+  MONDAY_TIME: '12:00',            // 月曜まとめの予約時刻（正午）
+  MONDAY_BASE: '00-月曜まとめ',    // 出力ファイル名の接頭辞
+  EXPECT_DOW: 0,                   // 実行想定の曜日（0=日曜）
   // 夜間バッチ（20:00 起動）が状態ファイルを書き終えるまでの実行禁止帯（JST）
   FORBID_FROM_MIN: 19 * 60 + 30,   // 19:30
   FORBID_TO_MIN: 21 * 60 + 30      // 21:30
@@ -154,6 +163,8 @@ const USAGE = [
   '  --state-file   状態ファイルの差し替え（検証用）',
   '  --unmark       指定日の manual_scheduled を取り消して夜間自動へ戻す（翌日以降のみ）',
   '',
+  '  ※ 実行想定は **日曜 ' + hhmm(PACK.FORBID_TO_MIN) + ' 以降**です（指示書68 §2-A）。',
+  '     その週の結果が出そろってから走らせると、月曜まとめの集計が確定値になります',
   '  ※ ' + hhmm(PACK.FORBID_FROM_MIN) + '〜' + hhmm(PACK.FORBID_TO_MIN)
     + ' JST は実行できません（夜間バッチが状態ファイルを書き終えるまで待つため）',
   '  ※ --date / --only は定義していません（post-x-daily.js 側が解釈してしまうため）'
@@ -171,6 +182,15 @@ function assertNotBatchWindow() {
       + '夜間バッチが状態ファイルを書き終えていない可能性があるため中断しました。'
       + hhmm(PACK.FORBID_TO_MIN) + ' 以降に再実行してください');
   }
+}
+
+// 指示書68 §2-A: 実行想定は日曜 21:30 以降。日曜以外でも動かせるが、
+// 月曜まとめの窓（実行日を含む週の月〜日）が未完の週になるため警告する。
+function warnIfNotExpectedDow(today) {
+  const d = dayOfWeek(today);
+  if (d === PACK.EXPECT_DOW) return;
+  logWarn('実行想定は日曜 ' + hhmm(PACK.FORBID_TO_MIN) + ' 以降です（今日は'
+    + WEEKDAY_JP[d] + '曜）。月曜まとめの集計期間はまだ終わっていない週になります');
 }
 
 function assertDateFormat(label, s) {
@@ -200,6 +220,7 @@ async function generate(args) {
   const today = todayJst();
 
   assertNotBatchWindow();
+  warnIfNotExpectedDow(today);
 
   // --- 引数の解決と検証 ---
   const start = args.opts['--start'] || addDays(today, 1);
@@ -313,6 +334,18 @@ async function generate(args) {
       + (plan.exhausted ? ' / *** プール枯渇フォールバック ***' : ''));
   }
 
+  // --- 月曜まとめ（指示書68 §2-A）---
+  // 64 の既存機能を壊さないため、ここで何が起きても週次パック本体は続行する。
+  const monday = await buildMondaySummary(today);
+  if (monday.ok) {
+    log('月曜まとめ: ' + monday.window.from + '〜' + monday.window.to + ' / '
+      + monday.agg.eventCount + 'イベント ' + monday.agg.deckTotal + 'デッキ / 加重 '
+      + monday.fitted.weighted + ' / 投稿予定 ' + monday.postDate + ' ' + PACK.MONDAY_TIME);
+    if (monday.fitted.over) logWarn('月曜まとめの文面が加重上限を超えています（手動対応が必要です）');
+  } else {
+    logWarn('月曜まとめは出力しません: ' + monday.reason);
+  }
+
   const planned = items.filter((it) => !it.skip);
   for (const it of planned) {
     if (it.overLimit) logWarn('[' + it.date + '] 加重 ' + it.weighted + ' が上限を超えています（手動対応が必要です）');
@@ -324,6 +357,17 @@ async function generate(args) {
       console.log('----- ' + it.date + '(' + WEEKDAY_JP[dayOfWeek(it.date)] + ') '
         + PACK.PLANNED_TIME + ' / ' + it.card.card_id + ' / 加重 ' + it.weighted + ' -----');
       for (const line of it.text.split('\n')) console.log('  | ' + line);
+    }
+    if (monday.ok) {
+      console.log('----- 月曜まとめ ' + monday.postDate + '(月) ' + PACK.MONDAY_TIME
+        + ' / 加重 ' + monday.fitted.weighted + ' -----');
+      for (const line of monday.fitted.text.split('\n')) console.log('  | ' + line);
+      console.log('  [画像] ' + monday.spec.title + ' / ' + monday.spec.sub);
+      for (const r of monday.spec.rows) {
+        console.log('    ' + r.label + ' ' + r.share + '% (' + r.count + 'デッキ)');
+      }
+    } else {
+      console.log('----- 月曜まとめ: 出力なし（' + monday.reason + '） -----');
     }
     console.log('');
     log('[DRY-RUN] ファイル出力・状態ファイル書き込みはいずれも実行していません（0 件）');
@@ -350,6 +394,29 @@ async function generate(args) {
   log('日別ファイルを出力しました: ' + planned.length + ' 日分（txt ' + planned.length + ' / jpg '
     + planned.filter((it) => it.imgName).length + '）');
 
+  // 月曜まとめ（指示書68 §2-A）。ここも「日別ファイル」の工程に含める＝
+  // チェックリストが完了マーカーである性質（最後に書く）を崩さない。
+  if (monday.ok) {
+    // 書き出しの失敗（フォント解決・ディスク・ファイルロック等）で 64 の本体を止めない。
+    // ここで落ちると状態ファイルもチェックリストも書かれず、パックが未完成になる。
+    try {
+      const banner = require('./x-weekly-banner.js');
+      await banner.renderBanner(monday.spec, path.join(outDir, monday.pngName));
+      fs.writeFileSync(path.join(outDir, monday.txtName),
+        monday.fitted.text.replace(/\n/g, '\r\n'), 'utf-8');   // BOM なし・CRLF
+      log('月曜まとめを出力しました: ' + monday.pngName + ' / ' + monday.txtName);
+    } catch (e) {
+      logWarn('月曜まとめの書き出しに失敗しました（週次パック本体は続行します）: '
+        + (e && e.message ? e.message : String(e)));
+      // 中途半端なファイルを残さない。チェックリストにも「出力なし」と書く
+      for (const n of [monday.pngName, monday.txtName]) {
+        try { fs.unlinkSync(path.join(outDir, n)); } catch (_) { /* 無ければ何もしない */ }
+      }
+      monday.ok = false;
+      monday.reason = '書き出しに失敗しました: ' + (e && e.message ? e.message : String(e));
+    }
+  }
+
   // --- 2) 状態ファイルへ最後に 1 回だけ原子書き ---
   if (!sameRaw(rawBefore, readStateRaw())) {
     throw new Error('状態ファイルが実行中に他プロセスから更新されました。'
@@ -362,7 +429,8 @@ async function generate(args) {
   const checklistPath = path.join(outDir, PACK.CHECKLIST_NAME);
   fs.writeFileSync(checklistPath, buildChecklist({
     items, planned, start, days, outDir, range, today,
-    hasMonday: planned.some((it) => dayOfWeek(it.date) === 1)
+    hasMonday: planned.some((it) => dayOfWeek(it.date) === 1),
+    monday
   }), 'utf-8');
 
   // --- 4) サマリ ---
@@ -373,6 +441,43 @@ async function generate(args) {
   log('次にやること: ' + PACK.CHECKLIST_NAME + ' を開き、X の Web 版から 1 件ずつ '
     + PACK.PLANNED_TIME + ' の予約投稿を登録してください');
   return { items, outDir, dryRun: false };
+}
+
+/**
+ * 月曜まとめ（指示書68 §2-A）の集計・文面・画像 spec を作る。
+ *   窓 = 実行日を含む週の月〜日（日曜実行なら「その週の月〜当日」）
+ *   投稿日 = 窓の終わり（日曜）の翌日 = 月曜
+ * 失敗しても throw しない。呼び出し側は { ok:false, reason } を見て続行する。
+ */
+async function buildMondaySummary(today) {
+  const r = { ok: false, reason: null };
+  try {
+    const banner = require('./x-weekly-banner.js');
+    const win = banner.windowMonday(today);
+    r.window = win;
+    r.postDate = banner.addDays(win.to, 1);
+
+    const idx = banner.loadIndex(ROOT);
+    const series = banner.loadSeries(ROOT);
+    const agg = banner.aggregateWindow(idx, series.ntc, win.from, win.to);
+    r.agg = agg;
+
+    if (agg.eventCount === 0 || agg.deckTotal === 0) {
+      r.reason = 'この週（' + win.from + '〜' + win.to + '）には対象イベントが 1 件もありません';
+      return r;
+    }
+
+    r.fitted = banner.fitText(banner.buildMondayText(agg), weightedLength,
+      daily.CONFIG.MAX_WEIGHTED_LENGTH);
+    r.spec = banner.buildSpec(agg, series, 'monday');
+    r.pngName = PACK.MONDAY_BASE + '-' + r.postDate + '.png';
+    r.txtName = PACK.MONDAY_BASE + '-' + r.postDate + '.txt';
+    r.ok = true;
+  } catch (e) {
+    r.reason = '生成に失敗しました（週次パック本体は続行します）: '
+      + (e && e.message ? e.message : String(e));
+  }
+  return r;
 }
 
 function fileBase(index, date, cardId) {
@@ -400,6 +505,7 @@ function buildChecklist(o) {
   push('- 集計期間（この週の文面の根拠）: ' + o.range.start + '〜' + o.range.end);
   push('- 予約時刻: **毎朝 ' + PACK.PLANNED_TIME + '（午前10時）**');
   push();
+  pushMondaySummarySection(push, o);
   push('## はじめに（必ず読んでください）');
   push();
   push('- **この週は X の予約投稿が前提です。登録しなかった日は、その日の投稿はありません。**');
@@ -423,6 +529,11 @@ function buildChecklist(o) {
   if (o.hasMonday) {
     push('- **月曜だけは、朝 10:00 の予約とは別に、夜 20:00 に「週間ムーバー」が自動投稿されます。**');
     push('  中身の違う別の投稿なので、二重投稿ではありません（これまでどおりの動きです）。');
+    if (o.monday && o.monday.ok) {
+      push('  さらに ' + PACK.MONDAY_TIME + ' の「週間環境まとめ」を加えて、'
+        + '**月曜は 3 件**（朝のカード／昼のまとめ／夜のムーバー）になります。');
+      push('  いずれも中身の違う別の投稿です。X の1日あたりの上限には収まっています。');
+    }
   }
   push();
   push('## 登録のしかた（1 日ぶんの手順）');
@@ -540,6 +651,48 @@ function buildChecklist(o) {
   return L.join('\r\n');
 }
 
+// 指示書68 §2-A: チェックリストの先頭に置く「月曜まとめ」の節。
+// 画像の添付を明記する（この投稿は画像が主役のため）。
+function pushMondaySummarySection(push, o) {
+  const m = o.monday;
+  push('## ★ 最初にこれ: 週間環境まとめ（画像つき）を月曜 ' + PACK.MONDAY_TIME + ' で予約');
+  push();
+  if (!m || !m.ok) {
+    push('- **今回は出力していません。** 理由: ' + ((m && m.reason) || '不明'));
+    push('- この週は週間環境まとめの投稿はありません。それで問題ありません。');
+    push('  下の「日別」（毎朝 ' + PACK.PLANNED_TIME + 'のカード）はいつもどおり登録してください。');
+    push();
+    return;
+  }
+  push('- [ ] 登録した');
+  push('- 投稿日時: **' + m.postDate + '（月） ' + PACK.MONDAY_TIME + '（正午）**');
+  push('  - 「午前／午後」を選ぶ欄がある場合は **午後 12:00**（＝お昼の12時）です。');
+  push('    24 時間表記の欄なら **12:00** です。');
+  push('- 投稿文ファイル: `' + m.txtName + '`  ← **コピー元はこちら**');
+  push('- 画像ファイル: `' + m.pngName + '`  ← **必ず添付してください（この投稿は画像が主役です）**');
+  push('- 集計期間: ' + m.window.from + '〜' + m.window.to + '（実行日を含む週の月〜日）');
+  push('- 集計結果: ' + m.agg.eventCount + 'イベント / 上位入賞 ' + m.agg.deckTotal + 'デッキ');
+  push('- 文字数: ' + m.fitted.weighted + ' / ' + daily.CONFIG.MAX_WEIGHTED_LENGTH
+    + '（X の数え方。' + (m.fitted.over ? '**上限を超えています**' : '上限内なのでそのまま投稿できます') + '）');
+  if (m.fitted.dropped.length) {
+    push('- 補足: 長さの都合で ' + m.fitted.dropped.join(' / ') + ' を省略しています');
+  }
+  if (m.fitted.over) {
+    push('- **⚠ 上限を超えています。そのままでは投稿できません。**');
+    push('  文面を短くするか、この週は見送ってください。');
+  }
+  push();
+  push('- 画像の内容（目視確認用）:');
+  for (const r of m.agg.rows) {
+    push('  - ' + r.label + '  ' + r.share + '%  (' + r.count + 'デッキ)');
+  }
+  push();
+  push('```');
+  for (const line of m.fitted.text.split('\n')) push(line);
+  push('```');
+  push();
+}
+
 // ===================================================================
 // --unmark（予約しなかった日を夜間自動へ戻す）
 // ===================================================================
@@ -627,4 +780,7 @@ if (require.main === module) {
   });
 }
 
-module.exports = { main, generate, unmark, parseArgs, buildChecklist, PACK, _internal: { todayJst, fileBase } };
+module.exports = {
+  main, generate, unmark, parseArgs, buildChecklist, buildMondaySummary, PACK,
+  _internal: { todayJst, fileBase, warnIfNotExpectedDow }
+};

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>データ利用について - GCG STATS</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="theme-color" content="#d4a029">
+  <meta name="description" content="GCG STATSの集計データ・グラフのご利用条件。出典明記で動画・配信・ブログに自由にご利用いただけます。">
+  <link rel="canonical" href="https://gcg-stats.com/data-usage.html">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="データ利用について | GCG STATS">
+  <meta property="og:description" content="GCG STATSの集計データ・グラフのご利用条件。出典明記で動画・配信・ブログに自由にご利用いただけます。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/data-usage.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .policy-content { max-width: 780px; margin: 0 auto; }
+    .policy-content h2 {
+      font-size: 15px; font-weight: 600; color: var(--accent);
+      margin: 36px 0 12px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+    }
+    .policy-content p {
+      font-size: 13px; color: var(--text-secondary); line-height: 1.9; margin-bottom: 12px;
+    }
+    .policy-content strong { color: var(--text-primary); font-weight: 600; }
+    .policy-content a {
+      color: var(--accent); text-decoration: none; transition: color 0.15s;
+    }
+    .policy-content a:hover { color: var(--accent-hover); }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="section-header">
+      <h1 class="section-title">データ・グラフのご利用について</h1>
+    </div>
+
+    <div class="policy-content">
+      <p>GCG STATSは、GUNDAM CARD GAMEの大会環境を追いかける非公式のファンサイトです。当サイトの集計データやグラフは、動画・配信・ブログ・SNSなどで<strong>自由にご利用いただけます</strong>。事前の連絡は不要です。</p>
+      <h2>ご利用いただけるもの</h2>
+      <p>当サイトが作成した集計値・ランキング・グラフ・表・ページのスクリーンショット。配信画面への表示、記事への転載、数値の引用など、形式は問いません。</p>
+      <h2>お願いする条件は1つだけ</h2>
+      <p>出典として「<strong>GCG STATS(gcg-stats.com)</strong>」の表記をお願いします。動画・配信なら概要欄または画面内、記事ならリンク付きの記載が理想です。数値を加工・再計算して使う場合は、その旨も添えていただけると誤解が防げます。</p>
+      <h2>対象外のもの</h2>
+      <p>カードの画像・イラスト・ロゴなどの公式素材は、当サイトに権利がないため本ページの対象外です(当サイトのグラフはこれらを含まない形で作られています)。公式素材の利用については各権利者の定めに従ってください。</p>
+      <h2>ご理解いただきたいこと</h2>
+      <p>当サイトのデータは、公式に公開されている大会情報を独自に集計したものです。<strong>元データに関する権利は各権利者(株式会社バンダイ等)に帰属し、当サイトがその利用を許諾するものではありません。</strong> 集計の正確性・完全性は保証できません。また、権利者からの要請があった場合、掲載内容や本ページの方針を変更することがあります。</p>
+      <h2>ご連絡</h2>
+      <p>掲載内容に問題がある場合や、ご不明な点は<a href="contact.html">お問い合わせ</a>からご連絡ください。権利者ご本人からの削除・修正のご要請には速やかに対応します。</p>
+    </div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js?v=15"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+  </script>
+</body>
+</html>
