@@ -3938,10 +3938,11 @@
     "status": "pending_review"
   },
   "2026-08-07": {
-    "recognized_at": "2026-08-07 22:01:41 JST",
+    "recognized_at": "2026-08-08 20:00:41 JST",
     "source_tweets": [
       "https://x.com/GUNDAM_GCG_JP/status/2085698721774182573",
-      "https://x.com/GUNDAM_GCG_JP/status/2085697467727892598"
+      "https://x.com/GUNDAM_GCG_JP/status/2085697467727892598",
+      "https://x.com/GUNDAM_GCG_JP/status/2085999462443270567"
     ],
     "cards": [
       {
@@ -3980,6 +3981,26 @@
         "effect": "【セット中】【起動・メイン】自分のトラッシュのカード4枚をゲームから除外する: このターン中、このユニットは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)【起動・アクション】自分のトラッシュのカード4枚をゲームから除外する: このバトル中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)",
         "effect_confidence": "low",
         "effect_length": 188,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST14-008",
+        "card_name": "ガンダムヘビーアームズ改（EW版）",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 4,
+        "ap": 6,
+        "hp": 4,
+        "traits": [
+          "〔Gチーム〕",
+          "〔オペレーション・メテオ〕"
+        ],
+        "link": "特徴にGチームを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
         "image_url": null,
         "confidence": "medium"
       }
