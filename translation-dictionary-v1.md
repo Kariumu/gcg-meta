@@ -16,6 +16,7 @@
 | 2026-05-27 | GD04 Week 4 新規訳語追加: Freedom Blockers / Justice & Providence Blockers / Clan | reports/msa-gd04-week4.html |
 | 2026-07-29 | GD05 Week 0 新規訳語追加: Nu Gundam / Sazabi / Shining & Master Gundam / Strike Freedom Blockers / Strike Freedom & Marida's Banshee | reports/msa-gd05-week0.html |
 | 2026-08-04 | GD05 Week 1 新規訳語追加: G Fighters (MF) / Strike Freedom & League Militaire / Strike Freedom & Marida's Banshee (Burn) / Strike Freedom, League Militaire & Marida's Banshee / Strike Freedom & Barbatos Lupus / Sazabi (Purple Green) / Sazabi Other / Sazabi & League Militaire / Barbatos Rush (Char Aznable) | reports/msa-gd05-week1.html |
+| 2026-08-11 | GD05 Week 2 新規訳語追加: Calibarn / Strike Freedom Other | reports/msa-gd05-week2.html |
 
 ## デッキ名・アーキタイプ訳語
 
@@ -65,6 +66,8 @@
 | Sazabi Other | **サザビー その他** |  | GD05 Week 1 新規。既存の Grampa Other＝グランパ その他 の表記に準拠 |
 | Sazabi & League Militaire | **サザビー & リーグ・ミリタリー** |  | GD05 Week 1 新規。元記事の見出しは閉じ括弧が余分な「Sazabi & League Militaire)」表記 |
 | Barbatos Rush (Char Aznable) | **バルバトス アグロ（シャア・アズナブル）** | バルバトスラッシュ（シャア） | GD05 Week 1 新規。既存の Barbatos Rush＝バルバトス アグロ に準拠 |
+| Calibarn | **カリバーン** |  | GD05 Week 2 新規。使用率2%を超えて元記事の掲載対象に入ったため登録 |
+| Strike Freedom Other | **ストライクフリーダム その他** |  | GD05 Week 2 新規。既存の Grampa Other＝グランパ その他 / Sazabi Other＝サザビー その他 の表記に準拠 |
 
 ## カラータイプ表記
 
