@@ -4,6 +4,7 @@
 
 - 規約: 海外名（英）→ サイト内表記（日）。同一アーキタイプに複数の和名候補がある場合は採用形を太字。
 - 更新ルール: 新規訳語は記事公開時に追記。記事側と本辞書の表記は必ず一致させる。
+- **訳語の典拠**: カード名・特徴に由来する語は必ず `data/cards_master_en.json`（英日対訳・全919枚）で公式日本語表記を確認してから登録する。英語名からの音写で決めない（2026-08-12、カリバーン/リーグ・ミリタリー/ミリシアの3件が音写由来の誤りだったため追加）。
 
 ## 改訂履歴
 
@@ -17,6 +18,7 @@
 | 2026-07-29 | GD05 Week 0 新規訳語追加: Nu Gundam / Sazabi / Shining & Master Gundam / Strike Freedom Blockers / Strike Freedom & Marida's Banshee | reports/msa-gd05-week0.html |
 | 2026-08-04 | GD05 Week 1 新規訳語追加: G Fighters (MF) / Strike Freedom & League Militaire / Strike Freedom & Marida's Banshee (Burn) / Strike Freedom, League Militaire & Marida's Banshee / Strike Freedom & Barbatos Lupus / Sazabi (Purple Green) / Sazabi Other / Sazabi & League Militaire / Barbatos Rush (Char Aznable) | reports/msa-gd05-week1.html |
 | 2026-08-11 | GD05 Week 2 新規訳語追加: Calibarn / Strike Freedom Other | reports/msa-gd05-week2.html |
+| 2026-08-12 | 公式カード名との照合により訳語を修正: Calibarn カリバーン→キャリバーン / League Militaire リーグ・ミリタリー→リガ・ミリティア（関連5エントリ含む） / Militia ミリシア→ミリシャ。公開済みMSA記事10本も遡及修正 | reports/msa-gd04-week1〜7,9, msa-gd05-week1〜2 |
 
 ## デッキ名・アーキタイプ訳語
 
@@ -27,14 +29,14 @@
 | Celestial Being Kyrios | **ソレスタルビーイング キュリオス** | CB キュリオス | |
 | Destiny Blockers | **デスティニー ブロッカー** | デスティニー・ブロッカー | |
 | Neo Zeong Blockers | **ネオ・ジオング ブロッカー** | NZブロッカー | |
-| Banshee Norn & League Militaire | **バンシィ・ノルン & リーグ・ミリタリー** | バンシィ・ノルン＆リーグ・ミリタリー | |
+| Banshee Norn & League Militaire | **バンシィ・ノルン & リガ・ミリティア** | バンシィ・ノルン＆リガ・ミリティア | |
 | Blue Purple Rush | **青紫アグロ** | 青紫ラッシュ | 既存サイト記事と用語統一（Week 11 で採用済み） |
 | Neo Zeong Burn (Red Blue) | **ネオ・ジオング バーン（赤青）** | | |
 | Turn-A | **ターンエー（∀ガンダム）** | ∀ガンダム | カッコで原表記を併記 |
 | Destiny Gundam | **デスティニーガンダム** | | |
 | Wing Zero Blockers | **ウイングゼロ ブロッカー** | ウイングガンダムゼロ ブロッカー | |
 | Neo Zeong Burn (Red Green) | **ネオ・ジオング バーン（赤緑）** | | |
-| League Militaire | **リーグ・ミリタリー** | | |
+| League Militaire | **リガ・ミリティア** | リーグ・ミリタリー | 公式カード名「ゾロアット（リガ・ミリティア仕様）」(GD04-016) の EN 名が Zoloat (League Militaire)。2026-08-12 リーグ・ミリタリー→リガ・ミリティアに修正 |
 | Barbatos Rush | **バルバトス アグロ** | バルバトスラッシュ | 既存サイトの「アグロ」表記に統一 |
 | Blue Green Rush | **青緑アグロ** | 青緑ラッシュ | 同上 |
 | The-O Blockers | **ジ・O ブロッカー** | The-O ブロッカー | Week 11 で採用済み |
@@ -47,8 +49,8 @@
 | Barbatos Lupus | **バルバトス ルプス** | — | GD04 Week 3 新規 |
 | Barbatos Rush (Purple Red) | **バルバトス アグロ（紫赤）** | — | GD04 Week 3 新規。色違い派生 |
 | Blue Red Agro | **青赤アグロ** | 青赤ラッシュ | GD04 Week 3 新規 |
-| Militia Rush | **ミリシア アグロ** | ミリシアラッシュ | GD04 Week 3 新規 |
-| Neo Zeong & League Militaire | **ネオ・ジオング & リーグ・ミリタリー** | — | GD04 Week 3 新規 |
+| Militia Rush | **ミリシャ アグロ** | ミリシャラッシュ / ミリシア アグロ | GD04 Week 3 新規。公式カード名「フラット（ミリシャ仕様）」(GD04-077) の EN 名が Flat (Militia)。2026-08-12 ミリシア→ミリシャに修正 |
+| Neo Zeong & League Militaire | **ネオ・ジオング & リガ・ミリティア** | — | GD04 Week 3 新規 |
 | Freedom Blockers | **フリーダム ブロッカー** | フリーダムブロッカー | GD04 Week 4 新規 |
 | Justice & Providence Blockers | **ジャスティス&プロヴィデンス ブロッカー** | — | GD04 Week 4 新規 |
 | Clan | **クラン** | — | GD04 Week 4 新規 |
@@ -58,15 +60,15 @@
 | Strike Freedom Blockers | **ストライクフリーダム ブロッカー** |  |  |
 | Strike Freedom & Marida's Banshee | **フリーダムバンシィ** |  | 短縮形を採用（松岡さん指示 2026-07-29） |
 | G Fighters (MF) | **Gファイターズ（MF）** | Gガンダム / シャイニング & マスターガンダム | GD05 Week 1 新規。Week 0 の Shining & Master Gundam と同系統と見られるが元記事に改称の明記なし。原表記寄りを採用（松岡さん指示 2026-08-04） |
-| Strike Freedom & League Militaire | **ストライクフリーダム & リーグ・ミリタリー** |  | GD05 Week 1 新規 |
+| Strike Freedom & League Militaire | **ストライクフリーダム & リガ・ミリティア** |  | GD05 Week 1 新規 |
 | Strike Freedom & Marida's Banshee (Burn) | **フリーダムバンシィ（バーン）** |  | GD05 Week 1 新規。元記事のアーキタイプ分類見直しで (Burn) 区分が追加 |
-| Strike Freedom, League Militaire & Marida's Banshee | **ストライクフリーダム & リーグ・ミリタリー & バンシィ** |  | GD05 Week 1 新規 |
+| Strike Freedom, League Militaire & Marida's Banshee | **ストライクフリーダム & リガ・ミリティア & バンシィ** |  | GD05 Week 1 新規 |
 | Strike Freedom & Barbatos Lupus | **ストライクフリーダム & バルバトス ルプス** |  | GD05 Week 1 新規 |
 | Sazabi (Purple Green) | **サザビー（紫緑）** |  | GD05 Week 1 新規。色違い派生。既存の Barbatos Rush (Purple Red)＝バルバトス アグロ（紫赤）に合わせ英語順で表記 |
 | Sazabi Other | **サザビー その他** |  | GD05 Week 1 新規。既存の Grampa Other＝グランパ その他 の表記に準拠 |
-| Sazabi & League Militaire | **サザビー & リーグ・ミリタリー** |  | GD05 Week 1 新規。元記事の見出しは閉じ括弧が余分な「Sazabi & League Militaire)」表記 |
+| Sazabi & League Militaire | **サザビー & リガ・ミリティア** |  | GD05 Week 1 新規。元記事の見出しは閉じ括弧が余分な「Sazabi & League Militaire)」表記 |
 | Barbatos Rush (Char Aznable) | **バルバトス アグロ（シャア・アズナブル）** | バルバトスラッシュ（シャア） | GD05 Week 1 新規。既存の Barbatos Rush＝バルバトス アグロ に準拠 |
-| Calibarn | **カリバーン** |  | GD05 Week 2 新規。使用率2%を超えて元記事の掲載対象に入ったため登録 |
+| Calibarn | **キャリバーン** | ガンダム・キャリバーン | GD05 Week 2 新規。公式カード名は「ガンダム・キャリバーン」(GD05-018)。デッキ名としては他と揃えて略称を採用。2026-08-12 カリバーン→キャリバーンに修正 |
 | Strike Freedom Other | **ストライクフリーダム その他** |  | GD05 Week 2 新規。既存の Grampa Other＝グランパ その他 / Sazabi Other＝サザビー その他 の表記に準拠 |
 
 ## カラータイプ表記
@@ -85,6 +87,6 @@
 
 | 項目 | URL |
 |---|---|
-| 公式ガンダムカードゲーム | `https://www.gundam-gcg.com/ja/`（既存サイト全レポート統一表記） |
+| 公式ガンダムカードゲーム | `https://www.gundam-gcg.com/jp/`（既存サイト全レポート統一表記） |
 | Mobile Suit Arena | `https://mobilesuitarena.com/` |
 | Doug Godinho 氏 Patreon | `https://www.patreon.com/DougGodinho` |
