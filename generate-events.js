@@ -571,7 +571,8 @@ function buildTopStats(eventsData, cardColors, seriesMap) {
     const evRaw_i = allEvents[i];
     const ev_i = consolidateNtcRank(evRaw_i, { isNtcType: isNtcTypeFn });
     const isNtc64 = isTargetEvent(evRaw_i, { isNtcType: isNtcTypeFn });
-    const rankThreshold = isNtc64 ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const rankThreshold = 4;
     const results = ev_i.results || [];
     for (let j = 0; j < results.length; j++) {
       const r = results[j];
@@ -771,7 +772,8 @@ function buildMetaStats(eventsData, cardColors, seriesMap, range) {
 
   for (const evRaw of allEvents) {
     const ev = consolidateNtcRank(evRaw, { isNtcType: isNtcTypeFn });
-    const threshold = isTargetEvent(evRaw, { isNtcType: isNtcTypeFn }) ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const threshold = 4;
     const region = evRaw.region || 'その他';
     if (!regionMap[region]) {
       regionMap[region] = { region: region, eventIds: new Set(), typeMap: {}, decks: 0 };

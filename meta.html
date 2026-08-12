@@ -538,7 +538,7 @@
     // ============================================================
     // NTC64(64名定員)の順位変換
     //   索引は「変換前の rank」と「results 総数(c)」を持つ。
-    //   events.json 経路と同じ規則をここで再現する(rank→ceil(rank/2), 集計上限 TOP8)。
+    //   events.json 経路と同じ規則をここで再現する(rank→ceil(rank/2), 集計上限 TOP4)。※指示書70で TOP8 拡張を撤回
     // ============================================================
     function isNtc64(ev) {
       if (!ev || (ev.c || 0) < 16) return false;
@@ -559,7 +559,8 @@
     // (rank は同一イベント内で重複しうるのでキーに使えない)。
     function passingResults(ev, filter) {
       var ntc = isNtc64(ev);
-      var threshold = ntc ? 8 : 4;
+      // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+      var threshold = 4;
       var out = [];
       for (var i = 0; i < (ev.r || []).length; i++) {
         var rank = ev.r[i][0];

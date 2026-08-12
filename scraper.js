@@ -15,7 +15,8 @@ const path = require('path');
 const { pushFiles } = require('./git-push');
 
 // === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
-// 64名定員NTC大会の summary.json 集計を TOP4 → TOP8 拡張(松岡さん回答 質問B: 1)。
+// 64名定員NTC大会の summary.json 集計は TOP4 相当(変換後 rank<=4)。
+// 旧: TOP4 → TOP8 拡張(松岡さん回答 質問B: 1)。指示書70(2026-08-12)で撤回。
 // ただし events.json に書き戻す top4_colors は **既存4件のまま** 維持する
 // (read-time consolidation の light mode が正しく動作する基準形式を保つため)。
 // NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
@@ -226,12 +227,35 @@ const SET_COLORS = {
   'ST05': 'Green', 'ST06': 'Red', 'ST07': 'Purple', 'ST08': 'Blue', 'ST09': 'White'
 };
 
+// cards_master.json の色情報(2026-08-03 追加)
+// card_colors.json は手作りの静的ファイルで、新弾が出ても更新されない
+// (実測: GD05 / EB01 / ST10 が1件も入っておらず、GD05のカードが色計算から
+//  除外されて「緑単色なのに紫が入っている」といった誤判定が出ていた。
+//  デッキログ側が申告する色と突き合わせると 312デッキ中25件が不一致だった)。
+// cards_master.json は公式カードリストの同期で更新され、全カードに color を持つので
+// こちらをフォールバックに使う。これで 312/312 が先方申告と一致する。
+let MASTER_COLORS = {};
+const cardsMasterColorPath = path.join(DATA_DIR, 'cards_master.json');
+if (fs.existsSync(cardsMasterColorPath)) {
+  try {
+    const m = JSON.parse(fs.readFileSync(cardsMasterColorPath, 'utf-8'));
+    let n = 0;
+    for (const id of Object.keys(m)) {
+      if (m[id] && typeof m[id].color === 'string' && m[id].color) { MASTER_COLORS[id] = m[id].color; n++; }
+    }
+    console.log(`  カード色の補完元(cards_master): ${n}枚`);
+  } catch (e) {
+    console.warn('  cards_master.json の読み込みに失敗(色の補完なしで続行):', e.message);
+  }
+}
+
 /**
  * カードIDから色を取得
- * card_colors.jsonの個別データを優先、なければセットIDから推定
+ * card_colors.json の個別データを優先 → cards_master.json の color → セットIDから推定
  */
 function getCardColor(cardId) {
   if (CARD_COLORS[cardId]) return CARD_COLORS[cardId];
+  if (MASTER_COLORS[cardId]) return MASTER_COLORS[cardId];
   const prefix = cardId.split('-')[0];
   return SET_COLORS[prefix] || 'Unknown';
 }
@@ -279,6 +303,92 @@ if (fs.existsSync(shopMasterPath)) {
   }
 }
 
+// === 2026-08-03 追加（松岡さん指示: 「その他」に落ちる結果を正しい地域に集計する）===
+// data/schedule.json（公式スケジュール由来・夜間バッチが毎日更新・1171店舗）と
+// data/expert-shops.json（エキスパートショップ一覧）を店舗→地域の追加ソースとして使う。
+// shop_master.json（197店舗・手動）は今後も最優先の上書きとして残す。
+//
+// 都道府県→地域の対応は shop_master.json の既存の流儀に合わせる:
+//   三重県=中部 / 新潟・山梨・長野=中部 / 沖縄県=九州
+// （stores.html は「中部・甲信越」「九州・沖縄」という別の呼び方をするが、
+//   events[].region は従来から上の8区分なので、そちらに揃える）
+const PREF_NAME_BY_CODE = {
+  'JP-01': '北海道', 'JP-02': '青森県', 'JP-03': '岩手県', 'JP-04': '宮城県', 'JP-05': '秋田県',
+  'JP-06': '山形県', 'JP-07': '福島県', 'JP-08': '茨城県', 'JP-09': '栃木県', 'JP-10': '群馬県',
+  'JP-11': '埼玉県', 'JP-12': '千葉県', 'JP-13': '東京都', 'JP-14': '神奈川県', 'JP-15': '新潟県',
+  'JP-16': '富山県', 'JP-17': '石川県', 'JP-18': '福井県', 'JP-19': '山梨県', 'JP-20': '長野県',
+  'JP-21': '岐阜県', 'JP-22': '静岡県', 'JP-23': '愛知県', 'JP-24': '三重県', 'JP-25': '滋賀県',
+  'JP-26': '京都府', 'JP-27': '大阪府', 'JP-28': '兵庫県', 'JP-29': '奈良県', 'JP-30': '和歌山県',
+  'JP-31': '鳥取県', 'JP-32': '島根県', 'JP-33': '岡山県', 'JP-34': '広島県', 'JP-35': '山口県',
+  'JP-36': '徳島県', 'JP-37': '香川県', 'JP-38': '愛媛県', 'JP-39': '高知県', 'JP-40': '福岡県',
+  'JP-41': '佐賀県', 'JP-42': '長崎県', 'JP-43': '熊本県', 'JP-44': '大分県', 'JP-45': '宮崎県',
+  'JP-46': '鹿児島県', 'JP-47': '沖縄県'
+  // 'CN-HK'（香港）は意図的に載せない。日本の8区分に当てはまらないため「その他」に落とす。
+};
+const REGION_BY_PREF_NAME = (function () {
+  const m = {};
+  const put = (region, prefs) => prefs.forEach((p) => { m[p] = region; });
+  put('北海道', ['北海道']);
+  put('東北', ['青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県']);
+  put('関東', ['茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県']);
+  put('中部', ['新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県']);
+  put('関西', ['滋賀県', '京都府', '大阪府', '兵庫県', '奈良県', '和歌山県']);
+  put('中国', ['鳥取県', '島根県', '岡山県', '広島県', '山口県']);
+  put('四国', ['徳島県', '香川県', '愛媛県', '高知県']);
+  put('九州', ['福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県']);
+  return m;
+})();
+
+/** 照合用の強い正規化（NFKC・空白除去・小文字化）。expert-shops.js と同じ規則 */
+function normNameStrict(s) {
+  return String(s || '').normalize('NFKC').replace(/\s+/g, '').toLowerCase();
+}
+
+// 店舗名(強正規化) → 地域 の索引を作る
+const REGION_INDEX = new Map();
+let regionIndexSources = [];
+(function buildRegionIndex() {
+  // schedule.json: pref_code から地域を決める
+  try {
+    const p = path.join(DATA_DIR, 'schedule.json');
+    if (fs.existsSync(p)) {
+      const sch = JSON.parse(fs.readFileSync(p, 'utf-8'));
+      let n = 0;
+      for (const st of Object.values(sch.stores || {})) {
+        if (!st || !st.name) continue;
+        const region = REGION_BY_PREF_NAME[PREF_NAME_BY_CODE[st.pref_code]];
+        if (!region) continue;
+        const key = normNameStrict(st.name);
+        if (!REGION_INDEX.has(key)) { REGION_INDEX.set(key, region); n++; }
+      }
+      regionIndexSources.push('schedule.json ' + n + '店舗');
+    }
+  } catch (e) {
+    console.warn('  schedule.json の読み込みに失敗（地域判定の追加ソースなしで続行）:', e.message);
+  }
+  // expert-shops.json: 都道府県から地域を決める（schedule.json に無い店舗の保険）
+  try {
+    const p = path.join(DATA_DIR, 'expert-shops.json');
+    if (fs.existsSync(p)) {
+      const ex = JSON.parse(fs.readFileSync(p, 'utf-8'));
+      let n = 0;
+      for (const sh of (ex.shops || [])) {
+        if (!sh || !sh.name) continue;
+        const region = sh.region && REGION_BY_PREF_NAME[sh.pref] ? sh.region : REGION_BY_PREF_NAME[sh.pref];
+        if (!region) continue;
+        const key = normNameStrict(sh.name);
+        if (!REGION_INDEX.has(key)) { REGION_INDEX.set(key, region); n++; }
+      }
+      regionIndexSources.push('expert-shops.json ' + n + '店舗');
+    }
+  } catch (e) {
+    console.warn('  expert-shops.json の読み込みに失敗（地域判定の追加ソースなしで続行）:', e.message);
+  }
+  if (regionIndexSources.length) {
+    console.log('  地域判定の追加ソース: ' + regionIndexSources.join(' / '));
+  }
+})();
+
 // フォールバック用キーワード（shop_masterに未登録の店舗向け）
 const REGION_KEYWORDS = {
   '北海道': ['北海道','札幌'],
@@ -308,6 +418,11 @@ function getRegion(storeName) {
   for (const [name, info] of Object.entries(SHOP_MASTER)) {
     if (storeName.includes(name) || name.includes(storeName)) return info.region;
   }
+  // 3.5 schedule.json / expert-shops.json の店舗名で一致（2026-08-03 追加）
+  //     ここで解決できると、店名にたまたま含まれる地名で誤判定するのを防げる。
+  //     例: 「TSUTAYA BOOKSTORE AIZU」(福島=東北) は従来キーワードに当たらず「その他」だった。
+  const strict = REGION_INDEX.get(normNameStrict(storeName));
+  if (strict) return strict;
   // 4. フォールバック: キーワード判定
   for (const [region, keywords] of Object.entries(REGION_KEYWORDS)) {
     for (const kw of keywords) {
@@ -326,8 +441,8 @@ function generateSummary(eventsData) {
 
   // Pass 1: デッキデータありのみ集計。
   // 段階1: top4_colors は **既存4件のまま** events.json に書き戻す(read-time consolidation 互換)。
-  // 段階2: 集計(deckTypeStats / regionStats / totalDecks)は 64名NTC のみ TOP8 拡張
-  //        (松岡さん回答 質問B: 1、summary.json に TOP8 集計結果が反映される)。
+  // 段階2: 集計(deckTypeStats / regionStats / totalDecks)は 64名NTC も変換後 rank<=4
+  //        (旧: TOP8 拡張・松岡さん回答 質問B: 1。指示書70で撤回)。
   for (const event of allEvents) {
     const region = getRegion(event.store || '');
 
@@ -351,12 +466,13 @@ function generateSummary(eventsData) {
     event.top4_colors = top4Colors;
     event.region = region;
 
-    // === 段階2: summary.json 用の集計(64名NTC のみ TOP8 拡張) ===
+    // === 段階2: summary.json 用の集計(64名NTC も変換後 rank<=4。旧 TOP8 拡張は指示書70で撤回) ===
     // consolidateNtcRank で 64名NTC を「ベスト8(各順位2名)」表記に変換し、
-    // rankThreshold で集計上限を切替(NTC64=8, それ以外=4)。
+    // 集計上限は一律 4(変換後)。旧: NTC64 のみ 8。指示書70で撤回。
     // 32名・他大会は no-op で素通し(R2/R5 厳守)。
     const evForAgg = consolidateNtcRank(event, { getDeckColors, isNtcType });
-    const rankThreshold = isNtcConsolidationTarget(event, { isNtcType }) ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const rankThreshold = 4;
 
     for (const result of (evForAgg.results || [])) {
       if (result.rank > rankThreshold) continue;

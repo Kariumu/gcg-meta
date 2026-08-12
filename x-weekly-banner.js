@@ -144,7 +144,8 @@ function aggregateWindow(idx, ntcSet, from, to, opts) {
     const results = ev.r || [];
     // isTargetEvent(generate-events.js) と等価: NTC シリーズ かつ results が 16 件以上
     const isNtc64 = (ev.c || results.length) >= 16;
-    const threshold = isNtc64 ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const threshold = 4;
 
     let used = 0;
     for (const row of results) {

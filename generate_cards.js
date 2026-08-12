@@ -8,7 +8,8 @@ const fs = require('fs');
 const path = require('path');
 
 // === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
-// 64名定員NTC大会(results.length>=16)の共起カード集計を TOP4 → TOP8 拡張(松岡さん回答 質問A: 1)。
+// 64名定員NTC大会(results.length>=16)の共起カード集計は TOP4 相当(変換後 rank<=4)。
+// 旧: TOP4 → TOP8 拡張(松岡さん回答 質問A: 1)。指示書70(2026-08-12)で撤回。
 // 32名定員・他大会は no-op で素通し(R2/R5 厳守)。共起カウントは deck だけ参照するため軽量モード。
 // NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
 const {
@@ -390,9 +391,10 @@ function calcAllCoUsed(eventsData, topN = 8) {
   const allDecks = [];
   for (const evRaw of Object.values(eventsData.events)) {
     // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換、
-    // 集計対象を TOP4→TOP8 に拡張(松岡さん回答 質問A: 1)
+    // 旧: 集計対象を TOP4→TOP8 に拡張(松岡さん回答 質問A: 1)。指示書70で撤回
     const ev = consolidateNtcRank(evRaw, { isNtcType });
-    const rankThreshold = isNtcConsolidationTarget(evRaw, { isNtcType }) ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const rankThreshold = 4;
     for (const result of (ev.results || [])) {
       if (result.rank > rankThreshold) continue;
       const cardIds = (result.deck || []).map(c => c.card_id);
@@ -514,11 +516,12 @@ function main() {
       }
     }
 
-    // TOP4採用実績(64名NTC大会のみ TOP8 拡張、松岡さん回答 質問A: 1)
+    // TOP4採用実績(旧: 64名NTC大会のみ TOP8 拡張、松岡さん回答 質問A: 1。指示書70で撤回)
     const adoptions = [];
     for (const evRaw of Object.values(eventsData.events)) {
       const ev = consolidateNtcRank(evRaw);
-      const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
+      // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+      const rankThreshold = 4;
       for (const result of (ev.results || [])) {
         if (result.rank > rankThreshold) continue;
         const c = (result.deck || []).find(x => x.card_id === dataKey);

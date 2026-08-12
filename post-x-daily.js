@@ -292,7 +292,8 @@ function halfMonthRangeFromDate(baseDateStr) {
 
 // ===================================================================
 // 採用集計（generate-events.js buildTopStats() と同一の抽出条件）
-//   ・NTC 64名大会は consolidateNtcRank 後 rank<=8、それ以外は rank<=4
+//   ・NTC 64名大会は consolidateNtcRank 後 rank<=4(公式1〜8位=各セット4位まで)、それ以外も rank<=4
+//     (旧: NTC64 のみ rank<=8。指示書70 2026-08-12 で撤回)
 //   ・deck が空の結果は分母にも分子にも入れない
 // ===================================================================
 function aggregateUsage(eventsObj, isNtcTypeFn, startDate, endDate) {
@@ -306,7 +307,8 @@ function aggregateUsage(eventsObj, isNtcTypeFn, startDate, endDate) {
     if (endDate && evRaw.date > endDate) continue;
     eventCount++;
     const ev = consolidateNtcRank(evRaw, { isNtcType: isNtcTypeFn });
-    const rankThreshold = isTargetEvent(evRaw, { isNtcType: isNtcTypeFn }) ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const rankThreshold = 4;
     const results = ev.results || [];
     for (const r of results) {
       if (r.rank > rankThreshold) continue;

@@ -586,16 +586,17 @@
             await GCG.loadSeries();
 
             for (var i = 0; i < allEvents.length; i++) {
-                // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換し、
-                // 集計対象を TOP4 → TOP8 に拡張(松岡さん回答 追加確認1: B案)
+                // 64名NTC大会(results.length>=16)のみ「ベスト8(各順位2名)」表記に変換する。
+                // 指示書70(2026-08-12): TOP4→TOP8 拡張(追加確認1: B案)は撤回。変換後 rank<=4 に統一。
+                //   あわせて consolidateNtcRank へ isNtcType を渡すよう修正した。未指定だと
+                //   ハードコードの NTC_SERIES_IDS のみで判定され MISSION4 以降が変換されず、
+                //   top_stats.json 経路と食い違う(2026年8月で 93 デッキのずれを実測)。
                 var evRaw_i = allEvents[i];
-                var ev_i = GCG.consolidateNtcRank(evRaw_i);
                 var _ntcOpts = GCG._seriesData && window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap
                     ? { isNtcType: window.NtcRankConsolidator.makeIsNtcTypeFromSeriesMap(GCG._seriesData) }
                     : {};
-                var isNtc64 = (typeof window !== 'undefined' && window.NtcRankConsolidator
-                    && window.NtcRankConsolidator.isTargetEvent(evRaw_i, _ntcOpts));
-                var rankThreshold = isNtc64 ? 8 : 4;
+                var ev_i = GCG.consolidateNtcRank(evRaw_i, _ntcOpts);
+                var rankThreshold = 4;
                 var results = ev_i.results || [];
                 for (var j = 0; j < results.length; j++) {
                     var r = results[j];

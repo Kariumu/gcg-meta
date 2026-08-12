@@ -139,8 +139,9 @@ function computeWeeklyStats(weekEvents) {
     // top4_colors も新rank=1〜8 用に完全再生成する(getDeckColors を注入)。
     // 32名大会・他大会・他 series_id は no-op で素通し(R2/R5 充足)。
     const ev = consolidateNtcRank(evRaw, { getDeckColors });
-    // 64名NTC大会のみ集計対象を TOP4 → TOP8 に拡張(松岡さん回答 追加確認1: B案)
-    const rankThreshold = isNtcConsolidationTarget(evRaw) ? 8 : 4;
+    // 旧: 64名NTC大会のみ集計対象を TOP4 → TOP8 に拡張(松岡さん回答 追加確認1: B案)。指示書70で撤回
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const rankThreshold = 4;
     for (const r of (ev.results || [])) {
       if (r.rank > rankThreshold) continue;
       totalDecks++;
@@ -187,11 +188,12 @@ function computeWeeklyStats(weekEvents) {
     .sort((a, b) => b.count - a.count);
 
   // 色別デッキ数を集計（カードの色を含むデッキの母数計算用）
-  // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換 + TOP8 拡張
+  // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換。TOP8 拡張は指示書70で撤回
   const colorDeckCount = {};  // { 'Blue': 数, 'Red': 数, ... }
   for (const evRaw of weekEvents) {
     const ev = consolidateNtcRank(evRaw, { getDeckColors, isNtcType });
-    const rankThreshold = isNtcConsolidationTarget(evRaw, { isNtcType }) ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const rankThreshold = 4;
     for (const r of (ev.results || [])) {
       if (r.rank > rankThreshold) continue;
       const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);
@@ -204,11 +206,12 @@ function computeWeeklyStats(weekEvents) {
   }
 
   // カードごとの色別採用数を集計
-  // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換 + TOP8 拡張
+  // NTC順位集計統合(指示書 NTC順位集計統合): 64名NTC のみ変換。TOP8 拡張は指示書70で撤回
   const cardColorUsage = {};  // { cardId: { colorDecks: 数 } }
   for (const evRaw of weekEvents) {
     const ev = consolidateNtcRank(evRaw, { getDeckColors, isNtcType });
-    const rankThreshold = isNtcConsolidationTarget(evRaw, { isNtcType }) ? 8 : 4;
+    // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+    const rankThreshold = 4;
     for (const r of (ev.results || [])) {
       if (r.rank > rankThreshold) continue;
       const colorEntry = (ev.top4_colors || []).find(tc => tc.rank === r.rank);

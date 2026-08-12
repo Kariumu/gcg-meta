@@ -28,10 +28,12 @@ const fs = require('fs');
 const path = require('path');
 
 // === NTC順位集計統合(指示書 NTC順位集計統合_最終版.md, 2026-05-18 実装、2026-05-19 type ベース対応) ===
-// 64名定員NTC大会を「ベスト8(各順位2名)」表記に変換し、集計対象を TOP4 → TOP8(各2件=最大16件)に拡張。
+// 64名定員NTC大会を「ベスト8(各順位2名)」表記に変換する。
+// 旧: 集計対象を TOP4 → TOP8(各2件=最大16件)に拡張。指示書70(2026-08-12)で撤回し、
+//     変換後 rank<=4(公式1〜8位=各セット4位まで)へ戻した。
 // 32名定員大会や他大会には一切影響を与えない(R2/R5 厳守)。
-// 注意: 本変更により 64名NTC 大会の total_decks/deck_type_ranking/winning_decks の値は
-//       従来の 4倍(TOP4 → TOP8 ×各2名)になる(松岡さん回答 追加確認1: B案)。
+// 注意: 64名NTC 大会は 1イベントあたり total_decks が 8 件(4位×2セット)になる。
+//       旧実装では 16 件(TOP8×各2名・松岡さん回答 追加確認1: B案)。指示書70で撤回。
 // NTC 判定は series.json の type='ntc' を参照(MISSION2/3/4... に自動対応)。
 const {
   consolidateNtcRank,
@@ -101,6 +103,9 @@ function buildSummary(seriesMeta, seriesEvents) {
 
     if (ev.top4_colors) {
       for (const t of ev.top4_colors) {
+        // 指示書70(2026-08-12): TOP8 拡張を撤回。64名NTC は変換後 rank<=4 のみ集計する
+        // (32名・他大会の top4_colors は元から rank<=4 のみなので影響なし)
+        if (t.rank > 4) continue;
         total_decks++;
         // regional tally
         const reg = ev.region || '(不明)';
