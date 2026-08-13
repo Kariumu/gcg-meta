@@ -350,10 +350,25 @@
 .modal.open { display:block; }
 .modal h3 { margin:0 0 10px; font-size:15px; }
 .modal .x { position:absolute; top:10px; right:10px; }
+/* ---- 共有画像モーダル（指示書71） ---- */
+.modal.wide { width:min(760px,calc(100vw - 24px)); }
+.si-prev { position:relative; width:100%; aspect-ratio:16/9; border-radius:11px; border:1px solid var(--line2); background:var(--card2); overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.si-prev img { width:100%; height:100%; object-fit:contain; display:block; }
+.si-prev .st { font-size:12.5px; color:var(--fg3); display:flex; align-items:center; gap:8px; }
+.si-prev .sp { width:15px; height:15px; border-radius:50%; border:2px solid var(--line2); border-top-color:var(--gold); animation:si-spin .8s linear infinite; }
+@keyframes si-spin { to { transform:rotate(360deg); } }
+.si-note { font-size:11.5px; color:var(--fg3); line-height:1.6; margin:9px 0 0; }
+.si-urlrow { display:flex; gap:8px; align-items:stretch; margin-top:10px; }
+.si-url { flex:1; min-width:0; background:var(--card2); border:1px solid var(--line2); border-radius:9px; padding:9px 11px; font-family:var(--mono); font-size:11.5px; color:var(--fg2); overflow-wrap:anywhere; word-break:break-all; max-height:74px; overflow:auto; }
+.si-acts { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; margin-top:12px; }
+.si-warn { font-size:12px; color:var(--vred-t); margin-top:9px; display:none; }
+.si-warn.on { display:block; }
+.si-warn.info { color:var(--fg3); }
 .menu { position:absolute; z-index:1196; background:var(--barbg); border:1px solid var(--line2); border-radius:11px; padding:6px; min-width:190px; box-shadow:0 12px 34px rgba(0,0,0,.5); display:none; }
 .menu.open { display:block; }
 .menu button { display:block; width:100%; text-align:left; padding:10px 12px; background:none; border:none; border-radius:8px; color:var(--fg); font-size:13px; cursor:pointer; font-family:inherit; }
 .menu button:hover { background:#1a2333; }
+.menu button:disabled { opacity:.4; cursor:not-allowed; }
 .menu hr { border:none; border-top:1px solid var(--line); margin:5px 0; }
 #toast { position:fixed; z-index:1220; left:50%; bottom:88px; transform:translateX(-50%); background:var(--barbg); border:1px solid var(--line2); color:var(--fg); border-radius:10px; padding:10px 14px; font-size:13px; display:none; align-items:center; gap:10px; max-width:calc(100vw - 30px); box-shadow:0 10px 30px rgba(0,0,0,.5); font-family:'IBM Plex Sans JP',sans-serif; }
 #toast.err { border-color:#f4474766; }
@@ -775,6 +790,7 @@
         <button class="btn-tcg" id="btnTcg">TCG＋に登録</button>
         <div class="d-foot-row">
           <button class="fb" id="btnShare"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/></svg>URL共有</button>
+          <button class="fb" id="btnShareImg"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m4 17 4.5-4.5 3 3L15 11l5 5"/></svg>共有画像</button>
           <button class="fb" id="btnSave"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4"/><path d="M12 3v13"/><path d="m7 12 5 5 5-5"/></svg>保存</button>
           <button class="fb sq" id="btnClearF">クリア</button>
         </div>
@@ -799,6 +815,7 @@
   <button data-m="open">保存デッキを読込</button>
   <button data-m="import">インポート（TCG＋/URL/テキスト）</button>
   <button data-m="dup">複製</button>
+  <button data-m="shareImage">共有画像を作成</button>
   <hr>
   <button data-m="clearAll">すべてクリア</button>
   <button data-m="clearColor">色を選んでクリア</button>
@@ -845,6 +862,26 @@
   </div>
 </div>
 
+<!-- 共有画像（指示書71）: 動的値は必ず textContent / DOM API で入れる（innerHTML 連結禁止） -->
+<div class="modal wide" id="shareImgModal">
+  <button class="mini-btn x" data-close>✕</button>
+  <h3>共有画像</h3>
+  <div class="si-prev" id="siPrev">
+    <span class="st" id="siStatus"><span class="sp"></span><span id="siStatusText">画像を生成しています…</span></span>
+    <img id="siImg" alt="共有画像のプレビュー" style="display:none">
+  </div>
+  <p class="si-note">画像内のQRコードを読み取ると、同じデッキがこのビルダーで開きます。画像の生成はすべてお使いの端末内で行われ、サーバーには送信されません。</p>
+  <div class="si-urlrow">
+    <div class="si-url mono" id="siUrl"></div>
+    <button class="btn" id="siCopy" style="flex:none">URLをコピー</button>
+  </div>
+  <div class="si-warn" id="siWarn"></div>
+  <div class="si-acts">
+    <button class="btn" id="siSave" disabled>画像を保存</button>
+    <button class="btn gold" id="siX" disabled>Xで共有</button>
+  </div>
+</div>
+
 <div class="modal" id="confirmModal">
   <h3 id="cfTitle"></h3>
   <div id="cfMsg" style="font-size:13px;color:var(--fg3);margin-bottom:14px"></div>
@@ -867,6 +904,2337 @@
 
 <div id="toast" role="status" aria-live="polite"></div>
 
+<!-- QRコード生成ライブラリ（指示書71・実行時CDN依存なしのインライン同梱）
+     qrcode-generator v2.0.4 / Kazuhiko Arase / MIT License
+     https://github.com/kazuhikoarase/qrcode-generator （dist/qrcode.js + dist/qrcode_UTF8.js を無改変で連結）
+     ライセンス表記はライブラリ本文の先頭コメントにも保持している。改変禁止。 -->
+<script>
+//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript
+//
+// Copyright (c) 2009 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+var qrcode = function() {
+
+  //---------------------------------------------------------------------
+  // qrcode
+  //---------------------------------------------------------------------
+
+  /**
+   * qrcode
+   * @param typeNumber 1 to 40
+   * @param errorCorrectionLevel 'L','M','Q','H'
+   */
+  var qrcode = function(typeNumber, errorCorrectionLevel) {
+
+    var PAD0 = 0xEC;
+    var PAD1 = 0x11;
+
+    var _typeNumber = typeNumber;
+    var _errorCorrectionLevel = QRErrorCorrectionLevel[errorCorrectionLevel];
+    var _modules = null;
+    var _moduleCount = 0;
+    var _dataCache = null;
+    var _dataList = [];
+
+    var _this = {};
+
+    var makeImpl = function(test, maskPattern) {
+
+      _moduleCount = _typeNumber * 4 + 17;
+      _modules = function(moduleCount) {
+        var modules = new Array(moduleCount);
+        for (var row = 0; row < moduleCount; row += 1) {
+          modules[row] = new Array(moduleCount);
+          for (var col = 0; col < moduleCount; col += 1) {
+            modules[row][col] = null;
+          }
+        }
+        return modules;
+      }(_moduleCount);
+
+      setupPositionProbePattern(0, 0);
+      setupPositionProbePattern(_moduleCount - 7, 0);
+      setupPositionProbePattern(0, _moduleCount - 7);
+      setupPositionAdjustPattern();
+      setupTimingPattern();
+      setupTypeInfo(test, maskPattern);
+
+      if (_typeNumber >= 7) {
+        setupTypeNumber(test);
+      }
+
+      if (_dataCache == null) {
+        _dataCache = createData(_typeNumber, _errorCorrectionLevel, _dataList);
+      }
+
+      mapData(_dataCache, maskPattern);
+    };
+
+    var setupPositionProbePattern = function(row, col) {
+
+      for (var r = -1; r <= 7; r += 1) {
+
+        if (row + r <= -1 || _moduleCount <= row + r) continue;
+
+        for (var c = -1; c <= 7; c += 1) {
+
+          if (col + c <= -1 || _moduleCount <= col + c) continue;
+
+          if ( (0 <= r && r <= 6 && (c == 0 || c == 6) )
+              || (0 <= c && c <= 6 && (r == 0 || r == 6) )
+              || (2 <= r && r <= 4 && 2 <= c && c <= 4) ) {
+            _modules[row + r][col + c] = true;
+          } else {
+            _modules[row + r][col + c] = false;
+          }
+        }
+      }
+    };
+
+    var getBestMaskPattern = function() {
+
+      var minLostPoint = 0;
+      var pattern = 0;
+
+      for (var i = 0; i < 8; i += 1) {
+
+        makeImpl(true, i);
+
+        var lostPoint = QRUtil.getLostPoint(_this);
+
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+
+      return pattern;
+    };
+
+    var setupTimingPattern = function() {
+
+      for (var r = 8; r < _moduleCount - 8; r += 1) {
+        if (_modules[r][6] != null) {
+          continue;
+        }
+        _modules[r][6] = (r % 2 == 0);
+      }
+
+      for (var c = 8; c < _moduleCount - 8; c += 1) {
+        if (_modules[6][c] != null) {
+          continue;
+        }
+        _modules[6][c] = (c % 2 == 0);
+      }
+    };
+
+    var setupPositionAdjustPattern = function() {
+
+      var pos = QRUtil.getPatternPosition(_typeNumber);
+
+      for (var i = 0; i < pos.length; i += 1) {
+
+        for (var j = 0; j < pos.length; j += 1) {
+
+          var row = pos[i];
+          var col = pos[j];
+
+          if (_modules[row][col] != null) {
+            continue;
+          }
+
+          for (var r = -2; r <= 2; r += 1) {
+
+            for (var c = -2; c <= 2; c += 1) {
+
+              if (r == -2 || r == 2 || c == -2 || c == 2
+                  || (r == 0 && c == 0) ) {
+                _modules[row + r][col + c] = true;
+              } else {
+                _modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    };
+
+    var setupTypeNumber = function(test) {
+
+      var bits = QRUtil.getBCHTypeNumber(_typeNumber);
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[Math.floor(i / 3)][i % 3 + _moduleCount - 8 - 3] = mod;
+      }
+
+      for (var i = 0; i < 18; i += 1) {
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+        _modules[i % 3 + _moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    };
+
+    var setupTypeInfo = function(test, maskPattern) {
+
+      var data = (_errorCorrectionLevel << 3) | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 6) {
+          _modules[i][8] = mod;
+        } else if (i < 8) {
+          _modules[i + 1][8] = mod;
+        } else {
+          _modules[_moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i += 1) {
+
+        var mod = (!test && ( (bits >> i) & 1) == 1);
+
+        if (i < 8) {
+          _modules[8][_moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          _modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          _modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      _modules[_moduleCount - 8][8] = (!test);
+    };
+
+    var mapData = function(data, maskPattern) {
+
+      var inc = -1;
+      var row = _moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      var maskFunc = QRUtil.getMaskFunction(maskPattern);
+
+      for (var col = _moduleCount - 1; col > 0; col -= 2) {
+
+        if (col == 6) col -= 1;
+
+        while (true) {
+
+          for (var c = 0; c < 2; c += 1) {
+
+            if (_modules[row][col - c] == null) {
+
+              var dark = false;
+
+              if (byteIndex < data.length) {
+                dark = ( ( (data[byteIndex] >>> bitIndex) & 1) == 1);
+              }
+
+              var mask = maskFunc(row, col - c);
+
+              if (mask) {
+                dark = !dark;
+              }
+
+              _modules[row][col - c] = dark;
+              bitIndex -= 1;
+
+              if (bitIndex == -1) {
+                byteIndex += 1;
+                bitIndex = 7;
+              }
+            }
+          }
+
+          row += inc;
+
+          if (row < 0 || _moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    };
+
+    var createBytes = function(buffer, rsBlocks) {
+
+      var offset = 0;
+
+      var maxDcCount = 0;
+      var maxEcCount = 0;
+
+      var dcdata = new Array(rsBlocks.length);
+      var ecdata = new Array(rsBlocks.length);
+
+      for (var r = 0; r < rsBlocks.length; r += 1) {
+
+        var dcCount = rsBlocks[r].dataCount;
+        var ecCount = rsBlocks[r].totalCount - dcCount;
+
+        maxDcCount = Math.max(maxDcCount, dcCount);
+        maxEcCount = Math.max(maxEcCount, ecCount);
+
+        dcdata[r] = new Array(dcCount);
+
+        for (var i = 0; i < dcdata[r].length; i += 1) {
+          dcdata[r][i] = 0xff & buffer.getBuffer()[i + offset];
+        }
+        offset += dcCount;
+
+        var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+        var rawPoly = qrPolynomial(dcdata[r], rsPoly.getLength() - 1);
+
+        var modPoly = rawPoly.mod(rsPoly);
+        ecdata[r] = new Array(rsPoly.getLength() - 1);
+        for (var i = 0; i < ecdata[r].length; i += 1) {
+          var modIndex = i + modPoly.getLength() - ecdata[r].length;
+          ecdata[r][i] = (modIndex >= 0)? modPoly.getAt(modIndex) : 0;
+        }
+      }
+
+      var totalCodeCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalCodeCount += rsBlocks[i].totalCount;
+      }
+
+      var data = new Array(totalCodeCount);
+      var index = 0;
+
+      for (var i = 0; i < maxDcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < dcdata[r].length) {
+            data[index] = dcdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      for (var i = 0; i < maxEcCount; i += 1) {
+        for (var r = 0; r < rsBlocks.length; r += 1) {
+          if (i < ecdata[r].length) {
+            data[index] = ecdata[r][i];
+            index += 1;
+          }
+        }
+      }
+
+      return data;
+    };
+
+    var createData = function(typeNumber, errorCorrectionLevel, dataList) {
+
+      var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectionLevel);
+
+      var buffer = qrBitBuffer();
+
+      for (var i = 0; i < dataList.length; i += 1) {
+        var data = dataList[i];
+        buffer.put(data.getMode(), 4);
+        buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+        data.write(buffer);
+      }
+
+      // calc num max data.
+      var totalDataCount = 0;
+      for (var i = 0; i < rsBlocks.length; i += 1) {
+        totalDataCount += rsBlocks[i].dataCount;
+      }
+
+      if (buffer.getLengthInBits() > totalDataCount * 8) {
+        throw 'code length overflow. ('
+          + buffer.getLengthInBits()
+          + '>'
+          + totalDataCount * 8
+          + ')';
+      }
+
+      // end code
+      if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+        buffer.put(0, 4);
+      }
+
+      // padding
+      while (buffer.getLengthInBits() % 8 != 0) {
+        buffer.putBit(false);
+      }
+
+      // padding
+      while (true) {
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD0, 8);
+
+        if (buffer.getLengthInBits() >= totalDataCount * 8) {
+          break;
+        }
+        buffer.put(PAD1, 8);
+      }
+
+      return createBytes(buffer, rsBlocks);
+    };
+
+    _this.addData = function(data, mode) {
+
+      mode = mode || 'Byte';
+
+      var newData = null;
+
+      switch(mode) {
+      case 'Numeric' :
+        newData = qrNumber(data);
+        break;
+      case 'Alphanumeric' :
+        newData = qrAlphaNum(data);
+        break;
+      case 'Byte' :
+        newData = qr8BitByte(data);
+        break;
+      case 'Kanji' :
+        newData = qrKanji(data);
+        break;
+      default :
+        throw 'mode:' + mode;
+      }
+
+      _dataList.push(newData);
+      _dataCache = null;
+    };
+
+    _this.isDark = function(row, col) {
+      if (row < 0 || _moduleCount <= row || col < 0 || _moduleCount <= col) {
+        throw row + ',' + col;
+      }
+      return _modules[row][col];
+    };
+
+    _this.getModuleCount = function() {
+      return _moduleCount;
+    };
+
+    _this.make = function() {
+      if (_typeNumber < 1) {
+        var typeNumber = 1;
+
+        for (; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, _errorCorrectionLevel);
+          var buffer = qrBitBuffer();
+
+          for (var i = 0; i < _dataList.length; i++) {
+            var data = _dataList[i];
+            buffer.put(data.getMode(), 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.getMode(), typeNumber) );
+            data.write(buffer);
+          }
+
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+
+          if (buffer.getLengthInBits() <= totalDataCount * 8) {
+            break;
+          }
+        }
+
+        _typeNumber = typeNumber;
+      }
+
+      makeImpl(false, getBestMaskPattern() );
+    };
+
+    _this.createTableTag = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var qrHtml = '';
+
+      qrHtml += '<table style="';
+      qrHtml += ' border-width: 0px; border-style: none;';
+      qrHtml += ' border-collapse: collapse;';
+      qrHtml += ' padding: 0px; margin: ' + margin + 'px;';
+      qrHtml += '">';
+      qrHtml += '<tbody>';
+
+      for (var r = 0; r < _this.getModuleCount(); r += 1) {
+
+        qrHtml += '<tr>';
+
+        for (var c = 0; c < _this.getModuleCount(); c += 1) {
+          qrHtml += '<td style="';
+          qrHtml += ' border-width: 0px; border-style: none;';
+          qrHtml += ' border-collapse: collapse;';
+          qrHtml += ' padding: 0px; margin: 0px;';
+          qrHtml += ' width: ' + cellSize + 'px;';
+          qrHtml += ' height: ' + cellSize + 'px;';
+          qrHtml += ' background-color: ';
+          qrHtml += _this.isDark(r, c)? '#000000' : '#ffffff';
+          qrHtml += ';';
+          qrHtml += '"/>';
+        }
+
+        qrHtml += '</tr>';
+      }
+
+      qrHtml += '</tbody>';
+      qrHtml += '</table>';
+
+      return qrHtml;
+    };
+
+    _this.createSvgTag = function(cellSize, margin, alt, title) {
+
+      var opts = {};
+      if (typeof arguments[0] == 'object') {
+        // Called by options.
+        opts = arguments[0];
+        // overwrite cellSize and margin.
+        cellSize = opts.cellSize;
+        margin = opts.margin;
+        alt = opts.alt;
+        title = opts.title;
+      }
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      // Compose alt property surrogate
+      alt = (typeof alt === 'string') ? {text: alt} : alt || {};
+      alt.text = alt.text || null;
+      alt.id = (alt.text) ? alt.id || 'qrcode-description' : null;
+
+      // Compose title property surrogate
+      title = (typeof title === 'string') ? {text: title} : title || {};
+      title.text = title.text || null;
+      title.id = (title.text) ? title.id || 'qrcode-title' : null;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var c, mc, r, mr, qrSvg='', rect;
+
+      rect = 'l' + cellSize + ',0 0,' + cellSize +
+        ' -' + cellSize + ',0 0,-' + cellSize + 'z ';
+
+      qrSvg += '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"';
+      qrSvg += !opts.scalable ? ' width="' + size + 'px" height="' + size + 'px"' : '';
+      qrSvg += ' viewBox="0 0 ' + size + ' ' + size + '" ';
+      qrSvg += ' preserveAspectRatio="xMinYMin meet"';
+      qrSvg += (title.text || alt.text) ? ' role="img" aria-labelledby="' +
+          escapeXml([title.id, alt.id].join(' ').trim() ) + '"' : '';
+      qrSvg += '>';
+      qrSvg += (title.text) ? '<title id="' + escapeXml(title.id) + '">' +
+          escapeXml(title.text) + '</title>' : '';
+      qrSvg += (alt.text) ? '<description id="' + escapeXml(alt.id) + '">' +
+          escapeXml(alt.text) + '</description>' : '';
+      qrSvg += '<rect width="100%" height="100%" fill="white" cx="0" cy="0"/>';
+      qrSvg += '<path d="';
+
+      for (r = 0; r < _this.getModuleCount(); r += 1) {
+        mr = r * cellSize + margin;
+        for (c = 0; c < _this.getModuleCount(); c += 1) {
+          if (_this.isDark(r, c) ) {
+            mc = c*cellSize+margin;
+            qrSvg += 'M' + mc + ',' + mr + rect;
+          }
+        }
+      }
+
+      qrSvg += '" stroke="transparent" fill="black"/>';
+      qrSvg += '</svg>';
+
+      return qrSvg;
+    };
+
+    _this.createDataURL = function(cellSize, margin) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      return createDataURL(size, size, function(x, y) {
+        if (min <= x && x < max && min <= y && y < max) {
+          var c = Math.floor( (x - min) / cellSize);
+          var r = Math.floor( (y - min) / cellSize);
+          return _this.isDark(r, c)? 0 : 1;
+        } else {
+          return 1;
+        }
+      } );
+    };
+
+    _this.createImgTag = function(cellSize, margin, alt) {
+
+      cellSize = cellSize || 2;
+      margin = (typeof margin == 'undefined')? cellSize * 4 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+
+      var img = '';
+      img += '<img';
+      img += '\u0020src="';
+      img += _this.createDataURL(cellSize, margin);
+      img += '"';
+      img += '\u0020width="';
+      img += size;
+      img += '"';
+      img += '\u0020height="';
+      img += size;
+      img += '"';
+      if (alt) {
+        img += '\u0020alt="';
+        img += escapeXml(alt);
+        img += '"';
+      }
+      img += '/>';
+
+      return img;
+    };
+
+    var escapeXml = function(s) {
+      var escaped = '';
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charAt(i);
+        switch(c) {
+        case '<': escaped += '&lt;'; break;
+        case '>': escaped += '&gt;'; break;
+        case '&': escaped += '&amp;'; break;
+        case '"': escaped += '&quot;'; break;
+        default : escaped += c; break;
+        }
+      }
+      return escaped;
+    };
+
+    var _createHalfASCII = function(margin) {
+      var cellSize = 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r1, r2, p;
+
+      var blocks = {
+        '██': '█',
+        '█ ': '▀',
+        ' █': '▄',
+        '  ': ' '
+      };
+
+      var blocksLastLineNoMargin = {
+        '██': '▀',
+        '█ ': '▀',
+        ' █': ' ',
+        '  ': ' '
+      };
+
+      var ascii = '';
+      for (y = 0; y < size; y += 2) {
+        r1 = Math.floor((y - min) / cellSize);
+        r2 = Math.floor((y + 1 - min) / cellSize);
+        for (x = 0; x < size; x += 1) {
+          p = '█';
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r1, Math.floor((x - min) / cellSize))) {
+            p = ' ';
+          }
+
+          if (min <= x && x < max && min <= y+1 && y+1 < max && _this.isDark(r2, Math.floor((x - min) / cellSize))) {
+            p += ' ';
+          }
+          else {
+            p += '█';
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          ascii += (margin < 1 && y+1 >= max) ? blocksLastLineNoMargin[p] : blocks[p];
+        }
+
+        ascii += '\n';
+      }
+
+      if (size % 2 && margin > 0) {
+        return ascii.substring(0, ascii.length - size - 1) + Array(size+1).join('▀');
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.createASCII = function(cellSize, margin) {
+      cellSize = cellSize || 1;
+
+      if (cellSize < 2) {
+        return _createHalfASCII(margin);
+      }
+
+      cellSize -= 1;
+      margin = (typeof margin == 'undefined')? cellSize * 2 : margin;
+
+      var size = _this.getModuleCount() * cellSize + margin * 2;
+      var min = margin;
+      var max = size - margin;
+
+      var y, x, r, p;
+
+      var white = Array(cellSize+1).join('██');
+      var black = Array(cellSize+1).join('  ');
+
+      var ascii = '';
+      var line = '';
+      for (y = 0; y < size; y += 1) {
+        r = Math.floor( (y - min) / cellSize);
+        line = '';
+        for (x = 0; x < size; x += 1) {
+          p = 1;
+
+          if (min <= x && x < max && min <= y && y < max && _this.isDark(r, Math.floor((x - min) / cellSize))) {
+            p = 0;
+          }
+
+          // Output 2 characters per pixel, to create full square. 1 character per pixels gives only half width of square.
+          line += p ? white : black;
+        }
+
+        for (r = 0; r < cellSize; r += 1) {
+          ascii += line + '\n';
+        }
+      }
+
+      return ascii.substring(0, ascii.length-1);
+    };
+
+    _this.renderTo2dContext = function(context, cellSize) {
+      cellSize = cellSize || 2;
+      var length = _this.getModuleCount();
+      for (var row = 0; row < length; row++) {
+        for (var col = 0; col < length; col++) {
+          context.fillStyle = _this.isDark(row, col) ? 'black' : 'white';
+          context.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
+        }
+      }
+    }
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytesFuncs = {
+    'default' : function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        bytes.push(c & 0xff);
+      }
+      return bytes;
+    }
+  };
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['default'];
+
+  //---------------------------------------------------------------------
+  // qrcode.createStringToBytes
+  //---------------------------------------------------------------------
+
+  /**
+   * @param unicodeData base64 string of byte array.
+   * [16bit Unicode],[16bit Bytes], ...
+   * @param numChars
+   */
+  qrcode.createStringToBytes = function(unicodeData, numChars) {
+
+    // create conversion map.
+
+    var unicodeMap = function() {
+
+      var bin = base64DecodeInputStream(unicodeData);
+      var read = function() {
+        var b = bin.read();
+        if (b == -1) throw 'eof';
+        return b;
+      };
+
+      var count = 0;
+      var unicodeMap = {};
+      while (true) {
+        var b0 = bin.read();
+        if (b0 == -1) break;
+        var b1 = read();
+        var b2 = read();
+        var b3 = read();
+        var k = String.fromCharCode( (b0 << 8) | b1);
+        var v = (b2 << 8) | b3;
+        unicodeMap[k] = v;
+        count += 1;
+      }
+      if (count != numChars) {
+        throw count + ' != ' + numChars;
+      }
+
+      return unicodeMap;
+    }();
+
+    var unknownChar = '?'.charCodeAt(0);
+
+    return function(s) {
+      var bytes = [];
+      for (var i = 0; i < s.length; i += 1) {
+        var c = s.charCodeAt(i);
+        if (c < 128) {
+          bytes.push(c);
+        } else {
+          var b = unicodeMap[s.charAt(i)];
+          if (typeof b == 'number') {
+            if ( (b & 0xff) == b) {
+              // 1byte
+              bytes.push(b);
+            } else {
+              // 2bytes
+              bytes.push(b >>> 8);
+              bytes.push(b & 0xff);
+            }
+          } else {
+            bytes.push(unknownChar);
+          }
+        }
+      }
+      return bytes;
+    };
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER :    1 << 0,
+    MODE_ALPHA_NUM : 1 << 1,
+    MODE_8BIT_BYTE : 1 << 2,
+    MODE_KANJI :     1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectionLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectionLevel = {
+    L : 1,
+    M : 0,
+    Q : 3,
+    H : 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000 : 0,
+    PATTERN001 : 1,
+    PATTERN010 : 2,
+    PATTERN011 : 3,
+    PATTERN100 : 4,
+    PATTERN101 : 5,
+    PATTERN110 : 6,
+    PATTERN111 : 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = function() {
+
+    var PATTERN_POSITION_TABLE = [
+      [],
+      [6, 18],
+      [6, 22],
+      [6, 26],
+      [6, 30],
+      [6, 34],
+      [6, 22, 38],
+      [6, 24, 42],
+      [6, 26, 46],
+      [6, 28, 50],
+      [6, 30, 54],
+      [6, 32, 58],
+      [6, 34, 62],
+      [6, 26, 46, 66],
+      [6, 26, 48, 70],
+      [6, 26, 50, 74],
+      [6, 30, 54, 78],
+      [6, 30, 56, 82],
+      [6, 30, 58, 86],
+      [6, 34, 62, 90],
+      [6, 28, 50, 72, 94],
+      [6, 26, 50, 74, 98],
+      [6, 30, 54, 78, 102],
+      [6, 28, 54, 80, 106],
+      [6, 32, 58, 84, 110],
+      [6, 30, 58, 86, 114],
+      [6, 34, 62, 90, 118],
+      [6, 26, 50, 74, 98, 122],
+      [6, 30, 54, 78, 102, 126],
+      [6, 26, 52, 78, 104, 130],
+      [6, 30, 56, 82, 108, 134],
+      [6, 34, 60, 86, 112, 138],
+      [6, 30, 58, 86, 114, 142],
+      [6, 34, 62, 90, 118, 146],
+      [6, 30, 54, 78, 102, 126, 150],
+      [6, 24, 50, 76, 102, 128, 154],
+      [6, 28, 54, 80, 106, 132, 158],
+      [6, 32, 58, 84, 110, 136, 162],
+      [6, 26, 54, 82, 110, 138, 166],
+      [6, 30, 58, 86, 114, 142, 170]
+    ];
+    var G15 = (1 << 10) | (1 << 8) | (1 << 5) | (1 << 4) | (1 << 2) | (1 << 1) | (1 << 0);
+    var G18 = (1 << 12) | (1 << 11) | (1 << 10) | (1 << 9) | (1 << 8) | (1 << 5) | (1 << 2) | (1 << 0);
+    var G15_MASK = (1 << 14) | (1 << 12) | (1 << 10) | (1 << 4) | (1 << 1);
+
+    var _this = {};
+
+    var getBCHDigit = function(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit += 1;
+        data >>>= 1;
+      }
+      return digit;
+    };
+
+    _this.getBCHTypeInfo = function(data) {
+      var d = data << 10;
+      while (getBCHDigit(d) - getBCHDigit(G15) >= 0) {
+        d ^= (G15 << (getBCHDigit(d) - getBCHDigit(G15) ) );
+      }
+      return ( (data << 10) | d) ^ G15_MASK;
+    };
+
+    _this.getBCHTypeNumber = function(data) {
+      var d = data << 12;
+      while (getBCHDigit(d) - getBCHDigit(G18) >= 0) {
+        d ^= (G18 << (getBCHDigit(d) - getBCHDigit(G18) ) );
+      }
+      return (data << 12) | d;
+    };
+
+    _this.getPatternPosition = function(typeNumber) {
+      return PATTERN_POSITION_TABLE[typeNumber - 1];
+    };
+
+    _this.getMaskFunction = function(maskPattern) {
+
+      switch (maskPattern) {
+
+      case QRMaskPattern.PATTERN000 :
+        return function(i, j) { return (i + j) % 2 == 0; };
+      case QRMaskPattern.PATTERN001 :
+        return function(i, j) { return i % 2 == 0; };
+      case QRMaskPattern.PATTERN010 :
+        return function(i, j) { return j % 3 == 0; };
+      case QRMaskPattern.PATTERN011 :
+        return function(i, j) { return (i + j) % 3 == 0; };
+      case QRMaskPattern.PATTERN100 :
+        return function(i, j) { return (Math.floor(i / 2) + Math.floor(j / 3) ) % 2 == 0; };
+      case QRMaskPattern.PATTERN101 :
+        return function(i, j) { return (i * j) % 2 + (i * j) % 3 == 0; };
+      case QRMaskPattern.PATTERN110 :
+        return function(i, j) { return ( (i * j) % 2 + (i * j) % 3) % 2 == 0; };
+      case QRMaskPattern.PATTERN111 :
+        return function(i, j) { return ( (i * j) % 3 + (i + j) % 2) % 2 == 0; };
+
+      default :
+        throw 'bad maskPattern:' + maskPattern;
+      }
+    };
+
+    _this.getErrorCorrectPolynomial = function(errorCorrectLength) {
+      var a = qrPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i += 1) {
+        a = a.multiply(qrPolynomial([1, QRMath.gexp(i)], 0) );
+      }
+      return a;
+    };
+
+    _this.getLengthInBits = function(mode, type) {
+
+      if (1 <= type && type < 10) {
+
+        // 1 - 9
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 10;
+        case QRMode.MODE_ALPHA_NUM : return 9;
+        case QRMode.MODE_8BIT_BYTE : return 8;
+        case QRMode.MODE_KANJI     : return 8;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 27) {
+
+        // 10 - 26
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 12;
+        case QRMode.MODE_ALPHA_NUM : return 11;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 10;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else if (type < 41) {
+
+        // 27 - 40
+
+        switch(mode) {
+        case QRMode.MODE_NUMBER    : return 14;
+        case QRMode.MODE_ALPHA_NUM : return 13;
+        case QRMode.MODE_8BIT_BYTE : return 16;
+        case QRMode.MODE_KANJI     : return 12;
+        default :
+          throw 'mode:' + mode;
+        }
+
+      } else {
+        throw 'type:' + type;
+      }
+    };
+
+    _this.getLostPoint = function(qrcode) {
+
+      var moduleCount = qrcode.getModuleCount();
+
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount; col += 1) {
+
+          var sameCount = 0;
+          var dark = qrcode.isDark(row, col);
+
+          for (var r = -1; r <= 1; r += 1) {
+
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+
+            for (var c = -1; c <= 1; c += 1) {
+
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+
+              if (r == 0 && c == 0) {
+                continue;
+              }
+
+              if (dark == qrcode.isDark(row + r, col + c) ) {
+                sameCount += 1;
+              }
+            }
+          }
+
+          if (sameCount > 5) {
+            lostPoint += (3 + sameCount - 5);
+          }
+        }
+      };
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row += 1) {
+        for (var col = 0; col < moduleCount - 1; col += 1) {
+          var count = 0;
+          if (qrcode.isDark(row, col) ) count += 1;
+          if (qrcode.isDark(row + 1, col) ) count += 1;
+          if (qrcode.isDark(row, col + 1) ) count += 1;
+          if (qrcode.isDark(row + 1, col + 1) ) count += 1;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row += 1) {
+        for (var col = 0; col < moduleCount - 6; col += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row, col + 1)
+              &&  qrcode.isDark(row, col + 2)
+              &&  qrcode.isDark(row, col + 3)
+              &&  qrcode.isDark(row, col + 4)
+              && !qrcode.isDark(row, col + 5)
+              &&  qrcode.isDark(row, col + 6) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount - 6; row += 1) {
+          if (qrcode.isDark(row, col)
+              && !qrcode.isDark(row + 1, col)
+              &&  qrcode.isDark(row + 2, col)
+              &&  qrcode.isDark(row + 3, col)
+              &&  qrcode.isDark(row + 4, col)
+              && !qrcode.isDark(row + 5, col)
+              &&  qrcode.isDark(row + 6, col) ) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+
+      for (var col = 0; col < moduleCount; col += 1) {
+        for (var row = 0; row < moduleCount; row += 1) {
+          if (qrcode.isDark(row, col) ) {
+            darkCount += 1;
+          }
+        }
+      }
+
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+
+      return lostPoint;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = function() {
+
+    var EXP_TABLE = new Array(256);
+    var LOG_TABLE = new Array(256);
+
+    // initialize tables
+    for (var i = 0; i < 8; i += 1) {
+      EXP_TABLE[i] = 1 << i;
+    }
+    for (var i = 8; i < 256; i += 1) {
+      EXP_TABLE[i] = EXP_TABLE[i - 4]
+        ^ EXP_TABLE[i - 5]
+        ^ EXP_TABLE[i - 6]
+        ^ EXP_TABLE[i - 8];
+    }
+    for (var i = 0; i < 255; i += 1) {
+      LOG_TABLE[EXP_TABLE[i] ] = i;
+    }
+
+    var _this = {};
+
+    _this.glog = function(n) {
+
+      if (n < 1) {
+        throw 'glog(' + n + ')';
+      }
+
+      return LOG_TABLE[n];
+    };
+
+    _this.gexp = function(n) {
+
+      while (n < 0) {
+        n += 255;
+      }
+
+      while (n >= 256) {
+        n -= 255;
+      }
+
+      return EXP_TABLE[n];
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrPolynomial
+  //---------------------------------------------------------------------
+
+  function qrPolynomial(num, shift) {
+
+    if (typeof num.length == 'undefined') {
+      throw num.length + '/' + shift;
+    }
+
+    var _num = function() {
+      var offset = 0;
+      while (offset < num.length && num[offset] == 0) {
+        offset += 1;
+      }
+      var _num = new Array(num.length - offset + shift);
+      for (var i = 0; i < num.length - offset; i += 1) {
+        _num[i] = num[i + offset];
+      }
+      return _num;
+    }();
+
+    var _this = {};
+
+    _this.getAt = function(index) {
+      return _num[index];
+    };
+
+    _this.getLength = function() {
+      return _num.length;
+    };
+
+    _this.multiply = function(e) {
+
+      var num = new Array(_this.getLength() + e.getLength() - 1);
+
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        for (var j = 0; j < e.getLength(); j += 1) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(_this.getAt(i) ) + QRMath.glog(e.getAt(j) ) );
+        }
+      }
+
+      return qrPolynomial(num, 0);
+    };
+
+    _this.mod = function(e) {
+
+      if (_this.getLength() - e.getLength() < 0) {
+        return _this;
+      }
+
+      var ratio = QRMath.glog(_this.getAt(0) ) - QRMath.glog(e.getAt(0) );
+
+      var num = new Array(_this.getLength() );
+      for (var i = 0; i < _this.getLength(); i += 1) {
+        num[i] = _this.getAt(i);
+      }
+
+      for (var i = 0; i < e.getLength(); i += 1) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.getAt(i) ) + ratio);
+      }
+
+      // recursive call
+      return qrPolynomial(num, 0).mod(e);
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  var QRRSBlock = function() {
+
+    var RS_BLOCK_TABLE = [
+
+      // L
+      // M
+      // Q
+      // H
+
+      // 1
+      [1, 26, 19],
+      [1, 26, 16],
+      [1, 26, 13],
+      [1, 26, 9],
+
+      // 2
+      [1, 44, 34],
+      [1, 44, 28],
+      [1, 44, 22],
+      [1, 44, 16],
+
+      // 3
+      [1, 70, 55],
+      [1, 70, 44],
+      [2, 35, 17],
+      [2, 35, 13],
+
+      // 4
+      [1, 100, 80],
+      [2, 50, 32],
+      [2, 50, 24],
+      [4, 25, 9],
+
+      // 5
+      [1, 134, 108],
+      [2, 67, 43],
+      [2, 33, 15, 2, 34, 16],
+      [2, 33, 11, 2, 34, 12],
+
+      // 6
+      [2, 86, 68],
+      [4, 43, 27],
+      [4, 43, 19],
+      [4, 43, 15],
+
+      // 7
+      [2, 98, 78],
+      [4, 49, 31],
+      [2, 32, 14, 4, 33, 15],
+      [4, 39, 13, 1, 40, 14],
+
+      // 8
+      [2, 121, 97],
+      [2, 60, 38, 2, 61, 39],
+      [4, 40, 18, 2, 41, 19],
+      [4, 40, 14, 2, 41, 15],
+
+      // 9
+      [2, 146, 116],
+      [3, 58, 36, 2, 59, 37],
+      [4, 36, 16, 4, 37, 17],
+      [4, 36, 12, 4, 37, 13],
+
+      // 10
+      [2, 86, 68, 2, 87, 69],
+      [4, 69, 43, 1, 70, 44],
+      [6, 43, 19, 2, 44, 20],
+      [6, 43, 15, 2, 44, 16],
+
+      // 11
+      [4, 101, 81],
+      [1, 80, 50, 4, 81, 51],
+      [4, 50, 22, 4, 51, 23],
+      [3, 36, 12, 8, 37, 13],
+
+      // 12
+      [2, 116, 92, 2, 117, 93],
+      [6, 58, 36, 2, 59, 37],
+      [4, 46, 20, 6, 47, 21],
+      [7, 42, 14, 4, 43, 15],
+
+      // 13
+      [4, 133, 107],
+      [8, 59, 37, 1, 60, 38],
+      [8, 44, 20, 4, 45, 21],
+      [12, 33, 11, 4, 34, 12],
+
+      // 14
+      [3, 145, 115, 1, 146, 116],
+      [4, 64, 40, 5, 65, 41],
+      [11, 36, 16, 5, 37, 17],
+      [11, 36, 12, 5, 37, 13],
+
+      // 15
+      [5, 109, 87, 1, 110, 88],
+      [5, 65, 41, 5, 66, 42],
+      [5, 54, 24, 7, 55, 25],
+      [11, 36, 12, 7, 37, 13],
+
+      // 16
+      [5, 122, 98, 1, 123, 99],
+      [7, 73, 45, 3, 74, 46],
+      [15, 43, 19, 2, 44, 20],
+      [3, 45, 15, 13, 46, 16],
+
+      // 17
+      [1, 135, 107, 5, 136, 108],
+      [10, 74, 46, 1, 75, 47],
+      [1, 50, 22, 15, 51, 23],
+      [2, 42, 14, 17, 43, 15],
+
+      // 18
+      [5, 150, 120, 1, 151, 121],
+      [9, 69, 43, 4, 70, 44],
+      [17, 50, 22, 1, 51, 23],
+      [2, 42, 14, 19, 43, 15],
+
+      // 19
+      [3, 141, 113, 4, 142, 114],
+      [3, 70, 44, 11, 71, 45],
+      [17, 47, 21, 4, 48, 22],
+      [9, 39, 13, 16, 40, 14],
+
+      // 20
+      [3, 135, 107, 5, 136, 108],
+      [3, 67, 41, 13, 68, 42],
+      [15, 54, 24, 5, 55, 25],
+      [15, 43, 15, 10, 44, 16],
+
+      // 21
+      [4, 144, 116, 4, 145, 117],
+      [17, 68, 42],
+      [17, 50, 22, 6, 51, 23],
+      [19, 46, 16, 6, 47, 17],
+
+      // 22
+      [2, 139, 111, 7, 140, 112],
+      [17, 74, 46],
+      [7, 54, 24, 16, 55, 25],
+      [34, 37, 13],
+
+      // 23
+      [4, 151, 121, 5, 152, 122],
+      [4, 75, 47, 14, 76, 48],
+      [11, 54, 24, 14, 55, 25],
+      [16, 45, 15, 14, 46, 16],
+
+      // 24
+      [6, 147, 117, 4, 148, 118],
+      [6, 73, 45, 14, 74, 46],
+      [11, 54, 24, 16, 55, 25],
+      [30, 46, 16, 2, 47, 17],
+
+      // 25
+      [8, 132, 106, 4, 133, 107],
+      [8, 75, 47, 13, 76, 48],
+      [7, 54, 24, 22, 55, 25],
+      [22, 45, 15, 13, 46, 16],
+
+      // 26
+      [10, 142, 114, 2, 143, 115],
+      [19, 74, 46, 4, 75, 47],
+      [28, 50, 22, 6, 51, 23],
+      [33, 46, 16, 4, 47, 17],
+
+      // 27
+      [8, 152, 122, 4, 153, 123],
+      [22, 73, 45, 3, 74, 46],
+      [8, 53, 23, 26, 54, 24],
+      [12, 45, 15, 28, 46, 16],
+
+      // 28
+      [3, 147, 117, 10, 148, 118],
+      [3, 73, 45, 23, 74, 46],
+      [4, 54, 24, 31, 55, 25],
+      [11, 45, 15, 31, 46, 16],
+
+      // 29
+      [7, 146, 116, 7, 147, 117],
+      [21, 73, 45, 7, 74, 46],
+      [1, 53, 23, 37, 54, 24],
+      [19, 45, 15, 26, 46, 16],
+
+      // 30
+      [5, 145, 115, 10, 146, 116],
+      [19, 75, 47, 10, 76, 48],
+      [15, 54, 24, 25, 55, 25],
+      [23, 45, 15, 25, 46, 16],
+
+      // 31
+      [13, 145, 115, 3, 146, 116],
+      [2, 74, 46, 29, 75, 47],
+      [42, 54, 24, 1, 55, 25],
+      [23, 45, 15, 28, 46, 16],
+
+      // 32
+      [17, 145, 115],
+      [10, 74, 46, 23, 75, 47],
+      [10, 54, 24, 35, 55, 25],
+      [19, 45, 15, 35, 46, 16],
+
+      // 33
+      [17, 145, 115, 1, 146, 116],
+      [14, 74, 46, 21, 75, 47],
+      [29, 54, 24, 19, 55, 25],
+      [11, 45, 15, 46, 46, 16],
+
+      // 34
+      [13, 145, 115, 6, 146, 116],
+      [14, 74, 46, 23, 75, 47],
+      [44, 54, 24, 7, 55, 25],
+      [59, 46, 16, 1, 47, 17],
+
+      // 35
+      [12, 151, 121, 7, 152, 122],
+      [12, 75, 47, 26, 76, 48],
+      [39, 54, 24, 14, 55, 25],
+      [22, 45, 15, 41, 46, 16],
+
+      // 36
+      [6, 151, 121, 14, 152, 122],
+      [6, 75, 47, 34, 76, 48],
+      [46, 54, 24, 10, 55, 25],
+      [2, 45, 15, 64, 46, 16],
+
+      // 37
+      [17, 152, 122, 4, 153, 123],
+      [29, 74, 46, 14, 75, 47],
+      [49, 54, 24, 10, 55, 25],
+      [24, 45, 15, 46, 46, 16],
+
+      // 38
+      [4, 152, 122, 18, 153, 123],
+      [13, 74, 46, 32, 75, 47],
+      [48, 54, 24, 14, 55, 25],
+      [42, 45, 15, 32, 46, 16],
+
+      // 39
+      [20, 147, 117, 4, 148, 118],
+      [40, 75, 47, 7, 76, 48],
+      [43, 54, 24, 22, 55, 25],
+      [10, 45, 15, 67, 46, 16],
+
+      // 40
+      [19, 148, 118, 6, 149, 119],
+      [18, 75, 47, 31, 76, 48],
+      [34, 54, 24, 34, 55, 25],
+      [20, 45, 15, 61, 46, 16]
+    ];
+
+    var qrRSBlock = function(totalCount, dataCount) {
+      var _this = {};
+      _this.totalCount = totalCount;
+      _this.dataCount = dataCount;
+      return _this;
+    };
+
+    var _this = {};
+
+    var getRsBlockTable = function(typeNumber, errorCorrectionLevel) {
+
+      switch(errorCorrectionLevel) {
+      case QRErrorCorrectionLevel.L :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectionLevel.M :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectionLevel.Q :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectionLevel.H :
+        return RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default :
+        return undefined;
+      }
+    };
+
+    _this.getRSBlocks = function(typeNumber, errorCorrectionLevel) {
+
+      var rsBlock = getRsBlockTable(typeNumber, errorCorrectionLevel);
+
+      if (typeof rsBlock == 'undefined') {
+        throw 'bad rs block @ typeNumber:' + typeNumber +
+            '/errorCorrectionLevel:' + errorCorrectionLevel;
+      }
+
+      var length = rsBlock.length / 3;
+
+      var list = [];
+
+      for (var i = 0; i < length; i += 1) {
+
+        var count = rsBlock[i * 3 + 0];
+        var totalCount = rsBlock[i * 3 + 1];
+        var dataCount = rsBlock[i * 3 + 2];
+
+        for (var j = 0; j < count; j += 1) {
+          list.push(qrRSBlock(totalCount, dataCount) );
+        }
+      }
+
+      return list;
+    };
+
+    return _this;
+  }();
+
+  //---------------------------------------------------------------------
+  // qrBitBuffer
+  //---------------------------------------------------------------------
+
+  var qrBitBuffer = function() {
+
+    var _buffer = [];
+    var _length = 0;
+
+    var _this = {};
+
+    _this.getBuffer = function() {
+      return _buffer;
+    };
+
+    _this.getAt = function(index) {
+      var bufIndex = Math.floor(index / 8);
+      return ( (_buffer[bufIndex] >>> (7 - index % 8) ) & 1) == 1;
+    };
+
+    _this.put = function(num, length) {
+      for (var i = 0; i < length; i += 1) {
+        _this.putBit( ( (num >>> (length - i - 1) ) & 1) == 1);
+      }
+    };
+
+    _this.getLengthInBits = function() {
+      return _length;
+    };
+
+    _this.putBit = function(bit) {
+
+      var bufIndex = Math.floor(_length / 8);
+      if (_buffer.length <= bufIndex) {
+        _buffer.push(0);
+      }
+
+      if (bit) {
+        _buffer[bufIndex] |= (0x80 >>> (_length % 8) );
+      }
+
+      _length += 1;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrNumber
+  //---------------------------------------------------------------------
+
+  var qrNumber = function(data) {
+
+    var _mode = QRMode.MODE_NUMBER;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _data;
+
+      var i = 0;
+
+      while (i + 2 < data.length) {
+        buffer.put(strToNum(data.substring(i, i + 3) ), 10);
+        i += 3;
+      }
+
+      if (i < data.length) {
+        if (data.length - i == 1) {
+          buffer.put(strToNum(data.substring(i, i + 1) ), 4);
+        } else if (data.length - i == 2) {
+          buffer.put(strToNum(data.substring(i, i + 2) ), 7);
+        }
+      }
+    };
+
+    var strToNum = function(s) {
+      var num = 0;
+      for (var i = 0; i < s.length; i += 1) {
+        num = num * 10 + chatToNum(s.charAt(i) );
+      }
+      return num;
+    };
+
+    var chatToNum = function(c) {
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      }
+      throw 'illegal char :' + c;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrAlphaNum
+  //---------------------------------------------------------------------
+
+  var qrAlphaNum = function(data) {
+
+    var _mode = QRMode.MODE_ALPHA_NUM;
+    var _data = data;
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _data.length;
+    };
+
+    _this.write = function(buffer) {
+
+      var s = _data;
+
+      var i = 0;
+
+      while (i + 1 < s.length) {
+        buffer.put(
+          getCode(s.charAt(i) ) * 45 +
+          getCode(s.charAt(i + 1) ), 11);
+        i += 2;
+      }
+
+      if (i < s.length) {
+        buffer.put(getCode(s.charAt(i) ), 6);
+      }
+    };
+
+    var getCode = function(c) {
+
+      if ('0' <= c && c <= '9') {
+        return c.charCodeAt(0) - '0'.charCodeAt(0);
+      } else if ('A' <= c && c <= 'Z') {
+        return c.charCodeAt(0) - 'A'.charCodeAt(0) + 10;
+      } else {
+        switch (c) {
+        case ' ' : return 36;
+        case '$' : return 37;
+        case '%' : return 38;
+        case '*' : return 39;
+        case '+' : return 40;
+        case '-' : return 41;
+        case '.' : return 42;
+        case '/' : return 43;
+        case ':' : return 44;
+        default :
+          throw 'illegal char :' + c;
+        }
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qr8BitByte
+  //---------------------------------------------------------------------
+
+  var qr8BitByte = function(data) {
+
+    var _mode = QRMode.MODE_8BIT_BYTE;
+    var _data = data;
+    var _bytes = qrcode.stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return _bytes.length;
+    };
+
+    _this.write = function(buffer) {
+      for (var i = 0; i < _bytes.length; i += 1) {
+        buffer.put(_bytes[i], 8);
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // qrKanji
+  //---------------------------------------------------------------------
+
+  var qrKanji = function(data) {
+
+    var _mode = QRMode.MODE_KANJI;
+    var _data = data;
+
+    var stringToBytes = qrcode.stringToBytesFuncs['SJIS'];
+    if (!stringToBytes) {
+      throw 'sjis not supported.';
+    }
+    !function(c, code) {
+      // self test for sjis support.
+      var test = stringToBytes(c);
+      if (test.length != 2 || ( (test[0] << 8) | test[1]) != code) {
+        throw 'sjis not supported.';
+      }
+    }('\u53cb', 0x9746);
+
+    var _bytes = stringToBytes(data);
+
+    var _this = {};
+
+    _this.getMode = function() {
+      return _mode;
+    };
+
+    _this.getLength = function(buffer) {
+      return ~~(_bytes.length / 2);
+    };
+
+    _this.write = function(buffer) {
+
+      var data = _bytes;
+
+      var i = 0;
+
+      while (i + 1 < data.length) {
+
+        var c = ( (0xff & data[i]) << 8) | (0xff & data[i + 1]);
+
+        if (0x8140 <= c && c <= 0x9FFC) {
+          c -= 0x8140;
+        } else if (0xE040 <= c && c <= 0xEBBF) {
+          c -= 0xC140;
+        } else {
+          throw 'illegal char at ' + (i + 1) + '/' + c;
+        }
+
+        c = ( (c >>> 8) & 0xff) * 0xC0 + (c & 0xff);
+
+        buffer.put(c, 13);
+
+        i += 2;
+      }
+
+      if (i < data.length) {
+        throw 'illegal char at ' + (i + 1);
+      }
+    };
+
+    return _this;
+  };
+
+  //=====================================================================
+  // GIF Support etc.
+  //
+
+  //---------------------------------------------------------------------
+  // byteArrayOutputStream
+  //---------------------------------------------------------------------
+
+  var byteArrayOutputStream = function() {
+
+    var _bytes = [];
+
+    var _this = {};
+
+    _this.writeByte = function(b) {
+      _bytes.push(b & 0xff);
+    };
+
+    _this.writeShort = function(i) {
+      _this.writeByte(i);
+      _this.writeByte(i >>> 8);
+    };
+
+    _this.writeBytes = function(b, off, len) {
+      off = off || 0;
+      len = len || b.length;
+      for (var i = 0; i < len; i += 1) {
+        _this.writeByte(b[i + off]);
+      }
+    };
+
+    _this.writeString = function(s) {
+      for (var i = 0; i < s.length; i += 1) {
+        _this.writeByte(s.charCodeAt(i) );
+      }
+    };
+
+    _this.toByteArray = function() {
+      return _bytes;
+    };
+
+    _this.toString = function() {
+      var s = '';
+      s += '[';
+      for (var i = 0; i < _bytes.length; i += 1) {
+        if (i > 0) {
+          s += ',';
+        }
+        s += _bytes[i];
+      }
+      s += ']';
+      return s;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64EncodeOutputStream
+  //---------------------------------------------------------------------
+
+  var base64EncodeOutputStream = function() {
+
+    var _buffer = 0;
+    var _buflen = 0;
+    var _length = 0;
+    var _base64 = '';
+
+    var _this = {};
+
+    var writeEncoded = function(b) {
+      _base64 += String.fromCharCode(encode(b & 0x3f) );
+    };
+
+    var encode = function(n) {
+      if (n < 0) {
+        // error.
+      } else if (n < 26) {
+        return 0x41 + n;
+      } else if (n < 52) {
+        return 0x61 + (n - 26);
+      } else if (n < 62) {
+        return 0x30 + (n - 52);
+      } else if (n == 62) {
+        return 0x2b;
+      } else if (n == 63) {
+        return 0x2f;
+      }
+      throw 'n:' + n;
+    };
+
+    _this.writeByte = function(n) {
+
+      _buffer = (_buffer << 8) | (n & 0xff);
+      _buflen += 8;
+      _length += 1;
+
+      while (_buflen >= 6) {
+        writeEncoded(_buffer >>> (_buflen - 6) );
+        _buflen -= 6;
+      }
+    };
+
+    _this.flush = function() {
+
+      if (_buflen > 0) {
+        writeEncoded(_buffer << (6 - _buflen) );
+        _buffer = 0;
+        _buflen = 0;
+      }
+
+      if (_length % 3 != 0) {
+        // padding
+        var padlen = 3 - _length % 3;
+        for (var i = 0; i < padlen; i += 1) {
+          _base64 += '=';
+        }
+      }
+    };
+
+    _this.toString = function() {
+      return _base64;
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // base64DecodeInputStream
+  //---------------------------------------------------------------------
+
+  var base64DecodeInputStream = function(str) {
+
+    var _str = str;
+    var _pos = 0;
+    var _buffer = 0;
+    var _buflen = 0;
+
+    var _this = {};
+
+    _this.read = function() {
+
+      while (_buflen < 8) {
+
+        if (_pos >= _str.length) {
+          if (_buflen == 0) {
+            return -1;
+          }
+          throw 'unexpected end of file./' + _buflen;
+        }
+
+        var c = _str.charAt(_pos);
+        _pos += 1;
+
+        if (c == '=') {
+          _buflen = 0;
+          return -1;
+        } else if (c.match(/^\s$/) ) {
+          // ignore if whitespace.
+          continue;
+        }
+
+        _buffer = (_buffer << 6) | decode(c.charCodeAt(0) );
+        _buflen += 6;
+      }
+
+      var n = (_buffer >>> (_buflen - 8) ) & 0xff;
+      _buflen -= 8;
+      return n;
+    };
+
+    var decode = function(c) {
+      if (0x41 <= c && c <= 0x5a) {
+        return c - 0x41;
+      } else if (0x61 <= c && c <= 0x7a) {
+        return c - 0x61 + 26;
+      } else if (0x30 <= c && c <= 0x39) {
+        return c - 0x30 + 52;
+      } else if (c == 0x2b) {
+        return 62;
+      } else if (c == 0x2f) {
+        return 63;
+      } else {
+        throw 'c:' + c;
+      }
+    };
+
+    return _this;
+  };
+
+  //---------------------------------------------------------------------
+  // gifImage (B/W)
+  //---------------------------------------------------------------------
+
+  var gifImage = function(width, height) {
+
+    var _width = width;
+    var _height = height;
+    var _data = new Array(width * height);
+
+    var _this = {};
+
+    _this.setPixel = function(x, y, pixel) {
+      _data[y * _width + x] = pixel;
+    };
+
+    _this.write = function(out) {
+
+      //---------------------------------
+      // GIF Signature
+
+      out.writeString('GIF87a');
+
+      //---------------------------------
+      // Screen Descriptor
+
+      out.writeShort(_width);
+      out.writeShort(_height);
+
+      out.writeByte(0x80); // 2bit
+      out.writeByte(0);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Global Color Map
+
+      // black
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+      out.writeByte(0x00);
+
+      // white
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+      out.writeByte(0xff);
+
+      //---------------------------------
+      // Image Descriptor
+
+      out.writeString(',');
+      out.writeShort(0);
+      out.writeShort(0);
+      out.writeShort(_width);
+      out.writeShort(_height);
+      out.writeByte(0);
+
+      //---------------------------------
+      // Local Color Map
+
+      //---------------------------------
+      // Raster Data
+
+      var lzwMinCodeSize = 2;
+      var raster = getLZWRaster(lzwMinCodeSize);
+
+      out.writeByte(lzwMinCodeSize);
+
+      var offset = 0;
+
+      while (raster.length - offset > 255) {
+        out.writeByte(255);
+        out.writeBytes(raster, offset, 255);
+        offset += 255;
+      }
+
+      out.writeByte(raster.length - offset);
+      out.writeBytes(raster, offset, raster.length - offset);
+      out.writeByte(0x00);
+
+      //---------------------------------
+      // GIF Terminator
+      out.writeString(';');
+    };
+
+    var bitOutputStream = function(out) {
+
+      var _out = out;
+      var _bitLength = 0;
+      var _bitBuffer = 0;
+
+      var _this = {};
+
+      _this.write = function(data, length) {
+
+        if ( (data >>> length) != 0) {
+          throw 'length over';
+        }
+
+        while (_bitLength + length >= 8) {
+          _out.writeByte(0xff & ( (data << _bitLength) | _bitBuffer) );
+          length -= (8 - _bitLength);
+          data >>>= (8 - _bitLength);
+          _bitBuffer = 0;
+          _bitLength = 0;
+        }
+
+        _bitBuffer = (data << _bitLength) | _bitBuffer;
+        _bitLength = _bitLength + length;
+      };
+
+      _this.flush = function() {
+        if (_bitLength > 0) {
+          _out.writeByte(_bitBuffer);
+        }
+      };
+
+      return _this;
+    };
+
+    var getLZWRaster = function(lzwMinCodeSize) {
+
+      var clearCode = 1 << lzwMinCodeSize;
+      var endCode = (1 << lzwMinCodeSize) + 1;
+      var bitLength = lzwMinCodeSize + 1;
+
+      // Setup LZWTable
+      var table = lzwTable();
+
+      for (var i = 0; i < clearCode; i += 1) {
+        table.add(String.fromCharCode(i) );
+      }
+      table.add(String.fromCharCode(clearCode) );
+      table.add(String.fromCharCode(endCode) );
+
+      var byteOut = byteArrayOutputStream();
+      var bitOut = bitOutputStream(byteOut);
+
+      // clear code
+      bitOut.write(clearCode, bitLength);
+
+      var dataIndex = 0;
+
+      var s = String.fromCharCode(_data[dataIndex]);
+      dataIndex += 1;
+
+      while (dataIndex < _data.length) {
+
+        var c = String.fromCharCode(_data[dataIndex]);
+        dataIndex += 1;
+
+        if (table.contains(s + c) ) {
+
+          s = s + c;
+
+        } else {
+
+          bitOut.write(table.indexOf(s), bitLength);
+
+          if (table.size() < 0xfff) {
+
+            if (table.size() == (1 << bitLength) ) {
+              bitLength += 1;
+            }
+
+            table.add(s + c);
+          }
+
+          s = c;
+        }
+      }
+
+      bitOut.write(table.indexOf(s), bitLength);
+
+      // end code
+      bitOut.write(endCode, bitLength);
+
+      bitOut.flush();
+
+      return byteOut.toByteArray();
+    };
+
+    var lzwTable = function() {
+
+      var _map = {};
+      var _size = 0;
+
+      var _this = {};
+
+      _this.add = function(key) {
+        if (_this.contains(key) ) {
+          throw 'dup key:' + key;
+        }
+        _map[key] = _size;
+        _size += 1;
+      };
+
+      _this.size = function() {
+        return _size;
+      };
+
+      _this.indexOf = function(key) {
+        return _map[key];
+      };
+
+      _this.contains = function(key) {
+        return typeof _map[key] != 'undefined';
+      };
+
+      return _this;
+    };
+
+    return _this;
+  };
+
+  var createDataURL = function(width, height, getPixel) {
+    var gif = gifImage(width, height);
+    for (var y = 0; y < height; y += 1) {
+      for (var x = 0; x < width; x += 1) {
+        gif.setPixel(x, y, getPixel(x, y) );
+      }
+    }
+
+    var b = byteArrayOutputStream();
+    gif.write(b);
+
+    var base64 = base64EncodeOutputStream();
+    var bytes = b.toByteArray();
+    for (var i = 0; i < bytes.length; i += 1) {
+      base64.writeByte(bytes[i]);
+    }
+    base64.flush();
+
+    return 'data:image/gif;base64,' + base64;
+  };
+
+  //---------------------------------------------------------------------
+  // returns qrcode function.
+
+  return qrcode;
+}();
+
+// multibyte support
+!function() {
+
+  qrcode.stringToBytesFuncs['UTF-8'] = function(s) {
+    // http://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
+    function toUTF8Array(str) {
+      var utf8 = [];
+      for (var i=0; i < str.length; i++) {
+        var charcode = str.charCodeAt(i);
+        if (charcode < 0x80) utf8.push(charcode);
+        else if (charcode < 0x800) {
+          utf8.push(0xc0 | (charcode >> 6),
+              0x80 | (charcode & 0x3f));
+        }
+        else if (charcode < 0xd800 || charcode >= 0xe000) {
+          utf8.push(0xe0 | (charcode >> 12),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+        // surrogate pair
+        else {
+          i++;
+          // UTF-16 encodes 0x10000-0x10FFFF by
+          // subtracting 0x10000 and splitting the
+          // 20 bits of 0x0-0xFFFFF into two halves
+          charcode = 0x10000 + (((charcode & 0x3ff)<<10)
+            | (str.charCodeAt(i) & 0x3ff));
+          utf8.push(0xf0 | (charcode >>18),
+              0x80 | ((charcode>>12) & 0x3f),
+              0x80 | ((charcode>>6) & 0x3f),
+              0x80 | (charcode & 0x3f));
+        }
+      }
+      return utf8;
+    }
+    return toUTF8Array(s);
+  };
+
+}();
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+      define([], factory);
+  } else if (typeof exports === 'object') {
+      module.exports = factory();
+  }
+}(function () {
+    return qrcode;
+}));
+
+//---------------------------------------------------------------------
+//
+// QR Code Generator for JavaScript UTF8 Support (optional)
+//
+// Copyright (c) 2011 Kazuhiko Arase
+//
+// URL: http://www.d-project.com/
+//
+// Licensed under the MIT license:
+//  http://www.opensource.org/licenses/mit-license.php
+//
+// The word 'QR Code' is registered trademark of
+// DENSO WAVE INCORPORATED
+//  http://www.denso-wave.com/qrcode/faqpatent-e.html
+//
+//---------------------------------------------------------------------
+
+!function(qrcode) {
+
+  //---------------------------------------------------------------------
+  // overwrite qrcode.stringToBytes
+  //---------------------------------------------------------------------
+
+  qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+
+}(qrcode);
+
+</script>
 <script src="js/deckbuilder-core.js"></script>
 <script>window.GCG_DATA = __GCG_DATA_JSON__;</script>
 <script>
@@ -980,7 +3348,7 @@ function confirmDlg(title, msg){
 function openModal(id){ $('ovl').classList.add('open'); $(id).classList.add('open'); }
 function closeModals(){
   $('ovl').classList.remove('open');
-  ['cardModal','decksModal','confirmModal','colorClearModal','importModal'].forEach(function(m){ $(m).classList.remove('open'); });
+  ['cardModal','decksModal','confirmModal','colorClearModal','importModal','shareImgModal'].forEach(function(m){ $(m).classList.remove('open'); });
 }
 
 /* ========== 履歴 ========== */
@@ -1254,6 +3622,8 @@ function renderDeck(){
 
   $('deckEmpty').classList.toggle('db-hidden', total > 0);
   $('btnDiag').classList.toggle('db-hidden', total === 0);
+  $('btnShareImg').disabled = (total === 0);
+  $('deckMenu').querySelector('[data-m="shareImage"]').disabled = (total === 0);
   $('diagBox').classList.toggle('db-hidden', total === 0);
 
   // タイプ別
@@ -1948,6 +4318,7 @@ $('deckMenu').querySelectorAll('[data-m]').forEach(function(b){
       s.draft = { id: nd.id, name: nd.name, cards: nd.cards, updated: nd.updated };
       if (saveStore(s)) { openDeck(nd.id); toast('複製して開きました'); }
     }
+    else if (m === 'shareImage') { siOpenModal(); }
     else if (m === 'clearAll') clearAllConfirm();
     else if (m === 'clearColor') {
       var colors = C.deckColors(state.cards, db.byId);
@@ -2203,6 +4574,7 @@ function copyFallback(text){
   } catch(e){ prompt('このURLをコピーしてください', text); return true; }
 }
 function shareUrlBase(){ return location.href.split(/[?#]/)[0]; }
+$('btnShareImg').onclick = function(){ siOpenModal(); };
 $('btnShare').onclick = function(){
   var st = C.encodeShareCode(state.cards, db.byId);
   if (!st.ok) {
@@ -2218,6 +4590,1254 @@ $('btnShare').onclick = function(){
     copyText(url).then(function(){ toast('共有URLをコピーしました（' + url.length + '文字）'); });
   });
 };
+
+/* ========== 共有画像（指示書71 / デザインは指示書71-B・2026-08-13） ==========
+ * デッキを 1 枚の PNG（既定 2400×1350・横16:9）に書き出す。
+ * 画像に焼き込む QR は「共有URLそのもの」で、読み取るとこのビルダーで同じデッキが開く（本機能の核）。
+ *
+ * 設計上の約束（勝手に変えない）:
+ *  - レイアウト計算は純関数 siComputeLayout() に分離し、描画関数 siRender() は結果を写すだけにする
+ *    （指示書71 §2-B「レイアウト計算と描画の分離」＝テスト可能性の要）
+ *  - 画像はモーダルを開いた時点で生成を完了させ、[画像を保存]/[Xで共有] のクリックハンドラは
+ *    保持済み File / Blob URL を同期的に使う（navigator.share と window.open は
+ *    ユーザー操作の有効期限 transient activation 内でしか許可されないため。指示書71 §2-D）
+ *  - 配色はページテーマに依存しない固定配色（明背景）。QR は白地に黒
+ *  - 生成はすべて端末内で完結（サーバー送信なし）
+ *  - フッターの権利文言は固定。QR ライブラリのライセンスコメントは保持
+ *  - 大会名・順位・使用者名などの大会情報は一切描画しない（入賞デッキの画像投稿は別案件）
+ *  - キャンバス寸法はパラメタ化してある（縦型は将来案件。UI からは露出しない）
+ */
+/* ---- 指示書71-B（2026-08-13）: デザイン改訂2「ダークテック」のトークン ----
+   原典: shijisho71B-mock-a2.html（寸法・色の正典）/ shijisho71B-design-A-rev2.png（完成見本）
+   原典が正なのはスキントークン（色・影・寸法・字間）に限る。グリッドの厳密座標は §2-5 の
+   アルゴリズムが正、色ドット色はサイト定義、フォントは既存機構、権利文言は固定。 */
+var SI_CANVAS   = { width: 2400, height: 1350 };   // 横16:9（既定）
+var SI_PAD_L    = 60;
+var SI_PAD_R    = 60;
+var SI_ACCENT_H = 8;
+var SI_CARD_RATIO = 838 / 600;  // カード画像の実測比（600×838・同一オリジン）
+
+/* QRプレート（§2-1）: 目標上限240px・モジュール整数倍・1モジュール5px未満なら5pxへ引き上げ */
+var SI_QR_TARGET     = 240;
+var SI_QR_MODULE_MIN = 5;     // X再圧縮耐性の下限（71 で 5px 以上を実証済み）
+var SI_PLATE_PAD     = 20;    // プレートの四辺パディング（＝QRの静穏域も兼ねる白地）
+var SI_PLATE_TOP     = 52;
+var SI_PLATE_RADIUS  = 20;
+
+/* グリッド（§2-5） */
+var SI_GRID_X0   = 60;
+var SI_GRID_X1   = 2340;
+var SI_GRID_Y1   = 1254;
+var SI_GRID_TOP_MIN = 452;    // プレート下端+20 と比べて大きい方を採る（動的 gridTop）
+var SI_CARD_W_MIN = 110;
+var SI_CARD_W_MAX = 250;      // 2026-08-13: 少種デッキで下半分が空くため上限を引き上げ
+var SI_BADGE_REF_W = 212;     // 枚数バッジの縮小式の基準幅（上限幅と独立。71-B 検収時の値で固定）
+var SI_BOX_GAP     = 14;      // 箱内のカード間（縦横）
+var SI_BOXROW_GAP  = 20;      // 同一行の箱間
+var SI_BOXCOL_GAP  = 26;      // 箱の行間
+var SI_BOX_TAB_TOP   = 12;    // 箱の上端 ⇔ ラベルタブ上端
+var SI_BOX_TAB_CLEAR = 6;     // ラベルタブ下端 ⇔ カード上端 の最小あき
+var SI_BOX_PAD_X   = 15;      // 同 左右
+var SI_BOX_PAD_B   = 15;      // 同 下
+var SI_BOX_COLS_MAX = 18;
+var SI_BOX_RADIUS  = 18;
+
+/* メタ行（§2-2） */
+var SI_META_TOP      = 220;   // 2026-08-13: 見出し帯を詰めてメタ行の高さを確保
+var SI_META_GAP      = 24;    // 要素間
+var SI_META_CHIP_GAP = 18;    // 色チップ同士
+var SI_META_DOT_GAP  = 12;    // ドット⇔色名
+var SI_META_DOT      = 25;    // 色ドットの直径（色名の拡大に合わせて 21→25）
+var SI_META_MAX_BOTTOM = 432; // 不変条件: メタ行下端 ≤ 432（文字拡大で2行を許容するため 392→432）
+var SI_COST_BARS   = 8;       // コスト1〜7 と 8+
+var SI_COST_BAR_W  = 26;
+var SI_COST_BAR_GAP = 9;
+var SI_COST_BAR_H  = 78;      // 最頻値の高さ
+var SI_COST_BAR_MIN = 4;      // 0枚のバー
+var SI_COST_LABEL_GAP = 16;   // ラベル⇔バー群
+var SI_COST_NUM_GAP = 7;      // バー下端⇔コスト数値
+/* バー下に添えるコスト値。要素数は SI_COST_BARS と必ず一致させること
+   （SI_COST_BARS を変えるときはこの配列も同数にする） */
+var SI_COST_NUM_LABELS = ['1','2','3','4','5','6','7','8+'];
+var SI_COST_MARGIN_L  = 6;    // コスト帯ブロックの左マージン
+
+var SI_IMG_TIMEOUT = 12000;   // カード画像1枚あたりの取得打ち切り（ms）
+var SI_MAX_BYTES = 4 * 1024 * 1024;   // 4MB ゲート（Xの静止画上限5MBに対する余裕。指示書71 §2-E）
+var SI_FOOTER_TEXT = 'GCG STATS(非公式ファンサイト) ／ カード画像の権利は各権利者に帰属します'; // 固定文言・一字も変えない
+var SI_SITE_TEXT   = 'gcg-stats.com';
+var SI_EYEBROW_TEXT = 'GCG STATS ｜ DECK';
+var SI_TITLE_FALLBACK = 'ガンダムカードゲーム デッキ';
+var SI_INTENT_BASE = 'https://x.com/intent/post';
+var SI_FF = '"IBM Plex Sans JP","Hiragino Sans","Noto Sans JP","Yu Gothic",system-ui,sans-serif';
+var SI_WEBFONT = '"IBM Plex Sans JP"';
+/* 字面のベースライン（原典PNGの実測インク帯 77〜95 / 124〜211 に合わせた） */
+var SI_Y_EYEBROW = 82;
+var SI_Y_TITLE   = 186;
+var SI_Y_CREDIT_URL = 1279;
+var SI_Y_CREDIT_LAW = 1319;
+
+var SI_FS = {
+  eyebrow: 28, title: 92, colorName: 34, pill: 34, tchip: 32, tchipSmall: 29,
+  costLabel: 30, costNum: 24, tab: 28, badge: 33, creditUrl: 30, creditLaw: 23, ph: 20
+};
+/* 固定配色（ダークテック・テーマ非依存） */
+var SI_COL = {
+  bg0:'#0a1020', bg1:'#0d1526', bg2:'#0a0f1d',
+  gridV:'rgba(255,255,255,0.022)', gridH:'rgba(255,255,255,0.016)',
+  glowA:'59,130,246', glowAAlpha:0.20, glowB:'139,92,246', glowBAlpha:0.16,
+  accent0:'#3b82f6', accent1:'#22d3ee', accent2:'#8b5cf6',
+  eyebrow:'#6b83b8', title:'#f2f6ff', titleShadow:'rgba(0,0,0,0.55)',
+  colorName:'#c6d4f2', dotRing:'rgba(255,255,255,0.10)',
+  pillFg:'#eaf1ff', pillBg:'rgba(255,255,255,0.07)', pillLine:'rgba(255,255,255,0.28)',
+  tchipBg:'rgba(255,255,255,0.05)',
+  costLabel:'#9fb2d9', costBar:'#7d93c4', costPeak:'#d4a029',
+  plate:'#ffffff', qrFg:'#000000', plateShadow:'rgba(0,0,0,0.55)',
+  boxLine:'rgba(255,255,255,0.13)',
+  cardShadow:'rgba(0,0,0,0.58)', cardLine:'rgba(255,255,255,0.10)',
+  badgeFg:'#d4a029', badgeBg:'rgba(8,12,24,0.92)',
+  creditUrl:'#d4a029', creditLaw:'#5d6f93',
+  phBg:'#141c2e', phFg:'#7d93c4'
+};
+/* タイプ色（サイト定義・cards.html の .filter-chip[data-cardtype=...] で確認） */
+var SI_TYPE_TONE = { UNIT:'#e8834a', PILOT:'#e06fa8', COMMAND:'#5db8e8', BASE:'#c9a25e', TOKEN:'#8b95a5' };
+var SI_TYPE_JA   = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース', TOKEN:'トークン' };
+var SI_TYPE_SEQ  = ['UNIT','PILOT','COMMAND','BASE','TOKEN'];
+
+function siFont(weight, size){ return weight + ' ' + size + 'px ' + SI_FF; }
+function siWebFont(weight, size){ return weight + ' ' + size + 'px ' + SI_WEBFONT; }
+/* 字間つきの送り幅。ctx.letterSpacing は各文字の後ろに足されるため len 倍で見積もる */
+function siTextW(text, font, ls, measure){
+  var n = siCodePoints(String(text)).length;
+  return measure(text, font) + (ls || 0) * n;
+}
+/* 行ボックス高の近似（CSS の line-height:normal 相当）。字面ではなく箱の高さに使う */
+function siLineH(size){ return Math.round(size * 1.36); }
+/* ラベルタブの実寸（描画側と同一の式）と、それを収める箱の上パディング。
+   固定値だと SI_FS.tab を変えたときに黙ってカードへ重なるため、常にタブ実寸から導出する。 */
+function siTabH(){ return siLineH(SI_FS.tab) + 4 * 2 + 5; }
+function siBoxPadTop(){ return SI_BOX_TAB_TOP + siTabH() + SI_BOX_TAB_CLEAR; }
+
+/* ---------- レイアウト純関数（DOM も canvas も触らない・指示書71-B §1/§2） ----------
+ * 入力: { width, height, deckName, totalCount, colors[], colorLabel(fn), colorHex(fn),
+ *         groups: [{type, cells:[{id,name,qty}], count}]（0枚タイプは含めない・タイプ順）,
+ *         costHist: [c1..c7, c8plus], qrModuleCount, measure(text,font)->px }
+ * 出力: 描画に必要な矩形座標をすべて含む（グループ枠・タブ・タイプチップ・コスト帯バー・
+ *       バッジ・QRプレートの矩形は §1 により必須）。
+ */
+function siComputeLayout(input){
+  var W = input.width, H = input.height, measure = input.measure;
+  var groups = input.groups || [];
+
+  /* ===== QRプレート（§2-1） ===== */
+  var n = input.qrModuleCount;
+  var per = Math.floor(SI_QR_TARGET / n);
+  if (per < SI_QR_MODULE_MIN) per = SI_QR_MODULE_MIN;   // 1モジュール5px未満なら5pxへ引き上げ
+  var qrSize = n * per;
+  var plateSide = qrSize + SI_PLATE_PAD * 2;
+  var plate = { x: W - SI_PAD_R - plateSide, y: SI_PLATE_TOP, w: plateSide, h: plateSide, r: SI_PLATE_RADIUS };
+  var qr = {
+    plate: plate, x: plate.x + SI_PLATE_PAD, y: plate.y + SI_PLATE_PAD,
+    size: qrSize, module: per, count: n, quiet: SI_PLATE_PAD
+  };
+  /* グリッド上端は動的。プレートが大きくなってもカードと構造的に重ならない */
+  var gridTop = Math.max(SI_GRID_TOP_MIN, plate.y + plate.h + 20);
+  var headRight = plate.x - 40;   // ヘッダーの折返し右端（デッキ名・メタ行 共通基準）
+
+  /* ===== アイキャッチ・デッキ名（§2-2） ===== */
+  var eyebrow = {
+    x: SI_PAD_L, y: SI_Y_EYEBROW, text: SI_EYEBROW_TEXT,
+    size: SI_FS.eyebrow, weight: 700, ls: 10, color: SI_COL.eyebrow, font: siFont(700, SI_FS.eyebrow)
+  };
+  var titleFont = siFont(900, SI_FS.title);
+  var titleMax = headRight;                       // = プレート左端 − 60 − 40 を x=60 起点で表した右端
+  var rawTitle = siSanitizeTitle(input.deckName) || SI_TITLE_FALLBACK;
+  var tt = siEllipsize(rawTitle, titleFont, titleMax - SI_PAD_L, function(t, f){ return siTextW(t, f, -1, measure); });
+  var title = {
+    x: SI_PAD_L, y: SI_Y_TITLE, font: titleFont, size: SI_FS.title, weight: 900, ls: -1,
+    text: tt.text, truncated: tt.truncated, full: rawTitle, maxWidth: titleMax - SI_PAD_L
+  };
+
+  /* ===== メタ行（§2-2）: 色チップ群 → 枚数ピル → タイプチップ → コスト帯 ===== */
+  function buildMetaItems(tchipFS, withCost, withCostNum){
+    var items = [];
+    /* 1) 色チップ群（ドット21 + 10 + 色名29/700、チップ同士は18） */
+    if ((input.colors || []).length) {
+      var chips = [], cx = 0, nameFont = siFont(700, SI_FS.colorName);
+      (input.colors || []).forEach(function(c){
+        var label = input.colorLabel(c);
+        var lw = measure(label, nameFont);
+        chips.push({ color: c, hex: input.colorHex(c), label: label, dx: cx, labelDx: cx + SI_META_DOT + SI_META_DOT_GAP, w: SI_META_DOT + SI_META_DOT_GAP + lw });
+        cx += SI_META_DOT + SI_META_DOT_GAP + lw + SI_META_CHIP_GAP;
+      });
+      items.push({ kind: 'chips', w: cx - SI_META_CHIP_GAP,
+                   h: Math.max(SI_META_DOT + 8, siLineH(SI_FS.colorName)),
+                   chips: chips, nameFont: nameFont });
+    }
+    /* 2) 「N枚」ピル */
+    var pillFont = siFont(800, SI_FS.pill), pillText = input.totalCount + '枚';
+    items.push({
+      kind: 'pill', text: pillText, font: pillFont,
+      w: Math.round(measure(pillText, pillFont)) + 26 * 2 + 3,
+      h: siLineH(SI_FS.pill) + 8 * 2 + 3
+    });
+    /* 3) タイプ内訳チップ（0枚タイプは非表示・タイプ順） */
+    var tFont = siFont(800, tchipFS);
+    groups.forEach(function(g){
+      var txt = SI_TYPE_JA[g.type] + ' ' + g.count;
+      items.push({
+        kind: 'tchip', type: g.type, tone: SI_TYPE_TONE[g.type] || SI_TYPE_TONE.TOKEN,
+        text: txt, font: tFont, fontSize: tchipFS,
+        w: Math.round(measure(txt, tFont)) + 24 * 2 + 5,
+        h: siLineH(tchipFS) + 8 * 2 + 5
+      });
+    });
+    /* 4) コスト帯 */
+    if (withCost) {
+      var lblFont = siFont(800, SI_FS.costLabel);
+      var lblW = Math.round(siTextW('コスト帯', lblFont, 2, measure));
+      var barsW = SI_COST_BARS * SI_COST_BAR_W + (SI_COST_BARS - 1) * SI_COST_BAR_GAP;
+      var numH = withCostNum ? (SI_COST_NUM_GAP + siLineH(SI_FS.costNum)) : 0;
+      /* 末尾の「8+」は2文字あり、バー幅を超えると右へ逃がす（描画側と同じ規則）。
+         その分だけブロックの実幅がバー群より広くなるので、折返し判定にも同じ量を含める。
+         はみ出し量 = 中心を (nw - barW) ずらして中央揃えで描くため 1.5 × (nw - barW)。 */
+      var lastW = withCostNum ? measure(SI_COST_NUM_LABELS[SI_COST_BARS - 1], siFont(700, SI_FS.costNum)) : 0;
+      var numOver = Math.ceil(Math.max(0, 1.5 * (lastW - SI_COST_BAR_W)));
+      items.push({
+        kind: 'cost', font: lblFont, label: 'コスト帯', labelW: lblW, barsW: barsW,
+        marginLeft: SI_COST_MARGIN_L, withNum: !!withCostNum, numOver: numOver,
+        w: SI_COST_MARGIN_L + lblW + SI_COST_LABEL_GAP + barsW + numOver,
+        h: SI_COST_BAR_H,      // 行の縦中央揃えの基準（＝バー高。既存の配置を変えない）
+        overhang: numH         // バーの下にぶら下がる分。行の下端計算にだけ効く
+      });
+    }
+    return items;
+  }
+
+  function layoutMeta(items){
+    var lines = [], cur = [], x = SI_PAD_L;
+    items.forEach(function(it){
+      var need = (cur.length ? SI_META_GAP : 0) + it.w;
+      if (cur.length && x + need > headRight) { lines.push(cur); cur = []; x = SI_PAD_L; need = it.w; }
+      it._x = x + (cur.length ? SI_META_GAP : 0);
+      x = it._x + it.w;
+      cur.push(it);
+    });
+    if (cur.length) lines.push(cur);
+    var y = SI_META_TOP, out = [], bottom = SI_META_TOP;
+    lines.forEach(function(ln, li){
+      var lh = 0, over = 0;
+      ln.forEach(function(it){ if (it.h > lh) lh = it.h; });
+      ln.forEach(function(it){
+        it._y = Math.round(y + (lh - it.h) / 2);
+        var b = it._y + it.h + (it.overhang || 0);
+        if (b > bottom) bottom = b;
+        if (it.overhang) over = Math.max(over, it._y + it.h + it.overhang - (y + lh));
+      });
+      out.push({ y: y, h: lh, overhang: over, items: ln });
+      y += lh + over + (li < lines.length - 1 ? SI_META_GAP : 0);
+      if (y > bottom) bottom = y;
+    });
+    return { lines: out, bottom: bottom };
+  }
+
+  var tchipFS = SI_FS.tchip, withCost = true, withCostNum = true;
+  var shrunk = false, costOmitted = false, costNumOmitted = false;
+  var meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
+  if (meta.bottom > SI_META_MAX_BOTTOM) {                 // セーフティ① バー下のコスト数値を省略
+    withCostNum = false; costNumOmitted = true;
+    meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
+  }
+  if (meta.bottom > SI_META_MAX_BOTTOM) {                 // セーフティ② チップを一段縮小
+    tchipFS = SI_FS.tchipSmall; shrunk = true;
+    meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
+  }
+  if (meta.bottom > SI_META_MAX_BOTTOM) {                 // セーフティ③ コスト帯を省略
+    withCost = false; costOmitted = true;
+    meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
+  }
+
+  /* コスト帯バーの実寸（最頻値=58px・最頻が同数複数なら最小コスト側を金） */
+  var hist = (input.costHist || []).slice(0, SI_COST_BARS);
+  while (hist.length < SI_COST_BARS) hist.push(0);
+  var peakV = Math.max.apply(null, hist), peakIdx = -1;
+  for (var pi = 0; pi < hist.length; pi++) { if (hist[pi] === peakV && peakV > 0) { peakIdx = pi; break; } }
+  var metaOut = { y: SI_META_TOP, bottom: meta.bottom, lines: [], chips: [], pill: null, typeChips: [], cost: null,
+                  shrunk: shrunk, costOmitted: costOmitted, costNumOmitted: costNumOmitted, tchipFontSize: tchipFS };
+  meta.lines.forEach(function(ln){
+    metaOut.lines.push({ y: ln.y, h: ln.h, overhang: ln.overhang || 0 });
+    ln.items.forEach(function(it){
+      if (it.kind === 'chips') {
+        it.chips.forEach(function(c){
+          metaOut.chips.push({
+            color: c.color, hex: c.hex, label: c.label, font: it.nameFont,
+            dotX: it._x + c.dx, dotCY: it._y + it.h / 2, dotR: SI_META_DOT / 2, ringW: 4,
+            labelX: it._x + c.labelDx, labelBaseline: Math.round(it._y + it.h / 2 + SI_FS.colorName * 0.36)
+          });
+        });
+      } else if (it.kind === 'pill') {
+        metaOut.pill = { x: it._x, y: it._y, w: it.w, h: it.h, text: it.text, font: it.font,
+                         textX: it._x + it.w / 2, baseline: Math.round(it._y + it.h / 2 + SI_FS.pill * 0.36) };
+      } else if (it.kind === 'tchip') {
+        metaOut.typeChips.push({ type: it.type, tone: it.tone, x: it._x, y: it._y, w: it.w, h: it.h,
+                                 text: it.text, font: it.font, fontSize: it.fontSize,
+                                 textX: it._x + it.w / 2, baseline: Math.round(it._y + it.h / 2 + it.fontSize * 0.36) });
+      } else if (it.kind === 'cost') {
+        var bx = it._x + it.marginLeft + it.labelW + SI_COST_LABEL_GAP;
+        var bottom = it._y + SI_COST_BAR_H;      // バーの下端（数値ラベルの上）
+        var bars = [], nums = [];
+        var numFont = siFont(700, SI_FS.costNum);
+        var numBaseline = bottom + SI_COST_NUM_GAP + Math.round(SI_FS.costNum * 0.80);
+        for (var i = 0; i < SI_COST_BARS; i++) {
+          var v = hist[i] || 0;
+          var bh = peakV > 0 ? Math.max(SI_COST_BAR_MIN, Math.round(v / peakV * SI_COST_BAR_H)) : SI_COST_BAR_MIN;
+          if (v === 0) bh = SI_COST_BAR_MIN;
+          bars.push({ i: i, value: v, peak: i === peakIdx,
+                      x: bx + i * (SI_COST_BAR_W + SI_COST_BAR_GAP), y: bottom - bh,
+                      w: SI_COST_BAR_W, h: bh });
+        }
+        if (it.withNum) {
+          for (var ni = 0; ni < SI_COST_BARS; ni++) {
+            var ntx = SI_COST_NUM_LABELS[ni];
+            var nw = measure(ntx, numFont);
+            var ncx = bx + ni * (SI_COST_BAR_W + SI_COST_BAR_GAP) + SI_COST_BAR_W / 2;
+            /* 最後の「8+」だけ2文字でバー幅を超えるため、右の空きスペースへ逃がして
+               隣（7）との間隔が他と揃うようにする */
+            if (ni === SI_COST_BARS - 1) ncx += Math.max(0, nw - SI_COST_BAR_W);
+            nums.push({ i: ni, text: ntx, font: numFont, fontSize: SI_FS.costNum,
+                        x: ncx, w: nw, baseline: numBaseline });
+          }
+        }
+        metaOut.cost = { x: it._x, y: it._y, w: it.w, h: it.h, label: it.label, font: it.font,
+                         labelX: it._x + it.marginLeft, labelBaseline: bottom - 6,
+                         barsX: bx, barsW: it.barsW, numOver: it.numOver || 0,
+                         bars: bars, nums: nums, peakIndex: peakIdx };
+      }
+    });
+  });
+
+  /* ===== グリッド（§2-5 決定的アルゴリズム） ===== */
+  var gridW = SI_GRID_X1 - SI_GRID_X0, gridH = SI_GRID_Y1 - gridTop;
+  /* ラベルタブ幅は箱の列数・カード幅に依らず文言だけで決まる。
+     箱がタブより狭いとタブが箱をはみ出して隣の箱に重なるため（二次確認で検出）、
+     箱幅の下限として tabW + 左右16px を課す（§2-5 の箱幅式に下限を追加）。 */
+  var tabFontM = siFont(800, SI_FS.tab);
+  var tabWs = groups.map(function(g){
+    return Math.round(siTextW(SI_TYPE_JA[g.type] + ' ' + g.count, tabFontM, 1, measure)) + 20 * 2 + 5;
+  });
+  var pick = siPickBoxLayout(groups, gridW, gridH, tabWs);
+  var fallbackFlat = false;
+  if (!pick) { pick = siPickFlatLayout(groups, gridW, gridH); fallbackFlat = true; }
+
+  var boxes = [], cells = [];
+  /* 縦の余りは上下へ均等に配る（下だけ大きく空いて見えるのを避ける。2026-08-13 追加）。
+     箱は必ず下へ動くだけなので、プレートとの非重複は従来より緩くなる方向にしか変わらない。 */
+  var blockH = 0, totalCells = 0;
+  groups.forEach(function(g){ totalCells += g.cells.length; });
+  if (pick && !fallbackFlat) {
+    pick.part.forEach(function(cnt, ri){ blockH += pick.rowsMeta[ri].h; });
+    blockH += (pick.part.length - 1) * SI_BOXCOL_GAP;
+  } else if (pick) {
+    var frows0 = Math.ceil(totalCells / pick.cols);
+    blockH = frows0 * pick.cardH + (frows0 - 1) * SI_BOX_GAP;
+  }
+  var gridSlack = Math.max(0, gridH - blockH);
+  var gridOffsetY = Math.floor(gridSlack / 2);
+  var gyTop = gridTop + gridOffsetY;
+  var gy = gyTop;
+  if (pick && !fallbackFlat) {
+    var at = 0;
+    pick.part.forEach(function(cnt, ri){
+      var gx = SI_GRID_X0, rowH = pick.rowsMeta[ri].h;
+      for (var j = 0; j < cnt; j++) {
+        var g = groups[at], o = pick.sel[at];
+        var box = {
+          type: g.type, tone: SI_TYPE_TONE[g.type] || SI_TYPE_TONE.TOKEN,
+          label: SI_TYPE_JA[g.type] + ' ' + g.count,
+          x: gx, y: gy, w: o.w, h: o.h, r: SI_BOX_RADIUS, cols: o.cols, rows: o.rows, cells: []
+        };
+        var tabText = box.label, tabFont = siFont(800, SI_FS.tab);
+        var tabW = Math.round(siTextW(tabText, tabFont, 1, measure)) + 20 * 2 + 5;
+        var tabH = siTabH();
+        box.tab = { x: gx + 16, y: gy + 12, w: tabW, h: tabH, text: tabText, font: tabFont,
+                    textX: gx + 16 + tabW / 2, baseline: Math.round(gy + 12 + tabH / 2 + SI_FS.tab * 0.36) };
+        for (var ci = 0; ci < g.cells.length; ci++) {
+          var r = Math.floor(ci / o.cols), c = ci % o.cols;
+          var cx = gx + SI_BOX_PAD_X + c * (pick.W + SI_BOX_GAP);
+          var cy = gy + siBoxPadTop() + r * (pick.cardH + SI_BOX_GAP);
+          var cell = siMakeCell(g.cells[ci], cx, cy, pick.W, pick.cardH, measure, g.type);
+          box.cells.push(cell); cells.push(cell);
+        }
+        boxes.push(box);
+        gx += o.w + SI_BOXROW_GAP;
+        at++;
+      }
+      gy += rowH + SI_BOXCOL_GAP;
+    });
+  } else if (pick) {
+    /* フォールバック: 枠なしフラットグリッド（タイプ順ソートは維持） */
+    var flat = [];
+    groups.forEach(function(g){ g.cells.forEach(function(c){ flat.push({ cell: c, type: g.type }); }); });
+    for (var fi = 0; fi < flat.length; fi++) {
+      var fr = Math.floor(fi / pick.cols), fc = fi % pick.cols;
+      var fx = SI_GRID_X0 + fc * (pick.W + SI_BOX_GAP);
+      var fy = gyTop + fr * (pick.cardH + SI_BOX_GAP);
+      var fcell = siMakeCell(flat[fi].cell, fx, fy, pick.W, pick.cardH, measure, flat[fi].type);
+      cells.push(fcell);
+    }
+  }
+
+  /* ===== 右下クレジット（§2-4） ===== */
+  var urlFont = siFont(800, SI_FS.creditUrl), lawFont = siFont(400, SI_FS.creditLaw);
+  var credit = {
+    url: { x: W - SI_PAD_R, y: SI_Y_CREDIT_URL, text: SI_SITE_TEXT, font: urlFont, size: SI_FS.creditUrl, ls: 1,
+           color: SI_COL.creditUrl, w: Math.round(siTextW(SI_SITE_TEXT, urlFont, 1, measure)) },
+    law: { x: W - SI_PAD_R, y: SI_Y_CREDIT_LAW, text: SI_FOOTER_TEXT, font: lawFont, size: SI_FS.creditLaw, ls: 0,
+           color: SI_COL.creditLaw, w: Math.round(measure(SI_FOOTER_TEXT, lawFont)) }
+  };
+
+  /* ===== 不変条件 ===== */
+  function inCanvasRect(r){ return r && r.x >= 0 && r.y >= 0 && r.x + r.w <= W && r.y + r.h <= H; }
+  var cellsIn = cells.every(function(c){ return inCanvasRect(c) && c.y + c.h <= SI_GRID_Y1 + 1; });
+  var boxesIn = boxes.every(inCanvasRect);
+  var cellsInBoxes = !boxes.length || boxes.every(function(b){
+    return b.cells.every(function(c){ return c.x >= b.x && c.y >= b.y && c.x + c.w <= b.x + b.w && c.y + c.h <= b.y + b.h; });
+  });
+  /* ラベルタブも箱の中に収まっていること（はみ出すと隣の箱に重なる） */
+  var tabsInBoxes = boxes.every(function(b){
+    return b.tab.x >= b.x && b.tab.y >= b.y && b.tab.x + b.tab.w <= b.x + b.w && b.tab.y + b.tab.h <= b.y + b.h;
+  });
+  var boxesNoOverlap = true;
+  for (var a1 = 0; a1 < boxes.length; a1++) for (var b1 = a1 + 1; b1 < boxes.length; b1++) {
+    var A = boxes[a1], B = boxes[b1];
+    if (A.x < B.x + B.w && B.x < A.x + A.w && A.y < B.y + B.h && B.y < A.y + A.h) boxesNoOverlap = false;
+  }
+  var plateGridNoOverlap = (plate.y + plate.h) < gridTop;
+  var qtySum = cells.reduce(function(s, c){ return s + c.qty; }, 0);
+
+  return {
+    width: W, height: H, accentH: SI_ACCENT_H,
+    eyebrow: eyebrow, title: title, meta: metaOut, qr: qr,
+    grid: {
+      x: SI_GRID_X0, y: gridTop, w: gridW, h: gridH, top: gridTop,
+      blockH: blockH, offsetY: gridOffsetY, contentTop: gyTop, contentBottom: gyTop + blockH,
+      cardW: pick ? pick.W : 0, cardH: pick ? pick.cardH : 0,
+      minCardW: SI_CARD_W_MIN, minWidthSatisfied: !!pick && pick.W >= SI_CARD_W_MIN,
+      boxes: boxes, fallbackFlat: fallbackFlat,
+      rows: pick && !fallbackFlat ? pick.part.length : (pick ? Math.ceil(cells.length / pick.cols) : 0),
+      part: pick && !fallbackFlat ? pick.part.slice() : null,
+      cols: pick && !fallbackFlat ? pick.sel.map(function(o){ return o.cols; }) : (pick ? [pick.cols] : []),
+      totalH: pick && !fallbackFlat ? pick.totalH : null
+    },
+    credit: credit, cells: cells, qtySum: qtySum,
+    inCanvas: cellsIn && boxesIn && inCanvasRect(plate),
+    cellsInBoxes: cellsInBoxes, tabsInBoxes: tabsInBoxes, boxesNoOverlap: boxesNoOverlap,
+    plateGridNoOverlap: plateGridNoOverlap,
+    metaBottomOk: metaOut.bottom <= SI_META_MAX_BOTTOM, metaMaxBottom: SI_META_MAX_BOTTOM,
+    ok: !!pick
+  };
+}
+
+function siMakeCell(src, x, y, w, h, measure, type){
+  /* バッジ: カード右上・内側10px・「×」なし数字のみ（§2-3）。
+     縮小式 s = clamp(W/212, 28/33, 1) で font/padX/padY のみ縮める（枠2.5px・影は固定）。
+     基準は 212（71-B 検収時のカード幅上限）で固定する。SI_CARD_W_MAX を上げたときに
+     同じカード幅でバッジだけ小さくなるのを防ぐため、上限幅とは別定数にしてある（二次確認の指摘）。 */
+  var s = w / SI_BADGE_REF_W;
+  if (s > 1) s = 1;
+  if (s < 28 / SI_FS.badge) s = 28 / SI_FS.badge;
+  var fs = SI_FS.badge * s;
+  var padX = 17 * s, padY = Math.max(1, Math.round(1 * s));
+  var bFont = siFont(800, Math.round(fs * 100) / 100);
+  var txt = String(src.qty);
+  var bw = Math.round(measure(txt, bFont) + padX * 2 + 5);
+  var bh = Math.round(siLineH(fs) * 0.86 + padY * 2 + 5);
+  return {
+    id: src.id, name: src.name, qty: src.qty, type: type,
+    x: x, y: y, w: w, h: h, r: 12,
+    badge: { x: Math.round(x + w - 10 - bw), y: Math.round(y + 10), w: bw, h: bh, text: txt,
+             font: bFont, fontSize: fs, scale: s,
+             textX: Math.round(x + w - 10 - bw / 2), baseline: Math.round(y + 10 + bh / 2 + fs * 0.36) }
+  };
+}
+
+/* §2-5 の探索。①W最大 → ②総高最小 → ③行数最小 → ④行の箱数列の辞書順最大
+   → ⑤（本実装で追加）各箱の列数列の辞書順最大。⑤が無いと同点が残り一意に定まらない。 */
+function siPickBoxLayout(groups, gridW, gridH, tabWs){
+  var k = groups.length;
+  if (!k) return null;
+  if (!tabWs) { tabWs = []; for (var t0 = 0; t0 < k; t0++) tabWs.push(0); }
+  var candCols = groups.map(function(g){
+    var u = g.cells.length, seen = {}, out = [];
+    for (var r = 1; r <= u; r++) {
+      var c = Math.ceil(u / r);
+      if (c >= 1 && c <= SI_BOX_COLS_MAX && !seen[c]) { seen[c] = 1; out.push(c); }
+    }
+    out.sort(function(a, b){ return b - a; });
+    return out;
+  });
+  if (candCols.some(function(a){ return !a.length; })) return null;
+  var parts = [];
+  for (var mask = 0; mask < (1 << (k - 1)); mask++) {
+    var p = [], cur = 1;
+    for (var i = 0; i < k - 1; i++) { if (mask & (1 << i)) { p.push(cur); cur = 1; } else cur++; }
+    p.push(cur); parts.push(p);
+  }
+  function lexGreater(a, b){
+    for (var i = 0; i < Math.max(a.length, b.length); i++) {
+      var x = a[i] === undefined ? -1 : a[i], y = b[i] === undefined ? -1 : b[i];
+      if (x !== y) return x > y;
+    }
+    return false;
+  }
+  function search(Wc, wantBest){
+    var cardH = Math.round(Wc * SI_CARD_RATIO);
+    var opt = groups.map(function(g, i){
+      var arr = [];
+      candCols[i].forEach(function(c){
+        var rows = Math.ceil(g.cells.length / c);
+        var bw = c * Wc + (c - 1) * SI_BOX_GAP + SI_BOX_PAD_X * 2;
+        var floorW = tabWs[i] + 32;            /* タブ用の下限（左右16px） */
+        if (bw < floorW) bw = floorW;
+        var bh = siBoxPadTop() + rows * cardH + (rows - 1) * SI_BOX_GAP + SI_BOX_PAD_B;
+        if (bw <= gridW && bh <= gridH) arr.push({ cols: c, rows: rows, w: bw, h: bh });
+      });
+      return arr;
+    });
+    if (opt.some(function(a){ return !a.length; })) return null;
+    var idx = [], best = null;
+    for (var z = 0; z < k; z++) idx.push(0);
+    for (;;) {
+      var sel = [];
+      for (var q = 0; q < k; q++) sel.push(opt[q][idx[q]]);
+      for (var pi = 0; pi < parts.length; pi++) {
+        var p = parts[pi], ok = true, totalH = 0, at = 0, rowsMeta = [];
+        for (var ri = 0; ri < p.length; ri++) {
+          var wsum = 0, hmax = 0;
+          for (var j = 0; j < p[ri]; j++) { wsum += sel[at + j].w; if (sel[at + j].h > hmax) hmax = sel[at + j].h; }
+          wsum += SI_BOXROW_GAP * (p[ri] - 1);
+          if (wsum > gridW) { ok = false; break; }
+          rowsMeta.push({ w: wsum, h: hmax, n: p[ri] });
+          totalH += hmax; at += p[ri];
+        }
+        if (!ok) continue;
+        totalH += SI_BOXCOL_GAP * (p.length - 1);
+        if (totalH > gridH) continue;
+        var cand = { W: Wc, cardH: cardH, sel: sel.slice(), part: p.slice(), rowsMeta: rowsMeta,
+                     totalH: totalH, colsSeq: sel.map(function(o){ return o.cols; }) };
+        if (!wantBest) return cand;
+        if (!best) best = cand;
+        else if (cand.totalH < best.totalH) best = cand;
+        else if (cand.totalH === best.totalH) {
+          if (cand.part.length < best.part.length) best = cand;
+          else if (cand.part.length === best.part.length) {
+            if (lexGreater(cand.part, best.part)) best = cand;
+            else if (!lexGreater(best.part, cand.part) && lexGreater(cand.colsSeq, best.colsSeq)) best = cand;
+          }
+        }
+      }
+      var d = k - 1;
+      while (d >= 0) { idx[d]++; if (idx[d] < opt[d].length) break; idx[d] = 0; d--; }
+      if (d < 0) break;
+    }
+    return best;
+  }
+  /* W についてフィージビリティは単調（小さいほど収まりやすい）なので二分探索 */
+  var lo = SI_CARD_W_MIN, hi = SI_CARD_W_MAX, bestW = -1;
+  if (!search(lo, false)) return null;
+  bestW = lo;
+  while (lo <= hi) {
+    var mid = Math.floor((lo + hi) / 2);
+    if (search(mid, false)) { bestW = mid; lo = mid + 1; } else hi = mid - 1;
+  }
+  return search(bestW, true);
+}
+
+/* 解なし時のフォールバック: 枠なしフラットグリッド（同領域・タイプ順ソート維持） */
+function siPickFlatLayout(groups, gridW, gridH){
+  var u = 0;
+  groups.forEach(function(g){ u += g.cells.length; });
+  if (!u) return null;
+  var best = null;
+  for (var Wc = SI_CARD_W_MAX; Wc >= SI_CARD_W_MIN; Wc--) {
+    var cardH = Math.round(Wc * SI_CARD_RATIO);
+    var cols = Math.floor((gridW + SI_BOX_GAP) / (Wc + SI_BOX_GAP));
+    if (cols < 1) continue;
+    var rows = Math.ceil(u / cols);
+    var h = rows * cardH + (rows - 1) * SI_BOX_GAP;
+    if (h <= gridH) { best = { W: Wc, cardH: cardH, cols: cols, rows: rows }; break; }
+  }
+  return best;
+}
+
+/* 省略記号（…）で maxWidth に収める。戻り値に省略後文字列と省略有無を返す。
+   切り出しは必ずコードポイント単位で行う（UTF-16 単位で slice すると絵文字などの
+   サロゲートペアが分割され、孤立サロゲート → U+FFFD が描かれる。二次確認で検出） */
+function siCodePoints(text){
+  if (typeof Array.from === 'function') return Array.from(text);
+  var out = [], i = 0, c;
+  while (i < text.length) {
+    c = text.charCodeAt(i);
+    if (c >= 0xD800 && c <= 0xDBFF && i + 1 < text.length) { out.push(text.substr(i, 2)); i += 2; }
+    else { out.push(text.charAt(i)); i += 1; }
+  }
+  return out;
+}
+function siEllipsize(text, font, maxWidth, measure){
+  if (measure(text, font) <= maxWidth) return { text: text, truncated: false };
+  var cps = siCodePoints(text);
+  var lo = 0, hi = cps.length;
+  while (lo < hi) {
+    var mid = Math.ceil((lo + hi) / 2);
+    if (measure(cps.slice(0, mid).join('') + '…', font) <= maxWidth) lo = mid; else hi = mid - 1;
+  }
+  return { text: cps.slice(0, lo).join('') + '…', truncated: true };
+}
+/* 「安全なデッキ名」。描画にも共有URLの &n= にも、この結果だけを使う。
+   落とすのは (1) 制御文字 (2) 孤立サロゲート の 2 種類だけで、いずれも「壊れた入力」に当たるもの。
+   ZWJ(U+200D) など絵文字結合子は残す。
+   孤立サロゲートを落とす理由: ?n= の slice(0,30) がサロゲート対を割ると孤立サロゲートが残り、
+   encodeURIComponent が URIError を投げる。放置すると [共有画像] を押しても
+   モーダルもトーストも出ない「無反応」になる（二次確認で検出）。 */
+function siStripLoneSurrogates(s){
+  var out = '', i = 0, c, d;
+  while (i < s.length) {
+    c = s.charCodeAt(i);
+    if (c >= 0xD800 && c <= 0xDBFF) {
+      d = (i + 1 < s.length) ? s.charCodeAt(i + 1) : 0;
+      if (d >= 0xDC00 && d <= 0xDFFF) { out += s.substr(i, 2); i += 2; continue; }
+      i += 1; continue;                                   /* 孤立した上位サロゲート */
+    }
+    if (c >= 0xDC00 && c <= 0xDFFF) { i += 1; continue; }  /* 孤立した下位サロゲート */
+    out += s.charAt(i); i += 1;
+  }
+  return out;
+}
+function siSanitizeTitle(s){
+  return siStripLoneSurrogates(
+    String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029\ufeff]/g, '')
+  ).trim();
+}
+
+/* ---------- 描画（レイアウト結果を写すだけ・指示書71-B §2） ---------- */
+function siRoundRect(ctx, x, y, w, h, r){
+  var rr = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + rr, y);
+  ctx.lineTo(x + w - rr, y); ctx.quadraticCurveTo(x + w, y, x + w, y + rr);
+  ctx.lineTo(x + w, y + h - rr); ctx.quadraticCurveTo(x + w, y + h, x + w - rr, y + h);
+  ctx.lineTo(x + rr, y + h); ctx.quadraticCurveTo(x, y + h, x, y + h - rr);
+  ctx.lineTo(x, y + rr); ctx.quadraticCurveTo(x, y, x + rr, y);
+  ctx.closePath();
+}
+/* 字間つき描画。ctx.letterSpacing 非対応環境は1文字ずつ送り幅を加算する */
+function siHasLetterSpacing(ctx){
+  try { var b = ctx.letterSpacing; ctx.letterSpacing = '1px'; var ok = ctx.letterSpacing === '1px'; ctx.letterSpacing = b || '0px'; return ok; }
+  catch (e) { return false; }
+}
+/* optional=true の呼び出しは「ctx.letterSpacing 非対応環境では字間を省略してよい」の意。
+   1文字ずつ送る代替は ZWJ 絵文字・結合文字を分解してしまうため、
+   71-A §2-6 が必須としないもの（デッキ名の -1px）はこちらを使う。 */
+function siFillTextLS(ctx, text, x, y, ls, align, optional){
+  var s = String(text);
+  if (!ls) { ctx.textAlign = align || 'left'; ctx.fillText(s, x, y); ctx.textAlign = 'left'; return; }
+  if (optional && !siHasLetterSpacing(ctx)) { ctx.textAlign = align || 'left'; ctx.fillText(s, x, y); ctx.textAlign = 'left'; return; }
+  var cps = siCodePoints(s);
+  var total = 0, i;
+  for (i = 0; i < cps.length; i++) total += ctx.measureText(cps[i]).width + ls;
+  var sx = x;
+  if (align === 'center') sx = x - total / 2;
+  else if (align === 'right') sx = x - total;
+  if (siHasLetterSpacing(ctx)) {
+    var prev = ctx.letterSpacing;
+    ctx.letterSpacing = ls + 'px';
+    ctx.textAlign = 'left';
+    ctx.fillText(s, sx, y);
+    ctx.letterSpacing = prev || '0px';
+    return;
+  }
+  ctx.textAlign = 'left';
+  for (i = 0; i < cps.length; i++) { ctx.fillText(cps[i], sx, y); sx += ctx.measureText(cps[i]).width + ls; }
+}
+function siGlow(ctx, cx, cy, rx, ry, rgb, alpha){
+  ctx.save();
+  ctx.translate(cx, cy);
+  ctx.scale(1, ry / rx);
+  var g = ctx.createRadialGradient(0, 0, 0, 0, 0, rx);
+  g.addColorStop(0, 'rgba(' + rgb + ',' + alpha + ')');
+  g.addColorStop(1, 'rgba(' + rgb + ',0)');
+  ctx.fillStyle = g;
+  ctx.beginPath(); ctx.arc(0, 0, rx, 0, Math.PI * 2); ctx.fill();
+  ctx.restore();
+}
+function siShadowOff(ctx){ ctx.shadowColor = 'rgba(0,0,0,0)'; ctx.shadowBlur = 0; ctx.shadowOffsetX = 0; ctx.shadowOffsetY = 0; }
+
+function siRender(ctx, L, res){
+  var W = L.width, H = L.height;
+  ctx.save();
+  ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+  siShadowOff(ctx);
+
+  /* --- 背景（縦グラデ） --- */
+  var bg = ctx.createLinearGradient(0, 0, 0, H);
+  bg.addColorStop(0, SI_COL.bg0); bg.addColorStop(0.55, SI_COL.bg1); bg.addColorStop(1, SI_COL.bg2);
+  ctx.fillStyle = bg; ctx.fillRect(0, 0, W, H);
+
+  /* --- グリッド線（48pxピッチ・1px の fillRect） --- */
+  ctx.fillStyle = SI_COL.gridV;
+  for (var gx = 0; gx < W; gx += 48) ctx.fillRect(gx, 0, 1, H);
+  ctx.fillStyle = SI_COL.gridH;
+  for (var gy = 0; gy < H; gy += 48) ctx.fillRect(0, gy, W, 1);
+
+  /* --- グロー（カードより下の層） --- */
+  siGlow(ctx, 144, -81, 540, 300, SI_COL.glowA, SI_COL.glowAAlpha);
+  siGlow(ctx, 2400, 1458, 600, 336, SI_COL.glowB, SI_COL.glowBAlpha);
+
+  /* --- 上端アクセントバー --- */
+  var ab = ctx.createLinearGradient(0, 0, W, 0);
+  ab.addColorStop(0, SI_COL.accent0); ab.addColorStop(0.45, SI_COL.accent1); ab.addColorStop(1, SI_COL.accent2);
+  ctx.fillStyle = ab; ctx.fillRect(0, 0, W, L.accentH);
+
+  /* --- アイキャッチ --- */
+  ctx.font = L.eyebrow.font; ctx.fillStyle = SI_COL.eyebrow;
+  siFillTextLS(ctx, L.eyebrow.text, L.eyebrow.x, L.eyebrow.y, L.eyebrow.ls, 'left');
+
+  /* --- デッキ名（影つき） --- */
+  ctx.font = L.title.font; ctx.fillStyle = SI_COL.title;
+  ctx.shadowColor = SI_COL.titleShadow; ctx.shadowBlur = 30; ctx.shadowOffsetY = 4;
+  siFillTextLS(ctx, L.title.text, L.title.x, L.title.y, L.title.ls, 'left', true);
+  siShadowOff(ctx);
+
+  /* --- メタ行: 色ドット＋色名 --- */
+  L.meta.chips.forEach(function(c){
+    ctx.save();
+    ctx.shadowColor = c.hex; ctx.shadowBlur = 18;
+    ctx.beginPath(); ctx.arc(c.dotX + c.dotR, c.dotCY, c.dotR, 0, Math.PI * 2);
+    ctx.fillStyle = c.hex; ctx.fill();
+    ctx.restore();
+    ctx.beginPath(); ctx.arc(c.dotX + c.dotR, c.dotCY, c.dotR + c.ringW / 2, 0, Math.PI * 2);
+    ctx.lineWidth = c.ringW; ctx.strokeStyle = SI_COL.dotRing; ctx.stroke();
+    ctx.font = c.font; ctx.fillStyle = SI_COL.colorName;
+    ctx.fillText(c.label, c.labelX, c.labelBaseline);
+  });
+
+  /* --- メタ行: 「N枚」ピル --- */
+  if (L.meta.pill) {
+    var p = L.meta.pill;
+    siRoundRect(ctx, p.x, p.y, p.w, p.h, p.h / 2);
+    ctx.fillStyle = SI_COL.pillBg; ctx.fill();
+    ctx.lineWidth = 1.5; ctx.strokeStyle = SI_COL.pillLine; ctx.stroke();
+    ctx.font = p.font; ctx.fillStyle = SI_COL.pillFg;
+    ctx.textAlign = 'center'; ctx.fillText(p.text, p.textX, p.baseline); ctx.textAlign = 'left';
+  }
+
+  /* --- メタ行: タイプ内訳チップ --- */
+  L.meta.typeChips.forEach(function(t){
+    siRoundRect(ctx, t.x, t.y, t.w, t.h, t.h / 2);
+    ctx.fillStyle = SI_COL.tchipBg; ctx.fill();
+    ctx.lineWidth = 2.5; ctx.strokeStyle = t.tone; ctx.stroke();
+    ctx.font = t.font; ctx.fillStyle = t.tone;
+    ctx.textAlign = 'center'; ctx.fillText(t.text, t.textX, t.baseline); ctx.textAlign = 'left';
+  });
+
+  /* --- メタ行: コスト帯 --- */
+  if (L.meta.cost) {
+    var cst = L.meta.cost;
+    ctx.font = cst.font; ctx.fillStyle = SI_COL.costLabel;
+    siFillTextLS(ctx, cst.label, cst.labelX, cst.labelBaseline, 2, 'left');
+    cst.bars.forEach(function(b){
+      ctx.globalAlpha = b.peak ? 1 : 0.9;
+      ctx.fillStyle = b.peak ? SI_COL.costPeak : SI_COL.costBar;
+      siRoundRect(ctx, b.x, b.y, b.w, b.h, Math.min(3, b.h / 2));
+      ctx.fill();
+      ctx.globalAlpha = 1;
+    });
+    /* バー下のコスト値（1〜7 と 8+）。最頻のバーだけ数値も金にして対応を分かりやすくする */
+    (cst.nums || []).forEach(function(nm){
+      ctx.font = nm.font;
+      ctx.fillStyle = (nm.i === cst.peakIndex) ? SI_COL.costPeak : SI_COL.costLabel;
+      ctx.textAlign = 'center'; ctx.fillText(nm.text, nm.x, nm.baseline); ctx.textAlign = 'left';
+    });
+  }
+
+  /* --- QRプレート（白がQRの静穏域を兼ねる） ---
+     描画順について: 71-A §2-3 は「最前面近く」としていたが、本実装ではグループ枠・カードの
+     直前に描く。§2-1 の動的 gridTop によりプレートとグリッドは構造的に重ならないため
+     最前面である必要がなく、最前面だとプレートの影（blur55/offsetY20）がグループ枠と
+     ラベルタブの上に落ちて枠の純色画素が失われる（P1 の色照合が成立しなくなる）ため。
+     プレートの上に何かが描かれることは無い（ヘッダー文字は plate.x−40 で頭打ち）。 */
+  var pl = L.qr.plate;
+  ctx.save();
+  ctx.shadowColor = SI_COL.plateShadow; ctx.shadowBlur = 55; ctx.shadowOffsetY = 20;
+  siRoundRect(ctx, pl.x, pl.y, pl.w, pl.h, pl.r);
+  ctx.fillStyle = SI_COL.plate; ctx.fill();
+  ctx.restore();
+  siShadowOff(ctx);
+
+  var sm = ctx.imageSmoothingEnabled;
+  ctx.imageSmoothingEnabled = false;
+  ctx.fillStyle = SI_COL.qrFg;
+  var m = L.qr.module;
+  for (var r = 0; r < L.qr.count; r++) {
+    for (var c2 = 0; c2 < L.qr.count; c2++) {
+      if (res.qr.isDark(r, c2)) ctx.fillRect(L.qr.x + c2 * m, L.qr.y + r * m, m, m);
+    }
+  }
+  ctx.imageSmoothingEnabled = sm;
+
+  /* --- グループ枠＋ラベルタブ --- */
+  L.grid.boxes.forEach(function(b){
+    siRoundRect(ctx, b.x + 0.75, b.y + 0.75, b.w - 1.5, b.h - 1.5, b.r);
+    ctx.lineWidth = 1.5; ctx.strokeStyle = SI_COL.boxLine; ctx.stroke();
+    var t = b.tab;
+    siRoundRect(ctx, t.x, t.y, t.w, t.h, t.h / 2);
+    ctx.fillStyle = siAlpha(b.tone, 0.14); ctx.fill();
+    ctx.lineWidth = 2.5; ctx.strokeStyle = b.tone; ctx.stroke();
+    ctx.font = t.font; ctx.fillStyle = b.tone;
+    siFillTextLS(ctx, t.text, t.textX, t.baseline, 1, 'center');
+  });
+
+  /* --- カード（3手順: 影付き角丸fill → clipして画像 → 輪郭stroke） --- */
+  ctx.imageSmoothingEnabled = true;
+  if ('imageSmoothingQuality' in ctx) ctx.imageSmoothingQuality = 'high';
+  L.cells.forEach(function(cell){
+    ctx.save();
+    ctx.shadowColor = SI_COL.cardShadow; ctx.shadowBlur = 34; ctx.shadowOffsetY = 16;
+    siRoundRect(ctx, cell.x, cell.y, cell.w, cell.h, cell.r);
+    ctx.fillStyle = SI_COL.phBg; ctx.fill();
+    ctx.restore();
+    siShadowOff(ctx);
+
+    var img = res.images[cell.id];
+    ctx.save();
+    siRoundRect(ctx, cell.x, cell.y, cell.w, cell.h, cell.r);
+    ctx.clip();
+    if (img) {
+      ctx.drawImage(img, cell.x, cell.y, cell.w, cell.h);
+    } else {
+      /* 読み込み失敗は fail-open。型番を書いたプレースホルダで描画を続行する */
+      ctx.fillStyle = SI_COL.phFg;
+      ctx.font = siFont(600, Math.max(12, Math.round(cell.w * 0.11)));
+      ctx.textAlign = 'center';
+      ctx.fillText(cell.id, cell.x + cell.w / 2, cell.y + cell.h / 2);
+      ctx.textAlign = 'left';
+    }
+    ctx.restore();
+
+    siRoundRect(ctx, cell.x + 0.75, cell.y + 0.75, cell.w - 1.5, cell.h - 1.5, cell.r);
+    ctx.lineWidth = 1.5; ctx.strokeStyle = SI_COL.cardLine; ctx.stroke();
+
+    /* 枚数バッジ（カード右上・×なし数字のみ・サイトのアイコン金） */
+    var b2 = cell.badge;
+    ctx.save();
+    ctx.shadowColor = 'rgba(0,0,0,0.5)'; ctx.shadowBlur = 18; ctx.shadowOffsetY = 6;
+    siRoundRect(ctx, b2.x, b2.y, b2.w, b2.h, b2.h / 2);
+    ctx.fillStyle = SI_COL.badgeBg; ctx.fill();
+    ctx.restore();
+    siShadowOff(ctx);
+    siRoundRect(ctx, b2.x, b2.y, b2.w, b2.h, b2.h / 2);
+    ctx.lineWidth = 2.5; ctx.strokeStyle = SI_COL.badgeFg; ctx.stroke();
+    ctx.font = b2.font; ctx.fillStyle = SI_COL.badgeFg;
+    ctx.textAlign = 'center'; ctx.fillText(b2.text, b2.textX, b2.baseline); ctx.textAlign = 'left';
+  });
+
+  /* --- 右下クレジット --- */
+  ctx.font = L.credit.url.font; ctx.fillStyle = SI_COL.creditUrl;
+  siFillTextLS(ctx, L.credit.url.text, L.credit.url.x, L.credit.url.y, L.credit.url.ls, 'right');
+  ctx.font = L.credit.law.font; ctx.fillStyle = SI_COL.creditLaw;
+  ctx.textAlign = 'right'; ctx.fillText(L.credit.law.text, L.credit.law.x, L.credit.law.y); ctx.textAlign = 'left';
+
+  ctx.restore();
+}
+/* #rrggbb → rgba(r,g,b,a) */
+function siAlpha(hex, a){
+  var h = String(hex).replace('#', '');
+  if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+  var v = parseInt(h, 16);
+  return 'rgba(' + ((v >> 16) & 255) + ',' + ((v >> 8) & 255) + ',' + (v & 255) + ',' + a + ')';
+}
+
+/* ---------- 入力の組み立て（タイプ別グループ・統計） ---------- */
+/* デッキタブと同一の並び（TYPE_ORDER の群 → cost昇順 → id昇順）でタイプ別に束ねる */
+function siGroups(){
+  var byType = {};
+  SI_TYPE_SEQ.forEach(function(t){ byType[t] = []; });
+  Object.keys(state.cards).forEach(function(id){
+    if (!(state.cards[id] > 0)) return;
+    var c = db.byId.get(id);
+    var t = (c && SI_TYPE_SEQ.indexOf(c.type) !== -1) ? c.type : 'UNIT';
+    byType[t].push(c || { id: id, name: id, cost: null });
+  });
+  var out = [];
+  SI_TYPE_SEQ.forEach(function(t){
+    var arr = byType[t];
+    if (!arr.length) return;   // 0枚のタイプは箱もチップも出さない
+    arr.sort(function(a, b){ return ((a.cost == null ? 99 : a.cost) - (b.cost == null ? 99 : b.cost)) || (a.id < b.id ? -1 : 1); });
+    var cells = arr.map(function(c){ return { id: c.id, name: c.name || c.id, qty: state.cards[c.id] }; });
+    out.push({ type: t, cells: cells, count: cells.reduce(function(s, c){ return s + c.qty; }, 0) });
+  });
+  return out;
+}
+/* コスト帯ヒストグラム（1〜7 と 8+。9以上は 8+ へ合算。実測でコスト0/nullは存在しないが
+   万一のときは 1 へ合算して落とさない） */
+function siCostHist(){
+  var h = [0, 0, 0, 0, 0, 0, 0, 0];
+  Object.keys(state.cards).forEach(function(id){
+    var q = state.cards[id];
+    if (!(q > 0)) return;
+    var c = db.byId.get(id);
+    var cost = c && c.cost != null ? c.cost : 1;
+    if (cost < 1) cost = 1;
+    var i = cost >= 8 ? 7 : (cost - 1);
+    h[i] += q;
+  });
+  return h;
+}
+
+/* ---------- 入力の組み立て ---------- */
+/* デッキタブと同一の並び（TYPE_ORDER の群 → cost昇順 → id昇順）。パラレルは別 id なので別セル */
+function siCells(){
+  var byType = {};
+  TYPE_ORDER.forEach(function(t){ byType[t] = []; });
+  Object.keys(state.cards).forEach(function(id){
+    if (!(state.cards[id] > 0)) return;
+    var c = db.byId.get(id);
+    var t = (c && TYPE_ORDER.indexOf(c.type) !== -1) ? c.type : 'UNIT';
+    byType[t].push(c || { id: id, name: id, cost: null });
+  });
+  var out = [];
+  TYPE_ORDER.forEach(function(t){
+    var arr = byType[t];
+    arr.sort(function(a, b){ return ((a.cost == null ? 99 : a.cost) - (b.cost == null ? 99 : b.cost)) || (a.id < b.id ? -1 : 1); });
+    arr.forEach(function(c){ out.push({ id: c.id, name: c.name || c.id, qty: state.cards[c.id] }); });
+  });
+  return out;
+}
+/* 共有URL: 押下状態や過去の生成結果に依存せず、常に現在のデッキ状態から組み直す */
+function siShareUrl(){
+  var st = C.encodeShareCode(state.cards, db.byId);
+  if (!st.ok) return { ok: false, reason: st.reason, items: st.items };
+  var name = siSanitizeTitle($('deckName').value);
+  var q = '';
+  if (name) {
+    try { q = '&n=' + encodeURIComponent(name); }
+    catch (e) { name = ''; q = ''; }    /* 最終防波堤: それでも投げるならデッキ名なしで続行 */
+  }
+  return { ok: true, url: shareUrlBase() + '?d=' + st.code + q, name: name };
+}
+function siFileName(ext){
+  var d = new Date(), p = function(v){ return ('0' + v).slice(-2); };
+  return 'gcg-deck-' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + '.' + (ext || 'png');
+}
+function siIntentUrl(text){ return SI_INTENT_BASE + '?text=' + encodeURIComponent(text); }
+function siIsMobile(){
+  var ua = navigator.userAgent || '';
+  if (/Android|iPhone|iPod|iPad/i.test(ua)) return true;
+  /* iPadOS 13+ の Safari は既定で Macintosh を名乗るため、タッチ点数で判別する */
+  if (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1) return true;
+  try {
+    return window.matchMedia('(pointer: coarse)').matches && window.matchMedia('(max-width: 1024px)').matches;
+  } catch (e) { return false; }
+}
+
+/* 実文字列を引数にした document.fonts.load（サブセット未ロードは fonts.ready では検出できない） */
+function siLoadFonts(reqs){
+  if (!document.fonts || !document.fonts.load) return Promise.resolve(false);
+  var jobs;
+  try { jobs = reqs.map(function(r){ return document.fonts.load(r.font, r.text); }); }
+  catch (e) { return Promise.resolve(false); }
+  var timeout = new Promise(function(res){ setTimeout(function(){ res('timeout'); }, 6000); });
+  return Promise.race([Promise.all(jobs).then(function(){ return true; }), timeout])
+    .then(function(v){ return v === true; })
+    .catch(function(){ return false; });
+}
+/* カード画像は 4 並列に制限して decode（iOS Safari の同時 decode 失敗対策）。
+   1 枚あたり SI_IMG_TIMEOUT で打ち切り、失敗扱い（プレースホルダ描画）にして先へ進む＝fail-open。
+   これが無いと 1 枚のハングでモーダルが「生成しています…」のまま止まる（二次確認の指摘） */
+function siDecodeWithTimeout(img, ms){
+  return new Promise(function(resolve, reject){
+    var done = false;
+    var t = setTimeout(function(){
+      if (done) return; done = true;
+      try { img.src = ''; } catch (e) {}
+      reject(new Error('timeout'));
+    }, ms);
+    img.decode().then(
+      function(){ if (done) return; done = true; clearTimeout(t); resolve(); },
+      function(e){ if (done) return; done = true; clearTimeout(t); reject(e); }
+    );
+  });
+}
+function siLoadImages(ids){
+  var out = {}, failed = [], i = 0;
+  function next(){
+    if (i >= ids.length) return Promise.resolve();
+    var id = ids[i++];
+    var img = new Image();
+    img.decoding = 'async';
+    img.src = 'images/cards/' + encodeURIComponent(id) + '.webp';
+    return siDecodeWithTimeout(img, SI_IMG_TIMEOUT).then(function(){ out[id] = img; },
+                             function(){ out[id] = null; failed.push(id); }).then(next);
+  }
+  var lanes = [];
+  for (var k = 0; k < 4 && k < ids.length; k++) lanes.push(next());
+  return Promise.all(lanes).then(function(){ return { images: out, failed: failed }; });
+}
+
+/* 既定は PNG。4MB を超えたときだけ JPEG へ自動フォールバックする（松岡さん裁定 2026-08-12）。
+   狙いは X の静止画上限 5MB に対する余裕の確保。QR は JPEG q80 まで劣化させても
+   pyzbar / zxing / jsQR で読めることを実測済みなので、q95 なら読み取りに影響しない。
+   toBlob はコールバック形式なので Promise 化して使う。 */
+function siToBlob(cv, mime, q){
+  return new Promise(function(resolve){
+    if (q == null) cv.toBlob(function(b){ resolve(b); }, mime);
+    else cv.toBlob(function(b){ resolve(b); }, mime, q);
+  });
+}
+/* toBlob は指定した MIME に対応していなければ PNG を返してよい（HTML仕様）。
+   そのため「JPEG を頼んだ」ではなく「返ってきた Blob の実タイプ」で判定する。
+   ラベルだけ .jpg / image/jpeg で中身が PNG、という食い違いを避けるため。 */
+function siIsJpegBlob(b){ return !!(b && /jpe?g/.test(b.type || '')); }
+function siEncResult(blob, quality, pngBytes){
+  var isJ = siIsJpegBlob(blob);
+  return {
+    blob: blob,
+    mime: isJ ? 'image/jpeg' : 'image/png',
+    ext: isJ ? 'jpg' : 'png',
+    fallback: isJ,
+    quality: isJ ? quality : null,
+    pngBytes: pngBytes
+  };
+}
+function siEncode(cv){
+  return siToBlob(cv, 'image/png').then(function(png){
+    var pngBytes = png ? png.size : 0;
+    if (png && png.size <= SI_MAX_BYTES) return siEncResult(png, null, pngBytes);
+    return siToBlob(cv, 'image/jpeg', 0.95).then(function(j95){
+      if (siIsJpegBlob(j95) && j95.size <= SI_MAX_BYTES) return siEncResult(j95, 0.95, pngBytes);
+      return siToBlob(cv, 'image/jpeg', 0.85).then(function(j85){
+        if (siIsJpegBlob(j85)) return siEncResult(j85, 0.85, pngBytes);
+        if (siIsJpegBlob(j95)) return siEncResult(j95, 0.95, pngBytes);
+        /* JPEG 非対応 UA: PNG のまま返す（4MB ゲートに掛かり X 共有は無効化される） */
+        return siEncResult(png || j95 || j85, null, pngBytes);
+      });
+    });
+  });
+}
+
+/* ---------- モーダル制御 ---------- */
+var siState = { blob: null, file: null, objUrl: null, text: '', url: '', fname: '', gen: 0, last: null };
+
+function siSetStatus(msg, spinning){
+  $('siStatus').style.display = '';
+  $('siStatus').querySelector('.sp').style.display = spinning ? '' : 'none';
+  $('siStatusText').textContent = msg;
+  $('siImg').style.display = 'none';
+}
+function siWarn(msg, isInfo){
+  var w = $('siWarn');
+  w.classList.toggle('info', !!isInfo);
+  if (msg) { w.textContent = msg; w.classList.add('on'); }
+  else { w.textContent = ''; w.classList.remove('on'); }
+}
+function siOpenModal(){
+  /* 想定外の例外でも「押しても何も起きない」にはしない */
+  try { siOpenModalInner(); }
+  catch (e) {
+    try { console.error('[share-image]', e); } catch (ignore) {}
+    toast('共有画像を作成できませんでした', true);
+  }
+}
+function siOpenModalInner(){
+  var total = C.totalCount(state.cards);
+  if (!total) { toast('デッキが空のため共有画像を作成できません'); return; }
+  var su = siShareUrl();
+  if (!su.ok) {
+    if (su.reason === 'preview') toast('先行カードが含まれるため、共有画像はまだ作成できません（公式登録後に可能になります）: ' + su.items.join(', '), true);
+    else toast('データ未収載のカードが含まれるため共有画像を作成できません: ' + su.items.join(', '), true);
+    return;
+  }
+  var gen = ++siState.gen;
+  siState.blob = null; siState.file = null;
+  siState.url = su.url;
+  siState.text = su.name ? (su.name + '\n' + su.url) : su.url;
+  siState.fname = siFileName('png');   // 実際の拡張子は書き出し後に確定する
+  siState.last = null;
+  $('siSave').disabled = true;
+  $('siX').disabled = true;
+  $('siUrl').textContent = su.url;
+  siWarn('');
+  siSetStatus('画像を生成しています…', true);
+  openModal('shareImgModal');
+  siGenerate(gen, su).catch(function(e){
+    if (gen !== siState.gen) return;
+    siSetStatus('画像の生成に失敗しました', false);
+    try { console.error('[share-image]', e); } catch (ignore) {}
+  });
+}
+
+function siGenerate(gen, su){
+  var groups = siGroups();
+  var cells = siCells();
+  var costHist = siCostHist();
+  var qr = qrcode(0, 'M');
+  qr.addData(su.url);
+  qr.make();
+  var colors = C.deckColors(state.cards, db.byId);
+  var total = C.totalCount(state.cards);
+
+  var mc = document.createElement('canvas').getContext('2d');
+  var measure = function(text, font){ mc.font = font; return mc.measureText(text).width; };
+
+  var titleText = (siSanitizeTitle(su.name) || SI_TITLE_FALLBACK) + '…';   // 省略記号もサブセットに含める
+  var typeText = groups.map(function(g){ return SI_TYPE_JA[g.type] + ' ' + g.count; }).join('');
+  var colorText = colors.map(jaColor).join('');
+  var fontReqs = [
+    { font: siWebFont(700, SI_FS.eyebrow),   text: SI_EYEBROW_TEXT },
+    { font: siWebFont(900, SI_FS.title),     text: titleText },
+    { font: siWebFont(700, SI_FS.colorName), text: colorText },
+    { font: siWebFont(800, SI_FS.pill),      text: total + '枚0123456789' },
+    { font: siWebFont(800, SI_FS.tchip),     text: typeText + '0123456789' },
+    { font: siWebFont(800, SI_FS.tchipSmall),text: typeText + '0123456789' },
+    { font: siWebFont(800, SI_FS.costLabel), text: 'コスト帯' },
+    { font: siWebFont(700, SI_FS.costNum),   text: '012345678+' },
+    { font: siWebFont(800, SI_FS.tab),       text: typeText + '0123456789' },
+    { font: siWebFont(800, SI_FS.badge),     text: '0123456789' },
+    { font: siWebFont(800, SI_FS.creditUrl), text: SI_SITE_TEXT },
+    { font: siWebFont(400, SI_FS.creditLaw), text: SI_FOOTER_TEXT },
+    { font: siWebFont(600, SI_FS.ph),        text: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-_p' }
+  ];
+
+  return siLoadFonts(fontReqs).then(function(fontOk){
+    if (gen !== siState.gen) return null;
+    var L = siComputeLayout({
+      width: SI_CANVAS.width, height: SI_CANVAS.height,
+      deckName: su.name, totalCount: total, colors: colors,
+      colorLabel: jaColor, colorHex: function(c){ return COLOR_HEX[c] || '#8b95a5'; },
+      groups: groups, costHist: costHist,
+      qrModuleCount: qr.getModuleCount(), measure: measure
+    });
+    if (!L.ok) {
+      siSetStatus('画像を生成できませんでした（カードが多すぎて配置できません）', false);
+      toast('画像を生成できませんでした（カードが多すぎて配置できません）', true);
+      return null;
+    }
+    return siLoadImages(cells.map(function(c){ return c.id; })).then(function(res){
+      if (gen !== siState.gen) return null;
+      var cv = document.createElement('canvas');
+      cv.width = L.width; cv.height = L.height;
+      siRender(cv.getContext('2d'), L, { images: res.images, qr: qr });
+      if (res.failed.length) toast(res.failed.length + '件のカード画像を読み込めませんでした（型番のみで描画しています）', true);
+      return siEncode(cv).then(function(enc){
+        return { blob: enc.blob, enc: enc, L: L, res: res, fontOk: fontOk };
+      });
+    });
+  }).then(function(out){
+    if (!out || gen !== siState.gen) return;
+    if (!out.blob) { siSetStatus('画像の生成に失敗しました', false); return; }
+    var blob = out.blob, L = out.L, enc = out.enc;
+    siState.fname = siFileName(enc.ext);
+    var file = null;
+    try { file = new File([blob], siState.fname, { type: enc.mime }); } catch (e) { file = null; }
+    if (siState.objUrl) { try { URL.revokeObjectURL(siState.objUrl); } catch (e) {} }
+    siState.blob = blob;
+    siState.file = file;
+    siState.objUrl = URL.createObjectURL(blob);
+    siState.last = {
+      url: siState.url, urlLength: siState.url.length,
+      qrModuleCount: L.qr.count, qrVersion: (L.qr.count - 17) / 4, qrModulePx: L.qr.module,
+      qrSize: L.qr.size, plate: L.qr.plate, gridTop: L.grid.top, fallbackFlat: L.grid.fallbackFlat,
+      metaShrunk: L.meta.shrunk, metaCostOmitted: L.meta.costOmitted,
+      metaCostNumOmitted: L.meta.costNumOmitted, metaBottom: L.meta.bottom,
+      pngBytes: enc.pngBytes, bytes: blob.size, mime: enc.mime, ext: enc.ext,
+      fallback: enc.fallback, quality: enc.quality,
+      fileName: siState.fname, fontLoaded: out.fontOk,
+      failedImages: out.res.failed, layout: L
+    };
+    $('siImg').src = siState.objUrl;
+    $('siImg').style.display = '';
+    $('siStatus').style.display = 'none';
+    $('siSave').disabled = false;
+    var over = blob.size > SI_MAX_BYTES;
+    $('siX').disabled = over;
+    if (over) {
+      siWarn('画像サイズが ' + (blob.size / 1048576).toFixed(2) + 'MB で上限（4MB）を超えたため、Xでの共有は無効にしています。画像の保存はできます。');
+    } else if (enc.fallback) {
+      siWarn(
+        (enc.pngBytes ? 'PNGだと ' + (enc.pngBytes / 1048576).toFixed(2) + 'MB と大きくなるため、' : 'ファイルサイズを抑えるため、')
+        + 'JPEG（' + (blob.size / 1048576).toFixed(2) + 'MB）で書き出しました。QRコードの読み取りには影響しません。', true);
+    }
+  });
+}
+
+/* 保持済みの Blob URL / File を同期的に使う（クリックハンドラ内で await しない） */
+function siDownload(){
+  if (!siState.objUrl) return;
+  var a = document.createElement('a');
+  a.href = siState.objUrl;
+  a.download = siState.fname;
+  a.rel = 'noopener';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+$('siSave').onclick = function(){ siDownload(); };
+$('siCopy').onclick = function(){
+  copyText(siState.url).then(function(){ toast('共有URLをコピーしました（' + siState.url.length + '文字）'); });
+};
+$('siX').onclick = function(){
+  if (!siState.blob) return;
+  var f = siState.file, text = siState.text;
+  /* 分岐は「モバイル判定 AND canShare」。PC の Chrome/Edge/Safari も canShare({files}) が真になるため
+     canShare 単独では PC が OS 共有シートに吸われ、投稿文へ共有URLを載せる intent 経路に到達できない */
+  if (siIsMobile() && f && navigator.canShare && navigator.share && navigator.canShare({ files: [f] })) {
+    navigator.share({ files: [f], text: text }).catch(function(e){
+      if (e && (e.name === 'AbortError')) return;
+      toast('共有に失敗しました。画像を保存して手動で添付してください', true);
+    });
+    return;
+  }
+  siDownload();
+  /* noopener を feature 文字列で渡すと戻り値が null になりブロック検知ができないため、
+     開いた直後に opener を切る方式にしている */
+  var w = window.open(siIntentUrl(text), '_blank');
+  if (w) {
+    try { w.opener = null; } catch (e) {}
+    toast('画像は保存済みです。投稿に添付してください');
+  } else {
+    toast('新規タブがブロックされました。画像は保存済みです。上の共有URLをコピーして投稿してください', true);
+  }
+};
+
+/* テスト用の公開面（レイアウト純関数の検証・T2/T3/T5 で使用） */
+window.GCG_SHARE_IMAGE = {
+  computeLayout: siComputeLayout,
+  ellipsize: siEllipsize,
+  sanitizeTitle: siSanitizeTitle,
+  stripLoneSurrogates: siStripLoneSurrogates,
+  buildCells: siCells,
+  buildGroups: siGroups,
+  buildCostHist: siCostHist,
+  pickBoxLayout: siPickBoxLayout,
+  textW: siTextW,
+  buildShareUrl: siShareUrl,
+  fileName: siFileName,
+  intentUrl: siIntentUrl,
+  isMobile: siIsMobile,
+  constants: {
+    canvas: SI_CANVAS, minCardW: SI_CARD_W_MIN, maxCardW: SI_CARD_W_MAX,
+    cardRatio: SI_CARD_RATIO, gap: SI_BOX_GAP, maxBytes: SI_MAX_BYTES,
+    footerText: SI_FOOTER_TEXT, siteText: SI_SITE_TEXT, titleFallback: SI_TITLE_FALLBACK,
+    eyebrowText: SI_EYEBROW_TEXT, intentBase: SI_INTENT_BASE,
+    qrTarget: SI_QR_TARGET, qrModuleMin: SI_QR_MODULE_MIN, platePad: SI_PLATE_PAD, plateTop: SI_PLATE_TOP,
+    gridX0: SI_GRID_X0, gridX1: SI_GRID_X1, gridY1: SI_GRID_Y1, gridTopMin: SI_GRID_TOP_MIN,
+    boxGap: SI_BOX_GAP, boxRowGap: SI_BOXROW_GAP, boxColGap: SI_BOXCOL_GAP,
+    boxPadTop: siBoxPadTop(), boxPadX: SI_BOX_PAD_X, boxPadB: SI_BOX_PAD_B, boxColsMax: SI_BOX_COLS_MAX,
+    metaTop: SI_META_TOP, metaMaxBottom: SI_META_MAX_BOTTOM,
+    typeTone: SI_TYPE_TONE, typeJa: SI_TYPE_JA, typeSeq: SI_TYPE_SEQ, colors: SI_COL, fontSizes: SI_FS
+  },
+  result: function(){ return siState.last; }
+};
+
 $('btnClearF').onclick = clearAllConfirm;
 $('btnUndo').onclick = undo;
 $('btnRedo').onclick = redo;
