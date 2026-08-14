@@ -4088,5 +4088,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-14": {
+    "recognized_at": "2026-08-14 21:51:39 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2088235436825330049",
+      "https://x.com/GUNDAM_GCG_JP/status/2088234179813122115"
+    ],
+    "cards": [
+      {
+        "card_number": "ST13-012",
+        "card_name": "スレッタ・マーキュリー",
+        "color": "Red",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。ターン1回 このユニットがアタックしている間、相手のユニットが効果ダメージで破壊されたとき、自分は1枚ドローする。",
+        "effect_confidence": "medium",
+        "effect_length": 76,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST13-006",
+        "card_name": "ガンダム・エアリアル",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 5,
+        "hp": 4,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "「スレッタ・マーキュリー」",
+        "effect": "【セット中】【アタック時】相手プレイヤーにアタックしているなら、相手のユニット1つを選ぶ。それに2ダメージを与える。【起動】アクション ターン1回 味方のユニット1つをレストにする：Lv.4以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+        "effect_confidence": "low",
+        "effect_length": 124,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
