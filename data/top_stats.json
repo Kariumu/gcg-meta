@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4"
   },
   "totals": {
-    "events": 138,
-    "decks": 649,
+    "events": 139,
+    "decks": 657,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 218,
-      "share": 33.6,
-      "win_rate": 26.6,
+      "count": 220,
+      "share": 33.5,
+      "win_rate": 26.8,
       "avg_rank": 2.5,
-      "wins": 58
+      "wins": 59
     },
     {
       "type_key": "Blue+Purple",
@@ -31,7 +31,7 @@
       ],
       "label": "青/紫",
       "count": 117,
-      "share": 18,
+      "share": 17.8,
       "win_rate": 29.1,
       "avg_rank": 2.4,
       "wins": 34
@@ -43,9 +43,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 85,
-      "share": 13.1,
-      "win_rate": 20,
+      "count": 87,
+      "share": 13.2,
+      "win_rate": 19.5,
       "avg_rank": 2.5,
       "wins": 17
     },
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 73,
-      "share": 11.2,
-      "win_rate": 27.4,
+      "count": 74,
+      "share": 11.3,
+      "win_rate": 28.4,
       "avg_rank": 2.4,
-      "wins": 20
+      "wins": 21
     },
     {
       "type_key": "Blue+White",
@@ -69,9 +69,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 68,
-      "share": 10.5,
-      "win_rate": 23.5,
+      "count": 70,
+      "share": 10.7,
+      "win_rate": 22.9,
       "avg_rank": 2.4,
       "wins": 16
     },
@@ -82,9 +82,9 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 51,
+      "count": 52,
       "share": 7.9,
-      "win_rate": 21.6,
+      "win_rate": 21.2,
       "avg_rank": 2.6,
       "wins": 11
     },
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 361,
+      "decks": 365,
       "usage_rate": 55.6
     },
     {
       "card_id": "ST03-008",
-      "decks": 300,
-      "usage_rate": 46.2
+      "decks": 304,
+      "usage_rate": 46.3
     },
     {
       "card_id": "ST01-010",
-      "decks": 281,
-      "usage_rate": 43.3
+      "decks": 284,
+      "usage_rate": 43.2
     },
     {
       "card_id": "GD01-030",
-      "decks": 278,
-      "usage_rate": 42.8
+      "decks": 282,
+      "usage_rate": 42.9
     },
     {
       "card_id": "ST01-001",
-      "decks": 261,
+      "decks": 264,
       "usage_rate": 40.2
     },
     {
       "card_id": "GD05-002",
-      "decks": 236,
+      "decks": 239,
       "usage_rate": 36.4
     },
     {
       "card_id": "GD05-081",
-      "decks": 230,
-      "usage_rate": 35.4
+      "decks": 233,
+      "usage_rate": 35.5
     },
     {
       "card_id": "GD01-008",
-      "decks": 222,
-      "usage_rate": 34.2
+      "decks": 224,
+      "usage_rate": 34.1
     },
     {
       "card_id": "GD03-056",
-      "decks": 213,
-      "usage_rate": 32.8
+      "decks": 215,
+      "usage_rate": 32.7
     },
     {
       "card_id": "GD05-027",
-      "decks": 211,
-      "usage_rate": 32.5
+      "decks": 213,
+      "usage_rate": 32.4
     }
   ],
-  "card_ranking_denominator": 649,
+  "card_ranking_denominator": 657,
   "recent_events": [
     {
       "event_id": "ntcd-01M01VZZJHMDC8RM096ZGQYWYW",
@@ -343,6 +343,41 @@
           "colors": [
             "Blue",
             "Green"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M022VK7D1ZVASBJC69Y6NT9C",
+      "date": "2026-08-15",
+      "store": "トイコンプ高槻店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
           ]
         }
       ]
@@ -521,45 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01KZTSCBP6811SJZBTBN3P2TJN",
-      "date": "2026-08-12",
-      "store": "ホビーステーション名古屋大須本店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-08-15",
-    "event_count": 918
+    "event_count": 919
   }
 }
