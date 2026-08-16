@@ -517,9 +517,12 @@ const POST_HEADER = '【 #ガンダムカードゲーム ニュータイプチ�
  */
 function buildPostText(event, dist, url, pref) {
   const md = mdOf(event.date);
-  const place = (store) => (pref ? pref + ':' + store : store);
+  // 【指示書72-D】区切りは全角コロン（半角は視認しにくいという松岡さんの指摘・2026-08-16）。
+  // 「上位入賞：」の後ろの半角スペースは削除する（全角コロンは字幅に余白を含むため）。
+  // ※ URL 中の「:」と、画像内デッキ名「順位：店舗名」は対象外。後者は元から全角。
+  const place = (store) => (pref ? pref + '：' + store : store);
   const mk = (store, useDist) => POST_HEADER + '\n' + md + ' 開催\n' + place(store) + '\n'
-    + '上位入賞: ' + (useDist ? dist : '上位4デッキ掲載') + '\n' + url;
+    + '上位入賞：' + (useDist ? dist : '上位4デッキ掲載') + '\n' + url;
   let store = String(event.store || '');
   let text = mk(store, true);
   const degrade = [];
