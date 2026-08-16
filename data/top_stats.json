@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4"
   },
   "totals": {
-    "events": 160,
-    "decks": 745,
+    "events": 162,
+    "decks": 761,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 243,
+      "count": 248,
       "share": 32.6,
-      "win_rate": 26.7,
+      "win_rate": 26.6,
       "avg_rank": 2.5,
-      "wins": 65
+      "wins": 66
     },
     {
       "type_key": "Blue+Purple",
@@ -30,11 +30,11 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 133,
-      "share": 17.9,
-      "win_rate": 27.8,
+      "count": 135,
+      "share": 17.7,
+      "win_rate": 28.1,
       "avg_rank": 2.4,
-      "wins": 37
+      "wins": 38
     },
     {
       "type_key": "Green+Purple",
@@ -44,7 +44,7 @@
       ],
       "label": "緑/紫",
       "count": 99,
-      "share": 13.3,
+      "share": 13,
       "win_rate": 18.2,
       "avg_rank": 2.6,
       "wins": 18
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 82,
+      "count": 84,
       "share": 11,
-      "win_rate": 28,
+      "win_rate": 28.6,
       "avg_rank": 2.4,
-      "wins": 23
+      "wins": 24
     },
     {
       "type_key": "Blue+White",
@@ -69,11 +69,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 80,
-      "share": 10.7,
-      "win_rate": 26.3,
+      "count": 83,
+      "share": 10.9,
+      "win_rate": 26.5,
       "avg_rank": 2.4,
-      "wins": 21
+      "wins": 22
     },
     {
       "type_key": "Blue+Red",
@@ -82,9 +82,9 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 66,
-      "share": 8.9,
-      "win_rate": 22.7,
+      "count": 67,
+      "share": 8.8,
+      "win_rate": 22.4,
       "avg_rank": 2.5,
       "wins": 15
     },
@@ -95,10 +95,10 @@
         "Purple"
       ],
       "label": "赤/紫",
-      "count": 15,
-      "share": 2,
-      "win_rate": 6.7,
-      "avg_rank": 3,
+      "count": 17,
+      "share": 2.2,
+      "win_rate": 5.9,
+      "avg_rank": 2.9,
       "wins": 1
     },
     {
@@ -108,8 +108,8 @@
         "Green"
       ],
       "label": "赤/緑",
-      "count": 10,
-      "share": 1.3,
+      "count": 11,
+      "share": 1.4,
       "win_rate": 0,
       "avg_rank": 3.2,
       "wins": 0
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 411,
+      "decks": 420,
       "usage_rate": 55.2
     },
     {
       "card_id": "ST03-008",
-      "decks": 338,
-      "usage_rate": 45.4
+      "decks": 343,
+      "usage_rate": 45.1
     },
     {
       "card_id": "GD01-030",
-      "decks": 316,
-      "usage_rate": 42.4
+      "decks": 321,
+      "usage_rate": 42.2
     },
     {
       "card_id": "ST01-010",
-      "decks": 313,
-      "usage_rate": 42
+      "decks": 321,
+      "usage_rate": 42.2
     },
     {
       "card_id": "ST01-001",
-      "decks": 287,
-      "usage_rate": 38.5
+      "decks": 294,
+      "usage_rate": 38.6
     },
     {
       "card_id": "GD05-002",
-      "decks": 279,
-      "usage_rate": 37.4
+      "decks": 285,
+      "usage_rate": 37.5
     },
     {
       "card_id": "GD05-081",
-      "decks": 273,
-      "usage_rate": 36.6
+      "decks": 279,
+      "usage_rate": 36.7
     },
     {
       "card_id": "GD01-008",
-      "decks": 251,
-      "usage_rate": 33.7
+      "decks": 257,
+      "usage_rate": 33.8
     },
     {
       "card_id": "GD03-056",
-      "decks": 245,
-      "usage_rate": 32.9
+      "decks": 248,
+      "usage_rate": 32.6
     },
     {
       "card_id": "ST05-010",
-      "decks": 242,
-      "usage_rate": 32.5
+      "decks": 245,
+      "usage_rate": 32.2
     }
   ],
-  "card_ranking_denominator": 745,
+  "card_ranking_denominator": 761,
   "recent_events": [
     {
       "event_id": "ntcd-01M04EC1D0CMTNVQJ8D54CR04B",
@@ -340,6 +340,76 @@
         },
         {
           "rank": 4,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M04N7QPJ5F8960WX69Z27QVA",
+      "date": "2026-08-16",
+      "store": "カードボックス玉島店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M04N7NVR0QGMCDY1E13ECERZ",
+      "date": "2026-08-16",
+      "store": "ドラゴンスター池袋店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
           "colors": [
             "Blue",
             "Green"
@@ -486,80 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M022VK7D1ZVASBJC69Y6NT9C",
-      "date": "2026-08-15",
-      "store": "トイコンプ高槻店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M0269ERAWWDFGBJSADCVKQ9S",
-      "date": "2026-08-15",
-      "store": "ティアワン浜松店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-08-16",
-    "event_count": 940
+    "event_count": 942
   }
 }
