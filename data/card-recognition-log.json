@@ -4136,5 +4136,115 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-16": {
+    "recognized_at": "2026-08-16 20:01:06 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2088928763727970590",
+      "https://x.com/GUNDAM_GCG_JP/status/2088921205466161480",
+      "https://x.com/GUNDAM_GCG_JP/status/2088913668297674783",
+      "https://x.com/GUNDAM_GCG_JP/status/2088906106391159207",
+      "https://x.com/GUNDAM_GCG_JP/status/2088898557935804786"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-090",
+        "card_name": "ヴィダール",
+        "color": "Red",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔ギャラルホルン〕",
+          "〔阿頼耶識〕"
+        ],
+        "link": "「ガエリオ・ボードウィン」",
+        "effect": "このカードのカード名は「ガエリオ・ボードウィン」としても扱う。【バースト】このカードを手札に加える。【アタック時】〔ギャラルホルン〕の自分のユニットが2つ以上いるなら、AP5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+        "effect_confidence": "low",
+        "effect_length": 116,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-036",
+        "card_name": "ガンダム・ヴィダール",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔ギャラルホルン〕",
+          "〔ガンダム・フレーム〕"
+        ],
+        "link": "「ガエリオ・ボードウィン」",
+        "effect": "【リンク時】相手のユニット1つを選ぶ。それに1ダメージを与える。",
+        "effect_confidence": "high",
+        "effect_length": 32,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-082",
+        "card_name": "アスラン・ザラ",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 5,
+        "cost": 1,
+        "ap": 2,
+        "hp": 2,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 55,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-002",
+        "card_name": "インフィニットジャスティスガンダム",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 6,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "「アスラン・ザラ」",
+        "effect": "ターン1回 自分のターン中、このユニットがバトルダメージで相手のカードを破壊したとき、〔オーブ〕の自分のユニット1つを選ぶ。それを3回復する。【配備時】自分のトラッシュの、ユニットカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、アクティブの相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+        "effect_confidence": "low",
+        "effect_length": 156,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-010",
+        "card_name": "アビスガンダム",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔地球連合〕",
+          "〔ファントムペイン〕",
+          "〔水中〕"
+        ],
+        "link": "「アウル・ニーダ」",
+        "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "high",
+        "effect_length": 33,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
