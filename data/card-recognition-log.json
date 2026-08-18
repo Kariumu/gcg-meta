@@ -4292,5 +4292,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-18": {
+    "recognized_at": "2026-08-18 20:00:33 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2089630884722872359",
+      "https://x.com/GUNDAM_GCG_JP/status/2089623341564870833"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-025",
+        "card_name": "リ・ガズィ",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔地球連邦〕",
+          "〔ロンド・ベル〕"
+        ],
+        "link": "特徴にロンド・ベルを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST13-002",
+        "card_name": "エルメス",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジオン〕"
+        ],
+        "link": "「ララァ・スン」",
+        "effect": "【配備時】「ピット/ファンネル」((遠隔兵器) AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1つを配備する。",
+        "effect_confidence": "medium",
+        "effect_length": 78,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
