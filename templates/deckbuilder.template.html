@@ -4648,18 +4648,40 @@ var SI_META_GAP      = 24;    // 要素間
 var SI_META_CHIP_GAP = 18;    // 色チップ同士
 var SI_META_DOT_GAP  = 12;    // ドット⇔色名
 var SI_META_DOT      = 25;    // 色ドットの直径（色名の拡大に合わせて 21→25）
-var SI_META_MAX_BOTTOM = 432; // 不変条件: メタ行下端 ≤ 432（文字拡大で2行を許容するため 392→432）
-var SI_COST_BARS   = 8;       // コスト1〜7 と 8+
-var SI_COST_BAR_W  = 26;
-var SI_COST_BAR_GAP = 9;
-var SI_COST_BAR_H  = 78;      // 最頻値の高さ
-var SI_COST_BAR_MIN = 4;      // 0枚のバー
-var SI_COST_LABEL_GAP = 16;   // ラベル⇔バー群
-var SI_COST_NUM_GAP = 7;      // バー下端⇔コスト数値
-/* バー下に添えるコスト値。要素数は SI_COST_BARS と必ず一致させること
-   （SI_COST_BARS を変えるときはこの配列も同数にする） */
-var SI_COST_NUM_LABELS = ['1','2','3','4','5','6','7','8+'];
-var SI_COST_MARGIN_L  = 6;    // コスト帯ブロックの左マージン
+var SI_META_MAX_BOTTOM = 432; // 不変条件: メタ行下端 ≤ 432 + タイトル増分（デッキ名が2行になった分だけ下へ送る）
+
+/* ---- チャートゾーン（指示書73 §0-3 / 原典 shijisho73-mock.html を実測して確定） ----
+   タイトル右〜QRプレート左の空きに「レベル帯」(左)「コスト帯」(右)を並べる特大チャート。
+   横は plate.x に追従（QRが大きい版でもプレートに近づきすぎない）、縦は固定。
+   ラベル上端 64 → ラベル行44 → 間隙10 → バー容器212(バー最大180 + 隙6 + 数値行26) → 下端 330。
+   ※ 指示書73 §0-3 本文の「数値行下端=y332」は構成値の合計(64+44+10+212=330)と2px食い違う。
+      モックの実測も330なので330を採る（発行元へ報告済み。他要素と揃える規定は無いため影響なし）。 */
+var SI_CHART_COUNT   = 2;     // レベル帯・コスト帯
+var SI_CHART_BARS    = 8;     // 1〜7 と 8+
+var SI_CHART_BAR_W   = 32;
+var SI_CHART_BAR_GAP = 8;
+var SI_CHART_W       = SI_CHART_BARS * SI_CHART_BAR_W + (SI_CHART_BARS - 1) * SI_CHART_BAR_GAP;  // 312
+var SI_CHART_GAP     = 48;    // レベル帯 ⇔ コスト帯
+var SI_CHART_PLATE_GAP = 64;  // ゾーン右端 ⇔ QRプレート左端（プレートの影のかかりを避ける）
+var SI_CHART_PEAK_H  = 180;   // 最頻値のバー高
+var SI_CHART_ZERO_H  = 6;     // 値0のバー高
+var SI_CHART_ZERO_ALPHA = 0.25;
+var SI_CHART_BAR_ALPHA  = 0.9;  // 最頻以外のバー
+var SI_CHART_BAR_R   = 4;     // バー上端の角丸（下端は角のまま）
+var SI_CHART_LABEL_Y = 64;    // ラベル行の上端（固定）
+var SI_CHART_LABEL_H = 44;    // ラベル行の高さ
+var SI_CHART_LABEL_GAP = 10;  // ラベル行下端 ⇔ バー容器上端
+var SI_CHART_LABEL_LS  = 3;   // ラベルの字間
+var SI_CHART_LABEL_BASE_OFF = 35;  // ゾーン上端 → ラベルのベースライン（=99。原典のラベル行 y64..108 の
+                                   //   ベースライン実測 99（行高44・フォント上端からの ascent 35）に合わせた）
+var SI_CHART_NUM_GAP = 6;     // バー下端 ⇔ 数値行上端
+var SI_CHART_NUM_H   = 26;    // 数値行の高さ
+var SI_CHART_NUM_BASE_OFF = 29;    // バー下端 → 数値のベースライン（モックのインク帯 309..327 から逆算）
+/* バー下に添える値。要素数は SI_CHART_BARS と必ず一致させること */
+var SI_CHART_NUM_LABELS = ['1','2','3','4','5','6','7','8+'];
+var SI_CHART_LABELS = { level: 'レベル帯', cost: 'コスト帯' };
+var SI_META_ZONE_GAP  = 32;   // メタ行の折返し右端 ＝ ゾーン左端 − 32（§0-5）
+var SI_TITLE_ZONE_GAP = 40;   // デッキ名の折返し右端 ＝ ゾーン左端 − 40（§2）
 
 var SI_IMG_TIMEOUT = 12000;   // カード画像1枚あたりの取得打ち切り（ms）
 var SI_MAX_BYTES = 4 * 1024 * 1024;   // 4MB ゲート（Xの静止画上限5MBに対する余裕。指示書71 §2-E）
@@ -4673,12 +4695,29 @@ var SI_WEBFONT = '"IBM Plex Sans JP"';
 /* 字面のベースライン（原典PNGの実測インク帯 77〜95 / 124〜211 に合わせた） */
 var SI_Y_EYEBROW = 82;
 var SI_Y_TITLE   = 186;
+/* デッキ名 C案（指示書73 §2・松岡さん裁定2026-08-19）:
+   92px で1行に収まらない名前は 64px へ落として最大2行に折返し、30字でも全文を出す（「…」なし）。
+   64px の1行目ベースライン 167 は、原典モック2種の実測ベースライン差から決めた:
+     shijisho73-mock.html      92px 版 … ベースライン 203（行ボックス y113 / line-height 1.08）
+     shijisho73-mock-long.html 64px 版 … ベースライン 184（行ボックス y119 / line-height 1.18）
+   差 19px を、当実装の 92px ベースライン SI_Y_TITLE=186 から引いた値。
+   行送り 76 は原典の line-height 75.52（=64×1.18）を丸めたもので、
+   原典PNGのインク帯（1行目 128..190 / 2行目 205..266）の送り 76〜77 とも一致する。 */
+var SI_Y_TITLE_SMALL   = 167;
+var SI_TITLE_SMALL_LH  = 76;   // 64px の行送り（≈1.18）
+var SI_TITLE_MAX_LINES = 2;
+var SI_TITLE_LS        = -1;   // 字間（92px・64px 共通）
+/* ベースライン → タイトル字面下端の見積り比。実測の描画字面は 92px で約9px（Webフォント時）・
+   16px（フォールバック時）なので 0.28 は安全側（大きめ）に取った値。
+   92px1行の下端と 64px の下端を「同じ比」で比べるためだけに使うので、比の絶対値は
+   下送り量に 5px 程度しか効かない（92px1行では必ず 0 になる）。 */
+var SI_TITLE_DESC_RATIO = 0.28;
 var SI_Y_CREDIT_URL = 1279;
 var SI_Y_CREDIT_LAW = 1319;
 
 var SI_FS = {
-  eyebrow: 28, title: 92, colorName: 34, pill: 34, tchip: 32, tchipSmall: 29,
-  costLabel: 30, costNum: 24, tab: 28, badge: 33, creditUrl: 30, creditLaw: 23, ph: 20
+  eyebrow: 28, title: 92, titleSmall: 64, colorName: 34, pill: 34, tchip: 32, tchipSmall: 29,
+  chartLabel: 30, chartNum: 26, tab: 28, badge: 33, creditUrl: 30, creditLaw: 23, ph: 20
 };
 /* 固定配色（ダークテック・テーマ非依存） */
 var SI_COL = {
@@ -4690,7 +4729,7 @@ var SI_COL = {
   colorName:'#c6d4f2', dotRing:'rgba(255,255,255,0.10)',
   pillFg:'#eaf1ff', pillBg:'rgba(255,255,255,0.07)', pillLine:'rgba(255,255,255,0.28)',
   tchipBg:'rgba(255,255,255,0.05)',
-  costLabel:'#9fb2d9', costBar:'#7d93c4', costPeak:'#d4a029',
+  chartLabel:'#9fb2d9', chartBar:'#7d93c4', chartPeak:'#d4a029',
   plate:'#ffffff', qrFg:'#000000', plateShadow:'rgba(0,0,0,0.55)',
   boxLine:'rgba(255,255,255,0.13)',
   cardShadow:'rgba(0,0,0,0.58)', cardLine:'rgba(255,255,255,0.10)',
@@ -4720,8 +4759,8 @@ function siBoxPadTop(){ return SI_BOX_TAB_TOP + siTabH() + SI_BOX_TAB_CLEAR; }
 /* ---------- レイアウト純関数（DOM も canvas も触らない・指示書71-B §1/§2） ----------
  * 入力: { width, height, deckName, totalCount, colors[], colorLabel(fn), colorHex(fn),
  *         groups: [{type, cells:[{id,name,qty}], count}]（0枚タイプは含めない・タイプ順）,
- *         costHist: [c1..c7, c8plus], qrModuleCount, measure(text,font)->px }
- * 出力: 描画に必要な矩形座標をすべて含む（グループ枠・タブ・タイプチップ・コスト帯バー・
+ *         levelHist: [l1..l7, l8plus], costHist: [c1..c7, c8plus], qrModuleCount, measure(text,font)->px }
+ * 出力: 描画に必要な矩形座標をすべて含む（グループ枠・タブ・タイプチップ・チャートのバー・
  *       バッジ・QRプレートの矩形は §1 により必須）。
  */
 function siComputeLayout(input){
@@ -4739,26 +4778,40 @@ function siComputeLayout(input){
     plate: plate, x: plate.x + SI_PLATE_PAD, y: plate.y + SI_PLATE_PAD,
     size: qrSize, module: per, count: n, quiet: SI_PLATE_PAD
   };
-  /* グリッド上端は動的。プレートが大きくなってもカードと構造的に重ならない */
-  var gridTop = Math.max(SI_GRID_TOP_MIN, plate.y + plate.h + 20);
-  var headRight = plate.x - 40;   // ヘッダーの折返し右端（デッキ名・メタ行 共通基準）
+  /* ===== チャートゾーン（指示書73 §0-3） =====
+     右端は plate.x に追従（QRが大きい版でもプレートへ近づきすぎない）。縦は固定。
+     ヘッダー文字（デッキ名・メタ行）の折返し右端はこのゾーン左端から逆算する。 */
+  var chartsW    = SI_CHART_COUNT * SI_CHART_W + (SI_CHART_COUNT - 1) * SI_CHART_GAP;
+  var zoneRight  = plate.x - SI_CHART_PLATE_GAP;
+  var zoneLeft   = zoneRight - chartsW;
+  var zoneTop    = SI_CHART_LABEL_Y;
+  var barsBottom = zoneTop + SI_CHART_LABEL_H + SI_CHART_LABEL_GAP + SI_CHART_PEAK_H;   // バーの下端（＝軸）
+  var zoneBottom = barsBottom + SI_CHART_NUM_GAP + SI_CHART_NUM_H;                      // 数値行の下端
+  var zone = { x: zoneLeft, y: zoneTop, w: chartsW, h: zoneBottom - zoneTop,
+               right: zoneRight, bottom: zoneBottom, inkRight: zoneRight,
+               chartW: SI_CHART_W, gap: SI_CHART_GAP,
+               barsBottom: barsBottom, plateGap: SI_CHART_PLATE_GAP };
+  var headRight  = zoneLeft - SI_META_ZONE_GAP;    // メタ行の折返し右端（§0-5）
+  var titleRight = zoneLeft - SI_TITLE_ZONE_GAP;   // デッキ名の折返し右端（§2）
 
-  /* ===== アイキャッチ・デッキ名（§2-2） ===== */
+  /* ===== アイキャッチ・デッキ名（§2-2 / 指示書73 §2） ===== */
   var eyebrow = {
     x: SI_PAD_L, y: SI_Y_EYEBROW, text: SI_EYEBROW_TEXT,
     size: SI_FS.eyebrow, weight: 700, ls: 10, color: SI_COL.eyebrow, font: siFont(700, SI_FS.eyebrow)
   };
-  var titleFont = siFont(900, SI_FS.title);
-  var titleMax = headRight;                       // = プレート左端 − 60 − 40 を x=60 起点で表した右端
   var rawTitle = siSanitizeTitle(input.deckName) || SI_TITLE_FALLBACK;
-  var tt = siEllipsize(rawTitle, titleFont, titleMax - SI_PAD_L, function(t, f){ return siTextW(t, f, -1, measure); });
-  var title = {
-    x: SI_PAD_L, y: SI_Y_TITLE, font: titleFont, size: SI_FS.title, weight: 900, ls: -1,
-    text: tt.text, truncated: tt.truncated, full: rawTitle, maxWidth: titleMax - SI_PAD_L
-  };
+  var title = siLayoutTitle(rawTitle, titleRight - SI_PAD_L, measure);
+  /* デッキ名が 64px×2行になった分だけ、メタ行・グリッド開始・メタ行の下端上限を下へ送る（§2）。
+     92px1行 と 64px1行 では 0（＝従来と1px も変わらない）。 */
+  var titleExtra = Math.max(0, title.bottom - (SI_Y_TITLE + Math.round(SI_FS.title * SI_TITLE_DESC_RATIO)));
+  var metaTop       = SI_META_TOP + titleExtra;
+  var metaMaxBottom = SI_META_MAX_BOTTOM + titleExtra;
+  /* グリッド上端は動的。プレートが大きくなってもカードと構造的に重ならない */
+  var gridTop = Math.max(SI_GRID_TOP_MIN + titleExtra, plate.y + plate.h + 20);
 
-  /* ===== メタ行（§2-2）: 色チップ群 → 枚数ピル → タイプチップ → コスト帯 ===== */
-  function buildMetaItems(tchipFS, withCost, withCostNum){
+  /* ===== メタ行（§2-2 / 指示書73 §0-4）: 色チップ群 → 枚数ピル → タイプチップ =====
+     コスト帯はチャートゾーンへ移設したのでメタ行には出さない。 */
+  function buildMetaItems(tchipFS){
     var items = [];
     /* 1) 色チップ群（ドット21 + 10 + 色名29/700、チップ同士は18） */
     if ((input.colors || []).length) {
@@ -4791,25 +4844,6 @@ function siComputeLayout(input){
         h: siLineH(tchipFS) + 8 * 2 + 5
       });
     });
-    /* 4) コスト帯 */
-    if (withCost) {
-      var lblFont = siFont(800, SI_FS.costLabel);
-      var lblW = Math.round(siTextW('コスト帯', lblFont, 2, measure));
-      var barsW = SI_COST_BARS * SI_COST_BAR_W + (SI_COST_BARS - 1) * SI_COST_BAR_GAP;
-      var numH = withCostNum ? (SI_COST_NUM_GAP + siLineH(SI_FS.costNum)) : 0;
-      /* 末尾の「8+」は2文字あり、バー幅を超えると右へ逃がす（描画側と同じ規則）。
-         その分だけブロックの実幅がバー群より広くなるので、折返し判定にも同じ量を含める。
-         はみ出し量 = 中心を (nw - barW) ずらして中央揃えで描くため 1.5 × (nw - barW)。 */
-      var lastW = withCostNum ? measure(SI_COST_NUM_LABELS[SI_COST_BARS - 1], siFont(700, SI_FS.costNum)) : 0;
-      var numOver = Math.ceil(Math.max(0, 1.5 * (lastW - SI_COST_BAR_W)));
-      items.push({
-        kind: 'cost', font: lblFont, label: 'コスト帯', labelW: lblW, barsW: barsW,
-        marginLeft: SI_COST_MARGIN_L, withNum: !!withCostNum, numOver: numOver,
-        w: SI_COST_MARGIN_L + lblW + SI_COST_LABEL_GAP + barsW + numOver,
-        h: SI_COST_BAR_H,      // 行の縦中央揃えの基準（＝バー高。既存の配置を変えない）
-        overhang: numH         // バーの下にぶら下がる分。行の下端計算にだけ効く
-      });
-    }
     return items;
   }
 
@@ -4823,7 +4857,7 @@ function siComputeLayout(input){
       cur.push(it);
     });
     if (cur.length) lines.push(cur);
-    var y = SI_META_TOP, out = [], bottom = SI_META_TOP;
+    var y = metaTop, out = [], bottom = metaTop;
     lines.forEach(function(ln, li){
       var lh = 0, over = 0;
       ln.forEach(function(it){ if (it.h > lh) lh = it.h; });
@@ -4840,32 +4874,19 @@ function siComputeLayout(input){
     return { lines: out, bottom: bottom };
   }
 
-  var tchipFS = SI_FS.tchip, withCost = true, withCostNum = true;
-  var shrunk = false, costOmitted = false, costNumOmitted = false;
-  var meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
-  if (meta.bottom > SI_META_MAX_BOTTOM) {                 // セーフティ① バー下のコスト数値を省略
-    withCostNum = false; costNumOmitted = true;
-    meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
-  }
-  if (meta.bottom > SI_META_MAX_BOTTOM) {                 // セーフティ② チップを一段縮小
+  var tchipFS = SI_FS.tchip, shrunk = false;
+  var meta = layoutMeta(buildMetaItems(tchipFS));
+  if (meta.bottom > metaMaxBottom) {                      // セーフティ: チップを一段縮小
     tchipFS = SI_FS.tchipSmall; shrunk = true;
-    meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
-  }
-  if (meta.bottom > SI_META_MAX_BOTTOM) {                 // セーフティ③ コスト帯を省略
-    withCost = false; costOmitted = true;
-    meta = layoutMeta(buildMetaItems(tchipFS, withCost, withCostNum));
+    meta = layoutMeta(buildMetaItems(tchipFS));
   }
 
-  /* コスト帯バーの実寸（最頻値=58px・最頻が同数複数なら最小コスト側を金） */
-  var hist = (input.costHist || []).slice(0, SI_COST_BARS);
-  while (hist.length < SI_COST_BARS) hist.push(0);
-  var peakV = Math.max.apply(null, hist), peakIdx = -1;
-  for (var pi = 0; pi < hist.length; pi++) { if (hist[pi] === peakV && peakV > 0) { peakIdx = pi; break; } }
-  var metaOut = { y: SI_META_TOP, bottom: meta.bottom, lines: [], chips: [], pill: null, typeChips: [], cost: null,
-                  shrunk: shrunk, costOmitted: costOmitted, costNumOmitted: costNumOmitted, tchipFontSize: tchipFS };
+  var metaOut = { y: metaTop, bottom: meta.bottom, lines: [], chips: [], pill: null, typeChips: [], rects: [],
+                  shrunk: shrunk, tchipFontSize: tchipFS, right: headRight };
   meta.lines.forEach(function(ln){
     metaOut.lines.push({ y: ln.y, h: ln.h, overhang: ln.overhang || 0 });
     ln.items.forEach(function(it){
+      metaOut.rects.push({ kind: it.kind, x: it._x, y: it._y, w: it.w, h: it.h + (it.overhang || 0) });
       if (it.kind === 'chips') {
         it.chips.forEach(function(c){
           metaOut.chips.push({
@@ -4881,38 +4902,48 @@ function siComputeLayout(input){
         metaOut.typeChips.push({ type: it.type, tone: it.tone, x: it._x, y: it._y, w: it.w, h: it.h,
                                  text: it.text, font: it.font, fontSize: it.fontSize,
                                  textX: it._x + it.w / 2, baseline: Math.round(it._y + it.h / 2 + it.fontSize * 0.36) });
-      } else if (it.kind === 'cost') {
-        var bx = it._x + it.marginLeft + it.labelW + SI_COST_LABEL_GAP;
-        var bottom = it._y + SI_COST_BAR_H;      // バーの下端（数値ラベルの上）
-        var bars = [], nums = [];
-        var numFont = siFont(700, SI_FS.costNum);
-        var numBaseline = bottom + SI_COST_NUM_GAP + Math.round(SI_FS.costNum * 0.80);
-        for (var i = 0; i < SI_COST_BARS; i++) {
-          var v = hist[i] || 0;
-          var bh = peakV > 0 ? Math.max(SI_COST_BAR_MIN, Math.round(v / peakV * SI_COST_BAR_H)) : SI_COST_BAR_MIN;
-          if (v === 0) bh = SI_COST_BAR_MIN;
-          bars.push({ i: i, value: v, peak: i === peakIdx,
-                      x: bx + i * (SI_COST_BAR_W + SI_COST_BAR_GAP), y: bottom - bh,
-                      w: SI_COST_BAR_W, h: bh });
-        }
-        if (it.withNum) {
-          for (var ni = 0; ni < SI_COST_BARS; ni++) {
-            var ntx = SI_COST_NUM_LABELS[ni];
-            var nw = measure(ntx, numFont);
-            var ncx = bx + ni * (SI_COST_BAR_W + SI_COST_BAR_GAP) + SI_COST_BAR_W / 2;
-            /* 最後の「8+」だけ2文字でバー幅を超えるため、右の空きスペースへ逃がして
-               隣（7）との間隔が他と揃うようにする */
-            if (ni === SI_COST_BARS - 1) ncx += Math.max(0, nw - SI_COST_BAR_W);
-            nums.push({ i: ni, text: ntx, font: numFont, fontSize: SI_FS.costNum,
-                        x: ncx, w: nw, baseline: numBaseline });
-          }
-        }
-        metaOut.cost = { x: it._x, y: it._y, w: it.w, h: it.h, label: it.label, font: it.font,
-                         labelX: it._x + it.marginLeft, labelBaseline: bottom - 6,
-                         barsX: bx, barsW: it.barsW, numOver: it.numOver || 0,
-                         bars: bars, nums: nums, peakIndex: peakIdx };
       }
     });
+  });
+
+  /* ===== チャート2本の実寸（指示書73 §0-2） =====
+     最頻＝金。同数が複数あるときは最小値側（＝配列の先頭側）だけを金にする（従来のコスト帯と同じ規則）。 */
+  function buildChart(key, srcHist, ix){
+    var hist = (srcHist || []).slice(0, SI_CHART_BARS);
+    while (hist.length < SI_CHART_BARS) hist.push(0);
+    var peakV = Math.max.apply(null, hist), peakIdx = -1;
+    for (var pi = 0; pi < hist.length; pi++) { if (hist[pi] === peakV && peakV > 0) { peakIdx = pi; break; } }
+    var x0 = zoneLeft + ix * (SI_CHART_W + SI_CHART_GAP);
+    var lblFont = siFont(800, SI_FS.chartLabel);
+    var numFont = siFont(700, SI_FS.chartNum);
+    var numBaseline = barsBottom + SI_CHART_NUM_BASE_OFF;
+    var bars = [], nums = [];
+    for (var i = 0; i < SI_CHART_BARS; i++) {
+      var v = hist[i] || 0;
+      var bh = (v > 0 && peakV > 0) ? Math.max(SI_CHART_ZERO_H, Math.round(v / peakV * SI_CHART_PEAK_H)) : SI_CHART_ZERO_H;
+      var bx = x0 + i * (SI_CHART_BAR_W + SI_CHART_BAR_GAP);
+      bars.push({ i: i, value: v, peak: i === peakIdx, zero: v === 0,
+                  x: bx, y: barsBottom - bh, w: SI_CHART_BAR_W, h: bh });
+      var ntx = SI_CHART_NUM_LABELS[i];
+      nums.push({ i: i, text: ntx, font: numFont, fontSize: SI_FS.chartNum,
+                  x: bx + SI_CHART_BAR_W / 2, w: measure(ntx, numFont), baseline: numBaseline });
+    }
+    return {
+      key: key, label: SI_CHART_LABELS[key], font: lblFont, fontSize: SI_FS.chartLabel, ls: SI_CHART_LABEL_LS,
+      x: x0, y: zoneTop, w: SI_CHART_W, h: zoneBottom - zoneTop,
+      labelX: x0, labelW: Math.round(siTextW(SI_CHART_LABELS[key], lblFont, SI_CHART_LABEL_LS, measure)),
+      labelBaseline: zoneTop + SI_CHART_LABEL_BASE_OFF,
+      barsBottom: barsBottom, values: hist, peakIndex: peakIdx, peakValue: peakV,
+      bars: bars, nums: nums
+    };
+  }
+  var charts = [buildChart('level', input.levelHist, 0), buildChart('cost', input.costHist, 1)];
+  /* 末尾の「8+」は2文字ぶんあり、バー幅32pxを超えるとバー中心のまま左右へはみ出す。
+     ゾーンの公称右端より実インクが右に出るので、プレートとの余白判定はこの実インクで見る。 */
+  charts.forEach(function(ch){
+    var last = ch.nums[ch.nums.length - 1];
+    var r = last.x + last.w / 2;
+    if (r > zone.inkRight) zone.inkRight = Math.ceil(r);
   });
 
   /* ===== グリッド（§2-5 決定的アルゴリズム） ===== */
@@ -5013,10 +5044,23 @@ function siComputeLayout(input){
   }
   var plateGridNoOverlap = (plate.y + plate.h) < gridTop;
   var qtySum = cells.reduce(function(s, c){ return s + c.qty; }, 0);
+  /* 指示書73 §0-5 の新不変条件: ヘッダー文字（メタ行・デッキ名）がチャートゾーンと交差しない。
+     折返し右端（headRight / titleRight）で保証しているが、単独で幅を超える要素が来ても
+     破れないことを毎回機械的に確かめる。 */
+  function siOverlap(a, b){ return a.x < b.x + b.w && b.x < a.x + a.w && a.y < b.y + b.h && b.y < a.y + a.h; }
+  var eyebrowRect = { x: eyebrow.x, y: eyebrow.y - eyebrow.size, w: Math.round(siTextW(eyebrow.text, eyebrow.font, eyebrow.ls, measure)),
+                      h: Math.round(eyebrow.size * 1.4) };
+  var metaZoneNoOverlap = metaOut.rects.every(function(r){ return !siOverlap(r, zone); }) && !siOverlap(eyebrowRect, zone);
+  var titleZoneNoOverlap = title.lines.every(function(ln){
+    /* 字面より一回り大きい箱で見る（size分だけ上、size×0.4分だけ下へ張り出すと仮定） */
+    return !siOverlap({ x: title.x, y: ln.baseline - title.size, w: ln.w, h: Math.round(title.size * 1.4) }, zone);
+  });
+  var chartsInCanvas = zone.x >= SI_PAD_L && zone.bottom <= H && zone.inkRight <= plate.x;
 
   return {
     width: W, height: H, accentH: SI_ACCENT_H,
     eyebrow: eyebrow, title: title, meta: metaOut, qr: qr,
+    chartZone: zone, charts: charts, titleExtra: titleExtra,
     grid: {
       x: SI_GRID_X0, y: gridTop, w: gridW, h: gridH, top: gridTop,
       blockH: blockH, offsetY: gridOffsetY, contentTop: gyTop, contentBottom: gyTop + blockH,
@@ -5032,7 +5076,9 @@ function siComputeLayout(input){
     inCanvas: cellsIn && boxesIn && inCanvasRect(plate),
     cellsInBoxes: cellsInBoxes, tabsInBoxes: tabsInBoxes, boxesNoOverlap: boxesNoOverlap,
     plateGridNoOverlap: plateGridNoOverlap,
-    metaBottomOk: metaOut.bottom <= SI_META_MAX_BOTTOM, metaMaxBottom: SI_META_MAX_BOTTOM,
+    metaZoneNoOverlap: metaZoneNoOverlap, titleZoneNoOverlap: titleZoneNoOverlap,
+    chartsInCanvas: chartsInCanvas,
+    metaBottomOk: metaOut.bottom <= metaMaxBottom, metaMaxBottom: metaMaxBottom,
     ok: !!pick
   };
 }
@@ -5192,6 +5238,46 @@ function siEllipsize(text, font, maxWidth, measure){
   }
   return { text: cps.slice(0, lo).join('') + '…', truncated: true };
 }
+/* デッキ名のレイアウト（指示書73 §2「C案」・松岡さん裁定 2026-08-19）。
+   ① 92px で1行に収まる名前（実測 約13字まで）は従来どおり 92px・1行。見た目は一切変わらない。
+   ② 収まらない名前は 64px へ落とし、単語境界を問わない通常折返しで最大2行にする。
+      デッキ名は入力側で30字上限（slice(0,30)）なので、64px×2行の容量（実測 30字以上）に必ず収まり
+      「…」は出ない。万一3行目が出る入力が来たときだけ、最終行を siEllipsize して破綻を防ぐ。
+   戻り値の lines[].baseline は描画用のベースライン、bottom はインク下端の目安
+   （メタ行とグリッドを何px下へ送るかの算出だけに使う）。 */
+function siLayoutTitle(text, maxWidth, measure){
+  var w = function(t, f){ return siTextW(t, f, SI_TITLE_LS, measure); };
+  var big = siFont(900, SI_FS.title);
+  if (w(text, big) <= maxWidth) {
+    return { x: SI_PAD_L, y: SI_Y_TITLE, font: big, size: SI_FS.title, weight: 900, ls: SI_TITLE_LS,
+             lines: [{ text: text, baseline: SI_Y_TITLE, w: Math.round(w(text, big)) }],
+             text: text, truncated: false, wrapped: false, full: text, maxWidth: maxWidth,
+             bottom: SI_Y_TITLE + Math.round(SI_FS.title * SI_TITLE_DESC_RATIO) };
+  }
+  var small = siFont(900, SI_FS.titleSmall);
+  var cps = siCodePoints(text), raw = [], cur = '';
+  for (var i = 0; i < cps.length; i++) {
+    var nx = cur + cps[i];
+    if (cur && w(nx, small) > maxWidth) { raw.push(cur); cur = cps[i]; }
+    else cur = nx;
+  }
+  if (cur) raw.push(cur);
+  var truncated = false;
+  if (raw.length > SI_TITLE_MAX_LINES) {                 /* 防御。30字上限がある限り到達しない */
+    var keep = raw.slice(0, SI_TITLE_MAX_LINES);
+    var tail = keep[SI_TITLE_MAX_LINES - 1] + raw.slice(SI_TITLE_MAX_LINES).join('');
+    keep[SI_TITLE_MAX_LINES - 1] = siEllipsize(tail, small, maxWidth, w).text;
+    raw = keep; truncated = true;
+  }
+  var lines = [];
+  for (var li = 0; li < raw.length; li++) {
+    lines.push({ text: raw[li], baseline: SI_Y_TITLE_SMALL + li * SI_TITLE_SMALL_LH, w: Math.round(w(raw[li], small)) });
+  }
+  return { x: SI_PAD_L, y: SI_Y_TITLE_SMALL, font: small, size: SI_FS.titleSmall, weight: 900, ls: SI_TITLE_LS,
+           lines: lines, text: raw.join(''), truncated: truncated, wrapped: true, full: text, maxWidth: maxWidth,
+           lineHeight: SI_TITLE_SMALL_LH,
+           bottom: lines[lines.length - 1].baseline + Math.round(SI_FS.titleSmall * SI_TITLE_DESC_RATIO) };
+}
 /* 「安全なデッキ名」。描画にも共有URLの &n= にも、この結果だけを使う。
    落とすのは (1) 制御文字 (2) 孤立サロゲート の 2 種類だけで、いずれも「壊れた入力」に当たるもの。
    ZWJ(U+200D) など絵文字結合子は残す。
@@ -5219,6 +5305,16 @@ function siSanitizeTitle(s){
 }
 
 /* ---------- 描画（レイアウト結果を写すだけ・指示書71-B §2） ---------- */
+/* 上端だけ角丸の矩形（チャートのバー用。下端は軸に接するので角のまま） */
+function siTopRoundRect(ctx, x, y, w, h, r){
+  var rr = Math.min(r, w / 2, h);
+  ctx.beginPath();
+  ctx.moveTo(x, y + h);
+  ctx.lineTo(x, y + rr); ctx.quadraticCurveTo(x, y, x + rr, y);
+  ctx.lineTo(x + w - rr, y); ctx.quadraticCurveTo(x + w, y, x + w, y + rr);
+  ctx.lineTo(x + w, y + h);
+  ctx.closePath();
+}
 function siRoundRect(ctx, x, y, w, h, r){
   var rr = Math.min(r, w / 2, h / 2);
   ctx.beginPath();
@@ -5301,10 +5397,12 @@ function siRender(ctx, L, res){
   ctx.font = L.eyebrow.font; ctx.fillStyle = SI_COL.eyebrow;
   siFillTextLS(ctx, L.eyebrow.text, L.eyebrow.x, L.eyebrow.y, L.eyebrow.ls, 'left');
 
-  /* --- デッキ名（影つき） --- */
+  /* --- デッキ名（影つき・92px1行 / 64px最大2行） --- */
   ctx.font = L.title.font; ctx.fillStyle = SI_COL.title;
   ctx.shadowColor = SI_COL.titleShadow; ctx.shadowBlur = 30; ctx.shadowOffsetY = 4;
-  siFillTextLS(ctx, L.title.text, L.title.x, L.title.y, L.title.ls, 'left', true);
+  L.title.lines.forEach(function(ln){
+    siFillTextLS(ctx, ln.text, L.title.x, ln.baseline, L.title.ls, 'left', true);
+  });
   siShadowOff(ctx);
 
   /* --- メタ行: 色ドット＋色名 --- */
@@ -5339,32 +5437,34 @@ function siRender(ctx, L, res){
     ctx.textAlign = 'center'; ctx.fillText(t.text, t.textX, t.baseline); ctx.textAlign = 'left';
   });
 
-  /* --- メタ行: コスト帯 --- */
-  if (L.meta.cost) {
-    var cst = L.meta.cost;
-    ctx.font = cst.font; ctx.fillStyle = SI_COL.costLabel;
-    siFillTextLS(ctx, cst.label, cst.labelX, cst.labelBaseline, 2, 'left');
-    cst.bars.forEach(function(b){
-      ctx.globalAlpha = b.peak ? 1 : 0.9;
-      ctx.fillStyle = b.peak ? SI_COL.costPeak : SI_COL.costBar;
-      siRoundRect(ctx, b.x, b.y, b.w, b.h, Math.min(3, b.h / 2));
+  /* --- チャートゾーン（レベル帯・コスト帯／指示書73 §0-1〜3） ---
+     QRプレートより先に描く。プレートの影がチャートの上に乗る原典のz順を保つため。 */
+  (L.charts || []).forEach(function(ch){
+    ctx.font = ch.font; ctx.fillStyle = SI_COL.chartLabel;
+    siFillTextLS(ctx, ch.label, ch.labelX, ch.labelBaseline, ch.ls, 'left');
+    ch.bars.forEach(function(b){
+      ctx.globalAlpha = b.zero ? SI_CHART_ZERO_ALPHA : (b.peak ? 1 : SI_CHART_BAR_ALPHA);
+      ctx.fillStyle = b.peak ? SI_COL.chartPeak : SI_COL.chartBar;
+      siTopRoundRect(ctx, b.x, b.y, b.w, b.h, SI_CHART_BAR_R);
       ctx.fill();
       ctx.globalAlpha = 1;
     });
-    /* バー下のコスト値（1〜7 と 8+）。最頻のバーだけ数値も金にして対応を分かりやすくする */
-    (cst.nums || []).forEach(function(nm){
+    /* バー下の値（1〜7 と 8+）。原典どおり最頻でも色は変えない */
+    ctx.fillStyle = SI_COL.chartBar;
+    ch.nums.forEach(function(nm){
       ctx.font = nm.font;
-      ctx.fillStyle = (nm.i === cst.peakIndex) ? SI_COL.costPeak : SI_COL.costLabel;
       ctx.textAlign = 'center'; ctx.fillText(nm.text, nm.x, nm.baseline); ctx.textAlign = 'left';
     });
-  }
+  });
 
   /* --- QRプレート（白がQRの静穏域を兼ねる） ---
      描画順について: 71-A §2-3 は「最前面近く」としていたが、本実装ではグループ枠・カードの
      直前に描く。§2-1 の動的 gridTop によりプレートとグリッドは構造的に重ならないため
      最前面である必要がなく、最前面だとプレートの影（blur55/offsetY20）がグループ枠と
      ラベルタブの上に落ちて枠の純色画素が失われる（P1 の色照合が成立しなくなる）ため。
-     プレートの上に何かが描かれることは無い（ヘッダー文字は plate.x−40 で頭打ち）。 */
+     プレートの上に何かが描かれることは無い（指示書73 以降、ヘッダー文字はチャートゾーン左端
+     −32/−40 で頭打ち、チャートゾーン自体はプレート左端−64 で頭打ち。チャートはこの直前に
+     描くので、プレートの影がチャートの上に乗る原典モックの z順になる）。 */
   var pl = L.qr.plate;
   ctx.save();
   ctx.shadowColor = SI_COL.plateShadow; ctx.shadowBlur = 55; ctx.shadowOffsetY = 20;
@@ -5563,6 +5663,22 @@ function siCostHist(){
   });
   return h;
 }
+/* レベル帯ヒストグラム（指示書73 §1）。siCostHist と完全同形で、見る値だけが level。
+   id はそのまま db.byId で引く（base解決もセル概念も無い）。10以上は 8+ へ合算し、
+   null/欠損/1未満は 1 へ寄せて枚数を落とさない（実測では level が null なのは TOKEN のみ＝投入不可）。 */
+function siLevelHist(){
+  var h = [0, 0, 0, 0, 0, 0, 0, 0];
+  Object.keys(state.cards).forEach(function(id){
+    var q = state.cards[id];
+    if (!(q > 0)) return;
+    var c = db.byId.get(id);
+    var lv = c && c.level != null ? c.level : 1;
+    if (lv < 1) lv = 1;
+    var i = lv >= 8 ? 7 : (lv - 1);
+    h[i] += q;
+  });
+  return h;
+}
 
 /* ---------- 入力の組み立て ---------- */
 /* 画像の先読み（siLoadImages）に渡すカード一覧。枠内と同一規則で並べる（指示書71-C §1-1）。
@@ -5753,6 +5869,7 @@ function siGenerate(gen, su){
   var groups = siGroups();
   var cells = siCells();
   var costHist = siCostHist();
+  var levelHist = siLevelHist();
   var qr = qrcode(0, 'M');
   qr.addData(su.url);
   qr.make();
@@ -5768,12 +5885,13 @@ function siGenerate(gen, su){
   var fontReqs = [
     { font: siWebFont(700, SI_FS.eyebrow),   text: SI_EYEBROW_TEXT },
     { font: siWebFont(900, SI_FS.title),     text: titleText },
+    { font: siWebFont(900, SI_FS.titleSmall),text: titleText },   // 64pxへ縮小して折返す版（指示書73 §2）
     { font: siWebFont(700, SI_FS.colorName), text: colorText },
     { font: siWebFont(800, SI_FS.pill),      text: total + '枚0123456789' },
     { font: siWebFont(800, SI_FS.tchip),     text: typeText + '0123456789' },
     { font: siWebFont(800, SI_FS.tchipSmall),text: typeText + '0123456789' },
-    { font: siWebFont(800, SI_FS.costLabel), text: 'コスト帯' },
-    { font: siWebFont(700, SI_FS.costNum),   text: '012345678+' },
+    { font: siWebFont(800, SI_FS.chartLabel),text: SI_CHART_LABELS.level + SI_CHART_LABELS.cost },
+    { font: siWebFont(700, SI_FS.chartNum),  text: '012345678+' },
     { font: siWebFont(800, SI_FS.tab),       text: typeText + '0123456789' },
     { font: siWebFont(800, SI_FS.badge),     text: '0123456789' },
     { font: siWebFont(800, SI_FS.creditUrl), text: SI_SITE_TEXT },
@@ -5787,7 +5905,7 @@ function siGenerate(gen, su){
       width: SI_CANVAS.width, height: SI_CANVAS.height,
       deckName: su.name, totalCount: total, colors: colors,
       colorLabel: jaColor, colorHex: function(c){ return COLOR_HEX[c] || '#8b95a5'; },
-      groups: groups, costHist: costHist,
+      groups: groups, costHist: costHist, levelHist: levelHist,
       qrModuleCount: qr.getModuleCount(), measure: measure
     });
     if (!L.ok) {
@@ -5820,8 +5938,10 @@ function siGenerate(gen, su){
       url: siState.url, urlLength: siState.url.length,
       qrModuleCount: L.qr.count, qrVersion: (L.qr.count - 17) / 4, qrModulePx: L.qr.module,
       qrSize: L.qr.size, plate: L.qr.plate, gridTop: L.grid.top, fallbackFlat: L.grid.fallbackFlat,
-      metaShrunk: L.meta.shrunk, metaCostOmitted: L.meta.costOmitted,
-      metaCostNumOmitted: L.meta.costNumOmitted, metaBottom: L.meta.bottom,
+      metaShrunk: L.meta.shrunk, metaBottom: L.meta.bottom, metaRight: L.meta.right,
+      titleWrapped: L.title.wrapped, titleLines: L.title.lines.length,
+      titleTruncated: L.title.truncated, titleExtra: L.titleExtra,
+      chartZone: L.chartZone,
       sortFallbacks: siSortFallbacks,
       pngBytes: enc.pngBytes, bytes: blob.size, mime: enc.mime, ext: enc.ext,
       fallback: enc.fallback, quality: enc.quality,
@@ -5896,6 +6016,8 @@ window.GCG_SHARE_IMAGE = {
   buildCells: siCells,
   buildGroups: siGroups,
   buildCostHist: siCostHist,
+  buildLevelHist: siLevelHist,
+  layoutTitle: siLayoutTitle,
   pickBoxLayout: siPickBoxLayout,
   textW: siTextW,
   buildShareUrl: siShareUrl,
@@ -5912,6 +6034,16 @@ window.GCG_SHARE_IMAGE = {
     boxGap: SI_BOX_GAP, boxRowGap: SI_BOXROW_GAP, boxColGap: SI_BOXCOL_GAP,
     boxPadTop: siBoxPadTop(), boxPadX: SI_BOX_PAD_X, boxPadB: SI_BOX_PAD_B, boxColsMax: SI_BOX_COLS_MAX,
     metaTop: SI_META_TOP, metaMaxBottom: SI_META_MAX_BOTTOM,
+    metaZoneGap: SI_META_ZONE_GAP, titleZoneGap: SI_TITLE_ZONE_GAP,
+    titleY: SI_Y_TITLE, titleSmallY: SI_Y_TITLE_SMALL, titleSmallLh: SI_TITLE_SMALL_LH,
+    titleMaxLines: SI_TITLE_MAX_LINES, titleLs: SI_TITLE_LS, titleDescRatio: SI_TITLE_DESC_RATIO,
+    chart: { count: SI_CHART_COUNT, bars: SI_CHART_BARS, barW: SI_CHART_BAR_W, barGap: SI_CHART_BAR_GAP,
+             width: SI_CHART_W, gap: SI_CHART_GAP, plateGap: SI_CHART_PLATE_GAP, peakH: SI_CHART_PEAK_H,
+             zeroH: SI_CHART_ZERO_H, zeroAlpha: SI_CHART_ZERO_ALPHA, barAlpha: SI_CHART_BAR_ALPHA,
+             barR: SI_CHART_BAR_R, labelY: SI_CHART_LABEL_Y, labelH: SI_CHART_LABEL_H,
+             labelGap: SI_CHART_LABEL_GAP, labelLs: SI_CHART_LABEL_LS,
+             labelBaseOff: SI_CHART_LABEL_BASE_OFF, numGap: SI_CHART_NUM_GAP, numH: SI_CHART_NUM_H,
+             numBaseOff: SI_CHART_NUM_BASE_OFF, numLabels: SI_CHART_NUM_LABELS, labels: SI_CHART_LABELS },
     typeTone: SI_TYPE_TONE, typeJa: SI_TYPE_JA, typeSeq: SI_TYPE_SEQ, colors: SI_COL, fontSizes: SI_FS
   },
   result: function(){ return siState.last; }
