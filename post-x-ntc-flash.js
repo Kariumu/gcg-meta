@@ -513,17 +513,34 @@ const POST_HEADER = '【 #ガンダムカードゲーム ニュータイプチ�
 /**
  * 縮退は指示書どおり ① 分布を「上位4デッキ掲載」へ置換 → ② 店舗名を省略記号で切る。
  * ヘッダ行・開催日・都道府県・URL は削らない。
- * @param {string|null} pref 表示名（prefLabelOf の戻り値）。null なら店舗名のみの行にする（§1-3）
+ * @param {string|null} pref 表示名（prefLabelOf の戻り値）。null なら店舗名のみの行にする
  */
 function buildPostText(event, dist, url, pref) {
   const md = mdOf(event.date);
   // 【指示書72-D】区切りは全角コロン（半角は視認しにくいという松岡さんの指摘・2026-08-16）。
   // 「上位入賞：」の後ろの半角スペースは削除する（全角コロンは字幅に余白を含むため）。
   // ※ URL 中の「:」と、画像内デッキ名「順位：店舗名」は対象外。後者は元から全角。
-  const place = (store) => (pref ? pref + '：' + store : store);
-  const mk = (store, useDist) => POST_HEADER + '\n' + md + ' 開催\n' + place(store) + '\n'
-    + '上位入賞：' + (useDist ? dist : '上位4デッキ掲載') + '\n' + url;
-  let store = String(event.store || '');
+  //
+  // 【指示書72-C v3 §1「地域:店舗行の全組合せ」】3行目は次の4通り。
+  //   都道府県あり + 店舗名あり → 「<都道府県>：<店舗名>」
+  //   都道府県なし + 店舗名あり → 「<店舗名>」のみ（コロンを出さない）
+  //   都道府県あり + 店舗名が空 → 「<都道府県>」のみ（コロンを出さない）
+  //   両方とも空               → この行自体を出さない（空行を作らない）
+  // ※縮退②で店舗名を切り詰めた場合は必ず省略記号「…」が付くため、この行が消えることはない。
+  // ※「空」の判定は前後の空白を落としてから行う（§1「行頭・行末の余分なスペースは削る」）。
+  //   空白だけの店舗名を素通しすると「東京：   」のように行末に空白が残るため。
+  //   実データ132件に前後空白のある店舗名は0件なので、既存の出力は1バイトも変わらない。
+  const place = (store) => {
+    const t = String(store == null ? '' : store).trim();
+    return pref ? (t ? pref + '：' + t : pref) : t;
+  };
+  const mk = (store, useDist) => {
+    const line3 = place(store);
+    return POST_HEADER + '\n' + md + ' 開催\n'
+      + (line3 ? line3 + '\n' : '')
+      + '上位入賞：' + (useDist ? dist : '上位4デッキ掲載') + '\n' + url;
+  };
+  let store = String(event.store == null ? '' : event.store).trim();
   let text = mk(store, true);
   const degrade = [];
   if (weightedLength(text) > CONFIG.MAX_WEIGHTED_LENGTH) {
