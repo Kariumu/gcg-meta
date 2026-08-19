@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4"
   },
   "totals": {
-    "events": 186,
-    "decks": 861,
+    "events": 187,
+    "decks": 869,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 277,
-      "share": 32.2,
-      "win_rate": 27.1,
+      "count": 278,
+      "share": 32,
+      "win_rate": 27,
       "avg_rank": 2.5,
       "wins": 75
     },
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 151,
+      "count": 152,
       "share": 17.5,
-      "win_rate": 27.8,
+      "win_rate": 27.6,
       "avg_rank": 2.4,
       "wins": 42
     },
@@ -43,11 +43,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 119,
-      "share": 13.8,
-      "win_rate": 18.5,
+      "count": 121,
+      "share": 13.9,
+      "win_rate": 19,
       "avg_rank": 2.6,
-      "wins": 22
+      "wins": 23
     },
     {
       "type_key": "Blue+White",
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 97,
-      "share": 11.3,
-      "win_rate": 25.8,
+      "count": 101,
+      "share": 11.6,
+      "win_rate": 25.7,
       "avg_rank": 2.4,
-      "wins": 25
+      "wins": 26
     },
     {
       "type_key": "Red+White",
@@ -70,7 +70,7 @@
       ],
       "label": "赤/白",
       "count": 90,
-      "share": 10.5,
+      "share": 10.4,
       "win_rate": 28.9,
       "avg_rank": 2.3,
       "wins": 26
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 469,
-      "usage_rate": 54.5
+      "decks": 471,
+      "usage_rate": 54.2
     },
     {
       "card_id": "ST03-008",
-      "decks": 393,
+      "decks": 396,
       "usage_rate": 45.6
     },
     {
       "card_id": "GD01-030",
-      "decks": 369,
-      "usage_rate": 42.9
+      "decks": 372,
+      "usage_rate": 42.8
     },
     {
       "card_id": "ST01-010",
-      "decks": 359,
-      "usage_rate": 41.7
+      "decks": 363,
+      "usage_rate": 41.8
     },
     {
       "card_id": "ST01-001",
-      "decks": 328,
-      "usage_rate": 38.1
+      "decks": 332,
+      "usage_rate": 38.2
     },
     {
       "card_id": "GD05-002",
-      "decks": 324,
-      "usage_rate": 37.6
+      "decks": 329,
+      "usage_rate": 37.9
     },
     {
       "card_id": "GD05-081",
-      "decks": 318,
-      "usage_rate": 36.9
-    },
-    {
-      "card_id": "GD01-008",
-      "decks": 287,
-      "usage_rate": 33.3
+      "decks": 323,
+      "usage_rate": 37.2
     },
     {
       "card_id": "GD03-056",
-      "decks": 286,
-      "usage_rate": 33.2
+      "decks": 289,
+      "usage_rate": 33.3
+    },
+    {
+      "card_id": "GD01-008",
+      "decks": 288,
+      "usage_rate": 33.1
     },
     {
       "card_id": "ST05-010",
-      "decks": 281,
-      "usage_rate": 32.6
+      "decks": 284,
+      "usage_rate": 32.7
     }
   ],
-  "card_ranking_denominator": 861,
+  "card_ranking_denominator": 869,
   "recent_events": [
     {
       "event_id": "ntcd-01M0CFVWCDETQ95526NDJSAPHN",
@@ -383,6 +383,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M0D11852M9J27VDJ4T8JZ8Q2",
+      "date": "2026-08-19",
+      "store": "ドラグーン周南",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M0A4B5T5SETBFXS1TE05PM8Z",
       "date": "2026-08-18",
       "store": "トーナメントセンターバトロコ川崎駅前",
@@ -521,45 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M0833BE6GX1MWN1X4V4EGXT6",
-      "date": "2026-08-17",
-      "store": "カードショップ＠ほ～む。熊本店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-08-19",
-    "event_count": 966
+    "event_count": 967
   }
 }
