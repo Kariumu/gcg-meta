@@ -4341,5 +4341,51 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-19": {
+    "recognized_at": "2026-08-19 20:00:32 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2089993270739001675",
+      "https://x.com/GUNDAM_GCG_JP/status/2089985724129120573"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-129",
+        "card_name": "5thルナ",
+        "color": "Purple",
+        "card_type": "BASE",
+        "level": 4,
+        "cost": 3,
+        "ap": null,
+        "hp": 2,
+        "traits": [
+          "〔拠点〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。【破壊時】自分のシールドがあるなら、「アクシズ」(〔ネオ・ジオン〕・AP0・HP5)のベーストークン1つを配備する。",
+        "effect_confidence": "medium",
+        "effect_length": 97,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST14-013",
+        "card_name": "天賦の才",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 2,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】相手のユニット1つを選ぶ。このターン中、それをAP-3する。メイン/アクション このカードをプレイするとき、以下の効果から1つを選択し発動する。■HP3以下の相手のユニット1〜2つを選ぶ。それらをレストにする。■相手のユニット1つを選ぶ。このターン中、それをAP-3する。",
+        "effect_confidence": "low",
+        "effect_length": 142,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
