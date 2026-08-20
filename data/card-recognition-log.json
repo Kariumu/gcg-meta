@@ -4387,5 +4387,51 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-20": {
+    "recognized_at": "2026-08-20 20:00:28 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2090355657430159774",
+      "https://x.com/GUNDAM_GCG_JP/status/2090348108794237429"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-016",
+        "card_name": "ドムトルーパー",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "特徴にオーブを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST12-011",
+        "card_name": "ミリアルド・ピースクラフト",
+        "color": "Red",
+        "card_type": "PILOT",
+        "level": 5,
+        "cost": 1,
+        "ap": 3,
+        "hp": 1,
+        "traits": [],
+        "link": "「ゼクス・マーキス」",
+        "effect": "このカードのカード名は「ゼクス・マーキス」としても扱う。【バースト】このカードを手札に加える。【起動・アクション】ターン1回 このユニットとバトルしている、ダメージを受けている相手のユニット1つを選ぶ。それに2ダメージを与える。",
+        "effect_confidence": "low",
+        "effect_length": 114,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
