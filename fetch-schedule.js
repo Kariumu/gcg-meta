@@ -66,6 +66,34 @@ async function fetchJSON(url, attempts = 3) {
   throw lastErr;
 }
 
+// 指示書75: アーカイブからシリーズ別の観測統計(真の初回開催・観測累計。maxStart は
+// 焼き込みには使わないが §5-2 のアーカイブ照合用に残す — 削らないこと)を読む。
+// 公式APIは開催済みイベントを一覧から消すため、現存イベントだけでは
+// シリーズの開始済み判定ができない(2026-08-20 実測: 8月NTCの現存最小は未来日付)。
+// 読めない・壊れている場合は空マップを返して本処理を続行する(現存のみのフォールバック)。
+function loadArchiveStats(archivePath) {
+  const stats = Object.create(null); // 指示書75-B: series_id が "__proto__" 等でも Object.prototype を汚染しない
+  try {
+    const a = JSON.parse(fs.readFileSync(archivePath, 'utf-8').replace(/^\uFEFF/, ''));
+    const events = a && typeof a.events === 'object' ? a.events : {};
+    for (const eid of Object.keys(events)) {
+      const ev = events[eid];
+      if (!ev || ev.series_id == null) continue;
+      const sid = String(ev.series_id);
+      const st = stats[sid] || (stats[sid] = { count: 0, minStart: null, maxStart: null });
+      st.count += 1;
+      const s = ev.start_datetime;
+      if (typeof s === 'string' && s !== '') {
+        if (st.minStart === null || s < st.minStart) st.minStart = s;
+        if (st.maxStart === null || s > st.maxStart) st.maxStart = s;
+      }
+    }
+  } catch (e) {
+    console.log('[archive-stats] WARN 読み込み失敗(現存イベントのみで続行): ' + e.message);
+  }
+  return stats;
+}
+
 async function main() {
   console.log('=== GCG Schedule Fetch ===');
   if (DRY_RUN) {
@@ -87,6 +115,9 @@ async function main() {
   if (fs.existsSync(OUTPUT_PATH)) {
     existingData = JSON.parse(fs.readFileSync(OUTPUT_PATH, 'utf-8'));
   }
+
+  // 指示書75: アーカイブの観測統計を1回だけ読む(読取のみのため dry-run でもスキップしない)
+  const archiveStats = loadArchiveStats(path.join(__dirname, 'data', 'schedule_archive.json'));
 
   // 4. 各シリーズのイベント一覧を取得
   const seriesList = [];
@@ -154,15 +185,33 @@ async function main() {
     }));
 
     // シリーズ情報
+    // 指示書75: 現存イベントの最小/最遅を正しく計算(従来の「配列先頭」は並び順依存で不正確)
+    const startsNow = jpEvents.map(e => e.start_datetime).filter(s => typeof s === 'string' && s !== '');
+    const applyEndsNow = jpEvents.map(e => e.apply_end_datetime).filter(s => typeof s === 'string' && s !== '');
+    const curFirst = startsNow.length ? startsNow.reduce((m, s) => (s < m ? s : m)) : null;
+    const curLast  = startsNow.length ? startsNow.reduce((m, s) => (s > m ? s : m)) : null;
+    const curApplyEnd = applyEndsNow.length ? applyEndsNow.reduce((m, s) => (s > m ? s : m)) : null; // 最遅
+
+    // 指示書75: アーカイブの観測統計と合成。
+    // first(初回)のみアーカイブと合成する(より古い方)。last(最終)は現存のみ(curLast)とする —
+    // 未来のイベントは常に現存一覧に載るため max 側のアーカイブ合成は利得がなく、
+    // 「観測後にキャンセルされた未来イベント」がアーカイブに残る(upsert専用で削除がない)場合に
+    // 終了済みシリーズが開催中に残る偽判定だけを生むため(チェッカー実行検証済み)。
+    // totalAll は観測ベースの累計(近似): 観測後キャンセル分を含みうる・当夜初観測の新規は翌晩まで
+    // 反映されない(アーカイブ更新は本計算の後のため)。いずれも仕様として許容する。
+    const ast = archiveStats[String(sid)] || null;
+    const firstStart = (ast && ast.minStart && (!curFirst || ast.minStart < curFirst)) ? ast.minStart : curFirst;
+    const lastStart  = curLast;
+    const totalAll   = Math.max(ast ? ast.count : 0, jpEvents.length);
+
     seriesList.push({
       event_series_id: sid,
       event_series_title: series.event_series_title,
-      total: jpEvents.length,
-      apply_end_datetime: jpEvents[0] ? jpEvents[0].apply_end_datetime : null,
-      first_start_datetime: jpEvents[0] ? jpEvents[0].start_datetime : null,
-      last_start_datetime: jpEvents.length > 0
-        ? jpEvents.reduce((max, e) => e.start_datetime > max ? e.start_datetime : max, jpEvents[0].start_datetime)
-        : null
+      total: jpEvents.length,          // 予定(現存)件数 — 従来どおり
+      total_all: totalAll,             // 指示書75: 観測ベースの累計開催数(アーカイブ件数と現存の大きい方)
+      apply_end_datetime: curApplyEnd,
+      first_start_datetime: firstStart,
+      last_start_datetime: lastStart
     });
 
     console.log(`    → ${jpEvents.length} events`);
@@ -215,7 +264,7 @@ async function main() {
   }
 }
 
-module.exports = { isDomesticSeries };
+module.exports = { isDomesticSeries, loadArchiveStats };
 
 if (require.main === module) {
   main().catch(err => {

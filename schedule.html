@@ -58,7 +58,7 @@
     // (例: 5月のショップバトル → 開催中 + 応募受付中)。
     // data/schedule.json では apply_end_datetime / start_datetime が null のイベントが含まれるため、
     // 有効な日時のみを対象にする。
-    function getEventSeriesStatuses(events) {
+    function getEventSeriesStatuses(events, seriesRec) {
       var now = new Date();
       function toValidDate(s) {
         if (!s) return null;
@@ -75,6 +75,10 @@
       var latestApplyEnd = applyEndDates.length ? new Date(Math.max.apply(null, applyEndDates)) : null;
       var earliestStart  = startDates.length ? new Date(Math.min.apply(null, startDates)) : null;
       var latestStart    = startDates.length ? new Date(Math.max.apply(null, startDates)) : null;
+      // 指示書75: シリーズ焼き込み値(アーカイブ由来の真の初回)を併用。初回側のみ(§2-2 と同じ理由で
+      // last 側は現存のみ)。古い schedule.json(焼き込み前)では値が現存ベースなので min しても同値 = 後方互換。
+      var sFirst = seriesRec ? toValidDate(seriesRec.first_start_datetime) : null;
+      if (sFirst && (!earliestStart || sFirst < earliestStart)) earliestStart = sFirst;
 
       var statuses = [];
       // 開催中: 既に始まっているイベントがあり、まだ全部終わっていない
@@ -131,11 +135,18 @@
         ? '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-family:var(--font-mono)">応募締切: ' + formatDeadline(series.apply_end_datetime) + '</div>'
         : '';
 
+      // 指示書75: 開催数は「累計(観測ベース)+うち予定(現存)」を併記する。
+      // total_all が欠落した古い schedule.json、または total_all == total のときは従来表示に落とす。
+      var totalAll = (typeof series.total_all === 'number' && isFinite(series.total_all)) ? series.total_all : null;
+      var countText = (totalAll !== null && totalAll > series.total)
+        ? (totalAll + '件(うち予定 ' + series.total + '件)')
+        : (series.total + '件');
+
       card.innerHTML =
         '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">' + badges + '</div>' +
         '<div style="font-size:15px;font-weight:600;color:var(--text-primary)">' + series.event_series_title + '</div>' +
         deadline +
-        '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-family:var(--font-mono)">開催数: ' + series.total + '件</div>';
+        '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-family:var(--font-mono)">開催数: ' + countText + '</div>';
       return card;
     }
 
@@ -154,7 +165,7 @@
         var sid = String(series[i].event_series_id);
         var events = eventsByseries[sid] || [];
         if (events.length === 0) { series[i]._skip = true; continue; }
-        series[i].statuses = getEventSeriesStatuses(events);
+        series[i].statuses = getEventSeriesStatuses(events, series[i]);
         // フォールバック: fetch-schedule.js 側で apply_end_datetime が「最遅」になっていない
         // 古い schedule.json を読み込んだ場合に備え、ここでも最遅で上書きする。
         // 無効な日時 / null はスキップ、すべて無効なら元の値を維持
@@ -185,8 +196,10 @@
           })
           .sort(function(a, b) {
             // 並び順: 開催中 → 応募受付中 → 開催予定 (現在動いているものを上に)
+            // 指示書75-B: 0 が falsy で最下位に化ける既存不具合の修正。in 判定で 0 を正しく扱う。
             var order = { ongoing: 0, accepting: 1, upcoming: 2, ended: 9 };
-            return (order[primaryStatus(a)] || 9) - (order[primaryStatus(b)] || 9);
+            var rank = function(s) { return (s in order) ? order[s] : 9; };
+            return rank(primaryStatus(a)) - rank(primaryStatus(b));
           })
       };
     }
