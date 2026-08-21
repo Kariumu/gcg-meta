@@ -4433,5 +4433,76 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-21": {
+    "recognized_at": "2026-08-21 21:46:09 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2090772152135930164",
+      "https://x.com/GUNDAM_GCG_JP/status/2090770909497856339",
+      "https://x.com/GUNDAM_GCG_JP/status/2090710496752160801"
+    ],
+    "cards": [
+      {
+        "card_number": "ST11-012",
+        "card_name": "ロニ・ガーベイ",
+        "color": "Purple",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔ジオン〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】〔水中〕の味方のユニット1つを選ぶ。このターン中、それが相手のユニットからバトルダメージを受けるとき、そのダメージを2軽減する。",
+        "effect_confidence": "medium",
+        "effect_length": 89,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-006",
+        "card_name": "シャンブロ",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 4,
+        "hp": 5,
+        "traits": [
+          "〔ジオン〕",
+          "〔水中〕"
+        ],
+        "link": "「ロニ・ガーベイ」",
+        "effect": "相手のターン開始時、このユニット以外の〔水中〕の味方のユニットがいるなら、このターン中、味方のシールドエリアのカードが相手から効果ダメージを受けるとき、そのダメージを5軽減する。【配備時】自分のトラッシュの〔水中〕のユニットカード1枚を選ぶ。それを手札に加える。",
+        "effect_confidence": "low",
+        "effect_length": 131,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-035",
+        "card_name": "Ζガンダム",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 4,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔エゥーゴ〕",
+          "〔ガンダムチーム〕"
+        ],
+        "link": "特徴にエゥーゴを持つPILOT",
+        "effect": "ターン1回 自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、AP3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 76,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
