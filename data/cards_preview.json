@@ -962,7 +962,7 @@
     "rarity": "C",
     "effect": "【バースト】このカードを手札に加える。【セット時】〔水中〕の味方のユニット1つを選ぶ。このターン中、それが相手のユニットからバトルダメージを受けるとき、そのダメージを2軽減する。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2090772152135930164",
-    "created_at": "2026-08-21 21:45:43 JST",
+    "created_at": "2026-08-22 20:00:44 JST",
     "preview": true,
     "_pendingReview": false,
     "_pendingReviewIssues": [],
@@ -986,7 +986,7 @@
     "rarity": "LR",
     "effect": "相手のターン開始時、このユニット以外の〔水中〕の味方のユニットがいるなら、このターン中、味方のシールドエリアのカードが相手から効果ダメージを受けるとき、そのダメージを5軽減する。【配備時】自分のトラッシュの〔水中〕のユニットカード1枚を選ぶ。それを手札に加える。",
     "source_url": "https://x.com/GUNDAM_GCG_JP/status/2090770909497856339",
-    "created_at": "2026-08-21 21:45:56 JST",
+    "created_at": "2026-08-22 20:00:57 JST",
     "preview": true,
     "_pendingReview": false,
     "_pendingReviewIssues": [],
@@ -1015,5 +1015,59 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-08-21"
+  },
+  "GD06-071": {
+    "card_number": "GD06-071",
+    "card_name": "シャイニングガンダム（明鏡止水）",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 6,
+    "cost": 5,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔MF〕",
+      "〔シャッフル同盟〕"
+    ],
+    "link": "「ドモン・カッシュ」",
+    "rarity": "R",
+    "effect": "ターン1回 自分のターン中、自分が(必殺技)のコマンドのメインアクションを発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。そうしたなら、このユニットをAP+2する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2091080432834039906",
+    "created_at": "2026-08-22 20:00:17 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-08-21"
+  },
+  "ST13-013": {
+    "card_number": "ST13-013",
+    "card_name": "僕がニュータイプだ",
+    "color": "Green",
+    "card_type": "COMMAND",
+    "level": 4,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [],
+    "link": "",
+    "rarity": "C",
+    "effect": "メイン 『ビット/ファンネル』((遠隔兵器)・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1〜2つを配備する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2091072889252671564",
+    "created_at": "2026-08-22 20:00:32 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-08-21",
+    "pilot": {
+      "name": "カリス・ノーティラス",
+      "traits": [
+        "〔宇宙革命軍〕",
+        "〔ニュータイプ〕"
+      ],
+      "ap": 1,
+      "hp": 1
+    }
   }
 }

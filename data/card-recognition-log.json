@@ -4435,11 +4435,13 @@
     "status": "pending_review"
   },
   "2026-08-21": {
-    "recognized_at": "2026-08-21 21:46:09 JST",
+    "recognized_at": "2026-08-22 20:00:58 JST",
     "source_tweets": [
       "https://x.com/GUNDAM_GCG_JP/status/2090772152135930164",
       "https://x.com/GUNDAM_GCG_JP/status/2090770909497856339",
-      "https://x.com/GUNDAM_GCG_JP/status/2090710496752160801"
+      "https://x.com/GUNDAM_GCG_JP/status/2090710496752160801",
+      "https://x.com/GUNDAM_GCG_JP/status/2091080432834039906",
+      "https://x.com/GUNDAM_GCG_JP/status/2091072889252671564"
     ],
     "cards": [
       {
@@ -4499,6 +4501,43 @@
         "effect": "ターン1回 自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、AP3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
         "effect_confidence": "medium",
         "effect_length": 76,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-071",
+        "card_name": "シャイニングガンダム（明鏡止水）",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔MF〕",
+          "〔シャッフル同盟〕"
+        ],
+        "link": "「ドモン・カッシュ」",
+        "effect": "ターン1回 自分のターン中、自分が(必殺技)のコマンドのメインアクションを発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。そうしたなら、このユニットをAP+2する。",
+        "effect_confidence": "medium",
+        "effect_length": 95,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST13-013",
+        "card_name": "僕がニュータイプだ",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン 『ビット/ファンネル』((遠隔兵器)・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1〜2つを配備する。",
+        "effect_confidence": "medium",
+        "effect_length": 79,
         "image_url": null,
         "confidence": "medium"
       }
