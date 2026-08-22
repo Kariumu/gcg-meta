@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4"
   },
   "totals": {
-    "events": 197,
-    "decks": 921,
+    "events": 200,
+    "decks": 937,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 290,
-      "share": 31.5,
-      "win_rate": 26.9,
+      "count": 291,
+      "share": 31.1,
+      "win_rate": 26.8,
       "avg_rank": 2.5,
       "wins": 78
     },
@@ -30,11 +30,11 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 159,
-      "share": 17.3,
-      "win_rate": 27.7,
+      "count": 164,
+      "share": 17.5,
+      "win_rate": 27.4,
       "avg_rank": 2.4,
-      "wins": 44
+      "wins": 45
     },
     {
       "type_key": "Green+Purple",
@@ -43,11 +43,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 128,
+      "count": 130,
       "share": 13.9,
-      "win_rate": 18.8,
+      "win_rate": 19.2,
       "avg_rank": 2.6,
-      "wins": 24
+      "wins": 25
     },
     {
       "type_key": "Blue+White",
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 112,
-      "share": 12.2,
-      "win_rate": 27.7,
+      "count": 117,
+      "share": 12.5,
+      "win_rate": 27.4,
       "avg_rank": 2.4,
-      "wins": 31
+      "wins": 32
     },
     {
       "type_key": "Red+White",
@@ -69,9 +69,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 99,
+      "count": 100,
       "share": 10.7,
-      "win_rate": 26.3,
+      "win_rate": 26,
       "avg_rank": 2.4,
       "wins": 26
     },
@@ -82,11 +82,11 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 82,
-      "share": 8.9,
-      "win_rate": 24.4,
+      "count": 84,
+      "share": 9,
+      "win_rate": 25,
       "avg_rank": 2.5,
-      "wins": 20
+      "wins": 21
     },
     {
       "type_key": "Red+Purple",
@@ -96,7 +96,7 @@
       ],
       "label": "赤/紫",
       "count": 21,
-      "share": 2.3,
+      "share": 2.2,
       "win_rate": 4.8,
       "avg_rank": 2.9,
       "wins": 1
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 492,
+      "decks": 500,
       "usage_rate": 53.4
     },
     {
       "card_id": "ST03-008",
-      "decks": 415,
-      "usage_rate": 45.1
+      "decks": 418,
+      "usage_rate": 44.6
     },
     {
       "card_id": "GD01-030",
-      "decks": 391,
-      "usage_rate": 42.5
+      "decks": 394,
+      "usage_rate": 42
     },
     {
       "card_id": "ST01-010",
-      "decks": 386,
-      "usage_rate": 41.9
+      "decks": 392,
+      "usage_rate": 41.8
     },
     {
       "card_id": "GD05-002",
-      "decks": 353,
-      "usage_rate": 38.3
-    },
-    {
-      "card_id": "ST01-001",
-      "decks": 351,
-      "usage_rate": 38.1
+      "decks": 364,
+      "usage_rate": 38.8
     },
     {
       "card_id": "GD05-081",
-      "decks": 346,
-      "usage_rate": 37.6
+      "decks": 358,
+      "usage_rate": 38.2
+    },
+    {
+      "card_id": "ST01-001",
+      "decks": 357,
+      "usage_rate": 38.1
     },
     {
       "card_id": "GD03-056",
-      "decks": 304,
-      "usage_rate": 33
-    },
-    {
-      "card_id": "GD01-008",
-      "decks": 301,
-      "usage_rate": 32.7
+      "decks": 311,
+      "usage_rate": 33.2
     },
     {
       "card_id": "ST05-010",
-      "decks": 299,
-      "usage_rate": 32.5
+      "decks": 306,
+      "usage_rate": 32.7
+    },
+    {
+      "card_id": "GD01-008",
+      "decks": 303,
+      "usage_rate": 32.3
     }
   ],
-  "card_ranking_denominator": 921,
+  "card_ranking_denominator": 937,
   "recent_events": [
     {
       "event_id": "ntcd-01M0KWRE3M25J05BTNA436K5XY",
@@ -418,6 +418,111 @@
       ]
     },
     {
+      "event_id": "ntcd-01M0M72E3FSFNQ11WDWK045EYT",
+      "date": "2026-08-22",
+      "store": "ブックオフイトーヨーカドー溝ノ口店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M0M72CYTWD8XDR7ATDKEQ5W1",
+      "date": "2026-08-22",
+      "store": "カードナイト",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M0M72C7D09SKX7PCM6MHFRGC",
+      "date": "2026-08-22",
+      "store": "スーパーカボス敦賀店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M0HMN5VAZQYMQE568KPR4VXM",
       "date": "2026-08-21",
       "store": "カードラボ天王寺店",
@@ -451,115 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M0HR35AKJ4CVGA56KDDPFJWV",
-      "date": "2026-08-21",
-      "store": "BOOKOFF SUPER BAZAAR 西友大森店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M0J5TDGXDDVFAV4NESTYBGKG",
-      "date": "2026-08-21",
-      "store": "ビデオインアメリカ京都西七条店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M0F285NSW6TNN58P4C6TPTCF",
-      "date": "2026-08-20",
-      "store": "S CARD OASIS 鳳店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-08-22",
-    "event_count": 977
+    "event_count": 980
   }
 }
