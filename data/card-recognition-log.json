@@ -4543,5 +4543,49 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-23": {
+    "recognized_at": "2026-08-23 20:00:30 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2091442820565368916",
+      "https://x.com/GUNDAM_GCG_JP/status/2091435278724378663"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-105",
+        "card_name": "譲れない優しさ",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 5,
+        "cost": 3,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン 「ガンダム・キャリバーン」(〔学園〕・AP5・HP3・《高機動》)のユニットトークン1つか、「ガンダム・エアリアル(改修型)」(〔クワイエット・ゼロ〕・AP3・HP5・《突破3》)のユニットトークン1つを配備する。",
+        "effect_confidence": "low",
+        "effect_length": 111,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST14-015",
+        "card_name": "戦場を駆ける想い",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 4,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】自分はEXリソース1つを置く。【メイン】自分はリソース1つをレストで置く。その後、このターン中、自分のリソースを効果でアクティブにしていないなら、自分のリソースを相手プレイヤーの人数と同じ数だけ選ぶ。それらをアクティブにする。",
+        "effect_confidence": "low",
+        "effect_length": 119,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
