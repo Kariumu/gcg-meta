@@ -4587,5 +4587,55 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-24": {
+    "recognized_at": "2026-08-24 20:00:29 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2091805208355758361",
+      "https://x.com/GUNDAM_GCG_JP/status/2091797660315369555"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-058",
+        "card_name": "ブラストインパルスガンダム",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔ザフト〕",
+          "〔ミネルバ隊〕"
+        ],
+        "link": "「ルナマリア・ホーク」",
+        "effect": "このユニットは配備したターンに、レストの相手のユニットをアタック先に選んでアタックしてもよい。",
+        "effect_confidence": "high",
+        "effect_length": 47,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-003",
+        "card_name": "ゾック",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔ジオン〕",
+          "〔水中〕"
+        ],
+        "link": "",
+        "effect": "このユニット以外の〔水中〕の味方のユニットがいる間、これは《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "medium",
+        "effect_length": 66,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
