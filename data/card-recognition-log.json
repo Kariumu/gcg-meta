@@ -4637,5 +4637,98 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-22": {
+    "recognized_at": "2026-08-24 21:36:52 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2091080432834039906",
+      "https://x.com/GUNDAM_GCG_JP/status/2091072889252671564"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-071",
+        "card_name": "シャイニングガンダム（明鏡止水）",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔MF〕",
+          "〔シャッフル同盟〕"
+        ],
+        "link": "「ドモン・カッシュ」",
+        "effect": "ターン1回 自分のターン中、自分が(必殺技)のコマンドのメインアクションを発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。そうしたなら、このユニットをAP+2する。",
+        "effect_confidence": "medium",
+        "effect_length": 95,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST13-013",
+        "card_name": "僕がニュータイプだ",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン 『ビット/ファンネル』((遠隔兵器)・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1〜2つを配備する。",
+        "effect_confidence": "medium",
+        "effect_length": 79,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
+  },
+  "2026-08-25": {
+    "recognized_at": "2026-08-25 20:00:29 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2092167599903650142",
+      "https://x.com/GUNDAM_GCG_JP/status/2092160056464716165"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-005",
+        "card_name": "アカツキ(シラヌイ)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 5,
+        "hp": 4,
+        "traits": [
+          "〔オーブ〕"
+        ],
+        "link": "特徴(オーブ)/「ムウ・ラ・フラガ」",
+        "effect": "【アタック時】ダメージを受けているLv.5以下の相手のユニット1つを選んでもよい。それを持ち主の手札に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 54,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST12-013",
+        "card_name": "最後の勝利者",
+        "color": "Red",
+        "card_type": "COMMAND",
+        "level": 6,
+        "cost": 2,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】相手のユニット1つを選ぶ。それに1ダメージを与える。【メイン】相手プレイヤー1人を選ぶ。自分とそのプレイヤーはそれぞれ自身のユニット1つを選ぶ。それらでバトルに移行し、ダメージステップのみを行う。(自分、相手の順番で選ぶ)",
+        "effect_confidence": "low",
+        "effect_length": 117,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
