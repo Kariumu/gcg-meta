@@ -4730,5 +4730,51 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-26": {
+    "recognized_at": "2026-08-26 20:00:23 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2092529986271842383",
+      "https://x.com/GUNDAM_GCG_JP/status/2092522440979087405"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-113",
+        "card_name": "禁じられた兵器",
+        "color": "Red",
+        "card_type": "COMMAND",
+        "level": 5,
+        "cost": 4,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】相手のユニット1つを選ぶ。それに2ダメージを与える。【メイン】/【アクション】ダメージを受けている相手のユニット1つを選ぶ。それに5ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 81,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST13-003",
+        "card_name": "ベルティゴ",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔宇宙革命軍〕"
+        ],
+        "link": "「カリス・ノーティラス」",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
