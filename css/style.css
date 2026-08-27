@@ -1635,31 +1635,45 @@ a.section-badge:hover {
   background: var(--bg-card);
 }
 
-/* ---- ホーム：hero-stats（ダッシュボード統計を流用） ---- */
-.home-hero-stats {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
+/* ---- ホーム：KPI計器帯（指示書81で旧hero-stats系から置換） ---- */
+.home-kpi-band {
   margin-top: 16px;
+  display: flex; align-items: stretch; justify-content: center;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  padding: 14px 8px;
+  flex-wrap: wrap;
 }
-.home-hero-stat {
-  min-width: 100px;
-  text-align: center;
+.home-kpi-period {
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  padding: 0 28px 0 12px; gap: 3px;
 }
-.home-hero-stat-value {
-  font-family: var(--font-mono, 'JetBrains Mono', monospace);
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--accent);
-  line-height: 1.1;
-  font-variant-numeric: tabular-nums;
+.home-kpi-period-label {
+  font-size: 10px; font-weight: 600; letter-spacing: .18em;
+  color: var(--text-muted); text-transform: uppercase;
 }
-.home-hero-stat-label {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 2px;
-  letter-spacing: 0.04em;
+.home-kpi-period-value {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+  color: var(--text-secondary); letter-spacing: .04em;
+}
+.home-kpi-stat {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 0 28px;
+  border-left: 1px solid rgba(255,255,255,0.07);
+}
+.home-kpi-label { font-size: 11px; font-weight: 500; color: var(--text-muted); letter-spacing: .08em; }
+.home-kpi-value {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums; line-height: 1.1;
+  margin-top: 3px; font-size: 22px; font-weight: 600; color: var(--text-primary);
+}
+.home-kpi-stat.is-primary .home-kpi-value { font-size: 32px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; }
+.home-kpi-stat.is-primary .home-kpi-label { color: var(--text-secondary); }
+.home-kpi-unit { font-size: 12px; font-weight: 500; color: var(--text-muted); margin-left: 3px; letter-spacing: 0; }
+@media (max-width: 480px) {
+  .home-kpi-band { display: grid; grid-template-columns: auto auto auto; justify-content: center; row-gap: 10px; padding: 12px 4px; }
+  .home-kpi-period { grid-column: 1 / -1; flex-direction: row; align-items: baseline; justify-content: center; gap: 8px; padding: 0; }
+  .home-kpi-stat { padding: 0 16px; }
+  .home-kpi-stat.is-primary { border-left: none; }
 }
 
 /* ---- 店舗検索セクション（トップ用） ---- */

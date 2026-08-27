@@ -50,7 +50,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=81">
     <style>
         /* 指示書60 Task2: サイトコンテンツ枠の視覚圧縮。
            css/style.css は全ページ共有のため変更せず、本ページ内で .home-site-nav 配下だけに適用する。
@@ -110,18 +110,22 @@
                     <div id="decktype-cards" class="loading">データを読み込み中</div>
                 </div>
             </div>
-            <div class="home-hero-stats" id="dash-stats">
-                <div class="home-hero-stat">
-                    <div class="home-hero-stat-value" id="stat-events">--</div>
-                    <div class="home-hero-stat-label">イベント</div>
+            <div class="home-kpi-band" id="dash-stats">
+                <div class="home-kpi-period">
+                    <div class="home-kpi-period-label">集計期間</div>
+                    <div class="home-kpi-period-value" id="stat-period">--</div>
                 </div>
-                <div class="home-hero-stat">
-                    <div class="home-hero-stat-value" id="stat-decks">--</div>
-                    <div class="home-hero-stat-label">総デッキ数</div>
+                <div class="home-kpi-stat is-primary">
+                    <div class="home-kpi-label">集計デッキ数</div>
+                    <div class="home-kpi-value"><span id="stat-decks">--</span><span class="home-kpi-unit">deck</span></div>
                 </div>
-                <div class="home-hero-stat">
-                    <div class="home-hero-stat-value" id="stat-types">--</div>
-                    <div class="home-hero-stat-label">デッキタイプ数</div>
+                <div class="home-kpi-stat">
+                    <div class="home-kpi-label">大会数</div>
+                    <div class="home-kpi-value" id="stat-events">--</div>
+                </div>
+                <div class="home-kpi-stat">
+                    <div class="home-kpi-label">デッキタイプ</div>
+                    <div class="home-kpi-value" id="stat-types">--</div>
                 </div>
             </div>
             <div id="date-filter-area" style="display:flex;justify-content:center;margin-top:16px"></div>
@@ -450,6 +454,26 @@
             });
         }
 
+        // 集計期間の銘板(#stat-period)を更新する(指示書81)。
+        // 数値と違いアニメーションは不要なので即時にテキストを設定する。
+        // 表示規則: 同一年月 → YYYY.MM / 年月が異なる → YYYY.MM.DD-YYYY.MM.DD / 両方空 → 全期間
+        // 片側のみ指定(利用者が一方の入力だけ消した場合)は開いた区間として表示する。
+        function setPeriodLabel(startVal, endVal) {
+            const el = document.getElementById('stat-period');
+            if (!el) return;
+            const s = String(startVal == null ? '' : startVal).trim();
+            const e = String(endVal == null ? '' : endVal).trim();
+            if (!s && !e) { el.textContent = '全期間'; return; }
+            const fmt = v => v.replace(/-/g, '.');
+            if (s && e) {
+                el.textContent = (s.slice(0, 7) === e.slice(0, 7))
+                    ? fmt(s.slice(0, 7))
+                    : fmt(s) + '\u2013' + fmt(e);
+                return;
+            }
+            el.textContent = s ? fmt(s) + '\u2013' : '\u2013' + fmt(e);
+        }
+
         // events.json + card_colors.json を遅延ロード（日付フィルタ操作時に1回だけ）
         // 注意: GCG.loadEvents() は失敗しても reject せず空データ({series:{},events:{}})を返す。
         //       そのまま成功扱いでメモ化すると、一度の通信失敗が「0件表示」のまま固定され、
@@ -546,6 +570,7 @@
             GCG.animateNumber(document.getElementById('stat-events'), top.totals.events);
             GCG.animateNumber(document.getElementById('stat-decks'), top.totals.decks);
             GCG.animateNumber(document.getElementById('stat-types'), top.totals.types);
+            setPeriodLabel(top.default_range.start || '', top.default_range.end || '');
 
             renderDeckTypes(top.deck_type_ranking);
             renderCardTop10(top.card_ranking, top.card_ranking_denominator != null ? top.card_ranking_denominator : top.totals.decks);
@@ -634,6 +659,7 @@
             GCG.animateNumber(document.getElementById('stat-events'), allEvents.length);
             GCG.animateNumber(document.getElementById('stat-decks'), totalResults);
             GCG.animateNumber(document.getElementById('stat-types'), Object.keys(allTypeKeys).length);
+            setPeriodLabel(startDate, endDate);
 
             var deckTypeRanking = Object.values(deckTypeMap).map(t => {
                 var share = totalResults > 0 ? Math.round(t.count / totalResults * 1000) / 10 : 0;
