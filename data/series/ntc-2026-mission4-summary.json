@@ -15,13 +15,13 @@
   "apply_end_date": "2026-07-20",
   "description": "2026年8月に全国各地で開催中の公式トーナメント「ニュータイプチャレンジ」の8月分（MISSION4）。開催期間は8月1日〜8月31日。",
   "stats": {
-    "event_count": 232,
-    "total_result_entries": 2162,
-    "total_decks": 1081,
+    "event_count": 234,
+    "total_result_entries": 2178,
+    "total_decks": 1089,
     "by_region": {
       "中国": {
-        "events": 19,
-        "decks": 89
+        "events": 20,
+        "decks": 93
       },
       "関西": {
         "events": 38,
@@ -36,8 +36,8 @@
         "decks": 60
       },
       "関東": {
-        "events": 64,
-        "decks": 328
+        "events": 65,
+        "decks": 332
       },
       "中部": {
         "events": 54,
@@ -60,8 +60,8 @@
           "Green"
         ],
         "label": "青/緑",
-        "count": 330,
-        "share": 30.5
+        "count": 333,
+        "share": 30.6
       },
       {
         "type_key": "Blue+Purple",
@@ -71,7 +71,7 @@
         ],
         "label": "青/紫",
         "count": 182,
-        "share": 16.8
+        "share": 16.7
       },
       {
         "type_key": "Blue+White",
@@ -80,7 +80,7 @@
           "White"
         ],
         "label": "青/白",
-        "count": 142,
+        "count": 143,
         "share": 13.1
       },
       {
@@ -91,7 +91,7 @@
         ],
         "label": "緑/紫",
         "count": 140,
-        "share": 13
+        "share": 12.9
       },
       {
         "type_key": "Red+White",
@@ -100,7 +100,7 @@
           "White"
         ],
         "label": "赤/白",
-        "count": 125,
+        "count": 126,
         "share": 11.6
       },
       {
@@ -110,7 +110,7 @@
           "Red"
         ],
         "label": "青/赤",
-        "count": 96,
+        "count": 97,
         "share": 8.9
       },
       {
@@ -134,22 +134,22 @@
         "share": 1.5
       },
       {
-        "type_key": "White+Purple",
-        "colors": [
-          "White",
-          "Purple"
-        ],
-        "label": "白/紫",
-        "count": 13,
-        "share": 1.2
-      },
-      {
         "type_key": "Green+White",
         "colors": [
           "Green",
           "White"
         ],
         "label": "緑/白",
+        "count": 15,
+        "share": 1.4
+      },
+      {
+        "type_key": "White+Purple",
+        "colors": [
+          "White",
+          "Purple"
+        ],
+        "label": "白/紫",
         "count": 13,
         "share": 1.2
       },
@@ -172,8 +172,8 @@
         ],
         "label": "青/緑",
         "wins": 90,
-        "count": 330,
-        "win_rate": 27.3
+        "count": 333,
+        "win_rate": 27
       },
       {
         "type_key": "Blue+Purple",
@@ -194,8 +194,8 @@
         ],
         "label": "青/白",
         "wins": 38,
-        "count": 142,
-        "win_rate": 26.8
+        "count": 143,
+        "win_rate": 26.6
       },
       {
         "type_key": "Red+White",
@@ -204,9 +204,9 @@
           "White"
         ],
         "label": "赤/白",
-        "wins": 33,
-        "count": 125,
-        "win_rate": 26.4
+        "wins": 34,
+        "count": 126,
+        "win_rate": 27
       },
       {
         "type_key": "Green+Purple",
@@ -227,8 +227,8 @@
         ],
         "label": "青/赤",
         "wins": 25,
-        "count": 96,
-        "win_rate": 26
+        "count": 97,
+        "win_rate": 25.8
       },
       {
         "type_key": "White+Purple",
@@ -248,9 +248,9 @@
           "White"
         ],
         "label": "緑/白",
-        "wins": 2,
-        "count": 13,
-        "win_rate": 15.4
+        "wins": 3,
+        "count": 15,
+        "win_rate": 20
       },
       {
         "type_key": "Red+Purple",
