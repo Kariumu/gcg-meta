@@ -215,7 +215,39 @@ const EXPANSION_NAMES = {
  */
 function formatExpansionName(expansionCode) {
   if (!expansionCode) return '';
-  return EXPANSION_NAMES[expansionCode] || expansionCode;
+  return normalizeExpansionLabel(expansionCode);
+}
+
+// 2026-08-28: data/sets_meta.json を「セットコード ⇔ パック名」の唯一の正とする。
+// 認識AIが返す expansion は同じセットでも「GD06」と「Stardust Trails」で揺れるため、
+// 表記をパック名側に寄せて正規化する。新弾は CLAUDE.md の運用どおり sets_meta.json に
+// 1行追記すれば、夜間バッチと regenerate-article.js の両方に同時に反映される。
+let _setsMetaCache = null;
+function loadSetsMeta() {
+  if (_setsMetaCache) return _setsMetaCache;
+  try {
+    const p = path.join(ROOT, 'data', 'sets_meta.json');
+    const parsed = fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf-8')) : [];
+    _setsMetaCache = Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    log(`*** 警告 *** sets_meta.json を読めません(セット表記の正規化は行いません): ${e.message}`);
+    _setsMetaCache = [];
+  }
+  return _setsMetaCache;
+}
+
+/**
+ * セット表記をパック名に正規化する(2026-08-28)
+ * 入力はセットコード('GD06')・パック名('Stardust Trails')のどちらでもよい。
+ * sets_meta.json に無い場合は EXPANSION_NAMES、それも無ければ入力をそのまま返す。
+ * @param {string} value
+ * @returns {string}
+ */
+function normalizeExpansionLabel(value) {
+  if (!value) return '';
+  const hit = loadSetsMeta().find((s) => s && (s.code === value || s.name_jp === value));
+  if (hit && hit.name_jp) return hit.name_jp;
+  return EXPANSION_NAMES[value] || value;
 }
 
 // 注: VISION_USAGE_FILE, VISION_MONTHLY_LIMIT は指示書34 で shared/recognition-core.js に移動
@@ -2563,8 +2595,12 @@ async function main() {
     // allCardInfos から最も多い expansion を選択(混在時の dominant)、空なら空文字フォールバック
     const expansionCounts = {};
     allCardInfos.forEach((c) => {
-      if (c && c.expansion) {
-        expansionCounts[c.expansion] = (expansionCounts[c.expansion] || 0) + 1;
+      // 2026-08-28: 集計前にパック名へ正規化する。
+      // 同じ GD06 でも AI が「GD06」「Stardust Trails」と揺れて返すため、
+      // 正規化しないと同一セットが2種類として数えられ「GD06+Stardust Trails」になる。
+      const label = normalizeExpansionLabel(c && c.expansion);
+      if (label) {
+        expansionCounts[label] = (expansionCounts[label] || 0) + 1;
       }
     });
     const dominantExpansion = Object.keys(expansionCounts).length > 0
@@ -2654,6 +2690,11 @@ async function main() {
       const lost = guardReadable ? [...prevIds].filter((id) => !nowIds.has(id)) : ['(判定不能)'];
       if (lost.length > 0) {
         overwriteBlocked = true;
+        // 2026-08-28: ガード発火をタスクスケジューラ上で見えるようにする。
+        // ログだけだと毎日ログを読まない限り気づけない(2026-08-27 の停止も見逃された)。
+        // 3 = 同日上書きガード発火(1 = 認識停止・API失敗、2 = 引数エラー と区別する)。
+        // 後続工程は継続するため process.exit ではなく exitCode を立てるだけにする。
+        process.exitCode = 3;
         log('');
         log('========================================');
         log(`*** 警告 *** ${articleDate}.html は既に存在し、今回の対象に含まれないカードがあります`);

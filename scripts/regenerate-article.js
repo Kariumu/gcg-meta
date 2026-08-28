@@ -175,8 +175,11 @@ async function main() {
   // === 6. 拡張コードの動的決定 ===
   const expansionCounts = {};
   cardInfoList.forEach(c => {
-    if (c && c.expansion) {
-      expansionCounts[c.expansion] = (expansionCounts[c.expansion] || 0) + 1;
+    // 2026-08-28: auto-news.js と同様、集計前にパック名へ正規化する
+    // (formatExpansionName が sets_meta.json を参照する正規化関数になっている)。
+    const label = formatExpansionName(c && c.expansion);
+    if (label) {
+      expansionCounts[label] = (expansionCounts[label] || 0) + 1;
     }
   });
   const dominantExpansion = Object.keys(expansionCounts).length > 0
