@@ -1247,5 +1247,127 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-08-26"
+  },
+  "GD06-130": {
+    "card_number": "GD06-130",
+    "card_name": "ソレイユ",
+    "color": "White",
+    "card_type": "BASE",
+    "level": 5,
+    "cost": 1,
+    "ap": 0,
+    "hp": 6,
+    "terrain": [],
+    "traits": [
+      "〔ディアナ・カウンター〕",
+      "〔艦船〕"
+    ],
+    "link": "",
+    "rarity": "U",
+    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、パイロットがセットされていない相手のユニット1つを選ぶ。このターン中、それを〔ディアナ・カウンター〕/〔ミリシャ〕の味方のユニットと同じ数だけAP-する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2092915023215468700",
+    "created_at": "2026-08-27 20:00:15 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-08-27"
+  },
+  "T-029": {
+    "card_number": "T-029",
+    "card_name": "ビット/ファンネル",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": null,
+    "cost": 2,
+    "ap": 2,
+    "hp": 2,
+    "terrain": [],
+    "traits": [
+      "〔遠隔兵器〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "このユニットはパイロットをセットできず、アタックできない。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2092892372858523843",
+    "created_at": "2026-08-27 20:00:27 JST",
+    "preview": true,
+    "_pendingReview": true,
+    "_pendingReviewIssues": [
+      "UNIT の level が空"
+    ],
+    "_articleDate": "2026-08-27"
+  },
+  "ST13-016": {
+    "card_number": "ST13-016",
+    "card_name": "ソドン",
+    "color": "Green",
+    "card_type": "BASE",
+    "level": 2,
+    "cost": 1,
+    "ap": 0,
+    "hp": 5,
+    "terrain": [],
+    "traits": [
+      "〔ジオン〕",
+      "〔艦船〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、「ビット/ファンネル」(〔遠隔兵器〕・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1つを配備する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2092884829117317182",
+    "created_at": "2026-08-27 20:00:42 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-08-27"
+  },
+  "ST14-011": {
+    "card_number": "ST14-011",
+    "card_name": "パプテマス・シロッコ",
+    "color": "White",
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 2,
+    "hp": 1,
+    "terrain": [],
+    "traits": [
+      "〔ティターンズ〕",
+      "〔ジュビトリス〕",
+      "〔ニュータイプ〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "【バースト】このカードを手札に加える。【アタック時】相手のユニット1つを選ぶ。このバトル中、それをレストの相手のユニットと同じ数だけAP-する。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2093254762682892462",
+    "created_at": "2026-08-28 20:00:15 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-08-28"
+  },
+  "ST14-001": {
+    "card_number": "ST14-001",
+    "card_name": "ジ・O",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 9,
+    "cost": 8,
+    "ap": 6,
+    "hp": 7,
+    "terrain": [],
+    "traits": [
+      "〔ティターンズ〕",
+      "〔ジュビトリス〕"
+    ],
+    "link": "「パプテマス・シロッコ」",
+    "rarity": "LR",
+    "effect": "《制圧》（アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる） 各相手プレイヤーの、レストの最もLv.が低いユニットすべては、相手のターンのスタートフェイズでアクティブにならない。",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2093247215343133035",
+    "created_at": "2026-08-28 20:00:28 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-08-28"
   }
 }
