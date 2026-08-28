@@ -143,7 +143,10 @@ async function main() {
     link: c.link || '',
     rarity: c.rarity,
     effect: c.effect || '',
-    expansion: c.expansion || null,
+    // 2026-08-28: cards_preview.json の既存エントリには expansion が保存されていないため、
+    // card_number の接頭辞(例 GD06-130 → GD06)からフォールバックで復元する。
+    // トークン(T-029 等)はセット名に含めない扱いのため、意図的に対象外(null のまま)。
+    expansion: c.expansion || (String(c.card_number || '').match(/^([A-Z]{2}\d{2})-/) || [])[1] || null,
     release_date: c.release_date || null,
     _tweetUrl: c.source_url || '',
     _localImagePath: c._localImagePath || null,
@@ -180,6 +183,17 @@ async function main() {
     ? Object.keys(expansionCounts).sort((a, b) => expansionCounts[b] - expansionCounts[a])[0]
     : null;
   const expansionName = formatExpansionName(dominantExpansion);
+
+  // === 6b. タイトル/desc 用セット表記(2026-08-28: auto-news.js と形式を統一)===
+  // auto-news.js:2468 の titleExpansionLabel と同一ロジック。
+  // セットが1種のみ → formatExpansionName の長い名称
+  // 2種以上の混在日 → セットコードを「+」連結(枚数降順、同数はコード昇順)
+  // これが無いと同じ日でも夜間バッチと再生成でタイトル形式が食い違う。
+  const titleExpansionLabel = Object.keys(expansionCounts).length >= 2
+    ? Object.keys(expansionCounts)
+        .sort((a, b) => expansionCounts[b] - expansionCounts[a] || a.localeCompare(b))
+        .join('+')
+    : expansionName;
 
   // === 7. 導入文 + 考察生成(Claude API、Opus)===
   // 同日公開でリンク条件成立した UNIT×PILOT 組合せを検出(2026-05-24 追加)
@@ -225,8 +239,8 @@ async function main() {
   // YYYY-MM-DD → 「M/D」(dateLabel 相当)
   const m = articleDate.match(/^\d{4}-(\d{2})-(\d{2})$/);
   const dateLbl = m ? `${parseInt(m[1])}/${parseInt(m[2])}` : articleDate;
-  const title = `【${dateLbl}公開】${expansionName || ''} 新カード${cardCount}枚まとめ`;
-  const desc = `ガンダムカードゲーム${expansionName || ''}から公開された新カード${cardCount}枚の紹介と環境考察。`;
+  const title = `【${dateLbl}公開】${titleExpansionLabel || ''} 新カード${cardCount}枚まとめ`;
+  const desc = `ガンダムカードゲーム${titleExpansionLabel || ''}から公開された新カード${cardCount}枚の紹介と環境考察。`;
   const pageHtml = generateNewsPage(articleDate, title, desc, articleHtml, {
     displayDate: articleDate.replace(/-/g, '.')
   });

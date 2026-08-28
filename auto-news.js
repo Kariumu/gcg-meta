@@ -904,6 +904,10 @@ function saveCardPreview(cardInfo, sourceUrl) {
     link: cardInfo.link || '',
     rarity: cardInfo.rarity,
     effect: cardInfo.effect || '',
+    // 2026-08-28: 再生成時にセット名を復元するため保存する。
+    // これが無いと regenerate-article.js が expansion を復元できず、
+    // タイトルが「【8/27公開】 新カード3枚まとめ」のようにセット名欠落になる。
+    expansion: cardInfo.expansion || null,
     source_url: sourceUrl || '',
     created_at: formatJST(new Date()),
     preview: true,
@@ -955,7 +959,15 @@ function checkRecognitionIssues(cardData) {
   // カードタイプ別必須フィールド
   const isEmpty = v => v === null || v === undefined || v === '-' || v === '';
   const cardType = cardData.card_type;
-  if (cardType === 'UNIT') {
+  // 2026-08-28: トークンカード(T-xxx)は公式にレベル表記が無いため level/cost を必須にしない。
+  // cards_master.json 収載のトークン27件は level を1件も持たず、stats は hp のみ(T-012/T-014)
+  // または ap+hp。よって hp のみ必須とする。
+  // 経緯: 2026-08-27 に T-029「ビット/ファンネル」が UNIT と分類され「UNIT の level が空」で
+  //       記事生成が全体停止し、reports/news/2026-08-27.html が未生成のまま残った。
+  const isToken = cardType === 'TOKEN' || /^T-\d+/.test(String(cardData.card_number || ''));
+  if (isToken) {
+    if (isEmpty(cardData.hp)) issues.push('TOKEN の hp が空');
+  } else if (cardType === 'UNIT') {
     if (isEmpty(cardData.level)) issues.push('UNIT の level が空');
     if (isEmpty(cardData.cost)) issues.push('UNIT の cost が空');
     if (isEmpty(cardData.ap)) issues.push('UNIT の ap が空');
@@ -986,6 +998,71 @@ function checkRecognitionIssues(cardData) {
     hasIssue: issues.length > 0,
     issues: issues,
   };
+}
+
+/**
+ * 記事HTMLから「主役として掲載されたカード番号」を抽出する(2026-08-28)
+ *
+ * assembleCardArticleHtml が出力する見出し
+ *   <h3 class="news-card-title">カード名 (カード番号)</h3>
+ * だけを対象にする。本文全体を対象にすると関連カードリンクまで拾ってしまう。
+ *
+ * 重要: この抽出は「掲載済みスキップ」と「同日上書きガード」の両方の土台になっている。
+ * 見出しのマークアップを変更するときは必ずここも直すこと。直し忘れると両方が
+ * 無言で機能しなくなり、既存記事の上書き事故(2026-08-28 の ST14 消失)が再発する。
+ * そのため呼び出し側は countHeadings と ids.size の食い違いを検知してフェイルクローズする。
+ *
+ * @param {string} html 記事HTML
+ * @returns {{ids: Set<string>, countHeadings: number}}
+ */
+function extractCardIdsFromArticleHtml(html) {
+  const ids = new Set();
+  for (const m of html.matchAll(/<h3 class="news-card-title">[^<]*\(([A-Z0-9]{1,6}-[0-9]{3})\)<\/h3>/g)) {
+    ids.add(m[1]);
+  }
+  const countHeadings = (html.match(/<h3 class="news-card-title">/g) || []).length;
+  return { ids, countHeadings };
+}
+
+/**
+ * 既に reports/news/*.html に掲載済みのカード番号を収集する(2026-08-28)
+ *
+ * 夜間バッチの取得窓は run-auto-news-daily.bat により「前日20:01〜実行時刻」で固定されている。
+ * このため前日 20:01 以降に投稿されたカードは翌晩の窓にも入り、cards_master 未登録である限り
+ * 「新カード」として再処理される。記事日付は窓内で最も古い投稿日で決まるため、
+ * 放置すると記事日付が前日に引き戻され、既存記事の上書き(= 掲載済みカードの消失)を招く。
+ *
+ * 抽出は同日上書きガードと同じ「主役カードの見出し」に限定する
+ * (本文全体だと関連カードリンクまで拾ってしまうため)。
+ *
+ * @returns {Set<string>} 掲載済みカード番号。収集に失敗した場合は空 Set(=スキップ判定を行わない)
+ */
+function loadPublishedCardIds() {
+  const ids = new Set();
+  let files;
+  try {
+    if (!fs.existsSync(NEWS_DIR)) return ids;
+    files = fs.readdirSync(NEWS_DIR).filter((f) => f.endsWith('.html'));
+  } catch (e) {
+    log(`*** 警告 *** ${NEWS_DIR} を列挙できません(重複掲載スキップは無効化されます): ${e.message}`);
+    return new Set();
+  }
+  // 1ファイルの失敗で全件を捨てないよう、try/catch はファイル単位に置く。
+  const failed = [];
+  for (const f of files) {
+    try {
+      const html = fs.readFileSync(path.join(NEWS_DIR, f), 'utf-8');
+      const { ids: found } = extractCardIdsFromArticleHtml(html);
+      found.forEach((id) => ids.add(id));
+    } catch (e) {
+      failed.push(`${f} (${e.message})`);
+    }
+  }
+  if (failed.length > 0) {
+    log(`*** 警告 *** 掲載済みカードの収集で ${failed.length}/${files.length} ファイルを読めませんでした: ${failed.slice(0, 5).join(' / ')}`);
+    log('  読めたファイル分のみでスキップ判定します(取りこぼしたカードは再処理される可能性があります)。');
+  }
+  return ids;
 }
 
 // 注: buildUnifiedCardDB は指示書34 で shared/recognition-core.js に移動 → 冒頭 require で取得済
@@ -1751,7 +1828,7 @@ function buildCardBlockHtml(card, analysis, inlineRelated, linkTargets) {
   html += `<td class="news-card-stat-label news-card-stat-label--right">コスト</td><td>${card.cost != null ? card.cost : '-'}</td></tr>\n`;
   // 指示書37d/37e(2026-05-17): UNIT/BASE は戦闘 AP/HP、PILOT は補正 AP/HP を表示。COMMAND のみ非表示。
   // GCG ルール上、PILOT カードの AP/HP は UNIT にセット時の補正値 → ラベルで明示
-  if (card.card_type === 'UNIT' || card.card_type === 'BASE' || card.card_type === 'PILOT') {
+  if (card.card_type === 'UNIT' || card.card_type === 'BASE' || card.card_type === 'PILOT' || card.card_type === 'TOKEN') {
     const apLabel = card.card_type === 'PILOT' ? '補正 AP' : 'AP';
     const hpLabel = card.card_type === 'PILOT' ? '補正 HP' : 'HP';
     html += `        <tr><td class="news-card-stat-label">${apLabel}</td><td>${card.ap != null ? card.ap : '-'}</td>`;
@@ -1974,7 +2051,6 @@ ${articleHtml}
   </main>
 
   <noscript>${escapeHtml(stripTags(articleHtml))}</noscript>
-  <div class="seo-content" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">${escapeHtml(stripTags(articleHtml))}</div>
 
   <div id="footer"></div>
 
@@ -2255,7 +2331,36 @@ async function main() {
   const date = todayStr();
   const generatedFiles = []; // GitHub API push用ファイルリスト
 
-  const newCards = targets.filter(t => t.type === 'new_card');
+  // 2026-08-28: 既に記事へ掲載済みのカードだけで構成される投稿は、窓に再度入っても処理しない。
+  // これを行わないと記事日付が前日に引き戻され、既存記事の上書き
+  // (または同日上書きガードの発火で当日分が公開されない)という事故になる。
+  // OCR より前で落とすため Vision / Claude API の課金も発生しない。
+  // --ignore-published: 掲載済みスキップを無効化する(取りこぼし・誤認識の復旧用)。
+  // 掲載済みカードを再 OCR したいケース(カード番号を誤認識したまま掲載した等)では、
+  // このフラグを付けて窓を再実行する。既定は無効。
+  const IGNORE_PUBLISHED = process.argv.includes('--ignore-published');
+  const publishedCardIds = IGNORE_PUBLISHED ? new Set() : loadPublishedCardIds();
+  if (IGNORE_PUBLISHED) log('--ignore-published 指定: 掲載済みカードのスキップを無効化します');
+  const previewByTweetUrl = new Map();
+  for (const c of Object.values(loadCardsPreview())) {
+    if (!c || !c.source_url || !c.card_number) continue;
+    if (!previewByTweetUrl.has(c.source_url)) previewByTweetUrl.set(c.source_url, []);
+    previewByTweetUrl.get(c.source_url).push(c.card_number);
+  }
+  const newCards = targets.filter(t => t.type === 'new_card').filter((t) => {
+    const url = `https://x.com/GUNDAM_GCG_JP/status/${t.tweet.id}`;
+    const known = previewByTweetUrl.get(url);
+    // その投稿のカードを1枚以上把握していて、かつ全部が掲載済みのときだけ落とす。
+    // 一部だけ掲載済みの投稿は落とさず、カード単位のスキップ(後述)に委ねる。
+    if (known && known.length > 0 && known.every((id) => publishedCardIds.has(id))) {
+      // 注意: known は cards_preview に保存済みのカードだけ。1投稿に複数カードがあり、
+      // 過去の実行でその一部しか取得できていなかった場合、未取得分もろとも落ちる。
+      // 復旧が必要なときは --ignore-published を付けて再実行すること。
+      log(`  スキップ: ${url} のカード(${known.join(', ')} / 画像${t.tweet.images ? t.tweet.images.length : 0}枚)は既に記事へ掲載済み → 再処理しない`);
+      return false;
+    }
+    return true;
+  });
   const notices = targets.filter(t => t.type === 'notice');
 
   // === 新カード記事 ===
@@ -2336,6 +2441,12 @@ async function main() {
         // （7/10 にティザーパラレルが記事化され images/cards/ のベース画像を上書きした事故の再発防止）
         if (ci.card_number && ci.card_number !== '不明' && cardsMaster[ci.card_number]) {
           log(`  スキップ: ${ci.card_number} は既存カード番号（パラレル/SP/再録とみなす）→ 記事・画像保存なし`);
+          continue;
+        }
+        // 2026-08-28: 投稿単位のスキップをすり抜けた「一部だけ掲載済み」の投稿に対する second layer。
+        // 既に記事へ掲載済みのカードは重複掲載しない。
+        if (ci.card_number && publishedCardIds.has(ci.card_number)) {
+          log(`  スキップ: ${ci.card_number} は既に記事へ掲載済み → 再処理しない`);
           continue;
         }
         ci._tweetUrl = tweetUrl;
@@ -2509,20 +2620,72 @@ async function main() {
     const desc = `ガンダムカードゲーム${titleExpansionLabel}から公開された新カード${cardCount}枚の紹介と環境考察。`;
     const pageHtml = generateNewsPage(articleDate, title, desc, articleHtml, { displayDate: articleDate.replace(/-/g, '.') });
     const filePath = path.join(NEWS_DIR, `${articleDate}.html`);
-    fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
-    generatedFiles.push({ repoPath: `reports/news/${articleDate}.html`, binary: false });
-    // 画像ファイルも追跡
-    for (const ci of allCardInfos) {
-      if (ci._localImagePath) {
-        const imgRepoPath = path.relative(ROOT, path.resolve(NEWS_DIR, ci._localImagePath));
-        generatedFiles.push({ repoPath: imgRepoPath, binary: true });
+    // 2026-08-28: 同日上書きガード(指示書外・松岡さん承認 B-1案)
+    // 同じ articleDate で再実行すると既存記事を無条件上書きしてしまい、
+    // 先の実行で掲載済みのカードが本番から消える事故が起きた
+    // (2026-08-28: 20:00 の ST14-011/ST14-001 が 21:45 の再実行で消失)。
+    // 今回の対象カードが既存記事のカードを包含しない場合は書き込みを中止する。
+    // 新カードは cards_preview.json に保存済みのため、
+    // regenerate-article.js --date <日付> で全カードを含む記事を再生成できる。
+    let overwriteBlocked = false;
+    if (fs.existsSync(filePath)) {
+      let prevIds = new Set();
+      let guardReadable = true;
+      try {
+        const prevHtml = fs.readFileSync(filePath, 'utf-8');
+        const parsed = extractCardIdsFromArticleHtml(prevHtml);
+        prevIds = parsed.ids;
+        // 既存ファイルがあるのに1件も抽出できないときは、必ずフェイルクローズに倒す。
+        // 抽出0件の原因は「見出しのマークアップ変更でパターンが合わなくなった」か
+        // 「2026-05 以前の旧形式記事(カード見出しを持たない)」のどちらかで、前者を
+        // 上書き許可にすると既存記事を無警告で潰す(2026-08-28 の ST14 消失)ため区別しない。
+        if (parsed.ids.size === 0) {
+          guardReadable = false;
+          log(`*** 警告 *** 既存記事 ${filePath} からカード番号を抽出できません(見出し ${parsed.countHeadings} 件)`);
+          log('  マークアップ変更で extractCardIdsFromArticleHtml の正規表現が合っていないか、旧形式記事です。');
+        }
+      } catch (e) {
+        // ファイルロック等で読めない場合はガード判定不能。
+        // 他工程と同様に例外でバッチ全体を落とさず、安全側(書き込み中止)に倒す。
+        guardReadable = false;
+        log(`*** 警告 *** 既存記事 ${filePath} を読めずガード判定できません: ${e.message}`);
+      }
+      const nowIds = new Set(allCardInfos.map((c) => c.card_number).filter(Boolean));
+      const lost = guardReadable ? [...prevIds].filter((id) => !nowIds.has(id)) : ['(判定不能)'];
+      if (lost.length > 0) {
+        overwriteBlocked = true;
+        log('');
+        log('========================================');
+        log(`*** 警告 *** ${articleDate}.html は既に存在し、今回の対象に含まれないカードがあります`);
+        log(`  既存記事のみに存在: ${lost.join(', ')}`);
+        log(`  今回の対象        : ${[...nowIds].join(', ') || '(なし)'}`);
+        log('  上書きすると既存カードが記事から消えるため、記事の書き込みと X 投稿を中止しました。');
+        log('  (速報記事・sets ハブ・push など後続の工程は通常どおり継続します)');
+        log('  全カードを含む記事は次のコマンドで再生成してください:');
+        log(`    node scripts/regenerate-article.js --date ${articleDate} --dry-run`);
+        log(`    node scripts/regenerate-article.js --date ${articleDate}`);
+        log('========================================');
+        log('');
       }
     }
-    log(`記事保存: ${filePath}`);
+    if (!overwriteBlocked) {
+      fs.writeFileSync(filePath, pageHtml, { encoding: 'utf-8' });
+      generatedFiles.push({ repoPath: `reports/news/${articleDate}.html`, binary: false });
+      // 画像ファイルも追跡
+      for (const ci of allCardInfos) {
+        if (ci._localImagePath) {
+          const imgRepoPath = path.relative(ROOT, path.resolve(NEWS_DIR, ci._localImagePath));
+          generatedFiles.push({ repoPath: imgRepoPath, binary: true });
+        }
+      }
+      log(`記事保存: ${filePath}`);
+    }
 
     // X投稿（テストモードではスキップ）
     const articleUrl = `${SITE_URL}/reports/news/${articleDate}.html`;
-    if (TEST_MODE) {
+    if (overwriteBlocked) {
+      log('[GUARD] 同日上書きガードにより X 投稿をスキップしました。');
+    } else if (TEST_MODE) {
       log(`[TEST_MODE] X投稿スキップ。記事URL: ${articleUrl}`);
     } else {
       const cardNames = allCardInfos.map(c => c.card_name).join('、');
