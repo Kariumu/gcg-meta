@@ -4939,5 +4939,52 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-29": {
+    "recognized_at": "2026-08-29 20:00:35 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2093617150023942540",
+      "https://x.com/GUNDAM_GCG_JP/status/2093609601614954543"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-102",
+        "card_name": "奇跡",
+        "color": "Blue",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 3,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【アクション】相手のターンで、このターン中、相手のユニットがアタックしていないなら、自分は2枚ドローする。",
+        "effect_confidence": "medium",
+        "effect_length": 72,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST12-004",
+        "card_name": "ガンダムエクシア",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔CB〕",
+          "〔GNドライヴ〕"
+        ],
+        "link": "「刹那・F・セイエイ」",
+        "effect": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+        "effect_confidence": "medium",
+        "effect_length": 79,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
