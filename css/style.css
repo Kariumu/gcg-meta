@@ -1676,6 +1676,185 @@ a.section-badge:hover {
   .home-kpi-stat.is-primary { border-left: none; }
 }
 
+/* ---- ホーム：3セクションの計器化（指示書82。既存ルールは削除せず追加のみ） ---- */
+
+/* --- 82-1 環境トレンド TOP3 --- */
+.home-trend { display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+.home-trend-donut {
+  flex: 0 0 250px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px;
+  line-height: normal;
+}
+.home-trend-donut-title {
+  font-size: 12px; font-weight: 600; color: var(--text-secondary);
+  letter-spacing: .06em; margin-bottom: 12px;
+}
+.home-trend-donut-box { position: relative; width: 170px; height: 170px; margin: 0 auto; }
+/* Chart.destroy() 後に canvas が既定の 300x150 へ戻るため、枠から出さない(0件データ時の横はみ出し対策) */
+.home-trend-donut-box canvas { max-width: 100%; max-height: 100%; }
+.home-trend-donut-center {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; pointer-events: none;
+}
+.home-trend-donut-center b {
+  font-family: var(--font-mono); font-size: 22px; font-weight: 700;
+  color: var(--text-primary); line-height: 1; font-variant-numeric: tabular-nums;
+}
+.home-trend-donut-center span { font-size: 10px; color: var(--text-muted); margin-top: 3px; letter-spacing: .1em; }
+.home-trend-legend { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+.home-trend-legend div { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-secondary); }
+.home-trend-legend i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.home-trend-legend .is-more { color: var(--text-muted); }
+.home-trend-legend .is-more i { background: rgba(255,255,255,0.15); }
+.home-trend-right { flex: 1; min-width: 340px; display: flex; flex-direction: column; gap: 8px; }
+
+.home-trend-card {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 12px 16px;
+  text-decoration: none; color: var(--text-primary);
+  line-height: normal;
+  transition: all var(--transition-med);
+}
+.home-trend-card:hover { border-color: var(--border-accent); box-shadow: var(--shadow-glow); transform: translateY(-2px); }
+.home-trend-rank {
+  font-family: var(--font-mono); font-size: 15px; font-weight: 700;
+  min-width: 22px; text-align: center; color: var(--text-muted);
+}
+.home-trend-rank.rank-1 { color: var(--rank-gold); }
+.home-trend-rank.rank-2 { color: var(--rank-silver); }
+.home-trend-rank.rank-3 { color: var(--rank-bronze); }
+.home-trend-badge { display: inline-flex; gap: 3px; flex-shrink: 0; }
+.home-trend-badge i {
+  width: 18px; height: 18px; border-radius: 4px; font-style: normal;
+  font-size: 10px; font-weight: 700; color: var(--bg-primary);
+  display: flex; align-items: center; justify-content: center;
+}
+.home-trend-name { font-size: 14px; font-weight: 600; min-width: 64px; }
+.home-trend-sub { display: flex; gap: 18px; margin-left: 20px; }
+.home-trend-sub > span { text-align: right; }
+.home-trend-sub > span > b {
+  font-family: var(--font-mono); font-size: 14px; font-weight: 600;
+  color: var(--text-secondary); font-variant-numeric: tabular-nums;
+}
+.home-trend-sub > span > span { display: block; font-size: 10px; color: var(--text-muted); margin-top: 1px; }
+.home-trend-share { margin-left: auto; text-align: right; }
+.home-trend-share > b {
+  display: block; font-family: var(--font-mono); font-size: 24px; font-weight: 700;
+  color: var(--text-primary); font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+}
+.home-trend-card.is-first .home-trend-share > b { font-size: 30px; color: var(--accent); }
+.home-trend-share > span { display: block; font-size: 10px; color: var(--text-muted); letter-spacing: .06em; margin-top: 1px; }
+
+.home-trend-rest { border-top: 1px solid rgba(255,255,255,0.07); margin-top: 4px; }
+.home-trend-row {
+  display: flex; align-items: center; gap: 10px; padding: 7px 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12px;
+  text-decoration: none; color: var(--text-secondary);
+  line-height: normal;
+  transition: background var(--transition-fast);
+}
+.home-trend-row:hover { background: var(--bg-card); }
+.home-trend-row-rank { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); min-width: 18px; text-align: center; }
+.home-trend-row .home-trend-badge i { width: 14px; height: 14px; font-size: 8px; border-radius: 3px; }
+.home-trend-row-name { min-width: 56px; color: var(--text-secondary); font-weight: 500; }
+.home-trend-row-bar { flex: 1; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.home-trend-row-bar i { display: block; height: 100%; border-radius: 2px; }
+.home-trend-row-pct {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  color: var(--text-secondary); min-width: 44px; text-align: right;
+}
+.home-trend-row-n { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); min-width: 34px; text-align: right; }
+
+/* --- 82-2 カード使用率 TOP10 --- */
+.home-top10-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.home-top10-item {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 8px 12px;
+  text-decoration: none; color: var(--text-primary);
+  line-height: normal;
+  transition: all var(--transition-fast);
+}
+.home-top10-item:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+.home-top10-rank {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 700;
+  min-width: 20px; text-align: center; color: var(--text-muted);
+}
+.home-top10-rank.rank-1 { color: var(--rank-gold); }
+.home-top10-rank.rank-2 { color: var(--rank-silver); }
+.home-top10-rank.rank-3 { color: var(--rank-bronze); }
+.home-top10-img {
+  width: 30px; height: 42px; border-radius: 3px; border: 1px solid var(--border);
+  object-fit: cover; background: var(--bg-card-hover); flex-shrink: 0;
+}
+.home-top10-body { flex: 1; min-width: 0; }
+.home-top10-id {
+  display: block; font-family: var(--font-mono); font-size: 12px; font-weight: 600;
+  color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.home-top10-bar { display: block; margin-top: 5px; height: 3px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; }
+.home-top10-bar i { display: block; height: 100%; background: var(--accent); opacity: .45; border-radius: 2px; }
+.home-top10-item.is-first .home-top10-bar i { opacity: 1; }
+.home-top10-val { text-align: right; flex-shrink: 0; }
+.home-top10-rate {
+  display: block; font-family: var(--font-mono); font-size: 15px; font-weight: 600;
+  color: var(--text-primary); font-variant-numeric: tabular-nums;
+}
+.home-top10-item.is-first .home-top10-rate { color: var(--accent); font-weight: 700; }
+.home-top10-n {
+  display: block; font-size: 10px; color: var(--text-muted);
+  font-family: var(--font-mono); margin-top: 1px; font-variant-numeric: tabular-nums;
+}
+
+/* --- 82-3 最新の大会結果 --- */
+.home-ev-row {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 9px 14px;
+  text-decoration: none; color: var(--text-primary);
+  line-height: normal;
+  transition: all var(--transition-med);
+}
+.home-ev-row:hover {
+  border-color: var(--border-accent); background: var(--bg-card-hover);
+  box-shadow: var(--shadow-glow); transform: translateX(4px);
+}
+.home-ev-date {
+  font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);
+  font-variant-numeric: tabular-nums; min-width: 74px; flex-shrink: 0;
+}
+.home-ev-store {
+  font-size: 13.5px; font-weight: 600; color: var(--text-primary);
+  flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.home-ev-win {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--accent-dim); border: 1px solid var(--border-accent);
+  border-radius: 999px; padding: 3px 10px 3px 8px; flex-shrink: 0;
+}
+.home-ev-win-label { font-style: normal; font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: .08em; }
+.home-ev-dots { display: inline-flex; gap: 2px; }
+.home-ev-win .color-dot { width: 9px; height: 9px; }
+.home-ev-others { display: flex; gap: 10px; margin-left: 8px; flex-shrink: 0; }
+.home-ev-others .home-ev-dots { opacity: .75; }
+.home-ev-none { font-size: 11px; color: var(--text-muted); flex-shrink: 0; }
+.home-empty-box { text-align: center; padding: 32px; color: var(--text-muted); }
+
+@media (max-width: 640px) {
+  .home-top10-grid { grid-template-columns: 1fr; }
+  .home-trend-donut { flex: 1 1 100%; }
+  .home-trend-right { min-width: 0; }
+  .home-ev-others { display: none; }
+}
+/* 従属数値は右列に 420px(デッキ数が4桁になる「全期間」では 443px)必要で、
+   それ未満だと横スクロールやカード枠の踏み越えが起きる(実測)。
+   タブレット縦(768px)からは余裕をもって収まるので、その手前までは隠す。 */
+@media (max-width: 767px) {
+  .home-trend-sub { display: none; }
+}
+
 /* ---- 店舗検索セクション（トップ用） ---- */
 .home-store-search {
   background: var(--bg-card);
