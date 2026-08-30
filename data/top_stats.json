@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4"
   },
   "totals": {
-    "events": 258,
-    "decks": 1201,
+    "events": 259,
+    "decks": 1205,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,7 +17,7 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 364,
+      "count": 365,
       "share": 30.3,
       "win_rate": 26.6,
       "avg_rank": 2.5,
@@ -31,7 +31,7 @@
       ],
       "label": "青/紫",
       "count": 204,
-      "share": 17,
+      "share": 16.9,
       "win_rate": 24.5,
       "avg_rank": 2.5,
       "wins": 50
@@ -44,7 +44,7 @@
       ],
       "label": "青/白",
       "count": 164,
-      "share": 13.7,
+      "share": 13.6,
       "win_rate": 25.6,
       "avg_rank": 2.4,
       "wins": 42
@@ -56,11 +56,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 154,
-      "share": 12.8,
-      "win_rate": 21.4,
-      "avg_rank": 2.6,
-      "wins": 33
+      "count": 155,
+      "share": 12.9,
+      "win_rate": 21.9,
+      "avg_rank": 2.5,
+      "wins": 34
     },
     {
       "type_key": "Red+White",
@@ -70,7 +70,7 @@
       ],
       "label": "赤/白",
       "count": 139,
-      "share": 11.6,
+      "share": 11.5,
       "win_rate": 28.1,
       "avg_rank": 2.4,
       "wins": 39
@@ -82,9 +82,9 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 105,
-      "share": 8.7,
-      "win_rate": 28.6,
+      "count": 107,
+      "share": 8.9,
+      "win_rate": 28,
       "avg_rank": 2.4,
       "wins": 30
     },
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 623,
+      "decks": 625,
       "usage_rate": 51.9
     },
     {
       "card_id": "ST03-008",
-      "decks": 516,
+      "decks": 518,
       "usage_rate": 43
     },
     {
       "card_id": "ST01-010",
-      "decks": 505,
+      "decks": 506,
       "usage_rate": 42
     },
     {
       "card_id": "GD01-030",
-      "decks": 489,
+      "decks": 491,
       "usage_rate": 40.7
     },
     {
       "card_id": "GD05-002",
-      "decks": 473,
+      "decks": 475,
       "usage_rate": 39.4
     },
     {
       "card_id": "GD05-081",
-      "decks": 467,
+      "decks": 469,
       "usage_rate": 38.9
     },
     {
       "card_id": "ST01-001",
-      "decks": 460,
+      "decks": 461,
       "usage_rate": 38.3
     },
     {
       "card_id": "GD03-056",
-      "decks": 380,
+      "decks": 381,
       "usage_rate": 31.6
     },
     {
       "card_id": "GD01-008",
-      "decks": 378,
+      "decks": 379,
       "usage_rate": 31.5
     },
     {
       "card_id": "ST05-010",
-      "decks": 375,
+      "decks": 376,
       "usage_rate": 31.2
     }
   ],
-  "card_ranking_denominator": 1201,
+  "card_ranking_denominator": 1205,
   "recent_events": [
     {
       "event_id": "ntcd-01M18CGC9FDDJZSABA6GDM3RNG",
@@ -560,6 +560,6 @@
   ],
   "source": {
     "latest_event_date": "2026-08-30",
-    "event_count": 1038
+    "event_count": 1039
   }
 }
