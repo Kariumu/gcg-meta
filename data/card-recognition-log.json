@@ -4986,5 +4986,55 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-30": {
+    "recognized_at": "2026-08-30 20:00:28 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2093979536723784105",
+      "https://x.com/GUNDAM_GCG_JP/status/2093971986582003847"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-046",
+        "card_name": "百式",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔エゥーゴ〕",
+          "〔ガンダムチーム〕"
+        ],
+        "link": "特徴にガンダムチームを持つPILOT",
+        "effect": "【アタック時】このユニット以外の〔ガンダムチーム〕の自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
+        "effect_confidence": "medium",
+        "effect_length": 56,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-007",
+        "card_name": "ガンダムレオパルド",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔バルチャー〕",
+          "〔水中〕"
+        ],
+        "link": "",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
