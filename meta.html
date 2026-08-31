@@ -461,17 +461,27 @@
 
     function getSeriesRangeById(sid) {
       if (!sid) return { start: '', end: '' };
-      var ids = seriesGroupIds(sid);
+      var self = allSeriesMap[sid];
+      if (!self) return { start: '', end: '' };
+      // シーズン(同じ short_name の開催月すべて)の期間を返す(2026-09-01)。
+      // 結果0件の開催月も範囲に含める。含めないと、この画面の既定レンジが
+      // data/meta_stats.json の default_range(シーズン範囲)と食い違い、
+      // canUseMetaStats() が false になって events.json(17MB)を毎回読み込んでしまう。
+      // 集計対象イベントの絞り込みは従来どおり seriesGroupIds()(0件の月を除外)で行う。
+      if (GCG.getSeasonDateRange) return GCG.getSeasonDateRange(allSeriesMap, self);
+      var key = seriesGroupKey(self);
+      var ids = Object.keys(allSeriesMap).filter(function (id) {
+        return seriesGroupKey(allSeriesMap[id]) === key;
+      });
+      if (ids.indexOf(String(sid)) < 0) ids.push(String(sid));
       var start = '', end = '';
       // 期間が未設定のシリーズがまとめ対象に含まれる場合は、その側を「制限なし」にする。
       var noStart = false, noEnd = false;
       ids.forEach(function (id) {
         var s = allSeriesMap[id];
         if (!s) return;
-        var r = GCG.getSeriesDateRange ? GCG.getSeriesDateRange(s)
-          : { start: s.start_date || '', end: s.end_date || '' };
-        if (r.start) { if (!start || r.start < start) start = r.start; } else { noStart = true; }
-        if (r.end) { if (!end || r.end > end) end = r.end; } else { noEnd = true; }
+        if (s.start_date) { if (!start || s.start_date < start) start = s.start_date; } else { noStart = true; }
+        if (s.end_date) { if (!end || s.end_date > end) end = s.end_date; } else { noEnd = true; }
       });
       return { start: noStart ? '' : start, end: noEnd ? '' : end };
     }

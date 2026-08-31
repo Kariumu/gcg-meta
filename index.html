@@ -259,29 +259,80 @@
             if (today <= end) return 'active';
             return 'completed';
         }
-        function pickHeroSeries(allSeries) {
-            // 判定し直した status を持つ複製で選ぶ(series.json の値は書き換えない)
-            allSeries = (allSeries || []).map(s => Object.assign({}, s, { status: effectiveStatus(s) }));
-            const active = allSeries.filter(s => s.status === 'active');
-            if (active.length > 0) {
-                return { series: active.sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''))[0], mode: 'active' };
-            }
-            const upcoming = allSeries.filter(s => s.status === 'upcoming')
-                .sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''));
-            if (upcoming.length > 0) {
-                const next = upcoming[0];
-                // 応募期間中（apply_start_date〜apply_end_date に今日が含まれる）なら「応募受付中」扱い
-                const today = new Date().toISOString().slice(0, 10);
-                if (next.apply_start_date && next.apply_end_date
-                    && today >= next.apply_start_date && today <= next.apply_end_date) {
-                    return { series: next, mode: 'accepting' };
-                }
-                return { series: next, mode: 'upcoming' };
-            }
-            const completed = allSeries.filter(s => s.status === 'completed')
-                .sort((a, b) => (b.start_date || '').localeCompare(a.start_date || ''));
-            if (completed.length > 0) return { series: completed[0], mode: 'completed-fallback' };
-            return null;
+        // ---- シーズン単位のヒーロー選択(2026-09-01 松岡さん指示) ----
+        // 公式NTCは同じシリーズが開催月ごとに別エントリで登録されるため
+        // (例: MISSION4 = 8月開催 7482 + 9月開催 7483)、short_name でまとめた
+        // 「シーズン」を1つの塊として扱い、期間も集計も月をまたいで合算する。
+        // これにより「月が変わった瞬間に当月シリーズが0件で表示される」問題も消える。
+        const HERO_MEMBER_MAX = 4;   // 1シーズンの開催月数の上限(余計なリクエストを増やさない)
+        function heroSeasons(allSeries) {
+            const list = (allSeries || []).filter(s => s && s.id);
+            const groupIndex = Object.create(null);
+            const groups = [];
+            // 代表(rep)は開始日が最も早いエントリ。表示名・スラッグの既定値に使う。
+            list.slice()
+                .sort((a, b) => (a.start_date || '').localeCompare(b.start_date || ''))
+                .forEach(s => {
+                    const key = GCG.seasonGroupKey ? GCG.seasonGroupKey(s)
+                        : String((s.short_name || s.display_name || s.id) || '');
+                    if (groupIndex[key] === undefined) {
+                        groupIndex[key] = groups.length;
+                        groups.push({ key: key, rep: s, members: [] });
+                    }
+                    groups[groupIndex[key]].members.push(s);
+                });
+            const today = new Date().toISOString().slice(0, 10);
+            groups.forEach(g => {
+                let start = '', end = '', noStart = false, noEnd = false;
+                g.members.forEach(s => {
+                    if (s.start_date) { if (!start || s.start_date < start) start = s.start_date; } else { noStart = true; }
+                    if (s.end_date) { if (!end || s.end_date > end) end = s.end_date; } else { noEnd = true; }
+                });
+                g.start_date = noStart ? '' : start;
+                g.end_date = noEnd ? '' : end;
+                // status はシーズンの期間で判定し直す(series.json の手入力値は書き換えない)
+                g.status = (!g.start_date || !g.end_date) ? (g.rep.status || '')
+                    : (today < g.start_date ? 'upcoming' : (today <= g.end_date ? 'active' : 'completed'));
+            });
+            const byStartAsc = (a, b) => (a.start_date || '').localeCompare(b.start_date || '');
+            const byStartDesc = (a, b) => (b.start_date || '').localeCompare(a.start_date || '');
+            const out = [];
+            groups.filter(g => g.status === 'active').sort(byStartAsc)
+                .forEach(g => out.push({ season: g, mode: 'active' }));
+            // 応募期間中（apply_start_date〜apply_end_date に今日が含まれる）なら「応募受付中」扱い
+            groups.filter(g => g.status === 'upcoming').sort(byStartAsc)
+                .forEach(g => out.push({
+                    season: g,
+                    mode: g.members.some(s => s.apply_start_date && s.apply_end_date
+                        && today >= s.apply_start_date && today <= s.apply_end_date) ? 'accepting' : 'upcoming'
+                }));
+            groups.filter(g => g.status === 'completed').sort(byStartDesc)
+                .forEach(g => out.push({ season: g, mode: 'completed-fallback' }));
+            return out;
+        }
+
+        // シーズンを renderHeroSeries が読める series 形にまとめる(renderHeroSeries は無変更)
+        function seasonAsSeries(g, linkMember) {
+            const rep = g.rep;
+            const subs = [];
+            g.members.forEach(s => { if (s.subtitle && subs.indexOf(s.subtitle) < 0) subs.push(s.subtitle); });
+            const today = new Date().toISOString().slice(0, 10);
+            let applyEnd = '';
+            g.members.forEach(s => {
+                if (s.apply_start_date && s.apply_end_date
+                    && today >= s.apply_start_date && today <= s.apply_end_date) applyEnd = s.apply_end_date;
+            });
+            const link = (linkMember && linkMember.slug) ? linkMember : rep;
+            return Object.assign({}, rep, {
+                slug: link.slug || rep.slug || '',
+                status: g.status,
+                start_date: g.start_date,
+                end_date: g.end_date,
+                subtitle: subs.join('・'),
+                // description は開催月ごとの文面なので、複数月をまとめたシーズンでは出さない
+                description: g.members.length > 1 ? '' : (rep.description || ''),
+                apply_end_date: applyEnd || rep.apply_end_date || ''
+            });
         }
 
         function formatApplyDeadline(d) {
@@ -341,15 +392,36 @@
                 if (!seriesRes.ok) throw new Error('series.json HTTP ' + seriesRes.status);
                 const seriesMap = await seriesRes.json();
                 const allSeries = Object.values(seriesMap || {});
-                const pick = pickHeroSeries(allSeries);
-                let summary = null;
-                if (pick && pick.series && pick.series.slug) {
+                const seasons = heroSeasons(allSeries);
+                const picked = seasons.length > 0 ? seasons[0] : null;
+                if (!picked) { renderHeroSeries(null, null); return; }
+                // シーズンに属する開催月の summary を全部読んで合算する
+                const members = picked.season.members.slice(0, HERO_MEMBER_MAX);
+                const stats = { event_count: 0, total_decks: 0, total_result_entries: 0 };
+                let got = 0;
+                let linkMember = null, bestCount = -1;
+                for (let i = 0; i < members.length; i++) {
+                    const m = members[i];
+                    if (!m.slug) continue;
+                    let cs = null;
                     try {
-                        const summaryRes = await fetch(basePath + 'data/series/' + pick.series.slug + '-summary.json');
-                        if (summaryRes.ok) summary = await summaryRes.json();
+                        const summaryRes = await fetch(basePath + 'data/series/' + m.slug + '-summary.json');
+                        if (summaryRes.ok) cs = await summaryRes.json();
                     } catch (_) { /* summary optional */ }
+                    if (!cs || !cs.stats) continue;
+                    got++;
+                    const st = cs.stats;
+                    if (typeof st.event_count === 'number') stats.event_count += st.event_count;
+                    if (typeof st.total_decks === 'number') stats.total_decks += st.total_decks;
+                    if (typeof st.total_result_entries === 'number') stats.total_result_entries += st.total_result_entries;
+                    // 「シリーズ詳細へ」は結果が最も多い開催月のページに向ける
+                    const n = (typeof st.event_count === 'number') ? st.event_count : -1;
+                    if (n > bestCount) { bestCount = n; linkMember = m; }
                 }
-                renderHeroSeries(pick, summary);
+                renderHeroSeries(
+                    { series: seasonAsSeries(picked.season, linkMember), mode: picked.mode },
+                    got > 0 ? { stats: stats } : null
+                );
             } catch (e) {
                 console.warn('hero load failed:', e && e.message);
                 document.getElementById('series-hero').innerHTML = '<div class="series-hero-empty">シリーズ情報を取得できませんでした。</div>';
@@ -586,7 +658,10 @@
             // シリーズ連動のデフォルト期間: デフォルトシリーズ（active > upcoming > 最新completed）の start_date/end_date を採用。
             // シリーズが取得できない場合のみ半月単位フォールバック。
             var defaultSeries = GCG.pickDefaultSeriesWithData ? GCG.pickDefaultSeriesWithData(seriesMap, events) : (GCG.pickDefaultSeries ? GCG.pickDefaultSeries(seriesMap) : null);
-            var defaultRange = defaultSeries ? GCG.getSeriesDateRange(defaultSeries) : GCG.getDefaultDateRange();
+            // 旧 js/common.js がキャッシュに残っている端末でも落ちないようガードする(2026-09-01 二次確認指摘)
+            var defaultRange = !defaultSeries ? GCG.getDefaultDateRange()
+                : (GCG.getSeasonDateRange ? GCG.getSeasonDateRange(seriesMap, defaultSeries)
+                    : GCG.getSeriesDateRange(defaultSeries));
             if (!defaultRange.start && !defaultRange.end) defaultRange = GCG.getDefaultDateRange();
             setupDateFilter(defaultRange.start, defaultRange.end, onDateFilterChange);
 

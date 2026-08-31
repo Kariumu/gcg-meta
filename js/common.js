@@ -695,6 +695,43 @@ const GCG = {
     };
   },
 
+  // ---- シーズン(開催月をまたぐシリーズ)単位のヘルパー(2026-09-01 松岡さん指示) ----
+  // 公式のNTCは同じシリーズが「開催月」ごとに別エントリで登録されている。
+  //   例: 「NTC MISSION4」= 8月開催(id 7482) + 9月開催(id 7483)
+  // 月単位で集計すると、9月分の結果が入った時点で8月分が集計から外れてしまうため、
+  // short_name でまとめた「シーズン」を単位にして合算する。
+  // 判定キーは meta.html の seriesGroupKey と同一。
+  seasonGroupKey: function(s) {
+    return String((s && (s.short_name || s.display_name || s.id)) || '');
+  },
+
+  // series と同じシーズンに属する全エントリ(自分自身を含む)を返す
+  seasonMembers: function(seriesInput, series) {
+    if (!series) return [];
+    var list;
+    if (Array.isArray(seriesInput)) list = seriesInput.slice();
+    else if (seriesInput && typeof seriesInput === 'object') list = Object.values(seriesInput);
+    else list = [];
+    var self = this;
+    var key = self.seasonGroupKey(series);
+    var out = list.filter(function(s) { return s && s.id && self.seasonGroupKey(s) === key; });
+    return out.length ? out : [series];
+  },
+
+  // シーズン全体の {start, end}。開始は最小・終了は最大。
+  // 期間が未設定のエントリが含まれる側は「制限なし」(空文字)にする(meta.html の getSeriesRangeById と同じ扱い)。
+  getSeasonDateRange: function(seriesInput, series) {
+    if (!series) return { start: '', end: '' };
+    var members = this.seasonMembers(seriesInput, series);
+    var start = '', end = '', noStart = false, noEnd = false;
+    for (var i = 0; i < members.length; i++) {
+      var s = members[i];
+      if (s.start_date) { if (!start || s.start_date < start) start = s.start_date; } else { noStart = true; }
+      if (s.end_date) { if (!end || s.end_date > end) end = s.end_date; } else { noEnd = true; }
+    }
+    return { start: noStart ? '' : start, end: noEnd ? '' : end };
+  },
+
   copyShareUrl: function(btn) {
     var url = window.location.href.split('#')[0];
     var label = btn.querySelector('.copy-label');
