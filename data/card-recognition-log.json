@@ -5036,5 +5036,52 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-08-31": {
+    "recognized_at": "2026-08-31 20:00:34 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2094341924299673771",
+      "https://x.com/GUNDAM_GCG_JP/status/2094334374141411635"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-121",
+        "card_name": "泣き虫ボウ",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【アクション】相手のユニット1つを選ぶ。このバトル中、それをAP-2する。それが《高機動》を持つなら、かわりにAP-6する。",
+        "effect_confidence": "medium",
+        "effect_length": 62,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST14-003",
+        "card_name": "パラス・アテネ",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 3,
+        "hp": 4,
+        "traits": [
+          "〔ティターンズ〕",
+          "〔ジュビトリス〕"
+        ],
+        "link": "特徴にジュビトリスを持つPILOT",
+        "effect": "【配備時】相手プレイヤー1人を選ぶ。そのプレイヤーは自身のトラッシュのユニットカード2枚を選ぶ。それらをゲームから除外する。",
+        "effect_confidence": "medium",
+        "effect_length": 62,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
