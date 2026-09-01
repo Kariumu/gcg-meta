@@ -5083,5 +5083,52 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-01": {
+    "recognized_at": "2026-09-01 20:00:33 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2094704313180574035",
+      "https://x.com/GUNDAM_GCG_JP/status/2094696764612001884"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-124",
+        "card_name": "アスピーテ",
+        "color": "Green",
+        "card_type": "BASE",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": 5,
+        "traits": [
+          "〔ギンガナム艦隊〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。起動・メイン このベースをレストにする:〔ギンガナム艦隊〕/〔遠隔兵器〕の自分のユニットが3つ以上いるなら、このターン中、〔ギンガナム艦隊〕の自分のユニットすべてをAP+1する。",
+        "effect_confidence": "low",
+        "effect_length": 128,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST11-013",
+        "card_name": "迂闊な攻撃",
+        "color": "Blue",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 2,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】レストのHP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。メイン／アクション レストのHP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。そうしたなら、自分は1枚ドローする。",
+        "effect_confidence": "low",
+        "effect_length": 106,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
