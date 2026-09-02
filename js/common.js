@@ -388,65 +388,87 @@ const GCG = {
   //   2026-05-24 案B採用(主タブ4つ + サブナビ)
   //   2026-05-24 主タブ再編 → カードリスト/レポートを独立タブに昇格、検索欄削除
   //   2026-08-06 主タブ「大会データ」を廃止し「環境分析」へ統合(9→8タブ・指示書66)
+  //   2026-09-02 主タブ8→6へ再編。主タブ「イベント(event)」を新設し、サブナビを event/analysis/cards の3グループへ(指示書86)
   // activePage は既存呼び出し互換のため文字列キーを維持
   // ('home','series','events','meta','cards','stores','schedule','reports','')
   _PAGE_MAP: {
     home:     { main: 'home',     sub: null       },
-    events:   { main: 'analysis', sub: 'events'   },
+    events:   { main: 'analysis', sub: 'events'   },   // 大会結果(meta.html#events)。主タブ key 'event'(イベント=これから参加する) とは別物
     series:   { main: 'analysis', sub: 'series'   },
-    schedule: { main: 'analysis', sub: 'schedule' },
     meta:     { main: 'analysis', sub: 'meta'     },
-    cards:    { main: 'cards',    sub: null       },
+    'ntc-official': { main: 'analysis', sub: 'ntc-official' },
+    reports:  { main: 'analysis', sub: 'reports'  },   // 指示書86: 主タブ reports を廃止し環境分析配下へ
+    schedule: { main: 'event',    sub: 'schedule' },   // 指示書86: analysis → event
+    stores:   { main: 'event',    sub: 'stores'   },   // 指示書86: venues → event
+    cards:    { main: 'cards',    sub: 'cards'    },   // 指示書86: サブ「カード検索」を点灯
+    sets:     { main: 'cards',    sub: 'sets'     },   // 指示書86: 主タブ sets を廃止しカードリスト配下へ
+    restrictions: { main: 'cards', sub: 'restrictions' }, // 指示書86: 未定義だったキーを追加(主タブ無点灯の不具合を解消)
     'deck-builder': { main: 'deck-builder', sub: null },
-    sets:     { main: 'sets',     sub: null       },
-    reports:  { main: 'reports',  sub: null       },
-    stores:   { main: 'venues',   sub: null       },
     mypage:   { main: 'mypage',   sub: null       },
-    'ntc-official': { main: 'analysis', sub: 'ntc-official' }
+    about:    { main: null,       sub: null       }    // 指示書86: 明示(動作は従来のフォールバックと同じ)
     // ntc-official は 2026-08-03 追加(指示書63 Step 1-N。NTC公式集計ページ)。
     // 2026-08-06(指示書66): 主タブ「大会データ」を廃止し「環境分析」へ統合。
-    // events/series/schedule/meta/ntc-official はいずれも main='analysis' で、
-    // 環境分析のサブナビ帯に並び、それぞれ sub キーでアクティブ点灯する
     // mypage は 2026-07-16 追加（お気に入り/マイページ、指示書39 松岡さん指示）
     // regions は 2026-07-15 削除（ショップバトル地域別ランキング廃止、松岡さん指示）
-    // '' (contact/privacy/about 等) は主タブもサブもアクティブ無し
+    // '' (contact/privacy/data-usage 等) は主タブもサブもアクティブ無し
   },
 
   _MAIN_TABS: [
-    { key: 'home',        href: '',             label: 'ホーム'     },
-    { key: 'analysis',    href: 'meta.html',    label: '環境分析'   },
-    { key: 'cards',       href: 'cards.html',   label: 'カードリスト' },
+    { key: 'home',         href: '',                  label: 'ホーム'       },
+    { key: 'event',        href: 'schedule.html',     label: 'イベント'     },  // 指示書86 新設。key は単数 'event'(ページキー 'events' とは別)
+    { key: 'analysis',     href: 'meta.html',         label: '環境分析'     },
+    { key: 'cards',        href: 'cards.html',        label: 'カードリスト' },
     { key: 'deck-builder', href: 'deck-builder.html', label: 'デッキビルダー' },
-    { key: 'sets',        href: 'sets/',        label: '新弾情報' },
-    { key: 'reports',     href: 'reports/',     label: 'レポート'   },
-    { key: 'venues',      href: 'stores.html',  label: '店舗一覧'  },
-    { key: 'mypage',      href: 'mypage.html',  label: 'マイページ' }
+    { key: 'mypage',       href: 'mypage.html',       label: 'マイページ'   }
   ],
 
   _SUB_NAV: {
-    // 2026-08-06(指示書66): 主タブ「大会データ」廃止に伴い、旧「大会データ」のサブナビを
-    // analysis 配下へ移し、環境分析・公式集計を加えた5項目に再編
-    analysis: [
-      { key: 'meta',         href: 'meta.html',         label: '環境分析'    },
-      // 2026-08-06(指示書67): イベント一覧を meta.html へ統合。events.html はリダイレクトスタブ。
-      // 導線の言葉は残したいので、タブ自体は残して統合ページの一覧セクションへ飛ばす。
-      { key: 'events',       href: 'meta.html#events',  label: 'イベント'    },
-      { key: 'series',       href: 'series/',           label: 'シリーズ'    },
+    event: [
       { key: 'schedule',     href: 'schedule.html',     label: 'スケジュール' },
-      { key: 'ntc-official', href: 'ntc-official.html', label: '公式集計'    }
+      { key: 'stores',       href: 'stores.html',       label: '店舗一覧'    }
     ],
-    // venues のサブナビは 2026-07-15 廃止（地域別ランキング削除に伴い店舗一覧のみ）
-    // cards / reports / home / venues / sets / deck-builder / mypage はサブナビ無し
+    analysis: [
+      { key: 'meta',         href: 'meta.html',         label: 'メタ概況'    },
+      { key: 'events',       href: 'meta.html#events',  label: '大会結果'    },
+      { key: 'series',       href: 'series/',           label: 'シリーズ'    },
+      { key: 'ntc-official', href: 'ntc-official.html', label: '公式集計'    },
+      { key: 'reports',      href: 'reports/',          label: 'レポート'    }
+    ],
+    cards: [
+      { key: 'cards',        href: 'cards.html',        label: 'カード検索'  },
+      { key: 'sets',         href: 'sets/',             label: '新弾情報'    },
+      { key: 'restrictions', href: 'restrictions.html', label: '禁止・制限'  }
+    ]
+    // home / deck-builder / mypage はサブナビ無し
   },
 
   _MAIN_LABEL: {
-    home:        'ホーム',
-    analysis:    '環境分析',
-    cards:       'カードリスト',
-    reports:     'レポート',
-    venues:      '店舗一覧',
-    mypage:      'マイページ'
+    home:          'ホーム',
+    event:         'イベント',
+    analysis:      '環境分析',
+    cards:         'カードリスト',
+    'deck-builder': 'デッキビルダー',
+    mypage:        'マイページ'
   },
+
+  // 2026-09-02(指示書86 §1-3): フッターのサイトマップ行（13項目・全ページ共通）。
+  // 主タブから外れた「レポート/新弾情報/店舗一覧」等の到達性を補うためのもの。
+  // 順序と文言を仕様で固定するため、_MAIN_TABS/_SUB_NAV からの自動生成はしない。
+  _FOOTER_SITEMAP: [
+    { href: '',                  label: 'ホーム'         },
+    { href: 'schedule.html',     label: 'スケジュール'   },
+    { href: 'stores.html',       label: '店舗一覧'       },
+    { href: 'meta.html',         label: 'メタ概況'       },
+    { href: 'meta.html#events',  label: '大会結果'       },
+    { href: 'series/',           label: 'シリーズ'       },
+    { href: 'ntc-official.html', label: '公式集計'       },
+    { href: 'reports/',          label: 'レポート'       },
+    { href: 'cards.html',        label: 'カード検索'     },
+    { href: 'sets/',             label: '新弾情報'       },
+    { href: 'restrictions.html', label: '禁止・制限'     },
+    { href: 'deck-builder.html', label: 'デッキビルダー' },
+    { href: 'mypage.html',       label: 'マイページ'     }
+  ],
 
   // 共通ヘッダーHTML生成
   renderHeader(activePage) {
@@ -498,6 +520,14 @@ const GCG = {
   // 共通フッターHTML生成
   renderFooter() {
     const basePath = this.getBasePath();
+    // 2026-09-02(指示書86 §1-3): 主タブ8→6 に伴う到達性の補完。CSS は触らず inline style で完結させる。
+    // font-size/font-weight/padding/border-radius を明示しているのは、この行が <nav> のため
+    // css/style.css の素のタグ規則 `nav a { padding:8px 16px; border-radius:8px; font-size:13px;
+    // font-weight:500 }`(139-148行 / 768px以下は 6px 12px・12px) を拾ってしまい、§1-3 が求める
+    // 「既存 .footer-links の a と同じ値」(11px / 400 / padding 0) にならないため(二次確認 中1)。
+    const sitemapHtml = this._FOOTER_SITEMAP
+      .map(s => `<a href="${basePath}${s.href}" style="color:var(--text-muted);text-decoration:none;font-size:11px;font-weight:400;padding:0;border-radius:0">${s.label}</a>`)
+      .join('\n          ');
     return `
       <footer class="site-footer">
         <div class="footer-disclaimer">
@@ -512,6 +542,9 @@ const GCG = {
           <br>
           <span style="font-size:10px;color:var(--text-muted);">権利者からの削除・修正のご要請には<a href="${basePath}contact.html" style="color:var(--accent);text-decoration:none;">お問い合わせ</a>より速やかに対応いたします。</span>
         </div>
+        <nav class="footer-sitemap" aria-label="サイトマップ" style="margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:11px;font-family:var(--font-mono)">
+          ${sitemapHtml}
+        </nav>
         <div class="footer-links" style="margin-top:16px;display:flex;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
           <a href="${basePath}privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">プライバシーポリシー</a>
           <a href="${basePath}contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
