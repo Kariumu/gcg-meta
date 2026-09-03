@@ -2630,6 +2630,21 @@ a.section-badge:hover {
   }
 }
 
+/* 2026-09-03(指示書89): 記事本文の分割不能な長い文字列(URL 等)を折り返す。生成済み記事 92本+レポートに効く */
+.report-article { overflow-wrap: anywhere; }
+.report-article pre, .report-article code { overflow-wrap: anywhere; white-space: pre-wrap; }
+
+/* 2026-09-03(指示書89 §2-4): ページ送りのボタン列を狭幅で折り返す。
+   meta.html は ①②③ の是正後も 320〜413px で .pagination(10ボタン・折り返し無し)が
+   はみ出して横スクロールが残るため。既存の .pagination 規則(705行)は変更していない。 */
+.pagination { flex-wrap: wrap; }
+
+/* 2026-09-03(指示書89 §2-4): 記事見出しに分割できない英字トークンがあると
+   .section-badge(日付) が容器の外へ押し出され、320〜346px で横スクロールになる
+   (reports/news/2026-06-12 ほか)。見出し側を折り返せるようにして解消する。
+   既存の .section-title 規則(190行)は変更していない。 */
+.section-title { overflow-wrap: anywhere; }
+
 /* ============================================================
  * 過去記事(インラインスタイル版)用のスマホ表示調整
  *
