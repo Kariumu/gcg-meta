@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 277,
-    "decks": 1293,
+    "events": 278,
+    "decks": 1297,
     "types": 11
   },
   "deck_type_ranking": [
@@ -18,7 +18,7 @@
       ],
       "label": "青/緑",
       "count": 378,
-      "share": 29.2,
+      "share": 29.1,
       "win_rate": 26.5,
       "avg_rank": 2.5,
       "wins": 100
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 216,
-      "share": 16.7,
-      "win_rate": 26.4,
+      "count": 219,
+      "share": 16.9,
+      "win_rate": 26,
       "avg_rank": 2.5,
       "wins": 57
     },
@@ -69,11 +69,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 160,
+      "count": 161,
       "share": 12.4,
-      "win_rate": 28.1,
+      "win_rate": 28.6,
       "avg_rank": 2.4,
-      "wins": 45
+      "wins": 46
     },
     {
       "type_key": "Blue+Red",
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 658,
+      "decks": 660,
       "usage_rate": 50.9
     },
     {
       "card_id": "ST03-008",
       "decks": 544,
-      "usage_rate": 42.1
+      "usage_rate": 41.9
     },
     {
       "card_id": "ST01-010",
       "decks": 537,
-      "usage_rate": 41.5
+      "usage_rate": 41.4
+    },
+    {
+      "card_id": "GD05-002",
+      "decks": 518,
+      "usage_rate": 39.9
     },
     {
       "card_id": "GD01-030",
       "decks": 517,
-      "usage_rate": 40
-    },
-    {
-      "card_id": "GD05-002",
-      "decks": 515,
-      "usage_rate": 39.8
+      "usage_rate": 39.9
     },
     {
       "card_id": "GD05-081",
-      "decks": 509,
-      "usage_rate": 39.4
+      "decks": 512,
+      "usage_rate": 39.5
     },
     {
       "card_id": "ST01-001",
       "decks": 489,
-      "usage_rate": 37.8
+      "usage_rate": 37.7
     },
     {
       "card_id": "GD03-056",
-      "decks": 407,
-      "usage_rate": 31.5
+      "decks": 410,
+      "usage_rate": 31.6
     },
     {
       "card_id": "ST05-010",
-      "decks": 402,
-      "usage_rate": 31.1
+      "decks": 405,
+      "usage_rate": 31.2
     },
     {
-      "card_id": "GD01-008",
-      "decks": 394,
-      "usage_rate": 30.5
+      "card_id": "GD02-054",
+      "decks": 397,
+      "usage_rate": 30.6
     }
   ],
-  "card_ranking_denominator": 1293,
+  "card_ranking_denominator": 1297,
   "recent_events": [
     {
       "event_id": "ntcd-01M1K3TNJE06MMV381EE21FD01",
@@ -488,6 +488,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M1KZA60HPZSMF3KSPT1874R9",
+      "date": "2026-09-03",
+      "store": "パピー弥富店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M1GMWCMVS16T4AYBV8XG63EE",
       "date": "2026-09-02",
       "store": "トレカチャンピオン江南店",
@@ -521,45 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M1GE06YEHKZ2MAVZB1VV4V67",
-      "date": "2026-09-02",
-      "store": "アメニティードリーム横浜店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-09-03",
-    "event_count": 1057
+    "event_count": 1058
   }
 }
