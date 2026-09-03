@@ -5177,5 +5177,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-03": {
+    "recognized_at": "2026-09-03 20:00:47 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2095429090303946851",
+      "https://x.com/GUNDAM_GCG_JP/status/2095421542779715699"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-042",
+        "card_name": "デストロイガンダム（MA形態）",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 6,
+        "ap": 4,
+        "hp": 6,
+        "traits": [
+          "〔生体CPU〕"
+        ],
+        "link": "特徴に生体CPUを持つPILOT",
+        "effect": "【配備時】自分のデッキを上から4枚見て、その中の〔生体CPU〕のパイロットカード1枚を、このユニットにセットしてもよい。残ったカードは無作為に下に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 76,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST13-009",
+        "card_name": "ガンダム・ファラクト",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔学園〕"
+        ],
+        "link": "特徴に学園を持つPILOT",
+        "effect": "【アタック時】相手プレイヤー1人を選ぶ。そのプレイヤーは自身のトラッシュのユニットカード2枚を選ぶ。それらをゲームから除外する。",
+        "effect_confidence": "medium",
+        "effect_length": 64,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
