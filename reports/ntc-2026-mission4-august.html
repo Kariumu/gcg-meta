@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026年8月 ニュータイプチャレンジ 結果まとめ — 週ごとの推移と、地域ごとの違い | GCG STATS</title>
+  <meta name="description" content="ニュータイプチャレンジ2026 MISSION4（8月開催）の263大会・入賞2,443デッキを集計。全国の週ごとのデッキタイプ推移、8地域それぞれの分布、1か月で採用率が動いたカードを、母数と集計方法を明示して掲載します。">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="2026年8月 ニュータイプチャレンジ 結果まとめ — 週ごとの推移と、地域ごとの違い | GCG STATS">
+  <meta property="og:description" content="ニュータイプチャレンジ2026 MISSION4（8月開催）の263大会・入賞2,443デッキを集計。全国の週ごとのデッキタイプ推移、8地域それぞれの分布、1か月で採用率が動いたカードを、母数と集計方法を明示して掲載します。">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://gcg-stats.com/reports/ntc-2026-mission4-august.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp/ntc-2026-mission4-august.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp/ntc-2026-mission4-august.png">
+  <meta name="twitter:site" content="@gcg_stats">
+  <link rel="canonical" href="https://gcg-stats.com/reports/ntc-2026-mission4-august.html">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://gcg-stats.com/"},
+      {"@type": "ListItem", "position": 2, "name": "レポート", "item": "https://gcg-stats.com/reports/"},
+      {"@type": "ListItem", "position": 3, "name": "2026年8月 ニュータイプチャレンジ 結果まとめ"}
+    ]
+  }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ---- この記事だけのスタイル。すべて .ntc-report 配下に閉じる（ヘッダー/フッターに影響させない） ---- */
+    .ntc-head{ margin-top:16px; padding-bottom:14px; border-bottom:1px solid var(--border); }
+    .ntc-head h1{ font-size:clamp(21px,4vw,30px); line-height:1.4; font-weight:700; letter-spacing:-.01em;
+      padding-left:12px; border-left:3px solid var(--accent); margin-bottom:8px; }
+    .ntc-head .sub{ color:var(--text-secondary); font-size:14.5px; margin:0 0 6px 15px; }
+    .ntc-head .meta{ color:var(--text-muted); font-size:12px; margin:0 0 0 15px; line-height:1.7; }
+    .ntc-report{ font-size:15px; line-height:1.8; }
+    .ntc-report .lede{ color:var(--text-secondary); font-size:15px; }
+    .ntc-report h2{ font-size:clamp(18px,3.2vw,22px); margin:56px 0 6px; font-weight:700; letter-spacing:-.01em;
+      padding-left:12px; border-left:3px solid var(--accent); }
+    .ntc-report h3{ font-size:16px; margin:32px 0 8px; font-weight:650; color:var(--text-primary); }
+    .ntc-report p{ margin:12px 0; }
+    .ntc-report ul{ margin:12px 0 12px 20px; }
+    .ntc-report a{ color:var(--accent); }
+    .ntc-report .tiles{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin:22px 0 8px; }
+    .ntc-report .tile{ background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; }
+    .ntc-report .tile .lab{ font-size:11.5px; color:var(--text-muted); letter-spacing:.02em; }
+    .ntc-report .tile .val{ font-size:27px; font-weight:700; line-height:1.25; margin-top:2px; }
+    .ntc-report .tile .val span{ font-size:14px; font-weight:600; color:var(--text-secondary); margin-left:2px; }
+    .ntc-report .card{ background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px 16px 14px; margin:18px 0; }
+    .ntc-report .card-title{ font-size:14.5px; font-weight:650; margin-bottom:2px; }
+    .ntc-report .card-sub{ font-size:12px; color:var(--text-muted); margin-bottom:14px; }
+    .ntc-report .legend{ display:flex; flex-wrap:wrap; gap:6px 14px; margin:12px 0 2px; font-size:12.5px; color:var(--text-secondary); }
+    .ntc-report .legend .item{ display:flex; align-items:center; gap:6px; }
+    .ntc-report .legend .key{ width:14px; height:4px; border-radius:2px; flex:none; }
+    .ntc-report .chip{ width:13px; height:13px; border-radius:3px; flex:none; overflow:hidden; display:inline-block; vertical-align:-2px; }
+    .ntc-report .note{ background:var(--bg-secondary); border:1px solid var(--border); border-left:3px solid var(--accent);
+      border-radius:6px; padding:12px 14px; margin:16px 0; font-size:13.5px; color:var(--text-secondary); }
+    .ntc-report .note strong{ color:var(--text-primary); }
+    .ntc-report .tbl-wrap{ overflow-x:auto; margin:14px 0; -webkit-overflow-scrolling:touch; }
+    .ntc-report table{ border-collapse:collapse; width:100%; min-width:520px; font-size:13px; }
+    .ntc-report caption{ text-align:left; font-size:12px; color:var(--text-muted); padding-bottom:8px; }
+    .ntc-report th, .ntc-report td{ padding:7px 9px; border-bottom:1px solid var(--border); text-align:right; white-space:nowrap; }
+    .ntc-report th:first-child, .ntc-report td:first-child{ text-align:left; }
+    .ntc-report thead th{ color:var(--text-secondary); font-weight:600; font-size:12px; border-bottom:1px solid var(--border-hover); }
+    .ntc-report tbody td{ font-variant-numeric:tabular-nums; font-family:var(--font-mono); font-size:12.5px; }
+    .ntc-report tbody td:first-child{ font-family:var(--font-sans); font-size:13px; }
+    .ntc-report tbody tr:hover{ background:rgba(255,255,255,.02); }
+    .ntc-report .up{ color:#0ca30c; } .ntc-report .down{ color:#e66767; }
+    .ntc-report .muted{ color:var(--text-muted); }
+    .ntc-report .sm{ font-size:12.5px; color:var(--text-secondary); }
+    .ntc-report svg{ display:block; width:100%; height:auto; overflow:visible; }
+    .ntc-report .sm-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:12px; }
+    .ntc-report .cr{ border-bottom:1px dotted var(--accent); cursor:help; -webkit-tap-highlight-color:transparent; }
+    .ntc-report .cr:hover, .ntc-report .cr:focus-visible{ color:var(--accent); outline:none; }
+    .ntc-report .cr.on{ color:var(--accent); }
+    /* 画面に固定して出す2つは article の外に置くので、ここだけ非スコープ */
+    .ntc-tip{ position:fixed; pointer-events:none; background:var(--bg-elevated); border:1px solid var(--border-hover);
+      border-radius:6px; padding:8px 10px; font-size:12px; line-height:1.6; box-shadow:0 6px 20px rgba(0,0,0,.5);
+      opacity:0; transition:opacity .1s; z-index:200; max-width:230px; }
+    .ntc-tip .t{ font-weight:650; margin-bottom:4px; }
+    .ntc-tip .r{ display:flex; justify-content:space-between; gap:14px; font-family:var(--font-mono); font-size:11.5px; }
+    .ntc-tip .r i{ width:8px; height:8px; border-radius:2px; display:inline-block; margin-right:5px; }
+    .ntc-cardpop{ position:fixed; z-index:210; background:var(--bg-elevated); border:1px solid var(--border-hover);
+      border-radius:10px; padding:8px; box-shadow:0 12px 34px rgba(0,0,0,.6); opacity:0; visibility:hidden;
+      transition:opacity .12s; pointer-events:none; width:212px; }
+    .ntc-cardpop.show{ opacity:1; visibility:visible; }
+    .ntc-cardpop.pinned{ pointer-events:auto; }
+    .ntc-cardpop img{ width:196px; height:274px; object-fit:contain; display:block; border-radius:6px; background:#0a0e14; }
+    .ntc-cardpop .cn{ font-size:12px; color:var(--text-primary); margin-top:7px; line-height:1.45; font-weight:600; }
+    .ntc-cardpop .ci{ font-family:var(--font-mono); font-size:10.5px; color:var(--text-muted); }
+    .ntc-cardpop .cl{ display:none; font-size:11.5px; margin-top:6px; }
+    .ntc-cardpop.pinned .cl{ display:block; }
+    @media (max-width:520px){ .ntc-report .tile .val{ font-size:23px; } }
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <nav class="breadcrumb" style="margin-bottom:12px;font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">
+      <a href="../index.html" style="color:var(--text-muted);text-decoration:none">ホーム</a>
+      <span style="margin:0 6px">›</span>
+      <a href="index.html" style="color:var(--text-muted);text-decoration:none">レポート</a>
+      <span style="margin:0 6px">›</span>
+      <span>2026年8月 NTC 結果まとめ</span>
+    </nav>
+    <a href="../reports/" style="color:var(--text-muted);text-decoration:none;font-size:13px">← レポート一覧に戻る</a>
+
+    <div class="ntc-head">
+      <h1>2026年8月 ニュータイプチャレンジ 結果まとめ</h1>
+      <p class="sub">週ごとの推移と、地域ごとの違い</p>
+      <p class="meta">対象大会: ニュータイプチャレンジ 2026 MISSION4（8月開催）／ 263大会・入賞2,443デッキ<br>
+      集計対象 2026-08-01〜2026-08-31 ｜ データ更新 2026-09-04 ｜ 公開 2026.09.05</p>
+    </div>
+
+    <article class="report-article ntc-report" style="margin-top:24px">
+
+<p class="lede"><strong>8月の第1週、ニュータイプチャレンジの入賞デッキは3本に1本以上が青緑でした。第5週には、4本に1本を下回るところまで減っています。</strong></p>
+<p class="lede">1か月のあいだに何が入れ替わったのか。2026年8月に開催されたニュータイプチャレンジ（NTC）の入賞デッキを、当サイトが公式大会結果から自動収集したデータで集計しました。全国の週ごとの推移、8地域それぞれの分布、そして採用率が動いたカードまでを追いかけます。</p>
+
+<div class="tiles">
+  <div class="tile"><div class="lab">集計した大会</div><div class="val">263<span>大会</span></div></div>
+  <div class="tile"><div class="lab">入賞デッキ</div><div class="val">2,443<span>本</span></div></div>
+  <div class="tile"><div class="lab">開催店舗</div><div class="val">263<span>店</span></div></div>
+  <div class="tile"><div class="lab">地域</div><div class="val">8<span>地域</span></div></div>
+</div>
+<p class="sm">8月のNTCは <strong>263店舗がちょうど1回ずつ</strong> 開催しました（同じ店舗が2回開催した例は0件）。掲載順位は8位までが218大会、64名規模で16行が公開されたものが42大会、その他が3大会です。本記事の「入賞デッキ」は、公式に公開された入賞者のデッキリストすべてを指します。</p>
+
+<h2>1. 全国：この1か月で何が入れ替わったか</h2>
+<p>まず全国の推移です。NTCは土日の開催に集中しているため、<strong>各区間に週末がちょうど1回ずつ入るよう、土曜日を起点に5区間</strong>で区切りました（最後の区間だけは8/29〜8/31の3日間です）。</p>
+
+<div class="card">
+  <div class="card-title">デッキタイプ別 入賞シェアの推移（全国）</div>
+  <div class="card-sub">2026年8月・入賞2,443本／縦軸は各区間の入賞デッキに占める割合</div>
+  <div id="chart-national"></div>
+  <div class="legend" id="legend-main"></div>
+</div>
+
+<p><strong>青緑が36.6%から24.2%へ、12.4ポイント下がりました。</strong>入れ替わるように青白が13.6%から19.6%へ6.0ポイント上がっています。8月上旬の時点で青緑はすでに3分の1を超える最大勢力で、そこから1か月かけて少しずつシェアを落とした、という動きです。</p>
+<p>青紫は8/08〜8/14で20.1%まで伸びたあと14%前後に戻り、緑紫と赤白は9.8〜17%、青赤は7〜10%の帯の中で上下しています。月末時点でも青緑は依然として最大勢力ですが、<strong>2位との差は月初の21.1ポイントから4.6ポイントまで縮みました。</strong></p>
+
+<div class="tbl-wrap">
+<table>
+<caption>表1：全国のデッキタイプ別 入賞シェア（%）／括弧内は本数</caption>
+<thead><tr><th>区間</th><th>大会</th><th>入賞</th><th>青緑</th><th>青紫</th><th>青白</th><th>緑紫</th><th>赤白</th><th>青赤</th></tr></thead>
+<tbody>
+<tr><td>8/01〜8/07</td><td>68</td><td>664</td><td>36.6 (243)</td><td>15.5 (103)</td><td>13.6 (90)</td><td>9.8 (65)</td><td>10.1 (67)</td><td>7.1 (47)</td></tr>
+<tr><td>8/08〜8/14</td><td>66</td><td>592</td><td>27.0 (160)</td><td>20.1 (119)</td><td>10.3 (61)</td><td>15.7 (93)</td><td>10.3 (61)</td><td>8.6 (51)</td></tr>
+<tr><td>8/15〜8/21</td><td>57</td><td>512</td><td>26.0 (133)</td><td>14.5 (74)</td><td>15.8 (81)</td><td>16.8 (86)</td><td>9.8 (50)</td><td>9.6 (49)</td></tr>
+<tr><td>8/22〜8/28</td><td>43</td><td>410</td><td>24.6 (101)</td><td>13.9 (57)</td><td>19.8 (81)</td><td>12.2 (50)</td><td>13.4 (55)</td><td>7.6 (31)</td></tr>
+<tr><td>8/29〜8/31</td><td>29</td><td>265</td><td>24.2 (64)</td><td>14.0 (37)</td><td>19.6 (52)</td><td>15.8 (42)</td><td>12.5 (33)</td><td>9.1 (24)</td></tr>
+<tr><td><strong>8月計</strong></td><td><strong>263</strong></td><td><strong>2443</strong></td><td><strong>28.7 (701)</strong></td><td><strong>16.0 (390)</strong></td><td><strong>14.9 (365)</strong></td><td><strong>13.8 (336)</strong></td><td><strong>10.9 (266)</strong></td><td><strong>8.3 (202)</strong></td></tr>
+</tbody></table>
+</div>
+
+<div class="note">
+<strong>数字の振れ幅について。</strong> 入賞1本が全体に与える影響は、8/01〜8/07の区間で0.15ポイント、8/29〜8/31の区間で0.38ポイントです。区間が後ろにいくほど母数が小さくなるので、1〜2ポイントの上下は「動いた」と読まないほうが安全です。上で触れた青緑−12.4ポイント・青白+6.0ポイントは、この振れ幅よりはるかに大きい変化です。
+</div>
+
+<p class="sm">なお、上位6タイプ以外は赤紫2.7%(67)・赤緑1.8%(44)・白紫1.5%(36)・緑白1.4%(35)・単色紫0.04%(1)で、合計7.5%（183本）でした。グラフでは省略しています。</p>
+
+<h2>2. 地域別：同じ日本でも、環境は同じではない</h2>
+<p>ここからが、全国平均だけを見ていると気づけない部分です。8地域それぞれで、8月の入賞デッキがどう分かれていたかを並べます。</p>
+
+<div class="card">
+  <div class="card-title">地域別 入賞デッキの内訳（2026年8月・合計）</div>
+  <div class="card-sub">北から南の順／各バーは100%＝その地域の入賞デッキ全体</div>
+  <div id="chart-region"></div>
+  <div class="legend" id="legend-region"></div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+<caption>表2：地域別 入賞シェア（%）と母数／「1本」は入賞デッキ1本が動かすポイント数</caption>
+<thead><tr><th>地域</th><th>大会</th><th>店舗</th><th>入賞</th><th>1本</th><th>青緑</th><th>青紫</th><th>青白</th><th>緑紫</th><th>赤白</th><th>青赤</th></tr></thead>
+<tbody>
+<tr><td>北海道</td><td>7</td><td>7</td><td>56</td><td>1.79</td><td>19.6</td><td>23.2</td><td>23.2</td><td>7.1</td><td>5.4</td><td>12.5</td></tr>
+<tr><td>東北</td><td>15</td><td>15</td><td>136</td><td>0.74</td><td>35.3</td><td>10.3</td><td>16.9</td><td>10.3</td><td>12.5</td><td>7.4</td></tr>
+<tr><td>関東</td><td>73</td><td>73</td><td>738</td><td>0.14</td><td>31.2</td><td>16.9</td><td>15.0</td><td>11.9</td><td>11.1</td><td>7.5</td></tr>
+<tr><td>中部</td><td>61</td><td>61</td><td>561</td><td>0.18</td><td>27.6</td><td>17.6</td><td>14.6</td><td>12.3</td><td>11.1</td><td>7.7</td></tr>
+<tr><td>関西</td><td>41</td><td>41</td><td>376</td><td>0.27</td><td>27.9</td><td>16.8</td><td>13.3</td><td>13.8</td><td>10.9</td><td>9.3</td></tr>
+<tr><td>中国</td><td>20</td><td>20</td><td>184</td><td>0.54</td><td>28.3</td><td>14.1</td><td>15.2</td><td>15.8</td><td>9.2</td><td>8.2</td></tr>
+<tr><td>四国</td><td>9</td><td>9</td><td>80</td><td>1.25</td><td>28.8</td><td>8.8</td><td>8.8</td><td>22.5</td><td>13.8</td><td>10.0</td></tr>
+<tr><td>九州</td><td>37</td><td>37</td><td>312</td><td>0.32</td><td>24.7</td><td>13.8</td><td>16.3</td><td>19.9</td><td>10.6</td><td>9.3</td></tr>
+<tr><td><strong>全国</strong></td><td><strong>263</strong></td><td><strong>263</strong></td><td><strong>2443</strong></td><td><strong>0.04</strong></td><td><strong>28.7</strong></td><td><strong>16.0</strong></td><td><strong>14.9</strong></td><td><strong>13.8</strong></td><td><strong>10.9</strong></td><td><strong>8.3</strong></td></tr>
+</tbody></table>
+</div>
+
+<h3>九州は緑紫が濃い（もっとも確度が高い特徴）</h3>
+<p>九州の緑紫は19.9%（62本／312本）で、全国の13.8%を6.1ポイント上回ります。この62本は<strong>28店舗・28大会に分かれており</strong>、いちばん多い店舗でも5本です。特定の店舗の常連が数字を押し上げているわけではなく、地域全体の傾向と見てよさそうです。隣接する四国も緑紫22.5%（18本／80本）と同じ方向を向いています（ただし四国は入賞80本と母数が小さく、1本で1.25ポイント動きます）。</p>
+
+<h3>北海道だけ、青緑が最大勢力ではない</h3>
+<p>北海道は青紫23.2%・青白23.2%が並んで最も多く、青緑は19.6%で3番手でした。全国で青緑が28.7%であることを考えると、はっきりした違いです。<strong>ただし北海道は7大会・入賞56本で、1本が1.79ポイントを動かします。</strong>青紫と青白はどちらも13本で、2本違えば順位が入れ替わる差です。「北海道は青紫が強い」と断定できる母数ではなく、<strong>傾向としてそう見えている</strong>という段階です。9月以降のデータで続くかどうかを見たいところです。</p>
+
+<h3>東北・関東は青緑が濃い</h3>
+<p>東北35.3%（48本／136本、14店舗に分散）、関東31.2%（230本／738本、71店舗に分散）と、全国平均より青緑が多く出ています。逆に九州は24.7%、北海道は19.6%と、青緑が全国平均より薄い地域もあります。</p>
+
+<div class="note">
+<strong>読むときの注意。</strong> 北海道（56本）・四国（80本）・中国（184本）は母数が小さく、数ポイントの差は偶然でも生じます。上の表の「1本」の列は、入賞デッキが1本違うと何ポイント動くかを示したものです。母数が大きい関東（0.14）・中部（0.18）・関西（0.27）・九州（0.32）の数字は比較的安定していると考えてください。
+</div>
+
+<h2>3. 関東と中部の週ごとの動き</h2>
+<p>地域ごとの推移も見たいところですが、週で区切ると小さい地域は「その週に大会が0件」という区間が出てしまいます（北海道と四国は2区間、東北・中国はそれぞれ1区間が0大会でした）。5区間すべてに大会があるのは関東・中部・関西・九州の4地域ですが、関西の8/29〜8/31は入賞32本（1本=3.13ポイント）、九州の8/22〜8/28は40本（1本=2.50ポイント）と、区間によっては1本で2.5〜3.1ポイント動いてしまいます。そこでここでは、<strong>入賞本数が飛び抜けて多い関東（738本）と中部（561本）の2地域</strong>だけを線で追います。</p>
+
+<div class="card">
+  <div class="card-title">関東・中部の週ごとの推移</div>
+  <div class="card-sub">縦軸は各区間の入賞デッキに占める割合／2地域とも同じ目盛りです</div>
+  <div class="sm-grid" id="chart-small"></div>
+  <div class="legend" id="legend-small"></div>
+</div>
+
+<p>関東は青緑が41.4%から23.6%へ大きく下げ、代わりに赤白が8.2%から16.7%へ伸びました。中部も青緑が34.7%から17.5%へ下がり、青白が13.2%から17.5%へ、青紫が16.7%から21.1%へ動いています。<strong>「青緑が減る」という全国の流れは、母数の大きい2地域でも共通して起きていました。</strong></p>
+<p class="sm">※中部の8/08〜8/14で青白が4.5%まで落ちていますが、この区間の中部は入賞112本（1本=0.89ポイント）で、青白は5本です。前後の区間と比べて極端に見えますが、母数の小ささによる振れの範囲内と考えられます。</p>
+
+<h2>4. 8月に採用率が動いたカード</h2>
+<p>ここからは、デッキの「色」ではなく<strong>中身のカード</strong>を見ます。入賞デッキ2,443本ぶんのリストがあるので、どのカードが1か月で増えたのかを直接数えられます。</p>
+<p>まず、全入賞デッキのうち何%がそのカードを採用していたかの推移です。</p>
+<p class="sm">※ 点線が引かれたカード名にカーソルを合わせると（スマートフォンはタップすると）、そのカードの画像が表示されます。</p>
+
+<div class="card">
+  <div class="card-title">採用率が伸びたカードの例（全入賞デッキに占める採用デッキの割合）</div>
+  <div class="card-sub">縦軸は0〜30%で3枚とも共通／2026年8月・入賞2,443本／動きの大きかったカードから3枚を選んだもので、伸び幅の順位は後述の表3</div>
+  <div class="sm-grid" id="chart-cards"></div>
+</div>
+
+<div class="note">
+<strong>ここで注意が必要です。</strong> 全国の採用率が上がったからといって、そのカードの評価が上がったとは限りません。<strong>そのカードを積むデッキタイプ自体が増えただけ</strong>かもしれないからです。たとえば青白が13.6%から19.6%に増えれば、青白にしか入らないカードの全国採用率は、中身が何も変わらなくても自動的に上がります。
+</div>
+
+<h3>「本当に評価が上がった」のはどれか</h3>
+<p>そこで、全国採用率の変化を2つに分解しました。8月前半（8/1〜8/14・入賞1,256本）と後半（8/22〜8/31・入賞675本）を比べ、変化のうち何ポイントが<strong>デッキタイプの構成が変わったこと</strong>によるもので、何ポイントが<strong>各タイプの中で採用が増えたこと</strong>によるものかを切り分けます。</p>
+
+<div class="card">
+  <div class="card-title">全国採用率の変化を、2つの要因に分ける</div>
+  <div class="card-sub">前半（8/1〜8/14）→後半（8/22〜8/31）の変化ポイント／上位5枚</div>
+  <div id="chart-decomp"></div>
+  <div class="legend" id="legend-decomp"></div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+<caption>表3：全国採用率の変化と、その内訳（ポイント）</caption>
+<thead><tr><th>カード</th><th>前半</th><th>後半</th><th>変化</th><th>うち タイプ内採用率</th><th>うち タイプ構成</th></tr></thead>
+<tbody>
+<tr><td><span class="cr" data-c="GD04-068">シルヴァ・バレト</span>（GD04-068）</td><td>10.5%</td><td>26.1%</td><td class="up">+15.6</td><td class="up">+8.4</td><td>+7.1</td></tr>
+<tr><td><span class="cr" data-c="GD01-118">溢れる慈愛</span>（GD01-118）</td><td>23.9%</td><td>35.7%</td><td class="up">+11.8</td><td>+1.2</td><td>+10.6</td></tr>
+<tr><td><span class="cr" data-c="GD01-073">ソードストライクガンダム</span>（GD01-073）</td><td>6.7%</td><td>15.3%</td><td class="up">+8.6</td><td class="up">+3.8</td><td>+4.8</td></tr>
+<tr><td><span class="cr" data-c="ST04-001">エールストライクガンダム</span>（ST04-001）</td><td>12.2%</td><td>20.6%</td><td class="up">+8.4</td><td>+1.2</td><td>+7.2</td></tr>
+<tr><td><span class="cr" data-c="GD01-065">フリーダムガンダム</span>（GD01-065）</td><td>4.8%</td><td>13.0%</td><td class="up">+8.3</td><td class="up">+4.2</td><td>+4.1</td></tr>
+</tbody></table>
+</div>
+
+<p>この見方をすると、同じ「増えた」でも中身が違うことがわかります。</p>
+<p><strong><span class="cr" data-c="GD01-118">溢れる慈愛</span>は、増加分11.8ポイントのうち10.6ポイントが「タイプ構成の変化」でした。</strong>採用するデッキ（青白・赤白）の中での採用率は91%→98%、100%→100%とほぼ変わっていません。つまりこのカードは「新たに評価された」のではなく、<strong>もともと必須だったカードを積むデッキが増えた</strong>結果として全国の数字が上がっています。</p>
+<p>対して<strong><span class="cr" data-c="GD04-068">シルヴァ・バレト</span>は、15.6ポイントのうち8.4ポイントが「タイプ内採用率の変化」</strong>です。内訳を見ると理由がはっきりします。</p>
+
+<div class="tbl-wrap">
+<table>
+<caption>表4：<span class="cr" data-c="GD04-068">シルヴァ・バレト</span>（GD04-068）のデッキタイプ別 採用率</caption>
+<thead><tr><th>デッキタイプ</th><th>前半のシェア</th><th>後半のシェア</th><th>タイプ内の採用率（前半→後半）</th></tr></thead>
+<tbody>
+<tr><td>青白</td><td>12.0%</td><td>19.7%</td><td>68% (n=151) → 84% (n=133)</td></tr>
+<tr><td>赤白</td><td>10.2%</td><td>13.0%</td><td class="up">15% (n=128) → 57% (n=88)</td></tr>
+<tr><td>緑白</td><td>1.4%</td><td>1.9%</td><td>35% (n=17) → 69% (n=13)</td></tr>
+<tr><td>白紫</td><td>1.5%</td><td>1.5%</td><td>26% (n=19) → 50% (n=10)</td></tr>
+</tbody></table>
+</div>
+
+<p><strong>赤白での採用率が15%から57%へ、42ポイント跳ね上がっています。</strong>青白ではもともと7割近くが積んでいたので伸びしろは限られますが、赤白は8月前半にはほとんど入っていませんでした。それが月末には過半数のデッキに入っています。「青白が増えたから全国の数字も上がった」だけでは説明できない動きが、赤白の側で起きていたことになります。</p>
+<p>減ったカードの側も、同じ理屈で読めます。前半→後半で全国採用率が下がった上位5枚は、<span class="cr" data-c="GD01-100">覚悟の表れ</span>（GD01-100、54.5%→45.8%）・<span class="cr" data-c="GD05-085">アムロ・レイ</span>（GD05-085、31.2%→23.3%）・<span class="cr" data-c="GD05-017">νガンダム</span>（GD05-017、30.9%→23.0%）・<span class="cr" data-c="GD05-027">ジェガン</span>（GD05-027、31.1%→23.4%）・<span class="cr" data-c="GD05-029">リ・ガズィ（ケーラ機）</span>（GD05-029、30.7%→23.1%）で、すべて青緑に入るカードです。</p>
+<p>ただし中身は2種類に分かれます。<strong>アムロ・レイ以下の4枚は、青緑の中での採用率が9割前後（91〜93%）のまま変わっていません。</strong>全国の数字が下がったのは、青緑というデッキタイプそのものが減ったからです。<strong>いっぽう覚悟の表れだけは、青緑の中での採用率が93%から69%へ24ポイント落ちています。</strong>こちらはデッキが減っただけでなく、青緑を使う人がこのカードを抜き始めた、という別の動きです。</p>
+
+<h3>なぜ複数のデッキが同じ1枚に行き着いたのか</h3>
+<p>ここから先は、カードのテキストと採用率から当サイトが読み取った見解です。</p>
+<p><span class="cr" data-c="GD04-068">シルヴァ・バレト</span>（GD04-068）は Lv5・コスト3、AP4/HP4 の《ブロッカー》で、<strong>自身が相手から受ける効果ダメージを3軽減します</strong>。ブロッカーとして盤面に立ちながら、盤面へ干渉するカードの多くを受け付けない。この2つを1枚で持っていることが、対処する側の負担になっているのだと考えられます。</p>
+<p>数えてみると、実際にそう読める形になっていました。8月の入賞デッキに入っていた「相手のユニットに触れるカード」のうち、後半（8/22〜8/31）に3%以上使われていたのは26枚です。<strong>そのうち17枚が、効果ダメージによる干渉でした。</strong>効果ダメージは3軽減されるため、たとえば赤の<span class="cr" data-c="GD04-109">強大な圧力</span>（GD04-109）は「Lv.6以下の相手のユニット1つに4ダメージ」ですが、シルヴァ・バレトに対しては1しか通りません。</p>
+<p>軽減を無視できる「破壊」「手札やデッキに戻す」を持つのは、残る9枚です。</p>
+
+<div class="tbl-wrap">
+<table>
+<caption>表5：8月後半に3%以上使われた除去のうち、効果ダメージではない9枚</caption>
+<thead><tr><th>カード</th><th>色</th><th>できること</th><th>後半の採用率</th><th>Lv5のシルヴァ・バレトを選べるか</th></tr></thead>
+<tbody>
+<tr><td><span class="cr" data-c="GD05-002">ストライクフリーダムガンダム</span>（GD05-002）</td><td>青</td><td>最もLv.が低い相手ユニットをデッキの下へ</td><td>41.5%</td><td>△ 相手の中で最もLv.が低いときだけ</td></tr>
+<tr><td><span class="cr" data-c="ST04-001">エールストライクガンダム</span>（ST04-001）</td><td>白</td><td>HP4以下を持ち主の手札に戻す</td><td>20.6%</td><td>○ Lv.4以上のパイロットをセットしたとき</td></tr>
+<tr><td><span class="cr" data-c="GD05-060">ガンダム・フラウロス（流星号）</span>（GD05-060）</td><td>紫</td><td>Lv.2以下を破壊</td><td>20.0%</td><td>× Lv.2以下まで</td></tr>
+<tr><td><span class="cr" data-c="GD01-073">ソードストライクガンダム</span>（GD01-073）</td><td>白</td><td>HP2以下を持ち主の手札に戻す</td><td>15.3%</td><td>× HP2以下まで</td></tr>
+<tr><td><span class="cr" data-c="GD05-114">広域殲滅</span>（GD05-114）</td><td>紫</td><td>Lv.4以下のユニットをすべて破壊</td><td>15.0%</td><td>× Lv.4以下まで</td></tr>
+<tr><td><span class="cr" data-c="GD05-050">ガンダムエクシアリペア</span>（GD05-050）</td><td>紫</td><td>パイロット未セットのLv.4以下をバトルダメージで破壊</td><td>15.0%</td><td>× Lv.4以下まで</td></tr>
+<tr><td><span class="cr" data-c="GD05-049">サザビー</span>（GD05-049）</td><td>紫</td><td>自分のユニットを破壊すると、相手も自分のユニット1つを選んで破壊する</td><td>7.9%</td><td>― 破壊するユニットを選ぶのは相手</td></tr>
+<tr><td><span class="cr" data-c="ST05-014">致命の一撃</span>（ST05-014）</td><td>紫</td><td>Lv.3以下を破壊</td><td>4.0%</td><td>× Lv.3以下まで</td></tr>
+<tr><td><span class="cr" data-c="GD04-117">優雅な物腰</span>（GD04-117）</td><td>白</td><td>Lv.3以下を1〜2つ手札に戻す</td><td>3.6%</td><td>× Lv.3以下まで</td></tr>
+</tbody></table>
+</div>
+
+<p><strong>9枚のうち6枚は、レベルやHPの上限があってLv5・HP4のシルヴァ・バレトを選べません。</strong>もう1枚のサザビーは、破壊するユニットを選ぶのが相手なので、こちらから指定できません。届くのは、白のエールストライクガンダムと、条件つきで青のストライクフリーダムガンダムの2枚だけでした。どちらも白か青を含むデッキのカードです。</p>
+<p>この表に入らなかった1枚が、紫の<span class="cr" data-c="ST09-009">ジャイアントキリング</span>（ST09-009）です。「アクティブのAP4以下の相手のユニット1つを破壊する」ので、AP4のシルヴァ・バレトを選べます。<strong>青紫の中では2%から12%へ増えました。</strong>ただし全国で見ると、後半の入賞675本のうち17本、2.5%にとどまります。同じ期間にシルヴァ・バレトを積んでいたのは26.1%でした。</p>
+<p><strong>解決策になるカードが無いわけではありません。ただ、それを入れる枠がまだ回っていないように見えます。</strong>効果ダメージによる除去は他の対面でも使うカードなので抜きにくく、シルヴァ・バレト1枚のために枠を割く判断は、まだ多くのデッキで起きていない。8月の数字からはそう見えます。</p>
+<p class="sm">※このパートは見解です。カードのテキストと採用率は事実ですが、実際の対戦でどう機能するかは盤面やパイロットの有無で変わります（HPを上げるパイロットをセットすればHPは4を超えます）。また《ブロッカー》であっても、AP4以上のユニットでアタックすればバトルダメージで破壊できます。数字が示しているのは、どのカードがどれだけ使われたかまでです。</p>
+
+<h2>5. 同じ色でも、月初と月末では中身が違う</h2>
+<p>「青白」「赤白」といった呼び方は1か月そのままですが、その中身は入れ替わっています。前半（8/1〜8/14）と後半（8/22〜8/31）で、同じデッキタイプの中の採用率を比べました。</p>
+
+<div class="tbl-wrap">
+<table>
+<caption>表6：青白の中で動いたカード（前半 n=151 → 後半 n=133）</caption>
+<thead><tr><th>カード</th><th>前半</th><th>後半</th><th>差</th></tr></thead>
+<tbody>
+<tr><td><span class="cr" data-c="GD01-065">フリーダムガンダム</span>（GD01-065）</td><td>40%</td><td>66%</td><td class="up">+26</td></tr>
+<tr><td><span class="cr" data-c="GD05-015">M1アストレイ（シュライク装備）</span>（GD05-015）</td><td>5%</td><td>31%</td><td class="up">+26</td></tr>
+<tr><td><span class="cr" data-c="GD01-073">ソードストライクガンダム</span>（GD01-073）</td><td>48%</td><td>70%</td><td class="up">+22</td></tr>
+<tr><td><span class="cr" data-c="GD04-068">シルヴァ・バレト</span>（GD04-068）</td><td>68%</td><td>84%</td><td class="up">+17</td></tr>
+<tr><td><span class="cr" data-c="GD04-077">フラット（ミリシャ仕様）</span>（GD04-077）</td><td>26%</td><td>38%</td><td class="up">+11</td></tr>
+<tr><td><span class="cr" data-c="ST01-001">ガンダム</span>（ST01-001）</td><td>63%</td><td>74%</td><td class="up">+11</td></tr>
+<tr><td><span class="cr" data-c="ST04-012">ストライカーパック</span>（ST04-012）</td><td>44%</td><td>19%</td><td class="down">−26</td></tr>
+<tr><td><span class="cr" data-c="GD05-005">ストライクルージュ（オオトリ装備）</span>（GD05-005）</td><td>46%</td><td>29%</td><td class="down">−16</td></tr>
+<tr><td><span class="cr" data-c="EB01-054">ギャプランTR-5［フライルー］1号機</span>（EB01-054）</td><td>30%</td><td>20%</td><td class="down">−10</td></tr>
+</tbody></table>
+</div>
+
+<div class="tbl-wrap">
+<table>
+<caption>表7：赤白の中で動いたカード（前半 n=128 → 後半 n=88）</caption>
+<thead><tr><th>カード</th><th>前半</th><th>後半</th><th>差</th></tr></thead>
+<tbody>
+<tr><td><span class="cr" data-c="GD04-068">シルヴァ・バレト</span>（GD04-068）</td><td>15%</td><td>57%</td><td class="up">+42</td></tr>
+<tr><td><span class="cr" data-c="GD01-128">資源衛星パラオ</span>（GD01-128）</td><td>45%</td><td>86%</td><td class="up">+41</td></tr>
+<tr><td><span class="cr" data-c="GD03-035">GFreD</span>（GD03-035）</td><td>3%</td><td>22%</td><td class="up">+18</td></tr>
+<tr><td><span class="cr" data-c="GD01-076">ミカエリス</span>（GD01-076）</td><td>0%</td><td>14%</td><td class="up">+14</td></tr>
+<tr><td><span class="cr" data-c="GD05-121">サイクロンパンチ</span>（GD05-121）</td><td>87%</td><td>100%</td><td class="up">+13</td></tr>
+<tr><td><span class="cr" data-c="GD05-072">ライジングガンダム</span>（GD05-072）</td><td>88%</td><td>100%</td><td class="up">+13</td></tr>
+<tr><td><span class="cr" data-c="GD05-128">ガンダムファイト</span>（GD05-128）</td><td>54%</td><td>25%</td><td class="down">−29</td></tr>
+<tr><td><span class="cr" data-c="GD05-035">ドラゴンガンダム</span>（GD05-035）</td><td>20%</td><td>5%</td><td class="down">−15</td></tr>
+<tr><td><span class="cr" data-c="GD05-112">宝華教典・十絶陣</span>（GD05-112）</td><td>21%</td><td>7%</td><td class="down">−14</td></tr>
+</tbody></table>
+</div>
+
+<p>青白は、ストライカーパックやストライクルージュを抜いてフリーダムガンダムとソードストライクガンダムを増やす方向へ動きました。赤白はシルヴァ・バレトと資源衛星パラオが一気に入り、代わりにガンダムファイトやドラゴンガンダムが減っています。<strong>「8月の青白」と一口に言っても、月初と月末では別の構築を指している</strong>ことになります。</p>
+<p class="sm">青緑の中では<span class="cr" data-c="GD01-100">覚悟の表れ</span>（GD01-100）が93%→69%と24ポイント下がり、<span class="cr" data-c="ST02-016">コルシカ基地</span>（ST02-016）が51%→62%へ上がりました。パーツの入れ替えは青緑でも起きています。</p>
+<p class="sm">※上の2つの表は、そのデッキタイプの中で採用率の差が大きかった順に、増えた側・減った側からそれぞれ抜き出したものです（前半か後半のどちらかで採用率10%以上のカードが対象）。「このカードを入れると勝てる／勝てない」を示すものではありません。採用の有無は構築の型の違いを表していることが多く、1枚だけを取り出して評価することはできません。</p>
+<p class="sm">※「差」は丸める前の値から計算しているため、表示している前半・後半を引き算した値と1だけずれる行があります。</p>
+
+<h2>6. 8月のまとめ</h2>
+<p>2026年8月のニュータイプチャレンジは、263店舗が1回ずつ、計263大会。入賞2,443本の記録から見えたのは次の3点です。</p>
+<ul style="margin:12px 0 12px 20px;font-size:14.5px;line-height:1.9">
+  <li style="margin-bottom:10px"><strong>青緑は最大勢力のまま、1か月で12.4ポイント落ちた。</strong><br><span style="color:var(--text-secondary)">36.6%から24.2%へ。入れ替わるように青白が13.6%から19.6%へ伸び、月初に21.1ポイントあった首位と2位の差は、月末には4.6ポイントまで縮みました。</span></li>
+  <li style="margin-bottom:10px"><strong>環境は地域によって違う。</strong><br><span style="color:var(--text-secondary)">九州は緑紫が全国より6.1ポイント多く、しかもそれが28店舗に分散していました。北海道では青緑が最大勢力ではありません。全国平均だけを見ていても、自分が出る大会に何が来るかは分かりません。</span></li>
+  <li><strong>色ではなくカードで見ると、動いた理由の一部が見える。</strong><br><span style="color:var(--text-secondary)">シルヴァ・バレトの全国採用率は10.5%から26.1%へ。この+15.6ポイントのうち+7.1ポイントは青白などのデッキタイプが増えたことによるもので、残る+8.4ポイントが各タイプの中で採用が増えたぶんです。後者でいちばん効いているのが、赤白の中での15%→57%でした。効果ダメージによる除去が3軽減で通らないこのカードに対して、解決策になるカードは存在するものの、それを入れる枠はまだ回っていないように見えます。</span></li>
+</ul>
+<p>ここに書いたのは、8月に実際に起きたことだけです。9月に何が起きるかは、9月のデータが出てから同じ方法で確かめられます。当サイトの集計は毎晩自動で更新しているため、月の途中の数字も同じ条件で見ることができます。</p>
+
+<h2>7. 集計方法</h2>
+<p>同じ数字を確かめられるように、集計の条件を書いておきます。</p>
+<ul style="margin:12px 0 12px 20px;color:var(--text-secondary);font-size:14px;line-height:1.9">
+  <li><strong>対象</strong>：2026-08-01〜2026-08-31 に開催されたニュータイプチャレンジ。公式に公開された入賞者のデッキリストのみを使用しています（参加者全員の分布ではありません）。263大会・2,443デッキ・263店舗。</li>
+  <li><strong>デッキタイプの決め方</strong>：デッキ50枚を色ごとに枚数で集計し、<strong>多い順の上位2色</strong>をそのデッキのタイプとします。表記の並びは青・赤・緑・白・紫の固定順です（例：青と緑が最も多ければ「青緑」）。当サイト全体で同じ規則を使っています。</li>
+  <li><strong>順位の扱い</strong>：64名規模の大会は1〜16位の形で公開されますが、実態は32名規模の大会が2つ同時に開催される形式のため、<strong>公開順位を2で割って切り上げ</strong>、公式の1〜8位に戻してから集計しています。この変換の結果、8月の入賞2,443本はすべて1〜8位に収まります。</li>
+  <li><strong>週の区切り</strong>：NTCが土日に集中するため、各区間に週末が1回ずつ入るよう土曜起点で5区間に分けました。最後の区間（8/29〜8/31）だけは3日間です。</li>
+  <li><strong>地域</strong>：開催店舗の所在地から北海道・東北・関東・中部・関西・中国・四国・九州の8地域に分類しています。</li>
+  <li><strong>カードの採用率</strong>：そのカードを1枚以上採用しているデッキの割合です（枚数ではありません）。</li>
+  <li><strong>除去手段の分類（4章）</strong>：カードの効果テキストに「破壊する」があれば破壊、「手札に戻す」「デッキの下に戻す」があれば戻す、「ダメージを与える」があれば効果ダメージとしました。<strong>キーワード能力の注釈文（丸カッコの中）は判定に使わず、シールドエリアへのダメージとバトルダメージは効果ダメージに含めていません</strong>（《突破》やマスターガンダムのシールド焼きはユニットへの除去ではないため）。母集団は、8月の入賞デッキに実際に入っていて、後半（8/22〜8/31）の採用率が3%以上のカードです。相手の盤面からユニットが失われるものは、テキストに「相手のユニット」と書かれていなくても含めます（サザビーのように、相手が自分で選んで破壊する形のもの）。1枚で複数に当てはまる場合は、破壊・戻すのほうに数えています。</li>
+  <li><strong>要因分解</strong>：全国採用率の変化を、Σ（タイプのシェア × タイプ内の採用率）として、シェアの変化ぶんと採用率の変化ぶんに分けています（それぞれ相手側の平均値を掛けて配分）。</li>
+</ul>
+<p class="sm">本記事の数値は、当サイトの<a href="../meta.html">環境分析ページ</a>で確認できます。ページの順位フィルタは初期状態が「TOP4」になっているため、<strong>「すべて」に切り替えてから</strong>期間・地域・デッキタイプを絞り込んでください（TOP4のままだと母数が1,221本になり、本記事の2,443本とは数字が変わります）。集計は毎晩自動で更新しています。</p>
+
+      <p style="color:var(--text-muted);font-size:12px;margin-top:28px">
+        ※データ出典: GUNDAM CARD GAME 公式大会結果（ニュータイプチャレンジ）を当サイトが自動収集・集計したものです。<br>
+        ※本記事はガンダムカードゲームの非公式ファンサイトによる集計であり、公式が発表した数値ではありません。<br>
+        ※関連: <a href="../series/ntc-2026-mission4.html">NTC 2026 MISSION4（8月開催）イベント一覧</a> ／ <a href="../meta.html">環境分析</a>
+      </p>
+
+      <p style="margin-top:16px;padding:12px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius);font-size:12px;color:var(--text-muted);line-height:1.7">
+        ※本記事はAIによって記述されている文章を含みます。記事内容に誤りがある場合には<a href="https://x.com/gcg_stats" target="_blank" rel="noopener" style="color:var(--accent)">Xアカウント（@gcg_stats）</a>のDMへご報告ください。
+      </p>
+
+    </article>
+
+    <div id="share-buttons" style="margin-top:32px"></div>
+  </main>
+
+  <div id="footer"></div>
+  <div class="ntc-tip" id="ntc-tip"></div>
+  <div class="ntc-cardpop" id="ntc-cardpop" aria-hidden="true"></div>
+
+  <script src="../js/common.js?v=13"></script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('reports');
+    document.getElementById('footer').innerHTML = GCG.renderFooter();
+    if (GCG.renderShareButtons) GCG.renderShareButtons('share-buttons', '2026年8月 ニュータイプチャレンジ 結果まとめ | GCG STATS');
+  </script>
+  <script>
+(function(){
+"use strict";
+var SURFACE="#151c27", GRID="#2c3646", AXIS="#38445a", INK="#e8ecf2", INK2="#8b95a5", INK3="#5a6577", ACCENT="#d4a029";
+/* デッキタイプの色。dataviz の検証済み並び（dark / surface #151c27 / 隣接ペア 全項目PASS）。
+   色は「そのデッキタイプ」に固定し、絞り込みや順位で塗り替えない。 */
+var TYPES=[
+ {k:"青緑",c:"#199e70",g:["#4488ff","#44cc64"]},
+ {k:"青紫",c:"#d95926",g:["#4488ff","#b444ff"]},
+ {k:"青白",c:"#3987e5",g:["#4488ff","#cccccc"]},
+ {k:"緑紫",c:"#c98500",g:["#44cc64","#b444ff"]},
+ {k:"赤白",c:"#d55181",g:["#ff4444","#cccccc"]},
+ {k:"青赤",c:"#008300",g:["#4488ff","#ff4444"]}
+];
+var OTHER={k:"その他",c:"#5a6577",g:["#5a6577","#5a6577"]};
+var WK=["8/01〜8/07","8/08〜8/14","8/15〜8/21","8/22〜8/28","8/29〜8/31"];
+var WKS=["8/01","8/08","8/15","8/22","8/29"];
+var NAT={n:[664,592,512,410,265],
+ "青緑":[36.6,27.0,26.0,24.6,24.2],"青紫":[15.5,20.1,14.5,13.9,14.0],"青白":[13.6,10.3,15.8,19.8,19.6],
+ "緑紫":[9.8,15.7,16.8,12.2,15.8],"赤白":[10.1,10.3,9.8,13.4,12.5],"青赤":[7.1,8.6,9.6,7.6,9.1]};
+var REGIONS=[
+ {r:"北海道",e:7,n:56,v:[19.6,23.2,23.2,7.1,5.4,12.5]},
+ {r:"東北",e:15,n:136,v:[35.3,10.3,16.9,10.3,12.5,7.4]},
+ {r:"関東",e:73,n:738,v:[31.2,16.9,15.0,11.9,11.1,7.5]},
+ {r:"中部",e:61,n:561,v:[27.6,17.6,14.6,12.3,11.1,7.7]},
+ {r:"関西",e:41,n:376,v:[27.9,16.8,13.3,13.8,10.9,9.3]},
+ {r:"中国",e:20,n:184,v:[28.3,14.1,15.2,15.8,9.2,8.2]},
+ {r:"四国",e:9,n:80,v:[28.8,8.8,8.8,22.5,13.8,10.0]},
+ {r:"九州",e:37,n:312,v:[24.7,13.8,16.3,19.9,10.6,9.3]}
+];
+var SMALL=[
+ {r:"関東",n:[232,160,136,138,72],"青緑":[41.4,28.1,29.4,23.2,23.6],"青紫":[20.3,17.5,17.6,12.3,12.5],
+  "青白":[12.1,16.3,14.7,16.7,19.4],"緑紫":[7.3,13.1,14.7,14.5,13.9],"赤白":[8.2,6.3,11.8,18.1,16.7],"青赤":[4.7,9.4,8.1,7.2,11.1]},
+ {r:"中部",n:[144,112,128,120,57],"青緑":[34.7,28.6,32.8,17.5,17.5],"青紫":[16.7,24.1,12.5,16.7,21.1],
+  "青白":[13.2,4.5,16.4,22.5,17.5],"緑紫":[8.3,17.0,11.7,11.7,15.8],"赤白":[10.4,12.5,7.8,14.2,10.5],"青赤":[6.9,7.1,7.8,7.5,10.5]}
+];
+var CARDS=[
+ {name:"シルヴァ・バレト",id:"GD04-068",v:[12.3,8.4,16.2,26.1,26.0]},
+ {name:"アーガマ",id:"GD02-129",v:[12.5,12.8,17.2,21.7,19.6]},
+ {name:"ソードストライクガンダム",id:"GD01-073",v:[7.2,6.1,11.1,14.1,17.0]}
+];
+var DECOMP=[
+ {name:"シルヴァ・バレト",id:"GD04-068",rate:8.43,share:7.14},
+ {name:"溢れる慈愛",id:"GD01-118",rate:1.19,share:10.62},
+ {name:"ソードストライクガンダム",id:"GD01-073",rate:3.77,share:4.80},
+ {name:"エールストライクガンダム",id:"ST04-001",rate:1.19,share:7.22},
+ {name:"フリーダムガンダム",id:"GD01-065",rate:4.19,share:4.07}
+];
+
+var NS="http://www.w3.org/2000/svg";
+function el(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+function txt(x,y,s,o){o=o||{};var t=el("text",{x:x,y:y,fill:o.fill||INK2,"font-size":o.fs||11,
+ "text-anchor":o.anchor||"start","dominant-baseline":o.bl||"auto","font-weight":o.fw||400,
+ "font-family":o.mono?"var(--font-mono)":"var(--font-sans)"});
+ if(o.mono)t.setAttribute("style","font-variant-numeric:tabular-nums");
+ t.textContent=s;return t;}
+function inkOn(hex){var r=parseInt(hex.slice(1,3),16)/255,g=parseInt(hex.slice(3,5),16)/255,b=parseInt(hex.slice(5,7),16)/255;
+ var f=function(c){return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);};
+ var L=0.2126*f(r)+0.7152*f(g)+0.0722*f(b);
+ return L>0.32?"#0a0e14":"#ffffff";}
+function svg(w,h){var s=el("svg",{viewBox:"0 0 "+w+" "+h,width:w,height:h,role:"img"});
+ s.setAttribute("style","max-width:100%;height:auto");return s;}
+
+/* ---- tooltip ---- */
+var tip=document.getElementById("ntc-tip");
+function showTip(evt,html){tip.innerHTML=html;tip.style.opacity="1";moveTip(evt);}
+function moveTip(evt){var x=evt.clientX+14,y=evt.clientY+14,r=tip.getBoundingClientRect();
+ if(x+r.width>window.innerWidth-8)x=evt.clientX-r.width-14;
+ if(y+r.height>window.innerHeight-8)y=evt.clientY-r.height-14;
+ tip.style.left=x+"px";tip.style.top=y+"px";}
+function hideTip(){tip.style.opacity="0";}
+
+/* ---- 凡例 ---- */
+function chip(g){return '<span class="chip" style="background:linear-gradient(135deg,'+g[0]+' 0 50%,'+g[1]+' 50% 100%)"></span>';}
+function buildLegend(id,items){var n=document.getElementById(id);if(!n)return;
+ n.innerHTML=items.map(function(t){
+  return '<span class="item"><span class="key" style="background:'+t.c+'"></span>'+(t.g?chip(t.g):'')+'<span>'+t.k+'</span></span>';}).join("");}
+
+/* ---- 折れ線 ---- */
+function lineChart(host,opt){
+ var W=Math.max(300,host.clientWidth||320), H=opt.h||300;
+ var mL=34,mR=opt.labels?100:14,mT=12,mB=opt.compact?26:30;
+ var pw=W-mL-mR, ph=H-mT-mB, yMax=opt.yMax, n=opt.x.length;
+ var s=svg(W,H);
+ var X=function(i){return mL+(n===1?pw/2:pw*i/(n-1));};
+ var Y=function(v){return mT+ph-ph*v/yMax;};
+ var step=opt.yStep||10;
+ for(var v=0;v<=yMax;v+=step){
+  s.appendChild(el("line",{x1:mL,x2:mL+pw,y1:Y(v),y2:Y(v),stroke:v===0?AXIS:GRID,"stroke-width":1}));
+  s.appendChild(txt(mL-7,Y(v)+3,v+"%",{anchor:"end",fs:opt.compact?9.5:10.5,fill:INK3,mono:1}));
+ }
+ for(var i=0;i<n;i++){
+  var lab=(opt.xShort&&(opt.compact||pw/n<64))?opt.xShort[i]:opt.x[i];
+  s.appendChild(txt(X(i),H-(opt.compact?10:12),lab,{anchor:i===0?"start":(i===n-1?"end":"middle"),fs:opt.compact?9.5:10.5,fill:INK3}));
+ }
+ opt.series.forEach(function(se){
+  var d=se.v.map(function(v,i){return (i?"L":"M")+X(i)+" "+Y(v);}).join(" ");
+  s.appendChild(el("path",{d:d,fill:"none",stroke:se.c,"stroke-width":2,"stroke-linejoin":"round","stroke-linecap":"round",
+   opacity:se.dim?0.85:1}));
+ });
+ opt.series.forEach(function(se){
+  se.v.forEach(function(v,i){
+   s.appendChild(el("circle",{cx:X(i),cy:Y(v),r:opt.compact?3.6:4.5,fill:se.c,stroke:SURFACE,"stroke-width":2}));
+  });
+  if(opt.labels&&se.label){
+   s.appendChild(el("circle",{cx:X(n-1),cy:Y(se.v[n-1]),r:5,fill:se.c,stroke:SURFACE,"stroke-width":2}));
+   s.appendChild(txt(X(n-1)+9,Y(se.v[n-1])+4,se.k+" "+se.v[n-1].toFixed(1)+"%",{fs:11.5,fill:INK,fw:600}));
+  }
+ });
+ /* hover: 区間ごとの縦帯 */
+ var focus=el("line",{x1:0,x2:0,y1:mT,y2:mT+ph,stroke:AXIS,"stroke-width":1,opacity:0});
+ s.appendChild(focus);
+ for(var j=0;j<n;j++){(function(j){
+  var x0=mL+(j===0?0:pw*(j-0.5)/(n-1)), x1=mL+(j===n-1?pw:pw*(j+0.5)/(n-1));
+  var hit=el("rect",{x:x0,y:mT,width:Math.max(1,x1-x0),height:ph,fill:"transparent"});
+  hit.style.cursor="crosshair";
+  hit.addEventListener("mouseenter",function(e){
+   focus.setAttribute("x1",X(j));focus.setAttribute("x2",X(j));focus.setAttribute("opacity","1");
+   var rows=opt.series.slice().sort(function(a,b){return b.v[j]-a.v[j];}).map(function(se){
+    return '<div class="r"><span><i style="background:'+se.c+'"></i>'+se.k+'</span><span>'+se.v[j].toFixed(1)+'%</span></div>';}).join("");
+   showTip(e,'<div class="t">'+opt.x[j]+(opt.n?'　<span style="color:'+INK3+';font-weight:400">入賞'+opt.n[j]+'本</span>':'')+'</div>'+rows);
+  });
+  hit.addEventListener("mousemove",moveTip);
+  hit.addEventListener("mouseleave",function(){focus.setAttribute("opacity","0");hideTip();});
+  s.appendChild(hit);
+ })(j);}
+ host.innerHTML="";host.appendChild(s);
+}
+
+/* ---- 100%積み上げ横棒 ---- */
+function stackChart(host){
+ var W=Math.max(300,host.clientWidth||320);
+ var mL=Math.min(120,Math.max(88,W*0.19)), mR=8, rowH=30, gapY=10, mT=6, mB=4;
+ var H=mT+REGIONS.length*(rowH+gapY)-gapY+mB;
+ var pw=W-mL-mR, GAP=2;
+ var s=svg(W,H);
+ REGIONS.forEach(function(rg,ri){
+  var y=mT+ri*(rowH+gapY);
+  s.appendChild(txt(0,y+13,rg.r,{fs:13,fill:INK,fw:600}));
+  s.appendChild(txt(0,y+27,rg.e+"大会 / "+rg.n+"本",{fs:9.5,fill:INK3,mono:1}));
+  var acc=0, segs=[];
+  TYPES.forEach(function(t,i){segs.push({t:t,v:rg.v[i]});});
+  var sum=rg.v.reduce(function(a,b){return a+b;},0);
+  segs.push({t:OTHER,v:Math.round((100-sum)*10)/10});
+  segs.forEach(function(sg){
+   var x=mL+pw*acc/100, w=pw*sg.v/100-GAP;
+   if(w<0.5)w=0.5;
+   var r=el("rect",{x:x,y:y,width:w,height:rowH,fill:sg.t.c,rx:2});
+   r.style.cursor="pointer";
+   (function(sg,rg){
+    var cnt=Math.round(rg.n*sg.v/100);
+    r.addEventListener("mouseenter",function(e){showTip(e,'<div class="t">'+rg.r+' ／ '+sg.t.k+'</div>'+
+     '<div class="r"><span>入賞シェア</span><span>'+sg.v.toFixed(1)+'%</span></div>'+
+     '<div class="r"><span>およその本数</span><span>約'+cnt+'本 / '+rg.n+'本</span></div>');});
+    r.addEventListener("mousemove",moveTip);r.addEventListener("mouseleave",hideTip);
+   })(sg,rg);
+   s.appendChild(r);
+   if(w>=38){ /* 収まるときだけ帯の中に置く。文字色は塗りの明るさで決める */
+    s.appendChild(txt(x+w/2,y+rowH/2+4,sg.v.toFixed(1),{anchor:"middle",fs:11,fill:inkOn(sg.t.c),fw:700,mono:1}));
+   }
+   acc+=sg.v;
+  });
+ });
+ host.innerHTML="";host.appendChild(s);
+}
+
+/* ---- 分解の横棒（強調＋グレー） ---- */
+function decompChart(host){
+ var W=Math.max(300,host.clientWidth||320);
+ var stacked=W<620;                       /* 狭い画面ではカード名をバーの上に置く */
+ var mL=stacked?34:Math.min(230,Math.max(150,W*0.30)), mR=56, rowH=20;
+ var gapY=stacked?34:20, top=stacked?22:0, mT=6;
+ var H=mT+DECOMP.length*(rowH+gapY+top);
+ var max=16, pw=W-mL-mR, GAP=2;
+ var s=svg(W,H);
+ DECOMP.forEach(function(d,i){
+  var y=mT+i*(rowH+gapY+top)+top;
+  if(stacked){
+   s.appendChild(txt(0,y-10,d.name,{fs:12.5,fill:INK,fw:650}));
+   s.appendChild(txt(W,y-10,d.id,{fs:9.5,fill:INK3,mono:1,anchor:"end"}));
+  }else{
+   s.appendChild(txt(0,y+9,d.name,{fs:12.5,fill:INK,fw:650}));
+   s.appendChild(txt(0,y+22,d.id,{fs:9.5,fill:INK3,mono:1}));
+  }
+  var w1=pw*d.rate/max, w2=pw*d.share/max;
+  var x0=mL;
+  var r1=el("rect",{x:x0,y:y,width:Math.max(1,w1-GAP),height:rowH,fill:ACCENT,rx:2});
+  var r2=el("rect",{x:x0+w1,y:y,width:Math.max(1,w2),height:rowH,fill:"#8b95a5",rx:2});
+  [[r1,"タイプ内の採用率が上がったぶん",d.rate],[r2,"デッキタイプの構成が変わったぶん",d.share]].forEach(function(p){
+   p[0].style.cursor="pointer";
+   p[0].addEventListener("mouseenter",function(e){showTip(e,'<div class="t">'+d.name+'</div>'+
+    '<div class="r"><span>'+p[1]+'</span><span>+'+p[2].toFixed(1)+'pt</span></div>'+
+    '<div class="r"><span>合計</span><span>+'+(d.rate+d.share).toFixed(1)+'pt</span></div>');});
+   p[0].addEventListener("mousemove",moveTip);p[0].addEventListener("mouseleave",hideTip);
+   s.appendChild(p[0]);
+  });
+  s.appendChild(txt(x0+w1+w2+8,y+14,"+"+(d.rate+d.share).toFixed(1)+"pt",{fs:12,fill:INK,fw:650,mono:1}));
+ });
+ host.innerHTML="";host.appendChild(s);
+}
+
+/* ---- 描画 ---- */
+function seriesOf(src,dimAll){return TYPES.map(function(t){return {k:t.k,c:t.c,v:src[t.k]};});}
+function render(){
+ var nat=document.getElementById("chart-national");
+ if(nat){
+  var se=seriesOf(NAT);
+  se.forEach(function(x){ if(x.k==="青緑"||x.k==="青白") x.label=true; });
+  lineChart(nat,{x:WK,xShort:WKS,n:NAT.n,series:se,yMax:40,yStep:10,h:320,labels:true});
+ }
+ var rg=document.getElementById("chart-region"); if(rg)stackChart(rg);
+ var sm=document.getElementById("chart-small");
+ if(sm){ sm.innerHTML=""; var slots=[];
+  SMALL.forEach(function(d){
+   var box=document.createElement("div");
+   box.innerHTML='<div style="font-size:12.5px;font-weight:650;margin-bottom:4px">'+d.r+
+    ' <span style="color:'+INK3+';font-weight:400;font-family:var(--font-mono);font-size:10.5px">'+
+    d.n.reduce(function(a,b){return a+b;},0)+'本</span></div>';
+   var c=document.createElement("div");box.appendChild(c);sm.appendChild(box);slots.push([c,d]);
+  });
+  slots.forEach(function(p){ /* 箱を全部置いてから測る。先に描くと1枚目だけ幅が違ってしまう */
+   lineChart(p[0],{x:WK,xShort:WKS,n:p[1].n,series:seriesOf(p[1]),yMax:45,yStep:15,h:210,compact:true});});
+ }
+ var cd=document.getElementById("chart-cards");
+ if(cd){ cd.innerHTML=""; var slots2=[];
+  CARDS.forEach(function(d){
+   var box=document.createElement("div");
+   box.innerHTML='<div style="font-size:12.5px;font-weight:650;margin-bottom:2px"><span class="cr" data-c="'+d.id+'">'+d.name+'</span></div>'+
+    '<div style="font-size:10.5px;color:'+INK3+';font-family:var(--font-mono);margin-bottom:4px">'+d.id+
+    '　'+d.v[0].toFixed(1)+'% → '+d.v[4].toFixed(1)+'%</div>';
+   var c=document.createElement("div");box.appendChild(c);cd.appendChild(box);slots2.push([c,d]);
+  });
+  slots2.forEach(function(p){
+   lineChart(p[0],{x:WK,xShort:WKS,n:NAT.n,series:[{k:p[1].name,c:ACCENT,v:p[1].v}],yMax:30,yStep:10,h:190,compact:true});});
+ }
+ var dc=document.getElementById("chart-decomp"); if(dc)decompChart(dc);
+}
+buildLegend("legend-main",TYPES);
+buildLegend("legend-region",TYPES.concat([OTHER]));
+buildLegend("legend-small",TYPES);
+buildLegend("legend-decomp",[{k:"タイプ内の採用率が上がったぶん",c:ACCENT},{k:"デッキタイプの構成が変わったぶん",c:"#8b95a5"}]);
+render();
+
+/* ---- カード画像プレビュー ----
+   画像とカードページはサイト内のルート絶対パス（/images/cards/... と /cards/<id>/）を参照する。 */
+var CARD_NAMES={};
+document.querySelectorAll(".cr").forEach(function(n){ if(!CARD_NAMES[n.dataset.c]) CARD_NAMES[n.dataset.c]=n.textContent; });
+var pop=document.getElementById("ntc-cardpop"), pinned=null, hoverId=null;
+var FINE=window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+function fillPop(id){
+ if(pop.dataset.c===id) return;
+ pop.dataset.c=id;
+ var nm=CARD_NAMES[id]||id;
+ pop.innerHTML='<img alt="'+nm+'（'+id+'）のカード画像" src="/images/cards/'+id+'.webp"'+
+  ' onerror="if(!this.dataset.r){this.dataset.r=1;this.src=\'/images/cards/'+id+'.jpg\';}">'+
+  '<div class="cn">'+nm+'</div><div class="ci">'+id+'</div>'+
+  '<div class="cl"><a href="/cards/'+id+'/" target="_blank" rel="noopener">カードページを開く →</a></div>';
+}
+function placePop(el){
+ var r=el.getBoundingClientRect(), pw=pop.offsetWidth||212, ph=pop.offsetHeight||330, M=10;
+ var x=r.left, y=r.bottom+8;
+ if(y+ph>window.innerHeight-M) y=Math.max(M,r.top-ph-8);
+ if(x+pw>window.innerWidth-M) x=window.innerWidth-pw-M;
+ if(x<M) x=M;
+ pop.style.left=x+"px"; pop.style.top=y+"px";
+}
+function openPop(el,pin){
+ fillPop(el.dataset.c); pop.classList.add("show"); pop.classList.toggle("pinned",!!pin);
+ pop.setAttribute("aria-hidden","false"); placePop(el);
+ if(pin){ if(pinned)pinned.classList.remove("on"); pinned=el; el.classList.add("on"); }
+}
+function closePop(){
+ pop.classList.remove("show","pinned"); pop.setAttribute("aria-hidden","true");
+ if(pinned){pinned.classList.remove("on");pinned=null;} hoverId=null;
+}
+function bindCardRefs(){
+document.querySelectorAll(".cr:not([data-bound])").forEach(function(el){
+ el.dataset.bound="1";
+ if(!CARD_NAMES[el.dataset.c])CARD_NAMES[el.dataset.c]=el.textContent;
+ el.setAttribute("tabindex","0");
+ el.setAttribute("role","button");
+ el.setAttribute("aria-label",(CARD_NAMES[el.dataset.c]||el.dataset.c)+" のカード画像を表示");
+ if(FINE){
+  el.addEventListener("mouseenter",function(){ if(pinned)return; hoverId=el; openPop(el,false); });
+  el.addEventListener("mouseleave",function(){ if(pinned)return; setTimeout(function(){ if(hoverId===el)closePop(); },60); });
+ }
+ el.addEventListener("click",function(e){
+  e.preventDefault(); e.stopPropagation();
+  if(pinned===el){ closePop(); } else { openPop(el,true); }
+ });
+ el.addEventListener("keydown",function(e){
+  if(e.key==="Enter"||e.key===" "){ e.preventDefault(); if(pinned===el)closePop(); else openPop(el,true); }
+  else if(e.key==="Escape"){ closePop(); el.blur(); }
+ });
+ el.addEventListener("focus",function(){ if(!pinned) openPop(el,false); });
+ el.addEventListener("blur",function(){ if(!pinned) closePop(); });
+});
+}
+bindCardRefs();
+document.addEventListener("click",function(e){ if(pinned&&!pop.contains(e.target)) closePop(); });
+document.addEventListener("keydown",function(e){ if(e.key==="Escape") closePop(); });
+window.addEventListener("scroll",function(){ if(pinned) placePop(pinned); else if(pop.classList.contains("show")) closePop(); },{passive:true});
+
+var t;window.addEventListener("resize",function(){clearTimeout(t);t=setTimeout(function(){render();bindCardRefs();closePop();},150);});
+window.addEventListener("scroll",hideTip,{passive:true});
+})();
+</script>
+</body>
+</html>
