@@ -5225,5 +5225,76 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-04": {
+    "recognized_at": "2026-09-04 22:32:21 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2095846839895687481",
+      "https://x.com/GUNDAM_GCG_JP/status/2095845582095233086",
+      "https://x.com/GUNDAM_GCG_JP/status/2095844338936803574"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-094",
+        "card_name": "ニャアン",
+        "color": "Purple",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔ジオン〕",
+          "〔アルファ殺し〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【セット時】味方のユニット1つを選ぶ。このターン中、それは以下の効果を得る。■このユニットがLv.4以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。",
+        "effect_confidence": "low",
+        "effect_length": 109,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-051",
+        "card_name": "GFreD",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 5,
+        "ap": 5,
+        "hp": 4,
+        "traits": [
+          "〔ジオン〕",
+          "〔アルファ殺し〕"
+        ],
+        "link": "「ニャアン」",
+        "effect": "【起動】メイン ターン1回 ②このユニットをレストにする: 自分のトラッシュのLv.5以下の〔アルファ殺し〕のユニットカード1枚を選ぶ。それを配備する。【配備時】このユニット以外の〔アルファ殺し〕の味方のユニットがいるならこのターン中、このユニットは以下の効果を得る。■ターン終了時に自分のリソース2つを選ぶ。それらをアクティブにする。",
+        "effect_confidence": "low",
+        "effect_length": 168,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "ST12-001",
+        "card_name": "ガンダムエピオン",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 6,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔ホワイトファング〕"
+        ],
+        "link": "「ゼクス・マーキス」",
+        "effect": "【セット中】Lv.5以上のパイロット ターン1回 自分のターン中、このユニットがダメージで相手のユニットを破壊したとき、AP5以下の相手のユニットすべてに2ダメージを与える。【配備時】相手のベース1つを選ぶ。それに5ダメージを与える。",
+        "effect_confidence": "low",
+        "effect_length": 117,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
