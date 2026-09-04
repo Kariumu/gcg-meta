@@ -13,13 +13,13 @@
   "status": "active",
   "description": "公式トーナメント「ニュータイプチャレンジ」2026 MISSION4 の9月開催分。全国各地の店舗で行われ、開催期間は2026年9月1日〜9月30日。",
   "stats": {
-    "event_count": 17,
-    "total_result_entries": 168,
-    "total_decks": 84,
+    "event_count": 19,
+    "total_result_entries": 192,
+    "total_decks": 96,
     "by_region": {
       "中部": {
-        "events": 3,
-        "decks": 12
+        "events": 4,
+        "decks": 20
       },
       "関東": {
         "events": 11,
@@ -30,8 +30,8 @@
         "decks": 4
       },
       "関西": {
-        "events": 1,
-        "decks": 4
+        "events": 2,
+        "decks": 8
       },
       "中国": {
         "events": 1,
@@ -40,6 +40,16 @@
     },
     "deck_type_ranking": [
       {
+        "type_key": "Blue+Green",
+        "colors": [
+          "Blue",
+          "Green"
+        ],
+        "label": "青/緑",
+        "count": 20,
+        "share": 20.8
+      },
+      {
         "type_key": "Red+White",
         "colors": [
           "Red",
@@ -47,7 +57,7 @@
         ],
         "label": "赤/白",
         "count": 19,
-        "share": 22.6
+        "share": 19.8
       },
       {
         "type_key": "Blue+White",
@@ -56,18 +66,8 @@
           "White"
         ],
         "label": "青/白",
-        "count": 17,
-        "share": 20.2
-      },
-      {
-        "type_key": "Blue+Green",
-        "colors": [
-          "Blue",
-          "Green"
-        ],
-        "label": "青/緑",
-        "count": 15,
-        "share": 17.9
+        "count": 18,
+        "share": 18.8
       },
       {
         "type_key": "Green+Purple",
@@ -76,8 +76,8 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "count": 12,
-        "share": 14.3
+        "count": 14,
+        "share": 14.6
       },
       {
         "type_key": "Blue+Purple",
@@ -86,8 +86,8 @@
           "Purple"
         ],
         "label": "青/紫",
-        "count": 11,
-        "share": 13.1
+        "count": 14,
+        "share": 14.6
       },
       {
         "type_key": "Blue+Red",
@@ -96,8 +96,8 @@
           "Red"
         ],
         "label": "青/赤",
-        "count": 8,
-        "share": 9.5
+        "count": 9,
+        "share": 9.4
       },
       {
         "type_key": "White+Purple",
@@ -107,7 +107,7 @@
         ],
         "label": "白/紫",
         "count": 1,
-        "share": 1.2
+        "share": 1
       },
       {
         "type_key": "Red+Purple",
@@ -117,10 +117,21 @@
         ],
         "label": "赤/紫",
         "count": 1,
-        "share": 1.2
+        "share": 1
       }
     ],
     "winning_decks": [
+      {
+        "type_key": "Blue+Purple",
+        "colors": [
+          "Blue",
+          "Purple"
+        ],
+        "label": "青/紫",
+        "wins": 7,
+        "count": 14,
+        "win_rate": 50
+      },
       {
         "type_key": "Red+White",
         "colors": [
@@ -133,26 +144,15 @@
         "win_rate": 31.6
       },
       {
-        "type_key": "Blue+Purple",
-        "colors": [
-          "Blue",
-          "Purple"
-        ],
-        "label": "青/紫",
-        "wins": 6,
-        "count": 11,
-        "win_rate": 54.5
-      },
-      {
         "type_key": "Blue+Green",
         "colors": [
           "Blue",
           "Green"
         ],
         "label": "青/緑",
-        "wins": 4,
-        "count": 15,
-        "win_rate": 26.7
+        "wins": 5,
+        "count": 20,
+        "win_rate": 25
       },
       {
         "type_key": "Blue+White",
@@ -162,8 +162,8 @@
         ],
         "label": "青/白",
         "wins": 3,
-        "count": 17,
-        "win_rate": 17.6
+        "count": 18,
+        "win_rate": 16.7
       },
       {
         "type_key": "Green+Purple",
@@ -172,9 +172,9 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "wins": 1,
-        "count": 12,
-        "win_rate": 8.3
+        "wins": 2,
+        "count": 14,
+        "win_rate": 14.3
       },
       {
         "type_key": "Blue+Red",
@@ -184,8 +184,8 @@
         ],
         "label": "青/赤",
         "wins": 1,
-        "count": 8,
-        "win_rate": 12.5
+        "count": 9,
+        "win_rate": 11.1
       }
     ]
   }
