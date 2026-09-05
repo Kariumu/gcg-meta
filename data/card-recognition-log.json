@@ -5296,5 +5296,54 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-05": {
+    "recognized_at": "2026-09-05 20:00:33 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2096153863137194072",
+      "https://x.com/GUNDAM_GCG_JP/status/2096146314312782202"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-083",
+        "card_name": "シャリア・ブル(GQ)",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 5,
+        "cost": 1,
+        "ap": 2,
+        "hp": 2,
+        "traits": [
+          "〔ジオン〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットが《リペア》を持つ間、これは《高機動》を得る。(このユニットはブロックされない)",
+        "effect_confidence": "medium",
+        "effect_length": 71,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-006",
+        "card_name": "GQuuuuuuX（オメガ・サイコミュ起動時）",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 3,
+        "ap": 4,
+        "hp": 2,
+        "traits": [
+          "〔アルファ殺し〕"
+        ],
+        "link": "「アマテ・ユズリハ（マチュ）」/「ニャアン」",
+        "effect": "【配備時】このユニット以外の〔アルファ殺し〕の味方のユニットがいるなら、HP3以下の相手のユニット1つを選んでもよい。それを持ち主の手札に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 72,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
