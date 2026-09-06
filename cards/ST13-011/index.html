@@ -81,6 +81,10 @@
   </main>
   <div id="footer"></div>
   <script src="../../js/common.js?v=10"></script>
-  <script>if (typeof GCG !== 'undefined') GCG.init();</script>
+  <script>
+    GCG.init();
+    document.getElementById('header').innerHTML = GCG.renderHeader('cards');
+    document.getElementById("footer").innerHTML = GCG.renderFooter();
+  </script>
 </body>
 </html>
