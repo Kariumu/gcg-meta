@@ -531,7 +531,7 @@ const GCG = {
     return `
       <footer class="site-footer">
         <div class="footer-disclaimer">
-          本サイトはガンダムカードゲームの非公式・非営利のファンサイトです。<br>
+          本サイトはガンダムカードゲームの個人運営による非公式ファンサイトです。<br>
           バンダイ・サンライズの認可・許諾は得ていません。<br>
           掲載情報は公式大会結果を基に自動集計しています。<br>
           カード画像・テキスト等は<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">公式サイト</a>より引用しています。<br>
@@ -539,6 +539,7 @@ const GCG = {
           <br>
           本サイトは公式ゲームの代替を意図したものではありません。<br>
           ガンダムカードゲーム公式サイト(<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">gundam-gcg.com</a>)をご利用・ご支援ください。<br>
+          本サイトはアフィリエイトプログラム(駿河屋アフィリエイトプログラム・A8.net)を利用しており、広告を含む箇所には「広告」と表記しています。<br>
           <br>
           <span style="font-size:10px;color:var(--text-muted);">権利者からの削除・修正のご要請には<a href="${basePath}contact.html" style="color:var(--accent);text-decoration:none;">お問い合わせ</a>より速やかに対応いたします。</span>
         </div>
