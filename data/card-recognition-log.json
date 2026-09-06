@@ -5345,5 +5345,51 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-06": {
+    "recognized_at": "2026-09-06 20:00:25 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2096516252336578587",
+      "https://x.com/GUNDAM_GCG_JP/status/2096508701238833367"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-120",
+        "card_name": "平和を望む心",
+        "color": "White",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【バースト】HP5以下の相手のユニット1つを選ぶ。それをレストにする。メイン／アクション 相手のユニット1つを選ぶ。それをレストにする。",
+        "effect_confidence": "medium",
+        "effect_length": 68,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-073",
+        "card_name": "ウイングガンダムゼロ(EW版)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔Gチーム〕"
+        ],
+        "link": "「ヒイロ・ユイ」",
+        "effect": "【セット中】ターン1回 このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。",
+        "effect_confidence": "medium",
+        "effect_length": 79,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
