@@ -357,16 +357,28 @@ const GCG = {
     return p;
   },
 
+  // 計測(指示書93 Phase A): GA4 へイベントを送る共通関数。
+  // gtag が無い・例外を投げる環境でも本来の処理を止めない。
+  track(name, params) {
+    try {
+      if (typeof window.gtag !== 'function') return;
+      const p = Object.assign({ transport_type: 'beacon' }, params || {});
+      Object.keys(p).forEach((k) => { if (typeof p[k] === 'string') p[k] = p[k].slice(0, 100); });   // GA4 の値 100 文字制限
+      window.gtag('event', String(name).slice(0, 40), p);
+    } catch (e) { /* 計測の失敗は本来の処理に影響させない */ }
+  },
+
   // deck = events.json の results[].deck([{card_id,count}])。
   // 成功時は deck-builder.html?d=<共有コード>&n=<大会名> へ遷移する。
   // 失敗(スクリプト/通信/encode)時はその場で従来の「デッキリストをコピー」に退避し、
   // ボタン表記も戻す。以後そのボタンはコピー動作になる。
-  openDeckInBuilder(deck, btn, deckName) {
+  openDeckInBuilder(deck, btn, deckName, extra) {
     if (!deck || !deck.length) return;
     const copy = () => this.copyToClipboard(this.deckToText(deck), btn);
     if (btn.getAttribute('data-mode') === 'copy') return copy();
     if (btn.getAttribute('data-busy')) return;
     btn.setAttribute('data-busy', '1');
+    GCG.track('builder_open', { source: 'event', store: deckName, rank: extra && extra.rank != null ? String(extra.rank) : '', mode: 'share' });
     btn.textContent = '\u23F3 \u8AAD\u307F\u8FBC\u307F\u4E2D\u2026';
     this.loadShareDb().then(byId => {
       const counts = {};
@@ -374,8 +386,10 @@ const GCG = {
       const r = window.DeckCore.encodeShareCode(counts, byId);
       if (!r.ok) throw new Error('encode-' + r.reason);
       location.href = this.getBasePath() + 'deck-builder.html?d=' + encodeURIComponent(r.code)
-        + '&n=' + encodeURIComponent(deckName || '');
-    }).catch(() => {
+        + '&n=' + encodeURIComponent(deckName || '')
+        + ((!extra || extra.src === 'event') ? '&src=event' : '');
+    }).catch((err) => {
+      GCG.track('builder_open_fallback', { source: 'event', store: deckName, reason: err && err.message });
       btn.removeAttribute('data-busy');
       btn.setAttribute('data-mode', 'copy');
       btn.textContent = '\u{1F4CB} \u30C7\u30C3\u30AD\u30EA\u30B9\u30C8\u3092\u30B3\u30D4\u30FC';
