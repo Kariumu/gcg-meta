@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  <style>.section-title a:hover { text-decoration: underline; }</style>
+  <style>.section-title a:hover { text-decoration: underline; }.builder-cta{margin:10px 0 4px}.btn-copy-lg{display:block;width:100%;max-width:520px;padding:12px 16px;font-size:15px}.builder-cta-note{font-size:12px;color:var(--text-muted);margin-top:6px}</style>
 </head>
 <body>
   <div id="header"></div>
@@ -59,14 +59,21 @@
 
     // shijisho-66: deck -> builder. Logic lives in common.js (see generate-events.js).
     var _deckReg = [];
+
+    // 指示書93 2-B-1: グリッド下ボタンの既定文。文言を変えるときはこの 2 つだけを直す。
+    function CTA_TEXT(rank) {
+      var label = rank === 1 ? '優勝' : rank === 2 ? '準優勝' : '入賞';
+      return '🛠️ この' + label + 'デッキをビルダーで改造する';
+    }
+    var CTA_NOTE = 'ログイン不要・そのまま枚数を変えて X に共有できます';
     function openInBuilder(i, btn) {
       var d = _deckReg[i];
-      if (!d || !d.length) return;
+      if (!d || !d.deck || !d.deck.length) return;
       if (typeof GCG.openDeckInBuilder !== 'function') {
         btn.textContent = '\u{1F4CB} \u30C7\u30C3\u30AD\u30EA\u30B9\u30C8\u3092\u30B3\u30D4\u30FC';
-        return GCG.copyToClipboard(GCG.deckToText(d), btn);
+        return GCG.copyToClipboard(GCG.deckToText(d.deck), btn);
       }
-      GCG.openDeckInBuilder(d, btn, currentEventStore);
+      GCG.openDeckInBuilder(d.deck, btn, GCG.rankText(d.rank) + ' ' + currentEventStore, { rank: d.rank, src: 'event' });
     }
 
     function renderPlayerCard(player, animDelay) {
@@ -78,13 +85,14 @@
 
       let linkHtml = '';
       if (player.tcgplus_url) {
-        linkHtml = '<a href="' + GCG.escapeHtml(player.tcgplus_url) + '" target="_blank" rel="noopener" class="btn-link">' +
+        linkHtml = '<a href="' + GCG.escapeHtml(player.tcgplus_url) + '" target="_blank" rel="noopener" class="btn-link"' +
+          ' onclick="GCG.track && GCG.track(\'tcgplus_open\',{place:\'event_page\'})">' +
           '\u{1F517} BANDAI TCG+ \u3067\u898B\u308B' +
           '<span style="font-size:10px;color:var(--text-muted);margin-left:2px">\u203BTCG+\u306B\u9077\u79FB\u3057\u307E\u3059</span>' +
           '</a>';
       }
       if (hasDeck) {
-        var deckIdx = _deckReg.push(player.deck) - 1;
+        var deckIdx = _deckReg.push({ deck: player.deck, rank: player.rank }) - 1;
         linkHtml += '<button class="btn-copy" onclick="openInBuilder(' + deckIdx + ', this)">' +
           '\u{1F6E0}\uFE0F \u30C7\u30C3\u30AD\u30D3\u30EB\u30C0\u30FC\u3067\u958B\u304F</button>';
       }
@@ -104,6 +112,15 @@
         deckHtml = '<div style="color:var(--text-muted);font-size:13px;padding:16px 0">\u30C7\u30C3\u30AD\u60C5\u5831\u306A\u3057</div>';
       }
 
+      // 指示書93 2-B-1: グリッドの下にもビルダー導線を出す(デッキがあるときだけ)
+      var ctaHtml = '';
+      if (hasDeck) {
+        ctaHtml = '<div class="builder-cta">' +
+          '<button class="btn-copy btn-copy-lg" onclick="openInBuilder(' + deckIdx + ', this)">' + CTA_TEXT(player.rank) + '</button>' +
+          '<div class="builder-cta-note">' + CTA_NOTE + '</div>' +
+          '</div>';
+      }
+
       return '<div style="margin-bottom:36px;' + delayStyle + '">' +
         '<div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap">' +
         '<span class="tag ' + tagClass + '" style="font-size:13px;min-width:52px;text-align:center">' +
@@ -112,6 +129,7 @@
         linkHtml +
         '</div>' +
         deckHtml +
+        ctaHtml +
         '</div>';
     }
 
@@ -130,7 +148,6 @@
         return;
       }
 
-      document.title = ev.store + ' ' + GCG.formatDate(ev.date) + ' - GCG STATS';
       currentEventStore = ev.store;
 
       // schedule.jsonからorganizer_idを検索
