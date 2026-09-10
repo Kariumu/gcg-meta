@@ -491,31 +491,36 @@ const GCG = {
     const activeMain = map.main;
     const activeSub  = map.sub;
 
+    const page = (activePage == null) ? '' : String(activePage);   // 指示書97: 省略時は '' として扱う(undefined を埋め込まない)
+    const attr = (v) => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
     // 主タブ
+    // 指示書97: サブナビのあるカテゴリ(event/analysis/cards)は「▾」ボタンを添える。
+    // ボタンは hidden 付きで出力し、initHeaderSubNav() が hidden を外す(初期化前は従来と同じ見た目)。
+    // タブ本体 <a> の動作(カテゴリ先頭ページへ移動)は変えない。開閉は ▾ だけ。
     const mainTabsHtml = this._MAIN_TABS.map(t => {
       const cls = (t.key === activeMain) ? 'active' : '';
-      return `<a href="${basePath}${t.href}" class="${cls}">${t.label}</a>`;
+      const a = `<a href="${basePath}${t.href}" class="${cls}">${t.label}</a>`;
+      if (!this._SUB_NAV[t.key]) return a;
+      return `<span class="mt-group">${a}<button type="button" class="mt-toggle" data-cat="${t.key}" aria-expanded="false" aria-controls="gcg-subnav" aria-label="${t.label}の配下ページを開く" hidden>\u25BE</button></span>`;
     }).join('');
 
-    // サブナビ（_SUB_NAV に定義のあるカテゴリのみ表示。現在は analysis のみ定義。home/cards/reports等は非表示）
-    let subNavHtml = '';
-    if (activeMain && this._SUB_NAV[activeMain]) {
-      const items = this._SUB_NAV[activeMain].map(s => {
-        const cls = (s.key === activeSub) ? 'active' : '';
-        return `<a href="${basePath}${s.href}" class="${cls}">${s.label}</a>`;
-      }).join('');
-      const label = this._MAIN_LABEL[activeMain] || '';
-      subNavHtml = `
-        <div class="sub-nav">
-          <div class="sub-nav-inner">
-            <span class="sub-nav-label">${label} ›</span>
-            ${items}
-          </div>
-        </div>`;
+    // サブナビ（_SUB_NAV に定義のあるカテゴリのみ中身を入れる。home/deck-builder/mypage 等は hidden）
+    // 指示書97: 2 段目は常に 1 つのコンテナ(#gcg-subnav)。初期の中身は従来どおり「開いているページのカテゴリ」。
+    // data-active-cat / data-active-sub は閉じるときに元の強調表示を復元するため、data-page は計測用。
+    const hasSub = !!(activeMain && this._SUB_NAV[activeMain]);
+    const subNavHtml = `
+        <div class="sub-nav" id="gcg-subnav" data-cat="${attr(activeMain || '')}" data-active-cat="${attr(activeMain || '')}" data-active-sub="${attr(activeSub || '')}" data-page="${attr(page)}"${hasSub ? '' : ' hidden'}>${hasSub ? this._subNavInner(activeMain, activeSub) : ''}</div>`;
+
+    // 指示書97: 呼び出し側が innerHTML へ挿入した直後に ▾ を有効化する(DOMContentLoaded 後の再挿入にも追随)。
+    // initHeaderSubNav は冪等(委譲リスナーは 1 回だけ)。node 等 document の無い環境では何もしない。
+    if (typeof document !== 'undefined' && typeof setTimeout === 'function') {
+      setTimeout(() => { try { GCG.initHeaderSubNav(); } catch (e) { /* ignore */ } }, 0);
     }
 
     // 検索欄は 2026-05-24 のヘッダー再修正で撤去
-    return `
+    // 指示書97: style.css は触らないため、追加 CSS はヘッダー HTML の先頭に <style id="gcg-hdr97"> で同梱する
+    return `${this._HDR97_CSS}
       <header class="site-header site-header-v2">
         <div class="header-inner">
           <a href="${basePath}" class="site-logo">
@@ -529,6 +534,113 @@ const GCG = {
         </div>
         ${subNavHtml}
       </header>`;
+  },
+
+  // 指示書97: 主タブ「▾」とサブナビ開閉用の CSS(ヘッダー HTML に同梱)。
+  // .mt-group > a は .site-header-v2 nav.main-tabs a(0,2,2)の規則を受け、padding-right だけ 0,3,2 で上書きする
+  // (セレクタを短くすると詳細度で負けるので縮めないこと)。▾ は U+25BE(絵文字は使わない)。
+  _HDR97_CSS: '<style id="gcg-hdr97">'
+    + '.site-header-v2 .mt-group { display: flex; align-items: stretch; }'
+    + '.site-header-v2 nav.main-tabs .mt-group > a { padding-right: 6px; }'
+    + '.site-header-v2 .mt-toggle { background: transparent; border: none; color: var(--text-muted); padding: 0 10px 0 2px; margin: 0; cursor: pointer; font: inherit; font-size: 11px; line-height: 1; display: flex; align-items: center; border-bottom: 2px solid transparent; transition: color 0.15s; }'
+    + '.site-header-v2 .mt-toggle:hover, .site-header-v2 .mt-toggle[aria-expanded="true"] { color: var(--accent); }'
+    + '.site-header-v2 .mt-toggle[hidden] { display: none; }'
+    + '.site-header-v2 .sub-nav.is-preview { border-top-color: var(--accent); }'
+    + '@media (max-width: 768px) {'
+    + ' .site-header-v2 nav.main-tabs .mt-group > a { padding-right: 4px; }'
+    + ' .site-header-v2 .mt-toggle { padding: 8px 10px 8px 2px; font-size: 12px; border-bottom: none; }'
+    + ' }'
+    + '</style>',
+
+  // 指示書97: サブナビ(2 段目)の中身。従来 renderHeader 内にあった生成をそのまま切り出したもの(出力 HTML は従来と同一)。
+  // activeSub に一致する項目だけ .active を付ける(null なら強調なし)。
+  _subNavInner(cat, activeSub) {
+    const list = this._SUB_NAV[cat];
+    if (!list) return '';
+    const basePath = this.getBasePath();
+    const items = list.map(s => {
+      const cls = (activeSub && s.key === activeSub) ? 'active' : '';
+      return `<a href="${basePath}${s.href}" class="${cls}">${s.label}</a>`;
+    }).join('');
+    const label = this._MAIN_LABEL[cat] || '';
+    return `
+          <div class="sub-nav-inner">
+            <span class="sub-nav-label">${label} ›</span>
+            ${items}
+          </div>
+        `;
+  },
+
+  // 指示書97: ▾ の aria-expanded を「自分のカテゴリが 2 段目に表示中なら true」に揃える
+  _syncSubNavToggles(sub) {
+    const shown = (sub && !sub.hidden) ? (sub.getAttribute('data-cat') || '') : '';
+    document.querySelectorAll('.mt-toggle').forEach(b => {
+      b.setAttribute('aria-expanded', (shown && b.getAttribute('data-cat') === shown) ? 'true' : 'false');
+    });
+  },
+
+  // 指示書97: 2 段目を「開いているページのカテゴリ」(強調表示も元どおり)に戻す。active が無ければ hidden。
+  _closeSubNav() {
+    const sub = document.getElementById('gcg-subnav');
+    if (!sub) return;
+    const activeCat = sub.getAttribute('data-active-cat') || '';
+    const activeSub = sub.getAttribute('data-active-sub') || '';
+    if (activeCat && this._SUB_NAV[activeCat]) {
+      sub.innerHTML = this._subNavInner(activeCat, activeSub || null);
+      sub.hidden = false;
+    } else {
+      sub.innerHTML = '';
+      sub.hidden = true;
+    }
+    sub.setAttribute('data-cat', activeCat);
+    sub.classList.remove('is-preview');
+    this._syncSubNavToggles(sub);
+    // 指示書97 R1: ヘッダーの高さが変わったことをページ側に知らせる(deck-builder の --hh 再計算など。resize を待つ既存コードがそのまま使える)
+    try { window.dispatchEvent(new Event('resize')); } catch (e) { /* ignore */ }
+  },
+
+  // 指示書97: ▾ を押したときの開閉。表示中のカテゴリと同じなら閉じる、違えばそのカテゴリで開く。
+  // 指示書97 R1: 開いているページのカテゴリ(active)の ▾ は常に「閉じる(=元に戻す)」扱いで計測しない。
+  _toggleSubNav(cat) {
+    const sub = document.getElementById('gcg-subnav');
+    if (!sub || !cat || !this._SUB_NAV[cat]) return;
+    const shown = sub.hidden ? '' : (sub.getAttribute('data-cat') || '');
+    const activeCat = sub.getAttribute('data-active-cat') || '';
+    if (cat === shown || cat === activeCat) { this._closeSubNav(); return; }
+    const activeSub = sub.getAttribute('data-active-sub') || '';
+    sub.innerHTML = this._subNavInner(cat, (cat === activeCat) ? (activeSub || null) : null);
+    sub.setAttribute('data-cat', cat);
+    sub.hidden = false;
+    sub.classList.toggle('is-preview', cat !== activeCat);
+    this._syncSubNavToggles(sub);
+    // 指示書97 R1: ヘッダーの高さが変わったことをページ側に知らせる(deck-builder の --hh 再計算など。resize を待つ既存コードがそのまま使える)
+    try { window.dispatchEvent(new Event('resize')); } catch (e) { /* ignore */ }
+    GCG.track('header_sub_open', { cat: cat, page: sub.getAttribute('data-page') || '' });
+  },
+
+  // 指示書97: ▾ を有効化する(hidden を外す)。委譲リスナー(click=capture / Escape=bubble)は document に 1 回だけ付ける。
+  initHeaderSubNav() {
+    if (typeof document === 'undefined') return;
+    const sub = document.getElementById('gcg-subnav');
+    document.querySelectorAll('.mt-toggle').forEach(b => { b.hidden = false; });
+    if (sub) this._syncSubNavToggles(sub);
+    const root = document.documentElement;
+    if (!root || root.dataset.gcgSubnavInit) return;
+    root.dataset.gcgSubnavInit = '1';
+    document.addEventListener('click', (e) => {
+      const el = (e.target && e.target.nodeType === 1) ? e.target : (e.target && e.target.parentElement);
+      if (!el || !el.closest) return;
+      const btn = el.closest('.mt-toggle');
+      if (btn) { GCG._toggleSubNav(btn.getAttribute('data-cat')); return; }
+      if (el.closest('.site-header')) return;   // ヘッダー内(2 段目のリンク等)は通常どおり
+      const s = document.getElementById('gcg-subnav');
+      if (s && s.classList.contains('is-preview')) GCG._closeSubNav();
+    }, true);   // 指示書97 R2: capture で登録=ページ側のクリック処理より先に閉じる(移動ボタンの着地計算がヘッダー高さの変化で狂わないように)。preventDefault/stopPropagation はしない
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      const s = document.getElementById('gcg-subnav');
+      if (s && s.classList.contains('is-preview')) GCG._closeSubNav();
+    });
   },
 
   // 共通フッターHTML生成
@@ -1011,6 +1123,7 @@ GCG.initHeaderSearch = function() {
 if (typeof document !== 'undefined') {
   const _gcgAutoInitSearch = function() {
     try { GCG.initHeaderSearch(); } catch (e) { /* ignore */ }
+    try { GCG.initHeaderSubNav(); } catch (e) { /* ignore */ }   // 指示書97: 主タブ ▾ の有効化
   };
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', _gcgAutoInitSearch);
