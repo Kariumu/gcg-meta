@@ -49,6 +49,15 @@
     <p class="page-lead">カード採用率・デッキタイプ分布・地域別メタを分析します。デッキタイプを選ぶと、そのタイプの入賞デッキが出た大会だけに<a href="#events">イベント一覧</a>を絞り込めます。</p>
     <div id="share-buttons"></div>
 
+    <!-- ページ内の移動(2026-09-10 指示書96・松岡さん指示)。JS 無効でも <a href="#…"> として動く -->
+    <nav class="meta-jump" id="meta-jump" aria-label="ページ内の移動">
+      <span class="meta-jump-label">移動</span>
+      <a class="meta-jump-btn" href="#decktype-section" data-jump="decktype-section">デッキタイプ分布</a>
+      <a class="meta-jump-btn" href="#deck-card-section" data-jump="deck-card-section">カード採用率</a>
+      <a class="meta-jump-btn" href="#region-section" data-jump="region-section">地域別メタ</a>
+      <a class="meta-jump-btn" href="#events" data-jump="events">大会結果</a>
+    </nav>
+
     <!-- シリーズ絞り込み（最上位） -->
     <div id="series-selector-area" class="series-selector" aria-label="シリーズ絞り込み"></div>
 
@@ -138,6 +147,19 @@
       .type-chip-hint { font-size: 12px; color: var(--text-muted); }
       .lazy-note { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
       tr.decktype-row.is-selected td { background: var(--accent-dim, rgba(255,170,0,0.1)); }
+      /* 指示書96: ページ内の移動ボタン(固定表示はしない=松岡さん決定) */
+      .meta-jump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 16px; }
+      .meta-jump-label { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.06em; }
+      .meta-jump-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; text-decoration: none; white-space: nowrap; transition: border-color 0.15s, color 0.15s; }
+      .meta-jump-btn::after { content: '↓'; font-size: 11px; color: var(--text-muted); }
+      .meta-jump-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-card); }
+      .meta-jump-btn:hover::after { color: var(--accent); }
+      /* 指示書96 R1: 着地位置の下限(JS が JUMP_OFFSET で上書きする。JS 無効時の保険) */
+      #decktype-section, #deck-card-section, #region-section, #events { scroll-margin-top: 16px; }
+      @media (max-width: 768px) {
+        .meta-jump-label { flex-basis: 100%; }
+        .meta-jump-btn { flex: 1 1 calc(50% - 4px); justify-content: center; }
+      }
     </style>
 
     <!-- 地域フィルター（2026-08-06 指示書67: 並びは北から南へ固定） -->
@@ -166,7 +188,7 @@
     </div>
 
     <!-- デッキタイプ分布 -->
-    <details class="collapsible-section mb-32" open>
+    <details class="collapsible-section mb-32" id="decktype-section" open>
       <summary class="section-header collapsible-toggle">
         <h2 class="section-title">デッキタイプ分布</h2>
         <span class="toggle-icon"></span>
@@ -236,7 +258,7 @@
     </details>
 
     <!-- ===== イベント一覧（2026-08-06 指示書67: events.html から統合） ===== -->
-    <section id="events" class="mb-32" style="scroll-margin-top:96px">
+    <section id="events" class="mb-32">
       <div class="section-header">
         <h2 class="section-title">イベント一覧</h2>
         <span class="section-badge" id="event-count">--</span>
@@ -759,8 +781,41 @@
       syncUrl();
     }
 
+    // 指示書96: ページ内の移動。着地位置を JUMP_OFFSET に揃え、閉じている節は開いてから飛ぶ
+    var JUMP_IDS = ['decktype-section', 'deck-card-section', 'region-section', 'events'];
+    var JUMP_OFFSET = 16;
+    function jumpTargetsOffset() {
+      // 指示書96 R1: ヘッダーは現状 sticky が効いていない(親 #header の高さがヘッダーと同じ)ため固定 16px。ヘッダーを固定化する改修が入ったらここを実測値に戻す
+      var off = JUMP_OFFSET;
+      JUMP_IDS.forEach(function (id) { var el = document.getElementById(id); if (el) el.style.scrollMarginTop = off + 'px'; });
+    }
+    function jumpTo(id, place) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (el.tagName === 'DETAILS' && !el.open) el.open = true;
+      jumpTargetsOffset();
+      // URL 付きで開いた場合はブラウザが先に(CSS の保険値で)飛んでいるので、二度目は瞬時に位置を直すだけ(smooth だと「飛んでからもう一度飛ぶ」体感になる)
+      el.scrollIntoView({ behavior: place === 'hash' ? 'auto' : 'smooth', block: 'start' });
+      if (place === 'hash') {
+        // 指示書96 R1: 読み込み後に上の節が伸びて着地がずれる(既存不具合)ので、利用者が触らない限り数回だけ位置を直す
+        var cancelled = false;
+        var cancel = function () { cancelled = true; };
+        ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (ev) { window.addEventListener(ev, cancel, { once: true, passive: true }); });
+        [300, 800, 1500, 2500, 4000].forEach(function (ms) {
+          setTimeout(function () {
+            if (cancelled) return;
+            var top = el.getBoundingClientRect().top;
+            if (Math.abs(top - JUMP_OFFSET) > 4) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+          }, ms);
+        });
+      }
+      try { window.history.replaceState(window.history.state, '', '#' + id); } catch (e) { /* 履歴操作の失敗は無視 */ }
+      GCG.track('meta_jump', { target: id, place: place });
+    }
+
     function jumpToEvents() {
       var el = document.getElementById('events');
+      jumpTargetsOffset();   // 指示書96 R1: 着地位置を JUMP_OFFSET(16px) に補正
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -1376,11 +1431,19 @@
       // 画面の状態と URL を一致させる(受け付けなかった type を消し、正規化後の値に揃える)
       syncUrl();
 
-      if (window.location.hash === '#events') jumpToEvents();
+      var hashId = (window.location.hash || '').slice(1);
+      if (JUMP_IDS.indexOf(hashId) >= 0) jumpTo(hashId, 'hash');
     }
 
     document.getElementById('header').innerHTML = GCG.renderHeader('meta');
     document.getElementById('footer').innerHTML = GCG.renderFooter();
+
+    // 指示書96: 移動ボタンと、幅が変わったときの着地位置の再計算
+    document.querySelectorAll('.meta-jump-btn').forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-jump'), 'nav'); });
+    });
+    window.addEventListener('resize', jumpTargetsOffset);
+    jumpTargetsOffset();
 
     init();
     GCG.renderShareButtons('share-buttons', '環境分析・大会結果一覧 | GCG STATS');
