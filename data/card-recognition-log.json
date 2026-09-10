@@ -5539,5 +5539,55 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-10": {
+    "recognized_at": "2026-09-10 20:00:35 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2097965802146394118",
+      "https://x.com/GUNDAM_GCG_JP/status/2097958255993712897"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-122",
+        "card_name": "アルビオン",
+        "color": "Blue",
+        "card_type": "BASE",
+        "level": 2,
+        "cost": 1,
+        "ap": null,
+        "hp": 4,
+        "traits": [
+          "〔地球連邦〕",
+          "〔アルビオン隊〕",
+          "〔艦船〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、Lv.2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+        "effect_confidence": "medium",
+        "effect_length": 76,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-008",
+        "card_name": "パワード・ジム",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 2,
+        "hp": 4,
+        "traits": [
+          "〔地球連邦〕"
+        ],
+        "link": "（地球連邦）",
+        "effect": "【アタック時】〔地球連邦〕の味方のベースがあるなら、このターン中、このユニットをAP+2する。",
+        "effect_confidence": "high",
+        "effect_length": 47,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
