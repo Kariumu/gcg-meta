@@ -560,11 +560,12 @@ const GCG = {
         <nav class="footer-sitemap" aria-label="サイトマップ" style="margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:11px;font-family:var(--font-mono)">
           ${sitemapHtml}
         </nav>
-        <div class="footer-links" style="margin-top:16px;display:flex;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
+        <div class="footer-links" style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
           <a href="${basePath}privacy.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">プライバシーポリシー</a>
           <a href="${basePath}contact.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">お問い合わせ</a>
           <a href="${basePath}about.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">サイトについて</a>
           <a href="${basePath}data-usage.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">データ利用について</a>
+          <a href="https://x.com/gcg_stats" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'" onclick="GCG.track('x_profile_click',{place:'footer'})">X: @gcg_stats</a>
         </div>
       </footer>`;
   },

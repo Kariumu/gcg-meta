@@ -78,6 +78,22 @@
             color: var(--text-muted);
             font-family: var(--font-mono);
         }
+
+        /* 指示書95: X アカウント案内ブロック(店舗検索 .home-store-search と同じ枠の見た目)。css/style.css は触らない */
+        .home-x-follow { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 24px; }
+        .home-x-follow-inner { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+        .home-x-follow-icon { flex: 0 0 auto; display: flex; color: var(--text-primary); }
+        .home-x-follow-body { flex: 1 1 240px; min-width: 0; }
+        .home-x-follow-title { font-size: 16px; font-weight: 600; margin: 0 0 6px; color: var(--text-primary); }
+        .home-x-follow-sub { font-size: 12px; color: var(--text-muted); margin: 0; line-height: 1.6; }
+        .home-x-follow-sub b { color: var(--text-secondary); font-family: var(--font-mono); font-weight: 600; }
+        .home-x-follow-btn { flex: 0 0 auto; display: inline-block; padding: 10px 18px; border-radius: 999px; background: var(--accent); color: var(--bg-primary); font-weight: 700; font-size: 13px; text-decoration: none; white-space: nowrap; transition: background 0.15s; }
+        .home-x-follow-btn:hover { background: var(--accent-hover); color: var(--bg-primary); }
+        @media (max-width: 768px) {
+            .home-x-follow { padding: 16px; }
+            .home-x-follow-inner { gap: 12px; }
+            .home-x-follow-btn { width: 100%; text-align: center; }
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -147,6 +163,20 @@
             </div>
             <div class="event-list" id="recent-events">
                 <div class="loading">データを読み込み中</div>
+            </div>
+        </section>
+
+        <!-- X アカウント案内(2026-09-09 指示書95・松岡さん指示)。外部スクリプトは使わない(第1段) -->
+        <section class="home-x-follow mb-32" aria-label="X アカウントのご案内">
+            <div class="home-x-follow-inner">
+                <div class="home-x-follow-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="30" height="30" focusable="false"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </div>
+                <div class="home-x-follow-body">
+                    <h2 class="home-x-follow-title">X（旧Twitter）で更新情報を配信中</h2>
+                    <p class="home-x-follow-sub">大会結果の速報・日次まとめ・分析記事の更新を X で投稿しています。GCG STATS の X アカウントは <b>@gcg_stats</b> です。</p>
+                </div>
+                <a class="home-x-follow-btn" id="home-x-follow-btn" href="https://x.com/gcg_stats" target="_blank" rel="noopener">@gcg_stats をフォロー</a>
             </div>
         </section>
 
@@ -1033,6 +1063,10 @@
         // Header/Footer
         document.getElementById('header').innerHTML = GCG.renderHeader('home');
         document.getElementById('footer').innerHTML = GCG.renderFooter();
+
+        // 指示書95: X アカウント案内ボタンの計測(遷移は通常どおり。track は失敗しても止まらない)
+        var xBtn = document.getElementById('home-x-follow-btn');
+        if (xBtn) xBtn.addEventListener('click', function () { GCG.track('x_profile_click', { place: 'home' }); });
 
         loadHero();
         initHomeStoreSearch();
