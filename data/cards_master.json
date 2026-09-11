@@ -39414,5 +39414,1509 @@
     "acquisition_info": "ニュータイプチャレンジ 2026 MISSION 4 参加記念品",
     "package_set": "PROMO",
     "effect_text": "【バースト】このカードの【アクション】を発動する。 【アクション】Lv.3以下の相手のユニット1～2つを選ぶ。それらを持ち主の手札に戻す。"
+  },
+  "ST11-001": {
+    "id": "ST11-001",
+    "name_jp": "シャア専用ズゴック",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジオン",
+      "水中"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "ST11",
+    "effect_text": "【セット中】このユニット以外の〔水中〕の味方のユニットが2つ以上いる間、相手のユニットは、これをアタック先に選べない。【配備時】このユニット以外の〔水中〕の味方のユニットがいるなら、Lv.2以下の相手のユニット1つを選ぶ。それを持ち主のデッキの下に戻す。",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-002": {
+    "id": "ST11-002",
+    "name_jp": "アッガイ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "水中"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "特徴〔ジオン〕"
+    ],
+    "package_set": "ST11",
+    "effect_text": "相手のターン中、このユニットがレストの間、HP2以下の〔水中〕の味方のユニットすべては、相手から効果ダメージを受けない。",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-003": {
+    "id": "ST11-003",
+    "name_jp": "ゾック",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "水中"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "このユニット以外の〔水中〕の味方のユニットがいる間、これは《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-004": {
+    "id": "ST11-004",
+    "name_jp": "ゾノ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 3,
+    "traits": [
+      "ザフト",
+      "水中"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [
+      "マルコ・モラシム"
+    ],
+    "package_set": "ST11",
+    "effect_text": "【配備時】「グーン」(〔ザフト〕 〔水中〕・AP1・HP1)のユニットトークン1つをレストで配備する。",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-005": {
+    "id": "ST11-005",
+    "name_jp": "アッシュ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ザフト",
+      "水中"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔ザフト〕"
+    ],
+    "package_set": "ST11",
+    "effect_text": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-006": {
+    "id": "ST11-006",
+    "name_jp": "シャンブロ",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ジオン",
+      "水中"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "ロニ・ガーベイ"
+    ],
+    "package_set": "ST11",
+    "effect_text": "相手のターン開始時、このユニット以外の〔水中〕の味方のユニットがいるなら、このターン中、味方のシールドエリアのカードが相手から効果ダメージを受けるとき、そのダメージを5軽減する。【配備時】自分のトラッシュの〔水中〕のユニットカード1枚を選ぶ。それを手札に加える。",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-007": {
+    "id": "ST11-007",
+    "name_jp": "ガンダムレオパルド",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "バルチャー",
+      "水中"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動新世紀ガンダムX",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "-",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-008": {
+    "id": "ST11-008",
+    "name_jp": "ドーシート",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "バルチャー",
+      "水中"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動新世紀ガンダムX",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "-",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-009": {
+    "id": "ST11-009",
+    "name_jp": "カプル",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ミリシャ",
+      "水中"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "【破壊時】相手のターンで、〔水中〕の味方のユニットがいるなら、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-010": {
+    "id": "ST11-010",
+    "name_jp": "アビスガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連合",
+      "ファントムペイン",
+      "水中"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "アウル・ニーダ"
+    ],
+    "package_set": "ST11",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-011": {
+    "id": "ST11-011",
+    "name_jp": "シャア・アズナブル",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】このターン中、〔水中〕の味方のユニットすべてをAP+1する。",
+    "terrain": "-",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-012": {
+    "id": "ST11-012",
+    "name_jp": "ロニ・ガーベイ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】〔水中〕の味方のユニット1つを選ぶ。このターン中、それが相手のユニットからバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "terrain": "-",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-013": {
+    "id": "ST11-013",
+    "name_jp": "迂闊な攻撃",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 4,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "【バースト】レストのHP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。【メイン】/【アクション】レストのHP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。そうしたなら、自分は1枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-014": {
+    "id": "ST11-014",
+    "name_jp": "紅海の鯱",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ザフト",
+      "コーディネイター"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "【アクション】〔水中〕の味方のユニット1つを選ぶ。このターン中、相手のユニットは、それをアタック先に選べない。【パイロット】「マルコ・モラシム」",
+    "terrain": "-",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-015": {
+    "id": "ST11-015",
+    "name_jp": "深淵からの一閃",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 5,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "【メイン】自分のトラッシュのLv.4以下の〔水中〕のユニットカード1枚を選ぶ。それをレストで配備する。",
+    "terrain": "-",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST11-016": {
+    "id": "ST11-016",
+    "name_jp": "マッド・アングラー",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Blue",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "艦船",
+      "水中"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "ST11",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、相手のユニットが4つ以上いるなら、レストの相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "地球",
+    "acquisition_info": "Aquatic Assault [ST11]"
+  },
+  "ST12-001": {
+    "id": "ST12-001",
+    "name_jp": "ガンダムエピオン",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "ホワイトファング"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "新機動戦記ガンダムW",
+    "link": [
+      "ゼクス・マーキス"
+    ],
+    "package_set": "ST12",
+    "effect_text": "【セット中・Lv.5以上のパイロット】【ターン1回】自分のターン中、このユニットがダメージで相手のユニットを破壊したとき、AP5以下の相手のユニットすべてに2ダメージを与える。【配備時】相手のベース1つを選ぶ。それに5ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-002": {
+    "id": "ST12-002",
+    "name_jp": "シャイニングガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "ドモン・カッシュ"
+    ],
+    "package_set": "ST12",
+    "effect_text": "【配備時】AP5以上の味方のユニット1つを選ぶ。このターン中、それは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-003": {
+    "id": "ST12-003",
+    "name_jp": "トールギスⅢ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "プリベンター"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "ゼクス・マーキス"
+    ],
+    "package_set": "ST12",
+    "effect_text": "【ターン1回】自分のターン中、このユニットがダメージで相手のユニットを破壊したとき、AP3以下の相手のユニットすべてに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-004": {
+    "id": "ST12-004",
+    "name_jp": "ガンダムエクシア",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [
+      "刹那・F・セイエイ"
+    ],
+    "package_set": "ST12",
+    "effect_text": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-005": {
+    "id": "ST12-005",
+    "name_jp": "GQuuuuuuX（オメガ・サイコミュ起動時）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "クラン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "アマテ・ユズリハ（マチュ）",
+      "ニャアン"
+    ],
+    "package_set": "ST12",
+    "effect_text": "【アタック時】自分の手札1枚を捨ててもよい。そうしたなら、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-006": {
+    "id": "ST12-006",
+    "name_jp": "ユニコーンガンダム2号機 バンシィ（デストロイモード）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "地球連邦"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "マリーダ・クルス"
+    ],
+    "package_set": "ST12",
+    "effect_text": "【セット中】【起動・メイン】自分のトラッシュのカード4枚をゲームから除外する：このターン中、このユニットは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)【起動・アクション】自分のトラッシュのカード4枚をゲームから除外する：このバトル中、このユニットは《制圧》を得る。(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-007": {
+    "id": "ST12-007",
+    "name_jp": "ギャン",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "マ・クベ"
+    ],
+    "package_set": "ST12",
+    "effect_text": "【リンク時】このターン中、このユニットは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-008": {
+    "id": "ST12-008",
+    "name_jp": "イフリート・シュナイド",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "特徴〔ジオン〕"
+    ],
+    "package_set": "ST12",
+    "effect_text": "-",
+    "terrain": "地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-009": {
+    "id": "ST12-009",
+    "name_jp": "ユニコーンガンダム2号機 バンシィ（ユニコーンモード）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連邦"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "マリーダ・クルス"
+    ],
+    "package_set": "ST12",
+    "effect_text": "【破壊時】シールドが3つ以下のプレイヤーがいるなら、自分のトラッシュのLv.6以上のユニットカード1枚を選ぶ。それを手札に加える。そうしたなら、自分の手札1枚を捨てる。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-010": {
+    "id": "ST12-010",
+    "name_jp": "スラッシュザクファントム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "ザフト"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "ST12",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-011": {
+    "id": "ST12-011",
+    "name_jp": "ミリアルド・ピースクラフト",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ホワイトファング"
+    ],
+    "stats": {
+      "ap_mod": 3,
+      "hp_mod": 1
+    },
+    "source_title": "新機動戦記ガンダムW",
+    "link": [],
+    "package_set": "ST12",
+    "effect_text": "このカードのカード名は「ゼクス・マーキス」としても扱う。【バースト】このカードを手札に加える。【起動・アクション】【ターン1回】このユニットとバトルしている、ダメージを受けている相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-012": {
+    "id": "ST12-012",
+    "name_jp": "プルトゥエルブ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "強化人間"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "ST12",
+    "effect_text": "このカードのカード名は「マリーダ・クルス」としても扱う。【バースト】このカードを手札に加える。【リンク時】自分のデッキを上から2枚見て、その中のカード1枚を上に戻す。残ったカードは自分のトラッシュに置く。シールドが3つ以下のプレイヤーがいるなら、デッキに戻すかわりに手札に加える。",
+    "terrain": "-",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-013": {
+    "id": "ST12-013",
+    "name_jp": "最後の勝利者",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 6,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "新機動戦記ガンダムW",
+    "link": [],
+    "package_set": "ST12",
+    "effect_text": "【バースト】相手のユニット1つを選ぶ。それに1ダメージを与える。【メイン】相手プレイヤー1人を選ぶ。自分とそのプレイヤーはそれぞれ自身のユニット1つを選ぶ。それらでバトルに移行し、ダメージステップのみを行う。(自分、相手の順番で選ぶ)",
+    "terrain": "-",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-014": {
+    "id": "ST12-014",
+    "name_jp": "知将のプライド",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 0
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "ST12",
+    "effect_text": "【アクション】味方のユニット1つを選ぶ。このバトル中、それは以下の効果を得る。■このユニットがバトルダメージで相手のユニットを破壊したとき、AP2以下の相手のユニット1つを選ぶ。それを破壊する。【パイロット】「マ・クベ」",
+    "terrain": "-",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-015": {
+    "id": "ST12-015",
+    "name_jp": "二機のユニコーン",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "ST12",
+    "effect_text": "【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。■Lv.2以下の相手のユニット1つを選ぶ。それを破壊する。■味方のユニット1つと、Lv.5以上の相手のユニット1つを選ぶ。それらに2ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST12-016": {
+    "id": "ST12-016",
+    "name_jp": "リーブラ",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Red",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ホワイトファング",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "新機動戦記ガンダムW",
+    "link": [],
+    "package_set": "ST12",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。【起動・メイン】このベースをレストにする：このターン中、パイロットがセットされている味方のユニットがバトルダメージで相手のユニットを破壊していたなら、Lv.4以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙",
+    "acquisition_info": "Raging Onslaught [ST12]"
+  },
+  "ST13-001": {
+    "id": "ST13-001",
+    "name_jp": "キュベレイ",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士Zガンダム",
+    "link": [
+      "ハマーン・カーン"
+    ],
+    "package_set": "ST13",
+    "effect_text": "【ターン1回】自分のターン中、自分のユニットにパイロットをセットしたとき、「ビット/ファンネル」(〔遠隔兵器〕・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1～2つを配備する。【起動・メイン】【ターン1回】①：自分のユニットトークン1つと相手のユニット1つを選ぶ。それらでバトルに移行し、ダメージステップのみを行う。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-002": {
+    "id": "ST13-002",
+    "name_jp": "エルメス",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "ララァ・スン"
+    ],
+    "package_set": "ST13",
+    "effect_text": "【配備時】「ビット/ファンネル」(〔遠隔兵器〕・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1つを配備する。",
+    "terrain": "宇宙",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-003": {
+    "id": "ST13-003",
+    "name_jp": "ベルティゴ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "宇宙革命軍"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動新世紀ガンダムX",
+    "link": [
+      "カリス・ノーティラス"
+    ],
+    "package_set": "ST13",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-004": {
+    "id": "ST13-004",
+    "name_jp": "GXビット",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "旧連邦",
+      "バルチャー",
+      "遠隔兵器"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 1
+    },
+    "source_title": "機動新世紀ガンダムX",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【配備時】自分のデッキを上から1枚見て、上か下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-005": {
+    "id": "ST13-005",
+    "name_jp": "GFreD",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【配備時】相手のユニットが4つ以上いるなら、自分のデッキを上から5枚見て、その中のパイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-006": {
+    "id": "ST13-006",
+    "name_jp": "ガンダム・エアリアル",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [
+      "スレッタ・マーキュリー"
+    ],
+    "package_set": "ST13",
+    "effect_text": "【セット中】【アタック時】相手プレイヤーにアタックしているなら、相手のユニット1つを選ぶ。それに2ダメージを与える。【起動・アクション】【ターン1回】味方のユニット1つをレストにする：Lv.4以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-007": {
+    "id": "ST13-007",
+    "name_jp": "ヤクト・ドーガ（ギュネイ専用機）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "特徴〔ネオ・ジオン〕"
+    ],
+    "package_set": "ST13",
+    "effect_text": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-008": {
+    "id": "ST13-008",
+    "name_jp": "ガンダムスローネツヴァイ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "CB",
+      "トリニティ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-009": {
+    "id": "ST13-009",
+    "name_jp": "ガンダム・ファラクト",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [
+      "特徴〔学園〕"
+    ],
+    "package_set": "ST13",
+    "effect_text": "【アタック時】相手プレイヤー1人を選ぶ。そのプレイヤーは自身のトラッシュのユニットカード2枚を選ぶ。それらをゲームから除外する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-010": {
+    "id": "ST13-010",
+    "name_jp": "赤いガンダム（0079）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "特徴〔ニュータイプ〕"
+    ],
+    "package_set": "ST13",
+    "effect_text": "【起動・メイン】【ターン1回】味方のユニットトークン1つを破壊する：このターン中、このユニットは《突破3》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-011": {
+    "id": "ST13-011",
+    "name_jp": "ハマーン・カーン",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 6,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士Zガンダム",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】自分のデッキを上から5枚見て、その中の、このユニットのLv.以下のパイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "-",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-012": {
+    "id": "ST13-012",
+    "name_jp": "スレッタ・マーキュリー",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【バースト】このカードを手札に加える。【ターン1回】このユニットがアタックしている間、相手のユニットが効果ダメージで破壊されたとき、自分は1枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-013": {
+    "id": "ST13-013",
+    "name_jp": "僕がニュータイプだ",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "宇宙革命軍",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動新世紀ガンダムX",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【メイン】「ビット/ファンネル」(〔遠隔兵器〕・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1～2つを配備する。【パイロット】「カリス・ノーティラス」",
+    "terrain": "-",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-014": {
+    "id": "ST13-014",
+    "name_jp": "最後の任務",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 6,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【メイン】自分のユニット1つを選ぶ。それを破壊する。そうしたなら、自分のデッキを上から4枚見て、その中のLv.4以下のユニットカード1枚を配備してもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "-",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-015": {
+    "id": "ST13-015",
+    "name_jp": "ソロモン迎撃作戦",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 4,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【バースト】このカードを手札に加える。【メイン】/【アクション】自分のトラッシュのユニットカード3枚を選ぶ。それらをゲームから除外する。そうしたなら、相手のユニット1つを選ぶ。それに3ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST13-016": {
+    "id": "ST13-016",
+    "name_jp": "ソドン",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Green",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "ST13",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。その後、「ビット/ファンネル」(〔遠隔兵器〕・AP2・HP2・このユニットはパイロットをセットできず、アタックできない)のユニットトークン1つを配備する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Silent Barrage [ST13]"
+  },
+  "ST14-001": {
+    "id": "ST14-001",
+    "name_jp": "ジ・O",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 9,
+    "cost": 8,
+    "traits": [
+      "ティターンズ",
+      "ジュピトリス"
+    ],
+    "stats": {
+      "ap": 6,
+      "hp": 7
+    },
+    "source_title": "機動戦士Zガンダム",
+    "link": [
+      "パプテマス・シロッコ"
+    ],
+    "package_set": "ST14",
+    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)各相手プレイヤーの、レストの最もLv.が低いユニットすべては、相手のターンのスタートフェイズでアクティブにならない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-002": {
+    "id": "ST14-002",
+    "name_jp": "ガンダムNT-1フルアーマー",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "地球連邦"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム0080 ポケットの中の戦争",
+    "link": [
+      "特徴〔ニュータイプ〕",
+      "クリスチーナ・マッケンジー"
+    ],
+    "package_set": "ST14",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-003": {
+    "id": "ST14-003",
+    "name_jp": "パラス・アテネ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ティターンズ",
+      "ジュピトリス"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士Zガンダム",
+    "link": [
+      "特徴〔ジュピトリス〕"
+    ],
+    "package_set": "ST14",
+    "effect_text": "【配備時】相手プレイヤー1人を選ぶ。そのプレイヤーは自身のトラッシュのユニットカード2枚を選ぶ。それらをゲームから除外する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-004": {
+    "id": "ST14-004",
+    "name_jp": "ギラ・ドーガ（重武装仕様）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "ST14",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)このユニットは相手プレイヤーをアタック先に選べない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-005": {
+    "id": "ST14-005",
+    "name_jp": "GファルコンDX",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "バルチャー"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動新世紀ガンダムX",
+    "link": [
+      "特徴〔バルチャー〕",
+      "特徴〔ニュータイプ〕"
+    ],
+    "package_set": "ST14",
+    "effect_text": "【配備時】Lv.6以下の相手のユニット1つを選ぶ。それをレストにする。その後、自分のトラッシュにカードが7枚以上あるなら、このターン中、それをAP-2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-006": {
+    "id": "ST14-006",
+    "name_jp": "フルアーマー・ユニコーンガンダム（デストロイモード）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 8,
+    "cost": 6,
+    "traits": [
+      "民間"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "バナージ・リンクス"
+    ],
+    "package_set": "ST14",
+    "effect_text": "【配備時】自分のデッキを上から3枚見て、その中のカードを相手プレイヤーの人数と同じ数だけ公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【セット中】【ターン1回】このユニットは、これのAP以下の相手のユニットからバトルダメージを受けるとき、そのダメージを受けない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-007": {
+    "id": "ST14-007",
+    "name_jp": "フルアーマー・ユニコーンガンダム（ユニコーンモード）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "民間"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "バナージ・リンクス"
+    ],
+    "package_set": "ST14",
+    "effect_text": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-008": {
+    "id": "ST14-008",
+    "name_jp": "ガンダムヘビーアームズ改（EW版）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 6,
+      "hp": 4
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "特徴〔Gチーム〕",
+      "特徴〔オペレーション・メテオ〕"
+    ],
+    "package_set": "ST14",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-009": {
+    "id": "ST14-009",
+    "name_jp": "デュエルガンダム アサルトシュラウド",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 3,
+    "traits": [
+      "ザフト"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [
+      "イザーク・ジュール"
+    ],
+    "package_set": "ST14",
+    "effect_text": "【破壊時】自分はEXリソース1つを置く。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-010": {
+    "id": "ST14-010",
+    "name_jp": "パーフェクトストライクガンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "三隻同盟"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [
+      "ムウ・ラ・フラガ"
+    ],
+    "package_set": "ST14",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-011": {
+    "id": "ST14-011",
+    "name_jp": "パプテマス・シロッコ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ティターンズ",
+      "ジュピトリス",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士Zガンダム",
+    "link": [],
+    "package_set": "ST14",
+    "effect_text": "【バースト】このカードを手札に加える。【アタック時】相手のユニット1つを選ぶ。このバトル中、それをレストの相手のユニットと同じ数だけAP-する。",
+    "terrain": "-",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-012": {
+    "id": "ST14-012",
+    "name_jp": "バナージ・リンクス",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "民間",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "ST14",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】Lv.5以上の味方のユニット1つを選ぶ。このターン中、それはアクティブのAP5以下の相手のユニットをアタック先に選んでもよい。",
+    "terrain": "-",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-013": {
+    "id": "ST14-013",
+    "name_jp": "天賦の才",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Zガンダム",
+    "link": [],
+    "package_set": "ST14",
+    "effect_text": "【バースト】相手のユニット1つを選ぶ。このターン中、それをAP-3する。【メイン】/【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。■HP3以下の相手のユニット1～2つを選ぶ。それらをレストにする。■相手のユニット1つを選ぶ。このターン中、それをAP-3する。",
+    "terrain": "-",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-014": {
+    "id": "ST14-014",
+    "name_jp": "炎のモビルスーツ乗り",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "バルチャー",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動新世紀ガンダムX",
+    "link": [],
+    "package_set": "ST14",
+    "effect_text": "【メイン】/【アクション】Lv.5以下の相手のユニット1つを選ぶ。このターン中、それをAP-3する。自分のトラッシュにコマンドカードが4枚以上あるなら、かわりに相手のユニット1つを選ぶ。(発動中のこのカードは含まない)【パイロット】「ガロード・ラン＆ティファ・アディール」",
+    "terrain": "-",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-015": {
+    "id": "ST14-015",
+    "name_jp": "戦場を駆ける想い",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 4,
+    "cost": 4,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "ST14",
+    "effect_text": "【バースト】自分はEXリソース1つを置く。【メイン】自分はリソース1つをレストで置く。その後、このターン中、自分のリソースを効果でアクティブにしていないなら、自分のリソースを相手プレイヤーの人数と同じ数だけ選ぶ。それらをアクティブにする。",
+    "terrain": "-",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "ST14-016": {
+    "id": "ST14-016",
+    "name_jp": "グリプス2",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "White",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ティターンズ",
+      "拠点"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士Zガンダム",
+    "link": [],
+    "package_set": "ST14",
+    "effect_text": "【バースト】このカードを配備する。【配備時】自分のシールド1つを手札に加える。【ターン1回】自分のターン中、味方のユニットがリンクしたとき、Lv.5以下の相手のユニット1つを選ぶ。このターン中、それをAP-1する。",
+    "terrain": "宇宙",
+    "acquisition_info": "Heavy Dominion [ST14]"
+  },
+  "T-028": {
+    "id": "T-028",
+    "name_jp": "グーン",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ザフト",
+      "水中"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダムSEED",
+    "package_set": "TOKEN",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "Aquatic Assault [ST11]",
+    "link": []
+  },
+  "T-029": {
+    "id": "T-029",
+    "name_jp": "ビット/ファンネル",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "遠隔兵器"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム",
+    "package_set": "TOKEN",
+    "effect_text": "このユニットはパイロットをセットできず、アタックできない。",
+    "terrain": "-",
+    "acquisition_info": "Silent Barrage [ST13]",
+    "link": []
   }
 }
