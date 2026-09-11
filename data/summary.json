@@ -1,10 +1,10 @@
 {
-  "total_events": 1135,
-  "total_decks": 5284,
+  "total_events": 1136,
+  "total_decks": 5288,
   "card_ranking": [
     {
       "card_id": "ST01-010",
-      "decks": 2742,
+      "decks": 2743,
       "usage_rate": 51.9,
       "wins": 687,
       "avg_count": 3.9,
@@ -12,8 +12,17 @@
       "min_count": 1
     },
     {
+      "card_id": "GD01-100",
+      "decks": 2651,
+      "usage_rate": 50.1,
+      "wins": 648,
+      "avg_count": 2.3,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
       "card_id": "ST01-001",
-      "decks": 2649,
+      "decks": 2650,
       "usage_rate": 50.1,
       "wins": 659,
       "avg_count": 3.8,
@@ -21,17 +30,8 @@
       "min_count": 1
     },
     {
-      "card_id": "GD01-100",
-      "decks": 2648,
-      "usage_rate": 50.1,
-      "wins": 647,
-      "avg_count": 2.3,
-      "max_count": 4,
-      "min_count": 1
-    },
-    {
       "card_id": "GD01-118",
-      "decks": 2048,
+      "decks": 2050,
       "usage_rate": 38.8,
       "wins": 529,
       "avg_count": 3.7,
@@ -58,34 +58,34 @@
     },
     {
       "card_id": "GD03-056",
-      "decks": 1893,
+      "decks": 1894,
       "usage_rate": 35.8,
-      "wins": 496,
+      "wins": 497,
       "avg_count": 4,
       "max_count": 4,
       "min_count": 1
     },
     {
       "card_id": "ST05-010",
-      "decks": 1887,
+      "decks": 1888,
       "usage_rate": 35.7,
-      "wins": 494,
+      "wins": 495,
       "avg_count": 4,
       "max_count": 4,
       "min_count": 2
     },
     {
       "card_id": "GD02-054",
-      "decks": 1829,
+      "decks": 1830,
       "usage_rate": 34.6,
-      "wins": 483,
+      "wins": 484,
       "avg_count": 4,
       "max_count": 4,
       "min_count": 1
     },
     {
       "card_id": "GD01-086",
-      "decks": 1677,
+      "decks": 1678,
       "usage_rate": 31.7,
       "wins": 427,
       "avg_count": 3.8,
@@ -94,7 +94,7 @@
     },
     {
       "card_id": "ST04-001",
-      "decks": 1594,
+      "decks": 1595,
       "usage_rate": 30.2,
       "wins": 408,
       "avg_count": 3.8,
@@ -103,7 +103,7 @@
     },
     {
       "card_id": "ST04-010",
-      "decks": 1574,
+      "decks": 1575,
       "usage_rate": 29.8,
       "wins": 401,
       "avg_count": 3.9,
@@ -112,25 +112,25 @@
     },
     {
       "card_id": "ST05-006",
-      "decks": 1485,
+      "decks": 1486,
       "usage_rate": 28.1,
-      "wins": 393,
+      "wins": 394,
       "avg_count": 3.8,
       "max_count": 4,
       "min_count": 1
     },
     {
       "card_id": "ST05-004",
-      "decks": 1478,
+      "decks": 1479,
       "usage_rate": 28,
-      "wins": 403,
+      "wins": 404,
       "avg_count": 3.9,
       "max_count": 4,
       "min_count": 1
     },
     {
       "card_id": "GD02-079",
-      "decks": 1371,
+      "decks": 1372,
       "usage_rate": 25.9,
       "wins": 350,
       "avg_count": 3.3,
@@ -166,7 +166,7 @@
     },
     {
       "card_id": "ST03-013",
-      "decks": 1092,
+      "decks": 1093,
       "usage_rate": 20.7,
       "wins": 268,
       "avg_count": 3.9,
@@ -184,9 +184,9 @@
     },
     {
       "card_id": "GD02-055",
-      "decks": 1081,
+      "decks": 1082,
       "usage_rate": 20.5,
-      "wins": 292,
+      "wins": 293,
       "avg_count": 3.2,
       "max_count": 4,
       "min_count": 1
@@ -202,8 +202,8 @@
     },
     {
       "card_id": "GD04-068",
-      "decks": 1032,
-      "usage_rate": 19.5,
+      "decks": 1034,
+      "usage_rate": 19.6,
       "wins": 261,
       "avg_count": 3,
       "max_count": 4,
@@ -211,7 +211,7 @@
     },
     {
       "card_id": "GD01-073",
-      "decks": 1008,
+      "decks": 1009,
       "usage_rate": 19.1,
       "wins": 269,
       "avg_count": 2.9,
@@ -238,7 +238,7 @@
     },
     {
       "card_id": "GD01-128",
-      "decks": 820,
+      "decks": 822,
       "usage_rate": 15.5,
       "wins": 210,
       "avg_count": 3.3,
@@ -247,9 +247,9 @@
     },
     {
       "card_id": "GD03-050",
-      "decks": 814,
+      "decks": 815,
       "usage_rate": 15.4,
-      "wins": 228,
+      "wins": 229,
       "avg_count": 2.6,
       "max_count": 4,
       "min_count": 1
@@ -283,28 +283,37 @@
     },
     {
       "card_id": "GD05-002",
-      "decks": 688,
-      "usage_rate": 13,
-      "wins": 183,
+      "decks": 691,
+      "usage_rate": 13.1,
+      "wins": 184,
       "avg_count": 3.9,
       "max_count": 4,
       "min_count": 1
     },
     {
       "card_id": "GD05-081",
-      "decks": 683,
-      "usage_rate": 12.9,
-      "wins": 181,
+      "decks": 686,
+      "usage_rate": 13,
+      "wins": 182,
       "avg_count": 3.7,
       "max_count": 4,
       "min_count": 1
     },
     {
       "card_id": "GD03-109",
-      "decks": 677,
+      "decks": 678,
       "usage_rate": 12.8,
       "wins": 159,
       "avg_count": 3.8,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
+      "card_id": "GD04-077",
+      "decks": 671,
+      "usage_rate": 12.7,
+      "wins": 167,
+      "avg_count": 2.8,
       "max_count": 4,
       "min_count": 1
     },
@@ -316,15 +325,6 @@
       "avg_count": 4,
       "max_count": 4,
       "min_count": 2
-    },
-    {
-      "card_id": "GD04-077",
-      "decks": 670,
-      "usage_rate": 12.7,
-      "wins": 167,
-      "avg_count": 2.8,
-      "max_count": 4,
-      "min_count": 1
     },
     {
       "card_id": "ST03-011",
@@ -383,7 +383,7 @@
     {
       "card_id": "ST02-001",
       "decks": 526,
-      "usage_rate": 10,
+      "usage_rate": 9.9,
       "wins": 133,
       "avg_count": 4,
       "max_count": 4,
@@ -454,7 +454,7 @@
     },
     {
       "card_id": "ST01-014",
-      "decks": 429,
+      "decks": 430,
       "usage_rate": 8.1,
       "wins": 93,
       "avg_count": 1.8,
@@ -463,7 +463,7 @@
     },
     {
       "card_id": "GD01-093",
-      "decks": 418,
+      "decks": 419,
       "usage_rate": 7.9,
       "wins": 86,
       "avg_count": 4,
@@ -472,7 +472,7 @@
     },
     {
       "card_id": "GD01-044",
-      "decks": 418,
+      "decks": 419,
       "usage_rate": 7.9,
       "wins": 86,
       "avg_count": 4,
@@ -481,7 +481,7 @@
     },
     {
       "card_id": "GD05-111",
-      "decks": 413,
+      "decks": 415,
       "usage_rate": 7.8,
       "wins": 101,
       "avg_count": 3.8,
@@ -535,7 +535,7 @@
     },
     {
       "card_id": "GD05-110",
-      "decks": 390,
+      "decks": 392,
       "usage_rate": 7.4,
       "wins": 101,
       "avg_count": 4,
@@ -544,9 +544,9 @@
     },
     {
       "card_id": "GD05-005",
-      "decks": 387,
-      "usage_rate": 7.3,
-      "wins": 95,
+      "decks": 389,
+      "usage_rate": 7.4,
+      "wins": 96,
       "avg_count": 2.7,
       "max_count": 4,
       "min_count": 1
@@ -554,7 +554,7 @@
     {
       "card_id": "GD05-019",
       "decks": 378,
-      "usage_rate": 7.2,
+      "usage_rate": 7.1,
       "wins": 98,
       "avg_count": 3.4,
       "max_count": 4,
@@ -571,7 +571,7 @@
     },
     {
       "card_id": "GD02-129",
-      "decks": 341,
+      "decks": 342,
       "usage_rate": 6.5,
       "wins": 90,
       "avg_count": 3.2,
@@ -580,9 +580,9 @@
     },
     {
       "card_id": "GD05-129",
-      "decks": 339,
+      "decks": 340,
       "usage_rate": 6.4,
-      "wins": 79,
+      "wins": 80,
       "avg_count": 3.2,
       "max_count": 4,
       "min_count": 1
@@ -598,18 +598,18 @@
     },
     {
       "card_id": "ST05-015",
-      "decks": 328,
+      "decks": 329,
       "usage_rate": 6.2,
-      "wins": 93,
+      "wins": 94,
       "avg_count": 2.3,
       "max_count": 4,
       "min_count": 1
     },
     {
       "card_id": "GD05-060",
-      "decks": 328,
+      "decks": 329,
       "usage_rate": 6.2,
-      "wins": 73,
+      "wins": 74,
       "avg_count": 1.9,
       "max_count": 4,
       "min_count": 1
@@ -617,7 +617,7 @@
     {
       "card_id": "GD03-063",
       "decks": 325,
-      "usage_rate": 6.2,
+      "usage_rate": 6.1,
       "wins": 84,
       "avg_count": 3.2,
       "max_count": 4,
@@ -653,9 +653,18 @@
     {
       "card_id": "ST03-001",
       "decks": 288,
-      "usage_rate": 5.5,
+      "usage_rate": 5.4,
       "wins": 69,
       "avg_count": 2.8,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
+      "card_id": "GD05-114",
+      "decks": 287,
+      "usage_rate": 5.4,
+      "wins": 66,
+      "avg_count": 2.1,
       "max_count": 4,
       "min_count": 1
     },
@@ -669,17 +678,8 @@
       "min_count": 1
     },
     {
-      "card_id": "GD05-114",
-      "decks": 286,
-      "usage_rate": 5.4,
-      "wins": 65,
-      "avg_count": 2.1,
-      "max_count": 4,
-      "min_count": 1
-    },
-    {
       "card_id": "GD01-003",
-      "decks": 284,
+      "decks": 285,
       "usage_rate": 5.4,
       "wins": 62,
       "avg_count": 2.3,
@@ -706,7 +706,7 @@
     },
     {
       "card_id": "GD01-065",
-      "decks": 269,
+      "decks": 270,
       "usage_rate": 5.1,
       "wins": 65,
       "avg_count": 2.2,
@@ -751,7 +751,7 @@
     },
     {
       "card_id": "GD05-033",
-      "decks": 221,
+      "decks": 222,
       "usage_rate": 4.2,
       "wins": 62,
       "avg_count": 3.9,
@@ -760,7 +760,7 @@
     },
     {
       "card_id": "GD05-066",
-      "decks": 221,
+      "decks": 222,
       "usage_rate": 4.2,
       "wins": 63,
       "avg_count": 4,
@@ -769,7 +769,7 @@
     },
     {
       "card_id": "GD05-097",
-      "decks": 221,
+      "decks": 222,
       "usage_rate": 4.2,
       "wins": 63,
       "avg_count": 4,
@@ -778,7 +778,7 @@
     },
     {
       "card_id": "GD05-089",
-      "decks": 220,
+      "decks": 221,
       "usage_rate": 4.2,
       "wins": 62,
       "avg_count": 3.8,
@@ -787,8 +787,8 @@
     },
     {
       "card_id": "GD05-069",
-      "decks": 219,
-      "usage_rate": 4.1,
+      "decks": 220,
+      "usage_rate": 4.2,
       "wins": 63,
       "avg_count": 4,
       "max_count": 4,
@@ -796,8 +796,8 @@
     },
     {
       "card_id": "GD05-072",
-      "decks": 219,
-      "usage_rate": 4.1,
+      "decks": 220,
+      "usage_rate": 4.2,
       "wins": 61,
       "avg_count": 3.9,
       "max_count": 4,
@@ -805,8 +805,8 @@
     },
     {
       "card_id": "GD05-120",
-      "decks": 219,
-      "usage_rate": 4.1,
+      "decks": 220,
+      "usage_rate": 4.2,
       "wins": 62,
       "avg_count": 2.6,
       "max_count": 4,
@@ -814,7 +814,7 @@
     },
     {
       "card_id": "GD05-121",
-      "decks": 217,
+      "decks": 218,
       "usage_rate": 4.1,
       "wins": 61,
       "avg_count": 3.9,
@@ -878,7 +878,7 @@
     {
       "card_id": "ST03-016",
       "decks": 193,
-      "usage_rate": 3.7,
+      "usage_rate": 3.6,
       "wins": 40,
       "avg_count": 3.2,
       "max_count": 4,
@@ -976,7 +976,7 @@
     },
     {
       "card_id": "GD04-109",
-      "decks": 153,
+      "decks": 154,
       "usage_rate": 2.9,
       "wins": 34,
       "avg_count": 2.6,
@@ -1030,9 +1030,9 @@
     },
     {
       "card_id": "GD02-058",
-      "decks": 138,
+      "decks": 139,
       "usage_rate": 2.6,
-      "wins": 35,
+      "wins": 36,
       "avg_count": 3.1,
       "max_count": 4,
       "min_count": 1
@@ -1065,6 +1065,15 @@
       "min_count": 1
     },
     {
+      "card_id": "GD05-010",
+      "decks": 132,
+      "usage_rate": 2.5,
+      "wins": 40,
+      "avg_count": 2.6,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
       "card_id": "GD04-011",
       "decks": 130,
       "usage_rate": 2.5,
@@ -1079,15 +1088,6 @@
       "usage_rate": 2.5,
       "wins": 22,
       "avg_count": 2.7,
-      "max_count": 4,
-      "min_count": 1
-    },
-    {
-      "card_id": "GD05-010",
-      "decks": 130,
-      "usage_rate": 2.5,
-      "wins": 40,
-      "avg_count": 2.6,
       "max_count": 4,
       "min_count": 1
     },
@@ -1380,20 +1380,20 @@
       "min_count": 1
     },
     {
+      "card_id": "EB01-054",
+      "decks": 70,
+      "usage_rate": 1.3,
+      "wins": 17,
+      "avg_count": 2.7,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
       "card_id": "GD03-032",
       "decks": 70,
       "usage_rate": 1.3,
       "wins": 14,
       "avg_count": 3.5,
-      "max_count": 4,
-      "min_count": 1
-    },
-    {
-      "card_id": "EB01-054",
-      "decks": 69,
-      "usage_rate": 1.3,
-      "wins": 17,
-      "avg_count": 2.7,
       "max_count": 4,
       "min_count": 1
     },
@@ -1425,6 +1425,15 @@
       "min_count": 1
     },
     {
+      "card_id": "GD05-036",
+      "decks": 65,
+      "usage_rate": 1.2,
+      "wins": 18,
+      "avg_count": 1.9,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
       "card_id": "GD02-006",
       "decks": 65,
       "usage_rate": 1.2,
@@ -1439,15 +1448,6 @@
       "usage_rate": 1.2,
       "wins": 19,
       "avg_count": 2.9,
-      "max_count": 4,
-      "min_count": 1
-    },
-    {
-      "card_id": "GD05-036",
-      "decks": 64,
-      "usage_rate": 1.2,
-      "wins": 18,
-      "avg_count": 1.9,
       "max_count": 4,
       "min_count": 1
     },
@@ -1560,20 +1560,20 @@
       "min_count": 1
     },
     {
+      "card_id": "GD01-116",
+      "decks": 42,
+      "usage_rate": 0.8,
+      "wins": 10,
+      "avg_count": 1.9,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
       "card_id": "GD04-001",
       "decks": 42,
       "usage_rate": 0.8,
       "wins": 9,
       "avg_count": 1.3,
-      "max_count": 4,
-      "min_count": 1
-    },
-    {
-      "card_id": "GD01-116",
-      "decks": 41,
-      "usage_rate": 0.8,
-      "wins": 10,
-      "avg_count": 1.9,
       "max_count": 4,
       "min_count": 1
     },
@@ -1929,6 +1929,15 @@
       "min_count": 1
     },
     {
+      "card_id": "GD05-075",
+      "decks": 24,
+      "usage_rate": 0.5,
+      "wins": 4,
+      "avg_count": 3.2,
+      "max_count": 4,
+      "min_count": 1
+    },
+    {
       "card_id": "GD04-037",
       "decks": 24,
       "usage_rate": 0.5,
@@ -1970,15 +1979,6 @@
       "usage_rate": 0.5,
       "wins": 6,
       "avg_count": 3.7,
-      "max_count": 4,
-      "min_count": 1
-    },
-    {
-      "card_id": "GD05-075",
-      "decks": 23,
-      "usage_rate": 0.4,
-      "wins": 4,
-      "avg_count": 3.3,
       "max_count": 4,
       "min_count": 1
     },
@@ -4646,18 +4646,18 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 1436,
+      "count": 1437,
       "share": 27.2,
-      "wins": 391,
-      "win_rate": 27.2,
+      "wins": 392,
+      "win_rate": 27.3,
       "avg_rank": 2.5,
       "card_ranking": [
         {
           "card_id": "ST05-010",
-          "decks": 1432,
+          "decks": 1433,
           "usage_rate": 99.7,
-          "wins": 390,
-          "win_rate": 27.2,
+          "wins": 391,
+          "win_rate": 27.3,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -4665,9 +4665,9 @@
         },
         {
           "card_id": "GD03-056",
-          "decks": 1431,
+          "decks": 1432,
           "usage_rate": 99.7,
-          "wins": 390,
+          "wins": 391,
           "win_rate": 27.3,
           "avg_count": 4,
           "median_count": 4,
@@ -4676,9 +4676,9 @@
         },
         {
           "card_id": "GD02-054",
-          "decks": 1427,
+          "decks": 1428,
           "usage_rate": 99.4,
-          "wins": 389,
+          "wins": 390,
           "win_rate": 27.3,
           "avg_count": 4,
           "median_count": 4,
@@ -4687,10 +4687,10 @@
         },
         {
           "card_id": "ST05-004",
-          "decks": 1375,
+          "decks": 1376,
           "usage_rate": 95.8,
-          "wins": 381,
-          "win_rate": 27.7,
+          "wins": 382,
+          "win_rate": 27.8,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -4698,10 +4698,10 @@
         },
         {
           "card_id": "ST05-006",
-          "decks": 1314,
+          "decks": 1315,
           "usage_rate": 91.5,
-          "wins": 351,
-          "win_rate": 26.7,
+          "wins": 352,
+          "win_rate": 26.8,
           "avg_count": 3.8,
           "median_count": 4,
           "max_count": 4,
@@ -4721,7 +4721,7 @@
         {
           "card_id": "ST01-001",
           "decks": 1164,
-          "usage_rate": 81.1,
+          "usage_rate": 81,
           "wins": 321,
           "win_rate": 27.6,
           "avg_count": 4,
@@ -4731,10 +4731,10 @@
         },
         {
           "card_id": "GD01-100",
-          "decks": 1159,
+          "decks": 1160,
           "usage_rate": 80.7,
-          "wins": 313,
-          "win_rate": 27,
+          "wins": 314,
+          "win_rate": 27.1,
           "avg_count": 2.2,
           "median_count": 2,
           "max_count": 4,
@@ -4743,7 +4743,7 @@
         {
           "card_id": "ST02-016",
           "decks": 1157,
-          "usage_rate": 80.6,
+          "usage_rate": 80.5,
           "wins": 311,
           "win_rate": 26.9,
           "avg_count": 2.8,
@@ -4754,7 +4754,7 @@
         {
           "card_id": "GD01-008",
           "decks": 1048,
-          "usage_rate": 73,
+          "usage_rate": 72.9,
           "wins": 290,
           "win_rate": 27.7,
           "avg_count": 3.6,
@@ -4786,10 +4786,10 @@
         },
         {
           "card_id": "GD02-055",
-          "decks": 872,
-          "usage_rate": 60.7,
-          "wins": 238,
-          "win_rate": 27.3,
+          "decks": 873,
+          "usage_rate": 60.8,
+          "wins": 239,
+          "win_rate": 27.4,
           "avg_count": 3.2,
           "median_count": 3,
           "max_count": 4,
@@ -4797,10 +4797,10 @@
         },
         {
           "card_id": "GD03-050",
-          "decks": 656,
+          "decks": 657,
           "usage_rate": 45.7,
-          "wins": 185,
-          "win_rate": 28.2,
+          "wins": 186,
+          "win_rate": 28.3,
           "avg_count": 2.3,
           "median_count": 2,
           "max_count": 4,
@@ -4831,7 +4831,7 @@
         {
           "card_id": "ST05-014",
           "decks": 522,
-          "usage_rate": 36.4,
+          "usage_rate": 36.3,
           "wins": 136,
           "win_rate": 26.1,
           "avg_count": 2.3,
@@ -4842,7 +4842,7 @@
         {
           "card_id": "ST01-015",
           "decks": 354,
-          "usage_rate": 24.7,
+          "usage_rate": 24.6,
           "wins": 109,
           "win_rate": 30.8,
           "avg_count": 1.6,
@@ -4864,7 +4864,7 @@
         {
           "card_id": "GD03-063",
           "decks": 321,
-          "usage_rate": 22.4,
+          "usage_rate": 22.3,
           "wins": 83,
           "win_rate": 25.9,
           "avg_count": 3.2,
@@ -4885,10 +4885,10 @@
         },
         {
           "card_id": "GD05-002",
-          "decks": 265,
+          "decks": 266,
           "usage_rate": 18.5,
-          "wins": 70,
-          "win_rate": 26.4,
+          "wins": 71,
+          "win_rate": 26.7,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -4896,10 +4896,10 @@
         },
         {
           "card_id": "GD05-081",
-          "decks": 264,
+          "decks": 265,
           "usage_rate": 18.4,
-          "wins": 70,
-          "win_rate": 26.5,
+          "wins": 71,
+          "win_rate": 26.8,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -4918,10 +4918,10 @@
         },
         {
           "card_id": "ST05-015",
-          "decks": 227,
-          "usage_rate": 15.8,
-          "wins": 70,
-          "win_rate": 30.8,
+          "decks": 228,
+          "usage_rate": 15.9,
+          "wins": 71,
+          "win_rate": 31.1,
           "avg_count": 1.9,
           "median_count": 2,
           "max_count": 4,
@@ -4929,10 +4929,10 @@
         },
         {
           "card_id": "GD05-114",
-          "decks": 223,
-          "usage_rate": 15.5,
-          "wins": 56,
-          "win_rate": 25.1,
+          "decks": 224,
+          "usage_rate": 15.6,
+          "wins": 57,
+          "win_rate": 25.4,
           "avg_count": 2.1,
           "median_count": 2,
           "max_count": 4,
@@ -4940,10 +4940,10 @@
         },
         {
           "card_id": "GD05-060",
-          "decks": 220,
-          "usage_rate": 15.3,
-          "wins": 61,
-          "win_rate": 27.7,
+          "decks": 221,
+          "usage_rate": 15.4,
+          "wins": 62,
+          "win_rate": 28.1,
           "avg_count": 1.9,
           "median_count": 2,
           "max_count": 4,
@@ -4951,10 +4951,10 @@
         },
         {
           "card_id": "GD05-129",
-          "decks": 218,
+          "decks": 219,
           "usage_rate": 15.2,
-          "wins": 58,
-          "win_rate": 26.6,
+          "wins": 59,
+          "win_rate": 26.9,
           "avg_count": 3.4,
           "median_count": 4,
           "max_count": 4,
@@ -4962,10 +4962,10 @@
         },
         {
           "card_id": "GD05-005",
-          "decks": 191,
-          "usage_rate": 13.3,
-          "wins": 50,
-          "win_rate": 26.2,
+          "decks": 192,
+          "usage_rate": 13.4,
+          "wins": 51,
+          "win_rate": 26.6,
           "avg_count": 2.6,
           "median_count": 3,
           "max_count": 4,
@@ -5061,12 +5061,12 @@
         },
         {
           "card_id": "GD02-058",
-          "decks": 37,
+          "decks": 38,
           "usage_rate": 2.6,
-          "wins": 9,
-          "win_rate": 24.3,
+          "wins": 10,
+          "win_rate": 26.3,
           "avg_count": 2.7,
-          "median_count": 3,
+          "median_count": 2.5,
           "max_count": 4,
           "min_count": 1
         },
@@ -5904,18 +5904,18 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 844,
+      "count": 845,
       "share": 16,
       "wins": 231,
-      "win_rate": 27.4,
+      "win_rate": 27.3,
       "avg_rank": 2.4,
       "card_ranking": [
         {
           "card_id": "GD01-118",
-          "decks": 830,
+          "decks": 831,
           "usage_rate": 98.3,
           "wins": 228,
-          "win_rate": 27.5,
+          "win_rate": 27.4,
           "avg_count": 3.7,
           "median_count": 4,
           "max_count": 4,
@@ -5924,7 +5924,7 @@
         {
           "card_id": "ST03-013",
           "decks": 598,
-          "usage_rate": 70.9,
+          "usage_rate": 70.8,
           "wins": 163,
           "win_rate": 27.3,
           "avg_count": 3.9,
@@ -5935,7 +5935,7 @@
         {
           "card_id": "ST04-001",
           "decks": 584,
-          "usage_rate": 69.2,
+          "usage_rate": 69.1,
           "wins": 162,
           "win_rate": 27.7,
           "avg_count": 3.9,
@@ -5946,7 +5946,7 @@
         {
           "card_id": "ST04-010",
           "decks": 580,
-          "usage_rate": 68.7,
+          "usage_rate": 68.6,
           "wins": 162,
           "win_rate": 27.9,
           "avg_count": 3.9,
@@ -5957,7 +5957,7 @@
         {
           "card_id": "GD01-086",
           "decks": 579,
-          "usage_rate": 68.6,
+          "usage_rate": 68.5,
           "wins": 159,
           "win_rate": 27.5,
           "avg_count": 3.8,
@@ -5967,10 +5967,10 @@
         },
         {
           "card_id": "GD01-128",
-          "decks": 558,
-          "usage_rate": 66.1,
+          "decks": 559,
+          "usage_rate": 66.2,
           "wins": 154,
-          "win_rate": 27.6,
+          "win_rate": 27.5,
           "avg_count": 3.5,
           "median_count": 4,
           "max_count": 4,
@@ -5979,7 +5979,7 @@
         {
           "card_id": "GD01-066",
           "decks": 530,
-          "usage_rate": 62.8,
+          "usage_rate": 62.7,
           "wins": 143,
           "win_rate": 27,
           "avg_count": 3.4,
@@ -5990,7 +5990,7 @@
         {
           "card_id": "GD03-034",
           "decks": 529,
-          "usage_rate": 62.7,
+          "usage_rate": 62.6,
           "wins": 143,
           "win_rate": 27,
           "avg_count": 2.8,
@@ -6011,7 +6011,7 @@
         },
         {
           "card_id": "GD04-068",
-          "decks": 431,
+          "decks": 432,
           "usage_rate": 51.1,
           "wins": 117,
           "win_rate": 27.1,
@@ -6034,7 +6034,7 @@
         {
           "card_id": "GD03-035",
           "decks": 395,
-          "usage_rate": 46.8,
+          "usage_rate": 46.7,
           "wins": 114,
           "win_rate": 28.9,
           "avg_count": 2.8,
@@ -6045,7 +6045,7 @@
         {
           "card_id": "ST04-011",
           "decks": 388,
-          "usage_rate": 46,
+          "usage_rate": 45.9,
           "wins": 101,
           "win_rate": 26,
           "avg_count": 2.5,
@@ -6056,7 +6056,7 @@
         {
           "card_id": "GD03-092",
           "decks": 323,
-          "usage_rate": 38.3,
+          "usage_rate": 38.2,
           "wins": 91,
           "win_rate": 28.2,
           "avg_count": 3,
@@ -6077,10 +6077,10 @@
         },
         {
           "card_id": "GD05-110",
-          "decks": 222,
-          "usage_rate": 26.3,
+          "decks": 223,
+          "usage_rate": 26.4,
           "wins": 63,
-          "win_rate": 28.4,
+          "win_rate": 28.3,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -6088,10 +6088,10 @@
         },
         {
           "card_id": "GD05-111",
-          "decks": 222,
-          "usage_rate": 26.3,
+          "decks": 223,
+          "usage_rate": 26.4,
           "wins": 63,
-          "win_rate": 28.4,
+          "win_rate": 28.3,
           "avg_count": 3.7,
           "median_count": 4,
           "max_count": 4,
@@ -6099,10 +6099,10 @@
         },
         {
           "card_id": "GD05-066",
-          "decks": 220,
-          "usage_rate": 26.1,
+          "decks": 221,
+          "usage_rate": 26.2,
           "wins": 62,
-          "win_rate": 28.2,
+          "win_rate": 28.1,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -6110,10 +6110,10 @@
         },
         {
           "card_id": "GD05-097",
-          "decks": 220,
-          "usage_rate": 26.1,
+          "decks": 221,
+          "usage_rate": 26.2,
           "wins": 62,
-          "win_rate": 28.2,
+          "win_rate": 28.1,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -6121,10 +6121,10 @@
         },
         {
           "card_id": "GD05-033",
-          "decks": 220,
-          "usage_rate": 26.1,
+          "decks": 221,
+          "usage_rate": 26.2,
           "wins": 62,
-          "win_rate": 28.2,
+          "win_rate": 28.1,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -6132,19 +6132,30 @@
         },
         {
           "card_id": "GD05-089",
-          "decks": 220,
-          "usage_rate": 26.1,
+          "decks": 221,
+          "usage_rate": 26.2,
           "wins": 62,
-          "win_rate": 28.2,
+          "win_rate": 28.1,
           "avg_count": 3.8,
           "median_count": 4,
           "max_count": 4,
           "min_count": 2
         },
         {
+          "card_id": "GD05-120",
+          "decks": 220,
+          "usage_rate": 26,
+          "wins": 62,
+          "win_rate": 28.2,
+          "avg_count": 2.6,
+          "median_count": 3,
+          "max_count": 4,
+          "min_count": 1
+        },
+        {
           "card_id": "ST03-010",
           "decks": 220,
-          "usage_rate": 26.1,
+          "usage_rate": 26,
           "wins": 57,
           "win_rate": 25.9,
           "avg_count": 3.1,
@@ -6153,22 +6164,11 @@
           "min_count": 1
         },
         {
-          "card_id": "GD05-120",
+          "card_id": "GD05-069",
           "decks": 219,
           "usage_rate": 25.9,
           "wins": 62,
           "win_rate": 28.3,
-          "avg_count": 2.6,
-          "median_count": 3,
-          "max_count": 4,
-          "min_count": 1
-        },
-        {
-          "card_id": "GD05-069",
-          "decks": 218,
-          "usage_rate": 25.8,
-          "wins": 62,
-          "win_rate": 28.4,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -6176,10 +6176,10 @@
         },
         {
           "card_id": "GD05-072",
-          "decks": 218,
-          "usage_rate": 25.8,
+          "decks": 219,
+          "usage_rate": 25.9,
           "wins": 60,
-          "win_rate": 27.5,
+          "win_rate": 27.4,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -6187,10 +6187,10 @@
         },
         {
           "card_id": "GD05-121",
-          "decks": 216,
-          "usage_rate": 25.6,
+          "decks": 217,
+          "usage_rate": 25.7,
           "wins": 60,
-          "win_rate": 27.8,
+          "win_rate": 27.6,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -6254,7 +6254,7 @@
         {
           "card_id": "ST04-012",
           "decks": 176,
-          "usage_rate": 20.9,
+          "usage_rate": 20.8,
           "wins": 46,
           "win_rate": 26.1,
           "avg_count": 2.3,
@@ -6265,7 +6265,7 @@
         {
           "card_id": "GD01-111",
           "decks": 166,
-          "usage_rate": 19.7,
+          "usage_rate": 19.6,
           "wins": 47,
           "win_rate": 28.3,
           "avg_count": 2.2,
@@ -6298,7 +6298,7 @@
         {
           "card_id": "GD01-072",
           "decks": 122,
-          "usage_rate": 14.5,
+          "usage_rate": 14.4,
           "wins": 34,
           "win_rate": 27.9,
           "avg_count": 2,
@@ -6309,7 +6309,7 @@
         {
           "card_id": "ST04-006",
           "decks": 111,
-          "usage_rate": 13.2,
+          "usage_rate": 13.1,
           "wins": 29,
           "win_rate": 26.1,
           "avg_count": 2.3,
@@ -6340,6 +6340,17 @@
           "min_count": 1
         },
         {
+          "card_id": "GD05-036",
+          "decks": 65,
+          "usage_rate": 7.7,
+          "wins": 18,
+          "win_rate": 27.7,
+          "avg_count": 1.9,
+          "median_count": 2,
+          "max_count": 4,
+          "min_count": 1
+        },
+        {
           "card_id": "GD05-042",
           "decks": 64,
           "usage_rate": 7.6,
@@ -6347,17 +6358,6 @@
           "win_rate": 29.7,
           "avg_count": 2.9,
           "median_count": 3,
-          "max_count": 4,
-          "min_count": 1
-        },
-        {
-          "card_id": "GD05-036",
-          "decks": 64,
-          "usage_rate": 7.6,
-          "wins": 18,
-          "win_rate": 28.1,
-          "avg_count": 1.9,
-          "median_count": 2,
           "max_count": 4,
           "min_count": 1
         },
@@ -6551,7 +6551,7 @@
         {
           "card_id": "GD01-051",
           "decks": 19,
-          "usage_rate": 2.3,
+          "usage_rate": 2.2,
           "wins": 5,
           "win_rate": 26.3,
           "avg_count": 2.9,
@@ -6562,11 +6562,22 @@
         {
           "card_id": "GD05-035",
           "decks": 19,
-          "usage_rate": 2.3,
+          "usage_rate": 2.2,
           "wins": 3,
           "win_rate": 15.8,
           "avg_count": 2.3,
           "median_count": 2,
+          "max_count": 4,
+          "min_count": 1
+        },
+        {
+          "card_id": "GD05-075",
+          "decks": 18,
+          "usage_rate": 2.1,
+          "wins": 4,
+          "win_rate": 22.2,
+          "avg_count": 3.1,
+          "median_count": 3,
           "max_count": 4,
           "min_count": 1
         },
@@ -6578,17 +6589,6 @@
           "win_rate": 5.6,
           "avg_count": 2.7,
           "median_count": 2,
-          "max_count": 4,
-          "min_count": 1
-        },
-        {
-          "card_id": "GD05-075",
-          "decks": 17,
-          "usage_rate": 2,
-          "wins": 4,
-          "win_rate": 23.5,
-          "avg_count": 3.2,
-          "median_count": 3,
           "max_count": 4,
           "min_count": 1
         },
@@ -8783,15 +8783,15 @@
         "White"
       ],
       "label": "青/白",
-      "count": 673,
+      "count": 674,
       "share": 12.7,
       "wins": 156,
-      "win_rate": 23.2,
+      "win_rate": 23.1,
       "avg_rank": 2.5,
       "card_ranking": [
         {
           "card_id": "ST01-010",
-          "decks": 596,
+          "decks": 597,
           "usage_rate": 88.6,
           "wins": 139,
           "win_rate": 23.3,
@@ -8802,7 +8802,7 @@
         },
         {
           "card_id": "GD01-118",
-          "decks": 592,
+          "decks": 593,
           "usage_rate": 88,
           "wins": 140,
           "win_rate": 23.6,
@@ -8813,8 +8813,8 @@
         },
         {
           "card_id": "GD01-086",
-          "decks": 548,
-          "usage_rate": 81.4,
+          "decks": 549,
+          "usage_rate": 81.5,
           "wins": 130,
           "win_rate": 23.7,
           "avg_count": 3.8,
@@ -8824,7 +8824,7 @@
         },
         {
           "card_id": "ST01-001",
-          "decks": 539,
+          "decks": 540,
           "usage_rate": 80.1,
           "wins": 121,
           "win_rate": 22.4,
@@ -8835,7 +8835,7 @@
         },
         {
           "card_id": "GD01-100",
-          "decks": 495,
+          "decks": 496,
           "usage_rate": 73.6,
           "wins": 101,
           "win_rate": 20.4,
@@ -8846,8 +8846,8 @@
         },
         {
           "card_id": "ST04-001",
-          "decks": 472,
-          "usage_rate": 70.1,
+          "decks": 473,
+          "usage_rate": 70.2,
           "wins": 119,
           "win_rate": 25.2,
           "avg_count": 3.7,
@@ -8857,7 +8857,7 @@
         },
         {
           "card_id": "ST04-010",
-          "decks": 461,
+          "decks": 462,
           "usage_rate": 68.5,
           "wins": 114,
           "win_rate": 24.7,
@@ -8868,10 +8868,10 @@
         },
         {
           "card_id": "GD02-079",
-          "decks": 428,
+          "decks": 429,
           "usage_rate": 63.6,
           "wins": 104,
-          "win_rate": 24.3,
+          "win_rate": 24.2,
           "avg_count": 3.3,
           "median_count": 4,
           "max_count": 4,
@@ -8879,8 +8879,8 @@
         },
         {
           "card_id": "GD04-068",
-          "decks": 330,
-          "usage_rate": 49,
+          "decks": 331,
+          "usage_rate": 49.1,
           "wins": 77,
           "win_rate": 23.3,
           "avg_count": 3,
@@ -8890,10 +8890,10 @@
         },
         {
           "card_id": "GD02-129",
-          "decks": 289,
-          "usage_rate": 42.9,
+          "decks": 290,
+          "usage_rate": 43,
           "wins": 75,
-          "win_rate": 26,
+          "win_rate": 25.9,
           "avg_count": 3.3,
           "median_count": 4,
           "max_count": 4,
@@ -8902,7 +8902,7 @@
         {
           "card_id": "ST04-012",
           "decks": 281,
-          "usage_rate": 41.8,
+          "usage_rate": 41.7,
           "wins": 62,
           "win_rate": 22.1,
           "avg_count": 2.7,
@@ -8912,10 +8912,10 @@
         },
         {
           "card_id": "GD05-002",
-          "decks": 264,
-          "usage_rate": 39.2,
+          "decks": 265,
+          "usage_rate": 39.3,
           "wins": 72,
-          "win_rate": 27.3,
+          "win_rate": 27.2,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -8923,10 +8923,10 @@
         },
         {
           "card_id": "GD05-081",
-          "decks": 262,
-          "usage_rate": 38.9,
+          "decks": 263,
+          "usage_rate": 39,
           "wins": 71,
-          "win_rate": 27.1,
+          "win_rate": 27,
           "avg_count": 3.4,
           "median_count": 3,
           "max_count": 4,
@@ -8934,21 +8934,21 @@
         },
         {
           "card_id": "GD01-073",
-          "decks": 259,
-          "usage_rate": 38.5,
+          "decks": 260,
+          "usage_rate": 38.6,
           "wins": 64,
-          "win_rate": 24.7,
-          "avg_count": 2.7,
+          "win_rate": 24.6,
+          "avg_count": 2.8,
           "median_count": 3,
           "max_count": 4,
           "min_count": 1
         },
         {
           "card_id": "GD04-077",
-          "decks": 234,
-          "usage_rate": 34.8,
+          "decks": 235,
+          "usage_rate": 34.9,
           "wins": 62,
-          "win_rate": 26.5,
+          "win_rate": 26.4,
           "avg_count": 2.6,
           "median_count": 3,
           "max_count": 4,
@@ -8956,10 +8956,10 @@
         },
         {
           "card_id": "GD01-065",
-          "decks": 202,
-          "usage_rate": 30,
+          "decks": 203,
+          "usage_rate": 30.1,
           "wins": 56,
-          "win_rate": 27.7,
+          "win_rate": 27.6,
           "avg_count": 2.3,
           "median_count": 2,
           "max_count": 4,
@@ -8967,10 +8967,10 @@
         },
         {
           "card_id": "ST01-014",
-          "decks": 179,
-          "usage_rate": 26.6,
+          "decks": 180,
+          "usage_rate": 26.7,
           "wins": 34,
-          "win_rate": 19,
+          "win_rate": 18.9,
           "avg_count": 2.1,
           "median_count": 2,
           "max_count": 4,
@@ -8979,7 +8979,7 @@
         {
           "card_id": "GD01-088",
           "decks": 154,
-          "usage_rate": 22.9,
+          "usage_rate": 22.8,
           "wins": 27,
           "win_rate": 17.5,
           "avg_count": 3.4,
@@ -9023,7 +9023,7 @@
         {
           "card_id": "ST04-015",
           "decks": 139,
-          "usage_rate": 20.7,
+          "usage_rate": 20.6,
           "wins": 33,
           "win_rate": 23.7,
           "avg_count": 2.7,
@@ -9166,7 +9166,7 @@
         {
           "card_id": "GD01-002",
           "decks": 96,
-          "usage_rate": 14.3,
+          "usage_rate": 14.2,
           "wins": 14,
           "win_rate": 14.6,
           "avg_count": 2.4,
@@ -9177,7 +9177,7 @@
         {
           "card_id": "GD05-005",
           "decks": 94,
-          "usage_rate": 14,
+          "usage_rate": 13.9,
           "wins": 22,
           "win_rate": 23.4,
           "avg_count": 2.5,
@@ -9219,6 +9219,17 @@
           "min_count": 1
         },
         {
+          "card_id": "GD05-010",
+          "decks": 82,
+          "usage_rate": 12.2,
+          "wins": 25,
+          "win_rate": 30.5,
+          "avg_count": 2.5,
+          "median_count": 2,
+          "max_count": 4,
+          "min_count": 1
+        },
+        {
           "card_id": "GD04-011",
           "decks": 82,
           "usage_rate": 12.2,
@@ -9228,17 +9239,6 @@
           "median_count": 4,
           "max_count": 4,
           "min_count": 2
-        },
-        {
-          "card_id": "GD05-010",
-          "decks": 81,
-          "usage_rate": 12,
-          "wins": 25,
-          "win_rate": 30.9,
-          "avg_count": 2.6,
-          "median_count": 2,
-          "max_count": 4,
-          "min_count": 1
         },
         {
           "card_id": "GD04-130",
@@ -9276,7 +9276,7 @@
         {
           "card_id": "GD05-015",
           "decks": 63,
-          "usage_rate": 9.4,
+          "usage_rate": 9.3,
           "wins": 14,
           "win_rate": 22.2,
           "avg_count": 2.6,
@@ -9297,10 +9297,10 @@
         },
         {
           "card_id": "EB01-054",
-          "decks": 60,
-          "usage_rate": 8.9,
+          "decks": 61,
+          "usage_rate": 9.1,
           "wins": 14,
-          "win_rate": 23.3,
+          "win_rate": 23,
           "avg_count": 2.8,
           "median_count": 3,
           "max_count": 4,
@@ -11838,18 +11838,18 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 370,
+      "count": 371,
       "share": 7,
       "wins": 81,
-      "win_rate": 21.9,
+      "win_rate": 21.8,
       "avg_rank": 2.6,
       "card_ranking": [
         {
           "card_id": "ST03-013",
-          "decks": 346,
+          "decks": 347,
           "usage_rate": 93.5,
           "wins": 77,
-          "win_rate": 22.3,
+          "win_rate": 22.2,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -11857,10 +11857,10 @@
         },
         {
           "card_id": "GD01-100",
-          "decks": 341,
+          "decks": 342,
           "usage_rate": 92.2,
           "wins": 78,
-          "win_rate": 22.9,
+          "win_rate": 22.8,
           "avg_count": 2.8,
           "median_count": 3,
           "max_count": 4,
@@ -11868,10 +11868,10 @@
         },
         {
           "card_id": "GD01-044",
-          "decks": 321,
+          "decks": 322,
           "usage_rate": 86.8,
           "wins": 70,
-          "win_rate": 21.8,
+          "win_rate": 21.7,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -11879,10 +11879,10 @@
         },
         {
           "card_id": "GD01-093",
-          "decks": 321,
+          "decks": 322,
           "usage_rate": 86.8,
           "wins": 70,
-          "win_rate": 21.8,
+          "win_rate": 21.7,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -11890,10 +11890,10 @@
         },
         {
           "card_id": "GD03-109",
-          "decks": 287,
+          "decks": 288,
           "usage_rate": 77.6,
           "wins": 66,
-          "win_rate": 23,
+          "win_rate": 22.9,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -11901,7 +11901,7 @@
         },
         {
           "card_id": "GD01-003",
-          "decks": 284,
+          "decks": 285,
           "usage_rate": 76.8,
           "wins": 62,
           "win_rate": 21.8,
@@ -11913,7 +11913,7 @@
         {
           "card_id": "GD01-111",
           "decks": 235,
-          "usage_rate": 63.5,
+          "usage_rate": 63.3,
           "wins": 56,
           "win_rate": 23.8,
           "avg_count": 2.5,
@@ -11923,11 +11923,11 @@
         },
         {
           "card_id": "GD01-128",
-          "decks": 190,
-          "usage_rate": 51.4,
+          "decks": 191,
+          "usage_rate": 51.5,
           "wins": 44,
-          "win_rate": 23.2,
-          "avg_count": 2.9,
+          "win_rate": 23,
+          "avg_count": 3,
           "median_count": 3,
           "max_count": 4,
           "min_count": 1
@@ -11935,7 +11935,7 @@
         {
           "card_id": "ST01-010",
           "decks": 172,
-          "usage_rate": 46.5,
+          "usage_rate": 46.4,
           "wins": 32,
           "win_rate": 18.6,
           "avg_count": 3.8,
@@ -11946,7 +11946,7 @@
         {
           "card_id": "ST01-001",
           "decks": 165,
-          "usage_rate": 44.6,
+          "usage_rate": 44.5,
           "wins": 31,
           "win_rate": 18.8,
           "avg_count": 3.8,
@@ -11956,10 +11956,10 @@
         },
         {
           "card_id": "GD05-111",
-          "decks": 151,
-          "usage_rate": 40.8,
+          "decks": 152,
+          "usage_rate": 41,
           "wins": 38,
-          "win_rate": 25.2,
+          "win_rate": 25,
           "avg_count": 4,
           "median_count": 4,
           "max_count": 4,
@@ -11967,10 +11967,10 @@
         },
         {
           "card_id": "GD05-110",
-          "decks": 147,
-          "usage_rate": 39.7,
+          "decks": 148,
+          "usage_rate": 39.9,
           "wins": 38,
-          "win_rate": 25.9,
+          "win_rate": 25.7,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -11978,10 +11978,10 @@
         },
         {
           "card_id": "GD05-002",
-          "decks": 147,
-          "usage_rate": 39.7,
+          "decks": 148,
+          "usage_rate": 39.9,
           "wins": 37,
-          "win_rate": 25.2,
+          "win_rate": 25,
           "avg_count": 3.9,
           "median_count": 4,
           "max_count": 4,
@@ -11989,10 +11989,10 @@
         },
         {
           "card_id": "GD05-081",
-          "decks": 147,
-          "usage_rate": 39.7,
+          "decks": 148,
+          "usage_rate": 39.9,
           "wins": 37,
-          "win_rate": 25.2,
+          "win_rate": 25,
           "avg_count": 3.8,
           "median_count": 4,
           "max_count": 4,
@@ -12001,7 +12001,7 @@
         {
           "card_id": "GD03-034",
           "decks": 139,
-          "usage_rate": 37.6,
+          "usage_rate": 37.5,
           "wins": 27,
           "win_rate": 19.4,
           "avg_count": 2.5,
@@ -12011,10 +12011,10 @@
         },
         {
           "card_id": "GD04-109",
-          "decks": 127,
-          "usage_rate": 34.3,
+          "decks": 128,
+          "usage_rate": 34.5,
           "wins": 31,
-          "win_rate": 24.4,
+          "win_rate": 24.2,
           "avg_count": 2.6,
           "median_count": 2,
           "max_count": 4,
@@ -12023,7 +12023,7 @@
         {
           "card_id": "ST01-015",
           "decks": 120,
-          "usage_rate": 32.4,
+          "usage_rate": 32.3,
           "wins": 30,
           "win_rate": 25,
           "avg_count": 2.5,
@@ -12033,10 +12033,10 @@
         },
         {
           "card_id": "GD05-005",
-          "decks": 99,
-          "usage_rate": 26.8,
+          "decks": 100,
+          "usage_rate": 27,
           "wins": 22,
-          "win_rate": 22.2,
+          "win_rate": 22,
           "avg_count": 3.1,
           "median_count": 3,
           "max_count": 4,
@@ -12045,7 +12045,7 @@
         {
           "card_id": "GD03-005",
           "decks": 95,
-          "usage_rate": 25.7,
+          "usage_rate": 25.6,
           "wins": 18,
           "win_rate": 18.9,
           "avg_count": 2.1,
@@ -12067,7 +12067,7 @@
         {
           "card_id": "GD02-046",
           "decks": 91,
-          "usage_rate": 24.6,
+          "usage_rate": 24.5,
           "wins": 20,
           "win_rate": 22,
           "avg_count": 2.9,
@@ -12100,7 +12100,7 @@
         {
           "card_id": "ST03-015",
           "decks": 68,
-          "usage_rate": 18.4,
+          "usage_rate": 18.3,
           "wins": 13,
           "win_rate": 19.1,
           "avg_count": 2.9,
@@ -12166,7 +12166,7 @@
         {
           "card_id": "GD03-035",
           "decks": 52,
-          "usage_rate": 14.1,
+          "usage_rate": 14,
           "wins": 9,
           "win_rate": 17.3,
           "avg_count": 2.6,
@@ -12177,7 +12177,7 @@
         {
           "card_id": "GD04-033",
           "decks": 48,
-          "usage_rate": 13,
+          "usage_rate": 12.9,
           "wins": 11,
           "win_rate": 22.9,
           "avg_count": 3.6,
@@ -12199,7 +12199,7 @@
         {
           "card_id": "GD04-003",
           "decks": 45,
-          "usage_rate": 12.2,
+          "usage_rate": 12.1,
           "wins": 8,
           "win_rate": 17.8,
           "avg_count": 4,
@@ -12210,7 +12210,7 @@
         {
           "card_id": "GD04-081",
           "decks": 45,
-          "usage_rate": 12.2,
+          "usage_rate": 12.1,
           "wins": 8,
           "win_rate": 17.8,
           "avg_count": 4,
@@ -12243,7 +12243,7 @@
         {
           "card_id": "GD04-121",
           "decks": 42,
-          "usage_rate": 11.4,
+          "usage_rate": 11.3,
           "wins": 7,
           "win_rate": 16.7,
           "avg_count": 4,
@@ -12254,7 +12254,7 @@
         {
           "card_id": "ST02-016",
           "decks": 42,
-          "usage_rate": 11.4,
+          "usage_rate": 11.3,
           "wins": 7,
           "win_rate": 16.7,
           "avg_count": 3.3,
@@ -12274,23 +12274,23 @@
           "min_count": 3
         },
         {
+          "card_id": "GD01-116",
+          "decks": 36,
+          "usage_rate": 9.7,
+          "wins": 7,
+          "win_rate": 19.4,
+          "avg_count": 2,
+          "median_count": 2,
+          "max_count": 4,
+          "min_count": 1
+        },
+        {
           "card_id": "GD03-092",
           "decks": 36,
           "usage_rate": 9.7,
           "wins": 5,
           "win_rate": 13.9,
           "avg_count": 2.5,
-          "median_count": 2,
-          "max_count": 4,
-          "min_count": 1
-        },
-        {
-          "card_id": "GD01-116",
-          "decks": 35,
-          "usage_rate": 9.5,
-          "wins": 7,
-          "win_rate": 20,
-          "avg_count": 2,
           "median_count": 2,
           "max_count": 4,
           "min_count": 1
@@ -12386,7 +12386,7 @@
         {
           "card_id": "GD03-033",
           "decks": 15,
-          "usage_rate": 4.1,
+          "usage_rate": 4,
           "wins": 4,
           "win_rate": 26.7,
           "avg_count": 4,
@@ -12397,7 +12397,7 @@
         {
           "card_id": "GD03-091",
           "decks": 15,
-          "usage_rate": 4.1,
+          "usage_rate": 4,
           "wins": 4,
           "win_rate": 26.7,
           "avg_count": 3.9,
@@ -12408,7 +12408,7 @@
         {
           "card_id": "GD03-127",
           "decks": 15,
-          "usage_rate": 4.1,
+          "usage_rate": 4,
           "wins": 4,
           "win_rate": 26.7,
           "avg_count": 3.6,
@@ -12419,7 +12419,7 @@
         {
           "card_id": "GD04-040",
           "decks": 15,
-          "usage_rate": 4.1,
+          "usage_rate": 4,
           "wins": 2,
           "win_rate": 13.3,
           "avg_count": 3.4,
@@ -12582,6 +12582,17 @@
           "min_count": 1
         },
         {
+          "card_id": "GD05-010",
+          "decks": 9,
+          "usage_rate": 2.4,
+          "wins": 2,
+          "win_rate": 22.2,
+          "avg_count": 2.2,
+          "median_count": 2,
+          "max_count": 4,
+          "min_count": 1
+        },
+        {
           "card_id": "ST04-016",
           "decks": 9,
           "usage_rate": 2.4,
@@ -12599,17 +12610,6 @@
           "wins": 2,
           "win_rate": 25,
           "avg_count": 2.5,
-          "median_count": 2,
-          "max_count": 4,
-          "min_count": 1
-        },
-        {
-          "card_id": "GD05-010",
-          "decks": 8,
-          "usage_rate": 2.2,
-          "wins": 2,
-          "win_rate": 25,
-          "avg_count": 2.4,
           "median_count": 2,
           "max_count": 4,
           "min_count": 1
@@ -12727,7 +12727,7 @@
         {
           "card_id": "GD01-050",
           "decks": 5,
-          "usage_rate": 1.4,
+          "usage_rate": 1.3,
           "wins": 2,
           "win_rate": 40,
           "avg_count": 4,
@@ -12738,7 +12738,7 @@
         {
           "card_id": "ST04-006",
           "decks": 5,
-          "usage_rate": 1.4,
+          "usage_rate": 1.3,
           "wins": 2,
           "win_rate": 40,
           "avg_count": 2.6,
@@ -12749,7 +12749,7 @@
         {
           "card_id": "GD02-036",
           "decks": 5,
-          "usage_rate": 1.4,
+          "usage_rate": 1.3,
           "wins": 1,
           "win_rate": 20,
           "avg_count": 2.8,
@@ -12760,7 +12760,7 @@
         {
           "card_id": "GD01-013",
           "decks": 5,
-          "usage_rate": 1.4,
+          "usage_rate": 1.3,
           "wins": 1,
           "win_rate": 20,
           "avg_count": 2.4,
@@ -18879,8 +18879,8 @@
   "region_ranking": [
     {
       "region": "関東",
-      "events": 321,
-      "decks": 1668,
+      "events": 322,
+      "decks": 1672,
       "top_deck_types": [
         {
           "type_key": "Blue+Purple",
@@ -18889,8 +18889,8 @@
             "Purple"
           ],
           "label": "青/紫",
-          "count": 444,
-          "wins": 126
+          "count": 445,
+          "wins": 127
         },
         {
           "type_key": "Red+White",
@@ -18899,7 +18899,7 @@
             "White"
           ],
           "label": "赤/白",
-          "count": 266,
+          "count": 267,
           "wins": 71
         },
         {
@@ -18919,7 +18919,7 @@
             "White"
           ],
           "label": "青/白",
-          "count": 215,
+          "count": 216,
           "wins": 53
         },
         {
@@ -19334,5 +19334,5 @@
       ]
     }
   ],
-  "updated_at": "2026-09-10T09:02:53.407Z"
+  "updated_at": "2026-09-11T08:02:56.475Z"
 }
