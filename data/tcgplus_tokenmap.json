@@ -7,7 +7,7 @@
       "scan"
     ],
     "scan_date": "2026-07-18T01:02:50.276Z",
-    "card_count": 918,
+    "card_count": 985,
     "scan_request_count": 4832,
     "scan_method": "adaptive-v1 (dense+bisect+island256, filter=image_url GC-JA/GC-EN)",
     "tournament": {
@@ -27,7 +27,49 @@
         "skipped_ambiguous": 3,
         "skipped_other": 0
       }
-    }
+    },
+    "diff_history": [
+      {
+        "date": "2026-07-18",
+        "targets": 1,
+        "adopted": 0,
+        "scanned_found": 0,
+        "unregistered": 1,
+        "unfound": 0,
+        "requests": 16,
+        "gate_requests": 16
+      },
+      {
+        "date": "2026-07-25",
+        "targets": 1,
+        "adopted": 0,
+        "scanned_found": 0,
+        "unregistered": 1,
+        "unfound": 0,
+        "requests": 32,
+        "gate_requests": 32
+      },
+      {
+        "date": "2026-07-25",
+        "targets": 1,
+        "adopted": 0,
+        "scanned_found": 0,
+        "unregistered": 1,
+        "unfound": 0,
+        "requests": 48,
+        "gate_requests": 48
+      },
+      {
+        "date": "2026-09-11",
+        "targets": 67,
+        "adopted": 0,
+        "scanned_found": 67,
+        "unregistered": 0,
+        "unfound": 0,
+        "requests": 261,
+        "gate_requests": 59
+      }
+    ]
   },
   "EB01-001": {
     "token": "SCe",
@@ -2044,6 +2086,14 @@
       "NEa": {
         "id": 95140,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD01/GD01-023_para_EN_dummy_sample.png"
+      },
+      "TTF": {
+        "id": 120655,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD01-023_P_dummy_EN_260828.png"
+      },
+      "TTd": {
+        "id": 120679,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD01-023_P_dummy_JP_260828.png"
       }
     }
   },
@@ -2265,6 +2315,14 @@
       "Sk0": {
         "id": 117632,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/GD01-030_P_dummy_JP_sample_260611.png"
+      },
+      "TTG": {
+        "id": 120656,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD01-030_P_dummy_EN_260828.png"
+      },
+      "TTe": {
+        "id": 120680,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD01-030_P_dummy_JP_260828.png"
       }
     }
   },
@@ -3236,6 +3294,14 @@
       "NFb": {
         "id": 95205,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD01/GD01-073_EN_dummy_sample.png"
+      },
+      "TSy": {
+        "id": 120636,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD01-073_dummy_EN_sample_260828.png"
+      },
+      "TTJ": {
+        "id": 120659,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD01-073_dummy_JP_sample_260828.png"
       }
     }
   },
@@ -3583,6 +3649,14 @@
       "Sk7": {
         "id": 117639,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/GD01-088_P_dummy_JP_sample_260611.png"
+      },
+      "S/Q": {
+        "id": 118746,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD01-088_dummy_EN_sample_260731.png"
+      },
+      "S/j": {
+        "id": 118765,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD01-088_dummy_JP_SAMPLE_260731.png"
       }
     }
   },
@@ -3737,6 +3811,14 @@
       "Sk9": {
         "id": 117641,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/GD01-093_P_dummy_JP_sample_260611.png"
+      },
+      "Svc": {
+        "id": 118374,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD01-093_SP_dummy_EN_260611.png"
+      },
+      "SwV": {
+        "id": 118431,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD01-093_SP_dummy_JP_260611.png"
       }
     }
   },
@@ -3848,6 +3930,18 @@
       "NG2": {
         "id": 95234,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD01/GD01-098_EN_dummy_sample.png"
+      },
+      "S/B": {
+        "id": 118731,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD01-098_P%2B_dummy_sample_260731.png"
+      },
+      "S/T": {
+        "id": 118749,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD01-098_P_dummy_JP_sample_260731.png"
+      },
+      "S/U": {
+        "id": 118750,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD01-098_P%2B_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -3944,6 +4038,14 @@
       "SkB": {
         "id": 117643,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/GD01-100_P_dummy_JP_sample_260611.png"
+      },
+      "TTH": {
+        "id": 120657,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD01-100_P_dummy_EN_sample_260828.png"
+      },
+      "TTf": {
+        "id": 120681,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD01-100_P_dummy_JP_sample_260828.png"
       }
     }
   },
@@ -6192,6 +6294,22 @@
       "OXu": {
         "id": 100472,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD02/GD02-079_dummy_EN_sample.png"
+      },
+      "S/C": {
+        "id": 118732,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD02-079_P_dummy_EN_sample_260731.png"
+      },
+      "S/D": {
+        "id": 118733,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD02-079_P%2B_dummy_sample_260731.png"
+      },
+      "S/V": {
+        "id": 118751,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD02-079_P_dummy_JP_sample_260731.png"
+      },
+      "S/W": {
+        "id": 118752,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD02-079_P%2B_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -6517,6 +6635,18 @@
       "OYC": {
         "id": 100492,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD02/GD02-095_dummy_EN_sample.png"
+      },
+      "S/E": {
+        "id": 118734,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD02-095_P_dummy_EN_sample_260731.png"
+      },
+      "S/F": {
+        "id": 118735,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD02-095_P%2B_dummy_sample_260731.png"
+      },
+      "S/X": {
+        "id": 118753,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD02-095_P_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -7348,6 +7478,18 @@
       "P+c": {
         "id": 106406,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD03/GD03-005_dummy_EN_sample.png"
+      },
+      "S/G": {
+        "id": 118736,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-005_P_dummy_EN_sample_260731.png"
+      },
+      "S/H": {
+        "id": 118737,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-005_P%2B_dummy_sample_260731.png"
+      },
+      "S/a": {
+        "id": 118756,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-005_P%2B_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -7752,6 +7894,22 @@
       "P+v": {
         "id": 106425,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD03/GD03-024_dummy_EN_sample.png"
+      },
+      "S/I": {
+        "id": 118738,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-024_P_dummy_EN_sample_260731.png"
+      },
+      "S/J": {
+        "id": 118739,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-024_P%2B_dummy_sample_260731.png"
+      },
+      "S/b": {
+        "id": 118757,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-024_P_dummy_JP_sample_260731.png"
+      },
+      "S/c": {
+        "id": 118758,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-024_P%2B_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -8549,6 +8707,18 @@
       "P/W": {
         "id": 106464,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD03/GD03-063_dummy_EN_sample.png"
+      },
+      "S/K": {
+        "id": 118740,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-063_P_dummy_EN_sample_260731.png"
+      },
+      "S/d": {
+        "id": 118759,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-063_P_dummy_JP_sample_260731.png"
+      },
+      "S/e": {
+        "id": 118760,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-063_P%2B_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -9339,6 +9509,14 @@
       "Q06": {
         "id": 106502,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD03/GD03-101_dummy_EN_sample.png"
+      },
+      "TSz": {
+        "id": 120637,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-101_dummy_EN_sample_260828.png"
+      },
+      "TTK": {
+        "id": 120660,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-101_dummy_JP_sample_260828.png"
       }
     }
   },
@@ -9515,6 +9693,22 @@
       "Q0F": {
         "id": 106511,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD03/GD03-110_dummy_EN_sample.png"
+      },
+      "S/M": {
+        "id": 118742,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-110_P_dummy_EN_sample_260731.png"
+      },
+      "S/N": {
+        "id": 118743,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD03-110_P%2B_dummy_sample_260731.png"
+      },
+      "S/f": {
+        "id": 118761,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-110_P_dummy_JP_sample_260731.png"
+      },
+      "S/g": {
+        "id": 118762,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD03-110_P%2B_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -10270,6 +10464,14 @@
       "RZv": {
         "id": 112889,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-017_LR%2B%2B_dummy_EN.png"
+      },
+      "TTQ": {
+        "id": 120666,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-017_P%2B_dummy_JP_sample_260828.png"
+      },
+      "TT2": {
+        "id": 120642,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-017_P%2B_dummy_EN_sample_260828.png"
       }
     }
   },
@@ -10657,6 +10859,14 @@
       "RRg": {
         "id": 112362,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-038_dummy_EN.png"
+      },
+      "TTR": {
+        "id": 120667,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-038_P_dummy_JP_sample_260828.png"
+      },
+      "TT3": {
+        "id": 120643,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-038_P_dummy_EN_sample_260828.png"
       }
     }
   },
@@ -11089,6 +11299,14 @@
       "RS3": {
         "id": 112387,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-063_dummy_EN.png"
+      },
+      "TS+": {
+        "id": 120638,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-063_dummy_EN_sample_260828.png"
+      },
+      "TTL": {
+        "id": 120661,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-063_dummy_JP_sample_260828.png"
       }
     }
   },
@@ -11157,6 +11375,14 @@
       "Ra6": {
         "id": 112902,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-066_para_dummy_EN.png"
+      },
+      "S/R": {
+        "id": 118747,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-066_dummy_EN_sample_260731.png"
+      },
+      "S/k": {
+        "id": 118766,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-066_dummy_JP_SAMPLE_260731.png"
       }
     }
   },
@@ -11800,6 +12026,22 @@
       "RSf": {
         "id": 112425,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-101_dummy_EN.png"
+      },
+      "S/O": {
+        "id": 118744,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-101_P_dummy_EN_sample_260731.png"
+      },
+      "S/P": {
+        "id": 118745,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-101_P%2B_dummy_sample_260731.png"
+      },
+      "S/h": {
+        "id": 118763,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-1018_P_dummy_JP_sample_260731.png"
+      },
+      "S/i": {
+        "id": 118764,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-1018_P%2B_dummy_JP_sample_260731.png"
       }
     }
   },
@@ -11882,6 +12124,14 @@
       "RaH": {
         "id": 112913,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-105_para_dummy_EN.png"
+      },
+      "TTS": {
+        "id": 120668,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-105_P_dummy_JP_sample_260828.png"
+      },
+      "TT4": {
+        "id": 120644,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-105_P_dummy_EN_sample_260828.png"
       }
     }
   },
@@ -12055,8 +12305,17 @@
       "RSt": {
         "id": 112439,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-115_dummy_EN.png"
+      },
+      "TTT": {
+        "id": 120669,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD04-115_P_dummy_JP_sample_260828.png"
+      },
+      "TT5": {
+        "id": 120645,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-115_P_dummy_EN_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD04-116": {
     "token": "RR0",
@@ -12097,6 +12356,10 @@
       "RaK": {
         "id": 112916,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_GD04-117_para_dummy_EN.png"
+      },
+      "S/S": {
+        "id": 118748,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD04-117_dummy_EN_sample_260731.png"
       }
     }
   },
@@ -12311,8 +12574,17 @@
       "Shs": {
         "id": 117494,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-001_dummy_JP.png"
+      },
+      "Svd": {
+        "id": 118375,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-001%2B_dummy_EN.png"
+      },
+      "SwW": {
+        "id": 118432,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-001%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-002": {
     "token": "Sht",
@@ -12325,8 +12597,25 @@
       "Sht": {
         "id": 117495,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-002_dummy_JP.png"
+      },
+      "Sve": {
+        "id": 118376,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-002%2B_dummy_EN.png"
+      },
+      "Svf": {
+        "id": 118377,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-002%2B%2B_dummy_EN.png"
+      },
+      "SwX": {
+        "id": 118433,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-002%2B_dummy_JP.png"
+      },
+      "SwY": {
+        "id": 118434,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-002%2B%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-003": {
     "token": "Shu",
@@ -12339,8 +12628,17 @@
       "Shu": {
         "id": 117496,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-003_dummy_JP.png"
+      },
+      "Svg": {
+        "id": 118378,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-003%2B_dummy_EN.png"
+      },
+      "SwZ": {
+        "id": 118435,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-003%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-004": {
     "token": "Shv",
@@ -12353,8 +12651,17 @@
       "Shv": {
         "id": 117497,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-004_dummy_JP.png"
+      },
+      "Svh": {
+        "id": 118379,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-004%2B_dummy_EN.png"
+      },
+      "Swa": {
+        "id": 118436,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-004%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-005": {
     "token": "Shw",
@@ -12367,8 +12674,17 @@
       "Shw": {
         "id": 117498,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-005_dummy_JP.png"
+      },
+      "Svi": {
+        "id": 118380,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-005%2B_dummy_EN.png"
+      },
+      "Swb": {
+        "id": 118437,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-005%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-006": {
     "token": "Shx",
@@ -12381,8 +12697,17 @@
       "Shx": {
         "id": 117499,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-006_dummy_JP.png"
+      },
+      "Svj": {
+        "id": 118381,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-006%2B_dummy_EN.png"
+      },
+      "Swc": {
+        "id": 118438,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-006%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-007": {
     "token": "Shy",
@@ -12437,8 +12762,17 @@
       "Sh/": {
         "id": 117503,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-010_dummy_JP.png"
+      },
+      "TTU": {
+        "id": 120670,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD05-010_P_dummy_JP_sample_260828.png"
+      },
+      "TT6": {
+        "id": 120646,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD05-010_P_dummy_EN_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-011": {
     "token": "Si0",
@@ -12535,8 +12869,25 @@
       "Si6": {
         "id": 117510,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-017_dummy_JP.png"
+      },
+      "Svk": {
+        "id": 118382,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-017%2B_dummy_EN.png"
+      },
+      "Svl": {
+        "id": 118383,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-017%2B%2B_dummy_EN.png"
+      },
+      "Swd": {
+        "id": 118439,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-017%2B_dummy_JP.png"
+      },
+      "Swe": {
+        "id": 118440,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-017%2B%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-018": {
     "token": "Si7",
@@ -12549,8 +12900,17 @@
       "Si7": {
         "id": 117511,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-018_dummy_JP.png"
+      },
+      "Svm": {
+        "id": 118384,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-018%2B_dummy_EN.png"
+      },
+      "Swf": {
+        "id": 118441,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-018%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-019": {
     "token": "Si8",
@@ -12577,8 +12937,17 @@
       "Si9": {
         "id": 117513,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-020_dummy_JP.png"
+      },
+      "Svn": {
+        "id": 118385,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-020%2B_dummy_EN.png"
+      },
+      "Swg": {
+        "id": 118442,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-020%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-021": {
     "token": "SiA",
@@ -12591,8 +12960,17 @@
       "SiA": {
         "id": 117514,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-021_dummy_JP.png"
+      },
+      "Svo": {
+        "id": 118386,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-021%2B_dummy_EN.png"
+      },
+      "Swh": {
+        "id": 118443,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-021%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-022": {
     "token": "SiB",
@@ -12647,8 +13025,17 @@
       "SiE": {
         "id": 117518,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-025_dummy_JP.png"
+      },
+      "Svp": {
+        "id": 118387,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-025%2B_dummy_EN.png"
+      },
+      "Swi": {
+        "id": 118444,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-025%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-026": {
     "token": "SiF",
@@ -12703,8 +13090,13 @@
       "SiI": {
         "id": 117522,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-029_dummy_JP.png"
+      },
+      "Swj": {
+        "id": 118445,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-029%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-030": {
     "token": "SiJ",
@@ -12759,8 +13151,25 @@
       "SiM": {
         "id": 117526,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-033_dummy_JP.png"
+      },
+      "Svr": {
+        "id": 118389,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-033%2B_dummy_EN.png"
+      },
+      "Svs": {
+        "id": 118390,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-033%2B%2B_dummy_EN.png"
+      },
+      "Swk": {
+        "id": 118446,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-033%2B_dummy_JP.png"
+      },
+      "Swl": {
+        "id": 118447,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-033%2B%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-034": {
     "token": "SiN",
@@ -12773,8 +13182,17 @@
       "SiN": {
         "id": 117527,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-034_dummy_JP.png"
+      },
+      "Svt": {
+        "id": 118391,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-034%2B_dummy_EN.png"
+      },
+      "Swm": {
+        "id": 118448,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-034%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-035": {
     "token": "SiO",
@@ -12787,8 +13205,17 @@
       "SiO": {
         "id": 117528,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-035_dummy_JP.png"
+      },
+      "Svu": {
+        "id": 118392,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-035%2B_dummy_EN.png"
+      },
+      "Swn": {
+        "id": 118449,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-035%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-036": {
     "token": "SiP",
@@ -12801,8 +13228,17 @@
       "SiP": {
         "id": 117529,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-036_dummy_JP.png"
+      },
+      "Svv": {
+        "id": 118393,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-036%2B_dummy_EN.png"
+      },
+      "Swo": {
+        "id": 118450,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-036%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-037": {
     "token": "SiQ",
@@ -12815,8 +13251,17 @@
       "SiQ": {
         "id": 117530,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-037_dummy_JP.png"
+      },
+      "Svw": {
+        "id": 118394,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-037%2B_dummy_EN.png"
+      },
+      "Swp": {
+        "id": 118451,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-037%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-038": {
     "token": "SiR",
@@ -12871,8 +13316,17 @@
       "SiU": {
         "id": 117534,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-041_dummy_JP.png"
+      },
+      "Svx": {
+        "id": 118395,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-041%2B_dummy_EN.png"
+      },
+      "Swq": {
+        "id": 118452,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-041%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-042": {
     "token": "SZ0",
@@ -12978,8 +13432,17 @@
       "Sib": {
         "id": 117541,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-048_dummy_JP.png"
+      },
+      "Svy": {
+        "id": 118396,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-048%2B_dummy_EN.png"
+      },
+      "Swr": {
+        "id": 118453,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-048%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-049": {
     "token": "Sic",
@@ -12992,8 +13455,25 @@
       "Sic": {
         "id": 117542,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-049_dummy_JP.png"
+      },
+      "Svz": {
+        "id": 118397,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-049%2B_dummy_EN.png"
+      },
+      "Sv+": {
+        "id": 118398,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-049%2B%2B_dummy_EN.png"
+      },
+      "Sws": {
+        "id": 118454,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-049%2B_dummy_JP.png"
+      },
+      "Swt": {
+        "id": 118455,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-049%2B%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-050": {
     "token": "Sid",
@@ -13006,8 +13486,17 @@
       "Sid": {
         "id": 117543,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-050_dummy_JP.png"
+      },
+      "Sv/": {
+        "id": 118399,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-050%2B_dummy_EN.png"
+      },
+      "Swu": {
+        "id": 118456,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-050%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-051": {
     "token": "Sie",
@@ -13020,8 +13509,17 @@
       "Sie": {
         "id": 117544,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-051_dummy_JP.png"
+      },
+      "Swv": {
+        "id": 118457,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-051%2B_dummy_JP.png"
+      },
+      "Sw0": {
+        "id": 118400,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-051%2B_dummy_EN.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-052": {
     "token": "Sif",
@@ -13034,8 +13532,17 @@
       "Sif": {
         "id": 117545,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-052_dummy_JP.png"
+      },
+      "Sww": {
+        "id": 118458,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-052%2B_dummy_JP.png"
+      },
+      "Sw1": {
+        "id": 118401,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-052%2B_dummy_EN.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-053": {
     "token": "Sig",
@@ -13048,8 +13555,17 @@
       "Sig": {
         "id": 117546,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-053_dummy_JP.png"
+      },
+      "Swx": {
+        "id": 118459,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-053%2B_dummy_JP.png"
+      },
+      "Sw2": {
+        "id": 118402,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-053%2B_dummy_EN.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-054": {
     "token": "Sih",
@@ -13076,8 +13592,17 @@
       "Sii": {
         "id": 117548,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-055_dummy_JP.png"
+      },
+      "Swy": {
+        "id": 118460,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-055%2B_dummy_JP.png"
+      },
+      "Sw3": {
+        "id": 118403,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-055%2B_dummy_EN.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-056": {
     "token": "Sij",
@@ -13132,8 +13657,17 @@
       "Sim": {
         "id": 117552,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-059_dummy_JP.png"
+      },
+      "Swz": {
+        "id": 118461,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-059%2B_dummy_JP.png"
+      },
+      "Sw4": {
+        "id": 118404,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-059%2B_dummy_EN.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-060": {
     "token": "Sin",
@@ -13202,8 +13736,17 @@
       "Sir": {
         "id": 117557,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-064_dummy_JP.png"
+      },
+      "Sw5": {
+        "id": 118405,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-064%2B_dummy_EN.png"
+      },
+      "Sw+": {
+        "id": 118462,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-064%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-065": {
     "token": "Sis",
@@ -13230,8 +13773,17 @@
       "Sit": {
         "id": 117559,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-066_dummy_JP.png"
+      },
+      "Sw6": {
+        "id": 118406,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-066%2B_dummy_EN.png"
+      },
+      "Sw/": {
+        "id": 118463,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-066%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-067": {
     "token": "Siu",
@@ -13244,8 +13796,25 @@
       "Siu": {
         "id": 117560,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-067_dummy_JP.png"
+      },
+      "Sw7": {
+        "id": 118407,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-067%2B_dummy_EN.png"
+      },
+      "Sw8": {
+        "id": 118408,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-067%2B%2B_dummy_EN.png"
+      },
+      "Sx0": {
+        "id": 118464,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-067%2B_dummy_JP.png"
+      },
+      "Sx1": {
+        "id": 118465,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-067%2B%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-068": {
     "token": "Siv",
@@ -13258,8 +13827,17 @@
       "Siv": {
         "id": 117561,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-068_dummy_JP.png"
+      },
+      "Sw9": {
+        "id": 118409,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-068%2B_dummy_EN.png"
+      },
+      "Sx2": {
+        "id": 118466,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-068%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-069": {
     "token": "Siw",
@@ -13286,8 +13864,17 @@
       "Six": {
         "id": 117563,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-070_dummy_JP.png"
+      },
+      "SwA": {
+        "id": 118410,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-070%2B_dummy_EN.png"
+      },
+      "Sx3": {
+        "id": 118467,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-070%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-071": {
     "token": "Siy",
@@ -13300,8 +13887,17 @@
       "Siy": {
         "id": 117564,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-071_dummy_JP.png"
+      },
+      "SwB": {
+        "id": 118411,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-071%2B_dummy_EN.png"
+      },
+      "Sx4": {
+        "id": 118468,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-071%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-072": {
     "token": "Siz",
@@ -13412,8 +14008,17 @@
       "Sj4": {
         "id": 117572,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-079_dummy_JP.png"
+      },
+      "SwC": {
+        "id": 118412,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-079%2B_dummy_EN.png"
+      },
+      "Sx5": {
+        "id": 118469,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-079%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-080": {
     "token": "Sj5",
@@ -13440,8 +14045,17 @@
       "Sj6": {
         "id": 117574,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-081_dummy_JP.png"
+      },
+      "SwD": {
+        "id": 118413,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-081%2B_dummy_EN.png"
+      },
+      "Sx6": {
+        "id": 118470,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-081%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-082": {
     "token": "Sj7",
@@ -13496,8 +14110,17 @@
       "SjA": {
         "id": 117578,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-085_dummy_JP.png"
+      },
+      "SwE": {
+        "id": 118414,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-085%2B_dummy_EN.png"
+      },
+      "Sx7": {
+        "id": 118471,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-085%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-086": {
     "token": "SjB",
@@ -13552,8 +14175,17 @@
       "SjE": {
         "id": 117582,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-089_dummy_JP.png"
+      },
+      "SwF": {
+        "id": 118415,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-089%2B_dummy_EN.png"
+      },
+      "Sx8": {
+        "id": 118472,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-089%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-090": {
     "token": "SjF",
@@ -13566,8 +14198,17 @@
       "SjF": {
         "id": 117583,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-090_dummy_JP.png"
+      },
+      "SwG": {
+        "id": 118416,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-090%2B_dummy_EN.png"
+      },
+      "Sx9": {
+        "id": 118473,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-090%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-091": {
     "token": "SjG",
@@ -13608,8 +14249,17 @@
       "SjI": {
         "id": 117586,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-093_dummy_JP.png"
+      },
+      "SwH": {
+        "id": 118417,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-093%2B_dummy_EN.png"
+      },
+      "SxA": {
+        "id": 118474,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-093%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-094": {
     "token": "SjJ",
@@ -13664,8 +14314,21 @@
       "SjM": {
         "id": 117590,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-097_dummy_JP.png"
+      },
+      "SwI": {
+        "id": 118418,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-097%2B_dummy_EN.png"
+      },
+      "SxB": {
+        "id": 118475,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-097%2B_dummy_JP.png"
+      },
+      "TTP": {
+        "id": 120665,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD05-097_P_dummy_JP_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-098": {
     "token": "SjN",
@@ -13678,8 +14341,17 @@
       "SjN": {
         "id": 117591,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-098_dummy_JP.png"
+      },
+      "SwJ": {
+        "id": 118419,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-098%2B_dummy_EN.png"
+      },
+      "SxC": {
+        "id": 118476,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-098%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-099": {
     "token": "SjO",
@@ -13706,8 +14378,17 @@
       "SjP": {
         "id": 117593,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-100_dummy_JP.png"
+      },
+      "TTV": {
+        "id": 120671,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD05-100_P_dummy_JP_sample_260828.png"
+      },
+      "TT7": {
+        "id": 120647,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD05-100_P_dummy_EN_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-101": {
     "token": "SjQ",
@@ -13734,8 +14415,17 @@
       "SjR": {
         "id": 117595,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-102_dummy_JP.png"
+      },
+      "SwK": {
+        "id": 118420,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-102%2B_dummy_EN.png"
+      },
+      "SxD": {
+        "id": 118477,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-102%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-103": {
     "token": "SjS",
@@ -13790,8 +14480,17 @@
       "SjV": {
         "id": 117599,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-106_dummy_JP.png"
+      },
+      "SwL": {
+        "id": 118421,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-106%2B_dummy_EN.png"
+      },
+      "SxE": {
+        "id": 118478,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-106%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-107": {
     "token": "SjW",
@@ -13846,8 +14545,17 @@
       "SjZ": {
         "id": 117603,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-110_dummy_JP.png"
+      },
+      "TS/": {
+        "id": 120639,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD05-110-_dummy_EN_sample_260828.png"
+      },
+      "TTM": {
+        "id": 120662,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD05-110-_dummy_JP_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-111": {
     "token": "Sja",
@@ -13902,8 +14610,25 @@
       "Sjd": {
         "id": 117607,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-114_dummy_JP.png"
+      },
+      "SwM": {
+        "id": 118422,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-114%2B_dummy_EN.png"
+      },
+      "SxF": {
+        "id": 118479,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-114%2B_dummy_JP.png"
+      },
+      "TTN": {
+        "id": 120663,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/GD05-114_dummy_JP_sample_260828.png"
+      },
+      "TT0": {
+        "id": 120640,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/GD05-114_dummy_EN_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-115": {
     "token": "Sje",
@@ -13972,8 +14697,17 @@
       "Sji": {
         "id": 117612,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-119_dummy_JP.png"
+      },
+      "SwN": {
+        "id": 118423,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_GD05-119%2B_dummy_EN.png"
+      },
+      "SxG": {
+        "id": 118480,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_GD05-119%2B_dummy_JP.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "GD05-120": {
     "token": "SZ1",
@@ -14497,6 +15231,14 @@
       "SkO": {
         "id": 117656,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/ST01-010_P_dummy_JP_sample_260611.png"
+      },
+      "SwO": {
+        "id": 118424,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_ST01-010_SP_dummy_EN_260611.png"
+      },
+      "SxH": {
+        "id": 118481,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_ST01-010_SP_dummy_JP_260611.png"
       }
     }
   },
@@ -14549,6 +15291,14 @@
       "OKP": {
         "id": 99609,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/ST01-011_P_EN_dummy.png"
+      },
+      "SwP": {
+        "id": 118425,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_ST01-011_SP_dummy_EN_260611.png"
+      },
+      "SxI": {
+        "id": 118482,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_ST01-011_SP_dummy_JP_260611.png"
       }
     }
   },
@@ -15107,6 +15857,14 @@
       "SkR": {
         "id": 117659,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/ST02-010_P_dummy_JP_sample_260611.png"
+      },
+      "SwQ": {
+        "id": 118426,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_ST02-010_SP_dummy_EN_260611.png"
+      },
+      "SxJ": {
+        "id": 118483,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_ST02-010_SP_dummy_JP_260611.png"
       }
     }
   },
@@ -15472,6 +16230,14 @@
       "RDx": {
         "id": 111483,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/ST03-006_EN_sample.png"
+      },
+      "TTO": {
+        "id": 120664,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/ST03-006_dummy_JP_sample_260828.png"
+      },
+      "TT1": {
+        "id": 120641,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/ST03-006_dummy_EN_sample_260828.png"
       }
     }
   },
@@ -15620,6 +16386,14 @@
       "SkT": {
         "id": 117661,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/ST03-010_P_dummy_JP_sample_260611.png"
+      },
+      "SwR": {
+        "id": 118427,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_ST03-010_SP_dummy_EN_260611.png"
+      },
+      "SxK": {
+        "id": 118484,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_ST03-010_SP_dummy_JP_260611.png"
       }
     }
   },
@@ -15664,6 +16438,30 @@
       "Ms3": {
         "id": 93571,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST03/ST03-011bp_dummy_sample.png"
+      },
+      "SwS": {
+        "id": 118428,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_ST03-011_SP_dummy_EN_260611.png"
+      },
+      "SxL": {
+        "id": 118485,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_ST03-011_SP_dummy_JP_260611.png"
+      },
+      "TTW": {
+        "id": 120672,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/ST03-011_P_dummy_JP_sample_260828.png"
+      },
+      "TTX": {
+        "id": 120673,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/ST03-011_P%2B_dummy_JP_sample_260828.png"
+      },
+      "TT8": {
+        "id": 120648,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/ST03-011_P_dummy_EN_sample_260828.png"
+      },
+      "TT9": {
+        "id": 120649,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/ST03-011_P%2B_dummy_EN_sample_260828.png"
       }
     }
   },
@@ -16210,6 +17008,14 @@
       "SkX": {
         "id": 117665,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/SC01/ST04-010_P_dummy_JP_sample_260611.png"
+      },
+      "SwT": {
+        "id": 118429,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_ST04-010_SP_dummy_EN_260611.png"
+      },
+      "SxM": {
+        "id": 118486,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_ST04-010_SP_dummy_JP_260611.png"
       }
     }
   },
@@ -16289,6 +17095,14 @@
       "Msd": {
         "id": 93607,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST04/ST04-012bp_dummy_sample.png"
+      },
+      "TTI": {
+        "id": 120658,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/ST04-012_P_dummy_EN_sample_260828.png"
+      },
+      "TTg": {
+        "id": 120682,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/ST04-012_P_dummy_JP_sample_260828.png"
       }
     }
   },
@@ -17691,6 +18505,14 @@
       "QE+": {
         "id": 107454,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/batch_ST07-009_promo_dummy_EN.png"
+      },
+      "SwU": {
+        "id": 118430,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD05/batch_ST07-009_SP_dummy_EN_260611.png"
+      },
+      "SxN": {
+        "id": 118487,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_ST07-009_SP_dummy_JP_260611.png"
       }
     }
   },
@@ -18928,6 +19750,902 @@
     },
     "needs_review": true
   },
+  "ST11-001": {
+    "token": "TbA",
+    "source": "scan",
+    "tokens_scan": {
+      "Ta8": {
+        "id": 121096,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-001_dummy_EN_sample.png"
+      },
+      "TbA": {
+        "id": 121162,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-001_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-002": {
+    "token": "TbB",
+    "source": "scan",
+    "tokens_scan": {
+      "Ta9": {
+        "id": 121097,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-002_dummy_EN_sample.png"
+      },
+      "TbB": {
+        "id": 121163,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-002_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-003": {
+    "token": "TbC",
+    "source": "scan",
+    "tokens_scan": {
+      "TaA": {
+        "id": 121098,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-003_dummy_EN_sample.png"
+      },
+      "TbC": {
+        "id": 121164,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-003_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-004": {
+    "token": "TbD",
+    "source": "scan",
+    "tokens_scan": {
+      "TaB": {
+        "id": 121099,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-004_dummy_EN_sample.png"
+      },
+      "TbD": {
+        "id": 121165,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-004_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-005": {
+    "token": "TbE",
+    "source": "scan",
+    "tokens_scan": {
+      "TaC": {
+        "id": 121100,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-005_dummy_EN_sample.png"
+      },
+      "TbE": {
+        "id": 121166,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-005_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-006": {
+    "token": "TbF",
+    "source": "scan",
+    "tokens_scan": {
+      "TaD": {
+        "id": 121101,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-006_dummy_EN_sample.png"
+      },
+      "TbF": {
+        "id": 121167,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-006_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-007": {
+    "token": "TbG",
+    "source": "scan",
+    "tokens_scan": {
+      "TaE": {
+        "id": 121102,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-007_dummy_EN_sample.png"
+      },
+      "TbG": {
+        "id": 121168,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-007_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-008": {
+    "token": "TbH",
+    "source": "scan",
+    "tokens_scan": {
+      "TaF": {
+        "id": 121103,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-008_dummy_EN_sample.png"
+      },
+      "TbH": {
+        "id": 121169,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-008_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-009": {
+    "token": "TbI",
+    "source": "scan",
+    "tokens_scan": {
+      "TaG": {
+        "id": 121104,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-009_dummy_EN_sample.png"
+      },
+      "TbI": {
+        "id": 121170,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-009_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-010": {
+    "token": "TbJ",
+    "source": "scan",
+    "tokens_scan": {
+      "TaH": {
+        "id": 121105,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-010_dummy_EN_sample.png"
+      },
+      "TbJ": {
+        "id": 121171,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-010_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-011": {
+    "token": "TbK",
+    "source": "scan",
+    "tokens_scan": {
+      "TaI": {
+        "id": 121106,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-011_dummy_EN_sample.png"
+      },
+      "TbK": {
+        "id": 121172,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-011_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-012": {
+    "token": "TbL",
+    "source": "scan",
+    "tokens_scan": {
+      "TaJ": {
+        "id": 121107,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-012_dummy_EN_sample.png"
+      },
+      "TbL": {
+        "id": 121173,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-012_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-013": {
+    "token": "TbM",
+    "source": "scan",
+    "tokens_scan": {
+      "TaK": {
+        "id": 121108,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-013_dummy_EN_sample.png"
+      },
+      "TbM": {
+        "id": 121174,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-013_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-014": {
+    "token": "TbN",
+    "source": "scan",
+    "tokens_scan": {
+      "TaL": {
+        "id": 121109,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-014_dummy_EN_sample.png"
+      },
+      "TbN": {
+        "id": 121175,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-014_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-015": {
+    "token": "TbO",
+    "source": "scan",
+    "tokens_scan": {
+      "TaM": {
+        "id": 121110,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-015_dummy_EN_sample.png"
+      },
+      "TbO": {
+        "id": 121176,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-015_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST11-016": {
+    "token": "TbP",
+    "source": "scan",
+    "tokens_scan": {
+      "TaN": {
+        "id": 121111,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/ST11-016_dummy_EN_sample.png"
+      },
+      "TbP": {
+        "id": 121177,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/ST11-016_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-001": {
+    "token": "TbR",
+    "source": "scan",
+    "tokens_scan": {
+      "TaP": {
+        "id": 121113,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-001_dummy_EN_sample.png"
+      },
+      "TbR": {
+        "id": 121179,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-001_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-002": {
+    "token": "TbS",
+    "source": "scan",
+    "tokens_scan": {
+      "TaQ": {
+        "id": 121114,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-002_dummy_EN_sample.png"
+      },
+      "TbS": {
+        "id": 121180,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-002_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-003": {
+    "token": "TbT",
+    "source": "scan",
+    "tokens_scan": {
+      "TaR": {
+        "id": 121115,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-003_dummy_EN_sample.png"
+      },
+      "TbT": {
+        "id": 121181,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-003_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-004": {
+    "token": "TbU",
+    "source": "scan",
+    "tokens_scan": {
+      "TaS": {
+        "id": 121116,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-004_dummy_EN_sample.png"
+      },
+      "TbU": {
+        "id": 121182,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-004_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-005": {
+    "token": "TbV",
+    "source": "scan",
+    "tokens_scan": {
+      "TaT": {
+        "id": 121117,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-005_dummy_EN_sample.png"
+      },
+      "TbV": {
+        "id": 121183,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-005_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-006": {
+    "token": "TbW",
+    "source": "scan",
+    "tokens_scan": {
+      "TaU": {
+        "id": 121118,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-006_dummy_EN_sample.png"
+      },
+      "TbW": {
+        "id": 121184,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-006_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-007": {
+    "token": "TbX",
+    "source": "scan",
+    "tokens_scan": {
+      "TaV": {
+        "id": 121119,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-007_dummy_EN_sample.png"
+      },
+      "TbX": {
+        "id": 121185,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-007_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-008": {
+    "token": "TbY",
+    "source": "scan",
+    "tokens_scan": {
+      "TaW": {
+        "id": 121120,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-008_dummy_EN_sample.png"
+      },
+      "TbY": {
+        "id": 121186,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-008_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-009": {
+    "token": "TbZ",
+    "source": "scan",
+    "tokens_scan": {
+      "TaX": {
+        "id": 121121,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-009_dummy_EN_sample.png"
+      },
+      "TbZ": {
+        "id": 121187,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-009_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-010": {
+    "token": "Tba",
+    "source": "scan",
+    "tokens_scan": {
+      "TaY": {
+        "id": 121122,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-010_dummy_EN_sample.png"
+      },
+      "Tba": {
+        "id": 121188,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-010_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-011": {
+    "token": "Tbb",
+    "source": "scan",
+    "tokens_scan": {
+      "TaZ": {
+        "id": 121123,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-011_dummy_EN_sample.png"
+      },
+      "Tbb": {
+        "id": 121189,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-011_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-012": {
+    "token": "Tbc",
+    "source": "scan",
+    "tokens_scan": {
+      "Taa": {
+        "id": 121124,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-012_dummy_EN_sample.png"
+      },
+      "Tbc": {
+        "id": 121190,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-012_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-013": {
+    "token": "Tbd",
+    "source": "scan",
+    "tokens_scan": {
+      "Tab": {
+        "id": 121125,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-013_dummy_EN_sample.png"
+      },
+      "Tbd": {
+        "id": 121191,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-013_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-014": {
+    "token": "Tbe",
+    "source": "scan",
+    "tokens_scan": {
+      "Tac": {
+        "id": 121126,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-014_dummy_EN_sample.png"
+      },
+      "Tbe": {
+        "id": 121192,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-014_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-015": {
+    "token": "Tbf",
+    "source": "scan",
+    "tokens_scan": {
+      "Tad": {
+        "id": 121127,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-015_dummy_EN_sample.png"
+      },
+      "Tbf": {
+        "id": 121193,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-015_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST12-016": {
+    "token": "Tbg",
+    "source": "scan",
+    "tokens_scan": {
+      "Tae": {
+        "id": 121128,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST12/ST12-016_dummy_EN_sample.png"
+      },
+      "Tbg": {
+        "id": 121194,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST12/ST12-016_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-001": {
+    "token": "Tbh",
+    "source": "scan",
+    "tokens_scan": {
+      "Taf": {
+        "id": 121129,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-001_dummy_EN_sample.png"
+      },
+      "Tbh": {
+        "id": 121195,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-001_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-002": {
+    "token": "Tbi",
+    "source": "scan",
+    "tokens_scan": {
+      "Tag": {
+        "id": 121130,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-002_dummy_EN_sample.png"
+      },
+      "Tbi": {
+        "id": 121196,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-002_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-003": {
+    "token": "Tbj",
+    "source": "scan",
+    "tokens_scan": {
+      "Tah": {
+        "id": 121131,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-003_dummy_EN_sample.png"
+      },
+      "Tbj": {
+        "id": 121197,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-003_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-004": {
+    "token": "Tbk",
+    "source": "scan",
+    "tokens_scan": {
+      "Tai": {
+        "id": 121132,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-004_dummy_EN_sample.png"
+      },
+      "Tbk": {
+        "id": 121198,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-004_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-005": {
+    "token": "Tbl",
+    "source": "scan",
+    "tokens_scan": {
+      "Taj": {
+        "id": 121133,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-005_dummy_EN_sample.png"
+      },
+      "Tbl": {
+        "id": 121199,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-005_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-006": {
+    "token": "Tbm",
+    "source": "scan",
+    "tokens_scan": {
+      "Tak": {
+        "id": 121134,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-006_dummy_EN_sample.png"
+      },
+      "Tbm": {
+        "id": 121200,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-006_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-007": {
+    "token": "Tbn",
+    "source": "scan",
+    "tokens_scan": {
+      "Tal": {
+        "id": 121135,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-007_dummy_EN_sample.png"
+      },
+      "Tbn": {
+        "id": 121201,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-007_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-008": {
+    "token": "Tbo",
+    "source": "scan",
+    "tokens_scan": {
+      "Tam": {
+        "id": 121136,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-008_dummy_EN_sample.png"
+      },
+      "Tbo": {
+        "id": 121202,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-008_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-009": {
+    "token": "Tbp",
+    "source": "scan",
+    "tokens_scan": {
+      "Tan": {
+        "id": 121137,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-009_dummy_EN_sample.png"
+      },
+      "Tbp": {
+        "id": 121203,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-009_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-010": {
+    "token": "Tbq",
+    "source": "scan",
+    "tokens_scan": {
+      "Tao": {
+        "id": 121138,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-010_dummy_EN_sample.png"
+      },
+      "Tbq": {
+        "id": 121204,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-010_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-011": {
+    "token": "Tbr",
+    "source": "scan",
+    "tokens_scan": {
+      "Tap": {
+        "id": 121139,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-011_dummy_EN_sample.png"
+      },
+      "Tbr": {
+        "id": 121205,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-011_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-012": {
+    "token": "Tbs",
+    "source": "scan",
+    "tokens_scan": {
+      "Taq": {
+        "id": 121140,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-012_dummy_EN_sample.png"
+      },
+      "Tbs": {
+        "id": 121206,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-012_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-013": {
+    "token": "Tbt",
+    "source": "scan",
+    "tokens_scan": {
+      "Tar": {
+        "id": 121141,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-013_dummy_EN_sample.png"
+      },
+      "Tbt": {
+        "id": 121207,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-013_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-014": {
+    "token": "Tbu",
+    "source": "scan",
+    "tokens_scan": {
+      "Tas": {
+        "id": 121142,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-014_dummy_EN_sample.png"
+      },
+      "Tbu": {
+        "id": 121208,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-014_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-015": {
+    "token": "Tbv",
+    "source": "scan",
+    "tokens_scan": {
+      "Tat": {
+        "id": 121143,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-015_dummy_EN_sample.png"
+      },
+      "Tbv": {
+        "id": 121209,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-015_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST13-016": {
+    "token": "Tbw",
+    "source": "scan",
+    "tokens_scan": {
+      "Tau": {
+        "id": 121144,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/ST13-016_dummy_EN_sample.png"
+      },
+      "Tbw": {
+        "id": 121210,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/ST13-016_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-001": {
+    "token": "Tby",
+    "source": "scan",
+    "tokens_scan": {
+      "Taw": {
+        "id": 121146,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-001_dummy_EN_sample.png"
+      },
+      "Tby": {
+        "id": 121212,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-001_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-002": {
+    "token": "Tbz",
+    "source": "scan",
+    "tokens_scan": {
+      "Tax": {
+        "id": 121147,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-002_dummy_EN_sample.png"
+      },
+      "Tbz": {
+        "id": 121213,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-002_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-003": {
+    "token": "Tb+",
+    "source": "scan",
+    "tokens_scan": {
+      "Tay": {
+        "id": 121148,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-003_dummy_EN_sample.png"
+      },
+      "Tb+": {
+        "id": 121214,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-003_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-004": {
+    "token": "Tb/",
+    "source": "scan",
+    "tokens_scan": {
+      "Taz": {
+        "id": 121149,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-004_dummy_EN_sample.png"
+      },
+      "Tb/": {
+        "id": 121215,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-004_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-005": {
+    "token": "Tc0",
+    "source": "scan",
+    "tokens_scan": {
+      "Ta+": {
+        "id": 121150,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-005_dummy_EN_sample.png"
+      },
+      "Tc0": {
+        "id": 121216,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-005_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-006": {
+    "token": "Tc1",
+    "source": "scan",
+    "tokens_scan": {
+      "Ta/": {
+        "id": 121151,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-006_dummy_EN_sample.png"
+      },
+      "Tc1": {
+        "id": 121217,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-006_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-007": {
+    "token": "Tc2",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb0": {
+        "id": 121152,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-007_dummy_EN_sample.png"
+      },
+      "Tc2": {
+        "id": 121218,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-007_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-008": {
+    "token": "Tc3",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb1": {
+        "id": 121153,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-008_dummy_EN_sample.png"
+      },
+      "Tc3": {
+        "id": 121219,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-008_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-009": {
+    "token": "Tc4",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb2": {
+        "id": 121154,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-009_dummy_EN_sample.png"
+      },
+      "Tc4": {
+        "id": 121220,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-009_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-010": {
+    "token": "Tc5",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb3": {
+        "id": 121155,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-010_dummy_EN_sample.png"
+      },
+      "Tc5": {
+        "id": 121221,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-010_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-011": {
+    "token": "Tc6",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb4": {
+        "id": 121156,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-011_dummy_EN_sample.png"
+      },
+      "Tc6": {
+        "id": 121222,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-011_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-012": {
+    "token": "Tc7",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb5": {
+        "id": 121157,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-012_dummy_EN_sample.png"
+      },
+      "Tc7": {
+        "id": 121223,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-012_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-013": {
+    "token": "Tc8",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb6": {
+        "id": 121158,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-013_dummy_EN_sample.png"
+      },
+      "Tc8": {
+        "id": 121224,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-013_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-014": {
+    "token": "Tc9",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb7": {
+        "id": 121159,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-014_dummy_EN_sample.png"
+      },
+      "Tc9": {
+        "id": 121225,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-014_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-015": {
+    "token": "TcA",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb8": {
+        "id": 121160,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-015_dummy_EN_sample.png"
+      },
+      "TcA": {
+        "id": 121226,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-015_dummy_JP_sample.png"
+      }
+    }
+  },
+  "ST14-016": {
+    "token": "TcB",
+    "source": "scan",
+    "tokens_scan": {
+      "Tb9": {
+        "id": 121161,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST14/ST14-016_dummy_EN_sample.png"
+      },
+      "TcB": {
+        "id": 121227,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST14/ST14-016_dummy_JP_sample.png"
+      }
+    }
+  },
   "T-001": {
     "token": "JnA",
     "source": "scan",
@@ -19101,6 +20819,20 @@
       "Mso": {
         "id": 93618,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST04/T-010_dummy_sample.png"
+      }
+    }
+  },
+  "T-011": {
+    "token": "T0o",
+    "source": "scan",
+    "tokens_scan": {
+      "T0o": {
+        "id": 118834,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD01/T-011_dummy_JP_sample.png"
+      },
+      "T0p": {
+        "id": 118835,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD01/T-011_EN_dummy_sample.png"
       }
     }
   },
@@ -19309,8 +21041,41 @@
       "RVr": {
         "id": 112629,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_T-022_dummy_EN.png"
+      },
+      "TTA": {
+        "id": 120650,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/T-022_L_P_dummy_EN_sample_260828.png"
+      },
+      "TTB": {
+        "id": 120651,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/T-022_L_P%2B_dummy_EN_sample_260828.png"
+      },
+      "TTC": {
+        "id": 120652,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/T-022_R_P_dummy_EN_sample_260828.png"
+      },
+      "TTD": {
+        "id": 120653,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/T-022_R_P%2B_dummy_EN_sample_260828.png"
+      },
+      "TTY": {
+        "id": 120674,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/T-022_L_P_dummy_JP_sample_260828.png"
+      },
+      "TTZ": {
+        "id": 120675,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/T-022_L_P%2B_dummy_JP_sample_260828.png"
+      },
+      "TTa": {
+        "id": 120676,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/T-022_R_P_dummy_JP_sample_260828.png"
+      },
+      "TTb": {
+        "id": 120677,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/T-022_R_P%2B_dummy_JP_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "T-023": {
     "token": "RVU",
@@ -19323,8 +21088,17 @@
       "RVs": {
         "id": 112630,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/GD04/batch_T-023_dummy_EN.png"
+      },
+      "TTE": {
+        "id": 120654,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/P/T-023_P%2B_dummy_EN_sample_260828.png"
+      },
+      "TTc": {
+        "id": 120678,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/P/T-023_P%2B_dummy_JP_sample_260828.png"
       }
-    }
+    },
+    "needs_review": true
   },
   "T-024": {
     "token": "RVV",
@@ -19379,6 +21153,34 @@
       "Sjv": {
         "id": 117625,
         "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/GD05/batch_T-27_dummy_JP.png"
+      }
+    }
+  },
+  "T-028": {
+    "token": "TbQ",
+    "source": "scan",
+    "tokens_scan": {
+      "TaO": {
+        "id": 121112,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST11/T-028_dummy_EN_sample.png"
+      },
+      "TbQ": {
+        "id": 121178,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST11/T-028_dummy_JP_sample.png"
+      }
+    }
+  },
+  "T-029": {
+    "token": "Tbx",
+    "source": "scan",
+    "tokens_scan": {
+      "Tav": {
+        "id": 121145,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-EN/ST13/T-029_dummy_EN_sample.png"
+      },
+      "Tbx": {
+        "id": 121211,
+        "image_url": "https://files.bandai-tcg-plus.com/card_image/GC-JA/ST13/T-029_dummy_JP_sample.png"
       }
     }
   }

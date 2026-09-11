@@ -415,7 +415,7 @@
   var SET_CODES = [
     'GD01','GD02','GD03','GD04','GD05','GD06','GD07','GD08','GD09','GD10',
     'ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','ST11','ST12',
-    'EB01','EB02','EB03','SC01','SC02'
+    'EB01','EB02','EB03','SC01','SC02','ST13','ST14'
   ];
   var B64URL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
