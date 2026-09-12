@@ -496,13 +496,14 @@ const GCG = {
 
     // 主タブ
     // 指示書97: サブナビのあるカテゴリ(event/analysis/cards)は「▾」ボタンを添える。
+    // 指示書98: ボタンの中身は文字 ▾(U+25BE)から山形の SVG(_HDR98_SVG)に替えた。開くと CSS で上向きに回転する。
     // ボタンは hidden 付きで出力し、initHeaderSubNav() が hidden を外す(初期化前は従来と同じ見た目)。
     // タブ本体 <a> の動作(カテゴリ先頭ページへ移動)は変えない。開閉は ▾ だけ。
     const mainTabsHtml = this._MAIN_TABS.map(t => {
       const cls = (t.key === activeMain) ? 'active' : '';
       const a = `<a href="${basePath}${t.href}" class="${cls}">${t.label}</a>`;
       if (!this._SUB_NAV[t.key]) return a;
-      return `<span class="mt-group">${a}<button type="button" class="mt-toggle" data-cat="${t.key}" aria-expanded="false" aria-controls="gcg-subnav" aria-label="${t.label}の配下ページを開く" hidden>\u25BE</button></span>`;
+      return `<span class="mt-group">${a}<button type="button" class="mt-toggle" data-cat="${t.key}" aria-expanded="false" aria-controls="gcg-subnav" aria-label="${t.label}の配下ページを開く" hidden>${this._HDR98_SVG}</button></span>`;
     }).join('');
 
     // サブナビ（_SUB_NAV に定義のあるカテゴリのみ中身を入れる。home/deck-builder/mypage 等は hidden）
@@ -538,18 +539,34 @@ const GCG = {
 
   // 指示書97: 主タブ「▾」とサブナビ開閉用の CSS(ヘッダー HTML に同梱)。
   // .mt-group > a は .site-header-v2 nav.main-tabs a(0,2,2)の規則を受け、padding-right だけ 0,3,2 で上書きする
-  // (セレクタを短くすると詳細度で負けるので縮めないこと)。▾ は U+25BE(絵文字は使わない)。
+  // (セレクタを短くすると詳細度で負けるので縮めないこと)。
+  // 指示書98: ▾ を山形 SVG に替え(開くと 180° 回転)、2 段目の文字と余白を 1 段目並みに拡大、開閉は height の 0.2 秒アニメ。
+  // スマホ(≤768px)は主タブ全 6 本の左右 padding を 12px→8px に詰める(山形の押せる幅 24px を足しても 375〜396px で 1 段目が 3 行にならないように)。
+  // 上書き行は style.css と同じセレクタ(同じ詳細度)で書く=この <style> は DOM 順で style.css より後なので勝つ。
+  _HDR98_SVG: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   _HDR97_CSS: '<style id="gcg-hdr97">'
     + '.site-header-v2 .mt-group { display: flex; align-items: stretch; }'
     + '.site-header-v2 nav.main-tabs .mt-group > a { padding-right: 6px; }'
-    + '.site-header-v2 .mt-toggle { background: transparent; border: none; color: var(--text-muted); padding: 0 10px 0 2px; margin: 0; cursor: pointer; font: inherit; font-size: 11px; line-height: 1; display: flex; align-items: center; border-bottom: 2px solid transparent; transition: color 0.15s; }'
+    + '.site-header-v2 .mt-toggle { background: transparent; border: none; color: var(--text-secondary); padding: 0 10px 0 4px; margin: 0; cursor: pointer; font: inherit; line-height: 1; display: flex; align-items: center; border-bottom: 2px solid transparent; transition: color 0.15s; }'
+    + '.site-header-v2 .mt-toggle svg { width: 14px; height: 14px; display: block; transition: transform 0.2s ease; }'
     + '.site-header-v2 .mt-toggle:hover, .site-header-v2 .mt-toggle[aria-expanded="true"] { color: var(--accent); }'
+    + '.site-header-v2 .mt-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }'
     + '.site-header-v2 .mt-toggle[hidden] { display: none; }'
+    + '.site-header-v2 .sub-nav { box-sizing: border-box; }'
     + '.site-header-v2 .sub-nav.is-preview { border-top-color: var(--accent); }'
+    + '.site-header-v2 .sub-nav.is-animating { overflow: hidden; transition: height 0.2s ease; }'
+    + '.site-header-v2 .sub-nav-inner { padding: 10px 28px; gap: 6px; }'
+    + '.site-header-v2 .sub-nav-label { font-size: 11px; }'
+    + '.site-header-v2 .sub-nav a { font-size: 14px; padding: 6px 14px; }'
     + '@media (max-width: 768px) {'
+    + ' .site-header-v2 nav.main-tabs a { padding: 8px 8px; }'
     + ' .site-header-v2 nav.main-tabs .mt-group > a { padding-right: 4px; }'
-    + ' .site-header-v2 .mt-toggle { padding: 8px 10px 8px 2px; font-size: 12px; border-bottom: none; }'
+    + ' .site-header-v2 .mt-toggle { padding: 8px 6px 8px 2px; border-bottom: none; }'
+    + ' .site-header-v2 .mt-toggle svg { width: 16px; height: 16px; }'
+    + ' .site-header-v2 .sub-nav-inner { padding: 8px 12px; gap: 4px; }'
+    + ' .site-header-v2 .sub-nav a { font-size: 13px; padding: 6px 12px; }'
     + ' }'
+    + '@media (prefers-reduced-motion: reduce) { .site-header-v2 .mt-toggle svg, .site-header-v2 .sub-nav.is-animating { transition: none; } }'
     + '</style>',
 
   // 指示書97: サブナビ(2 段目)の中身。従来 renderHeader 内にあった生成をそのまま切り出したもの(出力 HTML は従来と同一)。
@@ -579,24 +596,56 @@ const GCG = {
     });
   },
 
+  // 指示書98: 2 段目の高さを h0→h1 へ 0.2 秒で動かす(開く=0→h・閉じる=h→0・入れ替え=h0→h1)。instant なら即時。
+  // apply() は DOM を最終状態にする関数で、hidden にする場合は true を返す(hidden はここで付ける=閉じアニメの後)。
+  // hidden にするときは中身(innerHTML)もここで空にする=閉じアニメの間はリンクが見えたまま上へ畳まれる(空の帯だけが縮むのを避ける)。
+  // 高さが変わったことは、アニメ終了時(即時なら直後)に resize を 1 回 dispatch して知らせる(指示書97 R1 の通知をここへ集約)。
+  _animateSubNav(sub, apply, instant) {
+    const reduce = (typeof matchMedia === 'function') && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const notify = () => { try { window.dispatchEvent(new Event('resize')); } catch (e) { /* ignore */ } };
+    if (this._subAnimEnd) { this._subAnimEnd(); }   // 進行中のアニメを終端に飛ばす(連打しても状態が壊れない)
+    const h0 = sub.hidden ? 0 : sub.offsetHeight;
+    sub.hidden = false;   // apply の前に外す(apply 内の _syncSubNavToggles が hidden を見て aria-expanded を決めるため。後に外すと hidden ページから初めて開いたとき ▾ が回らない=別確認者 R1 ①)
+    const toHidden = apply();
+    const hide = () => { sub.hidden = true; sub.innerHTML = ''; };
+    if (instant || reduce) { if (toHidden) hide(); notify(); return; }
+    const h1 = toHidden ? 0 : sub.offsetHeight;
+    if (h0 === h1) { if (toHidden) hide(); notify(); return; }
+    sub.style.height = h0 + 'px'; sub.classList.add('is-animating');
+    void sub.offsetHeight;   // reflow(開始高さを確定させる)
+    let done = false; let timer = null;
+    const onEnd = (e) => { if (e.target === sub && e.propertyName === 'height') finish(); };   // 子要素(リンクの色 transition 等)の transitionend で早終了しない
+    const finish = () => {
+      if (done) return; done = true; clearTimeout(timer); sub.removeEventListener('transitionend', onEnd);
+      sub.classList.remove('is-animating'); sub.style.height = '';
+      if (toHidden) hide();
+      this._subAnimEnd = null; notify();
+    };
+    this._subAnimEnd = finish;
+    sub.addEventListener('transitionend', onEnd);
+    timer = setTimeout(finish, 300);   // transitionend が来ない環境(タブ非表示等)の保険
+    sub.style.height = h1 + 'px';
+  },
+
   // 指示書97: 2 段目を「開いているページのカテゴリ」(強調表示も元どおり)に戻す。active が無ければ hidden。
-  _closeSubNav() {
+  // 指示書98: instant=true(外側クリック)は即時、それ以外(▾・Escape)は 0.2 秒で閉じる。resize 通知は _animateSubNav が行う。
+  _closeSubNav(instant) {
     const sub = document.getElementById('gcg-subnav');
     if (!sub) return;
     const activeCat = sub.getAttribute('data-active-cat') || '';
     const activeSub = sub.getAttribute('data-active-sub') || '';
-    if (activeCat && this._SUB_NAV[activeCat]) {
-      sub.innerHTML = this._subNavInner(activeCat, activeSub || null);
-      sub.hidden = false;
-    } else {
-      sub.innerHTML = '';
-      sub.hidden = true;
-    }
-    sub.setAttribute('data-cat', activeCat);
-    sub.classList.remove('is-preview');
-    this._syncSubNavToggles(sub);
-    // 指示書97 R1: ヘッダーの高さが変わったことをページ側に知らせる(deck-builder の --hh 再計算など。resize を待つ既存コードがそのまま使える)
-    try { window.dispatchEvent(new Event('resize')); } catch (e) { /* ignore */ }
+    this._animateSubNav(sub, () => {
+      let toHidden = false;
+      if (activeCat && this._SUB_NAV[activeCat]) {
+        sub.innerHTML = this._subNavInner(activeCat, activeSub || null);
+      } else {
+        toHidden = true;   // 中身は閉じアニメの後で _animateSubNav が空にする(即時なら直後)
+      }
+      sub.setAttribute('data-cat', activeCat);
+      sub.classList.remove('is-preview');
+      this._syncSubNavToggles(sub);
+      return toHidden;
+    }, !!instant);
   },
 
   // 指示書97: ▾ を押したときの開閉。表示中のカテゴリと同じなら閉じる、違えばそのカテゴリで開く。
@@ -608,13 +657,13 @@ const GCG = {
     const activeCat = sub.getAttribute('data-active-cat') || '';
     if (cat === shown || cat === activeCat) { this._closeSubNav(); return; }
     const activeSub = sub.getAttribute('data-active-sub') || '';
-    sub.innerHTML = this._subNavInner(cat, (cat === activeCat) ? (activeSub || null) : null);
-    sub.setAttribute('data-cat', cat);
-    sub.hidden = false;
-    sub.classList.toggle('is-preview', cat !== activeCat);
-    this._syncSubNavToggles(sub);
-    // 指示書97 R1: ヘッダーの高さが変わったことをページ側に知らせる(deck-builder の --hh 再計算など。resize を待つ既存コードがそのまま使える)
-    try { window.dispatchEvent(new Event('resize')); } catch (e) { /* ignore */ }
+    this._animateSubNav(sub, () => {   // 指示書98: 0.2 秒で開く/入れ替える(resize 通知はアニメ終了時)
+      sub.innerHTML = this._subNavInner(cat, (cat === activeCat) ? (activeSub || null) : null);
+      sub.setAttribute('data-cat', cat);
+      sub.classList.toggle('is-preview', cat !== activeCat);
+      this._syncSubNavToggles(sub);
+      return false;
+    }, false);
     GCG.track('header_sub_open', { cat: cat, page: sub.getAttribute('data-page') || '' });
   },
 
@@ -634,7 +683,7 @@ const GCG = {
       if (btn) { GCG._toggleSubNav(btn.getAttribute('data-cat')); return; }
       if (el.closest('.site-header')) return;   // ヘッダー内(2 段目のリンク等)は通常どおり
       const s = document.getElementById('gcg-subnav');
-      if (s && s.classList.contains('is-preview')) GCG._closeSubNav();
+      if (s && s.classList.contains('is-preview')) GCG._closeSubNav(true);   // 指示書98: 外側クリックは即時(アニメで閉じるとヘッダーが縮む途中で「移動」ボタン等の着地計算が走り、見出しが上に隠れる)
     }, true);   // 指示書97 R2: capture で登録=ページ側のクリック処理より先に閉じる(移動ボタンの着地計算がヘッダー高さの変化で狂わないように)。preventDefault/stopPropagation はしない
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
