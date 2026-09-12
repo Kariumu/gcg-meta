@@ -50,6 +50,23 @@ function htmlFiles(relDir) {
   return fs.readdirSync(abs).filter(f => f.endsWith('.html')).sort();
 }
 
+// 指示書99: <meta name="robots" content="...noindex..."> を持つページかどうか。
+// head の先頭付近にしか置かないので先頭 4KB だけを判定に使う(読み込み自体はファイル全体。
+// 101 記事なので実行時間に影響しない)。
+// name→content の順に書かれた meta だけを見る(サイト内の書き方は全てこの順。
+// 逆順は非マッチ=載せる側に倒れる)。
+// 読めない・壊れている場合は false を返す(=従来どおり載せる)。
+// 夜間チェーン内で無人実行されるため、ここでのクラッシュは絶対に避ける。
+function isNoindex(absPath) {
+  try {
+    const head = fs.readFileSync(absPath, 'utf-8').slice(0, 4096);
+    const m = head.match(/<meta\s+name=["']robots["']\s+content=["']([^"']*)["']/i);
+    return !!(m && /\bnoindex\b/i.test(m[1]));
+  } catch (e) {
+    return false;
+  }
+}
+
 // data/events.json から イベントID -> 開催日(YYYY-MM-DD) の辞書を作る。
 // 読めない・壊れている場合も例外を投げず空辞書を返す(呼び出し側が now にフォールバック)。
 // 夜間チェーン内で無人実行されるため、ここでのクラッシュは絶対に避ける。
@@ -130,7 +147,7 @@ function main() {
   xml = xml.replace(/\s*<url>\s*<loc>https:\/\/gcg-stats\.com\/ntc-official\.html<\/loc>[\s\S]*?<\/url>/g, '');
 
   let blocks = '';
-  let counts = { series: 0, sets: 0, news: 0, events: 0, eventsFallback: 0, ntc: 0, ntcFallback: 0 };
+  let counts = { series: 0, sets: 0, news: 0, newsNoindex: 0, events: 0, eventsFallback: 0, ntc: 0, ntcFallback: 0 };
   const eventDates = loadEventDates();
 
   // series/ (ディレクトリ + 各シリーズページ)
@@ -152,6 +169,9 @@ function main() {
   // reports/news/ (各ニュース記事)
   for (const f of htmlFiles('reports/news')) {
     if (f === 'index.html') continue;
+    // 指示書99: noindex の記事は sitemap に入れない
+    //           (「載せない」と言いながら目次に載っている矛盾を避ける)
+    if (isNoindex(path.join(ROOT, 'reports/news', f))) { counts.newsNoindex++; continue; }
     blocks += urlBlock(SITE_URL + '/reports/news/' + f, 'monthly', '0.4', now);
     counts.news++;
   }
@@ -179,6 +199,7 @@ function main() {
 
   console.log('  → sitemap.xml 追記完了: series ' + counts.series +
     ' / sets ' + counts.sets + ' / reports-news ' + counts.news +
+    (counts.newsNoindex ? ' (noindex 除外 ' + counts.newsNoindex + ' 件)' : '') +
     ' / events ' + counts.events + ' 件' +
     (counts.eventsFallback ? ' (events lastmod 実行日フォールバック ' + counts.eventsFallback + ' 件)' : '') +
     ' / ntc-official ' + counts.ntc + ' 件' +
