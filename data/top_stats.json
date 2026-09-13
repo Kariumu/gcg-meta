@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 385,
-    "decks": 1810,
+    "events": 386,
+    "decks": 1814,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 445,
+      "count": 446,
       "share": 24.6,
-      "win_rate": 26.1,
+      "win_rate": 26,
       "avg_rank": 2.5,
       "wins": 116
     },
@@ -30,11 +30,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 298,
+      "count": 299,
       "share": 16.5,
-      "win_rate": 26.8,
+      "win_rate": 27.1,
       "avg_rank": 2.4,
-      "wins": 80
+      "wins": 81
     },
     {
       "type_key": "Blue+Purple",
@@ -43,9 +43,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 296,
+      "count": 297,
       "share": 16.4,
-      "win_rate": 26.4,
+      "win_rate": 26.3,
       "avg_rank": 2.5,
       "wins": 78
     },
@@ -83,7 +83,7 @@
       ],
       "label": "青/赤",
       "count": 164,
-      "share": 9.1,
+      "share": 9,
       "win_rate": 26.2,
       "avg_rank": 2.5,
       "wins": 43
@@ -115,6 +115,19 @@
       "wins": 0
     },
     {
+      "type_key": "White+Purple",
+      "colors": [
+        "White",
+        "Purple"
+      ],
+      "label": "白/紫",
+      "count": 19,
+      "share": 1,
+      "win_rate": 26.3,
+      "avg_rank": 2.7,
+      "wins": 5
+    },
+    {
       "type_key": "Green+White",
       "colors": [
         "Green",
@@ -126,19 +139,6 @@
       "win_rate": 21.1,
       "avg_rank": 2.4,
       "wins": 4
-    },
-    {
-      "type_key": "White+Purple",
-      "colors": [
-        "White",
-        "Purple"
-      ],
-      "label": "白/紫",
-      "count": 18,
-      "share": 1,
-      "win_rate": 27.8,
-      "avg_rank": 2.8,
-      "wins": 5
     },
     {
       "type_key": "Purple",
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 875,
-      "usage_rate": 48.3
+      "decks": 878,
+      "usage_rate": 48.4
     },
     {
       "card_id": "GD05-002",
-      "decks": 762,
+      "decks": 764,
       "usage_rate": 42.1
     },
     {
       "card_id": "GD05-081",
-      "decks": 757,
+      "decks": 759,
       "usage_rate": 41.8
     },
     {
       "card_id": "ST03-008",
-      "decks": 704,
+      "decks": 705,
       "usage_rate": 38.9
     },
     {
       "card_id": "ST01-010",
-      "decks": 695,
+      "decks": 697,
       "usage_rate": 38.4
     },
     {
       "card_id": "GD01-030",
-      "decks": 675,
+      "decks": 676,
       "usage_rate": 37.3
     },
     {
       "card_id": "ST01-001",
-      "decks": 629,
-      "usage_rate": 34.8
+      "decks": 630,
+      "usage_rate": 34.7
     },
     {
       "card_id": "GD03-056",
-      "decks": 588,
+      "decks": 590,
       "usage_rate": 32.5
     },
     {
       "card_id": "GD01-118",
-      "decks": 580,
-      "usage_rate": 32
+      "decks": 582,
+      "usage_rate": 32.1
     },
     {
       "card_id": "ST05-010",
-      "decks": 580,
-      "usage_rate": 32
+      "decks": 582,
+      "usage_rate": 32.1
     }
   ],
-  "card_ranking_denominator": 1810,
+  "card_ranking_denominator": 1814,
   "recent_events": [
     {
       "event_id": "ntcd-01M2CHGDNKKK5K0Z447Q5NTYZK",
@@ -390,6 +390,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M2CRC6806AM6A6X9QNZCQ041",
+      "date": "2026-09-13",
+      "store": "TSUTAYA AVクラブ 岡富店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "White",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M29Z4R6N3W4F395Q9BV3KWKZ",
       "date": "2026-09-12",
       "store": "蔦屋書店茂原店",
@@ -528,45 +563,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M2A9E67WSNJ70C0KQQ5Y7MB0",
-      "date": "2026-09-12",
-      "store": "MINT GAMES 池袋店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-09-13",
-    "event_count": 1165
+    "event_count": 1166
   }
 }
