@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 380,
-    "decks": 1789,
+    "events": 381,
+    "decks": 1793,
     "types": 11
   },
   "deck_type_ranking": [
@@ -18,23 +18,10 @@
       ],
       "label": "青/緑",
       "count": 441,
-      "share": 24.7,
+      "share": 24.6,
       "win_rate": 26.3,
       "avg_rank": 2.5,
       "wins": 116
-    },
-    {
-      "type_key": "Blue+Purple",
-      "colors": [
-        "Blue",
-        "Purple"
-      ],
-      "label": "青/紫",
-      "count": 293,
-      "share": 16.4,
-      "win_rate": 26.6,
-      "avg_rank": 2.5,
-      "wins": 78
     },
     {
       "type_key": "Blue+White",
@@ -43,11 +30,24 @@
         "White"
       ],
       "label": "青/白",
-      "count": 292,
-      "share": 16.3,
-      "win_rate": 26.4,
+      "count": 294,
+      "share": 16.4,
+      "win_rate": 26.5,
       "avg_rank": 2.4,
-      "wins": 77
+      "wins": 78
+    },
+    {
+      "type_key": "Blue+Purple",
+      "colors": [
+        "Blue",
+        "Purple"
+      ],
+      "label": "青/紫",
+      "count": 294,
+      "share": 16.4,
+      "win_rate": 26.5,
+      "avg_rank": 2.5,
+      "wins": 78
     },
     {
       "type_key": "Green+Purple",
@@ -57,7 +57,7 @@
       ],
       "label": "緑/紫",
       "count": 264,
-      "share": 14.8,
+      "share": 14.7,
       "win_rate": 21.2,
       "avg_rank": 2.6,
       "wins": 56
@@ -69,9 +69,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 248,
+      "count": 249,
       "share": 13.9,
-      "win_rate": 27.4,
+      "win_rate": 27.3,
       "avg_rank": 2.4,
       "wins": 68
     },
@@ -83,7 +83,7 @@
       ],
       "label": "青/赤",
       "count": 162,
-      "share": 9.1,
+      "share": 9,
       "win_rate": 25.9,
       "avg_rank": 2.5,
       "wins": 42
@@ -156,57 +156,92 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 865,
+      "decks": 867,
       "usage_rate": 48.4
     },
     {
       "card_id": "GD05-002",
-      "decks": 750,
-      "usage_rate": 41.9
+      "decks": 753,
+      "usage_rate": 42
     },
     {
       "card_id": "GD05-081",
-      "decks": 745,
-      "usage_rate": 41.6
+      "decks": 748,
+      "usage_rate": 41.7
     },
     {
       "card_id": "ST03-008",
       "decks": 701,
-      "usage_rate": 39.2
+      "usage_rate": 39.1
     },
     {
       "card_id": "ST01-010",
-      "decks": 686,
-      "usage_rate": 38.3
+      "decks": 688,
+      "usage_rate": 38.4
     },
     {
       "card_id": "GD01-030",
       "decks": 672,
-      "usage_rate": 37.6
+      "usage_rate": 37.5
     },
     {
       "card_id": "ST01-001",
-      "decks": 620,
+      "decks": 622,
       "usage_rate": 34.7
     },
     {
       "card_id": "GD03-056",
-      "decks": 585,
+      "decks": 586,
       "usage_rate": 32.7
     },
     {
       "card_id": "ST05-010",
-      "decks": 577,
-      "usage_rate": 32.3
+      "decks": 578,
+      "usage_rate": 32.2
     },
     {
       "card_id": "GD01-118",
-      "decks": 568,
-      "usage_rate": 31.7
+      "decks": 571,
+      "usage_rate": 31.8
     }
   ],
-  "card_ranking_denominator": 1789,
+  "card_ranking_denominator": 1793,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M2CHGDNKKK5K0Z447Q5NTYZK",
+      "date": "2026-09-13",
+      "store": "TSUTAYA光吉店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M29Z4R6N3W4F395Q9BV3KWKZ",
       "date": "2026-09-12",
@@ -521,45 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M2A9E11BFK3EH0Z1M0CBQ0RW",
-      "date": "2026-09-12",
-      "store": "カードショップロピス",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-09-12",
-    "event_count": 1160
+    "latest_event_date": "2026-09-13",
+    "event_count": 1161
   }
 }
