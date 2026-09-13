@@ -5686,5 +5686,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-13": {
+    "recognized_at": "2026-09-13 20:00:32 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2099052968729567600",
+      "https://x.com/GUNDAM_GCG_JP/status/2099045416159625374"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-112",
+        "card_name": "ルーへの対抗心",
+        "color": "Red",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【アクション】〔エゥーゴ〕の味方のユニットとバトルしている相手のユニット1つを選ぶ。それに2ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 55,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-091",
+        "card_name": "ルー・ルカ",
+        "color": "Red",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔エゥーゴ〕",
+          "〔ガンダムチーム〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。このユニットが〔エゥーゴ〕の間、これは《突破(1)》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+        "effect_confidence": "low",
+        "effect_length": 123,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
