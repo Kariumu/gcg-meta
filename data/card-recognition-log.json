@@ -5734,5 +5734,55 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-14": {
+    "recognized_at": "2026-09-14 22:05:21 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2099415356276199768",
+      "https://x.com/GUNDAM_GCG_JP/status/2099407810979299556"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-116",
+        "card_name": "ジオンの残光",
+        "color": "Purple",
+        "card_type": "COMMAND",
+        "level": 5,
+        "cost": 5,
+        "ap": null,
+        "hp": null,
+        "traits": [
+          "〔ジオン〕",
+          "〔デラーズ・フリート〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【メイン】自分のトラッシュの紫のLv.5以下の〔ジオン〕のユニットカード1枚を選ぶ。それを配備する。",
+        "effect_confidence": "medium",
+        "effect_length": 69,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-055",
+        "card_name": "ガンダム試作2号機",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔ジオン〕",
+          "〔デラーズ・フリート〕"
+        ],
+        "link": "「アナベル・ガトー」",
+        "effect": "【セット中】【アタック時】このユニットに1ダメージを与えてもよい。そうしたなら、このバトル中、これは《突破2》を得る。(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+        "effect_confidence": "low",
+        "effect_length": 133,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
