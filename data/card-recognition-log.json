@@ -5784,5 +5784,51 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-15": {
+    "recognized_at": "2026-09-15 20:00:33 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2099777741671534905",
+      "https://x.com/GUNDAM_GCG_JP/status/2099770199528333514"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-103",
+        "card_name": "前線復帰",
+        "color": "Blue",
+        "card_type": "COMMAND",
+        "level": 3,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
+        "effect_confidence": "high",
+        "effect_length": 34,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-014",
+        "card_name": "ジム改",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 2,
+        "cost": 1,
+        "ap": 2,
+        "hp": 1,
+        "traits": [
+          "〔地球連邦〕"
+        ],
+        "link": "〔地球連邦〕",
+        "effect": "相手のユニットが3つ以上いる間、このユニットは《ブロッカー》を得る。(レストにすることでアタック先をこのユニットにする)",
+        "effect_confidence": "medium",
+        "effect_length": 60,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
