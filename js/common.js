@@ -866,10 +866,18 @@ const GCG = {
 
     var byStartAsc  = function(a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); };
     var byStartDesc = function(a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); };
+    // 指示書100: シリーズが増えても既定は従来どおり NTC。start_date が同じだと並び順
+    // (= Object.values の整数キー昇順) だけで勝敗が決まってしまい、将来 NTC の ID が
+    // 他シリーズより大きくなると既定が入れ替わるため、各段で NTC を明示的に前へ置く。
+    var preferNtc = function(arr) {
+      var n = arr.filter(function(s) { return s && s.type === 'ntc'; });
+      var o = arr.filter(function(s) { return !(s && s.type === 'ntc'); });
+      return n.concat(o);
+    };
     var candidates = []
-      .concat(list.filter(function(s) { return s.status === 'active'; }).sort(byStartAsc))
-      .concat(list.filter(function(s) { return s.status === 'upcoming'; }).sort(byStartAsc))
-      .concat(list.filter(function(s) { return s.status === 'completed'; }).sort(byStartDesc));
+      .concat(preferNtc(list.filter(function(s) { return s.status === 'active'; }).sort(byStartAsc)))
+      .concat(preferNtc(list.filter(function(s) { return s.status === 'upcoming'; }).sort(byStartAsc)))
+      .concat(preferNtc(list.filter(function(s) { return s.status === 'completed'; }).sort(byStartDesc)));
 
     // events.json 全体と .events マップのどちらを渡されても動くよう解決
     var evMap = (eventsObj && eventsObj.events && typeof eventsObj.events === 'object')

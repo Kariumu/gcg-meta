@@ -511,13 +511,21 @@
     function pickDefaultSeries() {
       var list = Object.values(allSeriesMap || {});
       if (!list.length) return '';
-      var active = list.filter(function (s) { return s.status === 'active'; });
-      if (active.length) return active.sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); })[0].id;
-      var upcoming = list.filter(function (s) { return s.status === 'upcoming'; })
-        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); });
+      // 指示書100: js/common.js の preferNtc と同一ロジック。既定は従来どおり NTC に固定する。
+      // (この関数は common.js が古いキャッシュのときの劣化フォールバック経路)
+      var preferNtc = function (arr) {
+        var n = arr.filter(function (s) { return s && s.type === 'ntc'; });
+        var o = arr.filter(function (s) { return !(s && s.type === 'ntc'); });
+        return n.concat(o);
+      };
+      var active = preferNtc(list.filter(function (s) { return s.status === 'active'; })
+        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); }));
+      if (active.length) return active[0].id;
+      var upcoming = preferNtc(list.filter(function (s) { return s.status === 'upcoming'; })
+        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); }));
       if (upcoming.length) return upcoming[0].id;
-      var completed = list.filter(function (s) { return s.status === 'completed'; })
-        .sort(function (a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); });
+      var completed = preferNtc(list.filter(function (s) { return s.status === 'completed'; })
+        .sort(function (a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); }));
       if (completed.length) return completed[0].id;
       return '';
     }
@@ -575,7 +583,12 @@
       if (!ev || (ev.c || 0) < 16) return false;
       var sid = String(ev.s || '');
       var s = allSeriesMap[sid];
-      if (s && s.type === 'ntc') return true;
+      // 指示書100-裁定R1: 畳み込み対象を series.json の rank_consolidation で宣言できるようにする。
+      // **shared/ntc-rank-consolidator.js の makeIsNtcTypeFromSeriesMap() と規則を揃えること**
+      // (揃えないと「デッキタイプ表は閾値4 / カード採用率は閾値8」の食い違いが起きる)。
+      var rc = s && s.rank_consolidation;
+      if (rc === 'best8_x2') return true;
+      if (rc !== 'none' && s && s.type === 'ntc') return true;
       // series.json が取れなかった場合の保険。
       // shared/ntc-rank-consolidator.js の NTC_SERIES_IDS と同じ役割で、
       // 同ファイルの isTargetEvent() 側にもこの保険があるため、判定を揃えておく
@@ -1011,6 +1024,16 @@
       if ((currentDateEnd || '') !== (metaStats.default_range.end || '')) return false;
       // シリーズ絞り込みで対象が減っていたら事前集計とは別物になる
       if (filteredEvents.length !== (metaStats.totals && metaStats.totals.events)) return false;
+      // 指示書100-裁定R1: meta_stats.json は「既定シリーズのシーズン」だけを事前集計している。
+      // 件数の偶然一致で別シリーズの画面に事前集計を使ってしまわないよう、グループ名でも突合する。
+      // 比較は必ず seriesGroupKey(= short_name)で行うこと。slug で比べると、同じタブでも
+      // 代表 data-sid が 8月/9月で入れ替わるため、タブを押した人が毎回 events.json を読む回帰になる。
+      // 古い meta_stats.json(series_group 無し)では従来どおり件数一致だけで判定する(後方互換)。
+      var mg = (metaStats.default_range && metaStats.default_range.series_group) || '';
+      if (mg) {
+        var curS = currentSeriesId ? (allSeriesMap[currentSeriesId] || null) : null;
+        if (seriesGroupKey(curS) !== mg) return false;
+      }
       return true;
     }
 

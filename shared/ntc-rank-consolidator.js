@@ -95,7 +95,14 @@
     return function (seriesId) {
       if (seriesId == null || !seriesMap) return false;
       var entry = seriesMap[String(seriesId)];
-      return !!(entry && entry.type === 'ntc');
+      if (!entry) return false;
+      // 指示書100-裁定R1: 64名大会(results>=16)の順位畳み込み対象を series.json で宣言できるようにする。
+      //   rank_consolidation: 'best8_x2' … 畳み込む(ベスト16表記 → ベスト8・各順位2名)
+      //   rank_consolidation: 'none'     … 畳み込まない(将来、畳み込まない大会が出たとき用)
+      // 未設定のシリーズは従来どおり type==='ntc' で判定する(既存NTCの挙動を変えないため)。
+      if (entry.rank_consolidation === 'best8_x2') return true;
+      if (entry.rank_consolidation === 'none') return false;
+      return entry.type === 'ntc';
     };
   }
 
