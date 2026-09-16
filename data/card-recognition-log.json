@@ -5830,5 +5830,51 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-16": {
+    "recognized_at": "2026-09-16 20:00:42 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2100140133752229923",
+      "https://x.com/GUNDAM_GCG_JP/status/2100132586798375125"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-109",
+        "card_name": "戦闘神ギンガナム",
+        "color": "Green",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "メイン 「ターンX(アームズ)」(〔ギンガナム艦隊〕〔遠隔兵器〕・AP2・HP3)のユニットトークン1つか、「ターンX(レッグス)」(〔ギンガナム艦隊〕〔遠隔兵器〕・AP3・HP2)のユニットトークン1つをレストで配備する。",
+        "effect_confidence": "low",
+        "effect_length": 112,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-021",
+        "card_name": "ターンX(トップ)",
+        "color": "Green",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 2,
+        "hp": 2,
+        "traits": [
+          "〔ギンガナム艦隊〕"
+        ],
+        "link": "「ギム・ギンガナム」",
+        "effect": "【配備時】自分のユニットトークン1つを選ぶ。それと同じユニットトークン1つをレストで配備する。",
+        "effect_confidence": "high",
+        "effect_length": 47,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
