@@ -5876,5 +5876,55 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-17": {
+    "recognized_at": "2026-09-17 20:00:36 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2100502519021531590",
+      "https://x.com/GUNDAM_GCG_JP/status/2100494972042596419"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-098",
+        "card_name": "デュオ・マックスウェル",
+        "color": "White",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 1,
+        "hp": 2,
+        "traits": [
+          "〔Gチーム〕",
+          "〔オペレーションメテオ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。【リンク中】このユニットがレストの間、味方のベースはこれのLv.以下の相手のユニットからダメージを受けない。",
+        "effect_confidence": "medium",
+        "effect_length": 73,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-072",
+        "card_name": "ガンダムデスサイズヘル(EW版)",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 3,
+        "ap": 5,
+        "hp": 3,
+        "traits": [
+          "〔Gチーム〕",
+          "〔プリベンター〕"
+        ],
+        "link": "「デュオ・マックスウェル」",
+        "effect": "【セット中】【破壊時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、自分のトラッシュのLv.5以下のコマンドカード1枚を選んでもよい。それを手札に加える。",
+        "effect_confidence": "medium",
+        "effect_length": 93,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
