@@ -2590,6 +2590,8 @@
       search: '',
       sort: 'id-asc'
     };
+    // 初期状態の控え（URL へ書き出すとき「初期と同じ値は省く」ための比較元。URL 読み取りより前に取る。指示書104）
+    var initialFilterState = JSON.parse(JSON.stringify(filterState));
 
     // === DOM ===
     var gridEl = document.getElementById('card-grid');
@@ -2716,7 +2718,7 @@
         usageHtml = '<div class="card-no-data">未入賞</div>';
       }
 
-      return '<a class="card-item" href="/cards/' + card.id + '/">' +
+      return '<a class="card-item" href="/cards/' + card.id + '/" target="_blank" rel="noopener">' +
         '<div class="card-item-img-wrap">' +
           '<img class="card-item-img" src="' + imgSrc + '" alt="' + escapeAttr(card.name) + '" loading="lazy" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;flex&quot;">' +
           '<div class="card-item-fallback"><div class="card-item-fallback-id">' + card.id + '</div><div class="card-item-fallback-name">' + escapeAttr(card.name) + '</div></div>' +
@@ -2745,6 +2747,9 @@
       // Debounce for search input
       if (renderTimer) clearTimeout(renderTimer);
       renderTimer = setTimeout(doRender, 16);
+      // URL への書き出しは描画とは別の 500ms デバウンスで予約する（0 件表示のときも必ず通る位置。指示書104）
+      // 1 回ずつの操作（チップ・ソート・チェック・詳細クリア）は後段の監視で即時に書き出す（指示書104-裁定R1）
+      scheduleUrlSync();
     }
 
     function doRender() {
@@ -2903,6 +2908,32 @@
         filterState.adv = { lv: null, cs: null, ap: null, hp: null, src: [], tr: [], kwMask: 0, nopl: false };
         updateBadge(); renderCards();
       });
+      // URL から入れた filterState.adv を UI（スライダー・チップ・チェック・バッジ）へ反映する（指示書104）
+      // updFns / updateBadge / collect はこの関数の中にしか無いため、ここで 1 個だけ公開する
+      window.__cardlistAdv = {
+        applyFromState: function () {
+          var A = filterState.adv;
+          ['lv', 'cs', 'ap', 'hp'].forEach(function (k) {
+            var lo = document.getElementById('adv-' + k + '-min');
+            var hi = document.getElementById('adv-' + k + '-max');
+            if (!lo || !hi) return;
+            if (A[k]) { lo.value = A[k][0]; hi.value = A[k][1]; } else { lo.value = lo.min; hi.value = hi.max; }
+          });
+          updFns.forEach(function (f) { f(true); });
+          function mark(id, isOn) {
+            document.querySelectorAll('#' + id + ' .filter-chip').forEach(function (c2) {
+              if (isOn(+c2.getAttribute('data-idx'))) c2.classList.add('active'); else c2.classList.remove('active');
+            });
+          }
+          mark('adv-source', function (i) { return A.src.indexOf(i) >= 0; });
+          mark('adv-traits', function (i) { return A.tr.indexOf(i) >= 0; });
+          mark('adv-keywords', function (i) { return (A.kwMask & (1 << i)) !== 0; });
+          filterState.adv.src = collect('adv-source');
+          filterState.adv.tr = collect('adv-traits');
+          if (np) np.checked = !!A.nopl;
+          updateBadge();
+        }
+      };
     })();
 
     searchInput.addEventListener('input', function() {
@@ -2924,46 +2955,195 @@
       }
     });
 
-    // URL params support
-    (function() {
+    // === 検索条件と URL の同期（指示書104）===
+    // 書き出し: history.replaceState（履歴は増やさない）。renderCards() のたびに 500ms デバウンスで予約し、
+    //   1 回ずつの操作（チップ click・ソート change・「パラレル非表示」チェック・詳細クリア）は既存の処理の後に即時に書き出す（指示書104-裁定R1）
+    //   スライダーと検索欄の input だけはデバウンスのまま（Safari は replaceState を 30 秒に 100 回超えると例外になる。drag は毎フレーム発火する）
+    // 読み取り: 既存 6 キー（color / set / type / rarity / q / sort）の名前・書式はそのまま、全条件に対応
+    //   値はすべて検証してから入れる（不正値は黙って捨てる。有効値が 0 個のグループは初期状態のまま）
+    //   詳細検索の出典・特徴・固有ルールは添字ではなく表示ラベルで持つ（カードが増えると添字が変わるため）
+    var URL_SYNC_DELAY_MS = 500;
+    var URL_LABEL_SEP = '|';
+    var URL_KEYS = ['color', 'set', 'type', 'rarity', 'tour', 'ver', 'reg', 'q', 'sort', 'lv', 'cs', 'ap', 'hp', 'src', 'tr', 'kw', 'nopl'];
+    var URL_LIST_GROUPS = [
+      { key: 'color', state: 'colors', group: 'filter-color' },
+      { key: 'set', state: 'sets', group: 'filter-set' },
+      { key: 'type', state: 'types', group: 'filter-type' },
+      { key: 'rarity', state: 'rarities', group: 'filter-rarity' }
+    ];
+    var URL_SINGLE_GROUPS = [
+      { key: 'tour', state: 'tournament', group: 'filter-tournament' },
+      { key: 'ver', state: 'version', group: 'filter-version' },
+      { key: 'reg', state: 'regulation', group: 'filter-regulation' }
+    ];
+    var URL_RANGE_KEYS = ['lv', 'cs', 'ap', 'hp'];
+    var urlSyncTimer = null;
+    var lastUrlSearch = null; // 最後に URL と揃えた search 文字列。null の間（読み取り前）は書き出さない
+
+    function sameValues(a, b) {
+      if (a.length !== b.length) return false;
+      var x = a.slice().sort(), y = b.slice().sort();
+      for (var i = 0; i < x.length; i++) { if (x[i] !== y[i]) return false; }
+      return true;
+    }
+
+    function buildUrlSearch() {
+      var p = new URLSearchParams();
+      var init = initialFilterState, A = filterState.adv;
+      URL_LIST_GROUPS.forEach(function (g) {
+        var cur = filterState[g.state];
+        if (sameValues(cur, init[g.state])) return;
+        // 「全て」は省かず all と書く（省くと初期値の弾に戻ってしまうため）
+        p.set(g.key, cur.length === 0 ? 'all' : cur.join(','));
+      });
+      URL_SINGLE_GROUPS.forEach(function (g) {
+        if (filterState[g.state] !== init[g.state]) p.set(g.key, filterState[g.state]);
+      });
+      if (filterState.search !== init.search) p.set('q', filterState.search);
+      if (filterState.sort !== init.sort) p.set('sort', filterState.sort);
+      URL_RANGE_KEYS.forEach(function (k) {
+        if (A[k]) p.set(k, A[k][0] + '-' + A[k][1]);
+      });
+      if (A.src.length) p.set('src', A.src.map(function (i) { return ADV_SOURCES[i]; }).join(URL_LABEL_SEP));
+      if (A.tr.length) p.set('tr', A.tr.map(function (i) { return ADV_TRAITS[i]; }).join(URL_LABEL_SEP));
+      if (A.kwMask) {
+        var kws = [];
+        for (var i = 0; i < ADV_KEYWORDS.length; i++) { if (A.kwMask & (1 << i)) kws.push(ADV_KEYWORDS[i]); }
+        p.set('kw', kws.join(URL_LABEL_SEP));
+      }
+      if (A.nopl) p.set('nopl', '1');
+      // このページが扱わないキー（外部から付いた計測用パラメータ等）は消さずに残す
+      new URLSearchParams(window.location.search).forEach(function (v, k) {
+        if (URL_KEYS.indexOf(k) < 0) p.append(k, v);
+      });
+      return p.toString();
+    }
+
+    function syncUrlFromState() {
+      if (urlSyncTimer) { clearTimeout(urlSyncTimer); urlSyncTimer = null; }
+      if (lastUrlSearch === null) return;
+      var s = buildUrlSearch();
+      if (s === lastUrlSearch) return; // 同じなら replaceState を呼ばない
+      try {
+        var u = new URL(window.location.href);
+        u.search = s; // 空文字なら「?」も残らない。hash はそのまま
+        history.replaceState(null, '', u.toString());
+        lastUrlSearch = s;
+      } catch (e) {
+        // file:// や回数制限で失敗しても表示は続ける（次の変更で再試行される）
+      }
+    }
+
+    function scheduleUrlSync() {
+      if (urlSyncTimer) clearTimeout(urlSyncTimer);
+      urlSyncTimer = setTimeout(syncUrlFromState, URL_SYNC_DELAY_MS);
+    }
+
+    // 1 回ずつの操作は即時に書き出す（リロード先の URL はアンロード系イベントより先に決まるため、操作の時点で書く。指示書104-裁定R1）
+    //   チップ・詳細クリア: 既存のハンドラ（ボタン自身に登録）が状態を更新した後、バブリングで document に届いた時点で書く
+    //   ソート・チェック: 既存の change ハンドラより後に登録するので、後に走る
+    document.addEventListener('click', function (ev) {
+      var t = ev.target && ev.target.closest ? ev.target.closest('.filter-chip, #adv-clear') : null;
+      if (t) syncUrlFromState();
+    });
+    sortSelect.addEventListener('change', function () { syncUrlFromState(); });
+    var advNoParallelEl = document.getElementById('adv-noparallel');
+    if (advNoParallelEl) advNoParallelEl.addEventListener('change', function () { syncUrlFromState(); });
+
+    // 同じタブで別ページへ移動する・タブを切り替えるときは、デバウンスを待たずに書き出す（移動→戻る で復元される）
+    window.addEventListener('pagehide', function () { syncUrlFromState(); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') syncUrlFromState();
+    });
+
+    function applyStateFromUrl() {
       var params = new URLSearchParams(window.location.search);
-      if (params.get('color')) {
-        var colors = params.get('color').split(',');
-        filterState.colors = colors;
-        var chips = document.querySelectorAll('#filter-color .filter-chip');
-        chips[0].classList.remove('active');
-        chips.forEach(function(c) { if (colors.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      function chipValues(groupId) {
+        var out = [];
+        document.querySelectorAll('#' + groupId + ' .filter-chip').forEach(function (c) {
+          if (c.dataset.value && c.dataset.value !== 'all') out.push(c.dataset.value);
+        });
+        return out;
       }
-      if (params.get('set')) {
-        var sets = params.get('set').split(',');
-        filterState.sets = sets;
-        var chips = document.querySelectorAll('#filter-set .filter-chip');
-        chips.forEach(function(c) { c.classList.remove('active'); });
-        chips.forEach(function(c) { if (sets.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      // 全チップの active を外してから付け直す。1 つも付かなければ「全て」(先頭チップ)を付ける
+      function markChips(groupId, isOn) {
+        var chips = document.querySelectorAll('#' + groupId + ' .filter-chip');
+        var any = false;
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        chips.forEach(function (c) { if (isOn(c.dataset.value)) { c.classList.add('active'); any = true; } });
+        if (!any && chips[0]) chips[0].classList.add('active');
       }
-      if (params.get('type')) {
-        var types = params.get('type').split(',');
-        filterState.types = types;
-        var chips = document.querySelectorAll('#filter-type .filter-chip');
-        chips[0].classList.remove('active');
-        chips.forEach(function(c) { if (types.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      URL_LIST_GROUPS.forEach(function (g) {
+        var raw = params.get(g.key);
+        if (!raw) return;
+        if (raw === 'all') {
+          filterState[g.state] = [];
+          markChips(g.group, function (v) { return v === 'all'; });
+          return;
+        }
+        var allowed = chipValues(g.group), vals = [];
+        raw.split(',').forEach(function (v) {
+          if (allowed.indexOf(v) >= 0 && vals.indexOf(v) < 0) vals.push(v);
+        });
+        if (vals.length === 0) return;
+        filterState[g.state] = vals;
+        markChips(g.group, function (v) { return vals.indexOf(v) >= 0; });
+      });
+      URL_SINGLE_GROUPS.forEach(function (g) {
+        var raw = params.get(g.key);
+        if (!raw || chipValues(g.group).indexOf(raw) < 0) return;
+        filterState[g.state] = raw;
+        markChips(g.group, function (v) { return v === raw; });
+      });
+      var q = params.get('q');
+      if (q && q.trim()) filterState.search = q.trim();
+      var sortRaw = params.get('sort');
+      if (sortRaw && Array.prototype.some.call(sortSelect.options, function (o) { return o.value === sortRaw; })) {
+        filterState.sort = sortRaw;
       }
-      if (params.get('rarity')) {
-        var rarities = params.get('rarity').split(',');
-        filterState.rarities = rarities;
-        var chips = document.querySelectorAll('#filter-rarity .filter-chip');
-        chips[0].classList.remove('active');
-        chips.forEach(function(c) { if (rarities.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      searchInput.value = filterState.search;
+      sortSelect.value = filterState.sort;
+      URL_RANGE_KEYS.forEach(function (k) {
+        var raw = params.get(k), lo = document.getElementById('adv-' + k + '-min');
+        if (!raw || !lo) return;
+        // 「下限-上限」。先頭の「-」は負号として扱う（将来 AP/HP の補正値に負の数が入っても読めるように）
+        var cut = -1;
+        for (var i = 1; i < raw.length; i++) { if (raw.charAt(i) === '-' && raw.charAt(i - 1) !== '-') { cut = i; break; } }
+        if (cut < 0) return;
+        var parts = [raw.slice(0, cut), raw.slice(cut + 1)], mn = +lo.min, mx = +lo.max, nums = [];
+        for (var j = 0; j < 2; j++) {
+          var n = Number(parts[j]);
+          if (parts[j].trim() === '' || !isFinite(n) || Math.floor(n) !== n) return;
+          nums.push(Math.min(mx, Math.max(mn, n)));
+        }
+        filterState.adv[k] = [Math.min(nums[0], nums[1]), Math.max(nums[0], nums[1])];
+      });
+      function labelsToIdx(raw, labels) {
+        var out = [];
+        if (!raw) return out;
+        raw.split(URL_LABEL_SEP).forEach(function (s) {
+          var i = labels.indexOf(s);
+          if (i >= 0 && out.indexOf(i) < 0) out.push(i);
+        });
+        return out;
       }
-      if (params.get('q')) {
-        filterState.search = params.get('q');
-        searchInput.value = filterState.search;
+      var srcIdx = labelsToIdx(params.get('src'), ADV_SOURCES);
+      if (srcIdx.length) filterState.adv.src = srcIdx;
+      var trIdx = labelsToIdx(params.get('tr'), ADV_TRAITS);
+      if (trIdx.length) filterState.adv.tr = trIdx;
+      var kwIdx = labelsToIdx(params.get('kw'), ADV_KEYWORDS);
+      if (kwIdx.length) {
+        var m = 0;
+        kwIdx.forEach(function (i) { m |= (1 << i); });
+        filterState.adv.kwMask = m;
       }
-      if (params.get('sort')) {
-        filterState.sort = params.get('sort');
-        sortSelect.value = filterState.sort;
-      }
-    })();
+      if (params.get('nopl') === '1') filterState.adv.nopl = true;
+      if (window.__cardlistAdv) window.__cardlistAdv.applyFromState();
+    }
+
+    // 順序: URL 読み取り → 書き出しの比較元を確定 → ヘッダ → 初回描画（初回描画で URL を書き換えない）
+    applyStateFromUrl();
+    lastUrlSearch = buildUrlSearch();
 
     // Header/Footer
     GCG.init();
