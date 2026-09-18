@@ -24,3 +24,6 @@ tools/integrity/reports/
 # X毎日投稿の実行状態(2026-08-01 追加、指示書61)
 # .sched-run-tmp/ はローカル専用の実行状態置き場。リポジトリには含めない
 .sched-run-tmp/
+
+# A8 リンクマネージャーの専用タグ(2026-09-18 追加、指示書110)。ローカル専用
+data/affiliate.local.json
