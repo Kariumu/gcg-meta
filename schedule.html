@@ -25,6 +25,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* 指示書102 §2-C: 一覧が入る前にフッターが画面内に見えていると、
+       データが入った瞬間にフッターが下へ飛んでガタつく。main に 1 画面分の
+       最低高さを与えてフッターを最初から画面外に置く。
+       本番の一覧は 2,500px 以上あるので、データが入れば余白は出ない。 */
+    main { min-height: 100vh; }
+  </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
