@@ -58,6 +58,7 @@
 .hdr-mini .t { display:flex; align-items:center; gap:9px; font-size:14px; font-weight:700; color:var(--fg); letter-spacing:.02em; text-decoration:none; }
 .hdr-mini .logo { width:22px; height:22px; border-radius:6px; background:var(--gold); color:var(--bg); font-weight:800; font-size:13px; display:flex; align-items:center; justify-content:center; font-family:var(--mono); }
 .hdr-mini .pg { font-size:12px; color:var(--dim); }
+.hdr-mini h1.pg { font: inherit; font-size: 12px; margin: 0; }
 .hdr-mini .sp { flex:1; }
 .hdr-mini .tg { padding:7px 12px; border-radius:8px; background:var(--card); border:1px solid var(--line); color:var(--mut); font-size:12px; cursor:pointer; font-family:inherit; }
 @media (max-width:599.9px), (max-width:899.9px) and (orientation:portrait), (max-height:520px) {
@@ -635,7 +636,7 @@
 <!-- #18: 折りたたみ時のコンパクトバー（共通ヘッダー非表示中のみ表示） -->
 <div class="hdr-mini">
   <a class="t" href="index.html"><span class="logo">G</span>GCG STATS</a>
-  <span class="pg">デッキビルダー</span>
+  <h1 class="pg">デッキビルダー</h1>
   <span class="sp"></span>
   <button class="tg" id="hdrToggle">メニュー ▾</button>
 </div>

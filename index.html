@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="theme-color" content="#d4a029">
-    <meta name="description" content="ガンダムカードゲームのニュータイプチャレンジ大会結果を自動集計。カード採用率・デッキタイプ分布・地域別メタを分析する非公式ファンサイトです。">
+    <meta name="description" content="GCG STATS（gcgstats）は、ガンダムカードゲームのニュータイプチャレンジ・シリアルカードチャレンジの大会結果を自動集計する非公式ファンサイト。カード採用率・デッキタイプ分布・地域別メタを公開しています。">
     <link rel="canonical" href="https://gcg-stats.com/">
     <!-- OGP -->
     <meta property="og:site_name" content="GCG STATS">
@@ -37,7 +37,7 @@
           "@context": "https://schema.org",
           "@type": "WebSite",
           "name": "GCG STATS",
-          "alternateName": "ガンダムカードゲーム統計サイト",
+          "alternateName": ["ガンダムカードゲーム統計サイト", "GCGSTATS", "gcgstats"],
           "url": "https://gcg-stats.com/",
           "description": "ガンダムカードゲームの統計データ・採用率分析サイト",
           "inLanguage": "ja-JP",
@@ -425,7 +425,7 @@
                 + '<div class="series-hero-headline">' + GCG.escapeHtml(headline) + '</div>'
                 + '<div class="series-hero-badges">' + statusBadge + seriesBadge + '</div>'
                 + '</div>'
-                + '<h1 class="series-hero-title">' + GCG.escapeHtml(s.display_name || s.official_name || '') + '</h1>'
+                + '<h2 class="series-hero-title">' + GCG.escapeHtml(s.display_name || s.official_name || '') + '</h2>'
                 + (s.subtitle ? '<p class="series-hero-subtitle">' + GCG.escapeHtml(s.subtitle) + '</p>' : '')
                 + '<p class="series-hero-period">開催期間: ' + GCG.escapeHtml(period) + '</p>'
                 + (mode === 'accepting' && s.apply_end_date ? '<p class="series-hero-apply" style="margin:8px 0;padding:8px 12px;background:rgba(34,197,94,0.12);border:1px solid #22c55e;border-radius:6px;color:#22c55e;font-weight:700;font-family:var(--font-mono);display:inline-block">応募受付中 ／ 応募締切 ' + GCG.escapeHtml(formatApplyDeadline(s.apply_end_date)) + '</p>' : '')

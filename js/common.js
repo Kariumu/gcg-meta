@@ -527,7 +527,7 @@ const GCG = {
           <a href="${basePath}" class="site-logo">
             <span class="logo-icon">G</span>
             <div>
-              <span class="logo-text">GCG STATS</span>
+              ${page === 'home' ? '<h1 class="logo-text">GCG STATS</h1>' : '<span class="logo-text">GCG STATS</span>'}
               <span class="logo-sub">Tournament Analytics</span>
             </div>
           </a>
@@ -552,6 +552,7 @@ const GCG = {
     + '.site-header-v2 .mt-toggle:hover, .site-header-v2 .mt-toggle[aria-expanded="true"] { color: var(--accent); }'
     + '.site-header-v2 .mt-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }'
     + '.site-header-v2 .mt-toggle[hidden] { visibility: hidden; }'
+    + '.site-header-v2 .site-logo h1.logo-text { display: inline; margin: 0; }'
     + '.site-header-v2 .sub-nav { box-sizing: border-box; }'
     + '.site-header-v2 .sub-nav.is-preview { border-top-color: var(--accent); }'
     + '.site-header-v2 .sub-nav.is-animating { overflow: hidden; transition: height 0.2s ease; }'
