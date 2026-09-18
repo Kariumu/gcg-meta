@@ -33,6 +33,7 @@
   <meta name="twitter:description" content="ガンダムカードゲームの環境メタ分析と大会結果一覧。全国1370件のイベント・TOP4合計6425デッキから、デッキタイプ別シェア・カード採用率・地域別メタを集計しています。">
   <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -160,6 +161,14 @@
         .meta-jump-label { flex-basis: 100%; }
         .meta-jump-btn { flex: 1 1 calc(50% - 4px); justify-content: center; }
       }
+      /* 指示書102 §2-C: データが入る前に場所を確保して画面のガタつきを消す。
+         #rank-filter は実測では伸びていない（36px のまま）。押し下げていたのは
+         上の 2 つの箱なので、そちらに最低の高さを与える。数値は 1px 刻みの実測。 */
+      #series-selector-area { min-height: 68px; }
+      @media (min-width: 500px) { #series-selector-area { min-height: 31px; } }
+      #date-filter-area { min-height: 78px; }
+      @media (min-width: 379px) { #date-filter-area { min-height: 76px; } }
+      @media (min-width: 453px) { #date-filter-area { min-height: 35px; } }
     </style>
 
     <!-- 地域フィルター（2026-08-06 指示書67: 並びは北から南へ固定） -->

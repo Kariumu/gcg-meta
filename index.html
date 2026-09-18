@@ -49,6 +49,7 @@
         }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css?v=82">
     <style>
@@ -94,6 +95,23 @@
             .home-x-follow-inner { gap: 12px; }
             .home-x-follow-btn { width: 100%; text-align: center; }
         }
+        /* 指示書102 §2-C: データが入る前に場所を確保して画面のガタつきを消す。
+           数値は 320〜1280px を 1px 刻みで測った「データが入った後の高さ」。
+           見た目は変えない（データが入れば同じ高さになるので余白は出ない）。 */
+        /* C-1 の本体: 上のヒーロー(#series-hero)が伸びて下を押し下げていた。
+           実測 412px で 111.44 → 304px。ここを確保しないとトレンド節が 124px 下がる。
+           値は実測を切り捨てた整数。切り上げると充填後の高さが 0.3px ほど伸びて
+           下の文字の描画位置が全部ずれるため（見た目を変えないことを優先）。 */
+        #series-hero { min-height: 412px; }
+        @media (min-width: 328px) { #series-hero { min-height: 364px; } }
+        @media (min-width: 390px) { #series-hero { min-height: 304px; } }
+        @media (min-width: 495px) { #series-hero { min-height: 276px; } }
+        @media (min-width: 641px) { #series-hero { min-height: 296px; } }
+        .home-trend-right { min-height: 486px; }
+        #decktype-legend { min-height: 72px; }
+        #date-filter-area { min-height: 78px; }
+        @media (min-width: 379px) { #date-filter-area { min-height: 76px; } }
+        @media (min-width: 453px) { #date-filter-area { min-height: 35px; } }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>

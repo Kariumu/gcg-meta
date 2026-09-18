@@ -551,7 +551,7 @@ const GCG = {
     + '.site-header-v2 .mt-toggle svg { width: 14px; height: 14px; display: block; transition: transform 0.2s ease; }'
     + '.site-header-v2 .mt-toggle:hover, .site-header-v2 .mt-toggle[aria-expanded="true"] { color: var(--accent); }'
     + '.site-header-v2 .mt-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }'
-    + '.site-header-v2 .mt-toggle[hidden] { display: none; }'
+    + '.site-header-v2 .mt-toggle[hidden] { visibility: hidden; }'
     + '.site-header-v2 .sub-nav { box-sizing: border-box; }'
     + '.site-header-v2 .sub-nav.is-preview { border-top-color: var(--accent); }'
     + '.site-header-v2 .sub-nav.is-animating { overflow: hidden; transition: height 0.2s ease; }'
