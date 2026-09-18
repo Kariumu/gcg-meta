@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 588,
-    "decks": 2794,
+    "events": 589,
+    "decks": 2798,
     "types": 11
   },
   "deck_type_ranking": [
@@ -30,11 +30,11 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 489,
+      "count": 491,
       "share": 17.5,
-      "win_rate": 26,
+      "win_rate": 26.1,
       "avg_rank": 2.5,
-      "wins": 127
+      "wins": 128
     },
     {
       "type_key": "Blue+White",
@@ -43,9 +43,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 466,
+      "count": 467,
       "share": 16.7,
-      "win_rate": 26.2,
+      "win_rate": 26.1,
       "avg_rank": 2.4,
       "wins": 122
     },
@@ -56,9 +56,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 442,
+      "count": 443,
       "share": 15.8,
-      "win_rate": 24.7,
+      "win_rate": 24.6,
       "avg_rank": 2.5,
       "wins": 109
     },
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 1313,
+      "decks": 1315,
       "usage_rate": 47
     },
     {
       "card_id": "GD05-002",
-      "decks": 1203,
+      "decks": 1206,
       "usage_rate": 43.1
     },
     {
       "card_id": "GD05-081",
-      "decks": 1197,
-      "usage_rate": 42.8
+      "decks": 1200,
+      "usage_rate": 42.9
     },
     {
       "card_id": "ST03-008",
-      "decks": 1041,
-      "usage_rate": 37.3
+      "decks": 1042,
+      "usage_rate": 37.2
     },
     {
       "card_id": "GD01-030",
-      "decks": 1004,
+      "decks": 1005,
       "usage_rate": 35.9
     },
     {
       "card_id": "ST01-010",
-      "decks": 999,
-      "usage_rate": 35.8
+      "decks": 1000,
+      "usage_rate": 35.7
     },
     {
       "card_id": "GD03-056",
-      "decks": 964,
-      "usage_rate": 34.5
+      "decks": 967,
+      "usage_rate": 34.6
     },
     {
       "card_id": "ST05-010",
-      "decks": 953,
-      "usage_rate": 34.1
+      "decks": 956,
+      "usage_rate": 34.2
     },
     {
       "card_id": "GD01-118",
-      "decks": 933,
+      "decks": 934,
       "usage_rate": 33.4
     },
     {
       "card_id": "GD02-054",
-      "decks": 916,
+      "decks": 919,
       "usage_rate": 32.8
     }
   ],
-  "card_ranking_denominator": 2794,
+  "card_ranking_denominator": 2798,
   "recent_events": [
     {
       "event_id": "ntcd-01M2SQSXY5JYF8AP1VNY84A2EA",
@@ -453,6 +453,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M2T920JAAGF4TFRA4N5ND29D",
+      "date": "2026-09-18",
+      "store": "ブックオフ町田中央通り店（本・ホビー館）4F",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M2Q5FJPDMHAXGE64VWT5DWQ8",
       "date": "2026-09-17",
       "store": "S CARD OASIS 鳳店",
@@ -521,45 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M2Q5FGQAJYSE4PDS8FSYQE7S",
-      "date": "2026-09-17",
-      "store": "ジラフル広島ドンキ店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-09-18",
-    "event_count": 1368
+    "event_count": 1369
   }
 }
