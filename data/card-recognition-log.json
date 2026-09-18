@@ -5878,10 +5878,12 @@
     "status": "pending_review"
   },
   "2026-09-17": {
-    "recognized_at": "2026-09-17 20:00:36 JST",
+    "recognized_at": "2026-09-18 20:00:40 JST",
     "source_tweets": [
       "https://x.com/GUNDAM_GCG_JP/status/2100502519021531590",
-      "https://x.com/GUNDAM_GCG_JP/status/2100494972042596419"
+      "https://x.com/GUNDAM_GCG_JP/status/2100494972042596419",
+      "https://x.com/GUNDAM_GCG_JP/status/2100556624326950990",
+      "https://x.com/GUNDAM_GCG_JP/status/2100555375908999658"
     ],
     "cards": [
       {
@@ -5921,6 +5923,45 @@
         "effect": "【セット中】【破壊時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、自分のトラッシュのLv.5以下のコマンドカード1枚を選んでもよい。それを手札に加える。",
         "effect_confidence": "medium",
         "effect_length": 93,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-081",
+        "card_name": "アマナ・ユズリハ(マチュ)",
+        "color": "Blue",
+        "card_type": "PILOT",
+        "level": 4,
+        "cost": 1,
+        "ap": 1,
+        "hp": 2,
+        "traits": [
+          "〔アルファ殺し〕",
+          "〔ニュータイプ〕"
+        ],
+        "link": "",
+        "effect": "【バースト】このカードを手札に加える。このユニットが〔アルファ殺し〕の間、これは《リペア2》を得る。(自分のターン終了時、このユニットを指定の数回復する)",
+        "effect_confidence": "medium",
+        "effect_length": 77,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-003",
+        "card_name": "νガンダム(オメガ・サイコミュ開放時)",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 6,
+        "cost": 4,
+        "ap": 2,
+        "hp": 5,
+        "traits": [
+          "〔アルファ殺し〕"
+        ],
+        "link": "「アマテ・ユズリハ(マチュ)」",
+        "effect": "このユニットを自分の手札と同じ数だけAP+する。【アタック時】このユニット以外の〔アルファ殺し〕の味方のユニットがいて、自分の手札が5枚以下なら、自分は1枚ドローする。",
+        "effect_confidence": "medium",
+        "effect_length": 84,
         "image_url": null,
         "confidence": "medium"
       }
