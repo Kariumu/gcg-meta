@@ -5967,5 +5967,53 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-19": {
+    "recognized_at": "2026-09-19 20:00:27 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2101227293490184490",
+      "https://x.com/GUNDAM_GCG_JP/status/2101219744326332556"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-074",
+        "card_name": "フラット",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔ディアナ・カウンター〕"
+        ],
+        "link": "特徴にムーンレイスを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-069",
+        "card_name": "シルバースモー",
+        "color": "White",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔ムーンレイス〕"
+        ],
+        "link": "特徴にムーンレイスを持つPILOT",
+        "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【起動】アクション ターン1回 ①:ダメージを受けている〔ディアナ・カウンター〕の自分のユニット1つを選ぶ。それを1回復する。",
+        "effect_confidence": "medium",
+        "effect_length": 96,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
