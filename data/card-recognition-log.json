@@ -6015,5 +6015,55 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-20": {
+    "recognized_at": "2026-09-20 20:00:20 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2101589683109335277",
+      "https://x.com/GUNDAM_GCG_JP/status/2101582133311815739"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-043",
+        "card_name": "レギンレイズ(ジュリエッタ機)",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 3,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "宇宙",
+          "地球"
+        ],
+        "link": "特徴にギャラルホルンを持つPILOT",
+        "effect": "【リンク中】自分のターン中、このユニット以外の〔ギャラルホルン〕のユニットすべてをAP+1する。",
+        "effect_confidence": "high",
+        "effect_length": 48,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-038",
+        "card_name": "ガンダム・キマリスヴィダール",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 6,
+        "ap": 5,
+        "hp": 5,
+        "traits": [
+          "〔ギャラルホルン〕",
+          "〔ガンダム・フレーム〕"
+        ],
+        "link": "「ガエリオ・ボードウィン」",
+        "effect": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)【セット時】最もLv.が高い相手のユニット1つを選ぶ。それに3ダメージを与える。",
+        "effect_confidence": "low",
+        "effect_length": 119,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
