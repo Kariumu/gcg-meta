@@ -2252,6 +2252,12 @@ a.section-badge:hover {
   }
 }
 
+/* ========== カード詳細ページ: 画像+遊々亭ブロックの左列(指示書112) ========== */
+.card-visual { flex-shrink: 0; }
+@media (max-width: 600px) {
+  .card-visual { width: 100%; display: flex; flex-direction: column; align-items: center; }
+}
+
 /* =========================================================
    Header v2 — 2段ナビゲーション (2026-05-24, 案B 採用)
    - 1段目: ロゴ + 主タブ(4) + 検索
