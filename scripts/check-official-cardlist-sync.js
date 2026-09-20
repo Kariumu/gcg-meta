@@ -20,7 +20,6 @@
  *  [O1] 公式のカテゴリ一覧が既知のものと一致するか（新弾追加の検知）
  *  [O2] 公式各カテゴリの掲載件数とID一覧を取得し、master と突合
  *        - 公式にあって master に無い
- *            · リソース/ベース系プレフィックス（R- / EXB- / EXR- / RP- / EXBP- / EXRP-）→ 方針により除外（情報）
  *            · data/preview_card_pages.json の excluded_ids に載っている → 承認済み除外（情報）
  *            · それ以外 → ★要対応
  *        - master にあって公式に無い → ★要確認（掲載終了 or 誤登録）
@@ -49,8 +48,8 @@ const REQUEST_DELAY_MS = 1500; // 公式サーバ配慮（変更禁止）
 const USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 const LIST_URL = 'https://www.gundam-gcg.com/jp/cards/';
 
-/** リソース/ベース系（松岡さん方針により cards_master.json へ取り込まない） */
-const RESOURCE_LIKE = /^(R|EXB|EXR|RP|EXBP|EXRP)-\d/;
+// 指示書113（2026-09-20）: リソース／EXベース系（R- / EXB- / EXR- / RP- / EXBP- / EXRP-）も cards_master.json に
+// 取り込む方針に変わったため、旧 RESOURCE_LIKE による「方針により除外」をやめた（公式にあって master に無ければ ★要対応）。
 
 /** 2026-07-28 時点で確認済みのカテゴリ。公式から自動取得した一覧と突合し、増減を検知する */
 const KNOWN_PACKAGES = {
@@ -229,14 +228,12 @@ function loadAllow() {
   }
 
   const missing = [...officialAll.keys()].filter((id) => !masterIds.has(id));
-  const byPolicy = missing.filter((id) => RESOURCE_LIKE.test(id));
-  const approved = missing.filter((id) => !RESOURCE_LIKE.test(id) && allow.excluded.has(id));
-  const actionable = missing.filter((id) => !RESOURCE_LIKE.test(id) && !allow.excluded.has(id));
+  const approved = missing.filter((id) => allow.excluded.has(id));
+  const actionable = missing.filter((id) => !allow.excluded.has(id));
   const extra = [...masterIds].filter((id) => !officialAll.has(id));
 
   log('\n  公式ユニーク ' + officialAll.size + ' 件 / master ' + masterIds.size + ' 件');
   log('  公式にあって master に無い: ' + missing.length + ' 件');
-  log('    · リソース/ベース系（方針により除外）: ' + byPolicy.length + ' 件');
   log('    · 承認済み除外: ' + approved.length + ' 件');
   log('    · ★要対応: ' + actionable.length + ' 件');
   for (const id of actionable) {
@@ -249,7 +246,7 @@ function loadAllow() {
   }
   report.official.uniqueIds = officialAll.size;
   report.official.counts = counts;
-  report.official.missing = { byPolicy, approved, actionable };
+  report.official.missing = { approved, actionable };
   report.official.extra = extra;
 
   finish();

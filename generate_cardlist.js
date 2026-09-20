@@ -52,17 +52,31 @@ try {
   }
   const latestSid = Object.keys(lastDateBySeries).sort((x, y) => (lastDateBySeries[x] < lastDateBySeries[y] ? 1 : -1))[0];
   if (latestSid) {
+    // 公式NTCは同じシリーズが開催月ごとに別エントリで登録される(例: MISSION4 = 8月開催 7482 + 9月開催 7483)。
+    // 月単位で判定すると月替わりの度に「直近シーズン入賞」が前月分ごと入れ替わってしまうため、
+    // short_name でまとめたシーズン全体を対象にする(2026-09-01 松岡さん指示)。
+    // js/common.js の GCG.seasonGroupKey と同一キー。
+    const seasonKey = (s) => String((s && (s.short_name || s.display_name || s.id)) || '');
+    const latestMeta = seriesMeta[latestSid] || {};
+    const latestKey = seasonKey(latestMeta.id ? latestMeta : { id: latestSid });
+    const seasonSids = new Set(
+      Object.keys(seriesMeta).filter((id) => seasonKey(seriesMeta[id]) === latestKey)
+    );
+    seasonSids.add(String(latestSid));   // series.json に無い series_id でも自分自身は必ず含める
     for (const ev of Object.values(events)) {
-      if (String(ev.series_id) !== latestSid) continue;
+      if (!seasonSids.has(String(ev.series_id))) continue;
       for (const r of (ev.results || [])) {
         for (const c of (r.deck || [])) {
           if (c && c.card_id) recentSeasonSet.add(String(c.card_id));
         }
       }
     }
-    const meta = seriesMeta[latestSid] || {};
-    recentSeasonLabel = (meta.display_name || meta.official_name || ('シリーズ' + latestSid)) + (meta.subtitle ? '（' + meta.subtitle + '）' : '');
-    console.log(`  直近シーズン: ${recentSeasonLabel} / 期間末日 ${lastDateBySeries[latestSid]} / 採用 ${recentSeasonSet.size} 種（ベース番号）`);
+    const meta = latestMeta;
+    // 複数の開催月をまとめたシーズンでは「（8月開催）」のような月名は付けない
+    const multiMonth = seasonSids.size > 1;
+    recentSeasonLabel = (meta.display_name || meta.official_name || ('シリーズ' + latestSid))
+      + ((!multiMonth && meta.subtitle) ? '（' + meta.subtitle + '）' : '');
+    console.log(`  直近シーズン: ${recentSeasonLabel} / 対象シリーズ ${[...seasonSids].sort().join('+')} / 期間末日 ${lastDateBySeries[latestSid]} / 採用 ${recentSeasonSet.size} 種（ベース番号）`);
   } else {
     console.warn('  ⚠ 直近シーズンを特定できません（デッキ付きイベントなし）。全カード未入賞扱いで生成します。');
   }
@@ -82,8 +96,12 @@ const COLOR_HEX = {
 };
 const TYPE_JP = {
   'UNIT': 'ユニット', 'PILOT': 'パイロット',
-  'COMMAND': 'コマンド', 'BASE': 'ベース', 'TOKEN': 'トークン'
+  'COMMAND': 'コマンド', 'BASE': 'ベース', 'TOKEN': 'トークン',
+  // 指示書113: リソース／EXベース系（公式の「タイプ」の生値）
+  'RESOURCE': 'リソース', 'EX RESOURCE': 'EXリソース', 'EX BASE': 'EXベース'
 };
+// 指示書113: 採用率の集計対象外とするタイプ（デッキの 50 枚に含まれないカード）。タイルに「対象外」を出す
+const RESOURCE_TYPES = ['RESOURCE', 'EX RESOURCE', 'EX BASE'];
 const RARITY_ORDER = ['LR', 'R', 'U', 'C'];
 
 function escapeHtml(str) {
@@ -115,6 +133,8 @@ const SET_LABELS = {
   'ST10': 'スタートデッキ Generation Pulse',
   'TOKEN': 'トークンカード',
   'EB01': 'Eternal Nexus',
+  'RESOURCE': 'リソース',   // 指示書113（R- / RP- / EXR- / EXRP-）
+  'EXBASE': 'EXベース',     // 指示書113（EXB- / EXBP-）
 };
 
 function getSetPrefix(cardId) {
@@ -146,7 +166,7 @@ function getCardSet(card) {
 //   通常販売パック群の末尾（ST の後）かつ特殊枠（β/PROMO）の前に配置。
 //   ※「G005」は GD05 の OCR 誤読でありセットとして存在しないため除去
 //     （2026-06-10 指示書 cowork-instr-g005-merge-images Task E）
-const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','SC01','β','PROMO','TOKEN'];
+const SET_DISPLAY_ORDER = ['GD01','GD02','GD03','GD04','GD05','ST01','ST02','ST03','ST04','ST05','ST06','ST07','ST08','ST09','ST10','EB01','SC01','β','PROMO','TOKEN','RESOURCE','EXBASE'];
 
 // === 収録弾チップの行グループ（2026-07-11 松岡さん承認: 3行化＋行ごと色分け）===
 // 行1=通常弾(GDxx) / 行2=デッキ(STxx) / 行3=特殊セット・プロモ・その他(残り全部。未知セットも自動でここへ)
@@ -171,7 +191,7 @@ const DEFAULT_SET_FILTER = 'GD05';
 //   SET_LABELS        … セクション小見出し用の説明文
 //   SET_DISPLAY_NAMES … chip 等で使う短い表示名（生値=表示でよいものは記載を省略）
 // 現状 "PROMO" のみ日本語表示「プロモ」。GD01-04 / ST01-09 / β は生値=表示で齟齬なし。
-const SET_DISPLAY_NAMES = { 'PROMO': 'プロモ' };
+const SET_DISPLAY_NAMES = { 'PROMO': 'プロモ', 'RESOURCE': 'リソース', 'EXBASE': 'EXベース' };  // RESOURCE/EXBASE は指示書113
 function getSetDisplayName(set) {
   return SET_DISPLAY_NAMES[set] || set;
 }
@@ -218,7 +238,7 @@ const _srcSet = new Set(); const _traitCount = {}; const _kwCount = {};
 const _rng = { lv: [99, 0], cs: [99, 0], ap: [99, 0], hp: [99, 0] };
 const _bump = (k, v) => { if (typeof v === 'number' && isFinite(v)) { if (v < _rng[k][0]) _rng[k][0] = v; if (v > _rng[k][1]) _rng[k][1] = v; } };
 for (const c of allCards) {
-  if (c.source_title) _srcSet.add(c.source_title);
+  if (c.source_title && !RESOURCE_TYPES.includes(c.card_type)) _srcSet.add(c.source_title);  // 指示書113 要裁定 O-6
   for (const t of (c.traits || [])) _traitCount[t] = (_traitCount[t] || 0) + 1;
   const fx = c.effect_text || c.effect || '';
   for (const m of fx.matchAll(/《([^》]+)》/g)) { const k = m[1].replace(/\d+$/, ''); _kwCount[k] = (_kwCount[k] || 0) + 1; }
@@ -229,8 +249,10 @@ for (const c of allCards) {
 }
 const ADV_SOURCES = SOURCE_RELEASE_ORDER.filter(t => _srcSet.has(t))
   .concat([..._srcSet].filter(t => !SOURCE_RELEASE_ORDER.includes(t)).sort());
-const ADV_TRAITS = Object.keys(_traitCount).sort((a, b) => _traitCount[b] - _traitCount[a] || a.localeCompare(b));
-const ADV_KEYWORDS = Object.keys(_kwCount).sort((a, b) => _kwCount[b] - _kwCount[a] || a.localeCompare(b));
+// 同点時の並びは実行環境のロケールに依存させない(Linux と Windows で順序が入れ替わり、
+// cards.html が再生成のたびに差分を生むため。2026-09-01)
+const ADV_TRAITS = Object.keys(_traitCount).sort((a, b) => _traitCount[b] - _traitCount[a] || (a < b ? -1 : a > b ? 1 : 0));
+const ADV_KEYWORDS = Object.keys(_kwCount).sort((a, b) => _kwCount[b] - _kwCount[a] || (a < b ? -1 : a > b ? 1 : 0));
 const ADV_RANGES = _rng;
 const _srcIdx = {}; ADV_SOURCES.forEach((t, i) => { _srcIdx[t] = i; });
 const _trIdx = {}; ADV_TRAITS.forEach((t, i) => { _trIdx[t] = i; });
@@ -278,7 +300,7 @@ console.log(`  収録弾: ${setOrder.length} セット`);
 function generateNoscriptContent() {
   let html = '  <noscript>\n';
   html += '    <div style="padding:32px;max-width:1280px;margin:0 auto">\n';
-  html += '      <h1 style="color:#d4a029;font-size:18px;margin-bottom:16px">ガンダムカードゲーム カードリスト</h1>\n';
+  html += '      <h2 style="color:#d4a029;font-size:18px;margin-bottom:16px">ガンダムカードゲーム カードリスト</h2>\n';
   html += `      <p style="color:#8b95a5;margin-bottom:24px">全${totalCards}枚のカード情報を掲載しています。</p>\n`;
   html += '      <ul style="list-style:none;padding:0">\n';
   for (const card of allCards) {
@@ -338,6 +360,7 @@ function generateHTML() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>カードリスト | GCG STATS</title>
   <meta name="description" content="ガンダムカードゲームの全カード一覧。ユニット・パイロット・コマンド・ベースカード${totalCards}枚を色・タイプ・レアリティでフィルタリングして検索できます。大会採用率データも確認可能。">
+  <meta property="og:site_name" content="GCG STATS">
   <meta property="og:title" content="カードリスト | GCG STATS">
   <meta property="og:description" content="ガンダムカードゲーム全${totalCards}枚のカードリスト。大会採用率・フィルタリング検索対応。">
   <meta property="og:type" content="website">
@@ -1088,7 +1111,8 @@ ${generateNoscriptContent()}
     // === Constants ===
     var COLOR_JP = { Blue:'青', Green:'緑', Red:'赤', White:'白', Purple:'紫', Colorless:'無色' };
     var COLOR_HEX = { Blue:'#4488ff', Green:'#44cc64', Red:'#ff4444', White:'#cccccc', Purple:'#b444ff', Colorless:'#888888' };
-    var TYPE_JP = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース', TOKEN:'トークン' };
+    var TYPE_JP = { UNIT:'ユニット', PILOT:'パイロット', COMMAND:'コマンド', BASE:'ベース', TOKEN:'トークン', 'RESOURCE':'リソース', 'EX RESOURCE':'EXリソース', 'EX BASE':'EXベース' };
+    var RESOURCE_TYPES = ${JSON.stringify(RESOURCE_TYPES)};
     var RARITY_ORDER = { LR: 0, R: 1, U: 2, C: 3 };
     var TOTAL_CARDS = ${totalCards};
     var SET_ORDER = ${JSON.stringify(setOrder)};
@@ -1107,6 +1131,8 @@ ${generateNoscriptContent()}
       search: '',
       sort: 'id-asc'
     };
+    // 初期状態の控え（URL へ書き出すとき「初期と同じ値は省く」ための比較元。URL 読み取りより前に取る。指示書104）
+    var initialFilterState = JSON.parse(JSON.stringify(filterState));
 
     // === DOM ===
     var gridEl = document.getElementById('card-grid');
@@ -1223,7 +1249,9 @@ ${generateNoscriptContent()}
       var imgSrc = '/images/cards/' + card.id + '.webp';
 
       var usageHtml = '';
-      if (card.hasTournament && card.usage > 0) {
+      if (RESOURCE_TYPES.indexOf(card.type) >= 0) {
+        usageHtml = '<div class="card-no-data">対象外</div>';  // 指示書113: リソース／EXベースは採用率の集計対象外
+      } else if (card.hasTournament && card.usage > 0) {
         var barColor = card.usage > 30 ? 'var(--accent)' : card.usage > 15 ? 'var(--blue)' : 'var(--text-muted)';
         usageHtml = '<div class="card-item-usage">' +
           '<div class="card-usage-bar"><div class="card-usage-bar-fill" style="width:' + Math.min(card.usage, 100) + '%;background:' + barColor + '"></div></div>' +
@@ -1233,7 +1261,7 @@ ${generateNoscriptContent()}
         usageHtml = '<div class="card-no-data">未入賞</div>';
       }
 
-      return '<a class="card-item" href="/cards/' + card.id + '/">' +
+      return '<a class="card-item" href="/cards/' + card.id + '/" target="_blank" rel="noopener">' +
         '<div class="card-item-img-wrap">' +
           '<img class="card-item-img" src="' + imgSrc + '" alt="' + escapeAttr(card.name) + '" loading="lazy" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;flex&quot;">' +
           '<div class="card-item-fallback"><div class="card-item-fallback-id">' + card.id + '</div><div class="card-item-fallback-name">' + escapeAttr(card.name) + '</div></div>' +
@@ -1262,6 +1290,9 @@ ${generateNoscriptContent()}
       // Debounce for search input
       if (renderTimer) clearTimeout(renderTimer);
       renderTimer = setTimeout(doRender, 16);
+      // URL への書き出しは描画とは別の 500ms デバウンスで予約する（0 件表示のときも必ず通る位置。指示書104）
+      // 1 回ずつの操作（チップ・ソート・チェック・詳細クリア）は後段の監視で即時に書き出す（指示書104-裁定R1）
+      scheduleUrlSync();
     }
 
     function doRender() {
@@ -1420,6 +1451,32 @@ ${generateNoscriptContent()}
         filterState.adv = { lv: null, cs: null, ap: null, hp: null, src: [], tr: [], kwMask: 0, nopl: false };
         updateBadge(); renderCards();
       });
+      // URL から入れた filterState.adv を UI（スライダー・チップ・チェック・バッジ）へ反映する（指示書104）
+      // updFns / updateBadge / collect はこの関数の中にしか無いため、ここで 1 個だけ公開する
+      window.__cardlistAdv = {
+        applyFromState: function () {
+          var A = filterState.adv;
+          ['lv', 'cs', 'ap', 'hp'].forEach(function (k) {
+            var lo = document.getElementById('adv-' + k + '-min');
+            var hi = document.getElementById('adv-' + k + '-max');
+            if (!lo || !hi) return;
+            if (A[k]) { lo.value = A[k][0]; hi.value = A[k][1]; } else { lo.value = lo.min; hi.value = hi.max; }
+          });
+          updFns.forEach(function (f) { f(true); });
+          function mark(id, isOn) {
+            document.querySelectorAll('#' + id + ' .filter-chip').forEach(function (c2) {
+              if (isOn(+c2.getAttribute('data-idx'))) c2.classList.add('active'); else c2.classList.remove('active');
+            });
+          }
+          mark('adv-source', function (i) { return A.src.indexOf(i) >= 0; });
+          mark('adv-traits', function (i) { return A.tr.indexOf(i) >= 0; });
+          mark('adv-keywords', function (i) { return (A.kwMask & (1 << i)) !== 0; });
+          filterState.adv.src = collect('adv-source');
+          filterState.adv.tr = collect('adv-traits');
+          if (np) np.checked = !!A.nopl;
+          updateBadge();
+        }
+      };
     })();
 
     searchInput.addEventListener('input', function() {
@@ -1441,46 +1498,195 @@ ${generateNoscriptContent()}
       }
     });
 
-    // URL params support
-    (function() {
+    // === 検索条件と URL の同期（指示書104）===
+    // 書き出し: history.replaceState（履歴は増やさない）。renderCards() のたびに 500ms デバウンスで予約し、
+    //   1 回ずつの操作（チップ click・ソート change・「パラレル非表示」チェック・詳細クリア）は既存の処理の後に即時に書き出す（指示書104-裁定R1）
+    //   スライダーと検索欄の input だけはデバウンスのまま（Safari は replaceState を 30 秒に 100 回超えると例外になる。drag は毎フレーム発火する）
+    // 読み取り: 既存 6 キー（color / set / type / rarity / q / sort）の名前・書式はそのまま、全条件に対応
+    //   値はすべて検証してから入れる（不正値は黙って捨てる。有効値が 0 個のグループは初期状態のまま）
+    //   詳細検索の出典・特徴・固有ルールは添字ではなく表示ラベルで持つ（カードが増えると添字が変わるため）
+    var URL_SYNC_DELAY_MS = 500;
+    var URL_LABEL_SEP = '|';
+    var URL_KEYS = ['color', 'set', 'type', 'rarity', 'tour', 'ver', 'reg', 'q', 'sort', 'lv', 'cs', 'ap', 'hp', 'src', 'tr', 'kw', 'nopl'];
+    var URL_LIST_GROUPS = [
+      { key: 'color', state: 'colors', group: 'filter-color' },
+      { key: 'set', state: 'sets', group: 'filter-set' },
+      { key: 'type', state: 'types', group: 'filter-type' },
+      { key: 'rarity', state: 'rarities', group: 'filter-rarity' }
+    ];
+    var URL_SINGLE_GROUPS = [
+      { key: 'tour', state: 'tournament', group: 'filter-tournament' },
+      { key: 'ver', state: 'version', group: 'filter-version' },
+      { key: 'reg', state: 'regulation', group: 'filter-regulation' }
+    ];
+    var URL_RANGE_KEYS = ['lv', 'cs', 'ap', 'hp'];
+    var urlSyncTimer = null;
+    var lastUrlSearch = null; // 最後に URL と揃えた search 文字列。null の間（読み取り前）は書き出さない
+
+    function sameValues(a, b) {
+      if (a.length !== b.length) return false;
+      var x = a.slice().sort(), y = b.slice().sort();
+      for (var i = 0; i < x.length; i++) { if (x[i] !== y[i]) return false; }
+      return true;
+    }
+
+    function buildUrlSearch() {
+      var p = new URLSearchParams();
+      var init = initialFilterState, A = filterState.adv;
+      URL_LIST_GROUPS.forEach(function (g) {
+        var cur = filterState[g.state];
+        if (sameValues(cur, init[g.state])) return;
+        // 「全て」は省かず all と書く（省くと初期値の弾に戻ってしまうため）
+        p.set(g.key, cur.length === 0 ? 'all' : cur.join(','));
+      });
+      URL_SINGLE_GROUPS.forEach(function (g) {
+        if (filterState[g.state] !== init[g.state]) p.set(g.key, filterState[g.state]);
+      });
+      if (filterState.search !== init.search) p.set('q', filterState.search);
+      if (filterState.sort !== init.sort) p.set('sort', filterState.sort);
+      URL_RANGE_KEYS.forEach(function (k) {
+        if (A[k]) p.set(k, A[k][0] + '-' + A[k][1]);
+      });
+      if (A.src.length) p.set('src', A.src.map(function (i) { return ADV_SOURCES[i]; }).join(URL_LABEL_SEP));
+      if (A.tr.length) p.set('tr', A.tr.map(function (i) { return ADV_TRAITS[i]; }).join(URL_LABEL_SEP));
+      if (A.kwMask) {
+        var kws = [];
+        for (var i = 0; i < ADV_KEYWORDS.length; i++) { if (A.kwMask & (1 << i)) kws.push(ADV_KEYWORDS[i]); }
+        p.set('kw', kws.join(URL_LABEL_SEP));
+      }
+      if (A.nopl) p.set('nopl', '1');
+      // このページが扱わないキー（外部から付いた計測用パラメータ等）は消さずに残す
+      new URLSearchParams(window.location.search).forEach(function (v, k) {
+        if (URL_KEYS.indexOf(k) < 0) p.append(k, v);
+      });
+      return p.toString();
+    }
+
+    function syncUrlFromState() {
+      if (urlSyncTimer) { clearTimeout(urlSyncTimer); urlSyncTimer = null; }
+      if (lastUrlSearch === null) return;
+      var s = buildUrlSearch();
+      if (s === lastUrlSearch) return; // 同じなら replaceState を呼ばない
+      try {
+        var u = new URL(window.location.href);
+        u.search = s; // 空文字なら「?」も残らない。hash はそのまま
+        history.replaceState(null, '', u.toString());
+        lastUrlSearch = s;
+      } catch (e) {
+        // file:// や回数制限で失敗しても表示は続ける（次の変更で再試行される）
+      }
+    }
+
+    function scheduleUrlSync() {
+      if (urlSyncTimer) clearTimeout(urlSyncTimer);
+      urlSyncTimer = setTimeout(syncUrlFromState, URL_SYNC_DELAY_MS);
+    }
+
+    // 1 回ずつの操作は即時に書き出す（リロード先の URL はアンロード系イベントより先に決まるため、操作の時点で書く。指示書104-裁定R1）
+    //   チップ・詳細クリア: 既存のハンドラ（ボタン自身に登録）が状態を更新した後、バブリングで document に届いた時点で書く
+    //   ソート・チェック: 既存の change ハンドラより後に登録するので、後に走る
+    document.addEventListener('click', function (ev) {
+      var t = ev.target && ev.target.closest ? ev.target.closest('.filter-chip, #adv-clear') : null;
+      if (t) syncUrlFromState();
+    });
+    sortSelect.addEventListener('change', function () { syncUrlFromState(); });
+    var advNoParallelEl = document.getElementById('adv-noparallel');
+    if (advNoParallelEl) advNoParallelEl.addEventListener('change', function () { syncUrlFromState(); });
+
+    // 同じタブで別ページへ移動する・タブを切り替えるときは、デバウンスを待たずに書き出す（移動→戻る で復元される）
+    window.addEventListener('pagehide', function () { syncUrlFromState(); });
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'hidden') syncUrlFromState();
+    });
+
+    function applyStateFromUrl() {
       var params = new URLSearchParams(window.location.search);
-      if (params.get('color')) {
-        var colors = params.get('color').split(',');
-        filterState.colors = colors;
-        var chips = document.querySelectorAll('#filter-color .filter-chip');
-        chips[0].classList.remove('active');
-        chips.forEach(function(c) { if (colors.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      function chipValues(groupId) {
+        var out = [];
+        document.querySelectorAll('#' + groupId + ' .filter-chip').forEach(function (c) {
+          if (c.dataset.value && c.dataset.value !== 'all') out.push(c.dataset.value);
+        });
+        return out;
       }
-      if (params.get('set')) {
-        var sets = params.get('set').split(',');
-        filterState.sets = sets;
-        var chips = document.querySelectorAll('#filter-set .filter-chip');
-        chips.forEach(function(c) { c.classList.remove('active'); });
-        chips.forEach(function(c) { if (sets.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      // 全チップの active を外してから付け直す。1 つも付かなければ「全て」(先頭チップ)を付ける
+      function markChips(groupId, isOn) {
+        var chips = document.querySelectorAll('#' + groupId + ' .filter-chip');
+        var any = false;
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        chips.forEach(function (c) { if (isOn(c.dataset.value)) { c.classList.add('active'); any = true; } });
+        if (!any && chips[0]) chips[0].classList.add('active');
       }
-      if (params.get('type')) {
-        var types = params.get('type').split(',');
-        filterState.types = types;
-        var chips = document.querySelectorAll('#filter-type .filter-chip');
-        chips[0].classList.remove('active');
-        chips.forEach(function(c) { if (types.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      URL_LIST_GROUPS.forEach(function (g) {
+        var raw = params.get(g.key);
+        if (!raw) return;
+        if (raw === 'all') {
+          filterState[g.state] = [];
+          markChips(g.group, function (v) { return v === 'all'; });
+          return;
+        }
+        var allowed = chipValues(g.group), vals = [];
+        raw.split(',').forEach(function (v) {
+          if (allowed.indexOf(v) >= 0 && vals.indexOf(v) < 0) vals.push(v);
+        });
+        if (vals.length === 0) return;
+        filterState[g.state] = vals;
+        markChips(g.group, function (v) { return vals.indexOf(v) >= 0; });
+      });
+      URL_SINGLE_GROUPS.forEach(function (g) {
+        var raw = params.get(g.key);
+        if (!raw || chipValues(g.group).indexOf(raw) < 0) return;
+        filterState[g.state] = raw;
+        markChips(g.group, function (v) { return v === raw; });
+      });
+      var q = params.get('q');
+      if (q && q.trim()) filterState.search = q.trim();
+      var sortRaw = params.get('sort');
+      if (sortRaw && Array.prototype.some.call(sortSelect.options, function (o) { return o.value === sortRaw; })) {
+        filterState.sort = sortRaw;
       }
-      if (params.get('rarity')) {
-        var rarities = params.get('rarity').split(',');
-        filterState.rarities = rarities;
-        var chips = document.querySelectorAll('#filter-rarity .filter-chip');
-        chips[0].classList.remove('active');
-        chips.forEach(function(c) { if (rarities.indexOf(c.dataset.value) >= 0) c.classList.add('active'); });
+      searchInput.value = filterState.search;
+      sortSelect.value = filterState.sort;
+      URL_RANGE_KEYS.forEach(function (k) {
+        var raw = params.get(k), lo = document.getElementById('adv-' + k + '-min');
+        if (!raw || !lo) return;
+        // 「下限-上限」。先頭の「-」は負号として扱う（将来 AP/HP の補正値に負の数が入っても読めるように）
+        var cut = -1;
+        for (var i = 1; i < raw.length; i++) { if (raw.charAt(i) === '-' && raw.charAt(i - 1) !== '-') { cut = i; break; } }
+        if (cut < 0) return;
+        var parts = [raw.slice(0, cut), raw.slice(cut + 1)], mn = +lo.min, mx = +lo.max, nums = [];
+        for (var j = 0; j < 2; j++) {
+          var n = Number(parts[j]);
+          if (parts[j].trim() === '' || !isFinite(n) || Math.floor(n) !== n) return;
+          nums.push(Math.min(mx, Math.max(mn, n)));
+        }
+        filterState.adv[k] = [Math.min(nums[0], nums[1]), Math.max(nums[0], nums[1])];
+      });
+      function labelsToIdx(raw, labels) {
+        var out = [];
+        if (!raw) return out;
+        raw.split(URL_LABEL_SEP).forEach(function (s) {
+          var i = labels.indexOf(s);
+          if (i >= 0 && out.indexOf(i) < 0) out.push(i);
+        });
+        return out;
       }
-      if (params.get('q')) {
-        filterState.search = params.get('q');
-        searchInput.value = filterState.search;
+      var srcIdx = labelsToIdx(params.get('src'), ADV_SOURCES);
+      if (srcIdx.length) filterState.adv.src = srcIdx;
+      var trIdx = labelsToIdx(params.get('tr'), ADV_TRAITS);
+      if (trIdx.length) filterState.adv.tr = trIdx;
+      var kwIdx = labelsToIdx(params.get('kw'), ADV_KEYWORDS);
+      if (kwIdx.length) {
+        var m = 0;
+        kwIdx.forEach(function (i) { m |= (1 << i); });
+        filterState.adv.kwMask = m;
       }
-      if (params.get('sort')) {
-        filterState.sort = params.get('sort');
-        sortSelect.value = filterState.sort;
-      }
-    })();
+      if (params.get('nopl') === '1') filterState.adv.nopl = true;
+      if (window.__cardlistAdv) window.__cardlistAdv.applyFromState();
+    }
+
+    // 順序: URL 読み取り → 書き出しの比較元を確定 → ヘッダ → 初回描画（初回描画で URL を書き換えない）
+    applyStateFromUrl();
+    lastUrlSearch = buildUrlSearch();
 
     // Header/Footer
     GCG.init();

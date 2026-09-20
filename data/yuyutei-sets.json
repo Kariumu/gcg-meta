@@ -1,11 +1,7 @@
 {
- "generated_at": "2026-09-19",
+ "generated_at": "2026-09-20",
  "source": "遊々亭の検索フォームの vers[] 選択肢 25 件（指示書108 の保存 HTML yuyu-tei_sell_gcg_s_gd05_20260918.html）と、https://yuyu-tei.jp/top/gcg（2026-09-19 取得・evidence/yuyutei_top_gcg.html）",
- "unused_yuyutei_vers": {
-  "rp-100": "[RP-001]～[RP-100]。cards_master に RP- の番号が無いため対象外",
-  "exbp-100": "[EXBP-001]～[EXBP-100]。同上",
-  "exrp-100": "[EXRP-001]～[EXRP-100]。同上"
- },
+ "unused_yuyutei_vers": {},
  "sets": {
   "GD01": {
    "ver": "gd01",
@@ -169,7 +165,7 @@
    "label": "リソース・トークン",
    "sell_list": "https://yuyu-tei.jp/sell/gcg/s/reto",
    "buy_list": "https://yuyu-tei.jp/buy/gcg/s/reto",
-   "note": "TOKEN の番号 T-001〜T-029 のうち 27 が reto の一覧にある。reto には EXB-/EXR-/R- の番号も含まれるが cards_master に該当ページは無い"
+   "note": "TOKEN の番号 T-001〜T-029 のうち 27 が reto の一覧にある。reto には EXB-/EXR-/R- の番号も含まれるが、リソース／EXベース（R- / RP- / EXR- / EXRP- / EXB- / EXBP-）は RESOURCE・EXBASE 側で扱う（指示書113）"
   },
   "β": {
    "ver": "limited1.0",
@@ -177,6 +173,26 @@
    "sell_list": "https://yuyu-tei.jp/sell/gcg/s/limited1.0",
    "buy_list": "https://yuyu-tei.jp/buy/gcg/s/limited1.0",
    "note": "β の番号 67 種すべてが limited1.0 の一覧にある"
+  },
+  "RESOURCE": {
+   "vers": [
+    "reto",
+    "rp-100",
+    "exrp-100",
+    "limited1.0",
+    "gd05"
+   ],
+   "label": "リソース（通常・プロモ・EX）",
+   "note": "指示書113（2026-09-20）。R-/RP-/EXR-/EXRP- の番号が現れる弾コードを対応表から数えて決めた: reto(R 122・EXR 9 商品行)・rp-100(RP 132)・exrp-100(EXRP 26)・gd05(EXR 16)・limited1.0(R 3・EXR 1)。商品行は販売＋買取の延べ数"
+  },
+  "EXBASE": {
+   "vers": [
+    "reto",
+    "exbp-100",
+    "limited1.0"
+   ],
+   "label": "EXベース（通常・プロモ）",
+   "note": "指示書113（2026-09-20）。EXB-/EXBP- の番号が現れる弾コードを対応表から数えて決めた: reto(EXB 8)・exbp-100(EXBP 42)・limited1.0(EXB 1)。商品行は販売＋買取の延べ数"
   }
  }
 }

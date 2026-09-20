@@ -1,10 +1,20 @@
 {
- "generated_at": "2026-09-19",
+ "generated_at": "2026-09-20",
  "sets": {
   "eb01": {
    "sell_list": "https://yuyu-tei.jp/sell/gcg/s/eb01",
    "buy_list": "https://yuyu-tei.jp/buy/gcg/s/eb01",
    "fetched_at": "2026-09-19"
+  },
+  "exbp-100": {
+   "sell_list": "https://yuyu-tei.jp/sell/gcg/s/exbp-100",
+   "buy_list": "https://yuyu-tei.jp/buy/gcg/s/exbp-100",
+   "fetched_at": "2026-09-20"
+  },
+  "exrp-100": {
+   "sell_list": "https://yuyu-tei.jp/sell/gcg/s/exrp-100",
+   "buy_list": "https://yuyu-tei.jp/buy/gcg/s/exrp-100",
+   "fetched_at": "2026-09-20"
   },
   "gd01": {
    "sell_list": "https://yuyu-tei.jp/sell/gcg/s/gd01",
@@ -55,6 +65,11 @@
    "sell_list": "https://yuyu-tei.jp/sell/gcg/s/reto",
    "buy_list": "https://yuyu-tei.jp/buy/gcg/s/reto",
    "fetched_at": "2026-09-19"
+  },
+  "rp-100": {
+   "sell_list": "https://yuyu-tei.jp/sell/gcg/s/rp-100",
+   "buy_list": "https://yuyu-tei.jp/buy/gcg/s/rp-100",
+   "fetched_at": "2026-09-20"
   },
   "sc01": {
    "sell_list": "https://yuyu-tei.jp/sell/gcg/s/sc01",
@@ -114,6 +129,8 @@
  },
  "sets_fetched": {
   "eb01": "2026-09-19",
+  "exbp-100": "2026-09-20",
+  "exrp-100": "2026-09-20",
   "gd01": "2026-09-19",
   "gd02": "2026-09-19",
   "gd03": "2026-09-19",
@@ -124,6 +141,7 @@
   "promo-st20": "2026-09-19",
   "promo-t100": "2026-09-19",
   "reto": "2026-09-19",
+  "rp-100": "2026-09-20",
   "sc01": "2026-09-19",
   "st01": "2026-09-19",
   "st02": "2026-09-19",
@@ -1591,6 +1609,430 @@
     }
    ]
   },
+  "EXBP-001": {
+   "sell": [
+    {
+     "id": 10001,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10001,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-002": {
+   "sell": [
+    {
+     "id": 10002,
+     "ver": "exbp-100",
+     "name": "EXベース(ストライクガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10002,
+     "ver": "exbp-100",
+     "name": "EXベース(ストライクガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-003": {
+   "sell": [
+    {
+     "id": 10003,
+     "ver": "exbp-100",
+     "name": "EXベース(THE GUNDAM BASE コラボレーション2025)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10003,
+     "ver": "exbp-100",
+     "name": "EXベース(THE GUNDAM BASE コラボレーション2025)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-004": {
+   "sell": [
+    {
+     "id": 10004,
+     "ver": "exbp-100",
+     "name": "EXベース(ザクII(シャア・アズナブル機))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10004,
+     "ver": "exbp-100",
+     "name": "EXベース(ザクII(シャア・アズナブル機))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-005": {
+   "sell": [
+    {
+     "id": 10005,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム BCGFest 25-26 Ver.)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10005,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム BCGFest 25-26 Ver.)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-006": {
+   "sell": [
+    {
+     "id": 10006,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": []
+  },
+  "EXBP-007": {
+   "sell": [
+    {
+     "id": 10007,
+     "ver": "exbp-100",
+     "name": "EXベース(ユニコーンガンダム(デストロイモード))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": []
+  },
+  "EXBP-008": {
+   "sell": [
+    {
+     "id": 10008,
+     "ver": "exbp-100",
+     "name": "EXベース(フリーダムガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10008,
+     "ver": "exbp-100",
+     "name": "EXベース(フリーダムガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-009": {
+   "sell": [
+    {
+     "id": 10009,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・エアリアル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10009,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・エアリアル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-010": {
+   "sell": [
+    {
+     "id": 10010,
+     "ver": "exbp-100",
+     "name": "EXベース(GQuuuuuuX(ジークアクス))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10010,
+     "ver": "exbp-100",
+     "name": "EXベース(GQuuuuuuX(ジークアクス))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-011": {
+   "sell": [
+    {
+     "id": 10011,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・端白星)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10011,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・端白星)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-018": {
+   "sell": [
+    {
+     "id": 10012,
+     "ver": "exbp-100",
+     "name": "EXベース(Ξガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10012,
+     "ver": "exbp-100",
+     "name": "EXベース(Ξガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-019": {
+   "sell": [
+    {
+     "id": 10018,
+     "ver": "exbp-100",
+     "name": "EXベース(フォースインパルスガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10018,
+     "ver": "exbp-100",
+     "name": "EXベース(フォースインパルスガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-020": {
+   "sell": [
+    {
+     "id": 10013,
+     "ver": "exbp-100",
+     "name": "EXベース(トールギス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10013,
+     "ver": "exbp-100",
+     "name": "EXベース(トールギス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-021": {
+   "sell": [
+    {
+     "id": 10014,
+     "ver": "exbp-100",
+     "name": "EXベース(ユニコーンガンダム(デストロイモード))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10014,
+     "ver": "exbp-100",
+     "name": "EXベース(ユニコーンガンダム(デストロイモード))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-022": {
+   "sell": [
+    {
+     "id": 10015,
+     "ver": "exbp-100",
+     "name": "EXベース(クシャトリヤ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10015,
+     "ver": "exbp-100",
+     "name": "EXベース(クシャトリヤ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-023": {
+   "sell": [
+    {
+     "id": 10016,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・バルバトス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10016,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・バルバトス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-024": {
+   "sell": [
+    {
+     "id": 10017,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・エアリアル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10017,
+     "ver": "exbp-100",
+     "name": "EXベース(ガンダム・エアリアル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-025": {
+   "sell": [
+    {
+     "id": 10019,
+     "ver": "exbp-100",
+     "name": "EXベース(νガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10019,
+     "ver": "exbp-100",
+     "name": "EXベース(νガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-026": {
+   "sell": [
+    {
+     "id": 10020,
+     "ver": "exbp-100",
+     "name": "EXベース(シャイニングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10020,
+     "ver": "exbp-100",
+     "name": "EXベース(シャイニングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-027": {
+   "sell": [
+    {
+     "id": 10021,
+     "ver": "exbp-100",
+     "name": "EXベース(ウイングガンダムゼロ（EW版）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10021,
+     "ver": "exbp-100",
+     "name": "EXベース(ウイングガンダムゼロ（EW版）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXBP-031": {
+   "sell": [
+    {
+     "id": 10022,
+     "ver": "exbp-100",
+     "name": "EXベース(Freedom Ascension[GD05])",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10022,
+     "ver": "exbp-100",
+     "name": "EXベース(Freedom Ascension[GD05])",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
   "EXR-001": {
    "sell": [
     {
@@ -1836,6 +2278,266 @@
      "name": "EXリソース(マチュ＆ニャアン＆シュウジ)(パラレル)",
      "parallel": true,
      "rarity": "SP"
+    }
+   ]
+  },
+  "EXRP-001": {
+   "sell": [
+    {
+     "id": 10001,
+     "ver": "exrp-100",
+     "name": "EXリソース(リリーナ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10001,
+     "ver": "exrp-100",
+     "name": "EXリソース(リリーナ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-002": {
+   "sell": [
+    {
+     "id": 10002,
+     "ver": "exrp-100",
+     "name": "EXリソース(ラクス・クライン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10002,
+     "ver": "exrp-100",
+     "name": "EXリソース(ラクス・クライン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-003": {
+   "sell": [
+    {
+     "id": 10003,
+     "ver": "exrp-100",
+     "name": "EXリソース(スレッタ＆ミオリネ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10003,
+     "ver": "exrp-100",
+     "name": "EXリソース(スレッタ＆ミオリネ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-004": {
+   "sell": [
+    {
+     "id": 10004,
+     "ver": "exrp-100",
+     "name": "EXリソース(クーデリア・藍那・バーンスタイン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10004,
+     "ver": "exrp-100",
+     "name": "EXリソース(クーデリア・藍那・バーンスタイン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-005": {
+   "sell": [
+    {
+     "id": 10005,
+     "ver": "exrp-100",
+     "name": "EXリソース(アトラ・ミクスタ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10005,
+     "ver": "exrp-100",
+     "name": "EXリソース(アトラ・ミクスタ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-006": {
+   "sell": [
+    {
+     "id": 10006,
+     "ver": "exrp-100",
+     "name": "EXリソース(ラフタ・フランクランド)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10006,
+     "ver": "exrp-100",
+     "name": "EXリソース(ラフタ・フランクランド)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-007": {
+   "sell": [
+    {
+     "id": 10007,
+     "ver": "exrp-100",
+     "name": "EXリソース(フミタン・アドモス＆クーデリア・藍那・バーンスタイン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10007,
+     "ver": "exrp-100",
+     "name": "EXリソース(フミタン・アドモス＆クーデリア・藍那・バーンスタイン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-008": {
+   "sell": [
+    {
+     "id": 10008,
+     "ver": "exrp-100",
+     "name": "EXリソース(アルミリア・ボードウィン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10008,
+     "ver": "exrp-100",
+     "name": "EXリソース(アルミリア・ボードウィン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-009": {
+   "sell": [
+    {
+     "id": 10009,
+     "ver": "exrp-100",
+     "name": "EXリソース(アマテ・ユズリハ(マチュ))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10009,
+     "ver": "exrp-100",
+     "name": "EXリソース(アマテ・ユズリハ(マチュ))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-010": {
+   "sell": [
+    {
+     "id": 10010,
+     "ver": "exrp-100",
+     "name": "EXリソース(ニャアン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10010,
+     "ver": "exrp-100",
+     "name": "EXリソース(ニャアン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-011": {
+   "sell": [
+    {
+     "id": 10011,
+     "ver": "exrp-100",
+     "name": "EXリソース(コモリ・ハーコート)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10011,
+     "ver": "exrp-100",
+     "name": "EXリソース(コモリ・ハーコート)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-012": {
+   "sell": [
+    {
+     "id": 10012,
+     "ver": "exrp-100",
+     "name": "EXリソース(シイコ・スガイ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10012,
+     "ver": "exrp-100",
+     "name": "EXリソース(シイコ・スガイ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "EXRP-013": {
+   "sell": [
+    {
+     "id": 10013,
+     "ver": "exrp-100",
+     "name": "EXリソース(ドゥー・ムラサメ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10013,
+     "ver": "exrp-100",
+     "name": "EXリソース(ドゥー・ムラサメ)",
+     "parallel": false,
+     "rarity": "P"
     }
    ]
   },
@@ -17058,6 +17760,1326 @@
     }
    ],
    "buy": []
+  },
+  "RP-001": {
+   "sell": [
+    {
+     "id": 10001,
+     "ver": "rp-100",
+     "name": "リソース(ヒイロ＆ウイングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10001,
+     "ver": "rp-100",
+     "name": "リソース(ヒイロ＆ウイングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-002": {
+   "sell": [
+    {
+     "id": 10003,
+     "ver": "rp-100",
+     "name": "リソース(ゼクス＆トールギス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10003,
+     "ver": "rp-100",
+     "name": "リソース(ゼクス＆トールギス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-003": {
+   "sell": [
+    {
+     "id": 10008,
+     "ver": "rp-100",
+     "name": "リソース(アムロ＆ガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10008,
+     "ver": "rp-100",
+     "name": "リソース(アムロ＆ガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-004": {
+   "sell": [
+    {
+     "id": 10004,
+     "ver": "rp-100",
+     "name": "リソース(シャア＆ザクII(シャア・アズナブル機))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10004,
+     "ver": "rp-100",
+     "name": "リソース(シャア＆ザクII(シャア・アズナブル機))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-005": {
+   "sell": [
+    {
+     "id": 10009,
+     "ver": "rp-100",
+     "name": "リソース(バナージ＆ユニコーンガンダム(デストロイモード))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10009,
+     "ver": "rp-100",
+     "name": "リソース(バナージ＆ユニコーンガンダム(デストロイモード))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-006": {
+   "sell": [
+    {
+     "id": 10010,
+     "ver": "rp-100",
+     "name": "リソース(フル・フロンタル＆シナンジュ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10010,
+     "ver": "rp-100",
+     "name": "リソース(フル・フロンタル＆シナンジュ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-007": {
+   "sell": [
+    {
+     "id": 10005,
+     "ver": "rp-100",
+     "name": "リソース(キラ＆ストライクガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10005,
+     "ver": "rp-100",
+     "name": "リソース(キラ＆ストライクガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-008": {
+   "sell": [
+    {
+     "id": 10002,
+     "ver": "rp-100",
+     "name": "リソース(アスラン＆イージスガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10002,
+     "ver": "rp-100",
+     "name": "リソース(アスラン＆イージスガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-009": {
+   "sell": [
+    {
+     "id": 10007,
+     "ver": "rp-100",
+     "name": "リソース(スレッタ＆ガンダム・エアリアル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10007,
+     "ver": "rp-100",
+     "name": "リソース(スレッタ＆ガンダム・エアリアル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-010": {
+   "sell": [
+    {
+     "id": 10006,
+     "ver": "rp-100",
+     "name": "リソース(マチュ＆GQuuuuuuX(ジークアクス))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10006,
+     "ver": "rp-100",
+     "name": "リソース(マチュ＆GQuuuuuuX(ジークアクス))",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-011": {
+   "sell": [
+    {
+     "id": 10011,
+     "ver": "rp-100",
+     "name": "リソース(地球連邦軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10011,
+     "ver": "rp-100",
+     "name": "リソース(地球連邦軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-012": {
+   "sell": [
+    {
+     "id": 10012,
+     "ver": "rp-100",
+     "name": "リソース(ジオン公国軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10012,
+     "ver": "rp-100",
+     "name": "リソース(ジオン公国軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-013": {
+   "sell": [
+    {
+     "id": 10013,
+     "ver": "rp-100",
+     "name": "リソース(ネオ・ジオン軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10013,
+     "ver": "rp-100",
+     "name": "リソース(ネオ・ジオン軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-014": {
+   "sell": [
+    {
+     "id": 10014,
+     "ver": "rp-100",
+     "name": "リソース(シャア・アズナブル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10014,
+     "ver": "rp-100",
+     "name": "リソース(シャア・アズナブル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-015": {
+   "sell": [
+    {
+     "id": 10015,
+     "ver": "rp-100",
+     "name": "リソース(ビスト財団)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10015,
+     "ver": "rp-100",
+     "name": "リソース(ビスト財団)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-016": {
+   "sell": [
+    {
+     "id": 10016,
+     "ver": "rp-100",
+     "name": "リソース(OZ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10016,
+     "ver": "rp-100",
+     "name": "リソース(OZ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-017": {
+   "sell": [
+    {
+     "id": 10017,
+     "ver": "rp-100",
+     "name": "リソース(地球連合軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10017,
+     "ver": "rp-100",
+     "name": "リソース(地球連合軍)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-018": {
+   "sell": [
+    {
+     "id": 10018,
+     "ver": "rp-100",
+     "name": "リソース(ザフト)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10018,
+     "ver": "rp-100",
+     "name": "リソース(ザフト)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-019": {
+   "sell": [
+    {
+     "id": 10019,
+     "ver": "rp-100",
+     "name": "リソース(オーブ連合首長国)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10019,
+     "ver": "rp-100",
+     "name": "リソース(オーブ連合首長国)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-020": {
+   "sell": [
+    {
+     "id": 10020,
+     "ver": "rp-100",
+     "name": "リソース(アスティカシア高等専門学校)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10020,
+     "ver": "rp-100",
+     "name": "リソース(アスティカシア高等専門学校)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-021": {
+   "sell": [
+    {
+     "id": 10032,
+     "ver": "rp-100",
+     "name": "リソース(ハサウェイ＆Ξガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10032,
+     "ver": "rp-100",
+     "name": "リソース(ハサウェイ＆Ξガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-022": {
+   "sell": [
+    {
+     "id": 10031,
+     "ver": "rp-100",
+     "name": "リソース(刹那＆ガンダムエクシア)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10031,
+     "ver": "rp-100",
+     "name": "リソース(刹那＆ガンダムエクシア)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-023": {
+   "sell": [
+    {
+     "id": 10043,
+     "ver": "rp-100",
+     "name": "リソース(ニャアン&GFreD)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10043,
+     "ver": "rp-100",
+     "name": "リソース(ニャアン&GFreD)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-024": {
+   "sell": [
+    {
+     "id": 10021,
+     "ver": "rp-100",
+     "name": "リソース(ヒイロ・ユイ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10021,
+     "ver": "rp-100",
+     "name": "リソース(ヒイロ・ユイ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-025": {
+   "sell": [
+    {
+     "id": 10022,
+     "ver": "rp-100",
+     "name": "リソース(ウイングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10022,
+     "ver": "rp-100",
+     "name": "リソース(ウイングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-026": {
+   "sell": [
+    {
+     "id": 10023,
+     "ver": "rp-100",
+     "name": "リソース(デュオ・マックスウェル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10023,
+     "ver": "rp-100",
+     "name": "リソース(デュオ・マックスウェル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-027": {
+   "sell": [
+    {
+     "id": 10024,
+     "ver": "rp-100",
+     "name": "リソース(ガンダムデスサイズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10024,
+     "ver": "rp-100",
+     "name": "リソース(ガンダムデスサイズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-028": {
+   "sell": [
+    {
+     "id": 10025,
+     "ver": "rp-100",
+     "name": "リソース(トロワ・バートン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10025,
+     "ver": "rp-100",
+     "name": "リソース(トロワ・バートン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-029": {
+   "sell": [
+    {
+     "id": 10026,
+     "ver": "rp-100",
+     "name": "リソース(ガンダムヘビーアームズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10026,
+     "ver": "rp-100",
+     "name": "リソース(ガンダムヘビーアームズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-030": {
+   "sell": [
+    {
+     "id": 10027,
+     "ver": "rp-100",
+     "name": "リソース(カトル・ラバーバ・ウィナー)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10027,
+     "ver": "rp-100",
+     "name": "リソース(カトル・ラバーバ・ウィナー)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-031": {
+   "sell": [
+    {
+     "id": 10028,
+     "ver": "rp-100",
+     "name": "リソース(ガンダムサンドロック)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10028,
+     "ver": "rp-100",
+     "name": "リソース(ガンダムサンドロック)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-032": {
+   "sell": [
+    {
+     "id": 10029,
+     "ver": "rp-100",
+     "name": "リソース(張五飛)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10029,
+     "ver": "rp-100",
+     "name": "リソース(張五飛)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-033": {
+   "sell": [
+    {
+     "id": 10030,
+     "ver": "rp-100",
+     "name": "リソース(シェンロンガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10030,
+     "ver": "rp-100",
+     "name": "リソース(シェンロンガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-034": {
+   "sell": [
+    {
+     "id": 10033,
+     "ver": "rp-100",
+     "name": "リソース(三日月・オーガス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10033,
+     "ver": "rp-100",
+     "name": "リソース(三日月・オーガス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-035": {
+   "sell": [
+    {
+     "id": 10034,
+     "ver": "rp-100",
+     "name": "リソース(オルガ・イツカ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10034,
+     "ver": "rp-100",
+     "name": "リソース(オルガ・イツカ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-036": {
+   "sell": [
+    {
+     "id": 10035,
+     "ver": "rp-100",
+     "name": "リソース(昭弘・アルトランド)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10035,
+     "ver": "rp-100",
+     "name": "リソース(昭弘・アルトランド)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-037": {
+   "sell": [
+    {
+     "id": 10036,
+     "ver": "rp-100",
+     "name": "リソース(ビスケット・グリフォン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10036,
+     "ver": "rp-100",
+     "name": "リソース(ビスケット・グリフォン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-038": {
+   "sell": [
+    {
+     "id": 10037,
+     "ver": "rp-100",
+     "name": "リソース(ガンダム・バルバトス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10037,
+     "ver": "rp-100",
+     "name": "リソース(ガンダム・バルバトス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-039": {
+   "sell": [
+    {
+     "id": 10038,
+     "ver": "rp-100",
+     "name": "リソース(ガンダム・グシオンリベイク)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10038,
+     "ver": "rp-100",
+     "name": "リソース(ガンダム・グシオンリベイク)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-040": {
+   "sell": [
+    {
+     "id": 10039,
+     "ver": "rp-100",
+     "name": "リソース(ガエリオ・ボードウィン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10039,
+     "ver": "rp-100",
+     "name": "リソース(ガエリオ・ボードウィン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-041": {
+   "sell": [
+    {
+     "id": 10040,
+     "ver": "rp-100",
+     "name": "リソース(マクギリス・ファリド)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10040,
+     "ver": "rp-100",
+     "name": "リソース(マクギリス・ファリド)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-042": {
+   "sell": [
+    {
+     "id": 10041,
+     "ver": "rp-100",
+     "name": "リソース(ガンダム・キマリス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10041,
+     "ver": "rp-100",
+     "name": "リソース(ガンダム・キマリス)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-043": {
+   "sell": [
+    {
+     "id": 10042,
+     "ver": "rp-100",
+     "name": "リソース(シュヴァルべ・グレイズ （マクギリス機）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10042,
+     "ver": "rp-100",
+     "name": "リソース(シュヴァルべ・グレイズ （マクギリス機）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-044": {
+   "sell": [
+    {
+     "id": 10044,
+     "ver": "rp-100",
+     "name": "リソース(シン＆インパルスガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10044,
+     "ver": "rp-100",
+     "name": "リソース(シン＆インパルスガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-045": {
+   "sell": [
+    {
+     "id": 10057,
+     "ver": "rp-100",
+     "name": "リソース(エゥーゴ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10057,
+     "ver": "rp-100",
+     "name": "リソース(エゥーゴ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-046": {
+   "sell": [
+    {
+     "id": 10058,
+     "ver": "rp-100",
+     "name": "リソース(百式)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10058,
+     "ver": "rp-100",
+     "name": "リソース(百式)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-047": {
+   "sell": [
+    {
+     "id": 10059,
+     "ver": "rp-100",
+     "name": "リソース(ティターンズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10059,
+     "ver": "rp-100",
+     "name": "リソース(ティターンズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-048": {
+   "sell": [
+    {
+     "id": 10060,
+     "ver": "rp-100",
+     "name": "リソース(サイクロプス隊)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10060,
+     "ver": "rp-100",
+     "name": "リソース(サイクロプス隊)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-049": {
+   "sell": [
+    {
+     "id": 10061,
+     "ver": "rp-100",
+     "name": "リソース(キングオブハート)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10061,
+     "ver": "rp-100",
+     "name": "リソース(キングオブハート)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-050": {
+   "sell": [
+    {
+     "id": 10062,
+     "ver": "rp-100",
+     "name": "リソース(ソレスタルビーイング)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10062,
+     "ver": "rp-100",
+     "name": "リソース(ソレスタルビーイング)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-051": {
+   "sell": [
+    {
+     "id": 10063,
+     "ver": "rp-100",
+     "name": "リソース(鉄華団)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10063,
+     "ver": "rp-100",
+     "name": "リソース(鉄華団)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-052": {
+   "sell": [
+    {
+     "id": 10064,
+     "ver": "rp-100",
+     "name": "リソース(ギャラルホルン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10064,
+     "ver": "rp-100",
+     "name": "リソース(ギャラルホルン)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-053": {
+   "sell": [
+    {
+     "id": 10065,
+     "ver": "rp-100",
+     "name": "リソース(マフティー)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10065,
+     "ver": "rp-100",
+     "name": "リソース(マフティー)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-054": {
+   "sell": [
+    {
+     "id": 10066,
+     "ver": "rp-100",
+     "name": "リソース(ポメラニアンズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10066,
+     "ver": "rp-100",
+     "name": "リソース(ポメラニアンズ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-055": {
+   "sell": [
+    {
+     "id": 10054,
+     "ver": "rp-100",
+     "name": "リソース(シュウジ＆赤いガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10054,
+     "ver": "rp-100",
+     "name": "リソース(シュウジ＆赤いガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-056": {
+   "sell": [
+    {
+     "id": 10055,
+     "ver": "rp-100",
+     "name": "リソース(ガロード＆ガンダムX)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10055,
+     "ver": "rp-100",
+     "name": "リソース(ガロード＆ガンダムX)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-057": {
+   "sell": [
+    {
+     "id": 10045,
+     "ver": "rp-100",
+     "name": "リソース(カミーユ＆Zガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10045,
+     "ver": "rp-100",
+     "name": "リソース(カミーユ＆Zガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-058": {
+   "sell": [
+    {
+     "id": 10046,
+     "ver": "rp-100",
+     "name": "リソース(ハマーン＆キュベレイ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10046,
+     "ver": "rp-100",
+     "name": "リソース(ハマーン＆キュベレイ)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-059": {
+   "sell": [
+    {
+     "id": 10047,
+     "ver": "rp-100",
+     "name": "リソース(ウッソ＆Vガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10047,
+     "ver": "rp-100",
+     "name": "リソース(ウッソ＆Vガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-060": {
+   "sell": [
+    {
+     "id": 10048,
+     "ver": "rp-100",
+     "name": "リソース(ドモン＆シャイニングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10048,
+     "ver": "rp-100",
+     "name": "リソース(ドモン＆シャイニングガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-061": {
+   "sell": [
+    {
+     "id": 10049,
+     "ver": "rp-100",
+     "name": "リソース(ロラン＆∀ガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10049,
+     "ver": "rp-100",
+     "name": "リソース(ロラン＆∀ガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-062": {
+   "sell": [
+    {
+     "id": 10050,
+     "ver": "rp-100",
+     "name": "リソース(フリット＆ガンダムAGE-1 ノーマル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10050,
+     "ver": "rp-100",
+     "name": "リソース(フリット＆ガンダムAGE-1 ノーマル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-063": {
+   "sell": [
+    {
+     "id": 10051,
+     "ver": "rp-100",
+     "name": "リソース(三日月＆ガンダム・バルバトス（第1形態）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10051,
+     "ver": "rp-100",
+     "name": "リソース(三日月＆ガンダム・バルバトス（第1形態）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-064": {
+   "sell": [
+    {
+     "id": 10052,
+     "ver": "rp-100",
+     "name": "リソース(シャリア＆キケロガ（MS形態）（GQ）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10052,
+     "ver": "rp-100",
+     "name": "リソース(シャリア＆キケロガ（MS形態）（GQ）)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-065": {
+   "sell": [
+    {
+     "id": 10053,
+     "ver": "rp-100",
+     "name": "リソース(ジージェネエターナル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10053,
+     "ver": "rp-100",
+     "name": "リソース(ジージェネエターナル)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
+  },
+  "RP-067": {
+   "sell": [
+    {
+     "id": 10056,
+     "ver": "rp-100",
+     "name": "リソース(アムロ＆νガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ],
+   "buy": [
+    {
+     "id": 10056,
+     "ver": "rp-100",
+     "name": "リソース(アムロ＆νガンダム)",
+     "parallel": false,
+     "rarity": "P"
+    }
+   ]
   },
   "ST01-001": {
    "sell": [
