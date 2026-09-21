@@ -14,21 +14,21 @@
   "status": "active",
   "description": "公式イベント「ガンダムカードゲーム シリアルカードチャレンジ」の2026年9月開催分。開催期間は2026年9月1日〜9月30日。",
   "stats": {
-    "event_count": 225,
-    "total_result_entries": 2196,
-    "total_decks": 1097,
+    "event_count": 232,
+    "total_result_entries": 2252,
+    "total_decks": 1125,
     "by_region": {
       "関西": {
-        "events": 43,
-        "decks": 220
+        "events": 44,
+        "decks": 224
       },
       "九州": {
-        "events": 41,
-        "decks": 172
+        "events": 44,
+        "decks": 184
       },
       "関東": {
-        "events": 65,
-        "decks": 356
+        "events": 68,
+        "decks": 368
       },
       "中部": {
         "events": 47,
@@ -59,8 +59,8 @@
           "Purple"
         ],
         "label": "青/紫",
-        "count": 232,
-        "share": 21.1
+        "count": 236,
+        "share": 21
       },
       {
         "type_key": "Red+White",
@@ -69,8 +69,8 @@
           "White"
         ],
         "label": "赤/白",
-        "count": 214,
-        "share": 19.5
+        "count": 218,
+        "share": 19.4
       },
       {
         "type_key": "Green+Purple",
@@ -79,7 +79,7 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "count": 197,
+        "count": 203,
         "share": 18
       },
       {
@@ -89,8 +89,8 @@
           "White"
         ],
         "label": "青/白",
-        "count": 177,
-        "share": 16.1
+        "count": 184,
+        "share": 16.4
       },
       {
         "type_key": "Blue+Green",
@@ -99,7 +99,7 @@
           "Green"
         ],
         "label": "青/緑",
-        "count": 163,
+        "count": 168,
         "share": 14.9
       },
       {
@@ -109,8 +109,8 @@
           "Red"
         ],
         "label": "青/赤",
-        "count": 96,
-        "share": 8.8
+        "count": 98,
+        "share": 8.7
       },
       {
         "type_key": "White+Purple",
@@ -130,7 +130,7 @@
         ],
         "label": "赤/緑",
         "count": 5,
-        "share": 0.5
+        "share": 0.4
       },
       {
         "type_key": "Green+White",
@@ -161,8 +161,8 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "wins": 63,
-        "count": 197,
+        "wins": 65,
+        "count": 203,
         "win_rate": 32
       },
       {
@@ -173,8 +173,8 @@
         ],
         "label": "青/紫",
         "wins": 63,
-        "count": 232,
-        "win_rate": 27.2
+        "count": 236,
+        "win_rate": 26.7
       },
       {
         "type_key": "Red+White",
@@ -183,20 +183,9 @@
           "White"
         ],
         "label": "赤/白",
-        "wins": 57,
-        "count": 214,
+        "wins": 58,
+        "count": 218,
         "win_rate": 26.6
-      },
-      {
-        "type_key": "Blue+Green",
-        "colors": [
-          "Blue",
-          "Green"
-        ],
-        "label": "青/緑",
-        "wins": 40,
-        "count": 163,
-        "win_rate": 24.5
       },
       {
         "type_key": "Blue+White",
@@ -205,9 +194,20 @@
           "White"
         ],
         "label": "青/白",
-        "wins": 40,
-        "count": 177,
-        "win_rate": 22.6
+        "wins": 42,
+        "count": 184,
+        "win_rate": 22.8
+      },
+      {
+        "type_key": "Blue+Green",
+        "colors": [
+          "Blue",
+          "Green"
+        ],
+        "label": "青/緑",
+        "wins": 41,
+        "count": 168,
+        "win_rate": 24.4
       },
       {
         "type_key": "Blue+Red",
@@ -216,9 +216,9 @@
           "Red"
         ],
         "label": "青/赤",
-        "wins": 10,
-        "count": 96,
-        "win_rate": 10.4
+        "wins": 11,
+        "count": 98,
+        "win_rate": 11.2
       },
       {
         "type_key": "White+Purple",
