@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 775,
-    "decks": 3686,
+    "events": 776,
+    "decks": 3690,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,7 +17,7 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 716,
+      "count": 717,
       "share": 19.4,
       "win_rate": 25,
       "avg_rank": 2.5,
@@ -56,9 +56,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 616,
+      "count": 618,
       "share": 16.7,
-      "win_rate": 27.9,
+      "win_rate": 27.8,
       "avg_rank": 2.4,
       "wins": 172
     },
@@ -69,11 +69,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 562,
-      "share": 15.2,
-      "win_rate": 25.6,
+      "count": 563,
+      "share": 15.3,
+      "win_rate": 25.8,
       "avg_rank": 2.5,
-      "wins": 144
+      "wins": 145
     },
     {
       "type_key": "Blue+Red",
@@ -156,7 +156,7 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 1769,
+      "decks": 1770,
       "usage_rate": 48
     },
     {
@@ -171,22 +171,22 @@
     },
     {
       "card_id": "GD01-118",
-      "decks": 1321,
-      "usage_rate": 35.8
+      "decks": 1323,
+      "usage_rate": 35.9
     },
     {
       "card_id": "ST01-010",
-      "decks": 1293,
+      "decks": 1294,
       "usage_rate": 35.1
     },
     {
       "card_id": "ST03-008",
-      "decks": 1274,
+      "decks": 1276,
       "usage_rate": 34.6
     },
     {
       "card_id": "GD03-056",
-      "decks": 1262,
+      "decks": 1263,
       "usage_rate": 34.2
     },
     {
@@ -196,7 +196,7 @@
     },
     {
       "card_id": "GD01-030",
-      "decks": 1228,
+      "decks": 1230,
       "usage_rate": 33.3
     },
     {
@@ -205,7 +205,7 @@
       "usage_rate": 32.4
     }
   ],
-  "card_ranking_denominator": 3686,
+  "card_ranking_denominator": 3690,
   "recent_events": [
     {
       "event_id": "ntcd-01M369FKEQCB4GR7S3SJ7T0KXN",
@@ -567,6 +567,6 @@
   ],
   "source": {
     "latest_event_date": "2026-09-23",
-    "event_count": 1555
+    "event_count": 1556
   }
 }
