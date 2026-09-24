@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 785,
-    "decks": 3726,
+    "events": 786,
+    "decks": 3730,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,7 +17,7 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 723,
+      "count": 724,
       "share": 19.4,
       "win_rate": 24.9,
       "avg_rank": 2.5,
@@ -30,7 +30,7 @@
         "White"
       ],
       "label": "青/白",
-      "count": 683,
+      "count": 684,
       "share": 18.3,
       "win_rate": 26.5,
       "avg_rank": 2.4,
@@ -43,9 +43,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 675,
+      "count": 676,
       "share": 18.1,
-      "win_rate": 25.2,
+      "win_rate": 25.1,
       "avg_rank": 2.5,
       "wins": 170
     },
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 626,
+      "count": 627,
       "share": 16.8,
-      "win_rate": 27.8,
+      "win_rate": 27.9,
       "avg_rank": 2.5,
-      "wins": 174
+      "wins": 175
     },
     {
       "type_key": "Green+Purple",
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 1787,
+      "decks": 1789,
       "usage_rate": 48
     },
     {
       "card_id": "GD05-002",
-      "decks": 1685,
+      "decks": 1687,
       "usage_rate": 45.2
     },
     {
       "card_id": "GD05-081",
-      "decks": 1681,
+      "decks": 1683,
       "usage_rate": 45.1
     },
     {
       "card_id": "GD01-118",
-      "decks": 1339,
-      "usage_rate": 35.9
+      "decks": 1341,
+      "usage_rate": 36
     },
     {
       "card_id": "ST01-010",
-      "decks": 1305,
+      "decks": 1307,
       "usage_rate": 35
     },
     {
       "card_id": "ST03-008",
-      "decks": 1285,
+      "decks": 1286,
       "usage_rate": 34.5
     },
     {
       "card_id": "GD03-056",
-      "decks": 1274,
+      "decks": 1275,
       "usage_rate": 34.2
     },
     {
       "card_id": "ST05-010",
-      "decks": 1255,
+      "decks": 1256,
       "usage_rate": 33.7
     },
     {
       "card_id": "GD01-030",
-      "decks": 1239,
-      "usage_rate": 33.3
+      "decks": 1240,
+      "usage_rate": 33.2
     },
     {
       "card_id": "GD02-054",
-      "decks": 1205,
+      "decks": 1206,
       "usage_rate": 32.3
     }
   ],
-  "card_ranking_denominator": 3726,
+  "card_ranking_denominator": 3730,
   "recent_events": [
     {
       "event_id": "ntcd-01M3969N84TKX22TYJKBQK1MY0",
@@ -237,6 +237,41 @@
           "rank": 4,
           "colors": [
             "Green",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M399Q9PEB1SNS44WHE8BM73R",
+      "date": "2026-09-24",
+      "store": "カードボックス川口店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
             "Purple"
           ]
         }
@@ -521,45 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M36D15ZRK17SR8RVT9TKS2S2",
-      "date": "2026-09-23",
-      "store": "マナソース和歌山駅前店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-09-24",
-    "event_count": 1565
+    "event_count": 1566
   }
 }
