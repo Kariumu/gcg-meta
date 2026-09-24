@@ -112,6 +112,24 @@
         #date-filter-area { min-height: 78px; }
         @media (min-width: 379px) { #date-filter-area { min-height: 76px; } }
         @media (min-width: 453px) { #date-filter-area { min-height: 35px; } }
+        /* 指示書122 K-04: 集計の帯の「対象」（何の大会を数えたか）。
+           文字が入る前から高さを取っておき（広い幅は 2 行分・狭い幅は 3 行分）、文字が入っても帯の高さが
+           変わらないようにする。文字は枠の中で absolute にし、帯の列の幅の計算に影響させない。
+           取った行数を超える長さのときはそこで切り、全文は title に入れる。 */
+        .home-kpi-scope { flex: 0 0 100%; order: 99; position: relative; height: 32px; margin-top: 10px; }
+        .home-kpi-scope-text {
+            position: absolute; left: 12px; right: 12px; top: 0; height: 100%;
+            line-height: 16px; font-size: 11px; color: var(--text-muted); text-align: center;
+            display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+        }
+        /* 狭い幅（帯が grid になる幅）では、grid の列の幅がデータの到着で変わると全幅の行が左右に動くため、
+           「対象」は帯そのもの（幅が変わらない）を基準に absolute で下端に置き、その分の余白を帯の下に取る。
+           3 行分（48px）を取る。70px = 元の下の余白 12px ＋ 間 10px ＋ 「対象」48px */
+        @media (max-width: 480px) {
+            #dash-stats { position: relative; padding-bottom: 70px; }
+            .home-kpi-scope { position: absolute; left: 0; right: 0; bottom: 12px; height: 48px; margin-top: 0; }
+            .home-kpi-scope-text { -webkit-line-clamp: 3; }
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
@@ -160,6 +178,7 @@
                     <div class="home-kpi-label">デッキタイプ</div>
                     <div class="home-kpi-value" id="stat-types">--</div>
                 </div>
+                <div class="home-kpi-scope"><span class="home-kpi-scope-text" id="stat-scope">対象: --</span></div>
             </div>
             <div id="date-filter-area" style="display:flex;justify-content:center;margin-top:16px"></div>
         </section>
@@ -415,9 +434,10 @@
                 const st = summary.stats;
                 statsHtml = ''
                     + '<div class="series-hero-stats">'
-                    + '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.event_count != null ? st.event_count : '--') + '</div><div class="series-hero-stat-label">開催イベント</div></div>'
-                    + '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.total_decks != null ? st.total_decks : '--') + '</div><div class="series-hero-stat-label">集計デッキ</div></div>'
-                    + '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.total_result_entries != null ? st.total_result_entries : '--') + '</div><div class="series-hero-stat-label">記録結果</div></div>'
+                    // 指示書122 K-04: 下の集計の帯（GCG.animateNumber = toLocaleString）と同じく 3 桁ごとに区切る
+                    + '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.event_count != null ? Number(st.event_count).toLocaleString() : '--') + '</div><div class="series-hero-stat-label">開催イベント</div></div>'
+                    + '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.total_decks != null ? Number(st.total_decks).toLocaleString() : '--') + '</div><div class="series-hero-stat-label">集計デッキ</div></div>'
+                    + '<div class="series-hero-stat"><div class="series-hero-stat-value">' + (st.total_result_entries != null ? Number(st.total_result_entries).toLocaleString() : '--') + '</div><div class="series-hero-stat-label">記録結果</div></div>'
                     + '</div>';
             }
             el.innerHTML = ''
@@ -597,6 +617,46 @@
             el.textContent = s ? fmt(s) + '\u2013' : '\u2013' + fmt(e);
         }
 
+        // 指示書122 K-04: 集計の帯に「何の大会を数えたか」(#stat-scope)を出す。
+        //   top_stats.json には含まれるシリーズの一覧が無く、default_range.series_slug は帯の対象と
+        //   一致しない（帯は期間内の全シリーズを数えている）ため、集計期間と series.json の各シリーズの
+        //   開催期間の重なりで決める。同じ名前は 1 つにまとめ、まとめた後で 4 つ以上なら
+        //   先頭 3 つと「ほか N シリーズ」にする。期間が空（全期間）のときも同じ規則。
+        let scopeLabelSeq = 0;
+        function buildScopeLabel(seriesMap, startVal, endVal) {
+            const s = String(startVal == null ? '' : startVal).trim();
+            const e = String(endVal == null ? '' : endVal).trim();
+            const ids = Object.keys(seriesMap || {});
+            if (ids.length === 0) return '対象: --';
+            const list = ids.map(function (id) { return seriesMap[id]; })
+                .filter(function (x) {
+                    if (!x) return false;
+                    if (e && x.start_date && x.start_date > e) return false;
+                    if (s && x.end_date && x.end_date < s) return false;
+                    return true;
+                })
+                .sort(function (a, b) { return String(a.start_date || '').localeCompare(String(b.start_date || '')); });
+            const names = [];
+            list.forEach(function (x) {
+                const n = x.display_name || x.short_name;
+                if (n && names.indexOf(n) < 0) names.push(n);
+            });
+            if (names.length === 0) return '対象: 期間内のシリーズなし';
+            if (names.length >= 4) return '対象: ' + names.slice(0, 3).join('・') + ' ほか' + (names.length - 3) + 'シリーズ';
+            return '対象: ' + names.join('・');
+        }
+        async function setScopeLabel(startVal, endVal) {
+            const el = document.getElementById('stat-scope');
+            if (!el) return;
+            const seq = ++scopeLabelSeq;
+            let seriesMap = {};
+            try { seriesMap = await GCG.loadSeries(); } catch (err) { seriesMap = {}; }
+            if (seq !== scopeLabelSeq) return; // 期間が続けて変わったときは最後の 1 回だけ書く
+            const text = buildScopeLabel(seriesMap, startVal, endVal);
+            el.textContent = text;
+            el.title = text;
+        }
+
         // events.json + card_colors.json を遅延ロード（日付フィルタ操作時に1回だけ）
         // 注意: GCG.loadEvents() は失敗しても reject せず空データ({series:{},events:{}})を返す。
         //       そのまま成功扱いでメモ化すると、一度の通信失敗が「0件表示」のまま固定され、
@@ -694,6 +754,7 @@
             GCG.animateNumber(document.getElementById('stat-decks'), top.totals.decks);
             GCG.animateNumber(document.getElementById('stat-types'), top.totals.types);
             setPeriodLabel(top.default_range.start || '', top.default_range.end || '');
+            setScopeLabel(top.default_range.start || '', top.default_range.end || '');
 
             renderDeckTypes(top.deck_type_ranking);
             renderCardTop10(top.card_ranking, top.card_ranking_denominator != null ? top.card_ranking_denominator : top.totals.decks);
@@ -786,6 +847,7 @@
             GCG.animateNumber(document.getElementById('stat-decks'), totalResults);
             GCG.animateNumber(document.getElementById('stat-types'), Object.keys(allTypeKeys).length);
             setPeriodLabel(startDate, endDate);
+            setScopeLabel(startDate, endDate);
 
             var deckTypeRanking = Object.values(deckTypeMap).map(t => {
                 var share = totalResults > 0 ? Math.round(t.count / totalResults * 1000) / 10 : 0;

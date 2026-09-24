@@ -191,7 +191,7 @@
         '<span class="text-mono" style="color:var(--accent)">' + GCG.formatDate(ev.date) + '</span>' +
         (seriesName ? '<span style="opacity:0.3">|</span> <span>' + GCG.escapeHtml(seriesName) + '</span>' : '') +
         '</div></div>' +
-        '<span class="section-badge">' + (ev.results || []).length + '\u540D\u53C2\u52A0</span></div>';
+        ((ev.results || []).length ? '<span class="section-badge">\u5165\u8CDE' + (ev.results || []).length + '\u540D\u3092\u63B2\u8F09</span>' : '') + '</div>';
 
       const results = (ev.results || []).sort(function(a, b) { return a.rank - b.rank; });
 
