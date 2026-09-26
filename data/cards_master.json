@@ -2570,6 +2570,36 @@
     "package_set": "GD01",
     "effect_text": "〔WB隊〕の自分のユニットすべては《リペア1》を得る。 (自分のターン終了時、このユニットを指定の数回復する) 【セット時】このユニット以外の、自分のユニットが2つ以上いるなら、自分は1枚ドローする。"
   },
+  "GD01-001_p3": {
+    "id": "GD01-001_p3",
+    "name_jp": "ガンダム",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連邦",
+      "WB隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "アムロ・レイ"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "〔WB隊〕の自分のユニットすべては《リペア1》を得る。 (自分のターン終了時、このユニットを指定の数回復する) 【セット時】このユニット以外の、自分のユニットが2つ以上いるなら、自分は1枚ドローする。",
+    "effect": "〔WB隊〕の自分のユニットすべては《リペア1》を得る。 (自分のターン終了時、このユニットを指定の数回復する) 【セット時】このユニット以外の、自分のユニットが2つ以上いるなら、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
+    "base_card_id": "GD01-001"
+  },
   "GD01-002": {
     "id": "GD01-002",
     "name_jp": "ユニコーンガンダム（デストロイモード）",
@@ -3791,6 +3821,35 @@
     "package_set": "GD01",
     "effect_text": "【起動・メイン】自分の手札の〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を捨てる：このユニットにパイロットがセットされていないなら、自分のトラッシュのLv.3以下の〔ニュータイプ〕のパイロットカード1枚を選ぶ。それをこれにセットする。"
   },
+  "GD01-023_p2": {
+    "id": "GD01-023_p2",
+    "name_jp": "シャア専用ゲルググ",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 4,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【起動・メイン】自分の手札の〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を捨てる：このユニットにパイロットがセットされていないなら、自分のトラッシュのLv.3以下の〔ニュータイプ〕のパイロットカード1枚を選ぶ。それをこれにセットする。",
+    "effect": "【起動・メイン】自分の手札の〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を捨てる：このユニットにパイロットがセットされていないなら、自分のトラッシュのLv.3以下の〔ニュータイプ〕のパイロットカード1枚を選ぶ。それをこれにセットする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "オフィシャルカードケースセット 02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD01-023"
+  },
   "GD01-024": {
     "id": "GD01-024",
     "name_jp": "ウイングガンダムゼロ",
@@ -3870,6 +3929,35 @@
     "acquisition_info": "チャンピオンシップ優勝賞カード01",
     "package_set": "PROMO",
     "effect_text": "《高機動》(このユニットはブロックされない) 【配備時】Lv.5以下のユニットすべてに3ダメージを与える。"
+  },
+  "GD01-024_p3": {
+    "id": "GD01-024_p3",
+    "name_jp": "ウイングガンダムゼロ",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 8,
+    "cost": 8,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 7
+    },
+    "source_title": "新機動戦記ガンダムW",
+    "link": [
+      "ヒイロ・ユイ"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "《高機動》(このユニットはブロックされない) 【配備時】Lv.5以下のユニットすべてに3ダメージを与える。",
+    "effect": "《高機動》(このユニットはブロックされない) 【配備時】Lv.5以下のユニットすべてに3ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
+    "base_card_id": "GD01-024"
   },
   "GD01-025": {
     "id": "GD01-025",
@@ -4285,6 +4373,33 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 2,
+    "base_card_id": "GD01-030"
+  },
+  "GD01-030_p3": {
+    "id": "GD01-030_p3",
+    "name_jp": "リック・ドム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "《突破2》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "effect": "《突破2》(アタックで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1枚に指定の数ダメージを与える)",
+    "terrain": "宇宙",
+    "acquisition_info": "オフィシャルカードケースセット 02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
     "base_card_id": "GD01-030"
   },
   "GD01-031": {
@@ -6186,6 +6301,35 @@
     "package_set": "GD01",
     "effect_text": "【リンク中】【アタック時】HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。"
   },
+  "GD01-073_p1": {
+    "id": "GD01-073_p1",
+    "name_jp": "ソードストライクガンダム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連合"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [
+      "特徴〔地球連合〕"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【リンク中】【アタック時】HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "effect": "【リンク中】【アタック時】HP2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "プレミアムカードコレクション02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD01-073"
+  },
   "GD01-074": {
     "id": "GD01-074",
     "name_jp": "デミトレーナー チュチュ専用機",
@@ -7640,6 +7784,28 @@
     "parallel_number": 6,
     "base_card_id": "GD01-100"
   },
+  "GD01-100_p7": {
+    "id": "GD01-100_p7",
+    "name_jp": "覚悟の表れ",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 4,
+    "cost": 3,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】自分は2枚ドローする。",
+    "effect": "【メイン】自分は2枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "シリアルカードチャレンジ 上位賞記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 7,
+    "base_card_id": "GD01-100"
+  },
   "GD01-101": {
     "id": "GD01-101",
     "name_jp": "深い愛情",
@@ -8396,6 +8562,28 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 7,
+    "base_card_id": "GD01-118"
+  },
+  "GD01-118_p8": {
+    "id": "GD01-118_p8",
+    "name_jp": "溢れる慈愛",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 2,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】自分は2枚ドローする。その後、自分の手札1枚を捨てる。",
+    "effect": "【メイン】自分は2枚ドローする。その後、自分の手札1枚を捨てる。",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 8,
     "base_card_id": "GD01-118"
   },
   "GD01-119": {
@@ -17368,6 +17556,28 @@
     "package_set": "GD03",
     "effect_text": "【メイン】自分は1枚ドローする。その後、自分のトラッシュに、カード名に「旺盛な好奇心」を含むカードが2枚以上あるなら、HP4以下の相手のユニット1つを選ぶ。それをレストにする。"
   },
+  "GD03-101_p2": {
+    "id": "GD03-101_p2",
+    "name_jp": "旺盛な好奇心",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】自分は1枚ドローする。その後、自分のトラッシュに、カード名に「旺盛な好奇心」を含むカードが2枚以上あるなら、HP4以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "effect": "【メイン】自分は1枚ドローする。その後、自分のトラッシュに、カード名に「旺盛な好奇心」を含むカードが2枚以上あるなら、HP4以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD03-101"
+  },
   "GD03-102": {
     "id": "GD03-102",
     "name_jp": "特権階級",
@@ -18422,6 +18632,36 @@
     "package_set": "GD04",
     "effect_text": "【アタック時】〔リガ・ミリティア〕の自分のユニットが3つ以上いるなら、自分は1枚ドローする。"
   },
+  "GD04-003_p2": {
+    "id": "GD04-003_p2",
+    "name_jp": "Vガンダム",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士Vガンダム",
+    "link": [
+      "特徴〔リガ・ミリティア〕"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【アタック時】〔リガ・ミリティア〕の自分のユニットが3つ以上いるなら、自分は1枚ドローする。",
+    "effect": "【アタック時】 (リガ・ミリティア)の自分のユニットが3つ以上いるなら、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD04-003"
+  },
   "GD04-004": {
     "id": "GD04-004",
     "name_jp": "サイコ・ガンダムMk-Ⅱ",
@@ -18714,6 +18954,62 @@
     "effect_text": "【破壊時】このユニット以外の、〔リガ・ミリティア〕の味方のユニットがいるなら、「パーツ」(〔リガ・ミリティア〕・AP1・HP1・このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
     "source_title": "機動戦士Vガンダム"
   },
+  "GD04-011_p1": {
+    "id": "GD04-011_p1",
+    "name_jp": "Vガンダム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士Vガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【破壊時】このユニット以外の、〔リガ・ミリティア〕の味方のユニットがいるなら、「パーツ」(〔リガ・ミリティア〕・AP1・HP1・このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
+    "effect": "【破壊時】このユニット以外の、(リガ・ミリティア)の味方のユニットがいるなら、「パーツ」（((リガ・ミリティア) AP1・HP1 このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD04-011"
+  },
+  "GD04-011_p2": {
+    "id": "GD04-011_p2",
+    "name_jp": "Vガンダム",
+    "rarity": "U+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "リガ・ミリティア",
+      "ヴィクトリータイプ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士Vガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【破壊時】このユニット以外の、〔リガ・ミリティア〕の味方のユニットがいるなら、「パーツ」(〔リガ・ミリティア〕・AP1・HP1・このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
+    "effect": "【破壊時】このユニット以外の、(リガ・ミリティア)の味方のユニットがいるなら、「パーツ」（((リガ・ミリティア) AP1・HP1 このユニットは相手プレイヤーをアタック先に選べない)のユニットトークン1つを配備する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD04-011"
+  },
   "GD04-012": {
     "id": "GD04-012",
     "name_jp": "コア・ブースター（005）&コア・ブースター（006）",
@@ -18940,6 +19236,35 @@
     "acquisition_info": "Phantom Aria [GD04]",
     "package_set": "GD04",
     "effect_text": "【セット時・〔ニュータイプ〕のパイロット】「有線式アーム」(〔ジオン〕・AP2・HP1・このユニットはパイロットをセットできない)のユニットトークン2つを配備する。 【破壊時】「ジオング(ヘッド)」(〔ジオン〕・AP3・HP1)のユニットトークン1つをレストで配備する。"
+  },
+  "GD04-017_p3": {
+    "id": "GD04-017_p3",
+    "name_jp": "ジオング",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【セット時・〔ニュータイプ〕のパイロット】「有線式アーム」(〔ジオン〕・AP2・HP1・このユニットはパイロットをセットできない)のユニットトークン2つを配備する。 【破壊時】「ジオング(ヘッド)」(〔ジオン〕・AP3・HP1)のユニットトークン1つをレストで配備する。",
+    "effect": "【セット時・(ニュータイプ)のパイロット】 「有線式アーム」 ((ジオン)・AP2・HP1 このユニットはパイロットをセットできない)のユニットトークン2つを配備する。\n【破壊時】 「ジオング(ヘッド)」((ジオン)・AP3・HP1)のユニットトークン1つをレストで配備する。",
+    "terrain": "宇宙",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 Season 2優勝記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
+    "base_card_id": "GD04-017"
   },
   "GD04-018": {
     "id": "GD04-018",
@@ -19747,6 +20072,36 @@
     "acquisition_info": "Phantom Aria [GD04]",
     "package_set": "GD04",
     "effect_text": "【配備時】相手のユニットが2つ以上いるなら、Lv.2以下の相手のユニット1つを選ぶ。それに2ダメージを与える。"
+  },
+  "GD04-038_p1": {
+    "id": "GD04-038_p1",
+    "name_jp": "ガンダムエクシア",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [
+      "刹那・F・セイエイ"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【配備時】相手のユニットが2つ以上いるなら、Lv.2以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "effect": "【配備時】相手のユニットが2つ以上いるなら、Lv.2以下の相手のユニット1つを選ぶ、それにこのターン、ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 参加賞パック Vol.2",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD04-038"
   },
   "GD04-039": {
     "id": "GD04-039",
@@ -20609,6 +20964,36 @@
     "package_set": "GD04",
     "effect_text": "【配備時】Lv.1以下/AP1以下の相手のユニット1つを選ぶ。それを破壊する。",
     "source_title": "機動戦士ガンダム00"
+  },
+  "GD04-063_p1": {
+    "id": "GD04-063_p1",
+    "name_jp": "GNアーマー TYPE-E",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [
+      "刹那・F・セイエイ"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【配備時】Lv.1以下/AP1以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "effect": "【配備時】 Lv.1以下/AP1以下の相手のユニット1つを選ぶ。 それを破壊する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "プレミアムカードコレクション02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD04-063"
   },
   "GD04-064": {
     "id": "GD04-064",
@@ -22136,6 +22521,28 @@
     "stats": {},
     "link": []
   },
+  "GD04-105_p2": {
+    "id": "GD04-105_p2",
+    "name_jp": "邂逅",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 5,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】自分のデッキを上から5枚見て、その中の、パイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "effect": "【メイン】自分のデッキを上から5枚見て、その中の、パイロットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 参加賞パック Vol.2",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD04-105"
+  },
   "GD04-106": {
     "id": "GD04-106",
     "name_jp": "無差別な暴力",
@@ -22186,6 +22593,50 @@
     "package_set": "GD04",
     "effect_text": "【バースト】このカードを手札に加える。 【アクション】レストの自分のユニット1つを選ぶ。このターン中、相手のユニットすべてはアタックするとき、それをアタック先に選ばなければならない。",
     "source_title": "機動戦士ガンダム"
+  },
+  "GD04-107_p1": {
+    "id": "GD04-107_p1",
+    "name_jp": "宿命の戦い",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 2,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【アクション】レストの自分のユニット1つを選ぶ。このターン中、相手のユニットすべてはアタックするとき、それをアタック先に選ばなければならない。",
+    "effect": "【バースト】 このカードを手札に加える。\n【アクション】 レストの自分のユニット1つを選ぶ。 このターン中、相手のユニットすべてはアタックするとき、それをアタック先に選ばなければならない。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD04-107"
+  },
+  "GD04-107_p2": {
+    "id": "GD04-107_p2",
+    "name_jp": "宿命の戦い",
+    "rarity": "C+",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 2,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【アクション】レストの自分のユニット1つを選ぶ。このターン中、相手のユニットすべてはアタックするとき、それをアタック先に選ばなければならない。",
+    "effect": "【バースト】 このカードを手札に加える。\n【アクション】 レストの自分のユニット1つを選ぶ。 このターン中、相手のユニットすべてはアタックするとき、それをアタック先に選ばなければならない。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD04-107"
   },
   "GD04-108": {
     "id": "GD04-108",
@@ -22419,6 +22870,28 @@
     "package_set": "GD04",
     "effect_text": "【バースト】相手のユニット1つを選ぶ。それに1ダメージを与える。 【メイン】自分のユニット1つを選ぶ。このターン中、それがLv.5以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。",
     "source_title": "機動新世紀ガンダムX"
+  },
+  "GD04-115_p1": {
+    "id": "GD04-115_p1",
+    "name_jp": "バックアップ",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 3,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】相手のユニット1つを選ぶ。それに1ダメージを与える。 【メイン】自分のユニット1つを選ぶ。このターン中、それがLv.5以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。",
+    "effect": "【バースト】 相手のユニット1つを選ぶ。 それに1ダメージを与える。\n【メイン】自分のユニット1つを選ぶ。 このターン中、それがLv.5以下相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 参加賞パック Vol.2",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD04-115"
   },
   "GD04-116": {
     "id": "GD04-116",
@@ -23291,6 +23764,36 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-010_p1": {
+    "id": "GD05-010_p1",
+    "name_jp": "ストライクルージュ（キラ機）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔オーブ〕",
+      "キラ・ヤマト"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "-",
+    "effect": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 参加賞パック Vol.2",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-010"
+  },
   "GD05-011": {
     "id": "GD05-011",
     "name_jp": "カラミティガンダム＆レイダーガンダム",
@@ -23428,6 +23931,60 @@
     "effect_text": "〔オーブ〕の自分のユニットが配備されたとき、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-016_p1": {
+    "id": "GD05-016_p1",
+    "name_jp": "ムラサメ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "〔オーブ〕の自分のユニットが配備されたとき、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+    "effect": "〔オーブ〕の自分のユニットが配備されたとき、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-016"
+  },
+  "GD05-016_p2": {
+    "id": "GD05-016_p2",
+    "name_jp": "ムラサメ",
+    "rarity": "C+",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "〔オーブ〕の自分のユニットが配備されたとき、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+    "effect": "〔オーブ〕の自分のユニットが配備されたとき、このターン中、このユニットは《高機動》を得る。(このユニットはブロックされない)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD05-016"
   },
   "GD05-017": {
     "id": "GD05-017",
@@ -23592,6 +24149,68 @@
     "effect_text": "【破壊時】自分のデッキを上から3枚見て、その中の〔ロンド・ベル〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-019_p1": {
+    "id": "GD05-019_p1",
+    "name_jp": "リ・ガズィ",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "特徴〔ロンド・ベル〕",
+      "アムロ・レイ"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【破壊時】自分のデッキを上から3枚見て、その中の〔ロンド・ベル〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "effect": "【破壊時】自分のデッキを上から3枚見て、その中の〔ロンド・ベル〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-019"
+  },
+  "GD05-019_p2": {
+    "id": "GD05-019_p2",
+    "name_jp": "リ・ガズィ",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "特徴〔ロンド・ベル〕",
+      "アムロ・レイ"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【破壊時】自分のデッキを上から3枚見て、その中の〔ロンド・ベル〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "effect": "【破壊時】自分のデッキを上から3枚見て、その中の〔ロンド・ベル〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD05-019"
   },
   "GD05-020": {
     "id": "GD05-020",
@@ -25586,6 +26205,66 @@
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-069_p1": {
+    "id": "GD05-069_p1",
+    "name_jp": "ガンダムマックスター",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "チボデー・クロケット"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のデッキを上から4枚見て、その中の〔必殺技〕のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
+    "effect": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のデッキを上から4枚見て、その中の〔必殺技〕のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-069"
+  },
+  "GD05-069_p2": {
+    "id": "GD05-069_p2",
+    "name_jp": "ガンダムマックスター",
+    "rarity": "R+",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "チボデー・クロケット"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のデッキを上から4枚見て、その中の〔必殺技〕のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
+    "effect": "自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、自分のデッキを上から4枚見て、その中の〔必殺技〕のコマンドカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。【リンク中】【アタック時】このユニットにセットしているカードの【メイン】を発動する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD05-069"
+  },
   "GD05-070": {
     "id": "GD05-070",
     "name_jp": "トールギスⅢ",
@@ -26398,6 +27077,62 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-094_p1": {
+    "id": "GD05-094_p1",
+    "name_jp": "クェス・パラヤ",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【破壊時】〔ネオ・ジオン〕の自分のユニット1つを選ぶ。このターン中、それが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "effect": "【バースト】このカードを手札に加える。【破壊時】〔ネオ・ジオン〕の自分のユニット1つを選ぶ。このターン中、それが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-094"
+  },
+  "GD05-094_p2": {
+    "id": "GD05-094_p2",
+    "name_jp": "クェス・パラヤ",
+    "rarity": "U+",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【破壊時】〔ネオ・ジオン〕の自分のユニット1つを選ぶ。このターン中、それが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "effect": "【バースト】このカードを手札に加える。【破壊時】〔ネオ・ジオン〕の自分のユニット1つを選ぶ。このターン中、それが相手からバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD05-094"
+  },
   "GD05-095": {
     "id": "GD05-095",
     "name_jp": "ギュネイ・ガス",
@@ -26493,6 +27228,34 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 1,
+    "base_card_id": "GD05-097"
+  },
+  "GD05-097_p2": {
+    "id": "GD05-097_p2",
+    "name_jp": "ドモン・カッシュ",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ガンダムファイター",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。この効果で〔必殺技〕のコマンドカードを捨てたなら、それの【メイン】を発動してもよい。",
+    "effect": "【バースト】このカードを手札に加える。【セット時】自分は1枚ドローする。その後、自分の手札1枚を捨てる。この効果で〔必殺技〕のコマンドカードを捨てたなら、それの【メイン】を発動してもよい。",
+    "terrain": "-",
+    "acquisition_info": "Vジャンプ10月特大号 付録カード",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
     "base_card_id": "GD05-097"
   },
   "GD05-098": {
@@ -26591,6 +27354,34 @@
     "effect_text": "【バースト】このカードを手札に加える。【セット時】Lv.5以下の相手のユニット1つを選ぶ。それをレストにする。",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-100_p1": {
+    "id": "GD05-100_p1",
+    "name_jp": "カトル・ラバーバ・ウィナー",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "Gチーム",
+      "オペレーション・メテオ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】Lv.5以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "effect": "【バースト】このカードを手札に加える。【セット時】Lv.5以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 参加賞パック Vol.2",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-100"
   },
   "GD05-101": {
     "id": "GD05-101",
@@ -26834,6 +27625,30 @@
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD05-110_p1": {
+    "id": "GD05-110_p1",
+    "name_jp": "ダークネスフィンガー",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "必殺技"
+    ],
+    "stats": {},
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】相手のユニット1つを選ぶ。それに2ダメージを与える。その後、カード名に「マスターガンダム」を含む自分のユニットがいるなら、自分は1枚ドローする。",
+    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/【アクション】相手のユニット1つを選ぶ。それに2ダメージを与える。その後、カード名に「マスターガンダム」を含む自分のユニットがいるなら、自分は1枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-110"
+  },
   "GD05-111": {
     "id": "GD05-111",
     "name_jp": "機体奪取",
@@ -26850,6 +27665,50 @@
     "effect_text": "【メイン】自分の手札1枚を捨てる。そうしたなら、自分は2枚ドローする。",
     "terrain": "-",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-111_p1": {
+    "id": "GD05-111_p1",
+    "name_jp": "機体奪取",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 1,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】自分の手札1枚を捨てる。そうしたなら、自分は2枚ドローする。",
+    "effect": "【メイン】自分の手札1枚を捨てる。そうしたなら、自分は2枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-111"
+  },
+  "GD05-111_p2": {
+    "id": "GD05-111_p2",
+    "name_jp": "機体奪取",
+    "rarity": "U+",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 1,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】自分の手札1枚を捨てる。そうしたなら、自分は2枚ドローする。",
+    "effect": "【メイン】自分の手札1枚を捨てる。そうしたなら、自分は2枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD05-111"
   },
   "GD05-112": {
     "id": "GD05-112",
@@ -26936,6 +27795,28 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 1,
+    "base_card_id": "GD05-114"
+  },
+  "GD05-114_p2": {
+    "id": "GD05-114_p2",
+    "name_jp": "広域殲滅",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 6,
+    "cost": 6,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】Lv.4以下のユニットすべてを破壊する。",
+    "effect": "【メイン】Lv.4以下のユニットすべてを破壊する。",
+    "terrain": "-",
+    "acquisition_info": "プレミアムカードコレクション02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
     "base_card_id": "GD05-114"
   },
   "GD05-115": {
@@ -30265,6 +31146,35 @@
     "parallel_number": 2,
     "base_card_id": "ST03-001"
   },
+  "ST03-001_p3": {
+    "id": "ST03-001_p3",
+    "name_jp": "シナンジュ",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "フル・フロンタル"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【セット中】このユニットは《高機動》を得る。 (このユニットはブロックされない) 自分のターン中、このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "effect": "【セット中】このユニットは《高機動》を得る。 (このユニットはブロックされない) 自分のターン中、このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
+    "base_card_id": "ST03-001"
+  },
   "ST03-002": {
     "id": "ST03-002",
     "name_jp": "ギラ・ズール（アンジェロ・ザウパー専用機）",
@@ -30541,6 +31451,35 @@
     "package_set": "PROMO",
     "effect_text": "【破壊時】自分のデッキを上から3枚見て、その中の、〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。"
   },
+  "ST03-006_p3": {
+    "id": "ST03-006_p3",
+    "name_jp": "ザクⅡ（シャア・アズナブル機）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【破壊時】自分のデッキを上から3枚見て、その中の、〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "effect": "【破壊時】自分のデッキを上から3枚見て、その中の、〔ジオン〕/〔ネオ・ジオン〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "プレミアムカードコレクション02",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
+    "base_card_id": "ST03-006"
+  },
   "ST03-007": {
     "id": "ST03-007",
     "name_jp": "ザクⅠ",
@@ -30742,6 +31681,33 @@
     "acquisition_info": "プレミアムカードコレクション01[EVX05]",
     "package_set": "PROMO",
     "effect_text": "【アタック時】このターン中、このユニットをAP+2する。"
+  },
+  "ST03-008_p5": {
+    "id": "ST03-008_p5",
+    "name_jp": "ザクⅡ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【アタック時】このターン中、このユニットをAP+2する。",
+    "effect": "【アタック時】このターン中、このユニットをAP+2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 5,
+    "base_card_id": "ST03-008"
   },
   "ST03-009": {
     "id": "ST03-009",
@@ -31032,6 +31998,62 @@
     "parallel_number": 4,
     "base_card_id": "ST03-011"
   },
+  "ST03-011_p5": {
+    "id": "ST03-011_p5",
+    "name_jp": "シャア・アズナブル",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。 (このユニットはブロックされない)",
+    "effect": "【バースト】このカードを手札に加える。 【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。 (このユニットはブロックされない)",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAPIONSHIPS 26-27 店舗予選　優勝記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 5,
+    "base_card_id": "ST03-011"
+  },
+  "ST03-011_p6": {
+    "id": "ST03-011_p6",
+    "name_jp": "シャア・アズナブル",
+    "rarity": "C+",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。 (このユニットはブロックされない)",
+    "effect": "【バースト】このカードを手札に加える。 【アタック時】このターン中、このユニットをAP+1し、これがリンクユニットなら、これは《高機動》を得る。 (このユニットはブロックされない)",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 Season 2上位入賞記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 6,
+    "base_card_id": "ST03-011"
+  },
   "ST03-012": {
     "id": "ST03-012",
     "name_jp": "激昂",
@@ -31202,6 +32224,28 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 5,
+    "base_card_id": "ST03-013"
+  },
+  "ST03-013_p6": {
+    "id": "ST03-013_p6",
+    "name_jp": "格闘戦",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 2,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードの【メイン】を発動する。 【メイン】/【アクション】相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "effect": "【バースト】このカードの【メイン】を発動する。 【メイン】/【アクション】相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 6,
     "base_card_id": "ST03-013"
   },
   "ST03-014": {
@@ -32491,6 +33535,28 @@
     "acquisition_info": "SEED Strike [ST04] ボーナスパック",
     "package_set": "ST04",
     "effect_text": "【バースト】〔地球連合〕の自分のユニットトークンがいないなら、「エールストライクガンダム」(〔地球連合〕・AP3・HP3・《ブロッカー》)のユニットトークン1つを配備する。 【メイン】〔地球連合〕の自分のユニットトークンがいないなら、「ソードストライクガンダム」(〔地球連合〕・AP4・HP2・《ブロッカー》)か、「ランチャーストライクガンダム」(〔地球連合〕・AP2・HP4・《ブロッカー》)のユニットトークン1つを配備する。"
+  },
+  "ST04-012_p2": {
+    "id": "ST04-012_p2",
+    "name_jp": "ストライカーパック",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】〔地球連合〕の自分のユニットトークンがいないなら、「エールストライクガンダム」(〔地球連合〕・AP3・HP3・《ブロッカー》)のユニットトークン1つを配備する。 【メイン】〔地球連合〕の自分のユニットトークンがいないなら、「ソードストライクガンダム」(〔地球連合〕・AP4・HP2・《ブロッカー》)か、「ランチャーストライクガンダム」(〔地球連合〕・AP2・HP4・《ブロッカー》)のユニットトークン1つを配備する。",
+    "effect": "【バースト】〔地球連合〕の自分のユニットトークンがいないなら、「エールストライクガンダム」(〔地球連合〕・AP3・HP3・《ブロッカー》)のユニットトークン1つを配備する。 【メイン】〔地球連合〕の自分のユニットトークンがいないなら、「ソードストライクガンダム」(〔地球連合〕・AP4・HP2・《ブロッカー》)か、「ランチャーストライクガンダム」(〔地球連合〕・AP2・HP4・《ブロッカー》)のユニットトークン1つを配備する。",
+    "terrain": "-",
+    "acquisition_info": "シリアルカードチャレンジ 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "ST04-012"
   },
   "ST04-013": {
     "id": "ST04-013",
@@ -35069,6 +36135,36 @@
     "package_set": "ST07",
     "effect_text": "自分のターン終了時、自分のトラッシュに〔CB〕のカードが7枚以上あるなら、自分のリソース1つを選ぶ。それをアクティブにする。 【セット時】自分のデッキを上から2枚、自分のトラッシュに置く。この効果で〔CB〕のカードを置いたなら、自分は1枚ドローする。"
   },
+  "ST07-001_p2": {
+    "id": "ST07-001_p2",
+    "name_jp": "ガンダムエクシア",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "CB",
+      "GNドライヴ"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム00",
+    "link": [
+      "刹那・F・セイエイ"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "自分のターン終了時、自分のトラッシュに〔CB〕のカードが7枚以上あるなら、自分のリソース1つを選ぶ。それをアクティブにする。 【セット時】自分のデッキを上から2枚、自分のトラッシュに置く。この効果で〔CB〕のカードを置いたなら、自分は1枚ドローする。",
+    "effect": "自分のターン終了時、自分のトラッシュに〔CB〕のカードが7枚以上あるなら、自分のリソース1つを選ぶ。それをアクティブにする。 【セット時】自分のデッキを上から2枚、自分のトラッシュに置く。この効果で〔CB〕のカードを置いたなら、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "ST07-001"
+  },
   "ST07-002": {
     "id": "ST07-002",
     "name_jp": "ガンダムエクシア",
@@ -37219,6 +38315,35 @@
     "package_set": "ST09",
     "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このユニットが〔ミネルバ隊〕なら、自分のリソース1つを選ぶ。それをアクティブにする。"
   },
+  "ST09-008_p2": {
+    "id": "ST09-008_p2",
+    "name_jp": "シン・アスカ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊",
+      "コーディネイター"
+    ],
+    "stats": {
+      "ap_mod": 3,
+      "hp_mod": 0
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。 【アタック時】このユニットが〔ミネルバ隊〕なら、自分のリソース1つを選ぶ。それをアクティブにする。",
+    "effect": "【バースト】このカードを手札に加える。 【アタック時】このユニットが〔ミネルバ隊〕なら、自分のリソース1つを選ぶ。それをアクティブにする。",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "ST09-008"
+  },
   "ST09-009": {
     "id": "ST09-009",
     "name_jp": "ジャイアントキリング",
@@ -37255,6 +38380,28 @@
     "acquisition_info": "Destiny Ignition [ST09]",
     "package_set": "ST09",
     "effect_text": "【メイン】/【アクション】アクティブのAP4以下の相手のユニット1つを選ぶ。それを破壊する。"
+  },
+  "ST09-009_p2": {
+    "id": "ST09-009_p2",
+    "name_jp": "ジャイアントキリング",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【メイン】/【アクション】アクティブのAP4以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "effect": "【メイン】/【アクション】アクティブのAP4以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "ST09-009"
   },
   "ST09-010": {
     "id": "ST09-010",
@@ -38807,9 +39954,105 @@
     },
     "source_title": "機動戦士ガンダム",
     "package_set": "TOKEN",
-    "effect_text": "",
+    "effect_text": "このユニットはパイロットをセットできない。",
     "terrain": "-",
     "acquisition_info": "Phantom Aria [GD04]",
+    "link": []
+  },
+  "T-022_p1": {
+    "id": "T-022_p1",
+    "name_jp": "有線式アーム",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "package_set": "PROMO",
+    "effect_text": "このユニットはパイロットをセットできない。",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAPIONSHIPS 26-27 店舗予選　優勝記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-022",
+    "link": []
+  },
+  "T-022_p2": {
+    "id": "T-022_p2",
+    "name_jp": "有線式アーム",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "package_set": "PROMO",
+    "effect_text": "このユニットはパイロットをセットできない。",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAPIONSHIPS 26-27 店舗予選　優勝記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "T-022",
+    "link": []
+  },
+  "T-022_p3": {
+    "id": "T-022_p3",
+    "name_jp": "有線式アーム",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "package_set": "PROMO",
+    "effect_text": "このユニットはパイロットをセットできない。",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 Season 2上位入賞記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
+    "base_card_id": "T-022",
+    "link": []
+  },
+  "T-022_p4": {
+    "id": "T-022_p4",
+    "name_jp": "有線式アーム",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "package_set": "PROMO",
+    "effect_text": "このユニットはパイロットをセットできない。",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 Season 2上位入賞記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 4,
+    "base_card_id": "T-022",
     "link": []
   },
   "T-023": {
@@ -38830,6 +40073,30 @@
     "effect_text": "",
     "terrain": "-",
     "acquisition_info": "Phantom Aria [GD04]",
+    "link": []
+  },
+  "T-023_p1": {
+    "id": "T-023_p1",
+    "name_jp": "ジオング（ヘッド）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "package_set": "PROMO",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "WORLD CHAMPIONSHIPS 26-27 Season 2優勝記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-023",
     "link": []
   },
   "T-024": {
@@ -39525,6 +40792,36 @@
     "parallel_number": 1,
     "base_card_id": "ST11-002"
   },
+  "ST11-002_p2": {
+    "id": "ST11-002_p2",
+    "name_jp": "アッガイ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "水中"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "特徴〔ジオン〕"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "相手のターン中、このユニットがレストの間、HP2以下の〔水中〕の味方のユニットすべては、相手から効果ダメージを受けない。",
+    "effect": "相手のターン中、このユニットがレストの間、HP2以下の〔水中〕の味方のユニットすべては、相手から効果ダメージを受けない。",
+    "terrain": "地球",
+    "acquisition_info": "スタートデッキそのままバトル！[ST11]～[ST14] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "ST11-002"
+  },
   "ST11-003": {
     "id": "ST11-003",
     "name_jp": "ゾック",
@@ -40000,6 +41297,34 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 1,
+    "base_card_id": "ST11-011"
+  },
+  "ST11-011_p2": {
+    "id": "ST11-011_p2",
+    "name_jp": "シャア・アズナブル",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。【セット時】このターン中、〔水中〕の味方のユニットすべてをAP+1する。",
+    "effect": "【バースト】このカードを手札に加える。【セット時】このターン中、〔水中〕の味方のユニットすべてをAP+1する。",
+    "terrain": "-",
+    "acquisition_info": "スタートデッキそのままバトル！[ST11]～[ST14] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
     "base_card_id": "ST11-011"
   },
   "ST11-012": {
@@ -40716,6 +42041,35 @@
     "parallel_number": 1,
     "base_card_id": "ST12-009"
   },
+  "ST12-009_p2": {
+    "id": "ST12-009_p2",
+    "name_jp": "ユニコーンガンダム2号機 バンシィ（ユニコーンモード）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連邦"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [
+      "マリーダ・クルス"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【破壊時】シールドが3つ以下のプレイヤーがいるなら、自分のトラッシュのLv.6以上のユニットカード1枚を選ぶ。それを手札に加える。そうしたなら、自分の手札1枚を捨てる。",
+    "effect": "【破壊時】シールドが3つ以下のプレイヤーがいるなら、自分のトラッシュのLv.6以上のユニットカード1枚を選ぶ。それを手札に加える。そうしたなら、自分の手札1枚を捨てる。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "［ST11-ST14］リリースイベント -チーム戦- 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "ST12-009"
+  },
   "ST12-010": {
     "id": "ST12-010",
     "name_jp": "スラッシュザクファントム",
@@ -40863,6 +42217,34 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 1,
+    "base_card_id": "ST12-012"
+  },
+  "ST12-012_p2": {
+    "id": "ST12-012_p2",
+    "name_jp": "プルトゥエルブ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "強化人間"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムUC",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "このカードのカード名は「マリーダ・クルス」としても扱う。【バースト】このカードを手札に加える。【リンク時】自分のデッキを上から2枚見て、その中のカード1枚を上に戻す。残ったカードは自分のトラッシュに置く。シールドが3つ以下のプレイヤーがいるなら、デッキに戻すかわりに手札に加える。",
+    "effect": "このカードのカード名は「マリーダ・クルス」としても扱う。【バースト】このカードを手札に加える。【リンク時】自分のデッキを上から2枚見て、その中のカード1枚を上に戻す。残ったカードは自分のトラッシュに置く。シールドが3つ以下のプレイヤーがいるなら、デッキに戻すかわりに手札に加える。",
+    "terrain": "-",
+    "acquisition_info": "［ST11-ST14］リリースイベント -チーム戦- 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
     "base_card_id": "ST12-012"
   },
   "ST12-013": {
@@ -42702,6 +44084,54 @@
     "acquisition_info": "Silent Barrage [ST13]",
     "link": []
   },
+  "T-029_p1": {
+    "id": "T-029_p1",
+    "name_jp": "ビット/ファンネル",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "遠隔兵器"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "package_set": "PROMO",
+    "effect_text": "このユニットはパイロットをセットできず、アタックできない。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　参加者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "T-029",
+    "link": []
+  },
+  "T-029_p2": {
+    "id": "T-029_p2",
+    "name_jp": "ビット/ファンネル",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "遠隔兵器"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "package_set": "PROMO",
+    "effect_text": "このユニットはパイロットをセットできず、アタックできない。",
+    "terrain": "-",
+    "acquisition_info": "ショップバトル2026 SEASON4　優勝者パック",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "T-029",
+    "link": []
+  },
   "EXB-001": {
     "id": "EXB-001",
     "name_jp": "EXベース",
@@ -43297,6 +44727,23 @@
     "terrain": "-",
     "acquisition_info": "BANDAI CARD GAMES Fest 26-27 来場記念品"
   },
+  "EXBP-035": {
+    "id": "EXBP-035",
+    "name_jp": "EXベース",
+    "rarity": "P",
+    "card_type": "EX BASE",
+    "color": "-",
+    "traits": [],
+    "stats": {
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "EXBASE",
+    "effect_text": "(ゲーム開始時に、EXベース1つをベース置き場にアクティブで置く)",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]"
+  },
   "EXR-001": {
     "id": "EXR-001",
     "name_jp": "EXリソース",
@@ -43764,6 +45211,21 @@
     "terrain": "-",
     "acquisition_info": "オフィシャルプレイマット＆カードセット -機動戦士ガンダム00-"
   },
+  "EXRP-016": {
+    "id": "EXRP-016",
+    "name_jp": "EXリソース",
+    "rarity": "P",
+    "card_type": "EX RESOURCE",
+    "color": "-",
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "RESOURCE",
+    "effect_text": "(ゲーム開始時に、後攻のプレイヤーはEXリソース1つをリソースエリアにアクティブで置く)(コストを支払う際、EXリソースをレストにしてゲームから除外する)",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]"
+  },
   "EXRP-019": {
     "id": "EXRP-019",
     "name_jp": "EXリソース",
@@ -43778,6 +45240,21 @@
     "effect_text": "(ゲーム開始時に、後攻のプレイヤーはEXリソース1つをリソースエリアにアクティブで置く)(コストを支払う際、EXリソースをレストにしてゲームから除外する)",
     "terrain": "-",
     "acquisition_info": "オフィシャルプレイマット＆カードセット アスラン＆カガリ[EVX11]"
+  },
+  "EXRP-020": {
+    "id": "EXRP-020",
+    "name_jp": "EXリソース",
+    "rarity": "P",
+    "card_type": "EX RESOURCE",
+    "color": "-",
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム",
+    "link": [],
+    "package_set": "RESOURCE",
+    "effect_text": "(ゲーム開始時に、後攻のプレイヤーはEXリソース1つをリソースエリアにアクティブで置く)(コストを支払う際、EXリソースをレストにしてゲームから除外する)",
+    "terrain": "-",
+    "acquisition_info": "GCG EXPO 2026 in TOKYO サイドイベント記念品"
   },
   "R-001": {
     "id": "R-001",
@@ -46277,5 +47754,39 @@
     "effect_text": "(コストを支払う際、リソースをレストにする)",
     "terrain": "-",
     "acquisition_info": "「ガンダムカードゲーム 1stアニバーサリー アーカイブ」特別付録"
+  },
+  "RP-068": {
+    "id": "RP-068",
+    "name_jp": "リソース",
+    "rarity": "P",
+    "card_type": "RESOURCE",
+    "color": "-",
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "RESOURCE",
+    "effect_text": "(コストを支払う際、リソースをレストにする)",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]"
+  },
+  "RP-068_p1": {
+    "id": "RP-068_p1",
+    "name_jp": "リソース",
+    "rarity": "P+",
+    "card_type": "RESOURCE",
+    "color": "-",
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "RESOURCE",
+    "effect_text": "(コストを支払う際、リソースをレストにする)",
+    "terrain": "-",
+    "acquisition_info": "ガンダムカードゲーム 1st Anniversary Set [PB03]",
+    "is_parallel": true,
+    "is_promo": false,
+    "parallel_number": 1,
+    "base_card_id": "RP-068"
   }
 }
