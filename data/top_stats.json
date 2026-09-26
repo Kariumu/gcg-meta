@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 799,
-    "decks": 3790,
+    "events": 800,
+    "decks": 3794,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 732,
+      "count": 734,
       "share": 19.3,
       "win_rate": 24.9,
       "avg_rank": 2.5,
-      "wins": 182
+      "wins": 183
     },
     {
       "type_key": "Blue+White",
@@ -43,8 +43,8 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 684,
-      "share": 18,
+      "count": 685,
+      "share": 18.1,
       "win_rate": 25.3,
       "avg_rank": 2.5,
       "wins": 173
@@ -57,7 +57,7 @@
       ],
       "label": "赤/白",
       "count": 639,
-      "share": 16.9,
+      "share": 16.8,
       "win_rate": 27.7,
       "avg_rank": 2.5,
       "wins": 177
@@ -69,9 +69,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 578,
+      "count": 579,
       "share": 15.3,
-      "win_rate": 25.8,
+      "win_rate": 25.7,
       "avg_rank": 2.5,
       "wins": 149
     },
@@ -156,17 +156,17 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 1817,
+      "decks": 1818,
       "usage_rate": 47.9
     },
     {
       "card_id": "GD05-002",
-      "decks": 1713,
+      "decks": 1714,
       "usage_rate": 45.2
     },
     {
       "card_id": "GD05-081",
-      "decks": 1709,
+      "decks": 1710,
       "usage_rate": 45.1
     },
     {
@@ -176,36 +176,36 @@
     },
     {
       "card_id": "ST01-010",
-      "decks": 1327,
+      "decks": 1329,
       "usage_rate": 35
     },
     {
       "card_id": "ST03-008",
-      "decks": 1307,
+      "decks": 1310,
       "usage_rate": 34.5
     },
     {
       "card_id": "GD03-056",
-      "decks": 1295,
+      "decks": 1297,
       "usage_rate": 34.2
     },
     {
       "card_id": "ST05-010",
-      "decks": 1275,
-      "usage_rate": 33.6
+      "decks": 1277,
+      "usage_rate": 33.7
     },
     {
       "card_id": "GD01-030",
-      "decks": 1259,
-      "usage_rate": 33.2
+      "decks": 1262,
+      "usage_rate": 33.3
     },
     {
       "card_id": "GD02-054",
-      "decks": 1224,
+      "decks": 1226,
       "usage_rate": 32.3
     }
   ],
-  "card_ranking_denominator": 3790,
+  "card_ranking_denominator": 3794,
   "recent_events": [
     {
       "event_id": "ntcd-01M3E43CMNQGJMXRTAFX6FQXX3",
@@ -453,6 +453,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M3EZPNK8H23926TSJ46R1SZB",
+      "date": "2026-09-26",
+      "store": "マスターズギルド",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M3BZF3NAPXZ062ARW1T2QN16",
       "date": "2026-09-25",
       "store": "TSUTAYA大安寺店",
@@ -521,45 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M3969N84TKX22TYJKBQK1MY0",
-      "date": "2026-09-24",
-      "store": "トレカマーケットオンリーワン",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-09-26",
-    "event_count": 1579
+    "event_count": 1580
   }
 }
