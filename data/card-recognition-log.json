@@ -6421,5 +6421,76 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-28": {
+    "recognized_at": "2026-09-28 20:00:32 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2104496333788971427",
+      "https://x.com/GUNDAM_GCG_JP/status/2104488785371427260",
+      "https://x.com/GUNDAM_GCG_JP/status/2104481236333027588"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-039",
+        "card_name": "ネオ・コア・ファイター",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 2,
+        "cost": 2,
+        "ap": 1,
+        "hp": 2,
+        "traits": [
+          "〔エゥーゴ〕",
+          "〔ガンダムチーム〕"
+        ],
+        "link": "",
+        "effect": "【起動・メイン】カード名の異なるLv.3の〔ガンダムチーム〕の自分のユニット2つと、このユニットを破壊する:自分の手札のLv.8以上の〔ガンダムチーム〕のユニットカード1枚を配備する。",
+        "effect_confidence": "medium",
+        "effect_length": 92,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-045",
+        "card_name": "コア・ベース",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 2,
+        "traits": [
+          "〔エゥーゴ〕",
+          "〔ガンダムチーム〕"
+        ],
+        "link": "",
+        "effect": "【破壊時】Lv.5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+        "effect_confidence": "high",
+        "effect_length": 38,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-044",
+        "card_name": "コア・トップ",
+        "color": "Red",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [
+          "〔エゥーゴ〕",
+          "〔ガンダムチーム〕"
+        ],
+        "link": "特徴にガンダムチームを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
