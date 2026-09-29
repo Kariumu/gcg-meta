@@ -6492,5 +6492,52 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-29": {
+    "recognized_at": "2026-09-29 20:00:23 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2104851174629445798",
+      "https://x.com/GUNDAM_GCG_JP/status/2104843629735145759"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-114",
+        "card_name": "アルファ殺したち",
+        "color": "Purple",
+        "card_type": "COMMAND",
+        "level": 4,
+        "cost": 1,
+        "ap": null,
+        "hp": null,
+        "traits": [],
+        "link": "",
+        "effect": "【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。■〔アルファ殺し〕の味方のユニット1つを選ぶ。このバトル中、それが相手からバトルダメージを受けるとき、そのダメージを3軽減する。■Lv.2以下の相手のユニット1つを選ぶ。それを破壊する。",
+        "effect_confidence": "low",
+        "effect_length": 132,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-054",
+        "card_name": "GFreD",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 7,
+        "cost": 6,
+        "ap": 6,
+        "hp": 5,
+        "traits": [
+          "〔ジオン〕",
+          "〔アルファ殺し〕"
+        ],
+        "link": "「ニャアン」",
+        "effect": "《制圧》（アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる）【配備時】自分のユニット1つと、相手のユニット1つを選んでもよい。それらに1ダメージを与える。",
+        "effect_confidence": "medium",
+        "effect_length": 87,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
