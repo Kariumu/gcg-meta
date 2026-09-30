@@ -6539,5 +6539,52 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-09-30": {
+    "recognized_at": "2026-09-30 20:00:20 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2105213559676473472",
+      "https://x.com/GUNDAM_GCG_JP/status/2105206012043309514"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-052",
+        "card_name": "ヴァル・ヴァロ",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 5,
+        "cost": 4,
+        "ap": 4,
+        "hp": 4,
+        "traits": [
+          "〔ジオン〕",
+          "〔民間〕"
+        ],
+        "link": "「ケリィ・レズナー」",
+        "effect": "自分のトラッシュに〔ジオン〕のユニットカードが5枚以上ある間、このユニットは《高機動》を得る。(このユニットはブロックされない)【配備時】自分のデッキを上から1枚、自分のトラッシュに置く。この効果で〔ジオン〕のカードを置いたなら、AP4以下の相手のユニット1つを選ぶ。それをレストにする。",
+        "effect_confidence": "low",
+        "effect_length": 144,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-059",
+        "card_name": "ドム・トローペン",
+        "color": "Purple",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 3,
+        "hp": 3,
+        "traits": [],
+        "link": "特徴にデラーズ・フリートを持つPILOT",
+        "effect": "",
+        "effect_confidence": "high",
+        "effect_length": 0,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
