@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission4-september"
   },
   "totals": {
-    "events": 833,
-    "decks": 3955,
+    "events": 835,
+    "decks": 3967,
     "types": 11
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 748,
+      "count": 751,
       "share": 18.9,
-      "win_rate": 25.4,
+      "win_rate": 25.3,
       "avg_rank": 2.5,
       "wins": 190
     },
@@ -30,9 +30,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 732,
+      "count": 735,
       "share": 18.5,
-      "win_rate": 26,
+      "win_rate": 25.9,
       "avg_rank": 2.4,
       "wins": 190
     },
@@ -43,7 +43,7 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 725,
+      "count": 726,
       "share": 18.3,
       "win_rate": 25.2,
       "avg_rank": 2.5,
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 677,
+      "count": 680,
       "share": 17.1,
-      "win_rate": 27.3,
+      "win_rate": 27.5,
       "avg_rank": 2.5,
-      "wins": 185
+      "wins": 187
     },
     {
       "type_key": "Green+Purple",
@@ -69,11 +69,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 607,
-      "share": 15.3,
+      "count": 609,
+      "share": 15.4,
       "win_rate": 25.9,
       "avg_rank": 2.5,
-      "wins": 157
+      "wins": 158
     },
     {
       "type_key": "Blue+Red",
@@ -83,7 +83,7 @@
       ],
       "label": "青/赤",
       "count": 331,
-      "share": 8.4,
+      "share": 8.3,
       "win_rate": 19.6,
       "avg_rank": 2.6,
       "wins": 65
@@ -156,56 +156,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 1889,
+      "decks": 1895,
       "usage_rate": 47.8
     },
     {
       "card_id": "GD05-002",
-      "decks": 1792,
+      "decks": 1796,
       "usage_rate": 45.3
     },
     {
       "card_id": "GD05-081",
-      "decks": 1788,
+      "decks": 1792,
       "usage_rate": 45.2
     },
     {
       "card_id": "GD01-118",
-      "decks": 1438,
+      "decks": 1443,
       "usage_rate": 36.4
     },
     {
       "card_id": "ST01-010",
-      "decks": 1368,
+      "decks": 1373,
       "usage_rate": 34.6
     },
     {
       "card_id": "GD03-056",
-      "decks": 1365,
+      "decks": 1368,
       "usage_rate": 34.5
     },
     {
       "card_id": "ST03-008",
-      "decks": 1352,
+      "decks": 1357,
       "usage_rate": 34.2
     },
     {
       "card_id": "ST05-010",
-      "decks": 1343,
-      "usage_rate": 34
+      "decks": 1346,
+      "usage_rate": 33.9
     },
     {
       "card_id": "GD01-030",
-      "decks": 1302,
+      "decks": 1307,
       "usage_rate": 32.9
     },
     {
       "card_id": "GD02-054",
-      "decks": 1287,
+      "decks": 1290,
       "usage_rate": 32.5
     }
   ],
-  "card_ranking_denominator": 3955,
+  "card_ranking_denominator": 3967,
   "recent_events": [
     {
       "event_id": "ntcd-01M3RMPERGXR6RD5PS183A2GH3",
@@ -272,6 +272,76 @@
           "rank": 4,
           "colors": [
             "Blue",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3RR0BJXP8ZH3085HEM5M89C",
+      "date": "2026-09-30",
+      "store": "トレカショップスキップ",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3RR4T1RD82TGFA0X4YA9AA4",
+      "date": "2026-09-30",
+      "store": "ドラゴンスター池袋店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
             "White"
           ]
         }
@@ -486,80 +556,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M3KFRN44YDYYSN8245VWM3YX",
-      "date": "2026-09-28",
-      "store": "ドラゴンスター池袋店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3KFRHQ25HFHGT56PYGRDAKR",
-      "date": "2026-09-28",
-      "store": "アメニティードリーム町田店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-09-30",
-    "event_count": 1613
+    "event_count": 1615
   }
 }
