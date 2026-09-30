@@ -295,7 +295,7 @@
   <div id="footer"></div>
 
   <script src="shared/ntc-rank-consolidator.js?v=3"></script>
-  <script src="js/common.js?v=15"></script>
+  <script src="js/common.js?v=16"></script>
   <script>
     GCG.init();
 
@@ -314,7 +314,7 @@
     //   Red+Purple / White+Purple / Red+Green の3タイプで着地しなかった。
     //   受け取り側は normalizeTypeKey() で旧並びの URL も拾う(後方互換)。
     //
-    // 【common.js の ?v= は据え置き(鉄則)】
+    // 【common.js の ?v= は据え置き(鉄則)】(例外: 2026-09-30 指示書127 R2 で meta.html・store.html の 2 行だけ v=16 に上げた。他ページは据え置き)
     //   そのため common.js に足した新関数は「あれば使う / 無ければローカル実装」で必ず受ける。
     // ============================================================
 
@@ -1266,7 +1266,7 @@
           }).join('');
           const seriesMeta = ev.s && allSeriesMap[ev.s] ? allSeriesMap[ev.s] : null;
           const seriesBadgeHtml = seriesMeta && GCG.renderSeriesBadge
-            ? GCG.renderSeriesBadge(seriesMeta.short_name || seriesMeta.display_name, seriesMeta.slug) : '';
+            ? GCG.renderSeriesBadge(seriesMeta.short_name || seriesMeta.display_name, seriesMeta.slug, { tag: 'span' }) : '';
           return '<a href="events/' + ev.i + '.html" class="event-card">'
             + '<span class="event-date">' + GCG.formatDate(ev.d) + '</span>'
             + '<span class="event-store">' + GCG.escapeHtml(ev.n) + '</span>'

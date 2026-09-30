@@ -1239,7 +1239,7 @@ a.section-badge:hover {
   line-height: 1.5;
   transition: background var(--transition-fast), border-color var(--transition-fast);
 }
-.series-badge:hover {
+.series-badge[href]:hover {
   background: rgba(212, 160, 41, 0.22);
   border-color: rgba(212, 160, 41, 0.6);
 }

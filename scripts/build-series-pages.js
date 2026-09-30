@@ -37,6 +37,9 @@ const OUT_DIR = path.join(ROOT, 'series');
 
 const SITE_URL = 'https://gcg-stats.com';
 
+// 指示書127 M3: デッキ色を日本語で出す。generate-events.js の DECK_COLORS_JP（E: 588 行）と同一
+const DECK_COLORS_JP = { Blue: '青', Red: '赤', Green: '緑', White: '白', Purple: '紫', Unknown: '不明' };
+
 function loadJson(p) { return JSON.parse(fs.readFileSync(p, 'utf-8')); }
 
 function esc(s) {
@@ -134,7 +137,7 @@ function renderEventsList(seriesEvents) {
   const rows = show.map(evRaw => {
     // 64名NTC大会のみ rank を新表記(1-8)に変換(本表示は colors のみ参照のため軽量モード)
     const ev = consolidateNtcRank(evRaw, { isNtcType });
-    const top4 = (ev.top4_colors || []).slice(0, 4).map(t => esc(t.colors ? t.colors.join('/') : '')).join(' / ');
+    const top4 = (ev.top4_colors || []).slice(0, 4).map(t => esc(t.colors ? t.colors.map(c => DECK_COLORS_JP[c] || DECK_COLORS_JP.Unknown).join('/') : '')).join(' / ');
     return '<a href="/events/' + encodeURIComponent(ev.event_id) + '.html" class="event-card">'
       + '<span class="event-date">' + fmtDate(ev.date) + '</span>'
       + '<span class="event-store">' + esc(ev.store) + '</span>'
@@ -142,7 +145,7 @@ function renderEventsList(seriesEvents) {
       + '</a>';
   }).join('');
   const more = seriesEvents.length > 30
-    ? '<div style="margin-top:12px;text-align:center"><a href="/events.html" style="color:var(--accent);font-size:13px">全' + seriesEvents.length + '件を /events.html で見る →</a></div>'
+    ? '<div style="margin-top:12px;text-align:center"><a href="/meta.html#events" style="color:var(--accent);font-size:13px">全' + seriesEvents.length + '件を イベント一覧 で見る →</a></div>'
     : '';
   return '<div id="event-list">' + rows + '</div>' + more;
 }

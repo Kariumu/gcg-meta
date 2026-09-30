@@ -1019,11 +1019,14 @@ GCG.renderBreadcrumbJsonLd = function(items) {
 
 // ---- Task D: シリーズバッジ ----
 // shortName: 表示文字列 / slug: /series/{slug}.html へのリンク
-GCG.renderSeriesBadge = function(shortName, slug) {
+// opts.tag === 'span' のときはリンク無しの <span> を返す（指示書127 M1: <a class="event-card"> の中に置く用。a の入れ子を避ける）。
+// 既定は従来どおり <a>（index.html のシリーズ見出しが使う）。
+GCG.renderSeriesBadge = function(shortName, slug, opts) {
   const escape = (s) => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   const name = escape(shortName);
+  if (opts && opts.tag === 'span') return `<span class="series-badge">${name}</span>`;
   const href = slug ? `/series/${encodeURIComponent(slug)}.html` : '#';
   return `<a href="${href}" class="series-badge">${name}</a>`;
 };
