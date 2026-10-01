@@ -1,41 +1,15 @@
 {
   "default_range": {
-    "start": "2026-08-01",
-    "end": "2026-09-30",
-    "series_slug": "ntc-2026-mission4-september"
+    "start": "2026-10-01",
+    "end": "2026-10-31",
+    "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 835,
-    "decks": 3967,
-    "types": 11
+    "events": 6,
+    "decks": 36,
+    "types": 7
   },
   "deck_type_ranking": [
-    {
-      "type_key": "Blue+Green",
-      "colors": [
-        "Blue",
-        "Green"
-      ],
-      "label": "青/緑",
-      "count": 751,
-      "share": 18.9,
-      "win_rate": 25.3,
-      "avg_rank": 2.5,
-      "wins": 190
-    },
-    {
-      "type_key": "Blue+White",
-      "colors": [
-        "Blue",
-        "White"
-      ],
-      "label": "青/白",
-      "count": 735,
-      "share": 18.5,
-      "win_rate": 25.9,
-      "avg_rank": 2.4,
-      "wins": 190
-    },
     {
       "type_key": "Blue+Purple",
       "colors": [
@@ -43,11 +17,11 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 726,
-      "share": 18.3,
-      "win_rate": 25.2,
-      "avg_rank": 2.5,
-      "wins": 183
+      "count": 9,
+      "share": 25,
+      "win_rate": 22.2,
+      "avg_rank": 3,
+      "wins": 2
     },
     {
       "type_key": "Red+White",
@@ -56,11 +30,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 680,
-      "share": 17.1,
-      "win_rate": 27.5,
-      "avg_rank": 2.5,
-      "wins": 187
+      "count": 8,
+      "share": 22.2,
+      "win_rate": 12.5,
+      "avg_rank": 2.6,
+      "wins": 1
     },
     {
       "type_key": "Green+Purple",
@@ -69,11 +43,37 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 609,
-      "share": 15.4,
-      "win_rate": 25.9,
-      "avg_rank": 2.5,
-      "wins": 158
+      "count": 7,
+      "share": 19.4,
+      "win_rate": 28.6,
+      "avg_rank": 2.4,
+      "wins": 2
+    },
+    {
+      "type_key": "Blue+White",
+      "colors": [
+        "Blue",
+        "White"
+      ],
+      "label": "青/白",
+      "count": 5,
+      "share": 13.9,
+      "win_rate": 40,
+      "avg_rank": 2.2,
+      "wins": 2
+    },
+    {
+      "type_key": "Blue+Green",
+      "colors": [
+        "Blue",
+        "Green"
+      ],
+      "label": "青/緑",
+      "count": 5,
+      "share": 13.9,
+      "win_rate": 40,
+      "avg_rank": 2,
+      "wins": 2
     },
     {
       "type_key": "Blue+Red",
@@ -82,11 +82,11 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 331,
-      "share": 8.3,
-      "win_rate": 19.6,
-      "avg_rank": 2.6,
-      "wins": 65
+      "count": 1,
+      "share": 2.8,
+      "win_rate": 0,
+      "avg_rank": 2,
+      "wins": 0
     },
     {
       "type_key": "Red+Green",
@@ -95,414 +95,90 @@
         "Green"
       ],
       "label": "赤/緑",
-      "count": 38,
-      "share": 1,
-      "win_rate": 7.9,
-      "avg_rank": 3,
-      "wins": 3
-    },
-    {
-      "type_key": "Red+Purple",
-      "colors": [
-        "Red",
-        "Purple"
-      ],
-      "label": "赤/紫",
-      "count": 35,
-      "share": 0.9,
-      "win_rate": 2.9,
-      "avg_rank": 3,
-      "wins": 1
-    },
-    {
-      "type_key": "Green+White",
-      "colors": [
-        "Green",
-        "White"
-      ],
-      "label": "緑/白",
-      "count": 32,
-      "share": 0.8,
-      "win_rate": 21.9,
-      "avg_rank": 2.6,
-      "wins": 7
-    },
-    {
-      "type_key": "White+Purple",
-      "colors": [
-        "White",
-        "Purple"
-      ],
-      "label": "白/紫",
-      "count": 29,
-      "share": 0.7,
-      "win_rate": 20.7,
-      "avg_rank": 2.7,
-      "wins": 6
-    },
-    {
-      "type_key": "Purple",
-      "colors": [
-        "Purple"
-      ],
-      "label": "紫",
       "count": 1,
-      "share": 0,
+      "share": 2.8,
       "win_rate": 0,
-      "avg_rank": 4,
+      "avg_rank": 2,
       "wins": 0
     }
   ],
   "card_ranking": [
     {
       "card_id": "GD01-100",
-      "decks": 1895,
-      "usage_rate": 47.8
+      "decks": 16,
+      "usage_rate": 44.4
     },
     {
       "card_id": "GD05-002",
-      "decks": 1796,
-      "usage_rate": 45.3
+      "decks": 16,
+      "usage_rate": 44.4
     },
     {
       "card_id": "GD05-081",
-      "decks": 1792,
-      "usage_rate": 45.2
-    },
-    {
-      "card_id": "GD01-118",
-      "decks": 1443,
-      "usage_rate": 36.4
-    },
-    {
-      "card_id": "ST01-010",
-      "decks": 1373,
-      "usage_rate": 34.6
+      "decks": 16,
+      "usage_rate": 44.4
     },
     {
       "card_id": "GD03-056",
-      "decks": 1368,
-      "usage_rate": 34.5
-    },
-    {
-      "card_id": "ST03-008",
-      "decks": 1357,
-      "usage_rate": 34.2
+      "decks": 15,
+      "usage_rate": 41.7
     },
     {
       "card_id": "ST05-010",
-      "decks": 1346,
-      "usage_rate": 33.9
-    },
-    {
-      "card_id": "GD01-030",
-      "decks": 1307,
-      "usage_rate": 32.9
+      "decks": 15,
+      "usage_rate": 41.7
     },
     {
       "card_id": "GD02-054",
-      "decks": 1290,
-      "usage_rate": 32.5
+      "decks": 14,
+      "usage_rate": 38.9
+    },
+    {
+      "card_id": "ST03-008",
+      "decks": 13,
+      "usage_rate": 36.1
+    },
+    {
+      "card_id": "GD01-118",
+      "decks": 12,
+      "usage_rate": 33.3
+    },
+    {
+      "card_id": "GD04-068",
+      "decks": 12,
+      "usage_rate": 33.3
+    },
+    {
+      "card_id": "GD01-018",
+      "decks": 12,
+      "usage_rate": 33.3
     }
   ],
-  "card_ranking_denominator": 3967,
+  "card_ranking_denominator": 36,
   "recent_events": [
     {
-      "event_id": "ntcd-01M3RMPERGXR6RD5PS183A2GH3",
-      "date": "2026-09-30",
-      "store": "リバティ鑑定倶楽部王子店",
+      "event_id": "ntcd-01M3VVQF5GWB1WP015F8HSR9S7",
+      "date": "2026-10-01",
+      "store": "コーギーアール本店",
       "top4_colors": [
         {
           "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
           "colors": [
             "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3RMPDBGHX8MZXQW15A06YKJ",
-      "date": "2026-09-30",
-      "store": "カードボックス日本橋店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3RR0BJXP8ZH3085HEM5M89C",
-      "date": "2026-09-30",
-      "store": "トレカショップスキップ",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3RR4T1RD82TGFA0X4YA9AA4",
-      "date": "2026-09-30",
-      "store": "ドラゴンスター池袋店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3NYQN3A7KC98FR5TRANFFGX",
-      "date": "2026-09-29",
-      "store": "ホビーステーション大宮店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3P256WKNRCGA5M4S8EJ2Q8E",
-      "date": "2026-09-29",
-      "store": "カードラボ宇都宮店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3P5QQK5P35W6CX3J17SQHV2",
-      "date": "2026-09-29",
-      "store": "ドラゴンスター町田店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3P5QPMPK8EGX9FMD1W3307F",
-      "date": "2026-09-29",
-      "store": "ブックオフイオン橋本店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M3P95J3QX58GSF61PDQ3SF84",
-      "date": "2026-09-29",
-      "store": "ドラゴンスター日本橋3号店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
             "Purple"
           ]
         },
@@ -512,9 +188,37 @@
             "Blue",
             "Red"
           ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3VRA57YDYDG43VNKX9RHEY4",
+      "date": "2026-10-01",
+      "store": "G-PROJECT本店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
         },
         {
           "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
           "colors": [
             "Red",
             "White"
@@ -523,9 +227,114 @@
       ]
     },
     {
-      "event_id": "ntcd-01M3PPX674P3CKF4FR39REBKNB",
-      "date": "2026-09-29",
-      "store": "カードボックスヨコハマ本店",
+      "event_id": "ntcd-01M3VMWBZ76S98V63WMB3GZ8Y5",
+      "date": "2026-10-01",
+      "store": "トーナメントセンターバトロコ横浜伊勢佐木町",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3VAJC443FXDKVJWSA1DCWRB",
+      "date": "2026-10-01",
+      "store": "S CARD OASIS 新三郷店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "Green"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3VAJB5P9PM6CGPWCJA51XV6",
+      "date": "2026-10-01",
+      "store": "カードボックス川口店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3V74ZR0WF3BBVA66FBY8FAM",
+      "date": "2026-10-01",
+      "store": "ジラフル広島ドンキ店",
       "top4_colors": [
         {
           "rank": 1,
@@ -537,29 +346,29 @@
         {
           "rank": 1,
           "colors": [
-            "Red",
-            "White"
+            "Blue",
+            "Green"
           ]
         },
         {
           "rank": 2,
           "colors": [
             "Blue",
-            "Purple"
+            "Green"
           ]
         },
         {
           "rank": 2,
           "colors": [
-            "Green",
-            "Purple"
+            "Red",
+            "White"
           ]
         }
       ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-09-30",
-    "event_count": 1615
+    "latest_event_date": "2026-10-01",
+    "event_count": 1621
   }
 }
