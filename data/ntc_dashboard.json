@@ -7,7 +7,7 @@
       "start": "2026/8/1",
       "end": "2026/8/31",
       "first_seen": "2026-08-02T23:05:47.908+09:00",
-      "last_fetched": "2026-10-01T20:03:41.707+09:00",
+      "last_fetched": "2026-10-01T22:27:02.251+09:00",
       "fetch_stopped": false,
       "aggregates_latest": {
         "date": "2026-10-01",
@@ -192493,7 +192493,7 @@
       "start": "2026/9/1",
       "end": "2026/9/30",
       "first_seen": "2026-09-02T18:17:56.424+09:00",
-      "last_fetched": "2026-10-01T20:03:41.707+09:00",
+      "last_fetched": "2026-10-01T22:27:02.251+09:00",
       "fetch_stopped": false,
       "aggregates_latest": {
         "date": "2026-10-01",
@@ -380292,7 +380292,7 @@
       "start": "2026/9/1",
       "end": "2026/9/30",
       "first_seen": "2026-09-17T06:56:42.809+09:00",
-      "last_fetched": "2026-10-01T20:03:41.707+09:00",
+      "last_fetched": "2026-10-01T22:27:02.251+09:00",
       "fetch_stopped": false,
       "aggregates_latest": {
         "date": "2026-10-01",
@@ -618989,6 +618989,5736 @@
           ],
           "deck_count": 16,
           "details_fetched_at": "2026-09-30T18:14:16.094+09:00",
+          "recovered_from_single": true,
+          "winning_colors": [
+            3,
+            5
+          ],
+          "winning_colors_raw": [
+            [
+              3,
+              5
+            ]
+          ]
+        }
+      }
+    },
+    "01M3V74ZR0WF3BBVA66CCT6BAX": {
+      "title": "ガンダムカードゲーム　シリアルカードチャレンジ（10月開催）",
+      "start": "2026/10/1",
+      "end": "2026/10/31",
+      "first_seen": "2026-10-01T22:27:01.239+09:00",
+      "last_fetched": "2026-10-01T22:27:02.251+09:00",
+      "fetch_stopped": false,
+      "aggregates_latest": {
+        "date": "2026-10-01",
+        "denominator_n": 196,
+        "usages": [
+          {
+            "colors": [
+              3,
+              5
+            ],
+            "rate": 23.46938775510204,
+            "count": 46
+          },
+          {
+            "colors": [
+              1,
+              4
+            ],
+            "rate": 22.448979591836736,
+            "count": 44
+          },
+          {
+            "colors": [
+              2,
+              4
+            ],
+            "rate": 16.3265306122449,
+            "count": 32
+          },
+          {
+            "colors": [
+              1,
+              2
+            ],
+            "rate": 15.816326530612246,
+            "count": 31
+          },
+          {
+            "colors": [
+              1,
+              5
+            ],
+            "rate": 14.795918367346939,
+            "count": 29
+          },
+          {
+            "colors": [
+              1,
+              3
+            ],
+            "rate": 4.081632653061225,
+            "count": 8
+          },
+          {
+            "colors": [
+              2,
+              3
+            ],
+            "rate": 1.530612244897959,
+            "count": 3
+          },
+          {
+            "colors": [
+              2,
+              5
+            ],
+            "rate": 1.0204081632653061,
+            "count": 2
+          },
+          {
+            "colors": [],
+            "rate": 0.5102040816326531,
+            "count": 1
+          }
+        ],
+        "win_counts": [
+          {
+            "colors": [
+              1,
+              4
+            ],
+            "rank": 1,
+            "count": 2
+          },
+          {
+            "colors": [
+              1,
+              2
+            ],
+            "rank": 2,
+            "count": 1
+          },
+          {
+            "colors": [
+              3,
+              5
+            ],
+            "rank": 3,
+            "count": 1
+          },
+          {
+            "colors": [
+              2,
+              4
+            ],
+            "rank": 4,
+            "count": 1
+          }
+        ]
+      },
+      "aggregates_history": [
+        {
+          "date": "2026-10-01",
+          "denominator_n": 196,
+          "usages": [
+            {
+              "colors": [
+                3,
+                5
+              ],
+              "rate": 23.46938775510204,
+              "count": 46
+            },
+            {
+              "colors": [
+                1,
+                4
+              ],
+              "rate": 22.448979591836736,
+              "count": 44
+            },
+            {
+              "colors": [
+                2,
+                4
+              ],
+              "rate": 16.3265306122449,
+              "count": 32
+            },
+            {
+              "colors": [
+                1,
+                2
+              ],
+              "rate": 15.816326530612246,
+              "count": 31
+            },
+            {
+              "colors": [
+                1,
+                5
+              ],
+              "rate": 14.795918367346939,
+              "count": 29
+            },
+            {
+              "colors": [
+                1,
+                3
+              ],
+              "rate": 4.081632653061225,
+              "count": 8
+            },
+            {
+              "colors": [
+                2,
+                3
+              ],
+              "rate": 1.530612244897959,
+              "count": 3
+            },
+            {
+              "colors": [
+                2,
+                5
+              ],
+              "rate": 1.0204081632653061,
+              "count": 2
+            },
+            {
+              "colors": [],
+              "rate": 0.5102040816326531,
+              "count": 1
+            }
+          ],
+          "win_counts": [
+            {
+              "colors": [
+                1,
+                4
+              ],
+              "rank": 1,
+              "count": 2
+            },
+            {
+              "colors": [
+                1,
+                2
+              ],
+              "rank": 2,
+              "count": 1
+            },
+            {
+              "colors": [
+                3,
+                5
+              ],
+              "rank": 3,
+              "count": 1
+            },
+            {
+              "colors": [
+                2,
+                4
+              ],
+              "rank": 4,
+              "count": 1
+            }
+          ]
+        }
+      ],
+      "shops": {
+        "2026-10-01__01M3VVQF5GWB1WP015F8HSR9S7": {
+          "shop_id": "01M3VVQF5GWB1WP015F8HSR9S7",
+          "place": "コーギーアール本店",
+          "capacity": 64,
+          "date": "2026/10/1",
+          "first_seen": "2026-10-01T23:05:10.638+09:00",
+          "decks": [
+            {
+              "rank": 1,
+              "author": "アスラ",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-012",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 2,
+              "author": "5spell",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 1
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 3,
+              "author": "ちゃんちゃかちゃーん✦",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-023",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-026",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-031",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-039",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-049",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 2
+                },
+                {
+                  "id": "ST05-014",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 4,
+              "author": "オニール",
+              "deck_color_raw": [
+                1,
+                3
+              ],
+              "cards": [
+                {
+                  "id": "GD01-003",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-044",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-093",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-111",
+                  "count": 2
+                },
+                {
+                  "id": "GD03-109",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-038",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-015",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-013",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 5,
+              "author": "ぶっとー",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 6,
+              "author": "やま",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 3
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST09-009",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 7,
+              "author": "たぷたぷ",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-067",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-035",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-036",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 8,
+              "author": "sorbe",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-015",
+                  "count": 3
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 9,
+              "author": "Y-2",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-035",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-011",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 10,
+              "author": "ハリソン吉田",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-066",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 11,
+              "author": "タツノコ",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-023",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-026",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-049",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 12,
+              "author": "ミカミ",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-023",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-026",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-030",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-065",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-049",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-009",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST09-009",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 13,
+              "author": "yomaru",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-067",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 1
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 14,
+              "author": "K-玉三郎",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 3
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 15,
+              "author": "もるがんず",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 16,
+              "author": "woods",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-086",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            }
+          ],
+          "deck_count": 16,
+          "details_fetched_at": "2026-10-01T23:05:10.638+09:00",
+          "recovered_from_single": true,
+          "winning_colors": [
+            1,
+            5
+          ],
+          "winning_colors_raw": [
+            [
+              1,
+              5
+            ]
+          ]
+        },
+        "2026-10-01__01M3VRA57YDYDG43VNKX9RHEY4": {
+          "shop_id": "01M3VRA57YDYDG43VNKX9RHEY4",
+          "place": "G-PROJECT本店",
+          "capacity": 32,
+          "date": "2026/10/1",
+          "first_seen": "2026-10-01T23:05:10.638+09:00",
+          "decks": [
+            {
+              "rank": 1,
+              "author": "ﾁｭｹ",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-031",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-049",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 1
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 2,
+              "author": "ずんだちゃん",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-126",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-019",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-105",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-125",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 3,
+              "author": "パージ",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-035",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-036",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-068",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 4,
+              "author": "テール",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-036",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-119",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 3
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 5,
+              "author": "るーと",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-026",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-031",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-035",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 1
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 6,
+              "author": "ポニー",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 7,
+              "author": "いねまる",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 2
+                },
+                {
+                  "id": "ST02-016",
+                  "count": 2
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 8,
+              "author": "エクシア",
+              "deck_color_raw": [
+                1,
+                3
+              ],
+              "cards": [
+                {
+                  "id": "GD01-003",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-044",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-093",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-111",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 1
+                },
+                {
+                  "id": "GD03-035",
+                  "count": 1
+                },
+                {
+                  "id": "GD03-109",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-101",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-109",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-015",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-013",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            }
+          ],
+          "deck_count": 8,
+          "details_fetched_at": "2026-10-01T23:05:10.638+09:00",
+          "recovered_from_single": true,
+          "winning_colors": [
+            2,
+            4
+          ],
+          "winning_colors_raw": [
+            [
+              2,
+              4
+            ]
+          ]
+        },
+        "2026-10-01__01M3VMWBZ76S98V63WMB3GZ8Y5": {
+          "shop_id": "01M3VMWBZ76S98V63WMB3GZ8Y5",
+          "place": "トーナメントセンターバトロコ横浜伊勢佐木町",
+          "capacity": 64,
+          "date": "2026/10/1",
+          "first_seen": "2026-10-01T23:05:10.638+09:00",
+          "decks": [
+            {
+              "rank": 1,
+              "author": "ユキ",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 2,
+              "author": "ねお",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-026",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-035",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 3,
+              "author": "なた",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 4,
+              "author": "しゅー",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-023",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-026",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 5,
+              "author": "おたまん",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 6,
+              "author": "ミス",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 3
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-015",
+                  "count": 1
+                },
+                {
+                  "id": "ST09-009",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 7,
+              "author": "shinva",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-023",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-026",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 2
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-049",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 3
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 3
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 8,
+              "author": "ムキチ",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-024",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-126",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-020",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-023",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-028",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-125",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 9,
+              "author": "ますけ",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-058",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST09-009",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 10,
+              "author": "戦士",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-067",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 11,
+              "author": "ハッサン",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-035",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-036",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 12,
+              "author": "かにき",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-058",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST09-009",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 13,
+              "author": "アサクラ",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-106",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-019",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-125",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST02-016",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 14,
+              "author": "kana",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-019",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-020",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-125",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST02-016",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 15,
+              "author": "くたかけ",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-023",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-026",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-031",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-035",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 16,
+              "author": "ガンダム・デブリス",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            }
+          ],
+          "deck_count": 16,
+          "details_fetched_at": "2026-10-01T23:05:10.638+09:00",
+          "recovered_from_single": true,
+          "winning_colors": [
+            1,
+            4
+          ],
+          "winning_colors_raw": [
+            [
+              1,
+              4
+            ]
+          ]
+        },
+        "2026-10-01__01M3VAJC443FXDKVJWSA1DCWRB": {
+          "shop_id": "01M3VAJC443FXDKVJWSA1DCWRB",
+          "place": "S CARD OASIS 新三郷店",
+          "capacity": 32,
+          "date": "2026/10/1",
+          "first_seen": "2026-10-01T23:05:10.638+09:00",
+          "decks": [
+            {
+              "rank": 1,
+              "author": "ここ",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 2,
+              "author": "あいみぃ",
+              "deck_color_raw": [
+                2,
+                3
+              ],
+              "cards": [
+                {
+                  "id": "GD01-044",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-093",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-126",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-019",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 3,
+              "author": "シグナ",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-066",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 1
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-101",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-012",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 4,
+              "author": "kao",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-014",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 5,
+              "author": "でんせん",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 6,
+              "author": "秘宝伝",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-019",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-125",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST02-016",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 3
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 7,
+              "author": "チャキ",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-100",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST09-009",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 8,
+              "author": "じゃぱないの",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-035",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 1
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 3
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-014",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            }
+          ],
+          "deck_count": 8,
+          "details_fetched_at": "2026-10-01T23:05:10.638+09:00",
+          "recovered_from_single": true,
+          "winning_colors": [
+            1,
+            4
+          ],
+          "winning_colors_raw": [
+            [
+              1,
+              4
+            ]
+          ]
+        },
+        "2026-10-01__01M3VAJB5P9PM6CGPWCJA51XV6": {
+          "shop_id": "01M3VAJB5P9PM6CGPWCJA51XV6",
+          "place": "カードボックス川口店",
+          "capacity": 32,
+          "date": "2026/10/1",
+          "first_seen": "2026-10-01T23:05:10.638+09:00",
+          "decks": [
+            {
+              "rank": 1,
+              "author": "りり",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-019",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-020",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-125",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST02-016",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 2,
+              "author": "RK",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-066",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-033",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-010",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-011",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 3,
+              "author": "17",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-026",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 1
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 4,
+              "author": "ノキ",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 1
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-003",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-006",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-016",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-121",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 2
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 5,
+              "author": "lyndis",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 6,
+              "author": "龍一",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-014",
+                  "count": 2
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 7,
+              "author": "RC",
+              "deck_color_raw": [
+                1,
+                3
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-111",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-006",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-038",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-006",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-007",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST08-005",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 8,
+              "author": "ダーマ",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 2
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-101",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 3
+                },
+                {
+                  "id": "ST02-016",
+                  "count": 1
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            }
+          ],
+          "deck_count": 8,
+          "details_fetched_at": "2026-10-01T23:05:10.638+09:00",
+          "recovered_from_single": true,
+          "winning_colors": [
+            1,
+            2
+          ],
+          "winning_colors_raw": [
+            [
+              1,
+              2
+            ]
+          ]
+        },
+        "2026-10-01__01M3V74ZR0WF3BBVA66FBY8FAM": {
+          "shop_id": "01M3V74ZR0WF3BBVA66FBY8FAM",
+          "place": "ジラフル広島ドンキ店",
+          "capacity": 64,
+          "date": "2026/10/1",
+          "first_seen": "2026-10-01T23:05:10.638+09:00",
+          "decks": [
+            {
+              "rank": 1,
+              "author": "パージ",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-035",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-036",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-068",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 2,
+              "author": "ペペロンチーノ",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-126",
+                  "count": 1
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-019",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-020",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-029",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-085",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-125",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 3,
+              "author": "タケ",
+              "deck_color_raw": [
+                1,
+                2
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD02-029",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-031",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-088",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-122",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-021",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-024",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-027",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-015",
+                  "count": 3
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 4,
+              "author": "J",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-128",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 5,
+              "author": "ハッセ",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-008",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 2
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 6,
+              "author": "まお",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-068",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-117",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 7,
+              "author": "もな",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-014",
+                  "count": 3
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 8,
+              "author": "なぎ",
+              "deck_color_raw": [
+                2,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-026",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-030",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-017",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-050",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-062",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-093",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-007",
+                  "count": 2
+                },
+                {
+                  "id": "ST03-008",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-011",
+                  "count": 4
+                },
+                {
+                  "id": "ST03-016",
+                  "count": 3
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 9,
+              "author": "ワロス",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-005",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 10,
+              "author": "つぐと",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-117",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-015",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 11,
+              "author": "ふわとろ",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "EB01-054",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-001",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 12,
+              "author": "めるへる",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 13,
+              "author": "猫神たると",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 3
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 2
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 3
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-012",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 14,
+              "author": "Galess",
+              "deck_color_raw": [
+                1,
+                4
+              ],
+              "cards": [
+                {
+                  "id": "GD01-018",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD02-054",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-055",
+                  "count": 4
+                },
+                {
+                  "id": "GD03-050",
+                  "count": 3
+                },
+                {
+                  "id": "GD03-056",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-058",
+                  "count": 1
+                },
+                {
+                  "id": "GD05-060",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-114",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-129",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-004",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-006",
+                  "count": 4
+                },
+                {
+                  "id": "ST05-010",
+                  "count": 4
+                },
+                {
+                  "id": "ST09-009",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 15,
+              "author": "アルビノ",
+              "deck_color_raw": [
+                1,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-065",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-073",
+                  "count": 2
+                },
+                {
+                  "id": "GD01-086",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-100",
+                  "count": 1
+                },
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD02-079",
+                  "count": 3
+                },
+                {
+                  "id": "GD02-129",
+                  "count": 4
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD04-077",
+                  "count": 2
+                },
+                {
+                  "id": "GD05-002",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-010",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-081",
+                  "count": 4
+                },
+                {
+                  "id": "ST01-010",
+                  "count": 3
+                },
+                {
+                  "id": "ST01-014",
+                  "count": 2
+                },
+                {
+                  "id": "ST04-001",
+                  "count": 4
+                },
+                {
+                  "id": "ST04-010",
+                  "count": 4
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            },
+            {
+              "rank": 16,
+              "author": "かいちょー",
+              "deck_color_raw": [
+                3,
+                5
+              ],
+              "cards": [
+                {
+                  "id": "GD01-118",
+                  "count": 4
+                },
+                {
+                  "id": "GD01-128",
+                  "count": 2
+                },
+                {
+                  "id": "GD04-066",
+                  "count": 1
+                },
+                {
+                  "id": "GD04-068",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-033",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-066",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-069",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-072",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-089",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-097",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-110",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-111",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-120",
+                  "count": 3
+                },
+                {
+                  "id": "GD05-121",
+                  "count": 4
+                },
+                {
+                  "id": "GD05-128",
+                  "count": 1
+                }
+              ],
+              "total": 50,
+              "sideboard": 0
+            }
+          ],
+          "deck_count": 16,
+          "details_fetched_at": "2026-10-01T23:05:10.638+09:00",
           "recovered_from_single": true,
           "winning_colors": [
             3,
