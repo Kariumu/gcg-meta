@@ -6586,5 +6586,55 @@
       }
     ],
     "status": "pending_review"
+  },
+  "2026-10-01": {
+    "recognized_at": "2026-10-01 20:00:19 JST",
+    "source_tweets": [
+      "https://x.com/GUNDAM_GCG_JP/status/2105575947978064384",
+      "https://x.com/GUNDAM_GCG_JP/status/2105568403171819832"
+    ],
+    "cards": [
+      {
+        "card_number": "GD06-010",
+        "card_name": "ジム・キャノンⅡ",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 3,
+        "cost": 2,
+        "ap": 2,
+        "hp": 3,
+        "traits": [
+          "〔地球連邦〕",
+          "〔アルビオン隊〕"
+        ],
+        "link": "特徴にアルビオン隊を持つPILOT",
+        "effect": "【リンク時】自分は1枚ドローする。",
+        "effect_confidence": "high",
+        "effect_length": 17,
+        "image_url": null,
+        "confidence": "medium"
+      },
+      {
+        "card_number": "GD06-004",
+        "card_name": "ガンダム試作1号機",
+        "color": "Blue",
+        "card_type": "UNIT",
+        "level": 4,
+        "cost": 2,
+        "ap": 4,
+        "hp": 3,
+        "traits": [
+          "〔地球連邦〕",
+          "〔アルビオン隊〕"
+        ],
+        "link": "「コウ・ウラキ」",
+        "effect": "【リンク中】【破壊時】自分のターンなら、このユニットにセットされていたパイロットを持ち主の手札に戻す。その後、自分の手札1枚を捨てる。",
+        "effect_confidence": "medium",
+        "effect_length": 67,
+        "image_url": null,
+        "confidence": "medium"
+      }
+    ],
+    "status": "pending_review"
   }
 }
