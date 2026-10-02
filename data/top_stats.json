@@ -5,24 +5,11 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 6,
-    "decks": 36,
+    "events": 8,
+    "decks": 48,
     "types": 7
   },
   "deck_type_ranking": [
-    {
-      "type_key": "Blue+Purple",
-      "colors": [
-        "Blue",
-        "Purple"
-      ],
-      "label": "青/紫",
-      "count": 9,
-      "share": 25,
-      "win_rate": 22.2,
-      "avg_rank": 3,
-      "wins": 2
-    },
     {
       "type_key": "Red+White",
       "colors": [
@@ -30,11 +17,24 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 8,
-      "share": 22.2,
-      "win_rate": 12.5,
-      "avg_rank": 2.6,
-      "wins": 1
+      "count": 13,
+      "share": 27.1,
+      "win_rate": 23.1,
+      "avg_rank": 2.4,
+      "wins": 3
+    },
+    {
+      "type_key": "Blue+Purple",
+      "colors": [
+        "Blue",
+        "Purple"
+      ],
+      "label": "青/紫",
+      "count": 12,
+      "share": 25,
+      "win_rate": 25,
+      "avg_rank": 2.8,
+      "wins": 3
     },
     {
       "type_key": "Green+Purple",
@@ -43,10 +43,10 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 7,
-      "share": 19.4,
-      "win_rate": 28.6,
-      "avg_rank": 2.4,
+      "count": 10,
+      "share": 20.8,
+      "win_rate": 20,
+      "avg_rank": 2.6,
       "wins": 2
     },
     {
@@ -56,10 +56,10 @@
         "White"
       ],
       "label": "青/白",
-      "count": 5,
-      "share": 13.9,
-      "win_rate": 40,
-      "avg_rank": 2.2,
+      "count": 6,
+      "share": 12.5,
+      "win_rate": 33.3,
+      "avg_rank": 2.5,
       "wins": 2
     },
     {
@@ -70,7 +70,7 @@
       ],
       "label": "青/緑",
       "count": 5,
-      "share": 13.9,
+      "share": 10.4,
       "win_rate": 40,
       "avg_rank": 2,
       "wins": 2
@@ -83,7 +83,7 @@
       ],
       "label": "青/赤",
       "count": 1,
-      "share": 2.8,
+      "share": 2.1,
       "win_rate": 0,
       "avg_rank": 2,
       "wins": 0
@@ -96,7 +96,7 @@
       ],
       "label": "赤/緑",
       "count": 1,
-      "share": 2.8,
+      "share": 2.1,
       "win_rate": 0,
       "avg_rank": 2,
       "wins": 0
@@ -104,58 +104,128 @@
   ],
   "card_ranking": [
     {
-      "card_id": "GD01-100",
-      "decks": 16,
-      "usage_rate": 44.4
-    },
-    {
-      "card_id": "GD05-002",
-      "decks": 16,
-      "usage_rate": 44.4
-    },
-    {
-      "card_id": "GD05-081",
-      "decks": 16,
-      "usage_rate": 44.4
-    },
-    {
       "card_id": "GD03-056",
-      "decks": 15,
-      "usage_rate": 41.7
+      "decks": 21,
+      "usage_rate": 43.8
     },
     {
       "card_id": "ST05-010",
-      "decks": 15,
+      "decks": 21,
+      "usage_rate": 43.8
+    },
+    {
+      "card_id": "GD01-100",
+      "decks": 20,
+      "usage_rate": 41.7
+    },
+    {
+      "card_id": "GD05-002",
+      "decks": 20,
+      "usage_rate": 41.7
+    },
+    {
+      "card_id": "GD05-081",
+      "decks": 20,
       "usage_rate": 41.7
     },
     {
       "card_id": "GD02-054",
-      "decks": 14,
-      "usage_rate": 38.9
-    },
-    {
-      "card_id": "ST03-008",
-      "decks": 13,
-      "usage_rate": 36.1
+      "decks": 20,
+      "usage_rate": 41.7
     },
     {
       "card_id": "GD01-118",
-      "decks": 12,
-      "usage_rate": 33.3
+      "decks": 18,
+      "usage_rate": 37.5
     },
     {
       "card_id": "GD04-068",
-      "decks": 12,
+      "decks": 18,
+      "usage_rate": 37.5
+    },
+    {
+      "card_id": "ST03-008",
+      "decks": 16,
       "usage_rate": 33.3
     },
     {
       "card_id": "GD01-018",
-      "decks": 12,
-      "usage_rate": 33.3
+      "decks": 15,
+      "usage_rate": 31.3
     }
   ],
-  "card_ranking_denominator": 36,
+  "card_ranking_denominator": 48,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M3XP3VGYEQXKRP48HRSEY896",
+      "date": "2026-10-02",
+      "store": "ドラゴンスター日本橋2号店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3XP3TBQ39F3EDPAW3PRX1H6",
+      "date": "2026-10-02",
+      "store": "カードラボ姫路店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M3VVQF5GWB1WP015F8HSR9S7",
       "date": "2026-10-01",
@@ -368,7 +438,7 @@
     }
   ],
   "source": {
-    "latest_event_date": "2026-10-01",
-    "event_count": 1621
+    "latest_event_date": "2026-10-02",
+    "event_count": 1623
   }
 }
