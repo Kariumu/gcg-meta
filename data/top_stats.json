@@ -5,24 +5,11 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 10,
-    "decks": 56,
+    "events": 11,
+    "decks": 64,
     "types": 7
   },
   "deck_type_ranking": [
-    {
-      "type_key": "Blue+Purple",
-      "colors": [
-        "Blue",
-        "Purple"
-      ],
-      "label": "青/紫",
-      "count": 14,
-      "share": 25,
-      "win_rate": 28.6,
-      "avg_rank": 2.8,
-      "wins": 4
-    },
     {
       "type_key": "Red+White",
       "colors": [
@@ -30,11 +17,24 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 14,
-      "share": 25,
-      "win_rate": 21.4,
+      "count": 19,
+      "share": 29.7,
+      "win_rate": 26.3,
       "avg_rank": 2.4,
-      "wins": 3
+      "wins": 5
+    },
+    {
+      "type_key": "Blue+Purple",
+      "colors": [
+        "Blue",
+        "Purple"
+      ],
+      "label": "青/紫",
+      "count": 15,
+      "share": 23.4,
+      "win_rate": 26.7,
+      "avg_rank": 2.9,
+      "wins": 4
     },
     {
       "type_key": "Green+Purple",
@@ -44,7 +44,7 @@
       ],
       "label": "緑/紫",
       "count": 11,
-      "share": 19.6,
+      "share": 17.2,
       "win_rate": 18.2,
       "avg_rank": 2.5,
       "wins": 2
@@ -56,10 +56,10 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 8,
-      "share": 14.3,
-      "win_rate": 37.5,
-      "avg_rank": 2,
+      "count": 9,
+      "share": 14.1,
+      "win_rate": 33.3,
+      "avg_rank": 2.1,
       "wins": 3
     },
     {
@@ -69,10 +69,10 @@
         "White"
       ],
       "label": "青/白",
-      "count": 7,
+      "count": 8,
       "share": 12.5,
-      "win_rate": 28.6,
-      "avg_rank": 2.7,
+      "win_rate": 25,
+      "avg_rank": 2.6,
       "wins": 2
     },
     {
@@ -83,7 +83,7 @@
       ],
       "label": "青/赤",
       "count": 1,
-      "share": 1.8,
+      "share": 1.6,
       "win_rate": 0,
       "avg_rank": 2,
       "wins": 0
@@ -96,7 +96,7 @@
       ],
       "label": "赤/緑",
       "count": 1,
-      "share": 1.8,
+      "share": 1.6,
       "win_rate": 0,
       "avg_rank": 2,
       "wins": 0
@@ -104,57 +104,57 @@
   ],
   "card_ranking": [
     {
-      "card_id": "GD03-056",
-      "decks": 24,
-      "usage_rate": 42.9
-    },
-    {
-      "card_id": "ST05-010",
-      "decks": 24,
-      "usage_rate": 42.9
-    },
-    {
       "card_id": "GD01-100",
-      "decks": 23,
-      "usage_rate": 41.1
-    },
-    {
-      "card_id": "GD05-002",
-      "decks": 23,
-      "usage_rate": 41.1
-    },
-    {
-      "card_id": "GD05-081",
-      "decks": 23,
-      "usage_rate": 41.1
-    },
-    {
-      "card_id": "GD02-054",
-      "decks": 23,
-      "usage_rate": 41.1
+      "decks": 26,
+      "usage_rate": 40.6
     },
     {
       "card_id": "GD01-118",
-      "decks": 20,
-      "usage_rate": 35.7
+      "decks": 26,
+      "usage_rate": 40.6
+    },
+    {
+      "card_id": "GD05-002",
+      "decks": 26,
+      "usage_rate": 40.6
+    },
+    {
+      "card_id": "GD05-081",
+      "decks": 26,
+      "usage_rate": 40.6
+    },
+    {
+      "card_id": "GD03-056",
+      "decks": 25,
+      "usage_rate": 39.1
+    },
+    {
+      "card_id": "ST05-010",
+      "decks": 25,
+      "usage_rate": 39.1
     },
     {
       "card_id": "GD04-068",
-      "decks": 20,
-      "usage_rate": 35.7
+      "decks": 24,
+      "usage_rate": 37.5
+    },
+    {
+      "card_id": "GD02-054",
+      "decks": 24,
+      "usage_rate": 37.5
+    },
+    {
+      "card_id": "GD01-018",
+      "decks": 21,
+      "usage_rate": 32.8
     },
     {
       "card_id": "ST03-008",
       "decks": 20,
-      "usage_rate": 35.7
-    },
-    {
-      "card_id": "GD01-018",
-      "decks": 20,
-      "usage_rate": 35.7
+      "usage_rate": 31.3
     }
   ],
-  "card_ranking_denominator": 56,
+  "card_ranking_denominator": 64,
   "recent_events": [
     {
       "event_id": "ntcd-01M3XP3VGYEQXKRP48HRSEY896",
@@ -289,6 +289,41 @@
         },
         {
           "rank": 4,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M3XWZ96AY0BPMEV09Q3AS4V8",
+      "date": "2026-10-02",
+      "store": "コーギーアール大宮駅前店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
           "colors": [
             "Blue",
             "White"
@@ -470,45 +505,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M3V74ZR0WF3BBVA66FBY8FAM",
-      "date": "2026-10-01",
-      "store": "ジラフル広島ドンキ店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-02",
-    "event_count": 1625
+    "event_count": 1626
   }
 }
