@@ -31,6 +31,22 @@
        最低高さを与えてフッターを最初から画面外に置く。
        本番の一覧は 2,500px 以上あるので、データが入れば余白は出ない。 */
     main { min-height: 100vh; }
+    /* 指示書133: 遊々亭バナーの枠の高さの予約(中身は js/ads.js が差し込む)。
+       数値を変えるときは store / mypage / schedule と generate-events.js のテンプレを揃えること。
+       帯: 50+18+4=72 / 90+18+4=112(820px 以上)。四角: 250+18+4=272。
+       収まらない幅では display:none(高さ 0 の flex のままだと上下の余白が重ならず、畳んだ瞬間に本文が動く)。 */
+    .ad-slot{display:flex;flex-direction:column;align-items:center;margin:20px auto;width:100%}
+    .ad-slot[data-kind="band"]{min-height:72px}
+    @media(min-width:820px){.ad-slot[data-kind="band"]{min-height:112px}}
+    @media(max-width:359px){.ad-slot[data-kind="band"]{display:none}}
+    .ad-slot[data-kind="rect"]{min-height:272px}
+    @media(max-width:339px){.ad-slot[data-kind="rect"]{display:none}}
+    .ad-slot-failed,.ad-slot-none{display:none}
+    /* 指示書133-R1: 一覧が入る前の「最終更新」の行の高さと、一覧の最低高さを先に確保する。
+       ads.js が一覧データより先に走ると、下の四角の枠が最初の画面の中にあり、一覧の描画で画面外へ押し出されて CLS が 0.3〜0.5 になるため。
+       :empty にしない(一覧が短い時期に四角が画面内へ飛び込んで動くのを防ぐ。裁定②)。 */
+    #last-updated{min-height:20px}
+    #series-list{min-height:100vh}
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
   <script>
@@ -51,14 +67,17 @@
       </div>
       <div id="last-updated" style="margin-top:6px;font-size:12px;color:var(--text-muted);font-family:var(--font-mono)"></div>
     </div>
+    <div class="ad-slot" data-slot="schedule-top" data-kind="band"></div>
 
     <div id="loading" style="text-align:center;padding:40px;color:var(--text-muted)">イベント情報を取得中...</div>
     <div id="series-list"></div>
+    <div class="ad-slot" data-slot="schedule-bottom" data-kind="rect"></div>
   </main>
 
   <div id="footer"></div>
 
   <script src="js/common.js?v=15"></script>
+  <script src="js/ads.js?v=1" defer></script>
   <script>
     // Status determination — 全イベントの最遅申込期限・最早/最遅開始時刻から判定。
     // 状態は同時に複数成立しうるため、該当する全ステータスを配列で返す

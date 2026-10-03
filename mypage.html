@@ -91,6 +91,17 @@
       font-size: 11px; margin-right: 8px; transition: transform 0.15s ease;
     }
     .mypage-collapse:not([open]) > summary::before { transform: rotate(-90deg); }
+    /* 指示書133: 遊々亭バナーの枠の高さの予約(中身は js/ads.js が差し込む)。
+       数値を変えるときは store / mypage / schedule と generate-events.js のテンプレを揃えること。
+       帯: 50+18+4=72 / 90+18+4=112(820px 以上)。四角: 250+18+4=272。
+       収まらない幅では display:none(高さ 0 の flex のままだと上下の余白が重ならず、畳んだ瞬間に本文が動く)。 */
+    .ad-slot{display:flex;flex-direction:column;align-items:center;margin:20px auto;width:100%}
+    .ad-slot[data-kind="band"]{min-height:72px}
+    @media(min-width:820px){.ad-slot[data-kind="band"]{min-height:112px}}
+    @media(max-width:359px){.ad-slot[data-kind="band"]{display:none}}
+    .ad-slot[data-kind="rect"]{min-height:272px}
+    @media(max-width:339px){.ad-slot[data-kind="rect"]{display:none}}
+    .ad-slot-failed,.ad-slot-none{display:none}
   </style>
 </head>
 <body>
@@ -125,6 +136,7 @@
         <div id="fav-stores"></div>
       </details>
     </section>
+    <div class="ad-slot" data-slot="mypage-mid" data-kind="band"></div>
 
     <!-- お気に入りイベントまとめ -->
     <section id="fav-events-section" style="margin-bottom:28px">
@@ -157,11 +169,13 @@
         <div id="fav-missing"></div>
       </div>
     </section>
+    <div class="ad-slot" data-slot="mypage-bottom" data-kind="rect"></div>
   </main>
 
   <div id="footer"></div>
 
   <script src="/js/common.js?v=15"></script>
+  <script src="/js/ads.js?v=1" defer></script>
   <script src="/js/favorites.js?v=1"></script>
   <script>
     // favorites.js 読込失敗（404・ネット断）時のフォールバック（指示書45-1）:

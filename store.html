@@ -50,6 +50,17 @@
     .fav-star.is-on { color: var(--accent); }
     .fav-star:hover { transform: scale(1.15); }
     .fav-star[disabled] { cursor: not-allowed; opacity: 0.4; transform: none; }
+    /* 指示書133: 遊々亭バナーの枠の高さの予約(中身は js/ads.js が差し込む)。
+       数値を変えるときは store / mypage / schedule と generate-events.js のテンプレを揃えること。
+       帯: 50+18+4=72 / 90+18+4=112(820px 以上)。四角: 250+18+4=272。
+       収まらない幅では display:none(高さ 0 の flex のままだと上下の余白が重ならず、畳んだ瞬間に本文が動く)。 */
+    .ad-slot{display:flex;flex-direction:column;align-items:center;margin:20px auto;width:100%}
+    .ad-slot[data-kind="band"]{min-height:72px}
+    @media(min-width:820px){.ad-slot[data-kind="band"]{min-height:112px}}
+    @media(max-width:359px){.ad-slot[data-kind="band"]{display:none}}
+    .ad-slot[data-kind="rect"]{min-height:272px}
+    @media(max-width:339px){.ad-slot[data-kind="rect"]{display:none}}
+    .ad-slot-failed,.ad-slot-none{display:none}
   </style>
 </head>
 <body>
@@ -73,6 +84,7 @@
       <div id="store-winner-deck-trends" class="store-winner-trends"></div>
       <div id="store-events-history" class="store-events-history"></div>
     </section>
+    <div class="ad-slot" data-slot="store-mid" data-kind="band"></div>
 
     <!-- スケジュール（カレンダー） -->
     <section id="store-schedule-section" style="margin-top:28px">
@@ -81,12 +93,14 @@
       </div>
       <div id="calendar"></div>
     </section>
+    <div class="ad-slot" data-slot="store-bottom" data-kind="rect"></div>
   </main>
 
   <div id="footer"></div>
 
   <script src="shared/ntc-rank-consolidator.js?v=3"></script>
   <script src="js/common.js?v=16"></script>
+  <script src="js/ads.js?v=1" defer></script>
   <script src="/js/favorites.js?v=1"></script>
   <script>
     // favorites.js 読込失敗（404・ネット断）時のフォールバック（指示書45-1）:
