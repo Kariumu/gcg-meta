@@ -14,17 +14,17 @@
   "status": "active",
   "description": "公式イベント「ガンダムカードゲーム シリアルカードチャレンジ」の2026年10月開催分。開催期間は2026年10月1日〜10月31日。",
   "stats": {
-    "event_count": 64,
-    "total_result_entries": 648,
-    "total_decks": 324,
+    "event_count": 68,
+    "total_result_entries": 680,
+    "total_decks": 340,
     "by_region": {
       "関東": {
-        "events": 16,
-        "decks": 88
+        "events": 17,
+        "decks": 92
       },
       "九州": {
-        "events": 12,
-        "decks": 48
+        "events": 13,
+        "decks": 52
       },
       "中国": {
         "events": 5,
@@ -35,12 +35,12 @@
         "decks": 68
       },
       "中部": {
-        "events": 12,
-        "decks": 64
+        "events": 13,
+        "decks": 68
       },
       "四国": {
-        "events": 1,
-        "decks": 4
+        "events": 2,
+        "decks": 8
       },
       "北海道": {
         "events": 1,
@@ -59,7 +59,7 @@
           "White"
         ],
         "label": "赤/白",
-        "count": 77,
+        "count": 81,
         "share": 23.8
       },
       {
@@ -69,8 +69,8 @@
           "White"
         ],
         "label": "青/白",
-        "count": 64,
-        "share": 19.8
+        "count": 66,
+        "share": 19.4
       },
       {
         "type_key": "Blue+Purple",
@@ -79,8 +79,8 @@
           "Purple"
         ],
         "label": "青/紫",
-        "count": 58,
-        "share": 17.9
+        "count": 59,
+        "share": 17.4
       },
       {
         "type_key": "Green+Purple",
@@ -89,8 +89,8 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "count": 46,
-        "share": 14.2
+        "count": 50,
+        "share": 14.7
       },
       {
         "type_key": "Blue+Green",
@@ -99,8 +99,8 @@
           "Green"
         ],
         "label": "青/緑",
-        "count": 45,
-        "share": 13.9
+        "count": 48,
+        "share": 14.1
       },
       {
         "type_key": "Red+Green",
@@ -109,7 +109,7 @@
           "Green"
         ],
         "label": "赤/緑",
-        "count": 19,
+        "count": 20,
         "share": 5.9
       },
       {
@@ -120,7 +120,7 @@
         ],
         "label": "青/赤",
         "count": 9,
-        "share": 2.8
+        "share": 2.6
       },
       {
         "type_key": "Green+White",
@@ -129,8 +129,8 @@
           "White"
         ],
         "label": "緑/白",
-        "count": 3,
-        "share": 0.9
+        "count": 4,
+        "share": 1.2
       },
       {
         "type_key": "Red+Purple",
@@ -151,9 +151,9 @@
           "White"
         ],
         "label": "赤/白",
-        "wins": 21,
-        "count": 77,
-        "win_rate": 27.3
+        "wins": 22,
+        "count": 81,
+        "win_rate": 27.2
       },
       {
         "type_key": "Blue+White",
@@ -162,9 +162,9 @@
           "White"
         ],
         "label": "青/白",
-        "wins": 17,
-        "count": 64,
-        "win_rate": 26.6
+        "wins": 18,
+        "count": 66,
+        "win_rate": 27.3
       },
       {
         "type_key": "Blue+Purple",
@@ -174,8 +174,19 @@
         ],
         "label": "青/紫",
         "wins": 14,
-        "count": 58,
-        "win_rate": 24.1
+        "count": 59,
+        "win_rate": 23.7
+      },
+      {
+        "type_key": "Green+Purple",
+        "colors": [
+          "Green",
+          "Purple"
+        ],
+        "label": "緑/紫",
+        "wins": 9,
+        "count": 50,
+        "win_rate": 18
       },
       {
         "type_key": "Blue+Green",
@@ -185,8 +196,8 @@
         ],
         "label": "青/緑",
         "wins": 9,
-        "count": 45,
-        "win_rate": 20
+        "count": 48,
+        "win_rate": 18.8
       },
       {
         "type_key": "Red+Green",
@@ -196,19 +207,8 @@
         ],
         "label": "赤/緑",
         "wins": 9,
-        "count": 19,
-        "win_rate": 47.4
-      },
-      {
-        "type_key": "Green+Purple",
-        "colors": [
-          "Green",
-          "Purple"
-        ],
-        "label": "緑/紫",
-        "wins": 8,
-        "count": 46,
-        "win_rate": 17.4
+        "count": 20,
+        "win_rate": 45
       },
       {
         "type_key": "Blue+Red",
@@ -220,6 +220,17 @@
         "wins": 2,
         "count": 9,
         "win_rate": 22.2
+      },
+      {
+        "type_key": "Green+White",
+        "colors": [
+          "Green",
+          "White"
+        ],
+        "label": "緑/白",
+        "wins": 1,
+        "count": 4,
+        "win_rate": 25
       },
       {
         "type_key": "Red+Purple",
