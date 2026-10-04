@@ -20,6 +20,7 @@
 | 2026-08-11 | GD05 Week 2 新規訳語追加: Calibarn / Strike Freedom Other | reports/msa-gd05-week2.html |
 | 2026-08-12 | 公式カード名との照合により訳語を修正: Calibarn カリバーン→キャリバーン / League Militaire リーグ・ミリタリー→リガ・ミリティア（関連5エントリ含む） / Militia ミリシア→ミリシャ。公開済みMSA記事10本も遡及修正 | reports/msa-gd04-week1〜7,9, msa-gd05-week1〜2 |
 | 2026-09-16 | GD05 Week 7 新規訳語追加: Orb Union (Blue White) | reports/msa-gd05-week7.html |
+| 2026-10-04 | GD05+ST Week 0 新規訳語追加: Marine Rush / Barbatos Ple-Twelve | reports/msa-gd05sts-week0.html |
 
 ## デッキ名・アーキタイプ訳語
 
@@ -72,6 +73,8 @@
 | Calibarn | **キャリバーン** | ガンダム・キャリバーン | GD05 Week 2 新規。公式カード名は「ガンダム・キャリバーン」(GD05-018)。デッキ名としては他と揃えて略称を採用。2026-08-12 カリバーン→キャリバーンに修正 |
 | Strike Freedom Other | **ストライクフリーダム その他** |  | GD05 Week 2 新規。既存の Grampa Other＝グランパ その他 / Sazabi Other＝サザビー その他 の表記に準拠 |
 | Orb Union (Blue White) | **オーブ（青白）** | オーブ連合（青白） | GD05 Week 7 新規。公式カードの特徴表記は〔オーブ〕（英語版は (Orb)）。GD05-002 ストライクフリーダムガンダム 等、基本カード13種（パラレル含め23件）が保持し、色の内訳は青11・白2。色表記は Sazabi (Purple Green)＝サザビー（紫緑）の先例に合わせ英語順 |
+| Marine Rush | **水中アグロ** | マリーン アグロ | GD05+ST Week 0 新規。公式カードの特徴表記は〔水中〕（英語版は (Marine)）。ST11-001 シャア専用ズゴック 等、ST11収録の11種（ユニット10種＋ベース1種）が保持する。ほかにトークンのグーン（T-028）も保持。「アグロ」は既存の Barbatos Rush＝バルバトス アグロ / Militia Rush＝ミリシャ アグロ に準拠 |
+| Barbatos Ple-Twelve | **バルバトス プルトゥエルブ** | バルバトス プル・トゥエルブ | GD05+ST Week 0 新規。公式カード名は「プルトゥエルブ」(ST12-012。カード名は「マリーダ・クルス」としても扱う)。既存の Barbatos Lupus＝バルバトス ルプス の表記に準拠 |
 
 ## カラータイプ表記
 
