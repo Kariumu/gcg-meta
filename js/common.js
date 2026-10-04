@@ -369,8 +369,11 @@ const GCG = {
   },
 
   // deck = events.json の results[].deck([{card_id,count}])。
-  // 成功時は deck-builder.html?d=<共有コード>&n=<大会名> へ遷移する。
-  // 失敗(スクリプト/通信/encode)時はその場で従来の「デッキリストをコピー」に退避し、
+  // 成功時は deck-builder.html?d=<共有コード>&n=<大会名> を新しいタブで開く(指示書138)。
+  //   クリックの同期処理の中で空のタブを先に開き、共有コードができたらその URL へ差し替える
+  //   (loadShareDb は非同期。終わってから window.open するとポップアップ抑止に止められるため)。
+  //   空のタブを開けなかった端末(ポップアップ抑止など)は、従来どおり同じタブで遷移する。
+  // 失敗(スクリプト/通信/encode)時は、開いた空のタブを閉じてから従来の「デッキリストをコピー」に退避し、
   // ボタン表記も戻す。以後そのボタンはコピー動作になる。
   openDeckInBuilder(deck, btn, deckName, extra) {
     if (!deck || !deck.length) return;
@@ -378,22 +381,52 @@ const GCG = {
     if (btn.getAttribute('data-mode') === 'copy') return copy();
     if (btn.getAttribute('data-busy')) return;
     btn.setAttribute('data-busy', '1');
-    GCG.track('builder_open', { source: 'event', store: deckName, rank: extra && extra.rank != null ? String(extra.rank) : '', mode: 'share' });
+    const label = btn.textContent;   // 新しいタブで開いた後、ボタンを押す前の文言へ戻すために控える
+    let win = null;
+    try { win = window.open('', '_blank'); } catch (e) { win = null; }
+    if (win === window) win = null;   // 同じウィンドウが返る環境は「開けなかった」と同じ扱いにする
+    if (win) {
+      try { win.opener = null; } catch (e) { /* noopener 相当。代入できなくても続ける */ }
+      try {
+        win.document.title = 'デッキビルダーを開いています…';
+        win.document.body.style.cssText = 'margin:0;padding:24px;background:#0a0e14;color:#8b95a5;font:14px sans-serif';
+        win.document.body.textContent = 'デッキビルダーを開いています…';
+      } catch (e) { /* 案内の 1 行を書けなくても、タブの差し替えには影響しない */ }
+    }
+    GCG.track('builder_open', { source: 'event', store: deckName, rank: extra && extra.rank != null ? String(extra.rank) : '', mode: 'share', tab: win ? 'new' : 'same' });
     btn.textContent = '\u23F3 \u8AAD\u307F\u8FBC\u307F\u4E2D\u2026';
     this.loadShareDb().then(byId => {
       const counts = {};
       deck.forEach(c => { counts[c.card_id] = (counts[c.card_id] || 0) + c.count; });
       const r = window.DeckCore.encodeShareCode(counts, byId);
       if (!r.ok) throw new Error('encode-' + r.reason);
-      location.href = this.getBasePath() + 'deck-builder.html?d=' + encodeURIComponent(r.code)
+      const url = this.getBasePath() + 'deck-builder.html?d=' + encodeURIComponent(r.code)
         + '&n=' + encodeURIComponent(deckName || '')
         + ((!extra || extra.src === 'event') ? '&src=event' : '');
+      if (!win) { location.href = url; return; }   // 空のタブを開けなかった: 従来どおり同じタブで遷移
+      // 相対 URL が空のタブ(about:blank)基準で解かれないよう、このページ基準の絶対 URL にして渡す
+      if (!win.closed) win.location.href = new URL(url, location.href).href;
+      // 元のタブは残るので、ボタンを押す前の状態へ戻す(戻さないと 2 回目のクリックが data-busy で止まる)
+      btn.removeAttribute('data-busy');
+      btn.textContent = label;
     }).catch((err) => {
+      let waitFocus = false;
+      if (win) {   // 開いておいた空のタブを閉じ、元のタブへ戻してからコピーに切り替える
+        try { win.close(); } catch (e) { /* 閉じられなくても続ける */ }
+        try { window.focus(); } catch (e) { /* 同上 */ }
+        try { waitFocus = !document.hasFocus(); } catch (e) { waitFocus = false; }
+      }
       GCG.track('builder_open_fallback', { source: 'event', store: deckName, reason: err && err.message });
       btn.removeAttribute('data-busy');
       btn.setAttribute('data-mode', 'copy');
       btn.textContent = '\u{1F4CB} \u30C7\u30C3\u30AD\u30EA\u30B9\u30C8\u3092\u30B3\u30D4\u30FC';
-      copy();
+      if (!waitFocus) { copy(); return; }
+      // 空のタブを閉じた直後は元のタブにまだフォーカスが戻っておらず、clipboard.writeText が拒否される(Document is not focused)。
+      // フォーカスが戻るのを 1 回だけ待ってからコピーする。戻ったことが分からない端末は 1.5 秒で打ち切って、今までどおり試す。
+      let done = false;
+      const go = () => { if (done) return; done = true; window.removeEventListener('focus', go); copy(); };
+      window.addEventListener('focus', go);
+      setTimeout(go, 1500);
     });
   },
 
