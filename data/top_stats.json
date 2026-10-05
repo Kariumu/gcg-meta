@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 80,
-    "decks": 392,
+    "events": 81,
+    "decks": 396,
     "types": 9
   },
   "deck_type_ranking": [
@@ -18,7 +18,7 @@
       ],
       "label": "赤/白",
       "count": 95,
-      "share": 24.2,
+      "share": 24,
       "win_rate": 27.4,
       "avg_rank": 2.4,
       "wins": 26
@@ -30,9 +30,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 73,
-      "share": 18.6,
-      "win_rate": 26,
+      "count": 75,
+      "share": 18.9,
+      "win_rate": 25.3,
       "avg_rank": 2.5,
       "wins": 19
     },
@@ -44,7 +44,7 @@
       ],
       "label": "青/紫",
       "count": 66,
-      "share": 16.8,
+      "share": 16.7,
       "win_rate": 22.7,
       "avg_rank": 2.6,
       "wins": 15
@@ -56,11 +56,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 63,
-      "share": 16.1,
-      "win_rate": 17.5,
+      "count": 64,
+      "share": 16.2,
+      "win_rate": 18.8,
       "avg_rank": 2.7,
-      "wins": 11
+      "wins": 12
     },
     {
       "type_key": "Blue+Green",
@@ -69,9 +69,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 55,
-      "share": 14,
-      "win_rate": 23.6,
+      "count": 56,
+      "share": 14.1,
+      "win_rate": 23.2,
       "avg_rank": 2.6,
       "wins": 13
     },
@@ -83,7 +83,7 @@
       ],
       "label": "赤/緑",
       "count": 23,
-      "share": 5.9,
+      "share": 5.8,
       "win_rate": 43.5,
       "avg_rank": 2,
       "wins": 10
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 165,
-      "usage_rate": 42.1
+      "decks": 167,
+      "usage_rate": 42.2
     },
     {
       "card_id": "GD01-100",
-      "decks": 158,
-      "usage_rate": 40.3
+      "decks": 160,
+      "usage_rate": 40.4
     },
     {
       "card_id": "GD04-068",
-      "decks": 145,
-      "usage_rate": 37
+      "decks": 147,
+      "usage_rate": 37.1
     },
     {
       "card_id": "GD05-081",
-      "decks": 135,
-      "usage_rate": 34.4
+      "decks": 137,
+      "usage_rate": 34.6
     },
     {
       "card_id": "GD05-002",
-      "decks": 134,
-      "usage_rate": 34.2
+      "decks": 136,
+      "usage_rate": 34.3
     },
     {
       "card_id": "ST01-010",
-      "decks": 128,
-      "usage_rate": 32.7
+      "decks": 131,
+      "usage_rate": 33.1
     },
     {
       "card_id": "GD03-056",
-      "decks": 127,
-      "usage_rate": 32.4
+      "decks": 128,
+      "usage_rate": 32.3
     },
     {
       "card_id": "GD05-110",
       "decks": 126,
-      "usage_rate": 32.1
+      "usage_rate": 31.8
     },
     {
       "card_id": "GD05-111",
       "decks": 124,
-      "usage_rate": 31.6
+      "usage_rate": 31.3
     },
     {
       "card_id": "ST03-008",
-      "decks": 119,
-      "usage_rate": 30.4
+      "decks": 121,
+      "usage_rate": 30.6
     }
   ],
-  "card_ranking_denominator": 392,
+  "card_ranking_denominator": 396,
   "recent_events": [
     {
       "event_id": "ntcd-01M45GR2GAQY58167NNW587X7V",
@@ -393,6 +393,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M45QM98SC94PR4V0VF1XWGN6",
+      "date": "2026-10-05",
+      "store": "トーナメントセンターバトロコ小山駅前",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M42M1B4DVYB3W96PXQTJKDDC",
       "date": "2026-10-04",
       "store": "カードショップきりん 大阪天満橋店",
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M42TWVJB791YK17K9WJJXSNH",
-      "date": "2026-10-04",
-      "store": "トイコンプ高槻店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-05",
-    "event_count": 1695
+    "event_count": 1696
   }
 }
