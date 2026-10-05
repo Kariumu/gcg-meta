@@ -2197,5 +2197,60 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-10-04"
+  },
+  "GD06-100": {
+    "card_number": "GD06-100",
+    "card_name": "コレン・ナンダー",
+    "color": "White",
+    "card_type": "PILOT",
+    "level": 4,
+    "cost": 1,
+    "ap": 3,
+    "hp": 0,
+    "terrain": [],
+    "traits": [],
+    "link": "",
+    "rarity": "C",
+    "effect": "手札のこのカードを、Lv.5以上の〔ディアナ・カウンター〕のユニットにセットするようにプレイするとき、これをコスト-1する。【バースト】このカードを手札に加える。",
+    "expansion": "GD06",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2107025499495281096",
+    "created_at": "2026-10-05 20:00:11 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-10-05",
+    "pilot": {
+      "name": "コレン・ナンダー",
+      "traits": [
+        "〔ディアナ・カウンター〕",
+        "〔ムーンレィス〕"
+      ],
+      "ap": 3,
+      "hp": 0
+    }
+  },
+  "GD06-070": {
+    "card_number": "GD06-070",
+    "card_name": "イーゲル",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 6,
+    "cost": 5,
+    "ap": 5,
+    "hp": 3,
+    "terrain": [],
+    "traits": [
+      "〔ディアナ・カウンター〕"
+    ],
+    "link": "「コレン・ナンダー」",
+    "rarity": "R",
+    "effect": "【配備時】「ゴッゾーイ」((ディアナ・カウンター)・AP0・HP3・《ブロッカー》)のユニットトークン1つを配備する。【アタック時】このターン中、自分のユニットの効果で合計3以上を支払っていたなら、相手のユニット1つを選ぶ。このバトル中、それをAP-5する。",
+    "expansion": "Stardust Trails",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2107017950373056680",
+    "created_at": "2026-10-05 20:00:21 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-10-05"
   }
 }
