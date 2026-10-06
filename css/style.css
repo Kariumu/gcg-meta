@@ -2710,3 +2710,12 @@ a.section-badge:hover {
     flex-wrap: wrap;
   }
 }
+
+/* カード個別ページ: 英語カード名（型番の行の直後。大きさ・色は型番の行と同じ。指示書142） */
+.card-name-en {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: -8px 0 12px;
+  overflow-wrap: anywhere;
+}
