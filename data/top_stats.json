@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 95,
-    "decks": 480,
+    "events": 97,
+    "decks": 496,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 119,
-      "share": 24.8,
-      "win_rate": 28.6,
+      "count": 125,
+      "share": 25.2,
+      "win_rate": 28.8,
       "avg_rank": 2.4,
-      "wins": 34
+      "wins": 36
     },
     {
       "type_key": "Blue+White",
@@ -30,11 +30,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 91,
-      "share": 19,
-      "win_rate": 24.2,
+      "count": 92,
+      "share": 18.5,
+      "win_rate": 25,
       "avg_rank": 2.5,
-      "wins": 22
+      "wins": 23
     },
     {
       "type_key": "Green+Purple",
@@ -43,10 +43,10 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 81,
-      "share": 16.9,
-      "win_rate": 17.3,
-      "avg_rank": 2.6,
+      "count": 83,
+      "share": 16.7,
+      "win_rate": 16.9,
+      "avg_rank": 2.7,
       "wins": 14
     },
     {
@@ -56,9 +56,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 80,
-      "share": 16.7,
-      "win_rate": 22.5,
+      "count": 81,
+      "share": 16.3,
+      "win_rate": 22.2,
       "avg_rank": 2.6,
       "wins": 18
     },
@@ -69,11 +69,11 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 65,
-      "share": 13.5,
-      "win_rate": 24.6,
+      "count": 70,
+      "share": 14.1,
+      "win_rate": 24.3,
       "avg_rank": 2.6,
-      "wins": 16
+      "wins": 17
     },
     {
       "type_key": "Red+Green",
@@ -83,7 +83,7 @@
       ],
       "label": "赤/緑",
       "count": 25,
-      "share": 5.2,
+      "share": 5,
       "win_rate": 44,
       "avg_rank": 2,
       "wins": 11
@@ -95,10 +95,10 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 10,
-      "share": 2.1,
-      "win_rate": 20,
-      "avg_rank": 2.4,
+      "count": 11,
+      "share": 2.2,
+      "win_rate": 18.2,
+      "avg_rank": 2.5,
       "wins": 2
     },
     {
@@ -131,57 +131,127 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 206,
+      "decks": 213,
       "usage_rate": 42.9
     },
     {
       "card_id": "GD01-100",
-      "decks": 193,
-      "usage_rate": 40.2
+      "decks": 200,
+      "usage_rate": 40.3
     },
     {
       "card_id": "GD04-068",
-      "decks": 185,
-      "usage_rate": 38.5
+      "decks": 190,
+      "usage_rate": 38.3
     },
     {
       "card_id": "GD05-081",
-      "decks": 164,
-      "usage_rate": 34.2
+      "decks": 167,
+      "usage_rate": 33.7
     },
     {
       "card_id": "GD05-002",
-      "decks": 163,
-      "usage_rate": 34
-    },
-    {
-      "card_id": "GD03-056",
-      "decks": 160,
-      "usage_rate": 33.3
+      "decks": 166,
+      "usage_rate": 33.5
     },
     {
       "card_id": "ST01-010",
-      "decks": 157,
-      "usage_rate": 32.7
+      "decks": 163,
+      "usage_rate": 32.9
+    },
+    {
+      "card_id": "GD03-056",
+      "decks": 163,
+      "usage_rate": 32.9
     },
     {
       "card_id": "GD05-110",
-      "decks": 153,
-      "usage_rate": 31.9
+      "decks": 160,
+      "usage_rate": 32.3
     },
     {
       "card_id": "GD05-111",
-      "decks": 149,
-      "usage_rate": 31
+      "decks": 156,
+      "usage_rate": 31.5
     },
     {
       "card_id": "ST03-008",
-      "decks": 147,
-      "usage_rate": 30.6
+      "decks": 154,
+      "usage_rate": 31
     }
   ],
-  "card_ranking_denominator": 480,
+  "card_ranking_denominator": 496,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M4AJ38W1X3HC5734QAMTVQGG",
+      "date": "2026-10-07",
+      "store": "青馬堂本店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M4AJ37P86EJJPY2E4DYAF125",
+      "date": "2026-10-07",
+      "store": "バトロコ新津田沼駅前",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M48MAMXWN24WEQ7WBKJJP5D2",
       "date": "2026-10-06",
@@ -461,80 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M48MABFMNM12PN6XTT0NAK43",
-      "date": "2026-10-06",
-      "store": "Japan TCG Center吉祥寺駅北口店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M4AB7N4173DB1ZTNCYD2K85B",
-      "date": "2026-10-06",
-      "store": "カードショップLight",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-10-06",
-    "event_count": 1710
+    "latest_event_date": "2026-10-07",
+    "event_count": 1712
   }
 }
