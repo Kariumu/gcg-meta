@@ -31,6 +31,27 @@
 
   var COLOR_JA = { Blue: '青', Green: '緑', Red: '赤', White: '白', Purple: '紫' };
 
+  /* ---------- 表示言語（指示書143） ----------
+   * 違反バーの文面（validate の msg / note）だけが言語に従う。
+   * 既定は 'ja'。setLang を呼ばない限り、出力は指示書143 より前と 1 バイトも変わらない。
+   * setLang('en', { 基本型番: 英語名 }) とすると、〔カード名〕に英語名を使う（表に無いカードは日本語名のまま）。
+   */
+  var LANG = 'ja';
+  var EN_NAMES = null;
+  var COLOR_EN = { Blue: 'Blue', Green: 'Green', Red: 'Red', White: 'White', Purple: 'Purple' };
+  var EFFECTIVE_LABEL_EN = 'July 25, 2026';
+  // restrictions.json の注記（日本語のデータ）の英語。表に無い注記は日本語のまま出す
+  var NOTE_EN = {
+    '「スタートデッキ Iron Bloom [ST05]」はデッキの内容を一切変更しない場合のみ、公認・公式イベントでも使用可':
+      'The Iron Bloom [ST05] starter deck can still be used in official and sanctioned tournaments as long as no changes are made to its lineup'
+  };
+  function setLang(lang, enNames) {
+    LANG = (lang === 'en') ? 'en' : 'ja';
+    EN_NAMES = (LANG === 'en' && enNames && typeof enNames === 'object') ? enNames : null;
+    return LANG;
+  }
+  function getLang() { return LANG; }
+
   function escapeHtml(s) {
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -188,8 +209,10 @@
     var total = totalCount(deck);
     var colors = deckColors(deck, byId);
 
+    var en = (LANG === 'en');
     function nameOf(base) {
       var c = byId.get(base);
+      if (en && EN_NAMES && Object.prototype.hasOwnProperty.call(EN_NAMES, base) && EN_NAMES[base]) return EN_NAMES[base];
       return c ? c.name : base;
     }
     // デッキ内で base に属する型番（表示側のスクロール・枠色づけ用）
@@ -207,7 +230,11 @@
     if (total !== DECK_SIZE) {
       v.push({
         kind: 'count',
-        msg: total < DECK_SIZE
+        msg: en
+          ? (total < DECK_SIZE
+            ? 'The main deck must have exactly 50 cards (currently ' + total + '; ' + (DECK_SIZE - total) + ' short)'
+            : 'The main deck must have exactly 50 cards (currently ' + total + '; ' + (total - DECK_SIZE) + ' over)')
+          : total < DECK_SIZE
           ? 'メインデッキは50枚ちょうど（現在' + total + '枚: あと' + (DECK_SIZE - total) + '枚）'
           : 'メインデッキは50枚ちょうど（現在' + total + '枚: ' + (total - DECK_SIZE) + '枚超過）',
         ids: []
@@ -218,7 +245,10 @@
     if (colors.length >= 3) {
       v.push({
         kind: 'colors',
-        msg: '3色以上は大会構築不可（現在' + colors.length + '色: ' +
+        msg: en
+          ? 'Decks with 3 or more colors cannot be used in tournaments (currently ' + colors.length + ' colors: ' +
+            colors.map(function (c) { return COLOR_EN[c] || c; }).join('/') + ')'
+          : '3色以上は大会構築不可（現在' + colors.length + '色: ' +
           colors.map(function (c) { return COLOR_JA[c] || c; }).join('/') + '）',
         ids: [],
         colors: colors
@@ -228,7 +258,9 @@
     // 3. 禁止
     (R.banned || []).forEach(function (b) {
       if ((per.get(b) || 0) > 0) {
-        v.push({ kind: 'banned', base: b, msg: '禁止カード: 〔' + nameOf(b) + '〕（' + EFFECTIVE_LABEL + '施行）', ids: idsOfBase(b) });
+        v.push({ kind: 'banned', base: b, msg: en
+          ? 'Banned card: [' + nameOf(b) + '] (effective ' + EFFECTIVE_LABEL_EN + ')'
+          : '禁止カード: 〔' + nameOf(b) + '〕（' + EFFECTIVE_LABEL + '施行）', ids: idsOfBase(b) });
       }
     });
 
@@ -238,7 +270,9 @@
       if (n > r.count) {
         v.push({
           kind: 'limited', base: r.id, limit: r.count,
-          msg: '制限カード: 〔' + nameOf(r.id) + '〕は最大' + r.count + '枚まで（現在' + n + '枚・' + EFFECTIVE_LABEL + '施行）',
+          msg: en
+            ? 'Restricted card: up to ' + r.count + (r.count === 1 ? ' copy' : ' copies') + ' of [' + nameOf(r.id) + '] per deck (currently ' + n + '; effective ' + EFFECTIVE_LABEL_EN + ')'
+            : '制限カード: 〔' + nameOf(r.id) + '〕は最大' + r.count + '枚まで（現在' + n + '枚・' + EFFECTIVE_LABEL + '施行）',
           ids: idsOfBase(r.id)
         });
       }
@@ -251,7 +285,9 @@
       if ((per.get(a) || 0) > 0 && (per.get(b) || 0) > 0) {
         v.push({
           kind: 'pair', bases: [a, b],
-          msg: '禁止ペア: 〔' + nameOf(a) + '〕×〔' + nameOf(b) + '〕は同居不可（' + EFFECTIVE_LABEL + '施行）',
+          msg: en
+            ? 'Banned pair: [' + nameOf(a) + '] and [' + nameOf(b) + '] cannot be used in the same deck (effective ' + EFFECTIVE_LABEL_EN + ')'
+            : '禁止ペア: 〔' + nameOf(a) + '〕×〔' + nameOf(b) + '〕は同居不可（' + EFFECTIVE_LABEL + '施行）',
           ids: idsOfBase(a).concat(idsOfBase(b))
         });
       }
@@ -263,8 +299,12 @@
         present.forEach(function (m) { ids = ids.concat(idsOfBase(m)); });
         v.push({
           kind: 'group', bases: present,
-          msg: '禁止ペア（グループ）: グループ内は1種のみ採用可（現在' + present.length + '種・' + EFFECTIVE_LABEL + '施行）',
-          note: bp.group.st05_exception || '',
+          msg: en
+            ? 'Banned pair (group): only one of the cards in this group (up to 4 copies) can be used in a deck (currently ' + present.length + ' different cards; effective ' + EFFECTIVE_LABEL_EN + ')'
+            : '禁止ペア（グループ）: グループ内は1種のみ採用可（現在' + present.length + '種・' + EFFECTIVE_LABEL + '施行）',
+          note: (en && bp.group.st05_exception && Object.prototype.hasOwnProperty.call(NOTE_EN, bp.group.st05_exception))
+            ? NOTE_EN[bp.group.st05_exception]
+            : (bp.group.st05_exception || ''),
           ids: ids
         });
       }
@@ -273,7 +313,9 @@
     // 6. 同名4枚超過（手動は＋がブロックされ到達不能＝インポート由来のみ・§5.4-6）
     per.forEach(function (n, b) {
       if (n > MAX_PER_NAME) {
-        v.push({ kind: 'over4', base: b, msg: '〔' + nameOf(b) + '〕は4枚まで（現在' + n + '枚）', ids: idsOfBase(b) });
+        v.push({ kind: 'over4', base: b, msg: en
+          ? '[' + nameOf(b) + ']: up to 4 copies per deck (currently ' + n + ')'
+          : '〔' + nameOf(b) + '〕は4枚まで（現在' + n + '枚）', ids: idsOfBase(b) });
       }
     });
 
@@ -333,7 +375,8 @@
   }
 
   // deck= URL 生成（実証済み方式: token を枚数分ドット連結 + '!!!' + encodeURIComponent）
-  function tcgUrl(deck, db, tokenmap) {
+  // gameTitleId（指示書143）: TCG＋のゲームタイトル。15＝日本語版（既定）／16＝英語版。16 以外はすべて 15 にする
+  function tcgUrl(deck, db, tokenmap, gameTitleId) {
     var ids = Object.keys(deck).filter(function (id) { return deck[id] > 0; }).sort();
     var tokens = [];
     ids.forEach(function (id) {
@@ -344,7 +387,8 @@
       for (var i = 0; i < deck[id]; i++) tokens.push(t);
     });
     var raw = tokens.join('.') + '!!!';
-    return 'https://www.bandai-tcg-plus.com/deck_recipe?deck=' + encodeURIComponent(raw) + '&game_title_id=15';
+    var gt = (gameTitleId === 16 || gameTitleId === '16') ? 16 : 15;
+    return 'https://www.bandai-tcg-plus.com/deck_recipe?deck=' + encodeURIComponent(raw) + '&game_title_id=' + gt;
   }
 
   /* ---------- ＋操作の上限（§8: ブロックは同名4枚のみ） ---------- */
@@ -634,6 +678,9 @@
     MAX_PER_NAME: MAX_PER_NAME,
     MAX_SAVED_DECKS: MAX_SAVED_DECKS,
     COLOR_JA: COLOR_JA,
+    COLOR_EN: COLOR_EN,
+    setLang: setLang,
+    getLang: getLang,
     escapeHtml: escapeHtml,
     slimFromMaster: slimFromMaster,
     normalizePreview: normalizePreview,
