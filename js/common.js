@@ -116,6 +116,11 @@ const GCG = {
     return `${this.getBasePath()}images/cards/${cardId}.webp`;
   },
 
+  // 英語版のカード画像URL（指示書144。images/cards-en/ にその型番があるかは呼び出し側が判定する。無ければ cardImageUrl を使う）
+  cardImageUrlEn(cardId) {
+    return `${this.getBasePath()}images/cards-en/${cardId}.webp`;
+  },
+
   // 公式カード詳細URL
   cardSearchUrl(cardId) {
     return `https://www.gundam-gcg.com/jp/cards/detail.php?detailSearch=${cardId}`;
