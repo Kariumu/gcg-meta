@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 110,
-    "decks": 564,
+    "events": 111,
+    "decks": 568,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,24 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 145,
-      "share": 25.7,
-      "win_rate": 27.6,
+      "count": 148,
+      "share": 26.1,
+      "win_rate": 27.7,
       "avg_rank": 2.4,
-      "wins": 40
+      "wins": 41
+    },
+    {
+      "type_key": "Green+Purple",
+      "colors": [
+        "Green",
+        "Purple"
+      ],
+      "label": "緑/紫",
+      "count": 99,
+      "share": 17.4,
+      "win_rate": 15.2,
+      "avg_rank": 2.7,
+      "wins": 15
     },
     {
       "type_key": "Blue+White",
@@ -31,23 +44,10 @@
       ],
       "label": "青/白",
       "count": 98,
-      "share": 17.4,
+      "share": 17.3,
       "win_rate": 27.6,
       "avg_rank": 2.4,
       "wins": 27
-    },
-    {
-      "type_key": "Green+Purple",
-      "colors": [
-        "Green",
-        "Purple"
-      ],
-      "label": "緑/紫",
-      "count": 98,
-      "share": 17.4,
-      "win_rate": 15.3,
-      "avg_rank": 2.7,
-      "wins": 15
     },
     {
       "type_key": "Blue+Purple",
@@ -57,7 +57,7 @@
       ],
       "label": "青/紫",
       "count": 88,
-      "share": 15.6,
+      "share": 15.5,
       "win_rate": 25,
       "avg_rank": 2.5,
       "wins": 22
@@ -70,7 +70,7 @@
       ],
       "label": "青/緑",
       "count": 82,
-      "share": 14.5,
+      "share": 14.4,
       "win_rate": 24.4,
       "avg_rank": 2.6,
       "wins": 20
@@ -96,7 +96,7 @@
       ],
       "label": "青/赤",
       "count": 15,
-      "share": 2.7,
+      "share": 2.6,
       "win_rate": 13.3,
       "avg_rank": 2.7,
       "wins": 2
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 241,
-      "usage_rate": 42.7
+      "decks": 244,
+      "usage_rate": 43
     },
     {
       "card_id": "GD01-100",
       "decks": 220,
-      "usage_rate": 39
+      "usage_rate": 38.7
     },
     {
       "card_id": "GD04-068",
-      "decks": 216,
-      "usage_rate": 38.3
+      "decks": 219,
+      "usage_rate": 38.6
     },
     {
       "card_id": "GD05-110",
-      "decks": 186,
-      "usage_rate": 33
+      "decks": 189,
+      "usage_rate": 33.3
     },
     {
       "card_id": "GD03-056",
-      "decks": 185,
-      "usage_rate": 32.8
+      "decks": 186,
+      "usage_rate": 32.7
     },
     {
       "card_id": "ST01-010",
       "decks": 184,
-      "usage_rate": 32.6
+      "usage_rate": 32.4
+    },
+    {
+      "card_id": "GD05-111",
+      "decks": 184,
+      "usage_rate": 32.4
     },
     {
       "card_id": "GD05-081",
       "decks": 182,
-      "usage_rate": 32.3
+      "usage_rate": 32
+    },
+    {
+      "card_id": "ST03-008",
+      "decks": 182,
+      "usage_rate": 32
     },
     {
       "card_id": "GD05-002",
       "decks": 181,
-      "usage_rate": 32.1
-    },
-    {
-      "card_id": "ST03-008",
-      "decks": 181,
-      "usage_rate": 32.1
-    },
-    {
-      "card_id": "GD05-111",
-      "decks": 181,
-      "usage_rate": 32.1
+      "usage_rate": 31.9
     }
   ],
-  "card_ranking_denominator": 564,
+  "card_ranking_denominator": 568,
   "recent_events": [
     {
       "event_id": "ntcd-01M4FPWGY4ZGP9AF5S6VMGBDRE",
@@ -210,6 +210,41 @@
         },
         {
           "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M4FTAJG5JTMXF7TMNWJ8R3CE",
+      "date": "2026-10-09",
+      "store": "カードラボ天王寺店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
           "colors": [
             "Red",
             "White"
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M4ANH4R11D5RXTP7JBXH8WJJ",
-      "date": "2026-10-07",
-      "store": "トーナメントセンターバトロコ札幌狸小路",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-09",
-    "event_count": 1725
+    "event_count": 1726
   }
 }
