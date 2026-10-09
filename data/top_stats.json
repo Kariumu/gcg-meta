@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 109,
-    "decks": 556,
+    "events": 110,
+    "decks": 564,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 141,
-      "share": 25.4,
-      "win_rate": 27.7,
+      "count": 145,
+      "share": 25.7,
+      "win_rate": 27.6,
       "avg_rank": 2.4,
-      "wins": 39
+      "wins": 40
     },
     {
       "type_key": "Blue+White",
@@ -30,11 +30,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 97,
+      "count": 98,
       "share": 17.4,
-      "win_rate": 26.8,
-      "avg_rank": 2.5,
-      "wins": 26
+      "win_rate": 27.6,
+      "avg_rank": 2.4,
+      "wins": 27
     },
     {
       "type_key": "Green+Purple",
@@ -43,9 +43,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 97,
+      "count": 98,
       "share": 17.4,
-      "win_rate": 15.5,
+      "win_rate": 15.3,
       "avg_rank": 2.7,
       "wins": 15
     },
@@ -57,7 +57,7 @@
       ],
       "label": "青/紫",
       "count": 88,
-      "share": 15.8,
+      "share": 15.6,
       "win_rate": 25,
       "avg_rank": 2.5,
       "wins": 22
@@ -69,9 +69,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 81,
-      "share": 14.6,
-      "win_rate": 24.7,
+      "count": 82,
+      "share": 14.5,
+      "win_rate": 24.4,
       "avg_rank": 2.6,
       "wins": 20
     },
@@ -83,7 +83,7 @@
       ],
       "label": "赤/緑",
       "count": 27,
-      "share": 4.9,
+      "share": 4.8,
       "win_rate": 44.4,
       "avg_rank": 2,
       "wins": 12
@@ -95,9 +95,9 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 14,
-      "share": 2.5,
-      "win_rate": 14.3,
+      "count": 15,
+      "share": 2.7,
+      "win_rate": 13.3,
       "avg_rank": 2.7,
       "wins": 2
     },
@@ -109,7 +109,7 @@
       ],
       "label": "緑/白",
       "count": 7,
-      "share": 1.3,
+      "share": 1.2,
       "win_rate": 14.3,
       "avg_rank": 2.6,
       "wins": 1
@@ -131,57 +131,92 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 236,
-      "usage_rate": 42.4
+      "decks": 241,
+      "usage_rate": 42.7
     },
     {
       "card_id": "GD01-100",
-      "decks": 217,
+      "decks": 220,
       "usage_rate": 39
     },
     {
       "card_id": "GD04-068",
-      "decks": 211,
-      "usage_rate": 37.9
-    },
-    {
-      "card_id": "GD03-056",
-      "decks": 184,
-      "usage_rate": 33.1
-    },
-    {
-      "card_id": "ST01-010",
-      "decks": 182,
-      "usage_rate": 32.7
+      "decks": 216,
+      "usage_rate": 38.3
     },
     {
       "card_id": "GD05-110",
-      "decks": 181,
+      "decks": 186,
+      "usage_rate": 33
+    },
+    {
+      "card_id": "GD03-056",
+      "decks": 185,
+      "usage_rate": 32.8
+    },
+    {
+      "card_id": "ST01-010",
+      "decks": 184,
       "usage_rate": 32.6
     },
     {
       "card_id": "GD05-081",
-      "decks": 180,
-      "usage_rate": 32.4
+      "decks": 182,
+      "usage_rate": 32.3
     },
     {
       "card_id": "GD05-002",
-      "decks": 179,
-      "usage_rate": 32.2
+      "decks": 181,
+      "usage_rate": 32.1
     },
     {
       "card_id": "ST03-008",
-      "decks": 179,
-      "usage_rate": 32.2
+      "decks": 181,
+      "usage_rate": 32.1
     },
     {
       "card_id": "GD05-111",
-      "decks": 177,
-      "usage_rate": 31.8
+      "decks": 181,
+      "usage_rate": 32.1
     }
   ],
-  "card_ranking_denominator": 556,
+  "card_ranking_denominator": 564,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M4FPWGY4ZGP9AF5S6VMGBDRE",
+      "date": "2026-10-09",
+      "store": "ドラゴンスター日本橋2号店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M4D7XZXDMWCV8RWR2AFJN290",
       "date": "2026-10-08",
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M4ANH3NR289SB8DYB8RJFEZ2",
-      "date": "2026-10-07",
-      "store": "ドラゴンスター秋葉原駅前店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "Green"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-10-08",
-    "event_count": 1724
+    "latest_event_date": "2026-10-09",
+    "event_count": 1725
   }
 }
