@@ -2547,5 +2547,59 @@
     "_pendingReview": false,
     "_pendingReviewIssues": [],
     "_articleDate": "2026-10-11"
+  },
+  "GD06-111": {
+    "card_number": "GD06-111",
+    "card_name": "鋼の忠誠",
+    "color": "Red",
+    "card_type": "COMMAND",
+    "level": 5,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [],
+    "link": "",
+    "rarity": "R",
+    "effect": "【アクション】自分のトラッシュに〔ギャラルホルン〕のカードが4枚以上あるなら、相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "expansion": "GD06",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2109562216324178429",
+    "created_at": "2026-10-12 20:00:13 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-10-12",
+    "pilot": {
+      "name": "ジュリエッタ・ジュリス",
+      "traits": [
+        "〔ギャラルホルン〕"
+      ],
+      "ap": 2,
+      "hp": 1
+    }
+  },
+  "GD06-037": {
+    "card_number": "GD06-037",
+    "card_name": "レギンレイズ・ジュリア",
+    "color": "Red",
+    "card_type": "UNIT",
+    "level": 6,
+    "cost": 4,
+    "ap": 4,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔ギャラルホルン〕"
+    ],
+    "link": "「ジュリエッタ・ジュリス」",
+    "rarity": "R",
+    "effect": "自分のターン中、このユニットがダメージを受けている相手のユニットとバトルしている間、これは《先制攻撃》を得る。(アタック中のこのユニットは、相手より先にダメージを与える)【セット中】相手のユニットすべては、相手の効果でアクティブにならない。",
+    "expansion": "GD06",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2109554667575239070",
+    "created_at": "2026-10-12 20:00:22 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-10-12"
   }
 }
