@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 215,
-    "decks": 1044,
+    "events": 217,
+    "decks": 1052,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 274,
-      "share": 26.2,
+      "count": 278,
+      "share": 26.4,
       "win_rate": 25.9,
       "avg_rank": 2.4,
-      "wins": 71
+      "wins": 72
     },
     {
       "type_key": "Blue+Purple",
@@ -31,7 +31,7 @@
       ],
       "label": "青/紫",
       "count": 181,
-      "share": 17.3,
+      "share": 17.2,
       "win_rate": 25.4,
       "avg_rank": 2.5,
       "wins": 46
@@ -43,9 +43,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 178,
+      "count": 179,
       "share": 17,
-      "win_rate": 24.7,
+      "win_rate": 24.6,
       "avg_rank": 2.6,
       "wins": 44
     },
@@ -56,9 +56,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 166,
-      "share": 15.9,
-      "win_rate": 19.3,
+      "count": 168,
+      "share": 16,
+      "win_rate": 19,
       "avg_rank": 2.7,
       "wins": 32
     },
@@ -70,7 +70,7 @@
       ],
       "label": "青/緑",
       "count": 136,
-      "share": 13,
+      "share": 12.9,
       "win_rate": 27.9,
       "avg_rank": 2.5,
       "wins": 38
@@ -95,11 +95,11 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 33,
+      "count": 34,
       "share": 3.2,
-      "win_rate": 21.2,
-      "avg_rank": 2.4,
-      "wins": 7
+      "win_rate": 23.5,
+      "avg_rank": 2.3,
+      "wins": 8
     },
     {
       "type_key": "Green+White",
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 464,
-      "usage_rate": 44.4
+      "decks": 469,
+      "usage_rate": 44.6
     },
     {
       "card_id": "GD04-068",
-      "decks": 423,
-      "usage_rate": 40.5
+      "decks": 428,
+      "usage_rate": 40.7
     },
     {
       "card_id": "GD01-100",
-      "decks": 406,
-      "usage_rate": 38.9
+      "decks": 408,
+      "usage_rate": 38.8
     },
     {
       "card_id": "ST01-010",
-      "decks": 351,
-      "usage_rate": 33.6
-    },
-    {
-      "card_id": "GD03-056",
-      "decks": 343,
-      "usage_rate": 32.9
+      "decks": 352,
+      "usage_rate": 33.5
     },
     {
       "card_id": "GD05-110",
-      "decks": 340,
-      "usage_rate": 32.6
+      "decks": 345,
+      "usage_rate": 32.8
+    },
+    {
+      "card_id": "GD03-056",
+      "decks": 345,
+      "usage_rate": 32.8
     },
     {
       "card_id": "GD05-081",
-      "decks": 332,
-      "usage_rate": 31.8
+      "decks": 334,
+      "usage_rate": 31.7
     },
     {
       "card_id": "GD05-002",
-      "decks": 331,
+      "decks": 333,
       "usage_rate": 31.7
     },
     {
       "card_id": "GD05-111",
-      "decks": 326,
-      "usage_rate": 31.2
+      "decks": 329,
+      "usage_rate": 31.3
     },
     {
       "card_id": "ST03-008",
-      "decks": 302,
+      "decks": 304,
       "usage_rate": 28.9
     }
   ],
-  "card_ranking_denominator": 1044,
+  "card_ranking_denominator": 1052,
   "recent_events": [
     {
       "event_id": "ntcd-01M4T3XHY1KRTRHAHNSNFZQBSJ",
@@ -212,6 +212,76 @@
           "rank": 4,
           "colors": [
             "Blue",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M4T7BF75DXWQ5B2FSWYTQTR5",
+      "date": "2026-10-13",
+      "store": "トレカチャンピオン各務原店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M4T7BE26TJ367E68AQD8G6HV",
+      "date": "2026-10-13",
+      "store": "遊Vic中野店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Red",
             "White"
           ]
         }
@@ -461,80 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M4QAMVRWDF6G9425T2D6AFWV",
-      "date": "2026-10-12",
-      "store": "CARDBASE JABURO",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M4QAMTJV0YNWVNAH4CCMJ9D2",
-      "date": "2026-10-12",
-      "store": "竜星の嵐 高松店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-13",
-    "event_count": 1830
+    "event_count": 1832
   }
 }
