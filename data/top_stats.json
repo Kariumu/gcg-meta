@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 219,
-    "decks": 1064,
+    "events": 220,
+    "decks": 1072,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 282,
-      "share": 26.5,
-      "win_rate": 25.9,
+      "count": 283,
+      "share": 26.4,
+      "win_rate": 26.1,
       "avg_rank": 2.4,
-      "wins": 73
+      "wins": 74
     },
     {
       "type_key": "Blue+Purple",
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 184,
+      "count": 185,
       "share": 17.3,
-      "win_rate": 25,
+      "win_rate": 24.9,
       "avg_rank": 2.5,
       "wins": 46
     },
@@ -43,9 +43,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 179,
-      "share": 16.8,
-      "win_rate": 24.6,
+      "count": 181,
+      "share": 16.9,
+      "win_rate": 24.3,
       "avg_rank": 2.6,
       "wins": 44
     },
@@ -56,9 +56,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 170,
+      "count": 172,
       "share": 16,
-      "win_rate": 18.8,
+      "win_rate": 18.6,
       "avg_rank": 2.7,
       "wins": 32
     },
@@ -69,11 +69,11 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 137,
-      "share": 12.9,
-      "win_rate": 28.5,
-      "avg_rank": 2.5,
-      "wins": 39
+      "count": 139,
+      "share": 13,
+      "win_rate": 28.8,
+      "avg_rank": 2.4,
+      "wins": 40
     },
     {
       "type_key": "Red+Green",
@@ -109,7 +109,7 @@
       ],
       "label": "緑/白",
       "count": 24,
-      "share": 2.3,
+      "share": 2.2,
       "win_rate": 20.8,
       "avg_rank": 2.6,
       "wins": 5
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 473,
-      "usage_rate": 44.5
+      "decks": 476,
+      "usage_rate": 44.4
     },
     {
       "card_id": "GD04-068",
-      "decks": 432,
-      "usage_rate": 40.6
+      "decks": 434,
+      "usage_rate": 40.5
     },
     {
       "card_id": "GD01-100",
-      "decks": 412,
-      "usage_rate": 38.7
+      "decks": 416,
+      "usage_rate": 38.8
     },
     {
       "card_id": "ST01-010",
-      "decks": 355,
-      "usage_rate": 33.4
+      "decks": 359,
+      "usage_rate": 33.5
     },
     {
       "card_id": "GD03-056",
-      "decks": 351,
+      "decks": 354,
       "usage_rate": 33
     },
     {
       "card_id": "GD05-110",
-      "decks": 350,
-      "usage_rate": 32.9
+      "decks": 351,
+      "usage_rate": 32.7
     },
     {
       "card_id": "GD05-081",
-      "decks": 335,
-      "usage_rate": 31.5
-    },
-    {
-      "card_id": "GD05-002",
-      "decks": 334,
+      "decks": 337,
       "usage_rate": 31.4
     },
     {
-      "card_id": "GD05-111",
-      "decks": 333,
+      "card_id": "GD05-002",
+      "decks": 336,
       "usage_rate": 31.3
     },
     {
+      "card_id": "GD05-111",
+      "decks": 334,
+      "usage_rate": 31.2
+    },
+    {
       "card_id": "ST03-008",
-      "decks": 307,
-      "usage_rate": 28.9
+      "decks": 311,
+      "usage_rate": 29
     }
   ],
-  "card_ranking_denominator": 1064,
+  "card_ranking_denominator": 1072,
   "recent_events": [
     {
       "event_id": "ntcd-01M4T3XHY1KRTRHAHNSNFZQBSJ",
@@ -358,6 +358,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M4THNTMW2KBQKFA0038T5Q1Y",
+      "date": "2026-10-13",
+      "store": "フルアヘッド大阪日本橋店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M4Q774H8M1SCAHKXJ9G8Z2B5",
       "date": "2026-10-12",
       "store": "タンヨ玩具店",
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M4QAMZ1VCM4EH3YQ69M711ZP",
-      "date": "2026-10-12",
-      "store": "フルコンプPLAYERS CENTER 札幌駅前店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-13",
-    "event_count": 1834
+    "event_count": 1835
   }
 }
