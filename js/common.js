@@ -522,6 +522,28 @@ const GCG = {
     { href: 'mypage.html',       label: 'マイページ'     }
   ],
 
+  // 指示書146: 共通ヘッダーの主タブ列の右端に置く「言語の入口(EN)」。
+  // _MAIN_TABS には入れない(主タブの活性判定・サブナビ・フッターのサイトマップに影響させないため)。
+  // 飛び先は hrefFor(activePage) で決める: enPaths に「今のページの英語版」があればそこへ、無ければ既定(デッキビルダーの英語モード)。
+  // 2026-10-10 時点で英語の中身はデッキビルダーだけなので enPaths は空(既定だけが動く)。
+  // /en/ のページができたら、ページキー → サイトルートからの相対パスを足す(例: meta: 'en/meta.html')。
+  // hideOn のページには出さない: デッキビルダーは PC 幅で共通ヘッダーを表示するが、ページ内に JP/EN 切替(#segLang 等)が既にあり役目が重なるため(2026-10-10 松岡さん裁定)。
+  _LANG_ENTRY: {
+    label: 'EN',
+    title: 'English — Deck Builder (English mode)',
+    ariaLabel: 'EN — English: Deck Builder (English mode)',   // 読み上げ名は見えている文字「EN」で始める(WCAG 2.5.3。二次確認 k-2)
+    href: 'deck-builder.html?lang=en',
+    to: 'deck-builder',
+    enPaths: {},
+    hideOn: { 'deck-builder': true },
+    hrefFor(activePage) {
+      const key = (activePage == null) ? '' : String(activePage);
+      if (Object.prototype.hasOwnProperty.call(this.hideOn, key)) return null;
+      const p = Object.prototype.hasOwnProperty.call(this.enPaths, key) ? this.enPaths[key] : '';
+      return p ? { href: p, to: 'en:' + key } : { href: this.href, to: this.to };
+    }
+  },
+
   // 共通ヘッダーHTML生成
   renderHeader(activePage) {
     const basePath = this.getBasePath();
@@ -543,6 +565,13 @@ const GCG = {
       if (!this._SUB_NAV[t.key]) return a;
       return `<span class="mt-group">${a}<button type="button" class="mt-toggle" data-cat="${t.key}" aria-expanded="false" aria-controls="gcg-subnav" aria-label="${t.label}の配下ページを開く" hidden>${this._HDR98_SVG}</button></span>`;
     }).join('');
+
+    // 指示書146: 主タブの右に言語の入口(EN)。ページのタブとは別物なので .active は付けない(見た目は左の仕切りで分ける)。
+    // hrefFor が null のページ(デッキビルダー)には出さない。
+    const le = this._LANG_ENTRY.hrefFor(page);
+    const lt = attr(this._LANG_ENTRY.title);
+    const la = attr(this._LANG_ENTRY.ariaLabel);
+    const langHtml = !le ? '' : `<a href="${basePath}${attr(le.href)}" class="hdr-lang" lang="en" hreflang="en" title="${lt}" aria-label="${la}" data-gcg-lang-entry="${attr(le.to)}" data-page="${attr(page)}">${this._LANG_ENTRY.label}</a>`;
 
     // サブナビ（_SUB_NAV に定義のあるカテゴリのみ中身を入れる。home/deck-builder/mypage 等は hidden）
     // 指示書97: 2 段目は常に 1 つのコンテナ(#gcg-subnav)。初期の中身は従来どおり「開いているページのカテゴリ」。
@@ -569,7 +598,7 @@ const GCG = {
               <span class="logo-sub">Tournament Analytics</span>
             </div>
           </a>
-          <nav class="main-tabs">${mainTabsHtml}</nav>
+          <nav class="main-tabs">${mainTabsHtml}${langHtml}</nav>
         </div>
         ${subNavHtml}
       </header>`;
@@ -580,6 +609,11 @@ const GCG = {
   // (セレクタを短くすると詳細度で負けるので縮めないこと)。
   // 指示書98: ▾ を山形 SVG に替え(開くと 180° 回転)、2 段目の文字と余白を 1 段目並みに拡大、開閉は height の 0.2 秒アニメ。
   // スマホ(≤768px)は主タブ全 6 本の左右 padding を 12px→8px に詰める(山形の押せる幅 24px を足しても 375〜396px で 1 段目が 3 行にならないように)。
+  // 指示書146: 言語の入口(EN)。PC は主タブの右に仕切り付きで並べる。スマホ(≤768px)はタブ列に入れると 376〜414px で 3 行目に 1 つだけ落ちて
+  // ヘッダーが約 41px 高くなるため、ヘッダー右上の角(ロゴと同じ高さ)に枠付きで置く(2026-10-10 松岡さん裁定)。.site-header は sticky=絶対配置の基準。
+  // 320px 未満はロゴと重なるのでタブ列の末尾に戻す。
+  // PC 幅の狭い側(769〜1008px)は EN の分(約 56px)で主タブの文字の折り返しが増える(最大 4 行)ため、その幅だけ主タブ全体の左右余白を
+  // 18px→10px に詰める(折り返す幅は改修前の 769〜952px より狭い 769〜896px・最大 2 行。2026-10-10 二次確認 h-1・松岡さん裁定)。
   // 上書き行は style.css と同じセレクタ(同じ詳細度)で書く=この <style> は DOM 順で style.css より後なので勝つ。
   _HDR98_SVG: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   _HDR97_CSS: '<style id="gcg-hdr97">'
@@ -597,6 +631,8 @@ const GCG = {
     + '.site-header-v2 .sub-nav-inner { padding: 10px 28px; gap: 6px; }'
     + '.site-header-v2 .sub-nav-label { font-size: 11px; }'
     + '.site-header-v2 .sub-nav a { font-size: 14px; padding: 6px 14px; }'
+    + '.site-header-v2 nav.main-tabs a.hdr-lang { position: relative; margin-left: 6px; padding: 0 14px; }'
+    + '.site-header-v2 nav.main-tabs a.hdr-lang::before { content: ""; position: absolute; left: 0; top: 50%; height: 18px; margin-top: -9px; border-left: 1px solid var(--border-hover); }'
     + '@media (max-width: 768px) {'
     + ' .site-header-v2 nav.main-tabs a { padding: 8px 8px; }'
     + ' .site-header-v2 nav.main-tabs .mt-group > a { padding-right: 4px; }'
@@ -604,7 +640,11 @@ const GCG = {
     + ' .site-header-v2 .mt-toggle svg { width: 16px; height: 16px; }'
     + ' .site-header-v2 .sub-nav-inner { padding: 8px 12px; gap: 4px; }'
     + ' .site-header-v2 .sub-nav a { font-size: 13px; padding: 6px 12px; }'
+    + ' .site-header-v2 nav.main-tabs a.hdr-lang { position: absolute; top: 14px; right: 12px; margin: 0; padding: 6px 10px; border: 1px solid var(--border-hover); }'
+    + ' .site-header-v2 nav.main-tabs a.hdr-lang::before { display: none; }'
     + ' }'
+    + '@media (min-width: 769px) and (max-width: 1008px) { .site-header-v2 nav.main-tabs a { padding: 0 10px; } .site-header-v2 nav.main-tabs .mt-group > a { padding-right: 2px; } .site-header-v2 .mt-toggle { padding: 0 6px 0 2px; } .site-header-v2 nav.main-tabs a.hdr-lang { margin-left: 4px; padding: 0 10px; } }'
+    + '@media (max-width: 319.98px) { .site-header-v2 nav.main-tabs a.hdr-lang { position: static; margin-left: 4px; } }'
     + '@media (prefers-reduced-motion: reduce) { .site-header-v2 .mt-toggle svg, .site-header-v2 .sub-nav.is-animating { transition: none; } }'
     + '</style>',
 
@@ -720,6 +760,8 @@ const GCG = {
       if (!el || !el.closest) return;
       const btn = el.closest('.mt-toggle');
       if (btn) { GCG._toggleSubNav(btn.getAttribute('data-cat')); return; }
+      const lang = el.closest('a.hdr-lang');   // 指示書146: 言語の入口(EN)の計測。遷移は止めない(preventDefault しない)
+      if (lang) { GCG.track('lang_entry_click', { page: lang.getAttribute('data-page') || '', to: lang.getAttribute('data-gcg-lang-entry') || '' }); return; }
       if (el.closest('.site-header')) return;   // ヘッダー内(2 段目のリンク等)は通常どおり
       const s = document.getElementById('gcg-subnav');
       if (s && s.classList.contains('is-preview')) GCG._closeSubNav(true);   // 指示書98: 外側クリックは即時(アニメで閉じるとヘッダーが縮む途中で「移動」ボタン等の着地計算が走り、見出しが上に隠れる)
