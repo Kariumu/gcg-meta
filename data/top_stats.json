@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 220,
-    "decks": 1072,
+    "events": 221,
+    "decks": 1080,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 283,
-      "share": 26.4,
-      "win_rate": 26.1,
+      "count": 286,
+      "share": 26.5,
+      "win_rate": 26.2,
       "avg_rank": 2.4,
-      "wins": 74
+      "wins": 75
     },
     {
       "type_key": "Blue+Purple",
@@ -31,7 +31,7 @@
       ],
       "label": "青/紫",
       "count": 185,
-      "share": 17.3,
+      "share": 17.1,
       "win_rate": 24.9,
       "avg_rank": 2.5,
       "wins": 46
@@ -44,7 +44,7 @@
       ],
       "label": "青/白",
       "count": 181,
-      "share": 16.9,
+      "share": 16.8,
       "win_rate": 24.3,
       "avg_rank": 2.6,
       "wins": 44
@@ -56,9 +56,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 172,
-      "share": 16,
-      "win_rate": 18.6,
+      "count": 174,
+      "share": 16.1,
+      "win_rate": 18.4,
       "avg_rank": 2.7,
       "wins": 32
     },
@@ -69,11 +69,11 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 139,
-      "share": 13,
-      "win_rate": 28.8,
+      "count": 141,
+      "share": 13.1,
+      "win_rate": 29.1,
       "avg_rank": 2.4,
-      "wins": 40
+      "wins": 41
     },
     {
       "type_key": "Red+Green",
@@ -83,7 +83,7 @@
       ],
       "label": "赤/緑",
       "count": 37,
-      "share": 3.5,
+      "share": 3.4,
       "win_rate": 37.8,
       "avg_rank": 2.2,
       "wins": 14
@@ -96,7 +96,7 @@
       ],
       "label": "青/赤",
       "count": 34,
-      "share": 3.2,
+      "share": 3.1,
       "win_rate": 23.5,
       "avg_rank": 2.3,
       "wins": 8
@@ -108,9 +108,9 @@
         "White"
       ],
       "label": "緑/白",
-      "count": 24,
-      "share": 2.2,
-      "win_rate": 20.8,
+      "count": 25,
+      "share": 2.3,
+      "win_rate": 20,
       "avg_rank": 2.6,
       "wins": 5
     },
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 476,
+      "decks": 480,
       "usage_rate": 44.4
     },
     {
       "card_id": "GD04-068",
-      "decks": 434,
-      "usage_rate": 40.5
+      "decks": 436,
+      "usage_rate": 40.4
     },
     {
       "card_id": "GD01-100",
       "decks": 416,
-      "usage_rate": 38.8
+      "usage_rate": 38.5
     },
     {
       "card_id": "ST01-010",
-      "decks": 359,
-      "usage_rate": 33.5
+      "decks": 361,
+      "usage_rate": 33.4
     },
     {
       "card_id": "GD03-056",
-      "decks": 354,
+      "decks": 356,
       "usage_rate": 33
     },
     {
       "card_id": "GD05-110",
-      "decks": 351,
-      "usage_rate": 32.7
+      "decks": 354,
+      "usage_rate": 32.8
     },
     {
       "card_id": "GD05-081",
       "decks": 337,
-      "usage_rate": 31.4
+      "usage_rate": 31.2
+    },
+    {
+      "card_id": "GD05-111",
+      "decks": 337,
+      "usage_rate": 31.2
     },
     {
       "card_id": "GD05-002",
       "decks": 336,
-      "usage_rate": 31.3
-    },
-    {
-      "card_id": "GD05-111",
-      "decks": 334,
-      "usage_rate": 31.2
+      "usage_rate": 31.1
     },
     {
       "card_id": "ST03-008",
-      "decks": 311,
-      "usage_rate": 29
+      "decks": 315,
+      "usage_rate": 29.2
     }
   ],
-  "card_ranking_denominator": 1072,
+  "card_ranking_denominator": 1080,
   "recent_events": [
     {
       "event_id": "ntcd-01M4T3XHY1KRTRHAHNSNFZQBSJ",
@@ -393,6 +393,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M4W1QDAZ2YPKMDC34XTR3PQG",
+      "date": "2026-10-13",
+      "store": "Japan TCG Center吉祥寺駅北口店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M4Q774H8M1SCAHKXJ9G8Z2B5",
       "date": "2026-10-12",
       "store": "タンヨ玩具店",
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M4QAMZWW84K68108RMSQ64DP",
-      "date": "2026-10-12",
-      "store": "TSUTAYA AVクラブ 玉名店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-13",
-    "event_count": 1835
+    "event_count": 1836
   }
 }
