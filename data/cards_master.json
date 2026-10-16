@@ -28216,6 +28216,2999 @@
     "terrain": "地球",
     "acquisition_info": "Freedom Ascension [GD05]"
   },
+  "GD06-001": {
+    "id": "GD06-001",
+    "name_jp": "ガンダム試作1号機フルバーニアン",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "コウ・ウラキ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【ターン1回】このユニットがアタックされたとき、自分は1枚ドローする。\n【セット中】このユニットは《高機動》を得る。\n(このユニットはブロックされない)",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-002": {
+    "id": "GD06-002",
+    "name_jp": "インフィニットジャスティスガンダム",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "アスラン・ザラ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のカードを破壊したとき、〔オーブ〕の自分のユニット1つを選ぶ。それを3回復する。\n【配備時】自分のトラッシュの、ユニットカード3枚を選んでもよい。それらをゲームから除外する。そうしたなら、アクティブの相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-003": {
+    "id": "GD06-003",
+    "name_jp": "GQuuuuuuX（オメガ・サイコミュ開放時）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "アルファ殺し"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 5
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "アマテ・ユズリハ（マチュ）"
+    ],
+    "package_set": "GD06",
+    "effect_text": "このユニットを自分の手札と同じ数だけAP+する。\n【アタック時】このユニット以外の〔アルファ殺し〕の味方のユニットがいて、自分の手札が5枚以下なら、自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-004": {
+    "id": "GD06-004",
+    "name_jp": "ガンダム試作1号機",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "コウ・ウラキ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【リンク中】【破壊時】自分のターンなら、このユニットにセットされていたパイロットを持ち主の手札に戻す。その後、自分の手札1枚を捨てる。",
+    "terrain": "地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-005": {
+    "id": "GD06-005",
+    "name_jp": "アカツキ（シラヌイ）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔オーブ〕",
+      "ムウ・ラ・フラガ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【アタック時】ダメージを受けているLv.5以下の相手のユニット1つを選んでもよい。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-006": {
+    "id": "GD06-006",
+    "name_jp": "GQuuuuuuX（オメガ・サイコミュ起動時）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "アルファ殺し"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "アマテ・ユズリハ（マチュ）",
+      "ニャアン"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】このユニット以外の〔アルファ殺し〕の味方のユニットがいるなら、HP3以下の相手のユニット1つを選んでもよい。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-007": {
+    "id": "GD06-007",
+    "name_jp": "キケロガ（MS形態）（GQ）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 6
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "シャリア・ブル"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《リペア2》(自分のターン終了時、このユニットを指定の数回復する)\n【配備時】レストの相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-008": {
+    "id": "GD06-008",
+    "name_jp": "パワード・ジム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "地球連邦"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アタック時】〔地球連邦〕の味方のベースがあるなら、このターン中、このユニットをAP+2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-009": {
+    "id": "GD06-009",
+    "name_jp": "ジム・カスタム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "特徴〔アルビオン隊〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】HP1の相手のユニット1つを選んでもよい。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-010": {
+    "id": "GD06-010",
+    "name_jp": "ジム・キャノンⅡ",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "特徴〔アルビオン隊〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【リンク時】自分は1枚ドローする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-011": {
+    "id": "GD06-011",
+    "name_jp": "赤いガンダム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 4,
+    "traits": [],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "特徴〔ニュータイプ〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【リンク時】このターン中、自分のユニットすべては《リペア1》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-012": {
+    "id": "GD06-012",
+    "name_jp": "ズゴック",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "水中"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム",
+    "link": [
+      "特徴〔ジオン〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-013": {
+    "id": "GD06-013",
+    "name_jp": "ザクⅡF2型（地球連邦軍カラー）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "地球連邦"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-014": {
+    "id": "GD06-014",
+    "name_jp": "ジム改",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "地球連邦"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "相手のユニットが3つ以上いる間、このユニットは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-015": {
+    "id": "GD06-015",
+    "name_jp": "ガイアガンダム（バルトフェルド機）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "アンドリュー・バルトフェルド"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【セット中・〔オーブ〕のパイロット】このユニットは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-016": {
+    "id": "GD06-016",
+    "name_jp": "ドムトルーパー",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "オーブ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔オーブ〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-017": {
+    "id": "GD06-017",
+    "name_jp": "GQuuuuuuX",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Blue",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "アルファ殺し"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "アマテ・ユズリハ（マチュ）"
+    ],
+    "package_set": "GD06",
+    "effect_text": "このユニット以外の〔アルファ殺し〕の味方のユニットがいる間、これは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-018": {
+    "id": "GD06-018",
+    "name_jp": "キュベレイMk-Ⅱ（エルピー・プル専用）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "エルピー・プル"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《突破1》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)\n【セット中】【起動・アクション】【ターン1回】〔ネオ・ジオン〕/〔遠隔兵器〕の自分のユニット1つか、〔ネオ・ジオン〕の自分のベース1つを選ぶ。このバトル中、このユニットが受けるバトルダメージは、かわりにそれが受ける。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-019": {
+    "id": "GD06-019",
+    "name_jp": "ターンX",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 8,
+    "cost": 7,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 6
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "ギム・ギンガナム"
+    ],
+    "package_set": "GD06",
+    "effect_text": "相手のユニットはアタックするとき、可能ならレストの自分のユニットトークンをアタック先に選ぶ。\n【アタック時】〔ギンガナム艦隊〕の自分のユニットトークンがいないなら、「ターンX（アームズ）」(〔ギンガナム艦隊〕 〔遠隔兵器〕・AP2・HP3)のユニットトークン1つと、「ターンX（レッグス）」(〔ギンガナム艦隊〕 〔遠隔兵器〕・AP3・HP2)のユニットトークン1つをレストで配備する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-020": {
+    "id": "GD06-020",
+    "name_jp": "ハンマ・ハンマ",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 3,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "マシュマー・セロ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "自分のターン中、〔ネオ・ジオン〕の自分のユニットがダメージで相手のカードを破壊したとき、このユニットを1回復する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-021": {
+    "id": "GD06-021",
+    "name_jp": "ターンX（トップ）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "ギム・ギンガナム"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】自分のユニットトークン1つを選ぶ。それと同じユニットトークン1つをレストで配備する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-022": {
+    "id": "GD06-022",
+    "name_jp": "バンデット（メリーベル機）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "特徴〔ムーンレィス〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【リンク時】AP3以下の相手のユニット1つを選ぶ。このユニットとそれでバトルに移行し、ダメージステップのみを行う。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-023": {
+    "id": "GD06-023",
+    "name_jp": "ガルスJ",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【配備時】このユニットをレストにする。その後、Lv.3以上の〔ネオ・ジオン〕の自分のユニット1つを選ぶ。このターン中、それをAP+1する。この効果でリンクユニットをAP+したなら、これをアクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-024": {
+    "id": "GD06-024",
+    "name_jp": "R・ジャジャ",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "キャラ・スーン"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【破壊時】《ブロッカー》を持つAP3以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-025": {
+    "id": "GD06-025",
+    "name_jp": "リ・ガズィ",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "地球連邦",
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "特徴〔ロンド・ベル〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-026": {
+    "id": "GD06-026",
+    "name_jp": "マヒロー（ステロ機）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "特徴〔ムーンレィス〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【アタック時】このユニット以外の、〔ギンガナム艦隊〕/〔遠隔兵器〕の自分のユニットが3つ以上いるなら、自分のユニット1つを選ぶ。このターン中、それはAP+1され、《リペア2》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-027": {
+    "id": "GD06-027",
+    "name_jp": "ズサ（マシュマー機）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "マシュマー・セロ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】〔ネオ・ジオン〕の自分のユニット1つを選ぶ。このターン中、それはアクティブのAP4以下の相手のユニットをアタック先に選んでもよい。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-028": {
+    "id": "GD06-028",
+    "name_jp": "ガザD",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-029": {
+    "id": "GD06-029",
+    "name_jp": "キュベレイMk-Ⅱ（エルピー・プル専用）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "エルピー・プル"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-030": {
+    "id": "GD06-030",
+    "name_jp": "マヒロー",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 4
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "このユニット以外の、〔ギンガナム艦隊〕/〔遠隔兵器〕の自分のユニットが3つ以上いる間、これをAP+2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-031": {
+    "id": "GD06-031",
+    "name_jp": "ズサン",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-032": {
+    "id": "GD06-032",
+    "name_jp": "ベロナ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {
+      "hp": 1
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【破壊時】自分のデッキを上から2枚見て、その中の〔ギンガナム艦隊〕/〔ディアナ・カウンター〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-033": {
+    "id": "GD06-033",
+    "name_jp": "ΖΖガンダム",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 9,
+    "cost": 8,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム"
+    ],
+    "stats": {
+      "ap": 7,
+      "hp": 7
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "ジュドー・アーシタ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "〔エゥーゴ〕の自分のカードが相手のユニットにダメージを与えるとき、与えるダメージを+1する。\n【配備時】相手のユニットすべてに2ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-034": {
+    "id": "GD06-034",
+    "name_jp": "ガンダム・バエル",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "ギャラルホルン",
+      "ガンダム・フレーム"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [
+      "マクギリス・ファリド"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《高機動》(このユニットはブロックされない)\n【配備時】自分のトラッシュに〔ギャラルホルン〕のカードが4枚以上あるなら、自分のデッキを上から4枚見て、その中のLv.6以下の、〔ギャラルホルン〕/〔鉄華団〕のユニットカード1枚を配備してもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-035": {
+    "id": "GD06-035",
+    "name_jp": "Ζガンダム",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "特徴〔エゥーゴ〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【ターン1回】自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、AP3以下の相手のユニット1つを選ぶ。それに2ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-036": {
+    "id": "GD06-036",
+    "name_jp": "ガンダム・ヴィダール",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ギャラルホルン",
+      "ガンダム・フレーム"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [
+      "ガエリオ・ボードウィン"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【リンク時】相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-037": {
+    "id": "GD06-037",
+    "name_jp": "レギンレイズ・ジュリア",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "ギャラルホルン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [
+      "ジュリエッタ・ジュリス"
+    ],
+    "package_set": "GD06",
+    "effect_text": "自分のターン中、このユニットがダメージを受けている相手のユニットとバトルしている間、これは《先制攻撃》を得る。\n(アタック中のこのユニットは、相手より先にダメージを与える)\n【セット中】相手のユニットすべては、相手の効果でアクティブにならない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-038": {
+    "id": "GD06-038",
+    "name_jp": "ガンダム・キマリスヴィダール",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "ギャラルホルン",
+      "ガンダム・フレーム"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [
+      "ガエリオ・ボードウィン"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)\n【セット時】最もLv.が高い相手のユニット1つを選ぶ。それに3ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-039": {
+    "id": "GD06-039",
+    "name_jp": "ネオ・コア・ファイター",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【起動・メイン】カード名の異なるLv.3の〔ガンダムチーム〕の自分のユニット2つと、このユニットを破壊する：自分の手札のLv.8以上の〔ガンダムチーム〕のユニットカード1枚を配備する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-040": {
+    "id": "GD06-040",
+    "name_jp": "ガンダムMk-Ⅱ",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "特徴〔エゥーゴ〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-041": {
+    "id": "GD06-041",
+    "name_jp": "ウィンダム／ジェットストライカー装備（ネオ・ロアノーク専用）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "地球連合",
+      "ファントムペイン"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "ネオ・ロアノーク"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】AP5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-042": {
+    "id": "GD06-042",
+    "name_jp": "デストロイガンダム（MA形態）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 6,
+    "cost": 6,
+    "traits": [
+      "地球連合",
+      "ファントムペイン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "特徴〔生体CPU〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】自分のデッキを上から4枚見て、その中の〔生体CPU〕のパイロットカード1枚を、このユニットにセットしてもよい。残ったカードは無作為に下に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-043": {
+    "id": "GD06-043",
+    "name_jp": "レギンレイズ（ジュリエッタ機）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ギャラルホルン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [
+      "特徴〔ギャラルホルン〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【リンク中】自分のターン中、このユニット以外の〔ギャラルホルン〕のユニットすべてをAP+1する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-044": {
+    "id": "GD06-044",
+    "name_jp": "コア・トップ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "特徴〔ガンダムチーム〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-045": {
+    "id": "GD06-045",
+    "name_jp": "コア・ベース",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【破壊時】Lv.5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-046": {
+    "id": "GD06-046",
+    "name_jp": "百式",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "特徴〔ガンダムチーム〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【アタック時】このユニット以外の〔ガンダムチーム〕の自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-047": {
+    "id": "GD06-047",
+    "name_jp": "ウィンダム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "地球連合",
+      "ファントムペイン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-048": {
+    "id": "GD06-048",
+    "name_jp": "ヘルムヴィーゲ・リンカー",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Red",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ギャラルホルン"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【配備時】Lv.2以下の相手のユニット1つを選ぶ。それに1ダメージを与える。自分のトラッシュに〔ギャラルホルン〕のカードが4枚以上あるなら、かわりに相手のユニット1つを選ぶ。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-049": {
+    "id": "GD06-049",
+    "name_jp": "ガンダム試作2号機",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "アナベル・ガトー"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【セット時】自分のトラッシュに〔ジオン〕のユニットカードが10枚以上あるなら、各相手プレイヤーのベースすべてを破壊する。\n【破壊時】自分のデッキを上から3枚見て、その中の〔デラーズ・フリート〕のユニットカード1枚を公開して手札に加えてもよい。残ったカードは自分のトラッシュに置く。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-050": {
+    "id": "GD06-050",
+    "name_jp": "レジェンドガンダム",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "レイ・ザ・バレル"
+    ],
+    "package_set": "GD06",
+    "effect_text": "〔ザフト〕の自分のリンクユニットがいる間、トラッシュのこのカードをLv.-3、コスト-3する。\n【配備時】Lv.3以下の相手のユニット1つを選ぶ。それを破壊する。このユニットをトラッシュから配備したなら、かわりにLv.3以下の相手のユニット1～2つを選ぶ。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-051": {
+    "id": "GD06-051",
+    "name_jp": "GFreD",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ジオン",
+      "アルファ殺し"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "ニャアン"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【起動・メイン】【ターン1回】②,このユニットをレストにする：自分のトラッシュのLv.5以下の〔アルファ殺し〕のユニットカード1枚を選ぶ。それを配備する。\n【配備時】このユニット以外の〔アルファ殺し〕の味方のユニットがいるなら、このターン中、このユニットは以下の効果を得る。\n■ターン終了時に自分のリソース2つを選ぶ。それらをアクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-052": {
+    "id": "GD06-052",
+    "name_jp": "ヴァル・ヴァロ",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ジオン",
+      "民間"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "ケリィ・レズナー"
+    ],
+    "package_set": "GD06",
+    "effect_text": "自分のトラッシュに〔ジオン〕のユニットカードが5枚以上ある間、このユニットは《高機動》を得る。\n(このユニットはブロックされない)\n【配備時】自分のデッキを上から1枚、自分のトラッシュに置く。この効果で〔ジオン〕のカードを置いたなら、AP4以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-053": {
+    "id": "GD06-053",
+    "name_jp": "エグザベ専用ギャン（ハクジ装備）（GQ）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "エグザベ・オリべ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\n【破壊時】自分のリソース1つを選ぶ。それをアクティブにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-054": {
+    "id": "GD06-054",
+    "name_jp": "GFreD",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 7,
+    "cost": 6,
+    "traits": [
+      "ジオン",
+      "アルファ殺し"
+    ],
+    "stats": {
+      "ap": 6,
+      "hp": 5
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [
+      "ニャアン"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)\n【配備時】自分のユニット1つと、相手のユニット1つを選んでもよい。それらに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-055": {
+    "id": "GD06-055",
+    "name_jp": "ガンダム試作2号機",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "アナベル・ガトー"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【セット中】【アタック時】このユニットに1ダメージを与えてもよい。そうしたなら、このバトル中、これは《突破2》を得る。\n(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-056": {
+    "id": "GD06-056",
+    "name_jp": "ザメル",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アタック時】②支払ってもよい。そうしたなら、Lv.2以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "terrain": "地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-057": {
+    "id": "GD06-057",
+    "name_jp": "リック・ドムⅡ（カリウス機）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "カリウス"
+    ],
+    "package_set": "GD06",
+    "effect_text": "このユニット以外の〔デラーズ・フリート〕の自分のユニットがいる間、これは《ブロッカー》を得る。\n(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-058": {
+    "id": "GD06-058",
+    "name_jp": "ブラストインパルスガンダム",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ザフト",
+      "ミネルバ隊"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [
+      "ルナマリア・ホーク"
+    ],
+    "package_set": "GD06",
+    "effect_text": "このユニットは配備したターンに、レストの相手のユニットをアタック先に選んでアタックしてもよい。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-059": {
+    "id": "GD06-059",
+    "name_jp": "ドム・トローペン",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [
+      "特徴〔デラーズ・フリート〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-060": {
+    "id": "GD06-060",
+    "name_jp": "ザクⅡF2型",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "自分のトラッシュに〔ジオン〕のユニットカードが4枚以上ある間、このユニットをAP+1する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-061": {
+    "id": "GD06-061",
+    "name_jp": "ドラッツェ",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【起動・メイン】《援護1》(レストにすることで、このターン中、他の味方のユニット1つをAP+(指定の数)する)",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-062": {
+    "id": "GD06-062",
+    "name_jp": "ギャン（ハクジ装備）（GQ）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-063": {
+    "id": "GD06-063",
+    "name_jp": "GFreD",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "アルファ殺し"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-064": {
+    "id": "GD06-064",
+    "name_jp": "アルトロンガンダム（EW版）",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 3,
+    "traits": [
+      "Gチーム",
+      "マリーメイア軍"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 4
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "張五飛"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\nLv.5以上の相手のユニットがいる間、このユニットをAP+3する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-065": {
+    "id": "GD06-065",
+    "name_jp": "ゴールドスモー",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 5
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "ハリー・オード"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\n【起動・メイン】【ターン1回】④：《ブロッカー》を持つ、〔ディアナ・カウンター〕/〔ミリシャ〕の自分のユニットすべてをアクティブにし、このターン中、それらはアタックできない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-066": {
+    "id": "GD06-066",
+    "name_jp": "ガンダムシュピーゲル",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 4,
+    "traits": [
+      "MF"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 4
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "特徴〔ガンダムファイター〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\n【リンク中】【アタック時】このユニットにセットしているカードの【アクション】を発動する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-067": {
+    "id": "GD06-067",
+    "name_jp": "ガンダムサンドロック改（EW版）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 5
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "カトル・ラバーバ・ウィナー"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\n【セット時・Lv.4以上のパイロット】レストのHP3以下の相手のユニット1つを選ぶ。それは次の相手のターンのスタートフェイズでアクティブにならない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-068": {
+    "id": "GD06-068",
+    "name_jp": "ガンダムヘビーアームズ改（EW版）",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "トロワ・バートン"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】Lv.3以下の相手のユニット1つを選ぶ。それをレストにし、このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、このターン中、その相手のユニットをAP-2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-069": {
+    "id": "GD06-069",
+    "name_jp": "シルバースモー",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "特徴〔ムーンレィス〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)\n【起動・アクション】【ターン1回】①：ダメージを受けている〔ディアナ・カウンター〕の自分のユニット1つを選ぶ。それを1回復する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-070": {
+    "id": "GD06-070",
+    "name_jp": "イーゲル",
+    "rarity": "R",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 3
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "コレン・ナンダー"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】「ゴッゾー」(〔ディアナ・カウンター〕・AP0・HP3・《ブロッカー》)のユニットトークン1つを配備する。\n【アタック時】このターン中、自分のユニットの効果で合計③以上を支払っていたなら、相手のユニット1つを選ぶ。このバトル中、それをAP-5する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-071": {
+    "id": "GD06-071",
+    "name_jp": "シャイニングガンダム（明鏡止水）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 6,
+    "cost": 5,
+    "traits": [
+      "MF",
+      "シャッフル同盟"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [
+      "ドモン・カッシュ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【ターン1回】自分のターン中、自分が〔必殺技〕のコマンドの【メイン】/【アクション】を発動したとき、相手のユニット1つを選ぶ。このターン中、それをAP-2する。そうしたなら、このユニットをAP+2する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-072": {
+    "id": "GD06-072",
+    "name_jp": "ガンダムデスサイズヘル（EW版）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 5,
+    "cost": 3,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 3
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "デュオ・マックスウェル"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【セット中】【破壊時】このユニット以外の、〔Gチーム〕/〔プリベンター〕の自分のユニットがいるなら、自分のトラッシュのLv.5以下のコマンドカード1枚を選んでもよい。それを手札に加える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-073": {
+    "id": "GD06-073",
+    "name_jp": "ウイングガンダムゼロ（EW版）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "Gチーム"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [
+      "ヒイロ・ユイ"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【セット中】【ターン1回】このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、Lv.3以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-074": {
+    "id": "GD06-074",
+    "name_jp": "フラット",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "特徴〔ムーンレィス〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-075": {
+    "id": "GD06-075",
+    "name_jp": "サーペント",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "マリーメイア軍"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-076": {
+    "id": "GD06-076",
+    "name_jp": "ウォドム",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 5,
+    "cost": 4,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "∀ガンダム",
+    "link": [
+      "特徴〔ムーンレィス〕"
+    ],
+    "package_set": "GD06",
+    "effect_text": "【配備時】HP4以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-077": {
+    "id": "GD06-077",
+    "name_jp": "キャノン・イルフート",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 3,
+    "cost": 2,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-078": {
+    "id": "GD06-078",
+    "name_jp": "ウァッド",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 1,
+    "cost": 1,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 1,
+      "hp": 1
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【起動・メイン】③,このユニットをレストにする：このユニット以外の〔ディアナ・カウンター〕の自分のユニットがいるなら、Lv.4以下の相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-079": {
+    "id": "GD06-079",
+    "name_jp": "ムットゥー",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "White",
+    "level": 2,
+    "cost": 2,
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "-",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-080": {
+    "id": "GD06-080",
+    "name_jp": "コウ・ウラキ",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【起動・アクション】【ターン1回】このターン中、自分が効果でドローしていたなら、自分のユニット1つを選ぶ。それを2回復する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-081": {
+    "id": "GD06-081",
+    "name_jp": "アマテ・ユズリハ（マチュ）",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "アルファ殺し",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\nこのユニットが〔アルファ殺し〕の間、これは《リペア2》を得る。\n(自分のターン終了時、このユニットを指定の数回復する)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-082": {
+    "id": "GD06-082",
+    "name_jp": "アスラン・ザラ",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "オーブ",
+      "コーディネイター"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【セット時】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-083": {
+    "id": "GD06-083",
+    "name_jp": "シャリア・ブル（GQ）",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Blue",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【リンク中】このユニットが《リペア》を持つ間、これは《高機動》を得る。\n(このユニットはブロックされない)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-084": {
+    "id": "GD06-084",
+    "name_jp": "エルピー・プル",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 0
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【セット時】このターン中、このユニットは、〔ネオ・ジオン〕/〔遠隔兵器〕の自分のユニットと同じ数だけ《突破1》を得る。\n(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-085": {
+    "id": "GD06-085",
+    "name_jp": "ギム・ギンガナム",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ギンガナム艦隊",
+      "ムーンレィス"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【リンク中】相手のターン中、〔ギンガナム艦隊〕の自分のユニットすべてをAP+1する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-086": {
+    "id": "GD06-086",
+    "name_jp": "マシュマー・セロ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap_mod": 0,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "手札のこのカードを、リンク条件が「マシュマー・セロ」のユニットにセットするようにプレイするとき、これをコスト-1する。\n【バースト】このカードを手札に加える。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-087": {
+    "id": "GD06-087",
+    "name_jp": "メリーベル・ガジット",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ギンガナム艦隊",
+      "ムーンレィス"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【アタック時】〔ギンガナム艦隊〕の自分のユニット1つを選ぶ。このターン中、それはアクティブのLv.4以下の相手のユニットをアタック先に選んでもよい。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-088": {
+    "id": "GD06-088",
+    "name_jp": "ジュドー・アーシタ",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【リンク中】【破壊時】自分のトラッシュのLv.2以下の〔ガンダムチーム〕のユニットカード1枚を選ぶ。それを手札に加える。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-089": {
+    "id": "GD06-089",
+    "name_jp": "マクギリス・ファリド",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ギャラルホルン",
+      "阿頼耶識"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【リンク中】このユニットがバトルダメージで相手のシールドエリアのカードを破壊したとき、〔ギャラルホルン〕の自分のユニット1つを選ぶ。このターン中、それはアクティブのLv.5以下の相手のユニットをアタック先に選んでもよい。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-090": {
+    "id": "GD06-090",
+    "name_jp": "ヴィダール",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ギャラルホルン",
+      "阿頼耶識"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "このカードのカード名は「ガエリオ・ボードウィン」としても扱う。\n【バースト】このカードを手札に加える。\n【アタック時】〔ギャラルホルン〕の自分のユニットが2つ以上いるなら、AP5以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-091": {
+    "id": "GD06-091",
+    "name_jp": "ルー・ルカ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\nこのユニットが〔エゥーゴ〕の間、これは《突破1》を得る。\n(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-092": {
+    "id": "GD06-092",
+    "name_jp": "ネオ・ロアノーク",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Red",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "地球連合",
+      "ファントムペイン",
+      "オーブ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "このカードのカード名は「ムウ・ラ・フラガ」としても扱う。\n【バースト】このカードを手札に加える。\n【セット時】このユニットが、〔ファントムペイン〕/〔オーブ〕なら、このユニットのAP以下の相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-093": {
+    "id": "GD06-093",
+    "name_jp": "アナベル・ガトー",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【アタック時】このバトル中、このユニットが、これのLv.以下の相手のユニットからバトルダメージを受けるとき、そのダメージを2軽減する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-094": {
+    "id": "GD06-094",
+    "name_jp": "ニャアン",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "アルファ殺し",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【セット時】味方のユニット1つを選ぶ。このターン中、それは以下の効果を得る。\n■このユニットがLv.4以下の相手のユニットにバトルダメージを与えたとき、その相手のユニットを破壊する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-095": {
+    "id": "GD06-095",
+    "name_jp": "ケリィ・レズナー",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "民間"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【アタック時】このユニットに1ダメージを与えてもよい。そうしたなら、〔ジオン〕の自分のユニット1つを選ぶ。このターン中、それをAP+2する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-096": {
+    "id": "GD06-096",
+    "name_jp": "エグザベ・オリべ",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【リンク中】【アタック時】自分のデッキを上から1枚、自分のトラッシュに置く。この効果で、〔ジオン〕/〔アルファ殺し〕のカードを置いたなら、このバトル中、相手のユニットすべてをAP-1する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-097": {
+    "id": "GD06-097",
+    "name_jp": "ハリー・オード",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ディアナ・カウンター",
+      "ムーンレィス"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【ターン1回】このユニットが《ブロッカー》を発動したとき、これをアクティブにする。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-098": {
+    "id": "GD06-098",
+    "name_jp": "デュオ・マックスウェル",
+    "rarity": "U",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "Gチーム",
+      "オペレーション・メテオ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【リンク中】このユニットがレストの間、味方のベースはこれのLv.以下の相手のユニットからダメージを受けない。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-099": {
+    "id": "GD06-099",
+    "name_jp": "張五飛",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "Gチーム",
+      "オペレーション・メテオ",
+      "マリーメイア軍"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【アタック時】Lv.5以上の相手のユニット1つを選ぶ。このバトル中、それをAP-3する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-100": {
+    "id": "GD06-100",
+    "name_jp": "コレン・ナンダー",
+    "rarity": "C",
+    "card_type": "PILOT",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ディアナ・カウンター",
+      "ムーンレィス"
+    ],
+    "stats": {
+      "ap_mod": 3,
+      "hp_mod": 0
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "手札のこのカードを、Lv.5以上の〔ディアナ・カウンター〕のユニットにセットするようにプレイするとき、これをコスト-1する。\n【バースト】このカードを手札に加える。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-101": {
+    "id": "GD06-101",
+    "name_jp": "ガンダムが言ってる",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 6,
+    "cost": 2,
+    "traits": [
+      "アルファ殺し"
+    ],
+    "stats": {},
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。\n【メイン】/【アクション】HP5以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。その後、〔アルファ殺し〕の味方のリンクユニットがいるなら、自分は1枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-102": {
+    "id": "GD06-102",
+    "name_jp": "奇跡",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 3,
+    "cost": 3,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムSEED DESTINY",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【アクション】相手のターンで、このターン中、相手のユニットがアタックしていないなら、自分は2枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-103": {
+    "id": "GD06-103",
+    "name_jp": "前線復帰",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 0
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】レストの相手のユニット1つを選ぶ。それに1ダメージを与える。\n【パイロット】「サウス・バニング」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-104": {
+    "id": "GD06-104",
+    "name_jp": "堅実な支援",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Blue",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 0
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】/【アクション】HP3以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。\n【パイロット】「チャック・キース」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-105": {
+    "id": "GD06-105",
+    "name_jp": "譲れない優しさ",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 5,
+    "cost": 3,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】「ガンダム・キャリバーン」(〔学園〕・AP5・HP3・《高機動》)のユニットトークン1つか、「ガンダム・エアリアル（改修型）」(〔クワイエット・ゼロ〕・AP3・HP5・《突破3》)のユニットトークン1つを配備する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-106": {
+    "id": "GD06-106",
+    "name_jp": "気配察知",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アクション】このバトル中、自分のシールドエリアのカードは、AP6以下の相手のユニットからダメージを受けない。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-107": {
+    "id": "GD06-107",
+    "name_jp": "車懸りの陣",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ギンガナム艦隊",
+      "ムーンレィス"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 0
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】〔ギンガナム艦隊〕の自分のユニットがいるなら、《ブロッカー》を持つAP3以下の相手のユニット1つを選ぶ。それを破壊する。\n【パイロット】「スエッソン・ステロ」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-108": {
+    "id": "GD06-108",
+    "name_jp": "興奮状態",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】このターン中、Lv.4以下の〔ネオ・ジオン〕の味方のユニットすべてをAP+2する。\n【パイロット】「キャラ・スーン」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-109": {
+    "id": "GD06-109",
+    "name_jp": "戦闘神ギンガナム",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Green",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "ギンガナム艦隊"
+    ],
+    "stats": {},
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】「ターンX（アームズ）」(〔ギンガナム艦隊〕 〔遠隔兵器〕・AP2・HP3)のユニットトークン1つか、「ターンX（レッグス）」(〔ギンガナム艦隊〕 〔遠隔兵器〕・AP3・HP2)のユニットトークン1つをレストで配備する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-110": {
+    "id": "GD06-110",
+    "name_jp": "家族愛",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 2,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【アクション】自分のユニット1つを選ぶ。このバトル中、それをAP+2する。その後、自分の手札が3枚以下なら、自分は1枚ドローする。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-111": {
+    "id": "GD06-111",
+    "name_jp": "鋼の忠誠",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ギャラルホルン"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アクション】自分のトラッシュに〔ギャラルホルン〕のカードが4枚以上あるなら、相手のユニット1つを選ぶ。それに2ダメージを与える。\n【パイロット】「ジュリエッタ・ジュリス」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-112": {
+    "id": "GD06-112",
+    "name_jp": "ルーへの対抗心",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "エゥーゴ",
+      "ガンダムチーム",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アクション】〔エゥーゴ〕の味方のユニットとバトルしている相手のユニット1つを選ぶ。それに2ダメージを与える。\n【パイロット】「エル・ビアンノ」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-113": {
+    "id": "GD06-113",
+    "name_jp": "禁じられた兵器",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Red",
+    "level": 5,
+    "cost": 4,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】相手のユニット1つを選ぶ。それに2ダメージを与える。\n【メイン】/【アクション】ダメージを受けている相手のユニット1つを選ぶ。それに5ダメージを与える。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-114": {
+    "id": "GD06-114",
+    "name_jp": "アルファ殺したち",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 4,
+    "cost": 1,
+    "traits": [
+      "アルファ殺し"
+    ],
+    "stats": {},
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アクション】このカードをプレイするとき、以下の効果から1つを選択し発動する。\n■〔アルファ殺し〕の味方のユニット1つを選ぶ。このバトル中、それが相手からバトルダメージを受けるとき、そのダメージを3軽減する。\n■Lv.2以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-115": {
+    "id": "GD06-115",
+    "name_jp": "技術供与",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [],
+    "stats": {},
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】Lv.4以下の相手のユニット1つを選ぶ。それを破壊する。その後、「サザビー」(〔ネオ・ジオン〕・AP4・HP4)のユニットトークン1つを配備し、破壊されたユニットの持ち主は「νガンダム」(〔ロンド・ベル〕・AP3・HP3・《先制攻撃》)のユニットトークン1つを配備する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-116": {
+    "id": "GD06-116",
+    "name_jp": "ジオンの残光",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 5,
+    "cost": 5,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {},
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを手札に加える。\n【メイン】自分のトラッシュの紫のLv.5以下の〔ジオン〕のユニットカード1枚を選ぶ。それを配備する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-117": {
+    "id": "GD06-117",
+    "name_jp": "古参の合流",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "Purple",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 1
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アクション】レストの〔デラーズ・フリート〕の味方のユニット1つを選ぶ。バトルしている相手のユニットのアタック先をそれにする。\n【パイロット】「カリウス」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-118": {
+    "id": "GD06-118",
+    "name_jp": "千変万化",
+    "rarity": "R",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 5,
+    "cost": 2,
+    "traits": [],
+    "stats": {},
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【メイン】/【アクション】《ブロッカー》を持つ白の自分のユニットと同じ数まで相手のユニットを選ぶ。このターン中、それらをAP-2する。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-119": {
+    "id": "GD06-119",
+    "name_jp": "シュトゥルム・ウント・ドランク",
+    "rarity": "U",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ガンダムファイター",
+      "必殺技",
+      "DG細胞"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 2
+    },
+    "source_title": "機動武闘伝Gガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アクション】HP3以下の相手のユニット1つを選ぶ。それをレストにする。このカードの【アクション】発動後、トラッシュのこれを〔MF〕の自分のユニットにセットしてもよい。\n【パイロット】「シュバルツ・ブルーダー」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-120": {
+    "id": "GD06-120",
+    "name_jp": "平和を望む心",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 4,
+    "cost": 1,
+    "traits": [],
+    "stats": {},
+    "source_title": "新機動戦記ガンダムW Endless Waltz",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】HP5以下の相手のユニット1つを選ぶ。それをレストにする。\n【メイン】/【アクション】相手のユニット1つを選ぶ。それをレストにする。",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-121": {
+    "id": "GD06-121",
+    "name_jp": "泣き虫ポゥ",
+    "rarity": "C",
+    "card_type": "COMMAND",
+    "color": "White",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ディアナ・カウンター",
+      "ムーンレィス"
+    ],
+    "stats": {
+      "ap_mod": 1,
+      "hp_mod": 0
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【アクション】相手のユニット1つを選ぶ。このバトル中、それをAP-2する。それが《高機動》を持つなら、かわりにAP-6する。\n【パイロット】「ポゥ・エイジ」",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-122": {
+    "id": "GD06-122",
+    "name_jp": "アルビオン",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "Blue",
+    "level": 2,
+    "cost": 1,
+    "traits": [
+      "地球連邦",
+      "アルビオン隊",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、Lv.2以下の相手のユニット1つを選ぶ。それを持ち主の手札に戻す。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-123": {
+    "id": "GD06-123",
+    "name_jp": "エンドラ",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "Green",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ネオ・ジオン",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、自分のターンで、Lv.3以下のパイロットがセットされている〔ネオ・ジオン〕の自分のユニットがいるなら、《ブロッカー》を持つAP3以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-124": {
+    "id": "GD06-124",
+    "name_jp": "アスピーテ",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ギンガナム艦隊",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：〔ギンガナム艦隊〕/〔遠隔兵器〕の自分のユニットが3つ以上いるなら、このターン中、〔ギンガナム艦隊〕の自分のユニットすべてをAP+1する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-125": {
+    "id": "GD06-125",
+    "name_jp": "アーガマ",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "Red",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "エゥーゴ",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 6
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n【ターン1回】このベースがバトルダメージを受けたとき、レストの〔エゥーゴ〕の自分のユニットがいるなら、相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-126": {
+    "id": "GD06-126",
+    "name_jp": "スキップジャック級戦艦",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Red",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ギャラルホルン",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 鉄血のオルフェンズ",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、〔ギャラルホルン〕の味方のユニットがいるなら、ダメージを受けている相手のユニット1つを選ぶ。それに1ダメージを与える。",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-127": {
+    "id": "GD06-127",
+    "name_jp": "イオマグヌッソ",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "Purple",
+    "level": 4,
+    "cost": 2,
+    "traits": [
+      "ジオン",
+      "拠点"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士Gundam GQuuuuuuX(ジークアクス)",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、自分のターンなら、自分のデッキを上から2枚、自分のトラッシュに置く。この効果で〔アルファ殺し〕のカードを置いたなら、AP2以下の相手のユニット1つを選ぶ。それを破壊する。",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-128": {
+    "id": "GD06-128",
+    "name_jp": "グワデン",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Purple",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ジオン",
+      "デラーズ・フリート",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム0083",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n【起動・メイン】このベースをレストにする：〔ジオン〕の味方のユニット1つを選ぶ。このターン中、それが相手からバトルダメージを受けるとき、そのダメージを1軽減する。",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-129": {
+    "id": "GD06-129",
+    "name_jp": "5thルナ",
+    "rarity": "C",
+    "card_type": "BASE",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "拠点"
+    ],
+    "stats": {
+      "hp": 2
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。\n【破壊時】自分のシールドがあるなら、「アクシズ」(〔ネオ・ジオン〕・AP0・HP5)のベーストークン1つを配備する。",
+    "terrain": "宇宙",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
+  "GD06-130": {
+    "id": "GD06-130",
+    "name_jp": "ソレイユ",
+    "rarity": "U",
+    "card_type": "BASE",
+    "color": "White",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ディアナ・カウンター",
+      "艦船"
+    ],
+    "stats": {
+      "hp": 6
+    },
+    "source_title": "∀ガンダム",
+    "link": [],
+    "package_set": "GD06",
+    "effect_text": "【バースト】このカードを配備する。\n【配備時】自分のシールド1つを手札に加える。その後、パイロットがセットされていない相手のユニット1つを選ぶ。このターン中、それを〔ディアナ・カウンター〕/〔ミリシャ〕の味方のユニットと同じ数だけAP-する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "Stardust Trails[GD06]"
+  },
   "ST01-001": {
     "id": "ST01-001",
     "name_jp": "ガンダム",
@@ -44130,6 +47123,166 @@
     "is_promo": true,
     "parallel_number": 2,
     "base_card_id": "T-029",
+    "link": []
+  },
+  "T-030": {
+    "id": "T-030",
+    "name_jp": "ゴッゾー",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ディアナ・カウンター"
+    ],
+    "stats": {
+      "hp": 3
+    },
+    "source_title": "∀ガンダム",
+    "package_set": "TOKEN",
+    "effect_text": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
+    "link": []
+  },
+  "T-031": {
+    "id": "T-031",
+    "name_jp": "ターンX（アームズ）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ギンガナム艦隊",
+      "遠隔兵器"
+    ],
+    "stats": {
+      "ap": 2,
+      "hp": 3
+    },
+    "source_title": "∀ガンダム",
+    "package_set": "TOKEN",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
+    "link": []
+  },
+  "T-032": {
+    "id": "T-032",
+    "name_jp": "ターンX（レッグス）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ギンガナム艦隊",
+      "遠隔兵器"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 2
+    },
+    "source_title": "∀ガンダム",
+    "package_set": "TOKEN",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
+    "link": []
+  },
+  "T-033": {
+    "id": "T-033",
+    "name_jp": "サザビー",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 4
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "package_set": "TOKEN",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
+    "link": []
+  },
+  "T-034": {
+    "id": "T-034",
+    "name_jp": "νガンダム",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ロンド・ベル"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "package_set": "TOKEN",
+    "effect_text": "《先制攻撃》(アタック中のこのユニットは、相手より先にダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
+    "link": []
+  },
+  "T-035": {
+    "id": "T-035",
+    "name_jp": "ガンダム・キャリバーン",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "学園"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "package_set": "TOKEN",
+    "effect_text": "《高機動》(このユニットはブロックされない)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
+    "link": []
+  },
+  "T-036": {
+    "id": "T-036",
+    "name_jp": "ガンダム・エアリアル（改修型）",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "クワイエット・ゼロ"
+    ],
+    "stats": {
+      "ap": 3,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 水星の魔女",
+    "package_set": "TOKEN",
+    "effect_text": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
+    "link": []
+  },
+  "T-037": {
+    "id": "T-037",
+    "name_jp": "アクシズ",
+    "rarity": "T",
+    "card_type": "TOKEN",
+    "color": "-",
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "package_set": "TOKEN",
+    "effect_text": "",
+    "terrain": "-",
+    "acquisition_info": "Stardust Trails[GD06]",
     "link": []
   },
   "EXB-001": {
