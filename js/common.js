@@ -170,6 +170,10 @@ const GCG = {
   // ページのベースパスを自動検出
   getBasePath() {
     const path = window.location.pathname;
+    // 指示書148: 英語ページ /en/*.html は 1 階層深い(/en/meta.html → ../)
+    if (/^\/en\/[^/]*$/.test(path)) {
+      return '../';
+    }
     // 2 階層深いページ（サイトルートまで戻るには ../../）
     if (path.includes('/reports/news/')) {
       return '../../';
@@ -528,25 +532,68 @@ const GCG = {
   // 2026-10-10 時点で英語の中身はデッキビルダーだけなので enPaths は空(既定だけが動く)。
   // /en/ のページができたら、ページキー → サイトルートからの相対パスを足す(例: meta: 'en/meta.html')。
   // hideOn のページには出さない: デッキビルダーは PC 幅で共通ヘッダーを表示するが、ページ内に JP/EN 切替(#segLang 等)が既にあり役目が重なるため(2026-10-10 松岡さん裁定)。
+  // 指示書148: enPaths に英語版のあるページ(meta)を足した。英語ページでは同じ場所に「JA」(日本語の同じページへ)を出す。
+  //   英語ページかどうかは renderHeader の引数 { lang: 'en' } だけで決める(<html lang> は見ない)。
+  //   title / aria-label は飛び先に合わせる。ビルダー向けの固定文言は enPaths に無いページだけに残す。
+  //   en/cards.html は第 1 段では作らない(指示書148 §5 の R1)。作ったら enPaths に cards: 'en/cards.html' と enNames.cards を足す。
   _LANG_ENTRY: {
     label: 'EN',
     title: 'English — Deck Builder (English mode)',
     ariaLabel: 'EN — English: Deck Builder (English mode)',   // 読み上げ名は見えている文字「EN」で始める(WCAG 2.5.3。二次確認 k-2)
     href: 'deck-builder.html?lang=en',
     to: 'deck-builder',
-    enPaths: {},
+    enPaths: { meta: 'en/meta.html' },
+    enNames: { meta: 'Metagame' },                       // 日本語ページの EN の title / aria-label に入れる英語ページの名前
+    jaPaths: { meta: 'meta.html' },                      // 英語ページの JA の飛び先(サイトルートからの相対)
+    jaNames: { meta: '環境分析' },                        // 英語ページの JA の title / aria-label に入れる日本語ページの名前
     hideOn: { 'deck-builder': true },
-    hrefFor(activePage) {
+    has(obj, key) { return Object.prototype.hasOwnProperty.call(obj, key); },
+    // 戻り値: { href, to, label, title, ariaLabel, lang } か null(出さない)
+    hrefFor(activePage, lang) {
       const key = (activePage == null) ? '' : String(activePage);
-      if (Object.prototype.hasOwnProperty.call(this.hideOn, key)) return null;
-      const p = Object.prototype.hasOwnProperty.call(this.enPaths, key) ? this.enPaths[key] : '';
-      return p ? { href: p, to: 'en:' + key } : { href: this.href, to: this.to };
+      if (this.has(this.hideOn, key)) return null;
+      if (lang === 'en') {
+        if (!this.has(this.jaPaths, key)) return null;
+        const n = this.jaNames[key] || '';
+        return { href: this.jaPaths[key], to: 'ja:' + key, label: 'JA', lang: 'ja',
+          title: '日本語: ' + n, ariaLabel: 'JA — 日本語: ' + n };
+      }
+      if (this.has(this.enPaths, key) && this.enPaths[key]) {
+        const n = this.enNames[key] || '';
+        return { href: this.enPaths[key], to: 'en:' + key, label: this.label, lang: 'en',
+          title: 'English — ' + n, ariaLabel: 'EN — English: ' + n };
+      }
+      return { href: this.href, to: this.to, label: this.label, lang: 'en', title: this.title, ariaLabel: this.ariaLabel };
+    },
+    // 英語モードのリンク先(サイトルートからの相対 href → 英語版があればそれ)。無ければ日本語のページのまま
+    enHref(href) {
+      const s = String(href);
+      const i = s.indexOf('#');
+      const file = i < 0 ? s : s.slice(0, i);
+      const frag = i < 0 ? '' : s.slice(i);
+      if (file === 'deck-builder.html') return 'deck-builder.html?lang=en' + frag;
+      for (const k of Object.keys(this.jaPaths)) {
+        if (this.jaPaths[k] === file && this.has(this.enPaths, k) && this.enPaths[k]) return this.enPaths[k] + frag;
+      }
+      return s;
     }
   },
 
+  // 指示書148: 英語モードの辞書(js/i18n-en.js)。英語ページは common.js より前に読む。無ければ日本語のまま出す
+  _i18nEn(opts) {
+    if (!opts || opts.lang !== 'en') return null;
+    const g = (typeof window !== 'undefined' && window.GCG_I18N_EN) || (typeof globalThis !== 'undefined' && globalThis.GCG_I18N_EN) || null;
+    return g || null;
+  },
+
   // 共通ヘッダーHTML生成
-  renderHeader(activePage) {
+  // 指示書148: opts.lang === 'en' で英語モード(主タブ・サブナビ・言語の入口を英語にし、英語版のあるページへ飛ばす)。
+  // 引数を省いたとき・js/i18n-en.js が無いときは従来どおり(日本語)。
+  renderHeader(activePage, opts) {
     const basePath = this.getBasePath();
+    const EN = this._i18nEn(opts);
+    const lang = EN ? 'en' : 'ja';
+    const hrefOf = (h) => (EN ? this._LANG_ENTRY.enHref(h) : h);
     const map = this._PAGE_MAP[activePage] || { main: null, sub: null };
     const activeMain = map.main;
     const activeSub  = map.sub;
@@ -561,24 +608,25 @@ const GCG = {
     // タブ本体 <a> の動作(カテゴリ先頭ページへ移動)は変えない。開閉は ▾ だけ。
     const mainTabsHtml = this._MAIN_TABS.map(t => {
       const cls = (t.key === activeMain) ? 'active' : '';
-      const a = `<a href="${basePath}${t.href}" class="${cls}">${t.label}</a>`;
+      const label = EN ? (EN.NAV.main[t.key] || t.label) : t.label;
+      const a = `<a href="${basePath}${attr(hrefOf(t.href))}" class="${cls}">${label}</a>`;
       if (!this._SUB_NAV[t.key]) return a;
-      return `<span class="mt-group">${a}<button type="button" class="mt-toggle" data-cat="${t.key}" aria-expanded="false" aria-controls="gcg-subnav" aria-label="${t.label}の配下ページを開く" hidden>${this._HDR98_SVG}</button></span>`;
+      const tAria = EN ? attr(EN.fill(EN.NAV.subToggleAria, { label: label })) : `${t.label}の配下ページを開く`;
+      return `<span class="mt-group">${a}<button type="button" class="mt-toggle" data-cat="${t.key}" aria-expanded="false" aria-controls="gcg-subnav" aria-label="${tAria}" hidden>${this._HDR98_SVG}</button></span>`;
     }).join('');
 
     // 指示書146: 主タブの右に言語の入口(EN)。ページのタブとは別物なので .active は付けない(見た目は左の仕切りで分ける)。
     // hrefFor が null のページ(デッキビルダー)には出さない。
-    const le = this._LANG_ENTRY.hrefFor(page);
-    const lt = attr(this._LANG_ENTRY.title);
-    const la = attr(this._LANG_ENTRY.ariaLabel);
-    const langHtml = !le ? '' : `<a href="${basePath}${attr(le.href)}" class="hdr-lang" lang="en" hreflang="en" title="${lt}" aria-label="${la}" data-gcg-lang-entry="${attr(le.to)}" data-page="${attr(page)}">${this._LANG_ENTRY.label}</a>`;
+    // 指示書148: 英語ページでは「JA」(日本語の同じページへ)。title / aria-label は飛び先に合わせる(hrefFor が返す)。
+    const le = this._LANG_ENTRY.hrefFor(page, lang);
+    const langHtml = !le ? '' : `<a href="${basePath}${attr(le.href)}" class="hdr-lang" lang="${attr(le.lang)}" hreflang="${attr(le.lang)}" title="${attr(le.title)}" aria-label="${attr(le.ariaLabel)}" data-gcg-lang-entry="${attr(le.to)}" data-page="${attr(page)}">${le.label}</a>`;
 
     // サブナビ（_SUB_NAV に定義のあるカテゴリのみ中身を入れる。home/deck-builder/mypage 等は hidden）
     // 指示書97: 2 段目は常に 1 つのコンテナ(#gcg-subnav)。初期の中身は従来どおり「開いているページのカテゴリ」。
     // data-active-cat / data-active-sub は閉じるときに元の強調表示を復元するため、data-page は計測用。
     const hasSub = !!(activeMain && this._SUB_NAV[activeMain]);
     const subNavHtml = `
-        <div class="sub-nav" id="gcg-subnav" data-cat="${attr(activeMain || '')}" data-active-cat="${attr(activeMain || '')}" data-active-sub="${attr(activeSub || '')}" data-page="${attr(page)}"${hasSub ? '' : ' hidden'}>${hasSub ? this._subNavInner(activeMain, activeSub) : ''}</div>`;
+        <div class="sub-nav" id="gcg-subnav" data-cat="${attr(activeMain || '')}" data-active-cat="${attr(activeMain || '')}" data-active-sub="${attr(activeSub || '')}" data-page="${attr(page)}"${EN ? ' data-lang="en"' : ''}${hasSub ? '' : ' hidden'}>${hasSub ? this._subNavInner(activeMain, activeSub, EN ? { lang: 'en' } : undefined) : ''}</div>`;
 
     // 指示書97: 呼び出し側が innerHTML へ挿入した直後に ▾ を有効化する(DOMContentLoaded 後の再挿入にも追随)。
     // initHeaderSubNav は冪等(委譲リスナーは 1 回だけ)。node 等 document の無い環境では何もしない。
@@ -650,21 +698,29 @@ const GCG = {
 
   // 指示書97: サブナビ(2 段目)の中身。従来 renderHeader 内にあった生成をそのまま切り出したもの(出力 HTML は従来と同一)。
   // activeSub に一致する項目だけ .active を付ける(null なら強調なし)。
-  _subNavInner(cat, activeSub) {
+  // 指示書148: opts.lang === 'en' で英語(文言と、英語版のあるページへのリンク)。
+  _subNavInner(cat, activeSub, opts) {
     const list = this._SUB_NAV[cat];
     if (!list) return '';
     const basePath = this.getBasePath();
+    const EN = this._i18nEn(opts);
     const items = list.map(s => {
       const cls = (activeSub && s.key === activeSub) ? 'active' : '';
+      if (EN) return `<a href="${basePath}${this._LANG_ENTRY.enHref(s.href)}" class="${cls}">${EN.NAV.sub[s.key] || s.label}</a>`;
       return `<a href="${basePath}${s.href}" class="${cls}">${s.label}</a>`;
     }).join('');
-    const label = this._MAIN_LABEL[cat] || '';
+    const label = EN ? (EN.NAV.main[cat] || '') : (this._MAIN_LABEL[cat] || '');
     return `
           <div class="sub-nav-inner">
             <span class="sub-nav-label">${label} ›</span>
             ${items}
           </div>
         `;
+  },
+
+  // 指示書148: 2 段目を作り直すときの言語(renderHeader が data-lang="en" を付けたときだけ英語)
+  _subNavOpts(sub) {
+    return (sub && sub.getAttribute('data-lang') === 'en') ? { lang: 'en' } : undefined;
   },
 
   // 指示書97: ▾ の aria-expanded を「自分のカテゴリが 2 段目に表示中なら true」に揃える
@@ -716,7 +772,7 @@ const GCG = {
     this._animateSubNav(sub, () => {
       let toHidden = false;
       if (activeCat && this._SUB_NAV[activeCat]) {
-        sub.innerHTML = this._subNavInner(activeCat, activeSub || null);
+        sub.innerHTML = this._subNavInner(activeCat, activeSub || null, this._subNavOpts(sub));
       } else {
         toHidden = true;   // 中身は閉じアニメの後で _animateSubNav が空にする(即時なら直後)
       }
@@ -737,7 +793,7 @@ const GCG = {
     if (cat === shown || cat === activeCat) { this._closeSubNav(); return; }
     const activeSub = sub.getAttribute('data-active-sub') || '';
     this._animateSubNav(sub, () => {   // 指示書98: 0.2 秒で開く/入れ替える(resize 通知はアニメ終了時)
-      sub.innerHTML = this._subNavInner(cat, (cat === activeCat) ? (activeSub || null) : null);
+      sub.innerHTML = this._subNavInner(cat, (cat === activeCat) ? (activeSub || null) : null, this._subNavOpts(sub));
       sub.setAttribute('data-cat', cat);
       sub.classList.toggle('is-preview', cat !== activeCat);
       this._syncSubNavToggles(sub);
@@ -774,7 +830,10 @@ const GCG = {
   },
 
   // 共通フッターHTML生成
-  renderFooter() {
+  // 指示書148: opts.lang === 'en' で英語(_renderFooterEn)。引数を省いたとき・js/i18n-en.js が無いときは従来どおり。
+  renderFooter(opts) {
+    const EN = this._i18nEn(opts);
+    if (EN) return this._renderFooterEn(EN);
     const basePath = this.getBasePath();
     // 2026-09-02(指示書86 §1-3): 主タブ8→6 に伴う到達性の補完。CSS は触らず inline style で完結させる。
     // font-size/font-weight/padding/border-radius を明示しているのは、この行が <nav> のため
@@ -808,6 +867,43 @@ const GCG = {
           <a href="${basePath}about.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">サイトについて</a>
           <a href="${basePath}data-usage.html" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'">データ利用について</a>
           <a href="https://x.com/gcg_stats" target="_blank" rel="noopener" style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'" onclick="GCG.track('x_profile_click',{place:'footer'})">X: @gcg_stats</a>
+        </div>
+      </footer>`;
+  },
+
+  // 指示書148: 英語のフッター。作り(要素・style)は日本語のフッターと同じで、文言と「英語版のあるページ」へのリンクだけ替える。
+  // 権利表記(©SOTSU・SUNRISE・BANDAI)は日本語ページと同じ文字のまま lang="ja" で出す(表記を勝手に変えない)。
+  _renderFooterEn(EN) {
+    const basePath = this.getBasePath();
+    const esc = (v) => String(v).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const F = EN.FOOTER;
+    const link = 'color:var(--accent);text-decoration:none';
+    const sitemapHtml = this._FOOTER_SITEMAP
+      .map(s => `<a href="${basePath}${this._LANG_ENTRY.enHref(s.href)}" style="color:var(--text-muted);text-decoration:none;font-size:11px;font-weight:400;padding:0;border-radius:0">${esc(EN.NAV.footerSitemap[s.href] || s.label)}</a>`)
+      .join('\n          ');
+    const vars = {
+      officialSite: `<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="${link}">${esc(F.officialSite)}</a>`,
+      copyright: '<span lang="ja">©SOTSU・SUNRISE・BANDAI</span>',
+      officialDomain: `<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="${link}">gundam-gcg.com</a>`
+    };
+    const lines = F.lines.map(l => (l ? EN.fill(esc(l), vars) : '') + '<br>').join('\n          ');
+    const takedown = EN.fill(esc(F.takedown), { contact: `<a href="${basePath}contact.html" style="${link};">${esc(F.contact)}</a>` });
+    const hover = `style="color:var(--text-muted);text-decoration:none;transition:color 0.15s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-muted)'"`;
+    return `
+      <footer class="site-footer">
+        <div class="footer-disclaimer">
+          ${lines}
+          <span style="font-size:10px;color:var(--text-muted);">${takedown}</span>
+        </div>
+        <nav class="footer-sitemap" aria-label="${esc(EN.NAV.sitemapAria)}" style="margin-top:14px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:11px;font-family:var(--font-mono)">
+          ${sitemapHtml}
+        </nav>
+        <div class="footer-links" style="margin-top:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:20px;font-size:11px;font-family:var(--font-mono)">
+          <a href="${basePath}privacy.html" ${hover}>${esc(F.links.privacy)}</a>
+          <a href="${basePath}contact.html" ${hover}>${esc(F.links.contact)}</a>
+          <a href="${basePath}about.html" ${hover}>${esc(F.links.about)}</a>
+          <a href="${basePath}data-usage.html" ${hover}>${esc(F.links.dataUsage)}</a>
+          <a href="https://x.com/gcg_stats" target="_blank" rel="noopener" ${hover} onclick="GCG.track('x_profile_click',{place:'footer'})">X: @gcg_stats</a>
         </div>
       </footer>`;
   },
@@ -1057,7 +1153,8 @@ const GCG = {
 
 // ---- Task C: パンくずリスト ----
 // items: [{ name, href }]（最後の要素の href は無くても良い）
-GCG.renderBreadcrumb = function(items) {
+// 指示書148: opts.lang === 'en' で aria-label を英語にする(項目名は呼び出し側が渡す)。
+GCG.renderBreadcrumb = function(items, opts) {
   if (!Array.isArray(items) || items.length === 0) return '';
   const escape = (s) => String(s == null ? '' : s)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -1070,7 +1167,9 @@ GCG.renderBreadcrumb = function(items) {
     const attr = isLast ? ' aria-current="page"' : '';
     return `<li${attr}>${inner}</li>`;
   }).join('');
-  return `<nav class="breadcrumb" aria-label="パンくずリスト"><ol>${ol}</ol></nav>`;
+  const EN = GCG._i18nEn(opts);
+  const aria = EN ? String(EN.NAV.breadcrumbAria).replace(/"/g, '&quot;') : 'パンくずリスト';
+  return `<nav class="breadcrumb" aria-label="${aria}"><ol>${ol}</ol></nav>`;
 };
 
 // JSON-LD 構造化データ（SEO 用）。最後の要素も item を付けたい場合は href を付ける。

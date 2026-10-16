@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gundam Card Game Metagame and Tournament Results (Deck Colors, Card Adoption Rates) | GCG STATS</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="theme-color" content="#d4a029">
+  <meta name="description" content="Metagame analysis and tournament results for the Gundam Card Game. Deck color shares, card adoption rates and regional metagame, compiled daily from 1854 tournaments and 8762 top-4 decks across Japan.">
+  <link rel="canonical" href="https://gcg-stats.com/en/meta.html">
+  <link rel="alternate" hreflang="ja" href="https://gcg-stats.com/meta.html">
+  <link rel="alternate" hreflang="en" href="https://gcg-stats.com/en/meta.html">
+  <link rel="alternate" hreflang="x-default" href="https://gcg-stats.com/meta.html">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="ja_JP">
+  <meta property="og:title" content="Gundam Card Game Metagame and Tournament Results (Deck Colors, Card Adoption Rates) | GCG STATS">
+  <meta property="og:description" content="Metagame analysis and tournament results for the Gundam Card Game. Deck color shares, card adoption rates and regional metagame, compiled daily from 1854 tournaments and 8762 top-4 decks across Japan.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/en/meta.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gundam Card Game Metagame and Tournament Results (Deck Colors, Card Adoption Rates) | GCG STATS">
+  <meta name="twitter:description" content="Metagame analysis and tournament results for the Gundam Card Game. Deck color shares, card adoption rates and regional metagame, compiled daily from 1854 tournaments and 8762 top-4 decks across Japan.">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Gundam Card Game Metagame and Tournament Results","url":"https://gcg-stats.com/en/meta.html","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"GCG STATS","url":"https://gcg-stats.com/"}}</script>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <nav id="breadcrumb-container" aria-label="Breadcrumb"></nav>
+    <div class="section-header">
+      <h1 class="section-title">Metagame</h1>
+      <span class="section-badge" id="meta-info">Top 4</span>
+    </div>
+    <p class="page-lead">Card adoption rates, deck color distribution and regional metagame. Pick a deck color to narrow the <a href="#events">tournament results</a> to the tournaments where that deck color placed.</p>
+    <div id="share-buttons"></div>
+
+    <!-- ページ内の移動(2026-09-10 指示書96・松岡さん指示)。JS 無効でも <a href="#…"> として動く -->
+    <nav class="meta-jump" id="meta-jump" aria-label="Jump to section">
+      <span class="meta-jump-label">Jump</span>
+      <a class="meta-jump-btn" href="#decktype-section" data-jump="decktype-section">Deck Colors</a>
+      <a class="meta-jump-btn" href="#deck-card-section" data-jump="deck-card-section">Card Adoption</a>
+      <a class="meta-jump-btn" href="#region-section" data-jump="region-section">Regions</a>
+      <a class="meta-jump-btn" href="#events" data-jump="events">Tournament Results</a>
+    </nav>
+
+    <!-- シリーズ絞り込み（最上位） -->
+    <div id="series-selector-area" class="series-selector" aria-label="Series filter"></div>
+
+    <!-- 日付フィルター -->
+    <div id="date-filter-area" style="margin-bottom:12px"></div>
+
+    <!-- フィルターボタン -->
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" id="rank-filter">
+      <button class="rank-filter-btn" data-filter="win" onclick="setFilter('win')">Wins Only</button>
+      <button class="rank-filter-btn active" data-filter="top4" onclick="setFilter('top4')">Top 4</button>
+      <button class="rank-filter-btn" data-filter="all" onclick="setFilter('all')">All</button>
+    </div>
+    <style>
+      .rank-filter-btn {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 8px 20px;
+        border-radius: var(--radius);
+        font-size: 13px;
+        font-family: var(--font-mono);
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .rank-filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .rank-filter-btn.active {
+        background: var(--accent-dim, rgba(255, 170, 0, 0.1));
+        border-color: var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .region-filter-btn {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 6px 14px;
+        border-radius: var(--radius);
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .region-filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .region-filter-btn.active {
+        background: var(--accent-dim, rgba(255, 170, 0, 0.1));
+        border-color: var(--accent);
+        color: var(--accent);
+        font-weight: 600;
+      }
+      /* デッキタイプ絞り込みチップ（2026-08-06 指示書67） */
+      .type-chip-bar {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 24px;
+        min-height: 30px;
+      }
+      .type-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--accent-dim, rgba(255, 170, 0, 0.1));
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        padding: 6px 8px 6px 12px;
+        border-radius: var(--radius);
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .type-chip-clear {
+        background: transparent;
+        border: none;
+        color: inherit;
+        cursor: pointer;
+        font-size: 14px;
+        line-height: 1;
+        padding: 2px 4px;
+        border-radius: 4px;
+      }
+      .type-chip-clear:hover { background: rgba(255,255,255,0.12); }
+      .type-chip-hint { font-size: 12px; color: var(--text-muted); }
+      .lazy-note { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+      tr.decktype-row.is-selected td { background: var(--accent-dim, rgba(255,170,0,0.1)); }
+      /* 指示書96: ページ内の移動ボタン(固定表示はしない=松岡さん決定) */
+      .meta-jump { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 16px; }
+      .meta-jump-label { font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); letter-spacing: 0.06em; }
+      .meta-jump-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); font-size: 13px; text-decoration: none; white-space: nowrap; transition: border-color 0.15s, color 0.15s; }
+      .meta-jump-btn::after { content: '↓'; font-size: 11px; color: var(--text-muted); }
+      .meta-jump-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--bg-card); }
+      .meta-jump-btn:hover::after { color: var(--accent); }
+      /* 指示書96 R1: 着地位置の下限(JS が JUMP_OFFSET で上書きする。JS 無効時の保険) */
+      #decktype-section, #deck-card-section, #region-section, #events { scroll-margin-top: 16px; }
+      @media (max-width: 768px) {
+        .meta-jump-label { flex-basis: 100%; }
+        .meta-jump-btn { flex: 1 1 calc(50% - 4px); justify-content: center; }
+      }
+      /* 指示書102 §2-C: データが入る前に場所を確保して画面のガタつきを消す。
+         #rank-filter は実測では伸びていない（36px のまま）。押し下げていたのは
+         上の 2 つの箱なので、そちらに最低の高さを与える。数値は 1px 刻みの実測。 */
+      #series-selector-area { min-height: 68px; }
+      @media (min-width: 500px) { #series-selector-area { min-height: 31px; } }
+      #date-filter-area { min-height: 78px; }
+      @media (min-width: 379px) { #date-filter-area { min-height: 76px; } }
+      @media (min-width: 453px) { #date-filter-area { min-height: 35px; } }
+    </style>
+
+    <!-- 地域フィルター（2026-08-06 指示書67: 並びは北から南へ固定） -->
+    <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;align-items:center" id="region-filter">
+      <span style="font-size:12px;color:var(--text-muted);margin-right:4px">Region:</span>
+      <button class="region-filter-btn active" data-region="" onclick="setRegion(null)">All Regions</button>
+    </div>
+
+    <!-- デッキタイプ絞り込みの状態表示 -->
+    <div class="type-chip-bar" id="type-chip-bar"></div>
+
+    <!-- 統計サマリー -->
+    <div class="stats-grid" id="stats-summary">
+      <div class="stat-card">
+        <div class="stat-label">Events Analyzed</div>
+        <div class="stat-value" id="s-events">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label" id="s-decks-label">Top-4 Decks</div>
+        <div class="stat-value" id="s-decks">--</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Deck Colors</div>
+        <div class="stat-value" id="s-types">--</div>
+      </div>
+    </div>
+
+    <!-- デッキタイプ分布 -->
+    <details class="collapsible-section mb-32" id="decktype-section" open>
+      <summary class="section-header collapsible-toggle">
+        <h2 class="section-title">Deck Color Distribution</h2>
+        <span class="toggle-icon"></span>
+      </summary>
+      <div style="display:flex;gap:20px;flex-wrap:wrap">
+        <div class="chart-container" style="flex:0 1 380px;min-width:0;max-width:100%">
+          <div class="chart-title">Deck Color Share</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+            <div style="width:220px;height:220px;position:relative;flex-shrink:0">
+              <canvas id="decktype-pie" style="max-width:100%;max-height:100%"></canvas>
+            </div>
+            <div id="decktype-legend" style="display:flex;flex-direction:column;gap:4px"></div>
+          </div>
+        </div>
+        <div style="flex:1 1 340px;min-width:0;overflow-x:auto">
+          <table class="data-table" id="decktype-table">
+            <thead>
+              <tr>
+                <th style="position:static">Deck Color</th>
+                <th style="width:55px;position:static">Decks</th>
+                <th style="width:130px;position:static">Share</th>
+                <th style="width:50px;position:static">Wins</th>
+                <th style="width:60px;position:static">Win Rate</th>
+                <th style="width:55px;position:static">Avg. Placing</th>
+              </tr>
+            </thead>
+            <tbody id="decktype-body">
+              <tr><td colspan="6" class="loading">Loading data</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </details>
+
+    <!-- デッキタイプ別カード採用率 -->
+    <details class="collapsible-section mb-32" id="deck-card-section" open>
+      <summary class="section-header collapsible-toggle">
+        <h2 class="section-title">Card Adoption by Deck Color</h2>
+        <span class="toggle-icon"></span>
+      </summary>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px">
+        Card adoption rates within each deck color. Choose a deck color.
+      </p>
+
+      <!-- タイプ選択タブ -->
+      <div class="filter-bar" id="type-tabs" style="gap:6px;flex-wrap:wrap;margin-bottom:20px">
+        <div class="loading">Loading data</div>
+      </div>
+
+      <!-- カード採用率テーブル -->
+      <div id="deck-card-content">
+        <div style="text-align:center;padding:32px;color:var(--text-muted);font-size:13px">
+          Select a deck color from the tabs above
+        </div>
+      </div>
+    </details>
+
+    <!-- 地域別メタ -->
+    <details class="collapsible-section mb-32" id="region-section" open>
+      <summary class="section-header collapsible-toggle">
+        <h2 class="section-title">Regional Metagame</h2>
+        <span class="toggle-icon"></span>
+      </summary>
+      <div id="region-content">
+        <div class="loading">Loading data</div>
+      </div>
+    </details>
+
+    <!-- ===== イベント一覧（2026-08-06 指示書67: events.html から統合） ===== -->
+    <section id="events" class="mb-32">
+      <div class="section-header">
+        <h2 class="section-title">Tournament Results</h2>
+        <span class="section-badge" id="event-count">--</span>
+      </div>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px" id="event-list-lead">
+        The series, period, region and deck color filters above apply to this list.
+      </p>
+      <div class="filter-bar">
+        <input type="text" class="filter-input" id="search-input" placeholder="Search by store or player name...">
+      </div>
+      <div class="lazy-note" id="search-lazy-note" hidden>Loading player-name search data… (first time only)</div>
+
+      <div class="event-list" id="events-list">
+        <div class="loading">Loading data</div>
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </section>
+
+    <!-- SEO:BEGIN -->
+    <noscript><h2>Metagame Data</h2><h3>Deck Color Shares</h3><ul><li>Blue/Purple: 2093 decks (share 23.9%, 554 wins, win rate 26.5%, average placing 2.5)</li><li>Red/White: 1604 decks (share 18.3%, 437 wins, win rate 27.2%, average placing 2.4)</li><li>Blue/White: 1332 decks (share 15.2%, 320 wins, win rate 24%, average placing 2.5)</li><li>Blue/Green: 1294 decks (share 14.8%, 319 wins, win rate 24.7%, average placing 2.5)</li><li>Green/Purple: 824 decks (share 9.4%, 200 wins, win rate 24.3%, average placing 2.5)</li><li>Blue/Red: 584 decks (share 6.7%, 116 wins, win rate 19.9%, average placing 2.6)</li><li>Green/White: 546 decks (share 6.2%, 137 wins, win rate 25.1%, average placing 2.5)</li><li>Red/Green: 180 decks (share 2.1%, 36 wins, win rate 20%, average placing 2.6)</li><li>White/Purple: 159 decks (share 1.8%, 39 wins, win rate 24.5%, average placing 2.5)</li><li>Red/Purple: 143 decks (share 1.6%, 28 wins, win rate 19.6%, average placing 2.5)</li><li>Purple: 2 decks (share 0%, 0 wins, win rate 0%, average placing 3.5)</li><li>Green: 1 deck (share 0%, 1 win, win rate 100%, average placing 1)</li></ul><h3>Card Adoption Rate Ranking (Top 30)</h3><ol><li><a href="../cards/GD01-100/">GD01-100</a> A Show of Resolve: adoption rate 47.8% (4186 decks, 986 wins, 2.2 copies on average)</li><li><a href="../cards/ST01-010/">ST01-010</a> Amuro Ray: adoption rate 44.1% (3862 decks, 967 wins, 3.8 copies on average)</li><li><a href="../cards/ST01-001/">ST01-001</a> Gundam: adoption rate 40.7% (3562 decks, 888 wins, 3.7 copies on average)</li><li><a href="../cards/GD01-118/">GD01-118</a> Overflowing Affection: adoption rate 39.7% (3481 decks, 905 wins, 3.8 copies on average)</li><li><a href="../cards/GD03-056/">GD03-056</a> Gundam Barbatos Adapt: adoption rate 35.7% (3126 decks, 808 wins, 4 copies on average)</li><li><a href="../cards/ST05-010/">ST05-010</a> Mikazuki Augus: adoption rate 34.6% (3035 decks, 786 wins, 4 copies on average)</li><li><a href="../cards/GD02-054/">GD02-054</a> Gundam Barbatos 1st Form: adoption rate 32.8% (2874 decks, 749 wins, 3.9 copies on average)</li><li><a href="../cards/GD01-008/">GD01-008</a> Guntank: adoption rate 28.9% (2531 decks, 645 wins, 3.7 copies on average)</li><li><a href="../cards/GD01-086/">GD01-086</a> Gundam Lfrith: adoption rate 27.2% (2386 decks, 604 wins, 3.8 copies on average)</li><li><a href="../cards/GD04-068/">GD04-068</a> Silver Bullet: adoption rate 26.2% (2297 decks, 593 wins, 2.9 copies on average)</li><li><a href="../cards/ST02-016/">ST02-016</a> Corsica Base: adoption rate 26% (2281 decks, 553 wins, 2.6 copies on average)</li><li><a href="../cards/ST04-001/">ST04-001</a> Aile Strike Gundam: adoption rate 25.9% (2269 decks, 583 wins, 3.8 copies on average)</li><li><a href="../cards/ST04-010/">ST04-010</a> Kira Yamato: adoption rate 25.7% (2251 decks, 573 wins, 3.8 copies on average)</li><li><a href="../cards/ST05-006/">ST05-006</a> Hyakuren: adoption rate 25% (2188 decks, 569 wins, 3.8 copies on average)</li><li><a href="../cards/GD05-002/">GD05-002</a> Strike Freedom Gundam: adoption rate 24.5% (2149 decks, 531 wins, 3.9 copies on average)</li><li><a href="../cards/GD05-081/">GD05-081</a> Kira Yamato: adoption rate 24.5% (2146 decks, 529 wins, 3.8 copies on average)</li><li><a href="../cards/ST03-008/">ST03-008</a> Zaku Ⅱ: adoption rate 24.5% (2143 decks, 526 wins, 4 copies on average)</li><li><a href="../cards/GD02-079/">GD02-079</a> Rick Dias: adoption rate 23.7% (2074 decks, 519 wins, 3.3 copies on average)</li><li><a href="../cards/ST05-004/">ST05-004</a> Graze Custom: adoption rate 23.5% (2057 decks, 550 wins, 3.9 copies on average)</li><li><a href="../cards/GD01-030/">GD01-030</a> Rick Dom: adoption rate 23.4% (2049 decks, 501 wins, 3.9 copies on average)</li><li><a href="../cards/GD01-018/">GD01-018</a> ReZEL: adoption rate 20.6% (1807 decks, 453 wins, 2.8 copies on average)</li><li><a href="../cards/GD02-055/">GD02-055</a> Gundam Gusion Rebake: adoption rate 20.3% (1779 decks, 463 wins, 3.5 copies on average)</li><li><a href="../cards/GD01-128/">GD01-128</a> Mining Asteroid Palau: adoption rate 19.6% (1716 decks, 429 wins, 3 copies on average)</li><li><a href="../cards/GD01-073/">GD01-073</a> Sword Strike Gundam: adoption rate 16.3% (1427 decks, 369 wins, 2.7 copies on average)</li><li><a href="../cards/GD05-111/">GD05-111</a> Airframe Seizure: adoption rate 16.2% (1421 decks, 354 wins, 3.8 copies on average)</li><li><a href="../cards/GD05-110/">GD05-110</a> Darkness Finger: adoption rate 16% (1406 decks, 356 wins, 4 copies on average)</li><li><a href="../cards/GD03-050/">GD03-050</a> Gundam Barbatos Lupus: adoption rate 15.9% (1393 decks, 376 wins, 2.8 copies on average)</li><li><a href="../cards/ST03-013/">ST03-013</a> Close Combat: adoption rate 15.9% (1390 decks, 326 wins, 3.9 copies on average)</li><li><a href="../cards/GD01-020/">GD01-020</a> Anksha: adoption rate 15.4% (1346 decks, 341 wins, 3.5 copies on average)</li><li><a href="../cards/ST03-006/">ST03-006</a> Char's Zaku Ⅱ: adoption rate 15.2% (1330 decks, 316 wins, 4 copies on average)</li></ol><h3>Regional Metagame (north to south)</h3><ul><li>Hokkaido: 41 events, 164 decks (top: Blue/Purple, Blue/White, Red/White)</li><li>Tohoku: 100 events, 484 decks (top: Blue/Purple, Red/White, Blue/White)</li><li>Kanto: 527 events, 2764 decks (top: Blue/Purple, Red/White, Blue/White)</li><li>Chubu: 406 events, 1843 decks (top: Blue/Purple, Red/White, Blue/White)</li><li>Kansai: 312 events, 1492 decks (top: Blue/Purple, Red/White, Blue/Green)</li><li>Chugoku: 127 events, 568 decks (top: Blue/Purple, Blue/Green, Blue/White)</li><li>Shikoku: 61 events, 281 decks (top: Blue/Purple, Blue/Green, Red/White)</li><li>Kyushu: 280 events, 1166 decks (top: Red/White, Blue/Purple, Blue/Green)</li></ul><h3>Tournament Results (200 most recent of 1854)</h3><ul><li><a href="../events/ntcd-01M51YJQJZNZDEBNJSGRD140WM.html">2026-10-16 <span lang="ja">トーナメントセンターバトロコ金沢駅前</span></a> Winner: <span lang="ja">r1o</span></li><li><a href="../events/ntcd-01M51YJPP2F8J6GXJRYHWMZFG8.html">2026-10-16 <span lang="ja">トレカチャンピオン江南店</span></a> Winner: <span lang="ja">かわはら</span></li><li><a href="../events/ntcd-01M51YJNRKH5V1ENZAG1EDH5MW.html">2026-10-16 <span lang="ja">トレカチャンピオンなんば日本橋店</span></a> Winner: <span lang="ja">hiragi</span></li><li><a href="../events/ntcd-01M51YJME6J7JKXGS7QVDKDGT0.html">2026-10-16 <span lang="ja">カードラボ豊橋店</span></a> Winner: <span lang="ja">紅乃実</span></li><li><a href="../events/ntcd-01M4Z8PYMWX1NC2RD9SVF5FBGN.html">2026-10-15 <span lang="ja">カードボックス青馬堂矢向店</span></a> Winner: <span lang="ja">龍一</span></li><li><a href="../events/ntcd-01M4ZC4QYSMKF8KG2JVQJ7NVJ8.html">2026-10-15 <span lang="ja">フルコンプ PLAYERS CENTER 八王子本店</span></a> Winner: <span lang="ja">カピバラ</span></li><li><a href="../events/ntcd-01M4ZFJMZFH49F0VR7HSXE75WM.html">2026-10-15 <span lang="ja">カードラボオタロード本店</span></a> Winner: <span lang="ja">Syou</span></li><li><a href="../events/ntcd-01M4ZSWRAB1FT0YQVFA4EJRBSF.html">2026-10-15 <span lang="ja">G-PROJECT本店</span></a> Winner: <span lang="ja">みど</span></li><li><a href="../events/ntcd-01M4WJWHJ6ATZ05PVHPP4RT8ZR.html">2026-10-14 <span lang="ja">アメニティードリーム横浜店</span></a> Winner: <span lang="ja">のぶくん</span></li><li><a href="../events/ntcd-01M4WPA4V72K679PSWH9PR4M03.html">2026-10-14 <span lang="ja">カードボックス日本橋店</span></a> Winner: <span lang="ja">ホウオウ</span></li><li><a href="../events/ntcd-01M4WSR7P0ASMN4F3D00XTBRWA.html">2026-10-14 <span lang="ja">コーギーアール大宮駅前店</span></a> Winner: <span lang="ja">ちりめん</span></li><li><a href="../events/ntcd-01M4WSR5VD7WSCYAQ6J1YR3KT8.html">2026-10-14 <span lang="ja">カードショップ宝島神居店</span></a> Winner: <span lang="ja">下位卓の守護神</span></li><li><a href="../events/ntcd-01M4WSR4P3RC1XZ1MADF50V2DG.html">2026-10-14 <span lang="ja">ドラゴンスター池袋店</span></a> Winner: <span lang="ja">詩絵里</span></li><li><a href="../events/ntcd-01M4WSR3DHJF4XCD1FWH6HBMF6.html">2026-10-14 <span lang="ja">カードボックスオーサカ店</span></a> Winner: <span lang="ja">ローソン</span></li><li><a href="../events/ntcd-01M4WX6HEK5ZVTJ1EP4BSNFX0Z.html">2026-10-14 <span lang="ja">カードラボ福岡天神店</span></a> Winner: <span lang="ja">kmark</span></li><li><a href="../events/ntcd-01M4WX6GNHJ7ZV1KR72G5TP39X.html">2026-10-14 <span lang="ja">青馬堂本店</span></a> Winner: <span lang="ja">みず</span></li><li><a href="../events/ntcd-01M4WX6F53PGFBGBWJQ88W7TX5.html">2026-10-14 <span lang="ja">カードラボ名古屋駅前店</span></a> Winner: <span lang="ja">T</span></li><li><a href="../events/ntcd-01M4T3XHY1KRTRHAHNSNFZQBSJ.html">2026-10-13 <span lang="ja">カードラボ広島店</span></a> Winner: <span lang="ja">TKG</span></li><li><a href="../events/ntcd-01M4T7BF75DXWQ5B2FSWYTQTR5.html">2026-10-13 <span lang="ja">トレカチャンピオン各務原店</span></a> Winner: <span lang="ja">つけますたー</span></li><li><a href="../events/ntcd-01M4T7BE26TJ367E68AQD8G6HV.html">2026-10-13 <span lang="ja">遊Vic中野店</span></a> Winner: <span lang="ja">タテ</span></li><li><a href="../events/ntcd-01M4TASFZR1QSZ472FG69G9T5Y.html">2026-10-13 <span lang="ja">ドラゴンスター日本橋3号店</span></a> Winner: <span lang="ja">よるか</span></li><li><a href="../events/ntcd-01M4TASEF13KK4RYDW5PGQPJ9W.html">2026-10-13 <span lang="ja">ホビーステーション大宮店</span></a> Winner: <span lang="ja">ななさき</span></li><li><a href="../events/ntcd-01M4THNTMW2KBQKFA0038T5Q1Y.html">2026-10-13 <span lang="ja">フルアヘッド大阪日本橋店</span></a> Winner: <span lang="ja">あか</span></li><li><a href="../events/ntcd-01M4W1QDAZ2YPKMDC34XTR3PQG.html">2026-10-13 <span lang="ja">Japan TCG Center吉祥寺駅北口店</span></a> Winner: <span lang="ja">コニ</span></li><li><a href="../events/ntcd-01M4Q774H8M1SCAHKXJ9G8Z2B5.html">2026-10-12 <span lang="ja">タンヨ玩具店</span></a> Winner: <span lang="ja">ながぐつ</span></li><li><a href="../events/ntcd-01M4Q773ES9YV4QKH5SKDR2SZS.html">2026-10-12 <span lang="ja">ゲーム館ビート</span></a> Winner: <span lang="ja">ゆう</span></li><li><a href="../events/ntcd-01M4Q7727RSEV1H2BEG3BDSNEV.html">2026-10-12 <span lang="ja">TCGショップ193 ザザシティ浜松店</span></a> Winner: <span lang="ja">ナノC</span></li><li><a href="../events/ntcd-01M4QAMZWW84K68108RMSQ64DP.html">2026-10-12 <span lang="ja">TSUTAYA AVクラブ 玉名店</span></a> Winner: <span lang="ja">ばっちょ</span></li><li><a href="../events/ntcd-01M4QAMZ1VCM4EH3YQ69M711ZP.html">2026-10-12 <span lang="ja">フルコンプPLAYERS CENTER 札幌駅前店</span></a> Winner: <span lang="ja">波音</span></li><li><a href="../events/ntcd-01M4QAMXRE197NVN4E18A1X7YY.html">2026-10-12 <span lang="ja">カードショップアヴァロン</span></a> Winner: <span lang="ja">sey</span></li><li><a href="../events/ntcd-01M4QAMWX2WF2V2AN19BB4MTJY.html">2026-10-12 <span lang="ja">港北いわや</span></a> Winner: <span lang="ja">かずし。</span></li><li><a href="../events/ntcd-01M4QAMVRWDF6G9425T2D6AFWV.html">2026-10-12 <span lang="ja">CARDBASE JABURO</span></a> Winner: <span lang="ja">鹿之助</span></li><li><a href="../events/ntcd-01M4QAMTJV0YNWVNAH4CCMJ9D2.html">2026-10-12 <span lang="ja">竜星の嵐 高松店</span></a> Winner: <span lang="ja">トゥルー・デビル・タカヒロ</span></li><li><a href="../events/ntcd-01M4QAMSCYAF8F2XE537PYP3PC.html">2026-10-12 <span lang="ja">カードラボ岡山西口店</span></a> Winner: <span lang="ja">n</span></li><li><a href="../events/ntcd-01M4QE3C3S9DKKF82SVNRJNG88.html">2026-10-12 <span lang="ja">カードゲームショップどみなり屋</span></a> Winner: <span lang="ja">豺狼</span></li><li><a href="../events/ntcd-01M4QE3AN47NJ3QM3YTGMES5G9.html">2026-10-12 <span lang="ja">トレーディングカードショップワールド熊谷石原店</span></a> Winner: <span lang="ja">テルテル</span></li><li><a href="../events/ntcd-01M4QE39SJWS2C1BAN2NG7D9QM.html">2026-10-12 <span lang="ja">カードボックス名張店</span></a> Winner: <span lang="ja">けっち</span></li><li><a href="../events/ntcd-01M4QE39009QTSQ4W4HACVK640.html">2026-10-12 <span lang="ja">ラックス奈良柏木店</span></a> Winner: <span lang="ja">楯無</span></li><li><a href="../events/ntcd-01M4QE37Z5W4N1DS48DQ3ZEAW3.html">2026-10-12 <span lang="ja">トレカショップ竜のしっぽ 大阪梅田店</span></a> Winner: <span lang="ja">片岡瑞統</span></li><li><a href="../events/ntcd-01M4QHH7F1RC8T07MCSPGSDWBG.html">2026-10-12 <span lang="ja">G-PROJECT中津店</span></a> Winner: <span lang="ja">mao</span></li><li><a href="../events/ntcd-01M4QHH6MWRYTD5MTHWW043V4S.html">2026-10-12 <span lang="ja">ティアワン浜松店</span></a> Winner: <span lang="ja">酒場のブルーノ</span></li><li><a href="../events/ntcd-01M4QHH5HYTT9HT6N6C7PX0NY9.html">2026-10-12 <span lang="ja">トーナメントセンターバトロコ新静岡駅前</span></a> Winner: <span lang="ja">みらい</span></li><li><a href="../events/ntcd-01M4QHH4GQGCAB6S04KVFT5CWJ.html">2026-10-12 <span lang="ja">Cardmaster D.C.</span></a> Winner: <span lang="ja">にゅーち</span></li><li><a href="../events/ntcd-01M4QHH2FGAWK9YF4ZMGD2EVYW.html">2026-10-12 <span lang="ja">カードボックスイオンモール高知店</span></a> Winner: <span lang="ja">◆斎藤</span></li><li><a href="../events/ntcd-01M4QHH19BERBGJ8SSZDWYPTP5.html">2026-10-12 <span lang="ja">カードラボ＆ゲーマーズ小倉店</span></a> Winner: <span lang="ja">saku</span></li><li><a href="../events/ntcd-01M4QHH0DDN2XFWT4EJCNYEYAS.html">2026-10-12 <span lang="ja">ブックオフプラス福岡糸島トレカ館</span></a> Winner: <span lang="ja">ムラタ・アズラエル</span></li><li><a href="../events/ntcd-01M4QHGZK8VATQAV0XBZVZ2TNR.html">2026-10-12 <span lang="ja">トレカザウルス 京都店</span></a> Winner: <span lang="ja">sire</span></li><li><a href="../events/ntcd-01M4QHGYGTG9PR174GFYDB0P21.html">2026-10-12 <span lang="ja">カードボックス津店</span></a> Winner: <span lang="ja">シーモ</span></li><li><a href="../events/ntcd-01M4QHGXMZT7NJQ0TE93P5XM5B.html">2026-10-12 <span lang="ja">トレーディングカードショップシエル</span></a> Winner: <span lang="ja">ふくちゃん</span></li><li><a href="../events/ntcd-01M4QHGWGQBN88Z40FRBCHFJTS.html">2026-10-12 <span lang="ja">+upside（アップサイド）</span></a> Winner: <span lang="ja">もそじろう</span></li><li><a href="../events/ntcd-01M4QHGVNM7V364RD0KJR0AZF7.html">2026-10-12 <span lang="ja">ホビーショップぼっけもん</span></a> Winner: <span lang="ja">ウタキ</span></li><li><a href="../events/ntcd-01M4QHGTV6WEPR01W380TQAZDA.html">2026-10-12 <span lang="ja">カードボックス高槻店</span></a> Winner: <span lang="ja">アサノ</span></li><li><a href="../events/ntcd-01M4QHGSWD6GSW4EE2BQDJNS78.html">2026-10-12 <span lang="ja">アメニティードリーム大宮店</span></a> Winner: <span lang="ja">コニ</span></li><li><a href="../events/ntcd-01M4QHGRQE9953YAXCW5MYQY47.html">2026-10-12 <span lang="ja">V100徳島藍住店</span></a> Winner: <span lang="ja">ラム</span></li><li><a href="../events/ntcd-01M4QHGQPCTF3M0VRSPKK7ADEA.html">2026-10-12 <span lang="ja">WonderGOOいわき鹿島店</span></a> Winner: <span lang="ja">せいやん</span></li><li><a href="../events/ntcd-01M4QMYMXB9W9P3PKS57GW4Z1T.html">2026-10-12 <span lang="ja">トーナメントセンターバトロコ新潟万代</span></a> Winner: <span lang="ja">とり刺し</span></li><li><a href="../events/ntcd-01M4QMYM33SDVQHYGN66T8YB51.html">2026-10-12 <span lang="ja">TSUTAYAデイズタウンつくば</span></a> Winner: <span lang="ja">Longtown4</span></li><li><a href="../events/ntcd-01M4QMYK8KZ0RJ5722TV6AD364.html">2026-10-12 <span lang="ja">BOOKOFF SUPER BAZAAR 西友大森店</span></a> Winner: <span lang="ja">菊池家康</span></li><li><a href="../events/ntcd-01M4QMYJEXPYHAYFM1DSNMS6HG.html">2026-10-12 <span lang="ja">ホビーショップ パワーナイン</span></a> Winner: <span lang="ja">シータ</span></li><li><a href="../events/ntcd-01M4QMYHGZ8N2BMFW4BCYWD55B.html">2026-10-12 <span lang="ja">ブックオフ奈良かしはら店</span></a> Winner: <span lang="ja">どんぐり大好き</span></li><li><a href="../events/ntcd-01M4QMYGBDXBCQG60B3G3CCFRS.html">2026-10-12 <span lang="ja">カードショップ＠ほ～む。宮崎店</span></a> Winner: <span lang="ja">フキ</span></li><li><a href="../events/ntcd-01M4QMYFC04H2MHWRX897Q0TYR.html">2026-10-12 <span lang="ja">MagicBox</span></a> Winner: <span lang="ja">トワ</span></li><li><a href="../events/ntcd-01M4QRD9FHTTR4Y7F7N0N6379T.html">2026-10-12 <span lang="ja">ハリケーン川西店</span></a> Winner: <span lang="ja">マサ</span></li><li><a href="../events/ntcd-01M4QRD8H6SX5WH62BNB7EKNYK.html">2026-10-12 <span lang="ja">ホビーステーション金沢店</span></a> Winner: <span lang="ja">イケ</span></li><li><a href="../events/ntcd-01M4QRD79CR0BRAWPS6XB7H5CZ.html">2026-10-12 <span lang="ja">トレカエース下妻店（ブックエースTSUTAYA下妻店）</span></a> Winner: <span lang="ja">たくちょ</span></li><li><a href="../events/ntcd-01M4QZ7YBXR48TBD940HEMS2Z1.html">2026-10-12 <span lang="ja">ブックオフチャチャタウン小倉店</span></a> Winner: <span lang="ja">あおやん</span></li><li><a href="../events/ntcd-01M4QZ7W759NBSXV71NPERCDQW.html">2026-10-12 <span lang="ja">古本市場 福山曙店</span></a> Winner: <span lang="ja">さや</span></li><li><a href="../events/ntcd-01M4R6469DXCC6TMT3FEK9N1FB.html">2026-10-12 <span lang="ja">マスターズギルド</span></a> Winner: <span lang="ja">Ria</span></li><li><a href="../events/ntcd-01M51YJSQKK9Z6ZDV7NC270NB3.html">2026-10-12 <span lang="ja">カードショップBAHAMUT</span></a> Winner: <span lang="ja">$$$$</span></li><li><a href="../events/ntcd-01M4MMTNATEF8C02678G1FAGD2.html">2026-10-11 <span lang="ja">蔦屋書店熊本三年坂</span></a> Winner: <span lang="ja">トリオ</span></li><li><a href="../events/ntcd-01M4MMTM13JJCJZV6KAXWY8CHP.html">2026-10-11 <span lang="ja">コミかる伊勢崎店</span></a> Winner: <span lang="ja">D</span></li><li><a href="../events/ntcd-01M4MR87Z0A1996DZX61P480K1.html">2026-10-11 <span lang="ja">カードショップきりん 大阪天満橋店</span></a> Winner: <span lang="ja">タッピー</span></li><li><a href="../events/ntcd-01M4MR86M5M8MW3ZY030GE9TRP.html">2026-10-11 <span lang="ja">カードラボ名古屋大須店</span></a> Winner: <span lang="ja">さんななさん</span></li><li><a href="../events/ntcd-01M4MR85HZYBA8HK53E8MH0A5K.html">2026-10-11 <span lang="ja">カードショップ彩々 鹿児島店</span></a> Winner: <span lang="ja">あやひこ</span></li><li><a href="../events/ntcd-01M4MVP398X70BJB3AM5ARC10J.html">2026-10-11 <span lang="ja">カードボックス本の王国大垣店</span></a> Winner: <span lang="ja">だいこんあし</span></li><li><a href="../events/ntcd-01M4MVP1B2VV0CAY0WNHRG66ZR.html">2026-10-11 <span lang="ja">スポーツカード＆カードゲームショップ MINT三宮店</span></a> Winner: <span lang="ja">key</span></li><li><a href="../events/ntcd-01M4MVP04F31F2CN30YENEW8NK.html">2026-10-11 <span lang="ja">カードランド秋葉原店</span></a> Winner: <span lang="ja">ワン</span></li><li><a href="../events/ntcd-01M4MVNZ03ZHE6JSJCCA2BKRVG.html">2026-10-11 <span lang="ja">GameSpace&amp;cafeドラグーン博多</span></a> Winner: <span lang="ja">J村</span></li><li><a href="../events/ntcd-01M4MVNXWTRS35K5Y3FW9AVMAR.html">2026-10-11 <span lang="ja">カードボックス福山店</span></a> Winner: <span lang="ja">ゲキカラ</span></li><li><a href="../events/ntcd-01M4MZ3VREKK3P880P3EZA6Y0X.html">2026-10-11 <span lang="ja">MINT GAMES 池袋店</span></a> Winner: <span lang="ja">すずき</span></li><li><a href="../events/ntcd-01M4MZ3T6XD3RWE132YHYRW69A.html">2026-10-11 <span lang="ja">カードラボ博多マルイ店</span></a> Winner: <span lang="ja">ザム</span></li><li><a href="../events/ntcd-01M4N2J3CN2Y0J11ES0WKY9V8X.html">2026-10-11 <span lang="ja">TSUTAYA田宮店</span></a> Winner: <span lang="ja">いち</span></li><li><a href="../events/ntcd-01M4N2J29017H0WP4VHVNDX8MH.html">2026-10-11 <span lang="ja">オレタン福岡天神店</span></a> Winner: <span lang="ja">ドロロ</span></li><li><a href="../events/ntcd-01M4N60BY7MPCGZQSYXEX0N5Z6.html">2026-10-11 <span lang="ja">TSUTAYA田上店</span></a> Winner: <span lang="ja">てお</span></li><li><a href="../events/ntcd-01M4N60ABWCCG5H7TCKWY5SGAC.html">2026-10-11 <span lang="ja">ドラマ下北沢トレカ専門店</span></a> Winner: <span lang="ja">らいおん@@@1</span></li><li><a href="../events/ntcd-01M4N609FV1C0D6M5D1XNMQTXG.html">2026-10-11 <span lang="ja">CARDBOXアリオン塩冶店</span></a> Winner: <span lang="ja">Roid</span></li><li><a href="../events/ntcd-01M4N608C9TVNBTZMSBMWC270M.html">2026-10-11 <span lang="ja">TSUTAYA枚方ベルパルレ店</span></a> Winner: <span lang="ja">ZERO</span></li><li><a href="../events/ntcd-01M4NCV999508DTNSW5Y48THJQ.html">2026-10-11 <span lang="ja">NextPro名古屋大須店</span></a> Winner: <span lang="ja">kスバル</span></li><li><a href="../events/ntcd-01M4NCV8GD8GZT3C4ZGESK4NEF.html">2026-10-11 <span lang="ja">トレカ専門店 スーパートレ☆スタ宮崎駅前店</span></a> Winner: <span lang="ja">﨑</span></li><li><a href="../events/ntcd-01M4NCV7HC6ZXSTVG4B418PMZ8.html">2026-10-11 <span lang="ja">アメニティードリーム秋葉原店</span></a> Winner: <span lang="ja">こんいろ</span></li><li><a href="../events/ntcd-01M4N9D9XNZF1510T1X4BV91EW.html">2026-10-11 <span lang="ja">TSUTAYA BOOKSTORE宮交シティ</span></a> Winner: <span lang="ja">アイスバーグ</span></li><li><a href="../events/ntcd-01M4NG92J9R00XJSC0FAMCEJ4G.html">2026-10-11 <span lang="ja">TSUTAYA AVクラブ太宰府店</span></a> Winner: <span lang="ja">おおやけ</span></li><li><a href="../events/ntcd-01M4NKQ7TD740NNSBY5CY1BRPD.html">2026-10-11 <span lang="ja">プレイズ西尾シャオ店</span></a> Winner: <span lang="ja">紅兎</span></li><li><a href="../events/ntcd-01M4J2DYQFPMY76SDGA7CNCFVM.html">2026-10-10 <span lang="ja">TCGShop193秋葉原店</span></a> Winner: <span lang="ja">カッシュ</span></li><li><a href="../events/ntcd-01M4J2DXN2ZS562NHXY4KKYBR8.html">2026-10-10 <span lang="ja">ファーストカード666</span></a> Winner: <span lang="ja">やま@@@1</span></li><li><a href="../events/ntcd-01M4J5VY0FKKZQM20734JX2S2B.html">2026-10-10 <span lang="ja">カードラボ宇都宮店</span></a> Winner: <span lang="ja">マキ</span></li><li><a href="../events/ntcd-01M4J5VX6361HN21ZNRJY559Z7.html">2026-10-10 <span lang="ja">フルコンプ福岡天神店</span></a> Winner: <span lang="ja">キサラギ</span></li><li><a href="../events/ntcd-01M4J5VWBRTKTS3GWYT9MKCNHY.html">2026-10-10 <span lang="ja">JABUROⅡ</span></a> Winner: <span lang="ja">みんたや</span></li><li><a href="../events/ntcd-01M4J5VV6C187TTNF4FV024AFK.html">2026-10-10 <span lang="ja">カード＆ホビーショップ ドラグーン住吉</span></a> Winner: <span lang="ja">ふる</span></li><li><a href="../events/ntcd-01M4J5VTCTK13V1NVZB0X5CGFY.html">2026-10-10 <span lang="ja">トレーディングカードゲームショップ193名駅太閤店</span></a> Winner: <span lang="ja">モッピー</span></li><li><a href="../events/ntcd-01M4J5VRTZK2T273XJGKPF6CPM.html">2026-10-10 <span lang="ja">トレカショップ竜のしっぽ 姫路店</span></a> Winner: <span lang="ja">のんすとっぷねこ</span></li><li><a href="../events/ntcd-01M4J99A7VSDWEDFS0CK96KFAW.html">2026-10-10 <span lang="ja">トーナメントセンターバトロコ盛岡大通</span></a> Winner: <span lang="ja">ほーぷ</span></li><li><a href="../events/ntcd-01M4J999D9YD9J1Q8X62N7P4BM.html">2026-10-10 <span lang="ja">三洋堂書店新開橋店</span></a> Winner: <span lang="ja">あか</span></li><li><a href="../events/ntcd-01M4J998JPNDTTPT55V1A5830T.html">2026-10-10 <span lang="ja">トレーディングカードゲームショップ193大須店</span></a> Winner: <span lang="ja">しおた</span></li><li><a href="../events/ntcd-01M4J997B0REMJEMA9VRB8R8HN.html">2026-10-10 <span lang="ja">カードゲームのシーガル郡山店</span></a> Winner: <span lang="ja">焔</span></li><li><a href="../events/ntcd-01M4JCQJK03WS06A8T96QJV2GA.html">2026-10-10 <span lang="ja">トーナメントセンターバトロコ小田原駅前</span></a> Winner: <span lang="ja">のっきー</span></li><li><a href="../events/ntcd-01M4JCQHP3BP5GFJ4KZ6C46PTE.html">2026-10-10 <span lang="ja">TSUTAYAリノアス八尾店</span></a> Winner: <span lang="ja">田中兄</span></li><li><a href="../events/ntcd-01M4JCQGQZ9TDN7XCEATR9DRH7.html">2026-10-10 <span lang="ja">カードラボ池袋店</span></a> Winner: <span lang="ja">ハセガワ</span></li><li><a href="../events/ntcd-01M4JCQFJJ275871BJYRVG6DQC.html">2026-10-10 <span lang="ja">トレカ専門店 スーパートレ☆スタ宮崎恒久店</span></a> Winner: <span lang="ja">かびやまごんぺい</span></li><li><a href="../events/ntcd-01M4JCQESQ3S5078V4XWQG8SR2.html">2026-10-10 <span lang="ja">ゲームプラザ元気302</span></a> Winner: <span lang="ja">けんじ</span></li><li><a href="../events/ntcd-01M4JCQDPD8HPAP2S3P9YHJ8WN.html">2026-10-10 <span lang="ja">リバティ鑑定倶楽部王子店</span></a> Winner: <span lang="ja">モリモト</span></li><li><a href="../events/ntcd-01M4JG5DJFHEW8DWRD6CXX4Q1R.html">2026-10-10 <span lang="ja">カードラボ熊本店</span></a> Winner: <span lang="ja">おのでぃー</span></li><li><a href="../events/ntcd-01M4JG5CPT20NX823GH25PZPRA.html">2026-10-10 <span lang="ja">SuperKaBoS二の宮本店</span></a> Winner: <span lang="ja">ウエダジロウ</span></li><li><a href="../events/ntcd-01M4JG5BSDHBD41YT11KHAYMKQ.html">2026-10-10 <span lang="ja">トーナメントセンターバトロコ旭川駅前</span></a> Winner: <span lang="ja">マァサ</span></li><li><a href="../events/ntcd-01M4JKJVTVM3SFCTS9XQ8N03X1.html">2026-10-10 <span lang="ja">トレカプラザ55上前津店</span></a> Winner: <span lang="ja">さや</span></li><li><a href="../events/ntcd-01M4JKJTS9FBXPYF9NWAS43M9Z.html">2026-10-10 <span lang="ja">TSUTAYA枚方ベルパルレ店</span></a> Winner: <span lang="ja">ゆずなのは</span></li><li><a href="../events/ntcd-01M4JTE881RP6XQFFQPXVVK5MJ.html">2026-10-10 <span lang="ja">TOP CARD</span></a> Winner: <span lang="ja">しみしみ</span></li><li><a href="../events/ntcd-01M4JQ0XYGJNW5YP7X4VZ71CEA.html">2026-10-10 <span lang="ja">BOOKOFF西尾下町店</span></a> Winner: <span lang="ja">けーすけ</span></li><li><a href="../events/ntcd-01M4JQ0X2N9C4FXQRYJFSZZNVW.html">2026-10-10 <span lang="ja">TSUTAYA宇多津店</span></a> Winner: <span lang="ja">ヒロ@デミバーディングいいよね</span></li><li><a href="../events/ntcd-01M4JQ0VRJ4FP6288Q9BWMCWCC.html">2026-10-10 <span lang="ja">カードラボ千葉中央店</span></a> Winner: <span lang="ja">IKE</span></li><li><a href="../events/ntcd-01M4JXWC6FG6W08TMC80Y496TN.html">2026-10-10 <span lang="ja">トレカパラダイス</span></a> Winner: <span lang="ja">ますお</span></li><li><a href="../events/ntcd-01M4JXWAKYPVBJMQ45XG5CT19Y.html">2026-10-10 <span lang="ja">トーナメントセンターバトロコ渋谷センター街</span></a> Winner: <span lang="ja">koyo</span></li><li><a href="../events/ntcd-01M4FPWGY4ZGP9AF5S6VMGBDRE.html">2026-10-09 <span lang="ja">ドラゴンスター日本橋2号店</span></a> Winner: <span lang="ja">アカバ</span></li><li><a href="../events/ntcd-01M4FTAJG5JTMXF7TMNWJ8R3CE.html">2026-10-09 <span lang="ja">カードラボ天王寺店</span></a> Winner: <span lang="ja">かるら</span></li><li><a href="../events/ntcd-01M4FXR94NH2M2W58GB6TDKVJ0.html">2026-10-09 <span lang="ja">トレカチャンピオンなんば日本橋店</span></a> Winner: <span lang="ja">むらぼ</span></li><li><a href="../events/ntcd-01M4FXR83D1X7M3FV75GXAS8HH.html">2026-10-09 <span lang="ja">カードラボ豊橋店</span></a> Winner: <span lang="ja">りんだまん</span></li><li><a href="../events/ntcd-01M4G4M45KWP4YVA1PD7Q6W914.html">2026-10-09 <span lang="ja">トーナメントセンターバトロコ川越駅前</span></a> Winner: <span lang="ja">ゆーら</span></li><li><a href="../events/ntcd-01M4GBFYHAC26N408JKXBDJ3BF.html">2026-10-09 <span lang="ja">ブックオフ町田中央通り店（本・ホビー館）4F</span></a> Winner: <span lang="ja">buri</span></li><li><a href="../events/ntcd-01M4D7XZXDMWCV8RWR2AFJN290.html">2026-10-08 <span lang="ja">カードラボ浜松店</span></a> Winner: <span lang="ja">ウンファ</span></li><li><a href="../events/ntcd-01M4D7XYVNMMYYMC02FZK0TFWE.html">2026-10-08 <span lang="ja">アメニティードリーム立川店</span></a> Winner: <span lang="ja">ユウキ</span></li><li><a href="../events/ntcd-01M4DBC720VPGKBMRXM8Y0J51J.html">2026-10-08 <span lang="ja">フルコンプ PLAYERS CENTER 八王子本店</span></a> Winner: <span lang="ja">Kula</span></li><li><a href="../events/ntcd-01M4DBC5VSKCDFGHP5BDMCG3YX.html">2026-10-08 <span lang="ja">カードボックス青馬堂矢向店</span></a> Winner: <span lang="ja">由伸</span></li><li><a href="../events/ntcd-01M4DESVJZYS6BJ3Z3PNRQFEE7.html">2026-10-08 <span lang="ja">コーギーアール横浜店</span></a> Winner: <span lang="ja">しんのすけ</span></li><li><a href="../events/ntcd-01M4DEST4EY9PCX1Z80M0K7501.html">2026-10-08 <span lang="ja">カードキングダム溝の口店</span></a> Winner: <span lang="ja">よろず</span></li><li><a href="../events/ntcd-01M4AJ38W1X3HC5734QAMTVQGG.html">2026-10-07 <span lang="ja">青馬堂本店</span></a> Winner: <span lang="ja">クラム</span></li><li><a href="../events/ntcd-01M4AJ37P86EJJPY2E4DYAF125.html">2026-10-07 <span lang="ja">バトロコ新津田沼駅前</span></a> Winner: <span lang="ja">HRM</span></li><li><a href="../events/ntcd-01M4ANH4R11D5RXTP7JBXH8WJJ.html">2026-10-07 <span lang="ja">トーナメントセンターバトロコ札幌狸小路</span></a> Winner: <span lang="ja">$$$$</span></li><li><a href="../events/ntcd-01M4ANH3NR289SB8DYB8RJFEZ2.html">2026-10-07 <span lang="ja">ドラゴンスター秋葉原駅前店</span></a> Winner: <span lang="ja">コッペパン</span></li><li><a href="../events/ntcd-01M4ARZ9J2K1GSYJVAYQMHS5CX.html">2026-10-07 <span lang="ja">アメニティードリーム吉祥寺店</span></a> Winner: <span lang="ja">アオキ</span></li><li><a href="../events/ntcd-01M4ARZ87HZK7R286Z2PSS7BT8.html">2026-10-07 <span lang="ja">カードボックスオーサカ店</span></a> Winner: <span lang="ja">マニ屋</span></li><li><a href="../events/ntcd-01M4AWD2VMN87NX10P1B8J12W3.html">2026-10-07 <span lang="ja">トレーディングカードショップワールド熊谷石原店</span></a> Winner: <span lang="ja">まさし</span></li><li><a href="../events/ntcd-01M4AWD1FTZ0DHK6WDSAVXPX0Q.html">2026-10-07 <span lang="ja">カードラボ名古屋駅前店</span></a> Winner: <span lang="ja">はぎたろう</span></li><li><a href="../events/ntcd-01M48MAMXWN24WEQ7WBKJJP5D2.html">2026-10-06 <span lang="ja">ホビーステーション新潟店</span></a> Winner: <span lang="ja">BOX</span></li><li><a href="../events/ntcd-01M48MAKGW0N1PJWSRX82MG4WF.html">2026-10-06 <span lang="ja">ブックオフイオン橋本店</span></a> Winner: <span lang="ja">あまとう</span></li><li><a href="../events/ntcd-01M48MAJKP28B26XEJPN3B8Q95.html">2026-10-06 <span lang="ja">フルアヘッド大阪日本橋店</span></a> Winner: <span lang="ja">むらぼ</span></li><li><a href="../events/ntcd-01M48MAHN21A6GZ19E3BSVFXET.html">2026-10-06 <span lang="ja">カードボックスヨコハマ本店</span></a> Winner: <span lang="ja">イノウエ</span></li><li><a href="../events/ntcd-01M48MAGH68ZNB1NKRRX3ETM97.html">2026-10-06 <span lang="ja">カードショップさくら</span></a> Winner: <span lang="ja">カズ</span></li><li><a href="../events/ntcd-01M48MAFK578TTZRC2BVKM5AY0.html">2026-10-06 <span lang="ja">カードショップ札屋</span></a> Winner: <span lang="ja">かずき</span></li><li><a href="../events/ntcd-01M48MAEPN7Q3Y3V6RVPY7M4G2.html">2026-10-06 <span lang="ja">カードラボ長野店</span></a> Winner: <span lang="ja">豆腐准将</span></li><li><a href="../events/ntcd-01M48MACWXMM9AAMZR1PGQT84A.html">2026-10-06 <span lang="ja">遊Vic中野店</span></a> Winner: <span lang="ja">たかゆき</span></li><li><a href="../events/ntcd-01M48MABFMNM12PN6XTT0NAK43.html">2026-10-06 <span lang="ja">Japan TCG Center吉祥寺駅北口店</span></a> Winner: <span lang="ja">buri</span></li><li><a href="../events/ntcd-01M4AB7N4173DB1ZTNCYD2K85B.html">2026-10-06 <span lang="ja">カードショップLight</span></a> Winner: <span lang="ja">サメ</span></li><li><a href="../events/ntcd-01M45GR2GAQY58167NNW587X7V.html">2026-10-05 <span lang="ja">カードラボ静岡店</span></a> Winner: <span lang="ja">ストライク</span></li><li><a href="../events/ntcd-01M45GR1MYBBCYZREAM4J3XQP5.html">2026-10-05 <span lang="ja">トイパラダイスBANBAN21 具志川店</span></a> Winner: <span lang="ja">あるな</span></li><li><a href="../events/ntcd-01M45GR0PX86ZVMJY57R4TJQQN.html">2026-10-05 <span lang="ja">BIG MAGICなんば店</span></a> Winner: <span lang="ja">ポムランタン</span></li><li><a href="../events/ntcd-01M45GQZJSX1ABJHM5JRYWK0MZ.html">2026-10-05 <span lang="ja">アメニティードリーム新宿店</span></a> Winner: <span lang="ja">つう</span></li><li><a href="../events/ntcd-01M45GQYJ3NB86CRWDQ3ACXCHJ.html">2026-10-05 <span lang="ja">アメニティードリーム町田店</span></a> Winner: <span lang="ja">みつき</span></li><li><a href="../events/ntcd-01M45M5SDBND3B36K7TT0DRJYY.html">2026-10-05 <span lang="ja">S CARD OASIS 大垣店</span></a> Winner: <span lang="ja">とんぺい</span></li><li><a href="../events/ntcd-01M45QM98SC94PR4V0VF1XWGN6.html">2026-10-05 <span lang="ja">トーナメントセンターバトロコ小山駅前</span></a> Winner: <span lang="ja">ミンティアさん。</span></li><li><a href="../events/ntcd-01M45YFNC6S6ZH4WTPQSB158WG.html">2026-10-05 <span lang="ja">ブックオフチャチャタウン小倉店</span></a> Winner: <span lang="ja">Twenty</span></li><li><a href="../events/ntcd-01M45V162GW5Y31WZQZM1F0Q8T.html">2026-10-05 <span lang="ja">チェルモサード</span></a> Winner: <span lang="ja">msk</span></li><li><a href="../events/ntcd-01M461XARWHWQP9MX6N0MCJPG0.html">2026-10-05 <span lang="ja">TSUTAYA 田崎店</span></a> Winner: <span lang="ja">nisiken</span></li><li><a href="../events/ntcd-01M47HZGGT5XF1GVREH455YMNT.html">2026-10-05 <span lang="ja">トーナメントセンターバトロコ川崎駅前</span></a> Winner: <span lang="ja">ちゃむ</span></li><li><a href="../events/ntcd-01M42M1B4DVYB3W96PXQTJKDDC.html">2026-10-04 <span lang="ja">カードショップきりん 大阪天満橋店</span></a> Winner: <span lang="ja">くんぺい</span></li><li><a href="../events/ntcd-01M42M19KB0W8R2RY8TQ92BP3X.html">2026-10-04 <span lang="ja">TSUTAYA光吉店</span></a> Winner: <span lang="ja">えんもる</span></li><li><a href="../events/ntcd-01M42QF71NW9XF48TNFXKHYFHP.html">2026-10-04 <span lang="ja">カードショップ彩々アミュプラザ鹿児島店</span></a> Winner: <span lang="ja">やおきん</span></li><li><a href="../events/ntcd-01M42TWVJB791YK17K9WJJXSNH.html">2026-10-04 <span lang="ja">トイコンプ高槻店</span></a> Winner: <span lang="ja">ユウ</span></li><li><a href="../events/ntcd-01M42TWTESJ7DXJ171FVVQHPFR.html">2026-10-04 <span lang="ja">カードラボ＆ゲーマーズ小倉店</span></a> Winner: <span lang="ja">一郎</span></li><li><a href="../events/ntcd-01M42TWS919HTHJZC0PR71CSYS.html">2026-10-04 <span lang="ja">GIRAFULLなんば店</span></a> Winner: <span lang="ja">be</span></li><li><a href="../events/ntcd-01M42TWR7MV79MVEWMJ790P24E.html">2026-10-04 <span lang="ja">ゲームスペース鶴岡</span></a> Winner: <span lang="ja">ロロ</span></li><li><a href="../events/ntcd-01M42TWQ1SDMX4PYBVXCF865HB.html">2026-10-04 <span lang="ja">お宝弁財天 feat. パンドラ</span></a> Winner: <span lang="ja">めいろ</span></li><li><a href="../events/ntcd-01M42YB937GTPJV24SQF0VJEZ9.html">2026-10-04 <span lang="ja">TSUTAYA瀬戸店</span></a> Winner: <span lang="ja">タカクリ</span></li><li><a href="../events/ntcd-01M42YB837Y3BQNC6PX45RSC0N.html">2026-10-04 <span lang="ja">MINT GAMES 池袋店</span></a> Winner: <span lang="ja">おしょう</span></li><li><a href="../events/ntcd-01M42YB6X7DVRGKNP7WA15GGNR.html">2026-10-04 <span lang="ja">コミかる高崎店</span></a> Winner: <span lang="ja">アカソラ</span></li><li><a href="../events/ntcd-01M42YB5W95RR6T5HT6K1375KX.html">2026-10-04 <span lang="ja">ゲームショップコロッサス</span></a> Winner: <span lang="ja">さいとう</span></li><li><a href="../events/ntcd-01M42YB4E992YH8FSQ1MATV9YS.html">2026-10-04 <span lang="ja">竜星の嵐名古屋店</span></a> Winner: <span lang="ja">なずー</span></li><li><a href="../events/ntcd-01M431SBB43RWPN0FQ1EA820VE.html">2026-10-04 <span lang="ja">カードラボアバンティ京都店</span></a> Winner: <span lang="ja">ドラ</span></li><li><a href="../events/ntcd-01M4356PDXYJVX7M3Q8J2M67MZ.html">2026-10-04 <span lang="ja">ガンダムカードゲーム 公式ショップ 埼玉 越谷レイクタウン店</span></a> Winner: <span lang="ja">ノムラ</span></li><li><a href="../events/ntcd-01M4356N0PA52CX2AMRFFW6DSK.html">2026-10-04 <span lang="ja">遊INGコマーシャルモール博多店</span></a> Winner: <span lang="ja">だっと</span></li><li><a href="../events/ntcd-01M4356JYGQ11AQFJNCK1AZVXM.html">2026-10-04 <span lang="ja">TSUTAYA BOOKSTORE AIZU</span></a> Winner: <span lang="ja">シェロ</span></li><li><a href="../events/ntcd-01M4356J35CYD07SEKQPBV6FF3.html">2026-10-04 <span lang="ja">アメニティードリーム京都店</span></a> Winner: <span lang="ja">ＡＡＡ</span></li><li><a href="../events/ntcd-01M4356GTBPZ1AK8PTSFR3J9M7.html">2026-10-04 <span lang="ja">オレタン福岡天神店</span></a> Winner: <span lang="ja">ナベタク</span></li><li><a href="../events/ntcd-01M438MVHJF33AE18AQ4KJ20YD.html">2026-10-04 <span lang="ja">カードラボ鹿児島店</span></a> Winner: <span lang="ja">しー</span></li><li><a href="../events/ntcd-01M438MSZA1W53T126J99PGR9R.html">2026-10-04 <span lang="ja">カードラボ岐阜店</span></a> Winner: <span lang="ja">シマ</span></li><li><a href="../events/ntcd-01M43FG3XBM5VEHKN3HVDATDJK.html">2026-10-04 <span lang="ja">TSUTAYA AVクラブ太宰府店</span></a> Winner: <span lang="ja">duo</span></li><li><a href="../events/ntcd-01M43FG2S6ESAQNRD5SMSV5B39.html">2026-10-04 <span lang="ja">プレイズ西尾シャオ店</span></a> Winner: <span lang="ja">よーちゃん</span></li><li><a href="../events/ntcd-01M43FG1VFZ3NMCH55K3BKH8CB.html">2026-10-04 <span lang="ja">TSUTAYA BOOKSTORE そよら成田ニュータウン</span></a> Winner: <span lang="ja">Kurata</span></li><li><a href="../events/ntcd-01M43FG0VM1SSHNDFCNSN4JRGT.html">2026-10-04 <span lang="ja">スミレヤ</span></a> Winner: <span lang="ja">アップル</span></li><li><a href="../events/ntcd-01M43JYG1PZ512PGP3MNDRSFZW.html">2026-10-04 <span lang="ja">カードショップラフテリア</span></a> Winner: <span lang="ja">タナ</span></li><li><a href="../events/ntcd-01M43JYEYM0KJ8VFHBN3VT7M9F.html">2026-10-04 <span lang="ja">トレカショップ トレカ99</span></a> Winner: <span lang="ja">アルス</span></li><li><a href="../events/ntcd-01M43JYE1THYNH6ZGSZEVS3KG5.html">2026-10-04 <span lang="ja">Cards of Paradise 桜木店</span></a> Winner: <span lang="ja">ドフィ</span></li><li><a href="../events/ntcd-01M43JYCY0SJHM50BWSEDH0W02.html">2026-10-04 <span lang="ja">ビデオインアメリカ福知山店</span></a> Winner: <span lang="ja">ふみ</span></li><li><a href="../events/ntcd-01M43PBZM6107SK3KKDNBHBMD4.html">2026-10-04 <span lang="ja">ゲームスペースあなーば</span></a> Winner: <span lang="ja">うお</span></li><li><a href="../events/ntcd-01M43PBYBN1GXTVQJGS34TGR5Z.html">2026-10-04 <span lang="ja">TCG SHOP FiRST</span></a> Winner: <span lang="ja">ららふれんど</span></li><li><a href="../events/ntcd-01M4FXRA177SN7WTWHH78B1C3B.html">2026-10-04 <span lang="ja">元野木書店</span></a> Winner: <span lang="ja">ショウ</span></li><li><a href="../events/ntcd-01M4MAGNM12W4DY9V27RMHP07T.html">2026-10-04 <span lang="ja">メディオ！十日市店</span></a> Winner: <span lang="ja">Aりす</span></li><li><a href="../events/ntcd-01M401MMMRB9P23S0E743GT226.html">2026-10-03 <span lang="ja">TCG桜華</span></a> Winner: <span lang="ja">赤坂</span></li><li><a href="../events/ntcd-01M401MKNKPR3RZCVJX90K6SFK.html">2026-10-03 <span lang="ja">蔦屋書店茂原店</span></a> Winner: <span lang="ja">ヴァームース</span></li><li><a href="../events/ntcd-01M4052EG0ARCAVV0CT3FTB8GA.html">2026-10-03 <span lang="ja">フルコンプ福岡天神店</span></a> Winner: <span lang="ja">シャメさん</span></li><li><a href="../events/ntcd-01M4052DMH6H6E4K477PFWZ8CK.html">2026-10-03 <span lang="ja">カード＆ホビーショップ ドラグーン住吉</span></a> Winner: <span lang="ja">シンテンチ</span></li></ul><p>Pages for all 1854 tournaments are listed in sitemap.xml.</p></noscript>
+    <!-- SEO:END -->
+  </main>
+
+  <div id="footer"></div>
+
+  <!-- EN-CARD-NAMES:BEGIN -->
+  <script type="application/json" id="gcg-card-names-en">{"EB01-001":"Gundam Astray Red Frame Custom (EX)","EB01-002":"Hi-Nu Gundam (EX)","EB01-003":"Narrative Gundam A-Packs (EX)","EB01-004":"Gundam Barbatos Lupus Rex (EX)","EB01-005":"Zeta Gundam Ⅲ P2 Type","EB01-006":"Gundam Astray Gold Frame Amatsu","EB01-007":"Gundam TR-1 \"Hazel-Rah\"","EB01-008":"Gundam Delta Kai","EB01-009":"Gundam Full Armor (Thunderbolt) (EX)","EB01-010":"Gundam Barbatos 6th Form","EB01-011":"Beginning Gundam","EB01-012":"Dom Bein Nichts","EB01-013":"Red Gundam(0085)","EB01-014":"Gouf Vijayanta","EB01-015":"Prototype Asshimar TR-3 \"Kehaar\"","EB01-016":"Tornado Gundam","EB01-017":"Haro","EB01-018":"Gundam Astray Blue Frame Second L","EB01-019":"Gundam Pixy","EB01-020":"Gundam Mk-Ⅲ","EB01-021":"Build Strike Gundam (Full Package) (EX)","EB01-022":"Gundam Exia (EX)","EB01-023":"Le Cygne (EX)","EB01-024":"GQuuuuuuX (Omega Psycommu)","EB01-025":"Tallgeese Ⅱ","EB01-026":"Gundam Astaroth Origin","EB01-027":"Tallgeese","EB01-028":"Gundam Plutone","EB01-029":"Gundam Astaroth Rinascimento (EX)","EB01-030":"Big-Rang","EB01-031":"Oggo","EB01-032":"Gundam Ez8 High Mobility Custom","EB01-033":"Taurus (Sanc Kingdom)","EB01-034":"Gundam Lfrith Ur","EB01-035":"Gundam Lfrith Thorn","EB01-036":"Darilbalde","EB01-037":"Zudah Unit 1","EB01-038":"G-Self","EB01-039":"Rising Freedom Gundam","EB01-040":"Gundam Epyon","EB01-041":"Strike Freedom Gundam (EX)","EB01-042":"Psycho Haro (EX)","EB01-043":"Blue Destiny Unit-1 (EX)","EB01-044":"Justice Gundam (EX)","EB01-045":"Psycho Zaku (EX)","EB01-046":"Striker Custom (EX)","EB01-047":"Casval's Gundam","EB01-048":"S Gundam","EB01-049":"Pale Rider (Ground Heavy Equipment Type)","EB01-050":"Saikoro Gundam","EB01-051":"Ze'Gok","EB01-052":"Hildolfr","EB01-053":"Gundam GP00","EB01-054":"Gaplant TR-5 \"Hrairoo\" Unit 1","EB01-055":"Dom Gross Beil","EB01-056":"Gundam Geminass 01","EB01-057":"Gundam Geminass 02","EB01-058":"Extreme Gundam","EB01-059":"Psycho Zaku","EB01-060":"Gundam Aquarius","EB01-061":"Ellis Claude","EB01-062":"Jona Basta","EB01-063":"Io Fleming","EB01-064":"Rondo Gina Sahaku","EB01-065":"Meir Siva","EB01-066":"Reiji","EB01-067":"Asuna Elmarit","EB01-068":"Chall Acustica","EB01-069":"Beside Pain","EB01-070":"Daryl Lorenz","EB01-071":"Ittou Tsurugi","EB01-072":"Yuu Kajima","EB01-073":"Character Requests","EB01-074":"Eternal Road","EB01-075":"Fierce Enemy Assault","EB01-076":"Gerbera Straight","EB01-077":"Master League Begins","EB01-078":"Premium Unit Assembly","EB01-079":"Modification","EB01-080":"Sturm Faust","EB01-081":"MAP Weapon","EB01-082":"Warship Cruise","EB01-083":"SP Conversion Chips","EB01-084":"30cm Cannon (APFSDS Round)","EB01-085":"Kudelia Aina Bernstein & Isaribi","EB01-086":"Kycilia Zabi & Gwazine","EB01-087":"Marina Ismail & Ptolemaios 2","EB01-088":"Miorine Rembran & Academy Ship","EB01-089":"Lacus Clyne & Eternal","EB01-090":"Tiffa Adill & Freeden","EXB-002":"EX Base","EXB-003":"EX Base","EXBP-001":"EX Base","EXBP-002":"EX Base","EXBP-003":"EX Base","EXBP-004":"EX Base","EXBP-005":"EX Base","EXBP-006":"EX Base","EXBP-007":"EX Base","EXBP-008":"EX Base","EXBP-009":"EX Base","EXBP-010":"EX Base","EXBP-011":"EX Base","EXBP-019":"EX Base","EXBP-020":"EX Base","EXBP-021":"EX Base","EXBP-022":"EX Base","EXBP-023":"EX Base","EXBP-024":"EX Base","EXBP-025":"EX Base","EXBP-026":"EX Base","EXBP-027":"EX Base","EXBP-028":"EX Base","EXBP-029":"EX Base","EXBP-030":"EX Base","EXBP-031":"EX Base","EXBP-032":"EX Base","EXBP-034":"EX Base","EXBP-035":"EX Base","EXR-002":"EX Resource","EXR-003":"EX Resource","EXR-004":"EX Resource","EXR-005":"EX Resource","EXR-006":"EX Resource","EXR-007":"EX Resource","EXR-008":"EX Resource","EXR-009":"EX Resource","EXR-010":"EX Resource","EXR-011":"EX Resource","EXRP-001":"EX Resource","EXRP-002":"EX Resource","EXRP-003":"EX Resource","EXRP-004":"EX Resource","EXRP-005":"EX Resource","EXRP-006":"EX Resource","EXRP-007":"EX Resource","EXRP-008":"EX Resource","EXRP-009":"EX Resource","EXRP-010":"EX Resource","EXRP-011":"EX Resource","EXRP-012":"EX Resource","EXRP-013":"EX Resource","EXRP-014":"EX Resource","EXRP-015":"EX Resource","EXRP-019":"EX Resource","EXRP-020":"EX Resource","GD01-001":"Gundam","GD01-002":"Unicorn Gundam (Destroy Mode)","GD01-003":"Unicorn Gundam 02 Banshee (Destroy Mode)","GD01-004":"Guncannon","GD01-005":"Unicorn Gundam (Unicorn Mode)","GD01-006":"Delta Plus","GD01-007":"Noin's Aries","GD01-008":"Guntank","GD01-009":"G-Fighter","GD01-010":"Unicorn Gundam 02 Banshee (Unicorn Mode)","GD01-011":"Loto","GD01-012":"Zechs' Leo","GD01-013":"Gundam","GD01-014":"G-Sky Easy","GD01-015":"Ball","GD01-016":"Jegan","GD01-017":"Stark Jegan","GD01-018":"ReZEL","GD01-019":"Byarlant Custom","GD01-020":"Anksha","GD01-021":"Pisces","GD01-022":"Cancer","GD01-023":"Char's Gelgoog","GD01-024":"Wing Gundam Zero","GD01-025":"Gundam Deathscythe","GD01-026":"Char's Zaku Ⅱ","GD01-027":"Big Zam","GD01-028":"Gundam Sandrock","GD01-029":"Shenlong Gundam","GD01-030":"Rick Dom","GD01-031":"Gelgoog","GD01-032":"Gyan","GD01-033":"Gundam Deathscythe","GD01-034":"Gundam Heavyarms","GD01-035":"Zaku Ⅱ","GD01-036":"Gouf","GD01-037":"Gogg","GD01-038":"Adzam","GD01-039":"Dopp","GD01-040":"Wing Gundam","GD01-041":"Shenlong Gundam","GD01-042":"Duo's Leo","GD01-043":"Rasid's Maganac","GD01-044":"Kshatriya","GD01-045":"Duel Gundam (Assault Shroud)","GD01-046":"Buster Gundam","GD01-047":"Shamblo","GD01-048":"Zaku I Sniper Type","GD01-049":"Blitz Gundam","GD01-050":"LaGOWE","GD01-051":"Kshatriya","GD01-052":"Geara Zulu (Guards Type)","GD01-053":"Geara Doga (Heavy Armed Type)","GD01-054":"Duel Gundam","GD01-055":"BuCUE","GD01-056":"Geara Doga (Sleeves)","GD01-057":"Dreissen (Sleeves)","GD01-058":"Galluss-K","GD01-059":"Zee Zulu","GD01-060":"Zaku Mariner","GD01-061":"ZuOOT","GD01-062":"GOOhN","GD01-063":"ZnO","GD01-064":"DINN","GD01-065":"Freedom Gundam","GD01-066":"Justice Gundam","GD01-067":"Gundam Aerial Rebuild","GD01-068":"Perfect Strike Gundam","GD01-069":"Strike Rouge","GD01-070":"Gundam Aerial","GD01-071":"Gundam Pharact","GD01-072":"Launcher Strike Gundam","GD01-073":"Sword Strike Gundam","GD01-074":"Chuchu's Demi Trainer","GD01-075":"Darilbalde","GD01-076":"Michaelis","GD01-077":"Strike Gundam","GD01-078":"Mistral","GD01-079":"Skygrasper","GD01-080":"Cagalli's Skygrasper","GD01-081":"M1 Astray","GD01-082":"Gundam Aerial (Mirasoul Flight Unit)","GD01-083":"Guel's Dilanza","GD01-084":"Beguir-Pente","GD01-085":"Demi Garrison","GD01-086":"Gundam Lfrith","GD01-087":"Sayla Mass","GD01-088":"Banagher Links","GD01-089":"Riddhe Marcenas","GD01-090":"Duo Maxwell","GD01-091":"Chang Wufei","GD01-092":"M'Quve","GD01-093":"Marida Cruz","GD01-094":"Yzak Jule","GD01-095":"Dearka Elthman","GD01-096":"Cagalli Yula Athha","GD01-097":"Guel Jeturk","GD01-098":"Elan Ceres (Enhanced Person Number 4)","GD01-099":"Intercept Orders","GD01-100":"A Show of Resolve","GD01-101":"Deep Devotion","GD01-102":"Securing the Supply Line","GD01-103":"The Stubborn Cog","GD01-104":"Signs of a Revolution","GD01-105":"Citizens, Take a Stand!","GD01-106":"Fortress Defense","GD01-107":"First Contact","GD01-108":"Strategic Arms","GD01-109":"The Path to Victory or Defeat","GD01-110":"Rasid's Orders","GD01-111":"Battle of Aces","GD01-112":"Extreme Hatred","GD01-113":"The Desert Tiger","GD01-114":"Assault on Torrington Base","GD01-115":"Zeon Remnant Forces","GD01-116":"Stealth Stratagem","GD01-117":"The Witch and the Bride","GD01-118":"Overflowing Affection","GD01-119":"Iron-Fisted Discipline","GD01-120":"Naval Bombardment","GD01-121":"Midair Modifications","GD01-122":"Covert Operative","GD01-123":"Nahel Argama","GD01-124":"Side 7","GD01-125":"Zanzibar","GD01-126":"Underground Desert Base","GD01-127":"Gamow","GD01-128":"Mining Asteroid Palau","GD01-129":"Kusanagi","GD01-130":"13th Tactical Testing Sector","GD02-001":"Psycho Gundam","GD02-002":"Gundam Epyon","GD02-003":"Gundam Mk-II (Titans)","GD02-004":"Byarlant","GD02-005":"Tallgeese","GD02-006":"Forbidden Gundam","GD02-007":"Psycho Gundam (MA Mode)","GD02-008":"Gabthley","GD02-009":"Calamity Gundam","GD02-010":"Raider Gundam","GD02-011":"Moebius (Peacemaker Team)","GD02-012":"Core Booster","GD02-013":"Hizack","GD02-014":"Galbaldy Beta","GD02-015":"Marasai","GD02-016":"Barzam","GD02-017":"Delta Plus (Waverider Mode)","GD02-018":"Taurus","GD02-019":"Raider Gundam (MA Mode)","GD02-020":"Elmeth","GD02-021":"Gundam AGE-1 Normal","GD02-022":"G-Exes","GD02-023":"Gundam AGE-1 Spallow","GD02-024":"Red Gundam","GD02-025":"Gundam Heavyarms","GD02-026":"Genoace Custom","GD02-027":"Gundam AGE-1 Titus","GD02-028":"Abdul's Maganac","GD02-029":"Gundam AGE-1 Normal","GD02-030":"Genoace","GD02-031":"Gundam AGE-1 Titus","GD02-032":"White Gundam","GD02-033":"Kikeroga (MA Mode) (GQ)","GD02-034":"GQuuuuuuX","GD02-035":"Police Zaku (Armored RRU Type)","GD02-036":"Qubeley","GD02-037":"Gundam Virsago","GD02-038":"GQuuuuuuX (Omega Psycommu)","GD02-039":"Haman Karn's Gaza C","GD02-040":"Gundam Ashtaron","GD02-041":"Sugai's Gelgoog (GQ)","GD02-042":"Gundam Ashtaron (MA Mode)","GD02-043":"Daughtress Weapon","GD02-044":"Daughtress Command","GD02-045":"GINN Long-Range Reconnaissance Type","GD02-046":"Sayla's Light-Type Guncannon","GD02-047":"Gaza C","GD02-048":"Zaku Ⅲ (Sleeves)","GD02-049":"Daughtress","GD02-050":"Ga-Zowmn (Sleeves)","GD02-051":"01 Gundam","GD02-052":"Guncannon (GQ)","GD02-053":"Gundam X","GD02-054":"Gundam Barbatos 1st Form","GD02-055":"Gundam Gusion Rebake","GD02-056":"Gundam X","GD02-057":"Zedas","GD02-058":"Ryusei-Go (Graze Custom Ⅱ)","GD02-059":"Gundam Airmaster","GD02-060":"Gundam Leopard","GD02-061":"Hyakuri","GD02-062":"Amida's Hyakuren","GD02-063":"Gundam Airmaster (Fighter Mode)","GD02-064":"Gundam Leopard","GD02-065":"Jenice Custom","GD02-066":"Gafran","GD02-067":"Baqto","GD02-068":"Gundam Barbatos 3rd Form","GD02-069":"Zeta Gundam","GD02-070":"Gundam Kimaris","GD02-071":"Gundam Mk-II (AEUG)","GD02-072":"Hyaku-Shiki","GD02-073":"Carta's Graze Ritter (Ground Type)","GD02-074":"Gundam Aerial Rebuild","GD02-075":"Rick Dias (Red)","GD02-076":"Buster Gundam","GD02-077":"Ein's Schwalbe Graze","GD02-078":"Gundam Pharact","GD02-079":"Rick Dias","GD02-080":"Nemo","GD02-081":"Methuss","GD02-082":"Gaelio's Schwalbe Graze","GD02-083":"Graze Ritter (Ground Type)","GD02-084":"Lauda's Dilanza","GD02-085":"Four Murasame","GD02-086":"Jerid Messa","GD02-087":"Orga, Crot, and Shani","GD02-088":"Flit Asuno","GD02-089":"Lalah Sune","GD02-090":"Challia Bull (GQ)","GD02-091":"Haman Karn","GD02-092":"Shagia Frost","GD02-093":"Olba Frost","GD02-094":"Garrod Ran & Tiffa Adill","GD02-095":"Lafter Frankland","GD02-096":"Desil Galette","GD02-097":"Kamille Bidan","GD02-098":"Quattro Bajeena","GD02-099":"Gaelio Bauduin","GD02-100":"Dramatic Turnabout","GD02-101":"Beneath the Mask","GD02-102":"Mouar’s Determination","GD02-103":"AGE Device","GD02-104":"Turning Point of History","GD02-105":"Valedictorian","GD02-106":"White Wolf","GD02-107":"All-Range Attack","GD02-108":"That One Looks A Lot Stronger?","GD02-109":"Undying Persistence","GD02-110":"Awakened Power","GD02-111":"Decisive Last Resort","GD02-112":"Momentary Respite","GD02-113":"Sisterly Care","GD02-114":"It's Name is Ryusei-Go","GD02-115":"Familial Devotion","GD02-116":"Comrades Come First","GD02-117":"A New Sign","GD02-118":"Heart Set on Revenge","GD02-119":"Persistent and Fortudinous","GD02-120":"Aspiring Pilot","GD02-121":"Dominion","GD02-122":"Alexandria","GD02-123":"Sodon","GD02-124":"Diva","GD02-125":"Gwadan","GD02-126":"Shuji's Hideout","GD02-127":"Freeden","GD02-128":"Hammerhead","GD02-129":"Argama","GD02-130":"Sleipnir","GD03-001":"Gundam NT-1","GD03-002":"The-O","GD03-003":"Messala","GD03-004":"Hambrabi","GD03-005":"Kshatriya Besserung","GD03-006":"Penelope (Middle Form)","GD03-007":"Gundam NT-1 Full Armor","GD03-008":"Bolinoak Sammahn","GD03-009":"Palace Athene","GD03-010":"Full Armor Unicorn Gundam (Destroy Mode)","GD03-011":"GM Sniper II","GD03-012":"Messala (MA Mode)","GD03-013":"Hizack","GD03-014":"Hizack Custom","GD03-015":"Baund Doc","GD03-016":"Full Armor Unicorn Gundam (Unicorn Mode)","GD03-017":"Kämpfer","GD03-018":"Altron Gundam","GD03-019":"Gundam AGE-2 Normal","GD03-020":"Zaku Ⅱ FZ","GD03-021":"Gundam Deathscythe Hell","GD03-022":"Gundam Kyrios","GD03-023":"G-Bouncer","GD03-024":"Hy-Gogg","GD03-025":"Gundam Sandrock Custom","GD03-026":"Gundam Dynames","GD03-027":"Z’Gok E","GD03-028":"Auda's Maganac","GD03-029":"Gundam Heavyarms Custom","GD03-030":"Gundam Kyrios (Tail Unit Flight Mode)","GD03-031":"Gundam AGE-1 Flat","GD03-032":"Zaku (Four Snake Eyes') [YETI] (GQ)","GD03-033":"Providence Gundam","GD03-034":"GQuuuuuuX (Omega Psycommu)","GD03-035":"GFreD","GD03-036":"Ξ Gundam (Flight Form)","GD03-037":"Bertigo","GD03-038":"GuAIZ (Commander Type)","GD03-039":"Red Gundam","GD03-040":"Gundam Virsago & Gundam Ashtaron","GD03-041":"Patulia","GD03-042":"Duel Gundam (Assault Shroud)","GD03-043":"Messer Type-F02","GD03-044":"Daughtress Flyer","GD03-045":"Balient","GD03-046":"CGUE","GD03-047":"DINN (Commander Type)","GD03-048":"GFreD","GD03-049":"Gundam Exia (Trans-Am)","GD03-050":"Gundam Barbatos Lupus","GD03-051":"Gundam X Divider","GD03-052":"Gundam Virtue","GD03-053":"Gundam Gusion Rebake Full City","GD03-054":"Zeydra","GD03-055":"Gundam Hajiroboshi (2nd Form)","GD03-056":"Gundam Barbatos Adapt","GD03-057":"GN Armor (Type-E)","GD03-058":"Farsia","GD03-059":"Zedas R","GD03-060":"CGS Mobile Worker (Commander Type)","GD03-061":"Gundam Barbatos 6th Form","GD03-062":"GX-Bit","GD03-063":"0 Gundam","GD03-064":"Defurse","GD03-065":"Zedas M","GD03-066":"Gundam Barbatos 5th Form (Ground Type)","GD03-067":"Rouei","GD03-068":"Gundam Hajiroboshi","GD03-069":"Graham's Union Flag Custom","GD03-070":"Freedom Gundam","GD03-071":"Z Gundam (Biosensor)","GD03-072":"Aile Strike Gundam","GD03-073":"Graze Ein","GD03-074":"Tieren Taozi","GD03-075":"Super Gundam","GD03-076":"Freedom Gundam (METEOR)","GD03-077":"Justice Gundam (METEOR)","GD03-078":"Tieren High Mobility Type","GD03-079":"G-Defenser","GD03-080":"Gundam Kimaris Trooper (Trooper Mode)","GD03-081":"AEU Enact Demonstration Color","GD03-082":"Union Flag","GD03-083":"AEU Hellion","GD03-084":"Paptimus Scirocco","GD03-085":"Christina Mackenzie","GD03-086":"Yazan Gable","GD03-087":"Sarah Zabiarov","GD03-088":"Asemu Asuno","GD03-089":"Bernard Wiseman","GD03-090":"Mikhail Kaminsky","GD03-091":"Rau Le Creuset","GD03-092":"Nyaan","GD03-093":"Carris Nautilus","GD03-094":"Zeheart Galette","GD03-095":"Azee Gurumin","GD03-096":"Jamil Neate","GD03-097":"Wistario Afam","GD03-098":"Graham Aker","GD03-099":"Emma Sheen","GD03-100":"Soma Peries","GD03-101":"A Healthy Curiosity","GD03-102":"Privileged Position","GD03-103":"Field Directive","GD03-104":"Reccoa's Shadow","GD03-105":"Bridge Crew","GD03-106":"M.A.V. Tactics","GD03-107":"Over the River and Through the Woods","GD03-108":"How Many Miles to the Battlefield?","GD03-109":"Improved Technique","GD03-110":"Eliminate Target","GD03-111":"Infiltrator Present","GD03-112":"Warped Intent","GD03-113":"Human Karma","GD03-114":"Look of Determination","GD03-115":"Distant Reunion","GD03-116":"Towards Destiny","GD03-117":"Orga's Order","GD03-118":"Awakened Potential","GD03-119":"Awkward Approach","GD03-120":"Immortal Colasour","GD03-121":"Unheralded Attack","GD03-122":"Veteran Tactics","GD03-123":"Jupitris","GD03-124":"Ribo Colony","GD03-125":"Peacemillion","GD03-126":"Cyclops Team","GD03-127":"Jachin Due","GD03-128":"Doritea","GD03-129":"Hotarubi","GD03-130":"Downes","GD03-131":"Eternal","GD03-132":"Radish","GD04-001":"Gundam","GD04-002":"Penelope (Flight Form)","GD04-003":"Victory Gundam","GD04-004":"Psycho Gundam Mk-Ⅱ","GD04-005":"GM III","GD04-006":"V-Dash Gundam","GD04-007":"Victory Gundam Hexa","GD04-008":"Gundam","GD04-009":"Guncannon (108) & Guncannon (109)","GD04-010":"Gaplant","GD04-011":"Victory Gundam","GD04-012":"Core Booster (005) & Core Booster (006)","GD04-013":"Core Fighter","GD04-014":"Shokew","GD04-015":"Gun EZ","GD04-016":"Zoloat (League Militaire)","GD04-017":"Zeong","GD04-018":"Gundam Pharact","GD04-019":"GN Armor Type-D (Trans-Am)","GD04-020":"Gundam Lfrith Ur","GD04-021":"Gundam Lfrith Thorn","GD04-022":"Kikeroga (MS Mode) (GQ)","GD04-023":"Gundam Kyrios (Tail Booster)","GD04-024":"Gundam Aerial Rebuild","GD04-025":"Gundvölva","GD04-026":"Garma's Dopp","GD04-027":"Bigro","GD04-028":"Zakrello","GD04-029":"Gundam Dynames (GN Full Shield)","GD04-030":"Chuchu's Demi Trainer","GD04-031":"Heindree","GD04-032":"Xavier's Gyan Hakuji-Packs (GQ)","GD04-033":"Neo Zeong","GD04-034":"Gundam Kyrios","GD04-035":"Ξ Gundam","GD04-036":"Gundam Throne Eins","GD04-037":"Gundam Kyrios (Trans-Am)","GD04-038":"Gundam Exia","GD04-039":"Rozen Zulu","GD04-040":"Schuzrum-Galluss","GD04-041":"Gundam Throne Drei","GD04-042":"Psycho Gundam (GQ)","GD04-043":"Zssa (Sleeves)","GD04-044":"Gadeel","GD04-045":"Gundam Throne Zwei","GD04-046":"Gundam Dynames","GD04-047":"Gundam Virtue","GD04-048":"Hambrabi (GQ)","GD04-049":"Gundam DX","GD04-050":"Destiny Gundam","GD04-051":"Gundam Airmaster Burst","GD04-052":"Gundam Leopard Destroy","GD04-053":"Rey's Blaze Zaku Phantom","GD04-054":"Gundam Virtue (Trans-Am)","GD04-055":"Heine's Gouf Ignited","GD04-056":"Sword Impulse Gundam","GD04-057":"Gundam Nadleeh","GD04-058":"Jamil's Gundam X","GD04-059":"Daughtress High Mobility Command Wise Wallaby","GD04-060":"Esperansa","GD04-061":"G-Falcon","GD04-062":"Lunamaria's Gunner Zaku Warrior","GD04-063":"GN Armor Type-E","GD04-064":"Gundam Exia","GD04-065":"Unicorn Gundam 02 Banshee Norn (Destroy Mode)","GD04-066":"Unicorn Gundam (Awakened)","GD04-067":"∀ Gundam","GD04-068":"Silver Bullet","GD04-069":"∀ Gundam","GD04-070":"Al-Saachez's AEU Enact Custom Moralia Development Experiment Type","GD04-071":"Graham's Union Flag Custom Ⅱ (GN Flag)","GD04-072":"Unicorn Gundam 02 Banshee Norn (Unicorn Mode)","GD04-073":"∀ Gundam","GD04-074":"Kapool","GD04-075":"GN-X","GD04-076":"Hipheavy","GD04-077":"Flat (Militia)","GD04-078":"Borjarnon","GD04-079":"Agrissa","GD04-080":"Alvatore","GD04-081":"Üso Ewin","GD04-082":"Rosamia Badam","GD04-083":"Marbet Fingerhat","GD04-084":"Sleggar Law","GD04-085":"Suletta Mercury","GD04-086":"Garma Zabi","GD04-087":"Elan Ceres (Enhanced Person Number 5)","GD04-088":"Tokwan","GD04-089":"Nena Trinity","GD04-090":"Hallelujah Haptism","GD04-091":"Deux Murasame","GD04-092":"Michael Trinity","GD04-093":"Rey Za Burrel","GD04-094":"Pala Sys","GD04-095":"Lunamaria Hawke","GD04-096":"Ennil El","GD04-097":"Loran Cehack","GD04-098":"Riddhe Marcenas","GD04-099":"Ali al-Saachez","GD04-100":"Sochie Heim","GD04-101":"Kindhearted","GD04-102":"Moment of Rest","GD04-103":"Spiritual Support","GD04-104":"Shrike Team's Bulwark","GD04-105":"Encounter","GD04-106":"Indiscriminate Violence","GD04-107":"Destined Battle","GD04-108":"Witches from Earth","GD04-109":"Overwhelming Pressure","GD04-110":"Financier","GD04-111":"Trinity","GD04-112":"Inspector","GD04-113":"Damage Control","GD04-114":"Reformationist","GD04-115":"Backup","GD04-116":"Reliable Big Brother","GD04-117":"Graceful Demeanor","GD04-118":"World Distortion","GD04-119":"Fighting Alone","GD04-120":"Machine Doll Squad","GD04-121":"Reineforce Jr.","GD04-122":"Jaburo","GD04-123":"A Baoa Qu","GD04-124":"9th Tactical Testing Sector","GD04-125":"Trinity Warship","GD04-126":"Izuma Colony","GD04-127":"Freeden Ⅱ","GD04-128":"Armory One","GD04-129":"Willgem","GD04-130":"Industrial 7","GD05-001":"V2 Gundam","GD05-002":"Strike Freedom Gundam","GD05-003":"Waldfeld's Murasame","GD05-004":"Akatsuki (Oowashi)","GD05-005":"Strike Rouge (Ootori)","GD05-006":"Hashmal","GD05-007":"Asshimar","GD05-008":"Dijeh","GD05-009":"Gun Blaster","GD05-010":"Kira's Strike Rouge","GD05-011":"Calamity Gundam & Raider Gundam","GD05-012":"Forbidden Gundam","GD05-013":"Gun EZ","GD05-014":"Javelin","GD05-015":"M1 Astray Shrike","GD05-016":"Murasame","GD05-017":"Nu Gundam","GD05-018":"Gundam Calibarn","GD05-019":"Re-GZ","GD05-020":"Nu Gundam","GD05-021":"Gundam AGE-2 Double Bullet","GD05-022":"Gundam Schwarzette","GD05-023":"Re-GZ BWS","GD05-024":"Gundam AGE-2 Normal (SP Ver.)","GD05-025":"Demi Barding","GD05-026":"Gundam Aerial Rebuild","GD05-027":"Jegan","GD05-028":"Kayra's Jegan","GD05-029":"Kayra's Re-GZ","GD05-030":"Michaelis","GD05-031":"Guel's Dilanza","GD05-032":"Desultor","GD05-033":"Master Gundam","GD05-034":"Gaia Gundam","GD05-035":"Dragon Gundam","GD05-036":"Haow Gundam","GD05-037":"Destroy Gundam","GD05-038":"Gundam Throne Eins (GN High Mega Launcher)","GD05-039":"Chaos Gundam","GD05-040":"Abyss Gundam","GD05-041":"Gaia Gundam (MA Mode)","GD05-042":"Shining Gundam","GD05-043":"Neros Gundam","GD05-044":"Gundam Rose","GD05-045":"Chaos Gundam (MA Mode)","GD05-046":"Abyss Gundam (MA Mode)","GD05-047":"Exass","GD05-048":"Gundam Kyrios (Flight Mode)","GD05-049":"Sazabi","GD05-050":"Gundam Exia Repair","GD05-051":"Gundam Barbatos Lupus Rex","GD05-052":"Sazabi","GD05-053":"Quess's Jagd Doga","GD05-054":"Alpha Azieru","GD05-055":"Destiny Gundam","GD05-056":"Rezin's Geara Doga","GD05-057":"Gyunei's Jagd Doga","GD05-058":"Shiden Custom (Ryusei-Go)","GD05-059":"Gundam Barbatos Lupus","GD05-060":"Gundam Flauros (Ryusei-Go)","GD05-061":"Geara Doga","GD05-062":"Hobby Hizack","GD05-063":"Gyunei's Jagd Doga","GD05-064":"Force Impulse Gundam","GD05-065":"Landman Rodi","GD05-066":"Shining Gundam","GD05-067":"Wing Gundam Zero (EW)","GD05-068":"Shining Gundam (Super Mode)","GD05-069":"Gundam Maxter","GD05-070":"Tallgeese Ⅲ","GD05-071":"Gundam Sandrock Custom (EW)","GD05-072":"Rising Gundam","GD05-073":"Altron Gundam (EW)","GD05-074":"Noin's Taurus","GD05-075":"Royal Gundam","GD05-076":"Bolt Gundam","GD05-077":"Leo","GD05-078":"Gundam Deathscythe Hell (EW)","GD05-079":"Gundam Heavyarms Custom (EW)","GD05-080":"Gavane's Borjarnon","GD05-081":"Kira Yamato","GD05-082":"Andrew Waldfeld","GD05-083":"Cagalli Yula Athha","GD05-084":"Odelo Henrik","GD05-085":"Amuro Ray","GD05-086":"Kayra Su","GD05-087":"Lauda Neill","GD05-088":"Prospera Mercury","GD05-089":"Master Asia","GD05-090":"Stellar Loussier","GD05-091":"Sting Oakley","GD05-092":"Auel Neider","GD05-093":"Char Aznable","GD05-094":"Quess Paraya","GD05-095":"Gyunei Guss","GD05-096":"Chad Chadan","GD05-097":"Domon Kasshu","GD05-098":"Heero Yuy","GD05-099":"Trowa Barton","GD05-100":"Quatre Raberba Winner","GD05-101":"Gavane Goonny","GD05-102":"Wings of Light","GD05-103":"Not with Scattershot!","GD05-104":"At the Risk of One's Life","GD05-105":"Exclusively Defense-Oriented Policy","GD05-106":"Mutual Attraction","GD05-107":"Interwoven Blessings","GD05-108":"Overcoming Hardships","GD05-109":"Felsi's Plea","GD05-110":"Darkness Finger","GD05-111":"Airframe Seizure","GD05-112":"Hoka Kyoten Juzetsujin","GD05-113":"Rose Screamer","GD05-114":"Widespread Annihilation","GD05-115":"Newtype Labs Director","GD05-116":"Veteran's Pride","GD05-117":"Become a Shield","GD05-118":"Incendiary Spark","GD05-119":"A Wind Against Fires","GD05-120":"Shining Finger","GD05-121":"Cyclone Punch","GD05-122":"Graviton Hammer","GD05-123":"Archangel","GD05-124":"White Ark","GD05-125":"Ra Cailum","GD05-126":"Quiet Zero","GD05-127":"Girty Lue","GD05-128":"Gundam Fight","GD05-129":"Axis","GD05-130":"Presidential Office","R-002":"Resource","R-003":"Resource","R-004":"Resource","R-005":"Resource","R-006":"Resource","R-007":"Resource","R-008":"Resource","R-009":"Resource","R-010":"Resource","R-011":"Resource","R-012":"Resource","R-013":"Resource","R-014":"Resource","R-015":"Resource","R-016":"Resource","R-017":"Resource","R-018":"Resource","R-019":"Resource","R-020":"Resource","R-021":"Resource","R-022":"Resource","R-023":"Resource","R-024":"Resource","R-025":"Resource","R-026":"Resource","R-027":"Resource","R-028":"Resource","R-029":"Resource","R-030":"Resource","R-031":"Resource","R-032":"Resource","R-033":"Resource","R-034":"Resource","R-035":"Resource","R-036":"Resource","R-037":"Resource","R-038":"Resource","R-039":"Resource","R-040":"Resource","R-041":"Resource","RP-001":"Resource","RP-002":"Resource","RP-003":"Resource","RP-004":"Resource","RP-005":"Resource","RP-006":"Resource","RP-007":"Resource","RP-008":"Resource","RP-009":"Resource","RP-010":"Resource","RP-011":"Resource","RP-012":"Resource","RP-013":"Resource","RP-014":"Resource","RP-015":"Resource","RP-016":"Resource","RP-017":"Resource","RP-018":"Resource","RP-019":"Resource","RP-020":"Resource","RP-021":"Resource","RP-022":"Resource","RP-023":"Resource","RP-024":"Resource","RP-025":"Resource","RP-026":"Resource","RP-027":"Resource","RP-028":"Resource","RP-029":"Resource","RP-030":"Resource","RP-031":"Resource","RP-032":"Resource","RP-033":"Resource","RP-034":"Resource","RP-035":"Resource","RP-036":"Resource","RP-037":"Resource","RP-038":"Resource","RP-039":"Resource","RP-040":"Resource","RP-041":"Resource","RP-042":"Resource","RP-043":"Resource","RP-044":"Resource","RP-045":"Resource","RP-046":"Resource","RP-047":"Resource","RP-048":"Resource","RP-049":"Resource","RP-050":"Resource","RP-051":"Resource","RP-052":"Resource","RP-053":"Resource","RP-054":"Resource","RP-055":"Resource","RP-056":"Resource","RP-057":"Resource","RP-058":"Resource","RP-059":"Resource","RP-060":"Resource","RP-061":"Resource","RP-062":"Resource","RP-063":"Resource","RP-064":"Resource","RP-065":"Resource","RP-067":"Resource","RP-068":"Resource","ST01-001":"Gundam","ST01-002":"Gundam (MA Form)","ST01-003":"Guncannon","ST01-004":"Guntank","ST01-005":"GM","ST01-006":"Gundam Aerial (Permet Score Six)","ST01-007":"Gundam Aerial (Bit on Form)","ST01-008":"Demi Trainer","ST01-009":"Zowort","ST01-010":"Amuro Ray","ST01-011":"Suletta Mercury","ST01-012":"Thoroughly Damaged","ST01-013":"Kai's Resolve","ST01-014":"Unforeseen Incident","ST01-015":"White Base","ST01-016":"Asticassia School of Technology, Earth House","ST02-001":"Wing Gundam","ST02-002":"Wing Gundam (Bird Mode)","ST02-003":"Gundam Heavyarms","ST02-004":"Gundam Sandrock","ST02-005":"Maganac","ST02-006":"Tallgeese","ST02-007":"Leo","ST02-008":"Aries","ST02-009":"Tragos","ST02-010":"Heero Yuy","ST02-011":"Zechs Merquise","ST02-012":"Simultaneous Fire","ST02-013":"Peaceful Timbre","ST02-014":"Siege Ploy","ST02-015":"Saint Gabriel Institute","ST02-016":"Corsica Base","ST03-001":"Sinanju","ST03-002":"Angelo's Geara Zulu","ST03-003":"Geara Zulu","ST03-004":"Gaza D (Sleeves)","ST03-005":"Dra-C (Sleeves)","ST03-006":"Char's Zaku Ⅱ","ST03-007":"Zaku Ⅰ","ST03-008":"Zaku Ⅱ","ST03-009":"Gouf","ST03-010":"Full Frontal","ST03-011":"Char Aznable","ST03-012":"Indignation","ST03-013":"Close Combat","ST03-014":"The Blue Giant","ST03-015":"Rewloola","ST03-016":"Falmel","ST04-001":"Aile Strike Gundam","ST04-002":"Strike Gundam","ST04-003":"Moebius Zero","ST04-004":"Moebius","ST04-005":"Strike Dagger","ST04-006":"Aegis Gundam","ST04-007":"Aegis Gundam (MA Mode)","ST04-008":"Ginn","ST04-009":"Miguel's Ginn","ST04-010":"Kira Yamato","ST04-011":"Athrun Zala","ST04-012":"Striker Pack","ST04-013":"Hawk of Endymion","ST04-014":"The Magic Bullet of Dusk","ST04-015":"Archangel","ST04-016":"Vesalius","ST05-001":"Gundam Barbatos 4th Form","ST05-002":"Gundam Barbatos 2nd Form","ST05-003":"CGS Mobile Worker","ST05-004":"Graze Custom","ST05-005":"Gundam Gusion Rebake","ST05-006":"Hyakuren","ST05-007":"McGillis' Schwalbe Graze","ST05-008":"Graze Commander Type","ST05-009":"Graze","ST05-010":"Mikazuki Augus","ST05-011":"Akihiro Altland","ST05-012":"McGillis Fareed","ST05-013":"With Iron and Blood","ST05-014":"Fatal Strike","ST05-015":"Isaribi","ST06-001":"GQuuuuuuX (Omega Psycommu)","ST06-002":"GQuuuuuuX (Omega Psycommu)","ST06-003":"Gaia's Rick Dom (GQ)","ST06-004":"Gelgoog (GQ)","ST06-005":"Red Gundam","ST06-006":"Red Gundam","ST06-007":"Ortega's Rick Dom (GQ)","ST06-008":"Sugai's Gelgoog (GQ)","ST06-009":"Amate Yuzuriha (Machu)","ST06-010":"Shuji Itō","ST06-011":"Ruthless Tactics","ST06-012":"Schoolgirl and Smuggler","ST06-013":"Fierce Unity","ST06-014":"Clan Battle","ST06-015":"Kaneban Co., Ltd.","ST07-001":"Gundam Exia","ST07-002":"Gundam Exia","ST07-003":"Gundam Virtue","ST07-004":"Gundam Virtue","ST07-005":"Gundam Dynames","ST07-006":"Gundam Dynames","ST07-007":"Gundam Kyrios","ST07-008":"Gundam Kyrios (Flight Mode)","ST07-009":"Setsuna F. Seiei","ST07-010":"Tieria Erde","ST07-011":"Lockon Stratos (Neil)","ST07-012":"Allelujah Haptism","ST07-013":"Armed Intervention","ST07-014":"Tactical Visionary","ST07-015":"Ptolemaios","ST08-001":"Ξ Gundam","ST08-002":"Ξ Gundam","ST08-003":"Messer (Type-F Naked) (Commander Type)","ST08-004":"Messer Type-F01","ST08-005":"Messer Type-F02 Minelayer","ST08-006":"Penelope","ST08-007":"Penelope","ST08-008":"Gustav Karl Type-00","ST08-009":"Jegan Ground Type-A (Man Hunter)","ST08-010":"Hathaway Noa","ST08-011":"Lane Aim","ST08-012":"Words for Hathaway","ST08-013":"Lady Luck","ST08-014":"Valiant","ST08-015":"Davao","ST09-001":"Impulse Gundam","ST09-002":"Force Impulse Gundam","ST09-003":"Saviour Gundam","ST09-004":"Freedom Gundam","ST09-005":"Zaku Warrior","ST09-006":"Sword Impulse Gundam","ST09-007":"Blast Impulse Gundam","ST09-008":"Shinn Asuka","ST09-009":"Giant Killing","ST09-010":"Minerva","ST10-001":"Zeta Gundam (EX)","ST10-002":"Zeta Gundam","ST10-003":"Gundam Mk-II (AEUG)","ST10-004":"Super Gundam","ST10-005":"Nemo","ST10-006":"Phoenix Gundam (Power Unleashed) (EX)","ST10-007":"Gundam Barbatos 4th Form","ST10-008":"Gundam Barbatos 1st Form","ST10-009":"Graze Duel Type","ST10-010":"Mobile Worker (Tekkadan)","ST10-011":"Kamille Bidan","ST10-012":"Mark Guilder","ST10-013":"Tactical Training","ST10-014":"Unlocking the Development Diagram","ST10-015":"Diffuse Beam Cannon","ST10-016":"Luna Mana & Carry Base","ST11-001":"Char's Z'Gok","ST11-002":"Acguy","ST11-003":"Zock","ST11-004":"ZnO","ST11-005":"Ash","ST11-006":"Shamblo","ST11-007":"Gundam Leopard","ST11-008":"Daughseat","ST11-009":"Kapool","ST11-010":"Abyss Gundam","ST11-011":"Char Aznable","ST11-012":"Loni Garvey","ST11-013":"Poorly Planned Offensive","ST11-014":"The Orca of Red Sea","ST11-015":"A Twinkle from the Abyss","ST11-016":"Mad Angler","ST12-001":"Gundam Epyon","ST12-002":"Shining Gundam","ST12-003":"Tallgeese Ⅲ","ST12-004":"Gundam Exia","ST12-005":"GQuuuuuuX (Omega Psycommu)","ST12-006":"Unicorn Gundam 02 Banshee (Destroy Mode)","ST12-007":"Gyan","ST12-008":"Efreet Schneid","ST12-009":"Unicorn Gundam 02 Banshee (Unicorn Mode)","ST12-010":"Slash Zaku Phantom","ST12-011":"Milliardo Peacecraft","ST12-012":"Ple-Twelve","ST12-013":"The Final Victor","ST12-014":"Wise Leader's Pride","ST12-015":"Two Unicorns","ST12-016":"Libra","ST13-001":"Qubeley","ST13-002":"Elmeth","ST13-003":"Bertigo","ST13-004":"GX-Bit","ST13-005":"GFreD","ST13-006":"Gundam Aerial","ST13-007":"Gyunei's Jagd Doga","ST13-008":"Gundam Throne Zwei","ST13-009":"Gundam Pharact","ST13-010":"Red Gundam (0079)","ST13-011":"Haman Karn","ST13-012":"Suletta Mercury","ST13-013":"I'm a Newtype","ST13-014":"Final Duty","ST13-015":"Operation to Intercept Solomon","ST13-016":"Sodon","ST14-001":"The-O","ST14-002":"Gundam NT-1 Full Armor","ST14-003":"Palace Athene","ST14-004":"Geara Doga (Heavy Armed Type)","ST14-005":"G-Falcon DX","ST14-006":"Full Armor Unicorn Gundam (Destroy Mode)","ST14-007":"Full Armor Unicorn Gundam (Unicorn Mode)","ST14-008":"Gundam Heavyarms Custom (EW)","ST14-009":"Duel Gundam (Assault Shroud)","ST14-010":"Perfect Strike Gundam","ST14-011":"Paptimus Scirocco","ST14-012":"Banagher Links","ST14-013":"Natural Talent","ST14-014":"Blazing Mobile Suit Rider","ST14-015":"Battlefield Emotions","ST14-016":"Gryphios 2","T-001":"Gundam","T-002":"Guncannon","T-003":"Guntank","T-004":"Leo","T-005":"Tallgeese","T-006":"Char's Zaku Ⅱ","T-007":"Zaku Ⅱ","T-008":"Aile Strike Gundam","T-009":"Launcher Strike Gundam","T-010":"Sword Strike Gundam","T-011":"Fatum-00","T-012":"Daughtress","T-013":"Hy-Gogg","T-014":"Ad Balloon","T-015":"CGS Mobile Worker","T-016":"Graze Custom","T-017":"Gundam Barbatos 4th Form","T-018":"Red Gundam","T-019":"GQuuuuuuX (Omega Psycommu)","T-020":"GFreD","T-021":"Parts","T-022":"Wire-Guided Arm","T-023":"Zeong (Head)","T-024":"Alvaaron","T-025":"Gundam Exia","T-026":"Gundnode","T-027":"Pluma","T-028":"GOOhN","T-029":"Bit / Funnel"}</script>
+  <!-- EN-CARD-NAMES:END -->
+  <script src="../shared/ntc-rank-consolidator.js?v=3"></script>
+  <script src="../js/i18n-en.js"></script>
+  <script src="../js/common.js?v=16"></script>
+  <script>
+    // 指示書148: 英語ページ。古い js/common.js(英語ページを知らない版)がキャッシュに残っていても ../ を基準にする
+    if (GCG.getBasePath() !== '../') GCG.getBasePath = function () { return '../'; };
+    GCG.init();
+    var EN = window.GCG_I18N_EN;   // js/i18n-en.js(画面の文字列はここから引く)
+    var T = EN.META;
+    var cardNamesEn = {};
+    try { cardNamesEn = JSON.parse(document.getElementById('gcg-card-names-en').textContent || '{}'); } catch (e) { cardNamesEn = {}; }
+
+    // ============================================================
+    // 2026-08-06 指示書67: 環境分析 × イベント一覧の一体化
+    //
+    // 【データの取り方】
+    //   初期表示は data/events_index.json(軽量索引) と data/meta_stats.json(事前集計) だけで描く。
+    //   data/events.json(14.5MB) は「デッキの中身が要る操作」に入ったときだけ遅延ロードする:
+    //     - 既定条件から外れた状態でカード採用率を見るとき
+    //     - 店舗名/プレイヤー名検索を使うとき(索引に選手名を入れていないため。裁定②)
+    //
+    // 【type_key(デッキタイプ識別子)】
+    //   発行元裁定①により、サイト全体で「上位2色・GCG.DECK_COLOR_ORDER 順」を正とする。
+    //   以前は meta.html だけ辞書順で、index.html からの ?type= が
+    //   Red+Purple / White+Purple / Red+Green の3タイプで着地しなかった。
+    //   受け取り側は normalizeTypeKey() で旧並びの URL も拾う(後方互換)。
+    //
+    // 【common.js の ?v= は据え置き(鉄則)】(例外: 2026-09-30 指示書127 R2 で meta.html・store.html の 2 行だけ v=16 に上げた。他ページは据え置き)
+    //   そのため common.js に足した新関数は「あれば使う / 無ければローカル実装」で必ず受ける。
+    // ============================================================
+
+    // ---- common.js 未更新キャッシュへの備え(既存の防御パターン踏襲) ----
+    var DECK_COLOR_ORDER = (GCG.DECK_COLOR_ORDER && GCG.DECK_COLOR_ORDER.length)
+      ? GCG.DECK_COLOR_ORDER : ['Blue', 'Red', 'Green', 'White', 'Purple'];
+    var REGION_ORDER = (GCG.REGION_ORDER && GCG.REGION_ORDER.length)
+      ? GCG.REGION_ORDER : ['北海道', '東北', '関東', '中部', '関西', '中国', '四国', '九州', 'その他'];
+
+    function sortDeckColors(colors) {
+      if (GCG.sortDeckColors) return GCG.sortDeckColors(colors);
+      return (colors || []).slice().sort(function (a, b) {
+        var ia = DECK_COLOR_ORDER.indexOf(a), ib = DECK_COLOR_ORDER.indexOf(b);
+        if (ia < 0) ia = DECK_COLOR_ORDER.length;
+        if (ib < 0) ib = DECK_COLOR_ORDER.length;
+        return ia - ib;
+      });
+    }
+    // 区切りに空白も許す(重要):
+    //   index.html は `meta.html?type=Blue+Purple` のように **+ を生のまま** 出す。
+    //   クエリ文字列の `+` は URLSearchParams が半角スペースへデコードするため、
+    //   受け側には 'Blue Purple' として届く。'+' しか見ないと2色タイプが1つも着地しない。
+    //   古い common.js がキャッシュされている場合は GCG 側が旧実装(+のみ)になり得るので、
+    //   URL 由来の値はここで先に空白を + へ寄せてから渡す。
+    function normalizeTypeKey(key) {
+      if (!key) return '';
+      var k = String(key).trim().replace(/\s+/g, '+');
+      if (GCG.normalizeTypeKey) return GCG.normalizeTypeKey(k);
+      return sortDeckColors(k.split(/[+\s]+/).filter(Boolean)).join('+');
+    }
+    function regionRank(name) {
+      if (GCG.regionRank) return GCG.regionRank(name);
+      var i = REGION_ORDER.indexOf(name);
+      return i < 0 ? REGION_ORDER.length : i;
+    }
+    function sortRegionNames(names) {
+      if (GCG.sortRegions) return GCG.sortRegions(names);
+      return (names || []).slice().sort(function (a, b) {
+        var d = regionRank(a) - regionRank(b);
+        return d !== 0 ? d : String(a).localeCompare(String(b));
+      });
+    }
+    async function loadEventsIndex() {
+      if (GCG.loadEventsIndex) return GCG.loadEventsIndex();
+      try {
+        var res = await fetch(GCG.getBasePath() + 'data/events_index.json');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return await res.json();
+      } catch (e) {
+        console.error('events_index.json の読み込みに失敗:', e);
+        return null;
+      }
+    }
+
+    // ---- 状態 ----
+    const ITEMS_PER_PAGE = 30;
+    let currentFilter = 'top4';   // 'win' | 'top4' | 'all'
+    let currentRegion = null;     // null = 全地域
+    let currentDateStart = '';
+    let currentDateEnd = '';
+    let currentSeriesId = '';
+    let selectedType = null;      // カード採用率タブの選択(従来どおり必ず1つ選ばれる)
+    let filterType = null;        // イベント一覧の絞り込み(未選択なら null)
+    let currentPage = 1;
+    let searchText = '';
+
+    let indexData = null;         // events_index.json
+    let metaStats = null;         // meta_stats.json
+    let allSeriesMap = {};
+    let cardNames = {};
+    let deckTypes = [];           // 現在の条件で集計したデッキタイプ一覧
+    let filteredEvents = [];      // 現在の条件を通ったイベント(索引の形)
+    let pieChart = null;
+
+    // 遅延ロード分
+    let eventsDataGlobal = null;  // events.json
+    let cardColors = null;        // card_colors.json
+    let heavyPromise = null;      // 多重取得の防止
+
+    // ============================================================
+    // 遅延ロード
+    // ============================================================
+    // events.json を1回だけ取りに行く。
+    // GCG.loadEvents() は失敗しても reject せず {series:{},events:{}} を返すので、
+    // 「取れたが空」を失敗として扱い、メモ化を解除して次の操作でやり直せるようにする
+    // (1回の通信失敗でセッション中ずっと検索とカード採用率が死ぬのを避ける)。
+    function ensureHeavyData() {
+      if (heavyPromise) return heavyPromise;
+      heavyPromise = (async function () {
+        const ev = await GCG.loadEvents();
+        const ok = !!(ev && ev.events && Object.keys(ev.events).length);
+        if (!ok) {
+          GCG._eventsData = null;   // common.js 側のキャッシュも捨てて再取得できるようにする
+          heavyPromise = null;
+          throw new Error('events.json を取得できませんでした');
+        }
+        eventsDataGlobal = ev;
+        return true;
+      })();
+      return heavyPromise;
+    }
+
+    // 索引が使えないときだけ必要になる(通常経路では取得しない)
+    async function ensureCardColors() {
+      if (cardColors) return cardColors;
+      try {
+        const r = await fetch(GCG.getBasePath() + 'data/card_colors.json');
+        cardColors = r.ok ? await r.json() : {};
+      } catch (_) { cardColors = {}; }
+      return cardColors;
+    }
+
+    function getCardColor(cardId) {
+      return (cardColors && cardColors[cardId]) || 'Unknown';
+    }
+
+    // デッキ(カード配列)→ 上位2色。索引生成側 deckTypeColorsOf() と同一規則。
+    function detectDeckColors(deck) {
+      if (GCG.deckTypeColors) return GCG.deckTypeColors(deck, getCardColor);
+      const counts = {};
+      for (const card of deck) {
+        const col = getCardColor(card.card_id);
+        if (!col || col === 'Unknown' || col === 'Colorless') continue;
+        counts[col] = (counts[col] || 0) + card.count;
+      }
+      const sorted = Object.entries(counts).sort(function (a, b) { return b[1] - a[1]; });
+      if (sorted.length >= 2) return sortDeckColors([sorted[0][0], sorted[1][0]]);
+      if (sorted.length === 1) return [sorted[0][0]];
+      return ['Unknown'];
+    }
+
+    function colorsOfTypeKey(typeKey) {
+      return String(typeKey || '').split('+').filter(Boolean);
+    }
+    function labelOfTypeKey(typeKey) {
+      return colorsOfTypeKey(typeKey)
+        .map(function (c) { return EN.colorName(GCG.DECK_COLORS[c] ? c : 'Unknown'); })   // 日本語ページと同じく、5 色以外(Colorless 等)は Unknown(二次確認 L-6)
+        .join('/');
+    }
+
+    // ============================================================
+    // シリーズ(既存ロジックをそのまま継承)
+    // ============================================================
+    function countEventsBySeries() {
+      var c = {};
+      ((indexData && indexData.events) || []).forEach(function (ev) {
+        var sid = String(ev.s || '');
+        if (sid) c[sid] = (c[sid] || 0) + 1;
+      });
+      return c;
+    }
+
+    // ---- 同名シリーズのまとめ表示(2026-08-03 松岡さん指示「重複分は1つにまとめる」) ----
+    // 公式のNTCは同じ名前で月ごとに別シリーズとして登録されている。
+    //   例: 「NTC MISSION3」= 5月開催(id 6776) + 6月開催(id 6791)
+    // タブが同じ名前で2つ並ぶと選び分けられないため、表示上は1つのタブにまとめて
+    // 両方の結果をあわせて集計する。データ・URL・シリーズページ(SEO)は変更しない。
+    function seriesGroupKey(s) {
+      return String((s && (s.short_name || s.display_name || s.id)) || '');
+    }
+    function seriesGroupIds(sid) {
+      if (!sid) return [];
+      var map = allSeriesMap || {};
+      var self = map[sid];
+      if (!self) return [String(sid)];
+      var key = seriesGroupKey(self);
+      var counts = countEventsBySeries();
+      var ids = Object.keys(map).filter(function (id) {
+        return seriesGroupKey(map[id]) === key &&
+          ((counts[String(id)] || 0) > 0 || String(id) === String(sid));
+      }).map(String);
+      if (ids.indexOf(String(sid)) < 0) ids.push(String(sid));
+      return ids;
+    }
+
+    function getSeriesRangeById(sid) {
+      if (!sid) return { start: '', end: '' };
+      var self = allSeriesMap[sid];
+      if (!self) return { start: '', end: '' };
+      // シーズン(同じ short_name の開催月すべて)の期間を返す(2026-09-01)。
+      // 結果0件の開催月も範囲に含める。含めないと、この画面の既定レンジが
+      // data/meta_stats.json の default_range(シーズン範囲)と食い違い、
+      // canUseMetaStats() が false になって events.json(17MB)を毎回読み込んでしまう。
+      // 集計対象イベントの絞り込みは従来どおり seriesGroupIds()(0件の月を除外)で行う。
+      if (GCG.getSeasonDateRange) return GCG.getSeasonDateRange(allSeriesMap, self);
+      var key = seriesGroupKey(self);
+      var ids = Object.keys(allSeriesMap).filter(function (id) {
+        return seriesGroupKey(allSeriesMap[id]) === key;
+      });
+      if (ids.indexOf(String(sid)) < 0) ids.push(String(sid));
+      var start = '', end = '';
+      // 期間が未設定のシリーズがまとめ対象に含まれる場合は、その側を「制限なし」にする。
+      var noStart = false, noEnd = false;
+      ids.forEach(function (id) {
+        var s = allSeriesMap[id];
+        if (!s) return;
+        if (s.start_date) { if (!start || s.start_date < start) start = s.start_date; } else { noStart = true; }
+        if (s.end_date) { if (!end || s.end_date > end) end = s.end_date; } else { noEnd = true; }
+      });
+      return { start: noStart ? '' : start, end: noEnd ? '' : end };
+    }
+
+    function pickDefaultSeries() {
+      var list = Object.values(allSeriesMap || {});
+      if (!list.length) return '';
+      // 指示書100: js/common.js の preferNtc と同一ロジック。既定は従来どおり NTC に固定する。
+      // (この関数は common.js が古いキャッシュのときの劣化フォールバック経路)
+      var preferNtc = function (arr) {
+        var n = arr.filter(function (s) { return s && s.type === 'ntc'; });
+        var o = arr.filter(function (s) { return !(s && s.type === 'ntc'); });
+        return n.concat(o);
+      };
+      var active = preferNtc(list.filter(function (s) { return s.status === 'active'; })
+        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); }));
+      if (active.length) return active[0].id;
+      var upcoming = preferNtc(list.filter(function (s) { return s.status === 'upcoming'; })
+        .sort(function (a, b) { return (a.start_date || '').localeCompare(b.start_date || ''); }));
+      if (upcoming.length) return upcoming[0].id;
+      var completed = preferNtc(list.filter(function (s) { return s.status === 'completed'; })
+        .sort(function (a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); }));
+      if (completed.length) return completed[0].id;
+      return '';
+    }
+
+    function renderSeriesSelector() {
+      var el = document.getElementById('series-selector-area');
+      if (!el) return;
+      // 結果が1件も無いシリーズはタブに出さない(2026-08-03 松岡さん指示)。
+      var counts = countEventsBySeries();
+      var list = Object.values(allSeriesMap || {})
+        .filter(function (s) { return (counts[String(s.id)] || 0) > 0 || String(s.id) === String(currentSeriesId); })
+        .sort(function (a, b) { return (b.start_date || '').localeCompare(a.start_date || ''); });
+      if (!list.length) { el.innerHTML = ''; return; }
+      var groupIndex = Object.create(null);
+      var groups = [];
+      list.forEach(function (s) {
+        var key = seriesGroupKey(s);
+        if (groupIndex[key] !== undefined) { groups[groupIndex[key]].ids.push(String(s.id)); return; }
+        groupIndex[key] = groups.length;
+        groups.push({ rep: s, ids: [String(s.id)] });
+      });
+      var tabs = [];
+      tabs.push('<button type="button" class="series-tab' + (currentSeriesId === '' ? ' is-active' : '') + '" data-sid="">' + GCG.escapeHtml(T.allSeries) + '</button>');
+      groups.forEach(function (g) {
+        var isActive = g.ids.indexOf(String(currentSeriesId)) >= 0;
+        var label = GCG.escapeHtml(EN.seriesLabel(g.rep));
+        tabs.push('<button type="button" class="series-tab' + (isActive ? ' is-active' : '') + '" data-sid="' + GCG.escapeHtml(g.rep.id) + '">' + label + '</button>');
+      });
+      el.innerHTML = tabs.join('');
+      el.querySelectorAll('.series-tab').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          currentSeriesId = btn.getAttribute('data-sid') || '';
+          el.querySelectorAll('.series-tab').forEach(function (b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          // シリーズ切替時: 期間を新シリーズの start_date/end_date に自動更新
+          var r = getSeriesRangeById(currentSeriesId);
+          var dsEl = document.getElementById('date-start');
+          var deEl = document.getElementById('date-end');
+          if (dsEl) dsEl.value = r.start || '';
+          if (deEl) deEl.value = r.end || '';
+          currentDateStart = r.start || '';
+          currentDateEnd = r.end || '';
+          renderWithFilter();
+          syncUrl();
+        });
+      });
+    }
+
+    // ============================================================
+    // NTC64(64名定員)の順位変換
+    //   索引は「変換前の rank」と「results 総数(c)」を持つ。
+    //   events.json 経路と同じ規則をここで再現する(rank→ceil(rank/2), 集計上限 TOP4)。※指示書70で TOP8 拡張を撤回
+    // ============================================================
+    function isNtc64(ev) {
+      if (!ev || (ev.c || 0) < 16) return false;
+      var sid = String(ev.s || '');
+      var s = allSeriesMap[sid];
+      // 指示書100-裁定R1: 畳み込み対象を series.json の rank_consolidation で宣言できるようにする。
+      // **shared/ntc-rank-consolidator.js の makeIsNtcTypeFromSeriesMap() と規則を揃えること**
+      // (揃えないと「デッキタイプ表は閾値4 / カード採用率は閾値8」の食い違いが起きる)。
+      var rc = s && s.rank_consolidation;
+      if (rc === 'best8_x2') return true;
+      if (rc !== 'none' && s && s.type === 'ntc') return true;
+      // series.json が取れなかった場合の保険。
+      // shared/ntc-rank-consolidator.js の NTC_SERIES_IDS と同じ役割で、
+      // 同ファイルの isTargetEvent() 側にもこの保険があるため、判定を揃えておく
+      // (揃えないと「デッキタイプ表は閾値4 / カード採用率は閾値8」の食い違いが起きる)。
+      var ids = (window.NtcRankConsolidator && window.NtcRankConsolidator.NTC_SERIES_IDS) || [];
+      return ids.indexOf(sid) >= 0;
+    }
+
+    // 索引1件を、順位フィルタに通る [{pos, rank, type_key}] へ変換して返す。
+    // pos は「デッキを持つ結果」を results の並び順で数えた位置。
+    // events.json 側を同じ規則で走査すれば位置で対応づけられる
+    // (rank は同一イベント内で重複しうるのでキーに使えない)。
+    function passingResults(ev, filter) {
+      var ntc = isNtc64(ev);
+      // 指示書70(2026-08-12): TOP4→TOP8 拡張(質問A / 追加確認1:B案 / 質問B:1)は撤回。NTC64 も変換後 rank<=4(公式1〜8位=各セット4位まで)に統一
+      var threshold = 4;
+      var out = [];
+      for (var i = 0; i < (ev.r || []).length; i++) {
+        var rank = ev.r[i][0];
+        var key = ev.r[i][1];
+        if (ntc) rank = Math.ceil(rank / 2);
+        if (filter === 'win' && rank !== 1) continue;
+        if (filter === 'top4' && rank > threshold) continue;
+        out.push({ pos: i, rank: rank, type_key: key });
+      }
+      return out;
+    }
+
+    // イベント一覧の色ドット表示用(現行 events.html と同じ = 元rank<=4 を results 順で)
+    function displayTop4(ev) {
+      var ntc = isNtc64(ev);
+      var out = [];
+      for (var i = 0; i < (ev.r || []).length; i++) {
+        var rank = ev.r[i][0];
+        if (rank > 4) continue;
+        out.push({ rank: ntc ? Math.ceil(rank / 2) : rank, colors: colorsOfTypeKey(ev.r[i][1]) });
+      }
+      return out;
+    }
+
+    // ============================================================
+    // 絞り込み・集計（すべて索引だけで行う）
+    // ============================================================
+    function eventPassesBaseFilters(ev) {
+      if (currentDateStart && (!ev.d || ev.d < currentDateStart)) return false;
+      if (currentDateEnd && (!ev.d || ev.d > currentDateEnd)) return false;
+      if (currentSeriesId) {
+        var ids = seriesGroupIds(currentSeriesId);
+        if (ids.indexOf(String(ev.s || '')) < 0) return false;
+      }
+      if (currentRegion && ev.g !== currentRegion) return false;
+      return true;
+    }
+
+    // 「そのデッキタイプの入賞デッキを含む」= 順位フィルタを通る結果に type_key が1件以上ある
+    function eventHasType(ev, typeKey, filter) {
+      if (!typeKey) return true;
+      var rs = passingResults(ev, filter);
+      for (var i = 0; i < rs.length; i++) if (rs[i].type_key === typeKey) return true;
+      return false;
+    }
+
+    function computeDeckTypeRankingFromIndex(events, filter) {
+      const typeMap = {};
+      let totalDecks = 0;
+      for (const ev of events) {
+        const rs = passingResults(ev, filter);
+        for (const r of rs) {
+          totalDecks++;
+          if (!typeMap[r.type_key]) {
+            typeMap[r.type_key] = {
+              type_key: r.type_key,
+              colors: colorsOfTypeKey(r.type_key),
+              label: labelOfTypeKey(r.type_key),
+              count: 0, wins: 0, totalRank: 0
+            };
+          }
+          const t = typeMap[r.type_key];
+          t.count++;
+          t.totalRank += r.rank;
+          if (r.rank === 1) t.wins++;
+        }
+      }
+      const ranking = Object.values(typeMap).map(function (t) {
+        return {
+          type_key: t.type_key,
+          colors: t.colors,
+          label: t.label,
+          count: t.count,
+          share: totalDecks > 0 ? Math.round(t.count / totalDecks * 1000) / 10 : 0,
+          wins: t.wins,
+          win_rate: t.count > 0 ? Math.round(t.wins / t.count * 1000) / 10 : 0,
+          avg_rank: t.count > 0 ? Math.round(t.totalRank / t.count * 10) / 10 : 0
+        };
+      }).sort(function (a, b) { return b.count - a.count || a.type_key.localeCompare(b.type_key); });
+      return { ranking: ranking, totalDecks: totalDecks };
+    }
+
+    function computeRegionRankingFromIndex(events, filter) {
+      const regionMap = {};
+      for (const ev of events) {
+        const region = ev.g;
+        if (!region) continue;
+        if (!regionMap[region]) regionMap[region] = { region: region, eventIds: {}, typeMap: {}, decks: 0 };
+        const rs = passingResults(ev, filter);
+        if (rs.length) regionMap[region].eventIds[ev.i] = 1;
+        for (const r of rs) {
+          regionMap[region].decks++;
+          if (!regionMap[region].typeMap[r.type_key]) {
+            regionMap[region].typeMap[r.type_key] = {
+              type_key: r.type_key, colors: colorsOfTypeKey(r.type_key),
+              label: labelOfTypeKey(r.type_key), count: 0, wins: 0
+            };
+          }
+          regionMap[region].typeMap[r.type_key].count++;
+          if (r.rank === 1) regionMap[region].typeMap[r.type_key].wins++;
+        }
+      }
+      return Object.values(regionMap).map(function (r) {
+        return {
+          region: r.region,
+          events: Object.keys(r.eventIds).length,
+          decks: r.decks,
+          top_deck_types: Object.values(r.typeMap)
+            .sort(function (a, b) { return b.count - a.count || a.type_key.localeCompare(b.type_key); })
+            .slice(0, 5)
+        };
+      }).filter(function (r) { return r.decks > 0; })
+        // 2026-08-06 指示書67: 件数降順ではなく北順
+        .sort(function (a, b) {
+          var d = regionRank(a.region) - regionRank(b.region);
+          return d !== 0 ? d : String(a.region).localeCompare(String(b.region));
+        });
+    }
+
+    // ============================================================
+    // 描画
+    // ============================================================
+    function setFilter(filter) {
+      currentFilter = filter;
+      document.querySelectorAll('.rank-filter-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.filter === filter);
+      });
+      renderWithFilter();
+      syncUrl();
+    }
+
+    function setRegion(region) {
+      currentRegion = region;
+      document.querySelectorAll('.region-filter-btn').forEach(function (btn) {
+        btn.classList.toggle('active', (btn.dataset.region || null) === (region || null));
+      });
+      renderWithFilter();
+      syncUrl();
+    }
+
+    // 地域フィルターボタン（北順・固定）
+    function buildRegionFilterButtons() {
+      const present = {};
+      for (const ev of ((indexData && indexData.events) || [])) {
+        if (ev.g) present[ev.g] = true;
+      }
+      const regions = sortRegionNames(Object.keys(present));
+      const container = document.getElementById('region-filter');
+      container.innerHTML = '<span style="font-size:12px;color:var(--text-muted);margin-right:4px">' + GCG.escapeHtml(T.regionLabel) + '</span>' +
+        '<button class="region-filter-btn active" data-region="" onclick="setRegion(null)">' + GCG.escapeHtml(T.allRegions) + '</button>' +
+        regions.map(function (r) {
+          return '<button class="region-filter-btn" data-region="' + GCG.escapeHtml(r) + '" onclick="setRegion(\'' + GCG.escapeHtml(r) + '\')">' + regionHtml(r) + '</button>';
+        }).join('');
+    }
+
+    function renderTypeChip() {
+      const bar = document.getElementById('type-chip-bar');
+      if (!filterType) {
+        bar.innerHTML = '<span class="type-chip-hint">' + GCG.escapeHtml(T.chipHint) + '</span>';
+        return;
+      }
+      bar.innerHTML = '<span class="type-chip">'
+        + EN.colorDotsHtml(colorsOfTypeKey(filterType))
+        + '<span>' + GCG.escapeHtml(EN.fill(T.chipActive, { label: labelOfTypeKey(filterType) })) + '</span>'
+        + '<button type="button" class="type-chip-clear" onclick="clearTypeFilter()" aria-label="' + GCG.escapeHtml(T.chipClearAria) + '">✕</button>'
+        + '</span>'
+        + '<span class="type-chip-hint">' + GCG.escapeHtml(T.chipNote) + '</span>';
+    }
+
+    function setTypeFilter(typeKey) {
+      filterType = normalizeTypeKey(typeKey) || null;
+      selectType(filterType);
+      renderTypeChip();
+      renderDeckTypeTable(deckTypes);
+      currentPage = 1;
+      renderEventList();
+      syncUrl();
+      jumpToEvents();
+    }
+
+    function clearTypeFilter() {
+      filterType = null;
+      renderTypeChip();
+      renderDeckTypeTable(deckTypes);
+      currentPage = 1;
+      renderEventList();
+      syncUrl();
+    }
+
+    // 指示書96: ページ内の移動。着地位置を JUMP_OFFSET に揃え、閉じている節は開いてから飛ぶ
+    var JUMP_IDS = ['decktype-section', 'deck-card-section', 'region-section', 'events'];
+    var JUMP_OFFSET = 16;
+    function jumpTargetsOffset() {
+      // 指示書96 R1: ヘッダーは現状 sticky が効いていない(親 #header の高さがヘッダーと同じ)ため固定 16px。ヘッダーを固定化する改修が入ったらここを実測値に戻す
+      var off = JUMP_OFFSET;
+      JUMP_IDS.forEach(function (id) { var el = document.getElementById(id); if (el) el.style.scrollMarginTop = off + 'px'; });
+    }
+    function jumpTo(id, place) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (el.tagName === 'DETAILS' && !el.open) el.open = true;
+      jumpTargetsOffset();
+      // URL 付きで開いた場合はブラウザが先に(CSS の保険値で)飛んでいるので、二度目は瞬時に位置を直すだけ(smooth だと「飛んでからもう一度飛ぶ」体感になる)
+      el.scrollIntoView({ behavior: place === 'hash' ? 'auto' : 'smooth', block: 'start' });
+      if (place === 'hash') {
+        // 指示書96 R1: 読み込み後に上の節が伸びて着地がずれる(既存不具合)ので、利用者が触らない限り数回だけ位置を直す
+        var cancelled = false;
+        var cancel = function () { cancelled = true; };
+        ['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(function (ev) { window.addEventListener(ev, cancel, { once: true, passive: true }); });
+        [300, 800, 1500, 2500, 4000].forEach(function (ms) {
+          setTimeout(function () {
+            if (cancelled) return;
+            var top = el.getBoundingClientRect().top;
+            if (Math.abs(top - JUMP_OFFSET) > 4) el.scrollIntoView({ behavior: 'auto', block: 'start' });
+          }, ms);
+        });
+      }
+      try { window.history.replaceState(window.history.state, '', '#' + id); } catch (e) { /* 履歴操作の失敗は無視 */ }
+      GCG.track('meta_jump', { target: id, place: place });
+    }
+
+    function jumpToEvents() {
+      var el = document.getElementById('events');
+      jumpTargetsOffset();   // 指示書96 R1: 着地位置を JUMP_OFFSET(16px) に補正
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderWithFilter() {
+      if (!indexData) return;
+
+      filteredEvents = (indexData.events || []).filter(eventPassesBaseFilters);
+
+      const res = computeDeckTypeRankingFromIndex(filteredEvents, currentFilter);
+      deckTypes = res.ranking;
+      const totalDecks = res.totalDecks;
+      const totalEvents = filteredEvents.length;
+
+      const filterLabel = currentFilter === 'win' ? T.filterWin : currentFilter === 'top4' ? T.filterTop4 : T.filterAll;
+      const regionLabel = currentRegion ? ' / ' + (EN.regionName(currentRegion) || currentRegion) : '';
+
+      document.getElementById('s-events').textContent = totalEvents.toLocaleString('en-US');
+      document.getElementById('s-decks').textContent = totalDecks.toLocaleString('en-US');
+      document.getElementById('s-decks-label').textContent =
+        currentFilter === 'win' ? T.decksLabelWin : currentFilter === 'top4' ? T.decksLabelTop4 : T.decksLabelAll;
+      document.getElementById('s-types').textContent = deckTypes.length.toLocaleString('en-US');
+      document.getElementById('meta-info').textContent =
+        EN.fill(T.metaInfo, { events: totalEvents, decks: totalDecks, filter: filterLabel, region: regionLabel });
+
+      // 絞り込み中のタイプが今の条件で消えたら解除する
+      if (filterType && !deckTypes.some(function (d) { return d.type_key === filterType; })) {
+        filterType = null;
+      }
+
+      renderDeckTypeTable(deckTypes);
+      renderPieChart(deckTypes);
+      renderTypeTabs(deckTypes);
+      renderTypeChip();
+
+      // 地域別メタ（全地域のときのみ表示）
+      const regionSection = document.getElementById('region-section');
+      if (currentRegion) {
+        regionSection.style.display = 'none';
+      } else {
+        regionSection.style.display = '';
+        renderRegionSection(computeRegionRankingFromIndex(filteredEvents, currentFilter));
+      }
+
+      // タイプ選択の維持
+      if (selectedType && deckTypes.some(function (d) { return d.type_key === selectedType; })) {
+        selectType(selectedType);
+      } else if (deckTypes.length > 0) {
+        selectType(deckTypes[0].type_key);
+      } else {
+        selectType(null);
+      }
+
+      currentPage = 1;
+      renderEventList();
+    }
+
+    function onDateFilterChange() {
+      currentDateStart = document.getElementById('date-start').value;
+      currentDateEnd = document.getElementById('date-end').value;
+      renderWithFilter();
+      syncUrl();
+    }
+
+    function renderDeckTypeTable(types) {
+      const maxShare = types[0] ? types[0].share : 100;
+      const tbody = document.getElementById('decktype-body');
+      if (!types.length) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text-muted)">' + GCG.escapeHtml(T.noData) + '</td></tr>';
+        return;
+      }
+      tbody.innerHTML = types.map(function (dt) {
+        const primaryColor = GCG.primaryColorHex(dt.colors);
+        const sel = (filterType === dt.type_key) ? ' is-selected' : '';
+        return '<tr class="decktype-row' + sel + '" style="cursor:pointer" title="' + GCG.escapeHtml(T.rowTitle) + '"'
+          + ' onclick="setTypeFilter(\'' + dt.type_key + '\')">'
+          + '<td>' + EN.colorTagsHtml(dt.colors) + '</td>'
+          + '<td class="text-mono">' + dt.count + '</td>'
+          + '<td><div class="flex items-center gap-8">'
+          + '<div class="usage-bar-container"><div class="usage-bar" style="width:' + ((dt.share / (maxShare || 1)) * 100) + '%;background:' + primaryColor + '"></div></div>'
+          + '<span class="usage-rate">' + dt.share + '%</span></div></td>'
+          + '<td class="text-mono">' + dt.wins + '</td>'
+          + '<td class="text-mono" style="color:var(--green)">' + dt.win_rate + '%</td>'
+          + '<td class="text-mono" style="color:var(--accent)">' + dt.avg_rank + '</td>'
+          + '</tr>';
+      }).join('');
+    }
+
+    function renderPieChart(types) {
+      if (pieChart) { pieChart.destroy(); pieChart = null; }
+      const top8 = types.slice(0, 8);
+      const labels = top8.map(function (d) { return d.label; });
+      const data = top8.map(function (d) { return d.count; });
+      const canvas = document.getElementById('decktype-pie');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      // 初期色（プラグインで上書きされる）
+      const bgColors = top8.map(function (d) {
+        var hexArr = d.colors.map(function (c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        return hexArr[0];
+      });
+
+      // Chart.jsプラグイン: 2色デッキはグラデーションで描画
+      const gradientPlugin = {
+        id: 'gradientColor',
+        beforeDatasetsDraw: function (chart) {
+          var cctx = chart.ctx;
+          var area = chart.chartArea;
+          if (!area) return;
+          var meta = chart.getDatasetMeta(0);
+          top8.forEach(function (d, i) {
+            var hexArr = d.colors.map(function (c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+            if (hexArr.length >= 2 && meta.data[i]) {
+              var grad = cctx.createLinearGradient(area.left, area.top, area.right, area.bottom);
+              grad.addColorStop(0, hexArr[0]);
+              grad.addColorStop(1, hexArr[1]);
+              meta.data[i].options.backgroundColor = grad;
+            }
+          });
+        }
+      };
+
+      // HTML凡例を生成（2色はグラデーション丸）
+      var legendEl = document.getElementById('decktype-legend');
+      legendEl.innerHTML = top8.map(function (d) {
+        var hexArr = d.colors.map(function (c) { return (GCG.DECK_COLORS[c] || {}).hex || '#888'; });
+        var bg = hexArr.length === 1 ? hexArr[0]
+          : 'linear-gradient(135deg, ' + hexArr[0] + ' 0%, ' + hexArr[1] + ' 100%)';
+        return '<div style="display:flex;align-items:center;gap:6px;cursor:pointer" title="' + GCG.escapeHtml(T.rowTitle) + '"'
+          + ' onclick="setTypeFilter(\'' + d.type_key + '\')">'
+          + '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>'
+          + '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
+      }).join('');
+
+      pieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [{ data, backgroundColor: bgColors, borderColor: '#0a0e14', borderWidth: 3, hoverBorderWidth: 0 }]
+        },
+        plugins: [gradientPlugin],
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '55%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: '#1e2736', titleColor: '#e8ecf2', bodyColor: '#8b95a5',
+              borderColor: '#2a3a50', borderWidth: 1, cornerRadius: 8, padding: 10,
+              callbacks: {
+                label: function (ctx) {
+                  const total = ctx.dataset.data.reduce(function (a, b) { return a + b; }, 0);
+                  const pct = total > 0 ? Math.round(ctx.raw / total * 100) : 0;
+                  return EN.fill(T.pieTooltip, { label: ctx.label, count: ctx.raw, pct: pct });
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    function renderTypeTabs(types) {
+      const container = document.getElementById('type-tabs');
+      if (!types.length) {
+        container.innerHTML = '<div style="color:var(--text-muted);font-size:12px">' + GCG.escapeHtml(T.noTypes) + '</div>';
+        return;
+      }
+      container.innerHTML = types.map(function (dt) {
+        return '<button class="type-tab" data-type="' + dt.type_key + '"'
+          + ' style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);'
+          + 'padding:8px 14px;border-radius:var(--radius);font-size:12px;font-family:var(--font-mono);'
+          + 'cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:6px"'
+          + ' onclick="selectType(\'' + dt.type_key + '\')">'
+          + EN.colorDotsHtml(dt.colors)
+          + '<span>' + dt.label + '</span>'
+          + '<span style="opacity:0.5;font-size:10px">(' + dt.count + ')</span>'
+          + '</button>';
+      }).join('');
+    }
+
+    // ============================================================
+    // カード採用率
+    //   既定条件(事前集計と同じ条件)なら meta_stats.json をそのまま使う。
+    //   それ以外は events.json を遅延ロードして従来どおり再集計する。
+    // ============================================================
+    function canUseMetaStats() {
+      if (!metaStats || !metaStats.default_range) return false;
+      if (currentFilter !== 'top4') return false;
+      if (currentRegion) return false;
+      if ((currentDateStart || '') !== (metaStats.default_range.start || '')) return false;
+      if ((currentDateEnd || '') !== (metaStats.default_range.end || '')) return false;
+      // シリーズ絞り込みで対象が減っていたら事前集計とは別物になる
+      if (filteredEvents.length !== (metaStats.totals && metaStats.totals.events)) return false;
+      // 指示書100-裁定R1: meta_stats.json は「既定シリーズのシーズン」だけを事前集計している。
+      // 件数の偶然一致で別シリーズの画面に事前集計を使ってしまわないよう、グループ名でも突合する。
+      // 比較は必ず seriesGroupKey(= short_name)で行うこと。slug で比べると、同じタブでも
+      // 代表 data-sid が 8月/9月で入れ替わるため、タブを押した人が毎回 events.json を読む回帰になる。
+      // 古い meta_stats.json(series_group 無し)では従来どおり件数一致だけで判定する(後方互換)。
+      var mg = (metaStats.default_range && metaStats.default_range.series_group) || '';
+      if (mg) {
+        var curS = currentSeriesId ? (allSeriesMap[currentSeriesId] || null) : null;
+        if (seriesGroupKey(curS) !== mg) return false;
+      }
+      return true;
+    }
+
+    // 絞り込み条件つきのカード採用率を events.json から集計する。
+    //
+    // 【デッキタイプの判定は索引の type_key をそのまま使う】
+    //   ブラウザ側で色を再計算すると、索引生成側(card_colors → cards_master → セット接頭辞)と
+    //   ブラウザ側(card_colors のみ)で引ける色が違い、card_colors.json が新弾に追いつくまでの間
+    //   デッキタイプ分布とカード採用率が食い違う。索引の値を正として使えばその不一致は起きない。
+    //   索引の r[] と events.json の「デッキを持つ結果」は同じ並び順なので、位置で対応づける。
+    function cardRankingFromEventsJson(typeKey) {
+      const cardMap = {};
+      let deckCount = 0;
+      for (const ev of filteredEvents) {
+        const raw = eventsDataGlobal && eventsDataGlobal.events && eventsDataGlobal.events[ev.i];
+        if (!raw) continue;
+        const decks = (raw.results || []).filter(function (r) { return r.deck && r.deck.length; });
+        for (const p of passingResults(ev, currentFilter)) {
+          if (p.type_key !== typeKey) continue;
+          const r = decks[p.pos];
+          if (!r) continue;
+          deckCount++;
+          const isWin = p.rank === 1;
+          for (const card of r.deck) {
+            if (!cardMap[card.card_id]) {
+              cardMap[card.card_id] = { card_id: card.card_id, decks: 0, wins: 0, counts: [], total: 0 };
+            }
+            const c = cardMap[card.card_id];
+            c.decks++;
+            if (isWin) c.wins++;
+            c.counts.push(card.count);
+            c.total += card.count;
+          }
+        }
+      }
+      const list = Object.values(cardMap).map(function (c) {
+        c.counts.sort(function (a, b) { return a - b; });
+        return {
+          card_id: c.card_id,
+          decks: c.decks,
+          usage_rate: deckCount > 0 ? Math.round(c.decks / deckCount * 1000) / 10 : 0,
+          wins: c.wins,
+          win_rate: c.decks > 0 ? Math.round(c.wins / c.decks * 1000) / 10 : 0,
+          avg_count: Math.round(c.total / c.decks * 10) / 10,
+          median_count: c.counts[Math.floor(c.counts.length / 2)],
+          max_count: c.counts[c.counts.length - 1],
+          min_count: c.counts[0]
+        };
+      }).sort(function (a, b) { return b.usage_rate - a.usage_rate || b.decks - a.decks || a.card_id.localeCompare(b.card_id); });
+      return { cards: list, deckCount: deckCount };
+    }
+
+    function selectType(typeKey) {
+      selectedType = typeKey;
+
+      document.querySelectorAll('.type-tab').forEach(function (tab) {
+        if (tab.dataset.type === typeKey) {
+          tab.style.borderColor = 'var(--accent)';
+          tab.style.color = 'var(--accent)';
+          tab.style.background = 'var(--accent-dim)';
+        } else {
+          tab.style.borderColor = 'var(--border)';
+          tab.style.color = 'var(--text-secondary)';
+          tab.style.background = 'var(--bg-card)';
+        }
+      });
+
+      const container = document.getElementById('deck-card-content');
+      const dt = deckTypes.find(function (d) { return d.type_key === typeKey; });
+      if (!dt) {
+        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted);font-size:13px">' + GCG.escapeHtml(T.selectType) + '</div>';
+        return;
+      }
+
+      if (canUseMetaStats()) {
+        const pre = (metaStats.deck_type_ranking || []).find(function (t) { return t.type_key === typeKey; });
+        if (pre) { renderCardTable(dt, pre.card_ranking || [], pre.count); return; }
+      }
+
+      // 事前集計で賄えない条件 → events.json を遅延ロード
+      container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted);font-size:13px">'
+        + GCG.escapeHtml(T.aggregating) + '<br><span style="font-size:11px">' + GCG.escapeHtml(T.aggregatingSub) + '</span></div>';
+      const wanted = typeKey;
+      ensureHeavyData().then(function () {
+        if (selectedType !== wanted) return; // 待っている間に選択が変わった
+        const r = cardRankingFromEventsJson(wanted);
+        renderCardTable(dt, r.cards, r.deckCount || dt.count);
+      }).catch(function (e) {
+        console.error(e);
+        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">' + GCG.escapeHtml(T.cardRateError) + '</div>';
+      });
+    }
+
+    function renderCardTable(dt, cards, deckCount) {
+      const container = document.getElementById('deck-card-content');
+      if (!cards || cards.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:32px;color:var(--text-muted)">' + GCG.escapeHtml(T.noCards) + '</div>';
+        return;
+      }
+      const filterLabel = currentFilter === 'win' ? T.cardTitleWin : currentFilter === 'top4' ? T.cardTitleTop4 : T.cardTitleAll;
+      const denom = deckCount || dt.count;
+      container.innerHTML = ''
+        + '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:12px">'
+        + GCG.escapeHtml(EN.fill(T.cardTableTitle, { label: dt.label, count: denom, filter: filterLabel }))
+        + '</div>'
+        + '<div style="overflow-x:auto">'
+        + '<table class="data-table" style="--th-position:static">'
+        + '<thead><tr>'
+        + '<th style="width:36px;position:static">#</th>'
+        + '<th style="position:static">' + T.colCard + '</th>'
+        + '<th style="width:90px;position:static">' + T.colAdoptDecks + '</th>'
+        + '<th style="width:70px;position:static">' + T.colAdoptRate + '</th>'
+        + '<th style="width:55px;position:static">' + T.colWins + '</th>'
+        + '<th style="width:60px;position:static">' + T.colWinRate + '</th>'
+        + '<th style="width:60px;position:static">' + T.colMax + '</th>'
+        + '<th style="width:60px;position:static">' + T.colMin + '</th>'
+        + '<th style="width:60px;position:static">' + T.colMedian + '</th>'
+        + '</tr></thead><tbody>'
+        + cards.map(function (c, i) {
+          const nameEn = EN.cardNameEn(cardNamesEn, c.card_id);
+          const name = nameEn || cardNames[c.card_id] || '';
+          const winRate = c.win_rate !== undefined ? c.win_rate
+            : (c.decks > 0 ? Math.round((c.wins / c.decks) * 1000) / 10 : 0);
+          return '<tr>'
+            + '<td class="rank-cell ' + GCG.rankClass(i + 1) + '">' + (i + 1) + '</td>'
+            + '<td><a href="' + GCG.getBasePath() + 'cards/' + c.card_id + '/?from=meta"'
+            + ' style="color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:8px">'
+            + '<img src="' + GCG.cardImageUrl(c.card_id) + '" alt="" style="width:28px;height:39px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display=\'none\'">'
+            + '<div><div style="font-family:var(--font-mono);font-size:12px">' + GCG.escapeHtml(c.card_id) + '</div>'
+            + (name ? '<div style="font-size:11px;color:var(--text-secondary);margin-top:1px"' + (nameEn ? '' : ' lang="ja"') + '>' + GCG.escapeHtml(name) + '</div>' : '')
+            + '</div></a></td>'
+            + '<td class="text-mono" style="white-space:nowrap">' + c.decks + ' / ' + denom + '</td>'
+            + '<td><span class="usage-rate" style="font-weight:600">' + c.usage_rate + '%</span></td>'
+            + '<td class="text-mono">' + c.wins + '</td>'
+            + '<td class="text-mono" style="color:var(--green)">' + winRate + '%</td>'
+            + '<td class="text-mono">' + (c.max_count || '-') + '</td>'
+            + '<td class="text-mono">' + (c.min_count || '-') + '</td>'
+            + '<td class="text-mono">' + (c.median_count !== undefined ? c.median_count : (c.avg_count || '-')) + '</td>'
+            + '</tr>';
+        }).join('')
+        + '</tbody></table></div>';
+    }
+
+    // 地域別メタ
+    function renderRegionSection(regions) {
+      const container = document.getElementById('region-content');
+      if (!regions || regions.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-muted)">' + GCG.escapeHtml(T.noRegion) + '</div>';
+        return;
+      }
+      container.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">'
+        + regions.map(function (r) {
+          return '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all 0.15s"'
+            + ' onmouseover="this.style.borderColor=\'var(--accent)\'" onmouseout="this.style.borderColor=\'var(--border)\'"'
+            + ' onclick="setRegion(\'' + GCG.escapeHtml(r.region) + '\');window.scrollTo({top:0,behavior:\'smooth\'})">'
+            + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
+            + '<span style="font-weight:600;font-size:15px;color:var(--text-primary)">' + regionHtml(r.region) + '</span>'
+            + '<span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">' + GCG.escapeHtml(EN.fill(T.regionCard, { events: r.events, decks: r.decks })) + '</span>'
+            + '</div><div style="display:flex;flex-direction:column;gap:6px">'
+            + r.top_deck_types.map(function (dt) {
+              return '<div style="display:flex;align-items:center;justify-content:space-between;font-size:12px">'
+                + '<span>' + EN.colorDotsHtml(dt.colors) + ' <span style="color:var(--text-secondary)">' + GCG.escapeHtml(dt.label) + '</span></span>'
+                + '<span class="text-mono" style="color:var(--text-muted)">' + GCG.escapeHtml(EN.fill(T.regionDecks, { count: dt.count })) + '</span></div>';
+            }).join('')
+            + '</div></div>';
+        }).join('')
+        + '</div>';
+    }
+
+    // ============================================================
+    // イベント一覧
+    // ============================================================
+    function eventsForList() {
+      let list = filteredEvents;
+      if (filterType) {
+        list = list.filter(function (ev) { return eventHasType(ev, filterType, currentFilter); });
+      }
+      if (searchText) {
+        const q = searchText.toLowerCase();
+        list = list.filter(function (ev) {
+          if (String(ev.n || '').toLowerCase().indexOf(q) >= 0) return true;
+          // プレイヤー名は索引に持たない(裁定②)。events.json が届いていれば併せて見る。
+          const src = eventsDataGlobal && eventsDataGlobal.events && eventsDataGlobal.events[ev.i];
+          if (src) {
+            const names = (src.results || []).filter(function (r) { return r.rank <= 4; })
+              .map(function (r) { return r.player || ''; }).join(' ').toLowerCase();
+            if (names.indexOf(q) >= 0) return true;
+          }
+          return false;
+        });
+      }
+      return list;
+    }
+
+    function renderEventList() {
+      const list = eventsForList();
+      document.getElementById('event-count').textContent = EN.fill(T.eventCount, { count: list.length });
+
+      const lead = document.getElementById('event-list-lead');
+      lead.textContent = filterType
+        ? EN.fill(T.leadFiltered, { label: labelOfTypeKey(filterType) })
+        : T.leadDefault;
+
+      const totalPages = Math.ceil(list.length / ITEMS_PER_PAGE);
+      if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+      const start = (currentPage - 1) * ITEMS_PER_PAGE;
+      const pageEvents = list.slice(start, start + ITEMS_PER_PAGE);
+
+      const container = document.getElementById('events-list');
+      if (pageEvents.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-muted);font-size:13px">' + GCG.escapeHtml(T.noEvents) + '</div>';
+      } else {
+        container.innerHTML = pageEvents.map(function (ev) {
+          const top4 = displayTop4(ev).sort(function (a, b) { return a.rank - b.rank; });
+          const top4Html = top4.map(function (t, i) {
+            const rankLabel = EN.rankLabel(t.rank);
+            const sep = i > 0 ? '<span style="color:var(--border);margin:0 2px">|</span>' : '';
+            return sep + '<span style="display:inline-flex;align-items:center;gap:2px;font-size:11px">'
+              + '<span style="color:var(--text-muted);font-family:var(--font-mono);min-width:32px">' + rankLabel + '</span>'
+              + EN.colorDotsHtml(t.colors)
+              + '</span>';
+          }).join('');
+          const seriesMeta = ev.s && allSeriesMap[ev.s] ? allSeriesMap[ev.s] : null;
+          const seriesBadgeHtml = seriesMeta && GCG.renderSeriesBadge
+            ? GCG.renderSeriesBadge(EN.seriesLabel(seriesMeta), seriesMeta.slug, { tag: 'span' }) : '';
+          return '<a href="' + GCG.getBasePath() + 'events/' + ev.i + '.html" class="event-card">'
+            + '<span class="event-date">' + GCG.escapeHtml(EN.formatDate(ev.d)) + '</span>'
+            + '<span class="event-store" lang="ja">' + GCG.escapeHtml(ev.n) + '</span>'
+            + (seriesBadgeHtml ? '<span class="event-card-series">' + seriesBadgeHtml + '</span>' : '')
+            + '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'
+            + (top4Html || '<span style="color:var(--text-muted);font-size:11px">' + GCG.escapeHtml(T.noResultData) + '</span>')
+            + '</span></a>';
+        }).join('');
+      }
+
+      // ページネーション
+      const pag = document.getElementById('pagination');
+      if (totalPages <= 1) { pag.innerHTML = ''; return; }
+      let html = '';
+      if (currentPage > 1) html += '<button onclick="goPage(' + (currentPage - 1) + ')">←</button>';
+      for (let i = 1; i <= totalPages; i++) {
+        if (totalPages > 10 && Math.abs(i - currentPage) > 2 && i > 2 && i < totalPages - 1) {
+          if (i === currentPage - 3 || i === currentPage + 3) html += '<button disabled>...</button>';
+          continue;
+        }
+        html += '<button class="' + (i === currentPage ? 'active' : '') + '" onclick="goPage(' + i + ')">' + i + '</button>';
+      }
+      if (currentPage < totalPages) html += '<button onclick="goPage(' + (currentPage + 1) + ')">→</button>';
+      pag.innerHTML = html;
+    }
+
+    function goPage(p) {
+      currentPage = p;
+      renderEventList();
+      jumpToEvents();
+    }
+
+    function onSearchInput() {
+      searchText = document.getElementById('search-input').value.trim();
+      currentPage = 1;
+      renderEventList();
+      // プレイヤー名でも引けるように、初回入力で events.json を裏で取りに行く(裁定②)
+      if (searchText && !eventsDataGlobal) {
+        const note = document.getElementById('search-lazy-note');
+        note.hidden = false;
+        ensureHeavyData().then(function () {
+          note.hidden = true;
+          renderEventList();
+        }).catch(function () { note.hidden = true; });
+      }
+    }
+
+    // ============================================================
+    // URL 同期
+    // ============================================================
+    function syncUrl() {
+      var u = new URL(window.location.href);
+      if (currentSeriesId) u.searchParams.set('series_id', currentSeriesId); else u.searchParams.delete('series_id');
+      if (filterType) u.searchParams.set('type', filterType); else u.searchParams.delete('type');
+      if (currentRegion) u.searchParams.set('region', currentRegion); else u.searchParams.delete('region');
+      if (currentFilter && currentFilter !== 'top4') u.searchParams.set('rank', currentFilter); else u.searchParams.delete('rank');
+      window.history.replaceState({}, '', u.toString());
+    }
+
+    // pickDefaultSeriesWithData は {key:{date}} 形式を期待するので索引から作る
+    function indexEventsAsObj() {
+      var o = {};
+      ((indexData && indexData.events) || []).forEach(function (ev) { o[ev.i] = { date: ev.d }; });
+      return o;
+    }
+
+    // ============================================================
+    // 指示書148: 英語ページだけの表示の小道具
+    // ============================================================
+    // 地域名: データの値(日本語)はそのまま使い、表示だけ英語。辞書に無い地域は日本語のまま lang="ja"
+    function regionHtml(r) {
+      var en = EN.regionName(r);
+      return en ? GCG.escapeHtml(en) : '<span lang="ja">' + GCG.escapeHtml(r) + '</span>';
+    }
+    // 日付フィルター(GCG.renderDateFilterHTML と同じ要素・同じ id で、文字だけ英語)
+    function renderDateFilterEn(startVal, endVal) {
+      var a = function (v) { return GCG.escapeHtml(v || ''); };
+      return '\n      <div class="date-filter-container">'
+        + '\n        <span class="date-filter-label">' + a(T.periodLabel) + '</span>'
+        + '\n        <input type="date" class="date-filter-input" id="date-start" value="' + a(startVal) + '" aria-label="Start date">'
+        + '\n        <span class="date-filter-sep">' + a(T.periodSep) + '</span>'
+        + '\n        <input type="date" class="date-filter-input" id="date-end" value="' + a(endVal) + '" aria-label="End date">'
+        + '\n        <button class="date-filter-reset" id="date-reset-btn" title="' + a(T.periodResetTitle) + '">' + a(T.periodReset) + '</button>'
+        + '\n      </div>';
+    }
+    // シェアボタン(GCG.renderShareButtons と同じ要素で文字だけ英語。URL のコピーもここで行う)
+    function renderShareButtonsEn(containerId, title) {
+      var el = document.getElementById(containerId);
+      if (!el) return;
+      var url = window.location.href.split('#')[0];
+      var tweetUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title + '\n' + url + '\n' + T.shareHashtags);
+      el.innerHTML = '<div class="share-section">'
+        + '<span class="share-label">SHARE</span>'
+        + '<a class="share-btn share-x" href="' + GCG.escapeHtml(tweetUrl) + '" target="_blank" rel="noopener">'
+        + '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.731-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>'
+        + GCG.escapeHtml(T.shareOnX) + '</a>'
+        + '<button class="share-btn share-copy" type="button">'
+        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>'
+        + '<span class="copy-label">' + GCG.escapeHtml(T.copyUrl) + '</span>'
+        + '</button></div>';
+      var btn = el.querySelector('.share-copy');
+      btn.addEventListener('click', function () {
+        var label = btn.querySelector('.copy-label');
+        var done = function () {
+          btn.classList.add('copied'); label.textContent = T.copied;
+          setTimeout(function () { btn.classList.remove('copied'); label.textContent = T.copyUrl; }, 2000);
+        };
+        var u = window.location.href.split('#')[0];
+        if (navigator.clipboard) { navigator.clipboard.writeText(u).then(done, function () {}); return; }
+        var ta = document.createElement('textarea');
+        ta.value = u; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+        done();
+      });
+    }
+
+    // ============================================================
+    // 初期化
+    // ============================================================
+    async function init() {
+      // breadcrumb
+      var bcItems = [
+        { name: T.breadcrumbHome, href: '/' },
+        { name: T.breadcrumbSelf }
+      ];
+      document.getElementById('breadcrumb-container').innerHTML = GCG.renderBreadcrumb(bcItems, { lang: 'en' })
+        + GCG.renderBreadcrumbJsonLd(bcItems, 'https://gcg-stats.com/');
+
+      const basePath = GCG.getBasePath();
+      const [idx, ms, names] = await Promise.all([
+        loadEventsIndex(),
+        fetch(basePath + 'data/meta_stats.json').then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+        fetch(basePath + 'data/card_names.json').then(function (r) { return r.ok ? r.json() : {}; }).catch(function () { return {}; })
+      ]);
+      cardNames = names || {};
+      metaStats = ms;
+
+      // series データ(NTC判定・バッジ・タブに使う)
+      try { allSeriesMap = await GCG.loadSeries(); } catch (_) { allSeriesMap = {}; }
+
+      if (idx && idx.events) {
+        indexData = idx;
+      } else {
+        // 索引が取れないときは従来どおり events.json から索引相当を組み立てる(表示を落とさない)
+        console.warn('events_index.json を利用できないため events.json から再構成します');
+        await ensureHeavyData();
+        await ensureCardColors();
+        const evs = Object.values((eventsDataGlobal && eventsDataGlobal.events) || {});
+        indexData = {
+          events: evs.map(function (v) {
+            return {
+              i: v.event_id, d: v.date || '', s: String(v.series_id || ''), n: v.store || '',
+              g: v.region || '', c: (v.results || []).length,
+              r: (v.results || []).filter(function (r) { return r.deck && r.deck.length; })
+                .map(function (r) { return [r.rank, detectDeckColors(r.deck).join('+')]; })
+            };
+          }).sort(function (a, b) { return (b.d || '').localeCompare(a.d || '') || String(a.i).localeCompare(String(b.i)); })
+        };
+      }
+
+      // --- URL パラメータ ---
+      var urlParams = new URLSearchParams(window.location.search);
+      var paramSeries = urlParams.get('series_id') || urlParams.get('series');
+      if (paramSeries && allSeriesMap[paramSeries]) currentSeriesId = paramSeries;
+      // 2026-06-11 指示書v6: 初期選択のみ「イベントデータのあるシリーズ」を優先(6月0件問題の回避)。
+      else currentSeriesId = GCG.pickDefaultSeriesWithData
+        ? ((GCG.pickDefaultSeriesWithData(allSeriesMap, { events: indexEventsAsObj() }) || {}).id || '')
+        : pickDefaultSeries();
+
+      var paramRank = urlParams.get('rank');
+      if (paramRank === 'win' || paramRank === 'all' || paramRank === 'top4') currentFilter = paramRank;
+      document.querySelectorAll('.rank-filter-btn').forEach(function (btn) {
+        btn.classList.toggle('active', btn.dataset.filter === currentFilter);
+      });
+
+      renderSeriesSelector();
+
+      // 日付フィルター設置（シリーズ連動: 選択シリーズの start_date/end_date を初期値に）
+      const initialRange = getSeriesRangeById(currentSeriesId);
+      const filterArea = document.getElementById('date-filter-area');
+      filterArea.innerHTML = renderDateFilterEn(initialRange.start, initialRange.end);
+      currentDateStart = initialRange.start;
+      currentDateEnd = initialRange.end;
+      document.getElementById('date-start').addEventListener('change', onDateFilterChange);
+      document.getElementById('date-end').addEventListener('change', onDateFilterChange);
+      document.getElementById('date-reset-btn').addEventListener('click', function () {
+        document.getElementById('date-start').value = '';
+        document.getElementById('date-end').value = '';
+        onDateFilterChange();
+      });
+
+      buildRegionFilterButtons();
+
+      // 地域(URL)
+      var paramRegion = urlParams.get('region');
+      if (paramRegion) {
+        currentRegion = paramRegion;
+        document.querySelectorAll('.region-filter-btn').forEach(function (btn) {
+          btn.classList.toggle('active', (btn.dataset.region || null) === currentRegion);
+        });
+      }
+
+      // デッキタイプ(URL)
+      //   ・旧並び(辞書順)のリンクも normalizeTypeKey で受ける(後方互換)
+      //   ・クエリの `+` は半角スペースにデコードされるため normalizeTypeKey 側で吸収する
+      var paramType = urlParams.get('type') || (GCG.getParam ? GCG.getParam('type') : '');
+      var wantType = paramType ? normalizeTypeKey(paramType) : '';
+      if (wantType) filterType = wantType;
+
+      renderWithFilter();
+
+      // 指定タイプが既定期間に存在しないときだけ、全期間へ広げて拾い直す。
+      // 「全期間にも存在しないタイプ(打ち間違い等)」で期間やシリーズを消してしまわないよう、
+      // 広げる前に全期間の集計へ実在するかを確かめる。
+      if (wantType && !deckTypes.some(function (d) { return d.type_key === wantType; })) {
+        var existsAnywhere = computeDeckTypeRankingFromIndex(indexData.events || [], currentFilter)
+          .ranking.some(function (d) { return d.type_key === wantType; });
+        if (existsAnywhere) {
+          filterType = wantType;
+          currentDateStart = '';
+          currentDateEnd = '';
+          currentSeriesId = '';
+          var dsEl = document.getElementById('date-start');
+          var deEl = document.getElementById('date-end');
+          if (dsEl) dsEl.value = '';
+          if (deEl) deEl.value = '';
+          renderSeriesSelector();
+          renderWithFilter();
+        } else {
+          // どこにも無いタイプ → 絞り込みを掛けずに既定表示のままにする
+          filterType = null;
+          renderTypeChip();
+        }
+      }
+      if (filterType) {
+        selectType(filterType);
+        renderTypeChip();
+        renderDeckTypeTable(deckTypes);
+        renderEventList();
+      }
+
+      document.getElementById('search-input').addEventListener('input', onSearchInput);
+
+      // 画面の状態と URL を一致させる(受け付けなかった type を消し、正規化後の値に揃える)
+      syncUrl();
+
+      var hashId = (window.location.hash || '').slice(1);
+      if (JUMP_IDS.indexOf(hashId) >= 0) jumpTo(hashId, 'hash');
+    }
+
+    document.getElementById('header').innerHTML = GCG.renderHeader('meta', { lang: 'en' });
+    document.getElementById('footer').innerHTML = GCG.renderFooter({ lang: 'en' });
+
+    // 指示書96: 移動ボタンと、幅が変わったときの着地位置の再計算
+    document.querySelectorAll('.meta-jump-btn').forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); jumpTo(a.getAttribute('data-jump'), 'nav'); });
+    });
+    window.addEventListener('resize', jumpTargetsOffset);
+    jumpTargetsOffset();
+
+    init();
+    renderShareButtonsEn('share-buttons', T.shareTitle);
+  </script>
+</body>
+</html>
