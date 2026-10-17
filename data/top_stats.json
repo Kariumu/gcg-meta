@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 240,
-    "decks": 1176,
+    "events": 241,
+    "decks": 1180,
     "types": 9
   },
   "deck_type_ranking": [
@@ -18,7 +18,7 @@
       ],
       "label": "赤/白",
       "count": 309,
-      "share": 26.3,
+      "share": 26.2,
       "win_rate": 26.5,
       "avg_rank": 2.4,
       "wins": 82
@@ -31,7 +31,7 @@
       ],
       "label": "青/紫",
       "count": 201,
-      "share": 17.1,
+      "share": 17,
       "win_rate": 24.9,
       "avg_rank": 2.5,
       "wins": 50
@@ -43,11 +43,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 195,
-      "share": 16.6,
-      "win_rate": 19,
-      "avg_rank": 2.7,
-      "wins": 37
+      "count": 197,
+      "share": 16.7,
+      "win_rate": 19.3,
+      "avg_rank": 2.6,
+      "wins": 38
     },
     {
       "type_key": "Blue+White",
@@ -69,9 +69,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 161,
-      "share": 13.7,
-      "win_rate": 28.6,
+      "count": 163,
+      "share": 13.8,
+      "win_rate": 28.2,
       "avg_rank": 2.4,
       "wins": 46
     },
@@ -132,56 +132,91 @@
     {
       "card_id": "GD01-118",
       "decks": 515,
-      "usage_rate": 43.8
+      "usage_rate": 43.6
     },
     {
       "card_id": "GD04-068",
       "decks": 468,
-      "usage_rate": 39.8
+      "usage_rate": 39.7
     },
     {
       "card_id": "GD01-100",
       "decks": 453,
-      "usage_rate": 38.5
+      "usage_rate": 38.4
     },
     {
       "card_id": "ST01-010",
-      "decks": 400,
-      "usage_rate": 34
+      "decks": 402,
+      "usage_rate": 34.1
     },
     {
       "card_id": "GD03-056",
-      "decks": 395,
+      "decks": 397,
       "usage_rate": 33.6
     },
     {
       "card_id": "GD05-110",
       "decks": 377,
-      "usage_rate": 32.1
+      "usage_rate": 31.9
     },
     {
       "card_id": "GD05-111",
       "decks": 361,
-      "usage_rate": 30.7
+      "usage_rate": 30.6
     },
     {
       "card_id": "ST03-008",
-      "decks": 356,
-      "usage_rate": 30.3
+      "decks": 360,
+      "usage_rate": 30.5
     },
     {
       "card_id": "GD05-081",
-      "decks": 355,
+      "decks": 356,
       "usage_rate": 30.2
     },
     {
       "card_id": "GD05-002",
-      "decks": 354,
+      "decks": 355,
       "usage_rate": 30.1
     }
   ],
-  "card_ranking_denominator": 1176,
+  "card_ranking_denominator": 1180,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M5436S3PBP2QX7HVDJSRHHCX",
+      "date": "2026-10-17",
+      "store": "ファーストカード666",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M51YJQJZNZDEBNJSGRD140WM",
       "date": "2026-10-16",
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M4WJWHJ6ATZ05PVHPP4RT8ZR",
-      "date": "2026-10-14",
-      "store": "アメニティードリーム横浜店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-10-16",
-    "event_count": 1855
+    "latest_event_date": "2026-10-17",
+    "event_count": 1856
   }
 }
