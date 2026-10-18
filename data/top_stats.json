@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 254,
-    "decks": 1232,
+    "events": 256,
+    "decks": 1240,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,24 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 319,
+      "count": 321,
       "share": 25.9,
-      "win_rate": 26.3,
+      "win_rate": 26.2,
       "avg_rank": 2.4,
       "wins": 84
+    },
+    {
+      "type_key": "Green+Purple",
+      "colors": [
+        "Green",
+        "Purple"
+      ],
+      "label": "緑/紫",
+      "count": 206,
+      "share": 16.6,
+      "win_rate": 19.4,
+      "avg_rank": 2.7,
+      "wins": 40
     },
     {
       "type_key": "Blue+Purple",
@@ -31,23 +44,10 @@
       ],
       "label": "青/紫",
       "count": 205,
-      "share": 16.6,
+      "share": 16.5,
       "win_rate": 24.4,
       "avg_rank": 2.5,
       "wins": 50
-    },
-    {
-      "type_key": "Green+Purple",
-      "colors": [
-        "Green",
-        "Purple"
-      ],
-      "label": "緑/紫",
-      "count": 204,
-      "share": 16.6,
-      "win_rate": 19.1,
-      "avg_rank": 2.7,
-      "wins": 39
     },
     {
       "type_key": "Blue+White",
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 202,
+      "count": 203,
       "share": 16.4,
-      "win_rate": 24.3,
+      "win_rate": 24.6,
       "avg_rank": 2.6,
-      "wins": 49
+      "wins": 50
     },
     {
       "type_key": "Blue+Green",
@@ -69,9 +69,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 176,
-      "share": 14.3,
-      "win_rate": 29,
+      "count": 179,
+      "share": 14.4,
+      "win_rate": 28.5,
       "avg_rank": 2.4,
       "wins": 51
     },
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 535,
+      "decks": 538,
       "usage_rate": 43.4
     },
     {
       "card_id": "GD04-068",
-      "decks": 485,
+      "decks": 488,
       "usage_rate": 39.4
     },
     {
       "card_id": "GD01-100",
-      "decks": 471,
-      "usage_rate": 38.2
+      "decks": 473,
+      "usage_rate": 38.1
     },
     {
       "card_id": "ST01-010",
-      "decks": 427,
-      "usage_rate": 34.7
+      "decks": 431,
+      "usage_rate": 34.8
     },
     {
       "card_id": "GD03-056",
-      "decks": 409,
-      "usage_rate": 33.2
+      "decks": 411,
+      "usage_rate": 33.1
     },
     {
       "card_id": "GD05-110",
-      "decks": 389,
-      "usage_rate": 31.6
+      "decks": 391,
+      "usage_rate": 31.5
     },
     {
       "card_id": "ST03-008",
-      "decks": 380,
-      "usage_rate": 30.8
+      "decks": 385,
+      "usage_rate": 31
     },
     {
       "card_id": "GD05-111",
-      "decks": 375,
+      "decks": 377,
       "usage_rate": 30.4
     },
     {
       "card_id": "GD05-081",
-      "decks": 371,
-      "usage_rate": 30.1
+      "decks": 372,
+      "usage_rate": 30
     },
     {
       "card_id": "GD05-002",
-      "decks": 370,
-      "usage_rate": 30
+      "decks": 371,
+      "usage_rate": 29.9
     }
   ],
-  "card_ranking_denominator": 1232,
+  "card_ranking_denominator": 1240,
   "recent_events": [
     {
       "event_id": "ntcd-01M56NK585WGJ3GM85HGXGW31R",
@@ -283,6 +283,76 @@
           "colors": [
             "Red",
             "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M56WFEV6Q1QA4GXBH6R3Y1ES",
+      "date": "2026-10-18",
+      "store": "ホビーステーション名古屋大須本店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M56WFDQ4CKH2CZ0YGV0TT0BR",
+      "date": "2026-10-18",
+      "store": "カードラボ札幌店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
           ]
         }
       ]
@@ -461,80 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M54DGM64A69VGYQ1BK17SBNH",
-      "date": "2026-10-17",
-      "store": "プレイズ大阪日本橋本店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M54DGJY8RK6C7CY1SCEY9ACQ",
-      "date": "2026-10-17",
-      "store": "Duel Stade Ganryu 入間店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-18",
-    "event_count": 1869
+    "event_count": 1871
   }
 }
