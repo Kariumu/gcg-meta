@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 261,
-    "decks": 1264,
+    "events": 264,
+    "decks": 1276,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 328,
+      "count": 330,
       "share": 25.9,
-      "win_rate": 26.5,
+      "win_rate": 26.4,
       "avg_rank": 2.4,
       "wins": 87
     },
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 212,
-      "share": 16.8,
-      "win_rate": 24.1,
+      "count": 213,
+      "share": 16.7,
+      "win_rate": 23.9,
       "avg_rank": 2.5,
       "wins": 51
     },
@@ -43,11 +43,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 208,
+      "count": 210,
       "share": 16.5,
-      "win_rate": 19.7,
+      "win_rate": 20,
       "avg_rank": 2.6,
-      "wins": 41
+      "wins": 42
     },
     {
       "type_key": "Blue+White",
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 207,
+      "count": 209,
       "share": 16.4,
-      "win_rate": 24.2,
+      "win_rate": 24.4,
       "avg_rank": 2.6,
-      "wins": 50
+      "wins": 51
     },
     {
       "type_key": "Blue+Green",
@@ -69,11 +69,24 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 180,
-      "share": 14.2,
-      "win_rate": 28.9,
+      "count": 182,
+      "share": 14.3,
+      "win_rate": 29.1,
       "avg_rank": 2.4,
-      "wins": 52
+      "wins": 53
+    },
+    {
+      "type_key": "Red+Green",
+      "colors": [
+        "Red",
+        "Green"
+      ],
+      "label": "赤/緑",
+      "count": 39,
+      "share": 3.1,
+      "win_rate": 38.5,
+      "avg_rank": 2.2,
+      "wins": 15
     },
     {
       "type_key": "Blue+Red",
@@ -89,28 +102,15 @@
       "wins": 8
     },
     {
-      "type_key": "Red+Green",
-      "colors": [
-        "Red",
-        "Green"
-      ],
-      "label": "赤/緑",
-      "count": 38,
-      "share": 3,
-      "win_rate": 39.5,
-      "avg_rank": 2.2,
-      "wins": 15
-    },
-    {
       "type_key": "Green+White",
       "colors": [
         "Green",
         "White"
       ],
       "label": "緑/白",
-      "count": 29,
-      "share": 2.3,
-      "win_rate": 20.7,
+      "count": 30,
+      "share": 2.4,
+      "win_rate": 20,
       "avg_rank": 2.6,
       "wins": 6
     },
@@ -121,9 +121,9 @@
         "Purple"
       ],
       "label": "赤/紫",
-      "count": 24,
-      "share": 1.9,
-      "win_rate": 25,
+      "count": 25,
+      "share": 2,
+      "win_rate": 24,
       "avg_rank": 2.4,
       "wins": 6
     }
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 550,
+      "decks": 555,
       "usage_rate": 43.5
     },
     {
       "card_id": "GD04-068",
-      "decks": 500,
-      "usage_rate": 39.6
+      "decks": 504,
+      "usage_rate": 39.5
     },
     {
       "card_id": "GD01-100",
-      "decks": 482,
+      "decks": 486,
       "usage_rate": 38.1
     },
     {
       "card_id": "ST01-010",
-      "decks": 440,
-      "usage_rate": 34.8
+      "decks": 445,
+      "usage_rate": 34.9
     },
     {
       "card_id": "GD03-056",
-      "decks": 421,
-      "usage_rate": 33.3
+      "decks": 424,
+      "usage_rate": 33.2
     },
     {
       "card_id": "GD05-110",
-      "decks": 399,
-      "usage_rate": 31.6
+      "decks": 402,
+      "usage_rate": 31.5
     },
     {
       "card_id": "ST03-008",
-      "decks": 388,
+      "decks": 392,
       "usage_rate": 30.7
     },
     {
       "card_id": "GD05-111",
-      "decks": 386,
+      "decks": 389,
       "usage_rate": 30.5
     },
     {
       "card_id": "GD05-081",
-      "decks": 380,
-      "usage_rate": 30.1
+      "decks": 382,
+      "usage_rate": 29.9
     },
     {
       "card_id": "GD05-002",
-      "decks": 379,
-      "usage_rate": 30
+      "decks": 381,
+      "usage_rate": 29.9
     }
   ],
-  "card_ranking_denominator": 1264,
+  "card_ranking_denominator": 1276,
   "recent_events": [
     {
       "event_id": "ntcd-01M56NK585WGJ3GM85HGXGW31R",
@@ -535,6 +535,6 @@
   ],
   "source": {
     "latest_event_date": "2026-10-18",
-    "event_count": 1876
+    "event_count": 1879
   }
 }
