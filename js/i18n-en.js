@@ -185,11 +185,81 @@
     seoEventsNote: 'Pages for all {total} tournaments are listed in sitemap.xml.'
   };
 
+  // ---- カードリスト(en/cards.html。指示書148-R1。generate_cardlist.js が使う) ----
+  var CARDS = {
+    // {total} はカードの枚数(generate_cardlist.js が入れる)
+    pageTitle: 'Gundam Card Game Card List (All {total} Cards, with Tournament Adoption Rates) | GCG STATS',
+    metaDesc: 'The complete Gundam Card Game (GCG) card list. Filter all {total} cards by color, type, rarity, trait and set, and search by card name, effect text or English card name. Tournament adoption rates included.',
+    ogDesc: 'The complete Gundam Card Game card list with all {total} cards. Filter by color, type and trait, and check tournament adoption rates.',
+    h1: 'Card List',
+    restrictionsLink: 'See the banned and restricted card list',
+    statTotal: 'Total Cards',
+    statRecent: 'Used in Recent Season',
+    statNotRecent: 'Not Used in Recent Season',
+    statEvents: 'Events Analyzed',
+    groupColor: 'Color',
+    groupSet: 'Set',
+    groupType: 'Type',
+    groupRarity: 'Rarity',
+    groupVersion: 'Version',
+    groupTournament: 'Tournament',
+    groupRestriction: 'Restriction',
+    all: 'All',
+    versionNormal: 'Standard Only',
+    versionParallel: 'Parallel Only',
+    recentYes: 'Used in Recent Season',
+    recentNo: 'Not Used in Recent Season',
+    // {season} は直近シーズンの名前(seriesLabel など)
+    recentYesTitle: 'Used in a top-finishing deck in {season} (parallel versions included)',
+    recentNoTitle: 'Not used in any top-finishing deck in {season}',
+    regBanned: 'Banned',
+    regRestricted: 'Restricted',
+    regPair: 'Banned Pair',
+    advToggle: 'Advanced Search',
+    advActive: '{count} active',
+    lvMin: 'Lv. minimum', lvMax: 'Lv. maximum',
+    cost: 'Cost', costMin: 'Cost minimum', costMax: 'Cost maximum',
+    apMin: 'AP minimum', apMax: 'AP maximum',
+    hpMin: 'HP minimum', hpMax: 'HP maximum',
+    rangeSep: ' – ',
+    advSource: 'Source Work (release order, multiple choice)',
+    advTraits: 'Traits (multiple choice)',
+    advTraitPlaceholder: 'Filter traits by name',
+    advKeywords: 'Keyword Effects (multiple choice)',
+    advNoParallel: 'Hide parallel cards',
+    advClear: 'Clear advanced filters',
+    searchPlaceholder: 'Search by card name, ID or effect text...',
+    sortId: 'Card ID',
+    sortUsage: 'Adoption Rate (high to low)',
+    sortRarity: 'Rarity',
+    sortName: 'Name (A–Z)',
+    // 件数の表示(「<span>N</span> / 2154 件表示」の「件表示」の所)
+    resultsSuffix: 'shown',
+    setCount: '{count} cards',
+    noResults: 'No matching cards found',
+    noResultsHint: 'Try changing the filters or search terms',
+    backToTop: 'Back to top',
+    notApplicable: 'N/A',
+    notUsed: 'Not used',
+    adoptionRate: 'Adoption',
+    // 弾チップ: 日本語ページと同じくコードだけ。日本語で別名を出していた 3 つだけ英語の別名
+    setDisplayNames: { PROMO: 'Promo', RESOURCE: 'Resource', EXBASE: 'EX Base' },
+    // 弾ごとの見出しの説明(日本語は「第1弾ブースターパック」等。英語の商品名は範囲外なので、この 3 つだけ)
+    setLabels: { TOKEN: 'Token Cards', RESOURCE: 'Resource', EXBASE: 'EX Base' },
+    types: {
+      UNIT: 'Unit', PILOT: 'Pilot', COMMAND: 'Command', BASE: 'Base', TOKEN: 'Token',
+      RESOURCE: 'Resource', 'EX RESOURCE': 'EX Resource', 'EX BASE': 'EX Base'
+    },
+    // noscript(JS が動かないとき)の一覧
+    noscriptHeading: 'Gundam Card Game Card List',
+    noscriptLead: 'This page lists all {total} cards.'
+  };
+
   // ---- 小道具 ----
   // 数が 1 のときの単数形(二次確認 L-1)。「1 decks」→「1 deck」。前後が数字・小数点の 1(11・0.1・1.5)は触らない
-  var SINGULAR = { decks: 'deck', events: 'event', wins: 'win', tournaments: 'tournament', copies: 'copy' };
+  var SINGULAR = { decks: 'deck', events: 'event', wins: 'win', tournaments: 'tournament', copies: 'copy', cards: 'card' };
   function singularize(s) {
-    return String(s).replace(/(^|[^0-9.,])1 (decks|events|wins|tournaments|copies)\b/g, function (m, pre, w) { return pre + '1 ' + SINGULAR[w]; });
+    return String(s).replace(/(^|[^0-9.,])1 (decks|events|wins|tournaments|copies|cards)\b/g, function (m, pre, w) { return pre + '1 ' + SINGULAR[w]; });
   }
   function fill(tpl, vars) {
     return singularize(String(tpl).replace(/\{(\w+)\}/g, function (m, k) {
@@ -268,6 +338,7 @@
     NAV: NAV,
     FOOTER: FOOTER,
     META: META,
+    CARDS: CARDS,
     fill: fill,
     colorName: colorName,
     deckColorLabel: deckColorLabel,

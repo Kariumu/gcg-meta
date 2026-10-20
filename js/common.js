@@ -535,32 +535,38 @@ const GCG = {
   // 指示書148: enPaths に英語版のあるページ(meta)を足した。英語ページでは同じ場所に「JA」(日本語の同じページへ)を出す。
   //   英語ページかどうかは renderHeader の引数 { lang: 'en' } だけで決める(<html lang> は見ない)。
   //   title / aria-label は飛び先に合わせる。ビルダー向けの固定文言は enPaths に無いページだけに残す。
-  //   en/cards.html は第 1 段では作らない(指示書148 §5 の R1)。作ったら enPaths に cards: 'en/cards.html' と enNames.cards を足す。
+  //   指示書148-R1: en/cards.html を足した(4 つの表すべてに cards)。
+  //   言語の入口(JA/EN)だけ、今のページの絞り込み(location.search。?series_id=・?type=・?region=・?q=・?set=・?color= 等)を
+  //   そのまま飛び先に付ける(日英で同じ id・同じパラメータのため)。主タブ・サブナビ・フッター(enHref)には付けない。
   _LANG_ENTRY: {
     label: 'EN',
     title: 'English — Deck Builder (English mode)',
     ariaLabel: 'EN — English: Deck Builder (English mode)',   // 読み上げ名は見えている文字「EN」で始める(WCAG 2.5.3。二次確認 k-2)
     href: 'deck-builder.html?lang=en',
     to: 'deck-builder',
-    enPaths: { meta: 'en/meta.html' },
-    enNames: { meta: 'Metagame' },                       // 日本語ページの EN の title / aria-label に入れる英語ページの名前
-    jaPaths: { meta: 'meta.html' },                      // 英語ページの JA の飛び先(サイトルートからの相対)
-    jaNames: { meta: '環境分析' },                        // 英語ページの JA の title / aria-label に入れる日本語ページの名前
+    enPaths: { meta: 'en/meta.html', cards: 'en/cards.html' },
+    enNames: { meta: 'Metagame', cards: 'Card List' },          // 日本語ページの EN の title / aria-label に入れる英語ページの名前
+    jaPaths: { meta: 'meta.html', cards: 'cards.html' },        // 英語ページの JA の飛び先(サイトルートからの相対)
+    jaNames: { meta: '環境分析', cards: 'カードリスト' },         // 英語ページの JA の title / aria-label に入れる日本語ページの名前
     hideOn: { 'deck-builder': true },
     has(obj, key) { return Object.prototype.hasOwnProperty.call(obj, key); },
     // 戻り値: { href, to, label, title, ariaLabel, lang } か null(出さない)
+    // 今のページの絞り込み(?…)。node(render-check 等)では location が無いので空
+    search() {
+      try { return (typeof location !== 'undefined' && location && typeof location.search === 'string') ? location.search : ''; } catch (e) { return ''; }
+    },
     hrefFor(activePage, lang) {
       const key = (activePage == null) ? '' : String(activePage);
       if (this.has(this.hideOn, key)) return null;
       if (lang === 'en') {
         if (!this.has(this.jaPaths, key)) return null;
         const n = this.jaNames[key] || '';
-        return { href: this.jaPaths[key], to: 'ja:' + key, label: 'JA', lang: 'ja',
+        return { path: this.jaPaths[key], href: this.jaPaths[key] + this.search(), to: 'ja:' + key, label: 'JA', lang: 'ja',
           title: '日本語: ' + n, ariaLabel: 'JA — 日本語: ' + n };
       }
       if (this.has(this.enPaths, key) && this.enPaths[key]) {
         const n = this.enNames[key] || '';
-        return { href: this.enPaths[key], to: 'en:' + key, label: this.label, lang: 'en',
+        return { path: this.enPaths[key], href: this.enPaths[key] + this.search(), to: 'en:' + key, label: this.label, lang: 'en',
           title: 'English — ' + n, ariaLabel: 'EN — English: ' + n };
       }
       return { href: this.href, to: this.to, label: this.label, lang: 'en', title: this.title, ariaLabel: this.ariaLabel };
@@ -619,7 +625,9 @@ const GCG = {
     // hrefFor が null のページ(デッキビルダー)には出さない。
     // 指示書148: 英語ページでは「JA」(日本語の同じページへ)。title / aria-label は飛び先に合わせる(hrefFor が返す)。
     const le = this._LANG_ENTRY.hrefFor(page, lang);
-    const langHtml = !le ? '' : `<a href="${basePath}${attr(le.href)}" class="hdr-lang" lang="${attr(le.lang)}" hreflang="${attr(le.lang)}" title="${attr(le.title)}" aria-label="${attr(le.ariaLabel)}" data-gcg-lang-entry="${attr(le.to)}" data-page="${attr(page)}">${le.label}</a>`;
+    // 指示書148-R1: 絞り込みの引き継ぎ。描いた後に URL が変わる(絞り込みの操作)ので、data-href に search 無しの飛び先を持たせ、
+    // 押す・フォーカスする直前に今の location.search を付け直す(_refreshLangHref)。英語版の無いページ(path 無し)は従来どおり。
+    const langHtml = !le ? '' : `<a href="${basePath}${attr(le.href)}" class="hdr-lang" lang="${attr(le.lang)}" hreflang="${attr(le.lang)}" title="${attr(le.title)}" aria-label="${attr(le.ariaLabel)}" data-gcg-lang-entry="${attr(le.to)}" data-page="${attr(page)}"${le.path ? ` data-href="${basePath}${attr(le.path)}"` : ''}>${le.label}</a>`;
 
     // サブナビ（_SUB_NAV に定義のあるカテゴリのみ中身を入れる。home/deck-builder/mypage 等は hidden）
     // 指示書97: 2 段目は常に 1 つのコンテナ(#gcg-subnav)。初期の中身は従来どおり「開いているページのカテゴリ」。
@@ -802,6 +810,12 @@ const GCG = {
     GCG.track('header_sub_open', { cat: cat, page: sub.getAttribute('data-page') || '' });
   },
 
+  // 指示書148-R1: 言語の入口の飛び先に、今のページの絞り込み(location.search)を付け直す
+  _refreshLangHref(a) {
+    const base = a && a.getAttribute && a.getAttribute('data-href');
+    if (base) a.setAttribute('href', base + this._LANG_ENTRY.search());
+  },
+
   // 指示書97: ▾ を有効化する(hidden を外す)。委譲リスナー(click=capture / Escape=bubble)は document に 1 回だけ付ける。
   initHeaderSubNav() {
     if (typeof document === 'undefined') return;
@@ -817,11 +831,17 @@ const GCG = {
       const btn = el.closest('.mt-toggle');
       if (btn) { GCG._toggleSubNav(btn.getAttribute('data-cat')); return; }
       const lang = el.closest('a.hdr-lang');   // 指示書146: 言語の入口(EN)の計測。遷移は止めない(preventDefault しない)
+      if (lang) GCG._refreshLangHref(lang);   // 指示書148-R1: 今の絞り込みを付け直す
       if (lang) { GCG.track('lang_entry_click', { page: lang.getAttribute('data-page') || '', to: lang.getAttribute('data-gcg-lang-entry') || '' }); return; }
       if (el.closest('.site-header')) return;   // ヘッダー内(2 段目のリンク等)は通常どおり
       const s = document.getElementById('gcg-subnav');
       if (s && s.classList.contains('is-preview')) GCG._closeSubNav(true);   // 指示書98: 外側クリックは即時(アニメで閉じるとヘッダーが縮む途中で「移動」ボタン等の着地計算が走り、見出しが上に隠れる)
     }, true);   // 指示書97 R2: capture で登録=ページ側のクリック処理より先に閉じる(移動ボタンの着地計算がヘッダー高さの変化で狂わないように)。preventDefault/stopPropagation はしない
+    // 指示書148-R1: 中クリック・新しいタブで開く・キーボードでも今の絞り込みが付くよう、押す前とフォーカス時にも付け直す
+    const refresh = (e) => { const t = e.target; const a = (t && t.nodeType === 1 && t.closest) ? t.closest('a.hdr-lang') : null; if (a) GCG._refreshLangHref(a); };
+    document.addEventListener('pointerdown', refresh, true);
+    document.addEventListener('focusin', refresh, true);
+    document.addEventListener('contextmenu', refresh, true);
     document.addEventListener('keydown', (e) => {
       if (e.key !== 'Escape') return;
       const s = document.getElementById('gcg-subnav');
