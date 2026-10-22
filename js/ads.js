@@ -35,6 +35,8 @@
   var FAV_VERSION = 1;
 
   var CSS =
+    // 152-R1(2026-10-23): AdSense の未配信処理(unfill-optimized)が枠の中に 360x360 の iframe を置き、幅 360 の店舗ページで横幅が 557px になった。はみ出しだけ止める(高さは触らない)
+    '.ad-slot{overflow:hidden}' +
     '.ad-slot-inner{display:inline-flex;flex-direction:column;align-items:flex-end;gap:4px;position:relative}' +
     '.ad-label{font-size:10px;color:var(--text-muted);border:1px solid var(--border);border-radius:3px;' +
     'padding:1px 6px;font-family:var(--font-mono);line-height:14px}';
