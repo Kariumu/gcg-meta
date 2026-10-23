@@ -12,6 +12,8 @@
  *   マイページの枠(data-slot が mypage- で始まる)は、お気に入りが 1 件以上あるときだけ埋める(指示書152 §8-1)。
  *   広告が埋まらなかったとき(unfilled)も何もしない(畳むと本文が動くため。§8-2)。
  *   枠の高さの予約はページ側の <style> が持つ。ここの <style> は中身の見た目だけ。
+ *   記事の枠(data-slot が article-mid / article-end の四角)は、記事用の広告ユニットを使う(指示書153・PLACEMENT_SLOTS)。
+ *   記事のページはこのファイルを ads.js?v=2 で読む(このファイルを直したら、記事の ?v= も上げる)。
  */
 (function () {
   'use strict';
@@ -26,6 +28,9 @@
     '320x50': { w: 320, h: 50, slot: '2939022430' },
     '300x250': { w: 300, h: 250, slot: '1489762280' }
   };
+
+  // 置き場所ごとの広告ユニット(指示書153・2026-10-23 作成・どちらも固定サイズ 300x250)。四角(rect)の枠だけに使う
+  var PLACEMENT_SLOTS = { 'article-mid': '5931941303', 'article-end': '2575772345' };
 
   // 帯の PC 用(728x90)を選ぶ画面幅の下限。ページ側の予約(@media(min-width:820px))と同じ値にすること
   var BAND_WIDE_MIN_VIEWPORT = 820;
@@ -121,10 +126,12 @@
     if (size === null) { slot.classList.add('ad-slot-none'); return; }
 
     var u = SLOTS[size];
+    var unitSlot = u.slot;
+    if (size === '300x250' && slot.getAttribute('data-kind') === 'rect' && Object.prototype.hasOwnProperty.call(PLACEMENT_SLOTS, placement)) unitSlot = PLACEMENT_SLOTS[placement];
     slot.innerHTML =
       '<div class="ad-slot-inner"><span class="ad-label">広告</span>' +
       '<ins class="adsbygoogle" style="display:inline-block;width:' + u.w + 'px;height:' + u.h + 'px"' +
-      ' data-ad-client="' + client + '" data-ad-slot="' + u.slot + '"></ins></div>';
+      ' data-ad-client="' + client + '" data-ad-slot="' + unitSlot + '"></ins></div>';
     slot.classList.add('ad-size-' + size);
     slot.setAttribute('data-ad-filled', '1');
 

@@ -121,6 +121,13 @@
     .dr-report .dr-foot{ font-size:12px; color:var(--text-muted); margin-top:28px; }
     @media (max-width:420px){ .dr-report th, .dr-report td{ padding:6px 5px; } .dr-report .n{ font-size:10.5px; } }
   </style>
+<style data-ads-reserve="153">
+.ad-slot{display:flex;flex-direction:column;align-items:center;margin:20px auto;width:100%;overflow:hidden}
+.ad-slot[data-kind="rect"]{min-height:272px}
+@media(max-width:331px){.ad-slot[data-kind="rect"]{display:none}}
+.ad-slot-failed,.ad-slot-none{display:none}
+.ad-slot[data-slot="article-end"]{margin-bottom:32px}
+</style>
 </head>
 <body>
   <div id="header"></div>
@@ -190,6 +197,7 @@
 <h3>採用率10%を超えるのはGFreDと隠れ家の2種だけ</h3>
 <p><a href="../cards/GD03-035/">GFreD</a>と<a href="../cards/GD02-126/">シュウジの隠れ家</a>だけが、赤/緑の5本に1本以上が入れているカード。GFreDは【起動・メイン】でトラッシュのパイロットを除外して相手ユニット全体に1ダメージを与えるので、パイロット12枚を抱えるこのデッキでは弾に困らない。</p>
 
+<div class="ad-slot" data-slot="article-mid" data-kind="rect"></div>
 <h2>同じ型の入賞</h2>
 <p>10/12の<a href="../events/ntcd-01M4QMYK8KZ0RJ5722TV6AD364.html">BOOKOFF SUPER BAZAAR 西友大森店</a>で8位に入ったデッキも同じ型で、15種のうち13種が共通。違いは3つ。今回の優勝デッキは<a href="../cards/GD02-126/">シュウジの隠れ家</a>4枚とLv4の<a href="../cards/ST06-002/">GQuuuuuuX</a>2枚を足し、Lv5の<a href="../cards/ST06-001/">GQuuuuuuX</a>4枚と<a href="../cards/ST06-011/">冷徹な戦術</a>1枚を抜いた。クランバトルは3枚から1枚に減っている。共通する13種のうち、クランバトルを含む6種は枚数が違う。10/1〜10/18の赤/緑83デッキで〔クラン〕を軸にしたのはこの2本だけ。</p>
 
@@ -203,12 +211,14 @@
 <p>採用率は10/1〜10/18のシリアルカードチャレンジ 10月の入賞デッキのうち、デッキカラーが赤/緑の83本を母数にした。「珍」は赤/緑での採用率が10%未満のカード。デッキリストが公開されていない入賞デッキは数に入れていない。数字は公式の大会結果から自動で集めた集計で、誤りに気づいたら<a href="https://x.com/gcg_stats" target="_blank" rel="noopener">Xアカウント（@gcg_stats）</a>のDMで教えてほしい。</p>
 
     </article>
+    <div class="ad-slot" data-slot="article-end" data-kind="rect"></div>
     <div id="share-buttons" style="margin-top:32px"></div>
   </main>
 
   <div id="footer"></div>
 
   <script src="../js/common.js?v=13"></script>
+  <script src="../js/ads.js?v=2" defer></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('reports');
