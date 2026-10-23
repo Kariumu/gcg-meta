@@ -14,13 +14,13 @@
   "status": "active",
   "description": "公式イベント「ガンダムカードゲーム シリアルカードチャレンジ」の2026年10月開催分。開催期間は2026年10月1日〜10月31日。",
   "stats": {
-    "event_count": 286,
-    "total_result_entries": 2760,
-    "total_decks": 1380,
+    "event_count": 287,
+    "total_result_entries": 2768,
+    "total_decks": 1384,
     "by_region": {
       "関東": {
-        "events": 87,
-        "decks": 452
+        "events": 88,
+        "decks": 456
       },
       "九州": {
         "events": 47,
@@ -59,7 +59,7 @@
           "White"
         ],
         "label": "赤/白",
-        "count": 359,
+        "count": 360,
         "share": 26
       },
       {
@@ -69,18 +69,8 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "count": 231,
-        "share": 16.7
-      },
-      {
-        "type_key": "Blue+White",
-        "colors": [
-          "Blue",
-          "White"
-        ],
-        "label": "青/白",
-        "count": 221,
-        "share": 16
+        "count": 233,
+        "share": 16.8
       },
       {
         "type_key": "Blue+Purple",
@@ -89,6 +79,16 @@
           "Purple"
         ],
         "label": "青/紫",
+        "count": 222,
+        "share": 16
+      },
+      {
+        "type_key": "Blue+White",
+        "colors": [
+          "Blue",
+          "White"
+        ],
+        "label": "青/白",
         "count": 221,
         "share": 16
       },
@@ -152,8 +152,8 @@
         ],
         "label": "赤/白",
         "wins": 94,
-        "count": 359,
-        "win_rate": 26.2
+        "count": 360,
+        "win_rate": 26.1
       },
       {
         "type_key": "Blue+Green",
@@ -185,8 +185,8 @@
         ],
         "label": "青/紫",
         "wins": 53,
-        "count": 221,
-        "win_rate": 24
+        "count": 222,
+        "win_rate": 23.9
       },
       {
         "type_key": "Green+Purple",
@@ -195,9 +195,9 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "wins": 46,
-        "count": 231,
-        "win_rate": 19.9
+        "wins": 47,
+        "count": 233,
+        "win_rate": 20.2
       },
       {
         "type_key": "Red+Green",
