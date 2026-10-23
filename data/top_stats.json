@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 287,
-    "decks": 1384,
+    "events": 288,
+    "decks": 1392,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 360,
+      "count": 362,
       "share": 26,
-      "win_rate": 26.1,
+      "win_rate": 26.2,
       "avg_rank": 2.5,
-      "wins": 94
+      "wins": 95
     },
     {
       "type_key": "Green+Purple",
@@ -30,11 +30,24 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 233,
-      "share": 16.8,
-      "win_rate": 20.2,
+      "count": 235,
+      "share": 16.9,
+      "win_rate": 20.4,
       "avg_rank": 2.6,
-      "wins": 47
+      "wins": 48
+    },
+    {
+      "type_key": "Blue+White",
+      "colors": [
+        "Blue",
+        "White"
+      ],
+      "label": "青/白",
+      "count": 222,
+      "share": 15.9,
+      "win_rate": 23.9,
+      "avg_rank": 2.6,
+      "wins": 53
     },
     {
       "type_key": "Blue+Purple",
@@ -44,22 +57,9 @@
       ],
       "label": "青/紫",
       "count": 222,
-      "share": 16,
+      "share": 15.9,
       "win_rate": 23.9,
       "avg_rank": 2.5,
-      "wins": 53
-    },
-    {
-      "type_key": "Blue+White",
-      "colors": [
-        "Blue",
-        "White"
-      ],
-      "label": "青/白",
-      "count": 221,
-      "share": 16,
-      "win_rate": 24,
-      "avg_rank": 2.6,
       "wins": 53
     },
     {
@@ -69,9 +69,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 203,
-      "share": 14.7,
-      "win_rate": 30,
+      "count": 206,
+      "share": 14.8,
+      "win_rate": 29.6,
       "avg_rank": 2.4,
       "wins": 61
     },
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 599,
-      "usage_rate": 43.3
+      "decks": 602,
+      "usage_rate": 43.2
     },
     {
       "card_id": "GD04-068",
-      "decks": 545,
+      "decks": 548,
       "usage_rate": 39.4
     },
     {
       "card_id": "GD01-100",
-      "decks": 513,
-      "usage_rate": 37.1
+      "decks": 515,
+      "usage_rate": 37
     },
     {
       "card_id": "ST01-010",
-      "decks": 478,
-      "usage_rate": 34.5
+      "decks": 482,
+      "usage_rate": 34.6
     },
     {
       "card_id": "GD03-056",
-      "decks": 459,
-      "usage_rate": 33.2
+      "decks": 461,
+      "usage_rate": 33.1
     },
     {
       "card_id": "GD05-110",
-      "decks": 438,
+      "decks": 440,
       "usage_rate": 31.6
     },
     {
       "card_id": "ST03-008",
-      "decks": 434,
-      "usage_rate": 31.4
+      "decks": 439,
+      "usage_rate": 31.5
     },
     {
       "card_id": "GD05-111",
-      "decks": 424,
+      "decks": 426,
       "usage_rate": 30.6
     },
     {
       "card_id": "GD05-081",
-      "decks": 403,
-      "usage_rate": 29.1
+      "decks": 404,
+      "usage_rate": 29
     },
     {
       "card_id": "GD05-002",
-      "decks": 402,
+      "decks": 403,
       "usage_rate": 29
     }
   ],
-  "card_ranking_denominator": 1384,
+  "card_ranking_denominator": 1392,
   "recent_events": [
     {
       "event_id": "ntcd-01M5H623JJ5Z4WV37SCP0WDT2C",
@@ -283,6 +283,41 @@
           "colors": [
             "Red",
             "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M5KVWT8NTF9SCHJ7SD83C92H",
+      "date": "2026-10-22",
+      "store": "コーギーアール横浜店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
           ]
         }
       ]
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M5CBJDR4FPZ1C78PV14SSFH2",
-      "date": "2026-10-20",
-      "store": "カードボックスヨコハマ本店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-22",
-    "event_count": 1902
+    "event_count": 1903
   }
 }
