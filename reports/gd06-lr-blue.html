@@ -59,6 +59,9 @@
 .ad-slot{display:flex;flex-direction:column;align-items:center;margin:20px auto;width:100%;overflow:hidden}
 .ad-slot[data-kind="rect"]{min-height:272px}
 @media(max-width:331px){.ad-slot[data-kind="rect"]{display:none}}
+.ad-slot[data-kind="band"]{min-height:72px}
+@media(min-width:820px){.ad-slot[data-kind="band"]{min-height:112px}}
+@media(max-width:351px){.ad-slot[data-kind="band"]{display:none}}
 .ad-slot-failed,.ad-slot-none{display:none}
 .ad-slot[data-slot="article-end"]{margin-bottom:32px}
 </style>
@@ -145,7 +148,7 @@
 
   <div id="footer"></div>
   <script src="../js/common.js?v=13"></script>
-  <script src="../js/ads.js?v=2" defer></script>
+  <script src="../js/ads.js?v=3" defer></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('reports');
