@@ -259,11 +259,11 @@
         <div class="stats-grid" style="margin-top:16px">
           <div class="stat-card">
             <div class="stat-label">採用デッキ数</div>
-            <div class="stat-value">1<span class="unit"> デッキ</span></div>
+            <div class="stat-value">2<span class="unit"> デッキ</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">全体採用率</div>
-            <div class="stat-value">0.0<span class="unit">%</span></div>
+            <div class="stat-value">0.1<span class="unit">%</span></div>
           </div>
           <div class="stat-card">
             <div class="stat-label">優勝デッキ数</div>
@@ -298,13 +298,13 @@
             <tbody>
               <tr>
                 <td><span class="color-tag color-tag-blue">青</span> <span class="color-tag color-tag-purple">紫</span></td>
-                <td class="text-mono">1 / 2115</td>
+                <td class="text-mono">2 / 2117</td>
                 <td>
                   <div class="flex items-center gap-8">
                     <div class="usage-bar-container">
-                      <div class="usage-bar" style="width:0%;background:#4488ff"></div>
+                      <div class="usage-bar" style="width:0.1%;background:#4488ff"></div>
                     </div>
-                    <span class="usage-rate">0%</span>
+                    <span class="usage-rate">0.1%</span>
                   </div>
                 </td>
                 <td class="text-mono">1</td>
@@ -427,7 +427,7 @@
         <details class="collapsible-section">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">このカードが入っている入賞デッキ（ベスト4まで）</h2>
-            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="section-badge">1件</span><span class="toggle-icon"></span></div>
+            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="section-badge">2件</span><span class="toggle-icon"></span></div>
           </summary>
           <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">大会で 4 位以内（ベスト4）に入ったデッキのうち、このカードを入れているものを新しい順に並べています。店舗名を押すと、そのデッキの中身（大会結果ページ）が見られます。64 名規模の大会（NTC やシリアルカードチャレンジ）は、公式の 1〜8 位を 1〜4 位として載せています。同じ大会で優勝が 2 人並ぶのはそのためです。</p>
           <table class="data-table">
@@ -441,6 +441,13 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.10.24</td>
+                <td><a href="../../events/ntcd-01M5P3ZT8K8TKZG454GYJM7X1Y.html" style="color:var(--text-primary);text-decoration:none">マナソース和歌山駅前店</a></td>
+                <td>かきを</td>
+                <td class="rank-cell rank-3">3位</td>
+                <td class="text-mono">×1</td>
+              </tr>
               <tr>
                 <td class="text-mono" style="color:var(--accent)">2026.10.12</td>
                 <td><a href="../../events/ntcd-01M4QHGZK8VATQAV0XBZVZ2TNR.html" style="color:var(--text-primary);text-decoration:none">トレカザウルス 京都店</a></td>
@@ -461,7 +468,7 @@
       </div>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">ゾックは「機動戦士ガンダム」に登場する青のユニットカードです。Lv.3・コスト2で、AP3/HP3のステータスを持ちます。特徴は「ジオン」「水中」です。レアリティはC+で、ST11に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
-      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。合計1デッキで採用されており、平均1枚で投入されています。最も採用率が高いデッキタイプは青紫系（0%）です。</p>
+      <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">パラレル版のため、採用率データは通常版と共通で集計されています。ニュータイプチャレンジ大会での採用率は0.1%で、特定のデッキタイプで活躍しています。合計2デッキで採用されており、平均1枚で投入されています。最も採用率が高いデッキタイプは青紫系（0.1%）です。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">相性の良いカード</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">このカードと相性が良く、よく一緒に採用されるカードとしてガンタンク（同時採用率100%）、ジェガン（同時採用率100%）、リゼル（同時採用率100%）などがあります。デッキ構築の参考にしてください。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 12px;color:var(--text-primary)">このカードの特徴</h3>
@@ -541,7 +548,7 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', 'ゾック（ST11-003_p1）パラレル版採用率0.0% | GCG STATS');
+    GCG.renderShareButtons('share-buttons', 'ゾック（ST11-003_p1）パラレル版採用率0.1% | GCG STATS');
   </script>
 </body>
 </html>
