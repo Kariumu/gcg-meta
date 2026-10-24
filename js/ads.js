@@ -12,8 +12,14 @@
  *   マイページの枠(data-slot が mypage- で始まる)は、お気に入りが 1 件以上あるときだけ埋める(指示書152 §8-1)。
  *   広告が埋まらなかったとき(unfilled)も何もしない(畳むと本文が動くため。§8-2)。
  *   枠の高さの予約はページ側の <style> が持つ。ここの <style> は中身の見た目だけ。
- *   記事の枠(data-slot が article-mid / article-end の四角)は、記事用の広告ユニットを使う(指示書153・PLACEMENT_SLOTS)。
- *   記事のページはこのファイルを ads.js?v=2 で読む(このファイルを直したら、記事の ?v= も上げる)。
+ *   置き場所ごとの広告ユニット(PLACEMENT_SLOTS・置き場所 → 大きさ → スロット)。表に無い置き場所・大きさは、大きさで決まる既存のスロット(SLOTS)。
+ *     記事の本文中 article-mid は帯(指示書154)・記事の末尾 article-end は四角(指示書153)・大会結果のデッキの間 events-deck-1〜3 は帯(指示書154)。
+ *   後から作られた枠は window.GCGAds.scan(root) で埋める(大会結果のページの描き直しの後に呼ぶ・指示書154)。
+ *     埋めたかどうかは枠ごとの印(data-ad-filled)で決める。scan はページ全体の再実行ガード(__gcgAdsDone)を立ても見もしない。
+ *   記事のページと大会結果のページはこのファイルを ads.js?v=3 で読む(このファイルを直したら、記事と大会結果の ?v= も上げる)。
+ *   店舗・スケジュール・マイページは ?v=1 のまま。
+ *   タッチ端末の縮め方(usableWidth)で帯が 320 未満になっても、記事の本文中・大会結果のデッキの間の帯は、枠の本当の幅が 320 以上なら
+ *     320x50 を出す(指示書154-R1・BAND_FALLBACK_PLACEMENT)。前提: そのページに「351px 以下で帯を隠す」予約の CSS があること。
  */
 (function () {
   'use strict';
@@ -29,8 +35,18 @@
     '300x250': { w: 300, h: 250, slot: '1489762280' }
   };
 
-  // 置き場所ごとの広告ユニット(指示書153・2026-10-23 作成・どちらも固定サイズ 300x250)。四角(rect)の枠だけに使う
-  var PLACEMENT_SLOTS = { 'article-mid': '5931941303', 'article-end': '2575772345' };
+  // 置き場所ごとの広告ユニット(置き場所 → 大きさ → スロット)。指示書153(2026-10-23 作成)・指示書154(2026-10-24 作成)・どれも固定サイズ
+  var PLACEMENT_SLOTS = {
+    'article-mid': { '728x90': '3057214576', '320x50': '1744132902' },
+    'article-end': { '300x250': '2575772345' },
+    'events-deck': { '728x90': '8473278509', '320x50': '4414528271' }
+  };
+  var has = function (o, k) { return Object.prototype.hasOwnProperty.call(o, k); };
+  // data-slot から表を引く名前(events-deck-1〜 は events-deck で引く)
+  function placementKey(p) { return /^events-deck-\d+$/.test(p) ? 'events-deck' : p; }
+  // 指示書154-R1: 縮めた幅で帯を畳まない置き場所(ページ側に「351px 以下で帯を隠す」予約の CSS がある所だけ)
+  var BAND_FALLBACK_PLACEMENT = { 'article-mid': true, 'events-deck': true };
+  function isBandFallbackPlacement(p) { return has(BAND_FALLBACK_PLACEMENT, placementKey(p)); }
 
   // 帯の PC 用(728x90)を選ぶ画面幅の下限。ページ側の予約(@media(min-width:820px))と同じ値にすること
   var BAND_WIDE_MIN_VIEWPORT = 820;
@@ -123,11 +139,18 @@
 
     var size = pickSize(slot.getAttribute('data-kind'), usableWidth(slot));
     if (size === undefined) return;
+    // 指示書154-R1: 新しい置き場所の帯だけ、タッチ端末で縮めた幅が 320 未満でも、枠の本当の幅が 320 以上なら 320x50 を選ぶ
+    // (縮めた幅は 728x90 を選ぶかどうかにだけ使う)。回して枠が 320 未満になる画面幅 351 以下では、ページ側の予約の CSS
+    // (@media(max-width:351px){.ad-slot[data-kind="band"]{display:none}})が枠ごと隠すので、はみ出さない。
+    // この CSS が無いページの帯には効かせない(ほかの 7 枠は 152 のまま)。BAND_FALLBACK_PLACEMENT に足すときは、そのページにこの CSS を置く。
+    if (size === null && slot.getAttribute('data-kind') === 'band' && isBandFallbackPlacement(placement) && slot.clientWidth >= 320) size = '320x50';
     if (size === null) { slot.classList.add('ad-slot-none'); return; }
 
     var u = SLOTS[size];
     var unitSlot = u.slot;
-    if (size === '300x250' && slot.getAttribute('data-kind') === 'rect' && Object.prototype.hasOwnProperty.call(PLACEMENT_SLOTS, placement)) unitSlot = PLACEMENT_SLOTS[placement];
+    // 置き場所が表にあり、その大きさも表にあるときだけ置き場所のスロット(無ければ大きさで決まる既存のスロット)
+    var key = placementKey(placement);
+    if (has(PLACEMENT_SLOTS, key) && has(PLACEMENT_SLOTS[key], size)) unitSlot = PLACEMENT_SLOTS[key][size];
     slot.innerHTML =
       '<div class="ad-slot-inner"><span class="ad-label">広告</span>' +
       '<ins class="adsbygoogle" style="display:inline-block;width:' + u.w + 'px;height:' + u.h + 'px"' +
@@ -139,9 +162,10 @@
     (window.adsbygoogle = window.adsbygoogle || []).push({});
   }
 
-  function run() {
+  // root の中の枠をまだ埋めていない物だけ埋める(埋めた枠は fill の最初の判定で飛ばす)
+  function run(root) {
     try {
-      var slots = document.querySelectorAll('.ad-slot[data-slot]');
+      var slots = (root || document).querySelectorAll('.ad-slot[data-slot]');
       if (!slots.length) return;
       var client = readClient();
       if (!client) { warnOnce('AdSense の読み込みタグ(client=)が見つからないため広告を出しません'); return; }
@@ -155,9 +179,12 @@
     } catch (e) { warnOnce(e); }
   }
 
+  // 後から作られた枠を埋める入口(指示書154)。root を省くとページ全体
+  window.GCGAds = { scan: function (root) { run(root && root.querySelectorAll ? root : document); } };
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', run);
+    document.addEventListener('DOMContentLoaded', function () { run(document); });
   } else {
-    run();
+    run(document);
   }
 })();
