@@ -14,9 +14,9 @@
   "status": "active",
   "description": "公式イベント「ガンダムカードゲーム シリアルカードチャレンジ」の2026年10月開催分。開催期間は2026年10月1日〜10月31日。",
   "stats": {
-    "event_count": 289,
-    "total_result_entries": 2792,
-    "total_decks": 1396,
+    "event_count": 291,
+    "total_result_entries": 2808,
+    "total_decks": 1404,
     "by_region": {
       "関東": {
         "events": 89,
@@ -27,16 +27,16 @@
         "decks": 192
       },
       "中国": {
-        "events": 15,
-        "decks": 72
+        "events": 16,
+        "decks": 76
       },
       "関西": {
         "events": 49,
         "decks": 256
       },
       "中部": {
-        "events": 61,
-        "decks": 280
+        "events": 62,
+        "decks": 284
       },
       "四国": {
         "events": 9,
@@ -59,8 +59,8 @@
           "White"
         ],
         "label": "赤/白",
-        "count": 363,
-        "share": 26
+        "count": 366,
+        "share": 26.1
       },
       {
         "type_key": "Green+Purple",
@@ -70,7 +70,7 @@
         ],
         "label": "緑/紫",
         "count": 235,
-        "share": 16.8
+        "share": 16.7
       },
       {
         "type_key": "Blue+Purple",
@@ -79,8 +79,8 @@
           "Purple"
         ],
         "label": "青/紫",
-        "count": 224,
-        "share": 16
+        "count": 226,
+        "share": 16.1
       },
       {
         "type_key": "Blue+White",
@@ -89,7 +89,7 @@
           "White"
         ],
         "label": "青/白",
-        "count": 222,
+        "count": 223,
         "share": 15.9
       },
       {
@@ -100,7 +100,7 @@
         ],
         "label": "青/緑",
         "count": 206,
-        "share": 14.8
+        "share": 14.7
       },
       {
         "type_key": "Red+Green",
@@ -110,7 +110,7 @@
         ],
         "label": "赤/緑",
         "count": 44,
-        "share": 3.2
+        "share": 3.1
       },
       {
         "type_key": "Blue+Red",
@@ -119,8 +119,8 @@
           "Red"
         ],
         "label": "青/赤",
-        "count": 41,
-        "share": 2.9
+        "count": 42,
+        "share": 3
       },
       {
         "type_key": "Green+White",
@@ -129,8 +129,8 @@
           "White"
         ],
         "label": "緑/白",
-        "count": 32,
-        "share": 2.3
+        "count": 33,
+        "share": 2.4
       },
       {
         "type_key": "Red+Purple",
@@ -152,8 +152,8 @@
         ],
         "label": "赤/白",
         "wins": 96,
-        "count": 363,
-        "win_rate": 26.4
+        "count": 366,
+        "win_rate": 26.2
       },
       {
         "type_key": "Blue+Green",
@@ -167,6 +167,17 @@
         "win_rate": 29.6
       },
       {
+        "type_key": "Blue+Purple",
+        "colors": [
+          "Blue",
+          "Purple"
+        ],
+        "label": "青/紫",
+        "wins": 54,
+        "count": 226,
+        "win_rate": 23.9
+      },
+      {
         "type_key": "Blue+White",
         "colors": [
           "Blue",
@@ -174,19 +185,8 @@
         ],
         "label": "青/白",
         "wins": 53,
-        "count": 222,
-        "win_rate": 23.9
-      },
-      {
-        "type_key": "Blue+Purple",
-        "colors": [
-          "Blue",
-          "Purple"
-        ],
-        "label": "青/紫",
-        "wins": 53,
-        "count": 224,
-        "win_rate": 23.7
+        "count": 223,
+        "win_rate": 23.8
       },
       {
         "type_key": "Green+Purple",
@@ -218,8 +218,19 @@
         ],
         "label": "青/赤",
         "wins": 9,
-        "count": 41,
-        "win_rate": 22
+        "count": 42,
+        "win_rate": 21.4
+      },
+      {
+        "type_key": "Green+White",
+        "colors": [
+          "Green",
+          "White"
+        ],
+        "label": "緑/白",
+        "wins": 7,
+        "count": 33,
+        "win_rate": 21.2
       },
       {
         "type_key": "Red+Purple",
@@ -231,17 +242,6 @@
         "wins": 7,
         "count": 29,
         "win_rate": 24.1
-      },
-      {
-        "type_key": "Green+White",
-        "colors": [
-          "Green",
-          "White"
-        ],
-        "label": "緑/白",
-        "wins": 6,
-        "count": 32,
-        "win_rate": 18.8
       }
     ]
   }
