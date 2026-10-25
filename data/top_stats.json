@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 302,
-    "decks": 1460,
+    "events": 304,
+    "decks": 1468,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 391,
+      "count": 393,
       "share": 26.8,
-      "win_rate": 26.1,
+      "win_rate": 26,
       "avg_rank": 2.5,
       "wins": 102
     },
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 246,
-      "share": 16.8,
-      "win_rate": 21.5,
+      "count": 248,
+      "share": 16.9,
+      "win_rate": 21.4,
       "avg_rank": 2.6,
       "wins": 53
     },
@@ -43,11 +43,11 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 232,
+      "count": 233,
       "share": 15.9,
-      "win_rate": 23.3,
+      "win_rate": 23.6,
       "avg_rank": 2.5,
-      "wins": 54
+      "wins": 55
     },
     {
       "type_key": "Blue+White",
@@ -56,9 +56,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 227,
+      "count": 228,
       "share": 15.5,
-      "win_rate": 24.2,
+      "win_rate": 24.1,
       "avg_rank": 2.6,
       "wins": 55
     },
@@ -69,9 +69,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 209,
+      "count": 210,
       "share": 14.3,
-      "win_rate": 29.7,
+      "win_rate": 29.5,
       "avg_rank": 2.4,
       "wins": 62
     },
@@ -82,11 +82,11 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 44,
-      "share": 3,
-      "win_rate": 20.5,
+      "count": 45,
+      "share": 3.1,
+      "win_rate": 22.2,
       "avg_rank": 2.4,
-      "wins": 9
+      "wins": 10
     },
     {
       "type_key": "Red+Green",
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 639,
-      "usage_rate": 43.8
+      "decks": 642,
+      "usage_rate": 43.7
     },
     {
       "card_id": "GD04-068",
-      "decks": 584,
+      "decks": 587,
       "usage_rate": 40
     },
     {
       "card_id": "GD01-100",
-      "decks": 534,
-      "usage_rate": 36.6
+      "decks": 536,
+      "usage_rate": 36.5
     },
     {
       "card_id": "ST01-010",
-      "decks": 495,
+      "decks": 497,
       "usage_rate": 33.9
     },
     {
       "card_id": "GD03-056",
-      "decks": 482,
+      "decks": 485,
       "usage_rate": 33
     },
     {
       "card_id": "GD05-110",
-      "decks": 473,
+      "decks": 476,
       "usage_rate": 32.4
     },
     {
       "card_id": "GD05-111",
-      "decks": 457,
+      "decks": 459,
       "usage_rate": 31.3
     },
     {
       "card_id": "ST03-008",
-      "decks": 453,
-      "usage_rate": 31
+      "decks": 456,
+      "usage_rate": 31.1
     },
     {
       "card_id": "GD05-081",
-      "decks": 416,
+      "decks": 419,
       "usage_rate": 28.5
     },
     {
       "card_id": "GD05-002",
-      "decks": 415,
-      "usage_rate": 28.4
+      "decks": 418,
+      "usage_rate": 28.5
     }
   ],
-  "card_ranking_denominator": 1460,
+  "card_ranking_denominator": 1468,
   "recent_events": [
     {
       "event_id": "ntcd-01M5RPCEF17C6EKS62XC6PBQBP",
@@ -283,6 +283,76 @@
           "colors": [
             "Blue",
             "Green"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M5S445QPN4WS95T54T0VWJ08",
+      "date": "2026-10-25",
+      "store": "ガンダムカードゲーム 公式ショップ 埼玉 越谷レイクタウン店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M5S443RYN3BP3GB6X7VNTE55",
+      "date": "2026-10-25",
+      "store": "TSUTAYAブックセンター名豊刈谷店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
           ]
         }
       ]
@@ -461,80 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M5PE9VWG0TEFYTHYYH7SPYBN",
-      "date": "2026-10-24",
-      "store": "スーパーカボス敦賀店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Green",
-            "White"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M5PHQPHNW6980RRSWB4YKE6K",
-      "date": "2026-10-24",
-      "store": "TSUTAYA宮古店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-10-25",
-    "event_count": 1917
+    "event_count": 1919
   }
 }
