@@ -14,12 +14,15 @@
  *   枠の高さの予約はページ側の <style> が持つ。ここの <style> は中身の見た目だけ。
  *   置き場所ごとの広告ユニット(PLACEMENT_SLOTS・置き場所 → 大きさ → スロット)。表に無い置き場所・大きさは、大きさで決まる既存のスロット(SLOTS)。
  *     記事の本文中 article-mid は帯(指示書154)・記事の末尾 article-end は四角(指示書153)・大会結果のデッキの間 events-deck-1〜3 は帯(指示書154)。
+ *     カード個別の表の直後 card-top と入賞デッキの直前 card-decks・大会結果の関連大会の直前 events-related は帯(指示書156-A)。
+ *     環境分析の本文中 meta-mid・カードリストの本文中 cards-mid は帯で、表だけ先に入れてある(枠は指示書156-B で置く)。
  *   後から作られた枠は window.GCGAds.scan(root) で埋める(大会結果のページの描き直しの後に呼ぶ・指示書154)。
  *     埋めたかどうかは枠ごとの印(data-ad-filled)で決める。scan はページ全体の再実行ガード(__gcgAdsDone)を立ても見もしない。
- *   記事のページと大会結果のページはこのファイルを ads.js?v=3 で読む(このファイルを直したら、記事と大会結果の ?v= も上げる)。
- *   店舗・スケジュール・マイページは ?v=1 のまま。
+ *   カード個別と大会結果のページはこのファイルを ads.js?v=4 で読む(指示書156-A)。記事は ?v=3 のまま(指示書156-A の決定。?v= が違っても配られる中身は同じこのファイル)。
+ *   店舗・スケジュール・マイページは ?v=1 のまま。このファイルを直したら、読むページの ?v= を上げるかどうかを指示書で決める。
  *   タッチ端末の縮め方(usableWidth)で帯が 320 未満になっても、記事の本文中・大会結果のデッキの間の帯は、枠の本当の幅が 320 以上なら
  *     320x50 を出す(指示書154-R1・BAND_FALLBACK_PLACEMENT)。前提: そのページに「351px 以下で帯を隠す」予約の CSS があること。
+ *     指示書156-A で card-top・card-decks・events-related・meta-mid・cards-mid を足した。meta-mid・cards-mid は、156-B で枠を置くページにこの CSS を置くことが前提。
  */
 (function () {
   'use strict';
@@ -35,17 +38,25 @@
     '300x250': { w: 300, h: 250, slot: '1489762280' }
   };
 
-  // 置き場所ごとの広告ユニット(置き場所 → 大きさ → スロット)。指示書153(2026-10-23 作成)・指示書154(2026-10-24 作成)・どれも固定サイズ
+  // 置き場所ごとの広告ユニット(置き場所 → 大きさ → スロット)。指示書153(2026-10-23 作成)・指示書154(2026-10-24 作成)・指示書156-A(2026-10-28 作成)・どれも固定サイズ
   var PLACEMENT_SLOTS = {
     'article-mid': { '728x90': '3057214576', '320x50': '1744132902' },
     'article-end': { '300x250': '2575772345' },
-    'events-deck': { '728x90': '8473278509', '320x50': '4414528271' }
+    'events-deck': { '728x90': '8473278509', '320x50': '4414528271' },
+    'card-top': { '728x90': '8524412641', '320x50': '3480095836' },
+    'card-decks': { '728x90': '8920124774', '320x50': '3849515516' },
+    'events-related': { '728x90': '5209864498', '320x50': '8540850826' },
+    'meta-mid': { '728x90': '1970291789', '320x50': '4906400136' },
+    'cards-mid': { '728x90': '7227769157', '320x50': '3010864535' }
   };
   var has = function (o, k) { return Object.prototype.hasOwnProperty.call(o, k); };
   // data-slot から表を引く名前(events-deck-1〜 は events-deck で引く)
   function placementKey(p) { return /^events-deck-\d+$/.test(p) ? 'events-deck' : p; }
   // 指示書154-R1: 縮めた幅で帯を畳まない置き場所(ページ側に「351px 以下で帯を隠す」予約の CSS がある所だけ)
-  var BAND_FALLBACK_PLACEMENT = { 'article-mid': true, 'events-deck': true };
+  var BAND_FALLBACK_PLACEMENT = {
+    'article-mid': true, 'events-deck': true,
+    'card-top': true, 'card-decks': true, 'events-related': true, 'meta-mid': true, 'cards-mid': true
+  };
   function isBandFallbackPlacement(p) { return has(BAND_FALLBACK_PLACEMENT, placementKey(p)); }
 
   // 帯の PC 用(728x90)を選ぶ画面幅の下限。ページ側の予約(@media(min-width:820px))と同じ値にすること

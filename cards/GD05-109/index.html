@@ -48,6 +48,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../css/style.css">
+  <style data-ads-reserve="156">.ad-slot{display:flex;flex-direction:column;align-items:center;margin:20px auto 32px;width:100%}.ad-slot[data-kind="band"]{min-height:72px}@media(min-width:820px){.ad-slot[data-kind="band"]{min-height:112px}}@media(max-width:351px){.ad-slot[data-kind="band"]{display:none}}.seo-text-section .ad-slot{margin-left:-24px;margin-right:-24px;width:auto}@media(max-width:353px){.seo-text-section .ad-slot[data-kind="band"]{display:none}}.ad-slot-failed,.ad-slot-none{display:none}.link-targets>summary{display:flex;align-items:center;justify-content:space-between;gap:8px}.link-targets[open]>summary{margin-bottom:10px}</style>
 </head>
 <body>
   <div id="header"></div>
@@ -104,8 +105,11 @@
         </a>
 
         
-        <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
-          <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:1px">リンク対象ユニット</h3>
+        <details class="collapsible-section link-targets" style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
+          <summary class="collapsible-toggle">
+            <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0;text-transform:uppercase;letter-spacing:1px">リンク対象ユニット（9）</h3>
+            <span class="toggle-icon"></span>
+          </summary>
           <div style="display:flex;flex-wrap:wrap;gap:10px">
             <a href="../GD01-071/" style="display:flex;align-items:center;gap:8px;text-decoration:none;padding:6px 10px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:6px;transition:border-color 0.15s"
                    onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
@@ -216,7 +220,7 @@
                   </div>
                 </a>
           </div>
-        </div>
+        </details>
         <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
           <h3 style="font-size:13px;font-family:var(--font-mono);color:var(--text-muted);margin:0 0 10px;text-transform:uppercase;letter-spacing:1px">効果が参照する 〔学園〕のユニット（全32枚）</h3>
           <div style="display:flex;flex-wrap:wrap;gap:10px">
@@ -393,6 +397,7 @@
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">フェルシーの懇願は「機動戦士ガンダム 水星の魔女」に登場する緑のコマンドカードです。Lv.3・コスト1のコマンドカードで、AP+0/HP+1の補正を持ちます。レアリティはCで、GD05に収録されています。</p>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 8px;color:var(--text-primary)">大会での採用状況</h3>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">現時点でのニュータイプチャレンジ大会での採用は確認されていません。今後の環境変化で評価が変わる可能性があります。</p>
+      <div class="ad-slot" data-slot="card-top" data-kind="band"></div>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 12px;color:var(--text-primary)">このカードの特徴</h3>
       <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px;padding:14px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg)">
 
@@ -449,6 +454,7 @@
   </script>
 
   <script src="../../js/common.js?v=8"></script>
+  <script src="../../js/ads.js?v=4" defer></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
