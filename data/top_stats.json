@@ -5,8 +5,8 @@
     "series_slug": "serial-2026-10"
   },
   "totals": {
-    "events": 314,
-    "decks": 1528,
+    "events": 316,
+    "decks": 1536,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 403,
+      "count": 406,
       "share": 26.4,
-      "win_rate": 25.3,
+      "win_rate": 25.4,
       "avg_rank": 2.5,
-      "wins": 102
+      "wins": 103
     },
     {
       "type_key": "Green+Purple",
@@ -30,11 +30,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 268,
-      "share": 17.5,
-      "win_rate": 22.4,
+      "count": 270,
+      "share": 17.6,
+      "win_rate": 22.6,
       "avg_rank": 2.6,
-      "wins": 60
+      "wins": 61
     },
     {
       "type_key": "Blue+Purple",
@@ -43,9 +43,9 @@
         "Purple"
       ],
       "label": "青/紫",
-      "count": 240,
+      "count": 241,
       "share": 15.7,
-      "win_rate": 23.8,
+      "win_rate": 23.7,
       "avg_rank": 2.5,
       "wins": 57
     },
@@ -57,7 +57,7 @@
       ],
       "label": "青/白",
       "count": 232,
-      "share": 15.2,
+      "share": 15.1,
       "win_rate": 23.7,
       "avg_rank": 2.6,
       "wins": 55
@@ -69,9 +69,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 226,
+      "count": 228,
       "share": 14.8,
-      "win_rate": 29.6,
+      "win_rate": 29.4,
       "avg_rank": 2.4,
       "wins": 67
     },
@@ -109,7 +109,7 @@
       ],
       "label": "緑/白",
       "count": 36,
-      "share": 2.4,
+      "share": 2.3,
       "win_rate": 19.4,
       "avg_rank": 2.7,
       "wins": 7
@@ -122,7 +122,7 @@
       ],
       "label": "赤/紫",
       "count": 33,
-      "share": 2.2,
+      "share": 2.1,
       "win_rate": 21.2,
       "avg_rank": 2.5,
       "wins": 7
@@ -131,57 +131,127 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 656,
+      "decks": 659,
       "usage_rate": 42.9
     },
     {
       "card_id": "GD04-068",
-      "decks": 600,
-      "usage_rate": 39.3
+      "decks": 602,
+      "usage_rate": 39.2
     },
     {
       "card_id": "GD01-100",
-      "decks": 553,
-      "usage_rate": 36.2
+      "decks": 555,
+      "usage_rate": 36.1
     },
     {
       "card_id": "ST01-010",
-      "decks": 519,
-      "usage_rate": 34
+      "decks": 521,
+      "usage_rate": 33.9
     },
     {
       "card_id": "GD03-056",
-      "decks": 512,
+      "decks": 515,
       "usage_rate": 33.5
     },
     {
       "card_id": "ST03-008",
-      "decks": 492,
-      "usage_rate": 32.2
+      "decks": 496,
+      "usage_rate": 32.3
     },
     {
       "card_id": "GD05-110",
-      "decks": 487,
+      "decks": 490,
       "usage_rate": 31.9
     },
     {
       "card_id": "GD05-111",
-      "decks": 472,
+      "decks": 475,
       "usage_rate": 30.9
     },
     {
       "card_id": "GD01-030",
-      "decks": 449,
+      "decks": 452,
       "usage_rate": 29.4
     },
     {
-      "card_id": "GD05-081",
-      "decks": 429,
+      "card_id": "ST05-010",
+      "decks": 432,
       "usage_rate": 28.1
     }
   ],
-  "card_ranking_denominator": 1528,
+  "card_ranking_denominator": 1536,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M63A98MZDKVYW3JAH7MXPXW5",
+      "date": "2026-10-29",
+      "store": "S CARD OASIS 鳳店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M63A97300GKDFG4D45KAM4QJ",
+      "date": "2026-10-29",
+      "store": "トレカマーケットオンリーワン",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M60MF5PPRE056K95P8T24FH6",
       "date": "2026-10-28",
@@ -461,80 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M5W7P97GF6MT5C9WQKW585P7",
-      "date": "2026-10-26",
-      "store": "カードショップ＠ほ～む。熊本店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "Purple"
-          ]
-        }
-      ]
-    },
-    {
-      "event_id": "ntcd-01M5RPCEF17C6EKS62XC6PBQBP",
-      "date": "2026-10-25",
-      "store": "ブックエース小名浜住吉店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-10-28",
-    "event_count": 1929
+    "latest_event_date": "2026-10-29",
+    "event_count": 1931
   }
 }
