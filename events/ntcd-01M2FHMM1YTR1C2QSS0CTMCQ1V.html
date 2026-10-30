@@ -55,7 +55,7 @@
 
   <script src="../shared/ntc-rank-consolidator.js?v=3"></script>
   <script src="../js/common.js?v=11"></script>
-  <script src="../js/ads.js?v=3" defer></script>
+  <script src="../js/ads.js?v=4" defer></script>
   <script>
 
     GCG.init();
@@ -259,6 +259,7 @@
                          sameSeriesNearDate.map(relatedCard).join('') +
                          '</section>';
         }
+        if (relatedHtml && results.length >= 3) html += '<div class="ad-slot" data-slot="events-related" data-kind="band"></div>';
         html += relatedHtml;
       } catch(e) { /* 無視 */ }
 
