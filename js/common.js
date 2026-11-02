@@ -671,6 +671,8 @@ const GCG = {
   // PC 幅の狭い側(769〜1008px)は EN の分(約 56px)で主タブの文字の折り返しが増える(最大 4 行)ため、その幅だけ主タブ全体の左右余白を
   // 18px→10px に詰める(折り返す幅は改修前の 769〜952px より狭い 769〜896px・最大 2 行。2026-10-10 二次確認 h-1・松岡さん裁定)。
   // 上書き行は style.css と同じセレクタ(同じ詳細度)で書く=この <style> は DOM 順で style.css より後なので勝つ。
+  // 指示書158(2026-11-01): スマホ(≤768px)のヘッダーを縮める。ロゴを 1 行に・主タブと 2 段目を折り返さず横に送る 1 段に。
+  // 今いるタブを見える位置へ寄せる・端の「続きがある」印は _hdrScrollSetup()。769px 以上の見た目と HTML は変えない。
   _HDR98_SVG: '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   _HDR97_CSS: '<style id="gcg-hdr97">'
     + '.site-header-v2 .mt-group { display: flex; align-items: stretch; }'
@@ -698,6 +700,28 @@ const GCG = {
     + ' .site-header-v2 .sub-nav a { font-size: 13px; padding: 6px 12px; }'
     + ' .site-header-v2 nav.main-tabs a.hdr-lang { position: absolute; top: 14px; right: 12px; margin: 0; padding: 6px 10px; border: 1px solid var(--border-hover); }'
     + ' .site-header-v2 nav.main-tabs a.hdr-lang::before { display: none; }'
+    + ' .site-header-v2 { padding: 0 12px; }'
+    + ' .site-header-v2 .header-inner { position: relative; padding: 6px 0 0; gap: 2px; align-items: stretch; }'
+    + ' .site-header-v2 .site-logo { gap: 8px; min-height: 32px; padding-right: 64px; }'
+    + ' .site-header-v2 .site-logo .logo-icon { width: 26px; height: 26px; font-size: 13px; }'
+    + ' .site-header-v2 .site-logo .logo-text { font-size: 16px; letter-spacing: 2px; }'
+    + ' .site-header-v2 .site-logo .logo-sub { display: none; }'
+    + ' .site-header-v2 nav.main-tabs { flex-wrap: nowrap; justify-content: flex-start; gap: 2px; margin: 0 -12px; padding: 0 12px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }'
+    + ' .site-header-v2 nav.main-tabs::-webkit-scrollbar { display: none; }'
+    + ' .site-header-v2 nav.main-tabs > a, .site-header-v2 nav.main-tabs .mt-group { flex: none; white-space: nowrap; }'
+    + ' .site-header-v2 nav.main-tabs a { min-height: 36px; box-sizing: border-box; }'
+    + ' .site-header-v2 nav.main-tabs a.hdr-lang { top: 5px; right: 12px; min-height: 32px; padding: 0 10px; }'
+    + ' .site-header-v2 .header-inner::before, .site-header-v2 .header-inner::after, .site-header-v2 .sub-nav::before, .site-header-v2 .sub-nav::after { content: \'\'; position: absolute; bottom: 0; width: 28px; pointer-events: none; opacity: 0; transition: opacity 0.15s; z-index: 1; }'
+    + ' .site-header-v2 .header-inner::before, .site-header-v2 .header-inner::after { height: 36px; }'
+    + ' .site-header-v2 .header-inner::before, .site-header-v2 .sub-nav::before { left: -12px; background: linear-gradient(to right, rgb(17,24,32), rgba(17,24,32,0)); }'
+    + ' .site-header-v2 .header-inner::after, .site-header-v2 .sub-nav::after { right: -12px; background: linear-gradient(to left, rgb(17,24,32), rgba(17,24,32,0)); }'
+    + ' .site-header-v2 .header-inner.hs-more-l::before, .site-header-v2 .header-inner.hs-more-r::after, .site-header-v2 .sub-nav.hs-more-l::before, .site-header-v2 .sub-nav.hs-more-r::after { opacity: 1; }'
+    + ' .site-header-v2 .sub-nav { position: relative; margin: 0 -12px; }'
+    + ' .site-header-v2 .sub-nav::before { left: 0; top: 0; height: auto; } .site-header-v2 .sub-nav::after { right: 0; top: 0; height: auto; }'
+    + ' .site-header-v2 .sub-nav-inner { flex-wrap: nowrap; justify-content: flex-start; padding: 4px 12px; gap: 2px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; }'
+    + ' .site-header-v2 .sub-nav-inner::-webkit-scrollbar { display: none; }'
+    + ' .site-header-v2 .sub-nav-label { display: none; }'
+    + ' .site-header-v2 .sub-nav a { flex: none; white-space: nowrap; min-height: 32px; box-sizing: border-box; display: flex; align-items: center; }'
     + ' }'
     + '@media (min-width: 769px) and (max-width: 1008px) { .site-header-v2 nav.main-tabs a { padding: 0 10px; } .site-header-v2 nav.main-tabs .mt-group > a { padding-right: 2px; } .site-header-v2 .mt-toggle { padding: 0 6px 0 2px; } .site-header-v2 nav.main-tabs a.hdr-lang { margin-left: 4px; padding: 0 10px; } }'
     + '@media (max-width: 319.98px) { .site-header-v2 nav.main-tabs a.hdr-lang { position: static; margin-left: 4px; } }'
@@ -816,9 +840,60 @@ const GCG = {
     if (base) a.setAttribute('href', base + this._LANG_ENTRY.search());
   },
 
+  // 指示書158: スマホ(≤768px)で横に送る 2 つの列(主タブ・2 段目)に、今いるタブを見える位置へ寄せることと、
+  // 端の「続きがある」印(.hs-more-l / .hs-more-r)を付ける。列が送れない幅(PC)では何もしない(印も付かない)。
+  _hdrScrollMark(row, box) {
+    if (!row || !box) return;
+    const max = row.scrollWidth - row.clientWidth;
+    box.classList.toggle('hs-more-l', max > 1 && row.scrollLeft > 1);
+    box.classList.toggle('hs-more-r', max > 1 && row.scrollLeft < max - 1);
+  },
+  _hdrScrollActive(row) {
+    if (!row || row.scrollWidth - row.clientWidth <= 1 || row.dataset.hsTouched) return;   // 手で送った列は寄せ直さない
+    const a = row.querySelector('a.active');
+    if (!a) return;
+    const r = row.getBoundingClientRect(), b = a.getBoundingClientRect();
+    if (b.left >= r.left + 24 && b.right <= r.right - 24) return;   // もう見えている
+    row.scrollLeft += (b.left - r.left) - (row.clientWidth - b.width) / 2;
+  },
+  _hdrScrollAll(center) {
+    const nav = document.querySelector('.site-header-v2 nav.main-tabs');
+    const sub = document.getElementById('gcg-subnav');
+    const inner = sub && sub.querySelector('.sub-nav-inner');
+    if (center) { this._hdrScrollActive(nav); this._hdrScrollActive(inner); }
+    if (nav) this._hdrScrollMark(nav, nav.parentElement);
+    if (sub) this._hdrScrollMark(inner, sub);
+  },
+  _hdrScrollSetup() {
+    if (typeof document === 'undefined') return;
+    this._hdrScrollAll(true);
+    if (this._hdrWatch) this._hdrWatch();
+    const root = document.documentElement;
+    if (!root || root.dataset.gcgHdrScroll) return;
+    root.dataset.gcgHdrScroll = '1';
+    const touched = (e) => { const t = e.target; const r = (t && t.nodeType === 1 && t.closest) ? t.closest('.site-header-v2 nav.main-tabs, .site-header-v2 .sub-nav-inner') : null; if (r) r.dataset.hsTouched = '1'; };
+    document.addEventListener('pointerdown', touched, { capture: true, passive: true });
+    document.addEventListener('wheel', touched, { capture: true, passive: true });
+    document.addEventListener('scroll', (e) => {
+      const t = e.target;
+      if (t && t.nodeType === 1 && t.closest && t.closest('.site-header-v2')) GCG._hdrScrollAll(false);
+    }, { capture: true, passive: true });
+    window.addEventListener('resize', () => GCG._hdrScrollAll(false));
+    // 隠れていたヘッダーが出たとき(デッキビルダーの「メニュー」等)は幅が 0 から変わるので、今いるタブを寄せ直す
+    if (typeof ResizeObserver === 'function') {
+      let lastW = -1;
+      const ro = new ResizeObserver(() => { const n = document.querySelector('.site-header-v2 nav.main-tabs'); const w = n ? n.clientWidth : 0; const c = (lastW <= 0 && w > 0); lastW = w; GCG._hdrScrollAll(c); });
+      let watched = null;   // 指示書158-R0 C-1: 監視は 1 つだけ。描き直したら古いヘッダーを外してから新しい方を見る
+      const watch = () => { const h = document.querySelector('.site-header-v2'); if (!h || h === watched) return; if (watched) ro.unobserve(watched); watched = h; lastW = -1; ro.observe(h); };
+      watch(); this._hdrWatch = watch;
+    }
+    try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => GCG._hdrScrollAll(true)); } catch (e) { /* ignore */ }
+  },
+
   // 指示書97: ▾ を有効化する(hidden を外す)。委譲リスナー(click=capture / Escape=bubble)は document に 1 回だけ付ける。
   initHeaderSubNav() {
     if (typeof document === 'undefined') return;
+    this._hdrScrollSetup();   // 指示書158
     const sub = document.getElementById('gcg-subnav');
     document.querySelectorAll('.mt-toggle').forEach(b => { b.hidden = false; });
     if (sub) this._syncSubNavToggles(sub);
