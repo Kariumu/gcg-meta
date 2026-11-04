@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 35,
-    "decks": 168,
+    "events": 36,
+    "decks": 172,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 47,
-      "share": 28,
-      "win_rate": 23.4,
+      "count": 48,
+      "share": 27.9,
+      "win_rate": 25,
       "avg_rank": 2.5,
-      "wins": 11
+      "wins": 12
     },
     {
       "type_key": "Green+Purple",
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 37,
-      "share": 22,
-      "win_rate": 27,
+      "count": 39,
+      "share": 22.7,
+      "win_rate": 25.6,
       "avg_rank": 2.5,
       "wins": 10
     },
@@ -43,10 +43,10 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 22,
-      "share": 13.1,
-      "win_rate": 31.8,
-      "avg_rank": 2.5,
+      "count": 23,
+      "share": 13.4,
+      "win_rate": 30.4,
+      "avg_rank": 2.4,
       "wins": 7
     },
     {
@@ -57,7 +57,7 @@
       ],
       "label": "青/紫",
       "count": 21,
-      "share": 12.5,
+      "share": 12.2,
       "win_rate": 28.6,
       "avg_rank": 2.5,
       "wins": 6
@@ -70,7 +70,7 @@
       ],
       "label": "青/白",
       "count": 21,
-      "share": 12.5,
+      "share": 12.2,
       "win_rate": 28.6,
       "avg_rank": 2.3,
       "wins": 6
@@ -83,7 +83,7 @@
       ],
       "label": "赤/紫",
       "count": 11,
-      "share": 6.5,
+      "share": 6.4,
       "win_rate": 0,
       "avg_rank": 2.9,
       "wins": 0
@@ -96,7 +96,7 @@
       ],
       "label": "青/赤",
       "count": 4,
-      "share": 2.4,
+      "share": 2.3,
       "win_rate": 25,
       "avg_rank": 2.5,
       "wins": 1
@@ -109,7 +109,7 @@
       ],
       "label": "緑/白",
       "count": 3,
-      "share": 1.8,
+      "share": 1.7,
       "win_rate": 33.3,
       "avg_rank": 2.7,
       "wins": 1
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 71,
-      "usage_rate": 42.3
+      "decks": 72,
+      "usage_rate": 41.9
     },
     {
       "card_id": "GD04-068",
-      "decks": 65,
-      "usage_rate": 38.7
+      "decks": 66,
+      "usage_rate": 38.4
     },
     {
       "card_id": "GD01-100",
-      "decks": 64,
-      "usage_rate": 38.1
+      "decks": 65,
+      "usage_rate": 37.8
     },
     {
       "card_id": "GD03-056",
-      "decks": 63,
-      "usage_rate": 37.5
+      "decks": 65,
+      "usage_rate": 37.8
     },
     {
       "card_id": "ST05-010",
-      "decks": 59,
-      "usage_rate": 35.1
+      "decks": 61,
+      "usage_rate": 35.5
     },
     {
       "card_id": "ST03-008",
-      "decks": 58,
-      "usage_rate": 34.5
-    },
-    {
-      "card_id": "GD05-111",
-      "decks": 56,
-      "usage_rate": 33.3
+      "decks": 61,
+      "usage_rate": 35.5
     },
     {
       "card_id": "GD01-030",
-      "decks": 55,
-      "usage_rate": 32.7
+      "decks": 58,
+      "usage_rate": 33.7
+    },
+    {
+      "card_id": "GD05-111",
+      "decks": 57,
+      "usage_rate": 33.1
     },
     {
       "card_id": "GD05-110",
-      "decks": 53,
-      "usage_rate": 31.5
+      "decks": 54,
+      "usage_rate": 31.4
     },
     {
       "card_id": "GD01-128",
-      "decks": 47,
-      "usage_rate": 28
+      "decks": 48,
+      "usage_rate": 27.9
     }
   ],
-  "card_ranking_denominator": 168,
+  "card_ranking_denominator": 172,
   "recent_events": [
     {
       "event_id": "ntcd-01M6JW5PFDJPJVF2DC6ZRF6CZ0",
@@ -213,6 +213,41 @@
           "colors": [
             "Red",
             "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M6K30MHJS7NQ8KTD68KZPQQG",
+      "date": "2026-11-04",
+      "store": "カードボックス日本橋店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
           ]
         }
       ]
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M6G9R61X1R35FE0VRFN5JB95",
-      "date": "2026-11-03",
-      "store": "ホビーステーション金沢店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-04",
-    "event_count": 1968
+    "event_count": 1969
   }
 }
