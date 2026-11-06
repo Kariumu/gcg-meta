@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 44,
-    "decks": 208,
+    "events": 45,
+    "decks": 212,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 58,
-      "share": 27.9,
-      "win_rate": 24.1,
+      "count": 59,
+      "share": 27.8,
+      "win_rate": 25.4,
       "avg_rank": 2.5,
-      "wins": 14
+      "wins": 15
     },
     {
       "type_key": "Green+Purple",
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 47,
-      "share": 22.6,
-      "win_rate": 25.5,
+      "count": 49,
+      "share": 23.1,
+      "win_rate": 24.5,
       "avg_rank": 2.5,
       "wins": 12
     },
@@ -44,7 +44,7 @@
       ],
       "label": "青/緑",
       "count": 28,
-      "share": 13.5,
+      "share": 13.2,
       "win_rate": 28.6,
       "avg_rank": 2.5,
       "wins": 8
@@ -57,7 +57,7 @@
       ],
       "label": "青/紫",
       "count": 27,
-      "share": 13,
+      "share": 12.7,
       "win_rate": 29.6,
       "avg_rank": 2.4,
       "wins": 8
@@ -69,10 +69,10 @@
         "White"
       ],
       "label": "青/白",
-      "count": 24,
-      "share": 11.5,
-      "win_rate": 29.2,
-      "avg_rank": 2.3,
+      "count": 25,
+      "share": 11.8,
+      "win_rate": 28,
+      "avg_rank": 2.4,
       "wins": 7
     },
     {
@@ -83,7 +83,7 @@
       ],
       "label": "赤/紫",
       "count": 11,
-      "share": 5.3,
+      "share": 5.2,
       "win_rate": 0,
       "avg_rank": 2.9,
       "wins": 0
@@ -96,7 +96,7 @@
       ],
       "label": "緑/白",
       "count": 6,
-      "share": 2.9,
+      "share": 2.8,
       "win_rate": 33.3,
       "avg_rank": 2.5,
       "wins": 2
@@ -122,7 +122,7 @@
       ],
       "label": "赤/緑",
       "count": 2,
-      "share": 1,
+      "share": 0.9,
       "win_rate": 0,
       "avg_rank": 3.5,
       "wins": 0
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 88,
-      "usage_rate": 42.3
+      "decks": 90,
+      "usage_rate": 42.5
     },
     {
       "card_id": "GD04-068",
-      "decks": 80,
-      "usage_rate": 38.5
+      "decks": 82,
+      "usage_rate": 38.7
     },
     {
       "card_id": "GD03-056",
-      "decks": 79,
-      "usage_rate": 38
+      "decks": 81,
+      "usage_rate": 38.2
     },
     {
       "card_id": "GD01-100",
-      "decks": 77,
-      "usage_rate": 37
+      "decks": 78,
+      "usage_rate": 36.8
     },
     {
       "card_id": "ST03-008",
-      "decks": 74,
-      "usage_rate": 35.6
+      "decks": 76,
+      "usage_rate": 35.8
     },
     {
       "card_id": "ST05-010",
-      "decks": 73,
-      "usage_rate": 35.1
+      "decks": 75,
+      "usage_rate": 35.4
     },
     {
       "card_id": "GD01-030",
-      "decks": 70,
-      "usage_rate": 33.7
+      "decks": 72,
+      "usage_rate": 34
     },
     {
       "card_id": "GD05-111",
-      "decks": 67,
-      "usage_rate": 32.2
+      "decks": 68,
+      "usage_rate": 32.1
     },
     {
       "card_id": "GD05-110",
-      "decks": 65,
-      "usage_rate": 31.3
+      "decks": 66,
+      "usage_rate": 31.1
     },
     {
-      "card_id": "GD01-128",
-      "decks": 59,
-      "usage_rate": 28.4
+      "card_id": "GD05-129",
+      "decks": 61,
+      "usage_rate": 28.8
     }
   ],
-  "card_ranking_denominator": 208,
+  "card_ranking_denominator": 212,
   "recent_events": [
     {
       "event_id": "ntcd-01M6QT26638EPNWASM8DNSBFEM",
@@ -212,6 +212,41 @@
           "rank": 4,
           "colors": [
             "Red",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M6QXG2YQCZXC0H2509ZXMAK9",
+      "date": "2026-11-06",
+      "store": "ブックオフ町田中央通り店（本・ホビー館）4F",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
             "White"
           ]
         }
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M6FVZRB9XBTC3FVF40NBRPJS",
-      "date": "2026-11-03",
-      "store": "王の洞窟jr. 一宮22号バイパス店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-06",
-    "event_count": 1977
+    "event_count": 1978
   }
 }
