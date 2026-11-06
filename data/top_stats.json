@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 48,
-    "decks": 228,
+    "events": 49,
+    "decks": 232,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 63,
-      "share": 27.6,
-      "win_rate": 25.4,
+      "count": 65,
+      "share": 28,
+      "win_rate": 24.6,
       "avg_rank": 2.5,
       "wins": 16
     },
@@ -30,11 +30,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 54,
+      "count": 55,
       "share": 23.7,
-      "win_rate": 22.2,
-      "avg_rank": 2.6,
-      "wins": 12
+      "win_rate": 23.6,
+      "avg_rank": 2.5,
+      "wins": 13
     },
     {
       "type_key": "Blue+Purple",
@@ -44,7 +44,7 @@
       ],
       "label": "青/紫",
       "count": 29,
-      "share": 12.7,
+      "share": 12.5,
       "win_rate": 31,
       "avg_rank": 2.4,
       "wins": 9
@@ -57,7 +57,7 @@
       ],
       "label": "青/緑",
       "count": 29,
-      "share": 12.7,
+      "share": 12.5,
       "win_rate": 27.6,
       "avg_rank": 2.5,
       "wins": 8
@@ -70,7 +70,7 @@
       ],
       "label": "青/白",
       "count": 28,
-      "share": 12.3,
+      "share": 12.1,
       "win_rate": 28.6,
       "avg_rank": 2.4,
       "wins": 8
@@ -82,8 +82,8 @@
         "Purple"
       ],
       "label": "赤/紫",
-      "count": 11,
-      "share": 4.8,
+      "count": 12,
+      "share": 5.2,
       "win_rate": 0,
       "avg_rank": 2.9,
       "wins": 0
@@ -96,7 +96,7 @@
       ],
       "label": "緑/白",
       "count": 7,
-      "share": 3.1,
+      "share": 3,
       "win_rate": 42.9,
       "avg_rank": 2.3,
       "wins": 3
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 98,
-      "usage_rate": 43
+      "decks": 100,
+      "usage_rate": 43.1
     },
     {
       "card_id": "GD04-068",
-      "decks": 89,
-      "usage_rate": 39
+      "decks": 91,
+      "usage_rate": 39.2
     },
     {
       "card_id": "GD03-056",
-      "decks": 88,
-      "usage_rate": 38.6
+      "decks": 90,
+      "usage_rate": 38.8
+    },
+    {
+      "card_id": "ST05-010",
+      "decks": 83,
+      "usage_rate": 35.8
+    },
+    {
+      "card_id": "ST03-008",
+      "decks": 83,
+      "usage_rate": 35.8
     },
     {
       "card_id": "GD01-100",
       "decks": 82,
-      "usage_rate": 36
-    },
-    {
-      "card_id": "ST03-008",
-      "decks": 82,
-      "usage_rate": 36
-    },
-    {
-      "card_id": "ST05-010",
-      "decks": 81,
-      "usage_rate": 35.5
+      "usage_rate": 35.3
     },
     {
       "card_id": "GD01-030",
       "decks": 78,
-      "usage_rate": 34.2
+      "usage_rate": 33.6
     },
     {
       "card_id": "GD05-111",
-      "decks": 72,
-      "usage_rate": 31.6
+      "decks": 73,
+      "usage_rate": 31.5
     },
     {
       "card_id": "GD05-110",
-      "decks": 70,
-      "usage_rate": 30.7
+      "decks": 72,
+      "usage_rate": 31
     },
     {
       "card_id": "GD05-129",
-      "decks": 67,
-      "usage_rate": 29.4
+      "decks": 68,
+      "usage_rate": 29.3
     }
   ],
-  "card_ranking_denominator": 228,
+  "card_ranking_denominator": 232,
   "recent_events": [
     {
       "event_id": "ntcd-01M6QT26638EPNWASM8DNSBFEM",
@@ -358,6 +358,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M6RJ41KG4VV7ST8K4Z6DRBZG",
+      "date": "2026-11-06",
+      "store": "トレカパラダイス",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M6NB4G56EV97GP9DAFQKTB12",
       "date": "2026-11-05",
       "store": "トレカチャンピオン江南店",
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M6NZQC1X6MG2DP88FV1S09WN",
-      "date": "2026-11-05",
-      "store": "G-PROJECT本店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Green",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-06",
-    "event_count": 1981
+    "event_count": 1982
   }
 }
