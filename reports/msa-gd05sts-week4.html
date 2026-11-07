@@ -41,9 +41,13 @@
 .ad-slot{display:flex;flex-direction:column;align-items:center;margin:20px auto;width:100%;overflow:hidden}
 .ad-slot[data-kind="rect"]{min-height:272px}
 @media(max-width:331px){.ad-slot[data-kind="rect"]{display:none}}
-.ad-slot[data-kind="band"]{min-height:72px}
-@media(min-width:820px){.ad-slot[data-kind="band"]{min-height:112px}}
-@media(max-width:351px){.ad-slot[data-kind="band"]{display:none}}
+.ad-slot[data-kind="band"]:not([data-slot="article-mid"]){min-height:72px}
+@media(min-width:820px){.ad-slot[data-kind="band"]:not([data-slot="article-mid"]){min-height:112px}}
+@media(max-width:351px){.ad-slot[data-kind="band"]:not([data-slot="article-mid"]){display:none}}
+.ad-slot[data-slot="article-mid"]{min-height:272px}
+@media(min-width:820px){.ad-slot[data-slot="article-mid"]{min-height:112px}}
+@media(max-width:331px){.ad-slot[data-slot="article-mid"]{display:none}}
+.ad-slot[data-slot="article-mid"].ad-size-300x250{min-height:272px}
 .ad-slot-failed,.ad-slot-none{display:none}
 .ad-slot[data-slot="article-end"]{margin-bottom:32px}
 </style>
@@ -341,7 +345,7 @@
   <div id="footer"></div>
 
   <script src="../js/common.js?v=13"></script>
-  <script src="../js/ads.js?v=3" defer></script>
+  <script src="../js/ads.js?v=5" defer></script>
   <script>GCG.init();document.getElementById("header").innerHTML=GCG.renderHeader("reports");document.getElementById("footer").innerHTML=GCG.renderFooter();GCG.renderShareButtons("share-buttons","MSA環境レポート GD05+ST環境 Week 4（2026/10/18〜10/24）| GCG STATS");</script>
 </body>
 </html>
