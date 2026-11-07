@@ -1,1 +1,98 @@
-{}
+{
+  "GD07-017": {
+    "card_number": "GD07-017",
+    "card_name": "メッサーM01型(ガウマン機)",
+    "color": "Blue",
+    "card_type": "UNIT",
+    "level": 4,
+    "cost": 2,
+    "ap": 3,
+    "hp": 3,
+    "terrain": [],
+    "traits": [
+      "〔マフティー〕"
+    ],
+    "link": "特徴にマフティーを持つPILOT",
+    "rarity": "C",
+    "effect": "【セット時】〈マフティー〉の自分のユニット1つを選ぶ。それを2回復する。",
+    "expansion": "Blazing Fist",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2118976757067927627",
+    "created_at": "2026-11-07 20:00:13 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-11-06"
+  },
+  "GD07-123": {
+    "card_number": "GD07-123",
+    "card_name": "不可解な現象",
+    "color": "White",
+    "card_type": "COMMAND",
+    "level": 4,
+    "cost": 1,
+    "ap": null,
+    "hp": null,
+    "terrain": [],
+    "traits": [],
+    "link": "",
+    "rarity": "U",
+    "effect": "【バースト】このカードの【メイン】を発動する。【メイン】/アクション アクティブの相手のユニット1~2つを選ぶ。このターン中、それらをAP-2する。",
+    "expansion": "Blazing Fist",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2118677275445256527",
+    "created_at": "2026-11-07 20:00:22 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-11-06"
+  },
+  "T-038": {
+    "card_number": "T-038",
+    "card_name": "シールド・ファンネル",
+    "color": "Unknown",
+    "card_type": "UNIT",
+    "level": 2,
+    "cost": null,
+    "ap": 2,
+    "hp": 2,
+    "terrain": [],
+    "traits": [
+      "〔遠隔兵器〕"
+    ],
+    "link": "",
+    "rarity": "C",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)",
+    "expansion": "Blazing Fist",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2118676018626232590",
+    "created_at": "2026-11-07 20:00:32 JST",
+    "preview": true,
+    "_pendingReview": true,
+    "_pendingReviewIssues": [
+      "color が Unknown (色判定不能)"
+    ],
+    "_articleDate": "2026-11-06"
+  },
+  "GD07-075": {
+    "card_number": "GD07-075",
+    "card_name": "ユニコーンガンダム(覚醒)",
+    "color": "White",
+    "card_type": "UNIT",
+    "level": 6,
+    "cost": 5,
+    "ap": 5,
+    "hp": 4,
+    "terrain": [],
+    "traits": [
+      "〔民間〕"
+    ],
+    "link": "「バナージ・リンクス」",
+    "rarity": "R",
+    "effect": "《ブロッカー》(レストにすることでアタック先をこのユニットにする)【セット時】「シールド・ファンネル」(〔遠隔兵器〕・AP2・HP2・《ブロッカー》)のユニットトークン1つを配備する。",
+    "expansion": "Blazing Fist",
+    "source_url": "https://x.com/GUNDAM_GCG_JP/status/2118674766110536106",
+    "created_at": "2026-11-07 20:00:42 JST",
+    "preview": true,
+    "_pendingReview": false,
+    "_pendingReviewIssues": [],
+    "_articleDate": "2026-11-06"
+  }
+}
