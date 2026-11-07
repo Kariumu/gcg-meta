@@ -14,11 +14,14 @@
  *   枠の高さの予約はページ側の <style> が持つ。ここの <style> は中身の見た目だけ。
  *   置き場所ごとの広告ユニット(PLACEMENT_SLOTS・置き場所 → 大きさ → スロット)。表に無い置き場所・大きさは、大きさで決まる既存のスロット(SLOTS)。
  *     記事の本文中 article-mid は帯(指示書154)・記事の末尾 article-end は四角(指示書153)・大会結果のデッキの間 events-deck-1〜3 は帯(指示書154)。
+ *     指示書163: article-mid と events-deck-1〜3 は data-kind="band" のまま、画面幅 819 以下では 300x250 を出す(MID_RECT_PLACEMENT)。
+ *       画面幅 820 以上は帯のまま(728x90 か 320x50)。名前(band)と中身(300x250)が合わないのは承知のうえ(指示書163 裁定R0 の 1)。
  *     カード個別の表の直後 card-top と入賞デッキの直前 card-decks・大会結果の関連大会の直前 events-related は帯(指示書156-A)。
  *     環境分析の本文中 meta-mid・カードリストの本文中 cards-mid は帯で、表だけ先に入れてある(枠は指示書156-B で置く)。
  *   後から作られた枠は window.GCGAds.scan(root) で埋める(大会結果のページの描き直しの後に呼ぶ・指示書154)。
  *     埋めたかどうかは枠ごとの印(data-ad-filled)で決める。scan はページ全体の再実行ガード(__gcgAdsDone)を立ても見もしない。
- *   カード個別と大会結果のページはこのファイルを ads.js?v=4 で読む(指示書156-A)。記事は ?v=3 のまま(指示書156-A の決定。?v= が違っても配られる中身は同じこのファイル)。
+ *   カード個別はこのファイルを ads.js?v=4 で読む(指示書156-A)。大会結果と記事(本文中の枠がある物)は ?v=5(指示書163)。
+ *     本文中の枠が無い記事 6 本は ?v=3 のまま(指示書163 裁定R0 の 7)。?v= が違っても配られる中身は同じこのファイル。
  *   店舗・スケジュール・マイページは ?v=1 のまま。このファイルを直したら、読むページの ?v= を上げるかどうかを指示書で決める。
  *   タッチ端末の縮め方(usableWidth)で帯が 320 未満になっても、記事の本文中・大会結果のデッキの間の帯は、枠の本当の幅が 320 以上なら
  *     320x50 を出す(指示書154-R1・BAND_FALLBACK_PLACEMENT)。前提: そのページに「351px 以下で帯を隠す」予約の CSS があること。
@@ -39,10 +42,11 @@
   };
 
   // 置き場所ごとの広告ユニット(置き場所 → 大きさ → スロット)。指示書153(2026-10-23 作成)・指示書154(2026-10-24 作成)・指示書156-A(2026-10-28 作成)・どれも固定サイズ
+  // 指示書163: article-mid の 300x250 は 153 で作った 5931941303 を使い直す・events-deck の 300x250 は 3154255218(2026-11-07 作成)
   var PLACEMENT_SLOTS = {
-    'article-mid': { '728x90': '3057214576', '320x50': '1744132902' },
+    'article-mid': { '728x90': '3057214576', '320x50': '1744132902', '300x250': '5931941303' },
     'article-end': { '300x250': '2575772345' },
-    'events-deck': { '728x90': '8473278509', '320x50': '4414528271' },
+    'events-deck': { '728x90': '8473278509', '320x50': '4414528271', '300x250': '3154255218' },
     'card-top': { '728x90': '8524412641', '320x50': '3480095836' },
     'card-decks': { '728x90': '8920124774', '320x50': '3849515516' },
     'events-related': { '728x90': '5209864498', '320x50': '8540850826' },
@@ -58,6 +62,13 @@
     'card-top': true, 'card-decks': true, 'events-related': true, 'meta-mid': true, 'cards-mid': true
   };
   function isBandFallbackPlacement(p) { return has(BAND_FALLBACK_PLACEMENT, placementKey(p)); }
+
+  // 指示書163: data-kind は band のままで、画面幅 819 以下なら 300x250 を出す置き場所(記事の本文中・大会結果のデッキの間)。
+  // 前提: そのページに 163 の予約の CSS(819 以下 272px・820 以上 112px・331 以下で隠す・.ad-size-300x250 は 272px)があること。
+  var MID_RECT_PLACEMENT = { 'article-mid': true, 'events-deck': true };
+  function isMidRectPlacement(p) { return has(MID_RECT_PLACEMENT, placementKey(p)); }
+  // 300x250 を選ぶ画面幅の上限。ページ側の予約(@media(min-width:820px) で 112px に戻す)と合わせること
+  var MID_RECT_MAX_VIEWPORT = 819;
 
   // 帯の PC 用(728x90)を選ぶ画面幅の下限。ページ側の予約(@media(min-width:820px))と同じ値にすること
   var BAND_WIDE_MIN_VIEWPORT = 820;
@@ -148,12 +159,21 @@
     var placement = slot.getAttribute('data-slot') || '';
     if (placement.indexOf('mypage-') === 0 && favCount() < 1) return;
 
-    var size = pickSize(slot.getAttribute('data-kind'), usableWidth(slot));
+    var uw = usableWidth(slot);
+    var size = pickSize(slot.getAttribute('data-kind'), uw);
     if (size === undefined) return;
+    // 指示書163: 記事の本文中・大会結果のデッキの間の帯は、画面幅 819 以下なら 300x250(縮めた幅か枠の本当の幅が 300 以上のとき。
+    // どちらも 300 未満なら出さない)。画面幅 820 以上は下の帯の決め方のまま(728x90 → 320x50 → 154-R1 の救済)で、300x250 は出さない。
+    // 縮めた幅で 300 未満でも枠の本当の幅が 300 以上なら出す(154-R1 と同じ考え方)。回して枠が 300 未満になる画面幅 331 以下では、
+    // ページ側の予約の CSS が枠ごと隠すので、はみ出さない。
+    if (slot.getAttribute('data-kind') === 'band' && isMidRectPlacement(placement) && window.innerWidth <= MID_RECT_MAX_VIEWPORT) {
+      size = (uw >= 300 || slot.clientWidth >= 300) ? '300x250' : null;
+    }
     // 指示書154-R1: 新しい置き場所の帯だけ、タッチ端末で縮めた幅が 320 未満でも、枠の本当の幅が 320 以上なら 320x50 を選ぶ
     // (縮めた幅は 728x90 を選ぶかどうかにだけ使う)。回して枠が 320 未満になる画面幅 351 以下では、ページ側の予約の CSS
     // (@media(max-width:351px){.ad-slot[data-kind="band"]{display:none}})が枠ごと隠すので、はみ出さない。
-    // この CSS が無いページの帯には効かせない(ほかの 7 枠は 152 のまま)。BAND_FALLBACK_PLACEMENT に足すときは、そのページにこの CSS を置く。
+    // この CSS が無いページの帯には効かせない(BAND_FALLBACK_PLACEMENT に無い置き場所の帯は 152 のまま)。BAND_FALLBACK_PLACEMENT に足すときは、そのページにこの CSS を置く。
+    // 指示書163 の 2 か所(画面幅 819 以下)は、ここに来るのは枠の本当の幅が 300 未満のときだけなので、この救済(320 以上)には当たらない。
     if (size === null && slot.getAttribute('data-kind') === 'band' && isBandFallbackPlacement(placement) && slot.clientWidth >= 320) size = '320x50';
     if (size === null) { slot.classList.add('ad-slot-none'); return; }
 
