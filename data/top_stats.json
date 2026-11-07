@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 55,
-    "decks": 256,
+    "events": 56,
+    "decks": 260,
     "types": 9
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 76,
-      "share": 29.7,
-      "win_rate": 26.3,
+      "count": 77,
+      "share": 29.6,
+      "win_rate": 27.3,
       "avg_rank": 2.4,
-      "wins": 20
+      "wins": 21
     },
     {
       "type_key": "Green+Purple",
@@ -31,7 +31,7 @@
       ],
       "label": "緑/紫",
       "count": 57,
-      "share": 22.3,
+      "share": 21.9,
       "win_rate": 22.8,
       "avg_rank": 2.5,
       "wins": 13
@@ -44,9 +44,22 @@
       ],
       "label": "青/緑",
       "count": 35,
-      "share": 13.7,
+      "share": 13.5,
       "win_rate": 25.7,
       "avg_rank": 2.6,
+      "wins": 9
+    },
+    {
+      "type_key": "Blue+Purple",
+      "colors": [
+        "Blue",
+        "Purple"
+      ],
+      "label": "青/紫",
+      "count": 30,
+      "share": 11.5,
+      "win_rate": 30,
+      "avg_rank": 2.4,
       "wins": 9
     },
     {
@@ -57,22 +70,9 @@
       ],
       "label": "青/白",
       "count": 30,
-      "share": 11.7,
+      "share": 11.5,
       "win_rate": 30,
       "avg_rank": 2.3,
-      "wins": 9
-    },
-    {
-      "type_key": "Blue+Purple",
-      "colors": [
-        "Blue",
-        "Purple"
-      ],
-      "label": "青/紫",
-      "count": 29,
-      "share": 11.3,
-      "win_rate": 31,
-      "avg_rank": 2.4,
       "wins": 9
     },
     {
@@ -83,7 +83,7 @@
       ],
       "label": "赤/紫",
       "count": 12,
-      "share": 4.7,
+      "share": 4.6,
       "win_rate": 0,
       "avg_rank": 2.9,
       "wins": 0
@@ -95,9 +95,9 @@
         "White"
       ],
       "label": "緑/白",
-      "count": 7,
-      "share": 2.7,
-      "win_rate": 42.9,
+      "count": 8,
+      "share": 3.1,
+      "win_rate": 37.5,
       "avg_rank": 2.3,
       "wins": 3
     },
@@ -108,10 +108,10 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 7,
-      "share": 2.7,
-      "win_rate": 14.3,
-      "avg_rank": 2.6,
+      "count": 8,
+      "share": 3.1,
+      "win_rate": 12.5,
+      "avg_rank": 2.8,
       "wins": 1
     },
     {
@@ -131,56 +131,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 113,
-      "usage_rate": 44.1
+      "decks": 115,
+      "usage_rate": 44.2
     },
     {
       "card_id": "GD04-068",
-      "decks": 103,
-      "usage_rate": 40.2
+      "decks": 105,
+      "usage_rate": 40.4
     },
     {
       "card_id": "GD03-056",
-      "decks": 92,
-      "usage_rate": 35.9
+      "decks": 93,
+      "usage_rate": 35.8
     },
     {
       "card_id": "ST03-008",
       "decks": 91,
-      "usage_rate": 35.5
+      "usage_rate": 35
     },
     {
       "card_id": "GD01-100",
-      "decks": 89,
-      "usage_rate": 34.8
+      "decks": 90,
+      "usage_rate": 34.6
     },
     {
       "card_id": "GD05-111",
-      "decks": 85,
-      "usage_rate": 33.2
+      "decks": 86,
+      "usage_rate": 33.1
     },
     {
       "card_id": "ST05-010",
-      "decks": 85,
-      "usage_rate": 33.2
+      "decks": 86,
+      "usage_rate": 33.1
     },
     {
       "card_id": "GD01-030",
       "decks": 84,
-      "usage_rate": 32.8
+      "usage_rate": 32.3
     },
     {
       "card_id": "GD05-110",
-      "decks": 79,
-      "usage_rate": 30.9
+      "decks": 80,
+      "usage_rate": 30.8
     },
     {
       "card_id": "GD01-128",
-      "decks": 74,
-      "usage_rate": 28.9
+      "decks": 75,
+      "usage_rate": 28.8
     }
   ],
-  "card_ranking_denominator": 256,
+  "card_ranking_denominator": 260,
   "recent_events": [
     {
       "event_id": "ntcd-01M6T5K34T7GV12FNMQZG3CDVE",
@@ -393,6 +393,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M6TFX3QT57SK0W5M78D5328N",
+      "date": "2026-11-07",
+      "store": "今井書店TSUTAYA出雲店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M6QT26638EPNWASM8DNSBFEM",
       "date": "2026-11-06",
       "store": "カードラボ天王寺店",
@@ -496,45 +531,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M6R0XR74DQ51Q353E8288KV2",
-      "date": "2026-11-06",
-      "store": "カードラボアバンティ京都店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-07",
-    "event_count": 1988
+    "event_count": 1989
   }
 }
