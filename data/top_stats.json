@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 78,
-    "decks": 368,
+    "events": 82,
+    "decks": 384,
     "types": 10
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 114,
-      "share": 31,
-      "win_rate": 29.8,
+      "count": 120,
+      "share": 31.3,
+      "win_rate": 30.8,
       "avg_rank": 2.4,
-      "wins": 34
+      "wins": 37
     },
     {
       "type_key": "Green+Purple",
@@ -30,10 +30,10 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 73,
-      "share": 19.8,
-      "win_rate": 21.9,
-      "avg_rank": 2.5,
+      "count": 74,
+      "share": 19.3,
+      "win_rate": 21.6,
+      "avg_rank": 2.6,
       "wins": 16
     },
     {
@@ -43,9 +43,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 56,
-      "share": 15.2,
-      "win_rate": 26.8,
+      "count": 61,
+      "share": 15.9,
+      "win_rate": 24.6,
       "avg_rank": 2.5,
       "wins": 15
     },
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 40,
-      "share": 10.9,
-      "win_rate": 27.5,
+      "count": 43,
+      "share": 11.2,
+      "win_rate": 27.9,
       "avg_rank": 2.3,
-      "wins": 11
+      "wins": 12
     },
     {
       "type_key": "Blue+Purple",
@@ -70,7 +70,7 @@
       ],
       "label": "青/紫",
       "count": 34,
-      "share": 9.2,
+      "share": 8.9,
       "win_rate": 26.5,
       "avg_rank": 2.5,
       "wins": 9
@@ -82,10 +82,10 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 20,
-      "share": 5.4,
-      "win_rate": 15,
-      "avg_rank": 2.8,
+      "count": 21,
+      "share": 5.5,
+      "win_rate": 14.3,
+      "avg_rank": 2.9,
       "wins": 3
     },
     {
@@ -96,7 +96,7 @@
       ],
       "label": "赤/紫",
       "count": 15,
-      "share": 4.1,
+      "share": 3.9,
       "win_rate": 0,
       "avg_rank": 2.9,
       "wins": 0
@@ -109,7 +109,7 @@
       ],
       "label": "緑/白",
       "count": 11,
-      "share": 3,
+      "share": 2.9,
       "win_rate": 36.4,
       "avg_rank": 2.3,
       "wins": 4
@@ -122,7 +122,7 @@
       ],
       "label": "赤/緑",
       "count": 4,
-      "share": 1.1,
+      "share": 1,
       "win_rate": 0,
       "avg_rank": 3.8,
       "wins": 0
@@ -144,56 +144,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 166,
-      "usage_rate": 45.1
+      "decks": 174,
+      "usage_rate": 45.3
     },
     {
       "card_id": "GD04-068",
-      "decks": 149,
-      "usage_rate": 40.5
+      "decks": 157,
+      "usage_rate": 40.9
     },
     {
       "card_id": "ST03-008",
-      "decks": 126,
-      "usage_rate": 34.2
+      "decks": 132,
+      "usage_rate": 34.4
     },
     {
       "card_id": "GD05-111",
-      "decks": 121,
-      "usage_rate": 32.9
+      "decks": 127,
+      "usage_rate": 33.1
     },
     {
       "card_id": "GD01-100",
-      "decks": 120,
-      "usage_rate": 32.6
+      "decks": 126,
+      "usage_rate": 32.8
     },
     {
       "card_id": "GD05-110",
-      "decks": 119,
+      "decks": 124,
       "usage_rate": 32.3
     },
     {
-      "card_id": "GD03-056",
-      "decks": 113,
-      "usage_rate": 30.7
-    },
-    {
       "card_id": "GD01-030",
-      "decks": 110,
-      "usage_rate": 29.9
+      "decks": 116,
+      "usage_rate": 30.2
     },
     {
-      "card_id": "ST05-010",
-      "decks": 105,
-      "usage_rate": 28.5
+      "card_id": "GD03-056",
+      "decks": 114,
+      "usage_rate": 29.7
     },
     {
       "card_id": "GD01-128",
-      "decks": 103,
-      "usage_rate": 28
+      "decks": 109,
+      "usage_rate": 28.4
+    },
+    {
+      "card_id": "ST05-010",
+      "decks": 106,
+      "usage_rate": 27.6
     }
   ],
-  "card_ranking_denominator": 368,
+  "card_ranking_denominator": 384,
   "recent_events": [
     {
       "event_id": "ntcd-01M6WQZMT12NFYGGDEQRKJ34Z3",
@@ -548,6 +548,6 @@
   ],
   "source": {
     "latest_event_date": "2026-11-08",
-    "event_count": 2011
+    "event_count": 2015
   }
 }
