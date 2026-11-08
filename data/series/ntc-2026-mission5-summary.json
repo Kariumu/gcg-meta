@@ -13,9 +13,9 @@
   "status": "active",
   "description": "公式トーナメント「ニュータイプチャレンジ」2026 MISSION5 の11月開催分。全国各地の店舗で行われ、開催期間は2026年11月1日〜11月30日。",
   "stats": {
-    "event_count": 66,
-    "total_result_entries": 608,
-    "total_decks": 304,
+    "event_count": 67,
+    "total_result_entries": 616,
+    "total_decks": 308,
     "by_region": {
       "中部": {
         "events": 14,
@@ -26,8 +26,8 @@
         "decks": 132
       },
       "九州": {
-        "events": 8,
-        "decks": 32
+        "events": 9,
+        "decks": 36
       },
       "中国": {
         "events": 6,
@@ -58,8 +58,8 @@
           "White"
         ],
         "label": "赤/白",
-        "count": 93,
-        "share": 30.6
+        "count": 94,
+        "share": 30.5
       },
       {
         "type_key": "Green+Purple",
@@ -69,7 +69,7 @@
         ],
         "label": "緑/紫",
         "count": 61,
-        "share": 20.1
+        "share": 19.8
       },
       {
         "type_key": "Blue+Green",
@@ -79,7 +79,7 @@
         ],
         "label": "青/緑",
         "count": 46,
-        "share": 15.1
+        "share": 14.9
       },
       {
         "type_key": "Blue+White",
@@ -88,8 +88,8 @@
           "White"
         ],
         "label": "青/白",
-        "count": 34,
-        "share": 11.2
+        "count": 35,
+        "share": 11.4
       },
       {
         "type_key": "Blue+Purple",
@@ -99,7 +99,7 @@
         ],
         "label": "青/紫",
         "count": 32,
-        "share": 10.5
+        "share": 10.4
       },
       {
         "type_key": "Red+Purple",
@@ -108,8 +108,8 @@
           "Purple"
         ],
         "label": "赤/紫",
-        "count": 13,
-        "share": 4.3
+        "count": 14,
+        "share": 4.5
       },
       {
         "type_key": "Blue+Red",
@@ -118,8 +118,8 @@
           "Red"
         ],
         "label": "青/赤",
-        "count": 11,
-        "share": 3.6
+        "count": 12,
+        "share": 3.9
       },
       {
         "type_key": "Green+White",
@@ -129,7 +129,7 @@
         ],
         "label": "緑/白",
         "count": 10,
-        "share": 3.3
+        "share": 3.2
       },
       {
         "type_key": "Red+Green",
@@ -151,8 +151,8 @@
         ],
         "label": "赤/白",
         "wins": 28,
-        "count": 93,
-        "win_rate": 30.1
+        "count": 94,
+        "win_rate": 29.8
       },
       {
         "type_key": "Green+Purple",
@@ -177,6 +177,17 @@
         "win_rate": 23.9
       },
       {
+        "type_key": "Blue+White",
+        "colors": [
+          "Blue",
+          "White"
+        ],
+        "label": "青/白",
+        "wins": 10,
+        "count": 35,
+        "win_rate": 28.6
+      },
+      {
         "type_key": "Blue+Purple",
         "colors": [
           "Blue",
@@ -186,17 +197,6 @@
         "wins": 9,
         "count": 32,
         "win_rate": 28.1
-      },
-      {
-        "type_key": "Blue+White",
-        "colors": [
-          "Blue",
-          "White"
-        ],
-        "label": "青/白",
-        "wins": 9,
-        "count": 34,
-        "win_rate": 26.5
       },
       {
         "type_key": "Green+White",
@@ -217,8 +217,8 @@
         ],
         "label": "青/赤",
         "wins": 2,
-        "count": 11,
-        "win_rate": 18.2
+        "count": 12,
+        "win_rate": 16.7
       }
     ]
   }
