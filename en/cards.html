@@ -894,6 +894,10 @@
       <div class="no-results-icon">&#x1F50D;</div>
       <div>No matching cards found</div>
       <div style="margin-top:8px;font-size:12px">Try changing the filters or search terms</div>
+      <div id="no-results-set" style="display:none;margin-top:14px">
+        <div style="font-size:13px;margin-bottom:8px">No results within the selected set filter.</div>
+        <button type="button" class="filter-chip" id="no-results-clear-set">Remove set filter</button>
+      </div>
     </div>
     <div class="ad-slot" data-slot="cards-mid" data-kind="band"></div>
   </main>
@@ -3142,13 +3146,13 @@
     var RESOURCE_TYPES = ["RESOURCE","EX RESOURCE","EX BASE"];
     var RARITY_ORDER = { LR: 0, R: 1, U: 2, C: 3 };
     var TOTAL_CARDS = 2205;
-    var SET_ORDER = ["GD01","GD02","GD03","GD04","GD05","ST01","ST02","ST03","ST04","ST05","ST06","ST07","ST08","ST09","ST10","EB01","SC01","β","PROMO","TOKEN","RESOURCE","EXBASE","GD06","ST11","ST12","ST13","ST14"];
+    var SET_ORDER = ["GD01","GD02","GD03","GD04","GD05","GD06","ST01","ST02","ST03","ST04","ST05","ST06","ST07","ST08","ST09","ST10","ST11","ST12","ST13","ST14","EB01","SC01","β","PROMO","TOKEN","RESOURCE","EXBASE"];
     var SET_LABELS = {"TOKEN":"Token Cards","RESOURCE":"Resource","EXBASE":"EX Base"};
 
     // === Filter State ===
     var filterState = {
       colors: [],      // empty = all
-      sets: ["GD06"],  // 初期値=新弾(DEFAULT_SET_FILTER)。空=全て
+      sets: ["GD06"],  // 初期値=最新弾(データから選ぶ。複数なら複数)。空=全て
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
@@ -3338,6 +3342,9 @@
       if (count === 0) {
         gridEl.innerHTML = '';
         noResultsEl.style.display = 'block';
+        // 収録弾で絞り込み中の 0 件は、そうと分かる表示と「収録弾の絞り込みだけ外す」ボタンを出す(検索語は残す)
+        var setNote = document.getElementById('no-results-set');
+        if (setNote) setNote.style.display = filterState.sets.length > 0 ? 'block' : 'none';
         return;
       }
       noResultsEl.style.display = 'none';
@@ -3386,6 +3393,15 @@
     // === Event Listeners ===
     setupFilterGroup('filter-color', 'colors', true);
     setupFilterGroup('filter-set', 'sets', true);
+    (function () {
+      var clearSetBtn = document.getElementById('no-results-clear-set');
+      if (!clearSetBtn) return;
+      clearSetBtn.addEventListener('click', function () {
+        filterState.sets = [];
+        document.querySelectorAll('#filter-set .filter-chip').forEach(function (c) { c.classList.toggle('active', c.dataset.value === 'all'); });
+        renderCards();
+      });
+    })();
     setupFilterGroup('filter-type', 'types', true);
     setupFilterGroup('filter-rarity', 'rarities', true);
     setupFilterGroup('filter-tournament', 'tournament', false);

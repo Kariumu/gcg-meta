@@ -238,6 +238,8 @@
     setCount: '{count} cards',
     noResults: 'No matching cards found',
     noResultsHint: 'Try changing the filters or search terms',
+    noResultsSet: 'No results within the selected set filter.',
+    noResultsClearSet: 'Remove set filter',
     backToTop: 'Back to top',
     notApplicable: 'N/A',
     notUsed: 'Not used',

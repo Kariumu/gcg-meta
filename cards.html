@@ -887,6 +887,10 @@
       <div class="no-results-icon">&#x1F50D;</div>
       <div>該当するカードが見つかりません</div>
       <div style="margin-top:8px;font-size:12px">フィルターまたは検索条件を変更してください</div>
+      <div id="no-results-set" style="display:none;margin-top:14px">
+        <div style="font-size:13px;margin-bottom:8px">収録弾で絞り込み中のため 0 件です。</div>
+        <button type="button" class="filter-chip" id="no-results-clear-set">収録弾の絞り込みを外す</button>
+      </div>
     </div>
     <div class="ad-slot" data-slot="cards-mid" data-kind="band"></div>
   </main>
@@ -3126,13 +3130,13 @@
     var RESOURCE_TYPES = ["RESOURCE","EX RESOURCE","EX BASE"];
     var RARITY_ORDER = { LR: 0, R: 1, U: 2, C: 3 };
     var TOTAL_CARDS = 2205;
-    var SET_ORDER = ["GD01","GD02","GD03","GD04","GD05","ST01","ST02","ST03","ST04","ST05","ST06","ST07","ST08","ST09","ST10","EB01","SC01","β","PROMO","TOKEN","RESOURCE","EXBASE","GD06","ST11","ST12","ST13","ST14"];
+    var SET_ORDER = ["GD01","GD02","GD03","GD04","GD05","GD06","ST01","ST02","ST03","ST04","ST05","ST06","ST07","ST08","ST09","ST10","ST11","ST12","ST13","ST14","EB01","SC01","β","PROMO","TOKEN","RESOURCE","EXBASE"];
     var SET_LABELS = {"GD01":"第1弾ブースターパック","GD02":"第2弾ブースターパック","GD03":"第3弾ブースターパック","ST01":"スタートデッキ 地球連邦","ST02":"スタートデッキ ジオン","ST03":"スタートデッキ アナハイム","ST04":"スタートデッキ OZ","ST05":"スタートデッキ ザフト","ST06":"スタートデッキ ソレスタルビーイング","ST07":"スタートデッキ ネオ・ジオン","ST08":"スタートデッキ ティターンズ","ST09":"スタートデッキ インパルス","GD05":"第5弾ブースターパック","ST10":"スタートデッキ Generation Pulse","TOKEN":"トークンカード","EB01":"Eternal Nexus","RESOURCE":"リソース","EXBASE":"EXベース"};
 
     // === Filter State ===
     var filterState = {
       colors: [],      // empty = all
-      sets: ["GD06"],  // 初期値=新弾(DEFAULT_SET_FILTER)。空=全て
+      sets: ["GD06"],  // 初期値=最新弾(データから選ぶ。複数なら複数)。空=全て
       types: [],       // empty = all
       rarities: [],    // empty = all
       tournament: 'all', // 'all', 'yes', 'no'
@@ -3316,6 +3320,9 @@
       if (count === 0) {
         gridEl.innerHTML = '';
         noResultsEl.style.display = 'block';
+        // 収録弾で絞り込み中の 0 件は、そうと分かる表示と「収録弾の絞り込みだけ外す」ボタンを出す(検索語は残す)
+        var setNote = document.getElementById('no-results-set');
+        if (setNote) setNote.style.display = filterState.sets.length > 0 ? 'block' : 'none';
         return;
       }
       noResultsEl.style.display = 'none';
@@ -3364,6 +3371,15 @@
     // === Event Listeners ===
     setupFilterGroup('filter-color', 'colors', true);
     setupFilterGroup('filter-set', 'sets', true);
+    (function () {
+      var clearSetBtn = document.getElementById('no-results-clear-set');
+      if (!clearSetBtn) return;
+      clearSetBtn.addEventListener('click', function () {
+        filterState.sets = [];
+        document.querySelectorAll('#filter-set .filter-chip').forEach(function (c) { c.classList.toggle('active', c.dataset.value === 'all'); });
+        renderCards();
+      });
+    })();
     setupFilterGroup('filter-type', 'types', true);
     setupFilterGroup('filter-rarity', 'rarities', true);
     setupFilterGroup('filter-tournament', 'tournament', false);
