@@ -107,7 +107,7 @@
       id: id,
       name: p.card_name || '',
       color: p.color || '-',
-      type: p.card_type || '',
+      type: /^T-\d+/.test(String(id)) ? 'TOKEN' : (p.card_type || ''),   // 型番が T- ならトークン(指示書165。保存時にも直すが二重に備える)
       level: (p.level === undefined ? null : p.level),
       cost: (p.cost === undefined ? null : p.cost),
       // preview のコマンド＋パイロット型は pilot 副オブジェクトを持つ → 補正として取り込む（master の ap_mod/hp_mod と揃える）
@@ -463,16 +463,33 @@
   ];
   var B64URL = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
 
-  // 弾グループの並び順（2026-07-23 松岡さん確定: 通常弾→特殊弾→デッキ→特殊セット）
-  function setGroupRank(set) {
-    if (/^GD/.test(set)) return 1;      // 通常弾（ブースター）
-    if (/^EB/.test(set)) return 2;      // 特殊弾（エクストラブースター）
-    if (/^ST/.test(set)) return 3;      // デッキ（スタートデッキ）
-    if (/^SC/.test(set)) return 4;      // 特殊セット
-    if (set === 'β') return 5;
-    if (set === 'PROMO') return 6;
-    return 9;
+  // 弾の並びの決まり(指示書165 追補1・2026-11-08。手で書いた一覧に頼らない)
+  //   GDxx → STxx → EBxx → SCxx(それぞれ番号を数として比べる。GD10 は GD09 の後)→ β → PROMO → TOKEN → RESOURCE → EXBASE
+  //   → それ以外(PB など新しい型番の頭。頭の文字の順、同じ頭は番号順)。新しい弾が増えても決まりで正しい位置に入る。
+  //   ※ SET_CODES(共有コードの符号化)は別物。並べ替えには使わない・並びを変えない。
+  var SET_NAMED_RANK = { 'β': 5, 'PROMO': 6, 'TOKEN': 7, 'RESOURCE': 8, 'EXBASE': 9 };
+  var SET_PREFIX_RANK = { 'GD': 1, 'ST': 2, 'EB': 3, 'SC': 4 };
+  function setSortKey(set) {
+    var s = String(set == null ? '' : set);
+    if (Object.prototype.hasOwnProperty.call(SET_NAMED_RANK, s)) return [SET_NAMED_RANK[s], '', 0];
+    var m = /^([A-Za-z]+)(\d*)$/.exec(s);
+    if (m) {
+      var head = m[1], num = m[2] === '' ? 0 : parseInt(m[2], 10);
+      if (Object.prototype.hasOwnProperty.call(SET_PREFIX_RANK, head)) return [SET_PREFIX_RANK[head], head, num];
+      return [10, head, num];
+    }
+    return [10, s, 0];
   }
+  function compareSets(a, b) {
+    var x = setSortKey(a), y = setSortKey(b);
+    if (x[0] !== y[0]) return x[0] - y[0];
+    if (x[1] !== y[1]) return x[1] < y[1] ? -1 : 1;
+    if (x[2] !== y[2]) return x[2] - y[2];
+    var sa = String(a), sb = String(b);
+    return sa < sb ? -1 : sa > sb ? 1 : 0;
+  }
+  // 弾グループの順位(カードの並べ替え用)。compareSets と同じ決まりの先頭の値
+  function setGroupRank(set) { return setSortKey(set)[0]; }
   var SHARE_VERSION = 'A';
 
   function parseCardId(id) {
@@ -700,6 +717,7 @@
     linkableUnits: linkableUnits,
     SET_CODES: SET_CODES,
     setGroupRank: setGroupRank,
+    compareSets: compareSets,
     parseCardId: parseCardId,
     encodeShareCode: encodeShareCode,
     decodeShareCode: decodeShareCode,
