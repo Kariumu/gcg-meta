@@ -25419,6 +25419,35 @@
     "parallel_number": 2,
     "base_card_id": "GD05-049"
   },
+  "GD05-049_p3": {
+    "id": "GD05-049_p3",
+    "name_jp": "サザビー",
+    "rarity": "LR",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 7,
+    "cost": 5,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 5,
+      "hp": 5
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "シャア・アズナブル"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)\n【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
+    "effect": "《制圧》(アタックでシールドに与えるダメージは、先頭から2つに同時に与えられる)\n【アタック時】自分のユニット1つを選んでもよい。それを破壊する。そうしたなら、相手プレイヤーすべては、それぞれバトルしていない自身のユニット1つを選ぶ。それらを破壊する。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ニュータイプチャレンジ 2026 MISSION5 優勝記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 3,
+    "base_card_id": "GD05-049"
+  },
   "GD05-050": {
     "id": "GD05-050",
     "name_jp": "ガンダムエクシアリペア",
@@ -25761,6 +25790,35 @@
     "effect_text": "【起動・メイン】【ターン1回】このユニット以外の、自分のユニット1つを選ぶ。それを破壊する。そうしたなら、このユニットをアクティブにし、このターン中、これは相手プレイヤーをアタック先に選べない。",
     "terrain": "宇宙 地球",
     "acquisition_info": "Freedom Ascension [GD05]"
+  },
+  "GD05-057_p1": {
+    "id": "GD05-057_p1",
+    "name_jp": "ヤクト・ドーガ（ギュネイ専用機）",
+    "rarity": "U",
+    "card_type": "UNIT",
+    "color": "Purple",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [
+      "ギュネイ・ガス"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "【起動・メイン】【ターン1回】このユニット以外の、自分のユニット1つを選ぶ。それを破壊する。そうしたなら、このユニットをアクティブにし、このターン中、これは相手プレイヤーをアタック先に選べない。",
+    "effect": "【起動・メイン】【ターン1回】このユニット以外の、自分のユニット1つを選ぶ。それを破壊する。そうしたなら、このユニットをアクティブにし、このターン中、これは相手プレイヤーをアタック先に選べない。",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "ニュータイプチャレンジ 2026 MISSION5 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 1,
+    "base_card_id": "GD05-057"
   },
   "GD05-058": {
     "id": "GD05-058",
@@ -27077,6 +27135,34 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 1,
+    "base_card_id": "GD05-093"
+  },
+  "GD05-093_p2": {
+    "id": "GD05-093_p2",
+    "name_jp": "シャア・アズナブル",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Purple",
+    "level": 5,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 2
+    },
+    "source_title": "機動戦士ガンダム 逆襲のシャア",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。\n【リンク時】自分のトラッシュの〔ネオ・ジオン〕のベースカード1枚を選んでもよい。それを配備する。",
+    "effect": "【バースト】このカードを手札に加える。\n【リンク時】自分のトラッシュの〔ネオ・ジオン〕のベースカード1枚を選んでもよい。それを配備する。",
+    "terrain": "-",
+    "acquisition_info": "ニュータイプチャレンジ 2026 MISSION5 上位入賞記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
     "base_card_id": "GD05-093"
   },
   "GD05-094": {
@@ -29434,6 +29520,35 @@
     "parallel_number": 1,
     "base_card_id": "GD06-029"
   },
+  "GD06-029_p2": {
+    "id": "GD06-029_p2",
+    "name_jp": "キュベレイMk-Ⅱ（エルピー・プル専用）",
+    "rarity": "C",
+    "card_type": "UNIT",
+    "color": "Green",
+    "level": 4,
+    "cost": 3,
+    "traits": [
+      "ネオ・ジオン"
+    ],
+    "stats": {
+      "ap": 4,
+      "hp": 3
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [
+      "エルピー・プル"
+    ],
+    "package_set": "PROMO",
+    "effect_text": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "effect": "《突破3》(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "宇宙 地球",
+    "acquisition_info": "新弾限定戦[GD06] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
+    "base_card_id": "GD06-029"
+  },
   "GD06-030": {
     "id": "GD06-030",
     "name_jp": "マヒロー",
@@ -31453,6 +31568,34 @@
     "is_parallel": true,
     "is_promo": false,
     "parallel_number": 1,
+    "base_card_id": "GD06-084"
+  },
+  "GD06-084_p2": {
+    "id": "GD06-084_p2",
+    "name_jp": "エルピー・プル",
+    "rarity": "R",
+    "card_type": "PILOT",
+    "color": "Green",
+    "level": 3,
+    "cost": 1,
+    "traits": [
+      "ネオ・ジオン",
+      "ニュータイプ"
+    ],
+    "stats": {
+      "ap_mod": 2,
+      "hp_mod": 0
+    },
+    "source_title": "機動戦士ガンダムZZ",
+    "link": [],
+    "package_set": "PROMO",
+    "effect_text": "【バースト】このカードを手札に加える。\n【セット時】このターン中、このユニットは、〔ネオ・ジオン〕/〔遠隔兵器〕の自分のユニットと同じ数だけ《突破1》を得る。\n(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "effect": "【バースト】このカードを手札に加える。\n【セット時】このターン中、このユニットは、〔ネオ・ジオン〕/〔遠隔兵器〕の自分のユニットと同じ数だけ《突破1》を得る。\n(自分のターン中、このユニットがバトルダメージで相手のユニットを破壊したとき、その相手のシールドエリアの先頭のカード1つに指定の数ダメージを与える)",
+    "terrain": "-",
+    "acquisition_info": "新弾限定戦[GD06] 参加記念品",
+    "is_parallel": true,
+    "is_promo": true,
+    "parallel_number": 2,
     "base_card_id": "GD06-084"
   },
   "GD06-085": {
