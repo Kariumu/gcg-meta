@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 95,
-    "decks": 449,
+    "events": 96,
+    "decks": 453,
     "types": 10
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 143,
+      "count": 144,
       "share": 31.8,
-      "win_rate": 30.8,
+      "win_rate": 30.6,
       "avg_rank": 2.4,
       "wins": 44
     },
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 86,
+      "count": 87,
       "share": 19.2,
-      "win_rate": 24.4,
+      "win_rate": 24.1,
       "avg_rank": 2.5,
       "wins": 21
     },
@@ -44,7 +44,7 @@
       ],
       "label": "青/緑",
       "count": 70,
-      "share": 15.6,
+      "share": 15.5,
       "win_rate": 27.1,
       "avg_rank": 2.3,
       "wins": 19
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 53,
-      "share": 11.8,
-      "win_rate": 22.6,
+      "count": 55,
+      "share": 12.1,
+      "win_rate": 23.6,
       "avg_rank": 2.5,
-      "wins": 12
+      "wins": 13
     },
     {
       "type_key": "Blue+Purple",
@@ -70,7 +70,7 @@
       ],
       "label": "青/紫",
       "count": 36,
-      "share": 8,
+      "share": 7.9,
       "win_rate": 25,
       "avg_rank": 2.6,
       "wins": 9
@@ -83,7 +83,7 @@
       ],
       "label": "青/赤",
       "count": 26,
-      "share": 5.8,
+      "share": 5.7,
       "win_rate": 11.5,
       "avg_rank": 2.8,
       "wins": 3
@@ -109,7 +109,7 @@
       ],
       "label": "緑/白",
       "count": 12,
-      "share": 2.7,
+      "share": 2.6,
       "win_rate": 33.3,
       "avg_rank": 2.3,
       "wins": 4
@@ -144,56 +144,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 208,
-      "usage_rate": 46.3
+      "decks": 211,
+      "usage_rate": 46.6
     },
     {
       "card_id": "GD04-068",
-      "decks": 187,
-      "usage_rate": 41.6
+      "decks": 189,
+      "usage_rate": 41.7
     },
     {
       "card_id": "ST03-008",
-      "decks": 151,
+      "decks": 152,
       "usage_rate": 33.6
     },
     {
       "card_id": "GD05-110",
-      "decks": 148,
-      "usage_rate": 33
+      "decks": 149,
+      "usage_rate": 32.9
     },
     {
       "card_id": "GD05-111",
       "decks": 146,
-      "usage_rate": 32.5
+      "usage_rate": 32.2
     },
     {
       "card_id": "GD01-100",
-      "decks": 137,
-      "usage_rate": 30.5
+      "decks": 139,
+      "usage_rate": 30.7
     },
     {
       "card_id": "GD01-030",
       "decks": 132,
-      "usage_rate": 29.4
+      "usage_rate": 29.1
     },
     {
       "card_id": "GD01-128",
-      "decks": 128,
+      "decks": 129,
       "usage_rate": 28.5
     },
     {
       "card_id": "GD03-056",
-      "decks": 125,
+      "decks": 126,
       "usage_rate": 27.8
     },
     {
       "card_id": "ST01-010",
-      "decks": 116,
-      "usage_rate": 25.8
+      "decks": 118,
+      "usage_rate": 26
     }
   ],
-  "card_ranking_denominator": 449,
+  "card_ranking_denominator": 453,
   "recent_events": [
     {
       "event_id": "ntcd-01M723NV3K7N84E9Q01AXPYWQ7",
@@ -226,6 +226,41 @@
           "colors": [
             "Blue",
             "Red"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M7274SWTKF3EKJCG3GXSRXVP",
+      "date": "2026-11-10",
+      "store": "ホビーステーション新潟店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Red",
+            "White"
           ]
         }
       ]
@@ -509,45 +544,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M6WVDJ9V5AR45AEKQ7X22Z0M",
-      "date": "2026-11-08",
-      "store": "シーガル泉中央店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-10",
-    "event_count": 2028
+    "event_count": 2029
   }
 }
