@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 98,
-    "decks": 461,
+    "events": 99,
+    "decks": 465,
     "types": 10
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 147,
-      "share": 31.9,
-      "win_rate": 29.9,
+      "count": 148,
+      "share": 31.8,
+      "win_rate": 29.7,
       "avg_rank": 2.4,
       "wins": 44
     },
@@ -30,11 +30,11 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 88,
-      "share": 19.1,
-      "win_rate": 23.9,
+      "count": 90,
+      "share": 19.4,
+      "win_rate": 24.4,
       "avg_rank": 2.5,
-      "wins": 21
+      "wins": 22
     },
     {
       "type_key": "Blue+Green",
@@ -44,7 +44,7 @@
       ],
       "label": "青/緑",
       "count": 71,
-      "share": 15.4,
+      "share": 15.3,
       "win_rate": 28.2,
       "avg_rank": 2.3,
       "wins": 20
@@ -57,7 +57,7 @@
       ],
       "label": "青/白",
       "count": 57,
-      "share": 12.4,
+      "share": 12.3,
       "win_rate": 24.6,
       "avg_rank": 2.4,
       "wins": 14
@@ -70,7 +70,7 @@
       ],
       "label": "青/紫",
       "count": 36,
-      "share": 7.8,
+      "share": 7.7,
       "win_rate": 25,
       "avg_rank": 2.6,
       "wins": 9
@@ -82,9 +82,9 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 26,
-      "share": 5.6,
-      "win_rate": 11.5,
+      "count": 27,
+      "share": 5.8,
+      "win_rate": 11.1,
       "avg_rank": 2.8,
       "wins": 3
     },
@@ -144,56 +144,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 216,
-      "usage_rate": 46.9
+      "decks": 217,
+      "usage_rate": 46.7
     },
     {
       "card_id": "GD04-068",
-      "decks": 194,
-      "usage_rate": 42.1
+      "decks": 195,
+      "usage_rate": 41.9
     },
     {
       "card_id": "ST03-008",
-      "decks": 154,
-      "usage_rate": 33.4
+      "decks": 156,
+      "usage_rate": 33.5
     },
     {
       "card_id": "GD05-110",
-      "decks": 153,
-      "usage_rate": 33.2
+      "decks": 155,
+      "usage_rate": 33.3
     },
     {
       "card_id": "GD05-111",
-      "decks": 150,
-      "usage_rate": 32.5
+      "decks": 152,
+      "usage_rate": 32.7
     },
     {
       "card_id": "GD01-100",
-      "decks": 142,
+      "decks": 143,
       "usage_rate": 30.8
+    },
+    {
+      "card_id": "GD01-128",
+      "decks": 134,
+      "usage_rate": 28.8
     },
     {
       "card_id": "GD01-030",
       "decks": 134,
-      "usage_rate": 29.1
-    },
-    {
-      "card_id": "GD01-128",
-      "decks": 132,
-      "usage_rate": 28.6
+      "usage_rate": 28.8
     },
     {
       "card_id": "GD03-056",
-      "decks": 127,
-      "usage_rate": 27.5
+      "decks": 129,
+      "usage_rate": 27.7
     },
     {
-      "card_id": "ST01-010",
-      "decks": 119,
+      "card_id": "ST05-010",
+      "decks": 120,
       "usage_rate": 25.8
     }
   ],
-  "card_ranking_denominator": 461,
+  "card_ranking_denominator": 465,
   "recent_events": [
     {
       "event_id": "ntcd-01M723NV3K7N84E9Q01AXPYWQ7",
@@ -331,6 +331,41 @@
           "colors": [
             "Red",
             "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M72E09DCC8A2BED8M16GFJX9",
+      "date": "2026-11-10",
+      "store": "カードラボ豊橋店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Green",
+            "Purple"
           ]
         }
       ]
@@ -509,45 +544,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M6ZVJ2WMDETS88ZJ15J7A6RM",
-      "date": "2026-11-09",
-      "store": "トーナメントセンターバトロコ川崎駅前",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-10",
-    "event_count": 2031
+    "event_count": 2032
   }
 }
