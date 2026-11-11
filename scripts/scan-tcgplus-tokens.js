@@ -85,7 +85,7 @@ const THOROUGH_START = 38000;
 const THOROUGH_END = 76750;
 function inThorough(i) { return i >= THOROUGH_START && i <= THOROUGH_END; }
 const API = 'https://api.bandai-tcg-plus.com/api/user/deck/recipe';
-const UA = 'gcg-stats-tokenmap-scan/1.0 (+https://gcg-stats.com; contact kariumu19@gmail.com)';
+const UA = 'gcg-stats-tokenmap-scan/1.0 (+https://gcg-stats.com; contact https://gcg-stats.com/contact.html)';
 const GCG_NUM_RE = /^(GD|ST|EB|SC)\d{2}-\d{3}|^(EXB|EXR|T-)/;
 const GCG_IMG_RE = /\/card_image\/GC-(JA|EN)\//;
 
