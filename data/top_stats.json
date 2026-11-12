@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 109,
-    "decks": 521,
+    "events": 110,
+    "decks": 525,
     "types": 10
   },
   "deck_type_ranking": [
@@ -18,7 +18,7 @@
       ],
       "label": "赤/白",
       "count": 166,
-      "share": 31.9,
+      "share": 31.6,
       "win_rate": 28.9,
       "avg_rank": 2.5,
       "wins": 48
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 99,
-      "share": 19,
-      "win_rate": 25.3,
+      "count": 101,
+      "share": 19.2,
+      "win_rate": 24.8,
       "avg_rank": 2.5,
       "wins": 25
     },
@@ -44,7 +44,7 @@
       ],
       "label": "青/緑",
       "count": 80,
-      "share": 15.4,
+      "share": 15.2,
       "win_rate": 26.3,
       "avg_rank": 2.4,
       "wins": 21
@@ -56,11 +56,24 @@
         "White"
       ],
       "label": "青/白",
-      "count": 63,
-      "share": 12.1,
-      "win_rate": 25.4,
+      "count": 64,
+      "share": 12.2,
+      "win_rate": 26.6,
       "avg_rank": 2.4,
-      "wins": 16
+      "wins": 17
+    },
+    {
+      "type_key": "Blue+Red",
+      "colors": [
+        "Blue",
+        "Red"
+      ],
+      "label": "青/赤",
+      "count": 38,
+      "share": 7.2,
+      "win_rate": 15.8,
+      "avg_rank": 2.7,
+      "wins": 6
     },
     {
       "type_key": "Blue+Purple",
@@ -70,23 +83,10 @@
       ],
       "label": "青/紫",
       "count": 37,
-      "share": 7.1,
+      "share": 7,
       "win_rate": 24.3,
       "avg_rank": 2.6,
       "wins": 9
-    },
-    {
-      "type_key": "Blue+Red",
-      "colors": [
-        "Blue",
-        "Red"
-      ],
-      "label": "青/赤",
-      "count": 37,
-      "share": 7.1,
-      "win_rate": 16.2,
-      "avg_rank": 2.7,
-      "wins": 6
     },
     {
       "type_key": "Red+Purple",
@@ -96,7 +96,7 @@
       ],
       "label": "赤/紫",
       "count": 18,
-      "share": 3.5,
+      "share": 3.4,
       "win_rate": 5.6,
       "avg_rank": 2.8,
       "wins": 1
@@ -122,7 +122,7 @@
       ],
       "label": "赤/緑",
       "count": 6,
-      "share": 1.2,
+      "share": 1.1,
       "win_rate": 0,
       "avg_rank": 3.3,
       "wins": 0
@@ -144,56 +144,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 241,
-      "usage_rate": 46.3
+      "decks": 242,
+      "usage_rate": 46.1
     },
     {
       "card_id": "GD04-068",
-      "decks": 216,
-      "usage_rate": 41.5
+      "decks": 217,
+      "usage_rate": 41.3
     },
     {
       "card_id": "GD05-110",
       "decks": 178,
-      "usage_rate": 34.2
+      "usage_rate": 33.9
     },
     {
       "card_id": "ST03-008",
-      "decks": 174,
-      "usage_rate": 33.4
+      "decks": 176,
+      "usage_rate": 33.5
     },
     {
       "card_id": "GD05-111",
-      "decks": 171,
+      "decks": 172,
       "usage_rate": 32.8
     },
     {
       "card_id": "GD01-128",
       "decks": 158,
-      "usage_rate": 30.3
+      "usage_rate": 30.1
     },
     {
       "card_id": "GD01-100",
-      "decks": 155,
-      "usage_rate": 29.8
+      "decks": 156,
+      "usage_rate": 29.7
     },
     {
       "card_id": "GD01-030",
-      "decks": 148,
-      "usage_rate": 28.4
+      "decks": 150,
+      "usage_rate": 28.6
     },
     {
       "card_id": "GD03-056",
-      "decks": 139,
-      "usage_rate": 26.7
+      "decks": 141,
+      "usage_rate": 26.9
     },
     {
-      "card_id": "ST01-010",
-      "decks": 130,
-      "usage_rate": 25
+      "card_id": "ST05-010",
+      "decks": 132,
+      "usage_rate": 25.1
     }
   ],
-  "card_ranking_denominator": 521,
+  "card_ranking_denominator": 525,
   "recent_events": [
     {
       "event_id": "ntcd-01M77BWQJFKRYG0C0E1RFA4M3Q",
@@ -296,6 +296,41 @@
           "colors": [
             "Green",
             "Purple"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M780FY3HXH94QJZX6R03JZX3",
+      "date": "2026-11-12",
+      "store": "トレジャーコレクション山口店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Red"
           ]
         }
       ]
@@ -509,45 +544,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M723NV3K7N84E9Q01AXPYWQ7",
-      "date": "2026-11-10",
-      "store": "TSUTAYA西五反田店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-12",
-    "event_count": 2042
+    "event_count": 2043
   }
 }
