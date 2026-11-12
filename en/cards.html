@@ -3308,7 +3308,7 @@
         '<div class="card-item-img-wrap">' +
           '<img class="card-item-img" src="' + imgSrc + '" alt="' + nameShown + '"' + nameLang + ' loading="lazy" onerror="this.style.display=&quot;none&quot;;this.nextElementSibling.style.display=&quot;flex&quot;">' +
           '<div class="card-item-fallback"><div class="card-item-fallback-id">' + card.id + '</div><div class="card-item-fallback-name"' + nameLang + '>' + nameShown + '</div></div>' +
-          '<span class="card-rarity-badge rarity-' + card.rarity + '">' + card.rarity + '</span>' +
+          '<span class="card-rarity-badge rarity-' + escapeAttr(card.rarity) + '">' + escapeAttr(card.rarity) + '</span>' +
           (card.reg ? '<span class="card-reg-badge reg-' + card.reg + '">' + (card.reg === 'b' ? "Banned" : card.reg === 'r' ? "Restricted" : "Banned Pair") + '</span>' : '') +
         '</div>' +
         '<div class="card-item-info">' +

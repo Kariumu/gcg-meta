@@ -182,7 +182,7 @@
     <!-- 地域フィルター（2026-08-06 指示書67: 並びは北から南へ固定） -->
     <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;align-items:center" id="region-filter">
       <span style="font-size:12px;color:var(--text-muted);margin-right:4px">Region:</span>
-      <button class="region-filter-btn active" data-region="" onclick="setRegion(null)">All Regions</button>
+      <button class="region-filter-btn active" data-region="" onclick="setRegion(this.dataset.region || null)">All Regions</button>
     </div>
 
     <!-- デッキタイプ絞り込みの状態表示 -->
@@ -357,7 +357,8 @@
       });
     }
     // 区切りに空白も許す(重要):
-    //   index.html は `meta.html?type=Blue+Purple` のように **+ を生のまま** 出す。
+    //   index.html は以前 `meta.html?type=Blue+Purple` のように **+ を生のまま** 出していた
+    //   (2026-11-12 指示書166 から `Blue%2BPurple`。古いリンクや外からのリンクには + のものが残る)。
     //   クエリ文字列の `+` は URLSearchParams が半角スペースへデコードするため、
     //   受け側には 'Blue Purple' として届く。'+' しか見ないと2色タイプが1つも着地しない。
     //   古い common.js がキャッシュされている場合は GCG 側が旧実装(+のみ)になり得るので、
@@ -786,9 +787,9 @@
       const regions = sortRegionNames(Object.keys(present));
       const container = document.getElementById('region-filter');
       container.innerHTML = '<span style="font-size:12px;color:var(--text-muted);margin-right:4px">' + GCG.escapeHtml(T.regionLabel) + '</span>' +
-        '<button class="region-filter-btn active" data-region="" onclick="setRegion(null)">' + GCG.escapeHtml(T.allRegions) + '</button>' +
+        '<button class="region-filter-btn active" data-region="" onclick="setRegion(this.dataset.region || null)">' + GCG.escapeHtml(T.allRegions) + '</button>' +
         regions.map(function (r) {
-          return '<button class="region-filter-btn" data-region="' + GCG.escapeHtml(r) + '" onclick="setRegion(\'' + GCG.escapeHtml(r) + '\')">' + regionHtml(r) + '</button>';
+          return '<button class="region-filter-btn" data-region="' + GCG.escapeHtml(r) + '" onclick="setRegion(this.dataset.region)">' + regionHtml(r) + '</button>';
         }).join('');
     }
 
@@ -935,7 +936,7 @@
         const primaryColor = GCG.primaryColorHex(dt.colors);
         const sel = (filterType === dt.type_key) ? ' is-selected' : '';
         return '<tr class="decktype-row' + sel + '" style="cursor:pointer" title="' + GCG.escapeHtml(T.rowTitle) + '"'
-          + ' onclick="setTypeFilter(\'' + dt.type_key + '\')">'
+          + ' data-type="' + GCG.escapeHtml(dt.type_key) + '" onclick="setTypeFilter(this.dataset.type)">'
           + '<td>' + EN.colorTagsHtml(dt.colors) + '</td>'
           + '<td class="text-mono">' + dt.count + '</td>'
           + '<td><div class="flex items-center gap-8">'
@@ -990,9 +991,9 @@
         var bg = hexArr.length === 1 ? hexArr[0]
           : 'linear-gradient(135deg, ' + hexArr[0] + ' 0%, ' + hexArr[1] + ' 100%)';
         return '<div style="display:flex;align-items:center;gap:6px;cursor:pointer" title="' + GCG.escapeHtml(T.rowTitle) + '"'
-          + ' onclick="setTypeFilter(\'' + d.type_key + '\')">'
+          + ' data-type="' + GCG.escapeHtml(d.type_key) + '" onclick="setTypeFilter(this.dataset.type)">'
           + '<span style="display:inline-block;width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.12);background:' + bg + ';flex-shrink:0"></span>'
-          + '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + d.label + '</span></div>';
+          + '<span style="font-size:11px;font-family:\'JetBrains Mono\',monospace;color:#d0d6e0">' + GCG.escapeHtml(d.label) + '</span></div>';
       }).join('');
 
       pieChart = new Chart(ctx, {
@@ -1031,13 +1032,13 @@
         return;
       }
       container.innerHTML = types.map(function (dt) {
-        return '<button class="type-tab" data-type="' + dt.type_key + '"'
+        return '<button class="type-tab" data-type="' + GCG.escapeHtml(dt.type_key) + '"'
           + ' style="background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);'
           + 'padding:8px 14px;border-radius:var(--radius);font-size:12px;font-family:var(--font-mono);'
           + 'cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:6px"'
-          + ' onclick="selectType(\'' + dt.type_key + '\')">'
+          + ' onclick="selectType(this.dataset.type)">'
           + EN.colorDotsHtml(dt.colors)
-          + '<span>' + dt.label + '</span>'
+          + '<span>' + GCG.escapeHtml(dt.label) + '</span>'
           + '<span style="opacity:0.5;font-size:10px">(' + dt.count + ')</span>'
           + '</button>';
       }).join('');
@@ -1191,9 +1192,10 @@
             : (c.decks > 0 ? Math.round((c.wins / c.decks) * 1000) / 10 : 0);
           return '<tr>'
             + '<td class="rank-cell ' + GCG.rankClass(i + 1) + '">' + (i + 1) + '</td>'
-            + '<td><a href="' + GCG.getBasePath() + 'cards/' + c.card_id + '/?from=meta"'
+            // 指示書166 第2段: 型番は encodeURIComponent に通す(形の正しい型番では何も変わらない。古い common.js でも効く)
+            + '<td><a href="' + GCG.getBasePath() + 'cards/' + encodeURIComponent(c.card_id) + '/?from=meta"'
             + ' style="color:var(--text-primary);text-decoration:none;display:flex;align-items:center;gap:8px">'
-            + '<img src="' + GCG.cardImageUrl(c.card_id) + '" alt="" style="width:28px;height:39px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display=\'none\'">'
+            + '<img src="' + GCG.cardImageUrl(encodeURIComponent(c.card_id)) + '" alt="" style="width:28px;height:39px;border-radius:3px;object-fit:cover;border:1px solid var(--border)" onerror="this.style.display=\'none\'">'
             + '<div><div style="font-family:var(--font-mono);font-size:12px">' + GCG.escapeHtml(c.card_id) + '</div>'
             + (name ? '<div style="font-size:11px;color:var(--text-secondary);margin-top:1px"' + (nameEn ? '' : ' lang="ja"') + '>' + GCG.escapeHtml(name) + '</div>' : '')
             + '</div></a></td>'
@@ -1220,7 +1222,7 @@
         + regions.map(function (r) {
           return '<div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;cursor:pointer;transition:all 0.15s"'
             + ' onmouseover="this.style.borderColor=\'var(--accent)\'" onmouseout="this.style.borderColor=\'var(--border)\'"'
-            + ' onclick="setRegion(\'' + GCG.escapeHtml(r.region) + '\');window.scrollTo({top:0,behavior:\'smooth\'})">'
+            + ' data-region="' + GCG.escapeHtml(r.region) + '" onclick="setRegion(this.dataset.region);window.scrollTo({top:0,behavior:\'smooth\'})">'
             + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
             + '<span style="font-weight:600;font-size:15px;color:var(--text-primary)">' + regionHtml(r.region) + '</span>'
             + '<span style="font-size:12px;color:var(--text-muted);font-family:var(--font-mono)">' + GCG.escapeHtml(EN.fill(T.regionCard, { events: r.events, decks: r.decks })) + '</span>'
@@ -1291,7 +1293,7 @@
           const seriesMeta = ev.s && allSeriesMap[ev.s] ? allSeriesMap[ev.s] : null;
           const seriesBadgeHtml = seriesMeta && GCG.renderSeriesBadge
             ? GCG.renderSeriesBadge(EN.seriesLabel(seriesMeta), seriesMeta.slug, { tag: 'span' }) : '';
-          return '<a href="' + GCG.getBasePath() + 'events/' + ev.i + '.html" class="event-card">'
+          return '<a href="' + GCG.getBasePath() + 'events/' + encodeURIComponent(ev.i) + '.html" class="event-card">'
             + '<span class="event-date">' + GCG.escapeHtml(EN.formatDate(ev.d)) + '</span>'
             + '<span class="event-store" lang="ja">' + GCG.escapeHtml(ev.n) + '</span>'
             + (seriesBadgeHtml ? '<span class="event-card-series">' + seriesBadgeHtml + '</span>' : '')

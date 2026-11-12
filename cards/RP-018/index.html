@@ -69,7 +69,7 @@
         <img id="card-img" src="/images/cards/RP-018.webp" alt="リソース" width="600" height="838"
              style="width:280px;height:auto;max-width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
              onclick="openLightbox(this.src)"
-             onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='/images/cards/RP-018.webp?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
+             onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src=this.src.split('?')[0]+'?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
         <div class="shop-links" style="width:280px;max-width:100%;margin-top:12px;padding:12px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
             <span style="font-size:13px;color:var(--text-secondary);font-weight:600">遊々亭で</span>

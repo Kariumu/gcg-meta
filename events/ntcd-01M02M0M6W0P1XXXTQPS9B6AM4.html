@@ -60,6 +60,21 @@
 
     GCG.init();
 
+    // 指示書166 第2段: 型番とリンクの形(shared/card-id.js と同じ式。生成器が書き込む)
+    var CARD_ID_RE = new RegExp("^[A-Z]{1,5}[0-9]{0,3}-[0-9]{1,4}(_p[0-9]{1,2})?$");
+    var TCGPLUS_PREFIX = "https://www.bandai-tcg-plus.com/";
+    var TCGPLUS_BAD = new RegExp("[\\u0000- \\u007f\"'\u003c>\\\\`]");
+    function okCardId(v) { return typeof v === 'string' && CARD_ID_RE.test(v); }
+    function okTcgplusUrl(v) { return typeof v === 'string' && v.indexOf(TCGPLUS_PREFIX) === 0 && !TCGPLUS_BAD.test(v); }
+    function cardImgFallback(img) {
+      img.onerror = null;
+      img.style.display = 'none';
+      var box = document.createElement('div');
+      box.setAttribute('style', 'aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center');
+      box.textContent = img.getAttribute('data-cid') || '';
+      img.parentElement.insertBefore(box, img.parentElement.firstChild);
+    }
+
     var currentEventStore = '';
 
     // shijisho-66: deck -> builder. Logic lives in common.js (see generate-events.js).
@@ -89,7 +104,7 @@
         : 'animation:fadeIn 0.4s ease-out backwards';
 
       let linkHtml = '';
-      if (player.tcgplus_url) {
+      if (player.tcgplus_url && okTcgplusUrl(player.tcgplus_url)) {
         linkHtml = '<a href="' + GCG.escapeHtml(player.tcgplus_url) + '" target="_blank" rel="noopener" class="btn-link"' +
           ' onclick="GCG.track && GCG.track(\'tcgplus_open\',{place:\'event_page\'})">' +
           '\u{1F517} BANDAI TCG+ \u3067\u898B\u308B' +
@@ -105,10 +120,11 @@
       let deckHtml = '';
       if (hasDeck) {
         deckHtml = '<div class="deck-grid">' +
-          player.deck.map(function(card) {
-            return '<a href="' + GCG.getBasePath() + 'cards/' + card.card_id + '/?from=event&name=' + encodeURIComponent(currentEventStore) + '" target="_blank" rel="noopener" class="deck-card" title="' + card.card_id + '">' +
-              '<img src="' + GCG.cardImageUrl(card.card_id) + '" alt="' + card.card_id + '"' +
-              ' onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.insertAdjacentHTML(\'afterbegin\',\'<div style=&quot;aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center&quot;>' + card.card_id + '</div>\')">' +
+          player.deck.filter(function(card) { return card && okCardId(card.card_id); }).map(function(card) {
+            var cid = GCG.escapeHtml(card.card_id);
+            return '<a href="' + GCG.getBasePath() + 'cards/' + cid + '/?from=event&name=' + encodeURIComponent(currentEventStore) + '" target="_blank" rel="noopener" class="deck-card" title="' + cid + '">' +
+              '<img src="' + GCG.escapeHtml(GCG.cardImageUrl(card.card_id)) + '" alt="' + cid + '" data-cid="' + cid + '"' +
+              ' onerror="cardImgFallback(this)">' +
               '<span class="card-count">\u00D7' + card.count + '</span>' +
               '</a>';
           }).join('') +
@@ -193,7 +209,7 @@
         '<div class="section-header"><div>' +
         '<h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + storeDisplay + '</h1>' +
         '<div style="font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
-        '<span class="text-mono" style="color:var(--accent)">' + GCG.formatDate(ev.date) + '</span>' +
+        '<span class="text-mono" style="color:var(--accent)">' + GCG.escapeHtml(GCG.formatDate(ev.date)) + '</span>' +
         (seriesName ? '<span style="opacity:0.3">|</span> <span>' + GCG.escapeHtml(seriesName) + '</span>' : '') +
         '</div></div>' +
         ((ev.results || []).length ? '<span class="section-badge">\u5165\u8CDE' + (ev.results || []).length + '\u540D\u3092\u63B2\u8F09</span>' : '') + '</div>';
@@ -241,7 +257,7 @@
 
         function relatedCard(e) {
           return '<a href="' + GCG.getBasePath() + 'events/' + encodeURIComponent(e.event_id) + '.html" class="event-card">' +
-                 '<span class="event-date">' + GCG.formatDate(e.date) + '</span>' +
+                 '<span class="event-date">' + GCG.escapeHtml(GCG.formatDate(e.date)) + '</span>' +
                  '<span class="event-store">' + GCG.escapeHtml(e.store) + '</span>' +
                  '</a>';
         }

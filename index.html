@@ -938,8 +938,8 @@
                     : '';
                 const store = GCG.escapeHtml(ev.store);
                 return ''
-                    + '<a href="events/' + ev.event_id + '.html" class="home-ev-row">'
-                    + '<span class="home-ev-date">' + GCG.formatDate(ev.date) + '</span>'
+                    + '<a href="events/' + encodeURIComponent(ev.event_id) + '.html" class="home-ev-row">'
+                    + '<span class="home-ev-date">' + GCG.escapeHtml(GCG.formatDate(ev.date)) + '</span>'
                     + '<span class="home-ev-store" title="' + attrEsc(ev.store) + '">' + store + '</span>'
                     + (winHtml || othersHtml ? winHtml + othersHtml : '<span class="home-ev-none">データなし</span>')
                     + '</a>';
@@ -961,9 +961,9 @@
             const maxRate = top10[0] && top10[0].usage_rate ? top10[0].usage_rate : 100;
             container.innerHTML = '<div class="home-top10-grid">' + top10.map(function (c, i) {
                 return ''
-                    + '<a href="cards/' + c.card_id + '/?from=top" class="home-top10-item' + (i === 0 ? ' is-first' : '') + '">'
+                    + '<a href="cards/' + encodeURIComponent(c.card_id) + '/?from=top" class="home-top10-item' + (i === 0 ? ' is-first' : '') + '">'
                     + '<span class="home-top10-rank ' + GCG.rankClass(i + 1) + '">' + (i + 1) + '</span>'
-                    + '<img class="home-top10-img" src="' + GCG.cardImageUrl(c.card_id) + '" alt="" onerror="this.style.display=\'none\'">'
+                    + '<img class="home-top10-img" src="' + GCG.cardImageUrl(encodeURIComponent(c.card_id)) + '" alt="" onerror="this.style.display=\'none\'">'
                     + '<span class="home-top10-body">'
                     + '<span class="home-top10-id">' + GCG.escapeHtml(c.card_id) + '</span>'
                     + '<span class="home-top10-bar"><i style="width:' + ((c.usage_rate / maxRate) * 100) + '%"></i></span>'
@@ -998,7 +998,7 @@
             // 1〜3位 = カード(1位のみシェアを金・特大)
             var html = top3.map(function (dt, i) {
                 return ''
-                    + '<a href="meta.html?type=' + dt.type_key + '" class="home-trend-card' + (i === 0 ? ' is-first' : '') + '">'
+                    + '<a href="meta.html?type=' + encodeURIComponent(dt.type_key) + '" class="home-trend-card' + (i === 0 ? ' is-first' : '') + '">'
                     + '<span class="home-trend-rank rank-' + (i + 1) + '">' + (i + 1) + '</span>'
                     + trendColorBadge(dt.colors)
                     + '<span class="home-trend-name">' + GCG.escapeHtml(dt.label) + '</span>'
@@ -1015,7 +1015,7 @@
             if (rest.length) {
                 html += '<div class="home-trend-rest">' + rest.map(function (dt, i) {
                     return ''
-                        + '<a href="meta.html?type=' + dt.type_key + '" class="home-trend-row">'
+                        + '<a href="meta.html?type=' + encodeURIComponent(dt.type_key) + '" class="home-trend-row">'
                         + '<span class="home-trend-row-rank">' + (i + 4) + '</span>'
                         + trendColorBadge(dt.colors)
                         + '<span class="home-trend-row-name">' + GCG.escapeHtml(dt.label) + '</span>'
@@ -1119,7 +1119,8 @@
                 articles.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
                 var html = '';
                 CATS.forEach(function (c) {
-                    var items = articles.filter(function (a) { return a.category === c.key; }).slice(0, 5);
+                    // 指示書166 第2段: path は記事の置き場所の形(英数字と / . _ -)のときだけ使う
+                    var items = articles.filter(function (a) { return a.category === c.key && /^[A-Za-z0-9\/._-]+$/.test(a.path || ''); }).slice(0, 5);
                     if (items.length === 0) return;
                     html += '<div class="site-nav-card" style="cursor:default">';
                     html += '<div class="site-nav-card-title">' + GCG.escapeHtml(c.label) + '</div>';

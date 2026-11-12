@@ -297,10 +297,17 @@ const GCG = {
   },
 
   // HTMLエスケープ
+  // 指示書166 第2段: & < > " ' の 5 つを替える(属性の値に入れても抜けられないように)。
+  // null・undefined は空文字、数値などは文字にする(前の textContent 方式と同じ)。
+  // ※ onclick などの属性の中の JavaScript に入れる値は、これでは守れない(ブラウザが先に元へ戻す)。そこは data-* で渡すこと
   escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+    if (str === null || str === undefined) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   },
 
   // 数値アニメーション

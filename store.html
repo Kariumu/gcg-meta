@@ -248,8 +248,8 @@
           }).join('');
           var seriesMeta = ev.series_id && seriesMap[ev.series_id] ? seriesMap[ev.series_id] : null;
           var seriesBadgeHtml = seriesMeta && GCG.renderSeriesBadge ? GCG.renderSeriesBadge(seriesMeta.short_name || seriesMeta.display_name, seriesMeta.slug, { tag: 'span' }) : '';
-          return '<a href="events/' + ev.event_id + '.html" class="event-card">'
-            + '<span class="event-date">' + GCG.formatDate(ev.date) + '</span>'
+          return '<a href="events/' + encodeURIComponent(ev.event_id) + '.html" class="event-card">'
+            + '<span class="event-date">' + GCG.escapeHtml(GCG.formatDate(ev.date)) + '</span>'
             + '<span class="event-store">' + GCG.escapeHtml(ev.store || storeName || '') + '</span>'
             + (seriesBadgeHtml ? '<span class="event-card-series">' + seriesBadgeHtml + '</span>' : '')
             + '<span style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">'

@@ -63,7 +63,7 @@
         <img id="card-img" src="/images/cards/EXBP-034.webp" alt="EXベース" width="600" height="838"
              style="width:280px;height:auto;max-width:100%;border-radius:var(--radius-lg);border:1px solid var(--border);box-shadow:var(--shadow-md);cursor:zoom-in"
              onclick="openLightbox(this.src)"
-             onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src='/images/cards/EXBP-034.webp?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
+             onerror="if(!this.dataset.retried){this.dataset.retried='1';this.src=this.src.split('?')[0]+'?t='+Date.now();}else{this.onerror=null;this.style.display='none';}">
       </div>
       <div style="flex:1;min-width:280px">
         <h1 style="font-family:var(--font-mono);font-size:22px;margin-bottom:4px">EXベース</h1>

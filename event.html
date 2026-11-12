@@ -80,6 +80,22 @@
 
     var currentEventStore = '';
 
+    // 指示書166 第2段: 型番とリンクの形。shared/card-id.js と同じ式でなければならない
+    // (手書きのページなので式を直接書いている。tests/test-166-card-id-sync.js が同じであることを確かめる)
+    var CARD_ID_RE = /^[A-Z]{1,5}[0-9]{0,3}-[0-9]{1,4}(_p[0-9]{1,2})?$/;
+    var TCGPLUS_PREFIX = 'https://www.bandai-tcg-plus.com/';
+    var TCGPLUS_BAD = /[\u0000-\u0020\u007f"'<>\\`]/;
+    function okCardId(v) { return typeof v === 'string' && CARD_ID_RE.test(v); }
+    function okTcgplusUrl(v) { return typeof v === 'string' && v.indexOf(TCGPLUS_PREFIX) === 0 && !TCGPLUS_BAD.test(v); }
+    function cardImgFallback(img) {
+      img.onerror = null;
+      img.style.display = 'none';
+      var box = document.createElement('div');
+      box.setAttribute('style', 'aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center');
+      box.textContent = img.getAttribute('data-cid') || '';
+      img.parentElement.insertBefore(box, img.parentElement.firstChild);
+    }
+
     // shijisho-66: deck -> builder. Logic lives in common.js (see generate-events.js).
     var _deckReg = [];
     function openInBuilder(i, btn) {
@@ -100,7 +116,7 @@
         : 'animation:fadeIn 0.4s ease-out backwards';
 
       let linkHtml = '';
-      if (player.tcgplus_url) {
+      if (player.tcgplus_url && okTcgplusUrl(player.tcgplus_url)) {
         linkHtml = '<a href="' + GCG.escapeHtml(player.tcgplus_url) + '" target="_blank" rel="noopener" class="btn-link">' +
           '🔗 BANDAI TCG+ で見る' +
           '<span style="font-size:10px;color:var(--text-muted);margin-left:2px">※TCG+に遷移します</span>' +
@@ -115,10 +131,11 @@
       let deckHtml = '';
       if (hasDeck) {
         deckHtml = '<div class="deck-grid">' +
-          player.deck.map(function(card) {
-            return '<a href="' + GCG.getBasePath() + 'cards/' + card.card_id + '/?from=event&name=' + encodeURIComponent(currentEventStore) + '" target="_blank" rel="noopener" class="deck-card" title="' + card.card_id + '">' +
-              '<img src="' + GCG.cardImageUrl(card.card_id) + '" alt="' + card.card_id + '"' +
-              ' onerror="this.onerror=null;this.style.display=\'none\';this.parentElement.insertAdjacentHTML(\'afterbegin\',\'<div style=&quot;aspect-ratio:63/88;background:var(--bg-elevated);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--text-muted);font-family:var(--font-mono);padding:4px;text-align:center&quot;>' + card.card_id + '</div>\')">' +
+          player.deck.filter(function(card) { return card && okCardId(card.card_id); }).map(function(card) {
+            var cid = GCG.escapeHtml(card.card_id);
+            return '<a href="' + GCG.getBasePath() + 'cards/' + cid + '/?from=event&name=' + encodeURIComponent(currentEventStore) + '" target="_blank" rel="noopener" class="deck-card" title="' + cid + '">' +
+              '<img src="' + GCG.escapeHtml(GCG.cardImageUrl(card.card_id)) + '" alt="' + cid + '" data-cid="' + cid + '"' +
+              ' onerror="cardImgFallback(this)">' +
               '<span class="card-count">×' + card.count + '</span>' +
               '</a>';
           }).join('') +
@@ -170,7 +187,7 @@
         '<div class="section-header"><div>' +
         '<h1 class="section-title" style="margin-bottom:6px;font-size:16px">' + GCG.escapeHtml(ev.store) + '</h1>' +
         '<div style="font-size:13px;color:var(--text-secondary);display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
-        '<span class="text-mono" style="color:var(--accent)">' + GCG.formatDate(ev.date) + '</span>' +
+        '<span class="text-mono" style="color:var(--accent)">' + GCG.escapeHtml(GCG.formatDate(ev.date)) + '</span>' +
         (seriesName ? '<span style="opacity:0.3">|</span> <span>' + GCG.escapeHtml(seriesName) + '</span>' : '') +
         '</div></div>' +
         '<span class="section-badge">' + (ev.results || []).length + '名参加</span></div>';

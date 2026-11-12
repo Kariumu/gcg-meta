@@ -172,7 +172,7 @@
 
       card.innerHTML =
         '<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">' + badges + '</div>' +
-        '<div style="font-size:15px;font-weight:600;color:var(--text-primary)">' + series.event_series_title + '</div>' +
+        '<div style="font-size:15px;font-weight:600;color:var(--text-primary)">' + GCG.escapeHtml(series.event_series_title) + '</div>' +
         deadline +
         '<div style="font-size:12px;color:var(--text-muted);margin-top:4px;font-family:var(--font-mono)">開催数: ' + countText + '</div>';
       return card;
