@@ -6464,7 +6464,7 @@ function buyClick(e){
   if (e.type === 'auxclick' && e.button !== 1) return;
   var a = e.target && e.target.closest ? e.target.closest('a[data-buy]') : null;
   if (!a || !SHOP) return;
-  dbTrack('affiliate_click', { shop: SHOP.key, placement: 'deckbuilder', card_id: a.getAttribute('data-buy'), link_kind: a.getAttribute('data-kind') });
+  dbTrack('affiliate_click', { shop: SHOP.key, placement: 'deckbuilder', link_type: 'purchase', card_id: a.getAttribute('data-buy'), link_kind: a.getAttribute('data-kind') });   /* 指示書168: 一覧は購入（店の販売ページ）だけなので link_type は purchase 固定 */
 }
 $('bsList').addEventListener('click', buyClick);
 $('bsList').addEventListener('auxclick', buyClick);
