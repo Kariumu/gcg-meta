@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="shortcut icon" href="/favicon.ico">
   <meta name="theme-color" content="#d4a029">
-  <meta name="description" content="GCG STATS | ガンダムカードゲーム大会結果・環境分析サイト。">
+  <meta name="description" content="GCG STATS へのお問い合わせ・広告掲載のご相談はこちらのフォームから受け付けています。">
   <link rel="canonical" href="https://gcg-stats.com/contact.html">
   <!-- OGP -->
   <meta property="og:site_name" content="GCG STATS">
@@ -52,32 +52,130 @@
       font-family: var(--font-mono); font-size: 14px; font-weight: 600;
       color: var(--accent); letter-spacing: 0.5px; user-select: all;
     }
+      .contact-form { display:grid; gap:18px; }
+    .contact-form[hidden] { display:none; }
+    .form-row label, .form-row .legend { display:block; font-size:13px; font-weight:600; color:var(--text-primary); margin-bottom:6px; }
+    .form-row .req { color:var(--accent); font-size:11px; margin-left:6px; font-weight:600; }
+    .form-row .opt { color:var(--text-muted); font-size:11px; margin-left:6px; font-weight:400; }
+    .form-row input[type=text], .form-row input[type=email], .form-row input[type=url], .form-row textarea {
+      width:100%; box-sizing:border-box; background:var(--bg-input); color:var(--text-primary); border:1px solid var(--border);
+      border-radius:var(--radius); padding:12px; font-size:16px; font-family:inherit; line-height:1.6;
+    }
+    .form-row textarea { min-height:160px; resize:vertical; }
+    .form-row input:focus, .form-row textarea:focus { outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-dim); }
+    .form-row [aria-invalid=true] { border-color:var(--red); }
+    .form-row .hint { font-size:11px; color:var(--text-muted); margin-top:4px; }
+    .form-row .err { font-size:12px; color:var(--red); margin-top:4px; }
+    .choice-list { display:grid; gap:8px; }
+    .choice-list label { display:flex; align-items:center; gap:10px; font-weight:400; margin:0; padding:10px 12px; background:var(--bg-elevated); border:1px solid var(--border); border-radius:var(--radius); cursor:pointer; font-size:14px; }
+    .choice-list input { width:18px; height:18px; margin:0; accent-color:var(--accent); flex:none; }
+    fieldset.ad-fields { border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:16px; margin:0; display:grid; gap:18px; }
+    fieldset.ad-fields[hidden] { display:none; }
+    fieldset.ad-fields legend { font-size:13px; font-weight:700; color:var(--accent); padding:0 6px; }
+    .ad-note { font-size:12px; color:var(--text-secondary); line-height:1.8; margin:0; }
+    .hp-field { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
+    .form-actions button { width:100%; padding:14px; border:none; border-radius:var(--radius); background:var(--accent); color:#0a0e14; font-size:15px; font-weight:700; cursor:pointer; }
+    .form-actions button:disabled { opacity:.6; cursor:wait; }
+    .form-privacy { font-size:11px; color:var(--text-muted); line-height:1.8; margin:0; }
+    .form-status { border-radius:var(--radius); padding:12px 14px; font-size:13px; line-height:1.8; }
+    .form-status.is-sending { background:var(--bg-elevated); color:var(--text-secondary); }
+    .form-status.is-success { background:var(--green-dim); color:var(--text-primary); border:1px solid var(--green); }
+    .form-status.is-error { background:var(--red-dim); color:var(--text-primary); border:1px solid var(--red); }
+    .turnstile-box { min-height:65px; }
+    @media (max-width:480px) { .contact-card { padding:20px 16px; } }
   </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <div id="header"></div>
-
   <main class="container">
     <div class="section-header">
       <h1 class="section-title">お問い合わせ</h1>
     </div>
-
     <div class="contact-content">
       <div class="contact-card">
-        <p>GCG STATSに関するお問い合わせは、下記メールアドレスにて受け付けております。</p>
-        <p>掲載内容に問題がある場合（誤った情報の掲載、表記の修正依頼など）も、お気軽にご連絡ください。可能な限り迅速に対応いたします。</p>
-
+        <p>GCG STATS へのお問い合わせ、不具合の報告、掲載データの訂正のご依頼、広告掲載のご相談は、下のフォームから受け付けています。</p>
+        <div id="form-status" class="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
+        <form id="contact-form" class="contact-form" data-endpoint="/api/contact" novalidate>
+          <div class="form-row">
+            <label for="f-name">お名前／ご担当者名<span class="req">必須</span></label>
+            <input id="f-name" name="name" type="text" autocomplete="name" maxlength="100" required>
+            <p class="err" id="err-name" hidden></p>
+          </div>
+          <div class="form-row">
+            <label for="f-email">メールアドレス<span class="req">必須</span></label>
+            <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required>
+            <p class="hint">ご返信はこのアドレスへお送りします。</p>
+            <p class="err" id="err-email" hidden></p>
+          </div>
+          <div class="form-row" role="radiogroup" aria-labelledby="lg-type">
+            <span class="legend" id="lg-type">お問い合わせの種類<span class="req">必須</span></span>
+            <div class="choice-list">
+              <label><input type="radio" name="type" value="ad"> 広告掲載の相談</label>
+              <label><input type="radio" name="type" value="bug"> 不具合の報告</label>
+              <label><input type="radio" name="type" value="data"> 掲載データの訂正</label>
+              <label><input type="radio" name="type" value="other"> その他</label>
+            </div>
+            <p class="err" id="err-type" hidden></p>
+          </div>
+          <fieldset class="ad-fields" id="ad-fields" hidden>
+            <legend>広告掲載のご相談</legend>
+            <p class="ad-note">掲載の前に、ショップの運営実態・取り扱い商品・広告の内容とリンク先を確認する審査があります。くわしくは<a href="ads.html" style="color:var(--accent)">広告掲載のご案内</a>をご覧ください。広告の画像は、ご返信のメールでお送りいただく形になります。</p>
+            <div class="form-row">
+              <label for="f-shop">ショップ名／会社名<span class="req">必須</span></label>
+              <input id="f-shop" name="shop_name" type="text" autocomplete="organization" maxlength="100">
+              <p class="err" id="err-shop_name" hidden></p>
+            </div>
+            <div class="form-row">
+              <label for="f-url">ショップの URL<span class="req">必須</span></label>
+              <input id="f-url" name="shop_url" type="url" inputmode="url" autocomplete="url" maxlength="300" placeholder="https://">
+              <p class="err" id="err-shop_url" hidden></p>
+            </div>
+            <div class="form-row" role="group" aria-labelledby="lg-slots">
+              <span class="legend" id="lg-slots">希望する広告枠<span class="req">必須・複数選択可</span></span>
+              <div class="choice-list">
+                <label><input type="checkbox" name="slots" value="card_links"> 購入リンク（カード個別ページ・デッキビルダー）・買取リンク（カード個別ページ）</label>
+                <label><input type="checkbox" name="slots" value="banner"> 既存の広告枠を差し替える静止画広告</label>
+                <label><input type="checkbox" name="slots" value="parallel"> パラレルカード詳細ページの限定枠</label>
+                <label><input type="checkbox" name="slots" value="undecided"> 未定・相談したい</label>
+              </div>
+              <p class="err" id="err-slots" hidden></p>
+            </div>
+            <div class="form-row">
+              <label for="f-period">掲載希望時期<span class="opt">任意</span></label>
+              <input id="f-period" name="period" type="text" maxlength="100" placeholder="例: 2027年1月から3か月">
+              <p class="err" id="err-period" hidden></p>
+            </div>
+            <div class="form-row">
+              <label for="f-budget">ご予算<span class="opt">任意・未定でも可</span></label>
+              <input id="f-budget" name="budget" type="text" maxlength="100" placeholder="例: 未定">
+              <p class="err" id="err-budget" hidden></p>
+            </div>
+          </fieldset>
+          <div class="form-row">
+            <label for="f-message">お問い合わせ内容<span class="req">必須</span></label>
+            <textarea id="f-message" name="message" maxlength="4000" required></textarea>
+            <p class="hint">不具合・データの訂正は、該当するページの URL やカード番号を書いていただけると確認が早くなります。</p>
+            <p class="err" id="err-message" hidden></p>
+          </div>
+          <div class="hp-field" aria-hidden="true">
+            <label for="f-website">この欄には何も入力しないでください</label>
+            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="turnstile-box"><div class="cf-turnstile" data-sitekey="0x4AAAAAAF_YLMPTESfoH2fr" data-language="ja" data-theme="dark"></div></div>
+          <p class="form-privacy">ご入力いただいた内容は、お問い合わせへの回答・ご連絡と、広告掲載のご相談の検討（審査・お見積もりを含みます）のためだけに使います。くわしくは<a href="privacy.html" style="color:var(--accent)">プライバシーポリシー</a>をご覧ください。</p>
+          <div class="form-actions"><button type="submit">送信する</button></div>
+        </form>
+        <p style="margin-top:24px;font-size:12px;color:var(--text-muted)">フォームが使えない場合は、下記のメールアドレスでも受け付けています。</p>
         <div class="contact-email">gcgstats.info [at] gmail.com</div>
-
-        <p style="margin-top: 20px; font-size: 11px; color: var(--text-muted)">※ [at] を @ に置き換えてお送りください。</p>
+        <p style="margin-top:12px; font-size:11px; color:var(--text-muted)">※ [at] を @ に置き換えてお送りください。</p>
       </div>
-
       <!-- 著作権者向けセクション -->
       <div class="contact-card" style="margin-top: 24px; border-color: var(--accent);">
         <h2 style="font-size: 16px; margin-bottom: 12px; color: var(--text-primary);">著作権者の方へ</h2>
         <p>本サイトはガンダムカードゲームの個人運営による非公式ファンサイトであり、カード情報や画像は公式サイト（<a href="https://www.gundam-gcg.com/" target="_blank" rel="noopener" style="color:var(--accent)">gundam-gcg.com</a>）より引用しております。</p>
         <p>ガンダムおよびガンダムカードゲームに関連するすべての名称・デザイン・商標は、©SOTSU・SUNRISE・BANDAIに帰属します。</p>
-        <p>権利者からのご要請（削除・修正・利用方法の変更等）には、上記メールアドレスより速やかに対応いたします。お手数ですが、件名に <strong>【著作権関係】</strong> と記載の上、対象URLとご要望の内容をお知らせください。</p>
+        <p>権利者からのご要請（削除・修正・利用方法の変更等）には、お問い合わせフォーム（種類は「その他」）または上記メールアドレスより速やかに対応いたします。お手数ですが、メールでは件名に、フォームではお問い合わせ内容の冒頭に <strong>【著作権関係】</strong> と記載の上、対象URLとご要望の内容をお知らせください。</p>
         <p style="margin-top: 16px; font-size: 12px; color: var(--text-muted);">対応所要時間の目安: 連絡受信から24〜72時間以内</p>
       </div>
     </div>
@@ -86,6 +184,7 @@
   <div id="footer"></div>
 
   <script src="js/common.js?v=15"></script>
+  <script src="js/contact-form.js?v=1"></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('');
