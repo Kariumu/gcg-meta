@@ -13,17 +13,17 @@
   "status": "active",
   "description": "公式トーナメント「ニュータイプチャレンジ」2026 MISSION5 の11月開催分。全国各地の店舗で行われ、開催期間は2026年11月1日〜11月30日。",
   "stats": {
-    "event_count": 133,
-    "total_result_entries": 1256,
-    "total_decks": 629,
+    "event_count": 138,
+    "total_result_entries": 1296,
+    "total_decks": 649,
     "by_region": {
       "中部": {
-        "events": 29,
-        "decks": 133
+        "events": 30,
+        "decks": 137
       },
       "関東": {
-        "events": 40,
-        "decks": 208
+        "events": 43,
+        "decks": 220
       },
       "九州": {
         "events": 17,
@@ -38,8 +38,8 @@
         "decks": 32
       },
       "関西": {
-        "events": 21,
-        "decks": 96
+        "events": 22,
+        "decks": 100
       },
       "北海道": {
         "events": 4,
@@ -58,7 +58,7 @@
           "White"
         ],
         "label": "赤/白",
-        "count": 206,
+        "count": 213,
         "share": 32.8
       },
       {
@@ -68,8 +68,8 @@
           "Purple"
         ],
         "label": "緑/紫",
-        "count": 114,
-        "share": 18.1
+        "count": 117,
+        "share": 18
       },
       {
         "type_key": "Blue+Green",
@@ -78,7 +78,7 @@
           "Green"
         ],
         "label": "青/緑",
-        "count": 97,
+        "count": 100,
         "share": 15.4
       },
       {
@@ -88,8 +88,8 @@
           "White"
         ],
         "label": "青/白",
-        "count": 81,
-        "share": 12.9
+        "count": 86,
+        "share": 13.3
       },
       {
         "type_key": "Blue+Red",
@@ -98,7 +98,7 @@
           "Red"
         ],
         "label": "青/赤",
-        "count": 48,
+        "count": 49,
         "share": 7.6
       },
       {
@@ -109,7 +109,7 @@
         ],
         "label": "青/紫",
         "count": 42,
-        "share": 6.7
+        "share": 6.5
       },
       {
         "type_key": "Red+Purple",
@@ -119,7 +119,7 @@
         ],
         "label": "赤/紫",
         "count": 20,
-        "share": 3.2
+        "share": 3.1
       },
       {
         "type_key": "Green+White",
@@ -128,8 +128,8 @@
           "White"
         ],
         "label": "緑/白",
-        "count": 13,
-        "share": 2.1
+        "count": 14,
+        "share": 2.2
       },
       {
         "type_key": "Red+Green",
@@ -139,7 +139,7 @@
         ],
         "label": "赤/緑",
         "count": 6,
-        "share": 1
+        "share": 0.9
       },
       {
         "type_key": "White+Purple",
@@ -160,9 +160,9 @@
           "White"
         ],
         "label": "赤/白",
-        "wins": 61,
-        "count": 206,
-        "win_rate": 29.6
+        "wins": 65,
+        "count": 213,
+        "win_rate": 30.5
       },
       {
         "type_key": "Green+Purple",
@@ -172,8 +172,19 @@
         ],
         "label": "緑/紫",
         "wins": 26,
-        "count": 114,
-        "win_rate": 22.8
+        "count": 117,
+        "win_rate": 22.2
+      },
+      {
+        "type_key": "Blue+Green",
+        "colors": [
+          "Blue",
+          "Green"
+        ],
+        "label": "青/緑",
+        "wins": 25,
+        "count": 100,
+        "win_rate": 25
       },
       {
         "type_key": "Blue+White",
@@ -183,19 +194,8 @@
         ],
         "label": "青/白",
         "wins": 24,
-        "count": 81,
-        "win_rate": 29.6
-      },
-      {
-        "type_key": "Blue+Green",
-        "colors": [
-          "Blue",
-          "Green"
-        ],
-        "label": "青/緑",
-        "wins": 24,
-        "count": 97,
-        "win_rate": 24.7
+        "count": 86,
+        "win_rate": 27.9
       },
       {
         "type_key": "Blue+Purple",
@@ -216,8 +216,8 @@
         ],
         "label": "青/赤",
         "wins": 6,
-        "count": 48,
-        "win_rate": 12.5
+        "count": 49,
+        "win_rate": 12.2
       },
       {
         "type_key": "Green+White",
@@ -227,8 +227,8 @@
         ],
         "label": "緑/白",
         "wins": 4,
-        "count": 13,
-        "win_rate": 30.8
+        "count": 14,
+        "win_rate": 28.6
       },
       {
         "type_key": "Red+Purple",
