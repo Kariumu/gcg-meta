@@ -71,6 +71,8 @@
     .choice-list input { width:18px; height:18px; margin:0; accent-color:var(--accent); flex:none; }
     fieldset.ad-fields { border:1px solid var(--border-accent); border-radius:var(--radius-lg); padding:16px; margin:0; display:grid; gap:18px; }
     fieldset.ad-fields[hidden] { display:none; }
+    .ad-only { display:grid; gap:18px; }
+    .ad-only[hidden], .ad-note[hidden] { display:none; }
     fieldset.ad-fields legend { font-size:13px; font-weight:700; color:var(--accent); padding:0 6px; }
     .ad-note { font-size:12px; color:var(--text-secondary); line-height:1.8; margin:0; }
     .hp-field { position:absolute; left:-10000px; width:1px; height:1px; overflow:hidden; }
@@ -105,12 +107,13 @@
           <div class="form-row">
             <label for="f-email">メールアドレス<span class="req">必須</span></label>
             <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required>
-            <p class="hint">ご返信はこのアドレスへお送りします。</p>
+            <p class="hint" id="hint-email">ご返信はこのアドレスへお送りします。</p>
             <p class="err" id="err-email" hidden></p>
           </div>
           <div class="form-row" role="radiogroup" aria-labelledby="lg-type">
             <span class="legend" id="lg-type">お問い合わせの種類<span class="req">必須</span></span>
             <div class="choice-list">
+              <label><input type="radio" name="type" value="media_kit"> 媒体資料の請求</label>
               <label><input type="radio" name="type" value="ad"> 広告掲載の相談</label>
               <label><input type="radio" name="type" value="bug"> 不具合の報告</label>
               <label><input type="radio" name="type" value="data"> 掲載データの訂正</label>
@@ -119,18 +122,20 @@
             <p class="err" id="err-type" hidden></p>
           </div>
           <fieldset class="ad-fields" id="ad-fields" hidden>
-            <legend>広告掲載のご相談</legend>
-            <p class="ad-note">掲載の前に、ショップの運営実態・取り扱い商品・広告の内容とリンク先を確認する審査があります。くわしくは<a href="ads.html" style="color:var(--accent)">広告掲載のご案内</a>をご覧ください。広告の画像は、ご返信のメールでお送りいただく形になります。</p>
+            <legend id="lg-shop">広告掲載のご相談</legend>
+            <p class="ad-note" id="note-mk" data-mk="pending" hidden>広告掲載をご検討いただくための媒体資料（サイトの利用実績や掲載枠をまとめたもの）をお送りします。11月実績をまとめた媒体資料は、12月上旬から順次お送りします。資料のご請求と、広告掲載の審査・ご契約は別の段階です。</p>
+            <p class="ad-note" id="note-ad">掲載の前に、ショップの運営実態・取り扱い商品・広告の内容とリンク先を確認する審査があります。くわしくは<a href="ads.html" style="color:var(--accent)">広告掲載のご案内</a>をご覧ください。広告の画像は、ご返信のメールでお送りいただく形になります。</p>
             <div class="form-row">
               <label for="f-shop">ショップ名／会社名<span class="req">必須</span></label>
               <input id="f-shop" name="shop_name" type="text" autocomplete="organization" maxlength="100">
               <p class="err" id="err-shop_name" hidden></p>
             </div>
             <div class="form-row">
-              <label for="f-url">ショップの URL<span class="req">必須</span></label>
+              <label for="f-url">ショップの URL<span class="req" id="req-url">必須</span><span class="opt" id="opt-url" hidden>任意</span></label>
               <input id="f-url" name="shop_url" type="url" inputmode="url" autocomplete="url" maxlength="300" placeholder="https://">
               <p class="err" id="err-shop_url" hidden></p>
             </div>
+            <div id="ad-only" class="ad-only">
             <div class="form-row" role="group" aria-labelledby="lg-slots">
               <span class="legend" id="lg-slots">希望する広告枠<span class="req">必須・複数選択可</span></span>
               <div class="choice-list">
@@ -151,11 +156,12 @@
               <input id="f-budget" name="budget" type="text" maxlength="100" placeholder="例: 未定">
               <p class="err" id="err-budget" hidden></p>
             </div>
+            </div>
           </fieldset>
           <div class="form-row">
-            <label for="f-message">お問い合わせ内容<span class="req">必須</span></label>
+            <label for="f-message"><span id="lbl-message">お問い合わせ内容</span><span class="req" id="req-message">必須</span><span class="opt" id="opt-message" hidden>任意</span></label>
             <textarea id="f-message" name="message" maxlength="4000" required></textarea>
-            <p class="hint">不具合・データの訂正は、該当するページの URL やカード番号を書いていただけると確認が早くなります。</p>
+            <p class="hint" id="hint-message">不具合・データの訂正は、該当するページの URL やカード番号を書いていただけると確認が早くなります。</p>
             <p class="err" id="err-message" hidden></p>
           </div>
           <div class="hp-field" aria-hidden="true">
@@ -163,7 +169,7 @@
             <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
           <div class="turnstile-box"><div class="cf-turnstile" data-sitekey="0x4AAAAAAF_YLMPTESfoH2fr" data-language="ja" data-theme="dark"></div></div>
-          <p class="form-privacy">ご入力いただいた内容は、お問い合わせへの回答・ご連絡と、広告掲載のご相談の検討（審査・お見積もりを含みます）のためだけに使います。くわしくは<a href="privacy.html" style="color:var(--accent)">プライバシーポリシー</a>をご覧ください。</p>
+          <p class="form-privacy">ご入力いただいた内容は、お問い合わせへの回答・ご連絡、媒体資料のお送り、広告掲載のご相談の検討（審査・お見積もりを含みます）のためだけに使います。くわしくは<a href="privacy.html" style="color:var(--accent)">プライバシーポリシー</a>をご覧ください。</p>
           <div class="form-actions"><button type="submit">送信する</button></div>
         </form>
         <p style="margin-top:24px;font-size:12px;color:var(--text-muted)">フォームが使えない場合は、下記のメールアドレスでも受け付けています。</p>
@@ -184,7 +190,7 @@
   <div id="footer"></div>
 
   <script src="js/common.js?v=15"></script>
-  <script src="js/contact-form.js?v=1"></script>
+  <script src="js/contact-form.js?v=2"></script>
   <script>
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('');

@@ -7,14 +7,20 @@
  * - 「受け付けました」は送り先が { ok: true } を返したときだけ出す。失敗したときは入力をそのまま残し、もう一度送れるようにする。
  * - 送信中はボタンを止めて二重送信を防ぐ。
  * - GA4 へは問い合わせの種類だけを送る（名前・メールアドレス・本文・ショップ名などは送らない）。
- * - ?type=ad（ad / bug / data / other）で種類を選んだ状態で開く。
+ * - ?type=ad（ad / media_kit / bug / data / other）で種類を選んだ状態で開く。
+ * - 媒体資料の請求（media_kit）: ショップ名（必須）・URL（任意）・ご質問・補足（任意）。希望枠・時期・予算は使わない（指示書170）。
  */
 (function () {
   'use strict';
   var form = document.getElementById('contact-form');
   if (!form) return;
   var ENDPOINT = form.getAttribute('data-endpoint') || '/api/contact';
-  var TYPES = { ad: '広告掲載の相談', bug: '不具合の報告', data: '掲載データの訂正', other: 'その他' };
+  var TYPES = { media_kit: '媒体資料の請求', ad: '広告掲載の相談', bug: '不具合の報告', data: '掲載データの訂正', other: 'その他' };
+  // MEDIA_KIT: 資料の準備中は false。送付を始めたら true にし、contact.html・ads.html の data-mk="pending" の文も一緒に書き換え、contact.html の contact-form.js?v= を上げる
+  var MEDIA_KIT_READY = false;
+  var MK_SUCCESS = MEDIA_KIT_READY
+    ? '<strong>媒体資料のご請求を受け付けました。</strong><br>資料は、ご入力のメールアドレスへお送りします。'
+    : '<strong>媒体資料のご請求を受け付けました。</strong><br>11月実績をまとめた資料は、12月上旬から、ご入力のメールアドレスへ順次お送りします。';
   var SLOTS = ['card_links', 'banner', 'parallel', 'undecided'];
   var LIMITS = { name: 100, email: 254, message: 4000, shop_name: 100, shop_url: 300, period: 100, budget: 100 };
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -27,11 +33,23 @@
   function val(name) { var el = form.elements[name]; return el && typeof el.value === 'string' ? el.value.trim() : ''; }
   function typeVal() { var r = form.querySelector('input[name="type"]:checked'); return r ? r.value : ''; }
 
+  var $ = function (id) { return document.getElementById(id); };
+  var adOnly = $('ad-only');
   function syncAd() {
-    var on = typeVal() === 'ad';
-    adBox.hidden = !on;
+    var t = typeVal(), isAd = t === 'ad', isMk = t === 'media_kit', shopOn = isAd || isMk;
+    adBox.hidden = !shopOn;
+    adOnly.hidden = !isAd;
+    $('lg-shop').textContent = isMk ? '媒体資料のご請求' : '広告掲載のご相談';
+    $('note-ad').hidden = !isAd; $('note-mk').hidden = !isMk;
+    $('req-url').hidden = !isAd; $('opt-url').hidden = isAd;
     // 隠れている欄は確かめにも送信にも使わない
-    Array.prototype.forEach.call(adBox.querySelectorAll('input,textarea,select'), function (el) { el.disabled = !on; });
+    Array.prototype.forEach.call(adBox.querySelectorAll('input,textarea,select'), function (el) { el.disabled = !shopOn || (!isAd && adOnly.contains(el)); });
+    $('lbl-message').textContent = isMk ? 'ご質問・補足' : 'お問い合わせ内容';
+    $('req-message').hidden = isMk; $('opt-message').hidden = !isMk;
+    form.elements.message.required = !isMk;
+    $('hint-message').hidden = isMk;
+    $('hint-email').textContent = isMk ? '資料はこのメールアドレスへお送りします。' : 'ご返信はこのアドレスへお送りします。';
+    ['shop_url', 'slots', 'period', 'budget', 'message'].forEach(clearErr);
   }
 
   // ?type= で種類を選ぶ
@@ -39,7 +57,6 @@
     var t = new URLSearchParams(location.search).get('type');
     if (t && TYPES[t]) { var r = form.querySelector('input[name="type"][value="' + t + '"]'); if (r) r.checked = true; }
   } catch (_) { /* 古いブラウザでは選ばずに開く */ }
-  syncAd();
   Array.prototype.forEach.call(form.querySelectorAll('input[name="type"]'), function (r) { r.addEventListener('change', function () { syncAd(); clearErr('type'); }); });
 
   function setErr(name, msg) {
@@ -48,6 +65,7 @@
     if (el && el.setAttribute && !(el instanceof RadioNodeList)) { if (msg) el.setAttribute('aria-invalid', 'true'); else el.removeAttribute('aria-invalid'); }
   }
   function clearErr(name) { setErr(name, ''); }
+  syncAd();
   Array.prototype.forEach.call(form.querySelectorAll('input,textarea'), function (el) { el.addEventListener('input', function () { if (el.name) clearErr(el.name === 'slots' ? 'slots' : el.name); }); });
 
   function validate() {
@@ -56,11 +74,13 @@
     if (!name) errs.name = 'お名前（ご担当者名）を入力してください。'; else if (name.length > LIMITS.name) errs.name = LIMITS.name + ' 文字以内で入力してください。';
     if (!email) errs.email = 'メールアドレスを入力してください。'; else if (email.length > LIMITS.email || !EMAIL_RE.test(email)) errs.email = 'メールアドレスの形式をご確認ください（例: name@example.com）。';
     if (!TYPES[type]) errs.type = 'お問い合わせの種類を選んでください。';
-    if (!message) errs.message = 'お問い合わせ内容を入力してください。'; else if (message.length > LIMITS.message) errs.message = LIMITS.message + ' 文字以内で入力してください。';
-    if (type === 'ad') {
+    if (!message && type !== 'media_kit') errs.message = 'お問い合わせ内容を入力してください。'; else if (message.length > LIMITS.message) errs.message = LIMITS.message + ' 文字以内で入力してください。';
+    if (type === 'ad' || type === 'media_kit') {
       var shop = val('shop_name'), url = val('shop_url');
       if (!shop) errs.shop_name = 'ショップ名（会社名）を入力してください。'; else if (shop.length > LIMITS.shop_name) errs.shop_name = LIMITS.shop_name + ' 文字以内で入力してください。';
-      if (!url) errs.shop_url = 'ショップの URL を入力してください。'; else if (url.length > LIMITS.shop_url || !/^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(url)) errs.shop_url = 'http:// または https:// で始まる URL を入力してください。';
+      if (!url) { if (type === 'ad') errs.shop_url = 'ショップの URL を入力してください。'; } else if (url.length > LIMITS.shop_url || !/^https?:\/\/[^\s/$.?#].[^\s]*$/i.test(url)) errs.shop_url = 'http:// または https:// で始まる URL を入力してください。';
+    }
+    if (type === 'ad') {
       if (!form.querySelectorAll('input[name="slots"]:checked').length) errs.slots = '希望する広告枠を 1 つ以上選んでください（未定でも構いません）。';
       if (val('period').length > LIMITS.period) errs.period = LIMITS.period + ' 文字以内で入力してください。';
       if (val('budget').length > LIMITS.budget) errs.budget = LIMITS.budget + ' 文字以内で入力してください。';
@@ -91,6 +111,7 @@
     if (!token) { show('error', '送信前の確認（迷惑投稿の対策）が終わっていません。少し待ってからもう一度お試しください。'); return; }
     var type = typeVal();
     var body = { name: val('name'), email: val('email'), type: type, message: val('message'), website: val('website'), turnstile: token };
+    if (type === 'media_kit') { body.shop_name = val('shop_name'); body.shop_url = val('shop_url'); }
     if (type === 'ad') {
       body.shop_name = val('shop_name'); body.shop_url = val('shop_url'); body.period = val('period'); body.budget = val('budget');
       body.slots = Array.prototype.map.call(form.querySelectorAll('input[name="slots"]:checked'), function (c) { return c.value; }).filter(function (v) { return SLOTS.indexOf(v) >= 0; });
@@ -106,7 +127,7 @@
         if (r.status === 200 && r.j && r.j.ok === true) {
           done = true;
           form.hidden = true;
-          show('success', '<strong>お問い合わせを受け付けました。</strong><br>内容を確認し、必要に応じてご入力のメールアドレスへご連絡します。');
+          show('success', type === 'media_kit' ? MK_SUCCESS : '<strong>お問い合わせを受け付けました。</strong><br>内容を確認し、必要に応じてご入力のメールアドレスへご連絡します。');
           statusEl.focus && statusEl.focus();
           try { if (typeof gtag === 'function') gtag('event', 'contact_submit', { inquiry_type: type }); } catch (_) { /* 計測の失敗は無視 */ }
           return;
