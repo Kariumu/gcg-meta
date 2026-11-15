@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 138,
-    "decks": 649,
+    "events": 139,
+    "decks": 653,
     "types": 10
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 213,
+      "count": 214,
       "share": 32.8,
-      "win_rate": 30.5,
+      "win_rate": 30.8,
       "avg_rank": 2.4,
-      "wins": 65
+      "wins": 66
     },
     {
       "type_key": "Green+Purple",
@@ -31,7 +31,7 @@
       ],
       "label": "緑/紫",
       "count": 117,
-      "share": 18,
+      "share": 17.9,
       "win_rate": 22.2,
       "avg_rank": 2.5,
       "wins": 26
@@ -43,9 +43,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 100,
-      "share": 15.4,
-      "win_rate": 25,
+      "count": 102,
+      "share": 15.6,
+      "win_rate": 24.5,
       "avg_rank": 2.5,
       "wins": 25
     },
@@ -56,9 +56,9 @@
         "White"
       ],
       "label": "青/白",
-      "count": 86,
+      "count": 87,
       "share": 13.3,
-      "win_rate": 27.9,
+      "win_rate": 27.6,
       "avg_rank": 2.4,
       "wins": 24
     },
@@ -70,7 +70,7 @@
       ],
       "label": "青/赤",
       "count": 49,
-      "share": 7.6,
+      "share": 7.5,
       "win_rate": 12.2,
       "avg_rank": 2.9,
       "wins": 6
@@ -83,7 +83,7 @@
       ],
       "label": "青/紫",
       "count": 42,
-      "share": 6.5,
+      "share": 6.4,
       "win_rate": 26.2,
       "avg_rank": 2.5,
       "wins": 11
@@ -109,7 +109,7 @@
       ],
       "label": "緑/白",
       "count": 14,
-      "share": 2.2,
+      "share": 2.1,
       "win_rate": 28.6,
       "avg_rank": 2.4,
       "wins": 4
@@ -144,56 +144,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 308,
+      "decks": 310,
       "usage_rate": 47.5
     },
     {
       "card_id": "GD04-068",
-      "decks": 274,
-      "usage_rate": 42.2
+      "decks": 275,
+      "usage_rate": 42.1
     },
     {
       "card_id": "GD05-110",
-      "decks": 223,
-      "usage_rate": 34.4
-    },
-    {
-      "card_id": "GD05-111",
-      "decks": 212,
-      "usage_rate": 32.7
+      "decks": 224,
+      "usage_rate": 34.3
     },
     {
       "card_id": "ST03-008",
-      "decks": 212,
-      "usage_rate": 32.7
+      "decks": 214,
+      "usage_rate": 32.8
+    },
+    {
+      "card_id": "GD05-111",
+      "decks": 213,
+      "usage_rate": 32.6
     },
     {
       "card_id": "GD01-128",
-      "decks": 198,
+      "decks": 199,
       "usage_rate": 30.5
     },
     {
       "card_id": "GD01-100",
-      "decks": 191,
-      "usage_rate": 29.4
+      "decks": 193,
+      "usage_rate": 29.6
     },
     {
       "card_id": "GD01-030",
-      "decks": 174,
-      "usage_rate": 26.8
+      "decks": 176,
+      "usage_rate": 27
     },
     {
       "card_id": "ST01-010",
-      "decks": 162,
-      "usage_rate": 25
+      "decks": 164,
+      "usage_rate": 25.1
     },
     {
       "card_id": "GD03-056",
       "decks": 159,
-      "usage_rate": 24.5
+      "usage_rate": 24.3
     }
   ],
-  "card_ranking_denominator": 649,
+  "card_ranking_denominator": 653,
   "recent_events": [
     {
       "event_id": "ntcd-01M7ERS8EW0JB1VB94FEV6CJWK",
@@ -511,22 +511,22 @@
       ]
     },
     {
-      "event_id": "ntcd-01M7C9TMZNMRKG6VSVHZ0BE91D",
-      "date": "2026-11-14",
-      "store": "フルコンプPLAYERS CENTER 札幌駅前店",
+      "event_id": "ntcd-01M7FGV6HBXJXB1M27Y7K6KFYB",
+      "date": "2026-11-15",
+      "store": "サンエイト沼津店",
       "top4_colors": [
         {
           "rank": 1,
           "colors": [
-            "Blue",
-            "Purple"
+            "Red",
+            "White"
           ]
         },
         {
           "rank": 2,
           "colors": [
-            "Red",
-            "White"
+            "Blue",
+            "Green"
           ]
         },
         {
@@ -539,7 +539,7 @@
         {
           "rank": 4,
           "colors": [
-            "Red",
+            "Blue",
             "White"
           ]
         }
@@ -548,6 +548,6 @@
   ],
   "source": {
     "latest_event_date": "2026-11-15",
-    "event_count": 2071
+    "event_count": 2072
   }
 }
