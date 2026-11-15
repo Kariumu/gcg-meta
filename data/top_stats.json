@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 129,
-    "decks": 613,
+    "events": 130,
+    "decks": 617,
     "types": 10
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 199,
-      "share": 32.5,
-      "win_rate": 29.1,
-      "avg_rank": 2.5,
-      "wins": 58
+      "count": 200,
+      "share": 32.4,
+      "win_rate": 29.5,
+      "avg_rank": 2.4,
+      "wins": 59
     },
     {
       "type_key": "Green+Purple",
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 110,
-      "share": 17.9,
-      "win_rate": 23.6,
+      "count": 111,
+      "share": 18,
+      "win_rate": 23.4,
       "avg_rank": 2.5,
       "wins": 26
     },
@@ -44,7 +44,7 @@
       ],
       "label": "青/緑",
       "count": 96,
-      "share": 15.7,
+      "share": 15.6,
       "win_rate": 25,
       "avg_rank": 2.5,
       "wins": 24
@@ -57,7 +57,7 @@
       ],
       "label": "青/白",
       "count": 79,
-      "share": 12.9,
+      "share": 12.8,
       "win_rate": 29.1,
       "avg_rank": 2.3,
       "wins": 23
@@ -69,10 +69,10 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 46,
-      "share": 7.5,
-      "win_rate": 13,
-      "avg_rank": 2.8,
+      "count": 48,
+      "share": 7.8,
+      "win_rate": 12.5,
+      "avg_rank": 2.9,
       "wins": 6
     },
     {
@@ -83,7 +83,7 @@
       ],
       "label": "青/紫",
       "count": 42,
-      "share": 6.9,
+      "share": 6.8,
       "win_rate": 26.2,
       "avg_rank": 2.5,
       "wins": 11
@@ -96,7 +96,7 @@
       ],
       "label": "赤/紫",
       "count": 20,
-      "share": 3.3,
+      "share": 3.2,
       "win_rate": 5,
       "avg_rank": 2.8,
       "wins": 1
@@ -144,57 +144,92 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 287,
-      "usage_rate": 46.8
+      "decks": 288,
+      "usage_rate": 46.7
     },
     {
       "card_id": "GD04-068",
-      "decks": 254,
-      "usage_rate": 41.4
+      "decks": 255,
+      "usage_rate": 41.3
     },
     {
       "card_id": "GD05-110",
-      "decks": 210,
-      "usage_rate": 34.3
-    },
-    {
-      "card_id": "ST03-008",
-      "decks": 201,
-      "usage_rate": 32.8
+      "decks": 211,
+      "usage_rate": 34.2
     },
     {
       "card_id": "GD05-111",
-      "decks": 200,
-      "usage_rate": 32.6
+      "decks": 202,
+      "usage_rate": 32.7
+    },
+    {
+      "card_id": "ST03-008",
+      "decks": 202,
+      "usage_rate": 32.7
     },
     {
       "card_id": "GD01-128",
-      "decks": 188,
-      "usage_rate": 30.7
+      "decks": 189,
+      "usage_rate": 30.6
     },
     {
       "card_id": "GD01-100",
-      "decks": 180,
-      "usage_rate": 29.4
+      "decks": 182,
+      "usage_rate": 29.5
     },
     {
       "card_id": "GD01-030",
       "decks": 166,
-      "usage_rate": 27.1
+      "usage_rate": 26.9
     },
     {
       "card_id": "ST01-010",
       "decks": 155,
-      "usage_rate": 25.3
+      "usage_rate": 25.1
     },
     {
       "card_id": "GD03-056",
-      "decks": 152,
+      "decks": 153,
       "usage_rate": 24.8
     }
   ],
-  "card_ranking_denominator": 613,
+  "card_ranking_denominator": 617,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M7ERS8EW0JB1VB94FEV6CJWK",
+      "date": "2026-11-15",
+      "store": "カードショップアヴァロン",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Red"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M7C9TMZNMRKG6VSVHZ0BE91D",
       "date": "2026-11-14",
@@ -509,45 +544,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M7CQJARK2TRSG3HXCVRN9G8S",
-      "date": "2026-11-14",
-      "store": "V100徳島藍住店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "Purple"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Red"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        }
-      ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-11-14",
-    "event_count": 2062
+    "latest_event_date": "2026-11-15",
+    "event_count": 2063
   }
 }
