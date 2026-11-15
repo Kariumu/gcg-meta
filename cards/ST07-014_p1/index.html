@@ -110,6 +110,7 @@
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
         </a>
+        <p style="margin:6px 0 0;font-size:13px"><a href="#winning-decks" data-guide="card_to_decks" data-guide-card="ST07-014_p1" style="display:inline-block;padding:4px 0;color:var(--accent);text-decoration:none">このカードを使った入賞デッキを見る（16件）↓</a></p>
 
         
         <div style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
@@ -460,7 +461,7 @@
         </details>
     
         <div class="ad-slot" data-slot="card-decks" data-kind="band"></div>
-        <details class="collapsible-section">
+        <details class="collapsible-section" id="winning-decks" style="scroll-margin-top:12px">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">このカードが入っている入賞デッキ（ベスト4まで）</h2>
             <div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="section-badge">16件</span><span class="toggle-icon"></span></div>
@@ -666,5 +667,9 @@
     document.getElementById("footer").innerHTML = GCG.renderFooter();
     GCG.renderShareButtons('share-buttons', '戦術予報士（ST07-014_p1）パラレル版採用率8.2% | GCG STATS');
   </script>
+  <script>(function(){function op(){var d=document.getElementById("winning-decks");if(d&&!d.open)d.open=true;return d;}
+if(location.hash==="#winning-decks"){var d=op();if(d)setTimeout(function(){d.scrollIntoView();},0);}
+function h(e){try{if(e.type==="auxclick"&&e.button!==1)return;var a=e.target&&e.target.closest?e.target.closest("a[data-guide]"):null;if(!a)return;var g=a.getAttribute("data-guide");if(g==="card_to_decks"&&e.type==="click")op();if(typeof gtag==="function")gtag("event","guide_click",{guide:g,card_id:(a.getAttribute("data-guide-card")||"").slice(0,100),link_url:(a.getAttribute("href")||"").slice(0,100),transport_type:"beacon"});}catch(_){}}
+document.addEventListener("click",h,true);document.addEventListener("auxclick",h,true);})();</script>
 </body>
 </html>

@@ -43,6 +43,20 @@
     .rl-tag{display:inline-block;font-size:11px;font-weight:600;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:1px 6px;margin-right:8px;vertical-align:2px}
     .rl-title{overflow-wrap:anywhere}
     main section[id]{scroll-margin-top:16px}
+    .rg{margin-top:12px;padding:6px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px}
+    .rg-row{display:grid;grid-template-columns:9.5em minmax(0,1fr);gap:0 10px;padding:6px 0}
+    .rg-row+.rg-row{border-top:1px solid var(--border)}
+    .rg-h{font-size:12px;font-weight:700;color:var(--text-primary);line-height:22px;word-break:keep-all}
+    .rg-l{list-style:none;margin:0;padding:0;min-width:0}
+    .rg-l a{display:flex;align-items:baseline;gap:8px;min-width:0;line-height:22px;text-decoration:none}
+    .rg-k{flex-shrink:0;font-size:13px;color:var(--accent)}
+    .rg-l a:hover .rg-k{text-decoration:underline}
+    .rg-t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:var(--text-muted)}
+    .rg-d{flex-shrink:0;margin-left:auto;font-size:11px;color:var(--text-muted)}
+    .rg-sh{display:none}
+    @media(max-width:520px){.rg{padding:4px 12px}.rg-row{display:block;padding:4px 0}.rg-h{display:inline;font-size:11px;line-height:26px;margin-right:8px;white-space:nowrap}.rg-h wbr{display:none}.rg-l,.rg-l li{display:inline}.rg-l a{display:inline-block;line-height:26px;margin-right:12px}.rg-k{font-size:13px}.rg-lg,.rg-t,.rg-d{display:none}.rg-sh{display:inline}}
+    .rl-h3{font-size:14px;font-weight:600;color:var(--text-secondary);margin:16px 0 0;scroll-margin-top:16px}
+    .rl-sub{display:block;margin-top:4px;font-size:12px;font-weight:400;color:var(--text-muted)}
   </style>
 </head>
 <body>
@@ -54,6 +68,29 @@
       <span class="section-badge">204件</span>
     </div>
 
+    <div class="rg" role="navigation" aria-label="目的別の入口">
+      <div class="rg-row">
+        <div class="rg-h">今の環境を<wbr>知る</div>
+        <ul class="rg-l">
+        <li><a href="weekly-2026-11-02.html" data-guide="reports_env_tournament" title="週間まとめ 11/7〜11/8｜GD06登場後の最初の週末 デッキの型ごとの入賞割合とGD06の採用カード"><span class="rg-k"><span class="rg-lg">大会の最新まとめ</span><span class="rg-sh">大会の最新まとめ</span></span><span class="rg-t">週間まとめ 11/7〜11/8｜GD06登場後の最初の週末 デッキの型ごとの入賞割合とGD06の採用カード</span><span class="rg-d">2026.11.10 公開</span></a></li>
+        <li><a href="msa-gd06-week1.html" data-guide="reports_env_msa" title="MSA環境レポート GD06環境 Week 1（2026/11/1〜11/7）"><span class="rg-k"><span class="rg-lg">MSAの最新レポート（オンライン対戦）</span><span class="rg-sh">MSA（オンライン対戦）</span></span><span class="rg-t">MSA環境レポート GD06環境 Week 1（2026/11/1〜11/7）</span><span class="rg-d">2026.11.11 公開</span></a></li>
+        <li><a href="../meta.html" data-guide="reports_env_meta" title="デッキ分布・カード採用率"><span class="rg-k"><span class="rg-lg">環境分析（大会結果の一覧）</span><span class="rg-sh">環境分析</span></span><span class="rg-t">デッキ分布・カード採用率</span></a></li>
+        </ul>
+      </div>
+      <div class="rg-row">
+        <div class="rg-h">デッキの<wbr>構築例を<wbr>探す</div>
+        <ul class="rg-l">
+        <li><a href="#decks" data-guide="reports_decks" title="大会で入賞したデッキの解説（対象の大会・開催日つき）"><span class="rg-k"><span class="rg-lg">デッキ紹介 6件 ↓</span><span class="rg-sh">デッキ紹介 6件 ↓</span></span><span class="rg-t">大会で入賞したデッキの解説（対象の大会・開催日つき）</span></a></li>
+        </ul>
+      </div>
+      <div class="rg-row">
+        <div class="rg-h">新弾に<wbr>ついて<wbr>調べる</div>
+        <ul class="rg-l">
+        <li><a href="../sets/" data-guide="reports_sets" title="GD06 Stardust Trails 新弾情報"><span class="rg-k"><span class="rg-lg">新弾情報（GD06）</span><span class="rg-sh">新弾情報（GD06）</span></span><span class="rg-t">GD06 Stardust Trails 新弾情報</span></a></li>
+        <li><a href="../sets/gd07.html" data-guide="reports_sets_upcoming" title="GD07「Blazing Fist」 発売前判明カード一覧"><span class="rg-k"><span class="rg-lg">GD07 発売前の判明カード</span><span class="rg-sh">GD07 発売前</span></span><span class="rg-t">GD07「Blazing Fist」 発売前判明カード一覧</span><span class="rg-d">2027.01.30 発売予定</span></a></li>
+        </ul>
+      </div>
+    </div>
     <nav class="rl-toc" aria-label="カテゴリ">
       <a href="#latest">新着</a>
       <a href="#news">速報 132</a>
@@ -67,11 +104,11 @@
       </div>
       <div class="event-list" style="margin-top:12px">
       <a href="deck-2026-11-07-bael.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600"><span class="rl-tag">考察</span>デッキ紹介｜GD06の〔ギャラルホルン〕 — ガンダム・バエルの赤/白と赤/紫</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600"><span class="rl-tag">考察</span>デッキ紹介｜GD06の〔ギャラルホルン〕 — ガンダム・バエルの赤/白と赤/紫<span class="rl-sub">対象: ニュータイプチャレンジ 2026 MISSION5（11月開催）・2026.11.07開催</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.11.12</span>
       </a>
       <a href="deck-2026-11-07-diana.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600"><span class="rl-tag">考察</span>デッキ紹介｜緑/白 GD06の〔ディアナ・カウンター〕と〔ギンガナム艦隊〕 — 《ブロッカー》で守るデッキ</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600"><span class="rl-tag">考察</span>デッキ紹介｜緑/白 GD06の〔ディアナ・カウンター〕と〔ギンガナム艦隊〕 — 《ブロッカー》で守るデッキ<span class="rl-sub">対象: ニュータイプチャレンジ 2026 MISSION5（11月開催）・2026.11.07開催</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.11.12</span>
       </a>
       <a href="msa-gd06-week1.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
@@ -777,15 +814,15 @@
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.11.07</span>
       </a>
       <a href="weekly-2026-10-19.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">週間まとめ 10/19〜10/25｜デッキカラー別の入賞割合と採用カード</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">週間まとめ 10/19〜10/25｜デッキカラー別の入賞割合と採用カード<span class="rl-sub">対象: 2026/10/19〜10/25 開催の大会・5.5弾環境（GD06 登場前）</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.28</span>
       </a>
       <a href="weekly-2026-10-12.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">週間まとめ 10/12〜10/18｜デッキカラー別の入賞割合と採用カード</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">週間まとめ 10/12〜10/18｜デッキカラー別の入賞割合と採用カード<span class="rl-sub">対象: 2026/10/12〜10/18 開催の大会・5.5弾環境（GD06 登場前）</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.19</span>
       </a>
       <a href="matchup-2026-10-01-2026-10-13.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">デッキカラー相性表（10/1〜10/13 開催分・シリアルカードチャレンジ 10月）</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">デッキカラー相性表（10/1〜10/13 開催分・シリアルカードチャレンジ 10月）<span class="rl-sub">対象: 2026/10/1〜10/13 開催の大会（GD06 登場前）</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.15</span>
       </a>
       <a href="ntc-2026-mission4-august.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
@@ -821,7 +858,7 @@
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
       </a>
       <a href="2026-03-restriction.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">コルシカ基地制限＜2＞の影響考察</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">コルシカ基地制限＜2＞の影響考察<span class="rl-sub">対象: 2026年4月1日施行の制限（2026/3/1〜3/15 の大会データ）</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.03.28</span>
       </a>
       <a href="2026-03-week4-chubu.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
@@ -860,27 +897,35 @@
         <h2 class="section-title" style="font-size:18px">カード・デッキ考察</h2>
         <span class="section-badge">22件</span>
       </div>
-      <div class="event-list" style="margin-top:12px">
+      <h3 id="decks" class="rl-h3">デッキ紹介（6件）</h3>
+      <div class="event-list" style="margin-top:8px">
       <a href="deck-2026-11-07-bael.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜GD06の〔ギャラルホルン〕 — ガンダム・バエルの赤/白と赤/紫</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜GD06の〔ギャラルホルン〕 — ガンダム・バエルの赤/白と赤/紫<span class="rl-sub">対象: ニュータイプチャレンジ 2026 MISSION5（11月開催）・2026.11.07開催</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.11.12</span>
       </a>
       <a href="deck-2026-11-07-diana.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜緑/白 GD06の〔ディアナ・カウンター〕と〔ギンガナム艦隊〕 — 《ブロッカー》で守るデッキ</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜緑/白 GD06の〔ディアナ・カウンター〕と〔ギンガナム艦隊〕 — 《ブロッカー》で守るデッキ<span class="rl-sub">対象: ニュータイプチャレンジ 2026 MISSION5（11月開催）・2026.11.07開催</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.11.12</span>
       </a>
       <a href="deck-2026-08-01-exia.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜赤/紫 〔CB〕ガンダムエクシア — 主流の〔鉄華団〕を入れない45枚</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜赤/紫 〔CB〕ガンダムエクシア — 主流の〔鉄華団〕を入れない45枚<span class="rl-sub">対象: ニュータイプチャレンジ 2026 MISSION4（8月開催）・2026.08.01開催</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.11.06</span>
       </a>
       <a href="deck-2026-11-01-gundam.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜青/白 ガンダムと低コストユニット — ストライクフリーダムを入れないLv.4以下の50枚</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜青/白 ガンダムと低コストユニット — ストライクフリーダムを入れないLv.4以下の50枚<span class="rl-sub">対象: ニュータイプチャレンジ 2026 MISSION5・2026.11.01開催</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.11.03</span>
       </a>
       <a href="deck-2026-10-19-vgundam.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜青/緑 Vガンダム×フルアーマー・ユニコーン — 主流のザクⅡもνガンダムも入れない構築</span>
+        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜青/緑 Vガンダム×フルアーマー・ユニコーン — 主流のザクⅡもνガンダムも入れない構築<span class="rl-sub">対象: シリアルカードチャレンジ 10月・2026.10.19開催</span></span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.29</span>
       </a>
+      <a href="deck-2026-10-17-gquuuuuux.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
+        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜赤/緑 GQuuuuuuX（クラン）— 主流カード0枚で優勝した構築<span class="rl-sub">対象: シリアルカードチャレンジ 10月・2026.10.17開催</span></span>
+        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.22</span>
+      </a>
+      </div>
+      <h3 class="rl-h3">カード考察（16件）</h3>
+      <div class="event-list" style="margin-top:8px">
       <a href="gd06-lr-white.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span class="rl-title" style="font-size:15px;font-weight:600">GD06 白LR考察 — ブロッカー2枚・守って殴り返す</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.27</span>
@@ -900,14 +945,6 @@
       <a href="gd06-lr-blue.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span class="rl-title" style="font-size:15px;font-weight:600">GD06 青LR考察 — 読み合いの3機・ドローと手札で殴る</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.23</span>
-      </a>
-      </div>
-      <details style="margin-top:8px">
-        <summary style="cursor:pointer;font-size:13px;color:var(--text-muted);padding:8px 4px">もっと見る(残り12件)</summary>
-        <div class="event-list" style="margin-top:8px">
-      <a href="deck-2026-10-17-gquuuuuux.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
-        <span class="rl-title" style="font-size:15px;font-weight:600">デッキ紹介｜赤/緑 GQuuuuuuX（クラン）— 主流カード0枚で優勝した構築</span>
-        <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.10.22</span>
       </a>
       <a href="gd05-lr-blue.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span class="rl-title" style="font-size:15px;font-weight:600">GD05 青LR考察 — 光の翼と自由の帰還</span>
@@ -929,6 +966,10 @@
         <span class="rl-title" style="font-size:15px;font-weight:600">GD05 白LR考察 — シャイニングの闘気とゼロの制圧</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.07.11</span>
       </a>
+      </div>
+      <details style="margin-top:8px">
+        <summary style="cursor:pointer;font-size:13px;color:var(--text-muted);padding:8px 4px">もっと見る(残り6件)</summary>
+        <div class="event-list" style="margin-top:8px">
       <a href="eb01-lr-review.html" class="event-card" style="display:flex;align-items:center;justify-content:space-between;padding:16px 20px">
         <span class="rl-title" style="font-size:15px;font-weight:600">EB01「Eternal Nexus」LR全6種 徹底考察 — 〔ジージェネ〕デッキのシナジーと使い方</span>
         <span style="font-size:12px;color:var(--text-muted);white-space:nowrap;margin-left:16px">2026.06.14</span>
@@ -968,5 +1009,6 @@
     document.getElementById('header').innerHTML = GCG.renderHeader('reports');
     document.getElementById('footer').innerHTML = GCG.renderFooter();
   </script>
+  <script>(function(){function h(e){try{if(e.type==="auxclick"&&e.button!==1)return;var a=e.target&&e.target.closest?e.target.closest("a[data-guide]"):null;if(!a||typeof gtag!=="function")return;gtag("event","guide_click",{guide:a.getAttribute("data-guide"),link_url:(a.getAttribute("href")||"").slice(0,100),transport_type:"beacon"});}catch(_){}}document.addEventListener("click",h,true);document.addEventListener("auxclick",h,true);})();</script>
 </body>
 </html>
