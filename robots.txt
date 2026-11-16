@@ -1,4 +1,18 @@
 User-agent: *
 Allow: /
 
+# AI の学習への利用を断る（共通の書き方。Google は 2027 年初めに対応予定）
+User-agent: __usage_ai-training
+Disallow: /
+
+# 今すぐ効く、各社の学習用の名前
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: ClaudeBot
+User-agent: CCBot
+User-agent: Applebot-Extended
+User-agent: meta-externalagent
+User-agent: Bytespider
+Disallow: /
+
 Sitemap: https://gcg-stats.com/sitemap.xml
