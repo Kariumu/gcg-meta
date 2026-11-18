@@ -146,6 +146,7 @@
           </summary>
           <div style="text-align:center;padding:32px;color:var(--text-muted)">4 位以内に入ったデッキで、このカードを入れているものはまだありません</div>
         </details>
+        <p style="margin:12px 0 0;font-size:13px"><a href="../../deck-search.html?c=ST02-008" data-guide="card_to_search" data-guide-card="ST02-008" style="display:inline-block;padding:4px 0;color:var(--accent);text-decoration:none">このカードを採用した入賞デッキを探す →</a></p>
     
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
       <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">エアリーズについて</h2>
@@ -216,5 +217,9 @@
     document.getElementById("footer").innerHTML = GCG.renderFooter();
     GCG.renderShareButtons('share-buttons', 'エアリーズ（ST02-008_p1）パラレル版 | GCG STATS');
   </script>
+  <script>(function(){function op(){var d=document.getElementById("winning-decks");if(d&&!d.open)d.open=true;return d;}
+if(location.hash==="#winning-decks"){var d=op();if(d)setTimeout(function(){d.scrollIntoView();},0);}
+function h(e){try{if(e.type==="auxclick"&&e.button!==1)return;var a=e.target&&e.target.closest?e.target.closest("a[data-guide]"):null;if(!a)return;var g=a.getAttribute("data-guide");if(g==="card_to_decks"&&e.type==="click")op();if(typeof gtag==="function")gtag("event","guide_click",{guide:g,card_id:(a.getAttribute("data-guide-card")||"").slice(0,100),link_url:(a.getAttribute("href")||"").slice(0,100),transport_type:"beacon"});}catch(_){}}
+document.addEventListener("click",h,true);document.addEventListener("auxclick",h,true);})();</script>
 </body>
 </html>

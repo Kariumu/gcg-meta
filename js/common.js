@@ -409,7 +409,7 @@ const GCG = {
         win.document.body.textContent = 'デッキビルダーを開いています…';
       } catch (e) { /* 案内の 1 行を書けなくても、タブの差し替えには影響しない */ }
     }
-    GCG.track('builder_open', { source: 'event', store: deckName, rank: extra && extra.rank != null ? String(extra.rank) : '', mode: 'share', tab: win ? 'new' : 'same' });
+    GCG.track('builder_open', { source: (extra && extra.source) || 'event', store: deckName, rank: extra && extra.rank != null ? String(extra.rank) : '', mode: 'share', tab: win ? 'new' : 'same' });
     btn.textContent = '\u23F3 \u8AAD\u307F\u8FBC\u307F\u4E2D\u2026';
     this.loadShareDb().then(byId => {
       const counts = {};
@@ -432,7 +432,7 @@ const GCG = {
         try { window.focus(); } catch (e) { /* 同上 */ }
         try { waitFocus = !document.hasFocus(); } catch (e) { waitFocus = false; }
       }
-      GCG.track('builder_open_fallback', { source: 'event', store: deckName, reason: err && err.message });
+      GCG.track('builder_open_fallback', { source: (extra && extra.source) || 'event', store: deckName, reason: err && err.message });
       btn.removeAttribute('data-busy');
       btn.setAttribute('data-mode', 'copy');
       btn.textContent = '\u{1F4CB} \u30C7\u30C3\u30AD\u30EA\u30B9\u30C8\u3092\u30B3\u30D4\u30FC';
@@ -460,6 +460,7 @@ const GCG = {
     series:   { main: 'analysis', sub: 'series'   },
     meta:     { main: 'analysis', sub: 'meta'     },
     'ntc-official': { main: 'analysis', sub: 'ntc-official' },
+    'deck-search': { main: 'analysis', sub: 'deck-search' },   // 指示書174: 入賞デッキ検索(deck-search.html)
     reports:  { main: 'analysis', sub: 'reports'  },   // 指示書86: 主タブ reports を廃止し環境分析配下へ
     schedule: { main: 'event',    sub: 'schedule' },   // 指示書86: analysis → event
     stores:   { main: 'event',    sub: 'stores'   },   // 指示書86: venues → event
@@ -493,6 +494,7 @@ const GCG = {
     analysis: [
       { key: 'meta',         href: 'meta.html',         label: 'メタ概況'    },
       { key: 'events',       href: 'meta.html#events',  label: '大会結果'    },
+      { key: 'deck-search',  href: 'deck-search.html',  label: 'デッキ検索'  },   // 指示書174
       { key: 'series',       href: 'series/',           label: 'シリーズ'    },
       { key: 'ntc-official', href: 'ntc-official.html', label: '公式集計'    },
       { key: 'reports',      href: 'reports/',          label: 'レポート'    }
@@ -514,7 +516,7 @@ const GCG = {
     mypage:        'マイページ'
   },
 
-  // 2026-09-02(指示書86 §1-3): フッターのサイトマップ行（13項目・全ページ共通）。
+  // 2026-09-02(指示書86 §1-3): フッターのサイトマップ行（13項目・全ページ共通）。2026-11-16 指示書174 で「デッキ検索」を足して 14 項目。
   // 主タブから外れた「レポート/新弾情報/店舗一覧」等の到達性を補うためのもの。
   // 順序と文言を仕様で固定するため、_MAIN_TABS/_SUB_NAV からの自動生成はしない。
   _FOOTER_SITEMAP: [
@@ -523,6 +525,7 @@ const GCG = {
     { href: 'stores.html',       label: '店舗一覧'       },
     { href: 'meta.html',         label: 'メタ概況'       },
     { href: 'meta.html#events',  label: '大会結果'       },
+    { href: 'deck-search.html',  label: 'デッキ検索'     },   // 指示書174
     { href: 'series/',           label: 'シリーズ'       },
     { href: 'ntc-official.html', label: '公式集計'       },
     { href: 'reports/',          label: 'レポート'       },

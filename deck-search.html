@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3MY17P4E7F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3MY17P4E7F');
+  </script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6912628791259344" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入賞デッキ検索（カードの組み合わせで探す）| GCG STATS</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="theme-color" content="#d4a029">
+  <meta name="description" content="ガンダムカードゲームの入賞デッキを、採用しているカードの組み合わせで探せます。新しい商品が大会で使えるようになった日（発売日の7日後）で期間を区切り、デッキカラー・順位でも絞り込めます。">
+  <link rel="canonical" href="https://gcg-stats.com/deck-search.html">
+  <!-- OGP -->
+  <meta property="og:site_name" content="GCG STATS">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="入賞デッキ検索（カードの組み合わせで探す）| GCG STATS">
+  <meta property="og:description" content="ガンダムカードゲームの入賞デッキを、採用しているカードの組み合わせで探せます。新しい商品が大会で使えるようになった日（発売日の7日後）で期間を区切り、デッキカラー・順位でも絞り込めます。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gcg-stats.com/deck-search.html">
+  <meta property="og:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="入賞デッキ検索（カードの組み合わせで探す）| GCG STATS">
+  <meta name="twitter:description" content="ガンダムカードゲームの入賞デッキを、採用しているカードの組み合わせで探せます。新しい商品が大会で使えるようになった日（発売日の7日後）で期間を区切り、デッキカラー・順位でも絞り込めます。">
+  <meta name="twitter:image" content="https://gcg-stats.com/images/ogp-default.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- 指示書174: このページだけの見た目。すべて .ds- で始まる名前にして、ほかのページに当たらないようにする -->
+  <style>
+    .ds-panel{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px}
+    .ds-label{display:block;font-size:12px;color:var(--text-muted);margin-bottom:6px}
+    .ds-pick{position:relative}
+    .ds-input{width:100%;box-sizing:border-box}
+    .ds-sugg{position:absolute;left:0;right:0;top:100%;z-index:20;margin:4px 0 0;padding:4px 0;list-style:none;background:var(--bg-card);border:1px solid var(--border-hover);border-radius:8px;max-height:280px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+    .ds-sugg[hidden]{display:none}
+    .ds-sugg li{padding:8px 10px;cursor:pointer;font-size:13px;display:flex;gap:8px;align-items:baseline}
+    .ds-sugg li[aria-selected="true"],.ds-sugg li:hover{background:var(--bg-card-hover)}
+    .ds-sugg .ds-id{font-family:var(--font-mono);color:var(--accent);flex-shrink:0}
+    .ds-sugg .ds-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    .ds-sugg .ds-cold{color:var(--text-muted);font-size:11px;flex-shrink:0;margin-left:auto}
+    .ds-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .ds-chips:empty{display:none}
+    .ds-chip{display:flex;align-items:center;gap:6px;max-width:100%;box-sizing:border-box;padding:4px 4px 4px 10px;border:1px solid var(--border-accent);background:var(--accent-dim);border-radius:999px;font-size:13px}
+    .ds-chip .ds-id{font-family:var(--font-mono);color:var(--accent);flex-shrink:0}
+    .ds-chip .ds-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    .ds-chip button{flex-shrink:0;width:28px;height:28px;border:0;border-radius:50%;background:transparent;color:var(--text-muted);font-size:16px;cursor:pointer}
+    .ds-chip button:hover{color:var(--text-primary);background:var(--bg-card-hover)}
+    .ds-note{font-size:12px;color:var(--text-muted);margin-top:8px}
+    .ds-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+    .ds-filters select{width:100%;box-sizing:border-box}
+    @media(max-width:600px){.ds-filters{grid-template-columns:minmax(0,1fr)}}
+    .ds-summary{font-size:14px;margin:4px 0 12px;color:var(--text-secondary)}
+    .ds-summary b{color:var(--text-primary);font-family:var(--font-mono)}
+    .ds-msg{padding:20px 14px;text-align:center;color:var(--text-muted);background:var(--bg-card);border:1px dashed var(--border);border-radius:10px;font-size:14px}
+    .ds-msg button{margin-top:10px}
+    .ds-list{display:flex;flex-direction:column;gap:10px}
+    .ds-item{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:12px 14px;min-width:0}
+    .ds-head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:13px}
+    .ds-head .ds-date{font-family:var(--font-mono);color:var(--accent)}
+    .ds-head .ds-store{color:var(--text-primary);font-weight:600;overflow-wrap:anywhere;min-width:0}
+    .ds-head .ds-region{color:var(--text-muted);font-size:12px}
+    .ds-rank{display:inline-block;padding:1px 8px;border-radius:6px;font-size:12px;font-weight:600;border:1px solid var(--border)}
+    .ds-rank.r1{color:#d4a029;border-color:rgba(212,160,41,.4)}
+    .ds-rank.r2{color:#c0c8d4}
+    .ds-uses{margin-top:6px;font-size:12px;font-family:var(--font-mono);color:var(--text-secondary);overflow-wrap:anywhere}
+    .ds-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .ds-acts .btn-copy,.ds-acts .btn-link{margin:0}
+    .ds-deck{margin-top:8px}
+    .ds-deck summary{cursor:pointer;font-size:12px;color:var(--text-muted);padding:4px 0}
+    .ds-deck ul{list-style:none;margin:6px 0 0;padding:0;columns:2;column-gap:16px;font-size:12px}
+    @media(max-width:600px){.ds-deck ul{columns:1}}
+    .ds-deck li{break-inside:avoid;padding:2px 0;display:flex;gap:6px;min-width:0}
+    .ds-deck li .ds-id{font-family:var(--font-mono);color:var(--text-muted);flex-shrink:0}
+    .ds-deck li .ds-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    .ds-deck li .ds-ct{margin-left:auto;font-family:var(--font-mono);flex-shrink:0}
+    .ds-deck li.ds-hit .ds-nm,.ds-deck li.ds-hit .ds-id{color:var(--accent)}
+    .ds-more{display:block;margin:16px auto 0}
+  </style>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <div class="section-header">
+      <h1 class="section-title">入賞デッキ検索</h1>
+    </div>
+    <p class="page-lead">選んだカードを<strong>全部</strong>入れた入賞デッキを探せます（4枚まで）。期間は新しい商品が大会で使えるようになった日（発売日の7日後）で区切ります。64名規模の大会は公式の順位（ベスト8・各順位2名）です。</p>
+
+    <section class="ds-panel" aria-label="検索の条件">
+      <label class="ds-label" for="ds-q">カード（名前か型番の一部）</label>
+      <div class="ds-pick">
+        <input type="text" class="filter-input ds-input" id="ds-q" placeholder="例: ガンダム / GD06-001" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ds-sugg" aria-autocomplete="list">
+        <ul class="ds-sugg" id="ds-sugg" role="listbox" hidden></ul>
+      </div>
+      <div class="ds-chips" id="ds-chips"></div>
+      <p class="ds-note" id="ds-note">候補は、選んでいる期間の入賞デッキに入っていたカードを先に出します。</p>
+      <div class="ds-filters">
+        <div><label class="ds-label" for="ds-era">期間（使えるカードの区切り）</label><select class="filter-select" id="ds-era"></select><p class="ds-note" style="margin-top:4px">プロモ・SC は再録のため区切りに使いません</p></div>
+        <div><label class="ds-label" for="ds-col">デッキカラー</label><select class="filter-select" id="ds-col"></select></div>
+        <div><label class="ds-label" for="ds-rk">順位</label><select class="filter-select" id="ds-rk">
+          <option value="">入賞すべて</option>
+          <option value="4">ベスト4以内</option>
+          <option value="1">優勝</option>
+        </select></div>
+      </div>
+    </section>
+
+    <div id="ds-result" aria-live="polite"><div class="loading">データを読み込み中</div></div>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="js/common.js?v=18"></script>
+  <script src="js/deck-search.js?v=1"></script>
+</body>
+</html>
