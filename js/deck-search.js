@@ -16,6 +16,7 @@
   var BASE = GCG.getBasePath();
   var MAX_CARDS = 4;
   var PAGE = 20;
+  var SUGG_MAX = 30;        // 候補の数(指示書176 裁定R0 Q4)
 
   var ERAS = null;          // eras.json の中身
   var NAMES = {};           // card_id → 名前
@@ -162,17 +163,123 @@
   function renderChips() {
     $('ds-chips').innerHTML = state.cards.map(function (c, k) {
       var nm = NAMES[c.id] || '';
-      return '<span class="ds-chip" title="' + esc(c.id + ' ' + nm) + '"><span class="ds-id">' + esc(c.id) + '</span><span class="ds-nm">' + esc(nm) + '</span>'
+      return '<span class="ds-chip" title="' + esc(c.id + ' ' + nm) + '">' + imgHtml(c.id, 28) + '<span class="ds-id">' + esc(c.id) + '</span><span class="ds-nm">' + esc(nm) + '</span>'
         + '<button type="button" data-rm="' + k + '" aria-label="' + esc(c.id) + ' を外す">×</button></span>';
     }).join('');
     var full = state.cards.length >= MAX_CARDS;
     $('ds-q').disabled = full;
-    $('ds-q').placeholder = full ? 'カードは 4 枚まで選べます' : '例: ガンダム / GD06-001';
+    $('ds-q').placeholder = full ? 'カードは 4 枚まで選べます' : '例: ガンダム / がんだむ / Zaku / GD06-001';
   }
 
   // ---------- 画面: 候補 ----------
+  /* ds176-fold:start — 指示書176 §2-2・裁定R0。比べる前の直し方と当たりの判定(node の検証もこの部分をそのまま読む) */
+  // カタカナ → ひらがな。U+30A1〜U+30F6(ヴヵヶ・小書きを含む)と ヽヾ だけ。ー(30FC)・・(30FB)・ヷ〜ヺ(30F7〜30FA)は変えない
+  function toHira(s) { return s.replace(/[\u30A1-\u30F6\u30FD\u30FE]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0x60); }); }
+  // ギリシャ文字のうち、見た目の似たラテン文字がある物だけ寄せる(小文字にした後の形)。ν は V(Vガンダム)と混ざるので寄せない(読みの表で扱う)
+  var LOOK = { 'ζ': 'z', 'α': 'a', 'β': 'b' };   // ζ α β
+  var LOOK_RE = /[ζαβ]/g;
+  // 取る記号: 空白・中黒・かっこ・ハイフン類・引用符・幅ゼロの文字・. , ! ? & /(NFKC の後なので全角は半角になっている)
+  var DROP_RE = /[\s\u30FB\uFF65()\[\]\-\u2010-\u2015\u2212'\u2018\u2019"\u201C\u201D\u200B-\u200D\uFEFF.,!?&\/]/g;
+  // 長音を残した形(1 NFKC 2 小文字 3 カタカナ→ひらがな 4 ζαβ を寄せる 5 記号を取る)
+  function fold(s) {
+    return toHira(String(s == null ? '' : s).normalize('NFKC').toLowerCase())
+      .replace(LOOK_RE, function (c) { return LOOK[c]; }).replace(DROP_RE, '');
+  }
+  // 長音を取った形(裁定R0 Q1)
+  function dropLong(t) { return t.replace(/ー/g, ''); }
+  // 型番の比べ方: 記号を取らない。NFKC・小文字・空白を取る、に加えて、ー やダッシュ類を - として読む(§2-2-5・Q8)
+  function foldId(s) { return String(s == null ? '' : s).normalize('NFKC').toLowerCase().replace(/\s+/g, '').replace(/[ー\u2010-\u2015\u2212]/g, '-'); }
+  // 英語名だけに通す: 発音の記号を外す(NFD → 結合文字を取る → NFC。Q2)
+  function plain(s) { return String(s).normalize('NFD').replace(/[\u0300-\u036F]/g, '').normalize('NFC'); }
+  // 読みの表: [元, 読み, 別の読み?](長い物から順に置き換える。Q5)
+  var READ_JP = [['ΖΖ', 'ダブルゼータ'], ['Hi-ν', 'ハイニュー'], ['Ζ', 'ゼータ'], ['ν', 'ニュー'],
+    ['Ξ', 'クスィー', 'クシー'], ['∀', 'ターンエー'], ['α', 'アルファ'], ['β', 'ベータ']];
+  var READ_EN = [['Ξ', 'Xi '], ['∀', 'Turn A ']];
+  // 名前の頭がラテン文字の Z で、すぐ後がガンダムの時だけ「ゼータガンダム」とも読む(Q5。型番は名指ししない。NFKC の後で見るので全角の Ｚ も含む)
+  var Z_HEAD_RE = /^Z(?=ガンダム)/;
+  // 名前の別の書き方の一覧(元の名前は含まない)。読みが 2 つある文字が入っていれば、別の読みの形も足す
+  function readAlts(nm) {
+    var s = String(nm == null ? '' : nm).normalize('NFKC'), out = [];
+    for (var v = 1; v <= 2; v++) {
+      var t = s, hit = false, useV = false;
+      for (var i = 0; i < READ_JP.length; i++) {
+        var r = READ_JP[i];
+        if (t.indexOf(r[0]) < 0) continue;
+        if (v === 2 && r[2]) useV = true;
+        t = t.split(r[0]).join(v === 2 && r[2] ? r[2] : r[1]);
+        hit = true;
+      }
+      if (hit && (v === 1 || useV)) out.push(t);
+    }
+    if (Z_HEAD_RE.test(s)) out.push(s.replace(Z_HEAD_RE, 'ゼータ'));
+    return out;
+  }
+  function readAltEn(s) {
+    var t = String(s), hit = false;
+    for (var i = 0; i < READ_EN.length; i++) if (t.indexOf(READ_EN[i][0]) >= 0) { t = t.split(READ_EN[i][0]).join(READ_EN[i][1]); hit = true; }
+    return hit ? t : null;
+  }
+  // 比べる用の形を 1 回だけ作る。k: 長音を残した形の一覧 / d: 長音を取った形の一覧
+  function prepName(nm) {
+    var k = [fold(nm)].concat(readAlts(nm).map(fold));
+    return { k: k, d: k.map(dropLong) };
+  }
+  // 英語名: { s: 語をつないだ物, at: 語の頭の位置 }
+  function prepEn(en) {
+    if (!en) return null;
+    var src = readAltEn(en) || en;
+    var t = plain(String(src).normalize('NFKC')).toLowerCase().replace(LOOK_RE, function (c) { return LOOK[c]; })
+      .replace(/['\u2018\u2019\u200B-\u200D\uFEFF]/g, '');   // 引用符(Char's → chars)と幅ゼロの文字は語を分けずに取る
+    var words = t.split(/[\s()\[\]\-\u2010-\u2015\u2212"\u201C\u201D.,!?&\/]+/).filter(function (w) { return w; });
+    var s = '', at = [];
+    words.forEach(function (w) { at.push(s.length); s += w; });
+    return { s: s, at: at };
+  }
+  // 入力 → 比べる用の形。q: 長音を残す / qd: 長音を取る / qId: 型番用 / qEn: 英語名用(3 文字以上の時だけ §2-2-6)
+  // 記号を取ると空になる入力(「・」「ー」だけなど)は、名前・英語名とは比べない。型番とは、英字か数字を 1 文字以上含む時だけ比べる
+  // (「ー」「-」だけで全部の型番に当たらないように)。どれとも比べない入力は「見つかりません」になる(Q9)
+  function prepQuery(raw) {
+    var q = fold(raw), qd = dropLong(q), qId = foldId(raw);
+    if (!qd) q = '';
+    if (!/[a-z0-9]/.test(qId)) qId = '';
+    return { q: q, qd: qd, qId: qId, qEn: qd.length >= 3 ? plain(qd) : '' };
+  }
+  // 当たり方(裁定R0 Q1 で振り直し): 0 型番の頭 / 1 名前の頭 / 2 名前の一部 / 3 長音を取った時だけ名前に当たる / 4 型番の一部 / 5 英語名(語の頭) / -1 当たらない
+  function matchLevel(pq, nid, nm, en) {
+    var i;
+    if (pq.qId && nid.indexOf(pq.qId) === 0) return 0;
+    if (pq.q) {
+      var best = -1;
+      for (i = 0; i < nm.k.length; i++) {
+        var p = nm.k[i].indexOf(pq.q);
+        if (p === 0) return 1;
+        if (p > 0) best = 2;
+      }
+      if (best >= 0) return best;
+      for (i = 0; i < nm.d.length; i++) if (nm.d[i].indexOf(pq.qd) >= 0) return 3;
+    }
+    if (pq.qId && nid.indexOf(pq.qId) > 0) return 4;
+    if (pq.qEn && en) for (i = 0; i < en.at.length; i++) if (en.s.indexOf(pq.qEn, en.at[i]) === en.at[i]) return 5;
+    return -1;
+  }
+  var AT_EN = 5;
+  // 候補を集めて並べる(§2-2-9: 今の区切りで採用あり → 採用の多い順 → 当たり方 → 型番)
+  function collectHits(pq, ids, P, hotUse, chosen) {
+    var hits = [];
+    if (!pq.q && !pq.qId) return hits;
+    for (var i = 0; i < ids.length; i++) {
+      var id = ids[i];
+      if (chosen[id]) continue;
+      var lv = matchLevel(pq, P.id(id), P.nm(id), P.en(id));
+      if (lv < 0) continue;
+      var hu = hotUse(id);
+      hits.push({ id: id, hot: hu.hot, use: hu.use, at: lv });
+    }
+    hits.sort(function (a, b) { return a.hot - b.hot || b.use - a.use || a.at - b.at || (a.id < b.id ? -1 : 1); });
+    return hits;
+  }
+  /* ds176-fold:end */
   var sugg = [], suggAt = -1;
-  function norm(s) { return String(s || '').normalize('NFKC').toLowerCase().replace(/\s+/g, ''); }
   function currentFile() { var v = eraByKey(state.era); return v && v.e.file ? files[v.e.file] : null; }
   function usage(file) {
     if (!file._use) {
@@ -182,32 +289,72 @@
     }
     return file._use;
   }
+  // 比べる用の形の入れ物(作るのは初めて要った時に 1 回だけ)
+  var PREP = { id: {}, nm: {}, en: {} };
+  var P = {
+    id: function (id) { return PREP.id[id] || (PREP.id[id] = foldId(id)); },
+    nm: function (id) { return PREP.nm[id] || (PREP.nm[id] = prepName(NAMES[id])); },
+    en: function (id) { if (!EN) return null; if (!(id in PREP.en)) PREP.en[id] = prepEn(EN[id]); return PREP.en[id]; }
+  };
+  // 英語名(data/deck-search/names-en.json)。最初に文字を入れた時に 1 回だけ読む。読めなくても日本語と型番で探せる(§2-2-8)
+  var EN = null, enLoading = null;
+  function loadEn() {
+    if (enLoading) return enLoading;
+    enLoading = getJson('data/deck-search/names-en.json').then(function (j) {
+      EN = (j && typeof j === 'object') ? j : {};
+      PREP.en = {};
+      if ($('ds-q').value && document.activeElement === $('ds-q')) updateSugg();   // 読み終わった時に欄に文字が残っていれば作り直す
+    }, function (err) {
+      if (window.console) console.warn('[deck-search] 英語名を読めませんでした', err && err.message);
+    });
+    return enLoading;
+  }
+  // 画像(指示書176 §2-3)。属性に表示の大きさ(整数)を書き、CSS でも同じ幅・高さの箱と height:auto。
+  // alt="" は横に名前の文字があるため(読み上げで名前が 2 回読まれないように)。URL は GCG.cardImageUrl(元の番号)だけで作る
+  function imgHtml(id, w, inBox) {
+    var h = Math.round(w * 838 / 600);
+    var url = esc(GCG.cardImageUrl(baseId(id)));
+    // A′(裁定R0 Q4): 候補の箱の中は、箱の中で見えている行だけ読む(Chromium は箱の中の loading=lazy で 30 枚とも読むため)
+    var srcAttr = inBox && window.IntersectionObserver ? 'data-src="' + url + '"' : 'src="' + url + '"';
+    return '<span class="ds-img"><img ' + srcAttr + ' width="' + w + '" height="' + h + '" loading="lazy" decoding="async" alt=""></span>';
+  }
+  var boxIo = null;
+  function watchBoxImages(box) {
+    if (!window.IntersectionObserver) return;
+    if (!boxIo) boxIo = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { var im = e.target; im.src = im.getAttribute('data-src'); im.removeAttribute('data-src'); boxIo.unobserve(im); } });
+    }, { root: box, rootMargin: '90px 0px' });
+    boxIo.disconnect();
+    Array.prototype.forEach.call(box.querySelectorAll('img[data-src]'), function (im) { boxIo.observe(im); });
+  }
   function updateSugg() {
-    var q = norm($('ds-q').value);
+    var raw = $('ds-q').value;
     var box = $('ds-sugg');
-    if (!q) { box.hidden = true; $('ds-q').setAttribute('aria-expanded', 'false'); sugg = []; return; }
+    if (!fold(raw) && !foldId(raw)) { box.hidden = true; $('ds-q').setAttribute('aria-expanded', 'false'); sugg = []; return; }
     var file = currentFile(), chosen = {};
     state.cards.forEach(function (c) { chosen[c.id] = true; });
-    var hits = [];
-    for (var i = 0; i < BASE_IDS.length; i++) {
-      var id = BASE_IDS[i];
-      if (chosen[id]) continue;
-      var nid = norm(id), nnm = norm(NAMES[id]);
-      var at = nid.indexOf(q) === 0 ? 0 : nnm.indexOf(q) >= 0 ? 1 : nid.indexOf(q) >= 0 ? 2 : -1;
-      if (at < 0) continue;
+    var hits = collectHits(prepQuery(raw), BASE_IDS, P, function (id) {
       var k = file ? file._ci[id] : undefined;
-      hits.push({ id: id, hot: k !== undefined ? 0 : 1, use: k !== undefined ? usage(file)[k] : 0, at: at });
-    }
-    // 今の区切りの入賞デッキに出たカードを先に(その中は採用デッキ数の多い順)、次に型番の頭が合う物
-    hits.sort(function (a, b) { return a.hot - b.hot || b.use - a.use || a.at - b.at || (a.id < b.id ? -1 : 1); });
-    sugg = hits.slice(0, 30);
+      return { hot: k !== undefined ? 0 : 1, use: k !== undefined ? usage(file)[k] : 0 };
+    }, chosen);
+    sugg = hits.slice(0, SUGG_MAX);
     suggAt = sugg.length ? 0 : -1;
     box.innerHTML = sugg.length ? sugg.map(function (h, k) {
-      return '<li role="option" id="ds-o' + k + '" data-k="' + k + '" aria-selected="' + (k === suggAt) + '" title="' + esc(h.id + ' ' + (NAMES[h.id] || '')) + '"><span class="ds-id">' + esc(h.id)
-        + '</span><span class="ds-nm">' + esc(NAMES[h.id] || '') + '</span>' + (h.hot ? '<span class="ds-cold">この期間の採用なし</span>' : '') + '</li>';
+      var nm = NAMES[h.id] || '';
+      var en = h.at === AT_EN && EN && EN[h.id] ? '<span class="ds-en">' + esc(EN[h.id]) + '</span>' : '';   // 英語名だけで当たった時だけ出す
+      return '<li role="option" id="ds-o' + k + '" data-k="' + k + '" aria-selected="' + (k === suggAt) + '" title="' + esc(h.id + ' ' + nm) + '">'
+        + imgHtml(h.id, 32, true) + '<span class="ds-id">' + esc(h.id) + '</span>'
+        + (en ? '<span class="ds-nmw"><span class="ds-nm">' + esc(nm) + '</span>' + en + '</span>' : '<span class="ds-nm">' + esc(nm) + '</span>')
+        + (h.hot ? '<span class="ds-cold">この期間の採用なし</span>' : '') + '</li>';
     }).join('') : '<li aria-disabled="true" style="cursor:default;color:var(--text-muted)">見つかりません</li>';
     box.hidden = false;
+    watchBoxImages(box);
     $('ds-q').setAttribute('aria-expanded', 'true');
+  }
+  // 入力のたびに候補を作り直す(待たない・裁定R0 Q4)。文字が入っていれば英語名を読み始める(1 回だけ)
+  function onInput() {
+    if ($('ds-q').value) loadEn();
+    updateSugg();
   }
   function moveSugg(d) {
     if (!sugg.length) return;
@@ -350,7 +497,7 @@
   // ---------- 動き ----------
   function bind() {
     var q = $('ds-q');
-    q.addEventListener('input', updateSugg);
+    q.addEventListener('input', onInput);
     q.addEventListener('keydown', function (ev) {
       if (ev.key === 'ArrowDown') { ev.preventDefault(); moveSugg(1); }
       else if (ev.key === 'ArrowUp') { ev.preventDefault(); moveSugg(-1); }
@@ -400,7 +547,13 @@
     });
   }
 
+  // 画像が無い・読めない時は灰色の箱を残す。error は親に伝わらないので、捕捉の段階(capture)で受ける(§2-3-4)
+  function onImgError(ev) {
+    var t = ev.target;
+    if (t && t.tagName === 'IMG' && t.parentNode && t.parentNode.className && String(t.parentNode.className).indexOf('ds-img') >= 0) t.parentNode.className += ' ds-noimg';
+  }
   function start() {
+    ['ds-sugg', 'ds-chips', 'ds-result'].forEach(function (id) { $(id).addEventListener('error', onImgError, true); });
     $('header').innerHTML = GCG.renderHeader('deck-search');
     $('footer').innerHTML = GCG.renderFooter();
     Promise.all([getJson('data/deck-search/eras.json'), getJson('data/card_names.json')]).then(function (r) {

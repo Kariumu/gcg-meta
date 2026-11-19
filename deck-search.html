@@ -46,14 +46,22 @@
     .ds-input{width:100%;box-sizing:border-box}
     .ds-sugg{position:absolute;left:0;right:0;top:100%;z-index:20;margin:4px 0 0;padding:4px 0;list-style:none;background:var(--bg-card);border:1px solid var(--border-hover);border-radius:8px;max-height:280px;overflow-y:auto;box-shadow:0 8px 24px rgba(0,0,0,.4)}
     .ds-sugg[hidden]{display:none}
-    .ds-sugg li{padding:8px 10px;cursor:pointer;font-size:13px;display:flex;gap:8px;align-items:baseline}
+    .ds-sugg li{padding:6px 10px;cursor:pointer;font-size:13px;display:flex;gap:8px;align-items:center}
     .ds-sugg li[aria-selected="true"],.ds-sugg li:hover{background:var(--bg-card-hover)}
     .ds-sugg .ds-id{font-family:var(--font-mono);color:var(--accent);flex-shrink:0}
     .ds-sugg .ds-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    .ds-sugg .ds-nmw{display:flex;flex-direction:column;min-width:0}
+    .ds-sugg .ds-en{font-size:11px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+    /* 指示書176: カードの画像。属性の幅・高さ(表示の大きさ)と CSS の幅をそろえ、height:auto。読めない時は灰色の箱が残る */
+    .ds-img{flex-shrink:0;display:block;width:32px;height:45px;border-radius:3px;overflow:hidden;background:var(--bg-card-hover)}
+    .ds-img img{display:block;width:32px;height:auto}
+    .ds-chip .ds-img{width:28px;height:39px;border-radius:2px}
+    .ds-chip .ds-img img{width:28px}
+    .ds-noimg img{visibility:hidden}
     .ds-sugg .ds-cold{color:var(--text-muted);font-size:11px;flex-shrink:0;margin-left:auto}
     .ds-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
     .ds-chips:empty{display:none}
-    .ds-chip{display:flex;align-items:center;gap:6px;max-width:100%;box-sizing:border-box;padding:4px 4px 4px 10px;border:1px solid var(--border-accent);background:var(--accent-dim);border-radius:999px;font-size:13px}
+    .ds-chip{display:flex;align-items:center;gap:6px;max-width:100%;box-sizing:border-box;padding:4px 4px 4px 6px;border:1px solid var(--border-accent);background:var(--accent-dim);border-radius:999px;font-size:13px}
     .ds-chip .ds-id{font-family:var(--font-mono);color:var(--accent);flex-shrink:0}
     .ds-chip .ds-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
     .ds-chip button{flex-shrink:0;width:28px;height:28px;border:0;border-radius:50%;background:transparent;color:var(--text-muted);font-size:16px;cursor:pointer}
@@ -100,7 +108,7 @@
     <p class="page-lead">選んだカードを<strong>全部</strong>入れた入賞デッキを探せます（4枚まで）。期間は新しい商品が大会で使えるようになった日（発売日の7日後）で区切ります。64名規模の大会は公式の順位（ベスト8・各順位2名）です。</p>
 
     <section class="ds-panel" aria-label="検索の条件">
-      <label class="ds-label" for="ds-q">カード（名前か型番の一部）</label>
+      <label class="ds-label" for="ds-q">カード（名前・英語名・型番の一部。ひらがなでも探せます）</label>
       <div class="ds-pick">
         <input type="text" class="filter-input ds-input" id="ds-q" placeholder="例: ガンダム / GD06-001" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="ds-sugg" aria-autocomplete="list">
         <ul class="ds-sugg" id="ds-sugg" role="listbox" hidden></ul>
@@ -124,6 +132,6 @@
   <div id="footer"></div>
 
   <script src="js/common.js?v=18"></script>
-  <script src="js/deck-search.js?v=1"></script>
+  <script src="js/deck-search.js?v=2"></script>
 </body>
 </html>
