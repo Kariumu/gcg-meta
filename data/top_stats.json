@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 160,
-    "decks": 757,
+    "events": 161,
+    "decks": 765,
     "types": 10
   },
   "deck_type_ranking": [
@@ -17,11 +17,11 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 264,
-      "share": 34.9,
-      "win_rate": 31.1,
+      "count": 266,
+      "share": 34.8,
+      "win_rate": 31.2,
       "avg_rank": 2.4,
-      "wins": 82
+      "wins": 83
     },
     {
       "type_key": "Green+Purple",
@@ -30,9 +30,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 132,
+      "count": 133,
       "share": 17.4,
-      "win_rate": 21.2,
+      "win_rate": 21.1,
       "avg_rank": 2.5,
       "wins": 28
     },
@@ -43,9 +43,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 113,
+      "count": 114,
       "share": 14.9,
-      "win_rate": 23,
+      "win_rate": 22.8,
       "avg_rank": 2.5,
       "wins": 26
     },
@@ -56,11 +56,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 109,
-      "share": 14.4,
-      "win_rate": 26.6,
+      "count": 112,
+      "share": 14.6,
+      "win_rate": 26.8,
       "avg_rank": 2.4,
-      "wins": 29
+      "wins": 30
     },
     {
       "type_key": "Blue+Red",
@@ -70,7 +70,7 @@
       ],
       "label": "青/赤",
       "count": 49,
-      "share": 6.5,
+      "share": 6.4,
       "win_rate": 12.2,
       "avg_rank": 2.9,
       "wins": 6
@@ -96,7 +96,7 @@
       ],
       "label": "赤/紫",
       "count": 21,
-      "share": 2.8,
+      "share": 2.7,
       "win_rate": 9.5,
       "avg_rank": 2.7,
       "wins": 2
@@ -121,10 +121,10 @@
         "Green"
       ],
       "label": "赤/緑",
-      "count": 6,
-      "share": 0.8,
+      "count": 7,
+      "share": 0.9,
       "win_rate": 0,
-      "avg_rank": 3.3,
+      "avg_rank": 3.4,
       "wins": 0
     },
     {
@@ -144,57 +144,92 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 383,
+      "decks": 387,
       "usage_rate": 50.6
     },
     {
       "card_id": "GD04-068",
-      "decks": 339,
-      "usage_rate": 44.8
+      "decks": 344,
+      "usage_rate": 45
     },
     {
       "card_id": "GD05-110",
-      "decks": 274,
+      "decks": 277,
       "usage_rate": 36.2
     },
     {
       "card_id": "GD05-111",
-      "decks": 257,
-      "usage_rate": 33.9
+      "decks": 260,
+      "usage_rate": 34
     },
     {
       "card_id": "GD01-128",
-      "decks": 244,
-      "usage_rate": 32.2
+      "decks": 245,
+      "usage_rate": 32
     },
     {
       "card_id": "ST03-008",
-      "decks": 239,
-      "usage_rate": 31.6
+      "decks": 241,
+      "usage_rate": 31.5
     },
     {
       "card_id": "GD01-100",
-      "decks": 216,
-      "usage_rate": 28.5
+      "decks": 220,
+      "usage_rate": 28.8
     },
     {
       "card_id": "GD01-030",
-      "decks": 195,
+      "decks": 197,
       "usage_rate": 25.8
     },
     {
       "card_id": "ST01-010",
-      "decks": 185,
-      "usage_rate": 24.4
+      "decks": 188,
+      "usage_rate": 24.6
     },
     {
       "card_id": "GD05-033",
-      "decks": 184,
+      "decks": 186,
       "usage_rate": 24.3
     }
   ],
-  "card_ranking_denominator": 757,
+  "card_ranking_denominator": 765,
   "recent_events": [
+    {
+      "event_id": "ntcd-01M7VZ2SCVA19NN7H8ZVASZJGQ",
+      "date": "2026-11-20",
+      "store": "ドラゴンスター神戸三宮",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        }
+      ]
+    },
     {
       "event_id": "ntcd-01M7SCNEJGY5SXNHF7RBVE28YX",
       "date": "2026-11-19",
@@ -509,45 +544,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M7MBAZW62WJ3SQ7GMGWXWJM4",
-      "date": "2026-11-17",
-      "store": "ガンダムカードゲーム 公式ショップ 福岡 キャナルシティ博多店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        }
-      ]
     }
   ],
   "source": {
-    "latest_event_date": "2026-11-19",
-    "event_count": 2093
+    "latest_event_date": "2026-11-20",
+    "event_count": 2094
   }
 }
