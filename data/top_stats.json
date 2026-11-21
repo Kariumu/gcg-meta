@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 168,
-    "decks": 801,
+    "events": 169,
+    "decks": 805,
     "types": 10
   },
   "deck_type_ranking": [
@@ -17,9 +17,9 @@
         "White"
       ],
       "label": "赤/白",
-      "count": 276,
+      "count": 278,
       "share": 34.5,
-      "win_rate": 30.8,
+      "win_rate": 30.6,
       "avg_rank": 2.4,
       "wins": 85
     },
@@ -31,7 +31,7 @@
       ],
       "label": "緑/紫",
       "count": 135,
-      "share": 16.9,
+      "share": 16.8,
       "win_rate": 20.7,
       "avg_rank": 2.6,
       "wins": 28
@@ -43,11 +43,11 @@
         "White"
       ],
       "label": "青/白",
-      "count": 127,
-      "share": 15.9,
-      "win_rate": 26,
+      "count": 129,
+      "share": 16,
+      "win_rate": 26.4,
       "avg_rank": 2.5,
-      "wins": 33
+      "wins": 34
     },
     {
       "type_key": "Blue+Green",
@@ -57,7 +57,7 @@
       ],
       "label": "青/緑",
       "count": 121,
-      "share": 15.1,
+      "share": 15,
       "win_rate": 24,
       "avg_rank": 2.5,
       "wins": 29
@@ -144,56 +144,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 412,
-      "usage_rate": 51.4
+      "decks": 416,
+      "usage_rate": 51.7
     },
     {
       "card_id": "GD04-068",
-      "decks": 365,
-      "usage_rate": 45.6
+      "decks": 369,
+      "usage_rate": 45.8
     },
     {
       "card_id": "GD05-110",
-      "decks": 287,
-      "usage_rate": 35.8
+      "decks": 289,
+      "usage_rate": 35.9
     },
     {
       "card_id": "GD05-111",
-      "decks": 270,
-      "usage_rate": 33.7
+      "decks": 272,
+      "usage_rate": 33.8
     },
     {
       "card_id": "GD01-128",
-      "decks": 253,
+      "decks": 254,
       "usage_rate": 31.6
     },
     {
       "card_id": "ST03-008",
       "decks": 250,
-      "usage_rate": 31.2
+      "usage_rate": 31.1
     },
     {
       "card_id": "GD01-100",
-      "decks": 236,
-      "usage_rate": 29.5
+      "decks": 238,
+      "usage_rate": 29.6
     },
     {
       "card_id": "GD01-030",
       "decks": 203,
-      "usage_rate": 25.3
+      "usage_rate": 25.2
     },
     {
       "card_id": "ST01-010",
-      "decks": 201,
+      "decks": 202,
       "usage_rate": 25.1
     },
     {
       "card_id": "GD05-081",
-      "decks": 197,
-      "usage_rate": 24.6
+      "decks": 199,
+      "usage_rate": 24.7
     }
   ],
-  "card_ranking_denominator": 801,
+  "card_ranking_denominator": 805,
   "recent_events": [
     {
       "event_id": "ntcd-01M7YE29HHF013TMGHQWV6Y002",
@@ -441,6 +441,41 @@
       ]
     },
     {
+      "event_id": "ntcd-01M7YMWBGXK099H5SP2PNACSTN",
+      "date": "2026-11-21",
+      "store": "TSUTAYA田宮店",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Red",
+            "White"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "White"
+          ]
+        }
+      ]
+    },
+    {
       "event_id": "ntcd-01M7VZ2SCVA19NN7H8ZVASZJGQ",
       "date": "2026-11-20",
       "store": "ドラゴンスター神戸三宮",
@@ -509,45 +544,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M7SCN7ZM1ZZT1NRMKDDEYHNN",
-      "date": "2026-11-19",
-      "store": "ドラゴンスター秋葉原駅前店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Red",
-            "White"
-          ]
-        },
-        {
-          "rank": 3,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        },
-        {
-          "rank": 4,
-          "colors": [
-            "Blue",
-            "Green"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-21",
-    "event_count": 2101
+    "event_count": 2102
   }
 }
