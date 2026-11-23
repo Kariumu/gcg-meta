@@ -110,6 +110,7 @@
            style="color:var(--blue);font-size:13px;text-decoration:none">
           公式カード情報を見る →
         </a>
+        <p style="margin:6px 0 0;font-size:13px"><a href="#winning-decks" data-guide="card_to_decks" data-guide-card="ST12-007_p1" style="display:inline-block;padding:4px 0;color:var(--accent);text-decoration:none">このカードを使った入賞デッキを見る（1件）↓</a></p>
 
         
         <details class="collapsible-section link-targets" open style="margin-top:16px;padding:14px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
@@ -158,9 +159,23 @@
           </div>
         </div>
 
-        <div style="margin-top:16px;padding:20px;background:var(--bg-card);border:1px solid var(--border);border-radius:8px;text-align:center">
-          <div style="font-size:15px;font-weight:600;color:var(--text-primary)">まだ大会での採用データがありません</div>
-          <div style="font-size:12px;color:var(--text-muted);margin-top:6px">大会での使用が確認され次第、採用率などの統計を表示します。</div>
+        <div class="stats-grid" style="margin-top:16px">
+          <div class="stat-card">
+            <div class="stat-label">採用デッキ数</div>
+            <div class="stat-value">1<span class="unit"> デッキ</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">全体採用率</div>
+            <div class="stat-value">0.1<span class="unit">%</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">優勝デッキ数</div>
+            <div class="stat-value">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">平均採用枚数</div>
+            <div class="stat-value">2<span class="unit">枚</span></div>
+          </div>
         </div>
         <p style="font-size:11px;color:var(--text-muted);margin-top:8px;text-align:right">
           ※採用率データは通常版（<a href="../ST12-007/" style="color:var(--accent)">ST12-007</a>）と共通です
@@ -169,15 +184,180 @@
     </div>
 
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">デッキタイプ別採用状況</h2>
+            <span class="toggle-icon"></span>
+          </summary>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>デッキタイプ</th>
+                <th style="width:90px">採用数</th>
+                <th style="width:180px">採用率</th>
+                <th style="width:60px">平均枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="color-tag color-tag-green">緑</span> <span class="color-tag color-tag-purple">紫</span></td>
+                <td class="text-mono">1 / 1055</td>
+                <td>
+                  <div class="flex items-center gap-8">
+                    <div class="usage-bar-container">
+                      <div class="usage-bar" style="width:0.1%;background:#44cc64"></div>
+                    </div>
+                    <span class="usage-rate">0.1%</span>
+                  </div>
+                </td>
+                <td class="text-mono">2</td>
+              </tr>
+            </tbody>
+          </table>
+        </details>
+    <div class="ad-slot" data-slot="card-top" data-kind="band"></div>
     
+        <details class="collapsible-section mb-32" open>
+          <summary class="section-header collapsible-toggle">
+            <h2 class="section-title">一緒によく使われるカード</h2>
+            <div style="display:flex;align-items:center;gap:8px"><span class="section-badge">TOP8</span><span class="toggle-icon"></span></div>
+          </summary>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">このカードを採用したデッキで一緒に使われることが多いカードです。</p>
+          <div class="co-cards-grid">
+          <a href="../../cards/GD01-023/" class="co-card-item" title="シャア専用ゲルググ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-023.webp" alt="シャア専用ゲルググ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-023</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">シャア専用ゲルググ</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-026/" class="co-card-item" title="ザクⅡ（シャア・アズナブル機）" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-026.webp" alt="ザクⅡ（シャア・アズナブル機）" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-026</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ザクⅡ（シャア・アズナブル機）</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-030/" class="co-card-item" title="リック・ドム" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-030.webp" alt="リック・ドム" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-030</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">リック・ドム</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-031/" class="co-card-item" title="ゲルググ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-031.webp" alt="ゲルググ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-031</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ゲルググ</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-035/" class="co-card-item" title="ザクⅡ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-035.webp" alt="ザクⅡ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-035</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ザクⅡ</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-039/" class="co-card-item" title="ドップ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-039.webp" alt="ドップ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-039</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ドップ</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD01-092/" class="co-card-item" title="マ・クベ" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD01-092.webp" alt="マ・クベ" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD01-092</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">マ・クベ</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          <a href="../../cards/GD04-017/" class="co-card-item" title="ジオング" data-rate="high">
+            <div class="co-card-image-wrap">
+              <img src="../../images/cards/GD04-017.webp" alt="ジオング" class="co-card-image" loading="lazy"
+                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+              <div class="co-card-fallback" style="display:none"><span>GD04-017</span></div>
+            </div>
+            <div class="co-card-info">
+              <div class="co-card-name">ジオング</div>
+              <div class="co-card-rate"><span class="co-rate-value">100</span><span class="co-rate-unit">%</span></div>
+            </div>
+          </a>
+          </div>
+          <noscript>
+            <h3>一緒によく使われるカード</h3>
+            <ul>
+            <li><a href="/cards/GD01-023/">シャア専用ゲルググ（GD01-023）- 100%</a></li>
+            <li><a href="/cards/GD01-026/">ザクⅡ（シャア・アズナブル機）（GD01-026）- 100%</a></li>
+            <li><a href="/cards/GD01-030/">リック・ドム（GD01-030）- 100%</a></li>
+            <li><a href="/cards/GD01-031/">ゲルググ（GD01-031）- 100%</a></li>
+            <li><a href="/cards/GD01-035/">ザクⅡ（GD01-035）- 100%</a></li>
+            <li><a href="/cards/GD01-039/">ドップ（GD01-039）- 100%</a></li>
+            <li><a href="/cards/GD01-092/">マ・クベ（GD01-092）- 100%</a></li>
+            <li><a href="/cards/GD04-017/">ジオング（GD04-017）- 100%</a></li>
+            </ul>
+          </noscript>
+        </details>
     
+        <div class="ad-slot" data-slot="card-decks" data-kind="band"></div>
         <details class="collapsible-section" id="winning-decks" style="scroll-margin-top:12px">
           <summary class="section-header collapsible-toggle">
             <h2 class="section-title">このカードが入っている入賞デッキ（ベスト4まで）</h2>
-            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="section-badge">0件</span><span class="toggle-icon"></span></div>
+            <div style="display:flex;align-items:center;gap:8px;flex-shrink:0"><span class="section-badge">1件</span><span class="toggle-icon"></span></div>
           </summary>
-          <div style="text-align:center;padding:32px;color:var(--text-muted)">4 位以内に入ったデッキで、このカードを入れているものはまだありません</div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px">大会で 4 位以内（ベスト4）に入ったデッキのうち、このカードを入れているものを新しい順に並べています。店舗名を押すと、そのデッキの中身（大会結果ページ）が見られます。64 名規模の大会（NTC やシリアルカードチャレンジ）は、公式の 1〜8 位を 1〜4 位として載せています。同じ大会で優勝が 2 人並ぶのはそのためです。</p>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>店舗</th>
+                <th>プレイヤー</th>
+                <th style="width:60px">順位</th>
+                <th style="width:60px">枚数</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-mono" style="color:var(--accent)">2026.11.23</td>
+                <td><a href="../../events/ntcd-01M83P993V0Z6VX9X4PVFCQN0X.html" style="color:var(--text-primary);text-decoration:none">カードラボ名古屋大須店</a></td>
+                <td>γ(ガンマ)</td>
+                <td class="rank-cell ">4位</td>
+                <td class="text-mono">×2</td>
+              </tr>
+            </tbody>
+          </table>
+          
         </details>
+        <p style="margin:12px 0 0;font-size:13px"><a href="../../deck-search.html?c=ST12-007" data-guide="card_to_search" data-guide-card="ST12-007" style="display:inline-block;padding:4px 0;color:var(--accent);text-decoration:none">このカードを採用した入賞デッキを探す →</a></p>
     
     <section class="seo-text-section" style="margin-top:32px;padding:24px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg)">
       <h2 style="font-size:16px;font-weight:700;margin:0 0 12px;color:var(--text-primary)">ギャンについて</h2>
@@ -186,7 +366,6 @@
         <p style="margin:0;font-size:13px;color:var(--text-secondary);line-height:1.6">本カードは <a href="../ST12-007/" style="color:var(--blue);text-decoration:none">ギャン（ST12-007）</a> のパラレル(イラスト違い)版です。効果・ステータス・特徴は完全に同一で、デッキでは合算 4 枚まで投入できます。</p>
       </div>
       <p style="font-size:14px;line-height:1.8;color:var(--text-secondary);margin:0 0 16px">ギャンは「機動戦士ガンダム」に登場する紫のユニットカードです。Lv.2・コスト2で、AP3/HP1のステータスを持ちます。特徴は「ジオン」です。レアリティはC+で、ST12に収録されています。</p>
-      <div class="ad-slot" data-slot="card-top" data-kind="band"></div>
       <h3 style="font-size:14px;font-weight:600;margin:0 0 12px;color:var(--text-primary)">このカードの特徴</h3>
       <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px;padding:14px 16px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:var(--radius-lg)">
 
@@ -262,7 +441,11 @@
     GCG.init();
     document.getElementById('header').innerHTML = GCG.renderHeader('cards');
     document.getElementById("footer").innerHTML = GCG.renderFooter();
-    GCG.renderShareButtons('share-buttons', 'ギャン（ST12-007_p1）パラレル版 | GCG STATS');
+    GCG.renderShareButtons('share-buttons', 'ギャン（ST12-007_p1）パラレル版採用率0.1% | GCG STATS');
   </script>
+  <script>(function(){function op(){var d=document.getElementById("winning-decks");if(d&&!d.open)d.open=true;return d;}
+if(location.hash==="#winning-decks"){var d=op();if(d)setTimeout(function(){d.scrollIntoView();},0);}
+function h(e){try{if(e.type==="auxclick"&&e.button!==1)return;var a=e.target&&e.target.closest?e.target.closest("a[data-guide]"):null;if(!a)return;var g=a.getAttribute("data-guide");if(g==="card_to_decks"&&e.type==="click")op();if(typeof gtag==="function")gtag("event","guide_click",{guide:g,card_id:(a.getAttribute("data-guide-card")||"").slice(0,100),link_url:(a.getAttribute("href")||"").slice(0,100),transport_type:"beacon"});}catch(_){}}
+document.addEventListener("click",h,true);document.addEventListener("auxclick",h,true);})();</script>
 </body>
 </html>
