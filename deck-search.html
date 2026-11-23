@@ -88,13 +88,21 @@
     .ds-acts .btn-copy,.ds-acts .btn-link{margin:0}
     .ds-deck{margin-top:8px}
     .ds-deck summary{cursor:pointer;font-size:12px;color:var(--text-muted);padding:4px 0}
-    .ds-deck ul{list-style:none;margin:6px 0 0;padding:0;columns:2;column-gap:16px;font-size:12px}
-    @media(max-width:600px){.ds-deck ul{columns:1}}
-    .ds-deck li{break-inside:avoid;padding:2px 0;display:flex;gap:6px;min-width:0}
-    .ds-deck li .ds-id{font-family:var(--font-mono);color:var(--text-muted);flex-shrink:0}
-    .ds-deck li .ds-nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
-    .ds-deck li .ds-ct{margin-left:auto;font-family:var(--font-mono);flex-shrink:0}
-    .ds-deck li.ds-hit .ds-nm,.ds-deck li.ds-hit .ds-id{color:var(--accent)}
+    /* 指示書178: 中身はカードの画像の一覧。箱に大きさを持たせ、読み込み中に下の行がずれないようにする */
+    .ds-grid{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,72px);gap:8px 6px}
+    .ds-grid li{min-width:0}
+    .ds-card{display:block;color:inherit;text-decoration:none}
+    .ds-card:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+    .ds-cimg{position:relative;width:72px;height:101px;border-radius:4px}
+    .ds-cimg img{width:72px;height:auto}
+    .ds-hit .ds-cimg{box-shadow:0 0 0 2px var(--accent)}
+    .ds-cimg .ds-ct{position:absolute;right:2px;bottom:2px;padding:0 4px;border-radius:4px;background:rgba(0,0,0,.78);color:#fff;font:600 11px/16px var(--font-mono)}
+    .ds-alt{display:none}
+    .ds-noimg .ds-alt{display:block;position:absolute;left:0;right:0;top:0;bottom:18px;padding:4px;font-size:10px;line-height:1.3;color:var(--text-secondary);overflow:hidden;overflow-wrap:anywhere}
+    .ds-cnm{display:block;margin-top:2px;font-size:10px;line-height:14px;color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .ds-hit .ds-cnm{color:var(--accent)}
+    @media(max-width:600px){.ds-grid{grid-template-columns:repeat(auto-fill,64px)}.ds-cimg{width:64px;height:89px}.ds-cimg img{width:64px}}
+    @media(max-width:400px){.ds-grid{grid-template-columns:repeat(auto-fill,54px)}.ds-cimg{width:54px;height:75px}.ds-cimg img{width:54px}}
     .ds-more{display:block;margin:16px auto 0}
   </style>
 </head>
@@ -132,6 +140,6 @@
   <div id="footer"></div>
 
   <script src="js/common.js?v=18"></script>
-  <script src="js/deck-search.js?v=2"></script>
+  <script src="js/deck-search.js?v=3"></script>
 </body>
 </html>

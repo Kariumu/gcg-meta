@@ -387,7 +387,7 @@
     var lis = [];
     for (var p = 4; p < row.length; p += 2) {
       var id = file.cards[row[p]];
-      lis.push('<li' + (sel[id] ? ' class="ds-hit"' : '') + ' title="' + esc(id + ' ' + (NAMES[id] || '')) + '"><span class="ds-id">' + esc(id) + '</span><span class="ds-nm">' + esc(NAMES[id] || '') + '</span><span class="ds-ct">×' + row[p + 1] + '</span></li>');
+      lis.push(deckCardHtml(id, row[p + 1], !!sel[id]));
     }
     var total = 0; for (var q = 5; q < row.length; q += 2) total += row[q];
     return '<article class="ds-item" data-ev="' + esc(ev[0]) + '" data-rank="' + row[1] + '" data-raw="' + row[2] + '">'
@@ -397,8 +397,31 @@
       + '<div class="ds-uses">' + uses + '</div>'
       + '<div class="ds-acts"><button type="button" class="btn-copy" data-open="' + n + '">\u{1F6E0}️ デッキビルダーで開く</button>'
       + '<a class="btn-link" href="events/' + encodeURIComponent(ev[0]) + '.html">大会のページへ</a></div>'
-      + '<details class="ds-deck"><summary>デッキの中身（' + total + '枚・' + ((row.length - 4) / 2) + '種類）</summary><ul>' + lis.join('') + '</ul></details>'
+      + '<details class="ds-deck"><summary>デッキの中身（' + total + '枚・' + ((row.length - 4) / 2) + '種類）</summary><ul class="ds-grid">' + lis.join('') + '</ul></details>'
       + '</article>';
+  }
+  // 指示書178: デッキの中身をカードの画像の一覧で出す。押すとカード個別ページ(型番のまま・パラレルはそのページ)へ同じタブで(裁定R0 Q1)。計測は足さない(Q2)
+  // 画像は中身を開いた時に初めて src を入れる(開く前の HTML は data-src だけ)。URL は GCG.cardImageUrl(元の番号)だけ(回ごとに変わる値を付けない)
+  // 属性は表示の一番大きい大きさ(72×101・裁定R0 Q4)。lazy は付けない(裁定R0 Q6)。狭い幅では CSS で幅を変え height:auto(縦横の比は属性から取るので、読み込み中もずれない)
+  var DECK_W = 72, DECK_H = Math.round(DECK_W * 838 / 600);
+  function deckCardHtml(id, count, hit) {
+    var nm = NAMES[id] || '';
+    var label = id + (nm ? ' ' + nm : '');
+    var url = esc(GCG.cardImageUrl(baseId(id)));
+    return '<li' + (hit ? ' class="ds-hit"' : '') + '><a class="ds-card" href="' + esc(GCG.getBasePath() + 'cards/' + encodeURIComponent(id) + '/') + '" title="' + esc(label) + '">'
+      + '<span class="ds-img ds-cimg"><img data-src="' + url + '" width="' + DECK_W + '" height="' + DECK_H + '" decoding="async" alt="' + esc(label) + '">'
+      + '<span class="ds-alt" aria-hidden="true">' + esc(nm || id) + '</span>'
+      + '<span class="ds-ct">×' + (+count) + '</span></span>'
+      + '<span class="ds-cnm" aria-hidden="true">' + esc(nm || id) + '</span></a></li>';
+  }
+  // 中身を開いた時だけ画像を読む。toggle は親に伝わらないので、入れ物で捕捉の段階(capture)で受ける
+  function onDeckToggle(ev) {
+    var d = ev.target;
+    if (!d || d.tagName !== 'DETAILS' || !d.open || String(d.className).indexOf('ds-deck') < 0) return;
+    Array.prototype.forEach.call(d.querySelectorAll('img[data-src]'), function (im) {
+      im.src = im.getAttribute('data-src');
+      im.removeAttribute('data-src');
+    });
   }
   function popularHtml(file) {
     if (!file) return '';
@@ -554,6 +577,7 @@
   }
   function start() {
     ['ds-sugg', 'ds-chips', 'ds-result'].forEach(function (id) { $(id).addEventListener('error', onImgError, true); });
+    $('ds-result').addEventListener('toggle', onDeckToggle, true);
     $('header').innerHTML = GCG.renderHeader('deck-search');
     $('footer').innerHTML = GCG.renderFooter();
     Promise.all([getJson('data/deck-search/eras.json'), getJson('data/card_names.json')]).then(function (r) {
