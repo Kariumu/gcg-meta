@@ -5,8 +5,8 @@
     "series_slug": "ntc-2026-mission5"
   },
   "totals": {
-    "events": 212,
-    "decks": 1017,
+    "events": 213,
+    "decks": 1021,
     "types": 10
   },
   "deck_type_ranking": [
@@ -18,7 +18,7 @@
       ],
       "label": "赤/白",
       "count": 356,
-      "share": 35,
+      "share": 34.9,
       "win_rate": 28.9,
       "avg_rank": 2.4,
       "wins": 103
@@ -31,7 +31,7 @@
       ],
       "label": "青/白",
       "count": 180,
-      "share": 17.7,
+      "share": 17.6,
       "win_rate": 28.3,
       "avg_rank": 2.4,
       "wins": 51
@@ -43,9 +43,9 @@
         "Purple"
       ],
       "label": "緑/紫",
-      "count": 166,
-      "share": 16.3,
-      "win_rate": 22.3,
+      "count": 167,
+      "share": 16.4,
+      "win_rate": 22.2,
       "avg_rank": 2.5,
       "wins": 37
     },
@@ -56,9 +56,9 @@
         "Green"
       ],
       "label": "青/緑",
-      "count": 151,
-      "share": 14.8,
-      "win_rate": 22.5,
+      "count": 152,
+      "share": 14.9,
+      "win_rate": 22.4,
       "avg_rank": 2.5,
       "wins": 34
     },
@@ -69,9 +69,9 @@
         "Red"
       ],
       "label": "青/赤",
-      "count": 54,
-      "share": 5.3,
-      "win_rate": 14.8,
+      "count": 55,
+      "share": 5.4,
+      "win_rate": 14.5,
       "avg_rank": 2.8,
       "wins": 8
     },
@@ -96,7 +96,7 @@
       ],
       "label": "赤/紫",
       "count": 28,
-      "share": 2.8,
+      "share": 2.7,
       "win_rate": 7.1,
       "avg_rank": 2.9,
       "wins": 2
@@ -108,11 +108,11 @@
         "White"
       ],
       "label": "緑/白",
-      "count": 20,
-      "share": 2,
-      "win_rate": 25,
-      "avg_rank": 2.4,
-      "wins": 5
+      "count": 21,
+      "share": 2.1,
+      "win_rate": 28.6,
+      "avg_rank": 2.3,
+      "wins": 6
     },
     {
       "type_key": "Red+Green",
@@ -144,56 +144,56 @@
   "card_ranking": [
     {
       "card_id": "GD01-118",
-      "decks": 547,
-      "usage_rate": 53.8
+      "decks": 548,
+      "usage_rate": 53.7
     },
     {
       "card_id": "GD04-068",
-      "decks": 491,
-      "usage_rate": 48.3
+      "decks": 492,
+      "usage_rate": 48.2
     },
     {
       "card_id": "GD05-110",
       "decks": 364,
-      "usage_rate": 35.8
+      "usage_rate": 35.7
     },
     {
       "card_id": "GD05-111",
-      "decks": 339,
+      "decks": 340,
       "usage_rate": 33.3
     },
     {
       "card_id": "GD01-128",
       "decks": 321,
-      "usage_rate": 31.6
+      "usage_rate": 31.4
     },
     {
       "card_id": "ST03-008",
-      "decks": 309,
-      "usage_rate": 30.4
+      "decks": 311,
+      "usage_rate": 30.5
     },
     {
       "card_id": "GD01-100",
-      "decks": 305,
+      "decks": 306,
       "usage_rate": 30
     },
     {
       "card_id": "GD05-081",
-      "decks": 261,
+      "decks": 262,
       "usage_rate": 25.7
     },
     {
       "card_id": "GD05-033",
       "decks": 252,
-      "usage_rate": 24.8
+      "usage_rate": 24.7
     },
     {
-      "card_id": "GD05-066",
+      "card_id": "ST01-010",
       "decks": 251,
-      "usage_rate": 24.7
+      "usage_rate": 24.6
     }
   ],
-  "card_ranking_denominator": 1017,
+  "card_ranking_denominator": 1021,
   "recent_events": [
     {
       "event_id": "ntcd-01M8DWE2SN1FFVYQE55H8J3GTX",
@@ -226,6 +226,41 @@
           "colors": [
             "Red",
             "White"
+          ]
+        }
+      ]
+    },
+    {
+      "event_id": "ntcd-01M8DZVZ21MKFTRQSN70X5QWT1",
+      "date": "2026-11-27",
+      "store": "WONDER LAND",
+      "top4_colors": [
+        {
+          "rank": 1,
+          "colors": [
+            "Green",
+            "White"
+          ]
+        },
+        {
+          "rank": 2,
+          "colors": [
+            "Green",
+            "Purple"
+          ]
+        },
+        {
+          "rank": 3,
+          "colors": [
+            "Blue",
+            "Green"
+          ]
+        },
+        {
+          "rank": 4,
+          "colors": [
+            "Blue",
+            "Red"
           ]
         }
       ]
@@ -509,45 +544,10 @@
           ]
         }
       ]
-    },
-    {
-      "event_id": "ntcd-01M83JV2X3Z3BK8XQYSE1R8136",
-      "date": "2026-11-23",
-      "store": "WonderGOOいわき鹿島店",
-      "top4_colors": [
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 1,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Blue",
-            "White"
-          ]
-        },
-        {
-          "rank": 2,
-          "colors": [
-            "Green",
-            "Purple"
-          ]
-        }
-      ]
     }
   ],
   "source": {
     "latest_event_date": "2026-11-27",
-    "event_count": 2145
+    "event_count": 2146
   }
 }
